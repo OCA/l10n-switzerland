@@ -81,7 +81,7 @@ def _prepare_opae(obj, cr, uid, data, context):
     for line in payment.line_ids:
         opae.line = line
         opae.order_id += 1
-        opae.maturity_date = payment.date_prefered == 'due' and DateTime.strptime(line.ml_maturity_date,'%Y-%m-%d') or payment.date_prefered == 'fixed' and DateTime.strptime(payment.date_planned,'%Y-%M-%d') or payment.date_prefered == 'now' and DateTime.now()
+        opae.maturity_date = payment.date_prefered == 'due' and line.ml_maturity_date and DateTime.strptime(line.ml_maturity_date,'%Y-%m-%d') or payment.date_prefered == 'fixed' and payment.date_planned and DateTime.strptime(payment.date_planned,'%Y-%M-%d') or payment.date_prefered == 'now' and DateTime.now()
         opae.debit_account_number = ''.join(payment.mode.bank_id.bvr_number.split('-'))
         opae.debit_tax_account_number = opae.debit_account_number
         opae.order_number = line._id - payment.line_ids[0]._id + 1
@@ -147,12 +147,12 @@ def _prepare_opae(obj, cr, uid, data, context):
         opae.tata_npa = line.info_owner.split('\n')[2].split()[0]
         opae.tata_city = line.info_owner.split('\n')[2][len(opae.tata_npa):]
         opae.tata_add_designation = ''
-        opae.bic = line.bank_id.bank.bic or ''
-        opae.titi_bank_npa = line.bank_id.bank.zip or ''
-        opae.titi_bank_name = line.bank_id.bank.name or ''
+        opae.bic = line.bank_id.bank and line.bank_id.bank.bic or ''
+        opae.titi_bank_npa = line.bank_id.bank and line.bank_id.bank.zip or ''
+        opae.titi_bank_name = line.bank_id.bank and line.bank_id.bank.name or ''
         opae.titi_bank_add_designation = ''
-        opae.titi_bank_street = payment.mode.bank_id.bank.street or ''
-        opae.titi_bank_city = line.bank_id.bank.city or ''
+        opae.titi_bank_street = payment.mode.bank_id.bank and payment.mode.bank_id.bank.street or ''
+        opae.titi_bank_city = line.bank_id.bank and line.bank_id.bank.city or ''
         opae.titi_add_designation = ''
         if opae.transaction_type == 'bvrpost' or opae.transaction_type == 'bvrbank':
             opae.modulo_11_digit = '  '
@@ -320,10 +320,10 @@ def create_opae_header(opae, obj, cr, uid, data, context, transaction_type=-1):
     if opae.maturity_date < DateTime.strptime(str(DateTime.now())[:10],'%Y-%m-%d'):
         raise wizard.except_wizard(('Warning'),('Payment date must be at least today\nToday used instead.'))
         opae.maturity_date = DateTime.strptime(str(DateTime.now())[:10],'%Y-%m-%d')
-    opae_string += str(opae.maturity_date.year)[-2:]
+        opae_string += str(opae.maturity_date.year)[-2:]
     
     if not opae.maturity_date:
-        raise wizard.except_wizard(_('Error'), _('Missing maturity date \n' \
+        raise wizard.except_wizard(('Error'), ('Missing maturity date \n' \
                     'for the payment line: %s\n') % (opae.line._id))
     
     if len(str(opae.maturity_date.month)) == 1:
