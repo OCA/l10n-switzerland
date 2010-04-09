@@ -31,6 +31,7 @@
 ##############################################################################
 
 import dta_wizard
+import opae_wizard
 import wizard_bvr
 import bvr_import
 import journal_config

@@ -125,6 +125,12 @@
   </record>
 
   <!-- Adjust the fields attributes for bvbank -->
+  <record model="res.partner.bank.type.field" id="iban_field_bvbank">
+	<field name="name">iban</field>
+	<field name="bank_type_id" ref="bvbank"/>
+	<field name="required" eval="False"/>
+	<field name="readonly" eval="False"/>
+  </record>
   <record model="res.partner.bank.type.field" id="bank_field_bvbank">
 	<field name="name">bank</field>
 	<field name="bank_type_id" ref="bvbank"/>

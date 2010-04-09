@@ -89,6 +89,7 @@ TODO :
     "update_xml" : [
         "dta_view.xml",
         "dta_wizard.xml",
+        "opae_wizard.xml",
         "bvr_report.xml",
         "bvr_wizard.xml",
         "bvr_view.xml",

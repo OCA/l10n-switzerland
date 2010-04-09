@@ -37,7 +37,10 @@ class payment_order(osv.osv):
     _inherit = 'payment.order'
 
     def get_wizard(self,mode):
-        if mode == 'dta':
+        if mode == 'opae':
+            return 'l10n_ch','wizard_account_opae_create'
+        elif mode == 'dta':
             return 'l10n_ch','wizard_account_dta_create'
-        return super(payment_order,self).get_wizard(mode)
+        else:
+            return super(payment_order,self).get_wizard(mode)
 payment_order()
