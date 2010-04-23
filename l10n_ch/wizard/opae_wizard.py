@@ -29,12 +29,17 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #
 ##############################################################################
-### Complete rewriting of this code should be done
+### Complete rewriting of this code should be done but certification delay are the first may
 import wizard
 import pooler
 from mx import DateTime
 import pdb
 import base64
+import codecs
+import unicodedata
+from tools.translate import _
+####This code is a fisrst prototype that will be rewritten 
+### in middle term in order to ensure line validation and functunality extention
 """Code under developpement not functional YET"""
 
 FORM = """<?xml version="1.0"?>
@@ -51,12 +56,39 @@ FIELDS = {
     },
 }
 
+##code equivalence between 
+## OpenERP and Postfinance
+CODEEQUIV = {
+    'bvrpost' : u'28',
+    'bvrbank' : u'28',
+    'bvpost'  : u'22',
+    'bvbank'  : u'27', 
+    '00'      : u'00',
+    '97'      : u'97'
+ 
+ }
+
+    
+
 class OPAELine(object):
     """OPAE Line contain in OPAE File"""
-    def __init__(self):
+    
+    currencies_handler = {}
+    
+    def __init__(self, cursor, uid, data, pool, context=None):
         self.sector = ''
         self.data = ''
         self.compo = {}
+        ## Openerp Pooler
+        self.pool = pool
+        ## Psycopg cursor
+        self.cursor = cursor
+        ## OpenERP user id 
+        self.uid = uid
+        ## OpenERP wizard data
+        self.wizdata = data
+        # OpenERP current context 
+        self.context = context.copy
         
 
     ## @param self The object pointer.
@@ -75,14 +107,14 @@ class OPAELine(object):
         "Split line comment in 4 block of 35 chars"
         raw_comment = ''
         if linebr.communication and linebr.communication2:
-             raw_comment = line.communication + ' ' + line.communication2
+            raw_comment = line.communication + ' ' + line.communication2
         else:
-             raw_comment = line.communication 
+            raw_comment = line.communication 
         for i in xrange(0,140,35) :
             self.compo['communication_bloc_'+str(i/35+1)] = raw_comment[i:i+35]
             
     def set_address(self, prefix, addresses):
-        for addr in address:
+        for addr in addresses:
             if addr.type=='default':
                 op_line.compo[prefix+'_street'] = addr.street and addr.street or u''
                 op_line.compo[prefix+'_street'] += u' '
@@ -92,21 +124,216 @@ class OPAELine(object):
                 op_line.compo[prefix+'_npa'] = addr.zip or u''
                 op_line.compo[prefix+'_city'] =  addr.city or u''
                 
+                
+    def _create_control_sector(self):
+        vals = self.compo
+        opae_control_string =[] 
+        ## chapter 4.2 secteur de controle -> identificateur de fichier
+        opae_control_string.appends(u'036')
+        if not vals.get('line_date', False) :
+            raise wizard.except_wizard(
+                                        _('Error'), 
+                                        _('Missing date planned  \n' \
+                                        'for the payment order line: %s\n')
+                                        )
+        planned_date =  DateTime.strptime(self.payment_order.date_planned, '%Y-%M-%d')
+        if planned_date < DateTime.today():
+            raise wizard.except_wizard(
+                                        _('Warning'),
+                                        _('Payment date must be at least today\n \
+                                           Today used instead.')
+                                       )    
+        ## chapter 4.2 secteur de controle -> date decheance
+        opae_control_string.append(unicode(planned_date.strftime("%y%m%d")))
+        ## chapter 4.2 secteur de controle -> reserve + element de commande fix val
+        opae_control_string.append('0'* 5 + '1')
+        ## chapter 4.2 secteur de controle -> No de compte de debit
+
+        opae_control_string.append(vals['debit_account_number'].rjust(6,u'0'))
+        ## chapter 4.2 secteur de controle -> N0 de compte de debit de tax
+        opae_control_string.append(vals['debit_account_number'].rjust(6,u'0'))
+        opae_control_string.append(
+                            self.get_lines_order_num(
+                                                    planned_date, 
+                                                    vals['bonification_currency']
+                                                    )
+                           )
+
+
+        try:
+            opae_control_string.append(CODEEQUIV[vals['transaction_type']])
+        except Exception, e:
+            raise wizard.except_wizard(_('Error'), _('Type doesn\'t exists or isn\'t supported yet.'))
+
+        transaction_id = unicode(vals['transaction_id'].rjust(6,u'0'))
+        opae_control_string.append(transaction_id)
+        opae_control_string.append(u'0' * 7)
+        return (u''.join(opae_control_string))[:50] 
+        
+    def _format_post_account(self, postnumber, lenght):
+        numberpart = postnumber.split('-')
+        if len(numberpart) != 3 or len(postnumber)>lenght:
+            raise wizard.except_wizard(
+                    ('Error'),
+                    ('Post number account not in valid format ..-..-..')
+                    )
+        numberpart[1] = numberpart[1].rjust(lenght, u'0')
+        return u''.join(numberpart)
+        
+    def escape_vals(self, indict={}):
+        "Manage line encoding"
+        for key in indict:
+            string_in = indict[key]
+            try:
+                string_in = u''.join((c for c in unicodedata.normalize('NFD', string_in) \
+                    if unicodedata.category(c) != 'Mn'))
+                string_in.encode('ascii','ignore')
+                indict[key] =  string_in
+            except Exception, encode_err:
+                print  key, encode_err
+                return string_in    
+        
+    def _generate_dest_bank_string(self, vals):
+        bank_string = []
+        btype = vals['transaction_type']
+        if btype == 'bvbank':
+            if not vals['bic'] and not vals['iban']:
+                raise wizard.except_wizard(
+                                            _('Error'),
+                                            _('Bic/swift number is requiered'+
+                                            ' for bank %s if iban is not set'\
+                                                %(vals['benef_bank_name']))
+                                        )
+            if vals['bic'] and (len(vals['bic']) < 8 or len(vals['bic']) >15)  :
+                raise wizard.except_wizard(
+                                            _('Error'),
+                                            _('Error in bic.\nIf iban is present, just delete bic')
+                                            )
+
+            bank_string.append(vals['bic'].ljust(15, u' '))
+        if btype in ('bvpost', 'bvbank'):    
+            if btype == 'bvpost':
+                if vals['postal_account_number']:
+                    
+                    bank_string.append(self._format_post_account(vals['postal_account_number'], 6))
+                else:
+                    raise wizard.except_wizard(
+                                                _('Error'), 
+                                                _('Missing postal account number')
+                                            )
+
+                bank_string.append(u' '*6)
+
+            if btype == 'bvbank' :
+                if not vals['iban'] and not vals['postal_account_number']:
+                    raise wizard.except_wizard(
+                                            _('Error'),
+                                            _('Missing IBAN or Postal account number')
+                                        )
+
+        
+            if opae.transaction_type == 'bvbank' and not vals['iban']:
+                if vals['postal_account_number']:
+                    bank_string.append(self._format_post_account(vals['postal_account_number'], 6))
+            else:
+                if len(vals['iban'] > 15):
+                    raise wizard.except_wizard(
+                                                 _('Error'), 
+                                                 _('Iban too long')
+                                             )
+                bank_string.append(vals['iban'].rjust(15,'u0'))
+        return u''.join(bank_string)
+        
+        
+        
+    def generate_string(self):
+        vals = self.compo
+        opae_string = []
+        opae_string.append(self._create_control_sector())
+
+        if vals['transaction_type'] in ('bvrpost', 'bvrbank', 'bvpost', 'bvbank'):
+            opae_string.append(vals['deposit_currency'])
+            ##we round and convert to cents
+            float_amount = opae.pool.get('res.currency').round(
+                                                                cursor,
+                                                                uid,opae.line.currency,
+                                                                opae.line.amount_currency
+                                                            )
+            amount = unicode(int(round(float_amount),2)*100)
+            opae_string.append(amount.rjust(13, u'0'))
+            opae_string.append(vals['bonification_currency'])
+
+
+        if vals['deposit_currency'] in currencies_handler :
+            currencies_handler[vals['deposit_currency']]['used'] += 1
+            currencies_handler[vals['deposit_currency']]['total_amount'] += int(amount)
+
+        else:
+            currencies_handler[vals['deposit_currency']] = {'used':1,'total_amount':int(amount)}
+
+        opae_string.append(vals['country_code'])
+        opae_string.append(self._generate_dest_bank_string(vals))
+        
+
+        if vals['transaction_type'] in ('bvpost', 'bvbank'):
+            opae_string.append(vals['dest_name'].rjust(35,u' ')[:35])
+            opae_string.append(vals['dest_designation'].rjust(35,u' ')[:35])
+            opae_string.append(vals['dest_street'].rjust(35,u' ')[:35])
+            opae_string.append(vals['dest_npa'].ljust(10,u' ')[:10])
+            opae_string.append(vals['dest_city'].ljust(25,u' ')[:25])
+            if not vals['add_npa']:
+                raise wizard.except_wizard(_('Error'), _('No NPA'))
+            if not vals['principal_npa']:
+                raise wizard.except_wizard(_('Error'), _('No NPA'))
+            opae_string.append(vals['benef_name'].rjust(35,u' ')[:35])
+            opae_string.append(vals['benef_designation'].rjust(35,u' ')[:35])
+            opae_string.append(vals['benef_street'].rjust(35,u' ')[:35])
+            opae_string.append(vals['benef_npa'].ljust(10, u' '))
+            opae_string.append(vals['dest_city'].rjust(25,u' ')[:25])
+            opae_string.append(vals['communication_bloc_1'])
+            opae_string.append(vals['communication_bloc_2'])
+            opae_string.append(vals['communication_bloc_3'])
+            opae_string.append(vals['communication_bloc_4'])
+            opae_string.append(u' '*4)
+            opae_string.append(vals['principal_name'].rjust(35,u' '))
+            opae_string.append(vals['principal_designation'].rjust(35,u' '))
+            opae_string.append(vals['principal_street'].rjust(35,u' ')[:35])
+            opae_string.append(vals['principal_npa'].ljust(10,u' '))
+            opae_string.append(vals['principal_city'].rjust(25,u' '))
+            opae_string.append(u' '*14)    
+            
+        if vals['transaction_type'] in ('bvrpost', 'bvrpost'):    
+            opae_string.append(vals['modulo_11_digit'])
+            if notvals['bvr_num']:
+                raise wizard.except_wizard(
+                                            _('Error'), 
+                                            _('Please enter a BVR post account')
+                                            )
+            bvr_ad_num = vals['bvr_num'].split(u'-')
+
+            if len(bvr_ad_num) == 1:
+                if len(bvr_ad_num[0])!=5:
+                    raise wizard.except_wizard(
+                    _('Error'), 
+                    _('invalid Post account number')
+                )
+                opae_string.append(bvr_ad_num.rjust(9,u'0'))
+
+            else :
+                opae_string.append(self._format_post_account(vals['bvr_num'],6))
+            opae_string.append(vals['reference'].rjust(27, u'0'))
+            opae_string.append(vals['sender_reference'])
+            opae_string.append(u' '*555)
+            to_retunr = u''.join(opae_string)
+            ##To do test t return
+            
+            return to_retunr
+
         
         
 class OPAE(object):
     "OPAE File representation"
-    ##code equivalence between 
-    ## OpenERP and Postfinance
-    CODEEQUIV = {
-        'bvrpost' : '28',
-        'bvrbank' : '28',
-        'bvpost'  : '22',
-        'bvbank'  : '27', 
-        '00'      : '00',
-        '97'      : '97'
-     
-     }
+
 
     
     def __init__(self, cursor, uid, data, pool, context=None):
@@ -153,16 +380,22 @@ class OPAE(object):
         self.headline.compo['bonification_currency'] = None
         self.headline.compo['transaction_type'] = '00'
         self.headline.compo['transaction_id'] = 0
+        ## footer line representation                            
+        self.footerline = OPAELine()
+        self.footerline.compo['line_date'] = self.payment_order.date_planned
+        self.footerline.compo['debit_account_number'] = self.debit_account_number
+        self.footerline.compo['bonification_currency'] = None
+        self.footerline.compo['transaction_type'] = '97'
+        self.footerline.compo['transaction_id'] = 0
         ### array of unicode string that will be used for joined
         ##  see PEP for details
         self.result_array = []
         
        
         
-        
-        
-        
     def get_lines_order_num(self, date, currency):
+        """Retrun next available order line from 0 to 99
+           per currency rate"""
         key = (str(date), currency)
         if self.numers.has_key(key) :
             self.numers[key] += 1
@@ -176,6 +409,30 @@ class OPAE(object):
             return '01'
                 
         
+    def create_opae_footer(self, line):
+        opae_string = ''
+        opae_string += line._create_control_sector()
+
+        if len(line.currencies_handler) > 15:
+            wizard.except_wizard(
+                                    _('Error'),
+                                    _('There are too many currencies used in this payment order.\nMaximum authorised by OPAE : 15\nCurrent payment order contains %s currencies') % (len(line.currencies_handler)))
+
+        for currency in opae.currencies_handler:
+            opae_string += currency
+            used = unicode(opae.currencies[currency]['used'])
+            used = used.rjust(6, u'0')
+
+            opae_string += used
+            total_amount = unicode(opae.currencies[currency]['total_amount'])
+            total_amount = total_amount.rjust(13,u'0')
+            opae_string += total_amount
+
+        for i in currencies_handler:
+            opae_string += u'0' * 22
+
+        opae_string += ' '*320    
+        return opae_string
 
 
     
@@ -190,7 +447,7 @@ class OPAE(object):
         for line in self.payment.line_ids:
             counter += 1
             ## we have an unique id per OPAE line
-            op_line = OPAELine()
+            op_line = OPAELine(self.cursor, self.uid, self.wizdata, self.context)
             self.lines.append(op_line)
             ## we set limit execution date see chapter 4.2 date d'echeance
             op_line.compo['line_date'] = op_line.get_date(self.payment, line)
@@ -221,286 +478,76 @@ class OPAE(object):
             op_line.compo['country_code'] = self.payment_order.user_id.company_id.\
                 partner_id.country.code
             ## chapter 4.x No de compte postal du destinataire
-            op_line.compo['dest_postal_account_number'] = line.bank_id.post_number or u''
-            ## chapter 4.x No de compte postal du beneficiaire
-            op_line.compo['benef_postal_account_number'] = line.bank_id.post_number or u''
+            op_line.compo['postal_account_number'] = line.bank_id.post_number or u''
             ## chapter 4.x No IBAN du destinaire/beneficiaire
-            op_line.compo['dest_iban'] = line.bank_id.iban or u''
+            op_line.compo['iban'] = line.bank_id.iban or u''
             ## chapter 4.x No IBAN du destinaire/beneficiaire
-            op_line.compo['benef_iban'] = line.bank_id.iban or u''
-            ## adresse du beneficiaire/destinataire
-            op_line.compo['dest_iban' ] =  op_line.compo['dest_iban'].upper()
-            op_line.compo['add_name'] = ''
-            op_line.compo['add_street'] = ''
-            op_line.compo['add_npa'] = ''
-            op_line.compo['add_city'] = ''
-            if line.partner_id:
-                partner = line.partner_id
-                op_line.compo['add_name'] = partner.name
-                op_line.set_address('add', partner.address)
-                
-            op_line.compo['add_designation'] = ''
+            ## iban
+            op_line.compo['iban' ] =  op_line.compo['iban'].upper()
+            ## address management
+            if state in ('bvpost', 'bvrpost') :
+                if line.partner_id:
+                    partner = line.partner_id
+                    op_line.compo['benef_name'] = partner.name
+                    op_line.set_address('benef', partner.address)
+                op_line.compo['dest_name'] =  op_line.compo['benef_name']
+                op_line.compo['dest_street'] = op_line.compo['benef_street']
+                op_line.compo['dest_npa'] = op_line.compo['benef_npa']
+                op_line.compo['dest_city'] = op_line.compo['benef_city']
+                op_line.compo['dest_designation'] = ''
+                op_line.compo['benef_designation'] = ''
+            else :
+                op_line.compo['dest_npa'] = line.bank_id.bank and line.bank_id.bank.zip or ''
+                op_line.compo['dest_name'] = line.bank_id.bank and line.bank_id.bank.name or ''
+                op_line.compo['dest_designation'] = ''
+                op_line.compo['benef_designation'] = ''
+                op_line.compo['dest_street'] = line.bank_id.bank and line.bank_id.bank.street or ''
+                op_line.compo['dest_city'] = line.bank_id.bank and line.bank_id.bank.city or '' 
+                op_line.compo['benef_name'] = line.bank_id.owner_name or u''
+                op_line.compo['benef_street'] =  line.bank_id.street or ''
+                op_line.compo['benef_npa'] = line.bank_id.zip or ''
+                op_line.compo['benef_city'] = line.bank_id.city or ''
+                                
             op_line.set_communication(line)
             ## principal correspond to the source of payment
             op_line.compo['principal_name'] = ''
             op_line.compo['principal_street'] = ''
             op_line.compo['principal_npa'] = ''
             op_line.compo['principal_city'] = ''
-            if line.order_id.mode.bank_id.partner_id :
-                partner = line.order_id.mode.bank_id.partner_id
+            if self.payment_order.mode.bank_id.partner_id :
+                partner = self.payment_order.mode.bank_id.partner_id
                 op_line.compo['principal_name'] = partner.name
                 op_line.set_address('principal', partner.address)
             op_line.compo['principal_designation'] = ''
             op_line.compo['bic'] = line.bank_id.bank and line.bank_id.bank.bic or ''
-                        
-            op_line.compo['benef_bank_npa'] = line.bank_id.bank and line.bank_id.bank.zip or ''
-            op_line.compo['benef_bank_name'] = line.bank_id.bank and line.bank_id.bank.name or ''
-            op_line.compo['benef_bank_add_designation'] = ''
-            op_line.compo['benef_bank_street'] = self.payment_order.mode.bank_id.bank and self.payment_order.mode.bank_id.bank.street or ''
-            op_line.compo['benef_bank_city'] = line.bank_id.bank and line.bank_id.bank.city or ''
-            op_line.compo['benef_add_designation'] = ''
+            ##final bebficiary bank            
+
             op_line.compo['modulo_11_digit'] = '  '
-            op_line.compo['bvr_adherent_num'] = line.bank_id.bvr_adherent_num or line.bank_id.bvr_number or ''
+            op_line.compo['bvr_num'] = self.payment_order.mode.bank_id.bvr_number or ''
             op_line.compo['reference'] = line.communication
             op_line.compo['sender_reference'] = ' ' * 35
         
     def compute(self):
         """Compute the OPAE file output"""
-        self.header = self.create_control_sector(self.headline)+' '*650  
-        self.result_array.append(self.header)  
+        self.result_array.append(self.header.generate_string())  
         for parsed_line in self.lines :
-            pass
-        
-            
-            
+             self.result_array.append(parsed_line.generate_string())
+        self.result_array.append(self.footerline.generate_string())
+        return  u''.join(self.result_array)
 
 
 def _prepare_opae(obj, cursor, uid, data, context):
     pool = pooler.get_pool(cursor.dbname)
     opae = OPAE(cursor, uid, data, pool, context)
     opae.parse_payment_lines()
-    opae.compute()
+    res = opae.compute()
+    ## some to do
     return {'opae': opae.get_result_64()}
 
-def create_opae(opae, obj, cursor, uid, data, context):
-    
-    
-    if opae.transaction_type == 'bvrpost' or opae.transaction_type == 'bvrbank':
-        opae_string = create_opae_header(opae,obj,cursor,uid,data,context,transaction_type='28')[:50]
-        
-    if opae.transaction_type == 'bvpost':
-        opae_string = create_opae_header(opae,obj,cursor,uid,data,context,transaction_type='22')[:50]
-        
-    if opae.transaction_type == 'bvbank':
-        opae_string = create_opae_header(opae,obj,cursor,uid,data,context,transaction_type='27')[:50]
-    
-    if opae.transaction_type == 'bvrpost' or opae.transaction_type == 'bvrbank' or opae.transaction_type == 'bvpost'or opae.transaction_type == 'bvbank':
-        opae_string += opae.deposit_currency.code
-        amount = str(int(round(opae.pool.get('res.currency').round(cursor,uid,opae.line.currency,opae.line.amount_currency),2)*100))
-        opae_string += '0'*(13-len(amount)) + amount + ' ' + opae.bonification_currency.name
-    
-        
-    if opae.deposit_currency.code in opae.currencies:
-        opae.currencies[opae.deposit_currency.code]['used'] += 1
-        opae.currencies[opae.deposit_currency.code]['total_amount'] += int(amount)
-    
-    else:
-        opae.currencies[opae.deposit_currency.code] = {'used':1,'total_amount':int(amount)}
-    
-#    if opae.transaction_type == 'bvrpost' or opae.transaction_type == 'bvrbank' or opae.transaction_type == 'bvpost' and not opae.country_code in ['CH','LI']:
-#        raise wizard.except_wizard(('Error'), ('Country not supported by OPAE\n' \
-#                 'Country code: %s\n') % (opae.country_code))
-    opae_string += opae.country_code
-        
-    if opae.transaction_type == 'bvbank':
-        if 8>len(opae.bic)!=0:
-            raise wizard.except_wizard(('Error'),('Error in bic.\nIf iban is present, just delete bic'))
-        
-        opae_string += ' '*(15-len(opae.bic)) + opae.bic
-        
-    if opae.transaction_type == 'bvpost':
-        if opae.benef_postal_account_number:
-            first = opae.benef_postal_account_number[:2]
-            second = opae.benef_postal_account_number[3:-2]
-            third = opae.benef_postal_account_number[-1:]
-            second = '0'*(6-len(second))+second
-            opae_string += first+second+third
-    
-        else:
-            raise wizard.except_wizard(('Error'), ('Missing postal account number'))
-    
-        opae_string += ' '*6
-        
-    if opae.transaction_type == 'bvbank' and not opae.dest_iban and not opae.dest_postal_account_number:
-        raise wizard.except_wizard(('Error'),('Missing IBAN or Postal account number'))
-    
-    if opae.transaction_type == 'bvpost' or opae.transaction_type == 'bvbank':
-        if opae.transaction_type == 'bvbank' and not opae.dest_iban:
-            if opae.dest_postal_account_number:
-                temp=opae.dest_postal_account_number.split('-')
-                temp2 = ''
-                for i in temp:
-                    temp2 += i
-                opae_string +=temp2[:2]+'0'*(9-len(temp2))+temp2[2:]
-        else:
-            opae_string += opae.dest_iban + ' '*(35-len(opae.dest_iban))
-            
-    if opae.transaction_type == 'bvbank':
-        opae_string += ' '*(35-len(opae.benef_bank_name)) + opae.benef_bank_name 
-        opae_string += ' '*(35-len(opae.benef_bank_add_designation)) + opae.benef_bank_add_designation
-        opae_string += ' '*(35-len(opae.benef_bank_street)) + opae.benef_bank_street 
-        opae_string += opae.benef_bank_npa + ' ' * (10-len(opae.benef_bank_npa)) 
-        opae_string += ' '*(25-len(opae.benef_bank_city)) + opae.benef_bank_city
-        
-    if opae.transaction_type == 'bvpost':
-        opae_string += ' '*(35-len(opae.benef_name)) + opae.benef_name
-        opae_string += ' '*(35-len(opae.benef_add_designation)) + opae.benef_add_designation
-        opae_string += ' '*(35-len(opae.benef_street)) +opae.benef_street
-        
-        if len(opae.benef_npa) != 4 and not opae.benef_npa == '':
-            raise wizard.except_wizard(('Error'), ('Wrong NPA'))
-        
-        opae_string += opae.benef_npa or ' '*4
-        opae_string += ' '*6
-        opae_string += ' '*(25-len(opae.benef_city)) + opae.benef_city
-        
-    if opae.transaction_type == 'bvpost' or opae.transaction_type == 'bvbank':
-        opae_string += ' '*(35-len(opae.dest_name)) + opae.dest_name
-        opae_string += ' '*(35-len(opae.dest_add_designation)) +opae.dest_add_designation
-        opae_string += ' '*(35-len(opae.dest_street)) + opae.dest_street
-        
-        if len(opae.dest_npa) != 4 and not opae.dest_npa == '':
-            raise wizard.except_wizard(('Error'), ('Wrong NPA'))
-        
-        opae_string += opae.dest_npa or ' '*4
-        opae_string += ' '*6
-        opae_string += ' '*(25-len(opae.dest_city)) +opae.dest_city
-        opae_string += ' '*(35-len(opae.communication_bloc_1)) + opae.communication_bloc_1
-        opae_string += ' '*(35-len(opae.communication_bloc_2)) + opae.communication_bloc_2
-        
-        if not opae.communication_bloc_3:
-            opae.communication_bloc_3 = ' '*35
-        
-        opae_string += ' '*(35-len(opae.communication_bloc_3)) + opae.communication_bloc_3
-        
-        if not opae.communication_bloc_4:
-            opae.communication_bloc_4 = ' '*35
-        opae_string += ' '*(35-len(opae.communication_bloc_4)) + opae.communication_bloc_4
-        opae_string += ' '*4
-        opae_string += ' '*(35-len(opae.tata_name)) + opae.tata_name
-        opae_string += ' '*(35-len(opae.tata_add_designation)) + opae.tata_add_designation
-        opae_string += ' '*(35-len(opae.tata_street)) + opae.tata_street
-        
-        if len(opae.tata_npa) != 4 and not opae.tata_npa == '':
-            raise wizard.except_wizard(('Error'), ('Wrong NPA'))
-        
-        opae_string += opae.tata_npa or ' '*4
-        opae_string += ' '*6
-        opae_string += ' '*(25-len(opae.tata_city)) + opae.tata_city
-        opae_string += ' '*14    
-            
-    if opae.transaction_type == 'bvrpost' or opae.transaction_type == 'bvrbank':
-        opae_string += opae.modulo_11_digit
-                
-        bvr_ad_num = opae.bvr_adherent_num.split('-')
-        print bvr_ad_num
-        if len(bvr_ad_num) == 1:
-            if not bvr_ad_num[0]:
-                raise wizard.except_wizard(('Error'), ('Please enter a BVR adherent number 1'))
-            if len(bvr_ad_num[0])!=5:
-                raise wizard.except_wizard(('Error'), ('Please enter BVR adherent number with -'))
-            opae_string += '0000' + bvr_ad_num
-        
-        elif len(bvr_ad_num) == 3:
-            if len(bvr_ad_num[1]) > 6 or len(bvr_ad_num[0]) > 2:
-                raise wizard.except_wizard(('Error'),('Invalid BVR adherent number 2'))
-
-            opae_string += '0'*(2-len(bvr_ad_num[0])) + bvr_ad_num[0] + '0'*(6-len(bvr_ad_num[1])) + bvr_ad_num[1] + bvr_ad_num[2]
-        
-        else:
-            raise wizard.except_wizard(('Error'), ('Invalid BVR adherent number 3'))
-        
-        opae_string += opae.reference
-        opae_string += opae.sender_reference
-        opae_string += ' '*555
-    return opae_string + ' '*(700-len(opae_string))
-
-    def create_control_sector(self, opae_line):
-        vals = line.compo
-        opae_string =[] 
-        ## chapter 4.2 secteur de controle -> identificateur de fichier
-        opae_string.appends('036')
-        if not vals.get('line_date', False) :
-            raise wizard.except_wizard(
-                                        ('Error'), 
-                                        ('Missing date planned  \n' \
-                                        'for the payment order line: %s\n')
-                                        )
-        planned_date =  DateTime.strptime(self.payment_order.date_planned, '%Y-%M-%d')
-        if planned_date < DateTime.today():
-            raise wizard.except_wizard(
-                                        ('Warning'),
-                                        ('Payment date must be at least today\n \
-                                           Today used instead.')
-                                       )    
-        ## chapter 4.2 secteur de controle -> date decheance
-        opae_string.append(planned_date.strftime("%y%m%d"))
-        ## chapter 4.2 secteur de controle -> reserve + element de commande fix val
-        opae_string.append('0'* 5 + '1')
-        ## chapter 4.2 secteur de controle -> No de compte de debit
-
-        opae_string.append(vals['debit_account_number'].rjust(6,'0'))
-        ## chapter 4.2 secteur de controle -> N0 de compte de debit de tax
-        opae_string.append(vals['debit_account_number'].rjust(6,'0'))
-        opae_string.append(
-                            self.get_lines_order_num(
-                                                    planned_date, 
-                                                    vals['bonification_currency']
-                                                    )
-                           )
-        
-  
-        try:
-            opae_string.append(self.CODEEQUIV[vals['transaction_type']])
-        except Exception, e:
-            raise wizard.except_wizard(('Error'), ('Type doesn\'t exists or isn\'t supported yet.'))
-        
-        transaction_id = unicode(vals['transaction_id'].rjust(6,'0'))
-        opae_string.append(transaction_id)
-        opae_string.append('0' * 7)
-        return u''.join(opae_string)
-    
-def create_opae_footer(opae, obj, cursor, uid, data, context):
-    opae_string = ''
-    opae_string += create_opae_header(opae,obj,cursor,uid,data,context,transaction_type='97')[:50]
-    
-    if len(opae.currencies) > 15:
-        wizard.except_wizard(('Error'),('There are too many currencies used in this payment order.\nMaximum authorised by OPAE : 15\nCurrent payment order contains %s currencies') % (len(opae.currencies)))
-    
-    for currency in opae.currencies:
-        opae_string += currency
-        used = str(opae.currencies[currency]['used'])
-        
-        while len(used) < 6:
-            used = '0' + used
-        
-        opae_string += used
-        total_amount = str(opae.currencies[currency]['total_amount'])
-        
-        while len(total_amount) < 13:
-            total_amount = '0' + total_amount
-        
-        opae_string += total_amount
-    
-    for i in range (15-len(opae.currencies)):
-        opae_string += '0' * 22
-    
-    opae_string += ' '*320    
-    return opae_string
-        
+ 
 
 
-class wizard_opae_create(wizard.interface):
+class WizardOpaeCreate(wizard.interface):
     states = {
         'init' : {
             'actions' : [_prepare_opae],
@@ -512,4 +559,4 @@ class wizard_opae_create(wizard.interface):
         },
     }
 
-wizard_opae_create('account.opae_create')
+WizardOpaeCreate('account.opae_create')

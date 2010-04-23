@@ -84,7 +84,7 @@ class ResPartnerBank(osv.osv):
         'bvr_adherent_num': fields.char(
                                         'BVR adherent number', 
                                          size=11,
-                                         help='Post affiliation BVR number '+
+                                         help='PostFinance affiliation BVR number '+
                                          'of your financial establishement'+
                                          'used for BVR/ESR printing'
                                         ),
