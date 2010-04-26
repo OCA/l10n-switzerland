@@ -59,12 +59,12 @@ FIELDS = {
 ##code equivalence between 
 ## OpenERP and Postfinance
 CODEEQUIV = {
-    'bvrpost' : u'28',
-    'bvrbank' : u'28',
-    'bvpost'  : u'22',
-    'bvbank'  : u'27', 
-    '00'      : u'00',
-    '97'      : u'97'
+    u'bvrpost' : u'28',
+    u'bvrbank' : u'28',
+    u'bvpost'  : u'22',
+    u'bvbank'  : u'27', 
+    u'00'      : u'00',
+    u'97'      : u'97'
  
  }
 
@@ -75,7 +75,8 @@ class OPAELine(object):
     
     currencies_handler = {}
     
-    def __init__(self, cursor, uid, data, pool, context=None):
+    def __init__(self, cursor, uid, data, pool, payment_order, context=None):
+        print cursor, uid, data, pool, payment_order, context
         self.sector = ''
         self.data = ''
         self.compo = {}
@@ -88,7 +89,8 @@ class OPAELine(object):
         ## OpenERP wizard data
         self.wizdata = data
         # OpenERP current context 
-        self.context = context.copy
+        self.context = context and context.copy() or {}
+        self.payment_order = payment_order
         
 
     ## @param self The object pointer.
@@ -96,55 +98,58 @@ class OPAELine(object):
     ## @line the current line
     def get_date(self, payment, line):
         """Return the right OPAE Line date"""
+        if not line :
+            return unicode(DateTime.today().strftime("%y%m%d"))
+        to_return = DateTime.today()
         if payment.date_prefered == 'due' and line.ml_maturity_date :
-            return DateTime.strptime(line.ml_maturity_date, '%Y-%m-%d')
+            to_return = DateTime.strptime(line.ml_maturity_date, '%Y-%m-%d')
         if  payment.date_prefered == 'fixed' and payment.date_planned :
-            return DateTime.strptime(payment.date_planned, '%Y-%M-%d')
-        return DateTime.today()
+            to_return = DateTime.strptime(payment.date_planned, '%Y-%M-%d')
+        if to_return < DateTime.today():
+               raise wizard.except_wizard(
+                                           _('Error'),
+                                           _('Payment date must be at least today\n \
+                                              Today used instead.')
+                                          )
+        return unicode(to_return.strftime("%y%m%d"))
         
         
     def set_communication(self, linebr):
         "Split line comment in 4 block of 35 chars"
         raw_comment = ''
         if linebr.communication and linebr.communication2:
-            raw_comment = line.communication + ' ' + line.communication2
+            raw_comment = linebr.communication + ' ' + linebr.communication2
         else:
-            raw_comment = line.communication 
+            raw_comment = linebr.communication 
         for i in xrange(0,140,35) :
             self.compo['communication_bloc_'+str(i/35+1)] = raw_comment[i:i+35]
             
     def set_address(self, prefix, addresses):
         for addr in addresses:
             if addr.type=='default':
-                op_line.compo[prefix+'_street'] = addr.street and addr.street or u''
-                op_line.compo[prefix+'_street'] += u' '
-                op_line.compo[prefix+'_street'] += addr.street2 and addr.street2 or u''
-                op_line.compo[prefix+'_street'].replace(u"\n",u' ')
-                op_line.compo[prefix+'_street'] = op_line.compo['add_street'][0:34]
-                op_line.compo[prefix+'_npa'] = addr.zip or u''
-                op_line.compo[prefix+'_city'] =  addr.city or u''
+                add_string = addr.street or u''
+                add_string += u' '
+                add_string += addr.street2 or u''
+                add_string = add_string.replace(u"\n",u' ')
+                self.compo[prefix+'_street'] = add_string[0:34]
+                self.compo[prefix+'_npa'] = addr.zip or u''
+                self.compo[prefix+'_city'] =  addr.city or u''
                 
                 
     def _create_control_sector(self):
         vals = self.compo
         opae_control_string =[] 
         ## chapter 4.2 secteur de controle -> identificateur de fichier
-        opae_control_string.appends(u'036')
+        opae_control_string.append(u'036')
         if not vals.get('line_date', False) :
             raise wizard.except_wizard(
                                         _('Error'), 
                                         _('Missing date planned  \n' \
                                         'for the payment order line: %s\n')
                                         )
-        planned_date =  DateTime.strptime(self.payment_order.date_planned, '%Y-%M-%d')
-        if planned_date < DateTime.today():
-            raise wizard.except_wizard(
-                                        _('Warning'),
-                                        _('Payment date must be at least today\n \
-                                           Today used instead.')
-                                       )    
+     
         ## chapter 4.2 secteur de controle -> date decheance
-        opae_control_string.append(unicode(planned_date.strftime("%y%m%d")))
+        opae_control_string.append(vals['line_date'])
         ## chapter 4.2 secteur de controle -> reserve + element de commande fix val
         opae_control_string.append('0'* 5 + '1')
         ## chapter 4.2 secteur de controle -> No de compte de debit
@@ -152,23 +157,20 @@ class OPAELine(object):
         opae_control_string.append(vals['debit_account_number'].rjust(6,u'0'))
         ## chapter 4.2 secteur de controle -> N0 de compte de debit de tax
         opae_control_string.append(vals['debit_account_number'].rjust(6,u'0'))
-        opae_control_string.append(
-                            self.get_lines_order_num(
-                                                    planned_date, 
-                                                    vals['bonification_currency']
-                                                    )
-                           )
+        opae_control_string.append(vals['order_number'])
 
 
         try:
+            print vals['transaction_type'], CODEEQUIV
             opae_control_string.append(CODEEQUIV[vals['transaction_type']])
+            
         except Exception, e:
-            raise wizard.except_wizard(_('Error'), _('Type doesn\'t exists or isn\'t supported yet.'))
+            raise wizard.except_wizard(_('Error'), _("Type doesn 't exists or isn 't supported yet."))
 
         transaction_id = unicode(vals['transaction_id'].rjust(6,u'0'))
         opae_control_string.append(transaction_id)
         opae_control_string.append(u'0' * 7)
-        return (u''.join(opae_control_string))[:50] 
+        return (''.join(opae_control_string))[:50] 
         
     def _format_post_account(self, postnumber, lenght):
         numberpart = postnumber.split('-')
@@ -178,7 +180,7 @@ class OPAELine(object):
                     ('Post number account not in valid format ..-..-..')
                     )
         numberpart[1] = numberpart[1].rjust(lenght, u'0')
-        return u''.join(numberpart)
+        return ''.join(numberpart)
         
     def escape_vals(self, indict={}):
         "Manage line encoding"
@@ -210,7 +212,7 @@ class OPAELine(object):
                                             _('Error in bic.\nIf iban is present, just delete bic')
                                             )
 
-            bank_string.append(vals['bic'].ljust(15, u' '))
+            bank_string.append(vals['bic'].ljust(15, ' '))
         if btype in ('bvpost', 'bvbank'):    
             if btype == 'bvpost':
                 if vals['postal_account_number']:
@@ -222,7 +224,7 @@ class OPAELine(object):
                                                 _('Missing postal account number')
                                             )
 
-                bank_string.append(u' '*6)
+                bank_string.append(' '*6)
 
             if btype == 'bvbank' :
                 if not vals['iban'] and not vals['postal_account_number']:
@@ -232,16 +234,17 @@ class OPAELine(object):
                                         )
 
         
-            if opae.transaction_type == 'bvbank' and not vals['iban']:
+            if btype == 'bvbank' and not vals['iban']:
                 if vals['postal_account_number']:
                     bank_string.append(self._format_post_account(vals['postal_account_number'], 6))
             else:
-                if len(vals['iban'] > 15):
+                if not vals['iban']:
                     raise wizard.except_wizard(
-                                                 _('Error'), 
-                                                 _('Iban too long')
-                                             )
-                bank_string.append(vals['iban'].rjust(15,'u0'))
+                                                     _('Error'), 
+                                                     _('Iban missing')
+                                                 )
+                # error Iban lenght
+                bank_string.append(vals['iban'].rjust(35,'0'))
         return u''.join(bank_string)
         
         
@@ -249,62 +252,71 @@ class OPAELine(object):
     def generate_string(self):
         vals = self.compo
         opae_string = []
+        ##we transitarate the accuanted chars
+        
+        for key, string_in in vals.items() :
+            try:
+                string_in = u''.join((c for c in unicodedata.normalize('NFD', string_in) \
+                    if unicodedata.category(c) != 'Mn'))
+                string_in.encode('ascii','ignore')
+                vals[key] = string_in
+            except Exception, encode_err:
+                print  key, encode_err
+                vals[key] = string_in
+                
         opae_string.append(self._create_control_sector())
-
+        if vals['transaction_type']  == u'00':
+            opae_string.append(u' '*650)
+            return ''.join(opae_string)
         if vals['transaction_type'] in ('bvrpost', 'bvrbank', 'bvpost', 'bvbank'):
             opae_string.append(vals['deposit_currency'])
             ##we round and convert to cents
-            float_amount = opae.pool.get('res.currency').round(
-                                                                cursor,
-                                                                uid,opae.line.currency,
-                                                                opae.line.amount_currency
-                                                            )
-            amount = unicode(int(round(float_amount),2)*100)
+            amount = unicode(int(round(vals['deposit_amount']*100,2)))
             opae_string.append(amount.rjust(13, u'0'))
             opae_string.append(vals['bonification_currency'])
 
 
-        if vals['deposit_currency'] in currencies_handler :
-            currencies_handler[vals['deposit_currency']]['used'] += 1
-            currencies_handler[vals['deposit_currency']]['total_amount'] += int(amount)
+        if vals['deposit_currency'] in self.currencies_handler :
+            self.currencies_handler[vals['deposit_currency']]['used'] += 1
+            self.currencies_handler[vals['deposit_currency']]['total_amount'] += int(amount)
 
         else:
-            currencies_handler[vals['deposit_currency']] = {'used':1,'total_amount':int(amount)}
+            self.currencies_handler[vals['deposit_currency']] = {'used':1,'total_amount':int(amount)}
 
         opae_string.append(vals['country_code'])
         opae_string.append(self._generate_dest_bank_string(vals))
         
 
         if vals['transaction_type'] in ('bvpost', 'bvbank'):
-            opae_string.append(vals['dest_name'].rjust(35,u' ')[:35])
-            opae_string.append(vals['dest_designation'].rjust(35,u' ')[:35])
-            opae_string.append(vals['dest_street'].rjust(35,u' ')[:35])
-            opae_string.append(vals['dest_npa'].ljust(10,u' ')[:10])
-            opae_string.append(vals['dest_city'].ljust(25,u' ')[:25])
-            if not vals['add_npa']:
+            opae_string.append(vals['dest_name'].rjust(35, ' ')[:35])
+            opae_string.append(vals['dest_designation'].rjust(35, ' ')[:35])
+            opae_string.append(vals['dest_street'].rjust(35, ' ')[:35])
+            opae_string.append(vals['dest_npa'].ljust(10, ' ')[:10])
+            opae_string.append(vals['dest_city'].ljust(25, ' ')[:25])
+            if not vals['dest_npa']:
                 raise wizard.except_wizard(_('Error'), _('No NPA'))
             if not vals['principal_npa']:
                 raise wizard.except_wizard(_('Error'), _('No NPA'))
-            opae_string.append(vals['benef_name'].rjust(35,u' ')[:35])
-            opae_string.append(vals['benef_designation'].rjust(35,u' ')[:35])
-            opae_string.append(vals['benef_street'].rjust(35,u' ')[:35])
-            opae_string.append(vals['benef_npa'].ljust(10, u' '))
-            opae_string.append(vals['dest_city'].rjust(25,u' ')[:25])
+            opae_string.append(vals['benef_name'].rjust(35, ' ')[:35])
+            opae_string.append(vals['benef_designation'].rjust(35, ' ')[:35])
+            opae_string.append(vals['benef_street'].rjust(35, ' ')[:35])
+            opae_string.append(vals['benef_npa'].ljust(10, ' '))
+            opae_string.append(vals['dest_city'].rjust(25, ' ')[:25])
             opae_string.append(vals['communication_bloc_1'])
             opae_string.append(vals['communication_bloc_2'])
             opae_string.append(vals['communication_bloc_3'])
             opae_string.append(vals['communication_bloc_4'])
-            opae_string.append(u' '*4)
-            opae_string.append(vals['principal_name'].rjust(35,u' '))
-            opae_string.append(vals['principal_designation'].rjust(35,u' '))
-            opae_string.append(vals['principal_street'].rjust(35,u' ')[:35])
-            opae_string.append(vals['principal_npa'].ljust(10,u' '))
-            opae_string.append(vals['principal_city'].rjust(25,u' '))
-            opae_string.append(u' '*14)    
+            opae_string.append(' '*4)
+            opae_string.append(vals['principal_name'].rjust(35,' '))
+            opae_string.append(vals['principal_designation'].rjust(35,' '))
+            opae_string.append(vals['principal_street'].rjust(35,' ')[:35])
+            opae_string.append(vals['principal_npa'].ljust(10,' '))
+            opae_string.append(vals['principal_city'].rjust(25,' '))
+            opae_string.append(' '*14)    
             
         if vals['transaction_type'] in ('bvrpost', 'bvrpost'):    
             opae_string.append(vals['modulo_11_digit'])
-            if notvals['bvr_num']:
+            if not vals['bvr_num']:
                 raise wizard.except_wizard(
                                             _('Error'), 
                                             _('Please enter a BVR post account')
@@ -317,24 +329,23 @@ class OPAELine(object):
                     _('Error'), 
                     _('invalid Post account number')
                 )
-                opae_string.append(bvr_ad_num.rjust(9,u'0'))
+                opae_string.append(bvr_ad_num.rjust(9,'0'))
 
             else :
                 opae_string.append(self._format_post_account(vals['bvr_num'],6))
-            opae_string.append(vals['reference'].rjust(27, u'0'))
+            opae_string.append(vals['reference'].rjust(27, '0'))
             opae_string.append(vals['sender_reference'])
-            opae_string.append(u' '*555)
-            to_retunr = u''.join(opae_string)
+            opae_string.append(' '*555)
+        to_retunr = ''.join(opae_string)
+        print '>>>>>>>>>>>>>>>>>>', to_retunr, opae_string
             ##To do test t return
             
-            return to_retunr
+        return to_retunr
 
         
         
 class OPAE(object):
     "OPAE File representation"
-
-
     
     def __init__(self, cursor, uid, data, pool, context=None):
         ## Openerp Pooler
@@ -347,6 +358,8 @@ class OPAE(object):
         self.wizdata = data
         # OpenERP current context 
         self.context = context
+        #transaction id
+        self.transaction = 0
         pay_id = data['ids']
         if isinstance(pay_id, list) :
             pay_id = pay_id[0]
@@ -358,8 +371,6 @@ class OPAE(object):
                                                                    )
         ## OPAE string component                                                           
         self.compo =  {}
-        ## Boolean that will be set to true it OPAE header was generated
-        self.has_header = False
         ## Currency dict used for footer computation
         ## for more information look chapter 4.12 enregistrement total
         self.currencies = {}
@@ -367,26 +378,31 @@ class OPAE(object):
         self.lines = []
         self.numers = {}
         ## Enregistrement de test a ne pas confondre avec secteur de controle
-        self.header = ''
         if not self.payment_order.mode :
             raise wizard.except_wizard(_('Error'),
             _('No Payment mode define'))
         self.debit_account_number = self.payment_order.mode.\
                                     bank_id.bvr_number.replace(u'-',u'')
         ## header line representation                            
-        self.headline = OPAELine()
-        self.headline.compo['line_date'] = self.payment_order.date_planned
+        self.headline = OPAELine(self.cursor, self.uid, self.wizdata, self.pool, self.payment_order, self.context)
+        self.headline.compo['line_date'] = self.headline.get_date(self.payment_order, None)
         self.headline.compo['debit_account_number'] = self.debit_account_number
-        self.headline.compo['bonification_currency'] = None
-        self.headline.compo['transaction_type'] = '00'
-        self.headline.compo['transaction_id'] = 0
+        self.headline.compo['bonification_currency'] = u''
+        self.headline.compo['transaction_type'] = u'00'
+        self.headline.compo['transaction_id'] = unicode(self.transaction)
+        self.headline.compo['order_number'] = unicode(self.get_lines_order_num(self.headline.compo['line_date'], None))
+        self.headline.compo['deposit_currency'] = self.payment_order.user_id.company_id.currency_id.code
         ## footer line representation                            
-        self.footerline = OPAELine()
-        self.footerline.compo['line_date'] = self.payment_order.date_planned
+        self.footerline = OPAELine(self.cursor, self.uid, self.wizdata, self.pool, self.payment_order, self.context)
+        self.footerline.compo['line_date'] = self.footerline.get_date(self.payment_order, None)
         self.footerline.compo['debit_account_number'] = self.debit_account_number
-        self.footerline.compo['bonification_currency'] = None
-        self.footerline.compo['transaction_type'] = '97'
-        self.footerline.compo['transaction_id'] = 0
+        self.footerline.compo['bonification_currency'] = u''
+        self.footerline.compo['transaction_type'] = u'97'
+        self.footerline.compo['transaction_id'] = unicode(self.transaction)
+        self.footerline.compo['order_number'] = unicode(self.get_lines_order_num(self.footerline.compo['line_date'], None))
+        self.footerline.compo['deposit_currency'] = self.payment_order.user_id.company_id.currency_id.code
+        
+        
         ### array of unicode string that will be used for joined
         ##  see PEP for details
         self.result_array = []
@@ -418,17 +434,17 @@ class OPAE(object):
                                     _('Error'),
                                     _('There are too many currencies used in this payment order.\nMaximum authorised by OPAE : 15\nCurrent payment order contains %s currencies') % (len(line.currencies_handler)))
 
-        for currency in opae.currencies_handler:
+        for currency in line.currencies_handler:
             opae_string += currency
-            used = unicode(opae.currencies[currency]['used'])
+            used = unicode(line.currencies_handler[currency]['used'])
             used = used.rjust(6, u'0')
 
             opae_string += used
-            total_amount = unicode(opae.currencies[currency]['total_amount'])
+            total_amount = unicode(line.currencies_handler[currency]['total_amount'])
             total_amount = total_amount.rjust(13,u'0')
             opae_string += total_amount
 
-        for i in currencies_handler:
+        for i in line.currencies_handler:
             opae_string += u'0' * 22
 
         opae_string += ' '*320    
@@ -443,37 +459,37 @@ class OPAE(object):
         # beneficiare has is account trought a bank that use a postal account
         # All term can be retrieved in 
         # Postfinance Tech spech "Enregistrement OPAE"
-        counter = 0
-        for line in self.payment.line_ids:
-            counter += 1
+        self.transaction 
+        for line in self.payment_order.line_ids:
+            self.transaction += 1
             ## we have an unique id per OPAE line
-            op_line = OPAELine(self.cursor, self.uid, self.wizdata, self.context)
+            op_line = OPAELine(self.cursor, self.uid, self.wizdata, self.pool, self.payment_order, self.context)
             self.lines.append(op_line)
             ## we set limit execution date see chapter 4.2 date d'echeance
-            op_line.compo['line_date'] = op_line.get_date(self.payment, line)
+            op_line.compo['line_date'] = op_line.get_date(self.payment_order, line)
             ## we set the destination account 
             ##  see chapter 4.2 numero de compte de débit
             op_line.compo['debit_account_number'] = self.payment_order.mode.\
                                     bank_id.bvr_number.replace(u'-',u'')
             ## chapter 4.2 numero de compte de debit des taxes
             op_line.compo['debit_tax_account_number'] = op_line.compo['debit_account_number']
-            
+            op_line.compo['currency'] = line.currency.code
             ## We define line order number chapter 4.2 numero d'ordre
-            op_line.compo['order_number'] = self.get_lines_order_num(
+            op_line.compo['order_number'] = unicode(self.get_lines_order_num(
                                                   op_line.compo['line_date'],
                                                   line.currency.code
-                                                )
+                                                ))
             state = line.bank_id.state or self.payment_order.mode.bank_id.state
             ## chapter 4.2 genre de transaction
             op_line.compo['transaction_type'] = state
             ## chapter 4.2 no courant de transaction
-            op_line.compo['transaction_id'] = counter
+            op_line.compo['transaction_id'] = unicode(self.transaction)
             ## chapter 4.x Code ISO Monnaie de Depot 
             op_line.compo['deposit_currency'] = line.currency.code
             ## chap 4.x montant du depot
             op_line.compo['deposit_amount'] = line.amount_currency
             ## chap 4.x Code ISO Monnaie de bonnification
-            op_line.compo['bonification_currency'] = line.currency.code
+            op_line.compo['bonification_currency'] = unicode(line.currency.code)
             ## chap 4.x code ISO pays
             op_line.compo['country_code'] = self.payment_order.user_id.company_id.\
                 partner_id.country.code
@@ -494,8 +510,8 @@ class OPAE(object):
                 op_line.compo['dest_street'] = op_line.compo['benef_street']
                 op_line.compo['dest_npa'] = op_line.compo['benef_npa']
                 op_line.compo['dest_city'] = op_line.compo['benef_city']
-                op_line.compo['dest_designation'] = ''
-                op_line.compo['benef_designation'] = ''
+                op_line.compo['dest_designation'] = u''
+                op_line.compo['benef_designation'] = u''
             else :
                 op_line.compo['dest_npa'] = line.bank_id.bank and line.bank_id.bank.zip or ''
                 op_line.compo['dest_name'] = line.bank_id.bank and line.bank_id.bank.name or ''
@@ -504,45 +520,46 @@ class OPAE(object):
                 op_line.compo['dest_street'] = line.bank_id.bank and line.bank_id.bank.street or ''
                 op_line.compo['dest_city'] = line.bank_id.bank and line.bank_id.bank.city or '' 
                 op_line.compo['benef_name'] = line.bank_id.owner_name or u''
-                op_line.compo['benef_street'] =  line.bank_id.street or ''
-                op_line.compo['benef_npa'] = line.bank_id.zip or ''
-                op_line.compo['benef_city'] = line.bank_id.city or ''
-                                
+                op_line.compo['benef_street'] =  line.bank_id.street or u''
+                op_line.compo['benef_npa'] = line.bank_id.zip or u''
+                op_line.compo['benef_city'] = line.bank_id.city or u''
+                
+                    
             op_line.set_communication(line)
             ## principal correspond to the source of payment
-            op_line.compo['principal_name'] = ''
-            op_line.compo['principal_street'] = ''
-            op_line.compo['principal_npa'] = ''
-            op_line.compo['principal_city'] = ''
+            op_line.compo['principal_name'] = u''
+            op_line.compo['principal_street'] = u''
+            op_line.compo['principal_npa'] = u''
+            op_line.compo['principal_city'] = u''
             if self.payment_order.mode.bank_id.partner_id :
                 partner = self.payment_order.mode.bank_id.partner_id
                 op_line.compo['principal_name'] = partner.name
                 op_line.set_address('principal', partner.address)
-            op_line.compo['principal_designation'] = ''
+            op_line.compo['principal_designation'] = u''
             op_line.compo['bic'] = line.bank_id.bank and line.bank_id.bank.bic or ''
             ##final bebficiary bank            
 
-            op_line.compo['modulo_11_digit'] = '  '
+            op_line.compo['modulo_11_digit'] = u'  '
             op_line.compo['bvr_num'] = self.payment_order.mode.bank_id.bvr_number or ''
             op_line.compo['reference'] = line.communication
-            op_line.compo['sender_reference'] = ' ' * 35
+            op_line.compo['sender_reference'] = u' ' * 35
         
     def compute(self):
         """Compute the OPAE file output"""
-        self.result_array.append(self.header.generate_string())  
+        self.result_array.append(self.headline.generate_string())  
         for parsed_line in self.lines :
              self.result_array.append(parsed_line.generate_string())
-        self.result_array.append(self.footerline.generate_string())
-        return  u''.join(self.result_array)
+        self.result_array.append(self.create_opae_footer(self.footerline))
+        print self.result_array
+        return  "\n".join(self.result_array)
 
 
 def _prepare_opae(obj, cursor, uid, data, context):
     pool = pooler.get_pool(cursor.dbname)
     opae = OPAE(cursor, uid, data, pool, context)
     opae.parse_payment_lines()
-    res = opae.compute()
-    ## some to do
-    return {'opae': opae.get_result_64()}
+    res = opae.compute()    
+    return {'opae': base64.encodestring(res)}
 
  
 
