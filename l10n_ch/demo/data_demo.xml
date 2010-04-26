@@ -115,6 +115,14 @@ Np8UjYSiEUGffBy+cgqhd32Fqr3wmkjhO4n+2EpRtPCK8j8CgILN0JP4oAAAAABJRU5ErkJggg==
             <field name="bank" ref="partner_bank"/>
             <field name="iban">CH9100767000S00023455</field>
         </record>
+        <record model="res.partner.bank" id="opae_bank">
+            <field name="name">BigBank account 3</field>
+            <field name="acc_number">02345</field>
+            <field name="partner_id" ref="camptocamp"/>
+            <field name="state">bvbank</field>
+            <field name="bank" ref="partner_bank"/>
+            <field name="iban">ch9000767000h00002345</field>
+        </record>
         <record model="account.invoice" id="v11_invoice">
             <field name="name">V11 invoice</field>
             <field name="amount_total">5415</field>
@@ -139,10 +147,11 @@ Np8UjYSiEUGffBy+cgqhd32Fqr3wmkjhO4n+2EpRtPCK8j8CgILN0JP4oAAAAABJRU5ErkJggg==
             <field name="number">1</field>
             <field name="partner_id" ref="camptocamp"/>
             <field name="address_invoice_id" ref="res_partner_address_1"/>
-            <field name="account_id" ref="account.a_recv"/>
+            <field name="account_id" ref="account.a_pay"/>
             <field name="currency_id" ref="base.CHF"/>
             <field name="company_id" ref="base.main_company"/>
             <field name='type'>in_invoice</field>
+            <field name="partner_bank" ref="main_bank" />
         </record>
         <record model="account.invoice.line" id="dta_invoice_line">
             <field name="name">Dummy product</field>
@@ -157,10 +166,11 @@ Np8UjYSiEUGffBy+cgqhd32Fqr3wmkjhO4n+2EpRtPCK8j8CgILN0JP4oAAAAABJRU5ErkJggg==
             <field name="number">1</field>
             <field name="partner_id" ref="camptocamp"/>
             <field name="address_invoice_id" ref="res_partner_address_1"/>
-            <field name="account_id" ref="account.a_recv"/>
+            <field name="account_id" ref="account.a_pay"/>
             <field name="currency_id" ref="base.CHF"/>
             <field name="company_id" ref="base.main_company"/>
             <field name='type'>in_invoice</field>
+            <field name="partner_bank" ref="opae_bank" />
         </record>
         <record model="account.invoice.line" id="opae_invoice_line">
             <field name="name">Dummy product</field>
