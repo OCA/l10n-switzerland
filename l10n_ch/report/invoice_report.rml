@@ -7,7 +7,7 @@
       <pageTemplate id="first">
           <frame id="first" x1="24.0" y1="111.5mm" width="190mm" height="142mm" last="1"/>
           <pageGraphics>
-              <image x="13.15cm" y="25.5cm"  height="2.05cm" >[[company.logo]]</image>
+              <image x="13.15cm" y="25.5cm"  height="2.05cm" >[[company.logo or '']]</image>
               <setFont name="Helvetica" size="7"/>
           </pageGraphics>
           <frame id="Frame1"
@@ -18,7 +18,6 @@
               height="111mm"/>
       </pageTemplate>
   </template>
-<!-- begin of core -->
  <stylesheet>
      <blockTableStyle id="Standard_Outline">
        <blockAlignment value="LEFT"/>
@@ -99,10 +98,8 @@
   <story>
       <para style="P1">[[ repeatIn(objects,'o') ]]</para>
       <para style="P1">[[ setLang(o.partner_id.lang) ]]</para>
-            
-      <para style="StandardBold">[[ (o.address_invoice_id.pa == False) and removeParentNode('para') ]][[ o.address_invoice_id.title or '' ]] [[ o.address_invoice_id.name ]]</para>
-            <para style="Standard">[[ (o.address_invoice_id.pa == True) and removeParentNode('para') ]] [[ o.address_invoice_id.title or '' ]] [[ o.address_invoice_id.name ]]</para>
-      <para style="Standard">[[ (o.address_invoice_id.pa == False) and removeParentNode('para') ]]p/a [[ o.partner_id.name.upper() ]] [[ o.partner_id.title or '' ]]</para>
+      <para style="Standard">[[ o.partner_id.title or '' ]][[ o.partner_id.name ]]</para>
+      <para style="StandardBold">[[ o.address_invoice_id.title or '' ]] [[ o.address_invoice_id.name ]]</para>
             <para style="Standard">[[ o.address_invoice_id.street ]]</para>
             <para style="Standard">[[ o.address_invoice_id.street2 or '' ]]</para>
             <para style="Standard">[[ o.address_invoice_id.zip or '' ]] [[ o.address_invoice_id.city or '' ]]</para>
@@ -121,7 +118,7 @@
         <font face="Helvetica">[[ o.number ]]</font>
       </para>
       <para style="P15">
-        [[o.name]] - [[o.cust_reference]]
+        [[o.name]]
       </para>
       <para style="P14">
         <font color="white"> </font>
@@ -136,9 +133,8 @@
           </td>
           <td>
           <para style="P6">
-                  <font>[[ format((o.payment_term and o.payment_term.name)) or '' ]]</font>
-                  <font>[[ (o.date_due &lt; o.date_invoice) and removeParentNode('font') ]], until the </font>
-                  <font>[[ formatLang(o.date_due,date=True) ]]</font>
+                  <font>[[ (o.payment_term and o.payment_term.name) or '' ]]</font>
+                  <font>[[ (o.date_due and o.date_invoice) and removeParentNode('font') ]], until the [[ formatLang(o.date_due,date=True) ]]</font>
           </para>
           </td>
             </tr>
@@ -318,8 +314,8 @@
             Exact value: y=17.6mm
         -->
 
-        <setFont name="ocrb" size="11.5"/>
-    <drawRightString x="195mm" y="15mm">[[mod10r('01'+str('%.2f' % o.amount_total).replace('.','').rjust(10,'0'))]]&gt;[[ _get_ref(o) ]]+ [[o.partner_bank.bvr_number.split('-')[0]+(str(o.partner_bank.bvr_number.split('-')[1])).rjust(6,'0')+o.partner_bank.bvr_number.split('-')[2] ]]&gt;</drawRightString>
+        <setFont name="ocrb" size="12"/>
+    <drawRightString x="197.5mm" y="17mm">[[mod10r('01'+str('%.2f' % o.amount_total).replace('.','').rjust(10,'0'))]]&gt;[[ _get_ref(o) ]]+ [[o.partner_bank.bvr_number.split('-')[0]+(str(o.partner_bank.bvr_number.split('-')[1])).rjust(6,'0')+o.partner_bank.bvr_number.split('-')[2] ]]&gt;</drawRightString>
 
     </illustration>
 
