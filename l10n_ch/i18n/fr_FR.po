@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 5.0.7\n"
+"Project-Id-Version: OpenERP Server 5.0.9\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2010-02-22 14:33:48+0000\n"
-"PO-Revision-Date: 2010-02-22 14:33:48+0000\n"
+"POT-Creation-Date: 2010-04-30 09:45:46+0000\n"
+"PO-Revision-Date: 2010-04-30 09:45:46+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,8 +21,14 @@ msgid "Invoice Date:"
 msgstr ""
 
 #. module: l10n_ch
+#: rml:l10n_ch.bvr:0
+msgid "Width: 2.3inch, 5.9inch             Height: 4*1/6 inch"
+msgstr ""
+
+#. module: l10n_ch
+#: rml:l10n_ch.bvr:0
 #: rml:l10n_ch.invoice.bvr:0
-msgid "Canceled Invoice"
+msgid "-"
 msgstr ""
 
 #. module: l10n_ch
@@ -42,12 +48,6 @@ msgid "No bank account for the company."
 msgstr ""
 
 #. module: l10n_ch
-#: rml:l10n_ch.bvr:0
-#: rml:l10n_ch.invoice.bvr:0
-msgid "1.3cm 25.5cm 7cm 25.5cm"
-msgstr ""
-
-#. module: l10n_ch
 #: code:addons/l10n_ch/wizard/bvr_import.py:0
 #, python-format
 msgid "Record found after total record!"
@@ -56,12 +56,6 @@ msgstr ""
 #. module: l10n_ch
 #: model:res.partner.bank.type,name:l10n_ch.bvrpost
 msgid "DTA-BVRPOST"
-msgstr ""
-
-#. module: l10n_ch
-#: rml:l10n_ch.bvr:0
-#: rml:l10n_ch.invoice.bvr:0
-msgid "Mail:"
 msgstr ""
 
 #. module: l10n_ch
@@ -86,20 +80,17 @@ msgid "BVR A4 Sheet"
 msgstr ""
 
 #. module: l10n_ch
-#: model:res.partner.bank.type.field,name:l10n_ch.bank_field_bvbank
-#: model:res.partner.bank.type.field,name:l10n_ch.bank_field_bvpost
-#: model:res.partner.bank.type.field,name:l10n_ch.bank_field_bvrbank
-#: model:res.partner.bank.type.field,name:l10n_ch.bank_field_bvrpost
-#: model:res.partner.bank.type.field,name:l10n_ch.bank_field_iban
-msgid "bank"
-msgstr ""
-
-#. module: l10n_ch
 #: code:addons/l10n_ch/wizard/dta_wizard.py:0
 #, python-format
 msgid "You must provide a BVR number\n'\n"
 "                    'for the bank account: %s' \\n"
 "                    'on line: %s"
+msgstr ""
+
+#. module: l10n_ch
+#: rml:l10n_ch.bvr:0
+#: rml:l10n_ch.invoice.bvr:0
+msgid "p/a"
 msgstr ""
 
 #. module: l10n_ch
@@ -142,9 +133,12 @@ msgid "end of core"
 msgstr ""
 
 #. module: l10n_ch
-#: rml:l10n_ch.bvr:0
-#: rml:l10n_ch.invoice.bvr:0
-msgid "Width: 2.3inch, 5.9inch 		Height: 4*1/6 inch"
+#: model:res.partner.bank.type.field,name:l10n_ch.bank_field_bvbank
+#: model:res.partner.bank.type.field,name:l10n_ch.bank_field_bvpost
+#: model:res.partner.bank.type.field,name:l10n_ch.bank_field_bvrbank
+#: model:res.partner.bank.type.field,name:l10n_ch.bank_field_bvrpost
+#: model:res.partner.bank.type.field,name:l10n_ch.bank_field_iban
+msgid "bank"
 msgstr ""
 
 #. module: l10n_ch
@@ -157,38 +151,19 @@ msgid "No bank name defined\n' \\n"
 msgstr ""
 
 #. module: l10n_ch
-#: code:addons/l10n_ch/wizard/wizard_bvr.py:0
-#, python-format
-msgid "UserError"
-msgstr ""
-
-#. module: l10n_ch
 #: model:ir.actions.wizard,name:l10n_ch.wizard_bvr_check_report
 msgid "BVR"
 msgstr ""
 
 #. module: l10n_ch
 #: wizard_button:account.dta_create,init,end:0
+#: wizard_button:account.opae_create,init,end:0
 msgid "OK"
 msgstr ""
 
 #. module: l10n_ch
 #: rml:l10n_ch.invoice.bvr:0
-msgid "TVA (%)"
-msgstr ""
-
-#. module: l10n_ch
-#: rml:l10n_ch.invoice.bvr:0
 msgid "Tax"
-msgstr ""
-
-#. module: l10n_ch
-#: code:addons/l10n_ch/wizard/dta_wizard.py:0
-#, python-format
-msgid "You must provide ' \\n"
-"                        'a Clearing Number\n' \\n"
-"                        'for the partner bank: %s\n' \\n"
-"                        'on line %s"
 msgstr ""
 
 #. module: l10n_ch
@@ -225,13 +200,11 @@ msgid "DTA-BVBANK"
 msgstr ""
 
 #. module: l10n_ch
-#: rml:l10n_ch.invoice.bvr:0
-msgid "Remarque:"
-msgstr ""
-
-#. module: l10n_ch
-#: rml:l10n_ch.invoice.bvr:0
-msgid "Disc. (%)"
+#: code:addons/l10n_ch/wizard/dta_wizard.py:0
+#, python-format
+msgid "You must provide the bank city '\n"
+"                        'or the bic code for the partner bank: \n %d\n' + \\n"
+"                        'on line: %s"
 msgstr ""
 
 #. module: l10n_ch
@@ -256,31 +229,9 @@ msgid "Supplier Invoice"
 msgstr ""
 
 #. module: l10n_ch
-#: code:addons/l10n_ch/wizard/wizard_bvr.py:0
-#, python-format
-msgid "Your bank BVR number should be of the form 0X-XXX-X!\n' \\n"
-"                            'Please check your company ' \\n"
-"                            'information for the invoice:\n%s"
-msgstr ""
-
-#. module: l10n_ch
 #: constraint:res.partner:0
 msgid "The VAT doesn't seem to be correct."
 msgstr "Le numéro de TVA ne semble pas correct."
-
-#. module: l10n_ch
-#: rml:l10n_ch.bvr:0
-#: rml:l10n_ch.invoice.bvr:0
-msgid "1.3cm 27.7cm 20cm 27.7cm"
-msgstr ""
-
-#. module: l10n_ch
-#: code:addons/l10n_ch/wizard/dta_wizard.py:0
-#, python-format
-msgid "You must provide the bank city '\n"
-"                        'or the bic code for the partner bank: \n %d\n' + \\n"
-"                        'on line: %s"
-msgstr ""
 
 #. module: l10n_ch
 #: code:addons/l10n_ch/wizard/dta_wizard.py:0
@@ -289,7 +240,7 @@ msgid "You must provide a Clearing Number for your bank account."
 msgstr ""
 
 #. module: l10n_ch
-#: field:res.partner.bank,printAccount:0
+#: field:res.partner.bank,printaccount:0
 msgid "Print Account Number on BVR"
 msgstr ""
 
@@ -322,19 +273,9 @@ msgid "The properties account payable account receivable"
 msgstr ""
 
 #. module: l10n_ch
-#: rml:l10n_ch.invoice.bvr:0
-msgid "- Page:"
-msgstr ""
-
-#. module: l10n_ch
 #: model:res.partner.title,name:l10n_ch.res_c_partner_title_mme_m
 #: model:res.partner.title,name:l10n_ch.res_partner_title_mme_m
 msgid "Madame, Monsieur,"
-msgstr ""
-
-#. module: l10n_ch
-#: rml:l10n_ch.bvr:0
-msgid "Here is the BVR to allow you to pay the invoice '"
 msgstr ""
 
 #. module: l10n_ch
@@ -348,15 +289,26 @@ msgid "Invalid XML for View Architecture!"
 msgstr "XML non valide pour l'architecture de la vue"
 
 #. module: l10n_ch
-#: model:ir.model,name:l10n_ch.model_account_journal_todo
-msgid "account.journal.todo"
+#: model:ir.actions.wizard,name:l10n_ch.wizard_account_opae_create
+msgid "Create OPAE"
+msgstr ""
+
+#. module: l10n_ch
+#: wizard_field:account.opae_create,init,opae:0
+msgid "OPAE File"
 msgstr ""
 
 #. module: l10n_ch
 #: model:res.partner.bank.type.field,name:l10n_ch.iban_field
+#: model:res.partner.bank.type.field,name:l10n_ch.iban_field_bvbank
 #: model:res.partner.bank.type.field,name:l10n_ch.iban_field_iban
 msgid "iban"
 msgstr "IBAN"
+
+#. module: l10n_ch
+#: rml:l10n_ch.invoice.bvr:0
+msgid "Deposit"
+msgstr ""
 
 #. module: l10n_ch
 #: code:addons/l10n_ch/wizard/dta_wizard.py:0
@@ -370,8 +322,18 @@ msgid "Draft Invoice"
 msgstr ""
 
 #. module: l10n_ch
+#: wizard_view:account.opae_create,init:0
+msgid "OPAE file creation - Results"
+msgstr ""
+
+#. module: l10n_ch
+#: model:ir.model,name:l10n_ch.model_account_journal_todo
+msgid "account.journal.todo"
+msgstr ""
+
+#. module: l10n_ch
 #: rml:l10n_ch.invoice.bvr:0
-msgid "VAT :"
+msgid "Width: 2.3inch, 5.9inch         Height: 4*1/6 inch"
 msgstr ""
 
 #. module: l10n_ch
@@ -381,13 +343,51 @@ msgid "No payment mode or payment type code invalid."
 msgstr ""
 
 #. module: l10n_ch
-#: rml:l10n_ch.invoice.bvr:0
-msgid "Contact :"
+#: model:ir.actions.wizard,name:l10n_ch.wizard_invoice_bvr_check_report
+msgid "Invoices BVR"
 msgstr ""
 
 #. module: l10n_ch
-#: model:ir.actions.wizard,name:l10n_ch.wizard_invoice_bvr_check_report
-msgid "Invoices BVR"
+#: model:ir.module.module,description:l10n_ch.module_meta_information
+msgid "\n"
+"Swiss localisation :\n"
+" - DTA generation for a lot of paiment types\n"
+" - BVR management (number generation, report, etc..)\n"
+" - Import account move from the bank file (like v11 etc..)\n"
+" - Simplify the way you handle the bank statement for reconciliation\n"
+"\n"
+"You can also add with this module one of the following account plan:\n"
+" - l10n_ch_c2c_pcg\n"
+"\n"
+"\n"
+"    \n"
+"------------------------------------------------------------------------\n"
+"    \n"
+"Module incluant la localisation Suisse de TinyERP revu et corrigé par Camptocamp. Cette nouvelle version \n"
+"comprend la gestion et l'émissionde BVR, le paiement électronique via DTA (pour les banques, le système postal est en développement) \n"
+"et l'import du relevé de compte depuis la banque de manière automatisée. \n"
+"De plus, nous avons intégré la définition de toutes les banques Suisses(adresse, swift et clearing).\n"
+"\n"
+"Par ailleurs, conjointement à ce module, nous proposons 1 plan comptables issus de l'USAM :\n"
+"\n"
+"\n"
+" - l10n_ch_c2c_pcg\n"
+" \n"
+"--------------------------------------------------------------------------\n"
+"TODO :\n"
+"- Implement bvr import partial reconciliation\n"
+"- Replace wizard by osv_memory when possible\n"
+"- Add mising HELP\n"
+"- Finish code comment\n"
+"- Improve demo data\n"
+"\n"
+"\n"
+""
+msgstr ""
+
+#. module: l10n_ch
+#: rml:l10n_ch.bvr:0
+msgid "Invoice -"
 msgstr ""
 
 #. module: l10n_ch
@@ -410,19 +410,17 @@ msgid "You must provide ' \\n"
 msgstr ""
 
 #. module: l10n_ch
-#: rml:l10n_ch.invoice.bvr:0
-msgid "end of header"
+#: rml:l10n_ch.bvr:0
+msgid "Here is the BVR to allow you to pay the invoice :"
 msgstr ""
 
 #. module: l10n_ch
-#: constraint:res.partner:0
-msgid "Error ! You can not create recursive associated members."
-msgstr "Erreur ! Vous ne pouvez pas créer des membres associés de manière récursive."
-
-#. module: l10n_ch
-#: code:addons/l10n_ch/wizard/wizard_bvr.py:0
+#: code:addons/l10n_ch/wizard/dta_wizard.py:0
 #, python-format
-msgid "No bank specified on invoice:\n%s"
+msgid "You must provide ' \\n"
+"                        'a Clearing Number\n' \\n"
+"                        'for the partner bank: %s\n' \\n"
+"                        'on line %s"
 msgstr ""
 
 #. module: l10n_ch
@@ -436,25 +434,13 @@ msgid "PRO-FORMA"
 msgstr ""
 
 #. module: l10n_ch
-#: field:res.partner.bank,printBank:0
+#: field:res.partner.bank,printbank:0
 msgid "Print Bank on BVR"
-msgstr ""
-
-#. module: l10n_ch
-#: rml:l10n_ch.bvr:0
-#: rml:l10n_ch.invoice.bvr:0
-msgid "You Logo - Change X,Y,Width and Height"
 msgstr ""
 
 #. module: l10n_ch
 #: field:res.partner.bank,bvr_adherent_num:0
 msgid "BVR adherent number"
-msgstr ""
-
-#. module: l10n_ch
-#: rml:l10n_ch.bvr:0
-#: rml:l10n_ch.invoice.bvr:0
-msgid "Phone:"
 msgstr ""
 
 #. module: l10n_ch
@@ -473,24 +459,26 @@ msgid "Invoice with BVR"
 msgstr ""
 
 #. module: l10n_ch
-#: rml:l10n_ch.invoice.bvr:0
-msgid ":"
-msgstr ""
-
-#. module: l10n_ch
-#: rml:l10n_ch.invoice.bvr:0
-msgid "Condition"
-msgstr ""
-
-#. module: l10n_ch
 #: rml:l10n_ch.bvr:0
 #: rml:l10n_ch.invoice.bvr:0
 msgid ">"
 msgstr ""
 
 #. module: l10n_ch
+#: rml:l10n_ch.invoice.bvr:0
+msgid ", until the"
+msgstr ""
+
+#. module: l10n_ch
 #: model:res.partner.bank.type,name:l10n_ch.bank_dta
 msgid "Ordering party DTA"
+msgstr ""
+
+#. module: l10n_ch
+#: code:addons/l10n_ch/wizard/opae_wizard.py:0
+#, python-format
+msgid "Missing maturity date \n' \\n"
+"                    'for the payment line: %s\n"
 msgstr ""
 
 #. module: l10n_ch
@@ -500,8 +488,9 @@ msgid "Madame"
 msgstr ""
 
 #. module: l10n_ch
+#: rml:l10n_ch.bvr:0
 #: rml:l10n_ch.invoice.bvr:0
-msgid "Concerne:"
+msgid "<drawString x=\"62mm\" y=\"68mm\">"
 msgstr ""
 
 #. module: l10n_ch
@@ -512,13 +501,9 @@ msgstr ""
 #. module: l10n_ch
 #: code:addons/l10n_ch/wizard/bvr_import.py:0
 #: code:addons/l10n_ch/wizard/dta_wizard.py:0
+#: code:addons/l10n_ch/wizard/opae_wizard.py:0
 #, python-format
 msgid "Error"
-msgstr ""
-
-#. module: l10n_ch
-#: rml:l10n_ch.bvr:0
-msgid "Subject:"
 msgstr ""
 
 #. module: l10n_ch
@@ -541,14 +526,6 @@ msgstr ""
 #: model:res.partner.title,name:l10n_ch.res_c_partner_title_mlle
 #: model:res.partner.title,name:l10n_ch.res_partner_title_mlle
 msgid "Mademoiselle"
-msgstr ""
-
-#. module: l10n_ch
-#: code:addons/l10n_ch/wizard/wizard_bvr.py:0
-#, python-format
-msgid "Your bank BVR adherent number must contain exactly seven' \\n"
-"                            'digits!\nPlease check your company ' \\n"
-"                            'information for the invoice:\n%s"
 msgstr ""
 
 #. module: l10n_ch
@@ -607,6 +584,11 @@ msgid "Cancel"
 msgstr ""
 
 #. module: l10n_ch
+#: wizard_view:account.opae_create,init:0
+msgid "Clic on 'Save as' to save the OPAE file :"
+msgstr ""
+
+#. module: l10n_ch
 #: model:res.partner.bank.type.field,name:l10n_ch.post_field_bvpost
 msgid "post_number"
 msgstr ""
@@ -619,6 +601,17 @@ msgstr "Le nom de l'objet doit commencer avec x_ et ne pas contenir de charactè
 #. module: l10n_ch
 #: field:account.journal.todo,default_credit_account_id:0
 msgid "Default Credit Account"
+msgstr ""
+
+#. module: l10n_ch
+#: rml:l10n_ch.bvr:0
+#: rml:l10n_ch.invoice.bvr:0
+msgid "<drawString x=\"2mm\" y=\"68mm\">"
+msgstr ""
+
+#. module: l10n_ch
+#: rml:l10n_ch.invoice.bvr:0
+msgid "Avec nos vifs remerciements,"
 msgstr ""
 
 #. module: l10n_ch
@@ -662,9 +655,8 @@ msgid "Price"
 msgstr ""
 
 #. module: l10n_ch
-#: rml:l10n_ch.bvr:0
 #: rml:l10n_ch.invoice.bvr:0
-msgid "-"
+msgid "Canceled Invoice"
 msgstr ""
 
 #. module: l10n_ch
@@ -680,6 +672,12 @@ msgstr ""
 #. module: l10n_ch
 #: model:res.partner.bank.type,name:l10n_ch.bvrbank
 msgid "DTA-BVRBANK"
+msgstr ""
+
+#. module: l10n_ch
+#: rml:l10n_ch.bvr:0
+#: rml:l10n_ch.invoice.bvr:0
+msgid "</drawString>"
 msgstr ""
 
 #. module: l10n_ch

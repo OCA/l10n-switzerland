@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 5.0.7\n"
+"Project-Id-Version: OpenERP Server 5.0.9\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2010-02-22 14:36:54+0000\n"
-"PO-Revision-Date: 2010-02-22 14:36:54+0000\n"
+"POT-Creation-Date: 2010-04-30 09:54:28+0000\n"
+"PO-Revision-Date: 2010-04-30 09:54:28+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -99,6 +99,11 @@ msgstr ""
 #. module: l10n_ch_chart_c2c_pcg
 #: model:account.account.type,name:l10n_ch_chart_c2c_pcg.account_type_prov_reserve
 msgid "Bilan : Provisions et reserves"
+msgstr ""
+
+#. module: l10n_ch_chart_c2c_pcg
+#: view:account.tax.template.todo:0
+msgid "Account tax template"
 msgstr ""
 
 #. module: l10n_ch_chart_c2c_pcg
