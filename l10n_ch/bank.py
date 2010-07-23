@@ -111,6 +111,8 @@ class ResPartnerBank(osv.osv):
     def name_get(self, cursor, uid, ids, context=None):
         """Override of the name get function of the bank 
         in order to have the partner link to the bank"""
+        if not context:
+            context = {}
         if not len(ids):
             return []
         bank_type_obj = self.pool.get('res.partner.bank.type')
