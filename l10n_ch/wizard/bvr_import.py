@@ -60,7 +60,6 @@ def _reconstruct_invoice_ref(cursor, user, reference, context=None):
 def _import(self, cursor, user, data, context=None):
 
     statement_line_obj = self.pool.get('account.bank.statement.line')
-#    statement_reconcile_obj = pool.get('account.bank.statement.reconcile')
     voucher_obj = self.pool.get('account.voucher')
     voucher_line_obj = self.pool.get('account.voucher.line')
     move_line_obj = self.pool.get('account.move.line')
