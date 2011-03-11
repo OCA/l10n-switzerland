@@ -41,16 +41,16 @@ class l10n_ch_report_webkit_html(report_sxw.rml_parse):
         super(l10n_ch_report_webkit_html, self).__init__(cr, uid, name, context=context)
         self.localcontext.update({
             'time': time,
-            'cr':cr,
+            'cr': cr,
             'uid': uid,
             'user':self.pool.get("res.users").browse(cr, uid, uid),
             'mod10r': mod10r,
             '_space': self._space,
             '_get_ref': self._get_ref,
             'comma_me': self.comma_me,
-            'police_absolute_path' : self.police_absolute_path,
-            'bvr_absolute_path':self.bvr_absolute_path,
-            '_check' : self._check,
+            'police_absolute_path': self.police_absolute_path,
+            'bvr_absolute_path': self.bvr_absolute_path,
+            '_check': self._check,
             'headheight': self.headheight
         })
 
@@ -61,12 +61,12 @@ class l10n_ch_report_webkit_html(report_sxw.rml_parse):
 
     def police_absolute_path(self, inner_path) :
         """Will get the ocrb police absolute path"""
-        path = addons.get_module_resource(os.path.join('l10n_ch','report',inner_path))
+        path = addons.get_module_resource(os.path.join('l10n_ch', 'report', inner_path))
         return  path
         
     def bvr_absolute_path(self) :
         """Will get the ocrb police absolute path"""
-        path = addons.get_module_resource(os.path.join('l10n_ch','report','bvr1.jpg'))
+        path = addons.get_module_resource(os.path.join('l10n_ch', 'report', 'bvr1.jpg'))
         return  path
         
     def headheight(self):
@@ -76,7 +76,7 @@ class l10n_ch_report_webkit_html(report_sxw.rml_parse):
 
     def comma_me(self, amount):
         """Fast swiss number formatting"""
-        if  type(amount) is float :
+        if  isinstance(amount, float):
             amount = str('%.2f'%amount)
         else :
             amount = str(amount)
@@ -88,14 +88,15 @@ class l10n_ch_report_webkit_html(report_sxw.rml_parse):
             return self.comma_me(new)
 
     def _space(self, nbr, nbrspc=5):
-        """Spaces * 5"""
-        res = ''
-        for i in range(len(nbr)):
-            res = res + nbr[i]
-            if not (i-1) % nbrspc:
-                res = res + ' '
-        return res
+        """Spaces * 5.
 
+        Example:
+            >>> self._space('123456789012345')
+            '12 34567 89012 345'
+        """
+        return ''.join([' '[(i - 2) % nbrspc:] + c for i, c in enumerate(nbr)])
+      
+        
     def _get_ref(self, inv):
         """Retrieve ESR/BVR reference form invoice in order to print it"""
         res = ''
@@ -121,21 +122,21 @@ class l10n_ch_report_webkit_html(report_sxw.rml_parse):
             if not self._compile_check_bvr.match(
                     invoice.partner_bank_id.post_number or ''):
                 raise wizard.except_wizard(_('UserError'),
-                        _("Your bank BVR number should be of the form 0X-XXX-X! " +
-                                'Please check your company ' +
-                                'information for the invoice:\n' + 
-                                invoice_obj.name_get(cursor, self.uid, [invoice.id],
-                                    context={})[0][1]))
+                        _('Your bank BVR number should be of the form 0X-XXX-X! ' +
+                          'Please check your company ' +
+                          'information for the invoice:\n' + 
+                           invoice_obj.name_get(cursor, self.uid, [invoice.id],
+                           context={})[0][1]))
             if invoice.partner_bank_id.bvr_adherent_num \
                     and not self._compile_check_bvr_add_num.match(
                             invoice.partner_bank_id.bvr_adherent_num):
-                raise wizard.except_wizard('UserError',
-                        'Your bank BVR adherent number must contain exactly seven' +
-                                'digits!\nPlease check your company ' +
-                                'information for the invoice:\n' +
-                                invoice_obj.name_get(cursor, self.uid, [invoice.id],
-                                    context={})[0][1])
-        return ""
+                raise wizard.except_wizard(_('UserError'),
+                        _('Your bank BVR adherent number must contain exactly seven' +
+                          'digits!\nPlease check your company ' +
+                          'information for the invoice:\n' +
+                          invoice_obj.name_get(cursor, self.uid, [invoice.id],
+                          context={})[0][1]))
+        return ''
 
 class BVRWebKitParser(webkit_report.WebKitParser):
     
@@ -194,7 +195,7 @@ class BVRWebKitParser(webkit_report.WebKitParser):
         if not css :
             css = ''
         user = self.pool.get('res.users').browse(cursor, uid, uid)
-        company= user.company_id
+        company = user.company_id
         parse_template = template
         #default_filters=['unicode', 'entity'] can be used to set global filter
         body_mako_tpl = Template(parse_template ,input_encoding='utf-8')
@@ -236,7 +237,7 @@ class BVRWebKitParser(webkit_report.WebKitParser):
                                 )
         foot = False
         if footer and company.invoice_only :
-            foot_mako_tpl = Template(footer ,input_encoding='utf-8')
+            foot_mako_tpl = Template(footer, input_encoding='utf-8')
             foot = foot_mako_tpl.render(
                                         company=company, 
                                         time=time, 
