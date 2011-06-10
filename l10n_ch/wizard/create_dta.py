@@ -468,7 +468,7 @@ def _create_dta(obj, cr, uid, data, context=None):
         # si payment structure  -> bvr (826)
         # si non -> (827)
 
-        if elec_pay == 'dta_iban':
+        if elec_pay == 'iban':
             # If iban => country=country code for space reason
             v['comp_country'] = co_addr.country_id and co_addr.country_id.code+'-' or ''
             record_type = record_gt836

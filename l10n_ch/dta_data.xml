@@ -30,11 +30,6 @@
     <field name="code">dta_company</field>
   </record>
 
-  <record model="res.partner.bank.type" id="dta_iban">
-    <field name="name">DTA-IBAN</field>
-    <field name="code">dta_iban</field>
-  </record>
-
   <record model="res.partner.bank.type" id="bvrbank">
     <field name="name">DTA-BVRBANK</field>
     <field name="code">bvrbank</field>
@@ -56,7 +51,6 @@
   </record>
 
 
-
   <!-- Adjust the fields attributes for dta_company-->
   <record model="res.partner.bank.type.field" id="iban_field">
     <field name="name">iban</field>
@@ -64,22 +58,6 @@
     <field name="required" eval="True"/>
     <field name="readonly" eval="False"/>
   </record>
-
-
-  <!-- Adjust the fields attributes for dta_iban-->
-  <record model="res.partner.bank.type.field" id="iban_field_iban">
-    <field name="name">iban</field>
-    <field name="bank_type_id" ref="dta_iban"/>
-    <field name="required" eval="True"/>
-    <field name="readonly" eval="False"/>
-  </record>
-  <record model="res.partner.bank.type.field" id="bank_field_iban">
-    <field name="name">bank</field>
-    <field name="bank_type_id" ref="dta_iban"/>
-    <field name="required" eval="True"/>
-    <field name="readonly" eval="False"/>
-  </record>
-
 
   <!-- Adjust the fields attributes for bvrbank-->
   <record model="res.partner.bank.type.field" id="bank_field_bvrbank">

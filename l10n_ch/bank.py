@@ -33,15 +33,36 @@ class Bank(osv.osv):
 
 Bank()
 
-class bvr_checkbox(osv.osv):
-    """ Add function to generate function """
+
+class ResPartnerBank(osv.osv):
     _inherit = "res.partner.bank"
-
+    
     _columns = {
-        'print_bank' : fields.boolean('Print Bank on BVR'),
-        'print_account' : fields.boolean('Print Account Number on BVR'),
-        }
+        'name': fields.char('Description', size=128, required=True),
+        'post_number': fields.char('Post number', size=64),
+        'bvr_adherent_num': fields.char('BVR adherent number', size=11),
+        'dta_code': fields.char('DTA code', size=5),
+        'print_bank': fields.boolean('Print Bank on BVR'),
+        'print_account': fields.boolean('Print Account Number on BVR'),
+        'my_bank': fields.boolean('My company account ?'),
+    }
 
-bvr_checkbox()
+    def name_get(self, cursor, uid, ids, context=None):
+        if not len(ids):
+            return []
+        bank_type_obj = self.pool.get('res.partner.bank.type')
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+        type_ids = bank_type_obj.search(cursor, uid, [])
+        bank_type_names = {}
+        for bank_type in bank_type_obj.browse(cursor, uid, type_ids,
+                context=context):
+            bank_type_names[bank_type.code] = bank_type.name
+        res = []
+        for r in self.read(cursor, uid, ids, ['name','state'], context):
+            res.append((r['id'], r['name']+' : '+bank_type_names[r['state']]))
+        return res
+
+    _sql_constraints = [('bvr_adherent_uniq', 'unique (bvr_adherent_num)', 
+        'The BVR adherent number must be unique !')]
+
+ResPartnerBank()
