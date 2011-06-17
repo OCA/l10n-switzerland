@@ -119,7 +119,7 @@
                         <newline/>
                     </group>
                     <newline/>
-                    <group string="Postal account info" colspan="4"  attrs="{'invisible': [('state','not in', ['bvpost','bvrpost'])]}" >
+                    <group string="Postal account info" colspan="4"  attrs="{'invisible': [('state','not in', ['bvpost','bvrpost','bvbank','bvrbank'])]}" >
                         <field name="post_number"/>
                         <newline/>
                         <field name="my_bank"/>
