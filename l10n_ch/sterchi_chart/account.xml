@@ -11773,7 +11773,7 @@
             <field name="parent_id" eval="False"/>
         </record>
         <record id="l10nch_chart_template" model="account.chart.template">
-            <field name="name">Swiss PCG</field>
+            <field name="name">Plan comptable STERCHI</field>
             <field name="account_root_id" ref="ch_minimal_0"/>
             <field name="tax_code_root_id" ref="vat_code_chart_root"/>
             <field name="bank_account_view_id" ref="ch_102_0"/>

@@ -46,7 +46,7 @@
   </record>
 
   <record model="res.partner.bank.type" id="bvbank">
-    <field name="name">BV BANK</field>
+    <field name="name">BV Bank</field>
     <field name="code">bvbank</field>
   </record>
 
