@@ -44,7 +44,7 @@ class ResPartnerBank(osv.osv):
         'dta_code': fields.char('DTA code', size=5),
         'print_bank': fields.boolean('Print Bank on BVR'),
         'print_account': fields.boolean('Print Account Number on BVR'),
-        'my_bank': fields.boolean('My company account ?'),
+        'my_bank': fields.boolean('Print BVR ?', help="Check to print BVR invoices"),
     }
 
     def name_get(self, cursor, uid, ids, context=None):
