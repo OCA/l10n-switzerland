@@ -86,6 +86,7 @@
             <field name="name">res.partner_bank.form.hide.f1</field>
             <field name="model">res.partner</field>
             <field name="type">form</field>
+            <field name="sequence" eval="9" /> <!-- we do this to be called before base iban view -->
             <field name="inherit_id" ref="base.view_partner_bank_form"/>
             <field name="arch" type="xml">
                 <field name="acc_number" position="replace">
