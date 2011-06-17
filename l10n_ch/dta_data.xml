@@ -31,22 +31,22 @@
   </record>
 
   <record model="res.partner.bank.type" id="bvrbank">
-    <field name="name">DTA-BVRBANK</field>
+    <field name="name">BVR Bank</field>
     <field name="code">bvrbank</field>
   </record>
 
   <record model="res.partner.bank.type" id="bvrpost">
-    <field name="name">DTA-BVRPOST</field>
+    <field name="name">BVR Post</field>
     <field name="code">bvrpost</field>
   </record>
 
   <record model="res.partner.bank.type" id="bvpost">
-    <field name="name">DTA-BVPOST</field>
+    <field name="name">BV Post</field>
     <field name="code">bvpost</field>
   </record>
 
   <record model="res.partner.bank.type" id="bvbank">
-    <field name="name">DTA-BVBANK</field>
+    <field name="name">BV BANK</field>
     <field name="code">bvbank</field>
   </record>
 
