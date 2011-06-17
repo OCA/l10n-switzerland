@@ -58,6 +58,13 @@
     <field name="required" eval="True"/>
     <field name="readonly" eval="False"/>
   </record>
+  
+  <record model="res.partner.bank.type.field" id="iban_field_bvr_bank">
+    <field name="name">iban</field>
+    <field name="bank_type_id" ref="bvrbank"/>
+    <field name="required" eval="False"/>
+    <field name="readonly" eval="False"/>
+  </record>
 
   <!-- Adjust the fields attributes for bvrbank-->
   <record model="res.partner.bank.type.field" id="bank_field_bvrbank">
