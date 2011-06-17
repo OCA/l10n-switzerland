@@ -479,11 +479,6 @@ msgid "vert. delta in mm 1.2 will print the bvz 1.2mm lefter"
 msgstr ""
 
 #. module: l10n_ch
-#: model:res.partner.bank.type,name:l10n_ch.dta_iban
-msgid "DTA-IBAN"
-msgstr ""
-
-#. module: l10n_ch
 #: model:res.partner.bank.type.field,name:l10n_ch.acc_num_field_bvbank
 msgid "acc_number"
 msgstr ""
