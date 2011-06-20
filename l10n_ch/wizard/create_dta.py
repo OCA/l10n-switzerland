@@ -339,7 +339,9 @@ def _create_dta(obj, cr, uid, data, context=None):
     if context is None:
         context = {}
     payment = payment_obj.browse(cr, uid, data['id'], context=context)
-
+    # if payment.state != 'done':
+        # raise osv.except_osv(_('Order not confirmed'),
+        #         _('Please confirm it'))        
     if not payment.mode:
         raise osv.except_osv(_('Error'),
                 _('No payment mode'))
@@ -561,7 +563,7 @@ def _create_dta(obj, cr, uid, data, context=None):
         'res_model': 'payment.order',
         'res_id': data['id'],
         }, context=context)
-    return {'dta': dta_data}
+    return dta_data
 
 class create_dta_wizard(osv.osv_memory):
     _name="create.dta.wizard"
@@ -572,6 +574,11 @@ class create_dta_wizard(osv.osv_memory):
     def create_dta(self, cr, uid, ids, context=None):
         if not context:
             context = {}
+        if isinstance(ids, list):
+            req_id = ids[0]
+        else:
+            req_id = ids
+        current = self.browse(cr, uid, req_id, context)
         data = {}
         active_ids = context.get('active_ids', [])
         active_id = context.get('active_id', [])
@@ -579,25 +586,8 @@ class create_dta_wizard(osv.osv_memory):
         data['ids'] = active_ids
         data['id'] = active_id
         dta_file = _create_dta(self, cr, uid, data, context)
-        context.update({'dta_file':dta_file})
-        return self.save_dta(cr, uid, ids, context)
-
-    def save_dta(self, cr, uid, ids, context=None):
-        obj_model = self.pool.get('ir.model.data')
-        if context is None:
-            context = {}
-        model_data_ids = obj_model.search(cr,uid,[('model','=','ir.ui.view'), ('name','=','dta_save_view')])
-        resource_id = obj_model.read(cr, uid, model_data_ids, fields=['res_id'])[0]['res_id']
-        return {
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_model': 'create.dta.wizard',
-            'views': [(resource_id, 'form')],
-            'type': 'ir.actions.act_window',
-            'target': 'new',
-            'context': context,
-        }
-
+        current.write({'dta_file': dta_file})
+        return True
 
 create_dta_wizard()
 
