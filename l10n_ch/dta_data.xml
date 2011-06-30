@@ -46,7 +46,7 @@
   </record>
 
   <record model="res.partner.bank.type" id="bvbank">
-    <field name="name">BV BANK</field>
+    <field name="name">BV Bank</field>
     <field name="code">bvbank</field>
   </record>
 
@@ -56,6 +56,13 @@
     <field name="name">iban</field>
     <field name="bank_type_id" ref="bank_dta"/>
     <field name="required" eval="True"/>
+    <field name="readonly" eval="False"/>
+  </record>
+  
+  <record model="res.partner.bank.type.field" id="iban_field_bvr_bank">
+    <field name="name">iban</field>
+    <field name="bank_type_id" ref="bvrbank"/>
+    <field name="required" eval="False"/>
     <field name="readonly" eval="False"/>
   </record>
 
