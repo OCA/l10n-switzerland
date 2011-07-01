@@ -60,7 +60,7 @@ TODO :
 
 
 """,
-    "version" : "6.0",
+    "version" : "6.1",
     "author" : "Camptocamp SA",
     "category" : "Finance",
     "website": "http://www.camptocamp.com",
