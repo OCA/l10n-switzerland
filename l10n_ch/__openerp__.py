@@ -61,7 +61,7 @@ TODO :
 
 
 """,
-    "version" : "6.0",
+    "version" : "6.1",
     "author" : "Camptocamp SA",
     "category" : "Localization/Account Charts",
     "website": "http://www.camptocamp.com",

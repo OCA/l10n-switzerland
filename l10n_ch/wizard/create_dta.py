@@ -26,6 +26,7 @@ import base64
 from osv import osv, fields
 import pooler
 from tools.translate import _
+import unicode2ascii
 
 TRANS=[
     (u'é','e'),
@@ -37,6 +38,24 @@ TRANS=[
     (u'â','a'),
     (u'ä','a'),
 ]
+
+def _u2a(text) :
+    """Tries to convert unicode charactere to asci equivalence"""
+    if not text : return ""
+    txt = ""
+    for c in text:
+        if ord(c) < 128 : 
+            txt += c
+        elif c in unicode2ascii.EXTRA_LATIN_NAMES :
+            txt += unicode2ascii.EXTRA_LATIN_NAMES[c]
+        elif c in unicode2ascii.UNI2ASCII_CONVERSIONS :
+            txt += unicode2ascii.UNI2ASCII_CONVERSIONS[c]
+        elif c in unicode2ascii.EXTRA_CHARACTERS :
+            txt += unicode2ascii.EXTRA_CHARACTERS[c]
+        elif c in unicode2ascii.FG_HACKS :
+            txt += unicode2ascii.FG_HACKS[c]
+        else : txt+= "_"
+    return txt
 
 def tr(string_in):
     try:
@@ -341,7 +360,7 @@ def _create_dta(obj, cr, uid, data, context=None):
     payment = payment_obj.browse(cr, uid, data['id'], context=context)
     # if payment.state != 'done':
         # raise osv.except_osv(_('Order not confirmed'),
-        #         _('Please confirm it'))        
+        #         _('Please confirm it'))
     if not payment.mode:
         raise osv.except_osv(_('Error'),
                 _('No payment mode'))
@@ -553,7 +572,7 @@ def _create_dta(obj, cr, uid, data, context=None):
     v['sequence'] = str(seq).rjust(5).replace(' ','0')
     if dta :
         dta = dta + record_gt890(v).generate()
-
+    dta_data = _u2a(dta)    
     dta_data = base64.encodestring(dta)
     payment_obj.set_done(cr, uid, [data['id']], context)
     attachment_obj.create(cr, uid, {
