@@ -62,7 +62,7 @@
        </table>
 
        <table class="list_table" width="40%">
-           <tr><th>Tax</th><th>${_("Base") |entity}</th><th>${_("Amount") |entity}</th></tr>
+           <tr><th>Tax</th><th>${_("Base") |entity}AAAAAAAAaaaaaaa</th><th>${_("Amount") |entity}</th></tr>
           %if inv.tax_line :
            %for t in inv.tax_line :
            <tr>

@@ -90,6 +90,7 @@
        ${_check(objects)}
        %for inv in objects :
        <% setLang(inv.partner_id.lang) %>
+       <div colspan="2" style="text-align:right;font-family:bvrocrb;font-size:${company.bvr_scan_line_font_size}pt;position:absolute;top:${company.bvr_scan_line_vert}mm;left:${company.bvr_scan_line_horz}mm;z-index:4">${mod10r('01'+str('%.2f' % inv.amount_total).replace('.','').rjust(10,'0'))}&gt;${_get_ref(inv)}+${inv.partner_bank_id.post_number.split('-')[0]+(str(inv.partner_bank_id.post_number.split('-')[1])).rjust(6,'0')+inv.partner_bank_id.post_number.split('-')[2]}&gt;</div>
        <div id="cont_${inv.id}" style="padding-left:20mm;padding-top:0;padding-bottom:10;height:180mm">
         <!-- Your communication message here -->
        </div>
@@ -103,7 +104,7 @@
         <tr style="height:8.4666667mm;vertical-align:bottom;padding-bottom:0"> <td><table  style="width:100%" CELLPADDING="0" CELLSPACING="0"><td  style="width:4mm"></td><td style="width:40mm;text-align: right" >${_space(('%.2f' % inv.amount_total)[:-3], 1)}</td><td style="width:6mm"></td><td style="width:10mm;text-align: right">${ _space(('%.2f' % inv.amount_total)[-2:], 1)}</td><td style="width:3mm;text-align: right"></td></table></td><td><table  style="width:100%" CELLPADDING="0" CELLSPACING="0"><td  style="width:4mm"></td><td style="width:40mm;text-align: right" >${_space(('%.2f' % inv.amount_total)[:-3], 1)}</td><td style="width:6mm"></td><td style="width:10mm;text-align: right">${ _space(('%.2f' % inv.amount_total)[-2:], 1)}</td><td style="width:3mm;text-align: right"></td></table></td><td></td></tr>
         <tr style="height:21.166667mm"><td></td><td></td><td></td></tr>
         <tr style="height:8.4666667mm"> <td></td><td></td><td></td></tr>
-        <tr style="height:21.166667mm;vertical-align:top"><td></td><td colspan="2" style="text-align:right;padding-right:0.3in;font-family:bvrocrb;font-size:12pt">${mod10r('01'+str('%.2f' % inv.amount_total).replace('.','').rjust(10,'0'))}&gt;${_get_ref(inv)}+${inv.partner_bank_id.post_number.split('-')[0]+(str(inv.partner_bank_id.post_number.split('-')[1])).rjust(6,'0')+inv.partner_bank_id.post_number.split('-')[2]}&gt;</td></tr>
+        <tr style="height:21.166667mm;vertical-align:top"><td></td><td></td></tr>
     </table>
     %endfor
 </body>
