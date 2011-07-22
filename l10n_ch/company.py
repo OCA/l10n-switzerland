@@ -40,6 +40,8 @@ class res_company(osv.osv):
             help='Horiz. position in mm for scan line'),
         
         'bvr_scan_line_font_size': fields.float('BVR scan line font size (pt)'),
+        
+        'bvr_scan_line_letter_spacing':fields.float('BVR scan line letter spacing'),
             
         'bvr_background': fields.boolean('Insert BVR background ?'),
         
@@ -54,6 +56,7 @@ class res_company(osv.osv):
         'bvr_scan_line_vert': lambda *a: 232,
         'bvr_scan_line_horz': lambda *a: 72,
         'bvr_scan_line_font_size': lambda *a: 12,
+        'bvr_scan_line_letter_spacing': lambda *a: 0,
     }
 
 res_company()

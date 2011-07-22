@@ -7,6 +7,15 @@
            	font-weight: normal;
            	src: url(${police_absolute_path('ocrbb.ttf')}) format("truetype");
            }
+           .ocrbb{
+             text-align:right;
+             font-family:bvrocrb;
+             font-size:${str(company.bvr_scan_line_font_size).replace(',','.')}pt;
+             position:absolute;top:${str(company.bvr_scan_line_vert).replace(',','.')}mm;
+             left:${str(company.bvr_scan_line_horz).replace(',','.')}mm;
+             z-index:4;
+             letter-spacing:str(company.bvr_scan_line_letter_spacing).replace(',','.')
+           }
        </style>
 
    </head>
@@ -90,7 +99,7 @@
        ${_check(objects)}
        %for inv in objects :
        <% setLang(inv.partner_id.lang) %>
-       <div colspan="2" style="text-align:right;font-family:bvrocrb;font-size:${company.bvr_scan_line_font_size}pt;position:absolute;top:${company.bvr_scan_line_vert}mm;left:${company.bvr_scan_line_horz}mm;z-index:4">${mod10r('01'+str('%.2f' % inv.amount_total).replace('.','').rjust(10,'0'))}&gt;${_get_ref(inv)}+${inv.partner_bank_id.post_number.split('-')[0]+(str(inv.partner_bank_id.post_number.split('-')[1])).rjust(6,'0')+inv.partner_bank_id.post_number.split('-')[2]}&gt;</div>
+       <div colspan="2" class="ocrbb">${mod10r('01'+str('%.2f' % inv.amount_total).replace('.','').rjust(10,'0'))}&gt;${_get_ref(inv)}+${inv.partner_bank_id.post_number.split('-')[0]+(str(inv.partner_bank_id.post_number.split('-')[1])).rjust(6,'0')+inv.partner_bank_id.post_number.split('-')[2]}&gt;</div>
        <div id="cont_${inv.id}" style="padding-left:20mm;padding-top:0;padding-bottom:10;height:180mm">
         <!-- Your communication message here -->
        </div>
