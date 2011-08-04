@@ -198,10 +198,10 @@ class BVRWebKitParser(webkit_report.WebKitParser):
         company = user.company_id
         parse_template = template
         #default_filters=['unicode', 'entity'] can be used to set global filter
-        body_mako_tpl = Template(parse_template ,input_encoding='utf-8')
+        body_mako_tpl = Template(parse_template ,input_encoding='utf-8', output_encoding='utf-8')
         #BVR specific
         bvr_path = addons.get_module_resource(os.path.join('l10n_ch','report','bvr.mako'))
-        body_bvr_tpl = Template(file(bvr_path).read(), input_encoding='utf-8')
+        body_bvr_tpl = Template(file(bvr_path).read(), input_encoding='utf-8', output_encoding='utf-8')
 
         helper = report_helper.WebKitHelper(cursor, uid, report_xml.id, context)
         ##BVR Specific
@@ -225,7 +225,7 @@ class BVRWebKitParser(webkit_report.WebKitParser):
                                     **self.parser_instance.localcontext
                                     )
                 htmls.append(bvr)                            
-        head_mako_tpl = Template(header, input_encoding='utf-8')
+        head_mako_tpl = Template(header, input_encoding='utf-8', output_encoding='utf-8')
         head = head_mako_tpl.render(
                                     company=company, 
                                     time=time, 
@@ -237,7 +237,7 @@ class BVRWebKitParser(webkit_report.WebKitParser):
                                 )
         foot = False
         if footer and company.invoice_only :
-            foot_mako_tpl = Template(footer, input_encoding='utf-8')
+            foot_mako_tpl = Template(footer, input_encoding='utf-8', output_encoding='utf-8')
             foot = foot_mako_tpl.render(
                                         company=company, 
                                         time=time, 
