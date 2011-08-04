@@ -229,7 +229,6 @@ class BVRWebKitParser(webkit_report.WebKitParser):
                 htmls.append(bvr)                            
         head_mako_tpl = Template(header, input_encoding='utf-8', output_encoding='utf-8')
         head = head_mako_tpl.render(
-                                    company=company, 
                                     helper=helper, 
                                     css=css,
                                     _debug=False,
@@ -240,7 +239,6 @@ class BVRWebKitParser(webkit_report.WebKitParser):
         if footer and company.invoice_only :
             foot_mako_tpl = Template(footer, input_encoding='utf-8', output_encoding='utf-8')
             foot = foot_mako_tpl.render(
-                                        company=company, 
                                         helper=helper, 
                                         css=css, 
                                         _=self.translate_call,
@@ -248,7 +246,6 @@ class BVRWebKitParser(webkit_report.WebKitParser):
                                         )
         if report_xml.webkit_debug :
             deb = head_mako_tpl.render(
-                                        company=company, 
                                         helper=helper, 
                                         css=css, 
                                         _debug=html,
