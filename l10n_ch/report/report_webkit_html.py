@@ -191,6 +191,8 @@ class BVRWebKitParser(webkit_report.WebKitParser):
 <body style="border:0; margin: 0;" onload="subst()">
 </body>
 </html>"""
+        self.parser_instance.localcontext.update({'setLang':self.parser_instance.setLang})
+        self.parser_instance.localcontext.update({'formatLang':self.parser_instance.formatLang})
         css = report_xml.webkit_header.css
         if not css :
             css = ''
@@ -231,9 +233,9 @@ class BVRWebKitParser(webkit_report.WebKitParser):
                                     time=time, 
                                     helper=helper, 
                                     css=css,
-                                    formatLang=self.parser_instance.formatLang,
-                                    setLang=self.parser_instance.setLang, 
-                                    _debug=False
+                                    _debug=False,
+                                    _=self.translate_call,
+                                    **self.parser_instance.localcontext
                                 )
         foot = False
         if footer and company.invoice_only :
@@ -243,10 +245,8 @@ class BVRWebKitParser(webkit_report.WebKitParser):
                                         time=time, 
                                         helper=helper, 
                                         css=css, 
-                                        formatLang=self.parser_instance.formatLang,
-                                        setLang=self.parser_instance.setLang,
                                         _=self.translate_call,
-
+                                        **self.parser_instance.localcontext
                                         )
         if report_xml.webkit_debug :
             deb = head_mako_tpl.render(
@@ -255,9 +255,8 @@ class BVRWebKitParser(webkit_report.WebKitParser):
                                         helper=helper, 
                                         css=css, 
                                         _debug=html,
-                                        formatLang=self.parser_instance.formatLang,
-                                        setLang=self.parser_instance.setLang,
                                         _=self.translate_call,
+                                        **self.parser_instance.localcontext
                                         )
             return (deb, 'html')
         bin = self.get_lib(cursor, uid, company.id)
