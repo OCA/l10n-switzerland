@@ -140,6 +140,42 @@ class l10n_ch_report_webkit_html(report_sxw.rml_parse):
 
 class BVRWebKitParser(webkit_report.WebKitParser):
     
+    def setLang(self, lang):
+        if not lang:
+            lang = 'en_US'
+        self.localcontext['lang'] = lang
+        
+    def formatLang(self, value, digits=None, date=False, date_time=False, grouping=True, monetary=False):
+        """format using the know cursor, language from localcontext"""
+        if digits is None:
+            digits = self.parser_instance.get_digits(value)
+        if isinstance(value, (str, unicode)) and not value:
+            return ''
+        pool_lang = self.pool.get('res.lang')
+        lang = self.localcontext['lang']
+
+        lang_ids = pool_lang.search(self.parser_instance.cr, self.parser_instance.uid, [('code','=',lang)])[0]
+        lang_obj = pool_lang.browse(self.parser_instance.cr, self.parser_instance.uid, lang_ids)
+
+        if date or date_time:
+            if not str(value):
+                return ''
+
+            date_format = lang_obj.date_format
+            parse_format = '%Y-%m-%d'
+            if date_time:
+                value=value.split('.')[0]
+                date_format = date_format + " " + lang_obj.time_format
+                parse_format = '%Y-%m-%d %H:%M:%S'
+            if not isinstance(value, time.struct_time):
+                return time.strftime(date_format, time.strptime(value, parse_format))
+
+            else:
+                date = datetime(*value.timetuple()[:6])
+            return date.strftime(date_format)
+
+        return lang_obj.format('%.' + str(digits) + 'f', value, grouping=grouping, monetary=monetary)
+    
     def create_single_pdf(self, cursor, uid, ids, data, report_xml, context=None):
         """generate the PDF"""
         self.parser_instance = self.parser(
@@ -191,8 +227,8 @@ class BVRWebKitParser(webkit_report.WebKitParser):
 <body style="border:0; margin: 0;" onload="subst()">
 </body>
 </html>"""
-        self.parser_instance.localcontext.update({'setLang':self.parser_instance.setLang})
-        self.parser_instance.localcontext.update({'formatLang':self.parser_instance.formatLang})
+        self.parser_instance.localcontext.update({'setLang':self.setLang})
+        self.parser_instance.localcontext.update({'formatLang':self.formatLang})
         css = report_xml.webkit_header.css
         if not css :
             css = ''
