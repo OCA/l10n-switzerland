@@ -33,6 +33,7 @@ import addons
 import pooler
 from tools.config import config
 from mako.template import Template
+from mako import exceptions
 from tools.translate import _
 
 
@@ -248,46 +249,61 @@ class BVRWebKitParser(webkit_report.WebKitParser):
             
             self.parser_instance.localcontext['objects'] = [obj]
             if not company.bvr_only:
-                html = body_mako_tpl.render(
-                                            helper=helper, 
-                                            css=css,
-                                            _=self.translate_call,
-                                            **self.parser_instance.localcontext
-                                            )
+                try:
+                    html = body_mako_tpl.render(
+                                                helper=helper, 
+                                                css=css,
+                                                _=self.translate_call,
+                                                **self.parser_instance.localcontext
+                                                )
+                except Exception, e:
+                   raise Exception(exceptions.text_error_template().render())
                 htmls.append(html)
             if not company.invoice_only:
-                bvr = body_bvr_tpl.render(
-                                    helper=helper, 
-                                    css=css,
-                                    _=self.translate_call,
-                                    **self.parser_instance.localcontext
-                                    )
+                try:
+                    bvr = body_bvr_tpl.render(
+                                        helper=helper, 
+                                        css=css,
+                                        _=self.translate_call,
+                                        **self.parser_instance.localcontext
+                                        )
+                except Exception, e:
+                   raise Exception(exceptions.text_error_template().render())
                 htmls.append(bvr)                            
         head_mako_tpl = Template(header, input_encoding='utf-8', output_encoding='utf-8')
-        head = head_mako_tpl.render(
-                                    helper=helper, 
-                                    css=css,
-                                    _debug=False,
-                                    _=self.translate_call,
-                                    **self.parser_instance.localcontext
-                                )
+        try:
+            head = head_mako_tpl.render(
+                                        helper=helper, 
+                                        css=css,
+                                        _debug=False,
+                                        _=self.translate_call,
+                                        **self.parser_instance.localcontext
+                                    )
+        except Exception, e:
+           raise Exception(exceptions.text_error_template().render())
         foot = False
         if footer and company.invoice_only :
             foot_mako_tpl = Template(footer, input_encoding='utf-8', output_encoding='utf-8')
-            foot = foot_mako_tpl.render(
-                                        helper=helper, 
-                                        css=css, 
-                                        _=self.translate_call,
-                                        **self.parser_instance.localcontext
-                                        )
+            try:
+                foot = foot_mako_tpl.render(
+                                            helper=helper, 
+                                            css=css, 
+                                            _=self.translate_call,
+                                            **self.parser_instance.localcontext
+                                            )
+            except Exception, e:
+               raise Exception(exceptions.text_error_template().render())
         if report_xml.webkit_debug :
-            deb = head_mako_tpl.render(
-                                        helper=helper, 
-                                        css=css, 
-                                        _debug=html,
-                                        _=self.translate_call,
-                                        **self.parser_instance.localcontext
-                                        )
+            try:
+                deb = head_mako_tpl.render(
+                                            helper=helper, 
+                                            css=css, 
+                                            _debug=html,
+                                            _=self.translate_call,
+                                            **self.parser_instance.localcontext
+                                            )
+            except Exception, e:
+               raise Exception(exceptions.text_error_template().render())
             return (deb, 'html')
         bin = self.get_lib(cursor, uid, company.id)
         pdf = self.generate_pdf(bin, report_xml, head, foot, htmls)
