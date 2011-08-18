@@ -59,7 +59,7 @@ class ResPartnerBank(osv.osv):
             bank_type_names[bank_type.code] = bank_type.name
         res = []
         for r in self.read(cursor, uid, ids, ['name','state'], context):
-            res.append((r['id'], r['name']+' : '+bank_type_names[r['state']]))
+            res.append((r['id'], r['name']+' : '+bank_type_names.get(r['state'], '')))
         return res
 
     _sql_constraints = [('bvr_adherent_uniq', 'unique (bvr_adherent_num)', 
