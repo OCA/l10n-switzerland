@@ -21,10 +21,8 @@
 
 {
     "name" : "Switzerland - localization with 2011 taxes",
-    "description" : """
-Swiss localisation.
-===================
-
+    "description" :  """
+Swiss localisation :
  - DTA generation for a lot of payment types
  - BVR management (number generation, report, etc..)
  - Import account move from the bank file (like v11 etc..)
@@ -33,24 +31,27 @@ Swiss localisation.
 You can also add ZIP and bank completion with:
  - l10n_ch_zip
  - l10n_ch_bank
+ 
+ Author: Camptocamp SA
+ Donors: Hasa Sàrl, Open Net Sàrl and Prisme Solutions Informatique SA
 
-Author: Camptocamp SA
-Donors: Hasa SA, Open Net SA and Prisme Solutions Informatique SA
+------------------------------------------------------------------------
 
-Module incluant la localisation Suisse de TinyERP revu et corrig√© par Camptocamp. Cette nouvelle version
-comprend la gestion et l'√©missionde BVR, le paiement √©lectronique via DTA (pour les banques, le syst√®me postal est en d√©veloppement)
-et l'import du relev√© de compte depuis la banque de mani√®re automatis√©e.
-De plus, nous avons int√©gr√© la d√©finition de toutes les banques Suisses(adresse, swift et clearing).
+Module incluant la localisation Suisse de TinyERP revu et corrigé par Camptocamp. Cette nouvelle version
+comprend la gestion et l'émissionde BVR, le paiement électronique via DTA (pour les banques, le système postal est en développement)
+et l'import du relevé de compte depuis la banque de manière automatisée.
+De plus, nous avons intégré la définition de toutes les banques Suisses(adresse, swift et clearing).
 
-Par ailleurs, conjointement √† ce module, nous proposons la compl√©tion NPA:
+Par ailleurs, conjointement à ce module, nous proposons la complétion NPA:
 
 Vous pouvez ajouter la completion des banques et des NPA avec with:
  - l10n_ch_zip
  - l10n_ch_bank
-
+ 
  Auteur: Camptocamp SA
- Donateurs: Hasa S√†rl, Open Net S√†rl and Prisme Solutions Informatique SA
+ Donateurs: Hasa Sàrl, Open Net Sàrl and Prisme Solutions Informatique SA
 
+--------------------------------------------------------------------------
 TODO :
 - Implement bvr import partial reconciliation
 - Replace wizard by osv_memory when possible
