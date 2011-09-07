@@ -227,9 +227,9 @@ def _import(self, cursor, user, data, context=None):
         values['partner_id'] = partner_id
         statement_line_obj.create(cursor, user, values, context=context)
     attachment_obj.create(cursor, user, {
-        'name': 'BVR',
+        'name': 'BVR %s'%time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
         'datas': file,
-        'datas_fname': 'BVR.txt',
+        'datas_fname': 'BVR %s.txt'%time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
         'res_model': 'account.bank.statement',
         'res_id': statement_id,
         }, context=context)

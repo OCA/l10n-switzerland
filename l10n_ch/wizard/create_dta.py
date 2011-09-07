@@ -576,9 +576,9 @@ def _create_dta(obj, cr, uid, data, context=None):
     dta_data = base64.encodestring(dta)
     payment_obj.set_done(cr, uid, [data['id']], context)
     attachment_obj.create(cr, uid, {
-        'name': 'DTA',
+        'name': 'DTA%s'%time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
         'datas': dta_data,
-        'datas_fname': 'DTA.txt',
+        'datas_fname': 'DTA%s.txt'%time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
         'res_model': 'payment.order',
         'res_id': data['id'],
         }, context=context)
