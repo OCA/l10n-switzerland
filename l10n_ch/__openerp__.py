@@ -84,6 +84,7 @@ TODO :
     ],
     "demo_xml" : [
         "demo/demo.xml",
+        "demo/dta_demo.xml",
     ],
     "update_xml" : [
         "wizard.xml",
