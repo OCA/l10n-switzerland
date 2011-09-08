@@ -37,7 +37,7 @@
  Swiss banks for zip use better ZIP modules and l10n_ch_zip
 """,
     "version" : "5.0",
-    "author" : "Camptocamp SA",
+    "author" : "Camptocamp",
     "category" : "Localisation/Europe",
     "website": "http://www.camptocamp.com",
     
