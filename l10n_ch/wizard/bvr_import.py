@@ -208,7 +208,7 @@ def _import(self, cursor, user, data, context=None):
                         cursor, 
                         user,
                         [
-                            ('name','=','property_account_receivable'),
+                            ('name','=',name),
                             ('company_id','=',statement.company_id.id),
                             ('res_id', '=', False)
                         ]
