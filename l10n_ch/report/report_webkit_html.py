@@ -35,6 +35,7 @@ from tools.config import config
 from mako.template import Template
 from mako import exceptions
 from tools.translate import _
+from osv.osv import except_osv
 
 
 class l10n_ch_report_webkit_html(report_sxw.rml_parse):
@@ -51,7 +52,6 @@ class l10n_ch_report_webkit_html(report_sxw.rml_parse):
             'comma_me': self.comma_me,
             'police_absolute_path': self.police_absolute_path,
             'bvr_absolute_path': self.bvr_absolute_path,
-            '_check': self._check,
             'headheight': self.headheight
         })
 
@@ -59,7 +59,14 @@ class l10n_ch_report_webkit_html(report_sxw.rml_parse):
     _compile_comma_me = re.compile("^(-?\d+)(\d{3})")
     _compile_check_bvr = re.compile('[0-9][0-9]-[0-9]{3,6}-[0-9]')
     _compile_check_bvr_add_num = re.compile('[0-9]*$')
-
+    
+    def set_context(self, objects, data, ids, report_type=None):
+        user = self.pool.get('res.users').browse(self.cr, self.uid, self.uid)
+        company = user.company_id
+        if not company.invoice_only:
+            self._check(ids)
+        return super(l10n_ch_report_webkit_html, self).set_context(objects, data, ids, report_type=report_type)
+    
     def police_absolute_path(self, inner_path) :
         """Will get the ocrb police absolute path"""
         path = addons.get_module_resource(os.path.join('l10n_ch', 'report', inner_path))
@@ -108,21 +115,23 @@ class l10n_ch_report_webkit_html(report_sxw.rml_parse):
             invoice_number = self._compile_get_ref.sub('', inv.number)
         return mod10r(res + invoice_number.rjust(26-len(res), '0'))
         
-    def _check(self, invoices):
+    def _check(self, invoice_ids):
         """Check if the invoice is ready to be printed"""
+        if not invoice_ids:
+            invoice_ids = []
         cursor = self.cr
         pool = self.pool
         invoice_obj = pool.get('account.invoice')
-        ids = [x.id for x in invoices]
+        ids = invoice_ids
         for invoice in invoice_obj.browse(cursor, self.uid, ids):
             if not invoice.partner_bank_id:
-                raise wizard.except_wizard(_('UserError'),
+                raise except_osv(_('UserError'),
                         _('No bank specified on invoice:\n' + \
                                 invoice_obj.name_get(cursor, self.uid, [invoice.id],
                                     context={})[0][1]))
             if not self._compile_check_bvr.match(
                     invoice.partner_bank_id.post_number or ''):
-                raise wizard.except_wizard(_('UserError'),
+                raise except_osv(_('UserError'),
                         _('Your bank BVR number should be of the form 0X-XXX-X! ' +
                           'Please check your company ' +
                           'information for the invoice:\n' + 
@@ -131,7 +140,7 @@ class l10n_ch_report_webkit_html(report_sxw.rml_parse):
             if invoice.partner_bank_id.bvr_adherent_num \
                     and not self._compile_check_bvr_add_num.match(
                             invoice.partner_bank_id.bvr_adherent_num):
-                raise wizard.except_wizard(_('UserError'),
+                raise except_osv(_('UserError'),
                         _('Your bank BVR adherent number must contain exactly seven' +
                           'digits!\nPlease check your company ' +
                           'information for the invoice:\n' +
@@ -246,7 +255,6 @@ class BVRWebKitParser(webkit_report.WebKitParser):
         ##BVR Specific
         htmls = []
         for obj in objs :
-            
             self.parser_instance.localcontext['objects'] = [obj]
             if not company.bvr_only:
                 try:

@@ -98,7 +98,6 @@
            
            }
        </script>
-       ${_check(objects)}
        %for inv in objects :
        <% setLang(inv.partner_id.lang) %>
        <!--adresses + info block -->
