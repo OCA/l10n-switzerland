@@ -98,6 +98,9 @@ TODO :
     ],
     'test' : [
         'test/l10n_ch_report.yml',
+        'test/l10n_ch_dta.yml',
+        'test/l10n_ch_v11.yml',
+        'test/l10n_ch_v11_part.yml',
     ],
     "active": False,
     "installable": True,
