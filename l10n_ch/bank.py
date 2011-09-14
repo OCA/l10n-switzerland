@@ -36,7 +36,7 @@ Bank()
 
 class ResPartnerBank(osv.osv):
     _inherit = "res.partner.bank"
-    
+
     _columns = {
         'name': fields.char('Description', size=128, required=True),
         'post_number': fields.char('Post number', size=64),
@@ -62,7 +62,7 @@ class ResPartnerBank(osv.osv):
             res.append((r['id'], r['name']+' : '+bank_type_names.get(r['state'], '')))
         return res
 
-    _sql_constraints = [('bvr_adherent_uniq', 'unique (bvr_adherent_num)', 
+    _sql_constraints = [('bvr_adherent_uniq', 'unique (bvr_adherent_num)',
         'The BVR adherent number must be unique !')]
 
 ResPartnerBank()
