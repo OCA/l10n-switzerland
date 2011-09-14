@@ -143,7 +143,7 @@ class account_invoice(osv.osv):
     def onchange_partner_id(self, cr, uid, ids, type, partner_id,
             date_invoice=False, payment_term=False, partner_bank_id=False, company_id=False):
         """ Function that is call when the partner of the invoice is changed
-        it will retriev and set the good bank partner bank"""
+        it will retrieve and set the good bank partner bank"""
         res = super(account_invoice, self).onchange_partner_id(
                                                                 cr,
                                                                  uid,
