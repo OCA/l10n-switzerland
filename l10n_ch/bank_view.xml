@@ -24,6 +24,8 @@
                 </field>
             </field>
         </record>
+
+
         <!-- res.partner.bank in res partner form-->
         
         <record model="ir.ui.view" id="l10nch_view_res_partner_bank_hide_f1">
@@ -80,61 +82,7 @@
                 </field>
             </field>
         </record>
-
-        
-        <record model="ir.ui.view" id="l10nch_view_res_partner_bank_hide_f4">
-            <field name="name">res.partner_bank.form.hide.f1</field>
-            <field name="model">res.partner</field>
-            <field name="type">form</field>
-            <field name="sequence" eval="9" /> <!-- we do this to be called before base iban view -->
-            <field name="inherit_id" ref="base.view_partner_bank_form"/>
-            <field name="arch" type="xml">
-                <field name="acc_number" position="replace">
-                </field>
-            </field>
-        </record>
-        <record model="ir.ui.view" id="l10nch_view_res_partner_bank_hide_f5">
-            <field name="name">res.partner_bank.form.hide.f2</field>
-            <field name="model">res.partner</field>
-            <field name="type">form</field>
-            <field name="inherit_id" ref="base.view_partner_bank_form"/>
-            <field name="arch" type="xml">
-                <field name="bank" position="replace">
-                </field>
-            </field>
-        </record>
-        
-        <record model="ir.ui.view" id="l10nch_view_res_partner_bank_add_groups2">
-            <field name="name">res.partner_bank.form.hide.f2</field>
-            <field name="model">res.partner</field>
-            <field name="type">form</field>
-            <field name="sequence" eval="10" /> <!-- we do this to be called before base iban view -->
-            <field name="inherit_id" ref="base.view_partner_bank_form"/>
-            <field name="arch" type="xml">
-                <field name="state" position="after">
-                    <newline/>
-                    <separator colspan="4" string="Account infos"/>
-                    <group string="Bank account info" colspan="4" attrs="{'invisible': [('state','in', ['bvpost','bvrpost'])]}" >
-                        <field name="acc_number"/>
-                        <field name="dta_code"/>
-                        <newline/>
-                    </group>
-                    <newline/>
-                    <group string="Postal account info" colspan="4"  attrs="{'invisible': [('state','not in', ['bvpost','bvrpost','bvbank','bvrbank'])]}" >
-                        <field name="post_number"/>
-                        <newline/>
-                        <field name="my_bank"/>
-                        <group string="BVR print options" colspan="4"  attrs="{'invisible': [('my_bank','!=', True)]}" >
-                            <field name="bvr_adherent_num"/>
-                            <field name="print_bank"/>
-                            <field name="print_account"/>
-                            <newline/>
-                        </group>
-                    </group>
-                    <separator colspan="4" string="Financial institute infos"/>
-                </field>
-            </field>
-        </record>
+  
 
            <!-- res.partner.bank base form-->
 
@@ -160,7 +108,6 @@
                 </field>
             </field>
         </record>
-
         <record model="ir.ui.view" id="l10nch_view_res_partner_bank_hide_bank_frominvoice3">
             <field name="name">res.partner_bank.form.hide.bank.frominvoice</field>
             <field name="model">res.partner.bank</field>
@@ -198,19 +145,18 @@
                     <group string="Postal account info" colspan="4"  attrs="{'invisible': [('state','not in', ['bvpost','bvrpost','bvbank','bvrbank'])]}" >
                         <field name="post_number"/>
                         <newline/>
-                        <field name="my_bank"/>
-                        <group string="BVR print options" colspan="4"  attrs="{'invisible': [('my_bank','!=', True)]}" >
-                            <field name="bvr_adherent_num"/>
-                            <field name="print_bank"/>
-                            <field name="print_account"/>
-                            <newline/>
-                        </group>
+                    </group>
+                    <field name="my_bank"/>
+                    <group string="BVR print options" colspan="4"  attrs="{'invisible': [('my_bank','!=', True)]}" >
+                        <field name="bvr_adherent_num"/>
+                        <field name="print_bank"/>
+                        <field name="print_account"/>
+                        <newline/>
                     </group>
                     <field name="bank" />
                 </field>
             </field>
         </record>
-
 
 
     </data>
