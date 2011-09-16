@@ -44,7 +44,7 @@ def _u2a(text) :
     if not text : return ""
     txt = ""
     for c in text:
-        if ord(c) < 128 : 
+        if ord(c) < 128 :
             txt += c
         elif c in unicode2ascii.EXTRA_LATIN_NAMES :
             txt += unicode2ascii.EXTRA_LATIN_NAMES[c]
@@ -386,11 +386,13 @@ def _create_dta(obj, cr, uid, data, context=None):
     v['comp_name'] = co_addr.name
     v['comp_dta'] = bank.dta_code or '' #XXX not mandatory in pratice
 
-    v['comp_bank_number'] = bank.acc_number or ''
-    if bank.iban:
-        v['comp_bank_iban'] = bank.iban.replace(' ','') or ''
-    else:
-        v['comp_bank_iban'] = ''
+    # iban and account number are the same field and depends only on the type of account
+    v['comp_bank_iban'] = v['comp_bank_number'] = bank.acc_number or ''
+    
+    #if bank.iban:
+    #    v['comp_bank_iban'] = bank.iban.replace(' ','') or ''
+    #else:
+    #    v['comp_bank_iban'] = ''
     if not v['comp_bank_iban']:
         raise osv.except_osv(_('Error'),
                 _('No IBAN for the company bank account.'))
@@ -424,7 +426,7 @@ def _create_dta(obj, cr, uid, data, context=None):
                     'on the partner: %s\n' \
                     'on line: %s') % (pline.bank_id.state, pline.partner_id.name, pline.name))
 
-        v['partner_bank_iban'] =  pline.bank_id.iban or False
+        v['partner_bank_iban'] =  pline.bank_id.acc_number or False
         v['partner_bank_number'] =  pline.bank_id.acc_number  \
                 and pline.bank_id.acc_number.replace('.','').replace('-','') \
                 or  False
@@ -533,13 +535,10 @@ def _create_dta(obj, cr, uid, data, context=None):
 
         elif elec_pay == 'bvbank':
             if not v['partner_bank_number'] :
-                if v['partner_bank_iban'] :
-                    v['partner_bank_number']= v['partner_bank_iban']
-                else:
-                    raise osv.except_osv(_('Error'), _('You must provide ' \
-                            'a bank number \n' \
-                            'for the partner bank: %s\n' \
-                            'on line: %s') % (res_partner_bank_obj.name_get(cr, uid, [pline.bank_id.id], context)[0][1] , pline.name))
+                raise osv.except_osv(_('Error'), _('You must provide ' \
+                        'a bank number \n' \
+                        'for the partner bank: %s\n' \
+                        'on line: %s') % (res_partner_bank_obj.name_get(cr, uid, [pline.bank_id.id], context)[0][1] , pline.name))
             if not  v['partner_bank_clearing']:
                 raise osv.except_osv(_('Error'), _('You must provide ' \
                         'a Clearing Number\n' \
@@ -572,13 +571,13 @@ def _create_dta(obj, cr, uid, data, context=None):
     v['sequence'] = str(seq).rjust(5).replace(' ','0')
     if dta :
         dta = dta + record_gt890(v).generate()
-    dta_data = _u2a(dta)    
+    dta_data = _u2a(dta)
     dta_data = base64.encodestring(dta)
     payment_obj.set_done(cr, uid, [data['id']], context)
     attachment_obj.create(cr, uid, {
-        'name': 'DTA',
+        'name': 'DTA%s'%time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
         'datas': dta_data,
-        'datas_fname': 'DTA.txt',
+        'datas_fname': 'DTA%s.txt'%time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
         'res_model': 'payment.order',
         'res_id': data['id'],
         }, context=context)

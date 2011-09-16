@@ -192,8 +192,8 @@ def _import(self, cursor, user, data, context=None):
                      voucher_line_dict = line_dict
         if voucher_line_dict:
              voucher_line_dict.update({'voucher_id':voucher_id})
-             voucher_line_obj.create(cursor, user, voucher_line_dict, context=context)                
-             
+             voucher_line_obj.create(cursor, user, voucher_line_dict, context=context)
+
         if not account_id:
             if record['amount'] >= 0:
                 account_id = account_receivable
@@ -205,10 +205,10 @@ def _import(self, cursor, user, data, context=None):
             if record['amount'] < 0:
                 name = "property_account_payable"
             prop = property_obj.search(
-                        cursor, 
+                        cursor,
                         user,
                         [
-                            ('name','=','property_account_receivable'),
+                            ('name','=',name),
                             ('company_id','=',statement.company_id.id),
                             ('res_id', '=', False)
                         ]
@@ -227,9 +227,9 @@ def _import(self, cursor, user, data, context=None):
         values['partner_id'] = partner_id
         statement_line_obj.create(cursor, user, values, context=context)
     attachment_obj.create(cursor, user, {
-        'name': 'BVR',
+        'name': 'BVR %s'%time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
         'datas': file,
-        'datas_fname': 'BVR.txt',
+        'datas_fname': 'BVR %s.txt'%time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
         'res_model': 'account.bank.statement',
         'res_id': statement_id,
         }, context=context)

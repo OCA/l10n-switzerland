@@ -25,6 +25,8 @@ class Bank(osv.osv):
     """Inherit res.bank class in order to add swiss specific field"""
     _inherit = 'res.bank'
     _columns = {
+        ### Internal reference
+        'code': fields.char('Code', size=64),
         ###Swiss unik bank identifier also use in IBAN number
         'clearing': fields.char('Clearing number', size=64),
         ### city of the bank
@@ -45,6 +47,7 @@ class ResPartnerBank(osv.osv):
         'print_bank': fields.boolean('Print Bank on BVR'),
         'print_account': fields.boolean('Print Account Number on BVR'),
         'my_bank': fields.boolean('Print BVR ?', help="Check to print BVR invoices"),
+        'acc_number': fields.char('Account/IBAN Number', size=64),
     }
 
     def name_get(self, cursor, uid, ids, context=None):
