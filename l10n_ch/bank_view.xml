@@ -6,7 +6,7 @@
             <field name="name">res.bank.form</field>
             <field name="model">res.bank</field>
             <field name="type">form</field>
-            <field name="sequence" eval="9" /> <!-- we do this to be called before base iban view -->
+            <field name="sequence" eval="9" />
             <field name="inherit_id" ref="base.view_res_bank_form"/>
             <field name="arch" type="xml">
                 <field name="name" position="after">
@@ -23,7 +23,7 @@
             <field name="name">res.bank.tree</field>
             <field name="model">res.bank</field>
             <field name="type">tree</field>
-            <field name="sequence" eval="9" /> <!-- we do this to be called before  -->
+            <field name="sequence" eval="9" />
             <field name="inherit_id" ref="base.view_res_bank_tree"/>
             <field name="arch" type="xml">
                 <field name="name" position="after">
