@@ -164,7 +164,7 @@ class account_invoice(osv.osv):
                 if bank_ids:
                     #How to order bank ?
                     for bank in bank_ids:
-                        if bank.my_bank
+                        if bank.my_bank:
                             bank_id = bank.id
                 res['value']['partner_bank_id'] = bank_id
 
