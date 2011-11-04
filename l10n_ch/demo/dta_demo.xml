@@ -17,7 +17,7 @@
         <!-- <field name="iban">CH9100767000S00023455</field> -->
     </record>
 
-    <record model="res.partner.bank" id="main_bank">
+    <record model="res.partner.bank" id="main_partner_bank">
         <field name="name">My bank</field>
         <!-- <field name="acc_number">123456</field> -->
         <!-- <field name="iban">123456</field> -->
