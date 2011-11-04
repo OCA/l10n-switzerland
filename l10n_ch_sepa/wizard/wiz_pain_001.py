@@ -66,7 +66,7 @@ class WizardPain001(osv.osv_memory):
         return MsgSEPAFactory.get_instance('pain.001')
 
     def _create_attachment(self, cursor, user, data, context=None):
-        ''' Create an attachement using data profided
+        ''' Create an attachment using data provided
             data needed are :
                 - model : type of object to attach to
                 - id : id of object model
