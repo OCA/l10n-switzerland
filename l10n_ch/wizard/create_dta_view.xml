@@ -8,7 +8,7 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="DTA file creation - Results">
-                    <group width="300" colspan="4">
+                    <group colspan="4">
                         <separator string="Create DTA" colspan="4"/>
                         <field name="dta_file"/>
                         <group colspan="4">
