@@ -71,6 +71,9 @@ def _import(self, cursor, user, data, context=None):
     statement_obj = self.pool.get('account.bank.statement')
     property_obj = self.pool.get('ir.property')
     file = data['form']['file']
+    if not file: 
+        raise osv.except_osv(_('UserError'),
+                             _('Please select a file first!'))
     statement_id = data['id']
     records = []
     total_amount = 0
