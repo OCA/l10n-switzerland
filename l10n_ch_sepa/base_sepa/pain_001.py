@@ -50,9 +50,9 @@ class Pain001(MsgSEPA):
 
     _data = {}
 
-    def __init__(self, xsd_path = _DEFAULT_XSD_PATH,
-                       tmpl_dirs = [],
-                       tmpl_name = _DEFAULT_TMPL_NAME):
+    def __init__(self, xsd_path=_DEFAULT_XSD_PATH,
+                       tmpl_dirs=[],
+                       tmpl_name=_DEFAULT_TMPL_NAME):
         '''tmpl_path : path to mako template'''
 
         dirs = [addons.get_module_resource(self._BASE_TMPL_DIR)]
