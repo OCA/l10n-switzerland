@@ -67,9 +67,9 @@ class ResPartnerBank(osv.osv):
         return res
         
         
-    def _get_number(self, bank):
+    def _prepare_name(self, bank):
         "Hook to get bank number of bank account"
-        res = super(ResPartnerBank, self)._get_number(bank)
+        res = super(ResPartnerBank, self)._prepare_name(bank)
         res = res or u''
         if bank.post_number:
             if res:
