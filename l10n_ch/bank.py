@@ -21,6 +21,7 @@
 
 from tools.translate import _
 from osv import fields, osv
+import re
 
 class Bank(osv.osv):
     """Inherit res.bank class in order to add swiss specific field"""
@@ -65,8 +66,7 @@ class ResPartnerBank(osv.osv):
         for r in self.read(cursor, uid, ids, ['name','state'], context):
             res.append((r['id'], r['name']+' : '+bank_type_names.get(r['state'], '')))
         return res
-        
-        
+
     def _prepare_name(self, bank):
         "Hook to get bank number of bank account"
         res = super(ResPartnerBank, self)._prepare_name(bank)
@@ -78,7 +78,43 @@ class ResPartnerBank(osv.osv):
                 res = bank.post_number
         return res
 
+    def _check_9_pos_postal_num(self, number):
+        """
+        check if a postal number in format xx-xxxxxx-x is correct,
+        return true if it matches the pattern
+        and if check sum mod10 is ok
+        """
+        from tools import mod10r
+        pattern = r'^[0-9]{2}-[0-9]{1,6}-[0-9]$'
+        if not re.search(pattern, number):
+            return False
+        num, checksum = (number.replace('-','')[:-1], number[-1:])
+        return mod10r(num)[-1:] == checksum
+
+
+    def _check_5_pos_postal_num(self, number):
+        """
+        check if a postal number on 5 positions is correct
+        """
+        pattern = r'^[0-9]{1,5}$'
+        if not re.search(pattern, number):
+            return False
+        return True
+
+    def _check_postal_num(self, cursor, uid, ids):
+        banks = self.browse(cursor, uid, ids)
+        for b in banks:
+            return self._check_9_pos_postal_num(b.post_number) or \
+                   self._check_5_pos_postal_num(b.post_number)
+
+ 
+    _constraints = [(_check_postal_num,
+                    'Please enter a correct postal number. (01-23456-5 or 12345)',
+                    ['post_number'])]    
+
     _sql_constraints = [('bvr_adherent_uniq', 'unique (bvr_adherent_num)',
         'The BVR adherent number must be unique !')]
 
 ResPartnerBank()
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
