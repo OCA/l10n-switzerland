@@ -141,7 +141,7 @@ class l10n_ch_report_webkit_html(report_sxw.rml_parse):
                     and not self._compile_check_bvr_add_num.match(
                             invoice.partner_bank_id.bvr_adherent_num):
                 raise except_osv(_('UserError'),
-                        _('Your bank BVR adherent number must contain exactly seven' +
+                        _('Your bank BVR adherent number must contain only ' +
                           'digits!\nPlease check your company ' +
                           'information for the invoice:\n' +
                           invoice_obj.name_get(cursor, self.uid, [invoice.id],
