@@ -43,8 +43,8 @@ class ResPartnerBank(osv.osv):
 
     _columns = {
         'name': fields.char('Description', size=128, required=True),
-        'post_number': fields.char('Post number', size=64),
-        'bvr_adherent_num': fields.char('BVR adherent number', size=11),
+        'post_number': fields.char('Post number', size=64, help="Postal number 0x-xxxxxx-x or xxxxx"),
+        'bvr_adherent_num': fields.char('Bank BVR adherent number', size=11, help="Your Bank adherent number to be printed in references of your BVR. This is not a postal account number."),
         'dta_code': fields.char('DTA code', size=5),
         'print_bank': fields.boolean('Print Bank on BVR'),
         'print_account': fields.boolean('Print Account Number on BVR'),
