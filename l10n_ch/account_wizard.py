@@ -36,9 +36,30 @@ class WizardMultiChartsAccounts(osv.osv_memory):
     def execute(self, cr, uid, ids, context=None):
         """Override of code in order to be able to link journal with account in XML"""
         res = super(WizardMultiChartsAccounts, self).execute(cr, uid, ids, context)
-        path = addons.get_module_resource(os.path.join('l10n_ch','sterchi_chart','account_journal_rel.xml'))
-        tools.convert_xml_import(cr, 'l10n_ch', path, idref=None, mode='init', noupdate=True, report=None)
-        return res
+        path = addons.get_module_resource('l10n_ch','sterchi_chart','account_journal_rel.xml')
+        tools.convert_xml_import(cr, 'l10n_ch', path, idref=None, 
+                                 mode='init', noupdate=True, report=None)
 
+        return res
 WizardMultiChartsAccounts()
+
+class AccountInstaller(osv.osv_memory):
+
+    _inherit = 'account.installer'
+    def execute(self, cr, uid, ids, context=None):
+        """Override of code in to load translation XML"""
+        lang_obj = self.pool.get('res.lang')
+        lang_ids =  lang_obj.search(cr, uid, [])
+        for lang in lang_obj.browse(cr, uid, lang_ids):
+            path = addons.get_module_resource('l10n_ch','sterchi_chart',
+                                              lang.code.lower() + '_translation.xml')
+            if path:
+                tools.convert_xml_import(cr, 'l10n_ch', path, idref=None, 
+                                         mode='init', noupdate=True, report=None)
+        res = super(AccountInstaller, self).execute(cr, uid, ids, context)
+        return res
+AccountInstaller()
+
+
+
 
