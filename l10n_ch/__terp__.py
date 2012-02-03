@@ -64,7 +64,7 @@ Next features :
 - Improve demo data
 """,
     "version" : "5.0",
-    "author" : "Camptocamp SA",
+    "author" : "Camptocamp",
     "category" : "Localisation/Europe",
     "website": "http://www.camptocamp.com",
     
