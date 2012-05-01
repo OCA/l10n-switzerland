@@ -115,7 +115,7 @@ class ResPartnerBank(osv.osv):
 
  
     _constraints = [(_check_postal_num,
-                    'Please enter a correct postal number. (01-23456-5 or 12345)',
+                    'Please enter a correct postal number. (01-23456-1 or 12345)',
                     ['post_number'])]    
 
     _sql_constraints = [('bvr_adherent_uniq', 'unique (bvr_adherent_num)',
