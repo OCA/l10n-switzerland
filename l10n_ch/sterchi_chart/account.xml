@@ -11834,10 +11834,6 @@
             <field name="default_debit_account_id" eval="False"/>
         </record>
         
-        <record id="misc_transaction_journal" model="account.journal">
-            <field name="default_debit_account_id" eval="False"/>
-            <field name="default_debit_account_id" eval="False"/>
-        </record>
         
         <record model="account.journal" id="bilan_journal">
             <field name="default_debit_account_id" eval="False"/>
