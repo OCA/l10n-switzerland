@@ -71,7 +71,7 @@ TODO :
                "account_voucher",
                "report_webkit",
                "l10n_multilang"],
-               
+
  "init_xml": ["dta_data.xml",
               "journal_data.xml",
               #FR sterchi chart data
@@ -79,10 +79,10 @@ TODO :
               'sterchi_chart/vat.xml',
               'sterchi_chart/vat2011.xml',
               'sterchi_chart/fiscal_position.xml'],
- 
+
  "demo_xml": ["demo/demo.xml",
               "demo/dta_demo.xml"],
-              
+
  "update_xml": ["wizard.xml",
                 "wizard/bvr_import_view.xml",
                 "wizard/create_dta_view.xml",
@@ -91,15 +91,15 @@ TODO :
                 "bank_view.xml",
                 "security/ir.model.access.csv",
                 "report/report_webkit_html_view.xml"],
-                
+ 
  "test": ['test/l10n_ch_report.yml',
           'test/l10n_ch_dta.yml',
           #TODO: uncomment the 2 following tests once they are fixed
           #'test/l10n_ch_v11.yml',
           #'test/l10n_ch_v11_part.yml'
          ],
-          
- "active": False,
+
+ "auto_install": False,
  "installable": True,
  "certificate": "001103836064567088989",
  'images': ['images/config_chart_l10n_ch.jpeg','images/l10n_ch_chart.jpeg']}
