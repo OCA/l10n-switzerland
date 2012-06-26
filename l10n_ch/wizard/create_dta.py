@@ -537,7 +537,7 @@ def _create_dta(obj, cr, uid, data, context=None):
                         + ' ' + v['partner_bank_country']
             else:
                 raise osv.except_osv(_('Error'), _('You must provide the bank city '
-                        'or the bic code for the partner bank: \n %d\n' + \
+                        'or the bic code for the partner bank: \n %s\n' + \
                         'on line: %s') %(res_partner_bank_obj.name_get(cr, uid, [pline.bank_id.id], context)[0][1], pline.name))
 
         elif elec_pay == 'bvrbank' or elec_pay == 'bvrpost':
