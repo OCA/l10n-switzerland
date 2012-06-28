@@ -171,31 +171,33 @@ def _import(self, cursor, user, data, context=None):
 #                    line2reconcile = line.id
                     account_id = line.account_id.id
                     break
-        result = voucher_obj.onchange_partner_id(cursor, user, [], partner_id, journal_id=statement.journal_id.id, amount=abs(record['amount']), currency_id= statement.currency.id, ttype='receipt', date=statement.date ,context=context)
-        voucher_res = { 'type': 'receipt' ,
-
-             'name': values['name'],
-             'partner_id': partner_id,
-             'journal_id': statement.journal_id.id,
-             'account_id': result.get('account_id', statement.journal_id.default_credit_account_id.id),
-             'company_id': statement.company_id.id,
-             'currency_id': statement.currency.id,
-             'date': record['date'] or time.strftime('%Y-%m-%d'),
-             'amount': abs(record['amount']),
-            'period_id': statement.period_id.id
-             }
-        voucher_id = voucher_obj.create(cursor, user, voucher_res, context=context)
-        context.update({'move_line_ids': line_ids})
-        values['voucher_id'] = voucher_id
-        voucher_line_dict =  False
-        if result['value']['line_ids']:
-             for line_dict in result['value']['line_ids']:
-                 move_line = move_line_obj.browse(cursor, user, line_dict['move_line_id'], context)
-                 if move_id == move_line.move_id.id:
-                     voucher_line_dict = line_dict
-        if voucher_line_dict:
-             voucher_line_dict.update({'voucher_id':voucher_id})
-             voucher_line_obj.create(cursor, user, voucher_line_dict, context=context)
+        ## If we found a partner_id, we create a voucher, if not just create move_line
+        if partner_id :
+            context.update({'move_line_ids': line_ids})
+            result = voucher_obj.onchange_partner_id(cursor, user, [], partner_id, journal_id=statement.journal_id.id, amount=abs(record['amount']), currency_id= statement.currency.id, ttype='receipt', date=statement.date ,context=context)
+            voucher_res = { 'type': 'receipt' ,
+    
+                 'name': values['name'],
+                 'partner_id': partner_id,
+                 'journal_id': statement.journal_id.id,
+                 'account_id': result.get('account_id', statement.journal_id.default_credit_account_id.id),
+                 'company_id': statement.company_id.id,
+                 'currency_id': statement.currency.id,
+                 'date': record['date'] or time.strftime('%Y-%m-%d'),
+                 'amount': abs(record['amount']),
+                'period_id': statement.period_id.id
+                 }
+            voucher_id = voucher_obj.create(cursor, user, voucher_res, context=context)
+            values['voucher_id'] = voucher_id
+            voucher_line_dict =  False
+            if result['value']['line_cr_ids']:
+                 for line_dict in result['value']['line_cr_ids']:
+                     move_line = move_line_obj.browse(cursor, user, line_dict['move_line_id'], context)
+                     if move_id == move_line.move_id.id:
+                         voucher_line_dict = line_dict
+            if voucher_line_dict:
+                 voucher_line_dict.update({'voucher_id':voucher_id})
+                 voucher_line_obj.create(cursor, user, voucher_line_dict, context=context)
 
         if not account_id:
             if record['amount'] >= 0:
