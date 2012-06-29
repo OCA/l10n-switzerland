@@ -70,7 +70,9 @@ TODO :
                "account_payment",
                "account_voucher",
                "report_webkit",
-               "l10n_multilang"],
+               "l10n_multilang",
+               "invoice_webkit"
+               ],
 
  "init_xml": ["dta_data.xml",
               "journal_data.xml",
