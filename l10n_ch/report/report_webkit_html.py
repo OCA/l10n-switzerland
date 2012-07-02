@@ -44,10 +44,12 @@ import wizard
 import addons
 import pooler
 
+from openerp.addons.invoice_webkit.report.account_invoice import account_invoice_report 
 
 
 
-class l10n_ch_report_webkit_html(report_sxw.rml_parse):
+
+class l10n_ch_report_webkit_html(account_invoice_report):
     def __init__(self, cr, uid, name, context):
         super(l10n_ch_report_webkit_html, self).__init__(cr, uid, name, context=context)
         self.localcontext.update({
@@ -166,6 +168,7 @@ class BVRWebKitParser(webkit_report.WebKitParser):
     bvr_file_path = os.path.join('l10n_ch','report','bvr.mako')
 
     def create_single_pdf(self, cursor, uid, ids, data, report_xml, context=None):
+        print str("HELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
         """generate the PDF"""
         context = context or {}
         if report_xml.report_type != 'webkit':
@@ -266,7 +269,7 @@ class BVRWebKitParser(webkit_report.WebKitParser):
 
 BVRWebKitParser('report.invoice_web_bvr',
                'account.invoice',
-               'addons/l10n_ch/report/report_webkit_html.mako',
+               'addons/invoice_webkit/report/account_invoice.mako',
                parser=l10n_ch_report_webkit_html)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
