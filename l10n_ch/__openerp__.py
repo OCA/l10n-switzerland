@@ -71,7 +71,6 @@ TODO :
                "account_voucher",
                "report_webkit",
                "l10n_multilang",
-               "invoice_webkit"
                ],
 
  "init_xml": ["dta_data.xml",
@@ -92,7 +91,8 @@ TODO :
                 "account_invoice.xml",
                 "bank_view.xml",
                 "security/ir.model.access.csv",
-                "report/report_webkit_html_view.xml"],
+                "report/report_webkit_html_view.xml",
+                "view/invoice_view.xml"],
  
  "test": ['test/l10n_ch_report.yml',
           'test/l10n_ch_dta.yml',
