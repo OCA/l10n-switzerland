@@ -28,5 +28,5 @@ import wizard
 import payment
 import report
 import bank
-
+import view
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
