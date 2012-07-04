@@ -168,7 +168,6 @@ class BVRWebKitParser(webkit_report.WebKitParser):
     bvr_file_path = os.path.join('l10n_ch','report','bvr.mako')
 
     def create_single_pdf(self, cursor, uid, ids, data, report_xml, context=None):
-        print str("HELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
         """generate the PDF"""
         context = context or {}
         if report_xml.report_type != 'webkit':
@@ -269,7 +268,7 @@ class BVRWebKitParser(webkit_report.WebKitParser):
 
 BVRWebKitParser('report.invoice_web_bvr',
                'account.invoice',
-               'addons/invoice_webkit/report/account_invoice.mako',
+               'addons/l10n_ch/report/account_invoice.mako',
                parser=l10n_ch_report_webkit_html)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -6,10 +6,10 @@
         id="report_bvr_invoice_html" 
         model="account.invoice" 
         name="invoice_web_bvr"  
-        file="invoice_webkit/report/account_invoice.mako" 
+        file="l10n_ch/report/account_invoice.mako" 
         string="BVR invoice" 
         report_type="webkit"
-        webkit_header="base_headers_webkit.base_reports_portrait_header" 
+        webkit_header="report_webkit.ir_header_webkit_basesample0" 
         />
     </data>
 </openerp>
