@@ -63,7 +63,9 @@ class l10n_ch_report_webkit_html(account_invoice_report):
             'comma_me': self.comma_me,
             'police_absolute_path': self.police_absolute_path,
             'bvr_absolute_path': self.bvr_absolute_path,
-            'headheight': self.headheight
+            'headheight': self.headheight,
+            'company_vat' : self._get_company_vat,
+
         })
 
     _compile_get_ref = re.compile('[^0-9]')
@@ -77,6 +79,14 @@ class l10n_ch_report_webkit_html(account_invoice_report):
         if not company.invoice_only:
             self._check(ids)
         return super(l10n_ch_report_webkit_html, self).set_context(objects, data, ids, report_type=report_type)
+
+    def _get_company_vat(self):
+        res_users_obj=pooler.get_pool(self.cr.dbname).get('res.users')
+        company_vat = res_users_obj.browse(self.cr, self.uid,self.uid).company_id.partner_id.vat
+        if company_vat:
+            return company_vat
+        else:
+            return False
 
     def police_absolute_path(self, inner_path) :
         """Will get the ocrb police absolute path"""
