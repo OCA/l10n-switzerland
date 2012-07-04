@@ -92,7 +92,7 @@ TODO :
                 "bank_view.xml",
                 "security/ir.model.access.csv",
                 "report/report_webkit_html_view.xml",
-                "view/invoice_view.xml"],
+                ],
  
  "test": ['test/l10n_ch_report.yml',
           'test/l10n_ch_dta.yml',
