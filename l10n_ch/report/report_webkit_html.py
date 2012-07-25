@@ -44,12 +44,11 @@ import wizard
 import addons
 import pooler
 
-from openerp.addons.invoice_webkit.report.account_invoice import account_invoice_report 
 
 
 
 
-class l10n_ch_report_webkit_html(account_invoice_report):
+class l10n_ch_report_webkit_html(report_sxw.rml_parse):
     def __init__(self, cr, uid, name, context):
         super(l10n_ch_report_webkit_html, self).__init__(cr, uid, name, context=context)
         self.localcontext.update({
