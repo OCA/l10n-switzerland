@@ -101,6 +101,25 @@
 			    margin-right: 120px;
 			    float: right;
 			}
+			td.amount, th.amount {
+			    text-align: right;
+			}
+			.header_table {
+			    text-align: center;
+			    border: 1px solid lightGrey;
+			    border-collapse: collapse;
+			}
+
+			.header_table th {
+			    font-size: 12px;
+			    border: 1px solid lightGrey;
+			}
+
+			
+			.header_table td {
+			    font-size: 12px;
+			    border: 1px solid lightGrey;
+			}
 
     </style>
 </head>
@@ -152,7 +171,7 @@
         ${_("Subject : ")} ${inv.name or ''}
     </h3>
 
-    <table class="basic_table" width="100%">
+    <table class="header_table" width="100%">
         <tr>
             <th class="date">${_("Invoice Date")}</td>
             <th class="date">${_("Due Date")}</td>
@@ -171,9 +190,9 @@
         <thead>
             <tr>
                 <th>${_("Description")}</th>
-                <th>${_("Taxes")}</th>
                 <th>${_("Qty")}</th>
                 <th>${_("Unit Price")}</th>
+                <th>${_("Taxes")}</th>
                 <th>${_("Disc.(%)")}</th>
                 <th>${_("Net Sub Total")}</th>
             </tr>
@@ -182,11 +201,11 @@
         %for line in inv.invoice_line :
             <tr >
                 <td>${line.name}</td>
-                <td style="text-align:center;">${ ', '.join([ tax.name or '' for tax in line.invoice_line_tax_id ])}</td>
-                <td class="amount">${line.quantity} ${line.uos_id and line.uos_id.name or ''}</td>
+                <td class="amount">${formatLang(line.quantity or 0.0,digits=get_digits(dp='Account'))} ${line.uos_id and line.uos_id.name or ''}</td>
                 <td class="amount">${formatLang(line.price_unit)}</td>
+                <td style="text-align:center;">${ ', '.join([ tax.name or '' for tax in line.invoice_line_tax_id ])}</td>
                 <td class="amount">${formatLang(line.discount or 0.00, digits=get_digits(dp='Account'))}</td>
-                <td class="amount">${formatLang(line.price_subtotal, digits=get_digits(dp='Account'))} ${inv.currency_id.symbol}</td>
+                <td class="amount">${formatLang(line.price_subtotal, digits=get_digits(dp='Account'))}</td>
             </tr>
             %if line.note :
                 <tr>
@@ -201,7 +220,7 @@
                     <b>${_("Net :")}</b>
                 </td>
                 <td class="amount" style="border-right: thin solid  #ffffff ;border-left: thin solid  #ffffff ;">
-                    ${formatLang(inv.amount_untaxed, digits=get_digits(dp='Account'))} ${inv.currency_id.symbol}
+                    ${formatLang(inv.amount_untaxed, digits=get_digits(dp='Account'))} 
                 </td>
             </tr>
             <tr class="no_bloc">
@@ -209,15 +228,15 @@
                     <b>${_("Taxes:")}</b>
                 </td>
                 <td class="amount" style="border-right: thin solid  #ffffff ;border-top: thin solid  #ffffff ;border-left: thin solid  #ffffff ;">
-                        ${formatLang(inv.amount_tax, digits=get_digits(dp='Account'))} ${inv.currency_id.symbol}
+                        ${formatLang(inv.amount_tax, digits=get_digits(dp='Account'))} 
                 </td>
             </tr>
             <tr>
                 <td colspan="5" style="border-right: thin solid  #ffffff ;border-top: thin solid  #ffffff ;border-left: thin solid  #ffffff ;border-bottom: thin solid  #ffffff ;text-align:right;">
-                    <b>${_("Total:")}</b>
+                    <b>${_("Total in ") } ${inv.currency_id.symbol}  :</b>
                 </td>
                 <td class="amount" style="border-right: thin solid  #ffffff ;border-top: thin solid  #ffffff ;border-left: thin solid  #ffffff ;border-bottom: thin solid  #ffffff ;">
-                        <b>${formatLang(inv.amount_total, digits=get_digits(dp='Account'))} ${inv.currency_id.symbol}</b>
+                        <b>${formatLang(inv.amount_total, digits=get_digits(dp='Account'))}</b>
                 </td>
             </tr>
         </tfoot>
@@ -247,10 +266,12 @@
         <br/>
     <table class="list_bank_table" width="100%" >
         <tr>
-            <th style="width:20%;">${_("Bank Account")}</th>
-            <td style="width:30%;text-align:left;">${ inv.partner_bank_id and inv.partner_bank_id.acc_number or '-' } </td>
+            <th style="width:20%;">${_("Bank Name")}</th>
+            <td style="width:30%;text-align:left;">${ inv.partner_bank_id and inv.partner_bank_id.bank and inv.partner_bank_id.bank.name or '-' } </td>
+            %if inv.address_invoice_id and inv.address_invoice_id.partner_id and inv.address_invoice_id.partner_id.vat : 
             <th style="width:20%;">${_("Customer VAT No")}</td>
             <td style="width:30%;">${inv.address_invoice_id and inv.address_invoice_id.partner_id and inv.address_invoice_id.partner_id.vat or '-'}</td>
+            %endif
         </tr>
         <tr>
             <th style="width:20%;">${_("IBAN")}</th>
