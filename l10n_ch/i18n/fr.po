@@ -2194,7 +2194,7 @@ msgstr "Bénéfices s/ventes d'équipements d'exploitation"
 #. module: l10n_ch
 #: report:addons/l10n_ch/report/account_invoice.mako:171
 msgid "Subject : "
-msgstr "Subject : "
+msgstr "Concerne : "
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_290
@@ -2983,7 +2983,7 @@ msgstr "Actifs hors exploitation"
 #. module: l10n_ch
 #: report:addons/l10n_ch/report/account_invoice.mako:220
 msgid "Net :"
-msgstr "Net :"
+msgstr "Total H.T :"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_1513
@@ -4820,7 +4820,7 @@ msgstr "Autres charges de personnel de production"
 #. module: l10n_ch
 #: report:addons/l10n_ch/report/account_invoice.mako:264
 msgid "Thank you for your prompt payment"
-msgstr "Thank you for your prompt payment"
+msgstr "Avec nos remerciements,"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_8511
@@ -4850,7 +4850,7 @@ msgstr "Regards"
 #. module: l10n_ch
 #: report:addons/l10n_ch/report/account_invoice.mako:236
 msgid "Total in "
-msgstr "Total in "
+msgstr "Total en "
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_2830
@@ -5007,7 +5007,7 @@ msgstr "Agio"
 #. module: l10n_ch
 #: report:addons/l10n_ch/report/account_invoice.mako:247
 msgid "Rate"
-msgstr "Rate"
+msgstr "Taux  "
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_1461
@@ -5049,7 +5049,7 @@ msgstr "Pertes de change s/immobilisations financières"
 #. module: l10n_ch
 #: report:addons/l10n_ch/report/account_invoice.mako:179
 msgid "Our Ref."
-msgstr "Our Ref."
+msgstr "Notre Ref."
 
 #. module: l10n_ch
 #: report:addons/l10n_ch/report/account_invoice.mako:176
@@ -5520,7 +5520,7 @@ msgstr "Salaires pour la fourniture des prestations serv.A"
 #. module: l10n_ch
 #: report:addons/l10n_ch/report/account_invoice.mako:279
 msgid "Our VAT No"
-msgstr "Our VAT No"
+msgstr "Notre N°TVA"
 
 #. module: l10n_ch
 #: model:account.account.type,name:l10n_ch.account_type_financial_asset
@@ -6253,7 +6253,7 @@ msgstr "Acquisition de biens et services a 0%"
 #. module: l10n_ch
 #: report:addons/l10n_ch/report/account_invoice.mako:269
 msgid "Bank Name"
-msgstr "Bank Name"
+msgstr "Banque"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_1659
@@ -6635,7 +6635,7 @@ msgstr "Bénéfices s/autres immobilisations financières"
 #. module: l10n_ch
 #: report:addons/l10n_ch/report/account_invoice.mako:178
 msgid "Your Ref."
-msgstr "Your Ref."
+msgstr "Votre Ref."
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_4090
@@ -6988,7 +6988,7 @@ msgstr "TVA 0% exclue"
 #. module: l10n_ch
 #: report:addons/l10n_ch/report/account_invoice.mako:197
 msgid "Net Sub Total"
-msgstr "Net Sub Total"
+msgstr "Sous-total HT"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_1192
