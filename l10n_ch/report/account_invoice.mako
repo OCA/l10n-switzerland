@@ -199,30 +199,30 @@ td.vat {
             <td class="date">${formatLang(inv.date_invoice, date=True)}</td>
             <td class="date">${formatLang(inv.date_due, date=True)}</td>
             <td>${inv.reference or ''}</td>
-            <td width="20%">${inv.origin or ''}</td>
+            <td>${inv.origin or ''}</td>
         </tr>
     </table>
 
     <table class="list_invoice_table" width="100%" style="margin-top: 20px;">
         <thead>
             <tr>
-                <th>${_("Description")}</th>
-                <th>${_("Qty")}</th>
-                <th>${_("Unit Price")}</th>
-                <th>${_("Taxes")}</th>
-                <th>${_("Disc.(%)")}</th>
-                <th>${_("Net Sub Total")}</th>
+                <th >${_("Description")}</th>
+                <th >${_("Qty")}</th>
+                <th >${_("Unit Price")}</th>
+                <th >${_("Taxes")}</th>
+                <th >${_("Disc.(%)")}</th>
+                <th >${_("Net Sub Total")}</th>
             </tr>
         </thead>
         <tbody>
         %for line in inv.invoice_line :
             <tr >
                 <td>${line.name}</td>
-                <td class="amount">${formatLang(line.quantity or 0.0,digits=get_digits(dp='Account'))} ${line.uos_id and line.uos_id.name or ''}</td>
-                <td class="amount">${formatLang(line.price_unit)}</td>
-                <td style="text-align:center;">${ ', '.join([ tax.name or '' for tax in line.invoice_line_tax_id ])}</td>
-                <td class="amount">${formatLang(line.discount or 0.00, digits=get_digits(dp='Account'))}</td>
-                <td class="amount">${formatLang(line.price_subtotal, digits=get_digits(dp='Account'))}</td>
+                <td style="white-space:nowrap;" class="amount">${formatLang(line.quantity or 0.0,digits=get_digits(dp='Account'))} ${line.uos_id and line.uos_id.name or ''}</td>
+                <td style="white-space:nowrap;" class="amount">${formatLang(line.price_unit or 0.0,digits=get_digits(dp='Account'))}</td>
+                <td style="white-space:nowrap;text-align:center;">${ ', '.join([ tax.name or '' for tax in line.invoice_line_tax_id ])}</td>
+                <td style="white-space:nowrap;" class="amount">${formatLang(line.discount or 0.00, digits=get_digits(dp='Account'))}</td>
+                <td style="white-space:nowrap;" class="amount">${formatLang(line.price_subtotal, digits=get_digits(dp='Account'))}</td>
             </tr>
             %if line.note :
                 <tr>
