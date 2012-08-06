@@ -129,6 +129,15 @@ td.amount, th.amount {
     border: 1px solid lightGrey;
 }
 
+td.date {
+    white-space: nowrap;
+    width: 90px;
+}
+
+td.vat {
+    white-space: nowrap;
+}
+
     </style>
 </head>
 <body>
