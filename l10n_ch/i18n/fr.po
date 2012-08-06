@@ -4094,7 +4094,7 @@ msgstr "Achats d'accessoires"
 #. module: l10n_ch
 #: report:addons/l10n_ch/report/bvr.mako:130
 msgid "Here is the BVR to allow you to pay the invoice %s - %s"
-msgstr "Here is the BVR to allow you to pay the invoice %s - %s"
+msgstr "Veuillez trouver ci-joint le bulleting de versement concernant la facture du %s - %s"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_8003
@@ -4845,7 +4845,7 @@ msgstr "Amortissement cumulé s/équipements et installation"
 #. module: l10n_ch
 #: report:addons/l10n_ch/report/bvr.mako:132
 msgid "Regards"
-msgstr "Regards"
+msgstr "Avec nos remerciements"
 
 #. module: l10n_ch
 #: report:addons/l10n_ch/report/account_invoice.mako:236
