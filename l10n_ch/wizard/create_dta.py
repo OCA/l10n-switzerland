@@ -398,11 +398,7 @@ def _create_dta(obj, cr, uid, data, context=None):
 
     # iban and account number are the same field and depends only on the type of account
     v['comp_bank_iban'] = v['comp_bank_number'] = bank.acc_number or ''
-    
-    #if bank.iban:
-    #    v['comp_bank_iban'] = bank.iban.replace(' ','') or ''
-    #else:
-    #    v['comp_bank_iban'] = ''
+    v['comp_bank_iban'] = v['comp_bank_iban'].replace(' ','') or ''
     if not v['comp_bank_iban']:
         raise osv.except_osv(_('Error'),
                 _('No IBAN for the company bank account.'))
