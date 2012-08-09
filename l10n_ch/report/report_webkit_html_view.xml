@@ -11,5 +11,14 @@
         report_type="webkit"
         webkit_header="report_webkit.ir_header_webkit_basesample0" 
         />
+    <report auto="True" 
+        id="report_invoice_html" 
+        model="account.invoice" 
+        name="account.account_invoices"  
+        file="l10n_ch/report/account_invoice.mako" 
+        string="Invoices" 
+        report_type="webkit"
+        webkit_header="report_webkit.ir_header_webkit_basesample0" 
+        />
     </data>
 </openerp>
