@@ -75,7 +75,8 @@ class l10n_ch_report_webkit_html(report_sxw.rml_parse):
     def set_context(self, objects, data, ids, report_type=None):
         user = self.pool.get('res.users').browse(self.cr, self.uid, self.uid)
         company = user.company_id
-        if not company.invoice_only:
+        ## In case of report on invoice do not check BVR number
+        if not company.invoice_only and self.name <> 'account.account_invoices':
             self._check(ids)
         return super(l10n_ch_report_webkit_html, self).set_context(objects, data, ids, report_type=report_type)
 
@@ -279,5 +280,11 @@ BVRWebKitParser('report.invoice_web_bvr',
                'account.invoice',
                'addons/l10n_ch/report/account_invoice.mako',
                parser=l10n_ch_report_webkit_html)
+
+report_sxw.report_sxw('report.account.account_invoices',
+                       'account.invoice',
+                       'addons/l10n_ch/report/account_invoice.mako',
+                       parser=l10n_ch_report_webkit_html)
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
