@@ -69,8 +69,12 @@ class ResPartnerBank(osv.osv):
                 context=context):
             bank_type_names[bank_type.code] = bank_type.name
         res = []
-        for r in self.read(cursor, uid, ids, ['name','state'], context):
-            res.append((r['id'], r['name']+' : '+bank_type_names.get(r['state'], '')))
+        for r in self.read(cursor, uid, ids, ['name','acc_number','state'], context):
+            if not r['name'] or r['name'] == '/':
+                acc_name = r['acc_number']
+            else:
+                acc_name = r['name']
+            res.append((r['id'], acc_name+' : '+bank_type_names.get(r['state'], '')))
         return res
 
     def _prepare_name(self, bank):
