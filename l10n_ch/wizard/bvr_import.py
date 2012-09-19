@@ -42,8 +42,12 @@ def _reconstruct_invoice_ref(cursor, user, reference, context=None):
     result_invoice = cursor.fetchall()
     REF = re.compile('[^0-9]')
     for inv_id,inv_name in result_invoice:
-        inv_name =  REF.sub('0', str(inv_name))
-        if inv_name == reference:
+        sub_name =  REF.sub('0', str(inv_name))
+        if sub_name == reference:
+            id_invoice = inv_id
+            break
+        replace_name =  REF.sub('', str(inv_name))
+        if replace_name == reference:
             id_invoice = inv_id
             break
     if  id_invoice:
