@@ -155,6 +155,7 @@ def _import(self, cursor, user, data, context=None):
             ('ref', 'like', reference),
             ('reconcile_id', '=', False),
             ('account_id.type', 'in', ['receivable', 'payable']),
+            ('journal_id.type','=','sale'),
             ], order='date desc', context=context)
         if not line_ids:
             line_ids = _reconstruct_invoice_ref(cursor, user, reference, None)
