@@ -96,9 +96,6 @@ TODO :
  
  "test": ['test/l10n_ch_report.yml',
           'test/l10n_ch_dta.yml',
-          #TODO: uncomment the 2 following tests once they are fixed
-          #'test/l10n_ch_v11.yml',
-          #'test/l10n_ch_v11_part.yml'
          ],
 
  "auto_install": False,
