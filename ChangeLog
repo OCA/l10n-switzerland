@@ -1,0 +1,5 @@
+[6.1] New features:
+- Field iban disapeared and is now used as acc_number in res.partner.bank
+- Add a constraint on post numbers to fix 5 and 9 digits formats
+- Add condition texts in bvr invoices
+- Add po files de en, es, fr
