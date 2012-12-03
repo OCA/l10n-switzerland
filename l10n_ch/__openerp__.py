@@ -84,7 +84,7 @@ TODO :
              'wizard/bvr_import_view.xml',
              'wizard/create_dta_view.xml',
              'company_view.xml',
-             'account_invoice.xml',
+             'account_invoice_view.xml',
              'bank_view.xml',
              'security/ir.model.access.csv',
              'report/report_webkit_html_view.xml'
