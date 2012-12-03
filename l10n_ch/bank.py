@@ -40,7 +40,6 @@ class ResPartnerBank(osv.osv):
     """
     Inherit res.partner.bank class in order to add swiss specific fields
     such as:
-     - A postnumber
      - BVR data
      - BVR print options for company accounts
     """
@@ -48,27 +47,15 @@ class ResPartnerBank(osv.osv):
 
     _columns = {
         'name': fields.char('Description', size=128, required=True),
-        'post_number': fields.char('Post number', size=64, help="Postal number 0x-xxxxxx-x or xxxxx"),
         'bvr_adherent_num': fields.char('Bank BVR adherent number', size=11, help="Your Bank adherent number to be printed in references of your BVR. This is not a postal account number."),
         'dta_code': fields.char('DTA code', size=5),
         'print_bank': fields.boolean('Print Bank on BVR'),
         'print_account': fields.boolean('Print Account Number on BVR'),
         'print_partner': fields.boolean('Print Partner Address on BVR'),
-        'acc_number': fields.char('Account/IBAN Number', size=64),
+        'acc_number': fields.char('Account/IBAN Number', size=64, required=True),
         'my_bank': fields.boolean('Use my account to print BVR ?', help="Check to print BVR invoices"),
     }
 
-    def _prepare_name(self, bank):
-        "Hook to get bank number of bank account"
-        res = u''
-        if bank.acc_number:
-            res = super(ResPartnerBank, self)._prepare_name(bank) or u''
-        if bank.post_number:
-            if res:
-                res =  u"%s - %s" % (res, bank.post_number)
-            else:
-                res = bank.post_number
-        return res
 
     def _check_9_pos_postal_num(self, number):
         """
@@ -102,15 +89,15 @@ class ResPartnerBank(osv.osv):
         """
         banks = self.browse(cursor, uid, ids)
         for b in banks:
-            if not b.post_number:
+            if not b.state in ('bv', 'bvr'):
                 return True
-            return self._check_9_pos_postal_num(b.post_number) or \
-                   self._check_5_pos_postal_num(b.post_number)
+            return self._check_9_pos_postal_num(b.acc_number) or \
+                   self._check_5_pos_postal_num(b.acc_number)
 
 
     _constraints = [(_check_postal_num,
                     'Please enter a correct postal number. (01-23456-1 or 12345)',
-                    ['post_number'])]
+                    ['acc_number'])]
 
     _sql_constraints = [('bvr_adherent_uniq', 'unique (bvr_adherent_num)',
         'The BVR adherent number must be unique !')]
