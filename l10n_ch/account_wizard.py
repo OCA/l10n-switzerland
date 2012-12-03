@@ -18,29 +18,23 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import tools
-from osv import  osv
-import addons
-import os
+from openerp.osv.orm import TransientModel
 
-class WizardMultiChartsAccounts(osv.osv_memory):
+class WizardMultiChartsAccounts(TransientModel):
 
     _inherit ='wizard.multi.charts.accounts'
     _defaults = {
-        'bank_accounts_id': False,
         'code_digits': 0,
-        'sale_tax': False,
-        'purchase_tax':False
     }
 
-    def execute(self, cr, uid, ids, context=None):
-        """Override of code in order to be able to link journal with account in XML"""
-        res = super(WizardMultiChartsAccounts, self).execute(cr, uid, ids, context)
-        path = addons.get_module_resource(os.path.join('l10n_ch','sterchi_chart','account_journal_rel.xml'))
-        tools.convert_xml_import(cr, 'l10n_ch', path, idref=None, mode='init', noupdate=True, report=None)
-        return res
+#     def execute(self, cr, uid, ids, context=None):
+#         """Override of code in order to be able to link journal with account in XML"""
+#         res = super(WizardMultiChartsAccounts, self).execute(cr, uid, ids, context)
+#         path = addons.get_module_resource(os.path.join('l10n_ch','sterchi_chart','account_journal_rel.xml'))
+#         tools.convert_xml_import(cr, 'l10n_ch', path, idref=None, mode='init', noupdate=True, report=None)
+#         return res
 
-WizardMultiChartsAccounts()
+# WizardMultiChartsAccounts()
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
