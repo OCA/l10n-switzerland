@@ -22,8 +22,8 @@ import base64
 import time
 import re
 
-from tools.translate import _
-from osv import osv, fields
+from openerp.tools.translate import _
+from openerp.osv.orm import Model, TransientModel, fields
 from tools import mod10r
 import pooler
 
@@ -76,7 +76,7 @@ def _import(self, cursor, user, data, context=None):
     statement_obj = self.pool.get('account.bank.statement')
     property_obj = self.pool.get('ir.property')
     file = data['form']['file']
-    if not file: 
+    if not file:
         raise osv.except_osv(_('UserError'),
                              _('Please select a file first!'))
     statement_id = data['id']
@@ -182,7 +182,7 @@ def _import(self, cursor, user, data, context=None):
             context.update({'move_line_ids': line_ids})
             result = voucher_obj.onchange_partner_id(cursor, user, [], partner_id, journal_id=statement.journal_id.id, amount=abs(record['amount']), currency_id= statement.currency.id, ttype='receipt', date=statement.date ,context=context)
             voucher_res = { 'type': 'receipt' ,
-    
+
                  'name': values['name'],
                  'partner_id': partner_id,
                  'journal_id': statement.journal_id.id,
@@ -247,7 +247,7 @@ def _import(self, cursor, user, data, context=None):
 
     return {}
 
-class bvr_import_wizard(osv.osv_memory):
+class BvrImporterWizard(TransientModel):
     _name = 'bvr.import.wizard'
     _columns = {
         'file':fields.binary('BVR File')
@@ -269,6 +269,6 @@ class bvr_import_wizard(osv.osv_memory):
         _import(self, cr, uid, data, context=context)
         return {}
 
-bvr_import_wizard()
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

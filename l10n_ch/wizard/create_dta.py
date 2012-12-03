@@ -22,11 +22,11 @@
 import time
 from datetime import datetime
 import base64
-
-from osv import osv, fields
-import pooler
-from tools.translate import _
 import unicode2ascii
+
+from openerp.osv.orm import Model, TransientModel, fields
+import pooler
+from openerp.tools.translate import _
 
 import re
 
@@ -351,7 +351,7 @@ def c_ljust(s, size):
 def _is_9_pos_bvr_adherent(adherent_num):
     """
     from a bvr adherent number,
-    return true if 
+    return true if
     """
     pattern = r'[0-9]{2}-[0-9]{1,6}-[0-9]'
     return re.search(pattern, adherent_num)
@@ -520,7 +520,7 @@ def _create_dta(obj, cr, uid, data, context=None):
                         'for the bank account: %s\n' + \
                         'on line: %s') % (res_partner_bank_obj.name_get(cr, uid, [pline.bank_id.id], context)[0][1] , pline.name))
 
-            if v['partner_bank_code'] : # bank code is swift (BIC address)
+            if  v['partner_bank_code'] : # bank code is swift (BIC address)
                 v['option_id_bank']= 'A'
                 v['partner_bank_ident']= v['partner_bank_code']
             elif v['partner_bank_city']:
@@ -539,15 +539,15 @@ def _create_dta(obj, cr, uid, data, context=None):
         elif elec_pay == 'bvrbank' or elec_pay == 'bvrpost':
             from tools import mod10r
             if not v['reference']:
-                raise osv.except_osv(_('Error'), 
+                raise osv.except_osv(_('Error'),
                                      _('You must provide ' \
                                        'a BVR reference number \n' \
                                        'for the line: %s') % pline.name)
             v['reference'] = v['reference'].replace(' ', '')
             if is_9_pos_adherent:
-                if len(v['reference']) > 27: 
+                if len(v['reference']) > 27:
                     raise osv.except_osv(_('Error'),
-                                         _('BVR reference number is not valid \n' 
+                                         _('BVR reference number is not valid \n'
                                            'for the line: %s. \n'
                                            'Reference is too long.') % pline.name)
                 # do a mod10 check
@@ -627,7 +627,7 @@ def _create_dta(obj, cr, uid, data, context=None):
         }, context=context)
     return dta_data
 
-class create_dta_wizard(osv.osv_memory):
+class create_dta_wizard(TransientModel):
     _name="create.dta.wizard"
 
     _columns={
@@ -650,7 +650,5 @@ class create_dta_wizard(osv.osv_memory):
         dta_file = _create_dta(self, cr, uid, data, context)
         current.write({'dta_file': dta_file})
         return True
-
-create_dta_wizard()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
