@@ -19,9 +19,9 @@
 #
 ##############################################################################
 
-from osv import fields, osv
+from openerp.osv.orm import Model, fields
 
-class res_company(osv.osv):
+class ResCompany(Model):
     """override company in order to add bvr vertical and
     Horizontal print delta"""
     _inherit = "res.company"
@@ -58,7 +58,5 @@ class res_company(osv.osv):
         'bvr_scan_line_font_size': 12,
         'bvr_scan_line_letter_spacing': 0,
     }
-
-res_company()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

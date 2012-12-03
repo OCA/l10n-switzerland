@@ -19,9 +19,9 @@
 #
 ##############################################################################
 
-from osv import fields, osv
+from openerp.osv.orm import Model, fields
 
-class res_partner(osv.osv):
+class ResPartner(Model):
     _inherit = 'res.partner'
 
     _columns = {
@@ -29,5 +29,5 @@ class res_partner(osv.osv):
         'Companies that refers to partner'),
     }
 
-res_partner()
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

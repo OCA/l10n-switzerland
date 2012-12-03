@@ -18,12 +18,12 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-from osv import fields, osv
-from tools import mod10r
 import re
+from openerp.osv.orm import Model, fields
+from tools import mod10r
 
-class Bank(osv.osv):
+
+class Bank(Model):
     """Inherit res.bank class in order to add swiss specific field"""
     _inherit = 'res.bank'
     _columns = {
@@ -36,7 +36,7 @@ class Bank(osv.osv):
     }
 
 
-class ResPartnerBank(osv.osv):
+class ResPartnerBank(Model):
     """
     Inherit res.partner.bank class in order to add swiss specific fields
     such as:

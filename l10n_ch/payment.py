@@ -19,9 +19,9 @@
 #
 ##############################################################################
 
-from osv import osv
+from openerp.osv.orm import Model, fields
 
-class payment_order(osv.osv):
+class PaymentOrder(Model):
     _inherit = 'payment.order'
 
     def get_wizard(self,mode):
@@ -30,6 +30,5 @@ class payment_order(osv.osv):
 
         return super(payment_order,self).get_wizard(mode)
 
-payment_order()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

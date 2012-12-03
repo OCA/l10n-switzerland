@@ -20,10 +20,10 @@
 ##############################################################################
 
 from datetime import datetime
-from osv import fields, osv
+from openerp.osv.orm import Model, fields
 from tools import mod10r
 
-class account_invoice(osv.osv):
+class AccountInvoice(Model):
     """Inherit account.invoice in order to add bvr
     printing functionnalites. BVR is a Swiss payment vector"""
     _inherit = "account.invoice"
@@ -74,7 +74,7 @@ class account_invoice(osv.osv):
             ),
         ### Amount to pay
         'amount_to_pay': fields.function(_amount_to_pay,
-            type='float', 
+            type='float',
             string='Amount to be paid',
             help='The amount which should be paid at the current date\n' \
                     'minus the amount which is already in payment order'),
@@ -207,14 +207,14 @@ class account_invoice(osv.osv):
          return toreturn[0]
         else :
             return toreturn
-        
+
     def set_comment(self, cr,uid,id,commentid):
         if not commentid :
             return {}
         cond = self.pool.get('account.condition_text').browse(
             cr,uid,commentid,{})
         translation_obj = self.pool.get('ir.translation')
-        
+
 
         text =''
         if cond :
@@ -226,19 +226,19 @@ class account_invoice(osv.osv):
             res_trans = self.get_trans(cr, uid, 'account.condition_text,text', commentid, lang )
             if not res_trans :
                 res_trans = text
-        
+
         return {'value': {
                 'note1': res_trans,
                 }}
-                
-                
+
+
     def set_note(self, cr,uid,id,commentid):
         if not commentid :
             return {}
         cond = self.pool.get('account.condition_text').browse(
             cr,uid,commentid,{})
         translation_obj = self.pool.get('ir.translation')
-        
+
 
         text =''
         if cond :
@@ -247,11 +247,11 @@ class account_invoice(osv.osv):
                 lang = self.browse(cr, uid, id)[0].partner_id.lang
             except :
                 lang = 'en_EN'
-            res_trans = self.get_trans(cr, uid, 
+            res_trans = self.get_trans(cr, uid,
                 'account.condition_text,text', commentid, lang )
             if not res_trans :
                 res_trans = text
-        
+
         return {'value': {
                 'note2': res_trans,
                 }}
@@ -259,9 +259,9 @@ class account_invoice(osv.osv):
 
 
 
-account_invoice()
 
-class account_tax_code(osv.osv):
+
+class AccountTaxCode(Model):
     """Inherit account tax code in order
     to add a Case code"""
     _name = 'account.tax.code'
@@ -270,25 +270,23 @@ class account_tax_code(osv.osv):
         'code': fields.char('Case Code', size=512),
     }
 
-account_tax_code()
 
-class invoice_condition_text(osv.osv):
+
+class InvoiceConditionText(Model):
     """add info condition in the invoice"""
     _name = "account.condition_text"
     _description = "Invoice condition text"
-    
-        
+
+
     _columns = {
         'name' : fields.char('Methode', required=True, size=128),
         'type' : fields.selection([('header','Header'),
         ('footer','Footer')
-        ], 
+        ],
         'type',required=True),
         'text': fields.text('text', translate=True,required=True),
     }
 
-        
-invoice_condition_text()
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -33,8 +33,7 @@ from report import report_sxw
 from report_webkit import webkit_report
 from report_webkit import report_helper
 
-from osv import osv
-from osv.osv import except_osv
+from openerp.osv.osv import except_osv
 
 from tools import mod10r
 from tools.translate import _
