@@ -28,41 +28,16 @@ class AccountInvoice(Model):
     printing functionnalites. BVR is a Swiss payment vector"""
     _inherit = "account.invoice"
 
-    ## @param self The object pointer.
-    ## @param cursor a psycopg cursor
-    ## @param user res.user.id that is currently loged
-    ## @parma context a standard dict
-    ## @return a list of tuple (name,value)
+
     def _get_reference_type(self, cursor, user, context=None):
         """Function use by the function field reference_type in order to initalise available
         BVR Reference Types"""
-        res = super(account_invoice, self)._get_reference_type(cursor, user,
+        res = super(AccountInvoice, self)._get_reference_type(cursor, user,
                 context=context)
         res.append(('bvr', 'BVR'))
         return res
 
-    ## @param self The object pointer.
-    ## @param cursor a psycopg cursor
-    ## @param user res.user.id that is currently loged
-    ## @parma context a standard dict
-    ## @param name of the files
-    ## @param args a list of diverse argument
-    ## @parma context a standard dict
-    ## @return a  dict (invoice id,amount to pay)
-    def _amount_to_pay(self, cursor, user, ids, name, args, context=None):
-        '''Return the amount still to pay regarding all the payment orders'''
-        if not ids:
-            return {}
-        res = {}
-        for invoice in self.browse(cursor, user, ids, context=context):
-            res[invoice.id] = 0.0
-            if invoice.move_id:
-                for line in invoice.move_id.line_id:
-                    if not line.date_maturity or \
-                            datetime.strptime(line.date_maturity, '%Y-%m-%d') \
-                            < datetime.now():
-                        res[invoice.id] += line.amount_to_pay
-        return res
+
 
     _columns = {
         ### BVR reference type BVR or FREE
@@ -72,23 +47,12 @@ class AccountInvoice(Model):
         'partner_bank_id': fields.many2one('res.partner.bank', 'Bank Account',
             help='The partner bank account to pay\nKeep empty to use the default'
             ),
-        ### Amount to pay
-        'amount_to_pay': fields.function(_amount_to_pay,
-            type='float',
-            string='Amount to be paid',
-            help='The amount which should be paid at the current date\n' \
-                    'minus the amount which is already in payment order'),
         'text_condition1': fields.many2one('account.condition_text', 'Invoice information Top'),
         'text_condition2': fields.many2one('account.condition_text', 'Invoice information Bottom'),
         'note1' : fields.text('Invoice information Top'),
         'note2' : fields.text('Invoice information Bottom'),
     }
 
-    ## @param self The object pointer.
-    ## @param cursor a psycopg cursor
-    ## @param user res.user.id that is currently loged
-    ## @parma ids invoices id
-    ## @return a boolean True if valid False if invalid
     def _check_bvr(self, cr, uid, ids, context=None):
         """
         Function to validate a bvr reference like :
@@ -111,13 +75,9 @@ class AccountInvoice(Model):
                 if mod10r(invoice.reference[:-1]) != invoice.reference:
                     return False
         return True
-    ## @param self The object pointer.
-    ## @param cursor a psycopg cursor
-    ## @param user res.user.id that is currently loged
-    ## @parma ids invoices id
-    ## @return a boolean True if valid False if invalid
+
     def _check_reference_type(self, cursor, user, ids, context=None):
-        """Check the customer invoice reference type depending
+        """Check the supplier invoice reference type depending
         on the BVR reference type and the invoice partner bank type"""
         for invoice in self.browse(cursor, user, ids):
             if invoice.type in 'in_invoice':
@@ -135,61 +95,34 @@ class AccountInvoice(Model):
             ['reference_type']),
     ]
 
-    ## @param self The object pointer.
-    ## @param cr a psycopg cursor
-    ## @param uid res.user.id that is currently loged
-    ## @parma ids invoices id
-    ## @parma type the invoice type
-    ## @param partner_id the partner linked to the invoice
-    ## @parma date_invoice date of the invoice
-    ## @parma payment_term inoice payment term
-    ## @param partner_bank_id the partner linked invoice bank
-    ## @return the dict of values with the partner_bank value updated
-    def onchange_partner_id(self, cr, uid, ids, type, partner_id,
+    def onchange_partner_id(self, cursor, uid, ids, invoice_type, partner_id,
             date_invoice=False, payment_term=False, partner_bank_id=False, company_id=False):
         """ Function that is call when the partner of the invoice is changed
         it will retrieve and set the good bank partner bank"""
         #context not define in signature of function in account module
         context = {}
-        res = super(account_invoice, self).onchange_partner_id(cr,
-                                                               uid,
-                                                               ids,
-                                                               type,
-                                                               partner_id,
-                                                               date_invoice,
-                                                               payment_term,
-                                                               partner_bank_id,
-                                                               company_id)
+        res = super(account_invoice, self).onchange_partner_id(cursor, uid, ids, invoice_type, partner_id,
+            date_invoice=False, payment_term=False, partner_bank_id=False, company_id=False)
         bank_id = False
         if partner_id:
-            if type in ('in_invoice', 'in_refund'):
-                p = self.pool.get('res.partner').browse(cr, uid, partner_id, context)
+            if invoice_type in ('in_invoice', 'in_refund'):
+                p = self.pool.get('res.partner').browse(cursor, uid, partner_id, context)
                 if p.bank_ids:
                     bank_id = p.bank_ids[0].id
                 res['value']['partner_bank_id'] = bank_id
             else:
-                user = self.pool.get('res.users').browse(cr, uid, uid, context)
+                user = self.pool.get('res.users').browse(cursor, uid, uid, context)
                 bank_ids = user.company_id.partner_id.bank_ids
                 if bank_ids:
-                    #How to order bank ?
-                    for bank in bank_ids:
-                        if bank.my_bank:
-                            bank_id = bank.id
-                res['value']['partner_bank_id'] = bank_id
+                    res['value']['partner_bank_id'] = bank_ids[0]
 
         if partner_bank_id != bank_id:
-            to_update = self.onchange_partner_bank(cr, uid, ids, bank_id)
+            to_update = self.onchange_partner_bank(cursor, uid, ids, bank_id)
             res['value'].update(to_update['value'])
         return res
 
-    ## @param self The object pointer.
-    ## @param cursor a psycopg cursor
-    ## @param user res.user.id that is currently loged
-    ## @parma ids invoices id
-    ## @param partner_bank_id the partner linked invoice bank
-    ## @return the dict of values with the reference type  value updated
     def onchange_partner_bank(self, cursor, user, ids, partner_bank_id):
-        """update the reference type depending of the partner bank"""
+        """update the reference invoice_type depending of the partner bank"""
         res = {'value': {}}
         partner_bank_obj = self.pool.get('res.partner.bank')
         if partner_bank_id:
@@ -198,66 +131,24 @@ class AccountInvoice(Model):
                 res['value']['reference_type'] = 'bvr'
         return res
 
-    def get_trans(self, cr, uid, name, res_id, lang) :
-        sql = " SELECT value     from ir_translation where name = '%s' \
-        and res_id = %s and lang ='%s';" %(name, str(res_id), lang)
-        cr.execute(sql)
-        toreturn =  cr.fetchone()
-        if toreturn :
-         return toreturn[0]
-        else :
-            return toreturn
-
-    def set_comment(self, cr,uid,id,commentid):
+    def _set_condition(self, cr, uid, inv_id, commentid, key):
+        """Set the text of the notes in invoices"""
         if not commentid :
             return {}
+        try :
+            lang = self.browse(cr, uid, inv_id)[0].partner_id.lang
+        except :
+            lang = 'en_US'
         cond = self.pool.get('account.condition_text').browse(
-            cr,uid,commentid,{})
-        translation_obj = self.pool.get('ir.translation')
+            cr, uid, commentid, {'lang': lang})
+        return {'value': {key: cond.text}}
+
+    def set_header(self, cr, uid, inv_id, commentid):
+        return self._set_condition(cr, uid, inv_id, commentid, 'note1')
 
 
-        text =''
-        if cond :
-            text = cond.text
-            try :
-                lang = self.browse(cr, uid, id)[0].partner_id.lang
-            except :
-                lang = 'en_EN'
-            res_trans = self.get_trans(cr, uid, 'account.condition_text,text', commentid, lang )
-            if not res_trans :
-                res_trans = text
-
-        return {'value': {
-                'note1': res_trans,
-                }}
-
-
-    def set_note(self, cr,uid,id,commentid):
-        if not commentid :
-            return {}
-        cond = self.pool.get('account.condition_text').browse(
-            cr,uid,commentid,{})
-        translation_obj = self.pool.get('ir.translation')
-
-
-        text =''
-        if cond :
-            text = cond.text
-            try :
-                lang = self.browse(cr, uid, id)[0].partner_id.lang
-            except :
-                lang = 'en_EN'
-            res_trans = self.get_trans(cr, uid,
-                'account.condition_text,text', commentid, lang )
-            if not res_trans :
-                res_trans = text
-
-        return {'value': {
-                'note2': res_trans,
-                }}
-
-
-
+    def set_footer(self, cr, uid, inv_id, commentid):
+        return self._set_condition(cr, uid, inv_id, commentid, 'note2')
 
 
 
