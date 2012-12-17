@@ -8,12 +8,12 @@
       <field name="arch" type="xml">
          <group name="bank" position="after">
 
-            <group string="BVR options" attrs="{'invisible': ['|', ('company_id', '=', False), ('state','not in',['bvpost','bvrpost','bvrbank'])]}" >
-              <field name="bvr_adherent_num" attrs="{'invisible': [('state','!=','bvrbank')]}"/>
+            <group string="BVR options" attrs="{'invisible': ['|', ('company_id', '=', False), ('state','not in',['bvr','bv'])]}" >
+              <field name="bvr_adherent_num" attrs="{'invisible': [('state','!=','bvr')]}"/>
               <field name="print_bank"/>
               <field name="print_account"/>
             </group>
-            <group string="DTA options" attrs="{'invisible': ['|', ('company_id', '=', False), ('state','in',['bvpost','bvrpost','bvrbank'])]}">
+            <group string="DTA options" attrs="{'invisible': ['|', ('company_id', '=', False), ('state','in',['bv','bvr'])]}">
               <field name="dta_code"/>
             </group>
          </group>

@@ -28,7 +28,7 @@ class PaymentOrder(Model):
         if mode == 'dta':
             return 'l10n_ch', 'action_dta_create'
 
-        return super(payment_order,self).get_wizard(mode)
+        return super(PaymentOrder,self).get_wizard(mode)
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
