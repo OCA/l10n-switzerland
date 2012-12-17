@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<openerp>
+  <data noupdate="1">
+
+    <!-- Memo :
+         Mandatory for all kind of dta payment:
+         * for the partner bank:
+         - a bank name
+         * for the company:
+         - iban
+         Mandatory for iban payment:
+         * for the partner:
+         - iban
+         - BIC / iban or a city
+         Mandatory for bvrpost/bvrbank payment:
+         * for the partner:
+         - bvr ref number on the partner bank
+         Mandatory for bvbank payment:
+         * for the partner:
+         - bank number
+         Mandatory for bvpost payment:
+         * for the partner:
+         - post number
+    -->
+
+    <!-- Define new types -->
+    <record model="res.partner.bank.type" id="bvr">
+      <field name="name">BVR</field>
+      <field name="code">bvr</field>
+    </record>
+
+    <record model="res.partner.bank.type" id="bv">
+      <field name="name">BV</field>
+      <field name="code">bv</field>
+    </record>
+
+  </data>
+</openerp>
