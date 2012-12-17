@@ -231,7 +231,7 @@ msgstr "Moules et modèles"
 #: model:res.partner.bank.type,format_layout:l10n_ch.bank_dta
 #: model:res.partner.bank.type,format_layout:l10n_ch.bvbank
 #: model:res.partner.bank.type,format_layout:l10n_ch.bvpost
-#: model:res.partner.bank.type,format_layout:l10n_ch.bvrbank
+#: model:res.partner.bank.type,format_layout:l10n_ch.bv
 #: model:res.partner.bank.type,format_layout:l10n_ch.bvrpost
 msgid "%(bank_name)s: %(acc_number)s"
 msgstr "%(bank_name)s: %(acc_number)s"
@@ -4066,7 +4066,7 @@ msgid "Charges de location pour voitures en crédit-bail"
 msgstr "Charges de location pour voitures en crédit-bail"
 
 #. module: l10n_ch
-#: model:res.partner.bank.type,name:l10n_ch.bvrbank
+#: model:res.partner.bank.type,name:l10n_ch.bv
 msgid "DTA-BVRBANK"
 msgstr "DTA-BVRBANK"
 
@@ -7326,4 +7326,3 @@ msgstr "Assurances"
 #: model:account.account.template,name:l10n_ch.ch_3700
 msgid "Production propre d'immobi. corporelles meubles"
 msgstr "Production propre d'immobi. corporelles meubles"
-

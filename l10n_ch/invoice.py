@@ -83,7 +83,7 @@ class AccountInvoice(Model):
             if invoice.type in 'in_invoice':
                 if invoice.partner_bank_id and \
                         invoice.partner_bank_id.state in \
-                        ('bvrbank', 'bvrpost') and \
+                        ('bvr', 'bv') and \
                         invoice.reference_type != 'bvr':
                     return False
         return True
@@ -127,7 +127,7 @@ class AccountInvoice(Model):
         partner_bank_obj = self.pool.get('res.partner.bank')
         if partner_bank_id:
             partner_bank = partner_bank_obj.browse(cursor, user, partner_bank_id)
-            if partner_bank.state in ('bvrbank', 'bvrpost'):
+            if partner_bank.state in ('bvr', 'bv'):
                 res['value']['reference_type'] = 'bvr'
         return res
 
@@ -145,7 +145,6 @@ class AccountInvoice(Model):
 
     def set_header(self, cr, uid, inv_id, commentid):
         return self._set_condition(cr, uid, inv_id, commentid, 'note1')
-
 
     def set_footer(self, cr, uid, inv_id, commentid):
         return self._set_condition(cr, uid, inv_id, commentid, 'note2')
@@ -167,7 +166,6 @@ class InvoiceConditionText(Model):
     """add info condition in the invoice"""
     _name = "account.condition_text"
     _description = "Invoice condition text"
-
 
     _columns = {
         'name' : fields.char('Methode', required=True, size=128),

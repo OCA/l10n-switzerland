@@ -24,12 +24,12 @@
     -->
 
     <!-- Define new types -->
-    <record model="res.partner.bank.type" id="bvrbank">
+    <record model="res.partner.bank.type" id="bvr">
       <field name="name">BVR</field>
       <field name="code">bvr</field>
     </record>
 
-    <record model="res.partner.bank.type" id="bvrpost">
+    <record model="res.partner.bank.type" id="bv">
       <field name="name">BV</field>
       <field name="code">bv</field>
     </record>
