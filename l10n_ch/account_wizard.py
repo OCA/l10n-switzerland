@@ -23,11 +23,20 @@ from openerp.osv.orm import TransientModel
 class WizardMultiChartsAccounts(TransientModel):
 
     _inherit ='wizard.multi.charts.accounts'
-    _defaults = {
-        'code_digits': 0,
-    }
 
-    #TODO overrride default_get
+    def onchange_chart_template_id(self, cursor, uid, ids, chart_template_id=False, context=None):
+        if context is None: context = {}
+        res = super(WizardMultiChartsAccounts, self).onchange_chart_template_id(cursor, uid, ids,
+                                                                                chart_template_id=chart_template_id,
+                                                                                context=context)
+        # 0 is evaluated as False in python so we have to do this
+        # because original wizard test code_digits value on a float widget
+        if chart_template_id:
+            chart = self.pool['account.chart.template'].browse(cursor, uid,
+                                                               chart_template_id, context=context)
+            if chart.name == "Plan comptable STERCHI":
+                res['value']['code_digits'] = 0
+        return res
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
