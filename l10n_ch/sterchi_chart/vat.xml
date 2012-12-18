@@ -112,21 +112,6 @@
             <field name="code"/>
             <field name="parent_id" ref="vat_code_receivable_base"/>
         </record>
-        <record model="account.tax.code.template" id="vat_code_receivable_base_24_50%">
-            <field name="name">Acquisition de biens et services a 2.4% récup. à 50% (TR)</field>
-            <field name="code"/>
-            <field name="parent_id" ref="vat_code_receivable_base"/>
-        </record>
-        <record model="account.tax.code.template" id="vat_code_receivable_base_76_50%">
-            <field name="name">Acquisition de biens et services a 7.6% récup. à 50% (TN)</field>
-            <field name="code"/>
-            <field name="parent_id" ref="vat_code_receivable_base"/>
-        </record>
-        <record model="account.tax.code.template" id="vat_code_receivable_base_36_50%">
-            <field name="name">Acquisition de biens et services a 3.6% récup. à 50% (TS)</field>
-            <field name="code"/>
-            <field name="parent_id" ref="vat_code_receivable_base"/>
-        </record>
         <record model="account.tax.code.template" id="vat_code_receivable_base_invest">
             <field name="name">Acquisition de biens d'invest. et autres charges</field>
             <field name="code"/>
@@ -205,7 +190,7 @@
             <field name="account_collected_id" ref="ch_1171"/>
             <field name="account_paid_id" ref="ch_1171"/>
         </record>
-        
+
         <record model="account.tax.template" id="vat_36">
             <field name="name">TVA due a 3.6% (TS)</field>
             <field name="amount" eval="0.036"/>
