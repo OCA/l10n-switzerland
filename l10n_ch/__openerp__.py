@@ -42,7 +42,7 @@ Due to important refactoring needs and the Switzerland adoption of new internati
 - **l10n_ch_payment_slip**: Support of ESR/BVR payment slip report and reconciliation. Report refactored with easy element positioning.
 - **l10n_ch_sepa**: Alpha implementation of PostFinance SEPA/PAIN support will be completed during 2013/2014
 
-The modules will be soon available on OpenERP swiss localisation on launchpad:
+The modules will be soon available on OpenERP swiss localization on launchpad:
 https://launchpad.net/openerp-swiss-localization
 """,
  'version': '7.0',
