@@ -11811,6 +11811,7 @@
             <field name="property_account_expense_opening" ref="ch_2990"/>
             <field name="property_reserve_and_surplus_account" ref="ch_2991"/>
             <field name="code_digits" eval="0"/>
+            <field name="spoken_languages" eval="'it_IT;de_DE'"/>
         </record>
     </data>
 </openerp>
