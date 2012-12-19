@@ -45,12 +45,7 @@ class AccountInvoice(Model):
             'Reference Type', required=True),
         ### Partner bank link between bank and partner id
         'partner_bank_id': fields.many2one('res.partner.bank', 'Bank Account',
-            help='The partner bank account to pay\nKeep empty to use the default'
-            ),
-        'text_condition1': fields.many2one('account.condition_text', 'Invoice information Top'),
-        'text_condition2': fields.many2one('account.condition_text', 'Invoice information Bottom'),
-        'note1' : fields.text('Invoice information Top'),
-        'note2' : fields.text('Invoice information Bottom'),
+            help='The partner bank account to pay\nKeep empty to use the default'),
     }
 
     def _check_bvr(self, cr, uid, ids, context=None):
@@ -159,23 +154,5 @@ class AccountTaxCode(Model):
     _columns = {
         'code': fields.char('Case Code', size=512),
     }
-
-
-
-class InvoiceConditionText(Model):
-    """add info condition in the invoice"""
-    _name = "account.condition_text"
-    _description = "Invoice condition text"
-
-    _columns = {
-        'name' : fields.char('Methode', required=True, size=128),
-        'type' : fields.selection([('header','Header'),
-        ('footer','Footer')
-        ],
-        'type',required=True),
-        'text': fields.text('text', translate=True,required=True),
-    }
-
-
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
