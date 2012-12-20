@@ -1,7 +1,7 @@
  #-*- coding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2010 Camptocamp SA (http://www.camptocamp.com) 
+# Copyright (c) 2010 Camptocamp SA (http://www.camptocamp.com)
 # All Right Reserved
 #
 # Author : Nicolas Bessi (Camptocamp)
@@ -29,6 +29,6 @@
 #
 ##############################################################################
 
-import report_webkit_html
+from . import report_webkit_html
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

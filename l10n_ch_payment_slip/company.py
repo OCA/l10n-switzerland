@@ -18,8 +18,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
 from openerp.osv.orm import Model, fields
+
 
 class ResCompany(Model):
     """override company in order to add bvr vertical and
@@ -41,19 +41,13 @@ class ResCompany(Model):
 
         'bvr_scan_line_font_size': fields.float('BVR scan line font size (pt)'),
 
-        'bvr_scan_line_letter_spacing':fields.float('BVR scan line letter spacing'),
+        'bvr_scan_line_letter_spacing': fields.float('BVR scan line letter spacing'),
 
         'bvr_background': fields.boolean('Insert BVR background ?'),
-
-        'bvr_only': fields.boolean('Separated BVR only ?',
-            help='Print only the BVR separated page'),
-
-        'invoice_only': fields.boolean('Invoice only (Do not use with bvr only)?',
-            help='Print only the invoice without BVR'),
     }
 
     _defaults = {
-        'bvr_scan_line_vert': 232,
+        'bvr_scan_line_vert': 231,
         'bvr_scan_line_horz': 72,
         'bvr_scan_line_font_size': 12,
         'bvr_scan_line_letter_spacing': 0,

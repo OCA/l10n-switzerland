@@ -26,16 +26,14 @@ Swiss localization Payment slip Known as ESR/BVR:
 This addon allows you to print the ESR/BVR report.
 It will also allows you to reconcile from V11 filea provided by financial
 institutes.
+
 """,
  'version': '1.0',
  'author': 'Camptocamp',
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
- 'depends': ['l10n_ch', 'report_webkit', "l10n_ch_base_bank",
-             "base_header_webkit", "invoice_webkit"],
- 'data': ['sterchi_chart/account.xml',
-          'sterchi_chart/vat2011.xml',
-          'sterchi_chart/fiscal_position.xml' ],
+ 'depends': ['base', 'report_webkit', 'l10n_ch_base_bank'],
+ 'data': ["company_view.xml", "report/report_webkit_html_view.xml"],
  'demo': [],
  'test': [],
  'auto_install': False,

@@ -2,7 +2,6 @@
 ##############################################################################
 #
 #    Author: Nicolas Bessi. Copyright Camptocamp SA
-#    Donors: Hasa Sàrl, Open Net Sàrl and Prisme Solutions Informatique SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,34 +17,30 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-from datetime import datetime
 from openerp.osv.orm import Model, fields
-from tools import mod10r
+from openerp.tools import mod10r
+
 
 class AccountInvoice(Model):
     """Inherit account.invoice in order to add bvr
     printing functionnalites. BVR is a Swiss payment vector"""
     _inherit = "account.invoice"
 
-
     def _get_reference_type(self, cursor, user, context=None):
         """Function use by the function field reference_type in order to initalise available
         BVR Reference Types"""
         res = super(AccountInvoice, self)._get_reference_type(cursor, user,
-                context=context)
+                                                              context=context)
         res.append(('bvr', 'BVR'))
         return res
-
-
 
     _columns = {
         ### BVR reference type BVR or FREE
         'reference_type': fields.selection(_get_reference_type,
-            'Reference Type', required=True),
+                                           'Reference Type', required=True),
         ### Partner bank link between bank and partner id
         'partner_bank_id': fields.many2one('res.partner.bank', 'Bank Account',
-            help='The partner bank account to pay\nKeep empty to use the default'),
+                                           help='The partner bank account to pay\nKeep empty to use the default'),
     }
 
     def _check_bvr(self, cr, uid, ids, context=None):
@@ -54,12 +49,12 @@ class AccountInvoice(Model):
         0100054150009>132000000000000000000000014+ 1300132412>
         The validation is based on l10n_ch
         """
-        invoices = self.browse(cr,uid,ids)
+        invoices = self.browse(cr, uid, ids)
         for invoice in invoices:
             if invoice.reference_type == 'bvr':
                 if not invoice.reference:
                     return False
-                ## I need help for this bug because in this case
+                ## In this case
                 # <010001000060190> 052550152684006+ 43435>
                 # the reference 052550152684006 do not match modulo 10
                 #
@@ -76,9 +71,7 @@ class AccountInvoice(Model):
         on the BVR reference type and the invoice partner bank type"""
         for invoice in self.browse(cursor, user, ids):
             if invoice.type in 'in_invoice':
-                if invoice.partner_bank_id and \
-                        invoice.partner_bank_id.state in \
-                        ('bvr', 'bv') and \
+                if invoice.partner_bank_id and invoice.partner_bank_id.state in ('bvr', 'bv') and \
                         invoice.reference_type != 'bvr':
                     return False
         return True
@@ -91,13 +84,15 @@ class AccountInvoice(Model):
     ]
 
     def onchange_partner_id(self, cursor, uid, ids, invoice_type, partner_id,
-            date_invoice=False, payment_term=False, partner_bank_id=False, company_id=False):
+                            date_invoice=False, payment_term=False,
+                            partner_bank_id=False, company_id=False):
         """ Function that is call when the partner of the invoice is changed
         it will retrieve and set the good bank partner bank"""
         #context not define in signature of function in account module
         context = {}
-        res = super(account_invoice, self).onchange_partner_id(cursor, uid, ids, invoice_type, partner_id,
-            date_invoice=False, payment_term=False, partner_bank_id=False, company_id=False)
+        res = super(AccountInvoice, self).onchange_partner_id(cursor, uid, ids, invoice_type, partner_id,
+                                                              date_invoice=False, payment_term=False,
+                                                              partner_bank_id=False, company_id=False)
         bank_id = False
         if partner_id:
             if invoice_type in ('in_invoice', 'in_refund'):
@@ -126,25 +121,6 @@ class AccountInvoice(Model):
                 res['value']['reference_type'] = 'bvr'
         return res
 
-    def _set_condition(self, cr, uid, inv_id, commentid, key):
-        """Set the text of the notes in invoices"""
-        if not commentid :
-            return {}
-        try :
-            lang = self.browse(cr, uid, inv_id)[0].partner_id.lang
-        except :
-            lang = 'en_US'
-        cond = self.pool.get('account.condition_text').browse(
-            cr, uid, commentid, {'lang': lang})
-        return {'value': {key: cond.text}}
-
-    def set_header(self, cr, uid, inv_id, commentid):
-        return self._set_condition(cr, uid, inv_id, commentid, 'note1')
-
-    def set_footer(self, cr, uid, inv_id, commentid):
-        return self._set_condition(cr, uid, inv_id, commentid, 'note2')
-
-
 
 class AccountTaxCode(Model):
     """Inherit account tax code in order
@@ -154,5 +130,4 @@ class AccountTaxCode(Model):
     _columns = {
         'code': fields.char('Case Code', size=512),
     }
-
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
