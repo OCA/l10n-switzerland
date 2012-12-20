@@ -29,7 +29,7 @@ DTA, and ESR system in order to manage duality of Post and bank systems
  'author': 'Camptocamp',
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
- 'depends': ['l10n_ch'],
+ 'depends': ['account'],
  'data': ['bank_view.xml', 'bank_data.xml'],
  'demo': [],
  'test': [],
