@@ -56,7 +56,7 @@ class L10nCHReportWebkitHtml(report_sxw.rml_parse):
         self._check(ids)
         return super(L10nCHReportWebkitHtml, self).set_context(objects, data, ids, report_type=report_type)
 
-    def police_absolute_path(self, inner_path) :
+    def police_absolute_path(self, inner_path):
         """Will get the ocrb police absolute path"""
         path = addons.get_module_resource('l10n_ch_payment_slip', 'report', inner_path)
         return  path
@@ -74,8 +74,8 @@ class L10nCHReportWebkitHtml(report_sxw.rml_parse):
 
     def comma_me(self, amount):
         """Fast swiss number formatting"""
-        if  isinstance(amount, float):
-            amount = str('%.2f'%amount)
+        if isinstance(amount, float):
+            amount = str('%.2f' % amount)
         else:
             amount = str(amount)
         orig = amount
@@ -95,14 +95,7 @@ class L10nCHReportWebkitHtml(report_sxw.rml_parse):
         return ''.join([' '[(i - 2) % nbrspc:] + c for i, c in enumerate(nbr)])
 
     def _get_ref(self, inv):
-        """Retrieve ESR/BVR reference form invoice in order to print it"""
-        res = ''
-        if inv.partner_bank_id.bvr_adherent_num:
-            res = inv.partner_bank_id.bvr_adherent_num
-        invoice_number = ''
-        if inv.number:
-            invoice_number = self._compile_get_ref.sub('', inv.number)
-        return mod10r(res + invoice_number.rjust(26-len(res), '0'))
+       return inv.get_bvr_ref()
 
     def _check(self, invoice_ids):
         """Check if the invoice is ready to be printed"""
@@ -122,7 +115,7 @@ class L10nCHReportWebkitHtml(report_sxw.rml_parse):
                 raise except_osv(_('UserError'),
                                  _(('Your bank BVR number should be of the form 0X-XXX-X! '
                                     'Please check your company '
-                                    'information for the invoice:\n%s') %(invoice_name)))
+                                    'information for the invoice:\n%s') % (invoice_name)))
             if invoice.partner_bank_id.bvr_adherent_num \
                 and not self._compile_check_bvr_add_num.match(invoice.partner_bank_id.bvr_adherent_num):
                 raise except_osv(_('UserError'),
@@ -133,8 +126,8 @@ class L10nCHReportWebkitHtml(report_sxw.rml_parse):
 
 
 report_sxw.report_sxw('report.invoice_bvr_webkit',
-                       'account.invoice',
-                       'l10n_ch_payment_slip/report/bvr.mako',
-                       parser=L10nCHReportWebkitHtml)
+                      'account.invoice',
+                      'l10n_ch_payment_slip/report/bvr.mako',
+                      parser=L10nCHReportWebkitHtml)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
