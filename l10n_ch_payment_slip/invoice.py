@@ -23,7 +23,6 @@ from openerp.osv.orm import Model, fields
 from openerp.tools import mod10r
 
 
-
 class AccountInvoice(Model):
     """Inherit account.invoice in order to add bvr
     printing functionnalites. BVR is a Swiss payment vector"""
@@ -90,7 +89,7 @@ class AccountInvoice(Model):
     def copy(self, cursor, uid, inv_id, default=None, context=None):
         default = default or {}
         default.update({'reference' : False})
-        return super(res_partner, self).copy(cursor, uid, inv_id, default, context)
+        return super(AccountInvoice, self).copy(cursor, uid, inv_id, default, context)
 
 
 class AccountTaxCode(Model):
