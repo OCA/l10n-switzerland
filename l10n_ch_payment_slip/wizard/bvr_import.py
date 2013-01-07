@@ -29,11 +29,12 @@ from openerp.tools import mod10r
 
 REF = re.compile('[^0-9]')
 
+
 class BvrImporterWizard(TransientModel):
 
     _name = 'bvr.import.wizard'
 
-    _columns = {  'file':fields.binary('BVR File')}
+    _columns = {'file': fields.binary('BVR File')}
 
     def _reconstruct_invoice_ref(self, cursor, user, reference, context=None):
         """Try to get correct invoice/invoice line form ESV/BVR reference"""
@@ -41,22 +42,22 @@ class BvrImporterWizard(TransientModel):
         # On fait d'abord une recherche sur toutes les factures
         # we now search for an invoice
         user_obj = self.pool['res.users']
-        user_current=user_obj.browse(cursor, user, user)
+        user_current = user_obj.browse(cursor, user, user)
 
         cursor.execute("SELECT inv.id, inv.number from account_invoice "
                        "AS inv where inv.company_id = %s and type='out_invoice'",
                        (user_current.company_id.id,))
         result_invoice = cursor.fetchall()
         for inv_id, inv_name in result_invoice:
-            inv_name =  REF.sub('0', str(inv_name))
+            inv_name = REF.sub('0', str(inv_name))
             if inv_name == reference:
                 id_invoice = inv_id
                 break
-        if  id_invoice:
-            cursor.execute('SELECT l.id' \
-                           '  FROM account_move_line l, account_invoice i' \
-                           '    WHERE l.move_id = i.move_id AND l.reconcile_id is NULL  ' \
-                           '    AND i.id IN %s',(tuple([id_invoice]),))
+        if id_invoice:
+            cursor.execute('SELECT l.id'
+                           '  FROM account_move_line l, account_invoice i'
+                           '    WHERE l.move_id = i.move_id AND l.reconcile_id is NULL  '
+                           '    AND i.id IN %s', (tuple([id_invoice]),))
             inv_line = []
             for id_line in cursor.fetchall():
                 inv_line.append(id_line[0])
@@ -114,134 +115,129 @@ class BvrImporterWizard(TransientModel):
                 records.append(record)
             return records
 
+    def _create_voucher_from_record(self, cursor, uid, record,
+                                    statement, line_ids, context=None):
+        """Create a voucher with voucher line"""
+        context.update({'move_line_ids': line_ids})
+        voucher_obj = self.pool.get('account.voucher')
+        move_line_obj = self.pool.get('account.move.line')
+        voucher_line_obj = self.pool.get('account.voucher.line')
+        line = line_ids[0]
+        partner_id = line.partner_id and line.partner_id.id or False
+        if not partner_id:
+            return False
+        move_id = line.move_id.id
+        result = voucher_obj.onchange_partner_id(cursor, uid, [],
+                                                 partner_id,
+                                                 statement.journal_id.id,
+                                                 abs(record['amount']),
+                                                 statement.currency.id,
+                                                 'receipt',
+                                                 statement.date,
+                                                 context=context)
+        voucher_res = {'type': 'receipt',
+                       'name': record['reference'],
+                       'partner_id': partner_id,
+                       'journal_id': statement.journal_id.id,
+                       'account_id': result.get('account_id', statement.journal_id.default_credit_account_id.id),
+                       'company_id': statement.company_id.id,
+                       'currency_id': statement.currency.id,
+                       'date': record['date'] or time.strftime('%Y-%m-%d'),
+                       'amount': abs(record['amount']),
+                       'period_id': statement.period_id.id
+                       }
+        voucher_id = voucher_obj.create(cursor, uid, voucher_res, context=context)
 
+        voucher_line_dict = False
+        if result['value']['line_cr_ids']:
+            for line_dict in result['value']['line_cr_ids']:
+                move_line = move_line_obj.browse(cursor, uid, line_dict['move_line_id'], context)
+                if move_id == move_line.move_id.id:
+                    voucher_line_dict = line_dict
+        if voucher_line_dict:
+            voucher_line_dict.update({'voucher_id': voucher_id})
+            voucher_line_obj.create(cursor, uid, voucher_line_dict, context=context)
+        return voucher_id
 
-    def import_v11(self, cursor, user, ids, data, context=None):
+    def _get_account(self, cursor, uid, line_ids, record, context=None):
+        """Get account from move line or from property"""
+        property_obj = self.pool.get('ir.property')
+        move_line_obj = self.pool.get('account.move.line')
+        account_id = False
+        if line_ids:
+            for line in move_line_obj.browse(cursor, uid, line_ids, context=context):
+                return line.account_id.id
+        if not account_id and not line_ids:
+            name = "property_account_receivable"
+            if record['amount'] < 0:
+                name = "property_account_payable"
+            account_id = property_obj.get(cursor, uid, name, 'res.partner', context=context)
+            if not account_id:
+                raise except_osv(_('Error'),
+                                 _('The properties account payable account receivable are not set'))
+        return account_id
+
+    def import_v11(self, cursor, uid, ids, data, context=None):
         """Import v11 file and transfor it into statement lines"""
         if context is None: context = {}
+        module_obj = self.pool['ir.module.module']
+        voucher_enabled = module_obj.search(cursor, uid, [('name', '=', 'account_voucher'),
+                                                          ('state', '=', 'installed')])
         statement_line_obj = self.pool.get('account.bank.statement.line')
-        voucher_obj = self.pool.get('account.voucher')
-        voucher_line_obj = self.pool.get('account.voucher.line')
         move_line_obj = self.pool.get('account.move.line')
-        property_obj = self.pool.get('ir.property')
         attachment_obj = self.pool.get('ir.attachment')
         statement_obj = self.pool.get('account.bank.statement')
-        property_obj = self.pool.get('ir.property')
         file = data['form']['file']
         if not file:
             raise except_osv(_('UserError'),
-                                 _('Please select a file first!'))
+                             _('Please select a file first!'))
         statement_id = data['id']
         lines = base64.decodestring(file).split("\n")
-        records = self._parse_lines(cursor, user, lines ,context=context)
+        records = self._parse_lines(cursor, uid, lines, context=context)
         if context is None:
             context = {}
 
-        account_receivable = False
-        account_payable = False
-        statement = statement_obj.browse(cursor, user, statement_id, context=context)
+        statement = statement_obj.browse(cursor, uid, statement_id, context=context)
         for record in records:
             # Remove the 11 first char because it can be adherent number
             # TODO check if 11 is the right number
-            reference = record['reference'][11:-1].lstrip('0')
-            values = {'name': 'IN '+ reference,
+            reference = record['reference']
+            values = {'name': reference,
                       'date': record['date'],
                       'amount': record['amount'],
                       'ref': reference,
                       'type': (record['amount'] >= 0 and 'customer') or 'supplier',
                       'statement_id': statement_id,
                       }
-
-            line_ids = move_line_obj.search(cursor, user,
-                                            [('ref', 'like', reference),
+            line_ids = move_line_obj.search(cursor, uid,
+                                            [('ref', '=', reference),
                                              ('reconcile_id', '=', False),
                                              ('account_id.type', 'in', ['receivable', 'payable']),
-                                             ('journal_id.type','=','sale')],
-                                             order='date desc', context=context)
+                                             ('journal_id.type', '=', 'sale')],
+                                            order='date desc', context=context)
             if not line_ids:
-                line_ids = self._reconstruct_invoice_ref(cursor, user, reference, None)
-            partner_id = False
-            account_id = False
-            for line in move_line_obj.browse(cursor, user, line_ids, context=context):
-                account_receivable = line.partner_id.property_account_receivable.id
-                account_payable = line.partner_id.property_account_payable.id
-                partner_id = line.partner_id.id
-                move_id = line.move_id.id
-                if record['amount'] >= 0:
-                    if round(record['amount'] - line.debit, 2) < 0.01:
-                        account_id = line.account_id.id
-                        break
-                else:
-                    if round(line.credit + record['amount'], 2) < 0.01:
-                        account_id = line.account_id.id
-                        break
-            ## If we found a partner_id, we create a voucher, if not just create move_line
-            if partner_id :
-                context.update({'move_line_ids': line_ids})
-                result = voucher_obj.onchange_partner_id(cursor, user, [], partner_id, journal_id=statement.journal_id.id, amount=abs(record['amount']), currency_id= statement.currency.id, ttype='receipt', date=statement.date ,context=context)
-                voucher_res = { 'type': 'receipt' ,
-
-                     'name': values['name'],
-                     'partner_id': partner_id,
-                     'journal_id': statement.journal_id.id,
-                     'account_id': result.get('account_id', statement.journal_id.default_credit_account_id.id),
-                     'company_id': statement.company_id.id,
-                     'currency_id': statement.currency.id,
-                     'date': record['date'] or time.strftime('%Y-%m-%d'),
-                     'amount': abs(record['amount']),
-                    'period_id': statement.period_id.id
-                     }
-                voucher_id = voucher_obj.create(cursor, user, voucher_res, context=context)
-                values['voucher_id'] = voucher_id
-                voucher_line_dict =  False
-                if result['value']['line_cr_ids']:
-                     for line_dict in result['value']['line_cr_ids']:
-                         move_line = move_line_obj.browse(cursor, user, line_dict['move_line_id'], context)
-                         if move_id == move_line.move_id.id:
-                             voucher_line_dict = line_dict
-                if voucher_line_dict:
-                     voucher_line_dict.update({'voucher_id':voucher_id})
-                     voucher_line_obj.create(cursor, user, voucher_line_dict, context=context)
-
-            if not account_id:
-                if record['amount'] >= 0:
-                    account_id = account_receivable
-                else:
-                    account_id = account_payable
-            ##If line not linked to an invoice we create a line not linked to a voucher
-            if not account_id and not line_ids:
-                name = "property_account_receivable"
-                if record['amount'] < 0:
-                    name = "property_account_payable"
-                prop = property_obj.search(
-                            cursor,
-                            user,
-                            [
-                                ('name','=',name),
-                                ('company_id','=',statement.company_id.id),
-                                ('res_id', '=', False)
-                            ]
-                )
-                if prop:
-                    value = property_obj.read(cursor, user, prop[0], ['value_reference']).get('value_reference', False)
-                    if value :
-                        account_id = int(value.split(',')[1])
-                else :
-                    raise except_osv(_('Error'),
-                                     _('The properties account payable account receivable are not set'))
-            if not account_id and line_ids:
-                raise except_osv(_('Error'),
-                                 _('The properties account payable account receivable are not set'))
+                line_ids = self._reconstruct_invoice_ref(cursor, uid, reference, None)
+            if line_ids and voucher_enabled:
+                values['voucher_id'] = self._create_voucher_from_record(cursor, uid, record,
+                                                                        statement, line_ids,
+                                                                        context=context)
+            account_id = self._get_account(cursor, uid, line_ids,
+                                           record, context=context)
             values['account_id'] = account_id
+            if line_ids:
+                line = move_line_obj.browse(cursor, uid, line_ids[0])
+                partner_id = line.partner_id.id
+                values['name'] = line.invoice and (_('Inv. no ') + line.invoice.number) or values['name']
             values['partner_id'] = partner_id
-            statement_line_obj.create(cursor, user, values, context=context)
-        attachment_obj.create(cursor, user, {
-            'name': 'BVR %s'%time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
-            'datas': file,
-            'datas_fname': 'BVR %s.txt' % time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
-            'res_model': 'account.bank.statement',
-            'res_id': statement_id,
-            }, context=context)
+            statement_line_obj.create(cursor, uid, values, context=context)
+        attachment_obj.create(cursor, uid,
+                              {'name': 'BVR %s' % time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
+                               'datas': file,
+                               'datas_fname': 'BVR %s.txt' % time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
+                               'res_model': 'account.bank.statement',
+                               'res_id': statement_id,
+                               },
+                              context=context)
 
         return {}
 
@@ -257,7 +253,7 @@ class BvrImporterWizard(TransientModel):
         res = self.read(cursor, uid, ids[0], ['file'])
         if res:
             data['form']['file'] = res['file']
-        self.import_v11(self, cursor, uid, ids, data, context=context)
+        self.import_v11(cursor, uid, ids, data, context=context)
         return {}
 
 
