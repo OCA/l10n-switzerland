@@ -122,7 +122,7 @@ class BvrImporterWizard(TransientModel):
         voucher_obj = self.pool.get('account.voucher')
         move_line_obj = self.pool.get('account.move.line')
         voucher_line_obj = self.pool.get('account.voucher.line')
-        line = line_ids[0]
+        line = move_line_obj.browse(cursor, uid, line_ids[0])
         partner_id = line.partner_id and line.partner_id.id or False
         if not partner_id:
             return False
