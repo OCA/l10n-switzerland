@@ -27,6 +27,9 @@ This addon allows you to print the ESR/BVR report.
 It will also allows you to reconcile from V11 filea provided by financial
 institutes.
 
+If voucher is installed importing V11 files will generate a voucher
+if possible in statement lines.
+
 """,
  'version': '1.0',
  'author': 'Camptocamp',
