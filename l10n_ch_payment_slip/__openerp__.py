@@ -21,7 +21,7 @@
 
 {'name': 'Switzerland - Payment Slip',
  'description':  """
-Swiss localization Payment slip Known as ESR/BVR:
+Swiss localization Payment slip known as ESR/BVR:
 =================================================
 This addon allows you to print the ESR/BVR report.
 It will also allows you to reconcile from V11 filea provided by financial
