@@ -18,17 +18,17 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from openerp.osv.orm import Model
 
-from openerp.osv.orm import Model, fields
 
 class PaymentOrder(Model):
     _inherit = 'payment.order'
 
-    def get_wizard(self,mode):
+    def get_wizard(self, mode):
         if mode == 'dta':
-            return 'l10n_ch', 'action_dta_create'
+            return 'l10n_ch_dta', 'action_dta_create'
 
-        return super(PaymentOrder,self).get_wizard(mode)
+        return super(PaymentOrder, self).get_wizard(mode)
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

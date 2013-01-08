@@ -41,7 +41,7 @@ if possible in statement lines.
           "report/report_webkit_html_view.xml",
           "wizard/bvr_import_view.xml"],
  'demo': [],
- 'test': [],
+ 'test': [], # To be ported or migrate to unit tests or scenarios
  'auto_install': False,
  'installable': True,
  'images': []
