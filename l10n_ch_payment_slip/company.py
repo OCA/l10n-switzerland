@@ -47,7 +47,7 @@ class ResCompany(Model):
     }
 
     _defaults = {
-        'bvr_delta_vert': 231,
+        'bvr_delta_vert': -5,
         'bvr_scan_line_vert': 231,
         'bvr_scan_line_horz': 62,
         'bvr_scan_line_font_size': 11,
