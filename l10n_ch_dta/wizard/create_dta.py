@@ -246,7 +246,7 @@ class record_gt826(postal_record):
             raise except_osv(_('Error'),
                              _('You must provide a BVR number\n'
                                'for the bank account: %s'
-                               'on line: %s') % (self.pline.bank_id.name, self.pline.name))
+                               'on line: %s') % (self.pline.bank_id.acc_number, self.pline.name))
 
 
 class record_gt827(postal_record):
@@ -259,17 +259,17 @@ class record_gt827(postal_record):
             raise except_osv(_('Error'),
                              _('You must provide a bank number \n'
                                'for the partner bank: %s\n on line: %s') %
-                               (self.pline.bank_id.name, self.pline.name))
+                               (self.pline.bank_id.acc_number, self.pline.name))
         if not  self.global_values['partner_bank_clearing']:
             raise except_osv(_('Error'),
                              _('You must provide a Clearing Number\n'
                                'for the partner bank: %s\n on line %s') %
-                               (self.pline.bank_id.name, self.pline.name))
+                               (self.pline.bank_id.acc_number, self.pline.name))
         self.global_values['partner_bank_number'] = '/C/' + self.global_values['partner_bank_number']
         if not self.global_values['partner_post_number']:
             raise except_osv(_('Error'),
                              _('You must provide a post number \n for the partner bank: %s\n'
-                               'on line: %s') % (self.pline.bank_id.name, self.pline.name))
+                               'on line: %s') % (self.pline.bank_id.acc_number, self.pline.name))
         self.global_values['partner_bank_clearing'] = ''
         self.global_values['partner_bank_number'] = '/C/' + self.global_values['partner_post_number']
 
@@ -346,7 +346,7 @@ class record_gt836(record):
         if not self.global_values['partner_bank_iban']:
             raise except_osv(_('Error'),
                              _('No IBAN defined \n for the bank account: %s\n'
-                               'on line: %s') % (self.pline.bank_id.name, self.pline.name))
+                               'on line: %s') % (self.pline.bank_id.acc_number, self.pline.name))
         if self.global_values['partner_bank_code']: # bank code is swift (BIC address)
             self.global_values['option_id_bank']= 'A'
             self.global_values['partner_bank_ident']= self.global_values['partner_bank_code']
@@ -360,7 +360,7 @@ class record_gt836(record):
         else:
             raise except_osv(_('Error'),
                              _('You must provide the bank city '
-                               'or the bic code for the partner bank: \n %s\n on line: %s') % (self.pline.bank_id.name, self.pline.name))
+                               'or the bic code for the partner bank: \n %s\n on line: %s') % (self.pline.bank_id.acc_number, self.pline.name))
 
 
     def init_local_context(self):
@@ -515,20 +515,16 @@ class DTAFileGenerator(TransientModel):
         return elec_context
 
     def _set_bank_data(self, cr, uid, data, pline, elec_context, seq, context=None):
-        if pline.bank_id.bank:
-            elec_context['partner_bank_city'] = pline.bank_id.bank.city or False
-            elec_context['partner_bank_street'] = pline.bank_id.bank.street or ''
-            elec_context['partner_bank_zip'] = pline.bank_id.bank.zip or ''
-            elec_context['partner_bank_country'] = pline.bank_id.bank.country and \
-                                                   pline.bank_id.bank.country.name or ''
+        elec_context['partner_bank_city'] = pline.bank_id.bank.city or False
+        elec_context['partner_bank_street'] = pline.bank_id.bank.street or ''
+        elec_context['partner_bank_zip'] = pline.bank_id.bank.zip or ''
+        elec_context['partner_bank_country'] = pline.bank_id.bank.country_id and \
+                                                   pline.bank_id.bank.country_id.name or ''
 
-        elec_context['partner_bank_code'] = pline.bank_id.bank.bic
+        elec_context['partner_bank_code'] = pline.bank_id.bank_bic
         elec_context['reference'] = pline.move_line_id.ref
         # Add support for owner of the account if exists..
-        if pline.bank_id.owner_name:
-            elec_context['partner_name'] = pline.bank_id.owner_name
-        else:
-            elec_context['partner_name'] = pline.partner_id and pline.partner_id.name or ''
+        elec_context['partner_name'] = pline.partner_id and pline.partner_id.name or ''
         if pline.partner_id:
             part = pline.partner_id
             elec_context['partner_street'] = part.street
@@ -555,7 +551,7 @@ class DTAFileGenerator(TransientModel):
         elec_context['amount_to_pay']= str(pline.amount_currency).replace('.', ',')
         elec_context['number'] = pline.name
         elec_context['currency'] = pline.currency.name
-        elec_context['partner_bank_name'] = pline.bank_id.bank.name or False
+        elec_context['partner_bank_name'] = pline.bank_id.bank_name or False
         elec_context['partner_bank_clearing'] = pline.bank_id.bank.clearing or False
         if not elec_context['partner_bank_name']:
             raise except_osv(_('Error'),
