@@ -11,10 +11,11 @@
              text-align:right;
              font-family:bvrocrb;
              font-size:${str(company.bvr_scan_line_font_size or '0.0').replace(',','.')}pt;
-             position:absolute;top:${str(company.bvr_scan_line_vert or '0.0').replace(',','.')}mm;
+             position:absolute;
+             top:${str(company.bvr_scan_line_vert or '0.0').replace(',','.')}mm;
              left:${str(company.bvr_scan_line_horz or '0.0').replace(',','.')}mm;
              z-index:4;
-             letter-spacing:str(company.bvr_scan_line_letter_spacing or '0.0').replace(',','.')
+             letter-spacing:${str(company.bvr_scan_line_letter_spacing or '0.0').replace(',','.')}
            }
 
            .slip_address_b {
