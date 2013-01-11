@@ -204,7 +204,7 @@
        </div>
        %if inv.partner_bank_id and inv.partner_bank_id.print_bank and inv.partner_bank_id.bank:
          <div id="slip_bank_add_acc" class="slip_bank_add_acc">
-           ${inv.partner_bank_id.bank.name or ''} <br/>
+           ${inv.partner_bank_id.bank_name or ''} <br/>
            ${inv.partner_bank_id.bank and inv.partner_bank_id.bank.zip or ''}&nbsp;${inv.partner_bank_id.bank and inv.partner_bank_id.bank.city or ''}
          </div>
        %endif
@@ -254,7 +254,7 @@
 
        %if inv.partner_bank_id and inv.partner_bank_id.print_bank and inv.partner_bank_id.bank:
          <div id="slip2_bank_add_acc" class="slip2_bank_add_acc">
-           ${inv.partner_bank_id.bank.name or ''} <br/>
+           ${inv.partner_bank_id.bank_name or ''} <br/>
            ${inv.partner_bank_id.bank and inv.partner_bank_id.bank.zip or ''}&nbsp;${inv.partner_bank_id.bank and inv.partner_bank_id.bank.city or ''}
          </div>
        %endif
