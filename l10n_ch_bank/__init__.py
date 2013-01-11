@@ -1,11 +1,4 @@
 # -*- encoding: utf-8 -*-
-#
-#  __init__.py
-#  
-#
-#  Created by Nicolas Bessi
-#
-#  Copyright (c) 2010 CamptoCamp. All rights reserved.
 ##############################################################################
 #
 # WARNING: This program as such is intended to be used by professional
@@ -30,3 +23,6 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #
 ##############################################################################
+#  Created by Nicolas Bessi
+#
+#  Copyright (c) 2012 CamptoCamp. All rights reserved.
