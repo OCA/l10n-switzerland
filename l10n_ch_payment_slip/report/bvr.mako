@@ -25,13 +25,13 @@
 
            }
 
-          .dest_address_bvr {
+         .dest_address_bvr {
            position:absolute;
-           top:5.5cm;
-           margin-left:60%;
+           top:${str(company.bvr_add_vert or '0.0').replace(',','.')}mm;
+           left:${str(company.bvr_add_horz or '0.0').replace(',','.')}mm;
            font-size:12;
           }
-
+          
          .slip_bank_acc {
            font-family:Helvetica;
            font-size:8pt;
@@ -169,7 +169,7 @@
        %for inv in objects :
        <% setLang(inv.partner_id.lang) %>
        <!--adresses + info block -->
-        <table class="dest_address_bvr"  style="position:absolute;top:6mm;left:15mm;width:230px;word-wrap:break-word">
+        <table class="dest_address_bvr"  style="position:absolute;width:230px;word-wrap:break-word">
 
                %if inv.partner_id.title:
                <tr><td>${inv.partner_id.title.name}</tr></td>
