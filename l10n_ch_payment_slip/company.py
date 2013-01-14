@@ -38,6 +38,12 @@ class ResCompany(Model):
 
         'bvr_scan_line_horz': fields.float('BVR horiz. position for scan line(mm)',
             help='Horiz. position in mm for scan line'),
+            
+        'bvr_add_vert': fields.float('BVR vert. position for address (mm)',
+            help='Vert. position in mm for address'),
+
+        'bvr_add_horz': fields.float('BVR horiz. position address (mm)',
+            help='Horiz. position in mm for address'),
 
         'bvr_scan_line_font_size': fields.float('BVR scan line font size (pt)'),
 
@@ -52,6 +58,8 @@ class ResCompany(Model):
         'bvr_scan_line_horz': 62,
         'bvr_scan_line_font_size': 11,
         'bvr_scan_line_letter_spacing': 0,
+        'bvr_add_vert': 6,
+        'bvr_add_horz': 60,
     }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
