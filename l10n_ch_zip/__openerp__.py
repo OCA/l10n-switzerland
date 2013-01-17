@@ -29,7 +29,7 @@
 ##############################################################################
 {'name': 'Swiss ZIP completion list',
  'version': '1.0',
- 'depends': ['better_zip'],
+ 'depends': ['base', 'better_zip'],
  'author': 'Camptocamp',
  'description': """better zip data for Switzerland""",
  'website': 'http://www.camptocamp.com',
