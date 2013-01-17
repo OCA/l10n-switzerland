@@ -2,6 +2,7 @@
 ##############################################################################
 #
 #    Author Nicolas Bessi. Copyright Camptocamp SA
+#    Contributor: WinGo SA
 #
 # WARNING: This program as such is intended to be used by professional
 # programmers who take the whole responsability of assessing all potential
@@ -26,21 +27,13 @@
 #
 #
 ##############################################################################
-{
-    'name' : 'l10_ch_zip',
-    'description' : 'Better zip management data for CH',
-    'version' : '0.1',
-    'depends' : [
-                 'better_zip',
-                 ],
-    'author' : 'Camptocamp',
-    'description': """better zip data for Switzerland""",
-    'website': 'http://www.camptocamp.com',
-    'init_xml': [],
-    'update_xml': [
-                    'l10n_ch_better_zip.xml',
-                   ],
-    'demo_xml': [],
-    'installable': True,
-    'active': False,
-}
+{'name': 'Swiss ZIP completion list',
+ 'version': '1.0',
+ 'depends': ['better_zip'],
+ 'author': 'Camptocamp',
+ 'description': """better zip data for Switzerland""",
+ 'website': 'http://www.camptocamp.com',
+ 'data': ['l10n_ch_better_zip.xml'],
+ 'demo_xml': [],
+ 'installable': True,
+ 'active': False}

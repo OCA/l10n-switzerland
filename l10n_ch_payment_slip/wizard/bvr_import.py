@@ -171,7 +171,7 @@ class BvrImporterWizard(TransientModel):
             name = "property_account_receivable"
             if record['amount'] < 0:
                 name = "property_account_payable"
-            account_id = property_obj.get(cursor, uid, name, 'res.partner', context=context)
+            account_id = property_obj.get(cursor, uid, name, 'res.partner', context=context).id
             if not account_id:
                 raise except_osv(_('Error'),
                                  _('The properties account payable account receivable are not set'))
@@ -228,7 +228,7 @@ class BvrImporterWizard(TransientModel):
                 line = move_line_obj.browse(cursor, uid, line_ids[0])
                 partner_id = line.partner_id.id
                 values['name'] = line.invoice and (_('Inv. no ') + line.invoice.number) or values['name']
-            values['partner_id'] = partner_id
+                values['partner_id'] = partner_id
             statement_line_obj.create(cursor, uid, values, context=context)
         attachment_obj.create(cursor, uid,
                               {'name': 'BVR %s' % time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
