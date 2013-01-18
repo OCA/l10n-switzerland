@@ -1,5 +1,5 @@
 <openerp>
-    <data>
+    <data noupdate="1">
         <record id="state_DE" model="res.country.state">
             <field name="name">DE</field>
             <field name="code">DE</field>
