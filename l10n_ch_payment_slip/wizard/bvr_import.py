@@ -183,6 +183,14 @@ class BvrImporterWizard(TransientModel):
         module_obj = self.pool['ir.module.module']
         voucher_enabled = module_obj.search(cursor, uid, [('name', '=', 'account_voucher'),
                                                           ('state', '=', 'installed')])
+        # if module installed we check ir.config_parameter to force disable of voucher
+        if voucher_enabled:
+            para = self.pool['ir.config_parameter'].get_param(cursor,
+                                                              uid,
+                                                              'l10n_ch_payment_slip_voucher_disable',
+                                                              default = '0')
+            if para.lower() not in ['0', 'false']: # if voucher is disabled
+                voucher_enabled = False
         statement_line_obj = self.pool.get('account.bank.statement.line')
         move_line_obj = self.pool.get('account.move.line')
         attachment_obj = self.pool.get('ir.attachment')
