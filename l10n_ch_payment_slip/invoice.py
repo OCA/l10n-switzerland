@@ -83,13 +83,35 @@ class AccountInvoice(Model):
     def action_number(self, cursor, uid, ids, context=None):
         res = super(AccountInvoice, self).action_number(cursor, uid, ids, context=context)
         for inv in self.browse(cursor, uid, ids, context=context):
-            inv.write({'reference': inv.get_bvr_ref()})
+            ref = inv.get_bvr_ref()
+            inv.write({'reference': ref})
+            move_id = inv.move_id
+            if move_id:
+                cursor.execute('UPDATE account_move SET ref=%s ' \
+                               'WHERE id=%s',
+                               (ref, move_id.id))
+                print cursor.mogrify('UPDATE account_move SET ref=%s ' \
+                               'WHERE id=%s',
+                               (ref, move_id.id))
+                cursor.execute('UPDATE account_move_line SET ref=%s ' \
+                                'WHERE move_id=%s',
+                                (ref, move_id.id))
+                print cursor.mogrify('UPDATE account_move_line SET ref=%s ' \
+                                'WHERE move_id=%s',
+                                (ref, move_id.id))
+                cursor.execute('UPDATE account_analytic_line SET ref=%s ' \
+                                'FROM account_move_line ' \
+                                'WHERE account_move_line.move_id = %s ' \
+                                'AND account_analytic_line.move_id = account_move_line.id',
+                                (ref, move_id.id))
         return res
 
     def copy(self, cursor, uid, inv_id, default=None, context=None):
         default = default or {}
         default.update({'reference' : False})
         return super(AccountInvoice, self).copy(cursor, uid, inv_id, default, context)
+
+
 
 
 class AccountTaxCode(Model):
