@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <!-- res.bank base form-->    
+        <!-- res.bank base form-->
         <record model="ir.ui.view" id="view_res_bank_form">
             <field name="name">res.bank.form</field>
             <field name="model">res.bank</field>
@@ -16,7 +16,7 @@
                 </field>
             </field>
         </record>
-        
+
         <!-- res.bank base tree-->
         <record model="ir.ui.view" id="l10nch_view_res_bank_tree">
             <field name="name">res.bank.tree</field>
@@ -30,10 +30,10 @@
                 </field>
             </field>
         </record>
-        
+
         <!-- res.partner.bank in res partner form-->
         <!-- Partner -> Bank Details -->
-        
+
         <record model="ir.ui.view" id="l10nch_view_res_partner_bank_hide_f1">
             <field name="name">res.partner_bank.form.hide.f1</field>
             <field name="model">res.partner</field>
@@ -54,7 +54,7 @@
                 </field>
             </field>
         </record>
-        
+
         <record model="ir.ui.view" id="l10nch_view_res_partner_bank_add_groups">
             <field name="name">res.partner_bank.form.hide.f2</field>
             <field name="model">res.partner</field>
@@ -102,7 +102,7 @@
             <field name="type">form</field>
             <field name="inherit_id" ref="base.view_partner_bank_form"/>
             <field name="arch" type="xml">
-                <field name="bank" position="replace"> 
+                <field name="bank" position="replace">
                 </field>
             </field>
         </record>
@@ -115,7 +115,7 @@
             <field name="arch" type="xml">
                 <field name="state" position="after">
                     <newline/>
-                    
+
                     <separator colspan="4" string="Account infos"/>
                         <newline/>
                     <group string="Bank account info" colspan="4" attrs="{'invisible': [('state','in', ['bvpost','bvrpost'])]}" >
@@ -144,7 +144,7 @@
                     <field name="bank" />
                 </field>
             </field>
-        </record>        
+        </record>
 
         <!-- res.partner form bank list-->
         <!-- Adding Type and bank name -->
@@ -156,11 +156,11 @@
             <field name="arch" type="xml">
                 <xpath expr="/form/notebook/page/field[@name='bank_ids']/tree/field[@name='acc_number']" position="before">
                     <field name="state" />
-                    <field name="bank" /> 
+                    <field name="bank" />
                 </xpath>
             </field>
         </record>
-        
+
         <!-- res.partner form bank list-->
         <!-- Adding Type and bank name -->
         <record id="l10nch_view_partner_bank_invoice_tree" model="ir.ui.view">
@@ -172,7 +172,7 @@
                 <field name="acc_number" position="before">
                     <field name="state" />
                     <field name="bank" />
-                </field> 
+                </field>
             </field>
         </record>
 
