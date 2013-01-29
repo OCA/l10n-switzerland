@@ -21,14 +21,13 @@ from openerp.osv.orm import Model
 from openerp.tools import mod10r
 
 
-
 class AccountInvoice(Model):
 
     _inherit = "account.invoice"
 
     def onchange_partner_id(self, cursor, uid, ids, invoice_type, partner_id,
-                        date_invoice=False, payment_term=False,
-                        partner_bank_id=False, company_id=False):
+                            date_invoice=False, payment_term=False,
+                            partner_bank_id=False, company_id=False):
         """ Function that is call when the partner of the invoice is changed
         it will retrieve and set the good bank partner bank"""
         #context not define in signature of function in account module
@@ -47,7 +46,7 @@ class AccountInvoice(Model):
                 user = self.pool.get('res.users').browse(cursor, uid, uid, context)
                 bank_ids = user.company_id.partner_id.bank_ids
                 if bank_ids:
-                    res['value']['partner_bank_id'] = bank_ids[0]
+                    res['value']['partner_bank_id'] = bank_ids[0].id
 
         if partner_bank_id != bank_id:
             to_update = self.onchange_partner_bank(cursor, uid, ids, bank_id)
@@ -90,13 +89,12 @@ class AccountInvoice(Model):
                 # the reference 052550152684006 do not match modulo 10
                 #
                 if mod10r(invoice.reference[:-1]) != invoice.reference and \
-                    len(invoice.reference) == 15:
+                        len(invoice.reference) == 15:
                     return True
                 #
                 if mod10r(invoice.reference[:-1]) != invoice.reference:
                     return False
         return True
-
 
     _constraints = [
         (_check_bvr, 'Error: Invalid Bvr Number (wrong checksum).',
