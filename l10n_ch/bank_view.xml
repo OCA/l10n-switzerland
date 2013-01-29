@@ -141,7 +141,7 @@
                         </group>
                     </group>
                     <newline/>
-                    <field name="bank" />
+                    <field name="bank" on_change="onchange_bank_id(bank)" groups="base.group_extended"/>
                 </field>
             </field>
         </record>
@@ -171,7 +171,7 @@
             <field name="arch" type="xml">
                 <field name="acc_number" position="before">
                     <field name="state" />
-                    <field name="bank" />
+                    <field name="bank" on_change="onchange_bank_id(bank)" groups="base.group_extended"/>
                 </field>
             </field>
         </record>
