@@ -83,6 +83,8 @@ class AccountInvoice(Model):
     def action_number(self, cursor, uid, ids, context=None):
         res = super(AccountInvoice, self).action_number(cursor, uid, ids, context=context)
         for inv in self.browse(cursor, uid, ids, context=context):
+            if inv.type != 'out_invoice':
+                continue
             ref = inv.get_bvr_ref()
             inv.write({'reference': ref})
             move_id = inv.move_id
