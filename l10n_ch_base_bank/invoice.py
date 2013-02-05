@@ -113,8 +113,7 @@ class AccountInvoice(Model):
         if context is None:
             context = {}
         # In his great wisdom OpnERP allows type to be implicitely set in context
-        # with different key...
-        type_defined = vals.get('invoice_type') or context.get('type') or False
+        type_defined = vals.get('type') or context.get('type') or False
         if type_defined == 'out_invoice' and not vals.get('partner_bank_id'):
             user = self.pool.get('res.users').browse(cursor, uid, uid, context=context)
             bank_ids = user.company_id.partner_id.bank_ids
