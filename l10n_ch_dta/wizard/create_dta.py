@@ -518,8 +518,8 @@ class DTAFileGenerator(TransientModel):
         elec_context['partner_bank_city'] = pline.bank_id.bank.city or False
         elec_context['partner_bank_street'] = pline.bank_id.bank.street or ''
         elec_context['partner_bank_zip'] = pline.bank_id.bank.zip or ''
-        elec_context['partner_bank_country'] = pline.bank_id.bank.country_id and \
-                                                   pline.bank_id.bank.country_id.name or ''
+        elec_context['partner_bank_country'] = pline.bank_id.bank.country and \
+                                                   pline.bank_id.bank.country.name or ''
 
         elec_context['partner_bank_code'] = pline.bank_id.bank_bic
         elec_context['reference'] = pline.move_line_id.ref
