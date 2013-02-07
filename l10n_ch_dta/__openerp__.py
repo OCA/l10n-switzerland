@@ -30,7 +30,8 @@ Generate a DTA file for swiss banking system from payment order
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
  'depends': ['base', 'account_payment', 'l10n_ch_base_bank'],
- 'data': ["wizard/create_dta_view.xml"],
+ 'data': ["wizard/create_dta_view.xml",
+          "payent_view.xml"],
  'demo': ["demo/dta_demo.xml"],
  'test': [], # To be ported or migrate to unit tests or scenarios
  'auto_install': False,
