@@ -18,17 +18,15 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv.orm import Model
+from openerp.osv import orm, fields
 
 
-class PaymentOrder(Model):
+class PaymentOrder(orm.Model):
     _inherit = 'payment.order'
 
-    def get_wizard(self, mode):
-        if mode == 'dta':
-            return 'l10n_ch_dta', 'action_dta_create'
-
-        return super(PaymentOrder, self).get_wizard(mode)
-
+    _columns = {'dta_ids': fields.one2many('ir.attachment',
+                                           'res_id',
+                                           domain=[('res_model', '=', 'payment.order'),
+                                                   ('name', 'like', 'DTA')])}
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -479,8 +479,6 @@ def _is_9_pos_bvr_adherent(adherent_num):
 class DTAFileGenerator(TransientModel):
     _name = "create.dta.wizard"
 
-    _columns = {'dta_file': fields.binary('DTA File', readonly=True)}
-
     def _initialize_elec_context(self, cr, uid, data, context=None):
         elec_context = {}
         payment_obj = self.pool['payment.order']
@@ -622,17 +620,13 @@ class DTAFileGenerator(TransientModel):
         dta_data = _u2a(dta)
         dta_data = base64.encodestring(dta)
         payment_obj.set_done(cr, uid, [data['id']], context)
-        attachment_obj.create(cr, uid, {
-            'name': 'DTA%s'%time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
-            'datas': dta_data,
-            'datas_fname': 'DTA%s.txt'%time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
-            'res_model': 'payment.order',
-            'res_id': data['id'],
-            }, context=context)
+        dta_dict =  {'name': 'DTA%s'%time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
+                     'datas': dta_data,
+                     'datas_fname': 'DTA%s.txt'%time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
+                     'res_model': 'payment.order',
+                     'res_id': data['id']}
+        dta_id = attachment_obj.create(cr, uid, dta_dict, context=context)
         return dta_data
-
-
-
 
     def create_dta(self, cr, uid, ids, context=None):
         if not context:
@@ -649,7 +643,6 @@ class DTAFileGenerator(TransientModel):
         data['ids'] = active_ids
         data['id'] = active_id
         dta_file = self._create_dta(cr, uid, data, context)
-        current.write({'dta_file': dta_file})
-        return True
+        return dta_file
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

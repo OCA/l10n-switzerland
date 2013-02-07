@@ -1,0 +1,16 @@
+<openerp>
+  <data>
+    <record id="add_dta_files" model="ir.ui.view">
+      <field name="name">Add DTA files</field>
+      <field name="model">payment.order</field>
+      <field name="inherit_id" ref="account_payment.view_payment_order_form" />
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <field name="line_ids" position="before">
+          <label string="DTA"/>
+          <field name="dta_ids" colspan="4"/>
+        </field>
+      </field>
+    </record>
+  </data>
+</openerp>
