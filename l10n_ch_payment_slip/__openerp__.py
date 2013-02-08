@@ -37,6 +37,7 @@ if possible in statement lines.
  'website': 'http://www.camptocamp.com',
  'depends': ['base', 'report_webkit', 'l10n_ch_base_bank'],
  'data': ["company_view.xml",
+          "bank_view.xml",
           "account_invoice_view.xml",
           "report/report_webkit_html_view.xml",
           "wizard/bvr_import_view.xml",
