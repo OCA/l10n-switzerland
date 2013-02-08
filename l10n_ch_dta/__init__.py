@@ -19,3 +19,4 @@
 ##############################################################################
 from . import payment
 from . import wizard
+from . import bank
