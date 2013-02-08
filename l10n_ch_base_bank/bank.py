@@ -38,22 +38,16 @@ class Bank(Model):
 
 class ResPartnerBank(Model):
     """
-    Inherit res.partner.bank class in order to add swiss specific fields
-    such as:
-     - BVR data
-     - BVR print options for company accounts
+    Inherit res.partner.bank class in order to add swiss specific fields and state controls
     """
     _inherit = "res.partner.bank"
 
     _columns = {
         'name': fields.char('Description', size=128, required=True),
-        'bvr_adherent_num': fields.char('Bank BVR adherent number', size=11, help="Your Bank adherent number to be printed in references of your BVR. This is not a postal account number."),
-        'dta_code': fields.char('DTA code', size=5),
-        'print_bank': fields.boolean('Print Bank on BVR'),
-        'print_account': fields.boolean('Print Account Number on BVR'),
-        'print_partner': fields.boolean('Print Partner Address on BVR'),
+        'bvr_adherent_num': fields.char('Bank BVR adherent number', size=11, 
+                                        help=("Your Bank adherent number to be printed in references of your BVR."
+                                              "This is not a postal account number.")),
         'acc_number': fields.char('Account/IBAN Number', size=64, required=True),
-        'my_bank': fields.boolean('Use my account to print BVR ?', help="Check to print BVR invoices"),
     }
 
 
