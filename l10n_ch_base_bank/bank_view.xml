@@ -1,25 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
   <data>
-    <record model="ir.ui.view" id="l10nch_view_res_partner_bank_from_invoice">
-      <field name="name">res.partner_bank.form.l10n_ch</field>
-      <field name="model">res.partner.bank</field>
-      <field name="inherit_id" ref="base.view_partner_bank_form"/>
-      <field name="arch" type="xml">
-        <group name="bank" position="after">
-
-          <group string="BVR options" attrs="{'invisible': ['|', ('company_id', '=', False), ('state','not in',['bvr','bv'])]}" >
-            <field name="bvr_adherent_num" attrs="{'invisible': [('state','!=','bvr')]}"/>
-            <field name="print_bank"/>
-            <field name="print_account"/>
-          </group>
-          <group string="DTA options" attrs="{'invisible': ['|', ('company_id', '=', False), ('state','in',['bv','bvr'])]}">
-            <field name="dta_code"/>
-          </group>
-        </group>
-      </field>
-    </record>
-
     <record model="ir.ui.view" id="invoice_supplier_form6">
       <field name="name">account.invoice.supplier.form.inherit</field>
       <field name="model">account.invoice</field>
