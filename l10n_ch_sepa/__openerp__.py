@@ -62,7 +62,7 @@
             "test/pain001_ch.yml",
     ],
     "demo_xml": [],
-    "installable": True,
+    "installable": False,
     "active": False,
 #    'certificate': 'certificate',
 }
