@@ -5,7 +5,7 @@
 #    Financial contributors: Hasa SA, Open Net SA,
 #                            Prisme Solutions Informatique SA, Quod SA
 #
-#    Translation contributors:** brain-tec AG, Agile Business Group
+#    Translation contributors: brain-tec AG, Agile Business Group
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
