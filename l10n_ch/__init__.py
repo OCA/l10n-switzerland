@@ -2,7 +2,8 @@
 ##############################################################################
 #
 #    Author: Nicolas Bessi. Copyright Camptocamp SA
-#    Donors: Hasa Sàrl, Open Net Sàrl and Prisme Solutions Informatique SA
+#    Financial contributors: Hasa SA, Open Net SA,
+#                            Prisme Solutions Informatique SA, Quod SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as

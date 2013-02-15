@@ -31,7 +31,9 @@
  'version': '1.0',
  'depends': ['base', 'better_zip'],
  'author': 'Camptocamp',
- 'description': """better zip data for Switzerland""",
+ 'description': """
+better zip data for Switzerland
+###############################""",
  'website': 'http://www.camptocamp.com',
  'data': ['l10n_ch_better_zip.xml'],
  'demo_xml': [],
