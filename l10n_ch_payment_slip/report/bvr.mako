@@ -226,9 +226,9 @@
        <div id="slip_comp" class="slip_comp">
         <table class="slip_add">
             <tr><td>${user.company_id.partner_id.name}</td></tr>
-            <tr><td>${user.company_id.partner_id.address[0].street}</td></tr>
+            <tr><td>${user.company_id.partner_id.street}</td></tr>
             <tr><td></td></tr>
-            <tr><td>${user.company_id.partner_id.address[0].city} ${user.company_id.partner_id.address[0].zip}</td></tr>
+            <tr><td>${user.company_id.partner_id.city} ${user.company_id.partner_id.zip}</td></tr>
         </table>
       </div>
       %endif
@@ -253,9 +253,9 @@
        <div id="slip2_comp" class="slip2_comp">
            <table class="slip_add">
                <tr><td>${user.company_id.partner_id.name}</td></tr>
-               <tr><td>${user.company_id.partner_id.address[0].street}</td></tr>
+               <tr><td>${user.company_id.partner_id.street}</td></tr>
                <tr><td></td></tr>
-               <tr><td>${user.company_id.partner_id.address[0].city} ${user.company_id.partner_id.address[0].zip}</td></tr>
+               <tr><td>${user.company_id.partner_id.city} ${user.company_id.partner_id.zip}</td></tr>
            </table>
        </div>
        %endif
