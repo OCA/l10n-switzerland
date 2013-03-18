@@ -132,7 +132,7 @@
             <field name="parent_id" ref="vat_code_receivable_base_invest"/>
         </record>
         <!--
-        #  TVA - Taxe sur la Valeur Ajoutée
+        #  VAT excluded only for sell taxes, excluded and included for purchase taxes
         -->
         <record model="account.tax.template" id="vat_25">
             <field name="name">TVA due a 2.5% (TR)</field>
