@@ -92,13 +92,7 @@ class AccountInvoice(Model):
                 cursor.execute('UPDATE account_move SET ref=%s ' \
                                'WHERE id=%s',
                                (ref, move_id.id))
-                print cursor.mogrify('UPDATE account_move SET ref=%s ' \
-                               'WHERE id=%s',
-                               (ref, move_id.id))
                 cursor.execute('UPDATE account_move_line SET ref=%s ' \
-                                'WHERE move_id=%s',
-                                (ref, move_id.id))
-                print cursor.mogrify('UPDATE account_move_line SET ref=%s ' \
                                 'WHERE move_id=%s',
                                 (ref, move_id.id))
                 cursor.execute('UPDATE account_analytic_line SET ref=%s ' \
