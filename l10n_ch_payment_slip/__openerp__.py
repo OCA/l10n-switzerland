@@ -21,7 +21,7 @@
 ##############################################################################
 
 {'name': 'Switzerland - Payment Slip',
- 'description':  """
+ 'description': """
 Swiss localization Payment slip known as ESR/BVR:
 =================================================
 This addon allows you to print the ESR/BVR report.
@@ -32,7 +32,7 @@ If voucher is installed importing V11 files will generate a voucher
 if possible in statement lines.
 
 """,
- 'version': '1.0',
+ 'version': '1.1',
  'author': 'Camptocamp',
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
@@ -44,9 +44,9 @@ if possible in statement lines.
           "wizard/bvr_import_view.xml",
           "data.xml"],
  'demo': [],
- 'test': [], # To be ported or migrate to unit tests or scenarios
+ 'test': [],  # To be ported or migrate to unit tests or scenarios
  'auto_install': False,
  'installable': True,
  'images': []
-}
+ }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

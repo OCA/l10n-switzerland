@@ -7,15 +7,23 @@
                font-weight: normal;
                src: url(${police_absolute_path('ocrbb.ttf')}) format("truetype");
            }
-           .ocrbb{
-             text-align:right;
+
+           #ocrbb{
+             position:absolute;
+             left:${str(company.bvr_scan_line_horz or '0.0').replace(',','.')}mm;
+             top:${str(company.bvr_scan_line_vert or '0.0').replace(',','.')}mm;
              font-family:bvrocrb;
              font-size:${str(company.bvr_scan_line_font_size or '0.0').replace(',','.')}pt;
+             text-align:left;
+             width: 119mm;
+           }
+
+           .digitref {
              position:absolute;
-             top:${str(company.bvr_scan_line_vert or '0.0').replace(',','.')}mm;
-             left:${str(company.bvr_scan_line_horz or '0.0').replace(',','.')}mm;
-             z-index:4;
-             letter-spacing:${str(company.bvr_scan_line_letter_spacing or '0.0').replace(',','.')}
+             top:7px;
+             text-align:center;
+             float:left;
+             width:9px;
            }
 
            .slip_address_b {
@@ -31,7 +39,7 @@
            left:${str(company.bvr_add_horz or '0.0').replace(',','.')}mm;
            font-size:12;
           }
-          
+
          .slip_bank_acc {
            font-family:Helvetica;
            font-size:8pt;
@@ -269,8 +277,23 @@
 
        <div id="slip2_bank_acc" class="slip2_bank_acc">${inv.partner_bank_id.print_account and inv.partner_bank_id.acc_number or ''}</div>
     <!--- scaner code bar -->
-    <div colspan="2" class="ocrbb">${mod10r('01'+str('%.2f' % inv.amount_total).replace('.','').rjust(10,'0'))}&gt;${_get_ref(inv)}+&nbsp;${inv.partner_bank_id.acc_number.split('-')[0]+(str(inv.partner_bank_id.acc_number.split('-')[1])).rjust(6,'0')+inv.partner_bank_id.acc_number.split('-')[2]}&gt;</div>
-
+  <div id="ocrbb">
+    <%
+       ref_start_left   = 1.5
+       ref_coef_space   = company.bvr_scan_line_letter_spacing or 2.55
+       tt = [ v for v in mod10r('01'+str('%.2f' % inv.amount_total).replace('.','').rjust(10,'0')) ]
+       tt.append('&gt;')
+       tt += [v for v in _get_ref(inv)]
+       tt.append('+')
+       tt.append('&nbsp;')
+       tt += [v for v in inv.partner_bank_id.acc_number.split('-')[0]+(str(inv.partner_bank_id.acc_number.split('-')[1])).rjust(6,'0')+inv.partner_bank_id.acc_number.split\
+('-')[2]]
+       tt.append('&gt;')
+    %>
+        %for ii,c in enumerate(tt) :
+            <div class="digitref"  style="left:${ref_start_left + (ii*ref_coef_space)}mm;">${c}</div>
+        %endfor
+ </div>
     %endfor
 </body>
 </html>
