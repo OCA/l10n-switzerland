@@ -39,7 +39,7 @@ class ResCompany(Model):
 
         'bvr_scan_line_horz': fields.float('BVR horiz. position for scan line(mm)',
             help='Horiz. position in mm for scan line'),
-            
+
         'bvr_add_vert': fields.float('BVR vert. position for address (mm)',
             help='Vert. position in mm for address'),
 
@@ -55,10 +55,10 @@ class ResCompany(Model):
 
     _defaults = {
         'bvr_delta_vert': -5,
-        'bvr_scan_line_vert': 231,
-        'bvr_scan_line_horz': 62,
+        'bvr_scan_line_vert': 265,
+        'bvr_scan_line_horz': 67,
         'bvr_scan_line_font_size': 11,
-        'bvr_scan_line_letter_spacing': 0,
+        'bvr_scan_line_letter_spacing': 2.55,
         'bvr_add_vert': 6,
         'bvr_add_horz': 60,
     }
