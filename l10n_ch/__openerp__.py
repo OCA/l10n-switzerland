@@ -24,19 +24,18 @@
 
 {'name': 'Switzerland - Accounting',
  'description':  """
- Swiss localization :
- ====================
- **Multilang swiss STERCHI account chart and taxes**
-  **Author:** Camptocamp SA
+Swiss localization :
+====================
+**Multilang swiss STERCHI account chart and taxes**
+ **Author:** Camptocamp SA
 
-  **Financial contributors:** Prisme Solutions Informatique SA, Quod SA
+ **Financial contributors:** Prisme Solutions Informatique SA, Quod SA
 
-  **Translation contributors:** brain-tec AG, Agile Business Group
+ **Translation contributors:** brain-tec AG, Agile Business Group
 
- **This release will introduce major changes to l10n_ch.**
+**This release will introduce major changes to l10n_ch.**
 
- Due to important refactoring needs and the Switzerland adoption of new international payment standard during 2013-2014. We have reorganised the swiss localization addons this way:
-
+Due to important refactoring needs and the Switzerland adoption of new international payment standard during 2013-2014. We have reorganised the swiss localization addons this way:
  - **l10n_ch**: Multilang swiss STERCHI account chart and taxes (official addon)
  - **l10n_ch_base_bank**: Technical module that introduces a new and simplified version of bank type management
  - **l10n_ch_bank**: List of swiss banks
@@ -45,8 +44,8 @@
  - **l10n_ch_payment_slip**: Support of ESR/BVR payment slip report and reconciliation. Report refactored with easy element positioning.
  - **l10n_ch_sepa**: Alpha implementation of PostFinance SEPA/PAIN support will be completed during 2013/2014
 
- The modules will be soon available on OpenERP swiss localization on launchpad:
- https://launchpad.net/openerp-swiss-localization
+The modules will be soon available on OpenERP swiss localization on launchpad:
+https://launchpad.net/openerp-swiss-localization
 """,
  'version': '7.0',
  'author': 'Camptocamp',
