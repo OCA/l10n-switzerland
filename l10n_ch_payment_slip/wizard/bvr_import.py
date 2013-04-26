@@ -66,13 +66,15 @@ class BvrImporterWizard(TransientModel):
         else:
             return []
 
-    def _parse_lines(self, cursor, uid, lines, context=None):
+    def _parse_lines(self, cursor, uid, inlines, context=None):
         """Parses raw v11 line and populate records list with dict"""
         records = []
         total_amount = 0
         total_cost = 0
         find_total = False
-        for lines in lines:
+        for lines in inlines:
+            if not lines:  # manage new line at end of file
+                continue
             (line, lines) = (lines[:128], lines[128:])
             record = {}
             if line[0:3] in ('999', '995'):
@@ -114,7 +116,7 @@ class BvrImporterWizard(TransientModel):
                 total_amount += record['amount']
                 total_cost += record['cost']
                 records.append(record)
-            return records
+        return records
 
     def _create_voucher_from_record(self, cursor, uid, record,
                                     statement, line_ids, context=None):
@@ -203,6 +205,7 @@ class BvrImporterWizard(TransientModel):
         statement_id = data['id']
         lines = base64.decodestring(file).split("\n")
         records = self._parse_lines(cursor, uid, lines, context=context)
+
         if context is None:
             context = {}
 
