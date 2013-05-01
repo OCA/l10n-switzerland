@@ -5939,7 +5939,7 @@
     msgstr "IVA Vendite al 2.4% (TR)"
 
 #: model:account.tax.template,name:l10n_ch.vat_24_purchase
-    msgid "TVA 2.4% sur achat B&amp;S (TR)"
+    msgid "TVA 2.4% sur achat B&S (TR)"
     msgstr "IVA 2.4% Merci e servizi (TR)"
 
 #: model:account.tax.template,name:l10n_ch.vat_24_invest
@@ -5951,7 +5951,7 @@
     msgstr "IVA Vendite al 3.6% (TS)"
 
 #: model:account.tax.template,name:l10n_ch.vat_36_purchase
-    msgid "TVA 3.6% sur achat B&amp;S (TS)"
+    msgid "TVA 3.6% sur achat B&S (TS)"
     msgstr "IVA 3.6% Merci e servizi (TS)"
 
 #: model:account.tax.template,name:l10n_ch.vat_36_invest
@@ -5963,7 +5963,7 @@
     msgstr "IVA Vendite al 7.6% (TN)"
 
 #: model:account.tax.template,name:l10n_ch.vat_76_purchase
-    msgid "TVA 7.6% sur achat B&amp;S"
+    msgid "TVA 7.6% sur achat B&S"
     msgstr "IVA 7.6% Merci e servizi"
 
 #: model:account.tax.template,name:l10n_ch.vat_76_invest
@@ -6079,36 +6079,60 @@
     msgstr "IVA Vendite 2.5% (TR)"
 
 #: model:account.tax.template,name:l10n_ch.vat_25_purchase
-    msgid "TVA 2.5% sur achat B&amp;S (TR)"
+    msgid "TVA 2.5% sur achat B&S (TR)"
     msgstr "IVA 2.5% Merci e servizi (TR)"
+
+#: model:account.tax.template,name:l10n_ch.vat_25_purchase_ttc
+    msgid "TVA incl. 2.5% sur achat B&S (TR)"
+    msgstr "IVA incl. 2.5% Merci e servizi (TR)"
 
 #: model:account.tax.template,name:l10n_ch.vat_25_invest
     msgid "TVA 2.5% sur invest. et autres ch. (TR)"
     msgstr "IVA 2.5% Investimenti e altri costi (TR)"
+
+#: model:account.tax.template,name:l10n_ch.vat_25_invest_ttc
+    msgid "TVA incl. 2.5% sur invest. et autres ch. (TR)"
+    msgstr "IVA incl. 2.5% Investimenti e altri costi (TR)"
 
 #: model:account.tax.template,name:l10n_ch.vat_38
     msgid "TVA due a 3.8% (TS)"
     msgstr "IVA Vendite 3.8% (TS)"
 
 #: model:account.tax.template,name:l10n_ch.vat_38_purchase
-    msgid "TVA 3.8% sur achat B&amp;S (TS)"
+    msgid "TVA 3.8% sur achat B&S (TS)"
     msgstr "IVA 3.8% Merci e servizi  (TS)"
+
+#: model:account.tax.template,name:l10n_ch.vat_38_purchase_ttc
+    msgid "TVA incl. 3.8% sur achat B&S (TS)"
+    msgstr "IVA incl. 3.8% Merci e servizi  (TS)"
 
 #: model:account.tax.template,name:l10n_ch.vat_38_invest
     msgid "TVA 3.8% sur invest. et autres ch. (TS)"
     msgstr "IVA 3.8% Investimenti e altri costi (TS)"
+
+#: model:account.tax.template,name:l10n_ch.vat_38_invest_ttc
+    msgid "TVA incl. 3.8% sur invest. et autres ch. (TS)"
+    msgstr "IVA incl. 3.8% Investimenti e altri costi (TS)"
 
 #: model:account.tax.template,name:l10n_ch.vat_80
     msgid "TVA due a 8.0% (TN)"
     msgstr "IVA Vendite 8.0% (TN)"
 
 #: model:account.tax.template,name:l10n_ch.vat_80_purchase
-    msgid "TVA 8.0% sur achat B&amp;S (TN)"
+    msgid "TVA 8.0% sur achat B&S (TN)"
     msgstr "IVA 8.0% Merci e servizi  (TN)"
+
+#: model:account.tax.template,name:l10n_ch.vat_80_purchase_ttc
+    msgid "TVA incl. 8.0% sur achat B&S (TN)"
+    msgstr "IVA incl. 8.0% Merci e servizi  (TN)"
 
 #: model:account.tax.template,name:l10n_ch.vat_80_invest
     msgid "TVA 8.0% sur invest. et autres ch. (TN)"
     msgstr "IVA 8.0%  Investimenti e altri costi (TN)"
+
+#: model:account.tax.template,name:l10n_ch.vat_80_invest_ttc
+    msgid "TVA incl. 8.0% sur invest. et autres ch. (TN)"
+    msgstr "IVA incl. 8.0%  Investimenti e altri costi (TN)"
 
 #: model:account.tax.template,name:l10n_ch.vat_XO
     msgid "TVA due a 0% (Exportations)"
@@ -6125,4 +6149,3 @@
 #: model:account.tax.template,name:l10n_ch.vat_100_import
     msgid "100% sur import"
     msgstr "100% IVA Import"
-
