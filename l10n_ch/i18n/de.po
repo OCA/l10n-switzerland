@@ -5939,8 +5939,8 @@
     msgstr "Zu zahlende MwSt. bei 2,4% (USt)"
 
 #: model:account.tax.template,name:l10n_ch.vat_24_purchase
-    msgid "TVA 2.4% sur achat B&amp;S (TR)"
-    msgstr "MwSt. 2,4 % auf Einkäufe B&amp;S (USt)"
+    msgid "TVA 2.4% sur achat B&S (TR)"
+    msgstr "MwSt. 2,4 % auf Einkäufe B&S (USt)"
 
 #: model:account.tax.template,name:l10n_ch.vat_24_invest
     msgid "TVA 2.4% sur invest. et autres ch. (TR)"
@@ -5951,8 +5951,8 @@
     msgstr "Zu zahlende MwSt. bei 3,6% (LSt)"
 
 #: model:account.tax.template,name:l10n_ch.vat_36_purchase
-    msgid "TVA 3.6% sur achat B&amp;S (TS)"
-    msgstr "MwSt. 3,6% auf Einkäufe B&amp;S (LSt)"
+    msgid "TVA 3.6% sur achat B&S (TS)"
+    msgstr "MwSt. 3,6% auf Einkäufe B&S (LSt)"
 
 #: model:account.tax.template,name:l10n_ch.vat_36_invest
     msgid "TVA 3.6% sur invest. et autres ch. (TS)"
@@ -5963,8 +5963,8 @@
     msgstr "Zu zahlende MwSt. bei 7,6% (NRZ)"
 
 #: model:account.tax.template,name:l10n_ch.vat_76_purchase
-    msgid "TVA 7.6% sur achat B&amp;S"
-    msgstr "MwSt. 7.6% auf Einkäufe B&amp;S"
+    msgid "TVA 7.6% sur achat B&S"
+    msgstr "MwSt. 7.6% auf Einkäufe B&S"
 
 #: model:account.tax.template,name:l10n_ch.vat_76_invest
     msgid "TVA 7.6% sur invest. et autres ch. (TN)"
@@ -6079,36 +6079,60 @@
     msgstr "Zu zahlende MwSt. bei 2,5% (USt)"
 
 #: model:account.tax.template,name:l10n_ch.vat_25_purchase
-    msgid "TVA 2.5% sur achat B&amp;S (TR)"
-    msgstr "MwSt. 2,5% auf Einkäufe B&amp;S (USt)"
+    msgid "TVA 2.5% sur achat B&S (TR)"
+    msgstr "MwSt. 2,5% auf Einkäufe B&S (USt)"
+
+#: model:account.tax.template,name:l10n_ch.vat_25_purchase_ttc
+    msgid "TVA 2.5% incl. sur achat B&S (TR)"
+    msgstr "MwSt. incl. 2,5% auf Einkäufe B&S (USt)"
 
 #: model:account.tax.template,name:l10n_ch.vat_25_invest
     msgid "TVA 2.5% sur invest. et autres ch. (TR)"
     msgstr "MwSt. 2,5% auf Invest. und sonst. Aufw. (USt)"
+
+#: model:account.tax.template,name:l10n_ch.vat_25_invest_ttc
+    msgid "TVA incl. 2.5% sur invest. et autres ch. (TR)"
+    msgstr "MwSt. incl. 2,5% auf Invest. und sonst. Aufw. (USt)"
 
 #: model:account.tax.template,name:l10n_ch.vat_38
     msgid "TVA due a 3.8% (TS)"
     msgstr "Zu zahlende MwSt. bei 3,8% (LSt)"
 
 #: model:account.tax.template,name:l10n_ch.vat_38_purchase
-    msgid "TVA 3.8% sur achat B&amp;S (TS)"
-    msgstr "MwSt. 3,8% auf Einkäufe B&amp;S (LSt)"
+    msgid "TVA 3.8% sur achat B&S (TS)"
+    msgstr "MwSt. 3,8% auf Einkäufe B&S (LSt)"
+
+#: model:account.tax.template,name:l10n_ch.vat_38_purchase_ttc
+    msgid "TVA incl. 3.8% sur achat B&S (TS)"
+    msgstr "MwSt. incl. 3,8% auf Einkäufe B&S (LSt)"
 
 #: model:account.tax.template,name:l10n_ch.vat_38_invest
     msgid "TVA 3.8% sur invest. et autres ch. (TS)"
     msgstr "MwSt. 3,8% auf Invest. und sonst. Aufw. (LSt)"
+
+#: model:account.tax.template,name:l10n_ch.vat_38_invest_ttc
+    msgid "TVA incl. 3.8% sur invest. et autres ch. (TS)"
+    msgstr "MwSt. incl. 3,8% auf Invest. und sonst. Aufw. (LSt)"
 
 #: model:account.tax.template,name:l10n_ch.vat_80
     msgid " b"
     msgstr "Zu zahlende MwSt. bei 8,0% (NRZ)"
 
 #: model:account.tax.template,name:l10n_ch.vat_80_purchase
-    msgid "TVA 8.0% sur achat B&amp;S (TN)"
-    msgstr "MwSt. 8,0% auf Einkäufe B&amp;S (NRZ)"
+    msgid "TVA 8.0% sur achat B&S (TN)"
+    msgstr "MwSt. 8,0% auf Einkäufe B&S (NRZ)"
+
+#: model:account.tax.template,name:l10n_ch.vat_80_purchase_ttc
+    msgid "TVA incl. 8.0% sur achat B&S (TN)"
+    msgstr "MwSt. incl. 8,0% auf Einkäufe B&S (NRZ)"
 
 #: model:account.tax.template,name:l10n_ch.vat_80_invest
     msgid "TVA 8.0% sur invest. et autres ch. (TN)"
     msgstr "MwSt. 8,0% auf Invest. und sonst. Aufw. (NRZ)"
+
+#: model:account.tax.template,name:l10n_ch.vat_80_invest_ttc
+    msgid "TVA 8.0% sur invest. et autres ch. (TN)"
+    msgstr "MwSt. incl. 8,0% auf Invest. und sonst. Aufw. (NRZ)"
 
 #: model:account.tax.template,name:l10n_ch.vat_XO
     msgid "TVA due a 0% (Exportations)"
@@ -6125,4 +6149,3 @@
 #: model:account.tax.template,name:l10n_ch.vat_100_import
     msgid "100% sur import"
     msgstr "100% auf Import"
-
