@@ -45,12 +45,14 @@ class ResPartnerBank(Model):
 
     _columns = {
         'name': fields.char('Description', size=128, required=True),
-        'bvr_adherent_num': fields.char('Bank BVR adherent number', size=11, 
+        'bvr_adherent_num': fields.char('Bank BVR adherent number', size=11,
                                         help=("Your Bank adherent number to be printed in references of your BVR."
                                               "This is not a postal account number.")),
         'acc_number': fields.char('Account/IBAN Number', size=64, required=True),
+        'post_related_account': fields.char('Post related account',
+                                            size=64, required=True,
+                                            help="Bank account related to bank ccp")
     }
-
 
     def _check_9_pos_postal_num(self, number):
         """
@@ -63,11 +65,10 @@ class ResPartnerBank(Model):
             return False
         nums = number.split('-')
         prefix = nums[0]
-        num = nums[1].rjust(6,'0')
+        num = nums[1].rjust(6, '0')
         checksum = nums[2]
         expected_checksum = mod10r(prefix + num)[-1]
         return expected_checksum == checksum
-
 
     def _check_5_pos_postal_num(self, number):
         """
@@ -89,12 +90,11 @@ class ResPartnerBank(Model):
             return self._check_9_pos_postal_num(b.acc_number) or \
                    self._check_5_pos_postal_num(b.acc_number)
 
-
     _constraints = [(_check_postal_num,
                     'Please enter a correct postal number. (01-23456-1 or 12345)',
                     ['acc_number'])]
 
     _sql_constraints = [('bvr_adherent_uniq', 'unique (bvr_adherent_num)',
-        'The BVR adherent number must be unique !')]
+                         'The BVR adherent number must be unique !')]
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
