@@ -57,7 +57,8 @@ def _u2a(text):
             txt += unicode2ascii.EXTRA_CHARACTERS[c]
         elif c in unicode2ascii.FG_HACKS:
             txt += unicode2ascii.FG_HACKS[c]
-        else: txt += "_"
+        else:
+            txt += "_"
     return txt
 
 
@@ -349,7 +350,7 @@ class record_gt836(record):
             raise except_osv(_('Error'),
                              _('No IBAN defined \n for the bank account: %s\n'
                                'on line: %s') % (self.pline.bank_id.acc_number, self.pline.name))
-        if self.global_values['partner_bank_code']: # bank code is swift (BIC address)
+        if self.global_values['partner_bank_code']:  # Bank code is swift (BIC address)
             self.global_values['option_id_bank'] = 'A'
             self.global_values['partner_bank_ident'] = self.global_values['partner_bank_code']
         elif self.global_values['partner_bank_city']:
@@ -559,7 +560,8 @@ class DTAFileGenerator(TransientModel):
                              _('No bank name defined\n for the bank account: %s\n'
                                'on the partner: %s\n on line: %s') % (pline.bank_id.state,
                                                                       pline.partner_id.name, pline.name))
-        elec_context['partner_bank_iban'] = pline.bank_id.acc_number or False
+        elec_context['partner_bank_iban'] = (pline.bank_id.post_related_account or
+                                             pline.bank_id.acc_number or False)
         number = pline.bank_id.acc_number or ''
         elec_context['partner_bank_number'] = number.replace('.', '').replace('-', '') or False
         elec_context['partner_bvr'] = ''
@@ -594,8 +596,11 @@ class DTAFileGenerator(TransientModel):
             # si payment structure  -> bvr (826)
             # si non -> (827)
             elec_pay = pline.bank_id.state  # Bank type
+            country_code = pline.partner_id.country_id.code if pline.partner_id.country_id else False
             if elec_pay in ['iban', 'bank']:
                 # If iban => country=country code for space reason
+                record_type = record_gt836
+            elif country_code and country_code != 'CH':
                 record_type = record_gt836
             elif elec_pay == 'bvr':
                 record_type = record_gt826
