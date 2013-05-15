@@ -43,18 +43,49 @@
       </field>
     </record>
 
-    <record model="ir.ui.view" id="l10nch_view_res_partner_bank_ccp_bank">
-      <field name="name">res.partner_bank.form.l10n_ch.ccp_bank</field>
-      <field name="model">res.partner.bank</field>
-      <field name="inherit_id" ref="base.view_partner_bank_form"/>
+    <record model="ir.ui.view" id="add_custom_fields_on_bank">
+      <field name="name">add custom fields on bank</field>
+      <field name="model">res.bank</field>
+      <field name="type">form</field>
+      <field name="inherit_id" ref="base.view_res_bank_form"/>
       <field name="arch" type="xml">
-        <field name="acc_number" position="before">
-          <newline/>
-          <field name="post_related_account"
-                 attrs="{'invisible':[('state', 'not in', ['bv', 'bvr'])], 'required': [('state', 'in', ['bv', 'bvr'])]}"/>
-          <newline/>
+        <field name="bic" position="after">
+          <field name="code"/>
+          <field name="clearing"/>
+          <field name="ccp"/>
+          <field name="zip"/>
+          <field name="city"/>
         </field>
       </field>
     </record>
+
+    <record model="ir.ui.view" id="add_custom_fields_on_bank_list">
+      <field name="name">add custom fields on bank list</field>
+      <field name="model">res.bank</field>
+      <field name="type">form</field>
+      <field name="inherit_id" ref="base.view_res_bank_tree"/>
+      <field name="arch" type="xml">
+        <field name="bic" position="after">
+          <field name="code"/>
+          <field name="clearing"/>
+          <field name="ccp"/>
+        </field>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="add_ccp_on_res_partner_bank">
+      <field name="name">Add ccp on res partner bank</field>
+      <field name="model">res.partner.bank</field>
+      <field name="type">form</field>
+      <field name="inherit_id" ref="base.view_res_bank_tree"/>
+      <field name="arch" type="xml">
+        <field name="bic" position="after">
+          <field name="code"/>
+          <field name="clearing"/>
+          <field name="ccp"/>
+        </field>
+      </field>
+    </record>
+
   </data>
 </openerp>
