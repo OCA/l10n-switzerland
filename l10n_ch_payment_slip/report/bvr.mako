@@ -226,7 +226,7 @@
        %endif
 
 
-       <div id="slip_bank_acc" class="slip_bank_acc">${inv.partner_bank_id.print_account and inv.partner_bank_id.acc_number or ''}</div>
+       <div id="slip_bank_acc" class="slip_bank_acc">${inv.partner_bank_id.print_account and inv.partner_bank_id.get_account_number() or ''}</div>
 
        <div id="slip_amount" class="slip_amount"><span >${"&nbsp;".join(_space(('%.2f' % inv.amount_total)[:-3], 1))}</span>  <span style="padding-left:6mm">${"&nbsp;".join(_space(('%.2f' % inv.amount_total)[-2:], 1))}</span></div>
 
@@ -275,7 +275,7 @@
          </div>
        %endif
 
-       <div id="slip2_bank_acc" class="slip2_bank_acc">${inv.partner_bank_id.print_account and inv.partner_bank_id.acc_number or ''}</div>
+       <div id="slip2_bank_acc" class="slip2_bank_acc">${inv.partner_bank_id.print_account and inv.partner_bank_id.get_account_number() or ''}</div>
     <!--- scaner code bar -->
   <div id="ocrbb">
     <%
@@ -286,7 +286,7 @@
        tt += [v for v in _get_ref(inv)]
        tt.append('+')
        tt.append('&nbsp;')
-       tt += [v for v in inv.partner_bank_id.acc_number.split('-')[0]+(str(inv.partner_bank_id.acc_number.split('-')[1])).rjust(6,'0')+inv.partner_bank_id.acc_number.split\
+       tt += [v for v in inv.partner_bank_id.get_account_number().split('-')[0]+(str(inv.partner_bank_id.get_account_number().split('-')[1])).rjust(6,'0')+inv.partner_bank_id.get_account_number().split\
 ('-')[2]]
        tt.append('&gt;')
     %>
