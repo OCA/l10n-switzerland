@@ -88,7 +88,7 @@ class Pain001(MsgSEPA):
             raise osv.except_osv(_('ErrorCompanyBankBIC'),
                                  _('The selected company bank has no BIC number'))
         if not cp_bank_acc.iban and \
-           not cp_bank_acc.acc_number:
+           not cp_bank_acc.get_account_number():
             raise osv.except_osv(_('ErrorCompanyBankAccNumber'),
                                  _('The selected company bank has no IBAN and no Account number'))
 
@@ -102,7 +102,7 @@ class Pain001(MsgSEPA):
                 raise osv.except_osv(_('ErrorCreditorBankBIC'),
                                      _('Creditor bank has no BIC number for invoice %s') %(line.name,))
             if not crd_bank_acc.iban and \
-               not crd_bank_acc.acc_number:
+               not crd_bank_acc.get_account_number():
                 raise osv.except_osv(_('ErrorCompanyBankAccNumber'),
                                      _('The selected company bank has no IBAN and no Account number'))
 
