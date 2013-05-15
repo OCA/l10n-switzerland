@@ -19,13 +19,13 @@
 ##############################################################################
 
 {'name': 'Switzerland - Bank type',
- 'description':  """
+ 'description': """
 Swiss localization Bank type. Add new bank types
 ================================================
 This addons will add different bank type required by
 DTA, and ESR system in order to manage duality of Post and bank systems
 """,
- 'version': '1.0',
+ 'version': '1.1',
  'author': 'Camptocamp',
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
@@ -36,5 +36,5 @@ DTA, and ESR system in order to manage duality of Post and bank systems
  'auto_install': False,
  'installable': True,
  'images': []
-}
+ }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
