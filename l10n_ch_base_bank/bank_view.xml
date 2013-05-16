@@ -77,11 +77,9 @@
       <field name="name">Add ccp on res partner bank</field>
       <field name="model">res.partner.bank</field>
       <field name="type">form</field>
-      <field name="inherit_id" ref="base.view_res_bank_tree"/>
+      <field name="inherit_id" ref="base.view_partner_bank_form"/>
       <field name="arch" type="xml">
-        <field name="bic" position="after">
-          <field name="code"/>
-          <field name="clearing"/>
+        <field name="bank_bic" position="after">
           <field name="ccp"/>
         </field>
       </field>
