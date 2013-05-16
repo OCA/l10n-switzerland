@@ -110,7 +110,8 @@ class ResPartnerBank(orm.Model, BankCommon):
                                         help=("Your Bank adherent number to be printed in references of your BVR."
                                               "This is not a postal account number.")),
         'acc_number': fields.char('Account/IBAN Number', size=64, required=True),
-        'ccp': fields.related('bank', 'ccp', type='char', string='CCP'),
+        'ccp': fields.related('bank', 'ccp', type='char', string='CCP',
+                              readonly=True),
     }
 
     def get_account_number(self, cursor, uid, bid, context=None):
