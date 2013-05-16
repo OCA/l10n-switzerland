@@ -98,6 +98,7 @@ class Bank(orm.Model, BankCommon):
                     ' of type BV, BVR',
                     ['acc_number', 'bank'])]
 
+
 class ResPartnerBank(orm.Model, BankCommon):
     """
     Inherit res.partner.bank class in order to add swiss specific fields and state controls
