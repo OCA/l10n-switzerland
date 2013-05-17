@@ -3,11 +3,17 @@ Change with release 7.1
      If no ccp is set on bank old behavior is kept
      Be aware if you have customize bvr.mako you have to replace acc_number by get_account_number().
      It allows to avoid account duplications
+
   *) Add constraint to avoid wrong entries
+
   *) Disable invoice reference overwrite
+
   *) Better bank views in list mode
+
   *) Fix BVR options in bank views
+
   *) Remove attachments from payment order view as document addon in fixed
+
   *) Various fixes of DTA wizard
 
 Changes with release 7.0
