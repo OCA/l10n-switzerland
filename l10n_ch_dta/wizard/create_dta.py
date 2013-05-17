@@ -268,12 +268,6 @@ class record_gt827(postal_record):
                                'for the partner bank: %s\n on line %s') %
                              (self.pline.bank_id.get_account_number(), self.pline.name))
         self.global_values['partner_bank_number'] = '/C/' + self.global_values['partner_bank_number']
-        if not self.global_values['partner_post_number']:
-            raise except_osv(_('Error'),
-                             _('You must provide a post number \n for the partner bank: %s\n'
-                               'on line: %s') % (self.pline.bank_id.get_account_number(), self.pline.name))
-        self.global_values['partner_bank_clearing'] = ''
-        self.global_values['partner_bank_number'] = '/C/' + self.global_values['partner_post_number']
 
     def init_local_context(self):
         self.fields = [
@@ -510,7 +504,7 @@ class DTAFileGenerator(TransientModel):
         elec_context['comp_name'] = co_addr.name
         elec_context['comp_dta'] = bank.dta_code or ''  # Used by Mamuth payment systems
         # Iban and account number are the same field and depends only on the type of account
-        elec_context['comp_bank_iban'] = elec_context['comp_bank_number'] = bank.get_account_number() or ''
+        elec_context['comp_bank_iban'] = elec_context['comp_bank_number'] = bank.acc_number or ''
         elec_context['comp_bank_iban'] = elec_context['comp_bank_iban'].replace(' ', '') or ''
         if not elec_context['comp_bank_iban']:
             raise except_osv(_('Error'),
