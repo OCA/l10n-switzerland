@@ -563,8 +563,7 @@ class DTAFileGenerator(TransientModel):
                                'on the partner: %s\n on line: %s') % (pline.bank_id.state,
                                                                       pline.partner_id.name,
                                                                       pline.name))
-        elec_context['partner_bank_iban'] = (pline.bank_id.post_related_account or
-                                             pline.bank_id.get_account_number() or False)
+        elec_context['partner_bank_iban'] = (pline.bank_id.get_account_number() or False)
         number = pline.bank_id.get_account_number() or ''
         elec_context['partner_bank_number'] = number.replace('.', '').replace('-', '') or False
         elec_context['partner_bvr'] = ''
