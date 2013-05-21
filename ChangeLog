@@ -44,6 +44,7 @@ Changes with release 7.0
      - Refactoring of Mako CSS.
      - Remove of custom parser
      - Cleaning dead code
+     - Switch to commercial_entity for address display
      - TODO a wizard that contatenate the invoice PDF + the payment slip
 
   *) l10n_ch_sepa: Alpha implementation of PostFinance SEPA/PAIN support will be completed during 2013/2014
