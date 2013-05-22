@@ -5,6 +5,12 @@ Change with release 7.1
      Be aware if you have customizde bvr.mako you have to replace acc_number by get_account_number().
      This change allows to avoid duplication of res.partner.bank
 
+  *) Fix res.bank view
+
+  *) Improve res.bank name search by adding intelligent search
+
+  *) Add city to res.bank name_get
+
   *) Add constraint to avoid wrong entries on res.partner.bank
 
   *) Disable invoice reference overwrite when validating an invoice
