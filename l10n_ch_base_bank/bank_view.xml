@@ -53,8 +53,6 @@
           <field name="code"/>
           <field name="clearing"/>
           <field name="ccp"/>
-          <field name="zip"/>
-          <field name="city"/>
         </field>
       </field>
     </record>
