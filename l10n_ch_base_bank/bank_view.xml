@@ -43,6 +43,23 @@
       </field>
     </record>
 
+    <record id="view__bank_search" model="ir.ui.view">
+      <field name="name">res.bank.search</field>
+      <field name="model">res.bank</field>
+      <field name="arch" type="xml">
+        <search string="Banks">
+          <filter name="Postfinance"
+                  icon="terp-check" string="PostFinance"
+                  domain="[('bic', '=', 'POFICHBEXXX')]"
+                  help="PostFinance"/>
+          <field name="name"/>
+          <field name="code"/>
+          <field name="city"/>
+
+        </search>
+      </field>
+    </record>
+
     <!-- 'POFICHBEXXX' corresponds to Postfinance bic -->
 
     <record model="ir.ui.view" id="add_custom_fields_on_bank">
@@ -69,6 +86,7 @@
           <field name="code"/>
           <field name="clearing"/>
           <field name="ccp"/>
+          <field name="city"/>
         </field>
       </field>
     </record>
