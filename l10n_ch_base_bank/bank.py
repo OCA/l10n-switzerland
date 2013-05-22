@@ -51,12 +51,13 @@ class BankCommon(object):
             return False
         return True
 
+
 class Bank(orm.Model, BankCommon):
     """Inherit res.bank class in order to add swiss specific field"""
     _inherit = 'res.bank'
     _columns = {
         ### Internal reference
-        'code': fields.char('Code', size=64),
+        'code': fields.char('Code', size=64, select=True),
         ###Swiss unik bank identifier also use in IBAN number
         'clearing': fields.char('Clearing number', size=64),
         ### city of the bank
@@ -75,7 +76,6 @@ class Bank(orm.Model, BankCommon):
                     return False
         return True
 
-
     def _check_postal_num(self, cursor, uid, ids):
         """
         validate postal number format
@@ -88,6 +88,34 @@ class Bank(orm.Model, BankCommon):
                     self._check_5_pos_postal_num(bank.ccp)):
                 return False
         return True
+
+    def name_get(self, cursor, uid, ids, context=None):
+        res = []
+        cols = ('bic', 'name', 'city')
+        for bank in self.browse(cursor, uid, ids, context):
+            vals = (bank[x] for x in cols if bank[x])
+            res.append((bank.id, ' - '.join(vals)))
+        return res
+
+    def name_search(self, cursor, uid, name, args=None, operator='ilike', context=None, limit=80):
+        if args is None:
+            args = []
+        if context is None:
+            context = {}
+        ids = []
+        cols = ('code', 'bic', 'name', 'city')
+        if name:
+            for val in name.split(' '):
+                for col in cols:
+                    tmp_ids = self.search(cursor, uid, [(col, 'ilike', val)] + args, limit=limit)
+                    if tmp_ids:
+                        ids += tmp_ids
+                        break
+        # we sort by occurence
+        to_ret_ids = list(set(ids))
+        to_ret_ids = sorted(to_ret_ids, key=lambda x: ids.count(x), reverse=True)
+
+        return self.name_get(cursor, uid, to_ret_ids, context=context)
 
     _constraints = [(_check_postal_num,
                     'Please enter a correct postal number. (01-23456-1 or 12345)',
