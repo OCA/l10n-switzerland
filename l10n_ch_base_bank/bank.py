@@ -91,7 +91,7 @@ class Bank(orm.Model, BankCommon):
 
     def name_get(self, cursor, uid, ids, context=None):
         res = []
-        cols = ('bic', 'name', 'city')
+        cols = ('bic', 'name', 'street', 'city')
         for bank in self.browse(cursor, uid, ids, context):
             vals = (bank[x] for x in cols if bank[x])
             res.append((bank.id, ' - '.join(vals)))
@@ -103,7 +103,7 @@ class Bank(orm.Model, BankCommon):
         if context is None:
             context = {}
         ids = []
-        cols = ('code', 'bic', 'name', 'city')
+        cols = ('code', 'bic', 'name', 'street', 'city')
         if name:
             for val in name.split(' '):
                 for col in cols:

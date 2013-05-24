@@ -54,6 +54,7 @@
                   help="PostFinance"/>
           <field name="name"/>
           <field name="code"/>
+          <field name="street"/>
           <field name="city"/>
 
         </search>
@@ -86,6 +87,7 @@
           <field name="code"/>
           <field name="clearing"/>
           <field name="ccp"/>
+          <field name="street"/>
           <field name="city"/>
         </field>
       </field>
