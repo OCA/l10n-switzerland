@@ -61,6 +61,10 @@ class AccountInvoice(Model):
         if isinstance(inv_id, list):
             inv_id = inv_id[0]
         inv = self.browse(cursor, uid, inv_id, context=context)
+        ## We check if the type is bvr, if not we return false
+        if inv.partner_bank_id.state != 'bvr':
+            return ''
+        ##
         if inv.partner_bank_id.bvr_adherent_num:
             res = inv.partner_bank_id.bvr_adherent_num
         invoice_number = ''
@@ -80,7 +84,7 @@ class AccountInvoice(Model):
     def action_number(self, cursor, uid, ids, context=None):
         res = super(AccountInvoice, self).action_number(cursor, uid, ids, context=context)
         for inv in self.browse(cursor, uid, ids, context=context):
-            if inv.type != 'out_invoice':
+            if inv.type != 'out_invoice' or inv.partner_bank_id.state != 'bvr':
                 continue
             ref = inv.get_bvr_ref()
             move_id = inv.move_id
