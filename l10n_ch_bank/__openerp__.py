@@ -40,4 +40,4 @@
     "update_xml": [],
     "active": False,
     "installable": True,
-}
+ }

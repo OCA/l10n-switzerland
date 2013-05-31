@@ -18,7 +18,7 @@
     </GrpHdr>\
 <%doc>\
   for each payment in the payment order
-  line is saved in sepa_context in order to be available 
+  line is saved in sepa_context in order to be available
   in sub blocks and inheritages. Because, for now, only unamed
   blocks and def in mako can use a local for loop variable.
 </%doc>\
@@ -91,7 +91,7 @@
                   <IBAN>${bank_acc.iban}</IBAN>
                 % else:
                   <Othr>
-                    <Id>${bank_acc.acc_number}</Id>
+                    <Id>${bank_acc.get_account_number()}</Id>
                   </Othr>
                 % endif
               </Id>
