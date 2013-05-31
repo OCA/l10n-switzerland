@@ -179,12 +179,12 @@
        <!--adresses + info block -->
         <table class="dest_address_bvr"  style="position:absolute;width:230px;word-wrap:break-word">
 
-               %if inv.partner_id.title:
-               <tr><td>${inv.partner_id.title.name}</tr></td>
-               %endif
-               %if inv.partner_id.name:
-               <tr><td>${inv.partner_id.name}</td></tr>
-               %endif
+                %if inv.partner_id.id != inv.commercial_partner_id.id:
+                <tr><td>${inv.commercial_partner_id.name or ''}</td></tr>
+                <tr><td>${inv.partner_id.title and inv.partner_id.title.name or ''} ${inv.partner_id.name }</td></tr>
+                %else:
+                <tr><td>${inv.partner_id.title and inv.partner_id.title.name or ''} ${inv.partner_id.name }</td></tr>
+                %endif
                <tr><td>${inv.partner_id.street or ''|entity}</td></tr>
                <tr><td>${inv.partner_id.street2 or ''|entity}</td></tr>
                <tr><td>${inv.partner_id.zip or ''|entity} ${inv.partner_id.city or ''|entity}</td></tr>
@@ -209,10 +209,11 @@
          <table class="slip_add">
            <tr><td>${_space(_get_ref(inv))}</td></tr>
            <tr><td>
-               %if title:
-               ${inv.partner_id.title.name or ''|entity}&nbsp;
-               %endif
-               ${inv.partner_id.name |entity}</td></tr>
+            %if inv.partner_id.id != inv.commercial_partner_id.id:
+                ${inv.commercial_partner_id.name or ''|entity}</td></tr>
+            %else:
+                ${inv.partner_id.name |entity}</td></tr>
+            %endif
            <tr><td>${inv.partner_id.street or ''|entity}</td></tr>
            <tr><td>${inv.partner_id.street2 or ''|entity}</td></tr>
            <tr><td>${inv.partner_id.zip or ''|entity} ${inv.partner_id.city or ''|entity}</td></tr>
@@ -226,7 +227,7 @@
        %endif
 
 
-       <div id="slip_bank_acc" class="slip_bank_acc">${inv.partner_bank_id.print_account and inv.partner_bank_id.acc_number or ''}</div>
+       <div id="slip_bank_acc" class="slip_bank_acc">${inv.partner_bank_id.print_account and inv.partner_bank_id.get_account_number() or ''}</div>
 
        <div id="slip_amount" class="slip_amount"><span >${"&nbsp;".join(_space(('%.2f' % inv.amount_total)[:-3], 1))}</span>  <span style="padding-left:6mm">${"&nbsp;".join(_space(('%.2f' % inv.amount_total)[-2:], 1))}</span></div>
 
@@ -247,10 +248,11 @@
        <div id="slip2_address_b" class="slip2_address_b">
            <table class="slip_add">
                <tr><td>
-                   %if title:
-                   ${inv.partner_id.title.name or ''|entity}
-                   %endif
-                   ${inv.partner_id.name |entity}</td></tr>
+                %if inv.partner_id.id != inv.commercial_partner_id.id:
+                    ${inv.commercial_partner_id.name or ''|entity}</td></tr>
+                %else:
+                    ${inv.partner_id.name |entity}</td></tr>
+                %endif
                <tr><td>${inv.partner_id.street or ''|entity}</td></tr>
                <tr><td>${inv.partner_id.street2 or ''|entity}</td></tr>
                <tr><td>${inv.partner_id.zip or ''|entity} ${inv.partner_id.city or ''|entity}</td></tr>
@@ -260,10 +262,11 @@
        %if inv.partner_bank_id.print_partner:
        <div id="slip2_comp" class="slip2_comp">
            <table class="slip_add">
-               <tr><td>${user.company_id.partner_id.name}</td></tr>
-               <tr><td>${user.company_id.partner_id.street}</td></tr>
-               <tr><td></td></tr>
-               <tr><td>${user.company_id.partner_id.city} ${user.company_id.partner_id.zip}</td></tr>
+               <tr><td>
+            <tr><td>${user.company_id.partner_id.name}</td></tr>
+            <tr><td>${user.company_id.partner_id.street}</td></tr>
+            <tr><td></td></tr>
+            <tr><td>${user.company_id.partner_id.city} ${user.company_id.partner_id.zip}</td></tr>
            </table>
        </div>
        %endif
@@ -275,7 +278,7 @@
          </div>
        %endif
 
-       <div id="slip2_bank_acc" class="slip2_bank_acc">${inv.partner_bank_id.print_account and inv.partner_bank_id.acc_number or ''}</div>
+       <div id="slip2_bank_acc" class="slip2_bank_acc">${inv.partner_bank_id.print_account and inv.partner_bank_id.get_account_number() or ''}</div>
     <!--- scaner code bar -->
   <div id="ocrbb">
     <%
@@ -286,7 +289,7 @@
        tt += [v for v in _get_ref(inv)]
        tt.append('+')
        tt.append('&nbsp;')
-       tt += [v for v in inv.partner_bank_id.acc_number.split('-')[0]+(str(inv.partner_bank_id.acc_number.split('-')[1])).rjust(6,'0')+inv.partner_bank_id.acc_number.split\
+       tt += [v for v in inv.partner_bank_id.get_account_number().split('-')[0]+(str(inv.partner_bank_id.get_account_number().split('-')[1])).rjust(6,'0')+inv.partner_bank_id.get_account_number().split\
 ('-')[2]]
        tt.append('&gt;')
     %>

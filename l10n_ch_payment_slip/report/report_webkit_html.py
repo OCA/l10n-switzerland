@@ -112,7 +112,7 @@ class L10nCHReportWebkitHtml(report_sxw.rml_parse):
                 raise except_osv(_('UserError'),
                                  _('No bank specified on invoice:\n%s' % (invoice_name)))
             if not self._compile_check_bvr.match(
-                    invoice.partner_bank_id.acc_number or ''):
+                    invoice.partner_bank_id.get_account_number() or ''):
                 raise except_osv(_('UserError'),
                                  _(('Your bank BVR number should be of the form 0X-XXX-X! '
                                     'Please check your company '
