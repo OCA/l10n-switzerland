@@ -37,7 +37,7 @@
       <field name="inherit_id" ref="account.view_bank_statement_form"/>
       <field name="arch" type="xml">
         <div name="import_buttons" position="inside">
-          <button name="%(wizard_bvr_import)d"  string="Import BVR" type="action" colspan="2"/>
+          <button name="%(wizard_bvr_import)d" states="draft,open" string="Import BVR" type="action"/>
         </div>
       </field>
     </record>
