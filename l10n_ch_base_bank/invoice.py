@@ -47,7 +47,6 @@ class AccountInvoice(Model):
                 bank_ids = user.company_id.partner_id.bank_ids
                 if bank_ids:
                     res['value']['partner_bank_id'] = bank_ids[0].id
-
         if partner_bank_id != bank_id:
             to_update = self.onchange_partner_bank(cursor, uid, ids, bank_id)
             res['value'].update(to_update['value'])
@@ -59,8 +58,11 @@ class AccountInvoice(Model):
         partner_bank_obj = self.pool.get('res.partner.bank')
         if partner_bank_id:
             partner_bank = partner_bank_obj.browse(cursor, user, partner_bank_id)
-            if partner_bank.state in ('bvr', 'bv'):
+            if partner_bank.state == 'bvr':
                 res['value']['reference_type'] = 'bvr'
+            else:
+                res['value']['reference_type'] = 'none'
+                
         return res
 
     def _check_reference_type(self, cursor, user, ids, context=None):
@@ -68,7 +70,7 @@ class AccountInvoice(Model):
         on the BVR reference type and the invoice partner bank type"""
         for invoice in self.browse(cursor, user, ids):
             if invoice.type in 'in_invoice':
-                if invoice.partner_bank_id and invoice.partner_bank_id.state in ('bvr', 'bv') and \
+                if invoice.partner_bank_id and invoice.partner_bank_id.state == 'bvr' and \
                         invoice.reference_type != 'bvr':
                     return False
         return True
