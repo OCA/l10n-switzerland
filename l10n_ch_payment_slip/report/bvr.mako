@@ -198,7 +198,7 @@
            <br/>
        </div>
 
-       <div id="cont_${inv.id}" style="padding-left:20mm;padding-top:0;padding-bottom:10;height:180mm">
+       <div id="cont_${inv.id}" style="padding-left:20mm;padding-top:0;padding-bottom:10;height:180mm;z-index:3500">
         <!-- Your communication message here -->
        </div>
     %if company.bvr_background:
@@ -210,10 +210,11 @@
            <tr><td>${_space(_get_ref(inv))}</td></tr>
            <tr><td>
             %if inv.partner_id.id != commercial_partner.id:
-                ${commercial_partner.name or ''|entity}</td></tr>
+                ${commercial_partner.name or ''|entity}
             %else:
-                ${inv.partner_id.name |entity}</td></tr>
+                ${inv.partner_id.name |entity}
             %endif
+            </td></tr>
            <tr><td>${inv.partner_id.street or ''|entity}</td></tr>
            <tr><td>${inv.partner_id.street2 or ''|entity}</td></tr>
            <tr><td>${inv.partner_id.zip or ''|entity} ${inv.partner_id.city or ''|entity}</td></tr>
@@ -249,20 +250,20 @@
            <table class="slip_add">
                <tr><td>
                 %if inv.partner_id.id != commercial_partner.id:
-                    ${commercial_partner.name or ''|entity}</td></tr>
+                    ${commercial_partner.name or ''|entity}
                 %else:
-                    ${inv.partner_id.name |entity}</td></tr>
+                    ${inv.partner_id.name |entity}
                 %endif
+               </td></tr>
                <tr><td>${inv.partner_id.street or ''|entity}</td></tr>
                <tr><td>${inv.partner_id.street2 or ''|entity}</td></tr>
                <tr><td>${inv.partner_id.zip or ''|entity} ${inv.partner_id.city or ''|entity}</td></tr>
-           </table></td>
+           </table>
        </div>
 
        %if inv.partner_bank_id.print_partner:
        <div id="slip2_comp" class="slip2_comp">
            <table class="slip_add">
-               <tr><td>
             <tr><td>${user.company_id.partner_id.name}</td></tr>
             <tr><td>${user.company_id.partner_id.street}</td></tr>
             <tr><td></td></tr>
