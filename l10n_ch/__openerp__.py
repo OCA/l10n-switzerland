@@ -47,7 +47,7 @@ Due to important refactoring needs and the Switzerland adoption of new internati
 The modules will be soon available on OpenERP swiss localization on launchpad:
 https://launchpad.net/openerp-swiss-localization
 """,
- 'version': '7.0',
+ 'version': '7.1',
  'author': 'Camptocamp',
  'category': 'Localization/Account Charts',
  'website': 'http://www.camptocamp.com',

@@ -11,12 +11,12 @@
                         <group colspan="4">
                             <field name="bvr_delta_horz"/>
                             <field name="bvr_delta_vert"/>
-                            <field name="bvr_scan_line_vert"/>
                             <field name="bvr_scan_line_horz"/>
+                            <field name="bvr_scan_line_vert"/>
                             <field name="bvr_scan_line_font_size"/>
                             <field name="bvr_scan_line_letter_spacing"/>
-                            <field name="bvr_add_vert"/>
                             <field name="bvr_add_horz"/>
+                            <field name="bvr_add_vert"/>
                             <field name="bvr_background"/>
                         </group>
                     </page>

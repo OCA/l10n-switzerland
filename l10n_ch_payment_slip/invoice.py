@@ -30,7 +30,6 @@ class AccountInvoice(Model):
 
     _compile_get_ref = re.compile('[^0-9]')
 
-
     def _get_reference_type(self, cursor, user, context=None):
         """Function use by the function field reference_type in order to initalise available
         BVR Reference Types"""
@@ -38,7 +37,6 @@ class AccountInvoice(Model):
                                                               context=context)
         res.append(('bvr', 'BVR'))
         return res
-
 
     def _compute_full_bvr_name(self, cursor, uid, ids, field_names, arg, context=None):
         res = {}
@@ -63,12 +61,16 @@ class AccountInvoice(Model):
         if isinstance(inv_id, list):
             inv_id = inv_id[0]
         inv = self.browse(cursor, uid, inv_id, context=context)
+        ## We check if the type is bvr, if not we return false
+        if inv.partner_bank_id.state != 'bvr':
+            return ''
+        ##
         if inv.partner_bank_id.bvr_adherent_num:
             res = inv.partner_bank_id.bvr_adherent_num
         invoice_number = ''
         if inv.number:
             invoice_number = self._compile_get_ref.sub('', inv.number)
-        return mod10r(res + invoice_number.rjust(26-len(res), '0'))
+        return mod10r(res + invoice_number.rjust(26 - len(res), '0'))
 
     def _space(self, nbr, nbrspc=5):
         """Spaces * 5.
@@ -79,35 +81,31 @@ class AccountInvoice(Model):
         """
         return ''.join([' '[(i - 2) % nbrspc:] + c for i, c in enumerate(nbr)])
 
-
     def action_number(self, cursor, uid, ids, context=None):
         res = super(AccountInvoice, self).action_number(cursor, uid, ids, context=context)
         for inv in self.browse(cursor, uid, ids, context=context):
-            if inv.type != 'out_invoice':
+            if inv.type != 'out_invoice' or inv.partner_bank_id.state != 'bvr':
                 continue
             ref = inv.get_bvr_ref()
-            inv.write({'reference': ref})
             move_id = inv.move_id
             if move_id:
-                cursor.execute('UPDATE account_move SET ref=%s ' \
-                               'WHERE id=%s',
+                cursor.execute('UPDATE account_move SET ref=%s'
+                               '  WHERE id=%s',
                                (ref, move_id.id))
-                cursor.execute('UPDATE account_move_line SET ref=%s ' \
-                                'WHERE move_id=%s',
-                                (ref, move_id.id))
-                cursor.execute('UPDATE account_analytic_line SET ref=%s ' \
-                                'FROM account_move_line ' \
-                                'WHERE account_move_line.move_id = %s ' \
-                                'AND account_analytic_line.move_id = account_move_line.id',
-                                (ref, move_id.id))
+                cursor.execute('UPDATE account_move_line SET ref=%s'
+                               '  WHERE move_id=%s',
+                               (ref, move_id.id))
+                cursor.execute('UPDATE account_analytic_line SET ref=%s'
+                               '   FROM account_move_line '
+                               ' WHERE account_move_line.move_id = %s '
+                               '   AND account_analytic_line.move_id = account_move_line.id',
+                               (ref, move_id.id))
         return res
 
     def copy(self, cursor, uid, inv_id, default=None, context=None):
         default = default or {}
-        default.update({'reference' : False})
+        default.update({'reference': False})
         return super(AccountInvoice, self).copy(cursor, uid, inv_id, default, context)
-
-
 
 
 class AccountTaxCode(Model):

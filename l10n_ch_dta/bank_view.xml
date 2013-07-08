@@ -7,7 +7,7 @@
       <field name="inherit_id" ref="base.view_partner_bank_form"/>
       <field name="arch" type="xml">
         <group name="bank" position="after">
-          <group string="DTA options" attrs="{'invisible': ['|', ('company_id', '=', False), ('state','in',['bv','bvr'])]}">
+          <group string="DTA options" attrs="{'invisible': [('company_id', '=', False)]}">
             <field name="dta_code"/>
           </group>
         </group>
