@@ -227,6 +227,14 @@ class BvrImporterWizard(TransientModel):
                                              ('account_id.type', 'in', ['receivable', 'payable']),
                                              ('journal_id.type', '=', 'sale')],
                                             order='date desc', context=context)
+            #for multiple payments
+            if not line_ids:
+                line_ids = move_line_obj.search(cursor, uid,
+                                                [('transaction_ref', '=', reference),
+                                                ('reconcile_id', '=', False),
+                                                ('account_id.type', 'in', ['receivable', 'payable']),
+                                                ('journal_id.type', '=', 'sale')],
+                                                order='date desc', context=context)                                            
             if not line_ids:
                 line_ids = self._reconstruct_invoice_ref(cursor, uid, reference, None)
             if line_ids and voucher_enabled:
