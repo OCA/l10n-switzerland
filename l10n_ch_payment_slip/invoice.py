@@ -21,14 +21,17 @@ import re
 
 from openerp.osv.orm import Model, fields
 from openerp.tools import mod10r
-
-
+   
 class AccountInvoice(Model):
     """Inherit account.invoice in order to add bvr
     printing functionnalites. BVR is a Swiss payment vector"""
     _inherit = "account.invoice"
 
     _compile_get_ref = re.compile('[^0-9]')
+    
+    def init(self, cr):
+        cr.execute('UPDATE account_move_line SET transaction_ref = ref;')
+        return True
 
     def _get_reference_type(self, cursor, user, context=None):
         """Function use by the function field reference_type in order to initalise available
@@ -40,8 +43,19 @@ class AccountInvoice(Model):
 
     def _compute_full_bvr_name(self, cursor, uid, ids, field_names, arg, context=None):
         res = {}
+        move_line_obj = self.pool.get('account.move.line')
+        account_obj = self.pool.get('account.account')
+        tier_account_id = account_obj.search(cursor, uid, [('type','in',['receivable','payable'])])
         for inv in self.browse(cursor, uid, ids, context=context):
-            res[inv.id] = self._space(inv.get_bvr_ref())
+            move_lines = move_line_obj.search(cursor, uid, [('move_id','=',inv.move_id.id),('account_id','in',tier_account_id)])
+            if move_lines:
+                if len(move_lines) == 1:
+                    res[inv.id] = self._space(inv.get_bvr_ref())
+                else:
+                    refs = []
+                    for move_line in move_line_obj.browse(cursor, uid, move_lines, context=context):
+                        refs.append(self._space(move_line.get_bvr_ref()))
+                    res[inv.id] = ' ; '.join(refs)
         return res
 
     _columns = {
@@ -80,34 +94,75 @@ class AccountInvoice(Model):
             '12 34567 89012 345'
         """
         return ''.join([' '[(i - 2) % nbrspc:] + c for i, c in enumerate(nbr)])
-
-    def action_number(self, cursor, uid, ids, context=None):
-        res = super(AccountInvoice, self).action_number(cursor, uid, ids, context=context)
-        for inv in self.browse(cursor, uid, ids, context=context):
-            if inv.type != 'out_invoice' or inv.partner_bank_id.state != 'bvr':
+        
+    def action_number(self, cr, uid, ids, context=None):
+        res = super(AccountInvoice, self).action_number(cr, uid, ids, context=context)
+        move_line_obj = self.pool.get('account.move.line')
+        account_obj = self.pool.get('account.account')
+        tier_account_id = account_obj.search(cr, uid, [('type','in',['receivable','payable'])])
+        
+        for inv in self.browse(cr, uid, ids, context=context):
+            if inv.type != 'out_invoice' and inv.partner_bank_id.state != 'bvr':
                 continue
-            ref = inv.get_bvr_ref()
-            move_id = inv.move_id
-            if move_id:
-                cursor.execute('UPDATE account_move SET ref=%s'
-                               '  WHERE id=%s',
-                               (ref, move_id.id))
-                cursor.execute('UPDATE account_move_line SET ref=%s'
-                               '  WHERE move_id=%s',
-                               (ref, move_id.id))
-                cursor.execute('UPDATE account_analytic_line SET ref=%s'
-                               '   FROM account_move_line '
-                               ' WHERE account_move_line.move_id = %s '
-                               '   AND account_analytic_line.move_id = account_move_line.id',
-                               (ref, move_id.id))
-        return res
+            move_lines = move_line_obj.search(cr, uid, [('move_id','=',inv.move_id.id),('account_id','in',tier_account_id)])
+            if move_lines:
+                if len(move_lines) == 1:
+                    ref = inv.get_bvr_ref()
+                    move_id = inv.move_id
+                    if move_id:           
+                        cr.execute('UPDATE account_move_line SET transaction_ref=%s'
+                                    '  WHERE move_id=%s',
+                                    (ref, move_id.id))
+                        cr.execute('UPDATE account_analytic_line SET ref=%s'
+                                    '   FROM account_move_line '
+                                    ' WHERE account_move_line.move_id = %s '
+                                    '   AND account_analytic_line.move_id = account_move_line.id',
+                                    (ref, move_id.id))                      
+                else:
+                    for move_line in move_line_obj.browse(cr, uid, move_lines,context=context):
+                        ref = move_line.get_bvr_ref()
+                        if ref:
+                            #nosense to set a number on level account.move
+                            #write ref on move.line
+                            cr.execute('UPDATE account_move_line SET transaction_ref=%s'
+                                            '  WHERE id=%s',
+                                            (ref, move_line.id))
+                            #write ref on analytic.line
+                            cr.execute('UPDATE account_analytic_line SET ref=%s'
+                                            '   FROM account_move_line '
+                                            ' WHERE account_move_line.move_id = %s '
+                                            '   AND account_analytic_line.move_id = account_move_line.id',
+                                            (ref, move_line.move_id.id))
+        return res      
 
     def copy(self, cursor, uid, inv_id, default=None, context=None):
         default = default or {}
         default.update({'reference': False})
         return super(AccountInvoice, self).copy(cursor, uid, inv_id, default, context)
 
+class AccountMoveLine(Model):
 
+    _inherit = "account.move.line"
+    
+    _compile_get_ref = re.compile('[^0-9]')
+        
+    def get_bvr_ref(self, cursor, uid, move_line_id, context=None):
+        """Retrieve ESR/BVR reference from move line in order to print it"""
+        res = ''
+        if isinstance(move_line_id, list):
+            move_line_id = move_line_id[0]
+        move_line = self.browse(cursor, uid, move_line_id, context=context)
+        ## We check if the type is bvr, if not we return false
+        if move_line.invoice.partner_bank_id.state != 'bvr':
+            return ''
+        ##
+        if move_line.invoice.partner_bank_id.bvr_adherent_num:
+            res = move_line.invoice.partner_bank_id.bvr_adherent_num
+        move_number = ''
+        if move_line.invoice.number:
+            move_number = move_line.invoice.number + self._compile_get_ref.sub('', str(move_line_id))
+        return mod10r(res + move_number.rjust(26 - len(res), '0'))       
+    
 class AccountTaxCode(Model):
     """Inherit account tax code in order
     to add a Case code"""
