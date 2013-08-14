@@ -31,12 +31,18 @@ institutes.
 If voucher is installed importing V11 files will generate a voucher
 if possible in statement lines.
 
+v7.2 adds transaction_ref field in order to manage reconciliation
+in multi payment context (unique reference needed on account.move.line)
+
+In the future v8, this field will be removed from this addon
+but will remain in the data model via new banking addons dependence.
+
 """,
  'version': '1.1',
  'author': 'Camptocamp',
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
- 'depends': ['base', 'report_webkit', 'l10n_ch_base_bank','account_advanced_reconcile_transaction_ref'],
+ 'depends': ['base', 'report_webkit', 'l10n_ch_base_bank'],
  'data': ["company_view.xml",
           "bank_view.xml",
           "account_invoice_view.xml",
