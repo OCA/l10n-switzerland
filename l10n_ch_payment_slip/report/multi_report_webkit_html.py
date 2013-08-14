@@ -18,11 +18,11 @@
 #
 ##############################################################################
 
-#from openerp.report import report_sxw
-
 from .report_webkit_html import L10nCHReportWebkitHtml
 from .webkit_parser import MultiBvrWebKitParser
 
+from openerp.osv.osv import except_osv
+from openerp.tools.translate import _
 
 class L10nCHReportWebkitHtmlMulti(L10nCHReportWebkitHtml):
     def __init__(self, cr, uid, name, context):
@@ -32,16 +32,12 @@ class L10nCHReportWebkitHtmlMulti(L10nCHReportWebkitHtml):
         cursor = self.cr
         pool = self.pool
         move_line_obj = pool.get('account.move.line')
-        invoice_id = move_line_obj.read(cursor,self.uid,move_ids[0],['invoice'])['invoice'][0]
+        if not move_ids:
+            raise except_osv(_('UserError'),
+                             _('Your invoice should be validated to generate BVR references.'))
+        invoice_id = move_line_obj.read(cursor, self.uid, move_ids[0], ['invoice'])['invoice'][0]
         if invoice_id:
-            return super(L10nCHReportWebkitHtmlMulti, self)._check([invoice_id])     
-            
-    '''def _get_ref(self, move_line):
-        cursor = self.cr
-        pool = self.pool
-        inv_obj = pool.get('account.invoice')        
-        return inv_obj.get_bvr_ref_from_move_line(cursor,self.uid,move_line.id)'''          
-           
+            return super(L10nCHReportWebkitHtmlMulti, self)._check([invoice_id])
 
 MultiBvrWebKitParser('report.invoice_bvr_webkit_multi',
                       'account.invoice',
