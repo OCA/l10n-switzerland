@@ -118,6 +118,7 @@ class BvrImporterWizard(TransientModel):
                 records.append(record)
         return records
 
+    #deprecated
     def _create_voucher_from_record(self, cursor, uid, record,
                                     statement, line_ids, context=None):
         """Create a voucher with voucher line"""
@@ -234,7 +235,7 @@ class BvrImporterWizard(TransientModel):
                                                 ('reconcile_id', '=', False),
                                                 ('account_id.type', 'in', ['receivable', 'payable']),
                                                 ('journal_id.type', '=', 'sale')],
-                                                order='date desc', context=context)                                            
+                                                order='date desc', context=context)
             if not line_ids:
                 line_ids = self._reconstruct_invoice_ref(cursor, uid, reference, None)
             if line_ids and voucher_enabled:
