@@ -178,7 +178,7 @@
        <% setLang(move.invoice.partner_id.lang) %>
        <!--adresses + info block -->
         <table class="dest_address_bvr"  style="position:absolute;width:230px;word-wrap:break-word">
-          <% commercial_partner = move.invoice.commercial_partner_id if hasattr(move, 'commercial_partner_id') else move.invoice.partner_id %>
+          <% commercial_partner = move.invoice.commercial_partner_id if hasattr(move.invoice, 'commercial_partner_id') else move.invoice.partner_id %>
                 %if move.invoice.partner_id.id != commercial_partner.id:
                 <tr><td>${commercial_partner.name or ''}</td></tr>
                 <tr><td>${move.invoice.partner_id.title and move.invoice.partner_id.title.name or ''} ${move.invoice.partner_id.name }</td></tr>
