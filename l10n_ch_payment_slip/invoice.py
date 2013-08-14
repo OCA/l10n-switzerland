@@ -22,6 +22,34 @@ import re
 from openerp.osv.orm import Model, fields
 from openerp.tools import mod10r
 
+class AccountMoveLine(Model):
+
+    _inherit = "account.move.line"
+
+    _compile_get_ref = re.compile('[^0-9]')
+
+    _columns = {
+        'transaction_ref': fields.char('Transaction Ref.', size=128),
+    }
+
+    def get_bvr_ref(self, cursor, uid, move_line_id, context=None):
+        """Retrieve ESR/BVR reference from move line in order to print it"""
+        res = ''
+        if isinstance(move_line_id, (tuple, list)):
+            assert len(move_line_id) == 1, "Only 1 ID expected"
+            move_line_id = move_line_id[0]
+        move_line = self.browse(cursor, uid, move_line_id, context=context)
+        ## We check if the type is bvr, if not we return false
+        if move_line.invoice.partner_bank_id.state != 'bvr':
+            return ''
+        ##
+        if move_line.invoice.partner_bank_id.bvr_adherent_num:
+            res = move_line.invoice.partner_bank_id.bvr_adherent_num
+        move_number = ''
+        if move_line.invoice.number:
+            move_number = self._compile_get_ref.sub('', str(move_line.invoice.number) + str(move_line_id))
+        return mod10r(res + move_number.rjust(26 - len(res), '0'))
+
 class AccountInvoice(Model):
     """Inherit account.invoice in order to add bvr
     printing functionnalites. BVR is a Swiss payment vector"""
@@ -30,9 +58,9 @@ class AccountInvoice(Model):
     _compile_get_ref = re.compile('[^0-9]')
 
     def init(self, cr):
-        cr.execute('UPDATE account_move_line SET transaction_ref = ref
-                    WHERE transaction_ref IS NULL
-                    AND ref IS NOT NULL')
+        cr.execute('UPDATE account_move_line SET transaction_ref = ref '
+                   'WHERE transaction_ref IS NULL '
+                   'AND ref IS NOT NULL')
         return True
 
     def _get_reference_type(self, cursor, user, context=None):
@@ -138,34 +166,6 @@ class AccountInvoice(Model):
         default = default or {}
         default.update({'reference': False})
         return super(AccountInvoice, self).copy(cursor, uid, inv_id, default, context)
-
-class AccountMoveLine(Model):
-
-    _inherit = "account.move.line"
-
-    _compile_get_ref = re.compile('[^0-9]')
-
-    _columns = {
-        'transaction_ref': fields.char('Transaction Ref.', size=128),
-    }
-
-    def get_bvr_ref(self, cursor, uid, move_line_id, context=None):
-        """Retrieve ESR/BVR reference from move line in order to print it"""
-        res = ''
-        if isinstance(move_line_id, (tuple, list)):
-            assert len(move_line_id) == 1, "Only 1 ID expected"
-            move_line_id = move_line_id[0]
-        move_line = self.browse(cursor, uid, move_line_id, context=context)
-        ## We check if the type is bvr, if not we return false
-        if move_line.invoice.partner_bank_id.state != 'bvr':
-            return ''
-        ##
-        if move_line.invoice.partner_bank_id.bvr_adherent_num:
-            res = move_line.invoice.partner_bank_id.bvr_adherent_num
-        move_number = ''
-        if move_line.invoice.number:
-            move_number = self._compile_get_ref.sub('', str(move_line.invoice.number) + str(move_line_id))
-        return mod10r(res + move_number.rjust(26 - len(res), '0'))
 
 class AccountTaxCode(Model):
     """Inherit account tax code in order
