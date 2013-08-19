@@ -32,6 +32,12 @@ class AccountMoveLine(Model):
         'transaction_ref': fields.char('Transaction Ref.', size=128),
     }
 
+    def init(self, cr):
+        cr.execute('UPDATE account_move_line SET transaction_ref = ref '
+                   'WHERE transaction_ref IS NULL '
+                   'AND ref IS NOT NULL')
+        return True
+
     def get_bvr_ref(self, cursor, uid, move_line_id, context=None):
         """Retrieve ESR/BVR reference from move line in order to print it"""
         res = ''
@@ -56,12 +62,6 @@ class AccountInvoice(Model):
     _inherit = "account.invoice"
 
     _compile_get_ref = re.compile('[^0-9]')
-
-    def init(self, cr):
-        cr.execute('UPDATE account_move_line SET transaction_ref = ref '
-                   'WHERE transaction_ref IS NULL '
-                   'AND ref IS NOT NULL')
-        return True
 
     def _get_reference_type(self, cursor, user, context=None):
         """Function use by the function field reference_type in order to initalise available
@@ -125,7 +125,7 @@ class AccountInvoice(Model):
         """
         return ''.join([' '[(i - 2) % nbrspc:] + c for i, c in enumerate(nbr)])
 
-    def update_ref_on_account_analytic_line(cr, ref, move_id):
+    def _update_ref_on_account_analytic_line(self, cr, uid, ref, move_id, context=None):
         cr.execute('UPDATE account_analytic_line SET ref=%s'
                     '   FROM account_move_line '
                     ' WHERE account_move_line.move_id = %s '
@@ -151,7 +151,7 @@ class AccountInvoice(Model):
                         cr.execute('UPDATE account_move_line SET transaction_ref=%s'
                                     '  WHERE move_id=%s',
                                     (ref, move_id.id))
-                        self.update_ref_on_account_analytic_line(cr, ref, move_id.id)
+                        self._update_ref_on_account_analytic_line(cr, uid, ref, move_id.id)
                 else:
                     for move_line in move_line_obj.browse(cr, uid, move_lines, context=context):
                         ref = move_line.get_bvr_ref()
@@ -159,7 +159,7 @@ class AccountInvoice(Model):
                             cr.execute('UPDATE account_move_line SET transaction_ref=%s'
                                             '  WHERE id=%s',
                                             (ref, move_line.id))
-                            self.update_ref_on_account_analytic_line(cr, ref, move_line.move_id.id)
+                            self._update_ref_on_account_analytic_line(cr, uid, ref, move_line.move_id.id)
         return res
 
     def copy(self, cursor, uid, inv_id, default=None, context=None):
