@@ -1,6 +1,6 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-# 	* l10n_ch_dta
+#       * l10n_ch_dta
 #
 msgid ""
 msgstr ""
@@ -29,12 +29,12 @@ msgstr "Ordre de Paiement"
 #. module: l10n_ch_dta
 #: view:create.dta.wizard:0
 msgid "DTA Generation"
-msgstr "Génération DTA"
+msgstr "Génération du fichier DTA"
 
 #. module: l10n_ch_dta
 #: view:res.partner.bank:0
 msgid "DTA options"
-msgstr "DTA options"
+msgstr "Option de DTA"
 
 #. module: l10n_ch_dta
 #: field:payment.order,dta_ids:0
@@ -56,4 +56,3 @@ msgstr "Créer DTA"
 #: view:create.dta.wizard:0
 msgid "Cancel"
 msgstr "Annuler"
-
