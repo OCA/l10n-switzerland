@@ -238,7 +238,7 @@
             <tr><td>${user.company_id.partner_id.name}</td></tr>
             <tr><td>${user.company_id.partner_id.street}</td></tr>
             <tr><td></td></tr>
-            <tr><td>${user.company_id.partner_id.city} ${user.company_id.partner_id.zip}</td></tr>
+            <tr><td>${user.company_id.partner_id.zip} ${user.company_id.partner_id.city}</td></tr>
         </table>
       </div>
       %endif
@@ -267,7 +267,7 @@
             <tr><td>${user.company_id.partner_id.name}</td></tr>
             <tr><td>${user.company_id.partner_id.street}</td></tr>
             <tr><td></td></tr>
-            <tr><td>${user.company_id.partner_id.city} ${user.company_id.partner_id.zip}</td></tr>
+            <tr><td>${user.company_id.partner_id.zip} ${user.company_id.partner_id.city}</td></tr>
            </table>
        </div>
        %endif
