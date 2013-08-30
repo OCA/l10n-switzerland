@@ -34,7 +34,7 @@ msgstr "Génération du fichier DTA"
 #. module: l10n_ch_dta
 #: view:res.partner.bank:0
 msgid "DTA options"
-msgstr "Option de DTA"
+msgstr "Options de DTA"
 
 #. module: l10n_ch_dta
 #: field:payment.order,dta_ids:0
