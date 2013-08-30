@@ -18,8 +18,6 @@
            }
         ${css}
     </style>
-       </style>
-
    </head>
    <body topmargin="0px">
        <script type="text/javascript">

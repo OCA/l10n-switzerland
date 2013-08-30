@@ -93,12 +93,13 @@ TODO :
                 "security/ir.model.access.csv",
                 "report/report_webkit_html_view.xml",
                 ],
- 
+
  "test": ['test/l10n_ch_report.yml',
           'test/l10n_ch_dta.yml',
-         ],
+          'test/l10n_ch_v11.yml',
+          'test/l10n_ch_v11_part.yml'],
 
- "auto_install": False,
+ "active": False,
  "installable": True,
  "certificate": "001103836064567088989",
  'images': ['images/config_chart_l10n_ch.jpeg','images/l10n_ch_chart.jpeg']}
