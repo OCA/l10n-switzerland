@@ -147,6 +147,8 @@ class AccountInvoice(Model):
                 continue
             move_lines = move_line_obj.search(cr, uid, [('move_id', '=', inv.move_id.id),
                                                         ('account_id', 'in', tier_account_id)])
+            # We keep this branch for compatibility with single BVR report.
+            # This should be cleaned when porting to V8
             if move_lines:
                 if len(move_lines) == 1:
                     ref = inv.get_bvr_ref()

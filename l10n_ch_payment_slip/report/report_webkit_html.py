@@ -32,6 +32,10 @@ from openerp.tools.translate import _
 
 
 class L10nCHReportWebkitHtml(report_sxw.rml_parse):
+    """Report that output single BVR from invoice.
+    This report is deprectated and will be merged
+    with multi payment term BVR report when porting to V8"""
+
     def __init__(self, cr, uid, name, context):
         super(L10nCHReportWebkitHtml, self).__init__(cr, uid, name, context=context)
         self.localcontext.update({
