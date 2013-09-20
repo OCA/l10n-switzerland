@@ -1,3 +1,6 @@
+Change with release 7.2
+    L10n_ch_payment_slip pass to version 1.2 and now supports multi payment terms.
+
 Change with release 7.1
 
   *) Add ccp account on res_bank but keep retro compatibility with old model.
