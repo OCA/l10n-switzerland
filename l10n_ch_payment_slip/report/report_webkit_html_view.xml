@@ -104,6 +104,7 @@
       }]]></field>
       <field name="name">BVR header</field>
     </record>
+    <!-- deprecated report to be merged with multi bvr report -->
     <report auto="False"
             id="report_bvr_html"
             model="account.invoice"
