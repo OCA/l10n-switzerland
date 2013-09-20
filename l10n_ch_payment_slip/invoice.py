@@ -22,6 +22,7 @@ import re
 from openerp.osv.orm import Model, fields
 from openerp.tools import mod10r
 
+
 class AccountMoveLine(Model):
 
     _inherit = "account.move.line"
@@ -33,9 +34,9 @@ class AccountMoveLine(Model):
     }
 
     def init(self, cr):
-        cr.execute('UPDATE account_move_line SET transaction_ref = ref '
-                   'WHERE transaction_ref IS NULL '
-                   'AND ref IS NOT NULL')
+        cr.execute('UPDATE account_move_line SET transaction_ref = ref'
+                   '  WHERE transaction_ref IS NULL'
+                   '   AND ref IS NOT NULL')
         return True
 
     def get_bvr_ref(self, cursor, uid, move_line_id, context=None):
@@ -55,6 +56,7 @@ class AccountMoveLine(Model):
         if move_line.invoice.number:
             move_number = self._compile_get_ref.sub('', str(move_line.invoice.number) + str(move_line_id))
         return mod10r(res + move_number.rjust(26 - len(res), '0'))
+
 
 class AccountInvoice(Model):
     """Inherit account.invoice in order to add bvr
@@ -77,7 +79,8 @@ class AccountInvoice(Model):
         account_obj = self.pool.get('account.account')
         tier_account_id = account_obj.search(cursor, uid, [('type', 'in', ['receivable', 'payable'])])
         for inv in self.browse(cursor, uid, ids, context=context):
-            move_lines = move_line_obj.search(cursor, uid, [('move_id', '=', inv.move_id.id), ('account_id', 'in', tier_account_id)])
+            move_lines = move_line_obj.search(cursor, uid, [('move_id', '=', inv.move_id.id),
+                                                            ('account_id', 'in', tier_account_id)])
             if move_lines:
                 if len(move_lines) == 1:
                     res[inv.id] = self._space(inv.get_bvr_ref())
@@ -120,17 +123,17 @@ class AccountInvoice(Model):
         """Spaces * 5.
 
         Example:
-            >>> self._space('123456789012345')
+            self._space('123456789012345')
             '12 34567 89012 345'
         """
         return ''.join([' '[(i - 2) % nbrspc:] + c for i, c in enumerate(nbr)])
 
     def _update_ref_on_account_analytic_line(self, cr, uid, ref, move_id, context=None):
         cr.execute('UPDATE account_analytic_line SET ref=%s'
-                    '   FROM account_move_line '
-                    ' WHERE account_move_line.move_id = %s '
-                    '   AND account_analytic_line.move_id = account_move_line.id',
-                    (ref, move_id))
+                   '   FROM account_move_line '
+                   ' WHERE account_move_line.move_id = %s '
+                   '   AND account_analytic_line.move_id = account_move_line.id',
+                   (ref, move_id))
         return True
 
     def action_number(self, cr, uid, ids, context=None):
@@ -142,30 +145,33 @@ class AccountInvoice(Model):
         for inv in self.browse(cr, uid, ids, context=context):
             if inv.type != 'out_invoice' and inv.partner_bank_id.state != 'bvr':
                 continue
-            move_lines = move_line_obj.search(cr, uid, [('move_id', '=', inv.move_id.id), ('account_id', 'in', tier_account_id)])
+            move_lines = move_line_obj.search(cr, uid, [('move_id', '=', inv.move_id.id),
+                                                        ('account_id', 'in', tier_account_id)])
             if move_lines:
                 if len(move_lines) == 1:
                     ref = inv.get_bvr_ref()
                     move_id = inv.move_id
                     if move_id:
                         cr.execute('UPDATE account_move_line SET transaction_ref=%s'
-                                    '  WHERE move_id=%s',
-                                    (ref, move_id.id))
+                                   '  WHERE move_id=%s',
+                                   (ref, move_id.id))
                         self._update_ref_on_account_analytic_line(cr, uid, ref, move_id.id)
                 else:
                     for move_line in move_line_obj.browse(cr, uid, move_lines, context=context):
                         ref = move_line.get_bvr_ref()
                         if ref:
                             cr.execute('UPDATE account_move_line SET transaction_ref=%s'
-                                            '  WHERE id=%s',
-                                            (ref, move_line.id))
-                            self._update_ref_on_account_analytic_line(cr, uid, ref, move_line.move_id.id)
+                                       '  WHERE id=%s',
+                                       (ref, move_line.id))
+                            self._update_ref_on_account_analytic_line(cr, uid, ref,
+                                                                      move_line.move_id.id)
         return res
 
     def copy(self, cursor, uid, inv_id, default=None, context=None):
         default = default or {}
         default.update({'reference': False})
         return super(AccountInvoice, self).copy(cursor, uid, inv_id, default, context)
+
 
 class AccountTaxCode(Model):
     """Inherit account tax code in order
