@@ -30,5 +30,8 @@
 ##############################################################################
 
 from . import report_webkit_html
+from . import webkit_parser
+from . import multi_report_webkit_html
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

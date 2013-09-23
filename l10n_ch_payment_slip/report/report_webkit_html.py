@@ -32,6 +32,10 @@ from openerp.tools.translate import _
 
 
 class L10nCHReportWebkitHtml(report_sxw.rml_parse):
+    """Report that output single BVR from invoice.
+    This report is deprectated and will be merged
+    with multi payment term BVR report when porting to V8"""
+
     def __init__(self, cr, uid, name, context):
         super(L10nCHReportWebkitHtml, self).__init__(cr, uid, name, context=context)
         self.localcontext.update({
@@ -108,6 +112,9 @@ class L10nCHReportWebkitHtml(report_sxw.rml_parse):
         ids = invoice_ids
         for invoice in invoice_obj.browse(cursor, self.uid, ids):
             invoice_name = "%s %s" % (invoice.name, invoice.number)
+            if not invoice.number:
+                raise except_osv(_('UserError'),
+                                 _('Your invoice should be validated to generate a BVR reference.'))
             if not invoice.partner_bank_id:
                 raise except_osv(_('UserError'),
                                  _('No bank specified on invoice:\n%s' % (invoice_name)))

@@ -31,8 +31,17 @@ institutes.
 If voucher is installed importing V11 files will generate a voucher
 if possible in statement lines.
 
+v7.2 adds transaction_ref field in order to manage reconciliation
+in multi payment context (unique reference needed on account.move.line)
+
+In the future v8, this field will be removed from this addon
+but will remain in the data model via new banking addons dependence.
+
+New in version 1.2 mutliple payment terms are supported.
+Many BVR can be printed from on invoice.
+
 """,
- 'version': '1.1',
+ 'version': '1.2',
  'author': 'Camptocamp',
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
@@ -41,6 +50,7 @@ if possible in statement lines.
           "bank_view.xml",
           "account_invoice_view.xml",
           "report/report_webkit_html_view.xml",
+          "report/multi_report_webkit_html_view.xml",
           "wizard/bvr_import_view.xml",
           "data.xml"],
  'demo': [],
@@ -49,4 +59,3 @@ if possible in statement lines.
  'installable': True,
  'images': []
  }
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
