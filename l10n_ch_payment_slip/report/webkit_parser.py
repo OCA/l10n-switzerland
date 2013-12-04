@@ -21,21 +21,30 @@
 from openerp import pooler
 from openerp.addons.report_webkit import webkit_report
 
+
 class MultiBvrWebKitParser(webkit_report.WebKitParser):
 
-    def create_single_pdf(self, cursor, uid, ids, data, report_xml, context=None):
+    def create_single_pdf(self, cursor, uid, ids,
+                          data, report_xml, context=None):
         self.pool = pooler.get_pool(cursor.dbname)
         target_obj = 'account.move.line'
-        move_lines = self.get_obj_reference(cursor, uid, ids,context)
+        move_lines = self.get_obj_reference(cursor, uid, ids, context)
         context['active_model'] = self.table = target_obj
         context['active_ids'] = ids = move_lines
-        return super(MultiBvrWebKitParser, self).create_single_pdf(cursor, uid, ids, data, report_xml, context)
-    
-    def get_obj_reference(self,cursor,uid,ids,context):
+        return super(MultiBvrWebKitParser, self
+                     ).create_single_pdf(cursor, uid, ids,
+                                         data, report_xml, context)
+
+    def get_obj_reference(self, cursor, uid, ids, context):
         move_line_obj = self.pool.get('account.move.line')
         account_obj = self.pool.get('account.account')
         invoice_obj = self.pool.get('account.invoice')
-        inv = invoice_obj.browse(cursor, uid, ids[0],context)
-        tier_account_id = account_obj.search(cursor, uid, [('type', 'in', ['receivable', 'payable'])])
-        move_lines = move_line_obj.search(cursor, uid, [('move_id', '=', inv.move_id.id), ('account_id', 'in', tier_account_id)])
+        inv = invoice_obj.browse(cursor, uid, ids[0], context)
+        tier_account_id = account_obj.search(
+            cursor, uid,
+            [('type', 'in', ['receivable', 'payable'])])
+        move_lines = move_line_obj.search(
+            cursor, uid,
+            [('move_id', '=', inv.move_id.id),
+             ('account_id', 'in', tier_account_id)])
         return move_lines
