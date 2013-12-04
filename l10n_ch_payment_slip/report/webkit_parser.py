@@ -29,8 +29,6 @@ class MultiBvrWebKitParser(webkit_report.WebKitParser):
         move_lines = self.get_obj_reference(cursor, uid, ids,context)
         context['active_model'] = self.table = target_obj
         context['active_ids'] = ids = move_lines
-        import pdb
-        pdb.set_trace()
         return super(MultiBvrWebKitParser, self).create_single_pdf(cursor, uid, ids, data, report_xml, context)
     
     def get_obj_reference(self,cursor,uid,ids,context):
