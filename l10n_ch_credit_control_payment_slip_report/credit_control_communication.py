@@ -43,7 +43,7 @@ class MultiBvrWebKitParserCreditControl(webkit_parser.MultiBvrWebKitParser):
        In parameter insted of an invoice, so the function get_obj_reference
        return directly ids"""
 
-    def get_obj_reference(self, cursor, uid, ids, context):
+    def get_obj_reference(self, cursor, uid, ids, context=None):
         return ids
 
 MultiBvrWebKitParserCreditControl('report.invoice_bvr_webkit_multi_credit_control',

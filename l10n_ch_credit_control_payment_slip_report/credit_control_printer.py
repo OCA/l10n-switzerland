@@ -19,7 +19,7 @@
 ##############################################################################
 import base64
 
-from openerp.osv import orm, fields
+from openerp.osv import orm
 from openerp.tools.translate import _
 
 

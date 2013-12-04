@@ -1,8 +1,8 @@
 <openerp>
   <data>
 
-   <report auto="False"
-    		menu="False"
+    <report auto="False"
+            menu="False"
             id="report_bvr_html_multi_credit_control"
             model="account.invoice"
             name="invoice_bvr_webkit_multi_credit_control"
