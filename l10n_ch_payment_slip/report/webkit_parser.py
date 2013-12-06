@@ -31,9 +31,9 @@ class MultiBvrWebKitParser(webkit_report.WebKitParser):
         move_line_ids = self.get_obj_reference(cursor, uid, ids, context=context)
         ctx_multi_bvr = context.copy()
         ctx_multi_bvr['active_model'] = self.table = target_obj
-        ctx_multi_bvr['active_ids'] = ids = move_line_ids
+        ctx_multi_bvr['active_ids'] = move_line_ids
         return super(MultiBvrWebKitParser, self
-                     ).create_single_pdf(cursor, uid, ids,
+                     ).create_single_pdf(cursor, uid, move_line_ids,
                                          data, report_xml, ctx_multi_bvr)
 
     def get_obj_reference(self, cursor, uid, ids, context=None):
