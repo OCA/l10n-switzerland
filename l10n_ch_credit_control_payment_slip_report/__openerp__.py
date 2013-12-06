@@ -19,7 +19,8 @@
 ##############################################################################
 {
         "name" : "Print BVR credit control",
-        "description" : """print BVR credit control
+        "description" : """Add possibility to print BVR of
+	related credit control lines
         """,
         "version" : "1.0",
         "author" : "Camptocamp",
