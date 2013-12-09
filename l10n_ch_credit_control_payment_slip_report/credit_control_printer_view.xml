@@ -1,0 +1,18 @@
+<openerp>
+  <data>
+
+    <record id="credit_line_printer_form" model="ir.ui.view">
+      <field name="name">credit.line.printer.form</field>
+      <field name="model">credit.control.printer</field>
+      <field name="inherit_id" ref="account_credit_control.credit_line_printer_form"/>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <button name="print_lines" position="after">
+            <button name="print_linked_bvr" string="Print BVR" type="object" icon="gtk-execute" attrs="{'invisible': [('state', '==', 'done')]}"/>
+        </button>
+      </field>
+    </record>
+
+  </data>
+</openerp>
+ 
