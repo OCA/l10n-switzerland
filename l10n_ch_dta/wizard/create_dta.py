@@ -623,9 +623,10 @@ class DTAFileGenerator(TransientModel):
         dta_data = _u2a(dta)
         dta_data = base64.encodestring(dta)
         payment_obj.set_done(cr, uid, [data['id']], context)
-        dta_dict = {'name': 'DTA%s' % time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
+        dta_file_name='DTA%s.txt' % time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime())
+        dta_dict = {'name': dta_file_name,
                     'datas': dta_data,
-                    'datas_fname': 'DTA%s.txt' % time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
+                    'datas_fname': dta_file_name,
                     'res_model': 'payment.order',
                     'res_id': data['id']}
         dta_id = attachment_obj.create(cr, uid, dta_dict, context=context)
