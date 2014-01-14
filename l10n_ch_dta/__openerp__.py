@@ -29,7 +29,7 @@ Generate a DTA file for swiss banking system from payment order
  'author': 'Camptocamp',
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
- 'depends': ['base', 'account_payment', 'l10n_ch_base_bank'],
+ 'depends': ['base', 'account_payment', 'l10n_ch_base_bank','document'],
  'data': ["wizard/create_dta_view.xml",
           "bank_view.xml"],
  'demo': ["demo/dta_demo.xml"],
