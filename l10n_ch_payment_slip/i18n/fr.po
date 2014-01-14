@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-09-17 07:32+0000\n"
-"PO-Revision-Date: 2013-09-17 07:28+0000\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2014-01-14 11:42+0100\n"
+"Last-Translator: Yannick Vaucher <yannick.vaucher@camptocamp.com>\n"
 "Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 
 #. module: l10n_ch_payment_slip
@@ -39,17 +39,17 @@ msgstr "BVR/ESR"
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_add_horz:0
 msgid "Horiz. position in mm for address"
-msgstr "Horiz. position in mm for address"
+msgstr "Position horiz. en mm pour l'adresse"
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_background:0
 msgid "Insert BVR background ?"
-msgstr "Insert BVR background ?"
+msgstr "Insérer l'arrière-plan BVR ?"
 
 #. module: l10n_ch_payment_slip
 #: field:bvr.import.wizard,file:0
 msgid "BVR File"
-msgstr "BVR File"
+msgstr "Fichier BVR"
 
 #. module: l10n_ch_payment_slip
 #: view:bvr.import.wizard:0
@@ -59,96 +59,88 @@ msgstr "Import"
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_add_vert:0
 msgid "BVR vert. position for address (mm)"
-msgstr "BVR vert. position for address (mm)"
+msgstr "BVR position vert. pour l'adresse (mm)"
 
 #. module: l10n_ch_payment_slip
 #: field:res.partner.bank,print_bank:0
 msgid "Print Bank on BVR"
-msgstr "Print Bank on BVR"
+msgstr "Imprimer la banque sur le BVR"
 
 #. module: l10n_ch_payment_slip
 #: view:bvr.import.wizard:0
 #: model:ir.actions.act_window,name:l10n_ch_payment_slip.wizard_bvr_import
 msgid "BVR Import"
-msgstr "BVR Import"
+msgstr "Import BVR"
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_delta_horz:0
-msgid ""
-"horiz. delta in mm 1.2 will print the bvr 1.2mm lefter, negative value is "
-"possible"
-msgstr ""
-"horiz. delta in mm 1.2 will print the bvr 1.2mm lefter, negative value is "
-"possible"
+msgid "horiz. delta in mm 1.2 will print the bvr 1.2mm lefter, negative value is possible"
+msgstr "Delta horiz. en mm 1.2 imprimera le BVR 1.2mm plus à gauche, des valeurs négatives sont possibles"
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_scan_line_horz:0
 msgid "BVR horiz. position for scan line(mm)"
-msgstr "BVR horiz. position for scan line(mm)"
+msgstr "BVR position horiz. pour la ligne de codage(mm)"
 
 #. module: l10n_ch_payment_slip
 #: field:res.partner.bank,print_account:0
 msgid "Print Account Number on BVR"
-msgstr "Print Account Number on BVR"
+msgstr "Imprimer le numéro de compte sur le BVR"
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_scan_line_letter_spacing:0
 msgid "BVR scan line letter spacing"
-msgstr "BVR scan line letter spacing"
+msgstr "Espacement des charactères de la BVR ligne de codage"
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_delta_vert:0
-msgid ""
-"vert. delta in mm 1.2 will print the bvr 1.2mm lower, negative value is "
-"possible"
-msgstr ""
-"vert. delta in mm 1.2 will print the bvr 1.2mm lower, negative value is "
-"possible"
+msgid "vert. delta in mm 1.2 will print the bvr 1.2mm lower, negative value is possible"
+msgstr "Delta vert. en mm 1.2 imprimera le BVR 1.2mm plus bas, des valeurs négatives sont possibles"
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_scan_line_horz:0
 msgid "Horiz. position in mm for scan line"
-msgstr "Horiz. position in mm for scan line"
+msgstr "Position horiz. en mm pour la ligne de codage"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_res_company
 msgid "Companies"
-msgstr "Société"
+msgstr "Sociétés"
 
 #. module: l10n_ch_payment_slip
 #: view:res.partner.bank:0
 msgid "BVR options"
-msgstr "BVR options"
+msgstr "Options BVR"
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_scan_line_font_size:0
 msgid "BVR scan line font size (pt)"
-msgstr "BVR scan line font size (pt)"
+msgstr "Taille de police de la ligne de codage BVR (pt)"
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_add_vert:0
 msgid "Vert. position in mm for address"
-msgstr "Vert. position in mm for address"
+msgstr "Position vert. en mm pour l'adresse"
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_delta_horz:0
 msgid "BVR Horz. Delta (mm)"
-msgstr "BVR Horz. Delta (mm)"
+msgstr "BVR delta horz. (mm)"
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_delta_vert:0
 msgid "BVR Vert. Delta (mm)"
-msgstr "BVR Vert. Delta (mm)"
+msgstr "BVR delta vert. (mm)"
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_scan_line_vert:0
 msgid "BVR vert. position for scan line (mm)"
-msgstr "BVR vert. position for scan line (mm)"
+msgstr "BVR position vert. pour la ligne de codage (mm)"
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_scan_line_vert:0
 msgid "Vert. position in mm for scan line"
-msgstr "Vert. position in mm for scan line"
+msgstr "Position vert. en mm pour la ligne de codage"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_res_partner_bank
@@ -163,24 +155,25 @@ msgstr "bvr.import.wizard"
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_add_horz:0
 msgid "BVR horiz. position address (mm)"
-msgstr "BVR horiz. position address (mm)"
+msgstr "BVR position horiz. adresse (mm)"
 
 #. module: l10n_ch_payment_slip
 #: view:bvr.import.wizard:0
 msgid "Cancel"
-msgstr "Cancel"
+msgstr "Annuler"
 
 #. module: l10n_ch_payment_slip
 #: field:res.partner.bank,print_partner:0
 msgid "Print Partner Address on BVR"
-msgstr "Print Partner Address on BVR"
+msgstr "Imprimer l'adresse du partenaire sur le BVR"
 
 #. module: l10n_ch_payment_slip
 #: field:account.invoice,bvr_reference:0
 msgid "BVR REF."
-msgstr "BVR REF."
+msgstr "REF. BVR"
 
 #. module: l10n_ch_payment_slip
 #: view:res.company:0
 msgid "BVR Data"
-msgstr "BVR Data"
+msgstr "Données BVR"
+
