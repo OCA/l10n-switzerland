@@ -1,0 +1,6425 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* l10n_ch
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-15 14:59+0000\n"
+"PO-Revision-Date: 2014-01-15 14:59+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_82
+msgid "Résultat hors exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2812
+msgid "Compte de commandite, commanditaire C"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_301
+msgid "Caf brut de la production vendue secteur B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_302
+msgid "Caf brut de la production vendue secteur C"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_291_00
+msgid "Autres réserves"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_300
+msgid "Caf brut de la production vendue secteur A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6041
+msgid "Nettoyage des ateliers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6032
+msgid "Charges accessoires des entrepôts"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_662
+msgid "Vitrines, décoration, foires, expositions"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_45
+#: model:account.account.template,name:l10n_ch.ch_640
+msgid "Charges d'énergie"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8410
+msgid "Frais de banque et de chèque postaux"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3423
+msgid "Ventes brutes prestations services TVA sans déd.IP"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_financial_asset
+msgid "Bilan : Immobilisations financieres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3090
+#: model:account.account.template,name:l10n_ch.ch_3290
+#: model:account.account.template,name:l10n_ch.ch_3490
+#: model:account.account.template,name:l10n_ch.ch_3690
+#: model:account.account.template,name:l10n_ch.ch_3900
+msgid "Escomptes s/ventes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_871_0
+msgid "Autres charges hors exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1100
+msgid "Créances envers des tiers suisses"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4600
+msgid "Autres charges de matières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_other_payable
+msgid "Bilan : Autres creanciers à CT"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_820_00
+msgid "Produits de l'activité hors exploitation 1"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6642
+msgid "Cadeaux à la clientèle"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6611
+msgid "Articles de publicité, échantillons"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1524
+msgid "Installations de sécurité"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4092
+#: model:account.account.template,name:l10n_ch.ch_4292
+#: model:account.account.template,name:l10n_ch.ch_4492
+#: model:account.account.template,name:l10n_ch.ch_4902
+msgid "Remises s/achats"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_623_0
+msgid "Droits de circulation, cotisations, taxes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1538
+msgid "Acomptes s/véhicules"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2330
+msgid "Provisions pour travaux de garantie à court terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7920
+msgid "Bénéfices s/ventes d'immeubles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8110
+msgid "Bilans de clôture"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6261
+msgid "Charges location pour camionnettes en crédit-bail"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2340
+msgid "Provisions pour impôts directs"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6863
+msgid "Produits financiers s/créances à l.t. envers tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6131
+msgid "ERR des machines de bureau"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6011
+msgid "Loyer interne des ateliers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1069
+msgid "Correction valeur s/titres réalisables court terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6039
+msgid "Charges accessoires de conciergerie"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4062
+msgid "Travaux de tiers secteur C"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_280
+msgid "Capital/Privé"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4060
+msgid "Travaux de tiers secteur A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_fixed_asset
+msgid "Bilan : Immo corporelles mobilieres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7018
+#: model:account.account.template,name:l10n_ch.ch_7038
+#: model:account.account.template,name:l10n_ch.ch_8218
+msgid "Charges de publicité"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5801
+msgid "Commissions pour recherche de personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_464
+#: model:account.account.template,name:l10n_ch.ch_4640
+msgid "Autres charges pour prestations de tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1973
+msgid "Droits de propriété, d'édition, conventionnels"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6235
+#: model:account.account.template,name:l10n_ch.ch_6361
+msgid "Taxes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1551
+msgid "Entrepôts à hauts rayonnages"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.fiscal.position.template,name:l10n_ch.fiscal_position_template_import
+msgid "Import/Export"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7413
+msgid "Corrections de valeur s/placements financiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_balance_net
+msgid "Solde de TVA a payer a l'AFC"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1799
+msgid "Amortissement cumulé s/autres immobilisations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6462
+msgid "Eaux usées"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_210
+#: model:account.account.template,name:l10n_ch.ch_271_0
+msgid "Dettes financières à court terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2990
+msgid "Bénéfice reporté / Perte reportée"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7510
+#: model:account.account.template,name:l10n_ch.ch_8510
+msgid "Intérêts hypothécaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_due_tva38
+#: model:account.tax.template,name:l10n_ch.vat_38
+msgid "TVA due a 3.8% (TS)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1221
+msgid "Stocks de pièces semi-ouvrées"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_chart_root
+msgid "VAT"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1250
+#: model:account.account.template,name:l10n_ch.ch_125_0
+msgid "Marchandises en consignation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6002
+msgid "Loyer des entrepôts"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6030
+msgid "Charges accessoires des usines"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1928
+msgid "Acomptes pour stocks"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2005
+msgid "Dettes c/opérations de crédit-bail"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3009
+msgid "Déductions sur le chiffre d'affaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6851
+msgid "Produits financiers s/avoirs à court terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6004
+msgid "Loyer des bâtiments de bureau et d'administration"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_lt_liability
+msgid "Bilan : Dettes à LT"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5821
+msgid "Frais de repas"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_568
+msgid "Autres charges de personnel pour l'administration"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6502
+msgid "Photocopies"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3703
+msgid "Réparations propres d'immobi.corporelles immeubles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_due_25
+msgid "Chiffre d'affaires imposable a 2.5% (TR)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_636
+msgid "Droits, taxes, autorisations, patentes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_791
+msgid "Bénéfices s/immobilisations corporelles meubles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6531
+msgid "Honoraires pour conseil"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6951
+msgid "Amortissements s/charges de recherche, dévelop."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1260
+#: model:account.account.template,name:l10n_ch.ch_126_0
+msgid "Stocks de produits finis"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1191
+msgid "Cautionnements en espèces"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_299_0
+#: model:account.account.template,name:l10n_ch.ch_299_00
+msgid "Bénéfice/Perte résultant du bilan"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6042
+msgid "Nettoyage des entrepôts"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_base_due
+msgid "Chiffre d'affaires imposable"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1051
+msgid "Placements fiduciaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_321
+msgid "Ventes brutes de marchandises secteur B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6222
+msgid "Assurances pour camions"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1849
+msgid "Amortissement cumulé s/autres charges activées"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5830
+msgid "Indemnités forfaitaires pour les cadres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6101
+msgid "ERR de mobilier et installations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6006
+msgid "Loyer du garage, du parking"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.template,name:l10n_ch.vat_100_import
+msgid "100% dédouanement TVA"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8700
+msgid "Honoraires pour expertises, conférences, publica."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1041
+msgid "Effets à recevoir"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_payable
+msgid "TVA préalable sur acquisitions (a récupérer)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6213
+msgid "Carburants pour véhicules spéciaux"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2841
+msgid "Capital-participation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6311
+msgid "Assurance garantie"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2601
+msgid "Provision pour assainissements"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3022
+msgid "Chiffre d'affaires brut TVA taux zéro"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5072
+#: model:account.account.template,name:l10n_ch.ch_5272
+#: model:account.account.template,name:l10n_ch.ch_5472
+#: model:account.account.template,name:l10n_ch.ch_5672
+#: model:account.account.template,name:l10n_ch.ch_572
+#: model:account.account.template,name:l10n_ch.ch_5720
+msgid "Prévoyance professionnelle"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6057
+msgid "Frais de réparation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_274_0
+msgid "Dettes financières à long terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_150
+msgid "Immobilisation corporelles meubles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_276_0
+msgid "Provisions"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4008
+#: model:account.account.template,name:l10n_ch.ch_4208
+msgid "Variations de stocks"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1810
+msgid "Disagio s/emprunts"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2110
+#: model:account.account.template,name:l10n_ch.ch_2711
+msgid "Dettes envers les chèques postaux"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1_2
+#: model:account.account.template,name:l10n_ch.ch_91
+#: model:account.account.template,name:l10n_ch.ch_910
+msgid "Bilan"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_257_0
+msgid "Dettes à long terme envers des institutions LPP"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_18
+#: model:account.account.template,name:l10n_ch.ch_180
+msgid "Charges activées et comptes d'actif de corrections de valeur"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_255_0
+msgid "Dettes à long terme envers des sociétés du groupe"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3422
+msgid "Ventes brutes prestations services TVA avec déd.IP"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_10
+msgid "Actifs circulants"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6580
+msgid "Conseils en développement de concepts"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2911
+msgid "Fonds de secours pour les employés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_340
+msgid "Ventes brutes de prestations de service secteur A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2852
+msgid "Participations privées aux charges d'exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1230
+msgid "Stocks de matières auxiliaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_14
+msgid "Actifs immobilisés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_890
+msgid "Impôts directs de l'entreprise"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6141
+msgid "ERR du mobilier des chambres du personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_693
+msgid "Amortissements s/immobilisations corporelles imm."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_due_38
+msgid "Chiffre d'affaires imposable a 3.8% (TS)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1639
+msgid "Amortissement cumulé s/entrepôts"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6881
+msgid "Produits financiers s/créances envers filiale B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3702
+msgid "Réparations propres d'immobi. corporelles meubles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1549
+msgid "Amortissement cumulé s/instruments et outillage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_281_00
+msgid "Capital propre des sociétés de personnes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_527
+msgid "Charges sociales pour le commerce des marchandises"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1024
+msgid "Compte en devise EUR"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2881
+msgid "Immeuble privé B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6871
+msgid "Produits financiers s/créances envers la filiale B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2880
+msgid "Immeuble privé A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1570
+msgid "Constructions mobilières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_225_0
+msgid "Autres dettes à court terme c/stés du groupe"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_base_net
+msgid "Base de calcul de TVA"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_79
+msgid "Bénéfices provenant de l'aliénation d'actifs immob"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4500
+msgid "Courant fort"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_depreciation
+msgid "PP : Amortissement"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_63
+#: model:account.account.template,name:l10n_ch.ch_8215
+msgid "Assurances-choses, droits, taxes, autorisations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_due_tva
+msgid "TVA Due "
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_329
+msgid "Déductions sur les ventes de marchandises"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6056
+msgid "Entretien du garage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6522
+msgid "Pourboires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4287
+msgid "Pertes de marchandises secteur B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1403
+#: model:account.account.template,name:l10n_ch.ch_1941
+msgid "Obligations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6160
+msgid "Charges c/installations production en crédit-bail"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_151_0
+#: model:account.account.template,name:l10n_ch.ch_1951
+msgid "Mobilier et installations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1700
+msgid "Brevets"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6575
+msgid "Frais de réseau"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_44
+msgid "Charges pour prestations de tiers (services)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6034
+msgid "Charges accessoires des bâtiments de bureau et adm"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_view_income
+msgid "Autre: Vue Produits"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1060
+msgid "Actions (cotées)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1409
+msgid "Corrections valeur s/titres à long terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3619
+msgid "Déductions s/produits des licences, brevets.etc."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1003
+msgid "Devise A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1059
+msgid "Provision pour pertes s/avoirs à court terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6005
+msgid "Loyer des locaux de personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_284_00
+msgid "Capital-actions et participation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4025
+msgid "Achat de matériel d'emballage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6000
+msgid "Loyer des usines"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6862
+msgid "Produits financiers s/participations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1177
+msgid "Créances envers l'administration des douanes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3711
+msgid "Consommation propre produit Y"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3710
+msgid "Consommation propre produit X"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6062
+msgid "Charges pour entrepôt en crédit-bail"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1401
+msgid "Bons de participation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2700
+#: model:account.account.template,name:l10n_ch.ch_270_0
+msgid "Dettes à court terme résultant prestations service"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6620
+msgid "Vitrines, décoration"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4011
+msgid "Achats de composantes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6562
+msgid "Location de matériel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3092
+#: model:account.account.template,name:l10n_ch.ch_3292
+#: model:account.account.template,name:l10n_ch.ch_3492
+msgid "Remises s/ventes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1532
+msgid "Camions"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5000
+msgid "Salaires de production"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1519
+msgid "Amortissement cumulé sur mobilier et installations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2720
+msgid "Dettes d'impôts"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_52
+msgid "Charges de personnel pour le commerce des march."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_89
+msgid "Charges d'impôt"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6063
+msgid "Charges pour des bâtiments d'exposition et vente"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_841_0
+msgid "Charges financières s/placements financiers hors exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_114_0
+#: model:account.account.template,name:l10n_ch.ch_119_00
+msgid "Autres créances à court terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_211_0
+msgid "Dettes c/chèques postaux, sociétés de virement"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2240
+msgid "Obligation à rembourser"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1159
+msgid "Provisions pertes s/autres créances envers société"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8100
+msgid "Bilans d'ouverture"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8015
+msgid "Pertes exceptionnelles s/débiteurs"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8012
+msgid "Dotations exceptionnelles aux amortissements"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3096
+#: model:account.account.template,name:l10n_ch.ch_3296
+#: model:account.account.template,name:l10n_ch.ch_3496
+#: model:account.account.template,name:l10n_ch.ch_3906
+msgid "Différences de change s/vente"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1779
+msgid "Amortissement cumulé sur goodwill"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2991
+msgid "Bénéfice de l'exercice / Perte de l'exercice"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1151
+msgid "Créances d'emprunt envers la filiale B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_purchase
+msgid "PP : Achat de marchandise"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1150
+msgid "Créances d'emprunt envers la filiale A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1530
+msgid "Automobiles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2261
+msgid "Dettes à court terme envers l'actionnaire Y"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2260
+msgid "Dettes à court terme envers l'actionnaire X"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6280
+msgid "Frets d'expédition, de transport, cargo domicile"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_229_0
+msgid "Résultat à verser"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1571
+msgid "Voies ferrées industrielles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5
+#: model:account.account.template,name:l10n_ch.ch_7011
+#: model:account.account.template,name:l10n_ch.ch_7031
+#: model:account.account.template,name:l10n_ch.ch_8211
+msgid "Charges de personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_851_00
+msgid "Charges de l'immeuble hors exploitation 1"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3741
+msgid "Consommation propre du service Y"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3740
+msgid "Consommation propre du service X"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6065
+msgid "Charges pour des locaux de personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1640
+msgid "Halles d'exposition"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_114_00
+msgid "Autres créances à court terme envers des tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1490
+#: model:account.account.template,name:l10n_ch.ch_149_0
+msgid "Actions propres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_616
+#: model:account.account.template,name:l10n_ch.ch_616_0
+msgid "Charges c/immobi. corporelles meubles crédit-bail"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1528
+msgid "Acomptes s/machines, informatique, communication"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6570
+msgid "Charges de licence/Update"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2853
+msgid "Valeur locative de l'appartement privé"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1201
+msgid "Stocks de marchandises B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1079
+msgid "Correction valeur s/autres placements court terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4061
+msgid "Travaux de tiers secteur B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7504
+#: model:account.account.template,name:l10n_ch.ch_8502
+msgid "Loyers des garages"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6850
+msgid "Produits financiers s/avoirs postaux, bancaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_610_0
+msgid "ERR d'installations de production"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3600
+msgid "Ventes de matières premières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2210
+msgid "Acomptes à court terme de tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_369
+msgid "Déductions s/les autres produits"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6802
+msgid "Charges financières pour emprunts hypothécaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1711
+msgid "Echantillons"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6400
+msgid "Force motrice"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_80
+msgid "Résultat exceptionnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1910
+#: model:account.account.template,name:l10n_ch.ch_191_0
+msgid "Créances à court terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8216
+msgid "Charges d'énergie, évacuation des déchets"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1575
+msgid "Baraques"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3421
+msgid "Ventes brutes prestations services TVA taux réduit"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6402
+msgid "Flux d'éclairage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2442
+msgid "Hypothèques sur ateliers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_454
+#: model:account.account.template,name:l10n_ch.ch_4540
+#: model:account.account.template,name:l10n_ch.ch_6430
+#: model:account.account.template,name:l10n_ch.ch_643_0
+msgid "Eau"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4081
+#: model:account.account.template,name:l10n_ch.ch_4281
+msgid "Variations de stocks secteur B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_646
+#: model:account.account.template,name:l10n_ch.ch_6460
+#: model:account.account.template,name:l10n_ch.ch_646_0
+msgid "Evacuation de déchets"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.template,name:l10n_ch.vat_38_invest_ttc
+msgid "TVA incl. 3.8% sur invest. et autres ch. (TS)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_215_0
+msgid "Dettes financières à court terme stés du groupe"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6010
+msgid "Loyer interne des usines"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1228
+msgid "Acomptes versés pour autres approvisionnements"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_611_0
+msgid "ERR d'installations pour le commerce des march."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_61
+#: model:account.account.template,name:l10n_ch.ch_610
+msgid "Entretien, réparations, remplacements (ERR)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_449
+msgid "Déductions obtenues s/achats de prestations tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_personnal_exp
+msgid "PP : Charge de personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6581
+msgid "Développement individualisé, adaptation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1404
+msgid "Obligations de caisse"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6161
+msgid "Charges c/équipements de vente en crédit-bail"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6701
+msgid "Poursuites"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_145_0
+msgid "Créances à long terme envers des sociétés du groupe"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_372
+msgid "Consommations propres de marchandises"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_700_0
+msgid "Produits de l'activité annexe 1"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1669
+msgid "Amortissement cumulé s/biens-fonds non bâtis"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_report_result
+msgid "Bilan : Resultat reporte"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_234_0
+msgid "Provisions à court terme pour impôts"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2460
+#: model:account.account.template,name:l10n_ch.ch_246_0
+msgid "Emprunts par obligations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6560
+msgid "Location en crédit-bail de matériel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6830
+#: model:account.account.template,name:l10n_ch.ch_683_0
+msgid "Charges financières pour financement LPP"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1668
+msgid "Acomptes s/immeubles d'habitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7900
+msgid "Bénéfices s/titres des actifs immobilisés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6360
+msgid "Droits"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6681
+msgid "Etudes de marché"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_216_0
+msgid "Dettes financières à court terme actionnaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4022
+msgid "Achats de matières TVA taux zéro"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3800
+msgid "Variations de stocks de produits en cours"
+msgstr ""
+
+#. module: l10n_ch
+#: model:ir.model,name:l10n_ch.model_wizard_multi_charts_accounts
+msgid "wizard.multi.charts.accounts"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_656
+msgid "Informatique"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2751
+msgid "Emprunts à long terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2760
+msgid "Provisions pour impôts"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_668
+msgid "Conseils en publicité, études de marché"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4010
+msgid "Achats d'appareils"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1169
+msgid "Provisions pertes s/autres créances actionnaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1178
+msgid "Créances envers la CNA"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_106_0
+msgid "Titres réalisables à court terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_870
+msgid "Autres résultats hors exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1440
+#: model:account.account.template,name:l10n_ch.ch_1450
+msgid "Prêts à long terme à des sociétés du groupe"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_345
+#: model:account.account.template,name:l10n_ch.ch_3450
+msgid "Ventes brutes prestations services à stés groupe"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1410
+msgid "Comptes de placement"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_600
+msgid "Loyers pour locaux de tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1111
+msgid "Créances envers la filiale B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_200_0
+msgid "Dettes à court terme résultant d'achats et prestations services envers des tiers (fournisseurs)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_100_0
+#: model:account.account.template,name:l10n_ch.ch_1900
+msgid "Caisse"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1110
+msgid "Créances envers la filiale A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6260
+msgid "Charges de location pour voitures en crédit-bail"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1521
+msgid "Infrastructures informatiques"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1525
+msgid "Appareils électroniques de mesure et de contrôle"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_due_0
+msgid "Chiffre d'affaires imposable a 0% (export)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4501
+msgid "Courant faible"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1979
+msgid "Amortissement cumulé s/immob. incorporelles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_605
+msgid "Charges d'entretien des locaux"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2160
+msgid "Dettes financières à court terme c/actionnaire X"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1972
+msgid "Droits de licence, concessions, d'usage, commerce"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6202
+msgid "Réparation, service et nettoyage des camions"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3408
+msgid "Variations stocks c/travaux en cours"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1638
+msgid "Acomptes s/entrepôts"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2161
+msgid "Dettes financières à court terme c/actionnaire Y"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2670
+msgid "Provisions pour prestations de retraite"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6893
+msgid "Gains de change s/immobilisations financières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1210
+msgid "Stocks de matières premières A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4012
+msgid "Achats d'accessoires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_652_0
+msgid "Cotisations, dons, cadeaux et pourboires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_non_ope_result
+msgid "PP : Resultat activites annexes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2230
+msgid "Dividendes non encaissés de l'exercice"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3021
+msgid "Chiffre d'affaires brut TVA taux réduit"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1648
+msgid "Acomptes s/bâtiments d'exposition et vente"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8003
+msgid "Bénéfices de change exceptionnels"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_667
+msgid "Relations publiques"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3012
+msgid "Chiffre d'affaires brut des ventes en gros"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_179_0
+msgid "Autres immobilisations incorporelles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6013
+msgid "Loyer interne des bâtiments d'exposition et vente"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6530
+msgid "Honoraires pour fiduciaire"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_540
+msgid "Salaires pour la fourniture des prestations serv."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_642_0
+msgid "Combustibles et matériaux de chauffage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2121
+msgid "Effets destinés à financer les stocks obligatoires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_200
+msgid "Dettes à court terme résultant d'achats et prestations services"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5082
+#: model:account.account.template,name:l10n_ch.ch_5282
+#: model:account.account.template,name:l10n_ch.ch_5482
+#: model:account.account.template,name:l10n_ch.ch_5682
+#: model:account.account.template,name:l10n_ch.ch_582
+msgid "Indemnités effectives"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6582
+msgid "Charges d'installation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6036
+msgid "Charges accessoires de garage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_360
+#: model:account.account.template,name:l10n_ch.ch_368
+msgid "Autres produits c/ventes et prestations services"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3020
+msgid "Chiffre d'affaires brut TVA taux normal"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2630
+msgid "Provisions pour travaux de garantie"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2002
+msgid "Dettes c/charges de personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6066
+msgid "Charges pour garage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_110
+msgid "Créances"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1421
+msgid "Participation dans la filiale B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1420
+msgid "Participation dans la filiale A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_264_0
+msgid "Provisions pour impôts (long terme)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_680
+msgid "Charges financières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6111
+msgid "ERR d'installations de locaux d'exposition"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8000
+msgid "Dissolutions de réserves"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_850
+msgid "Résultat de l'immeuble hors exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6284
+msgid "Cargo domicile"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1620
+#: model:account.account.template,name:l10n_ch.ch_162_0
+msgid "Ateliers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3601
+msgid "Ventes de matières auxiliaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7910
+msgid "Bénéfices s/ventes d'équipements d'exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2440
+msgid "Hypothèques sur bâtiments d'exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6711
+msgid "Surveillance"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3427
+msgid "Ventes brutes prestations annexes d'exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_166_0
+msgid "Immeubles d'habitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6221
+msgid "Assurances pour camionnettes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_290
+msgid "Réserves, Bénéfice/Perte résultant du bilan"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_180_00
+msgid "Frais de fondation, augmentation de capital"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4407
+#: model:account.account.template,name:l10n_ch.ch_447
+msgid "Charges directes d'achat s/prestations de services"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7013
+#: model:account.account.template,name:l10n_ch.ch_7033
+#: model:account.account.template,name:l10n_ch.ch_8213
+msgid "Charges d'entretien, réparations, remplacements"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6610
+msgid "Imprimés publicitaires, matériel de publicité"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2232
+msgid "Coupons d'obligations non encaissés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4211
+msgid "Achats de marchandises TVA taux réduit"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1572
+msgid "Réservoirs"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7401
+#: model:account.account.template,name:l10n_ch.ch_8401
+msgid "Produits d'autres placements financiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_46
+#: model:account.account.template,name:l10n_ch.ch_7019
+#: model:account.account.template,name:l10n_ch.ch_7039
+#: model:account.account.template,name:l10n_ch.ch_8219
+msgid "Autres charges"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8209
+msgid "Diminution de produits"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_173_0
+msgid "Droits de propriétés, d'édition, conventionnels"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_view_expense
+msgid "Autre: Vue Charges"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1289
+msgid "Corrections valeur s/stocks produits en cours"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6573
+msgid "Disquettes, CD-Rom, cassettes, fournitures"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6941
+msgid "Amortissements s/marques, échantillons, modèles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5083
+#: model:account.account.template,name:l10n_ch.ch_5283
+#: model:account.account.template,name:l10n_ch.ch_5483
+#: model:account.account.template,name:l10n_ch.ch_5683
+msgid "Indemnités de frais forfaitaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1701
+msgid "Know-how"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2851
+msgid "Prélèvements privés en nature"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7410
+msgid "Frais de banque et de chèques postaux"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6606
+msgid "Publicité dans les journaux pour le produit X"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8701
+msgid "Jetons de présence"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_309
+msgid "Déductions sur le caf de la production vendue"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6050
+msgid "Entretien des usines"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3680
+msgid "Produits résultant d'expertises"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_177_0
+msgid "Goodwill"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_609
+#: model:account.account.template,name:l10n_ch.ch_6090
+msgid "Charges de locaux comme prélèvements privés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8413
+msgid "Corrections de valeur s/placements financiers hors"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_adjusting_asset
+msgid "Bilan : Actif de regularisation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1193
+msgid "Effets à recevoir, pas de remise à l'escompte"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_653_0
+msgid "Honoraires pour fiduciaire et conseil"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1610
+#: model:account.account.template,name:l10n_ch.ch_161_0
+msgid "Usines"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6511
+msgid "Téléfax"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4027
+#: model:account.account.template,name:l10n_ch.ch_407
+#: model:account.account.template,name:l10n_ch.ch_4217
+#: model:account.account.template,name:l10n_ch.ch_47
+#: model:account.account.template,name:l10n_ch.ch_470
+msgid "Charges directes d'achat"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_520
+msgid "Charges de personnel pour le commerce A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_receivable_base_invest80
+msgid "Acquisition de biens d'invest. et autres charges a 8.0% (TN)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6901
+msgid "Dépréciations s/autres immobilisations financières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_409
+msgid "Déductions obtenues s/achats de matières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1149
+msgid "Provisions pertes s/autres créances envers tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_990
+msgid "Ecritures de regroupements"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6571
+msgid "Entretien / Hotline Hardware"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5831
+msgid "Indemnités forfaitaires pour la direction"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6270
+#: model:account.account.template,name:l10n_ch.ch_627_0
+msgid "Charges de véhicules comme prélèvements privés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_636_0
+msgid "Droits et taxes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1619
+msgid "Amortissement cumulé s/usines"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1958
+msgid "Acomptes pour immobilisations corporelles meubles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_601
+msgid "Loyers pour locaux propres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4014
+msgid "Achats de matières auxiliaires et fournitures"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_453
+#: model:account.account.template,name:l10n_ch.ch_621_0
+msgid "Carburants"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.template,name:l10n_ch.vat_25_purchase
+msgid "TVA 2.5% sur achat B&S (TR)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3609
+msgid "Déductions sur les produits accessoires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_receivable_base_80
+msgid "Acquisition de biens et services a 8.0% (TN)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1301
+msgid "Produits à recevoir"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6600
+msgid "Publicité dans les journaux"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6672
+msgid "Anniversaires de l'entreprise"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1200
+msgid "Stocks de marchandises A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_218_0
+msgid "Part à rembourser dettes financières à long terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_due_tva80
+#: model:account.tax.template,name:l10n_ch.vat_80
+msgid "TVA due a 8.0% (TN)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1601
+#: model:account.account.template,name:l10n_ch.ch_1611
+#: model:account.account.template,name:l10n_ch.ch_1621
+#: model:account.account.template,name:l10n_ch.ch_1631
+#: model:account.account.template,name:l10n_ch.ch_1642
+#: model:account.account.template,name:l10n_ch.ch_1652
+#: model:account.account.template,name:l10n_ch.ch_1662
+msgid "Terrains"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6302
+msgid "Assurance vols"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_529
+msgid "Prestations de travail de tiers dans le commerce"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_367
+#: model:account.account.template,name:l10n_ch.ch_3670
+msgid "Produits c/mise à disposition du personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5071
+#: model:account.account.template,name:l10n_ch.ch_5271
+#: model:account.account.template,name:l10n_ch.ch_5471
+#: model:account.account.template,name:l10n_ch.ch_5671
+#: model:account.account.template,name:l10n_ch.ch_571
+#: model:account.account.template,name:l10n_ch.ch_5710
+msgid "Caisse de compensation familiale"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5200
+msgid "Salaires pour le commerce des marchandises"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_701_0
+msgid "Charges de l'activité annexe 1"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3220
+msgid "Ventes brutes TVA taux normal"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3610
+msgid "Produits de licence pour brevet X"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_703_0
+msgid "Charges de l'activité annexe 2"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6461
+msgid "Evacuation de déchets spéciaux"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1618
+msgid "Acomptes s/usines"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_220_0
+msgid "Dettes envers des institutions publiques"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_685_0
+msgid "Produits financiers des liquidités et des titres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1791
+msgid "Logiciels (développement interne)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6843
+msgid "Pertes de change s/immobilisations financières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1109
+msgid "Ducroire"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_28
+msgid "Capitaux propres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_633_0
+msgid "Primes pour assurances liées aux crédits"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_322
+msgid "Ventes brutes de marchandises secteur C"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1523
+msgid "Systèmes à commande automatique"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_320
+msgid "Ventes brutes de marchandises secteur A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2611
+msgid "Provision pour développement"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1004
+msgid "Devise B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1512
+msgid "Installations d'entrepôts"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1279
+msgid "Corrections valeur s/stocks produits semi-ouvrés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5820
+msgid "Frais de voyages"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_101_0
+msgid "Poste (CCP)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6721
+msgid "Développement projet B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1651
+msgid "Bâtiments d'administration"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6670
+msgid "Manifestations en faveur de la clientèle"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4886
+msgid "Pertes de marchandises"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1049
+msgid "Provisions pertes s/chèques et effets à recevoir"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2001
+msgid "Dettes c/prestations de services envers des tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7902
+msgid "Bénéfices s/ventes de participations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8001
+msgid "Dissolutions de provisions superflues"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1550
+#: model:account.account.template,name:l10n_ch.ch_155_0
+msgid "Installations de stockage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1451
+msgid "Prêts hypothécaires à des sociétés du groupe"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2600
+msgid "Provision pour réparations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2000
+msgid "Dettes c/achats de matières et marchandises"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_429
+msgid "Déductions obtenues s/achats liés aux marchandises"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_146_0
+msgid "Créances à long terme envers des actionnaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_37
+msgid "Prestations propres et consommations propres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_686_0
+msgid "Produits financiers c/immobilisations financières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1511
+msgid "Installations d'ateliers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_payable
+msgid "Bilan : Fournisseurs"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1269
+msgid "Corrections valeur s/stocks produits finis"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6330
+msgid "Primes pour assurance-vie"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6840
+msgid "Frais de banque et des chèques postaux"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2030
+#: model:account.account.template,name:l10n_ch.ch_203_0
+msgid "Acomptes de clients"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8710
+msgid "Charges pour des activités hors exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_450
+#: model:account.account.template,name:l10n_ch.ch_640_0
+msgid "Electricité"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_payable_invest
+msgid "TVA préalable sur invest. et autres ch."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1459
+msgid "Corrections valeur s/créances long terme des sociétés du groupe"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1732
+msgid "Droits conventionnels"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7015
+#: model:account.account.template,name:l10n_ch.ch_7035
+msgid "Assurances-choses, droits, taxes, patentes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_receivable_base
+msgid "Acquisition de biens et services"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_800
+msgid "Produits exceptionnels"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_view_liability
+msgid "Autre: Vue Passifs"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2331
+msgid "Provisions pour risques liés aux engagements"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6510
+msgid "Téléphone"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_850_00
+msgid "Produits de l'immeuble hors exploitation 1"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_840
+msgid "Résultat des placements financiers hors exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_due_0_exclu
+msgid "Chiffre d'affaires non-imposable a 0% (exclu)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6052
+msgid "Entretien des entrepôts"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5090
+#: model:account.account.template,name:l10n_ch.ch_5290
+#: model:account.account.template,name:l10n_ch.ch_5490
+#: model:account.account.template,name:l10n_ch.ch_5690
+#: model:account.account.template,name:l10n_ch.ch_5900
+msgid "Employés temporaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2270
+msgid "Dettes à court terme envers fonds de prévoyance"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_991
+#: model:account.account.template,name:l10n_ch.ch_9910
+msgid "Ecritures de corrections"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6922
+msgid "Amortissements s/machines de bureau, informatique"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6541
+msgid "Charges pour assemblée générale"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1526
+msgid "Logiciels"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6130
+msgid "ERR du mobilier de bureau"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1211
+msgid "Stocks de matières premières B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2560
+msgid "Emprunts à long terme à des actionnaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_206_0
+msgid "Dettes c/achats, prestations services actionnaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_371
+msgid "Consommations propres pour propre production"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_income
+msgid "PP : Chiffre d'affaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7515
+#: model:account.account.template,name:l10n_ch.ch_8515
+msgid "Ordures, évacuation des déchets"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_196_0
+msgid "Immobilisations corporelles immeubles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_other_ope_exp
+msgid "PP : Autres charges d'exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2181
+msgid "Prêt à rembourser"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_152_0
+msgid "Machines de bureau, informatiques, communication"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1001
+msgid "Caisse succursale"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7930
+msgid "Bénéfices s/ventes de brevets, droits de licence"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_130_0
+msgid "Actifs de régularisation (Actifs transitoires)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_112_00
+msgid "Créances résultant prestations envers actionnaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6503
+msgid "Littérature technique"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6820
+msgid "Charges financières s/compte courant actionnaire A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_509
+msgid "Prestations de travail de tiers dans la production"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1
+msgid "Actif"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1429
+msgid "Corrections valeur s/participations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_260
+msgid "Provisions à long terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6720
+msgid "Recherche projet A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_receivable_base_0
+msgid "Acquisition de biens et services a 0%"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4212
+msgid "Achats de marchandises TVA taux zéro"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2300
+msgid "Charges à payer"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_614_0
+msgid "ERR d'installations pour le personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6861
+msgid "Produits financiers s/autres immobilisations à l.t"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6947
+msgid "Amortissements s/goodwill"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6800
+msgid "Charges financières pour crédit bancaire"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_34
+msgid "Ventes de prestations de services"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_receivable
+msgid "Bilan : Debiteurs"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1659
+msgid "Amortissement cumulé s/bâtiments administratifs"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6210
+msgid "Carburants pour voitures"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6550
+#: model:account.account.template,name:l10n_ch.ch_655_0
+msgid "Charges d'administration comme prélèvements privés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2650
+#: model:account.account.template,name:l10n_ch.ch_265_0
+msgid "Provisions pour la protection de l'environnement"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_182_00
+msgid "Frais de recherche et de développement"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3011
+msgid "Chiffre d'affaires brut des ventes de détail"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6015
+msgid "Loyer interne des locaux de personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6880
+msgid "Produits financiers s/compte courant actionnaire X"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1820
+msgid "Frais de recherche"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6231
+msgid "Droits de circulation pour camionnettes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6331
+msgid "Primes pour cautionnement"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_671
+msgid "Sécurité et surveillance"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6609
+msgid "Publicité à la télévision pour le produit Y"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_185_0
+msgid "Comptes d'actif de corrections de valeur"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2445
+msgid "Hypothèques sur bâtiments de bureau/administration"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_692
+msgid "Amortissements s/immobilisations corporelles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3008
+msgid "Variations des stocks de produits en cours / finis"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4001
+msgid "Achats de matières produit Y"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4000
+msgid "Achats de matières produit X"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1859
+msgid "Corrections de valeur s/capital-actions non libéré"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3420
+msgid "Ventes brutes prestations services TVA taux normal"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3_9
+#: model:account.account.template,name:l10n_ch.ch_90
+#: model:account.account.template,name:l10n_ch.ch_900
+#: model:account.account.template,name:l10n_ch.ch_9000
+msgid "Compte de résultat"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3620
+msgid "Droits de douane"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4096
+#: model:account.account.template,name:l10n_ch.ch_4296
+#: model:account.account.template,name:l10n_ch.ch_4496
+#: model:account.account.template,name:l10n_ch.ch_4906
+msgid "Différences de change s/achats"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4020
+msgid "Achats de matières TVA taux normal"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5009
+#: model:account.account.template,name:l10n_ch.ch_5209
+#: model:account.account.template,name:l10n_ch.ch_5409
+#: model:account.account.template,name:l10n_ch.ch_5609
+#: model:account.account.template,name:l10n_ch.ch_59
+#: model:account.account.template,name:l10n_ch.ch_590
+msgid "Prestations de travail de tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_110_00
+msgid "Créances résultant prestations envers des tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_604
+msgid "Charges de nettoyage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_36
+msgid "Autres produits"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.chart.template,name:l10n_ch.l10nch_chart_template
+msgid "Plan comptable STERCHI"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_670
+msgid "Informations économiques, poursuites"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4521
+#: model:account.account.template,name:l10n_ch.ch_6421
+msgid "Charbon, briquettes, bois"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_240
+msgid "Dettes financière à long terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2750
+msgid "Avances fermes à long terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5604
+msgid "Honoraires des membres du conseil d'administration"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_689_0
+msgid "Autres produits financiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_589
+#: model:account.account.template,name:l10n_ch.ch_5890
+msgid "Charges de personnel comme prélèvements privés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3200
+msgid "Ventes brutes de l'article X"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6162
+msgid "Charges c/installations de stockage en crédit-bail"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1513
+msgid "Mobilier de bureau"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_233_0
+msgid "Provisions à court terme c/ventes, services"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_695
+msgid "Amortissements s/charges activées"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3905
+msgid "Pertes s/clients"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1909
+msgid "Corrections de valeur s/liquidités et titres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6055
+msgid "Entretien des locaux de personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_548
+msgid "Autres charges de personnel pour les prestations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1052
+msgid "Placement fiduciaires en devises"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1709
+msgid "Amortissement cumulé s/brevets, know-how, recettes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_99
+msgid "Ecriture de regroupements et de corrections"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1040
+msgid "Chèques"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6031
+msgid "Charges accessoires des ateliers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3840
+msgid "Variations de stocks de services en cours"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6048
+msgid "Matériel de nettoyage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.template,name:l10n_ch.vat_25_invest_ttc
+msgid "TVA incl. 2.5% sur invest. et autres ch. (TR)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1422
+msgid "Autres participations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8002
+msgid "Réévaluations comptables"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1238
+msgid "Acomptes versés s/matières auxiliaires-fournitures"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3607
+msgid "Produits de travaux annexes d'exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_122_0
+msgid "Stocks d'autres approvisionnements"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1218
+msgid "Acomptes versés pour matières premières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_681_0
+msgid "Charges financières pour financement par des stés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8503
+msgid "Loyer interne"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2620
+#: model:account.account.template,name:l10n_ch.ch_262_0
+msgid "Provisions pour restructuration de l'entreprise"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1730
+msgid "Droits de propriété intellectuelle"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_790
+msgid "Bénéfices s/immobilisations financières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_374
+msgid "Consommations propres de services"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5005
+#: model:account.account.template,name:l10n_ch.ch_5205
+#: model:account.account.template,name:l10n_ch.ch_5405
+#: model:account.account.template,name:l10n_ch.ch_5605
+msgid "Prestations des assurances sociales"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1020
+msgid "Compte courant exploitation principale"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2855
+msgid "Cotisations privées à titre de prévoyance"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6212
+msgid "Carburants pour camions"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3094
+#: model:account.account.template,name:l10n_ch.ch_3294
+#: model:account.account.template,name:l10n_ch.ch_3494
+msgid "Frais d'encaissement"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_613_0
+msgid "ERR d'installations de bureau"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.template,name:l10n_ch.vat_25_invest
+msgid "TVA 2.5% sur invest. et autres ch. (TR)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1628
+msgid "Acomptes s/ateliers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8902
+msgid "Impôts hors exercices"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1599
+#: model:account.account.template,name:l10n_ch.ch_1959
+#: model:account.account.template,name:l10n_ch.ch_1969
+msgid "Amortissement cumulé s/immobilisations corporelles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6894
+msgid "Gains de change sur dettes financières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.template,name:l10n_ch.vat_25_purchase_ttc
+msgid "TVA incl. 2.5% sur achat B&S (TR)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3801
+msgid "Variations de stocks de produits finis"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_408
+msgid "Variations de stocks, pertes de matières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2003
+msgid "Dettes c/assurances sociales"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2550
+msgid "Emprunts à long terme à des sociétés du groupe"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_40
+#: model:account.account.template,name:l10n_ch.ch_7010
+#: model:account.account.template,name:l10n_ch.ch_7030
+#: model:account.account.template,name:l10n_ch.ch_8210
+msgid "Charges de matières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6803
+msgid "Intérêts moratoires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5800
+msgid "Annonces pour recherche de personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.template,name:l10n_ch.vat_80_purchase
+msgid "TVA 8.0% sur achat B&S (TN)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4091
+msgid "Rabais et autres réductions de prix s/achats"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3841
+msgid "Variations de stocks de services terminés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2561
+msgid "Dettes hypothécaires envers des actionnaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6854
+#: model:account.account.template,name:l10n_ch.ch_6864
+msgid "Produits financiers s/actions propres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1968
+msgid "Acomptes pour immobilisations corporelles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3093
+#: model:account.account.template,name:l10n_ch.ch_3293
+#: model:account.account.template,name:l10n_ch.ch_3493
+msgid "Commissions de tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1232
+#: model:account.account.template,name:l10n_ch.ch_1920
+msgid "Stocks"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3720
+msgid "Consommation propre article X"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3721
+msgid "Consommation propre article Y"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7411
+msgid "Frais de dépôts"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3227
+msgid "Ventes brutes de prestations annexes exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6841
+#: model:account.account.template,name:l10n_ch.ch_8411
+msgid "Frais de dépôt"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1029
+msgid "Provisions risques de change s/comptes en devises"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5840
+msgid "Repas"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_205_0
+msgid "Dettes c/achats, prestations services stés groupe"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1590
+msgid "Lingerie et habits de travail"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_452
+msgid "Combustibles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4071
+#: model:account.account.template,name:l10n_ch.ch_4271
+#: model:account.account.template,name:l10n_ch.ch_4471
+#: model:account.account.template,name:l10n_ch.ch_4701
+msgid "Droits de douane à l'importation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2443
+msgid "Hypothèques sur entrepôts"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_9101
+msgid "Bilan de clôture"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6060
+msgid "Charges pour usine en crédit-bail"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1280
+#: model:account.account.template,name:l10n_ch.ch_128_0
+msgid "Stocks de produits en cours"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_560
+#: model:account.account.template,name:l10n_ch.ch_5600
+msgid "Salaires pour l'administration"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1649
+msgid "Amortissement cumulé s/bâtiments exposition, vente"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8412
+msgid "Pertes de change s/placements financiers hors ex."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_428
+msgid "Variations de stocks de marchandises, pertes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_9900
+msgid "Ecritures de regroupements des débiteurs"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_164_0
+msgid "Bâtiments d'exposition et de vente"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1539
+msgid "Amortissement cumulé s/véhicules"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_682_0
+msgid "Charges financières pour financement actionnaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.template,name:l10n_ch.vat_O_import
+msgid "TVA 0% Importations de biens et services"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_20
+msgid "Dettes à court terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1419
+msgid "Corrections valeur s/autres placements long terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6671
+msgid "Contacts avec les médias"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3681
+msgid "Produits résultant de services de formation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1574
+msgid "Ascenseurs, escaliers roulants"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4021
+msgid "Achats de matières TVA taux réduit"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4082
+#: model:account.account.template,name:l10n_ch.ch_4282
+msgid "Variations de stocks secteur C"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_221_0
+msgid "Autres dettes à court terme envers des tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1002
+msgid "Caisse auxiliaire"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1248
+msgid "Acomptes versés pour stocks obligatoires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_142_0
+msgid "Participations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6608
+msgid "Publicité à la télévision pour le produit X"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1548
+msgid "Acomptes s/instruments et outillage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_288_00
+msgid "Comptes pour immeubles et biens-fonds privés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2111
+msgid "Dettes envers les sociétés de virement"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_181_00
+msgid "Disagio s/emprunts et s/emprunts par obligations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_intangible_asset
+msgid "Bilan : Immo incorporelles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1231
+msgid "Stocks de fournitures d'exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1559
+msgid "Amortissement cumulé s/installations de stockage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_65
+msgid "Charges d'administration et d'informatique"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1240
+#: model:account.account.template,name:l10n_ch.ch_124_0
+msgid "Stocks obligatoires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1510
+msgid "Mobilier d'exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6900
+msgid "Dépréciation s/titres des actifs immobilisés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5074
+#: model:account.account.template,name:l10n_ch.ch_5274
+#: model:account.account.template,name:l10n_ch.ch_5474
+#: model:account.account.template,name:l10n_ch.ch_5674
+#: model:account.account.template,name:l10n_ch.ch_574
+#: model:account.account.template,name:l10n_ch.ch_5740
+msgid "Assurance indemnités journalières en cas maladie"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_341
+msgid "Ventes brutes de prestations de services secteur B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5007
+#: model:account.account.template,name:l10n_ch.ch_5207
+#: model:account.account.template,name:l10n_ch.ch_5407
+#: model:account.account.template,name:l10n_ch.ch_57
+msgid "Charges sociales"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_490
+msgid "Déductions s/charges"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6201
+msgid "Réparation, service et nettoyage des camionnettes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2690
+#: model:account.account.template,name:l10n_ch.ch_269_0
+msgid "Autres provisions"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_583
+msgid "Indemnités forfaitaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1194
+msgid "Compte courant de primes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_prov_reserve
+msgid "Bilan : Provisions et reserves"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6233
+msgid "Droits de circulation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_628_0
+msgid "Frets, frais de transport, cargo domicile"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_170_0
+#: model:account.account.template,name:l10n_ch.ch_1970
+msgid "Brevets, know-how, recettes de fabrication"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_financial_result
+msgid "PP : Resultat financier"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5091
+#: model:account.account.template,name:l10n_ch.ch_5901
+msgid "Employés à la tâche"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_equity
+msgid "Bilan : Capitaux propres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_751_0
+msgid "Charges de l'immeuble d'exploitation 1"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6232
+msgid "Droits de circulation pour poids lourds"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5073
+#: model:account.account.template,name:l10n_ch.ch_5273
+#: model:account.account.template,name:l10n_ch.ch_5473
+#: model:account.account.template,name:l10n_ch.ch_5673
+#: model:account.account.template,name:l10n_ch.ch_573
+#: model:account.account.template,name:l10n_ch.ch_5730
+msgid "Assurance-accidents"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_153_0
+msgid "Véhicules"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_68
+msgid "Résultat financier"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1802
+msgid "Frais d'organisation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_cash
+msgid "Bilan : Liquidites et titres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_117_00
+msgid "Créances envers des institutions publiques"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6860
+msgid "Produits financiers s/titres à long terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_750_0
+msgid "Produits de l'immeuble d'exploitation 1"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6810
+msgid "Charges financières s/le compte courant filiale A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3010
+msgid "Chiffre d'affaires brut au comptant"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2140
+#: model:account.account.template,name:l10n_ch.ch_214_0
+msgid "Autres dettes financières à court terme à tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4080
+#: model:account.account.template,name:l10n_ch.ch_4280
+msgid "Variations de stocks secteur A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6574
+msgid "Investissements de faible montant"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7017
+#: model:account.account.template,name:l10n_ch.ch_7037
+#: model:account.account.template,name:l10n_ch.ch_8217
+msgid "Charges d'administration, d'informatique"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1089
+msgid "Correction valeur s/actions propres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1661
+msgid "Maisons d'habitations de sociétés immobilières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_421
+msgid "Charges de marchandises du secteur B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1660
+msgid "Maisons d'habitation du personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_420
+msgid "Charges de marchandises du secteur A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1522
+msgid "Systèmes de communication"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_50
+msgid "Charges de personnel de production"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1518
+msgid "Acomptes sur mobilier et installations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7512
+#: model:account.account.template,name:l10n_ch.ch_8512
+msgid "Droits, taxes, impôts fonciers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6206
+msgid "Nettoyage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1800
+msgid "Frais de fondation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6603
+msgid "Publicité sur le Vidéotexte"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2100
+#: model:account.account.template,name:l10n_ch.ch_210_0
+#: model:account.account.template,name:l10n_ch.ch_2710
+msgid "Dettes bancaires à court terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8
+msgid "Résultats exceptionnel et hors exploitation impôts"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6870
+msgid "Produits financiers s/cpte courant de la filiale A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_9901
+msgid "Ecritures de regroupements des créditeurs"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.template,name:l10n_ch.vat_38_purchase
+msgid "TVA 3.8% sur achat B&S (TS)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1790
+msgid "Fichiers de clients"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_224_0
+msgid "Obligations à rembourser"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3410
+msgid "Ventes brutes prestations de services au comptant"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8200
+msgid "Chiffre d'affaires brut"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1529
+msgid "Amortissement cumulé machines, informatique, comm"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6014
+msgid "Loyer interne des bâtiments de bureau et adm."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_39
+msgid "Déductions s/produits des ventes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6891
+msgid "Produits financiers s/acomptes versés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6892
+msgid "Gains de change sur liquidités et titres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2570
+msgid "Emprunts à long terme à des institutions LPP"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1000
+msgid "Caisse principale"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2801
+msgid "Capital propre du conjoint"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6920
+msgid "Amortissements s/machines et appareil production"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2910
+msgid "Réserves statutaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_325
+#: model:account.account.template,name:l10n_ch.ch_3250
+msgid "Ventes brutes de marchandises stés groupe"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4530
+#: model:account.account.template,name:l10n_ch.ch_6214
+msgid "Essence"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6320
+msgid "Assurance pour arrêts d'exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3222
+msgid "Ventes brutes TVA avec déduction IP"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7514
+#: model:account.account.template,name:l10n_ch.ch_8514
+msgid "Eau, eaux usées"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_656_0
+msgid "Locations en crédit-bail et locations de hard/soft"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_821_00
+msgid "Charges de l'activité hors exploitation 1"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5070
+#: model:account.account.template,name:l10n_ch.ch_5270
+#: model:account.account.template,name:l10n_ch.ch_5470
+#: model:account.account.template,name:l10n_ch.ch_5670
+#: model:account.account.template,name:l10n_ch.ch_570
+#: model:account.account.template,name:l10n_ch.ch_5700
+msgid "AVS, AI, APG, assurance-chômage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_base_ca_total
+msgid "Chiffre d'affaires - total"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_427
+msgid "Charges directes d'achat s/marchandises"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4286
+msgid "Pertes de marchandises secteur A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6203
+#: model:account.account.template,name:l10n_ch.ch_620_0
+msgid "Réparation, service et nettoyage des véhicules"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_75
+msgid "Résultat d'immeuble"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1142
+msgid "Avances de frais"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5880
+msgid "Manifestations en faveur du personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3701
+msgid "Production propre d'immobi. corporelles immeubles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_184_00
+msgid "Autres charges activées"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2444
+msgid "Hypothèques sur bâtiments d'exposition et de vente"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7402
+msgid "Produits de placements financiers auprès stés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_465
+#: model:account.account.template,name:l10n_ch.ch_4650
+msgid "Charges d'emballage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.template,name:l10n_ch.vat_80_invest
+msgid "TVA 8.0% sur invest. et autres ch. (TN)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_792
+msgid "Bénéfice s/immobilisations corporelles immeubles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7511
+msgid "Entretien de l'immeuble"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_263_0
+msgid "Provisions résultant de ventes/prestations service"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_584
+msgid "Restaurant du personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1219
+msgid "Corrections valeur s/stocks de matières premières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1010
+msgid "Chèques postaux exploitation principale"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_631_0
+msgid "Primes d'assurance responsabilité civile /garantie"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_160
+msgid "Immobilisation corporelles immeubles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3091
+#: model:account.account.template,name:l10n_ch.ch_3291
+#: model:account.account.template,name:l10n_ch.ch_3491
+#: model:account.account.template,name:l10n_ch.ch_3691
+#: model:account.account.template,name:l10n_ch.ch_4901
+msgid "Rabais et réductions de prix"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_140
+#: model:account.account.template,name:l10n_ch.ch_194_0
+msgid "Immobilisations financières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1809
+msgid "Amortissement cumulé s/frais"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6230
+msgid "Droits de circulation pour voitures"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_receivable_base_invest25
+msgid "Acquisition de biens d'invest. et autres charges a 2.5% (TR)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1140
+msgid "Avances à court terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1792
+msgid "Interdiction de concurrence"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6016
+msgid "Loyer interne du garage, du parking"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_view_assets
+msgid "Autre: Vue Actifs"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_111_00
+msgid "Créances résultant prestations envers des sociétés du groupe"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5081
+#: model:account.account.template,name:l10n_ch.ch_5281
+#: model:account.account.template,name:l10n_ch.ch_5481
+#: model:account.account.template,name:l10n_ch.ch_5681
+#: model:account.account.template,name:l10n_ch.ch_581
+msgid "Formation et formation continue"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6043
+msgid "Nettoyage des bâtiments d'exposition et vente"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6281
+msgid "Frets d'arrivage, de transport, cargo domicile"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7901
+msgid "Bénéfices s/autres immobilisations financières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2900
+msgid "Réserve générale"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_250
+#: model:account.account.template,name:l10n_ch.ch_275_0
+msgid "Autres dettes à long terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1729
+#: model:account.account.template,name:l10n_ch.ch_1739
+msgid "Amortissement cumulé s/droits"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4090
+#: model:account.account.template,name:l10n_ch.ch_4290
+#: model:account.account.template,name:l10n_ch.ch_4490
+#: model:account.account.template,name:l10n_ch.ch_4900
+msgid "Escomptes s/achats"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2150
+msgid "Dettes financières à court terme c/la filiale A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6641
+msgid "Conseils à la clientèle"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1508
+msgid "Acomptes s/machines et appareils de production"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6300
+msgid "Assurance pour dommages"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_801
+msgid "Charges exceptionnelles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1208
+msgid "Acomptes versés pour marchandises"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3209
+#: model:account.account.template,name:l10n_ch.ch_3409
+msgid "Déductions sur les ventes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_451
+#: model:account.account.template,name:l10n_ch.ch_641_0
+msgid "Gaz"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6204
+msgid "Réparation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_9201
+msgid "Participation au bénéfice de l'associé Y"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6921
+msgid "Amortissements s/mobilier et installations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1609
+msgid "Amortissement cumulé s/bâtiments d'exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4401
+msgid "Charges pour prestation du service Y"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_820
+msgid "Résultat de l'activité hors exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6801
+msgid "Charges financières pour emprunts"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4015
+#: model:account.account.template,name:l10n_ch.ch_4215
+msgid "Achats de matériel d'emballage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1080
+msgid "Actions propres (réalisables à court terme)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_365
+#: model:account.account.template,name:l10n_ch.ch_3650
+msgid "Autres produits prestations services stés groupe"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2180
+msgid "Hypothèque à rembourser"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_630_0
+msgid "Primes d'assurance c/dommages, bris de glace, vols"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1449
+msgid "Corrections valeur s/créances long terme à tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_508
+msgid "Autres charges de personnel de production"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_690
+msgid "Dépréciations s/immobilisations financières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2914
+msgid "Réserve de crise"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2441
+msgid "Hypothèques sur usines"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_650
+#: model:account.account.template,name:l10n_ch.ch_7516
+#: model:account.account.template,name:l10n_ch.ch_8516
+msgid "Charges d'administration"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3401
+msgid "Ventes brutes de prestations de services Y"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5832
+msgid "Indemnités forfaitaires pour le conseil d'adm."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_27
+#: model:account.account.template,name:l10n_ch.ch_270
+msgid "Dettes hors exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_110_0
+msgid "Créances résultant de vente et de prestations de services (débiteurs-clients)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_115_00
+msgid "Autres créances à court terme envers des sociétés du groupe"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8511
+msgid "Entretien d'immeuble"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8900
+msgid "Impôts sur le bénéfice"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1962
+msgid "Biens-fonds non bâtis"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4210
+msgid "Achats de marchandises TVA taux normal"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4880
+msgid "Pertes de matières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_256_0
+msgid "Dettes à long terme envers des actionnaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.template,name:l10n_ch.vat_80_invest_ttc
+msgid "TVA incl. 8.0% sur invest. et autres ch. (TN)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2820
+#: model:account.account.template,name:l10n_ch.ch_282_00
+msgid "Capital social de la S.à.r.l"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4093
+#: model:account.account.template,name:l10n_ch.ch_4293
+#: model:account.account.template,name:l10n_ch.ch_4493
+#: model:account.account.template,name:l10n_ch.ch_4903
+msgid "Ristournes obtenues s/achats"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5603
+msgid "Salaires de la direction de l'entreprise"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5608
+msgid "Autres charges de personnel (administration)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2850
+msgid "Prélèvements privés en espèces"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_688_0
+msgid "Produits financiers placement auprès actionnaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_664
+msgid "Frais de voyage, conseils à la clientèle"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3221
+msgid "Ventes brutes TVA taux réduit"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8016
+msgid "Charges pour indemnités pour préjudices"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1658
+msgid "Acomptes s/bâtiments administratifs"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4510
+#: model:account.account.template,name:l10n_ch.ch_6410
+msgid "Gaz naturel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6370
+msgid "Autorisations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6940
+msgid "Amortissement s/brevets, know-how"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1720
+msgid "Droits de licences"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6
+#: model:account.account.template,name:l10n_ch.ch_67
+msgid "Autres charges d'exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_666
+msgid "Publicité, sponsoring"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6054
+msgid "Entretien des bâtiments de bureau et adm."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3212
+msgid "Ventes en gros brutes à crédit"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_171_0
+#: model:account.account.template,name:l10n_ch.ch_1971
+msgid "Marques commerciales, échantillons, modèles, plans"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_62
+#: model:account.account.template,name:l10n_ch.ch_7014
+#: model:account.account.template,name:l10n_ch.ch_7034
+#: model:account.account.template,name:l10n_ch.ch_8214
+msgid "Charges de véhicules et de transport"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6710
+msgid "Sécurité"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_840_0
+msgid "Produits financiers s/placements financiers hors exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2830
+#: model:account.account.template,name:l10n_ch.ch_283_00
+msgid "Capital de la société coopérative"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_48
+msgid "Variations de stocks, pertes de matières et march."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8901
+msgid "Impôts sur le capital"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2800
+msgid "Capital propre"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1949
+msgid "Corrections de valeur s/immobilisations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_non_ope_asset
+msgid "Bilan : Actifs hors exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2208
+msgid "Impôts directs dus"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_107_0
+msgid "Autres placements à court terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_144_0
+msgid "Créances à long terme envers des tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_654_0
+msgid "Conseil d'administration, AG, OR"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_118_00
+#: model:account.account.template,name:l10n_ch.ch_1850
+#: model:account.account.template,name:l10n_ch.ch_185_00
+msgid "Capital-actions non libéré"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_500
+msgid "Charges de personnel de production du secteur A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6283
+msgid "Frais de transport"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_66
+#: model:account.account.template,name:l10n_ch.ch_6660
+msgid "Publicité"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6371
+msgid "Patentes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6521
+msgid "Dons et cadeaux"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4400
+msgid "Charges pour prestation du service X"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2151
+msgid "Dettes financières à court terme c/filiale B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_74
+msgid "Résultat des placements financiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2060
+msgid "Dettes envers l'actionnaire X"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_38
+#: model:account.account.template,name:l10n_ch.ch_380
+msgid "Variations de stocks de produits et services"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_685
+msgid "Produits financiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6561
+msgid "Location en crédit-bail de logiciels"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2061
+msgid "Dettes envers l'actionnaire Y"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_462
+#: model:account.account.template,name:l10n_ch.ch_4620
+msgid "Autres charges de marchandises"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_612_0
+msgid "ERR d'installations d'entreposage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6102
+msgid "ERR d'outils et matériel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_549
+msgid "Prestations de tiers pour les prestations service"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_30
+msgid "Chiffre d'affaires brut de la production vendue"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2903
+msgid "Réserve de réévaluation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_19
+#: model:account.account.template,name:l10n_ch.ch_190
+msgid "Actifs hors exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_661
+msgid "Imprimés, matériel, articles de publicité"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_due_80
+msgid "Chiffre d'affaires imposable a 8.0% (TN)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3611
+msgid "Produits de licence pour brevet Y"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5003
+#: model:account.account.template,name:l10n_ch.ch_5203
+#: model:account.account.template,name:l10n_ch.ch_5403
+msgid "Commissions"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7502
+msgid "Loyers de locaux d'exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6621
+msgid "Foires, expositions"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_195_0
+msgid "Immobilisations corporelles meubles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1531
+msgid "Camionnettes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_660
+msgid "Publicité, médias électroniques"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6930
+msgid "Amortissements s/bâtiments d'exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_603
+msgid "Charges accessoires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6140
+msgid "ERR du mobilier du restaurant du personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_9
+msgid "Clôture"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1721
+msgid "Concessions"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1160
+msgid "Créances d'emprunt envers l'actionnaire X"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1161
+msgid "Créances d'emprunt envers l'actionnaire Y"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6164
+msgid "Charges c/équipements destinés au personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6500
+msgid "Matériel de bureau"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4070
+#: model:account.account.template,name:l10n_ch.ch_4270
+#: model:account.account.template,name:l10n_ch.ch_4470
+#: model:account.account.template,name:l10n_ch.ch_4700
+msgid "Frets à l'achat"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_820_0
+msgid "Résultat de l'activité hors exploitation 1"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_280_0
+msgid "Capital"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2856
+msgid "Impôts privés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2912
+msgid "Réserve de remplacement"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_528
+msgid "Autres charges de personnel pour le commerce march"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_280_00
+msgid "Capital propre des entreprises raison individuelle"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6844
+msgid "Pertes de change s/dettes financières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1598
+msgid "Acomptes s/autres immobilisations corporelles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2400
+#: model:account.account.template,name:l10n_ch.ch_240_0
+#: model:account.account.template,name:l10n_ch.ch_2740
+msgid "Dettes bancaires à long terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_120
+#: model:account.account.template,name:l10n_ch.ch_192_0
+msgid "Stocks et travaux en cours"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6263
+#: model:account.account.template,name:l10n_ch.ch_626_0
+msgid "Charges de location pour véhicules en crédit-bail"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1063
+msgid "Obligations (cotées)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7000
+#: model:account.account.template,name:l10n_ch.ch_7020
+msgid "Produits bruts"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1629
+msgid "Amortissement cumulé s/ateliers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3
+msgid "Chiffre d'affaires ventes, prestations services"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1170
+msgid "TVA: déductible s/achats de matières et services"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1229
+msgid "Corrections valeur s/stocks d'autres approvision."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1129
+msgid "Provisions pertes s/créances envers actionnaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6910
+msgid "Dépréciation s/participation à la filiale A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_750
+msgid "Résultat de l'immeuble d'exploitation 1"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1209
+msgid "Corrections valeur s/stocks de marchandises"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1929
+msgid "Corrections de valeur s/stocks et travaux en cours"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1176
+msgid "Impôt anticipé à récupérer"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_141_0
+msgid "Autres placements à long terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1840
+msgid "Charges de procès"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_308
+#: model:account.account.template,name:l10n_ch.ch_3080
+msgid "Variations des stocks de produits en cours/finis"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1650
+msgid "Bâtiments de bureau"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_24
+msgid "Dettes à long terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4072
+#: model:account.account.template,name:l10n_ch.ch_4272
+#: model:account.account.template,name:l10n_ch.ch_4472
+#: model:account.account.template,name:l10n_ch.ch_4702
+msgid "Frais de transport à l'achat"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_consolidation
+msgid "Autre : Consolidation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_120_0
+msgid "Stocks de marchandises"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3024
+msgid "Chiffre d'affaires brut TVA sans déduction IP"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8011
+msgid "Dotations exceptionnelles aux provisions"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1500
+#: model:account.account.template,name:l10n_ch.ch_1950
+msgid "Machines et appareils"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1025
+msgid "Compte en devise B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_658_0
+msgid "Conseils et développements"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1702
+msgid "Recettes de fabrication"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1499
+msgid "Corrections valeur s/actions propres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2004
+msgid "Dettes c/autres charges d'exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_70
+msgid "Résultat des activités annexes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4531
+#: model:account.account.template,name:l10n_ch.ch_6215
+msgid "Diesel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_123_0
+msgid "Stocks de matières auxiliaires et de fournitures"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1022
+msgid "Compte d'épargne"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1591
+msgid "Moules et modèles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2902
+msgid "Agio"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2200
+msgid "TVA due"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2341
+msgid "Provisions pour impôts indirects"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1300
+msgid "Charges constatées d'avance"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_569
+msgid "Prestations de travail de tiers c/l'administration"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1509
+msgid "Amortissement cumulé s/machines et appareils prod."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1180
+msgid "Capital-actions non libéré, réclamé"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4026
+#: model:account.account.template,name:l10n_ch.ch_406
+msgid "Travaux de tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4087
+msgid "Pertes de matières secteur B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4088
+msgid "Pertes de matières secteur C"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4086
+msgid "Pertes de matières secteur A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_402
+msgid "Charges de matières du secteur C"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_401
+msgid "Charges de matières du secteur B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_400
+msgid "Charges de matières du secteur A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2050
+msgid "Dettes envers la filiale A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2301
+msgid "Produits constatés d'avance"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2051
+msgid "Dettes envers la filiale B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1461
+msgid "Prêts hypothécaires à des actionnaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2206
+msgid "Impôt anticipé dû"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2571
+msgid "Dettes hypothécaires envers des institutions LPP"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6205
+msgid "Service"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6163
+msgid "Charges c/équipements de bureau en crédit-bail"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_480
+#: model:account.account.template,name:l10n_ch.ch_4800
+msgid "Variations de stocks des matières de production"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2231
+msgid "Dividendes non encaissés des exercices précédents"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1062
+msgid "Bons de jouissance (cotés)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_172_0
+msgid "Droits de licences, concessions, etc."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1469
+msgid "Corrections valeur s/créances long terme à action."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_793
+msgid "Bénéfices s/immobilisations incorporelles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6512
+msgid "Internet"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3400
+msgid "Ventes brutes de prestations de services X"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1731
+msgid "Droits d'édition"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_42
+msgid "Charges de marchandises"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7501
+msgid "Loyers privés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1050
+msgid "Placements fixes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1520
+msgid "Machines de bureau"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5006
+#: model:account.account.template,name:l10n_ch.ch_5206
+#: model:account.account.template,name:l10n_ch.ch_5406
+#: model:account.account.template,name:l10n_ch.ch_5606
+msgid "Mise à disposition de personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_850_0
+msgid "Résultat de l'immeuble hors exploitation 1"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6700
+msgid "Informations économiques"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6003
+msgid "Loyer des bâtiments d'exposition et de vente"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7503
+#: model:account.account.template,name:l10n_ch.ch_8501
+msgid "Loyers des appartements"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_620
+msgid "Charges de véhicules"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_567
+msgid "Charges sociales pour l'administration"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_628
+msgid "Charges de transport"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8006
+msgid "Produits pour indemnités pour préjudices"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6282
+msgid "Frets"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1770
+msgid "Goodwill (survaleur)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3497
+msgid "Ports"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_170
+#: model:account.account.template,name:l10n_ch.ch_197_0
+msgid "Immobilisations incorporelles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1579
+msgid "Amortissement cumulé s/équipements et installation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6911
+msgid "Dépréciation s/créance envers la filiale B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3095
+#: model:account.account.template,name:l10n_ch.ch_3295
+#: model:account.account.template,name:l10n_ch.ch_3495
+msgid "Pertes sur clients"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6040
+msgid "Nettoyage des usines"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_102_0
+#: model:account.account.template,name:l10n_ch.ch_1902
+msgid "Banques"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_680_0
+msgid "Charges financières pour financement par des tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6923
+msgid "Amortissements s/véhicules"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8010
+msgid "Dotations exceptionnelles aux réserves"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1608
+msgid "Acomptes s/bâtiments d'exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3050
+msgid "Retours de marchandises"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1460
+msgid "Prêts à long terme à des actionnaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.template,name:l10n_ch.vat_38_purchase_ttc
+msgid "TVA incl. 3.8% sur achat B&S (TS)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6226
+#: model:account.account.template,name:l10n_ch.ch_6312
+msgid "Assurance protection juridique"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_other_receivable
+msgid "Bilan : Autres créances"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6501
+msgid "Imprimés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_637_0
+msgid "Autorisations et patentes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1270
+#: model:account.account.template,name:l10n_ch.ch_127_0
+msgid "Stocks de produits semi-ouvrés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1171
+msgid "TVA: déductible s/investissement et autres charges"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_32
+msgid "Ventes de marchandises"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6853
+msgid "Produits financiers s/autres placements à c.t."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1919
+msgid "Corrections de valeur s/créances à court terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_105_0
+msgid "Avoirs à court terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2120
+#: model:account.account.template,name:l10n_ch.ch_212_0
+#: model:account.account.template,name:l10n_ch.ch_2712
+msgid "Effets à payer"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1961
+msgid "Immeubles en propriété par étage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6262
+msgid "Charges de location pour camions en crédit-bail"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6053
+msgid "Entretien des bâtiments d'exposition et vente"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4
+msgid "Charges de matières, marchandises et services"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_384
+msgid "Variations de stocks de services"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_payable_bs
+msgid "TVA préalable sur biens et services"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_672
+msgid "Recherche et développement"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6532
+msgid "Honoraires pour conseil juridique"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1441
+msgid "Prêts hypothécaires à des tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1821
+msgid "Frais de développement"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_657_0
+msgid "Licences et entretien"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_460
+msgid "Autres charges de matières pour la production"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1600
+#: model:account.account.template,name:l10n_ch.ch_160_0
+msgid "Bâtiments d'exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6033
+msgid "Charges accessoires des bâtiments d'exposition"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1921
+msgid "Travaux en cours"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_receivable_base_invest
+msgid "Acquisition de biens d'invest. et autres charges"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3023
+msgid "Chiffre d'affaires brut TVA avec déduction IP"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_130
+#: model:account.account.template,name:l10n_ch.ch_1930
+#: model:account.account.template,name:l10n_ch.ch_193_0
+msgid "Actifs de régularisation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3223
+msgid "Ventes brutes TVA sans déduction IP"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_159_0
+msgid "Autres immobilisations corporelles meubles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_700
+#: model:account.account.template,name:l10n_ch.ch_702_0
+msgid "Résultat de l'activité annexe 2"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1239
+#: model:account.account.template,name:l10n_ch.ch_1249
+msgid "Réserve s/marchandises"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_60
+#: model:account.account.template,name:l10n_ch.ch_7012
+#: model:account.account.template,name:l10n_ch.ch_7032
+#: model:account.account.template,name:l10n_ch.ch_8212
+msgid "Charges de locaux"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6950
+msgid "Amortissements s/charges de fondation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_741_0
+msgid "Charges s/placements financiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7400
+#: model:account.account.template,name:l10n_ch.ch_8400
+msgid "Produits de placements en liquidités et titres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4201
+msgid "Achats de marchandises article Y"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4200
+msgid "Achats de marchandises article X"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1141
+msgid "Créances d'emprunt à court terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_305
+msgid "Caf brut de la production livrée à des stés groupe"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6046
+msgid "Personnel de nettoyage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1192
+msgid "Acomptes aux fournisseurs"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_290_0
+msgid "Réserves"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_488
+msgid "Pertes de matières et de marchandises"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1501
+msgid "Chaînes de production"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3411
+msgid "Ventes brutes prestations de services à crédit"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5008
+#: model:account.account.template,name:l10n_ch.ch_5089
+#: model:account.account.template,name:l10n_ch.ch_5208
+#: model:account.account.template,name:l10n_ch.ch_5289
+#: model:account.account.template,name:l10n_ch.ch_5408
+#: model:account.account.template,name:l10n_ch.ch_5489
+#: model:account.account.template,name:l10n_ch.ch_5689
+#: model:account.account.template,name:l10n_ch.ch_58
+#: model:account.account.template,name:l10n_ch.ch_588
+msgid "Autres charges de personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1989
+msgid "Amortissements cumulés s/charges activées"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2290
+msgid "Résultat à verser à des tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5810
+msgid "Recyclage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_56
+msgid "Charges de personnel dans l'administration"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1710
+msgid "Marques commerciales"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_157_0
+msgid "Equipements et installations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_261_0
+msgid "Provisions pour recherche et développement"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6680
+msgid "Conseils en publicité"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2251
+msgid "Dettes à court terme envers la filiale B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_116_00
+msgid "Autres créances à court terme envers actionnaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3602
+msgid "Ventes de déchets"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_230
+#: model:account.account.template,name:l10n_ch.ch_273_0
+msgid "Passifs de régularisation, provisions court terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7
+msgid "Résultat des activités annexes d'exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2551
+msgid "Dettes hypothécaires envers des sociétés du groupe"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1901
+msgid "Chèques postaux"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6264
+msgid "Location de véhicules"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6931
+msgid "Amortissements s/usines"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8005
+msgid "Subventions obtenues"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1120
+msgid "Créances envers l'actionnaire X"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6225
+msgid "Assurance casco"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5080
+#: model:account.account.template,name:l10n_ch.ch_5280
+#: model:account.account.template,name:l10n_ch.ch_5480
+#: model:account.account.template,name:l10n_ch.ch_5680
+#: model:account.account.template,name:l10n_ch.ch_580
+msgid "Recherche de personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_9100
+msgid "Bilan d'ouverture"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_547
+msgid "Charges sociales pour les prestations de services"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2211
+msgid "Emprunts à court terme de tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4511
+#: model:account.account.template,name:l10n_ch.ch_6411
+msgid "Gaz liquide en bonbonnes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2448
+msgid "Hypothèques sur biens-fonds non bâtis"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_267_0
+msgid "Provisions pour prestations en cas de vieillesse"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2811
+msgid "Compte de capital, associé B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5079
+#: model:account.account.template,name:l10n_ch.ch_5279
+#: model:account.account.template,name:l10n_ch.ch_5479
+#: model:account.account.template,name:l10n_ch.ch_5679
+#: model:account.account.template,name:l10n_ch.ch_579
+#: model:account.account.template,name:l10n_ch.ch_5790
+msgid "Impôts à la source"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_606
+msgid "Charges pour immobilisations en crédit-bail"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2810
+msgid "Compte de capital, associé A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2602
+msgid "Provision pour rénovations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2854
+msgid "Primes d'assurance privées"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_684_0
+msgid "Autres charges financières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6607
+msgid "Publicité dans les journaux pour le produit Y"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6064
+msgid "Charges pour des bâtiments de bureau et adm."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6811
+#: model:account.account.template,name:l10n_ch.ch_6821
+msgid "Charges financières pour emprunts auprès filiale B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_minimal_0
+msgid "Plan comptable"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6301
+msgid "Assurance pour bris de glace"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_receivable_base_38
+msgid "Acquisition de biens et services a 3.8% (TS)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4288
+msgid "Pertes de marchandises secteur C"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2840
+msgid "Capital-actions"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1061
+msgid "Bons de participation (cotés)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6605
+msgid "Publicité sur CD-ROM"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_870_0
+msgid "Autres produits hors exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_285_00
+msgid "Compte privé"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5002
+#: model:account.account.template,name:l10n_ch.ch_5202
+#: model:account.account.template,name:l10n_ch.ch_5402
+#: model:account.account.template,name:l10n_ch.ch_5602
+msgid "Participations au bénéfice"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_740_0
+msgid "Produits de placements financiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5811
+msgid "Formation continue"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_150_0
+msgid "Machines et appareils destinés à la production"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6845
+msgid "Escomptes accordés aux clients"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1023
+msgid "Compte de placement"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_view
+msgid "Autre : Vue"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_121_0
+msgid "Stocks de matières premières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6051
+msgid "Entretien des ateliers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1220
+msgid "Stocks de pièces terminées"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1402
+msgid "Bons de jouissance"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6100
+msgid "ERR de machines et appareils de production"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_650_0
+msgid "Matériel de bureau, imprimés, photocopies"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4532
+#: model:account.account.template,name:l10n_ch.ch_6216
+msgid "Huile"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_687_0
+msgid "Produits financiers de placement auprès des stés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6234
+#: model:account.account.template,name:l10n_ch.ch_6520
+msgid "Cotisations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1009
+msgid "Provisions pour risques de change"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7403
+msgid "Produits de placements financiers c/actionnaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1199
+msgid "Provisions pertes s/autres créances à court terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1540
+#: model:account.account.template,name:l10n_ch.ch_154_0
+msgid "Instruments et outillage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_54
+msgid "Charges de personnel pour la fourniture"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_285_0
+msgid "Privé"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2913
+msgid "Réserve pour répartition d'un dividende constant"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1101
+msgid "Créances envers des tiers étrangers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.template,name:l10n_ch.vat_80_purchase_ttc
+msgid "TVA incl. 8.0% sur achat B&S (TN)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3210
+msgid "Ventes brutes au comptant"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_691
+msgid "Dépréciations s/participations à des stés groupe"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2170
+#: model:account.account.template,name:l10n_ch.ch_217_0
+msgid "Dettes financières à court terme fonds prévoyance"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_adj_liability
+msgid "Bilan : Passifs de regularisation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5845
+msgid "Produits des repas (comme diminution charges)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8500
+msgid "Loyers des locaux"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6842
+msgid "Pertes de change s/liquidités et titres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7513
+#: model:account.account.template,name:l10n_ch.ch_8513
+msgid "Primes d'assurance"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6661
+msgid "Sponsoring"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6601
+msgid "Publicité à la radio"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_100
+#: model:account.account.template,name:l10n_ch.ch_190_0
+msgid "Liquidités et titres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3000
+msgid "Chiffre d'affaires brut du produit X"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3001
+msgid "Chiffre d'affaires brut du produit Y"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7009
+#: model:account.account.template,name:l10n_ch.ch_7029
+msgid "Diminutions de produits"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1829
+msgid "Amortissement cumulé s/frais rech./développement"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6223
+msgid "Assurances pour véhicules spéciaux"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_non_ope_debts
+msgid "Bilan : Dettes hors exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6059
+msgid "Abonnements d'entretien"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3201
+msgid "Ventes brutes de l'article Y"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_other
+msgid "Autre : Other"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6035
+msgid "Charges accessoires des locaux de personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_440
+msgid "Charges pour prestations de services de tiers A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_140_0
+msgid "Titres à long terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6602
+msgid "Publicité à la télévision"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1573
+msgid "Conteneurs"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2207
+msgid "Droits de timbre dus"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_349
+msgid "Déductions s/ventes prestations de services"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2915
+msgid "Réserves libres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1578
+msgid "Acomptes s/équipements et installations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1090
+#: model:account.account.template,name:l10n_ch.ch_109_0
+msgid "Compte d'attente en monnaie"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6037
+msgid "Charges accessoires de chauffage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_9200
+msgid "Participation au bénéfice de l'associé X"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_104_0
+msgid "Chèques, effets à recevoir"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6640
+msgid "Frais de voyage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4409
+#: model:account.account.template,name:l10n_ch.ch_49
+msgid "Déductions obtenues s/charges"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4009
+#: model:account.account.template,name:l10n_ch.ch_4209
+msgid "Déductions obtenues s/achats"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1070
+msgid "Instruments financiers dérivés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5881
+#: model:account.account.template,name:l10n_ch.ch_6513
+msgid "Frais de port"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_180_0
+#: model:account.account.template,name:l10n_ch.ch_1980
+#: model:account.account.template,name:l10n_ch.ch_198_0
+msgid "Charges activées"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6540
+msgid "Charges pour conseil d'administration"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_694
+msgid "Amortissements s/immobilisations incorporelles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_230_0
+#: model:account.account.template,name:l10n_ch.ch_2730
+msgid "Passifs de régularisation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2610
+msgid "Provision pour recherche"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5846
+msgid "Produits des boissons (comme diminution charges)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8013
+msgid "Pertes exceptionnelles de change"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_227_0
+msgid "Autres dettes à court terme c/fonds prévoyance"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_220
+#: model:account.account.template,name:l10n_ch.ch_272_0
+msgid "Autres dettes à court terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6852
+msgid "Produits financiers s/titres réalisables à c. t."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6200
+msgid "Réparation, service et nettoyage des voitures"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6120
+msgid "ERR du dépôt central"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4520
+#: model:account.account.template,name:l10n_ch.ch_6420
+msgid "Mazout"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6044
+msgid "Nettoyage des bâtiments de bureau et adm."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4291
+msgid "Rabais et réductions de prix s/achats"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8004
+msgid "Bénéfices exceptionnels s/aliénations actifs immob"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_226_0
+msgid "Autres dettes à court terme envers actionnaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6211
+msgid "Carburants pour camionnettes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5822
+msgid "Frais de logement"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1021
+msgid "Compte courant exploitation accessoire"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_361
+msgid "Produits des licences, des brevets, etc."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_92
+#: model:account.account.template,name:l10n_ch.ch_920
+msgid "Utilisation du bénéfice"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6401
+msgid "Flux de chaleur"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_290_00
+msgid "Réserves légales"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_69
+msgid "Amortissement"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3211
+msgid "Ventes de détail brutes à crédit"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_4013
+msgid "Achats d'autres matières"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6890
+msgid "Produits financiers c/intérêts moratoires, escptes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6012
+msgid "Loyer interne des entrepôts"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1712
+msgid "Modèles"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_receivable_base_invest38
+msgid "Acquisition de biens d'invest. et autres charges a 3.8% (TS)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_inventory
+msgid "Bilan : Stocks"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1722
+msgid "Droits de jouissance"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2733
+msgid "Provisions à court terme"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5001
+#: model:account.account.template,name:l10n_ch.ch_5201
+#: model:account.account.template,name:l10n_ch.ch_5401
+#: model:account.account.template,name:l10n_ch.ch_5601
+msgid "Suppléments"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2500
+#: model:account.account.template,name:l10n_ch.ch_250_0
+msgid "Emprunts à long terme à des tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1630
+#: model:account.account.template,name:l10n_ch.ch_163_0
+msgid "Entrepôts"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_390
+msgid "Déductions s/produits"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2250
+msgid "Dettes à court terme envers la filiale A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5841
+msgid "Boissons"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1011
+msgid "Chèques postaux succursale"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6058
+msgid "Investissements de moindre importance"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6895
+msgid "Escomptes obtenus des fournisseurs"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1190
+msgid "Créances envers des sociétés de virement"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6045
+msgid "Nettoyage des locaux de personnel"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2420
+#: model:account.account.template,name:l10n_ch.ch_242_0
+#: model:account.account.template,name:l10n_ch.ch_2741
+msgid "Dettes résultant d'opérations de crédit-bail"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1119
+msgid "Provisions pertes s/créances envers des sociétés du groupe"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1400
+#: model:account.account.template,name:l10n_ch.ch_1940
+msgid "Actions"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1719
+msgid "Amortissement cumulé s/marques, échantillons, etc."
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7500
+msgid "Loyers internes pour locaux d'exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6804
+msgid "Charges financières pour acomptes de clients"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6001
+msgid "Loyer des ateliers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_165_0
+msgid "Bâtiments administratifs"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6121
+msgid "ERR du dépôt à A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_370
+msgid "Prestations propres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_64
+#: model:account.account.template,name:l10n_ch.ch_7016
+#: model:account.account.template,name:l10n_ch.ch_7036
+msgid "Charges d'énergie et évacuation des déchets"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6047
+msgid "Nettoyage effectué par des tiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_7412
+msgid "Pertes de change s/placements financiers"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_8014
+msgid "Pertes exceptionnelles s/aliénations actifs immob"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_632_0
+msgid "Primes d'assurance pour arrêts d'exploitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_244_0
+#: model:account.account.template,name:l10n_ch.ch_2752
+msgid "Dettes hypothécaires"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.template,name:l10n_ch.vat_O_exclude
+msgid "TVA 0% exclue"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2
+msgid "Passif"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2446
+msgid "Hypothèques sur immeubles d'habitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_651_0
+msgid "Téléphone, téléfax, Internet, frais de port"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6061
+msgid "Charges pour atelier en crédit-bail"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6110
+msgid "ERR d'installations des magasins"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_342
+msgid "Ventes brutes prestations de services du secteur C"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1801
+msgid "Frais d'augmentation de capital"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_507
+msgid "Charges sociales de production"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6584
+msgid "Développement projet informatique B"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6583
+msgid "Développement projet informatique A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3007
+msgid "Chiffre d'affaires brut prestations annexes"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2901
+msgid "Réserve pour actions propres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.template,name:l10n_ch.vat_XO
+msgid "TVA due a 0% (Exportations)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_482
+#: model:account.account.template,name:l10n_ch.ch_4820
+msgid "Variations de stocks de marchandises"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.template,name:l10n_ch.vat_38_invest
+msgid "TVA 3.8% sur invest. et autres ch. (TS)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1713
+msgid "Plans"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_2640
+msgid "Provisions pour impôts latents"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1811
+msgid "Disagio s/emprunts par obligations"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5607
+msgid "Charges sociales (administration)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1533
+msgid "Véhicules spéciaux"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_630
+msgid "Assurances-choses"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_due_tva25
+#: model:account.tax.template,name:l10n_ch.vat_25
+msgid "TVA due a 2.5% (TR)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6572
+msgid "Entretien / Hotline Software"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6542
+msgid "Charges pour organe de révision"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1121
+msgid "Créances envers l'actionnaire Y"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1960
+msgid "Bâtiments d'habitation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_5400
+msgid "Salaires pour la fourniture des prestations serv.A"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1641
+msgid "Halle de vente"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6224
+#: model:account.account.template,name:l10n_ch.ch_6310
+msgid "Assurance responsabilité civile"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6604
+msgid "Publicité sur Internet"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3097
+#: model:account.account.template,name:l10n_ch.ch_3297
+#: model:account.account.template,name:l10n_ch.ch_3907
+msgid "Frets et ports"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_223_0
+msgid "Dividendes et coupons d'obligations non encaissés"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1723
+msgid "Raisons de commerce"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_receivable_net
+msgid "Acquisition - total"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_building_asset
+msgid "Bilan : Immo corporelles immobilieres"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3608
+msgid "Variations des stocks de travaux en cours"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1411
+msgid "Comptes bloqués à titre de réserve de crise"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_260_0
+msgid "Provisions réparation, assainissements, rénovation"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6038
+msgid "Charges accessoires d'électricité, de gaz et d'eau"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.tax.code.template,name:l10n_ch.vat_code_receivable_base_25
+msgid "Acquisition de biens et services a 2.5% (TR)"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_6220
+msgid "Assurances pour voitures"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_1558
+msgid "Acomptes s/installations de stockage"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.type,name:l10n_ch.account_type_closing
+msgid "Autre : Cloture"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_622_0
+msgid "Assurances"
+msgstr ""
+
+#. module: l10n_ch
+#: model:account.account.template,name:l10n_ch.ch_3700
+msgid "Production propre d'immobi. corporelles meubles"
+msgstr ""
+
