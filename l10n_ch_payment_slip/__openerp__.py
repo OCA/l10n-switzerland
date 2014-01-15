@@ -20,7 +20,7 @@
 #
 ##############################################################################
 
-{'name': 'Switzerland - Payment Slip',
+{'name': 'Switzerland - Payment Slip (BVR/ESR)',
  'description': """
 Swiss localization Payment slip known as ESR/BVR:
 =================================================
