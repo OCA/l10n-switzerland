@@ -1,0 +1,58 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#       * l10n_ch_dta
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-07-30 14:04+0000\n"
+"PO-Revision-Date: 2013-07-30 13:47+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_ch_dta
+#: field:res.partner.bank,dta_code:0
+msgid "DTA code"
+msgstr "code DTA"
+
+#. module: l10n_ch_dta
+#: model:ir.model,name:l10n_ch_dta.model_payment_order
+msgid "Payment Order"
+msgstr "Ordre de Paiement"
+
+#. module: l10n_ch_dta
+#: view:create.dta.wizard:0
+msgid "DTA Generation"
+msgstr "Génération du fichier DTA"
+
+#. module: l10n_ch_dta
+#: view:res.partner.bank:0
+msgid "DTA options"
+msgstr "Options de DTA"
+
+#. module: l10n_ch_dta
+#: field:payment.order,dta_ids:0
+msgid "unknown"
+msgstr "unknown"
+
+#. module: l10n_ch_dta
+#: model:ir.model,name:l10n_ch_dta.model_res_partner_bank
+msgid "Bank Accounts"
+msgstr "Comptes bancaires"
+
+#. module: l10n_ch_dta
+#: view:create.dta.wizard:0
+#: model:ir.actions.act_window,name:l10n_ch_dta.action_dta_create
+msgid "Create DTA"
+msgstr "Créer DTA"
+
+#. module: l10n_ch_dta
+#: view:create.dta.wizard:0
+msgid "Cancel"
+msgstr "Annuler"
