@@ -7,13 +7,15 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-04 16:03+0000\n"
-"PO-Revision-Date: 2013-12-04 16:03+0000\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2014-01-14 17:24+0000\n"
+"Last-Translator: Vincent Renaville@camptocamp "
+"<vincent.renaville@camptocamp.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2014-01-15 05:31+0000\n"
+"X-Generator: Launchpad (build 16890)\n"
 
 #. module: l10n_ch_credit_control_payment_slip_report
 #: code:addons/l10n_ch_credit_control_payment_slip_report/credit_control_printer.py:40
@@ -46,4 +48,3 @@ msgstr "Erreur"
 #: model:ir.model,name:l10n_ch_credit_control_payment_slip_report.model_credit_control_printer
 msgid "Mass printer"
 msgstr "Impression en masse"
-
