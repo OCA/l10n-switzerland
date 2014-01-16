@@ -1,0 +1,157 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* l10n_ch_scan_bvr
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-09-11 09:45+0000\n"
+"PO-Revision-Date: 2013-09-11 09:45+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:81
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:108
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:137
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:159
+#, python-format
+msgid "BVR CheckSum Error in first part"
+msgstr "Erreur de validation dans la première partie"
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:191
+#, python-format
+msgid "The default product in this partner have wrong taxes configuration"
+msgstr "Le produit par défaut sur ce partenaire a une mauvaise configuration des taxes"
+
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:87
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:114
+#, python-format
+msgid "BVR CheckSum Error in third part"
+msgstr "Erreur de validation dans la troisième partie"
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:83
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:86
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:89
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:107
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:110
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:113
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:116
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:136
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:158
+#, python-format
+msgid "Validation Error"
+msgstr "Erreur de validation"
+
+#. module: l10n_ch_scan_bvr
+#: field:scan.bvr,state:0
+msgid "State"
+msgstr "Status"
+
+#. module: l10n_ch_scan_bvr
+#: selection:scan.bvr,state:0
+msgid "Need extra information"
+msgstr "Information complémentaire nécessaire"
+
+#. module: l10n_ch_scan_bvr
+#: view:scan.bvr:0
+#: field:scan.bvr,bank_account_id:0
+msgid "Partner Bank Account"
+msgstr "Compte bancaire partenaire"
+
+#. module: l10n_ch_scan_bvr
+#: view:scan.bvr:0
+msgid "Create"
+msgstr "Créer"
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:191
+#, python-format
+msgid "Error !"
+msgstr "Erreur !"
+
+#. module: l10n_ch_scan_bvr
+#: view:scan.bvr:0
+msgid "SCAN BVR"
+msgstr "SCAN BVR"
+
+#. module: l10n_ch_scan_bvr
+#: selection:scan.bvr,state:0
+msgid "valid"
+msgstr "valider"
+
+#. module: l10n_ch_scan_bvr
+#: view:scan.bvr:0
+msgid "Invoice Journal"
+msgstr "Journal des factures"
+
+#. module: l10n_ch_scan_bvr
+#: model:ir.actions.act_window,name:l10n_ch_scan_bvr.action_scan_bvr
+#: model:ir.ui.menu,name:l10n_ch_scan_bvr.menu_scan_bvr
+msgid "Scan BVR"
+msgstr "Scan BVR"
+
+#. module: l10n_ch_scan_bvr
+#: field:res.partner,supplier_invoice_default_product:0
+msgid "Default product supplier invoice"
+msgstr "Produit par défaut pour les facture fournisseur"
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:90
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:117
+#, python-format
+msgid "BVR CheckSum Error in fourth part"
+msgstr "Erreur de validation dans la quatrième partie"
+
+#. module: l10n_ch_scan_bvr
+#: field:scan.bvr,bvr_string:0
+msgid "BVR String"
+msgstr "Chaine BVR"
+
+#. module: l10n_ch_scan_bvr
+#: view:scan.bvr:0
+msgid "Bvr Scanning Result"
+msgstr "Resultat du scanning du BVR"
+
+#. module: l10n_ch_scan_bvr
+#: model:ir.model,name:l10n_ch_scan_bvr.model_scan_bvr
+msgid "BVR Scanning Wizard"
+msgstr "BVR Scanning Wizard"
+
+#. module: l10n_ch_scan_bvr
+#: field:scan.bvr,journal_id:0
+msgid "Invoice journal"
+msgstr "Journal de facture"
+
+#. module: l10n_ch_scan_bvr
+#: selection:scan.bvr,state:0
+msgid "New"
+msgstr "Nouveau"
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:84
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:111
+#, python-format
+msgid "BVR CheckSum Error in second part"
+msgstr "Erreur de validation dans la deuxième partie"
+
+#. module: l10n_ch_scan_bvr
+#: view:scan.bvr:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: l10n_ch_scan_bvr
+#: model:ir.model,name:l10n_ch_scan_bvr.model_res_partner
+#: view:scan.bvr:0
+#: field:scan.bvr,partner_id:0
+msgid "Partner"
+msgstr "Partenaire"
