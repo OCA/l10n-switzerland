@@ -33,12 +33,6 @@ class AccountMoveLine(Model):
         'transaction_ref': fields.char('Transaction Ref.', size=128),
     }
 
-    def init(self, cr):
-        cr.execute('UPDATE account_move_line SET transaction_ref = ref'
-                   '  WHERE transaction_ref IS NULL'
-                   '   AND ref IS NOT NULL')
-        return True
-
     def get_bvr_ref(self, cursor, uid, move_line_id, context=None):
         """Retrieve ESR/BVR reference from move line in order to print it"""
         res = ''
