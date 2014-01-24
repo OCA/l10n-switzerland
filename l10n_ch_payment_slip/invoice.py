@@ -163,7 +163,7 @@ class AccountInvoice(Model):
             # We keep this branch for compatibility with single BVR report.
             # This should be cleaned when porting to V8
             if move_lines:
-                # An existing transaction_ref as the priority if we
+                # An existing transaction_ref has the priority if we
                 # already have a transaction ref, it has been issued by
                 # a payment service, so we don't need a BVR reference.
                 if len(move_lines) == 1:
