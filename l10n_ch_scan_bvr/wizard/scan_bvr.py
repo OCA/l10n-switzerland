@@ -197,7 +197,7 @@ class scan_bvr(TransientModel):
                     fposition_id=False,
                     price_unit=False,
                     currency_id=False,
-                    context=None,
+                    context=context,
                     company_id=None)
                 ## We will check that the tax specified
                 ## on the product is price include or amount is 0
@@ -219,7 +219,7 @@ class scan_bvr(TransientModel):
                                      'invoice_line_tax_id': [(6, 0, product_onchange_result['value']['invoice_line_tax_id'])]
                                      }
                 invoice_line_ids = invoice_line_obj.create(
-                                            cr, uid, invoice_line_vals)
+                                            cr, uid, invoice_line_vals,context=context)
             return invoice_line_ids
 
     def _create_direct_invoice(self, cr, uid, ids, data, context):
@@ -285,7 +285,7 @@ class scan_bvr(TransientModel):
                         'type': 'in_invoice',
                         }
 
-        last_invoice = account_invoice_obj.create(cr, uid, curr_invoice)
+        last_invoice = account_invoice_obj.create(cr, uid, curr_invoice,context=context)
         data['invoice_id'] = last_invoice
         self._create_invoice_line(cr, uid, ids, data, context)
         ## Noew we create taxes lines
