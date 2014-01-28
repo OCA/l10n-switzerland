@@ -519,7 +519,7 @@ class DTAFileGenerator(TransientModel):
                                                 pline.bank_id.bank.country.name or '')
 
         elec_context['partner_bank_code'] = pline.bank_id.bank_bic
-        elec_context['reference'] = pline.move_line_id.ref
+        elec_context['reference'] = pline.move_line_id.transaction_ref
         # Add support for owner of the account if exists..
         elec_context['partner_name'] = pline.partner_id and pline.partner_id.name or ''
         if pline.partner_id:
