@@ -19,27 +19,23 @@
 #
 ##############################################################################
 
-{
-        "name": "Wizard to Scan BVR for Invoice",
-        "description": """create invoices from BVR code
+{"name": "Wizard to Scan BVR for Invoice",
+ "description": """
+create invoices from BVR code
 
-        This module works with C-channel or other OCR scanner.
-        It helps you to create an invoice directly from the BVR Code.
-        It currently supports BVR and BVR+
-        """,
-        "version": "1.0",
-        "author": "Camptocamp",
-        "category": "Generic Modules/Others",
-        "website": "http://www.camptocamp.com",
-        "depends": [
-                    "l10n_ch",
-                    "l10n_ch_payment_slip"
-                    ],
-        "data": [
-                "wizard/scan_bvr_view.xml",
-                "partner_view.xml",
-                "bank_view.xml",
-                ],
-        "active": False,
-        "installable": True
-}
+This module works with C-channel or other OCR scanner.
+It helps you to create an invoice directly from the BVR Code.
+It currently supports BVR and BVR+
+
+""",
+ "version": "1.0",
+ "author": "Camptocamp",
+ "category": "Generic Modules/Others",
+ "website": "http://www.camptocamp.com",
+ "depends": ["l10n_ch",
+             "l10n_ch_payment_slip"],
+ "data": ["wizard/scan_bvr_view.xml",
+          "partner_view.xml",
+          "bank_view.xml"],
+ "installable": True
+ }

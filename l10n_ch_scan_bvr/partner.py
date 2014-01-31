@@ -27,9 +27,10 @@ class ResPartner(Model):
 
     _columns = {
         'supplier_invoice_default_product': fields.many2one(
-                                        'product.product',
-                                        'Default product supplier invoice'),
-                }
+            'product.product',
+            'Default product supplier invoice'
+        ),
+    }
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
