@@ -30,7 +30,7 @@ from openerp.tools.translate import _
 class scan_bvr(TransientModel):
 
     _name = "scan.bvr"
-    _description = "BVR Scanning Wizard"
+    _description = "BVR/ESR Scanning Wizard"
 
     _columns = {
         'journal_id': fields.many2one('account.journal',
@@ -79,7 +79,7 @@ class scan_bvr(TransientModel):
         return (10 - resultnumber) % 10
 
     def _construct_bvrplus_in_chf(self, bvr_string):
-            ##
+
             if len(bvr_string) != 43:
                 raise orm.except_orm(_('Validation Error'),
                                      _('BVR CheckSum Error in first part'))
@@ -93,14 +93,13 @@ class scan_bvr(TransientModel):
                 raise orm.except_orm(_('Validation Error'),
                                      _('BVR CheckSum Error in fourth part'))
             else:
-                    bvr_struct = {
-                                  'type': bvr_string[0:2],
+                    bvr_struct = {'type': bvr_string[0:2],
                                   'amount': 0.0,
                                   'reference': bvr_string[4:31],
                                   'bvrnumber': bvr_string[4:10],
                                   'beneficiaire': self._create_bvr_account(
-                                    bvr_string[33:42]
-                                    ),
+                                      bvr_string[33:42]
+                                  ),
                                   'domain': '',
                                   'currency': ''
                                   }
@@ -120,34 +119,31 @@ class scan_bvr(TransientModel):
                 raise orm.except_orm(_('Validation Error'),
                                      _('BVR CheckSum Error in fourth part'))
             else:
-                    bvr_struct = {
-                                  'type': bvr_string[0:2],
+                    bvr_struct = {'type': bvr_string[0:2],
                                   'amount': float(bvr_string[2:12])/100,
                                   'reference': bvr_string[14:41],
                                   'bvrnumber': bvr_string[14:20],
                                   'beneficiaire': self._create_bvr_account(
-                                     bvr_string[43:52]
-                                    ),
+                                      bvr_string[43:52]
+                                  ),
                                   'domain': '',
                                   'currency': ''
                                   }
                     return bvr_struct
 
     def _construct_bvr_postal_in_chf(self, bvr_string):
-            ##
             if len(bvr_string) != 42:
                 raise orm.except_orm(_('Validation Error'),
                                      _('BVR CheckSum Error in first part'))
             else:
 
-                    bvr_struct = {
-                                  'type': bvr_string[0:2],
+                    bvr_struct = {'type': bvr_string[0:2],
                                   'amount': float(bvr_string[2:12])/100,
                                   'reference': bvr_string[14:30],
                                   'bvrnumber': '',
                                   'beneficiaire': self._create_bvr_account(
-                                        bvr_string[32:41]
-                                    ),
+                                      bvr_string[32:41]
+                                  ),
                                   'domain': '',
                                   'currency': ''
                                   }
@@ -156,18 +152,19 @@ class scan_bvr(TransientModel):
     def _construct_bvr_postal_other_in_chf(self, bvr_string):
         ##
         if len(bvr_string) != 41:
-            raise orm.except_orm(_('Validation Error'), 
-                    _('BVR CheckSum Error in first part'))
+            raise orm.except_orm(
+                _('Validation Error'),
+                _('BVR CheckSum Error in first part')
+            )
         else:
 
-                bvr_struct = {
-                              'type': bvr_string[0:2],
+                bvr_struct = {'type': bvr_string[0:2],
                               'amount': float(bvr_string[7:16])/100,
                               'reference': bvr_string[18:33],
                               'bvrnumber': '000000',
                               'beneficiaire': self._create_bvr_account(
-                                    bvr_string[34:40]
-                                ),
+                                  bvr_string[34:40]
+                              ),
                               'domain': '',
                               'currency': ''
                               }
@@ -181,10 +178,11 @@ class scan_bvr(TransientModel):
             self.write(cr, uid, ids, {'partner_id': data['partner_id']})
             ## We check that this partner have a default product
             accounts_data = pool.get('res.partner').read(
-                                    cr, uid,
-                                    data['partner_id'],
-                                    ['supplier_invoice_default_product'],
-                                    context=context)
+                cr, uid,
+                data['partner_id'],
+                ['supplier_invoice_default_product'],
+                context=context
+            )
             if accounts_data['supplier_invoice_default_product']:
                 product_onchange_result = invoice_line_obj.product_id_change(
                     cr, uid, ids,
@@ -203,8 +201,9 @@ class scan_bvr(TransientModel):
                 ## on the product is price include or amount is 0
                 if product_onchange_result['value']['invoice_line_tax_id']:
                     taxes = pool.get('account.tax').browse(
-                                       cr, uid,
-                                       product_onchange_result['value']['invoice_line_tax_id'])
+                        cr, uid,
+                        product_onchange_result['value']['invoice_line_tax_id']
+                    )
                     for taxe in taxes:
                         if not taxe.price_include and taxe.amount != 0.0:
                             raise orm.except_orm(_('Error !'),
@@ -219,7 +218,7 @@ class scan_bvr(TransientModel):
                                      'invoice_line_tax_id': [(6, 0, product_onchange_result['value']['invoice_line_tax_id'])]
                                      }
                 invoice_line_ids = invoice_line_obj.create(
-                                            cr, uid, invoice_line_vals,context=context)
+                    cr, uid, invoice_line_vals, context=context)
             return invoice_line_ids
 
     def _create_direct_invoice(self, cr, uid, ids, data, context):
@@ -229,46 +228,53 @@ class scan_bvr(TransientModel):
         account_invoice_tax_obj = pool.get('account.invoice.tax')
         if data['bank_account']:
             account_info = pool.get('res.partner.bank').browse(
-                                        cr, uid, data['bank_account'],
-                                        context=context)
+                cr, uid, data['bank_account'],
+                context=context
+            )
         ## We will now search the currency_id
         #
         #
-        currency_search = pool.get('res.currency').search(cr, uid,
-                                          [('name',
-                                            '=',
-                                            data['bvr_struct']['currency'])],
-                                          context=context)
+        currency_search = pool.get('res.currency').search(
+            cr, uid,
+            [('name',
+              '=',
+              data['bvr_struct']['currency'])],
+            context=context
+        )
         currency_id = pool.get('res.currency').browse(cr, uid,
                                                       currency_search[0],
                                                       context=context)
         ## Account Modification
         if data['bvr_struct']['domain'] == 'name':
-            pool.get('res.partner.bank').write(cr, uid,
-                       data['bank_account'],
-                       {'post_number': data['bvr_struct']['beneficiaire']},
-                       context=context)
+            pool.get('res.partner.bank').write(
+                cr, uid,
+                data['bank_account'],
+                {'post_number': data['bvr_struct']['beneficiaire']},
+                context=context
+            )
         else:
             pool.get('res.partner.bank').write(
-                        cr, uid,
-                        data['bank_account'],
-                        {'bvr_adherent_num': data['bvr_struct']['bvrnumber'],
-                         'bvr_number': data['bvr_struct']['beneficiaire']},
-                        context=context)
+                cr, uid,
+                data['bank_account'],
+                {'bvr_adherent_num': data['bvr_struct']['bvrnumber'],
+                 'bvr_number': data['bvr_struct']['beneficiaire']},
+                context=context
+            )
         date_due = time.strftime('%Y-%m-%d')
         # We will now compute the due date and fixe the payment term
-        payment_term_id = account_info.partner_id.property_payment_term and account_info.partner_id.property_payment_term.id or False
+        payment_term_id = (account_info.partner_id.property_payment_term and
+                           account_info.partner_id.property_payment_term.id or False)
         if payment_term_id:
             #We Calculate due_date
             res = pool.get('account.invoice').onchange_payment_term_date_invoice(
-                             cr, uid, [],
-                             payment_term_id,
-                             time.strftime('%Y-%m-%d'))
+                cr, uid, [],
+                payment_term_id,
+                time.strftime('%Y-%m-%d')
+            )
             date_due = res['value']['date_due']
         ##
         #
-        curr_invoice = {
-                        'name': time.strftime('%Y-%m-%d'),
+        curr_invoice = {'name': time.strftime('%Y-%m-%d'),
                         'partner_id': account_info.partner_id.id,
                         'account_id': account_info.partner_id.property_account_payable.id,
                         'date_due': date_due,
@@ -285,7 +291,8 @@ class scan_bvr(TransientModel):
                         'type': 'in_invoice',
                         }
 
-        last_invoice = account_invoice_obj.create(cr, uid, curr_invoice,context=context)
+        last_invoice = account_invoice_obj.create(cr, uid,
+                                                  curr_invoice, context=context)
         data['invoice_id'] = last_invoice
         self._create_invoice_line(cr, uid, ids, data, context)
         ## Noew we create taxes lines
@@ -302,23 +309,23 @@ class scan_bvr(TransientModel):
                                             inv,
                                             computed_tax,
                                             account_invoice_tax_obj)
-        action = {
-                    'domain': "[('id','=', "+ str(last_invoice) + ")]",
-                    'name': 'Invoices',
-                    'view_type': 'form',
-                    'view_mode': 'form',
-                    'res_model': 'account.invoice',
-                    'view_id': False,
-                    'context': "{'type':'out_invoice'}",
-                    'type': 'ir.actions.act_window',
-                    'res_id': last_invoice
-                }
+        action = {'domain': "[('id','=', " + str(last_invoice) + ")]",
+                  'name': 'Invoices',
+                  'view_type': 'form',
+                  'view_mode': 'form',
+                  'res_model': 'account.invoice',
+                  'view_id': False,
+                  'context': "{'type':'out_invoice'}",
+                  'type': 'ir.actions.act_window',
+                  'res_id': last_invoice}
         return action
 
     def _create_bvr_account(self, account_unformated):
-        account_formated = "%s-%s-%s" % (account_unformated[0:2],
-                                         str(int(account_unformated[2:len(account_unformated)-1])),
-                                         account_unformated[len(account_unformated)-1:len(account_unformated)])
+        account_formated = "%s-%s-%s" % (
+            account_unformated[0:2],
+            str(int(account_unformated[2:len(account_unformated)-1])),
+            account_unformated[len(account_unformated)-1:len(account_unformated)]
+        )
         return account_formated
 
     def _get_bvr_structurated(self, bvr_string):
