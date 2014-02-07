@@ -37,11 +37,3 @@ class account_invoice(orm.Model):
             return ''
         return super(account_invoice, self)._get_bvr_ref(cr, uid, invoice,
                                                          context=context)
-
-    def action_number(self, cr, uid, ids, context=None):
-        res = super(account_invoice, self).\
-            action_number(cr, uid, ids, context=context)
-        for invoice in self.browse(cr, uid, ids, context=context):
-            if invoice.bvr_reference and not invoice.transaction_id:
-                invoice.write({'transaction_id': invoice.bvr_reference})
-        return res

@@ -46,8 +46,7 @@ class AccountMoveLine(Model):
             move_line_id = move_line_id[0]
         move_line = self.browse(cursor, uid, move_line_id, context=context)
         ## We check if the type is bvr, if not we return false
-        if (move_line.invoice.partner_bank_id.state != 'bvr' or
-                move_line.transaction_ref):
+        if move_line.invoice.partner_bank_id.state != 'bvr':
             return ''
         ##
         if move_line.invoice.partner_bank_id.bvr_adherent_num:
@@ -55,7 +54,13 @@ class AccountMoveLine(Model):
         move_number = ''
         if move_line.invoice.number:
             move_number = self._compile_get_ref.sub('', str(move_line.invoice.number) + str(move_line_id))
-        return mod10r(res + move_number.rjust(26 - len(res), '0'))
+        reference = mod10r(res + move_number.rjust(26 - len(res), '0'))
+        if (move_line.transaction_ref and
+                move_line.transaction_ref != reference):
+            # the line has already a transaction id and it is not
+            # a BVR reference
+            return ''
+        return reference
 
 
 class AccountInvoice(Model):
@@ -149,22 +154,17 @@ class AccountInvoice(Model):
                    (ref, move_id))
         return True
 
-    def _action_bvr_number_single(self, cr, uid, invoice, context=None):
-        ref = invoice.get_bvr_ref()
-        move = invoice.move_id
+    def _action_bvr_number_move(self, cr, uid, invoice, move, ref, context=None):
         if not (move or ref):
             return
         cr.execute('UPDATE account_move_line SET transaction_ref=%s'
                    '  WHERE move_id=%s', (ref, move.id))
         self._update_ref_on_account_analytic_line(cr, uid, ref, move.id)
 
-    def _action_bvr_number_multiple(self, cr, uid, invoice,
-                                    move_lines, context=None):
-        line_obj = self.pool.get('account.move.line')
-        for move_line in line_obj.browse(cr, uid, move_lines, context=context):
-            ref = move_line.get_bvr_ref()
+    def _action_bvr_number_move_line(self, cr, uid, invoice, move_line,
+                                     ref, context=None):
             if not ref:
-                continue
+                return
             cr.execute('UPDATE account_move_line SET transaction_ref=%s'
                        '  WHERE id=%s', (ref, move_line.id))
             self._update_ref_on_account_analytic_line(cr, uid, ref,
@@ -179,17 +179,28 @@ class AccountInvoice(Model):
         for inv in self.browse(cr, uid, ids, context=context):
             if inv.type != 'out_invoice' and inv.partner_bank_id.state != 'bvr':
                 continue
-            move_lines = move_line_obj.search(cr, uid, [('move_id', '=', inv.move_id.id),
-                                                        ('account_id', 'in', tier_account_id)])
-            if not move_lines:
+            move_line_ids = move_line_obj.search(
+                cr, uid,
+                [('move_id', '=', inv.move_id.id),
+                 ('account_id', 'in', tier_account_id)],
+                context=context)
+            if not move_line_ids:
                 continue
             # We keep this branch for compatibility with single BVR report.
             # This should be cleaned when porting to V8
-            if len(move_lines) == 1:
-                self._action_bvr_number_single(cr, uid, inv, context=context)
+            if len(move_line_ids) == 1:
+                ref = inv.get_bvr_ref()
+                move = inv.move_id
+                self._action_bvr_number_move(cr, uid, inv, move, ref,
+                                             context=context)
             else:
-                self._action_bvr_number_multiple(cr, uid, inv, move_lines,
-                                                 context=context)
+                move_lines = move_line_obj.browse(cr, uid, move_line_ids,
+                                                  context=context)
+                for move_line in move_lines:
+                    ref = move_line.get_bvr_ref()
+                    self._action_bvr_number_move_line(cr, uid, inv,
+                                                      move_line, ref,
+                                                      context=context)
         return res
 
     def copy(self, cursor, uid, inv_id, default=None, context=None):
