@@ -490,11 +490,17 @@ class DTAFileGenerator(TransientModel):
         bank = payment.mode.bank_id
         if not bank:
             raise except_osv(_('Error'), _('No bank account for the company.'))
-        elec_context['comp_bank_name'] = bank.bank and bank.bank.name or False
+        if not bank.bank:
+            raise except_osv(_('Error'),
+                             _('You must set a bank '
+                               'for the bank account with number %s' %
+                               bank.acc_number or ''))
+        elec_context['comp_bank_name'] = bank.bank.name
         elec_context['comp_bank_clearing'] = bank.bank.clearing
         if not elec_context['comp_bank_clearing']:
             raise except_osv(_('Error'),
-                             _('You must provide a Clearing Number for your bank account.'))
+                             _('You must provide a Clearing Number '
+                               'for the bank %s.' % bank.bank.name))
         company = payment.company_id
         co_addr = company.partner_id
         elec_context['comp_country'] = co_addr.country_id and co_addr.country_id.name or ''
@@ -519,9 +525,7 @@ class DTAFileGenerator(TransientModel):
                                                 pline.bank_id.bank.country.name or '')
 
         elec_context['partner_bank_code'] = pline.bank_id.bank_bic
-        # TODO transaction_ref does not exist in this module or its
-        # dependencies so move that in a glue module
-        elec_context['reference'] = pline.move_line_id.transaction_ref
+        elec_context['reference'] = pline.move_line_id.ref
         # Add support for owner of the account if exists..
         elec_context['partner_name'] = pline.partner_id and pline.partner_id.name or ''
         if pline.partner_id:
