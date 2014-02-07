@@ -162,6 +162,8 @@ class ResPartnerBank(orm.Model, BankCommon):
         for p_bank in p_banks:
             if not p_bank.state in ('bv', 'bvr'):
                 continue
+            if not p_bank.get_account_number():
+                continue
             if not (self._check_9_pos_postal_num(p_bank.get_account_number()) or
                     self._check_5_pos_postal_num(p_bank.get_account_number())):
                 return False
