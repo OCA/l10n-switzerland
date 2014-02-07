@@ -181,6 +181,49 @@ class BvrImporterWizard(TransientModel):
                                  _('The properties account payable account receivable are not set'))
         return account_id
 
+    def _prepare_line_vals(self, cursor, uid, statement, record,
+                           voucher_enabled, context=None):
+        # Remove the 11 first char because it can be adherent number
+        # TODO check if 11 is the right number
+        move_line_obj = self.pool.get('account.move.line')
+        reference = record['reference']
+        values = {'name': reference,
+                  'date': record['date'],
+                  'amount': record['amount'],
+                  'ref': reference,
+                  'type': (record['amount'] >= 0 and 'customer') or 'supplier',
+                  'statement_id': statement.id,
+                  }
+        line_ids = move_line_obj.search(cursor, uid,
+                                        [('ref', '=', reference),
+                                         ('reconcile_id', '=', False),
+                                         ('account_id.type', 'in', ['receivable', 'payable']),
+                                         ('journal_id.type', '=', 'sale')],
+                                        order='date desc', context=context)
+        #for multiple payments
+        if not line_ids:
+            line_ids = move_line_obj.search(cursor, uid,
+                                            [('transaction_ref', '=', reference),
+                                             ('reconcile_id', '=', False),
+                                             ('account_id.type', 'in', ['receivable', 'payable']),
+                                             ('journal_id.type', '=', 'sale')],
+                                            order='date desc', context=context)
+        if not line_ids:
+            line_ids = self._reconstruct_invoice_ref(cursor, uid, reference, None)
+        if line_ids and voucher_enabled:
+            values['voucher_id'] = self._create_voucher_from_record(cursor, uid, record,
+                                                                    statement, line_ids,
+                                                                    context=context)
+        account_id = self._get_account(cursor, uid, line_ids,
+                                       record, context=context)
+        values['account_id'] = account_id
+        if line_ids:
+            line = move_line_obj.browse(cursor, uid, line_ids[0])
+            partner_id = line.partner_id.id
+            values['name'] = line.invoice and (_('Inv. no ') + line.invoice.number) or values['name']
+            values['partner_id'] = partner_id
+        return values
+
     def import_v11(self, cursor, uid, ids, data, context=None):
         """Import v11 file and transfor it into statement lines"""
         if context is None: context = {}
@@ -196,7 +239,6 @@ class BvrImporterWizard(TransientModel):
             if para.lower() not in ['0', 'false']: # if voucher is disabled
                 voucher_enabled = False
         statement_line_obj = self.pool.get('account.bank.statement.line')
-        move_line_obj = self.pool.get('account.move.line')
         attachment_obj = self.pool.get('ir.attachment')
         statement_obj = self.pool.get('account.bank.statement')
         file = data['form']['file']
@@ -207,49 +249,11 @@ class BvrImporterWizard(TransientModel):
         lines = base64.decodestring(file).split("\n")
         records = self._parse_lines(cursor, uid, lines, context=context)
 
-        if context is None:
-            context = {}
-
         statement = statement_obj.browse(cursor, uid, statement_id, context=context)
         for record in records:
-            # Remove the 11 first char because it can be adherent number
-            # TODO check if 11 is the right number
-            reference = record['reference']
-            values = {'name': reference,
-                      'date': record['date'],
-                      'amount': record['amount'],
-                      'ref': reference,
-                      'type': (record['amount'] >= 0 and 'customer') or 'supplier',
-                      'statement_id': statement_id,
-                      }
-            line_ids = move_line_obj.search(cursor, uid,
-                                            [('ref', '=', reference),
-                                             ('reconcile_id', '=', False),
-                                             ('account_id.type', 'in', ['receivable', 'payable']),
-                                             ('journal_id.type', '=', 'sale')],
-                                            order='date desc', context=context)
-            #for multiple payments
-            if not line_ids:
-                line_ids = move_line_obj.search(cursor, uid,
-                                                [('transaction_ref', '=', reference),
-                                                ('reconcile_id', '=', False),
-                                                ('account_id.type', 'in', ['receivable', 'payable']),
-                                                ('journal_id.type', '=', 'sale')],
-                                                order='date desc', context=context)
-            if not line_ids:
-                line_ids = self._reconstruct_invoice_ref(cursor, uid, reference, None)
-            if line_ids and voucher_enabled:
-                values['voucher_id'] = self._create_voucher_from_record(cursor, uid, record,
-                                                                        statement, line_ids,
-                                                                        context=context)
-            account_id = self._get_account(cursor, uid, line_ids,
-                                           record, context=context)
-            values['account_id'] = account_id
-            if line_ids:
-                line = move_line_obj.browse(cursor, uid, line_ids[0])
-                partner_id = line.partner_id.id
-                values['name'] = line.invoice and (_('Inv. no ') + line.invoice.number) or values['name']
-                values['partner_id'] = partner_id
+            values = self._prepare_line_vals(cursor, uid, statement,
+                                             record, voucher_enabled,
+                                             context=context)
             statement_line_obj.create(cursor, uid, values, context=context)
         attachment_obj.create(cursor, uid,
                               {'name': 'BVR %s' % time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
