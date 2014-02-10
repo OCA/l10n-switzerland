@@ -32,18 +32,16 @@ import time
 import base64
 
 from osv import osv, fields
-import pooler
-from tools.translate import _
 
 from l10n_ch_sepa.base_sepa.msg_sepa import MsgSEPAFactory
 
+
 class WizardPain001(osv.osv_memory):
-    _name="wizard.pain001"
+    _name = "wizard.pain001"
 
-    _columns={
-        'pain_001_file':fields.binary('XML File', readonly=True)
+    _columns = {
+        'pain_001_file': fields.binary('XML File', readonly=True)
     }
-
 
     def _get_country_code(self, payment):
         ''' return the coutry code or None
@@ -54,13 +52,13 @@ class WizardPain001(osv.osv_memory):
             return payment.user_id.company_id.partner_id.country.code
         return None
 
-    def _get_pain_def(self, cc):
+    def _get_pain_def(self, country_code):
         ''' Get the right message definition based on country code
          of selected company bank (via payment mode)
          if no country is defined, take the company country
          - Here we could add a second level for bank definitions'''
-        if cc:
-            class_name = 'pain.001' + '.' + cc.lower()
+        if country_code:
+            class_name = 'pain.001' + '.' + country_code.lower()
             if MsgSEPAFactory.has_instance(class_name):
                 return MsgSEPAFactory.get_instance(class_name)
         return MsgSEPAFactory.get_instance('pain.001')
@@ -74,13 +72,17 @@ class WizardPain001(osv.osv_memory):
         '''
         context = context or {}
         attachment_obj = self.pool.get('ir.attachment')
-        attachment_obj.create(cursor, user, {
-                'name': 'pain001_%s' %time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
-                'datas': data['base64_data'],
-                'datas_fname': 'pain001_%s.xml' %time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
-                'res_model': data['model'],
-                'res_id': data['id'],
-            }, context=context)
+        vals = {
+            'name': 'pain001_%s' % time.strftime("%Y-%m-%d_%H:%M:%S",
+                                                 time.gmtime()),
+            'datas': data['base64_data'],
+            'datas_fname': 'pain001_%s.xml' % time.strftime(
+                "%Y-%m-%d_%H:%M:%S",
+                time.gmtime()),
+            'res_model': data['model'],
+            'res_id': data['id'],
+            }
+        attachment_obj.create(cursor, user, vals, context=context)
 
     def create_pain_001(self, cursor, user, ids, context=None):
         ''' create a pain 001 file into wizard and add it as an attachment '''
@@ -103,15 +105,13 @@ class WizardPain001(osv.osv_memory):
 
         pain_001 = pain.compute_export(cursor, user, pay_id, context)
         pain_001_file = base64.encodestring(pain_001)
-        
+
         data = {'base64_data': pain_001_file, 'id': pay_id}
         data['model'] = 'payment.order'
-        
+
         self._create_attachment(cursor, user, data, context=context)
-        
 
         current.write({'pain_001_file': pain_001_file})
         return True
 
-WizardPain001()
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

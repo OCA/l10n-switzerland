@@ -33,37 +33,37 @@
     "version": "6.1",
     "category": "Finance",
     "description": """
-        SEPA payments
-        
-        pain.001 for Credit Transfert Initiation
-        
-        This module designed for Swiss payment is also generic for euro payments
-        as the Swiss standards are slightly different.
-        It intends to be reusable to accept new definition of specific standards
-        by country.  
-        
-        TODO: Needs to be fully tested with a FI
-        
-        WARNING: This module has been developed in 6.0 and has never been launched in 6.1 yet
-        
+SEPA payments
+
+pain.001 for Credit Transfert Initiation
+
+This module designed for Swiss payment is also generic for euro payments
+as the Swiss standards are slightly different.
+It intends to be reusable to accept new definition of specific standards
+by country.
+
+TODO: Needs to be fully tested with a FI
+
+WARNING: This module has been developed in 6.0 and has never been launched
+in 6.1 yet
+
     """,
     "author": "Camptocamp",
     "depends": [
-            "base",
-            "account",
-            "l10n_ch"
+        "base",
+        "account",
+        "l10n_ch"
     ],
     "init_xml": [],
     "update_xml": [
-            "wizard/wiz_pain_001_view.xml",
+        "wizard/wiz_pain_001_view.xml",
     ],
-    "test" : [
-            "test/pain001_eu.yml",
-            "test/pain001_ch.yml",
+    "test": [
+        "test/pain001_eu.yml",
+        "test/pain001_ch.yml",
     ],
     "demo_xml": [],
     "installable": False,
     "active": False,
-#    'certificate': 'certificate',
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

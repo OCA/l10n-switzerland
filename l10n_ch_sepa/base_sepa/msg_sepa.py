@@ -35,15 +35,18 @@ from lxml import etree
 
 SEPA_DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
 
+
 class MsgSEPA(object):
 
     _xsd_path = None
     _xml_data = None
 
-    def __init__(self, xsd_path = None):
-        '''If no xsd is defined, we consider that we will use the basid iso20022 XSD file'''
-        self._xsd_path = xsd_path
+    def __init__(self, xsd_path=None):
+        '''If no xsd is defined, we consider that we will use the basid
+        iso20022 XSD file
 
+        '''
+        self._xsd_path = xsd_path
 
     def _is_xsd_valid(self):
         '''Check the validity of XML data with an XML Schema
@@ -54,7 +57,6 @@ class MsgSEPA(object):
         if not self._xml_data:
             pass
             # TODO raise exception no XML data
-
 
         try:
             f_xsd = open(self._xsd_path)
@@ -71,9 +73,12 @@ class MsgSEPA(object):
 
         return xmlschema.validate(xml_data)
 
+
 class MsgSEPAFactory(object):
     """This class is a factory that creates SEPA message in order to allow
-    redefinition of those message to match with different country implementations
+    redefinition of those message to match with different country
+    implementations
+
     """
     _register = {}
 
@@ -89,6 +94,6 @@ class MsgSEPAFactory(object):
 
     @classmethod
     def has_instance(cls, key):
-        return cls._register.has_key(key)
+        return key in cls._register
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
