@@ -27,8 +27,8 @@ class DTAFileGenerator(orm.TransientModel):
 
     def _set_bank_data(self, cr, uid, data, pline, elec_context,
                        seq, context=None):
-        record = super(DTAFileGenerator, self).\
+        super(DTAFileGenerator, self).\
             _set_bank_data(cr, uid, data, pline,
                            elec_context, seq, context=context)
         if pline.move_line_id.transaction_ref:
-            record['reference'] = pline.move_line_id.transaction_ref
+            elec_context['reference'] = pline.move_line_id.transaction_ref
