@@ -60,13 +60,21 @@ class account_statement_completion_rule(orm.Model):
         st_obj = self.pool.get('account.bank.statement.line')
         res = {}
         invoice_obj = self.pool.get('account.invoice')
+        # For customer invoices, search in bvr_reference that is as list
+        # of references separated by semicolons and formatted with
+        # spaces inside them.
+        # For supplier invoices, search in 'reference'
         query = ("SELECT id FROM account_invoice "
                  "WHERE company_id = %s "
-                 "AND %s = ANY (string_to_array( "
-                 "                replace(bvr_reference, ' ', ''), "
-                 "              ';') "
+                 "AND (%s = ANY (string_to_array( "
+                 "                 replace(bvr_reference, ' ', ''), "
+                 "               ';')) "
+                 "     AND type IN ('out_invoice', 'out_refund') "
+                 "     OR type IN ('in_invoice', 'in_refund') "
+                 "     AND reference_type = 'bvr' AND reference = %s "
                  ")")
         cr.execute(query, (st_line['company_id'][0],
+                           st_line['transaction_id'],
                            st_line['transaction_id']))
         rows = cr.fetchall()
         invoice_ids = [row[0] for row in rows]
