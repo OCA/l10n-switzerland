@@ -44,9 +44,6 @@ by country.
 
 TODO: Needs to be fully tested with a FI
 
-WARNING: This module has been developed in 6.0 and has never been launched
-in 6.1 yet
-
     """,
     "author": "Camptocamp",
     "depends": [
@@ -54,16 +51,14 @@ in 6.1 yet
         "account",
         "l10n_ch"
     ],
-    "init_xml": [],
-    "update_xml": [
+    "data": [
         "wizard/wiz_pain_001_view.xml",
     ],
     "test": [
         "test/pain001_eu.yml",
         "test/pain001_ch.yml",
     ],
-    "demo_xml": [],
-    "installable": False,
-    "active": False,
+    "installable": True,
+    "active": True,
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
