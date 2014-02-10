@@ -171,14 +171,21 @@ class AccountInvoice(Model):
                                                       move_line.move_id.id)
 
     def action_number(self, cr, uid, ids, context=None):
+        """ Copy the BVR/ESR reference in the transaction_ref of move lines.
+
+        For customers invoices: the BVR reference is computed using
+        ``get_bvr_ref()`` on the invoice or move lines.
+
+        For suppliers invoices: the BVR reference is stored in the reference
+        field of the invoice.
+
+        """
         res = super(AccountInvoice, self).action_number(cr, uid, ids, context=context)
         move_line_obj = self.pool.get('account.move.line')
         account_obj = self.pool.get('account.account')
         tier_account_id = account_obj.search(cr, uid, [('type', 'in', ['receivable', 'payable'])])
 
         for inv in self.browse(cr, uid, ids, context=context):
-            if inv.type != 'out_invoice' and inv.partner_bank_id.state != 'bvr':
-                continue
             move_line_ids = move_line_obj.search(
                 cr, uid,
                 [('move_id', '=', inv.move_id.id),
@@ -189,15 +196,21 @@ class AccountInvoice(Model):
             # We keep this branch for compatibility with single BVR report.
             # This should be cleaned when porting to V8
             if len(move_line_ids) == 1:
-                ref = inv.get_bvr_ref()
                 move = inv.move_id
+                if inv.type in ('out_invoice', 'out_refund'):
+                    ref = inv.get_bvr_ref()
+                elif inv.reference_type == 'bvr' and inv.reference:
+                    ref = inv.reference
                 self._action_bvr_number_move(cr, uid, inv, move, ref,
                                              context=context)
             else:
                 move_lines = move_line_obj.browse(cr, uid, move_line_ids,
                                                   context=context)
                 for move_line in move_lines:
-                    ref = move_line.get_bvr_ref()
+                    if inv.type in ('out_invoice', 'out_refund'):
+                        ref = move_line.get_bvr_ref()
+                    elif inv.reference_type == 'bvr' and inv.reference:
+                        ref = inv.reference
                     self._action_bvr_number_move_line(cr, uid, inv,
                                                       move_line, ref,
                                                       context=context)
