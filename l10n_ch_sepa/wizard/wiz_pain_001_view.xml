@@ -24,8 +24,8 @@
                 </form>
             </field>
         </record>
-        
-        <record 
+
+        <record
             model="ir.actions.act_window"
             id="action_create_pain_001">
             <field name="name">Create SEPA payment</field>
@@ -35,8 +35,8 @@
             <field name="view_id" ref="wizard_pain_001_view"/>
             <field name="target">new</field>
         </record>
-        
-        <record 
+
+        <record
             model="ir.values"
             id="action_account_pain_001_create_values">
             <field name="key2">client_action_multi</field>
@@ -46,7 +46,7 @@
             <field name="key">action</field>
             <field name="object" eval="1" />
         </record>
-        
+
         <!-- TODO make available button depending on payment mode
         payment mode might be overloaded to ensure a mode of payment
         this, in order to use payment mode instead of bank type -->
@@ -61,6 +61,6 @@
                 </xpath>
             </field>
         </record>-->
-        
+
     </data>
 </openerp>
