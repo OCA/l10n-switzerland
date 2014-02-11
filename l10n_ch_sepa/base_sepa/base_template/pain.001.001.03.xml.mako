@@ -76,12 +76,11 @@
 </Document>
 \
 <%def name="address(partner)">\
-            <% address = partner.address[0] %>
               <PstlAdr>
-                <StrtNm>${address.street}</StrtNm>
-                <PstCd>${address.zip}</PstCd>
-                <TwnNm>${address.city}</TwnNm>
-                <Ctry>${address.country_id.code}</Ctry>
+                <StrtNm>${partner.street}</StrtNm>
+                <PstCd>${partner.zip}</PstCd>
+                <TwnNm>${partner.city}</TwnNm>
+                <Ctry>${partner.country_id.code}</Ctry>
               </PstlAdr>
 </%def>\
 \
