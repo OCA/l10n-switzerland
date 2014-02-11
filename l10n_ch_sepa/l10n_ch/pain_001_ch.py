@@ -24,9 +24,9 @@ import os
 from l10n_ch_sepa.base_sepa.msg_sepa import MsgSEPAFactory
 from l10n_ch_sepa.base_sepa.pain_001 import Pain001
 
-_xsd_path = os.path.join('l10n_ch_sepa', 'l10n_ch', 'xsd',
+_xsd_path = os.path.join('l10n_ch', 'xsd',
                          'pain.001.001.03.ch.02.xsd')
-_tmpl_dirs = [os.path.join('l10n_ch_sepa', 'l10n_ch', 'template')]
+_tmpl_dirs = [os.path.join('l10n_ch', 'template')]
 _tmpl_name = 'pain.001.001.03.ch.02.xml.mako'
 
 

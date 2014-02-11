@@ -19,8 +19,6 @@
 #
 ##############################################################################
 
-from StringIO import StringIO
-
 from lxml import etree
 
 
@@ -58,7 +56,7 @@ class MsgSEPA(object):
         xmlschema_doc = etree.parse(f_xsd)
         xmlschema = etree.XMLSchema(xmlschema_doc)
 
-        xml_data = etree.parse(StringIO(self._xml_data))
+        xml_data = etree.fromstring(str(self._xml_data))
 
         xmlschema.assertValid(xml_data)
 

@@ -35,9 +35,9 @@ from msg_sepa import MsgSEPA, MsgSEPAFactory
 
 class Pain001(MsgSEPA):
 
-    _DEFAULT_XSD_PATH = os.path.join('l10n_ch_sepa', 'base_sepa', 'base_xsd',
+    _DEFAULT_XSD_PATH = os.path.join('base_sepa', 'base_xsd',
                                      'pain.001.001.03.xsd')
-    _BASE_TMPL_DIR = os.path.join('l10n_ch_sepa', 'base_sepa', 'base_template')
+    _BASE_TMPL_DIR = os.path.join('base_sepa', 'base_template')
     _DEFAULT_TMPL_NAME = 'pain.001.001.03.xml.mako'
 
     _data = {}
@@ -47,16 +47,16 @@ class Pain001(MsgSEPA):
                  tmpl_name=_DEFAULT_TMPL_NAME):
         '''tmpl_path : path to mako template'''
 
-        dirs = [addons.get_module_resource(self._BASE_TMPL_DIR)]
+        dirs = [addons.get_module_resource('l10n_ch_sepa', self._BASE_TMPL_DIR)]
         for dir in tmpl_dirs:
-            dirs += [addons.get_module_resource(dir)]
+            dirs += [addons.get_module_resource('l10n_ch_sepa', dir)]
 
         lookup = TemplateLookup(directories=dirs, input_encoding='utf-8',
                                 output_encoding='utf-8')
         self.mako_tpl = lookup.get_template(tmpl_name)
         self._xml_data = None
 
-        xsd_path = addons.get_module_resource(xsd_path)
+        xsd_path = addons.get_module_resource('l10n_ch_sepa', xsd_path)
         super(Pain001, self).__init__(xsd_path)
 
     def _check_data(self):
