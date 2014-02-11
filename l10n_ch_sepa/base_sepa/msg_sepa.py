@@ -21,6 +21,9 @@
 
 from lxml import etree
 
+from openerp.osv import orm
+from openerp.tools.translate import _
+
 
 SEPA_DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
 
@@ -44,23 +47,27 @@ class MsgSEPA(object):
         Raise an error if no XML data have been defined
         Raise an error if XSD file specified is not found'''
         if not self._xml_data:
-            pass
-            # TODO raise exception no XML data
+            raise orm.except_orm(_('Error'), _('No XML data found'))
 
         try:
             f_xsd = open(self._xsd_path)
         except:
-            pass
-            # TODO raise exception no XSD file
+            raise orm.except_orm(_('Error'), _('No XSD file found'))
 
         xmlschema_doc = etree.parse(f_xsd)
         xmlschema = etree.XMLSchema(xmlschema_doc)
 
         xml_data = etree.fromstring(str(self._xml_data))
 
-        xmlschema.assertValid(xml_data)
+        try:
+            xmlschema.assertValid(xml_data)
+        except etree.DocumentInvalid, e:
+            raise orm.except_orm(
+                _('XML is not Valid !'),
+                _('The document validation has raised following errors: \n%s')
+                % e.message)
 
-        return xmlschema.validate(xml_data)
+        return True
 
 
 class MsgSEPAFactory(object):

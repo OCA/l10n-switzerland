@@ -26,9 +26,9 @@ from mako import exceptions
 from mako.lookup import TemplateLookup
 
 import pooler
-import addons
-from osv import osv
-from tools.translate import _
+from openerp import addons
+from openerp.osv import orm
+from openerp.tools.translate import _
 
 from msg_sepa import MsgSEPA, MsgSEPAFactory
 
@@ -64,28 +64,28 @@ class Pain001(MsgSEPA):
         Do all data check to ensure no data is missing to generate the XML file
         '''
         if not self._data:
-            raise osv.except_osv(_('Error'), _('No data has been entered'))
+            raise orm.except_orm(_('Error'), _('No data has been entered'))
 
         if not self._data['payment']:
-            raise osv.except_osv(_('Error'), _('A payment order is missing'))
+            raise orm.except_orm(_('Error'), _('A payment order is missing'))
         payment = self._data['payment']
 
         if payment.state in ['draft']:
-            raise osv.except_osv(
+            raise orm.except_orm(
                 _('ErrorPaymentState'),
                 _('Payment is in draft state. Please confirm it first.'))
 
         cp_bank_acc = payment.mode.bank_id
         if not cp_bank_acc:
-            raise osv.except_osv(_('ErrorCompanyBank'),
+            raise orm.except_orm(_('ErrorCompanyBank'),
                                  _('No company bank is defined in payment'))
         if not cp_bank_acc.bank.bic:
-            raise osv.except_osv(_('ErrorCompanyBankBIC'),
+            raise orm.except_orm(_('ErrorCompanyBankBIC'),
                                  _('The selected company bank has no BIC '
                                    'number'))
         if (not cp_bank_acc.iban
                 and not cp_bank_acc.get_account_number()):
-            raise osv.except_osv(
+            raise orm.except_orm(
                 _('ErrorCompanyBankAccNumber'),
                 _('The selected company bank has no IBAN and no Account '
                   'number'))
@@ -94,18 +94,18 @@ class Pain001(MsgSEPA):
         for line in payment.line_ids:
             crd_bank_acc = line.bank_id
             if not crd_bank_acc:
-                raise osv.except_osv(
+                raise orm.except_orm(
                     _('ErrorCreditorBank'),
                     _('No bank selected for creditor of invoice %s')
                     % (line.name,))
             if not crd_bank_acc.bank.bic:
-                raise osv.except_osv(
+                raise orm.except_orm(
                     _('ErrorCreditorBankBIC'),
                     _('Creditor bank has no BIC number for invoice %s')
                     % (line.name,))
             if (not crd_bank_acc.iban
                     and not crd_bank_acc.get_account_number()):
-                raise osv.except_osv(
+                raise orm.except_orm(
                     _('ErrorCompanyBankAccNumber'),
                     _('The selected company bank has no IBAN and no Account '
                       'number'))
@@ -132,15 +132,12 @@ class Pain001(MsgSEPA):
             raise Exception(exceptions.text_error_template().render())
 
         if not self._xml_data:
-            raise osv.except_osv(
+            raise orm.except_orm(
                 _('XML is Empty !'),
                 _('An error has occured during XML generation'))
 
         # Validate the XML generation
-        if not self._is_xsd_valid():
-            raise osv.except_osv(
-                _('XML is not Valid !'),
-                _('An error has occured during XML generation'))
+        self._is_xsd_valid()
 
         return self._xml_data
 

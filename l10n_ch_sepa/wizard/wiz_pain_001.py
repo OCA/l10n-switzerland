@@ -31,12 +31,12 @@
 import time
 import base64
 
-from osv import osv, fields
+from openerp.osv import orm, fields
 
 from l10n_ch_sepa.base_sepa.msg_sepa import MsgSEPAFactory
 
 
-class WizardPain001(osv.osv_memory):
+class WizardPain001(orm.TransientModel):
     _name = "wizard.pain001"
 
     _columns = {
