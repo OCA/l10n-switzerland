@@ -80,14 +80,14 @@
                 <StrtNm>${partner.street}</StrtNm>
                 <PstCd>${partner.zip}</PstCd>
                 <TwnNm>${partner.city}</TwnNm>
-                <Ctry>${partner.country_id.code}</Ctry>
+                <Ctry>${partner.country_id.code or partner.company_id.country_id.code}</Ctry>
               </PstlAdr>
 </%def>\
 \
 <%def name="acc_id(bank_acc)">
               <Id>
                 % if bank_acc.iban:
-                  <IBAN>${bank_acc.iban}</IBAN>
+                  <IBAN>${bank_acc.iban.replace(" ","")}</IBAN>
                 % else:
                   <Othr>
                     <Id>${bank_acc.get_account_number()}</Id>
