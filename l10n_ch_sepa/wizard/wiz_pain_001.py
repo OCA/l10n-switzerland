@@ -70,7 +70,6 @@ class WizardPain001(orm.TransientModel):
                 - id : id of object model
                 - base64_data
         '''
-        context = context or {}
         attachment_obj = self.pool.get('ir.attachment')
         vals = {
             'name': 'pain001_%s' % time.strftime("%Y-%m-%d_%H:%M:%S",
@@ -89,12 +88,13 @@ class WizardPain001(orm.TransientModel):
 
         payment_obj = self.pool.get('payment.order')
 
-        context = context or {}
+        if context is None:
+            context = {}
         if isinstance(ids, list):
             wiz_id = ids[0]
         else:
             wiz_id = ids
-        current = self.browse(cursor, user, wiz_id, context)
+        current = self.browse(cursor, user, wiz_id, context=context)
 
         pay_id = context.get('active_id', [])
 
@@ -103,7 +103,7 @@ class WizardPain001(orm.TransientModel):
         cc = self._get_country_code(payment)
         pain = self._get_pain_def(cc)
 
-        pain_001 = pain.compute_export(cursor, user, pay_id, context)
+        pain_001 = pain.compute_export(cursor, user, pay_id, context=context)
         pain_001_file = base64.encodestring(pain_001)
 
         data = {'base64_data': pain_001_file, 'id': pay_id}
