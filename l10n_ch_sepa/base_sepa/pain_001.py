@@ -47,7 +47,8 @@ class Pain001(MsgSEPA):
                  tmpl_name=_DEFAULT_TMPL_NAME):
         '''tmpl_path : path to mako template'''
 
-        dirs = [addons.get_module_resource('l10n_ch_sepa', self._BASE_TMPL_DIR)]
+        dirs = [addons.get_module_resource('l10n_ch_sepa',
+                                           self._BASE_TMPL_DIR)]
         for dir in tmpl_dirs:
             dirs += [addons.get_module_resource('l10n_ch_sepa', dir)]
 
