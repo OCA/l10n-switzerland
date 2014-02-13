@@ -155,7 +155,7 @@ class AccountInvoice(Model):
         return True
 
     def _action_bvr_number_move(self, cr, uid, invoice, move, ref, context=None):
-        if not (move or ref):
+        if not (move and ref):
             return
         cr.execute('UPDATE account_move_line SET transaction_ref=%s'
                    '  WHERE move_id=%s', (ref, move.id))
@@ -163,12 +163,12 @@ class AccountInvoice(Model):
 
     def _action_bvr_number_move_line(self, cr, uid, invoice, move_line,
                                      ref, context=None):
-            if not ref:
-                return
-            cr.execute('UPDATE account_move_line SET transaction_ref=%s'
-                       '  WHERE id=%s', (ref, move_line.id))
-            self._update_ref_on_account_analytic_line(cr, uid, ref,
-                                                      move_line.move_id.id)
+        if not ref:
+            return
+        cr.execute('UPDATE account_move_line SET transaction_ref=%s'
+                   '  WHERE id=%s', (ref, move_line.id))
+        self._update_ref_on_account_analytic_line(cr, uid, ref,
+                                                  move_line.move_id.id)
 
     def action_number(self, cr, uid, ids, context=None):
         """ Copy the BVR/ESR reference in the transaction_ref of move lines.
