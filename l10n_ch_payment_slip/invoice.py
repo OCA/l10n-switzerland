@@ -201,6 +201,8 @@ class AccountInvoice(Model):
                     ref = inv.get_bvr_ref()
                 elif inv.reference_type == 'bvr' and inv.reference:
                     ref = inv.reference
+                else:
+                    ref = False
                 self._action_bvr_number_move(cr, uid, inv, move, ref,
                                              context=context)
             else:
@@ -211,6 +213,8 @@ class AccountInvoice(Model):
                         ref = move_line.get_bvr_ref()
                     elif inv.reference_type == 'bvr' and inv.reference:
                         ref = inv.reference
+                    else:
+                        ref = False
                     self._action_bvr_number_move_line(cr, uid, inv,
                                                       move_line, ref,
                                                       context=context)
