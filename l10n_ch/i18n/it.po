@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openerp-swiss-localization\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-01-15 14:59+0000\n"
-"PO-Revision-Date: 2014-01-15 15:32+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2014-03-02 13:33+0000\n"
+"Last-Translator: Federico Vincenti <federico.vincenti@fevis.ch>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-16 05:35+0000\n"
-"X-Generator: Launchpad (build 16901)\n"
+"X-Launchpad-Export-Date: 2014-03-03 05:38+0000\n"
+"X-Generator: Launchpad (build 16948)\n"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_82
@@ -40,7 +40,7 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_291_00
 msgid "Autres réserves"
-msgstr ""
+msgstr "Altre riserve"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_300
@@ -66,7 +66,7 @@ msgstr ""
 #: model:account.account.template,name:l10n_ch.ch_45
 #: model:account.account.template,name:l10n_ch.ch_640
 msgid "Charges d'énergie"
-msgstr ""
+msgstr "Costi energetici"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_8410
@@ -193,7 +193,7 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_1069
 msgid "Correction valeur s/titres réalisables court terme"
-msgstr ""
+msgstr "Rettifica valore titoli"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_6039
@@ -208,7 +208,7 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_280
 msgid "Capital/Privé"
-msgstr ""
+msgstr "Capitale proprio"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_4060
@@ -230,7 +230,7 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_5801
 msgid "Commissions pour recherche de personnel"
-msgstr ""
+msgstr "Commissione per la ricerca del personale"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_464
@@ -247,7 +247,7 @@ msgstr ""
 #: model:account.account.template,name:l10n_ch.ch_6235
 #: model:account.account.template,name:l10n_ch.ch_6361
 msgid "Taxes"
-msgstr ""
+msgstr "Imposte"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_1551
@@ -257,7 +257,7 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.fiscal.position.template,name:l10n_ch.fiscal_position_template_import
 msgid "Import/Export"
-msgstr ""
+msgstr "Importa/Esporta"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_7413
@@ -300,7 +300,7 @@ msgstr ""
 #: model:account.tax.code.template,name:l10n_ch.vat_code_due_tva38
 #: model:account.tax.template,name:l10n_ch.vat_38
 msgid "TVA due a 3.8% (TS)"
-msgstr ""
+msgstr "IVA dovuta del 3.8% (TS)"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_1221
@@ -310,7 +310,7 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.tax.code.template,name:l10n_ch.vat_code_chart_root
 msgid "VAT"
-msgstr ""
+msgstr "IVA"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_1250
@@ -371,7 +371,7 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_6502
 msgid "Photocopies"
-msgstr ""
+msgstr "Fotocopie"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_3703
@@ -381,7 +381,7 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.tax.code.template,name:l10n_ch.vat_code_due_25
 msgid "Chiffre d'affaires imposable a 2.5% (TR)"
-msgstr ""
+msgstr "Cifra d'affari imponibile al 2.5% (TR)"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_636
@@ -407,7 +407,7 @@ msgstr ""
 #: model:account.account.template,name:l10n_ch.ch_1260
 #: model:account.account.template,name:l10n_ch.ch_126_0
 msgid "Stocks de produits finis"
-msgstr ""
+msgstr "Scorte prodotti finiti"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_1191
@@ -428,7 +428,7 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.tax.code.template,name:l10n_ch.vat_code_base_due
 msgid "Chiffre d'affaires imposable"
-msgstr ""
+msgstr "Cifra d'affari imponibile"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_1051
@@ -443,7 +443,7 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_6222
 msgid "Assurances pour camions"
-msgstr ""
+msgstr "Assicurazione per camion"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_1849
@@ -493,12 +493,12 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_2841
 msgid "Capital-participation"
-msgstr ""
+msgstr "Capitale di partecipazione"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_6311
 msgid "Assurance garantie"
-msgstr ""
+msgstr "Assicurazioni garanzie"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_2601
@@ -518,7 +518,7 @@ msgstr ""
 #: model:account.account.template,name:l10n_ch.ch_572
 #: model:account.account.template,name:l10n_ch.ch_5720
 msgid "Prévoyance professionnelle"
-msgstr ""
+msgstr "Previdenza professionale"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_6057
@@ -533,7 +533,7 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_150
 msgid "Immobilisation corporelles meubles"
-msgstr ""
+msgstr "Immobilizzazioni materiali mobiliari"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_276_0
@@ -562,7 +562,7 @@ msgstr ""
 #: model:account.account.template,name:l10n_ch.ch_91
 #: model:account.account.template,name:l10n_ch.ch_910
 msgid "Bilan"
-msgstr ""
+msgstr "Bilancio"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_257_0
@@ -588,7 +588,7 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_10
 msgid "Actifs circulants"
-msgstr ""
+msgstr "Attivo circolante"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_6580
@@ -603,7 +603,7 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_340
 msgid "Ventes brutes de prestations de service secteur A"
-msgstr ""
+msgstr "Ricavi prestazioni di servizi lordi settore A"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_2852
@@ -618,12 +618,12 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_14
 msgid "Actifs immobilisés"
-msgstr ""
+msgstr "Attivo fisso"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_890
 msgid "Impôts directs de l'entreprise"
-msgstr ""
+msgstr "Imposte dirette azienda"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_6141
@@ -673,7 +673,7 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_1024
 msgid "Compte en devise EUR"
-msgstr ""
+msgstr "Conto valuta EUR"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_2881
@@ -703,7 +703,7 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.tax.code.template,name:l10n_ch.vat_code_base_net
 msgid "Base de calcul de TVA"
-msgstr ""
+msgstr "Calcolo di base per l'IVA"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_79
@@ -729,7 +729,7 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.tax.code.template,name:l10n_ch.vat_code_due_tva
 msgid "TVA Due "
-msgstr ""
+msgstr "IVA dovuta "
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_329
@@ -755,7 +755,7 @@ msgstr ""
 #: model:account.account.template,name:l10n_ch.ch_1403
 #: model:account.account.template,name:l10n_ch.ch_1941
 msgid "Obligations"
-msgstr ""
+msgstr "Obbligazioni"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_6160
@@ -771,7 +771,7 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_1700
 msgid "Brevets"
-msgstr ""
+msgstr "Patenti, know-how, licenze, diritti e sviluppo"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_6575
@@ -796,12 +796,12 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_1060
 msgid "Actions (cotées)"
-msgstr ""
+msgstr "Titoli"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_1409
 msgid "Corrections valeur s/titres à long terme"
-msgstr ""
+msgstr "Rettifica valore titoli"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_3619
@@ -811,7 +811,7 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_1003
 msgid "Devise A"
-msgstr ""
+msgstr "Valuta A"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_1059
