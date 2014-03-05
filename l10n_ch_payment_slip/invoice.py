@@ -154,13 +154,6 @@ class AccountInvoice(Model):
                    (ref, move_id))
         return True
 
-    def _action_bvr_number_move(self, cr, uid, invoice, move, ref, context=None):
-        if not (move and ref):
-            return
-        cr.execute('UPDATE account_move_line SET transaction_ref=%s'
-                   '  WHERE move_id=%s', (ref, move.id))
-        self._update_ref_on_account_analytic_line(cr, uid, ref, move.id)
-
     def _action_bvr_number_move_line(self, cr, uid, invoice, move_line,
                                      ref, context=None):
         if not ref:
@@ -182,42 +175,33 @@ class AccountInvoice(Model):
         """
         res = super(AccountInvoice, self).action_number(cr, uid, ids, context=context)
         move_line_obj = self.pool.get('account.move.line')
-        account_obj = self.pool.get('account.account')
-        tier_account_id = account_obj.search(cr, uid, [('type', 'in', ['receivable', 'payable'])])
 
         for inv in self.browse(cr, uid, ids, context=context):
             move_line_ids = move_line_obj.search(
                 cr, uid,
                 [('move_id', '=', inv.move_id.id),
-                 ('account_id', 'in', tier_account_id)],
+                 ('account_id', '=', inv.account_id.id)],
                 context=context)
             if not move_line_ids:
                 continue
-            # We keep this branch for compatibility with single BVR report.
-            # This should be cleaned when porting to V8
-            if len(move_line_ids) == 1:
-                move = inv.move_id
+            move_lines = move_line_obj.browse(cr, uid, move_line_ids,
+                                              context=context)
+            for move_line in move_lines:
                 if inv.type in ('out_invoice', 'out_refund'):
-                    ref = inv.get_bvr_ref()
+                    if len(move_lines) == 1:
+                        # We keep this branch for compatibility with single
+                        # BVR report.
+                        # This should be cleaned when porting to V8
+                        ref = inv.get_bvr_ref()
+                    else:
+                        ref = move_line.get_bvr_ref()
                 elif inv.reference_type == 'bvr' and inv.reference:
                     ref = inv.reference
                 else:
                     ref = False
-                self._action_bvr_number_move(cr, uid, inv, move, ref,
-                                             context=context)
-            else:
-                move_lines = move_line_obj.browse(cr, uid, move_line_ids,
+                self._action_bvr_number_move_line(cr, uid, inv,
+                                                  move_line, ref,
                                                   context=context)
-                for move_line in move_lines:
-                    if inv.type in ('out_invoice', 'out_refund'):
-                        ref = move_line.get_bvr_ref()
-                    elif inv.reference_type == 'bvr' and inv.reference:
-                        ref = inv.reference
-                    else:
-                        ref = False
-                    self._action_bvr_number_move_line(cr, uid, inv,
-                                                      move_line, ref,
-                                                      context=context)
         return res
 
     def copy(self, cursor, uid, inv_id, default=None, context=None):
