@@ -187,7 +187,7 @@ class BvrImporterWizard(TransientModel):
         # TODO check if 11 is the right number
         move_line_obj = self.pool.get('account.move.line')
         reference = record['reference']
-        values = {'name': reference,
+        values = {'name': '/',
                   'date': record['date'],
                   'amount': record['amount'],
                   'ref': reference,
