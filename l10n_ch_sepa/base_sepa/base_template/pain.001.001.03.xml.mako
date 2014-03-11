@@ -36,10 +36,10 @@
         <ReqdExctnDt>${line.date > today and line.date or today}</ReqdExctnDt>
         <Dbtr>
           <Nm>order.user_id.company_id.name</Nm>\
-          ${address(order.user_id.company_id.partner_id)}\
+          ${self.address(order.user_id.company_id.partner_id)}\
         </Dbtr>
         <DbtrAcct>\
-          ${acc_id(order.mode.bank_id)}\
+          ${self.acc_id(order.mode.bank_id)}\
         </DbtrAcct>
         <DbtrAgt>
           <FinInstnId>
@@ -61,10 +61,10 @@
           </CdtrAgt>
           <Cdtr>
             <Nm>${line.partner_id.name}</Nm>\
-            ${address(line.partner_id)}\
+            ${self.address(line.partner_id)}\
           </Cdtr>
           <CdtrAcct>\
-            ${acc_id(line.bank_id)}\
+            ${self.acc_id(line.bank_id)}\
           </CdtrAcct>\
           <%block name="RmtInf"/>
         </CdtTrfTxInf>
@@ -86,11 +86,11 @@
 \
 <%def name="acc_id(bank_acc)">
               <Id>
-                % if bank_acc.iban:
-                  <IBAN>${bank_acc.iban.replace(" ","")}</IBAN>
+                % if bank_acc.state == 'iban':
+                  <IBAN>${bank_acc.iban.replace(' ', '')}</IBAN>
                 % else:
                   <Othr>
-                    <Id>${bank_acc.get_account_number()}</Id>
+                    <Id>${bank_acc.acc_number}</Id>
                   </Othr>
                 % endif
               </Id>

@@ -25,3 +25,15 @@
           </RmtInf>
    % endif
 </%block>
+
+<%def name="acc_id(bank_acc)">
+              <Id>
+                % if bank_acc.state == 'iban':
+                  <IBAN>${bank_acc.iban.replace(' ', '')}</IBAN>
+                % else:
+                  <Othr>
+                    <Id>${bank_acc.get_account_number()}</Id>
+                  </Othr>
+                % endif
+              </Id>
+</%def>
