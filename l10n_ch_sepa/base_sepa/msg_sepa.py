@@ -20,6 +20,7 @@
 ##############################################################################
 
 from lxml import etree
+from StringIO import StringIO
 
 from openerp.osv import orm
 from openerp.tools.translate import _
@@ -54,10 +55,12 @@ class MsgSEPA(object):
         except:
             raise orm.except_orm(_('Error'), _('No XSD file found'))
 
+        parser = etree.XMLParser()
         xmlschema_doc = etree.parse(f_xsd)
         xmlschema = etree.XMLSchema(xmlschema_doc)
 
-        xml_data = etree.fromstring(str(self._xml_data))
+        xml_data = etree.parse(StringIO(self._xml_data.encode('utf-8')),
+                               parser=parser)
 
         try:
             xmlschema.assertValid(xml_data)

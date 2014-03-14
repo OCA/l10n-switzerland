@@ -53,7 +53,7 @@ class Pain001(MsgSEPA):
             dirs += [addons.get_module_resource('l10n_ch_sepa', dir)]
 
         lookup = TemplateLookup(directories=dirs, input_encoding='utf-8',
-                                output_encoding='utf-8')
+                                output_encoding='unicode')
         self.mako_tpl = lookup.get_template(tmpl_name)
         self._xml_data = None
 
