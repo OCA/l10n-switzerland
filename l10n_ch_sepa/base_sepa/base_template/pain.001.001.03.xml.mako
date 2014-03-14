@@ -35,7 +35,7 @@
         <BtchBookg>false</BtchBookg>
         <ReqdExctnDt>${line.date > today and line.date or today}</ReqdExctnDt>
         <Dbtr>
-          <Nm>order.user_id.company_id.name</Nm>\
+          <Nm>${order.user_id.company_id.name}</Nm>\
           ${self.address(order.user_id.company_id.partner_id)}\
         </Dbtr>
         <DbtrAcct>\
