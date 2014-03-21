@@ -77,9 +77,15 @@
 \
 <%def name="address(partner)">\
               <PstlAdr>
-                <StrtNm>${partner.street}</StrtNm>
-                <PstCd>${partner.zip}</PstCd>
-                <TwnNm>${partner.city}</TwnNm>
+                %if partner.street:
+                  <StrtNm>${partner.street}</StrtNm>
+                %endif
+                %if partner.zip:
+                  <PstCd>${partner.zip}</PstCd>
+                %endif
+                %if partner.city:
+                  <TwnNm>${partner.city}</TwnNm>
+                %endif
                 <Ctry>${partner.country_id.code or partner.company_id.country_id.code}</Ctry>
               </PstlAdr>
 </%def>\
