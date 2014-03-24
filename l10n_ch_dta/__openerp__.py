@@ -25,7 +25,7 @@ Swiss localization supplier bank payment file known as DTA file :
 Generate a DTA file for swiss banking system from payment order
 
 """,
- 'version': '1.0',
+ 'version': '1.0.1',
  'author': 'Camptocamp',
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
