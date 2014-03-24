@@ -57,6 +57,10 @@
           <ChrgBr>SLEV</ChrgBr>
 
           <%block name="CdtrAgt">
+            <%
+            line=sepa_context['line']
+            invoice = line.move_line_id.invoice
+            %>
             <CdtrAgt>
               <FinInstnId>
                 <BIC>${line.bank_id.bank.bic}</BIC>
