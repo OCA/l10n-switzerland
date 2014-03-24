@@ -10,6 +10,48 @@
         </InitgPty>
 </%block>
 
+<%block name="CdtrAgt">
+<%doc>\
+        For type 1, Creditor Agent shouldn't be delivered
+</%doc>\
+   <%
+   line=sepa_context['line']
+   invoice = line.move_line_id.invoice
+   %>
+   % if not invoice.partner_bank_id.state == 'bvr':
+    ${parent.CdtrAgt()}
+   % endif
+</%block>
+
+<%block name="PmtTpInf">
+<%doc>\
+        Local Instrument
+            Code
+             or
+            Proprietary
+
+        Proprietary is required for types 1, 2.1, 2.2
+        1: CH01
+        2.1: CH02
+        2.2: CH03
+
+        Code is requiered for type 7
+        7: CCP
+
+</%doc>\
+   <%
+   line=sepa_context['line']
+   invoice = line.move_line_id.invoice
+   %>
+   % if invoice.partner_bank_id.state == 'bvr':
+          <PmtTpInf>
+              <LclInstrm>
+                <Prtry>CH01</Prtry>
+              </LclInstrm>
+          </PmtTpInf>
+   % endif
+</%block>
+
 <%block name="RmtInf">
    <%
    line=sepa_context['line']

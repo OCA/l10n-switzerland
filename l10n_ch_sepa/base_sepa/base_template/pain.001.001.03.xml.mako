@@ -50,15 +50,19 @@
           <PmtId>
             <EndToEndId>${line.name}</EndToEndId>
           </PmtId>
+          <%block name="PmtTpInf"/>
           <Amt>
             <InstdAmt Ccy="${line.currency.name}">${line.amount_currency}</InstdAmt>
           </Amt>
           <ChrgBr>SLEV</ChrgBr>
-          <CdtrAgt>
-            <FinInstnId>
-              <BIC>${line.bank_id.bank.bic}</BIC>
-            </FinInstnId>
-          </CdtrAgt>
+
+          <%block name="CdtrAgt">
+            <CdtrAgt>
+              <FinInstnId>
+                <BIC>${line.bank_id.bank.bic}</BIC>
+              </FinInstnId>
+            </CdtrAgt>
+          </%block>
           <Cdtr>
             <Nm>${line.partner_id.name}</Nm>\
             ${self.address(line.partner_id)}\
