@@ -21,7 +21,7 @@
 
 {
     "name": "SEPA",
-    "version": "6.1",
+    "version": "1.0",
     "category": "Finance",
     "description": """
 SEPA payments
@@ -38,7 +38,6 @@ TODO: Needs to be fully tested with a FI
     """,
     "author": "Camptocamp",
     "depends": [
-        "base",
         "account",
         "l10n_ch"
     ],
