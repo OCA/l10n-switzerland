@@ -7,6 +7,10 @@
 <%block name="InitgPty">
         <InitgPty>
           <Nm>${order.user_id.company_id.name}</Nm>
+          <CtctDtls>
+            <Nm>OpenERP - SEPA Payments - by Camptocamp</Nm>
+            <Othr>${module_version}</Othr>
+          </CtctDtls>
         </InitgPty>
 </%block>
 

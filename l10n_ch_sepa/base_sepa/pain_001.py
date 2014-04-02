@@ -121,6 +121,16 @@ class Pain001(MsgSEPA):
 
     def compute_export(self, cursor, user, id, context=None):
         '''Compute the payment order 'id' as xml data using mako template'''
+        pool = pooler.get_pool(cursor.dbname)
+        module_obj = pool['ir.module.module']
+        this_module_id = module_obj.search(
+            cursor, user,
+            [('name', '=', 'l10n_ch_sepa')],
+            context=context)
+        this_module = module_obj.browse(cursor, user, this_module_id,
+                                        context=context)[0]
+        module_version = this_module.latest_version
+
         self._gather_payment_data(cursor, user, id, context=context)
         self._check_data()
 
@@ -128,6 +138,7 @@ class Pain001(MsgSEPA):
             self._xml_data = self.mako_tpl.render_unicode(
                 order=self._data['payment'],
                 thetime=time,
+                module_version=module_version,
                 sepa_context={})
         except Exception:
             raise Exception(exceptions.text_error_template().render())
