@@ -80,10 +80,10 @@ class Pain001(MsgSEPA):
         if not cp_bank_acc:
             raise orm.except_orm(_('ErrorCompanyBank'),
                                  _('No company bank is defined in payment'))
-        if not cp_bank_acc.bank.bic:
+        if not cp_bank_acc.bank.bic and not cp_bank_acc.bank_bic:
             raise orm.except_orm(_('ErrorCompanyBankBIC'),
-                                 _('The selected company bank has no BIC '
-                                   'number'))
+                                 _('The selected company bank account has no '
+                                   'BIC number'))
         if (not cp_bank_acc.iban
                 and not cp_bank_acc.get_account_number()):
             raise orm.except_orm(
@@ -99,10 +99,10 @@ class Pain001(MsgSEPA):
                     _('ErrorCreditorBank'),
                     _('No bank selected for creditor of invoice %s')
                     % (line.name,))
-            if not crd_bank_acc.bank.bic:
+            if not crd_bank_acc.bank.bic and not crd_bank_acc.bank_bic:
                 raise orm.except_orm(
                     _('ErrorCreditorBankBIC'),
-                    _('Creditor bank has no BIC number for invoice %s')
+                    _('Creditor bank account has no BIC number for invoice %s')
                     % (line.name,))
             if (not crd_bank_acc.iban
                     and not crd_bank_acc.get_account_number()):

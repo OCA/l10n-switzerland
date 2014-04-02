@@ -43,7 +43,7 @@
         </DbtrAcct>
         <DbtrAgt>
           <FinInstnId>
-            <BIC>${order.mode.bank_id.bank.bic}</BIC>
+            <BIC>${order.mode.bank_id.bank.bic or order.mode.bank_id.bank_bic}</BIC>
           </FinInstnId>
         </DbtrAgt>
         <CdtTrfTxInf>
@@ -63,7 +63,7 @@
             %>
             <CdtrAgt>
               <FinInstnId>
-                <BIC>${line.bank_id.bank.bic}</BIC>
+                <BIC>${line.bank_id.bank.bic or line.bank_id.bank_bic}</BIC>
               </FinInstnId>
             </CdtrAgt>
           </%block>
