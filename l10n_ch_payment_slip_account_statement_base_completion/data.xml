@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data noupdate="1">
+
+    <record id="bank_statement_completion_rule_bvr_invoice" model="account.statement.completion.rule">
+      <field name="name">Match from Invoice using BVR/ESR Reference</field>
+      <field name="sequence">40</field>
+      <field name="function_to_call">get_from_bvr_reference_and_invoice</field>
+    </record>
+
+  </data>
+</openerp>
