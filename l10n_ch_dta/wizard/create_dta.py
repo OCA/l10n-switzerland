@@ -492,11 +492,17 @@ class DTAFileGenerator(TransientModel):
         bank = payment.mode.bank_id
         if not bank:
             raise except_osv(_('Error'), _('No bank account for the company.'))
-        elec_context['comp_bank_name'] = bank.bank and bank.bank.name or False
+        if not bank.bank:
+            raise except_osv(_('Error'),
+                             _('You must set a bank '
+                               'for the bank account with number %s' %
+                               bank.acc_number or ''))
+        elec_context['comp_bank_name'] = bank.bank.name
         elec_context['comp_bank_clearing'] = bank.bank.clearing
         if not elec_context['comp_bank_clearing']:
             raise except_osv(_('Error'),
-                             _('You must provide a Clearing Number for your bank account.'))
+                             _('You must provide a Clearing Number '
+                               'for the bank %s.' % bank.bank.name))
         company = payment.company_id
         co_addr = company.partner_id
         elec_context['comp_country'] = co_addr.country_id and co_addr.country_id.name or ''
