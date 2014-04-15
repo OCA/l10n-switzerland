@@ -60,7 +60,7 @@ class ResCompany(Model):
         'bvr_scan_line_font_size': 11,
         'bvr_scan_line_letter_spacing': 2.55,
         'bvr_add_vert': 6,
-        'bvr_add_horz': 60,
+        'bvr_add_horz': 6,
     }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

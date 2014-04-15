@@ -39,6 +39,7 @@
            top:${str(company.bvr_add_vert or '0.0').replace(',','.')}mm;
            left:${str(company.bvr_add_horz or '0.0').replace(',','.')}mm;
            font-size:12;
+           text-align:left;
           }
 
          .slip_bank_acc {
@@ -179,7 +180,7 @@
        <% inv = move.invoice %>
        <% setLang(inv.partner_id.lang) %>
        <!--adresses + info block -->
-        <table class="dest_address_bvr"  style="position:absolute;width:230px;word-wrap:break-word">
+        <table class="dest_address_bvr" style="position:absolute;width:230px;word-wrap:break-word">
           <% commercial_partner = inv.commercial_partner_id if hasattr(move.invoice, 'commercial_partner_id') else inv.partner_id %>
                 %if inv.partner_id.id != commercial_partner.id:
                 <tr><td>${commercial_partner.name or ''}</td></tr>
