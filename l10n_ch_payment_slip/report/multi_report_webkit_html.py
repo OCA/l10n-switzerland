@@ -50,6 +50,7 @@ class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
             'police_absolute_path': self.police_absolute_path,
             'bvr_absolute_path': self.bvr_absolute_path,
             'headheight': self.headheight,
+            'amount': self.amount,
         })
 
     _compile_get_ref = re.compile('[^0-9]')
@@ -63,6 +64,10 @@ class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
                                                                     data,
                                                                     ids,
                                                                     report_type=report_type)
+
+    def amount(self, move, rtype=None):
+        return self.pool['account.move.line']._get_bvr_amount(move, rtype=rtype)
+
     def _get_ref(self, move):
         """Get BVR reference using move related to invoice"""
         model = self.pool['account.move.line']
