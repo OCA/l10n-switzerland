@@ -27,7 +27,6 @@ from openerp.osv import orm
 from openerp.tools import mod10r
 from openerp.tools.translate import _
 from openerp.osv import orm
-from .webkit_parser import MultiBvrWebKitParser
 from ..invoice import AccountInvoice
 
 class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
@@ -59,14 +58,39 @@ class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
     _compile_check_bvr_add_num = re.compile('[0-9]*$')
 
     def set_context(self, objects, data, ids, report_type=None):
-        self._check(ids)
-        return super(L10nCHReportWebkitHtmlMulti, self).set_context(objects,
-                                                                    data,
-                                                                    ids,
-                                                                    report_type=report_type)
+        ml_ids = self.get_obj_reference(ids)
+        self._check(ml_ids)
+        objects = self.pool['account.move.line'].browse(self.cr, self.uid,
+                                                           ml_ids)
+        import pdb; pdb.set_trace()
+
+        return super(L10nCHReportWebkitHtmlMulti, self).set_context(
+            objects,
+            data,
+            ids,
+            report_type=report_type
+        )
+
+    def get_obj_reference(self, ids, context=None):
+        cursor, uid = self.cr, self.uid
+        move_line_obj = self.pool.get('account.move.line')
+        account_obj = self.pool.get('account.account')
+        invoice_obj = self.pool.get('account.invoice')
+        inv = invoice_obj.browse(cursor, uid, ids[0], context=context)
+        tier_account_ids = account_obj.search(
+            cursor, uid,
+            [('type', 'in', ['receivable', 'payable'])],
+            context=context)
+        move_line_ids = move_line_obj.search(
+            cursor, uid,
+            [('move_id', '=', inv.move_id.id),
+             ('account_id', 'in', tier_account_ids)],
+            context=context)
+        return move_line_ids
 
     def amount(self, move, rtype=None):
-        return self.pool['account.move.line']._get_bvr_amount(move, rtype=rtype)
+        ml_model = self.pool['account.move.line']
+        return ml_model._get_bvr_amount(self.cr, self.uid, move, rtype=rtype)
 
     def _get_ref(self, move):
         """Get BVR reference using move related to invoice"""
@@ -76,16 +100,16 @@ class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
     def police_absolute_path(self, inner_path):
         """Will get the ocrb police absolute path"""
         path = addons.get_module_resource('l10n_ch_payment_slip', 'report', inner_path)
-        return  path
+        return path
 
     def bvr_absolute_path(self):
         """Will get the ocrb police absolute path"""
         path = addons.get_module_resource('l10n_ch_payment_slip', 'report', 'bvr1.jpg')
-        return  path
+        return path
 
     def headheight(self):
         report_id = self.pool['ir.actions.report.xml'].search(self.cr, self.uid,
-                                                                  [('name', '=', 'BVR invoice')])[0]
+                                                              [('name', '=', 'BVR invoice')])[0]
         report = self.pool['ir.actions.report.xml'].browse(self.cr, self.uid, report_id)
         return report.webkit_header.margin_top
 
@@ -153,7 +177,7 @@ class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
         if invoice_id:
             self._check_invoice([invoice_id])
 
-MultiBvrWebKitParser('report.invoice_bvr_webkit_multi',
+report_sxw.report_sxw('report.invoice_bvr_webkit_multi',
                       'account.invoice',
                       'l10n_ch_payment_slip/report/multi_bvr.mako',
                       parser=L10nCHReportWebkitHtmlMulti)
