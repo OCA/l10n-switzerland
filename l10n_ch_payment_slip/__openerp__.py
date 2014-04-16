@@ -49,7 +49,6 @@ Many BVR can be printed from on invoice.
  'data': ["company_view.xml",
           "bank_view.xml",
           "account_invoice_view.xml",
-          "report/report_webkit_html_view.xml",
           "report/multi_report_webkit_html_view.xml",
           "wizard/bvr_import_view.xml",
           "data.xml"],
