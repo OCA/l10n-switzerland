@@ -4,7 +4,7 @@
     <report auto="False"
             menu="False"
             id="report_bvr_html_multi_credit_control"
-            model="account.invoice"
+            model="credit.control.line"
             name="invoice_bvr_webkit_multi_credit_control"
             file="l10n_ch_payment_slip/report/multi_bvr.mako"
             string="BVR/ESR multiple Credit control"

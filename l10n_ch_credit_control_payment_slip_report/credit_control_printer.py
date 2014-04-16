@@ -28,6 +28,7 @@ class CreditControlPrinter(orm.TransientModel):
     _inherit = 'credit.control.printer'
 
     def print_linked_bvr(self, cr, uid, wiz_id, context=None):
+        """Print BVR from credit line"""
         assert not (isinstance(wiz_id, list) and len(wiz_id) > 1), \
             "wiz_id: only one id expected"
         comm_obj = self.pool.get('credit.control.communication')
@@ -38,13 +39,9 @@ class CreditControlPrinter(orm.TransientModel):
         if not form.line_ids and not form.print_all:
             raise orm.except_orm(_('Error'),
                                  _('No credit control lines selected.'))
-
-        move_line_ids = []
-        for line in form.line_ids:
-            if line.move_line_id:
-                move_line_ids.append(line.move_line_id.id)
+        credit_ids = [x.id for x in form.line_ids]
         report_file = comm_obj._generate_report_bvr(cr, uid,
-                                                    move_line_ids,
+                                                    credit_ids,
                                                     context=context)
 
         form.write({'report_file': base64.b64encode(report_file),

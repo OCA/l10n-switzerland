@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author Vincent Renaville. Copyright 2013 Camptocamp SA
+#    Author: Nicolas Bessi
+#    Copyright 2014 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,6 +18,23 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import credit_control_communication
-from . import credit_control_printer
-from . import account
+from openerp.osv import orm
+
+
+class account_move_line(orm.Model):
+    """Overrride BVR amount to take in account dunning fees"""
+
+    _inherit = "account.move.line"
+
+    def _get_bvr_amount(self, cr, uid, move, rtype=None):
+        """Hook to get amount in CHF for BVR
+        The amount must include dunning fees
+
+        :param move: move line report
+        :param rtype: report type string just in case
+
+        :returns: BVR float amount
+
+        """
+        fees = getattr(move, 'bvr_dunning_fees', 0.0)
+        return move.debit + fees
