@@ -62,7 +62,6 @@ class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
         self._check(ml_ids)
         objects = self.pool['account.move.line'].browse(self.cr, self.uid,
                                                            ml_ids)
-        import pdb; pdb.set_trace()
 
         return super(L10nCHReportWebkitHtmlMulti, self).set_context(
             objects,
