@@ -33,7 +33,7 @@ class AccountMoveLine(Model):
         'transaction_ref': fields.char('Transaction Ref.', size=128),
     }
 
-    def _get_bvr_amount(self, move, rtype=None):
+    def _get_bvr_amount(self, cr, uid,  move, rtype=None):
         """Hook to get amount in CHF for BVR"""
         return move.debit
 
