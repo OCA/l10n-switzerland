@@ -28,7 +28,9 @@ class ResPartner(Model):
     _columns = {
         'supplier_invoice_default_product': fields.many2one(
             'product.product',
-            'Default product supplier invoice'
+            'Default product supplier invoice',
+            help="Use by the scan BVR wizard, if completed, it'll generate "
+                 "a line with the proper amount and this specified product"
         ),
     }
 
