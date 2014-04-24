@@ -19,15 +19,16 @@
 #
 ##############################################################################
 
-{"name": "Wizard to Scan BVR for Invoice",
+{"name": "Switzerland - Scan ESR/BVR to create invoices",
  "description": """
-create invoices from BVR code
+Scan ESR/BVR to create supplier invoices
+========================================
 
 This module works with C-channel or other OCR scanner.
 
-It helps you to create an invoice directly from the BVR Code. Find the menu entry
+It helps you to create an invoice directly from the ESR/BVR Code. Find the menu entry
 called "Scan BVR" under Accounting -> Supplier. It open a popup from which you
-can scan the BVR number. It'll recognize the needed information and create an 
+can scan the ESR/BVR number. It'll recognize the needed information and create an 
 invoice for the right supplier.
 
 If you have completed the field "Default product supplier invoice" on the concerned

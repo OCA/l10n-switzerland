@@ -17,7 +17,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{"name": "Printing of dunning BVR",
+{"name": "Switzerland - Printing of dunning BVR",
  "summary": "Print BVR/ESR slip related to credit control",
  "description": """
 Printing of dunning BVR
