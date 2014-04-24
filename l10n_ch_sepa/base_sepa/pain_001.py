@@ -43,9 +43,11 @@ class Pain001(MsgSEPA):
     _data = {}
 
     def __init__(self, xsd_path=_DEFAULT_XSD_PATH,
-                 tmpl_dirs=[],
+                 tmpl_dirs=None,
                  tmpl_name=_DEFAULT_TMPL_NAME):
         '''tmpl_path : path to mako template'''
+        if tmpl_dirs is None:
+            tmpl_dirs = []
 
         dirs = [addons.get_module_resource('l10n_ch_sepa',
                                            self._BASE_TMPL_DIR)]
