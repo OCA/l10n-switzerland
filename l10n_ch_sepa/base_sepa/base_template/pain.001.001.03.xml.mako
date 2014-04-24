@@ -35,36 +35,44 @@
         <BtchBookg>false</BtchBookg>
         <ReqdExctnDt>${line.date > today and line.date or today}</ReqdExctnDt>
         <Dbtr>
-          <Nm>order.user_id.company_id.name</Nm>\
-          ${address(order.user_id.company_id.partner_id)}\
+          <Nm>${order.user_id.company_id.name}</Nm>\
+          ${self.address(order.user_id.company_id.partner_id)}\
         </Dbtr>
         <DbtrAcct>\
-          ${acc_id(order.mode.bank_id)}\
+          ${self.acc_id(order.mode.bank_id)}\
         </DbtrAcct>
         <DbtrAgt>
           <FinInstnId>
-            <BIC>${order.mode.bank_id.bank.bic}</BIC>
+            <BIC>${order.mode.bank_id.bank.bic or order.mode.bank_id.bank_bic}</BIC>
           </FinInstnId>
         </DbtrAgt>
         <CdtTrfTxInf>
           <PmtId>
             <EndToEndId>${line.name}</EndToEndId>
           </PmtId>
+          <%block name="PmtTpInf"/>
           <Amt>
             <InstdAmt Ccy="${line.currency.name}">${line.amount_currency}</InstdAmt>
           </Amt>
           <ChrgBr>SLEV</ChrgBr>
-          <CdtrAgt>
-            <FinInstnId>
-              <BIC>${line.bank_id.bank.bic}</BIC>
-            </FinInstnId>
-          </CdtrAgt>
+
+          <%block name="CdtrAgt">
+            <%
+            line=sepa_context['line']
+            invoice = line.move_line_id.invoice
+            %>
+            <CdtrAgt>
+              <FinInstnId>
+                <BIC>${line.bank_id.bank.bic or line.bank_id.bank_bic}</BIC>
+              </FinInstnId>
+            </CdtrAgt>
+          </%block>
           <Cdtr>
             <Nm>${line.partner_id.name}</Nm>\
-            ${address(line.partner_id)}\
+            ${self.address(line.partner_id)}\
           </Cdtr>
           <CdtrAcct>\
-            ${acc_id(line.bank_id)}\
+            ${self.acc_id(line.bank_id)}\
           </CdtrAcct>\
           <%block name="RmtInf"/>
         </CdtTrfTxInf>
@@ -76,22 +84,27 @@
 </Document>
 \
 <%def name="address(partner)">\
-            <% address = partner.address[0] %>
               <PstlAdr>
-                <StrtNm>${address.street}</StrtNm>
-                <PstCd>${address.zip}</PstCd>
-                <TwnNm>${address.city}</TwnNm>
-                <Ctry>${address.country_id.code}</Ctry>
+                %if partner.street:
+                  <StrtNm>${partner.street}</StrtNm>
+                %endif
+                %if partner.zip:
+                  <PstCd>${partner.zip}</PstCd>
+                %endif
+                %if partner.city:
+                  <TwnNm>${partner.city}</TwnNm>
+                %endif
+                <Ctry>${partner.country_id.code or partner.company_id.country_id.code}</Ctry>
               </PstlAdr>
 </%def>\
 \
 <%def name="acc_id(bank_acc)">
               <Id>
-                % if bank_acc.iban:
-                  <IBAN>${bank_acc.iban}</IBAN>
+                % if bank_acc.state == 'iban':
+                  <IBAN>${bank_acc.iban.replace(' ', '')}</IBAN>
                 % else:
                   <Othr>
-                    <Id>${bank_acc.get_account_number()}</Id>
+                    <Id>${bank_acc.acc_number}</Id>
                   </Othr>
                 % endif
               </Id>
