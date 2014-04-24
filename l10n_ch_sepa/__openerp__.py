@@ -25,11 +25,12 @@
     "category": "Finance",
     "description": """
 SEPA payments
+=============
 
 pain.001 for Credit Transfert Initiation
 
-This module designed for Swiss payment is also generic for euro payments
-as the Swiss standards are slightly different.
+This module designed for Swiss payment is based on the norm for euro payments
+but implements the special Swiss extensions.
 It intends to be reusable to accept new definition of specific standards
 by country.
 
