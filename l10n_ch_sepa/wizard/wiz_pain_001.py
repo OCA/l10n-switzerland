@@ -63,7 +63,7 @@ class WizardPain001(orm.TransientModel):
                 return MsgSEPAFactory.get_instance(class_name)
         return MsgSEPAFactory.get_instance('pain.001')
 
-    def _create_attachment(self, cursor, user, data, context=None):
+    def _create_attachment(self, cr, uid, data, context=None):
         ''' Create an attachment using data provided
             data needed are :
                 - model : type of object to attach to
@@ -81,9 +81,9 @@ class WizardPain001(orm.TransientModel):
             'res_model': data['model'],
             'res_id': data['id'],
             }
-        attachment_obj.create(cursor, user, vals, context=context)
+        attachment_obj.create(cr, uid, vals, context=context)
 
-    def create_pain_001(self, cursor, user, ids, context=None):
+    def create_pain_001(self, cr, uid, ids, context=None):
         ''' create a pain 001 file into wizard and add it as an attachment '''
 
         payment_obj = self.pool.get('payment.order')
@@ -94,22 +94,22 @@ class WizardPain001(orm.TransientModel):
             wiz_id = ids[0]
         else:
             wiz_id = ids
-        current = self.browse(cursor, user, wiz_id, context=context)
+        current = self.browse(cr, uid, wiz_id, context=context)
 
         pay_id = context.get('active_id', [])
 
-        payment = payment_obj.browse(cursor, user, pay_id, context=context)
+        payment = payment_obj.browse(cr, uid, pay_id, context=context)
 
         cc = self._get_country_code(payment)
         pain = self._get_pain_def(cc)
 
-        pain_001 = pain.compute_export(cursor, user, pay_id, context=context)
+        pain_001 = pain.compute_export(cr, uid, pay_id, context=context)
         pain_001_file = base64.encodestring(pain_001.encode('utf-8'))
 
         data = {'base64_data': pain_001_file, 'id': pay_id}
         data['model'] = 'payment.order'
 
-        self._create_attachment(cursor, user, data, context=context)
+        self._create_attachment(cr, uid, data, context=context)
 
         current.write({'pain_001_file': pain_001_file})
         return True

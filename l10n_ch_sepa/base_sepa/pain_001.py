@@ -111,27 +111,27 @@ class Pain001(MsgSEPA):
                     _('The selected company bank has no IBAN and no Account '
                       'number'))
 
-    def _gather_payment_data(self, cursor, user, id, context=None):
+    def _gather_payment_data(self, cr, uid, id, context=None):
         ''' Record the payment order data based on its id '''
-        pool = pooler.get_pool(cursor.dbname)
+        pool = pooler.get_pool(cr.dbname)
         payment_obj = pool.get('payment.order')
 
-        payment = payment_obj.browse(cursor, user, id, context=context)
+        payment = payment_obj.browse(cr, uid, id, context=context)
         self._data['payment'] = payment
 
-    def compute_export(self, cursor, user, id, context=None):
+    def compute_export(self, cr, uid, id, context=None):
         '''Compute the payment order 'id' as xml data using mako template'''
-        pool = pooler.get_pool(cursor.dbname)
+        pool = pooler.get_pool(cr.dbname)
         module_obj = pool['ir.module.module']
         this_module_id = module_obj.search(
-            cursor, user,
+            cr, uid,
             [('name', '=', 'l10n_ch_sepa')],
             context=context)
-        this_module = module_obj.browse(cursor, user, this_module_id,
+        this_module = module_obj.browse(cr, uid, this_module_id,
                                         context=context)[0]
         module_version = this_module.latest_version
 
-        self._gather_payment_data(cursor, user, id, context=context)
+        self._gather_payment_data(cr, uid, id, context=context)
         self._check_data()
 
         try:
