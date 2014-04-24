@@ -29,24 +29,24 @@
 ##############################################################################
 
 {
-    "name": "SEPA",
+    "name": "Switzerland - SEPA Payment File",
     "version": "6.1",
     "category": "Finance",
     "description": """
-        SEPA payments
-        
-        pain.001 for Credit Transfert Initiation
-        
-        This module designed for Swiss payment is also generic for euro payments
-        as the Swiss standards are slightly different.
-        It intends to be reusable to accept new definition of specific standards
-        by country.  
-        
-        TODO: Needs to be fully tested with a FI
-        
-        WARNING: This module has been developed in 6.0 and has never been launched in 6.1 yet
-        
-    """,
+Swiss electronic payment (SEPA)
+===============================
+
+This addons allows you to generate SEPA electronic payment file for Switzerland.
+You'll found the wizard in payment order.
+
+This module designed for Swiss payment is also generic for euro payments
+as the Swiss standards are slightly different.
+It intends to be reusable to accept new definition of specific standards
+by country.  
+
+It currently supports the "pain.001$2 norm for Credit Transfert Initiation.
+       
+""",
     "author": "Camptocamp",
     "depends": [
             "base",

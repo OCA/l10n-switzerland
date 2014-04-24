@@ -18,22 +18,31 @@
 #
 ##############################################################################
 {
-        "name" : "Print BVR credit control",
-        "description" : """Add possibility to print BVR of
-	related credit control lines
-        """,
-        "version" : "1.0",
-        "author" : "Camptocamp",
-        "category" : "Generic Modules/Others",
-        "website": "http://www.camptocamp.com",
-        "depends" : [
-                        "account_credit_control",
-                        "l10n_ch_payment_slip"
-                    ],
-        "data" :[
-                            "credit_control_printer_view.xml",
-                            "report.xml"
-                        ],
-        "active": False,
-        "installable": True
+"name" : "Switzerland - Credit control with ESR/BVR",
+"description" : """
+Swiss Credit control using ESR/BVR
+==================================
+
+This addon adds the possibility to print ESR/BVR of related credit control
+lines. He is useful if you use the credit control module (account_credit_control). 
+This module allow you to manage advance credit controlling and is hosted here :
+https://launchpad.net/account-financial-tools
+
+You can also find this module on apps.openerp.com
+
+""",
+"version" : "1.0",
+"author" : "Camptocamp",
+"category" : "Generic Modules/Others",
+"website": "http://www.camptocamp.com",
+"depends" : [
+                "account_credit_control",
+                "l10n_ch_payment_slip"
+            ],
+"data" :[
+                    "credit_control_printer_view.xml",
+                    "report.xml"
+                ],
+"active": False,
+"installable": True
 }

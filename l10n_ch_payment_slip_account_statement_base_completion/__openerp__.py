@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-{'name' : 'Swiss Localization BVR/ESR - Bank statement Completion',
+{'name' : 'Switzerland - BVR/ESR Bank statement Completion',
  'version' : '1.0',
  'author' : 'Camptocamp',
  'maintainer': 'Camptocamp',
@@ -29,8 +29,8 @@
               'account_statement_base_completion',  # lp:banking-addons/bank-statement-reconcile-7.0 
               ],
  'description': """
-Swiss Localization BVR/ESR - Bank statement Completion
-======================================================
+Swiss BVR/ESR Bank statement Completion
+=======================================
 
 Link module between the Swiss localization BVR/ESR module
 (l10n_ch_payment_slip) and the module adding a transaction ID
@@ -41,6 +41,10 @@ using the BVR/ESR reference.
 
 When importing a BVR/ESR, the transaction ID is also copied to the
 transaction id field of the bank statement.
+
+This module is needed if you use the Swiss localization module and the 
+bank-statement-reconcile project in the banking addons 
+(https://launchpad.net/banking-addons).
 
  """,
  'website': 'http://www.camptocamp.com',
