@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <record id="scan_bvr_memory_form" model="ir.ui.view">
+      <field name="name">scan.bvr.memory.form</field>
+      <field name="model">scan.bvr</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="SCAN BVR">
+          <group col="2" colspan="2" >
+            <separator string="Bvr Scanning Result" colspan="2" />
+            <field name="bvr_string" required="1" colspan="2" /> 
+            <separator string="Invoice Journal" colspan="2" />
+            <field name="journal_id" domain="[('type', '=', 'purchase')]" required="1" colspan="2"/>
+          </group>
+          <group col="2" colspan="2" attrs="{'invisible': [('state','!=', 'need_extra_info')]}" >
+            <newline/>
+            <separator string="Partner"  colspan="2" />
+            <field name="partner_id" attrs="{'required': [('state','=', 'need_extra_info')]}" colspan="2"/>
+            <separator string="Partner Bank Account"  colspan="2" />
+            <field name="bank_account_id" colspan="2" attrs="{'required': [('state','=', 'need_extra_info')]}" 
+              domain="[('partner_id','=', partner_id)]"/>
+          </group>
+          <field name="state" readonly="1"/>
+          <group col="2" colspan="2" >
+            <button icon='gtk-cancel' special="cancel" string="Cancel" />
+            <button name="validate_bvr_string" string="Create" colspan="1" type="object" icon="gtk-go-forward" />
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="action_scan_bvr" model="ir.actions.act_window">
+      <field name="name">Scan BVR</field>
+      <field name="res_model">scan.bvr</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name='view_id' ref='scan_bvr_memory_form' />
+      <field name="target">new</field>
+    </record>
+
+
+    <menuitem action="action_scan_bvr"
+      id="menu_scan_bvr"
+      parent="account.menu_finance_payables" />
+
+  </data>
+</openerp>
