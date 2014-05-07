@@ -24,14 +24,13 @@ import time
 import re
 
 from openerp.tools.translate import _
-from openerp.osv.orm import TransientModel, fields
-from openerp.osv import orm
+from openerp.osv import orm, fields
 from openerp.tools import mod10r
 
 REF = re.compile('[^0-9]')
 
 
-class BvrImporterWizard(TransientModel):
+class BvrImporterWizard(orm.TransientModel):
 
     _name = 'bvr.import.wizard'
 

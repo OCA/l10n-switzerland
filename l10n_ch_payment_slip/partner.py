@@ -19,10 +19,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from openerp.osv import orm, fields
 
-from openerp.osv.orm import Model, fields
 
-class ResPartner(Model):
+class ResPartner(orm.Model):
     _inherit = 'res.partner'
 
     _columns = {
