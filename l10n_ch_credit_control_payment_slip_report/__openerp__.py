@@ -26,7 +26,7 @@ The dunning fees are printed on ESR but this not affect the amount
 of move lines
 
 """,
- "version": "1.1.0",
+ "version": "1.2.0",
  "author": "Camptocamp",
  "category": "Generic Modules/Others",
  "website": "http://www.camptocamp.com",
