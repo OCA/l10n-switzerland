@@ -22,11 +22,11 @@
 Printing of dunning BVR
 =======================
 Add possibility to print BVR/ESR slip of related credit control lines.
-The dunning fees are printed on ESR but this not affect the amount
+The dunning fees are printed on ESR but they will not affect the amount
 of move lines
 
 """,
- "version": "1.2.0",
+ "version": "1.3.0",
  "author": "Camptocamp",
  "category": "Generic Modules/Others",
  "website": "http://www.camptocamp.com",
