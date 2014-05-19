@@ -8,7 +8,10 @@
       <MsgId>${order.reference}</MsgId>
       <CreDtTm>${thetime.strftime("%Y-%m-%dT%H:%M:%S")}</CreDtTm>
       <NbOfTxs>${len (order.line_ids)}</NbOfTxs>
-      <CtrlSum>${order.total}</CtrlSum>\
+      <%
+      control_sum = sum([line.amount_currency for line in order.line_ids])
+      %>
+      <CtrlSum>${control_sum}</CtrlSum>\
       <%block name="InitgPty">
         <InitgPty>
           <Nm>${order.user_id.company_id.name}</Nm>\
