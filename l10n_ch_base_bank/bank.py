@@ -21,7 +21,7 @@
 ##############################################################################
 import re
 from openerp.osv import orm, fields
-from tools import mod10r
+from openerp.tools import mod10r
 
 
 class BankCommon(object):

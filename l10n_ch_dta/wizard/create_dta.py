@@ -28,7 +28,7 @@ import unicode2ascii
 from openerp.osv.osv import except_osv
 from openerp.osv.orm import TransientModel
 from openerp.tools.translate import _
-from tools import mod10r
+from openerp.tools import mod10r
 
 TRANS = [(u'é', 'e'),
          (u'è', 'e'),
