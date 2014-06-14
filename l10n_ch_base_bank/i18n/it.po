@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-02 06:33+0000\n"
-"X-Generator: Launchpad (build 16985)\n"
+"X-Launchpad-Export-Date: 2014-06-14 05:59+0000\n"
+"X-Generator: Launchpad (build 17045)\n"
 
 #. module: l10n_ch_base_bank
 #: model:res.partner.bank.type,name:l10n_ch_base_bank.bvr
