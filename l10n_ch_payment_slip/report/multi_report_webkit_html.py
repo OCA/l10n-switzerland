@@ -28,6 +28,7 @@ from openerp.tools import mod10r
 from openerp.tools.translate import _
 from ..invoice import AccountInvoice
 
+
 class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
     """Report that output single BVR from invoice.
     This report is deprectated and will be merged
@@ -60,7 +61,7 @@ class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
         ml_ids = self.get_obj_reference(ids)
         self._check(ml_ids)
         objects = self.pool['account.move.line'].browse(self.cr, self.uid,
-                                                           ml_ids)
+                                                        ml_ids)
 
         return super(L10nCHReportWebkitHtmlMulti, self).set_context(
             objects,
@@ -153,7 +154,7 @@ class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
                 )
             adherent_num = invoice.partner_bank_id.bvr_adherent_num
             if invoice.partner_bank_id.bvr_adherent_num \
-                and not self._compile_check_bvr_add_num.match(adherent_num):
+                    and not self._compile_check_bvr_add_num.match(adherent_num):
                 raise orm.except_orm(
                     _('UserError'),
                     _(('Your bank BVR adherent number must contain only '
