@@ -90,14 +90,17 @@ class AccountInvoice(Model):
         move_line_obj = self.pool.get('account.move.line')
         account_obj = self.pool.get('account.account')
         tier_account_id = account_obj.search(cursor, uid,
-                                             [('type', 'in', ['receivable', 'payable'])])
+                                             [('type', 'in', ['receivable', 'payable'])],
+                                             context=context)
         for inv in self.browse(cursor, uid, ids, context=context):
             move_lines = move_line_obj.search(cursor, uid,
                                               [('move_id', '=', inv.move_id.id),
-                                               ('account_id', 'in', tier_account_id)])
+                                               ('account_id', 'in', tier_account_id)],
+                                              context=context)
             if move_lines:
                 refs = []
-                for move_line in move_line_obj.browse(cursor, uid, move_lines, context=context):
+                for move_line in move_line_obj.browse(cursor, uid, move_lines,
+                                                      context=context):
                     refs.append(AccountInvoice._space(move_line.get_bvr_ref()))
                 res[inv.id] = ' ; '.join(refs)
         return res
