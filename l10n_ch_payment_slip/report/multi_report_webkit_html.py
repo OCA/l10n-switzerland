@@ -26,7 +26,6 @@ from openerp.osv import orm
 
 from openerp.tools import mod10r
 from openerp.tools.translate import _
-from openerp.osv import orm
 from ..invoice import AccountInvoice
 
 class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
