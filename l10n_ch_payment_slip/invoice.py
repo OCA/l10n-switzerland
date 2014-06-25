@@ -77,8 +77,8 @@ class AccountInvoice(Model):
     _compile_get_ref = re.compile('[^0-9]')
 
     def _get_reference_type(self, cursor, user, context=None):
-        """Function use by the function field reference_type
-        in order to initalise availabl BVR Reference Types
+        """Function used by the function field 'reference_type'
+        in order to initalise available BVR Reference Types
         """
         res = super(AccountInvoice, self)._get_reference_type(cursor, user,
                                                               context=context)
