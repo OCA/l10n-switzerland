@@ -41,7 +41,8 @@ class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
             'time': time,
             'cr': cr,
             'uid': uid,
-            'user': self.pool.get("res.users").browse(cr, uid, uid),
+            'user': self.pool['res.users'].browse(cr, uid, uid,
+                                                  context=context),
             'mod10r': mod10r,
             '_space': AccountInvoice._space,
             '_get_ref': self._get_ref,
@@ -72,9 +73,9 @@ class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
 
     def get_obj_reference(self, ids, context=None):
         cursor, uid = self.cr, self.uid
-        move_line_obj = self.pool.get('account.move.line')
-        account_obj = self.pool.get('account.account')
-        invoice_obj = self.pool.get('account.invoice')
+        move_line_obj = self.pool['account.move.line']
+        account_obj = self.pool['account.account']
+        invoice_obj = self.pool['account.invoice']
         inv = invoice_obj.browse(cursor, uid, ids[0], context=context)
         tier_account_ids = account_obj.search(
             cursor, uid,
