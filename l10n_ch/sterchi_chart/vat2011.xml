@@ -148,8 +148,8 @@
             <field name="ref_base_sign" eval="-1.0"/>
             <field name="ref_tax_sign" eval="-1.0"/>
             <field name="chart_template_id" ref="l10nch_chart_template"/>
-            <field name="account_collected_id" ref="ch_1170"/>
-            <field name="account_paid_id" ref="ch_1170"/>
+            <field name="account_collected_id" ref="ch_2200"/>
+            <field name="account_paid_id" ref="ch_2200"/>
             <field name="type_tax_use">sale</field>
         </record>
         <record model="account.tax.template" id="vat_25_purchase">
@@ -251,8 +251,8 @@
             <field name="ref_tax_sign" eval="-1.0"/>
             <field name="chart_template_id" ref="l10nch_chart_template"/>
             <field name="type_tax_use">sale</field>
-            <field name="account_collected_id" ref="ch_1170"/>
-            <field name="account_paid_id" ref="ch_1170"/>
+            <field name="account_collected_id" ref="ch_2200"/>
+            <field name="account_paid_id" ref="ch_2200"/>
         </record>
         <record model="account.tax.template" id="vat_38_purchase">
             <field name="name">TVA 3.8% sur achat B&amp;S (TS)</field>
@@ -354,8 +354,8 @@
             <field name="ref_tax_sign" eval="-1.0"/>
             <field name="chart_template_id" ref="l10nch_chart_template"/>
             <field name="type_tax_use">sale</field>
-            <field name="account_collected_id" ref="ch_1170"/>
-            <field name="account_paid_id" ref="ch_1170"/>
+            <field name="account_collected_id" ref="ch_2200"/>
+            <field name="account_paid_id" ref="ch_2200"/>
         </record>
         <record model="account.tax.template" id="vat_80_purchase">
             <field name="name">TVA 8.0% sur achat B&amp;S (TN)</field>
@@ -456,8 +456,8 @@
             <field name="ref_tax_sign" eval="-1.0"/>
             <field name="chart_template_id" ref="l10nch_chart_template"/>
             <field name="type_tax_use">sale</field>
-            <field name="account_collected_id" ref="ch_1170"/>
-            <field name="account_paid_id" ref="ch_1170"/>
+            <field name="account_collected_id" ref="ch_2200"/>
+            <field name="account_paid_id" ref="ch_2200"/>
         </record>
         <record model="account.tax.template" id="vat_O_exclude">
             <field name="name">TVA 0% exclue</field>
