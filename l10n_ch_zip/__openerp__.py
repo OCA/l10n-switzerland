@@ -28,6 +28,7 @@
 #
 ##############################################################################
 {'name': 'Switzerland - Postal codes (ZIP) list',
+ 'summary': 'Loads all Swiss postal codes',
  'version': '1.0.1',
  'depends': ['base', 'base_location'],
  'author': 'Camptocamp',
