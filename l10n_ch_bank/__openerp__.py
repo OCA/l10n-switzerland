@@ -28,6 +28,7 @@
 #
 #  Copyright (c) 2010 CamptoCamp. All rights reserved.
 {"name": "Switzerland - Bank list",
+ "summary": "Banks names, addresses and BIC codes",
  "description": """
 Swiss bank list
 ===============
