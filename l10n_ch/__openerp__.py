@@ -23,6 +23,7 @@
 ##############################################################################
 
 {'name': 'Switzerland - Accounting',
+ 'summary': 'Multilang swiss STERCHI account chart and taxes',
  'description':  """
 Swiss localization
 ==================
