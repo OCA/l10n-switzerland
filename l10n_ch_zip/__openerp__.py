@@ -36,10 +36,10 @@
 Swiss postal code (ZIP) list
 ============================
 
-This module will load all Swiss postal codes (ZIP) in OpenERP to
+This module will load all Swiss postal codes (ZIP) in Odoo to
 ease the input of partners.
 
-It is not mandatory to use OpenERP in Switzerland, but can improve the user experience.
+It is not mandatory to use Odoo in Switzerland, but can improve the user experience.
 
 """,
  'website': 'http://www.camptocamp.com',
