@@ -3,13 +3,14 @@ Odoo/OpenERP Swiss Localization
 
 This repository provide official swiss localization provided by OCA.
 
-It extends Odoo to add needed functionnality to use OpenERP in Switzerland:
+It extends Odoo/OpenERP to add needed functionnalites to use Odoo/OpenERP in Switzerland.
+The currently available addons are:
 
-- BVR/ESR support (printing, reconciliation,...)
-- Support for automatic BVR Scanner
-- Postfinance specification support in bank entries
-- V11 importation for Bank statement
-- DTA electronic Payment support
-- SEPA payment support for Postfinance
-- USAM recomanded account chart
-- VAT definition
+
+  - **l10n_ch_bank**: List of swiss banks
+  - **l10n_ch_zip**: List of swiss postal ZIP
+  - **l10n_ch_dta**: Support of dta payment protocol (will be deprecated end 2014)
+  - **l10n_ch_dta**: Support of bank electronic payment (DTA)
+  - **l10n_ch_sepa**: Support of SEPA/PAIN electronic payment (crdit transfert only)
+  - **l10n_ch_payment_slip**: Support of ESR/BVR payment slip report and reconciliation. The report now support easy positioning and multiple payment terms
+  - **l10n_ch_scan_bvr**: Scan the ESR/BVR reference to automatically create the proper suplier invoice
