@@ -19,6 +19,7 @@
 ##############################################################################
 {
 "name" : "Switzerland - Credit control with ESR/BVR",
+"summary": "Print ESR/BVR for credit control",
 "description" : """
 Swiss Credit control using ESR/BVR
 ==================================
