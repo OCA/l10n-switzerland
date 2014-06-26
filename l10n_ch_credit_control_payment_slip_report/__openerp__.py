@@ -17,6 +17,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+<<<<<<< HEAD
 {"name": "Switzerland - Printing of dunning BVR",
  "summary": "Print BVR/ESR slip related to credit control",
  "description": """
@@ -25,7 +26,6 @@ Printing of dunning BVR
 Add possibility to print BVR/ESR slip of related credit control lines.
 The dunning fees are printed on ESR but they will not affect the amount
 of move lines
-
 """,
  "version": "1.3.0",
  "author": "Camptocamp",
