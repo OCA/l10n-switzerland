@@ -21,6 +21,7 @@
 ##############################################################################
 
 {'name': 'Switzerland - Payment Slip (BVR/ESR)',
+ 'summary': 'Print ESR/BVR payment slip with your invoices',
  'description': """
 Swiss Payment slip known as ESR/BVR
 ===================================
