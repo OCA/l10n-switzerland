@@ -19,6 +19,7 @@
 ##############################################################################
 
 {'name': 'Switzerland - Bank Payment File (DTA)',
+ 'summary': 'Electronic payment file with for Swiss bank (DTA)',
  'description':  """
 Swiss bank electronic payment (DTA)
 ===================================
