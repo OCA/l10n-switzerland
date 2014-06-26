@@ -27,9 +27,16 @@
 #  Created by Nicolas Bessi
 #
 #  Copyright (c) 2010 CamptoCamp. All rights reserved.
-{"name": "l10n_ch_bank",
- "description": """ Swiss localisation :
-    Swiss banks list
+{"name": "Switzerland - Bank list",
+ "summary": "Banks names, addresses and BIC codes",
+ "description": """
+Swiss bank list
+===============
+This module will load all Swiss banks in OpenERP with their name, address and BIC code to
+ease the input of bank account.
+
+It is not mandatory to use OpenERP in Switzerland, but can improve the user experience.
+
  """,
     "version": "7.0",
     "author": "Camptocamp",

@@ -23,29 +23,36 @@
 ##############################################################################
 
 {'name': 'Switzerland - Accounting',
+ 'summary': 'Multilang swiss STERCHI account chart and taxes',
  'description':  """
-Swiss localization :
-====================
+Swiss localization
+==================
+
 **Multilang swiss STERCHI account chart and taxes**
- **Author:** Camptocamp SA
+This localisation module creates the VAT taxes for sales and purchases  
+needed in Switzerland and provides the recommanded STERCHI chart of account
+in french, italian and german. 
 
- **Financial contributors:** Prisme Solutions Informatique SA, Quod SA
+**Other related modules you may found interesting using OpenERP in Switzerland**
 
- **Translation contributors:** brain-tec AG, Agile Business Group
-
-**This release will introduce major changes to l10n_ch.**
-
-Due to important refactoring needs and the Switzerland adoption of new international payment standard during 2013-2014. We have reorganised the swiss localization addons this way:
- - **l10n_ch**: Multilang swiss STERCHI account chart and taxes (official addon)
- - **l10n_ch_base_bank**: Technical module that introduces a new and simplified version of bank type management
+Various other modules have been made to work with OpenERP in Switzerland, you may 
+found some of them useful for you. Here is a list of the main ones:
  - **l10n_ch_bank**: List of swiss banks
- - **l10n_ch_zip**: List of swiss postal zip
- - **l10n_ch_dta**: Support of dta payment protocol (will be deprecated end 2014)
+ - **l10n_ch_zip**: List of swiss postal (ZIP)
+ - **l10n_ch_dta**: Support of bank electronic payment (DTA)
+ - **l10n_ch_sepa**: Support of SEPA/PAIN electronic payment
  - **l10n_ch_payment_slip**: Support of ESR/BVR payment slip report and reconciliation. Report refactored with easy element positioning.
- - **l10n_ch_sepa**: Alpha implementation of PostFinance SEPA/PAIN support will be completed during 2013/2014
+ - **l10n_ch_scan_bvr**: Scan the ESR/BVR reference to automatically create the proper suplier invoice
 
-The modules will be soon available on OpenERP swiss localization on launchpad:
-https://launchpad.net/openerp-swiss-localization
+All the modules are available on OpenERP swiss localization project on launchpad:
+https://launchpad.net/openerp-swiss-localization. You can also find them on apps.openerp.com.
+
+**Author:** Camptocamp
+
+**Financial contributors:** Prisme Solutions Informatique SA, Quod SA
+
+**Translation contributors:** Brain-tec AG, Agile Business Group
+
 """,
  'version': '7.1',
  'author': 'Camptocamp',

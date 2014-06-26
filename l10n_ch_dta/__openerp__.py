@@ -19,10 +19,13 @@
 ##############################################################################
 
 {'name': 'Switzerland - Bank Payment File (DTA)',
+ 'summary': 'Electronic payment file for Swiss bank (DTA)',
  'description':  """
-Swiss localization supplier bank payment file known as DTA file :
-=================================================
-Generate a DTA file for swiss banking system from payment order
+Swiss bank electronic payment (DTA)
+===================================
+
+This addons allows you to generate an electronic payment file for Swiss bank 
+(known as DTA). You'll found the wizard in payment order.
 
 """,
  'version': '1.0.1',
