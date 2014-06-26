@@ -19,6 +19,7 @@
 ##############################################################################
 
 {'name': 'Switzerland - Bank type',
+ 'summary': 'Types and number validation for swiss electronic payment. DTA, ESR',
  'description': """
 Swiss bank type and fields
 ==========================
