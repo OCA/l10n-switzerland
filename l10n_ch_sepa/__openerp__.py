@@ -21,6 +21,7 @@
 
 {
     "name": "Switzerland - SEPA Electronic Payment File",
+    "summary": "Generate pain.001 Credit Transfert Files for your payments",
     "version": "1.0",
     "category": "Finance",
     "description": """
