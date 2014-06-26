@@ -13,5 +13,5 @@ The currently available addons are:
   - **l10n_ch_dta**: Support of dta payment protocol (will be deprecated end 2014)
   - **l10n_ch_dta**: Support of bank electronic payment (DTA)
   - **l10n_ch_sepa**: Support of SEPA/PAIN electronic payment (crdit transfert only)
-  - **l10n_ch_payment_slip**: Support of ESR/BVR payment slip report and reconciliation. The report now supports easy positioning and multiple payment terms
+  - **l10n_ch_payment_slip**: Support of ESR/BVR payment slip report and reconciliation.
   - **l10n_ch_scan_bvr**: Scan the ESR/BVR reference to automatically create the proper suplier invoice
