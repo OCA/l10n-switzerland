@@ -44,7 +44,7 @@ This feature will be depreacted around the end of 2014.
 l10n_ch_sepa
 ------------
 
-Provide support of SEPA/PAIN electronic payment file.
+Provides support of SEPA/PAIN electronic payment file.
 Only credit transfert file are supported
 
 
