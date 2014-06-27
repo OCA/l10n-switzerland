@@ -42,7 +42,7 @@ script:
 #    - flake8 . --max-line-length=120 --exclude=__init__.py
 
     - openerp-server -d test --stop-after-init --init=$(python -c 'import os; print(",".join(x for x in os.listdir(".") if os.path.isdir(x) and not x.startswith(".") and not x.endswith(".unported")))') --addons-path=$(pwd),`python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"`/addons,$HOME/partner-contact-management,$HOME/bank-statement-reconcile,$HOME/account-financial-tools
-    - coverage run $(which openerp-server) -d test --test-enable --log-level=test --stop-after-init --init=$(python -c 'import os; print(",".join(x for x in os.listdir(".") if os.path.isdir(x) and not x.startswith(".") and not x.endswith("_unported")))') --addons-path=$(pwd),`python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"`/addons --logfile=/tmp/test.log.txt; cat /tmp/test.log.txt; grep ERROR /tmp/test.log.txt; (exit $(($?-1)))
+    - coverage run $(which openerp-server) -d test --test-enable --log-level=test --stop-after-init --init=$(python -c 'import os; print(",".join(x for x in os.listdir(".") if os.path.isdir(x) and not x.startswith(".") and not x.endswith("_unported")))') --addons-path=$(pwd),$HOME/partner-contact-management,$HOME/bank-statement-reconcile,$HOME/account-financial-tools,`python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"`/addons --logfile=/tmp/test.log.txt; cat /tmp/test.log.txt; grep ERROR /tmp/test.log.txt; (exit $(($?-1)))
     
 after_success:
   coveralls
