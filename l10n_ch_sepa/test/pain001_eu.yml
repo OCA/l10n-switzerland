@@ -16,7 +16,7 @@
     name: 'Account' 
     bank: pain001_bank
     iban: 'CH9100767000S00023455'
-    partner_id: base.res_partner_agrolait
+    partner_id: base.res_partner_2
 
 -
   I create a bank account
@@ -49,7 +49,7 @@
     currency_id: base.EUR
     account_id: account.a_pay
     type : in_invoice
-    partner_id: base.res_partner_agrolait
+    partner_id: base.res_partner_2
     address_contact_id: base.res_partner_address_8
     address_invoice_id: base.res_partner_address_8
     reference_type: bvr
@@ -116,7 +116,7 @@
     move_line_id: !ref {model: account.move.line, search: "[('ref','=','111111111111111111111111111111')]"}
     #name  (reference)
     order_id: pain001_payment_order
-    partner_id: base.res_partner_agrolait
+    partner_id: base.res_partner_2
     state: normal
 
 -
