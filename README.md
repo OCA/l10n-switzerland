@@ -30,10 +30,12 @@ This feature will be depreacted around the end of 2014.
 Adds the support of postal account and bank postal account norm.
 The partner bank form allows you to input swiss bank account and postal account in a correct manner.
 
-l10n_vat
---------
+
+l10n_ch_vat
+-----------
 
 Provides swiss tax chart (deprecated)
+
 
 l10n_ch_sepa
 ------------
