@@ -17,23 +17,27 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-        "name" : "Print BVR credit control",
-        "description" : """Add possibility to print BVR of
-	related credit control lines
-        """,
-        "version" : "1.0",
-        "author" : "Camptocamp",
-        "category" : "Generic Modules/Others",
-        "website": "http://www.camptocamp.com",
-        "depends" : [
-                        "account_credit_control",
-                        "l10n_ch_payment_slip"
-                    ],
-        "data" :[
-                            "credit_control_printer_view.xml",
-                            "report.xml"
-                        ],
-        "active": False,
-        "installable": True
-}
+{"name": "Printing of dunning BVR",
+ "summary": "Print BVR/ESR slip related to credit control",
+ "description": """
+Printing of dunning BVR
+=======================
+Add possibility to print BVR/ESR slip of related credit control lines.
+The dunning fees are printed on ESR but they will not affect the amount
+of move lines
+
+""",
+ "version": "1.3.0",
+ "author": "Camptocamp",
+ "category": "Generic Modules/Others",
+ "website": "http://www.camptocamp.com",
+ "depends": ["account_credit_control",
+             "account_credit_control_dunning_fees",
+             "l10n_ch_payment_slip"
+             ],
+ "data": ["credit_control_printer_view.xml",
+          "report.xml"
+          ],
+ "active": False,
+ "installable": True
+ }
