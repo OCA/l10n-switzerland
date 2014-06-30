@@ -35,7 +35,7 @@ Generate a DTA file for swiss banking system from payment order
  'demo': ["demo/dta_demo.xml"],
  'test': [], # To be ported or migrate to unit tests or scenarios
  'auto_install': False,
- 'installable': True,
+ 'installable': False,
  'images': []
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
