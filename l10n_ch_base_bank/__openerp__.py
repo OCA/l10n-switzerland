@@ -34,7 +34,7 @@ DTA, and ESR system in order to manage duality of Post and bank systems
  'demo': [],
  'test': [],
  'auto_install': False,
- 'installable': True,
+ 'installable': False,
  'images': []
  }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
