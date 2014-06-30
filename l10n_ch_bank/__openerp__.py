@@ -39,5 +39,5 @@
     "data": ["bank.xml"],
     "update_xml": [],
     "active": False,
-    "installable": True,
+    'installable': False,
  }
