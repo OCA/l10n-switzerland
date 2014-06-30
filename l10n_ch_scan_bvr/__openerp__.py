@@ -45,5 +45,5 @@ It currently supports BVR and BVR+
  "data": ["wizard/scan_bvr_view.xml",
           "partner_view.xml",
           "bank_view.xml"],
- "installable": True
+ 'installable': False
  }

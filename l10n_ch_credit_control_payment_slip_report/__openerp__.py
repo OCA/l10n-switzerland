@@ -35,5 +35,5 @@
                             "report.xml"
                         ],
         "active": False,
-        "installable": True
+        'installable': False
 }

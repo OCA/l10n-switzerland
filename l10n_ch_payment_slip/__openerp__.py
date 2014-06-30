@@ -56,6 +56,6 @@ Many BVR can be printed from on invoice.
  'demo': [],
  'test': [],  # To be ported or migrate to unit tests or scenarios
  'auto_install': False,
- 'installable': True,
+ 'installable': False,
  'images': []
  }

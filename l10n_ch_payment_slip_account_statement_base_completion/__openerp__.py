@@ -47,6 +47,6 @@ transaction id field of the bank statement.
  'data': ['data.xml',
           ],
  'tests': [],
- 'installable': True,
+ 'installable': False,
  'auto_install': True,
 }

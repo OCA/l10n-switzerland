@@ -37,5 +37,5 @@ better zip data for Switzerland
  'website': 'http://www.camptocamp.com',
  'data': ['l10n_ch_better_zip.xml'],
  'demo_xml': [],
- 'installable': True,
+ 'installable': False,
  'active': False}
