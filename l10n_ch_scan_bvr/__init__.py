@@ -1,9 +1,11 @@
-# -*- coding: utf-8 -*-
+# -*- encoding: utf-8 -*-
+#
+#  l10n_ch_scan_bvr
+#
+#  Created by Nicolas Bessi and Vincent Renaville
+#
+#  Copyright (c) 2012 CamptoCamp. All rights reserved.
 ##############################################################################
-#
-#    Author: Yannick Vaucher
-#    Copyright 2011 Camptocamp SA
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
 #    published by the Free Software Foundation, either version 3 of the
@@ -19,7 +21,5 @@
 #
 ##############################################################################
 
-import base_sepa
-import l10n_ch
-import wizard
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+from . import wizard
+from . import partner

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record id="partner_default_product_supplier_invoice" model="ir.ui.view">
+      <field name="name">partner.default.supplier.invoice.product.form.view</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form" />
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <field name="credit_limit" position="after">
+          <field name="supplier_invoice_default_product"/>
+        </field>
+      </field>
+    </record>
+  </data>
+</openerp>

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Yannick Vaucher
-#    Copyright 2011 Camptocamp SA
+#    Author: Vincent Renaville
+#    Copyright 2013 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,7 +19,20 @@
 #
 ##############################################################################
 
-import base_sepa
-import l10n_ch
-import wizard
+from openerp.osv.orm import Model, fields
+
+
+class ResPartner(Model):
+    _inherit = 'res.partner'
+
+    _columns = {
+        'supplier_invoice_default_product': fields.many2one(
+            'product.product',
+            'Default product supplier invoice',
+            help="Use by the scan BVR wizard, if completed, it'll generate "
+                 "a line with the proper amount and this specified product"
+        ),
+    }
+
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

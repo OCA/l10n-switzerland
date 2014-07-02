@@ -1,0 +1,32 @@
+# Config file .travis.yml
+
+language: python
+
+python:
+  - "2.7"
+
+virtualenv:
+  system_site_packages: true
+
+before_install:
+  - git clone https://github.com/OCA/partner-contact-management $HOME/partner-contact-management -b 7.0
+  - git clone https://github.com/OCA/bank-statement-reconcile $HOME/bank-statement-reconcile -b 7.0
+  - git clone https://github.com/OCA/account-financial-tools $HOME/account-financial-tools -b 7.0
+  - git clone https://github.com/nbessi/maintainer-quality-tools.git $HOME/maintainer-quality-tools -b nbi-addons_path_missing_on_create
+
+env:
+  - PATH=$HOME/maintainer-quality-tools/travis:$PATH
+ 
+services:
+  - postgresql
+
+install:
+  - $HOME/maintainer-quality-tools/travis/travis_install_nightly 7.0
+  - pip install coveralls flake8
+
+script:
+    # - travis_run_flake8 will be activaed in a separated commit
+    - travis_run_tests 7.0 openerp_test $HOME/partner-contact-management $HOME/bank-statement-reconcile $HOME/account-financial-tools
+
+after_success:
+  coveralls
