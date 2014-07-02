@@ -40,37 +40,30 @@
 -
   I create an invoice on 1st January for 7000 EUR
   ###########################
- #   Creating 1 invoice    #
-###########################
+  #   Creating 1 invoice    #
+  ###########################
 -
-  !record {model: account.invoice, id: pain001_account_invoice}:
+  !record {model: account.invoice, id: pain001_account_invoice, view: account.invoice_supplier_form}:
     company_id: base.main_company
     journal_id: account.bank_journal
     currency_id: base.EUR
     account_id: account.a_pay
     type : in_invoice
     partner_id: base.res_partner_2
-    commercial_partner_id : base.res_partner_2
     reference_type: bvr
     reference: 111111111111111111111111111111
     date_invoice: !eval "'%s-01-01' %(datetime.now().year)"
     period_id: account.period_1
-    #invoice_line:
     partner_bank_id: pain001_company_bank
     check_total : 1000
--
-  I add an invoice line
--
-  !record {model: account.invoice.line, id: pain001_invoice_line}:
-    account_id: account.a_expense
-    name: '[PC1] Basic PC'
-    price_unit: 1000.0
-    quantity: 1.0
-    product_id: product.product_product_5
-    uos_id: product.product_uom_unit
-    invoice_id: pain001_account_invoice
-
-
+    invoice_line:
+      - account_id: account.a_expense
+        name: 'a name'
+        price_unit: 1000.0
+        quantity: 1.0
+        product_id: product.product_product_5
+        uos_id: product.product_uom_unit
+    journal_id: account.expenses_journal
 -
   I Validate invoice by clicking on Validate button
 -
@@ -79,8 +72,8 @@
 -
   I create my payment order to pay my invoice
   ###########################
- #   Doing payment order   #
-###########################
+  #   Doing payment order   #
+  ###########################
 -
   !record {model: payment.order, id: pain001_payment_order}:
     #date_created
@@ -124,11 +117,18 @@
   !workflow {model: payment.order, action: open, ref: pain001_payment_order}
 
 -
+  I set country to main company
+-
+
+  !record {model: res.partner, id: base.main_partner}:
+    country_id: base.ch
+
+-
   Use the wizard to generate the pain 001 message
 -
   !python {model: wizard.pain001}: |
     import base64
-    wiz_id = self.create(cr, uid, [])
+    wiz_id = self.create(cr, uid, {})
     wiz = self.browse(cr, uid, wiz_id)
 
     pay_order_id =  ref("pain001_payment_order")

@@ -106,7 +106,7 @@ class Pain001(MsgSEPA):
                     _('ErrorCreditorBankBIC'),
                     _('Creditor bank account has no BIC number for invoice %s')
                     % (line.name,))
-            if (not crd_bank_acc.state.iban
+            if (not crd_bank_acc.state == 'iban'
                     and not crd_bank_acc.get_account_number()):
                 raise orm.except_orm(
                     _('ErrorCompanyBankAccNumber'),
