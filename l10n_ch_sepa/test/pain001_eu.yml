@@ -66,7 +66,7 @@
     name: '[PC1] Basic PC'
     price_unit: 1000.0
     quantity: 1.0
-    product_id: product.product_product_pc1
+    product_id: product.product_product_5
     uos_id: product.product_uom_unit
     invoice_id: pain001_account_invoice
 
