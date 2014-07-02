@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record model="ir.ui.view" id="invoice_supplier_form6">
+      <field name="name">account.invoice.supplier.form.inherit</field>
+      <field name="model">account.invoice</field>
+      <field name="type">form</field>
+      <field name="inherit_id" ref="account.invoice_supplier_form"/>
+      <field name="arch" type="xml">
+        <field name="partner_id" position="replace">
+          <field name="partner_id"
+                 on_change="onchange_partner_id(type, partner_id, date_invoice, payment_term, partner_bank_id)"
+                 select="1"/>
+        </field>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="invoice_supplier_form8">
+      <field name="name">account.invoice.supplier.form.inherit</field>
+      <field name="model">account.invoice</field>
+      <field name="type">form</field>
+      <field name="inherit_id" ref="account.invoice_supplier_form"/>
+      <field name="priority" eval="18"/>
+      <field name="arch" type="xml">
+        <field name="partner_bank_id" position="replace">
+          <field name="partner_bank_id"
+                 domain="[('partner_id', '=', partner_id)]"
+                 on_change="onchange_partner_bank(partner_bank_id)"/>
+        </field>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="invoice_form">
+      <field name="name">account.invoice.form.inherit</field>
+      <field name="model">account.invoice</field>
+      <field name="type">form</field>
+      <field name="inherit_id" ref="account.invoice_form"/>
+      <field name="arch" type="xml">
+        <field name="partner_bank_id" position="replace">
+          <field name="partner_bank_id"
+                 domain="[('partner_id.ref_companies', 'in', [company_id])]"/>
+        </field>
+      </field>
+    </record>
+
+    <record id="view__bank_search" model="ir.ui.view">
+      <field name="name">res.bank.search</field>
+      <field name="model">res.bank</field>
+      <field name="arch" type="xml">
+        <search string="Banks">
+          <filter name="Postfinance"
+                  icon="terp-check" string="PostFinance"
+                  domain="[('bic', '=', 'POFICHBEXXX')]"
+                  help="PostFinance"/>
+          <field name="name"/>
+          <field name="code"/>
+          <field name="street"/>
+          <field name="city"/>
+
+        </search>
+      </field>
+    </record>
+
+    <!-- 'POFICHBEXXX' corresponds to Postfinance bic -->
+
+    <record model="ir.ui.view" id="add_custom_fields_on_bank">
+      <field name="name">add custom fields on bank</field>
+      <field name="model">res.bank</field>
+      <field name="type">form</field>
+      <field name="inherit_id" ref="base.view_res_bank_form"/>
+      <field name="arch" type="xml">
+        <field name="bic" position="after">
+          <field name="code"/>
+          <field name="clearing"/>
+          <field name="ccp" attrs="{'invisible': [('bic', '=', 'POFICHBEXXX')]}"/>
+        </field>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="add_custom_fields_on_bank_list">
+      <field name="name">add custom fields on bank list</field>
+      <field name="model">res.bank</field>
+      <field name="type">form</field>
+      <field name="inherit_id" ref="base.view_res_bank_tree"/>
+      <field name="arch" type="xml">
+        <field name="bic" position="after">
+          <field name="code"/>
+          <field name="clearing"/>
+          <field name="ccp"/>
+          <field name="street"/>
+          <field name="city"/>
+        </field>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="add_ccp_on_res_partner_bank">
+      <field name="name">Add ccp on res partner bank</field>
+      <field name="model">res.partner.bank</field>
+      <field name="type">form</field>
+      <field name="inherit_id" ref="base.view_partner_bank_form"/>
+      <field name="arch" type="xml">
+        <field name="bank_bic" position="after">
+          <field name="ccp" attrs="{'invisible': [('bank_bic', '=', 'POFICHBEXXX')]}"/>
+        </field>
+      </field>
+    </record>
+
+  </data>
+</openerp>

@@ -1,0 +1,8 @@
+<openerp>
+  <data noupdate="True">
+    <record id="payment_slip_voucher_disable" model="ir.config_parameter">
+      <field name="key">l10n_ch_payment_slip_voucher_disable</field>
+      <field name="value">0</field>
+    </record>
+  </data>
+</openerp>
