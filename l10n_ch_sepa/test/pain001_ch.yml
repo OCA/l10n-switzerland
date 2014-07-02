@@ -14,9 +14,9 @@
 -
   !record {model: res.partner.bank, id: pain001_ch_partner_bank}:
     state: 'iban'
-    name: 'Account' 
+    name: 'Account'
     bank: pain001_ch_bank
-    iban: 'CH9100767000S00023455'
+    acc_number: 'CH9100767000S00023455'
     partner_id: base.res_partner_2
 
 -
@@ -24,9 +24,9 @@
 -
   !record {model: res.partner.bank, id: pain001_ch_company_bank}:
     state: 'iban'
-    name: 'Account for company' 
+    name: 'Account for company'
     bank: pain001_ch_bank
-    iban: 'CH9100767000S00023455'
+    acc_number: 'CH9100767000S00023455'
     partner_id: base.main_partner
 
 
@@ -39,9 +39,9 @@
     journal: !ref {model: account.journal, search: "[('type','=','bank')]"}
 
 -
-  I create an invoice on 1st January for 7000 EUR 
+  I create an invoice on 1st January for 7000 EUR
   ###########################
- #   Creating 1 invoice    # 
+ #   Creating 1 invoice    #
 ###########################
 -
   !record {model: account.invoice, id: pain001_ch_account_invoice}:
@@ -54,10 +54,10 @@
     address_contact_id: base.res_partner_address_8
     address_invoice_id: base.res_partner_address_8
     reference_type: bvr
-    reference: 111111111111111111111111111111 
+    reference: 111111111111111111111111111111
     date_invoice: !eval "'%s-01-01' %(datetime.now().year)"
     period_id: account.period_1
-    #invoice_line: 
+    #invoice_line:
     partner_bank_id: pain001_ch_company_bank
     check_total : 1000
 -
@@ -81,7 +81,7 @@
 -
   I create my payment order to pay my invoice
   ###########################
- #   Doing payment order   # 
+ #   Doing payment order   #
 ###########################
 -
   !record {model: payment.order, id: pain001_ch_payment_order}:
@@ -123,7 +123,7 @@
 -
   I confirm my payment order
 -
-  !workflow {model: payment.order, action: open, ref: pain001_ch_payment_order}    
+  !workflow {model: payment.order, action: open, ref: pain001_ch_payment_order}
 
 
 -
