@@ -13,8 +13,6 @@ before_install:
   - git clone https://github.com/OCA/bank-statement-reconcile $HOME/bank-statement-reconcile -b 7.0
   - git clone https://github.com/OCA/account-financial-tools $HOME/account-financial-tools -b 7.0
   - git clone https://github.com/nbessi/maintainer-quality-tools.git $HOME/maintainer-quality-tools -b nbi-addons_path_missing_on_create
-
-env:
   - PATH=$HOME/maintainer-quality-tools/travis:$PATH
  
 services:
