@@ -7,6 +7,8 @@ python:
 
 env:
   - ODOO="https://github.com/savoirfairelinux/odoo/archive/setuptools-addons.tar.gz"  # Temp until https://github.com/odoo/odoo/issues/185 or https://github.com/odoo/odoo/issues/441 is fixed
+ 
+before_install:
   - git clone https://github.com/OCA/partner-contact-management $HOME/partner-contact-management -b master
   - git clone https://github.com/OCA/bank-statement-reconcile $HOME/bank-statement-reconcile -b master
   - git clone https://github.com/OCA/account-financial-tools $HOME/account-financial-tools -b master
