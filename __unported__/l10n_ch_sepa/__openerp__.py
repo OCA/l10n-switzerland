@@ -40,7 +40,10 @@ TODO: Needs to be fully tested with a FI
     "author": "Camptocamp",
     "depends": [
         "account",
-        "l10n_ch"
+        "l10n_ch",
+        "l10n_ch_base_bank",
+        "base_iban",
+        "account_payment",
     ],
     "data": [
         "wizard/wiz_pain_001_view.xml",
