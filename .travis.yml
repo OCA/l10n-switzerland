@@ -24,7 +24,7 @@ install:
 
 script:
     # - travis_run_flake8 will be activaed in a separated commit
-    - travis_run_tests 7.0 openerp_test $HOME/partner-contact-management $HOME/bank-statement-reconcile $HOME/account-financial-tools
+    - travis_run_tests 7.0 $HOME/partner-contact-management $HOME/bank-statement-reconcile $HOME/account-financial-tools
 
 after_success:
   coveralls
