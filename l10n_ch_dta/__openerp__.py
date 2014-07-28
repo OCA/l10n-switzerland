@@ -24,7 +24,7 @@
 Swiss bank electronic payment (DTA)
 ===================================
 
-This addons allows you to generate an electronic payment file for Swiss bank 
+This addons allows you to generate an electronic payment file for Swiss bank
 (known as DTA). You'll found the wizard in payment order.
 
 """,
@@ -36,9 +36,8 @@ This addons allows you to generate an electronic payment file for Swiss bank
  'data': ["wizard/create_dta_view.xml",
           "bank_view.xml"],
  'demo': ["demo/dta_demo.xml"],
- 'test': [], # To be ported or migrate to unit tests or scenarios
+ 'test': [],  # To be ported or migrate to unit tests or scenarios
  'auto_install': False,
  'installable': True,
  'images': []
-}
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+ }
