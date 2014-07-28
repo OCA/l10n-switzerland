@@ -32,10 +32,11 @@
  "description": """
 Swiss bank list
 ===============
-This module will load all Swiss banks in OpenERP with their name, address and BIC code to
-ease the input of bank account.
+This module will load all Swiss banks in OpenERP with their name,
+address and BIC code to ease the input of bank account.
 
-It is not mandatory to use OpenERP in Switzerland, but can improve the user experience.
+It is not mandatory to use OpenERP in Switzerland,
+but can improve the user experience.
 
  """,
     "version": "7.0",

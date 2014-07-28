@@ -29,23 +29,26 @@ Swiss localization
 ==================
 
 **Multilang swiss STERCHI account chart and taxes**
-This localisation module creates the VAT taxes for sales and purchases  
+This localisation module creates the VAT taxes for sales and purchases
 needed in Switzerland and provides the recommanded STERCHI chart of account
-in french, italian and german. 
+in french, italian and german.
 
 **Other related modules you may found interesting using OpenERP in Switzerland**
 
-Various other modules have been made to work with OpenERP in Switzerland, you may 
-found some of them useful for you. Here is a list of the main ones:
+Various other modules have been made to work with OpenERP in Switzerland,
+you may found some of them useful for you. Here is a list of the main ones:
  - **l10n_ch_bank**: List of swiss banks
  - **l10n_ch_zip**: List of swiss postal (ZIP)
  - **l10n_ch_dta**: Support of bank electronic payment (DTA)
  - **l10n_ch_sepa**: Support of SEPA/PAIN electronic payment
- - **l10n_ch_payment_slip**: Support of ESR/BVR payment slip report and reconciliation. Report refactored with easy element positioning.
+ - **l10n_ch_payment_slip**: Support of ESR/BVR payment slip report and reconciliation.
+                             Report refactored with easy element positioning.
  - **l10n_ch_scan_bvr**: Scan the ESR/BVR reference to automatically create the proper suplier invoice
 
-All the modules are available on OpenERP swiss localization project on launchpad:
-https://launchpad.net/openerp-swiss-localization. You can also find them on apps.openerp.com.
+All the modules are available on OpenERP swiss localization project on Github:
+https://github.com/OCA/l10n-switzerland
+
+You can also find them on apps.odoo.com.
 
 **Author:** Camptocamp
 
@@ -66,6 +69,6 @@ https://launchpad.net/openerp-swiss-localization. You can also find them on apps
  'test': [],
  'auto_install': False,
  'installable': True,
- 'images': ['images/config_chart_l10n_ch.jpeg','images/l10n_ch_chart.jpeg']
-}
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+ 'images': ['images/config_chart_l10n_ch.jpeg',
+            'images/l10n_ch_chart.jpeg']
+ }

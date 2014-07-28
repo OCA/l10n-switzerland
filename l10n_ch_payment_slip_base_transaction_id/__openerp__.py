@@ -19,15 +19,14 @@
 #
 ##############################################################################
 
-{'name' : 'Switzerland - BVR/ESR Transaction ID Compatibility',
- 'version' : '1.0',
- 'author' : 'Camptocamp',
+{'name': 'Switzerland - BVR/ESR Transaction ID Compatibility',
+ 'version': '1.0',
+ 'author': 'Camptocamp',
  'maintainer': 'Camptocamp',
  'license': 'AGPL-3',
  'category': 'Hidden',
- 'depends' : ['l10n_ch_payment_slip',
-              'base_transaction_id',  # lp:banking-addons/bank-statement-reconcile-7.0 
-              ],
+ 'depends': ['l10n_ch_payment_slip',
+             'base_transaction_id'],
  'description': """
 Swiss BVR/ESR Transaction ID Compatibility
 ==========================================
@@ -40,8 +39,8 @@ When an invoice has a transaction ID, no BVR reference should be generated
 because the reconciliation should be done with the transaction ID, not
 a new reference.
 
-This module is needed if you use the Swiss localization module and the 
-bank-statement-reconcile project in the banking addons 
+This module is needed if you use the Swiss localization module and the
+bank-statement-reconcile project in the banking addons
 (https://launchpad.net/banking-addons).
 
  """,
@@ -50,4 +49,4 @@ bank-statement-reconcile project in the banking addons
  'tests': [],
  'installable': True,
  'auto_install': True,
-}
+ }

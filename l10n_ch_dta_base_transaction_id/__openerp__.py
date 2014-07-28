@@ -19,15 +19,14 @@
 #
 ##############################################################################
 
-{'name' : 'Switzerland - Bank Payment File (DTA) Transaction ID Compatibility',
- 'version' : '1.0',
- 'author' : 'Camptocamp',
+{'name': 'Switzerland - Bank Payment File (DTA) Transaction ID Compatibility',
+ 'version': '1.0',
+ 'author': 'Camptocamp',
  'maintainer': 'Camptocamp',
  'license': 'AGPL-3',
  'category': 'Hidden',
- 'depends' : ['l10n_ch_dta',
-              'base_transaction_id',  # lp:banking-addons/bank-statement-reconcile-7.0 
-              ],
+ 'depends': ['l10n_ch_dta',
+             'base_transaction_id'],
  'description': """
 Swiss bank electronic payment (DTA) - Transaction ID Compatibility
 ==================================================================
@@ -37,8 +36,8 @@ Link module between the Swiss Payment File (DTA) module
 field (base_transaction_id).
 
 When an invoice has a transaction ID, the DTA is exported with this ID
-as reference. This is used by the bank-statement-reconcile project in the 
-banking addons (https://launchpad.net/banking-addons).
+as reference. This is used by the bank-statement-reconcile project
+in the banking addons (https://launchpad.net/banking-addons).
 
 """,
  'website': 'http://www.camptocamp.com',
@@ -46,4 +45,4 @@ banking addons (https://launchpad.net/banking-addons).
  'tests': [],
  'installable': True,
  'auto_install': True,
-}
+ }
