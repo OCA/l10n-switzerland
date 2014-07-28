@@ -39,8 +39,12 @@ Swiss postal code (ZIP) list
 This module will load all Swiss postal codes (ZIP) in Odoo to
 ease the input of partners.
 
+<<<<<<< HEAD
 It is not mandatory to use Odoo in Switzerland,
 but can improve the user experience.
+=======
+It is not mandatory for using Odoo in Switzerland, but can improve the user experience.
+>>>>>>> 5a48023... Typo in manifest description
 
 """,
  'website': 'http://www.camptocamp.com',
