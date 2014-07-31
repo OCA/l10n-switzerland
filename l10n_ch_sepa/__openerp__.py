@@ -28,7 +28,8 @@
 Swiss electronic payment (SEPA)
 ===============================
 
-This addons allows you to generate SEPA electronic payment file for Switzerland.
+This addons allows you to generate SEPA electronic payment file for
+Switzerland.
 You'll found the wizard in payment order.
 
 This module designed for Swiss payment is also generic for euro payments
