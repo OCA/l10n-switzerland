@@ -21,8 +21,8 @@ install:
   - travis_install_nightly ${VERSION}
 
 script:
-    - travis_run_flake8
-    - travis_run_tests ${VERSION}
+  - travis_run_flake8
+  - travis_run_tests
 
 after_success:
   coveralls
