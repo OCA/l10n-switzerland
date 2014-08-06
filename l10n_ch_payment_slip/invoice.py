@@ -50,9 +50,25 @@ class AccountMoveLine(Model):
             move_line_id = move_line_id[0]
 
         move_line = self.browse(cursor, uid, move_line_id, context=context)
-        # We check if the type is bvr, if not we return false
-        if move_line.invoice.partner_bank_id.state != 'bvr':
+
+        if not self._is_generate_bvr(cursor, uid, move_line.invoice, context):
             return ''
+        
+        reference = self._compute_bvr_ref(cursor, uid, move_line, context)
+        if (move_line.transaction_ref and
+                move_line.transaction_ref != reference):
+            # the line has already a transaction id and it is not
+            # a BVR reference
+            return ''
+        return reference
+        
+    def _is_generate_bvr(self, cursor, uid, invoice, context=None):
+        ''' Determine if BVR should be generated or not. '''
+        # We check if the type is bvr, if not we return false
+        return invoice.partner_bank_id and invoice.partner_bank_id.state == 'bvr'
+        
+    def _compute_bvr_ref(self, cursor, uid, move_line, context=None):
+        ''' Default BVR reference computation '''
         if move_line.invoice.partner_bank_id.bvr_adherent_num:
             res = move_line.invoice.partner_bank_id.bvr_adherent_num
         move_number = ''
@@ -61,13 +77,7 @@ class AccountMoveLine(Model):
             compound = str(move_line.invoice.number) + str(move_line_id)
             move_number = self._compile_get_ref.sub('', compound)
         reference = mod10r(res + move_number.rjust(26 - len(res), '0'))
-        if (move_line.transaction_ref and
-                move_line.transaction_ref != reference):
-            # the line has already a transaction id and it is not
-            # a BVR reference
-            return ''
         return reference
-
 
 class AccountInvoice(Model):
     """Inherit account.invoice in order to add bvr
