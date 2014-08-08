@@ -17,7 +17,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-<<<<<<< HEAD
 {"name": "Switzerland - Printing of dunning BVR",
  "summary": "Print BVR/ESR slip related to credit control",
  "description": """

@@ -34,7 +34,9 @@ class CreditCommunication(orm.TransientModel):
     def _generate_report_bvr(self, cr, uid, line_ids, context=None):
         """Will generate a report by inserting mako template
            of Multiple BVR Report"""
-        service = netsvc.LocalService('report.invoice_bvr_webkit_multi_credit_control')
+        service = netsvc.LocalService(
+            'report.invoice_bvr_webkit_multi_credit_control'
+        )
         result, format = service.create(cr, uid, line_ids, {}, {})
         return result
 
@@ -56,14 +58,18 @@ class MultiBvrWebKitParserCreditControl(multi_report_webkit_html.L10nCHReportWeb
 
     def get_company_currency(self):
         cmp_model = self.pool['res.company']
-        c_id = cmp_model._company_default_get(self.cr, self.uid, 'res.currency')
+        c_id = cmp_model._company_default_get(self.cr, self.uid,
+                                              'res.currency')
         comp = cmp_model.browse(self.cr, self.uid, c_id)
         return comp.currency_id
 
     def get_swiss_currency(self):
-        return self.pool['ir.model.data'].get_object(self.cr,
-                                                     self.uid,
-                                                     'base', 'CHF')
+        return self.pool['ir.model.data'].get_object(
+            self.cr,
+            self.uid,
+            'base',
+            'CHF'
+        )
 
     def set_context(self, objects, data, ids, report_type=None):
         new_objects = []
