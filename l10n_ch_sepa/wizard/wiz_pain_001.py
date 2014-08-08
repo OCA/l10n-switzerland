@@ -113,5 +113,3 @@ class WizardPain001(orm.TransientModel):
 
         current.write({'pain_001_file': pain_001_file})
         return True
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

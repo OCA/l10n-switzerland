@@ -156,4 +156,3 @@ class Pain001(MsgSEPA):
         return self._xml_data
 
 MsgSEPAFactory.register_class('pain.001', Pain001)
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

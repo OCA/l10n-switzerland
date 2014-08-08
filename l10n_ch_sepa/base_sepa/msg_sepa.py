@@ -94,5 +94,3 @@ class MsgSEPAFactory(object):
     @classmethod
     def has_instance(cls, key):
         return key in cls._register
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
