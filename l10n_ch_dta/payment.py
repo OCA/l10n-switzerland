@@ -24,9 +24,11 @@ from openerp.osv import orm, fields
 class PaymentOrder(orm.Model):
     _inherit = 'payment.order'
 
-    _columns = {'dta_ids': fields.one2many('ir.attachment',
-                                           'res_id',
-                                           domain=[('res_model', '=', 'payment.order'),
-                                                   ('name', 'like', 'DTA')])}
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+    _columns = {
+        'dta_ids': fields.one2many(
+            'ir.attachment',
+            'res_id',
+            domain=[('res_model', '=', 'payment.order'),
+                    ('name', 'like', 'DTA')]
+        )
+    }

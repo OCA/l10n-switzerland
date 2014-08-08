@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Nicolas Bessi. Copyright Camptocamp SA
+#    Copyright Camptocamp SA
 #    Financial contributors: Hasa SA, Open Net SA,
 #                            Prisme Solutions Informatique SA, Quod SA
 #
@@ -25,8 +25,7 @@ import re
 import base64
 import unicode2ascii
 
-from openerp.osv.osv import except_osv
-from openerp.osv.orm import TransientModel
+from openerp.osv import orm
 from openerp.tools.translate import _
 from tools import mod10r
 
@@ -79,6 +78,11 @@ def tr(string_in):
 
 
 class record(object):
+    """Abstract class that provides common
+    knowledge for any kind of post/bank account
+
+    """
+
     def __init__(self, global_context_dict, pool, pline):
         self.pool = pool
         self.pline = pline
@@ -101,9 +105,9 @@ class record(object):
         self.init_local_context()
 
     def init_local_context(self):
-        """
-        Must instanciate a fields list, field = (name,size)
+        """Instanciate a fields list, field = (name,size)
         and update a local_values dict.
+
         """
         raise NotImplementedError('Init not implemented')
 
@@ -112,6 +116,10 @@ class record(object):
         raise NotImplementedError('Check not implemented')
 
     def generate(self):
+        """Generate formatted fields data in DTA format
+        for a given account
+
+        """
         res = ''
         for field in self.fields:
             if field[0] in self.pre:
@@ -130,11 +138,16 @@ class record(object):
 
 
 class postal_record(record):
+    """Class that propose common
+    knowledge for all postal account type
+
+    """
     def __init__(self, global_context_dict, pool, pline):
         super(postal_record, self).__init__(global_context_dict, pool, pline)
         self.is_9_pos_adherent = False
 
     def validate_global_context_dict(self):
+        """Ensure postal record is valid"""
         # if adherent bvr number is a 9 pos number
         # add 0 to fill 2nd part plus remove '-'
         # exemple: 12-567-C becomes 12000567C
@@ -147,18 +160,19 @@ class postal_record(record):
         # exemple: 12345 becomes 000012345
         elif len(self.global_values['partner_bvr']) == 5:
             self.global_values['partner_bvr'] = self.global_values['partner_bvr'].rjust(9, '0')
-
         else:
-            raise except_osv(_('Error'),
-                             _('Wrong postal number format.\n'
-                               'It must be 12-123456-9 or 12345 format'))
+            raise orm.except_orm(
+                _('Error'),
+                _('Wrong postal number format.\n'
+                  'It must be 12-123456-9 or 12345 format')
+            )
 
 
 class record_gt826(postal_record):
-    """
-    bvr
-    """
+    """ BVR record implementation"""
+
     def init_local_context(self):
+        """Define field of BVR records"""
         self.fields = [
             ('seg_num1', 2),
             #header
@@ -215,63 +229,84 @@ class record_gt826(postal_record):
         })
 
     def validate_global_context_dict(self):
+        """Validate BVR record values"""
         super(record_gt826, self).validate_global_context_dict()
         if not self.global_values['reference']:
-            raise except_osv(_('Error'),
-                             _('You must provide a BVR reference'
-                               'number \n for the line: %s') % self.pline.name)
-
-        self.global_values['reference'] = self.global_values['reference'].replace(' ', '')
+            raise orm.except_orm(
+                _('Error'),
+                _('You must provide a BVR reference'
+                  'number \n for the line: %s') % self.pline.name
+            )
+        ref = self.global_values['reference'].replace(' ', '')
+        self.global_values['reference'] = ref
         if self.is_9_pos_adherent:
-            if len(self.global_values['reference']) > 27:
-                raise except_osv(_('Error'),
-                                 _('BVR reference number is not valid \n for the line: %s. \n'
-                                   'Reference is too long.') % self.pline.name)
+            if len(ref) > 27:
+                raise orm.except_orm(
+                    _('Error'),
+                    _('BVR reference number is not valid \n for the line: %s. \n'
+                      'Reference is too long.') % self.pline.name
+                )
             # do a mod10 check
-            if mod10r(self.global_values['reference'][:-1]) != self.global_values['reference']:
-                raise except_osv(_('Error'),
-                                 _('BVR reference number is not valid \n for the line: %s. \n'
-                                   'Mod10 check failed') % self.pline.name)
+            if mod10r(ref[:-1]) != ref:
+                raise orm.except_orm(
+                    _('Error'),
+                    _('BVR reference number is not valid \n for the line: %s. \n'
+                      'Mod10 check failed') % self.pline.name
+                )
             # fill reference with 0
-            self.global_values['reference'] = self.global_values['reference'].rjust(27, '0')
+            self.global_values['reference'] = ref.rjust(27, '0')
         else:
             # reference of BVR adherent with 5 positions number
             # have 15 positions references
-            if len(self.global_values['reference']) > 15:
-                raise except_osv(_('Error'),
-                                 _('BVR reference number is not valid \n'
-                                   'for the line: %s. \n Reference is too long '
-                                   'for this type of beneficiary.') % self.pline.name)
-            # complete 15 first digit with 0 on left and complete 27 digits with trailing spaces
+            if len(ref) > 15:
+                raise orm.except_orm(
+                    _('Error'),
+                    _('BVR reference number is not valid \n'
+                      'for the line: %s. \n Reference is too long '
+                      'for this type of beneficiary.') % self.pline.name
+                )
+            # complete 15 first digit with 0 on left and complete 27 digits
+            # with trailing spaces
             # exemple: 123456 becomes 00000000012345____________
-            self.global_values['reference'] = self.global_values['reference'].rjust(15, '0').ljust(27, ' ')
+            adjust = ref.rjust(15, '0').ljust(27, ' ')
+            self.global_values['reference'] = adjust
 
         if not self.global_values['partner_bvr']:
-            raise except_osv(_('Error'),
-                             _('You must provide a BVR number\n'
-                               'for the bank account: %s'
-                               'on line: %s') % (self.pline.bank_id.get_account_number(), self.pline.name))
+            raise orm.except_orm(
+                _('Error'),
+                _('You must provide a BVR number\n'
+                  'for the bank account: %s'
+                  'on line: %s') % (self.pline.bank_id.get_account_number(),
+                                    self.pline.name)
+            )
 
 
 class record_gt827(postal_record):
     """
-    interne suisse (bvpost et bvbank)
+    Swiss internal (bvpost and bvbank) record implemetation
     """
     def validate_global_context_dict(self):
+        """Validate record values"""
         super(record_gt827, self).validate_global_context_dict()
         if not self.global_values['partner_bank_number']:
-            raise except_osv(_('Error'),
-                             _('You must provide a bank number \n'
-                               'for the partner bank: %s\n on line: %s') %
-                             (self.pline.bank_id.get_account_number(), self.pline.name))
+            raise orm.except_orm(
+                _('Error'),
+                _('You must provide a bank number \n'
+                  'for the partner bank: %s\n on line: %s') %
+                (self.pline.bank_id.get_account_number(), self.pline.name)
+            )
         if not self.global_values['partner_bank_clearing']:
-            raise except_osv(_('Error'),
-                             _('You must provide a Clearing Number\n'
-                               'for the partner bank: %s\n on line %s') %
-                             (self.pline.bank_id.get_account_number(), self.pline.name))
-        self.global_values['partner_bank_number'] = '/C/' + self.global_values['partner_bank_number']
+            raise orm.except_orm(
+                _('Error'),
+                _('You must provide a Clearing Number\n'
+                  'for the partner bank: %s\n on line %s') %
+                (self.pline.bank_id.get_account_number(), self.pline.name)
+            )
+        frm = '/C/%s' % self.global_values['partner_bank_number']
+        self.global_values['partner_bank_number'] = frm
 
     def init_local_context(self):
+        """Define fields values"""
         self.fields = [
             ('seg_num1', 2),
             #header
@@ -332,37 +367,49 @@ class record_gt827(postal_record):
 
 
 class record_gt836(record):
-    """
-    iban
-    """
+    """Implements iban record"""
 
     def validate_global_context_dict(self):
+        """Validate iban values"""
+
+        def _compute_bank_ident(values):
+            res = '%s %s %s %s %s' % (values['partner_bank_name'],
+                                      values['partner_bank_street'],
+                                      values['partner_bank_zip'],
+                                      values['partner_bank_city'],
+                                      values['partner_bank_country'])
+            return res
+
         part = self.pline.partner_id
-        self.global_values['partner_country'] = part.country_id and part.country_id.code + '-' or ''
+        p_country = '%s-' % part.country_id.code if part.country_id else ''
+        self.global_values['partner_country'] = p_country
         co_addr = self.pline.order_id.company_id
-        self.global_values['comp_country'] = co_addr.country_id and co_addr.country_id.code + '-' or ''
+        c_country = '%s-' % co_addr.country_id.code if co_addr.country_id else ''
+        self.global_values['comp_country'] = c_country
+
         if not self.global_values['partner_bank_iban']:
-            raise except_osv(_('Error'),
-                             _('No IBAN defined \n for the bank account: %s\n'
-                               'on line: %s') % (self.pline.bank_id.get_account_number(),
-                                                 self.pline.name))
+            raise orm.except_orm(
+                _('Error'),
+                _('No IBAN defined \n for the bank account: %s\n'
+                  'on line: %s') % (self.pline.bank_id.get_account_number(),
+                                    self.pline.name)
+            )
         if self.global_values['partner_bank_code']:  # Bank code is swift (BIC address)
             self.global_values['option_id_bank'] = 'A'
             self.global_values['partner_bank_ident'] = self.global_values['partner_bank_code']
         elif self.global_values['partner_bank_city']:
             self.global_values['option_id_bank'] = 'D'
-            self.global_values['partner_bank_ident'] = self.global_values['partner_bank_name'] \
-                    + ' ' + self.global_values['partner_bank_street'] \
-                    + ' ' + self.global_values['partner_bank_zip'] \
-                    + ' ' + self.global_values['partner_bank_city'] \
-                    + ' ' + self.global_values['partner_bank_country']
+            self.global_values['partner_bank_ident'] = _compute_bank_ident(self.global_values)
         else:
-            raise except_osv(_('Error'),
-                             _('You must provide the bank city '
-                               'or the bic code for the partner bank: \n %s\n on line: %s') %
-                             (self.pline.bank_id.get_account_number(), self.pline.name))
+            raise orm.except_orm(
+                _('Error'),
+                _('You must provide the bank city '
+                  'or the bic code for the partner bank: \n %s\n on line: %s') %
+                (self.pline.bank_id.get_account_number(), self.pline.name)
+            )
 
     def init_local_context(self):
+        """Define iban fields"""
         self.fields = [
             ('seg_num1', 2),
             #header
@@ -429,10 +476,12 @@ class record_gt836(record):
 
 
 class record_gt890(record):
-    """
-    Total
+    """Implements Total Record of DTA file
+    if behaves like a account payment order
+
     """
     def init_local_context(self):
+        """Initialise fields"""
         self.fields = [
             ('seg_num1', 2),
             #header
@@ -477,7 +526,7 @@ def _is_9_pos_bvr_adherent(adherent_num):
     return re.search(pattern, adherent_num)
 
 
-class DTAFileGenerator(TransientModel):
+class DTAFileGenerator(orm.TransientModel):
     _name = "create.dta.wizard"
 
     def _initialize_elec_context(self, cr, uid, data, context=None):
@@ -487,25 +536,34 @@ class DTAFileGenerator(TransientModel):
         elec_context['uid'] = str(uid)
         elec_context['creation_date'] = time.strftime('%y%m%d')
         if not payment.mode:
-            raise except_osv(_('Error'),
-                             _('No payment mode'))
+            raise orm.except_orm(
+                _('Error'),
+                _('No payment mode')
+            )
         bank = payment.mode.bank_id
         if not bank:
-            raise except_osv(_('Error'), _('No bank account for the company.'))
+            raise orm.except_orm(
+                _('Error'),
+                _('No bank account for the company.')
+            )
         if not bank.bank:
-            raise except_osv(_('Error'),
-                             _('You must set a bank '
-                               'for the bank account with number %s' %
-                               bank.acc_number or ''))
+            raise orm.except_orm(
+                _('Error'),
+                _('You must set a bank '
+                  'for the bank account with number %s' %
+                  bank.acc_number or '')
+            )
         elec_context['comp_bank_name'] = bank.bank.name
         elec_context['comp_bank_clearing'] = bank.bank.clearing
         if not elec_context['comp_bank_clearing']:
-            raise except_osv(_('Error'),
-                             _('You must provide a Clearing Number '
-                               'for the bank %s.' % bank.bank.name))
+            raise orm.except_orm(
+                _('Error'),
+                _('You must provide a Clearing Number '
+                  'for the bank %s.' % bank.bank.name)
+            )
         company = payment.company_id
         co_addr = company.partner_id
-        elec_context['comp_country'] = co_addr.country_id and co_addr.country_id.name or ''
+        elec_context['comp_country'] = co_addr.country_id.name if co_addr.country_id else ''
         elec_context['comp_street'] = co_addr.street or ''
         elec_context['comp_zip'] = co_addr.zip
         elec_context['comp_city'] = co_addr.city
@@ -515,21 +573,24 @@ class DTAFileGenerator(TransientModel):
         elec_context['comp_bank_iban'] = elec_context['comp_bank_number'] = bank.acc_number or ''
         elec_context['comp_bank_iban'] = elec_context['comp_bank_iban'].replace(' ', '') or ''
         if not elec_context['comp_bank_iban']:
-            raise except_osv(_('Error'),
-                             _('No IBAN for the company bank account.'))
+            raise orm.except_orm(
+                _('Error'),
+                _('No IBAN for the company bank account.')
+            )
         return elec_context
 
     def _set_bank_data(self, cr, uid, data, pline, elec_context, seq, context=None):
         elec_context['partner_bank_city'] = pline.bank_id.bank.city or False
         elec_context['partner_bank_street'] = pline.bank_id.bank.street or ''
         elec_context['partner_bank_zip'] = pline.bank_id.bank.zip or ''
-        elec_context['partner_bank_country'] = (pline.bank_id.bank.country and
-                                                pline.bank_id.bank.country.name or '')
+        b_country = pline.bank_id.bank.country.name if pline.bank_id.bank.country else ''
+        elec_context['partner_bank_country'] = b_country
 
         elec_context['partner_bank_code'] = pline.bank_id.bank_bic
         elec_context['reference'] = pline.move_line_id.ref
         # Add support for owner of the account if exists..
-        elec_context['partner_name'] = pline.partner_id and pline.partner_id.name or ''
+        p_name = pline.partner_id.name if pline.partner_id else ''
+        elec_context['partner_name'] = p_name
         if pline.partner_id:
             part = pline.partner_id
             elec_context['partner_street'] = part.street
@@ -537,22 +598,30 @@ class DTAFileGenerator(TransientModel):
             elec_context['partner_zip'] = part.zip
 
             # If iban => country=country code for space reason
-            elec_context['partner_country'] = part.country_id and part.country_id.name or ''
+            p_country = part.country_id.name if part.country_id else ''
+            elec_context['partner_country'] = p_country
         else:
-            raise except_osv(_('Error'),
-                             _('No address defined \n for the partner: %s on line') %
-                            (pline.partner_id.name, pline.name))
+            raise orm.except_orm(
+                _('Error'),
+                _('No address defined \n for the partner: %s on line') %
+                (pline.partner_id.name, pline.name)
+            )
 
     def _process_payment_lines(self, cr, uid, data, pline, elec_context, seq, context=None):
         if not pline.bank_id:
-            raise except_osv(_('Error'),
-                             _('No bank account defined\n on line: %s') % pline.name)
+            raise orm.except_orm(
+                _('Error'),
+                _('No bank account defined\n on line: %s') % pline.name
+            )
         if not pline.bank_id.bank:
-                raise except_osv(_('Error'),
-                                 _('No bank defined for the bank account: %s\n'
-                                   'on the partner: %s\n on line: %s') % (pline.bank_id.state,
-                                                                          pline.partner_id.name,
-                                                                          pline.name))
+                raise orm.except_orm(
+                    _('Error'),
+                    _('No bank defined for the bank account: %s\n'
+                      'on the partner: %s\n on line: %s') %
+                    (pline.bank_id.state,
+                     pline.partner_id.name,
+                     pline.name)
+                )
         elec_context['sequence'] = str(seq).rjust(5).replace(' ', '0')
         elec_context['amount_to_pay'] = str(pline.amount_currency).replace('.', ',')
         elec_context['number'] = pline.name
@@ -560,31 +629,43 @@ class DTAFileGenerator(TransientModel):
         elec_context['partner_bank_name'] = pline.bank_id.bank_name or False
         elec_context['partner_bank_clearing'] = pline.bank_id.bank.clearing or False
         if not elec_context['partner_bank_name']:
-            raise except_osv(_('Error'),
-                             _('No bank name defined\n for the bank account: %s\n'
-                               'on the partner: %s\n on line: %s') % (pline.bank_id.state,
-                                                                      pline.partner_id.name,
-                                                                      pline.name))
+            raise orm.except_orm(
+                _('Error'),
+                _('No bank name defined\n for the bank account: %s\n'
+                  'on the partner: %s\n on line: %s') % (pline.bank_id.state,
+                                                         pline.partner_id.name,
+                                                         pline.name)
+            )
         elec_context['partner_bank_iban'] = (pline.bank_id.get_account_number() or False)
         number = pline.bank_id.get_account_number() or ''
-        elec_context['partner_bank_number'] = number.replace('.', '').replace('-', '') or False
+        number = number.replace('.', '').replace('-', '') or False
+        elec_context['partner_bank_number'] = number
         elec_context['partner_bvr'] = ''
         if pline.bank_id.state in ('bv', 'bvr'):
             elec_context['partner_bvr'] = pline.bank_id.get_account_number() or ''
-        self._set_bank_data(cr, uid, data, pline, elec_context, seq, context=context)
+        self._set_bank_data(cr, uid, data, pline,
+                            elec_context, seq, context=context)
         if pline.order_id.date_scheduled:
-            date_value = datetime.strptime(pline.order_id.date_scheduled, '%Y-%m-%d')
+            date_value = datetime.strptime(pline.order_id.date_scheduled,
+                                           '%Y-%m-%d')
         elif pline.date:
-            date_value = datetime.strptime(pline.date, '%Y-%m-%d')
+            date_value = datetime.strptime(pline.date,
+                                           '%Y-%m-%d')
         else:
             date_value = datetime.now()
         elec_context['date_value'] = date_value.strftime("%y%m%d")
         return elec_context
 
     def _create_dta(self, cr, uid, data, context=None):
+        """Generate DTA file"""
         if context is None:
             context = {}
-        elec_context = self._initialize_elec_context(cr, uid, data, context=context)
+        elec_context = self._initialize_elec_context(
+            cr,
+            uid,
+            data,
+            context=context
+        )
         dta = ''
         payment_obj = self.pool['payment.order']
         attachment_obj = self.pool['ir.attachment']
@@ -595,8 +676,11 @@ class DTAFileGenerator(TransientModel):
         amount_currency_tot = 0
 
         for pline in payment.line_ids:
-            elec_context = self._process_payment_lines(cr, uid, data, pline,
-                                                       elec_context, seq, context=context)
+            elec_context = self._process_payment_lines(
+                cr, uid, data, pline,
+                elec_context, seq,
+                context=context
+            )
             # si compte iban -> iban (836)
             # si payment structure  -> bvr (826)
             # si non -> (827)
@@ -612,9 +696,18 @@ class DTAFileGenerator(TransientModel):
             elif elec_pay == 'bv':
                 record_type = record_gt827
             else:
-                raise except_osv(_('Error'),
-                                 _('The Bank type %s of the bank account: %s is not supported') %
-                                 (elec_pay, res_partner_bank_obj.name_get(cr, uid, [pline.bank_id.id], context)[0][1],))
+                name = res_partner_bank_obj.name_get(
+                    cr,
+                    uid,
+                    [pline.bank_id.id],
+                    context
+                )
+                name = name[0][1]
+                raise orm.except_orm(
+                    _('Error'),
+                    _('The Bank type %s of the bank account: %s is not supported') %
+                    (elec_pay, name)
+                )
 
             dta_line = record_type(elec_context, self.pool, pline).generate()
 
@@ -632,12 +725,14 @@ class DTAFileGenerator(TransientModel):
         dta_data = base64.encodestring(dta)
         payment_obj.set_done(cr, uid, [data['id']], context)
         dta_file_name = 'DTA%s.txt' % time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime())
-        dta_dict = {'name': dta_file_name,
-                    'datas': dta_data,
-                    'datas_fname': dta_file_name,
-                    'res_model': 'payment.order',
-                    'res_id': data['id']}
-        dta_id = attachment_obj.create(cr, uid, dta_dict, context=context)
+        dta_dict = {
+            'name': dta_file_name,
+            'datas': dta_data,
+            'datas_fname': dta_file_name,
+            'res_model': 'payment.order',
+            'res_id': data['id']
+        }
+        attachment_obj.create(cr, uid, dta_dict, context=context)
         return dta_data
 
     def create_dta(self, cr, uid, ids, context=None):
@@ -651,5 +746,3 @@ class DTAFileGenerator(TransientModel):
         data['id'] = active_id
         dta_file = self._create_dta(cr, uid, data, context)
         return dta_file
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
