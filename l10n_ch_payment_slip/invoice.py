@@ -37,7 +37,7 @@ class AccountMoveLine(Model):
         """Hook to get amount in CHF for BVR"""
         return move.debit
 
-    def get_bvr_ref(self, cursor, uid, move_line_id, context=None):
+    def get_bvr_ref(self, cr, uid, move_line_id, context=None):
         """Retrieve ESR/BVR reference from move line in order to print it
 
         Returns False when no BVR reference should be generated.  No
@@ -49,7 +49,7 @@ class AccountMoveLine(Model):
             assert len(move_line_id) == 1, "Only 1 ID expected"
             move_line_id = move_line_id[0]
 
-        move_line = self.browse(cursor, uid, move_line_id, context=context)
+        move_line = self.browse(cr, uid, move_line_id, context=context)
         # We check if the type is bvr, if not we return false
         if move_line.invoice.partner_bank_id.state != 'bvr':
             return ''
@@ -76,53 +76,66 @@ class AccountInvoice(Model):
 
     _compile_get_ref = re.compile('[^0-9]')
 
-    def _get_reference_type(self, cursor, user, context=None):
+    def _get_reference_type(self, cr, user, context=None):
         """Function used by the function field 'reference_type'
         in order to initalise available BVR Reference Types
         """
-        res = super(AccountInvoice, self)._get_reference_type(cursor, user,
+        res = super(AccountInvoice, self)._get_reference_type(cr, user,
                                                               context=context)
         res.append(('bvr', 'BVR'))
         return res
 
-    def _compute_full_bvr_name(self, cursor, uid, ids, field_names, arg, context=None):
+    def _compute_full_bvr_name(self, cr, uid, ids, field_names, arg,
+                               context=None):
         res = {}
         move_line_obj = self.pool.get('account.move.line')
         account_obj = self.pool.get('account.account')
-        tier_account_id = account_obj.search(cursor, uid,
-                                             [('type', 'in', ['receivable', 'payable'])],
-                                             context=context)
-        for inv in self.browse(cursor, uid, ids, context=context):
-            move_lines = move_line_obj.search(cursor, uid,
-                                              [('move_id', '=', inv.move_id.id),
-                                               ('account_id', 'in', tier_account_id)],
-                                              context=context)
+        tier_account_id = account_obj.search(
+            cr,
+            uid,
+            [('type', 'in', ['receivable', 'payable'])],
+            context=context
+        )
+        for inv in self.browse(cr, uid, ids, context=context):
+            move_lines = move_line_obj.search(
+                cr,
+                uid,
+                [('move_id', '=', inv.move_id.id),
+                 ('account_id', 'in', tier_account_id)],
+                context=context
+            )
             if move_lines:
                 refs = []
-                for move_line in move_line_obj.browse(cursor, uid, move_lines,
+                for move_line in move_line_obj.browse(cr, uid, move_lines,
                                                       context=context):
                     refs.append(AccountInvoice._space(move_line.get_bvr_ref()))
                 res[inv.id] = ' ; '.join(refs)
         return res
 
     _columns = {
-        ### BVR reference type BVR or FREE
-        'reference_type': fields.selection(_get_reference_type,
-                                           'Reference Type',
-                                           required=True),
+        # BVR reference type BVR or FREE
+        'reference_type': fields.selection(
+            _get_reference_type,
+            'Reference Type',
+            required=True
+        ),
 
-        ### Partner bank link between bank and partner id
-        'partner_bank_id': fields.many2one('res.partner.bank',
-                                           'Bank Account',
-                                           help='The partner bank account to pay\n'
-                                                'Keep empty to use the default'),
+        # Partner bank link between bank and partner id
+        'partner_bank_id': fields.many2one(
+            'res.partner.bank',
+            'Bank Account',
+            help='The partner bank account to pay\n'
+            'Keep empty to use the default'
+        ),
 
-        'bvr_reference': fields.function(_compute_full_bvr_name,
-                                         type="char",
-                                         size=512,
-                                         string="BVR REF.",
-                                         store=True,
-                                         readonly=True)
+        'bvr_reference': fields.function(
+            _compute_full_bvr_name,
+            type="char",
+            size=512,
+            string="BVR REF.",
+            store=True,
+            readonly=True
+        )
     }
 
     @staticmethod
@@ -135,13 +148,16 @@ class AccountInvoice(Model):
         """
         return ''.join([' '[(i - 2) % nbrspc:] + c for i, c in enumerate(nbr)])
 
-    def _update_ref_on_account_analytic_line(self, cr, uid, ref, move_id, context=None):
+    def _update_ref_on_account_analytic_line(self, cr, uid, ref, move_id,
+                                             context=None):
         """Propagate reference on analytic line"""
-        cr.execute('UPDATE account_analytic_line SET ref=%s'
-                   '   FROM account_move_line '
-                   ' WHERE account_move_line.move_id = %s '
-                   '   AND account_analytic_line.move_id = account_move_line.id',
-                   (ref, move_id))
+        cr.execute(
+            'UPDATE account_analytic_line SET ref=%s'
+            '   FROM account_move_line '
+            ' WHERE account_move_line.move_id = %s '
+            '   AND account_analytic_line.move_id = account_move_line.id',
+            (ref, move_id)
+        )
         return True
 
     def _action_bvr_number_move_line(self, cr, uid, invoice, move_line,
@@ -164,7 +180,8 @@ class AccountInvoice(Model):
         field of the invoice.
 
         """
-        res = super(AccountInvoice, self).action_number(cr, uid, ids, context=context)
+        res = super(AccountInvoice, self).action_number(cr, uid, ids,
+                                                        context=context)
         move_line_obj = self.pool.get('account.move.line')
 
         for inv in self.browse(cr, uid, ids, context=context):
@@ -190,10 +207,11 @@ class AccountInvoice(Model):
                                                   context=context)
         return res
 
-    def copy(self, cursor, uid, inv_id, default=None, context=None):
+    def copy(self, cr, uid, inv_id, default=None, context=None):
         default = default or {}
         default.update({'reference': False})
-        return super(AccountInvoice, self).copy(cursor, uid, inv_id, default, context)
+        return super(AccountInvoice, self).copy(cr, uid, inv_id, default,
+                                                context)
 
 
 class AccountTaxCode(Model):
