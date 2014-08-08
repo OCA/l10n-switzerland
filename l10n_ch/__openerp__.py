@@ -64,7 +64,7 @@ You can also find them on apps.odoo.com.
  'depends': ['account', 'l10n_multilang'],
  'data': ['sterchi_chart/account.xml',
           'sterchi_chart/vat2011.xml',
-          'sterchi_chart/fiscal_position.xml' ],
+          'sterchi_chart/fiscal_position.xml'],
  'demo': [],
  'test': [],
  'auto_install': False,
