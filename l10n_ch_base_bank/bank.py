@@ -56,13 +56,13 @@ class Bank(orm.Model, BankCommon):
     """Inherit res.bank class in order to add swiss specific field"""
     _inherit = 'res.bank'
     _columns = {
-        ### Internal reference
+        # Internal reference
         'code': fields.char('Code', size=64, select=True),
-        ###Swiss unik bank identifier also use in IBAN number
+        # Swiss unik bank identifier also use in IBAN number
         'clearing': fields.char('Clearing number', size=64),
-        ### city of the bank
+        # City of the bank
         'city': fields.char('City', size=128, select=1),
-        ### ccp of the bank
+        # CCP of the bank
         'ccp': fields.char('CCP', size=64, select=1)
     }
 
@@ -117,14 +117,16 @@ class Bank(orm.Model, BankCommon):
 
         return self.name_get(cursor, uid, to_ret_ids, context=context)
 
-    _constraints = [(_check_postal_num,
-                    'Please enter a correct postal number. (01-23456-1 or 12345)',
-                    ['ccp']),
+    _constraints = [
+        (_check_postal_num,
+         'Please enter a correct postal number. (01-23456-1 or 12345)',
+         ['ccp']),
 
-                    (_check_ccp_duplication,
-                    'You can not enter a ccp both on the bank and on an account'
-                    ' of type BV, BVR',
-                    ['acc_number', 'bank'])]
+        (_check_ccp_duplication,
+         'You can not enter a ccp both on the bank and on an account'
+         ' of type BV, BVR',
+         ['acc_number', 'bank'])
+    ]
 
 
 class ResPartnerBank(orm.Model, BankCommon):
@@ -135,9 +137,11 @@ class ResPartnerBank(orm.Model, BankCommon):
 
     _columns = {
         'name': fields.char('Description', size=128, required=True),
-        'bvr_adherent_num': fields.char('Bank BVR adherent number', size=11,
-                                        help=("Your Bank adherent number to be printed in references of your BVR."
-                                              "This is not a postal account number.")),
+        'bvr_adherent_num': fields.char(
+            'Bank BVR adherent number', size=11,
+            help="Your Bank adherent number to be printed in references of your BVR."
+                 "This is not a postal account number."
+        ),
         'acc_number': fields.char('Account/IBAN Number', size=64, required=True),
         'ccp': fields.related('bank', 'ccp', type='char', string='CCP',
                               readonly=True),
@@ -189,14 +193,16 @@ class ResPartnerBank(orm.Model, BankCommon):
                 return False
         return True
 
-    _constraints = [(_check_postal_num,
-                    'Please enter a correct postal number. (01-23456-1 or 12345)',
-                    ['acc_number']),
+    _constraints = [
+        (_check_postal_num,
+         'Please enter a correct postal number. (01-23456-1 or 12345)',
+         ['acc_number']),
 
-                    (_check_ccp_duplication,
-                    'You can not enter a ccp both on the bank and on an account'
-                    ' of type BV, BVR',
-                    ['acc_number', 'bank'])]
+        (_check_ccp_duplication,
+         'You can not enter a ccp both on the bank and on an account'
+         ' of type BV, BVR',
+         ['acc_number', 'bank'])
+    ]
 
     _sql_constraints = [('bvr_adherent_uniq', 'unique (bvr_adherent_num)',
                          'The BVR adherent number must be unique !')]
