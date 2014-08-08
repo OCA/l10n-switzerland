@@ -32,9 +32,11 @@ class AccountInvoice(Model):
         it will retrieve and set the good bank partner bank"""
         #context not define in signature of function in account module
         context = {}
-        res = super(AccountInvoice, self).onchange_partner_id(cursor, uid, ids, invoice_type, partner_id,
-                                                              date_invoice=False, payment_term=False,
-                                                              partner_bank_id=False, company_id=False)
+        res = super(AccountInvoice, self).onchange_partner_id(
+            cursor, uid, ids, invoice_type, partner_id,
+            date_invoice=False, payment_term=False,
+            partner_bank_id=False, company_id=False
+        )
         bank_id = False
         if partner_id:
             if invoice_type in ('in_invoice', 'in_refund'):
@@ -62,7 +64,7 @@ class AccountInvoice(Model):
                 res['value']['reference_type'] = 'bvr'
             else:
                 res['value']['reference_type'] = 'none'
-                
+
         return res
 
     def _check_reference_type(self, cursor, user, ids, context=None):
