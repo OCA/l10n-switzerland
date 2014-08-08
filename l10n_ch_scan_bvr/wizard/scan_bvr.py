@@ -53,12 +53,14 @@ class scan_bvr(TransientModel):
         pool = pooler.get_pool(cr.dbname)
         user = pool.get('res.users').browse(cr, uid, uid, context=context)
         if user.company_id:
-            ## We will get purchase journal linked with this company
-            journal_ids = pool.get('account.journal').search(cr,
-                                                             uid,
-                                                             [('type', '=', 'purchase'),
-                                                              ('company_id', '=', user.company_id.id)],
-                                                             context=context)
+            # We will get purchase journal linked with this company
+            journal_ids = pool.get('account.journal').search(
+                cr,
+                uid,
+                [('type', '=', 'purchase'),
+                 ('company_id', '=', user.company_id.id)],
+                context=context
+            )
             if len(journal_ids) == 1:
                 return journal_ids[0]
             else:
@@ -81,76 +83,90 @@ class scan_bvr(TransientModel):
     def _construct_bvrplus_in_chf(self, bvr_string):
 
             if len(bvr_string) != 43:
-                raise orm.except_orm(_('Validation Error'),
-                                     _('BVR CheckSum Error in first part'))
+                raise orm.except_orm(
+                    _('Validation Error'),
+                    _('BVR CheckSum Error in first part')
+                )
             elif self._check_number(bvr_string[0:2]) != int(bvr_string[2]):
-                raise orm.except_orm(_('Validation Error'),
-                                     _('BVR CheckSum Error in second part'))
+                raise orm.except_orm(
+                    _('Validation Error'),
+                    _('BVR CheckSum Error in second part')
+                )
             elif self._check_number(bvr_string[4:30]) != int(bvr_string[30]):
-                raise orm.except_orm(_('Validation Error'),
-                                     _('BVR CheckSum Error in third part'))
+                raise orm.except_orm(
+                    _('Validation Error'),
+                    _('BVR CheckSum Error in third part')
+                )
             elif self._check_number(bvr_string[33:41]) != int(bvr_string[41]):
-                raise orm.except_orm(_('Validation Error'),
-                                     _('BVR CheckSum Error in fourth part'))
+                raise orm.except_orm(
+                    _('Validation Error'),
+                    _('BVR CheckSum Error in fourth part')
+                )
             else:
-                    bvr_struct = {'type': bvr_string[0:2],
-                                  'amount': 0.0,
-                                  'reference': bvr_string[4:31],
-                                  'bvrnumber': bvr_string[4:10],
-                                  'beneficiaire': self._create_bvr_account(
-                                      bvr_string[33:42]
-                                  ),
-                                  'domain': '',
-                                  'currency': ''
-                                  }
-                    return bvr_struct
+                bvr_struct = {'type': bvr_string[0:2],
+                              'amount': 0.0,
+                              'reference': bvr_string[4:31],
+                              'bvrnumber': bvr_string[4:10],
+                              'beneficiaire': self._create_bvr_account(
+                                  bvr_string[33:42]
+                              ),
+                              'domain': '',
+                              'currency': ''}
+                return bvr_struct
 
     def _construct_bvr_in_chf(self, bvr_string):
             if len(bvr_string) != 53:
-                raise orm.except_orm(_('Validation Error'),
-                                     _('BVR CheckSum Error in first part'))
+                raise orm.except_orm(
+                    _('Validation Error'),
+                    _('BVR CheckSum Error in first part')
+                )
             elif self._check_number(bvr_string[0:12]) != int(bvr_string[12]):
-                raise orm.except_orm(_('Validation Error'),
-                                     _('BVR CheckSum Error in second part'))
+                raise orm.except_orm(
+                    _('Validation Error'),
+                    _('BVR CheckSum Error in second part')
+                )
             elif self._check_number(bvr_string[14:40]) != int(bvr_string[40]):
-                raise orm.except_orm(_('Validation Error'),
-                                     _('BVR CheckSum Error in third part'))
+                raise orm.except_orm(
+                    _('Validation Error'),
+                    _('BVR CheckSum Error in third part')
+                )
             elif self._check_number(bvr_string[43:51]) != int(bvr_string[51]):
-                raise orm.except_orm(_('Validation Error'),
-                                     _('BVR CheckSum Error in fourth part'))
+                raise orm.except_orm(
+                    _('Validation Error'),
+                    _('BVR CheckSum Error in fourth part')
+                )
             else:
-                    bvr_struct = {'type': bvr_string[0:2],
-                                  'amount': float(bvr_string[2:12])/100,
-                                  'reference': bvr_string[14:41],
-                                  'bvrnumber': bvr_string[14:20],
-                                  'beneficiaire': self._create_bvr_account(
-                                      bvr_string[43:52]
-                                  ),
-                                  'domain': '',
-                                  'currency': ''
-                                  }
-                    return bvr_struct
+                bvr_struct = {'type': bvr_string[0:2],
+                              'amount': float(bvr_string[2:12])/100,
+                              'reference': bvr_string[14:41],
+                              'bvrnumber': bvr_string[14:20],
+                              'beneficiaire': self._create_bvr_account(
+                                  bvr_string[43:52]
+                              ),
+                              'domain': '',
+                              'currency': ''}
+                return bvr_struct
 
     def _construct_bvr_postal_in_chf(self, bvr_string):
             if len(bvr_string) != 42:
-                raise orm.except_orm(_('Validation Error'),
-                                     _('BVR CheckSum Error in first part'))
+                raise orm.except_orm(
+                    _('Validation Error'),
+                    _('BVR CheckSum Error in first part')
+                )
             else:
 
-                    bvr_struct = {'type': bvr_string[0:2],
-                                  'amount': float(bvr_string[2:12])/100,
-                                  'reference': bvr_string[14:30],
-                                  'bvrnumber': '',
-                                  'beneficiaire': self._create_bvr_account(
-                                      bvr_string[32:41]
-                                  ),
-                                  'domain': '',
-                                  'currency': ''
-                                  }
-                    return bvr_struct
+                bvr_struct = {'type': bvr_string[0:2],
+                              'amount': float(bvr_string[2:12])/100,
+                              'reference': bvr_string[14:30],
+                              'bvrnumber': '',
+                              'beneficiaire': self._create_bvr_account(
+                                  bvr_string[32:41]
+                              ),
+                              'domain': '',
+                              'currency': ''}
+                return bvr_struct
 
     def _construct_bvr_postal_other_in_chf(self, bvr_string):
-        ##
         if len(bvr_string) != 41:
             raise orm.except_orm(
                 _('Validation Error'),
@@ -158,17 +174,16 @@ class scan_bvr(TransientModel):
             )
         else:
 
-                bvr_struct = {'type': bvr_string[0:2],
-                              'amount': float(bvr_string[7:16])/100,
-                              'reference': bvr_string[18:33],
-                              'bvrnumber': '000000',
-                              'beneficiaire': self._create_bvr_account(
-                                  bvr_string[34:40]
-                              ),
-                              'domain': '',
-                              'currency': ''
-                              }
-                return bvr_struct
+            bvr_struct = {'type': bvr_string[0:2],
+                          'amount': float(bvr_string[7:16])/100,
+                          'reference': bvr_string[18:33],
+                          'bvrnumber': '000000',
+                          'beneficiaire': self._create_bvr_account(
+                              bvr_string[34:40]
+                          ),
+                          'domain': '',
+                          'currency': ''}
+            return bvr_struct
 
     def _create_invoice_line(self, cr, uid, ids, data, context):
             invoice_line_ids = False
@@ -196,9 +211,10 @@ class scan_bvr(TransientModel):
                     price_unit=False,
                     currency_id=False,
                     context=context,
-                    company_id=None)
-                ## We will check that the tax specified
-                ## on the product is price include or amount is 0
+                    company_id=None
+                )
+                # We will check that the tax specified
+                # on the product is price include or amount is 0
                 if product_onchange_result['value']['invoice_line_tax_id']:
                     taxes = pool.get('account.tax').browse(
                         cr, uid,
@@ -206,17 +222,21 @@ class scan_bvr(TransientModel):
                     )
                     for taxe in taxes:
                         if not taxe.price_include and taxe.amount != 0.0:
-                            raise orm.except_orm(_('Error !'),
-                                                 _('''The default product
-                                                      in this partner have wrong taxes configuration'''))
-                invoice_line_vals = {'product_id': accounts_data['supplier_invoice_default_product'][0],
-                                     'account_id': product_onchange_result['value']['account_id'],
-                                     'name': product_onchange_result['value']['name'],
-                                     'uos_id': product_onchange_result['value']['uos_id'],
-                                     'price_unit': data['bvr_struct']['amount'],
-                                     'invoice_id': data['invoice_id'],
-                                     'invoice_line_tax_id': [(6, 0, product_onchange_result['value']['invoice_line_tax_id'])]
-                                     }
+                            raise orm.except_orm(
+                                _('Error !'),
+                                _('''The default product
+                                in this partner have wrong taxes configuration''')
+                            )
+                invoice_line_vals = {
+                    'product_id': accounts_data['supplier_invoice_default_product'][0],
+                    'account_id': product_onchange_result['value']['account_id'],
+                    'name': product_onchange_result['value']['name'],
+                    'uos_id': product_onchange_result['value']['uos_id'],
+                    'price_unit': data['bvr_struct']['amount'],
+                    'invoice_id': data['invoice_id'],
+                    'invoice_line_tax_id': [(6, 0, product_onchange_result['value']
+                                             ['invoice_line_tax_id'])]
+                }
                 invoice_line_ids = invoice_line_obj.create(
                     cr, uid, invoice_line_vals, context=context)
             return invoice_line_ids
@@ -244,7 +264,7 @@ class scan_bvr(TransientModel):
         currency_id = pool.get('res.currency').browse(cr, uid,
                                                       currency_search[0],
                                                       context=context)
-        ## Account Modification
+        # Account Modification
         if data['bvr_struct']['domain'] == 'name':
             pool.get('res.partner.bank').write(
                 cr, uid,
@@ -274,25 +294,29 @@ class scan_bvr(TransientModel):
             date_due = res['value']['date_due']
         ##
         #
-        curr_invoice = {'name': time.strftime('%Y-%m-%d'),
-                        'partner_id': account_info.partner_id.id,
-                        'account_id': account_info.partner_id.property_account_payable.id,
-                        'date_due': date_due,
-                        'date_invoice': time.strftime('%Y-%m-%d'),
-                        'payment_term': payment_term_id,
-                        'reference_type': 'bvr',
-                        'reference':  data['bvr_struct']['reference'],
-                        'amount_total':  data['bvr_struct']['amount'],
-                        'check_total':  data['bvr_struct']['amount'],
-                        'partner_bank_id': account_info.id,
-                        'comment': '',
-                        'currency_id': currency_id.id,
-                        'journal_id': data['journal_id'],
-                        'type': 'in_invoice',
-                        }
+        curr_invoice = {
+            'name': time.strftime('%Y-%m-%d'),
+            'partner_id': account_info.partner_id.id,
+            'account_id': account_info.partner_id.property_account_payable.id,
+            'date_due': date_due,
+            'date_invoice': time.strftime('%Y-%m-%d'),
+            'payment_term': payment_term_id,
+            'reference_type': 'bvr',
+            'reference':  data['bvr_struct']['reference'],
+            'amount_total':  data['bvr_struct']['amount'],
+            'check_total':  data['bvr_struct']['amount'],
+            'partner_bank_id': account_info.id,
+            'comment': '',
+            'currency_id': currency_id.id,
+            'journal_id': data['journal_id'],
+            'type': 'in_invoice',
+        }
 
-        last_invoice = account_invoice_obj.create(cr, uid,
-                                                  curr_invoice, context=context)
+        last_invoice = account_invoice_obj.create(
+            cr, uid,
+            curr_invoice,
+            context=context
+        )
         data['invoice_id'] = last_invoice
         self._create_invoice_line(cr, uid, ids, data, context)
         ## Noew we create taxes lines
@@ -309,15 +333,17 @@ class scan_bvr(TransientModel):
                                             inv,
                                             computed_tax,
                                             account_invoice_tax_obj)
-        action = {'domain': "[('id','=', " + str(last_invoice) + ")]",
-                  'name': 'Invoices',
-                  'view_type': 'form',
-                  'view_mode': 'form',
-                  'res_model': 'account.invoice',
-                  'view_id': False,
-                  'context': "{'type':'out_invoice'}",
-                  'type': 'ir.actions.act_window',
-                  'res_id': last_invoice}
+        action = {
+            'domain': "[('id','=', " + str(last_invoice) + ")]",
+            'name': 'Invoices',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'account.invoice',
+            'view_id': False,
+            'context': "{'type':'out_invoice'}",
+            'type': 'ir.actions.act_window',
+            'res_id': last_invoice
+        }
         return action
 
     def _create_bvr_account(self, account_unformated):
@@ -451,42 +477,40 @@ class scan_bvr(TransientModel):
         ##
         data = {}
         data['bvr_struct'] = self._get_bvr_structurated(
-                                                        bvr_data.bvr_string
-                                                        )
+            bvr_data.bvr_string)
         ## We will now search the account linked with this BVR
         if data['bvr_struct']['domain'] == 'name':
+            domain = [('acc_number', '=', data['bvr_struct']['beneficiaire'])]
             partner_bank_search = self.pool.get('res.partner.bank').search(
-                                        cr,
-                                        uid,
-                                        [('acc_number',
-                                          '=',
-                                          data['bvr_struct']['beneficiaire']
-                                        )],
-                                        context=context)
+                cr,
+                uid,
+                domain,
+                context=context
+            )
         else:
+            domain = [('bvr_adherent_num', '=', data['bvr_struct']['bvrnumber'])]
             partner_bank_search = self.pool.get('res.partner.bank').search(
-                                        cr,
-                                        uid,
-                                        [('bvr_adherent_num',
-                                          '=',
-                                          data['bvr_struct']['bvrnumber'])],
-                                        context=context)
-        ### We will need to know if we need to create invoice line
+                cr,
+                uid,
+                domain,
+                context=context
+            )
+        # We will need to know if we need to create invoice line
         if partner_bank_search:
-            #we have found the account corresponding to the bvr_adhreent_number
-            #so we can directly create the account
-            #
+            # We have found the account corresponding to the
+            # bvr_adhreent_number
+            # so we can directly create the account
             partner_bank_result = self.pool.get('res.partner.bank').browse(
-                                            cr,
-                                            uid,
-                                            partner_bank_search[0],
-                                            context=context
-                                            )
+                cr,
+                uid,
+                partner_bank_search[0],
+                context=context
+            )
             data['id'] = bvr_data.id
             data['partner_id'] = partner_bank_result.partner_id.id
             data['bank_account'] = partner_bank_result.id
             data['journal_id'] = bvr_data.journal_id.id
-            action = self._create_direct_invoice(cr, uid,ids, data, context)
+            action = self._create_direct_invoice(cr, uid, ids, data, context)
             return action
         elif bvr_data.bank_account_id:
             data['id'] = bvr_data.id
