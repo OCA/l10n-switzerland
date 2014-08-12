@@ -541,7 +541,8 @@ def build_dictionary():
         except ValueError:
             pass
     # Next, add some by-hand ones (overlap possible, so order matters)
-    for m in [EXTRA_LATIN_NAMES, EXTRA_CHARACTERS, UNI2ASCII_CONVERSIONS, FG_HACKS]:
+    for m in [EXTRA_LATIN_NAMES, EXTRA_CHARACTERS,
+              UNI2ASCII_CONVERSIONS, FG_HACKS]:
         for i in m:
             try:
                 d[ord(i)] = unicode(m[i])
