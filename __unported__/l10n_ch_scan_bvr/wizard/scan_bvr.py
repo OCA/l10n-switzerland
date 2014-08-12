@@ -19,12 +19,12 @@
 #
 ##############################################################################
 
-import pooler
 import time
 
 from openerp.osv import orm
 from openerp.osv.orm import TransientModel, fields
 from openerp.tools.translate import _
+from openerp import pooler
 
 
 class scan_bvr(TransientModel):

@@ -25,7 +25,7 @@ import time
 from mako import exceptions
 from mako.lookup import TemplateLookup
 
-import pooler
+from openerp import pooler
 from openerp import addons
 from openerp.osv import orm
 from openerp.tools.translate import _
