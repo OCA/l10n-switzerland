@@ -226,18 +226,20 @@ class scan_bvr(TransientModel):
                         if not taxe.price_include and taxe.amount != 0.0:
                             raise orm.except_orm(
                                 _('Error !'),
-                                _('''The default product
-                                in this partner have wrong taxes configuration''')
+                                _('The default product in this partner has '
+                                  'wrong taxes configuration')
                             )
+                prod = accounts_data['supplier_invoice_default_product'][0]
+                account = product_onchange_result['value']['account_id']
+                taxes = product_onchange_result['value']['invoice_line_tax_id']
                 invoice_line_vals = {
-                    'product_id': accounts_data['supplier_invoice_default_product'][0],
-                    'account_id': product_onchange_result['value']['account_id'],
+                    'product_id': prod,
+                    'account_id': account,
                     'name': product_onchange_result['value']['name'],
                     'uos_id': product_onchange_result['value']['uos_id'],
                     'price_unit': data['bvr_struct']['amount'],
                     'invoice_id': data['invoice_id'],
-                    'invoice_line_tax_id': [(6, 0, product_onchange_result['value']
-                                             ['invoice_line_tax_id'])]
+                    'invoice_line_tax_id': [(6, 0, taxes)],
                 }
                 invoice_line_ids = invoice_line_obj.create(
                     cr, uid, invoice_line_vals, context=context)
@@ -285,17 +287,18 @@ class scan_bvr(TransientModel):
         date_due = time.strftime('%Y-%m-%d')
         # We will now compute the due date and fixe the payment term
         payment_term_id = (account_info.partner_id.property_payment_term and
-                           account_info.partner_id.property_payment_term.id or False)
+                           account_info.partner_id.property_payment_term.id or
+                           False)
         if payment_term_id:
-            #We Calculate due_date
-            res = pool.get('account.invoice').onchange_payment_term_date_invoice(
+            # We Calculate due_date
+            inv_mod = pool.get('account.invoice')
+            res = inv_mod.onchange_payment_term_date_invoice(
                 cr, uid, [],
                 payment_term_id,
                 time.strftime('%Y-%m-%d')
             )
             date_due = res['value']['date_due']
-        ##
-        #
+
         curr_invoice = {
             'name': time.strftime('%Y-%m-%d'),
             'partner_id': account_info.partner_id.id,
@@ -349,10 +352,11 @@ class scan_bvr(TransientModel):
         return action
 
     def _create_bvr_account(self, account_unformated):
+        acc_len = len(account_unformated)
         account_formated = "%s-%s-%s" % (
             account_unformated[0:2],
-            str(int(account_unformated[2:len(account_unformated) - 1])),
-            account_unformated[len(account_unformated) - 1:len(account_unformated)]
+            str(int(account_unformated[2:acc_len - 1])),
+            account_unformated[acc_len - 1:acc_len]
         )
         return account_formated
 
@@ -444,7 +448,8 @@ class scan_bvr(TransientModel):
 
             elif bvr_type[0:1] == '<' and len(bvr_string) == 41:
                 ## It the BVR postal in CHF
-                bvr_struct = self._construct_bvr_postal_other_in_chf(bvr_string)
+                bvr_struct = self._construct_bvr_postal_other_in_chf(
+                    bvr_string)
                 ## We will test if the BVR have an Adherent Number
                 ## if not we will make the search of the account base on
                 ## his name non base on the BVR adherent number
@@ -457,7 +462,8 @@ class scan_bvr(TransientModel):
             ##
             else:
                 raise orm.except_orm(_('BVR Type error'),
-                                     _('This kind of BVR is not supported at this time'))
+                                     _('This kind of BVR is not supported '
+                                       'at this time'))
             return bvr_struct
 
     def validate_bvr_string(self, cr, uid, ids, context):
@@ -490,7 +496,9 @@ class scan_bvr(TransientModel):
                 context=context
             )
         else:
-            domain = [('bvr_adherent_num', '=', data['bvr_struct']['bvrnumber'])]
+            domain = [
+                ('bvr_adherent_num', '=', data['bvr_struct']['bvrnumber'])
+            ]
             partner_bank_search = self.pool.get('res.partner.bank').search(
                 cr,
                 uid,
