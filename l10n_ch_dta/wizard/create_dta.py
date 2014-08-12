@@ -177,7 +177,7 @@ class record_gt826(postal_record):
         """Define field of BVR records"""
         self.fields = [
             ('seg_num1', 2),
-            #header
+            # header
             ('date_value_hdr', 6),
             ('partner_bank_clearing', 12),
             ('zero5', 5),
@@ -188,7 +188,7 @@ class record_gt826(postal_record):
             ('genre_trans', 3),
             ('type_paiement', 1),
             ('flag', 1),
-            #seg1
+            # seg1
             ('comp_dta', 5),
             ('number', 11),
             ('comp_bank_iban', 24),
@@ -196,7 +196,7 @@ class record_gt826(postal_record):
             ('currency', 3),
             ('amount_to_pay', 12),
             ('padding', 14),
-            #seg2
+            # seg2
             ('seg_num2', 2),
             ('comp_name', 20),
             ('comp_street', 20),
@@ -204,7 +204,7 @@ class record_gt826(postal_record):
             ('comp_city', 10),
             ('comp_country', 20),
             ('padding', 46),
-            #seg3
+            # seg3
             ('seg_num3', 2),
             ('partner_bvr', 12),  # Numero d'adherent bvr
             ('partner_name', 20),
@@ -313,7 +313,7 @@ class record_gt827(postal_record):
         """Define fields values"""
         self.fields = [
             ('seg_num1', 2),
-            #header
+            # header
             ('date_value_hdr', 6),
             ('partner_bank_clearing', 12),
             ('zero5', 5),
@@ -324,7 +324,7 @@ class record_gt827(postal_record):
             ('genre_trans', 3),
             ('type_paiement', 1),
             ('flag', 1),
-            #seg1
+            # seg1
             ('comp_dta', 5),
             ('number', 11),
             ('comp_bank_iban', 24),
@@ -332,7 +332,7 @@ class record_gt827(postal_record):
             ('currency', 3),
             ('amount_to_pay', 12),
             ('padding', 14),
-            #seg2
+            # seg2
             ('seg_num2', 2),
             ('comp_name', 20),
             ('comp_street', 20),
@@ -340,7 +340,7 @@ class record_gt827(postal_record):
             ('comp_city', 10),
             ('comp_country', 20),
             ('padding', 46),
-            #seg3
+            # seg3
             ('seg_num3', 2),
             ('partner_bank_number', 30),
             ('partner_name', 24),
@@ -348,12 +348,12 @@ class record_gt827(postal_record):
             ('partner_zip', 12),
             ('partner_city', 12),
             ('partner_country', 24),
-            #seg4
+            # seg4
             ('seg_num4', 2),
             ('reference', 112),
             ('padding', 14),
-            #seg5
-            #('padding',128)
+            # seg5
+            # ('padding',128)
         ]
 
         self.pre.update({
@@ -420,7 +420,7 @@ class record_gt836(record):
         """Define iban fields"""
         self.fields = [
             ('seg_num1', 2),
-            #header
+            # header
             ('date_value_hdr', 6),
             ('partner_bank_clearing', 12),
             ('zero5', 5),
@@ -431,7 +431,7 @@ class record_gt836(record):
             ('genre_trans', 3),
             ('type_paiement', 1),
             ('flag', 1),
-            #seg1
+            # seg1
             ('comp_dta', 5),
             ('number', 11),
             ('comp_bank_iban', 24),
@@ -439,7 +439,7 @@ class record_gt836(record):
             ('currency', 3),
             ('amount_to_pay', 15),
             ('padding', 11),
-            #seg2
+            # seg2
             ('seg_num2', 2),
             ('conv_cours', 12),
             ('comp_name', 35),
@@ -448,13 +448,13 @@ class record_gt836(record):
             ('comp_zip', 10),
             ('comp_city', 22),
             ('padding', 9),
-            #seg3
+            # seg3
             ('seg_num3', 2),
             ('option_id_bank', 1),
             ('partner_bank_ident', 70),
             ('partner_bank_iban', 34),
             ('padding', 21),
-            #seg4
+            # seg4
             ('seg_num4', 2),
             ('partner_name', 35),
             ('partner_street', 35),
@@ -462,7 +462,7 @@ class record_gt836(record):
             ('partner_zip', 10),
             ('partner_city', 22),
             ('padding', 21),
-            #seg5
+            # seg5
             ('seg_num5', 2),
             ('option_motif', 1),
             ('reference', 105),
@@ -492,7 +492,7 @@ class record_gt890(record):
         """Initialise fields"""
         self.fields = [
             ('seg_num1', 2),
-            #header
+            # header
             ('date_value_hdr', 6),
             ('partner_bank_clearing', 12),
             ('zero5', 5),
@@ -503,7 +503,7 @@ class record_gt890(record):
             ('genre_trans', 3),
             ('type_paiement', 1),
             ('flag', 1),
-            #total
+            # total
             ('amount_total', 16),
             ('padding', 59)
         ]
