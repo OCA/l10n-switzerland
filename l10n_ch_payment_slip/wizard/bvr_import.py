@@ -243,7 +243,8 @@ class BvrImporterWizard(orm.TransientModel):
 
     def import_v11(self, cursor, uid, ids, data, context=None):
         """Import v11 file and transfor it into statement lines"""
-        if context is None: context = {}
+        if context is None:
+            context = {}
         module_obj = self.pool['ir.module.module']
         voucher_enabled = module_obj.search(cursor,
                                             uid,
@@ -296,7 +297,8 @@ class BvrImporterWizard(orm.TransientModel):
 
     def import_bvr(self, cursor, uid, ids, context=None):
         data = {}
-        if context is None: context = {}
+        if context is None:
+            context = {}
         active_ids = context.get('active_ids', [])
         active_id = context.get('active_id', False)
         data['form'] = {}
@@ -308,7 +310,3 @@ class BvrImporterWizard(orm.TransientModel):
             data['form']['file'] = res['file']
         self.import_v11(cursor, uid, ids, data, context=context)
         return {}
-
-
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
