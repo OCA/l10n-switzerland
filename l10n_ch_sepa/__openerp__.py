@@ -37,7 +37,7 @@ as the Swiss standards are slightly different.
 It intends to be reusable to accept new definition of specific standards
 by country.
 
-It currently supports the "pain.001$2 norm for Credit Transfert Initiation.
+It currently supports the "pain.001" norm for Credit Transfert Initiation.
 
 """,
     "author": "Camptocamp",
