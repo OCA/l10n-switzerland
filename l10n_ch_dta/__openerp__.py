@@ -20,7 +20,7 @@
 
 {'name': 'Switzerland - Bank Payment File (DTA)',
  'summary': 'Electronic payment file for Swiss bank (DTA)',
- 'description':  """
+ 'description': """
 Swiss bank electronic payment (DTA)
 ===================================
 
