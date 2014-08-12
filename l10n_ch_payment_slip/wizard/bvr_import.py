@@ -44,8 +44,9 @@ class BvrImporterWizard(orm.TransientModel):
         user_obj = self.pool['res.users']
         user_current = user_obj.browse(cursor, user, user)
 
-        cursor.execute("SELECT inv.id, inv.number from account_invoice "
-                       "AS inv where inv.company_id = %s and type='out_invoice'",
+        cursor.execute("SELECT inv.id, inv.number FROM account_invoice "
+                       "AS inv WHERE inv.company_id = %s "
+                       "And type='out_invoice'",
                        (user_current.company_id.id,))
         result_invoice = cursor.fetchall()
         for inv_id, inv_name in result_invoice:
