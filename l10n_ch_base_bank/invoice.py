@@ -40,12 +40,18 @@ class AccountInvoice(Model):
         bank_id = False
         if partner_id:
             if invoice_type in ('in_invoice', 'in_refund'):
-                p = self.pool.get('res.partner').browse(cursor, uid, partner_id, context)
+                p = self.pool.get('res.partner').browse(
+                    cursor,
+                    uid,
+                    partner_id,
+                    context
+                )
                 if p.bank_ids:
                     bank_id = p.bank_ids[0].id
                 res['value']['partner_bank_id'] = bank_id
             else:
-                user = self.pool.get('res.users').browse(cursor, uid, uid, context)
+                user = self.pool.get('res.users').browse(
+                    cursor, uid, uid, context)
                 bank_ids = user.company_id.partner_id.bank_ids
                 if bank_ids:
                     res['value']['partner_bank_id'] = bank_ids[0].id
@@ -59,7 +65,8 @@ class AccountInvoice(Model):
         res = {'value': {}}
         partner_bank_obj = self.pool.get('res.partner.bank')
         if partner_bank_id:
-            partner_bank = partner_bank_obj.browse(cursor, user, partner_bank_id)
+            partner_bank = partner_bank_obj.browse(
+                cursor, user, partner_bank_id)
             if partner_bank.state == 'bvr':
                 res['value']['reference_type'] = 'bvr'
             else:
@@ -72,8 +79,9 @@ class AccountInvoice(Model):
         on the BVR reference type and the invoice partner bank type"""
         for invoice in self.browse(cursor, user, ids):
             if invoice.type in 'in_invoice':
-                if invoice.partner_bank_id and invoice.partner_bank_id.state == 'bvr' and \
-                        invoice.reference_type != 'bvr':
+                if (invoice.partner_bank_id and
+                        invoice.partner_bank_id.state == 'bvr' and
+                        invoice.reference_type != 'bvr'):
                     return False
         return True
 
@@ -114,11 +122,14 @@ class AccountInvoice(Model):
         not systemtically call"""
         if context is None:
             context = {}
-        # In his great wisdom OpnERP allows type to be implicitely set in context
+        # In his great wisdom OpenERP allows type to be
+        # implicitely set in context
         type_defined = vals.get('type') or context.get('type') or False
         if type_defined == 'out_invoice' and not vals.get('partner_bank_id'):
-            user = self.pool.get('res.users').browse(cursor, uid, uid, context=context)
+            user = self.pool.get('res.users').browse(
+                cursor, uid, uid, context=context)
             bank_ids = user.company_id.partner_id.bank_ids
             if bank_ids:
                 vals['partner_bank_id'] = bank_ids[0].id
-        return super(AccountInvoice, self).create(cursor, uid, vals, context=context)
+        return super(AccountInvoice, self).create(
+            cursor, uid, vals, context=context)
