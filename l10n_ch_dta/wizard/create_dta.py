@@ -350,7 +350,7 @@ class record_gt827(postal_record):
             ('padding', 14),
             #seg5
             #('padding',128)
-            ]
+        ]
 
         self.pre.update({
             'date_value_hdr': self.global_values['date_value'],

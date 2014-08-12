@@ -403,7 +403,7 @@ EXTRA_LATIN_NAMES = {
     u'\N{LATIN SMALL LETTER EZH WITH RETROFLEX HOOK}': u's',
     # u'\N{LATIN SUBSCRIPT SMALL LETTER SCHWA}': u'',
     # u'\N{LATIN CROSS}': u''
-    }
+}
 
 # Additional ones; see "man uni2ascii"
 UNI2ASCII_CONVERSIONS = {
@@ -482,7 +482,7 @@ UNI2ASCII_CONVERSIONS = {
     u'\N{RIGHTWARDS ARROW}': u'->',
     u'\N{LEFTWARDS DOUBLE ARROW}': u'<=',
     u'\N{RIGHTWARDS DOUBLE ARROW}': u'=>',
-    }
+}
 
 # More from "man uni2ascii", in a different category.
 EXTRA_CHARACTERS = {
