@@ -35,23 +35,31 @@ class test_scan_bvr(common.TransactionCase):
         Partner = self.registry('res.partner')
         PartnerBank = self.registry('res.partner.bank')
         self.Invoice = self.registry('account.invoice')
-        bank1_id = Bank.create(cr, uid, {
-            'name': 'Big swiss bank',
-            'bic': 'DRESDEFF300',
-            'country': self.ref('base.ch'),
-            })
+        bank1_id = Bank.create(
+            cr,
+            uid,
+            {
+                'name': 'Big swiss bank',
+                'bic': 'DRESDEFF300',
+                'country': self.ref('base.ch'),
+            }
+        )
 
         self.partner1 = Partner.browse(
             cr, uid, self.ref('base.res_partner_2'))
         #  I create a bank account
         # ok this is an iban but base_iban might not be installed
-        partner1bank1_id = PartnerBank.create(cr, uid, {
-            'state': 'bank',
-            'name': 'Account',
-            'bank': bank1_id,
-            'acc_number': 'CH9100767000S00023455',
-            'partner_id': self.ref('base.res_partner_2'),
-            })
+        partner1bank1_id = PartnerBank.create(
+            cr,
+            uid,
+            {
+                'state': 'bank',
+                'name': 'Account',
+                'bank': bank1_id,
+                'acc_number': 'CH9100767000S00023455',
+                'partner_id': self.ref('base.res_partner_2'),
+            }
+        )
 
         self.partner1bank1 = PartnerBank.browse(cr, uid, partner1bank1_id)
         self.purchase_journal_id = self.ref('account.expenses_journal')

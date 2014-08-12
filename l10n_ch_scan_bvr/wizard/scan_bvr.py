@@ -41,12 +41,14 @@ class scan_bvr(TransientModel):
                                       string="Partner"),
         'bank_account_id': fields.many2one('res.partner.bank',
                                            string="Partner Bank Account"),
-        'state': fields.selection([
-            ('new', 'New'),
-            ('valid', 'valid'),
-            ('need_extra_info', 'Need extra information'),
+        'state': fields.selection(
+            [
+                ('new', 'New'),
+                ('valid', 'valid'),
+                ('need_extra_info', 'Need extra information'),
             ],
-            'State'),
+            'State'
+        ),
     }
 
     def _default_journal(self, cr, uid, context=None):
@@ -137,7 +139,7 @@ class scan_bvr(TransientModel):
                 )
             else:
                 bvr_struct = {'type': bvr_string[0:2],
-                              'amount': float(bvr_string[2:12])/100,
+                              'amount': float(bvr_string[2:12]) / 100,
                               'reference': bvr_string[14:41],
                               'bvrnumber': bvr_string[14:20],
                               'beneficiaire': self._create_bvr_account(
@@ -156,7 +158,7 @@ class scan_bvr(TransientModel):
             else:
 
                 bvr_struct = {'type': bvr_string[0:2],
-                              'amount': float(bvr_string[2:12])/100,
+                              'amount': float(bvr_string[2:12]) / 100,
                               'reference': bvr_string[14:30],
                               'bvrnumber': '',
                               'beneficiaire': self._create_bvr_account(
@@ -175,7 +177,7 @@ class scan_bvr(TransientModel):
         else:
 
             bvr_struct = {'type': bvr_string[0:2],
-                          'amount': float(bvr_string[7:16])/100,
+                          'amount': float(bvr_string[7:16]) / 100,
                           'reference': bvr_string[18:33],
                           'bvrnumber': '000000',
                           'beneficiaire': self._create_bvr_account(
@@ -302,9 +304,9 @@ class scan_bvr(TransientModel):
             'date_invoice': time.strftime('%Y-%m-%d'),
             'payment_term': payment_term_id,
             'reference_type': 'bvr',
-            'reference':  data['bvr_struct']['reference'],
-            'amount_total':  data['bvr_struct']['amount'],
-            'check_total':  data['bvr_struct']['amount'],
+            'reference': data['bvr_struct']['reference'],
+            'amount_total': data['bvr_struct']['amount'],
+            'check_total': data['bvr_struct']['amount'],
             'partner_bank_id': account_info.id,
             'comment': '',
             'currency_id': currency_id.id,
@@ -349,8 +351,8 @@ class scan_bvr(TransientModel):
     def _create_bvr_account(self, account_unformated):
         account_formated = "%s-%s-%s" % (
             account_unformated[0:2],
-            str(int(account_unformated[2:len(account_unformated)-1])),
-            account_unformated[len(account_unformated)-1:len(account_unformated)]
+            str(int(account_unformated[2:len(account_unformated) - 1])),
+            account_unformated[len(account_unformated) - 1:len(account_unformated)]
         )
         return account_formated
 
