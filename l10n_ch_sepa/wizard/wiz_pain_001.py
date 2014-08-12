@@ -80,7 +80,7 @@ class WizardPain001(orm.TransientModel):
                 time.gmtime()),
             'res_model': data['model'],
             'res_id': data['id'],
-            }
+        }
         attachment_obj.create(cr, uid, vals, context=context)
 
     def create_pain_001(self, cr, uid, ids, context=None):
