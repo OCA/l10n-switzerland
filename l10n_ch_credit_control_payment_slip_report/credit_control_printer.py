@@ -46,7 +46,8 @@ class CreditControlPrinter(orm.TransientModel):
         form.write(
             {
                 'report_file': base64.b64encode(report_file),
-                'report_name': 'credit_control_esr_bvr_%s.pdf' % fields.datetime.now(),
+                'report_name': 'credit_control_esr_bvr_%s.pdf' %
+                               fields.datetime.now(),
                 'state': 'done'
             }
         )

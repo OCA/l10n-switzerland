@@ -41,7 +41,8 @@ class CreditCommunication(orm.TransientModel):
         return result
 
 
-class MultiBvrWebKitParserCreditControl(multi_report_webkit_html.L10nCHReportWebkitHtmlMulti):
+class MultiBvrWebKitParserCreditControl(
+        multi_report_webkit_html.L10nCHReportWebkitHtmlMulti):
     """We define a new parser because this report take move line
        In parameter insted of an invoice, so the function get_obj_reference
        return directly ids"""
