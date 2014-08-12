@@ -105,15 +105,17 @@ class scan_bvr(TransientModel):
                     _('BVR CheckSum Error in fourth part')
                 )
             else:
-                bvr_struct = {'type': bvr_string[0:2],
-                              'amount': 0.0,
-                              'reference': bvr_string[4:31],
-                              'bvrnumber': bvr_string[4:10],
-                              'beneficiaire': self._create_bvr_account(
-                                  bvr_string[33:42]
-                              ),
-                              'domain': '',
-                              'currency': ''}
+                bvr_struct = {
+                    'type': bvr_string[0:2],
+                    'amount': 0.0,
+                    'reference': bvr_string[4:31],
+                    'bvrnumber': bvr_string[4:10],
+                    'beneficiaire': self._create_bvr_account(
+                        bvr_string[33:42]
+                    ),
+                    'domain': '',
+                    'currency': ''
+                }
                 return bvr_struct
 
     def _construct_bvr_in_chf(self, bvr_string):
@@ -138,15 +140,17 @@ class scan_bvr(TransientModel):
                     _('BVR CheckSum Error in fourth part')
                 )
             else:
-                bvr_struct = {'type': bvr_string[0:2],
-                              'amount': float(bvr_string[2:12]) / 100,
-                              'reference': bvr_string[14:41],
-                              'bvrnumber': bvr_string[14:20],
-                              'beneficiaire': self._create_bvr_account(
-                                  bvr_string[43:52]
-                              ),
-                              'domain': '',
-                              'currency': ''}
+                bvr_struct = {
+                    'type': bvr_string[0:2],
+                    'amount': float(bvr_string[2:12]) / 100,
+                    'reference': bvr_string[14:41],
+                    'bvrnumber': bvr_string[14:20],
+                    'beneficiaire': self._create_bvr_account(
+                        bvr_string[43:52]
+                    ),
+                    'domain': '',
+                    'currency': ''
+                }
                 return bvr_struct
 
     def _construct_bvr_postal_in_chf(self, bvr_string):
@@ -157,15 +161,17 @@ class scan_bvr(TransientModel):
                 )
             else:
 
-                bvr_struct = {'type': bvr_string[0:2],
-                              'amount': float(bvr_string[2:12]) / 100,
-                              'reference': bvr_string[14:30],
-                              'bvrnumber': '',
-                              'beneficiaire': self._create_bvr_account(
-                                  bvr_string[32:41]
-                              ),
-                              'domain': '',
-                              'currency': ''}
+                bvr_struct = {
+                    'type': bvr_string[0:2],
+                    'amount': float(bvr_string[2:12]) / 100,
+                    'reference': bvr_string[14:30],
+                    'bvrnumber': '',
+                    'beneficiaire': self._create_bvr_account(
+                        bvr_string[32:41]
+                    ),
+                    'domain': '',
+                    'currency': ''
+                }
                 return bvr_struct
 
     def _construct_bvr_postal_other_in_chf(self, bvr_string):
@@ -176,24 +182,26 @@ class scan_bvr(TransientModel):
             )
         else:
 
-            bvr_struct = {'type': bvr_string[0:2],
-                          'amount': float(bvr_string[7:16]) / 100,
-                          'reference': bvr_string[18:33],
-                          'bvrnumber': '000000',
-                          'beneficiaire': self._create_bvr_account(
-                              bvr_string[34:40]
-                          ),
-                          'domain': '',
-                          'currency': ''}
+            bvr_struct = {
+                'type': bvr_string[0:2],
+                'amount': float(bvr_string[7:16]) / 100,
+                'reference': bvr_string[18:33],
+                'bvrnumber': '000000',
+                'beneficiaire': self._create_bvr_account(
+                    bvr_string[34:40]
+                ),
+                'domain': '',
+                'currency': ''
+            }
             return bvr_struct
 
     def _create_invoice_line(self, cr, uid, ids, data, context):
             invoice_line_ids = False
             pool = pooler.get_pool(cr.dbname)
             invoice_line_obj = pool.get('account.invoice.line')
-            ## First we write partner_id
+            # First we write partner_id
             self.write(cr, uid, ids, {'partner_id': data['partner_id']})
-            ## We check that this partner have a default product
+            # We check that this partner have a default product
             accounts_data = pool.get('res.partner').read(
                 cr, uid,
                 data['partner_id'],
@@ -247,7 +255,7 @@ class scan_bvr(TransientModel):
 
     def _create_direct_invoice(self, cr, uid, ids, data, context):
         pool = pooler.get_pool(cr.dbname)
-        ## We will call the function, that create invoice line
+        # We will call the function, that create invoice line
         account_invoice_obj = pool.get('account.invoice')
         account_invoice_tax_obj = pool.get('account.invoice.tax')
         if data['bank_account']:
@@ -255,9 +263,7 @@ class scan_bvr(TransientModel):
                 cr, uid, data['bank_account'],
                 context=context
             )
-        ## We will now search the currency_id
-        #
-        #
+        # We will now search the currency_id
         currency_search = pool.get('res.currency').search(
             cr, uid,
             [('name',
@@ -324,7 +330,7 @@ class scan_bvr(TransientModel):
         )
         data['invoice_id'] = last_invoice
         self._create_invoice_line(cr, uid, ids, data, context)
-        ## Noew we create taxes lines
+        # Now we create taxes lines
         computed_tax = account_invoice_tax_obj.compute(cr,
                                                        uid,
                                                        last_invoice,
@@ -362,104 +368,99 @@ class scan_bvr(TransientModel):
 
     def _get_bvr_structurated(self, bvr_string):
         if bvr_string is not False:
-            ## We will get the 2 frist digit of the BVr string in order
-            ## to now the BVR type of this account
+            # We will get the 2 frist digit of the BVr string in order
+            # to now the BVR type of this account
             bvr_type = bvr_string[0:2]
             if bvr_type == '01' and len(bvr_string) == 42:
-                ## This BVr is the type of BVR in CHF
+                # This BVR is the type of BVR in CHF
                 # WE will call the function and Call
                 bvr_struct = self._construct_bvr_postal_in_chf(bvr_string)
-                ## We will test if the BVR have an Adherent Number if not we
-                ## will make the search of the account base on
-                ##his name non base on the BVR adherent number
+                # We will test if the BVR have an Adherent Number if not we
+                # will make the search of the account base on
+                # his name non base on the BVR adherent number
                 if (bvr_struct['bvrnumber'] == '000000'):
                     bvr_struct['domain'] = 'name'
                 else:
                     bvr_struct['domain'] = 'bvr_adherent_num'
-                ## We will set the currency , in this case it's allways CHF
+                # We will set the currency , in this case it's allways CHF
                 bvr_struct['currency'] = 'CHF'
-            ##
             elif bvr_type == '01':
-                ## This BVr is the type of BVR in CHF
-                # WE will call the function and Call
+                # This BVR is the type of BVR in CHF
+                # We will call the function and Call
                 bvr_struct = self._construct_bvr_in_chf(bvr_string)
-                ## We will test if the BVR have an Adherent Number if not
-                ## we will make the search of the account base on
-                ##his name non base on the BVR adherent number
+                # We will test if the BVR have an Adherent Number if not
+                # we will make the search of the account base on
+                # his name non base on the BVR adherent number
                 if (bvr_struct['bvrnumber'] == '000000'):
                     bvr_struct['domain'] = 'name'
                 else:
                     bvr_struct['domain'] = 'bvr_adherent_num'
-                ## We will set the currency , in this case it's allways CHF
+                # We will set the currency , in this case it's allways CHF
                 bvr_struct['currency'] = 'CHF'
-            ##
             elif bvr_type == '03':
-                ## It will be (At this time) the same work
-                ## as for a standard BVR with 01 code
+                # It will be (At this time) the same work
+                # as for a standard BVR with 01 code
                 bvr_struct = self._construct_bvr_postal_in_chf(bvr_string)
-                ## We will test if the BVR have an Adherent Number
-                ## if not we will make the search of the account base on
-                ##his name non base on the BVR adherent number
+                # We will test if the BVR have an Adherent Number
+                # if not we will make the search of the account base on
+                # his name non base on the BVR adherent number
                 if (bvr_struct['bvrnumber'] == '000000'):
                     bvr_struct['domain'] = 'name'
                 else:
                     bvr_struct['domain'] = 'bvr_adherent_num'
-                ## We will set the currency , in this case it's allways CHF
+                # We will set the currency , in this case it's allways CHF
                 bvr_struct['currency'] = 'CHF'
-            ##
             elif bvr_type == '04':
-                ## It the BVR postal in CHF
+                # It the BVR postal in CHF
                 bvr_struct = self._construct_bvrplus_in_chf(bvr_string)
-                ## We will test if the BVR have an Adherent Number
-                ## if not we will make the search of the account base on
-                ##his name non base on the BVR adherent number
+                # We will test if the BVR have an Adherent Number
+                # if not we will make the search of the account base on
+                # his name non base on the BVR adherent number
                 if (bvr_struct['bvrnumber'] == '000000'):
                     bvr_struct['domain'] = 'name'
                 else:
                     bvr_struct['domain'] = 'bvr_adherent_num'
-                ## We will set the currency , in this case it's allways CHF
+                # We will set the currency , in this case it's allways CHF
                 bvr_struct['currency'] = 'CHF'
-            ##
             elif bvr_type == '21':
-                ## It for a BVR in Euro
+                # It for a BVR in Euro
                 bvr_struct = self._construct_bvr_in_chf(bvr_string)
-                ## We will test if the BVR have an Adherent Number if
-                ## not we will make the search of the account base on
-                ##his name non base on the BVR adherent number
+                # We will test if the BVR have an Adherent Number if
+                # not we will make the search of the account base on
+                # his name non base on the BVR adherent number
                 if (bvr_struct['bvrnumber'] == '000000'):
                     bvr_struct['domain'] = 'name'
                 else:
                     bvr_struct['domain'] = 'bvr_adherent_num'
-                ## We will set the currency , in this case it's allways CHF
+                # We will set the currency , in this case it's allways CHF
                 bvr_struct['currency'] = 'EUR'
             ##
             elif bvr_type == '31':
-                ## It the BVR postal in CHF
+                # It the BVR postal in CHF
                 bvr_struct = self._construct_bvrplus_in_chf(bvr_string)
-                ## We will test if the BVR have an Adherent Number if not
-                ## we will make the search of the account base on
-                ##his name non base on the BVR adherent number
+                # We will test if the BVR have an Adherent Number if not
+                # we will make the search of the account base on
+                # his name non base on the BVR adherent number
                 if (bvr_struct['bvrnumber'] == '000000'):
                     bvr_struct['domain'] = 'name'
                 else:
                     bvr_struct['domain'] = 'bvr_adherent_num'
-                ## We will set the currency , in this case it's allways CHF
+                # We will set the currency , in this case it's allways CHF
                 bvr_struct['currency'] = 'EUR'
 
             elif bvr_type[0:1] == '<' and len(bvr_string) == 41:
-                ## It the BVR postal in CHF
+                # It the BVR postal in CHF
                 bvr_struct = self._construct_bvr_postal_other_in_chf(
                     bvr_string)
-                ## We will test if the BVR have an Adherent Number
-                ## if not we will make the search of the account base on
-                ## his name non base on the BVR adherent number
+                # We will test if the BVR have an Adherent Number
+                # if not we will make the search of the account base on
+                # his name non base on the BVR adherent number
                 if (bvr_struct['bvrnumber'] == '000000'):
                     bvr_struct['domain'] = 'name'
                 else:
                     bvr_struct['domain'] = 'bvr_adherent_num'
-                ## We will set the currency , in this case it's allways CHF
+                # We will set the currency , in this case it's allways CHF
                 bvr_struct['currency'] = 'CHF'
-            ##
             else:
                 raise orm.except_orm(_('BVR Type error'),
                                      _('This kind of BVR is not supported '
@@ -470,23 +471,23 @@ class scan_bvr(TransientModel):
         # We will now retrive result
         bvr_data = self.browse(cr, uid, ids, context)[0]
         # BVR Standrard
-        #0100003949753>120000000000234478943216899+ 010001628>
+        # 0100003949753>120000000000234478943216899+ 010001628>
         # BVR without BVr Reference
-        #0100000229509>000000013052001000111870316+ 010618955>
+        # 0100000229509>000000013052001000111870316+ 010618955>
         # BVR + In CHF
-        #042>904370000000000000007078109+ 010037882>
+        # 042>904370000000000000007078109+ 010037882>
         # BVR In euro
-        #2100000440001>961116900000006600000009284+ 030001625>
-        #<060001000313795> 110880150449186+ 43435>
-        #<010001000165865> 951050156515104+ 43435>
-        #<010001000060190> 052550152684006+ 43435>
-        ##
+        # 2100000440001>961116900000006600000009284+ 030001625>
+        # <060001000313795> 110880150449186+ 43435>
+        # <010001000165865> 951050156515104+ 43435>
+        # <010001000060190> 052550152684006+ 43435>
+        #
         # Explode and check  the BVR Number and structurate it
-        ##
+        #
         data = {}
         data['bvr_struct'] = self._get_bvr_structurated(
             bvr_data.bvr_string)
-        ## We will now search the account linked with this BVR
+        # We will now search the account linked with this BVR
         if data['bvr_struct']['domain'] == 'name':
             domain = [('acc_number', '=', data['bvr_struct']['beneficiaire'])]
             partner_bank_search = self.pool.get('res.partner.bank').search(
