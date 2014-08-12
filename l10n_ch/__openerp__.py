@@ -33,17 +33,20 @@ This localisation module creates the VAT taxes for sales and purchases
 needed in Switzerland and provides the recommanded STERCHI chart of account
 in french, italian and german.
 
-**Other related modules you may found interesting using OpenERP in Switzerland**
+**Related modules you may found interesting using OpenERP in Switzerland**
 
 Various other modules have been made to work with OpenERP in Switzerland,
 you may found some of them useful for you. Here is a list of the main ones:
+
  - **l10n_ch_bank**: List of swiss banks
  - **l10n_ch_zip**: List of swiss postal (ZIP)
  - **l10n_ch_dta**: Support of bank electronic payment (DTA)
  - **l10n_ch_sepa**: Support of SEPA/PAIN electronic payment
- - **l10n_ch_payment_slip**: Support of ESR/BVR payment slip report and reconciliation.
+ - **l10n_ch_payment_slip**: Support of ESR/BVR payment slip report,
+                             Reconciliation,
                              Report refactored with easy element positioning.
- - **l10n_ch_scan_bvr**: Scan the ESR/BVR reference to automatically create the proper suplier invoice
+ - **l10n_ch_scan_bvr**: Scan the ESR/BVR reference to automatically create
+                         the proper suplier invoice
 
 All the modules are available on OpenERP swiss localization project on Github:
 https://github.com/OCA/l10n-switzerland
