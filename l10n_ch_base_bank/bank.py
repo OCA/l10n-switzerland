@@ -185,7 +185,7 @@ class ResPartnerBank(orm.Model, BankCommon):
         """
         p_banks = self.browse(cursor, uid, ids)
         for p_bank in p_banks:
-            if not p_bank.state in ('bv', 'bvr'):
+            if p_bank.state not in ('bv', 'bvr'):
                 continue
             if not p_bank.get_account_number():
                 continue
@@ -203,7 +203,7 @@ class ResPartnerBank(orm.Model, BankCommon):
         """
         p_banks = self.browse(cursor, uid, ids)
         for p_bank in p_banks:
-            if not p_bank.state in ('bv', 'bvr'):
+            if p_bank.state not in ('bv', 'bvr'):
                 continue
             bank_ccp = p_bank.bank.ccp if p_bank.bank else False
             if not bank_ccp:

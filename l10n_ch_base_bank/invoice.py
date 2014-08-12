@@ -30,7 +30,7 @@ class AccountInvoice(Model):
                             partner_bank_id=False, company_id=False):
         """ Function that is call when the partner of the invoice is changed
         it will retrieve and set the good bank partner bank"""
-        #context not define in signature of function in account module
+        # Context not define in signature of function in account module
         context = {}
         res = super(AccountInvoice, self).onchange_partner_id(
             cursor, uid, ids, invoice_type, partner_id,
@@ -96,7 +96,7 @@ class AccountInvoice(Model):
             if invoice.reference_type == 'bvr' and invoice.state != 'draft':
                 if not invoice.reference:
                     return False
-                ## In this case
+                # In this case
                 # <010001000060190> 052550152684006+ 43435>
                 # the reference 052550152684006 do not match modulo 10
                 #
