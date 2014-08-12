@@ -93,7 +93,7 @@ class Pain001(MsgSEPA):
                 _('The selected company bank has no IBAN and no Account '
                   'number'))
 
-        #Check each invoices
+        # Check each invoices
         for line in payment.line_ids:
             crd_bank_acc = line.bank_id
             if not crd_bank_acc:
