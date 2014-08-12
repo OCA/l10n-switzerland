@@ -129,7 +129,7 @@ class BvrImporterWizard(orm.TransientModel):
                 records.append(record)
         return records
 
-    #deprecated
+    # deprecated
     def _create_voucher_from_record(self, cursor, uid, record,
                                     statement, line_ids, context=None):
         """Create a voucher with voucher line"""
@@ -224,7 +224,7 @@ class BvrImporterWizard(orm.TransientModel):
             order='date desc',
             context=context
         )
-        #for multiple payments
+        # For multiple payments
         if not line_ids:
             line_ids = move_line_obj.search(
                 cursor, uid,
