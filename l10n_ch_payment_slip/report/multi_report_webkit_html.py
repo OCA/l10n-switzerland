@@ -99,18 +99,34 @@ class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
 
     def police_absolute_path(self, inner_path):
         """Will get the ocrb police absolute path"""
-        path = addons.get_module_resource('l10n_ch_payment_slip', 'report', inner_path)
+        path = addons.get_module_resource(
+            'l10n_ch_payment_slip',
+            'report',
+            inner_path
+        )
         return path
 
     def bvr_absolute_path(self):
         """Will get the ocrb police absolute path"""
-        path = addons.get_module_resource('l10n_ch_payment_slip', 'report', 'bvr1.jpg')
+        path = addons.get_module_resource(
+            'l10n_ch_payment_slip',
+            'report',
+            'bvr1.jpg'
+        )
         return path
 
     def headheight(self):
-        report_id = self.pool['ir.actions.report.xml'].search(self.cr, self.uid,
-                                                              [('name', '=', 'BVR invoice')])[0]
-        report = self.pool['ir.actions.report.xml'].browse(self.cr, self.uid, report_id)
+        report_id = self.pool['ir.actions.report.xml'].search(
+            self.cr,
+            self.uid,
+            [('name', '=', 'BVR invoice')]
+        )
+        report_id = report_id[0]
+        report = self.pool['ir.actions.report.xml'].browse(
+            self.cr,
+            self.uid,
+            report_id
+        )
         return report.webkit_header.margin_top
 
     def comma_me(self, amount):
@@ -138,7 +154,8 @@ class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
             if not invoice.number:
                 raise orm.except_orm(
                     _('UserError'),
-                    _('Your invoice should be validated to generate a BVR reference.')
+                    _('Your invoice should be validated '
+                      'to generate a BVR reference.')
                 )
             if not invoice.partner_bank_id:
                 raise orm.except_orm(
@@ -154,8 +171,8 @@ class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
                        'information for the invoice:\n%s') % (invoice_name))
                 )
             adherent_num = invoice.partner_bank_id.bvr_adherent_num
-            if invoice.partner_bank_id.bvr_adherent_num \
-                    and not self._compile_check_bvr_add_num.match(adherent_num):
+            compliance = self._compile_check_bvr_add_num.match(adherent_num)
+            if invoice.partner_bank_id.bvr_adherent_num and not compliance:
                 raise orm.except_orm(
                     _('UserError'),
                     _(('Your bank BVR adherent number must contain only '
@@ -170,7 +187,8 @@ class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
         if not move_ids:
             raise orm.except_orm(
                 _('UserError'),
-                _('Your invoice should be validated to generate BVR reference.')
+                _('Your invoice should be validated '
+                  'to generate BVR reference.')
             )
         invoice_id = move_line_obj.read(cursor, self.uid, move_ids[0],
                                         ['invoice'])['invoice'][0]

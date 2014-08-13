@@ -29,7 +29,8 @@ class ResPartnerBank(orm.Model):
      We leave it here in order
     """
     _inherit = "res.partner.bank"
-    _columns = {'print_bank': fields.boolean('Print Bank on BVR'),
-                'print_account': fields.boolean('Print Account Number on BVR'),
-                'print_partner': fields.boolean('Print Partner Address on BVR'),
-                }
+    _columns = {
+        'print_bank': fields.boolean('Print Bank on BVR'),
+        'print_account': fields.boolean('Print Account Number on BVR'),
+        'print_partner': fields.boolean('Print Partner Address on BVR'),
+    }
