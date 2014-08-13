@@ -55,7 +55,8 @@ class Pain001(MsgSEPA):
             dirs += [addons.get_module_resource('l10n_ch_sepa', dir)]
 
         lookup = TemplateLookup(directories=dirs, input_encoding='utf-8',
-                                output_encoding='unicode')
+                                output_encoding='unicode',
+                                default_filters=['unicode', 'x'])
         self.mako_tpl = lookup.get_template(tmpl_name)
         self._xml_data = None
 
@@ -93,7 +94,7 @@ class Pain001(MsgSEPA):
                 _('The selected company bank has no IBAN and no Account '
                   'number'))
 
-        #Check each invoices
+        # Check each invoices
         for line in payment.line_ids:
             crd_bank_acc = line.bank_id
             if not crd_bank_acc:
@@ -156,4 +157,3 @@ class Pain001(MsgSEPA):
         return self._xml_data
 
 MsgSEPAFactory.register_class('pain.001', Pain001)
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -9,22 +9,21 @@ So I want that many Latin-1 characters have their umlaute's, etc., stripped.
 Some of it can be done automatically but some needs to be done by hand, that
 I can tell.
 """
-__version__='1.0.1'
-__author__='Jim Hefferon: ftpmaint at tug.ctan.org'
-__date__='2008-July-15'
-__notes__="""As sources, used effbot's web site, and
+__version__ = '1.0.1'
+__author__ = 'Jim Hefferon: ftpmaint at tug.ctan.org'
+__date__ = '2008-July-15'
+__notes__ = """As sources, used effbot's web site, and
     http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/251871
 and
     man uni2ascii
 """
-
-import os, os.path, sys, re
+import sys
 import unicodedata
 
 # These characters that are not done automatically by NFKD, and
 # have a name starting with "LATIN".    Some of these I found on the interwebs,
 # but some I did by eye.    Corrections or additions appreciated.
-EXTRA_LATIN_NAMES={
+EXTRA_LATIN_NAMES = {
     # First are ones I got off the interweb
     u"\N{LATIN CAPITAL LETTER O WITH STROKE}": u"O",
     u"\N{LATIN SMALL LETTER A WITH GRAVE}": u"a",
@@ -404,13 +403,13 @@ EXTRA_LATIN_NAMES={
     u'\N{LATIN SMALL LETTER EZH WITH RETROFLEX HOOK}': u's',
     # u'\N{LATIN SUBSCRIPT SMALL LETTER SCHWA}': u'',
     # u'\N{LATIN CROSS}': u''
-    }
+}
 
 # Additional ones; see "man uni2ascii"
-UNI2ASCII_CONVERSIONS={
+UNI2ASCII_CONVERSIONS = {
     u'\N{NO-BREAK SPACE}': u' ',
     u'\N{LEFT-POINTING DOUBLE ANGLE QUOTATION MARK}': u'"',
-    u'\N{SOFT HYPHEN}': u'',    # Controversial: see http://www.cs.tut.fi/~jkorpela/shy.html
+    u'\N{SOFT HYPHEN}': u'',
     u'\N{RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK}': u'"',
     u'\N{ETHIOPIC WORDSPACE}': u' ',
     u'\N{OGHAM SPACE MARK}': u' ',
@@ -483,10 +482,10 @@ UNI2ASCII_CONVERSIONS={
     u'\N{RIGHTWARDS ARROW}': u'->',
     u'\N{LEFTWARDS DOUBLE ARROW}': u'<=',
     u'\N{RIGHTWARDS DOUBLE ARROW}': u'=>',
-    }
+}
 
 # More from "man uni2ascii", in a different category.
-EXTRA_CHARACTERS={
+EXTRA_CHARACTERS = {
     u'\N{ACUTE ACCENT}': u"'",
     u'\N{BROKEN BAR}': u'|',
     # u'\N{CEDILLA}': u'{cedilla}',
@@ -521,9 +520,9 @@ EXTRA_CHARACTERS={
     u'\N{VULGAR FRACTION THREE QUARTERS}': u'3/4',
     u'\N{YEN SIGN}': u'yen'
 }
-FG_HACKS={
-    u'\u0082': u'', # "break permitted here" symbol
-    u'\u2022': u'*', # Bullet
+FG_HACKS = {
+    u'\u0082': u'',  # "break permitted here" symbol
+    u'\u2022': u'*',  # Bullet
 }
 
 
@@ -532,24 +531,28 @@ def build_dictionary():
     d = dict()
     # First do what can be done automatically
     for i in range(0xffff):
-        u=unichr(i)
+        u = unichr(i)
         try:
-            n=unicodedata.name(u)
+            n = unicodedata.name(u)
             if n.startswith('LATIN '):
-                k=unicodedata.normalize('NFKD', u).encode('ASCII', 'ignore')
-                if k: d[i]=unicode(k)    # i=ord(u)
-        except ValueError: pass
+                k = unicodedata.normalize('NFKD', u).encode('ASCII', 'ignore')
+                if k:
+                    d[i] = unicode(k)  # i=ord(u)
+        except ValueError:
+            pass
     # Next, add some by-hand ones (overlap possible, so order matters)
-    for m in [EXTRA_LATIN_NAMES,EXTRA_CHARACTERS,UNI2ASCII_CONVERSIONS,FG_HACKS]:
+    for m in [EXTRA_LATIN_NAMES, EXTRA_CHARACTERS,
+              UNI2ASCII_CONVERSIONS, FG_HACKS]:
         for i in m:
-            try: d[ord(i)]=unicode(m[i])
-            except Exception, err: pass
+            try:
+                d[ord(i)] = unicode(m[i])
+            except Exception:
+                pass
     return d
-
-
 
 udict = build_dictionary()
 convert = lambda s: s.translate(udict)
+
 
 def coroutine(func):
     def start(*argz, **kwz):
@@ -558,6 +561,7 @@ def coroutine(func):
         return cr
     return start
 
+
 @coroutine
 def co_filter(drain, in_enc='utf-8', out_enc='ascii'):
     bs = None
@@ -565,30 +569,56 @@ def co_filter(drain, in_enc='utf-8', out_enc='ascii'):
         chunk = (yield bs)
         bs = drain(convert(unicode(chunk)).encode('utf-8'))
 
+
 def uc_filter(sin, sout, bs=8192, in_enc='utf-8', out_enc='ascii'):
     sout = co_filter(sout.write, in_enc, out_enc)
     while True:
         dta = sin.read(bs)
-        if not dta: break
-        else: sout.send(dta)
+        if not dta:
+            break
+        else:
+            sout.send(dta)
 
 
 if __name__ == '__main__':
     from optparse import OptionParser
-    parser = OptionParser(usage='%prog [options]',
-        description='utf8 stdin -> ascii stdout')
-    parser.add_option('-s', '--src-enc',
-        action='store', type='str', dest='src_enc', metavar='ENC', default='utf-8',
-        help='source encoding (utf-8)')
-    parser.add_option('-d', '--dst-enc',
-        action='store', type='str', dest='dst_enc', metavar='ENC', default='ascii',
-        help='destination encoding (ascii)')
-    parser.add_option('-c', '--chunk',
-        action='store', type='int', dest='bs', metavar='BYTES', default=8192,
-        help='read/write in chunks of a given size (8192)')
+    parser = OptionParser(
+        usage='%prog [options]',
+        description='utf8 stdin -> ascii stdout'
+    )
+    parser.add_option(
+        '-s',
+        '--src-enc',
+        action='store',
+        type='str',
+        dest='src_enc',
+        metavar='ENC',
+        default='utf-8',
+        help='source encoding (utf-8)'
+    )
+    parser.add_option(
+        '-d',
+        '--dst-enc',
+        action='store',
+        type='str',
+        dest='dst_enc',
+        metavar='ENC',
+        default='ascii',
+        help='destination encoding (ascii)'
+    )
+    parser.add_option(
+        '-c',
+        '--chunk',
+        action='store',
+        type='int',
+        dest='bs',
+        metavar='BYTES',
+        default=8192,
+        help='read/write in chunks of a given size (8192)'
+    )
     optz, argz = parser.parse_args()
-    if argz: parser.error('Only stdin -> stdout conversion suported')
+    if argz:
+        parser.error('Only stdin -> stdout conversion suported')
 
-    uc_filter(sys.stdin, sys.stdout, bs=optz.bs, in_enc=optz.src_enc, out_enc=optz.dst_enc)
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+    uc_filter(sys.stdin, sys.stdout, bs=optz.bs,
+              in_enc=optz.src_enc, out_enc=optz.dst_enc)
