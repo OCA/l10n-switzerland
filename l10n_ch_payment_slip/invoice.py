@@ -64,8 +64,8 @@ class AccountMoveLine(Model):
     def _is_generate_bvr(self, cr, uid, invoice, context=None):
         ''' Determine if BVR should be generated or not. '''
         # We check if the type is bvr, if not we return false
-        return (invoice.partner_bank_id and 
-                    invoice.partner_bank_id.state == 'bvr')
+        return (invoice.partner_bank_id and
+                invoice.partner_bank_id.state == 'bvr')
 
     def _compute_bvr_ref(self, cr, uid, move_line, context=None):
         ''' Default BVR reference computation '''
