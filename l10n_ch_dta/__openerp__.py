@@ -19,10 +19,13 @@
 ##############################################################################
 
 {'name': 'Switzerland - Bank Payment File (DTA)',
- 'description':  """
-Swiss localization supplier bank payment file known as DTA file :
-=================================================
-Generate a DTA file for swiss banking system from payment order
+ 'summary': 'Electronic payment file for Swiss bank (DTA)',
+ 'description': """
+Swiss bank electronic payment (DTA)
+===================================
+
+This addons allows you to generate an electronic payment file for Swiss bank
+(known as DTA). You'll found the wizard in payment order.
 
 """,
  'version': '1.0.1',
@@ -33,9 +36,8 @@ Generate a DTA file for swiss banking system from payment order
  'data': ["wizard/create_dta_view.xml",
           "bank_view.xml"],
  'demo': ["demo/dta_demo.xml"],
- 'test': [], # To be ported or migrate to unit tests or scenarios
+ 'test': [],  # To be ported or migrate to unit tests or scenarios
  'auto_install': False,
  'installable': True,
  'images': []
-}
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+ }

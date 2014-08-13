@@ -22,4 +22,3 @@
 import base_sepa
 import l10n_ch
 import wizard
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

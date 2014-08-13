@@ -94,7 +94,7 @@ class Pain001(MsgSEPA):
                 _('The selected company bank has no IBAN and no Account '
                   'number'))
 
-        #Check each invoices
+        # Check each invoices
         for line in payment.line_ids:
             crd_bank_acc = line.bank_id
             if not crd_bank_acc:
@@ -157,4 +157,3 @@ class Pain001(MsgSEPA):
         return self._xml_data
 
 MsgSEPAFactory.register_class('pain.001', Pain001)
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
