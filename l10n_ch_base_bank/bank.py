@@ -56,13 +56,13 @@ class Bank(orm.Model, BankCommon):
     """Inherit res.bank class in order to add swiss specific field"""
     _inherit = 'res.bank'
     _columns = {
-        ### Internal reference
+        # Internal reference
         'code': fields.char('Code', size=64, select=True),
-        ###Swiss unik bank identifier also use in IBAN number
+        # Swiss unik bank identifier also use in IBAN number
         'clearing': fields.char('Clearing number', size=64),
-        ### city of the bank
+        # City of the bank
         'city': fields.char('City', size=128, select=1),
-        ### ccp of the bank
+        # CCP of the bank
         'ccp': fields.char('CCP', size=64, select=1)
     }
 
@@ -71,7 +71,11 @@ class Bank(orm.Model, BankCommon):
         for bank in self.browse(cursor, uid, ids):
             p_acc_ids = p_acc_obj.search(cursor, uid, [('bank', '=', bank.id)])
             if p_acc_ids:
-                check = p_acc_obj._check_ccp_duplication(cursor, uid, p_acc_ids)
+                check = p_acc_obj._check_ccp_duplication(
+                    cursor,
+                    uid,
+                    p_acc_ids
+                )
                 if not check:
                     return False
         return True
@@ -97,7 +101,8 @@ class Bank(orm.Model, BankCommon):
             res.append((bank.id, ' - '.join(vals)))
         return res
 
-    def name_search(self, cursor, uid, name, args=None, operator='ilike', context=None, limit=80):
+    def name_search(self, cursor, uid, name, args=None, operator='ilike',
+                    context=None, limit=80):
         if args is None:
             args = []
         if context is None:
@@ -107,38 +112,58 @@ class Bank(orm.Model, BankCommon):
         if name:
             for val in name.split(' '):
                 for col in cols:
-                    tmp_ids = self.search(cursor, uid, [(col, 'ilike', val)] + args, limit=limit)
+                    tmp_ids = self.search(
+                        cursor,
+                        uid,
+                        [(col, 'ilike', val)] + args,
+                        limit=limit
+                    )
                     if tmp_ids:
                         ids += tmp_ids
                         break
         # we sort by occurence
         to_ret_ids = list(set(ids))
-        to_ret_ids = sorted(to_ret_ids, key=lambda x: ids.count(x), reverse=True)
+        to_ret_ids = sorted(
+            to_ret_ids,
+            key=lambda x: ids.count(x),
+            reverse=True
+        )
 
         return self.name_get(cursor, uid, to_ret_ids, context=context)
 
-    _constraints = [(_check_postal_num,
-                    'Please enter a correct postal number. (01-23456-1 or 12345)',
-                    ['ccp']),
+    _constraints = [
+        (_check_postal_num,
+         'Please enter a correct postal number. (01-23456-1 or 12345)',
+         ['ccp']),
 
-                    (_check_ccp_duplication,
-                    'You can not enter a ccp both on the bank and on an account'
-                    ' of type BV, BVR',
-                    ['acc_number', 'bank'])]
+        (_check_ccp_duplication,
+         'You can not enter a ccp both on the bank and on an account'
+         ' of type BV, BVR',
+         ['acc_number', 'bank'])
+    ]
 
 
 class ResPartnerBank(orm.Model, BankCommon):
     """
-    Inherit res.partner.bank class in order to add swiss specific fields and state controls
+    Inherit res.partner.bank class in order to add swiss specific fields
+    and state controls
+
     """
     _inherit = 'res.partner.bank'
 
     _columns = {
         'name': fields.char('Description', size=128, required=True),
-        'bvr_adherent_num': fields.char('Bank BVR adherent number', size=11,
-                                        help=("Your Bank adherent number to be printed in references of your BVR."
-                                              "This is not a postal account number.")),
-        'acc_number': fields.char('Account/IBAN Number', size=64, required=True),
+        'bvr_adherent_num': fields.char(
+            'Bank BVR adherent number', size=11,
+            help="Your Bank adherent number to be printed "
+                 "in references of your BVR."
+                 "This is not a postal account number."
+        ),
+        'acc_number': fields.char(
+            'Account/IBAN Number',
+            size=64,
+            required=True
+        ),
         'ccp': fields.related('bank', 'ccp', type='char', string='CCP',
                               readonly=True),
     }
@@ -160,12 +185,14 @@ class ResPartnerBank(orm.Model, BankCommon):
         """
         p_banks = self.browse(cursor, uid, ids)
         for p_bank in p_banks:
-            if not p_bank.state in ('bv', 'bvr'):
+            if p_bank.state not in ('bv', 'bvr'):
                 continue
             if not p_bank.get_account_number():
                 continue
-            if not (self._check_9_pos_postal_num(p_bank.get_account_number()) or
-                    self._check_5_pos_postal_num(p_bank.get_account_number())):
+            acc = p_bank.get_account_number()
+            if not (
+                    self._check_9_pos_postal_num(acc) or
+                    self._check_5_pos_postal_num(acc)):
                 return False
         return True
 
@@ -176,27 +203,33 @@ class ResPartnerBank(orm.Model, BankCommon):
         """
         p_banks = self.browse(cursor, uid, ids)
         for p_bank in p_banks:
-            if not p_bank.state in ('bv', 'bvr'):
+            if p_bank.state not in ('bv', 'bvr'):
                 continue
             bank_ccp = p_bank.bank.ccp if p_bank.bank else False
             if not bank_ccp:
                 continue
-            part_bank_check = (self._check_5_pos_postal_num(p_bank.acc_number) or
-                               self._check_9_pos_postal_num(p_bank.acc_number))
-            bank_check = (self._check_5_pos_postal_num(p_bank.bank.ccp) or
-                          self._check_9_pos_postal_num(p_bank.bank.ccp))
+            part_bank_check = (
+                self._check_5_pos_postal_num(p_bank.acc_number) or
+                self._check_9_pos_postal_num(p_bank.acc_number)
+            )
+            bank_check = (
+                self._check_5_pos_postal_num(p_bank.bank.ccp) or
+                self._check_9_pos_postal_num(p_bank.bank.ccp)
+            )
             if part_bank_check and bank_check:
                 return False
         return True
 
-    _constraints = [(_check_postal_num,
-                    'Please enter a correct postal number. (01-23456-1 or 12345)',
-                    ['acc_number']),
+    _constraints = [
+        (_check_postal_num,
+         'Please enter a correct postal number. (01-23456-1 or 12345)',
+         ['acc_number']),
 
-                    (_check_ccp_duplication,
-                    'You can not enter a ccp both on the bank and on an account'
-                    ' of type BV, BVR',
-                    ['acc_number', 'bank'])]
+        (_check_ccp_duplication,
+         'You can not enter a ccp both on the bank and on an account'
+         ' of type BV, BVR',
+         ['acc_number', 'bank'])
+    ]
 
     _sql_constraints = [('bvr_adherent_uniq', 'unique (bvr_adherent_num)',
                          'The BVR adherent number must be unique !')]

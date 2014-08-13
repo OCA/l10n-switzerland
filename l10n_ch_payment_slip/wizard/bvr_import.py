@@ -44,8 +44,9 @@ class BvrImporterWizard(orm.TransientModel):
         user_obj = self.pool['res.users']
         user_current = user_obj.browse(cursor, user, user)
 
-        cursor.execute("SELECT inv.id, inv.number from account_invoice "
-                       "AS inv where inv.company_id = %s and type='out_invoice'",
+        cursor.execute("SELECT inv.id, inv.number FROM account_invoice "
+                       "AS inv WHERE inv.company_id = %s "
+                       "And type='out_invoice'",
                        (user_current.company_id.id,))
         result_invoice = cursor.fetchall()
         for inv_id, inv_name in result_invoice:
@@ -56,7 +57,8 @@ class BvrImporterWizard(orm.TransientModel):
         if id_invoice:
             cursor.execute('SELECT l.id'
                            '  FROM account_move_line l, account_invoice i'
-                           '    WHERE l.move_id = i.move_id AND l.reconcile_id is NULL  '
+                           '    WHERE l.move_id = i.move_id '
+                           '    AND l.reconcile_id is NULL  '
                            '    AND i.id IN %s', (tuple([id_invoice]),))
             inv_line = []
             for id_line in cursor.fetchall():
@@ -105,14 +107,18 @@ class BvrImporterWizard(orm.TransientModel):
                 record = {
                     'reference': line[12:39],
                     'amount': float(line[39:47]) + (float(line[47:49]) / 100),
-                    'date': time.strftime('%Y-%m-%d', time.strptime(line[65:71], '%y%m%d')),
+                    'date': time.strftime(
+                        '%Y-%m-%d',
+                        time.strptime(line[65:71], '%y%m%d')
+                    ),
                     'cost': float(line[96:98]) + (float(line[98:100]) / 100),
                 }
 
                 if record['reference'] != mod10r(record['reference'][:-1]):
                     raise orm.except_orm(
                         _('Error'),
-                        _('Recursive mod10 is invalid for reference: %s') % record['reference']
+                        _('Recursive mod10 is invalid for reference: %s') %
+                        record['reference']
                     )
 
                 if line[2] == '5':
@@ -123,7 +129,7 @@ class BvrImporterWizard(orm.TransientModel):
                 records.append(record)
         return records
 
-    #deprecated
+    # deprecated
     def _create_voucher_from_record(self, cursor, uid, record,
                                     statement, line_ids, context=None):
         """Create a voucher with voucher line"""
@@ -157,17 +163,20 @@ class BvrImporterWizard(orm.TransientModel):
                        'amount': abs(record['amount']),
                        'period_id': statement.period_id.id
                        }
-        voucher_id = voucher_obj.create(cursor, uid, voucher_res, context=context)
+        voucher_id = voucher_obj.create(cursor, uid, voucher_res,
+                                        context=context)
 
         voucher_line_dict = False
         if result['value']['line_cr_ids']:
             for line_dict in result['value']['line_cr_ids']:
-                move_line = move_line_obj.browse(cursor, uid, line_dict['move_line_id'], context)
+                move_line = move_line_obj.browse(
+                    cursor, uid, line_dict['move_line_id'], context)
                 if move_id == move_line.move_id.id:
                     voucher_line_dict = line_dict
         if voucher_line_dict:
             voucher_line_dict.update({'voucher_id': voucher_id})
-            voucher_line_obj.create(cursor, uid, voucher_line_dict, context=context)
+            voucher_line_obj.create(
+                cursor, uid, voucher_line_dict, context=context)
         return voucher_id
 
     def _get_account(self, cursor, uid, line_ids, record, context=None):
@@ -176,17 +185,20 @@ class BvrImporterWizard(orm.TransientModel):
         move_line_obj = self.pool.get('account.move.line')
         account_id = False
         if line_ids:
-            for line in move_line_obj.browse(cursor, uid, line_ids, context=context):
+            for line in move_line_obj.browse(
+                    cursor, uid, line_ids, context=context):
                 return line.account_id.id
         if not account_id and not line_ids:
             name = "property_account_receivable"
             if record['amount'] < 0:
                 name = "property_account_payable"
-            account_id = property_obj.get(cursor, uid, name, 'res.partner', context=context).id
+            account_id = property_obj.get(
+                cursor, uid, name, 'res.partner', context=context).id
             if not account_id:
                 raise orm.except_orm(
                     _('Error'),
-                    _('The properties account payable account receivable are not set')
+                    _('The properties account payable account receivable '
+                      'are not set')
                 )
         return account_id
 
@@ -212,7 +224,7 @@ class BvrImporterWizard(orm.TransientModel):
             order='date desc',
             context=context
         )
-        #for multiple payments
+        # For multiple payments
         if not line_ids:
             line_ids = move_line_obj.search(
                 cursor, uid,
@@ -224,7 +236,8 @@ class BvrImporterWizard(orm.TransientModel):
                 context=context
             )
         if not line_ids:
-            line_ids = self._reconstruct_invoice_ref(cursor, uid, reference, None)
+            line_ids = self._reconstruct_invoice_ref(cursor, uid,
+                                                     reference, None)
         if line_ids and voucher_enabled:
             values['voucher_id'] = self._create_voucher_from_record(
                 cursor, uid, record,
@@ -237,19 +250,22 @@ class BvrImporterWizard(orm.TransientModel):
         if line_ids:
             line = move_line_obj.browse(cursor, uid, line_ids[0])
             partner_id = line.partner_id.id
-            values['name'] = line.invoice and (_('Inv. no ') + line.invoice.number) or values['name']
+            num = line.invoice.number if line.invoice else False
+            values['name'] = _('Inv. no %s') % num if num else values['name']
             values['partner_id'] = partner_id
         return values
 
     def import_v11(self, cursor, uid, ids, data, context=None):
         """Import v11 file and transfor it into statement lines"""
-        if context is None: context = {}
+        if context is None:
+            context = {}
         module_obj = self.pool['ir.module.module']
         voucher_enabled = module_obj.search(cursor,
                                             uid,
                                             [('name', '=', 'account_voucher'),
                                              ('state', '=', 'installed')])
-        # if module installed we check ir.config_parameter to force disable of voucher
+        # if module installed we check ir.config_parameter
+        # to force disable of voucher
         if voucher_enabled:
             para = self.pool['ir.config_parameter'].get_param(
                 cursor,
@@ -282,13 +298,19 @@ class BvrImporterWizard(orm.TransientModel):
                                              context=context)
             statement_line_obj.create(cursor, uid, values, context=context)
         attachment_obj.create(
-            cursor, uid,
-            {'name': 'BVR %s' % time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
-             'datas': file,
-             'datas_fname': 'BVR %s.txt' % time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime()),
-             'res_model': 'account.bank.statement',
-             'res_id': statement_id,
-             },
+            cursor,
+            uid,
+            {
+                'name': 'BVR %s' % time.strftime(
+                    "%Y-%m-%d_%H:%M:%S", time.gmtime()
+                ),
+                'datas': file,
+                'datas_fname': 'BVR %s.txt' % time.strftime(
+                    "%Y-%m-%d_%H:%M:%S", time.gmtime()
+                ),
+                'res_model': 'account.bank.statement',
+                'res_id': statement_id,
+            },
             context=context
         )
 
@@ -296,7 +318,8 @@ class BvrImporterWizard(orm.TransientModel):
 
     def import_bvr(self, cursor, uid, ids, context=None):
         data = {}
-        if context is None: context = {}
+        if context is None:
+            context = {}
         active_ids = context.get('active_ids', [])
         active_id = context.get('active_id', False)
         data['form'] = {}
@@ -308,7 +331,3 @@ class BvrImporterWizard(orm.TransientModel):
             data['form']['file'] = res['file']
         self.import_v11(cursor, uid, ids, data, context=context)
         return {}
-
-
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
