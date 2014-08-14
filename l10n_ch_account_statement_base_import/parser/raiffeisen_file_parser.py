@@ -32,21 +32,24 @@ from openerp.tools.translate import _
 import logging
 logger = logging.getLogger(__name__)
 
+
 def float_or_zero(val):
     """ Conversion function used to manage
     empty string into float usecase"""
     return float(val) if val else 0.0
 
+
 class RaiffeisenFileParser(FileParser):
-    
-    def __init__(self, parse_name, ftype='csv', extra_fields=None, header=None, **kwargs):
+
+    def __init__(self, parse_name, ftype='csv', extra_fields=None,
+                 header=None, **kwargs):
         """
-            :param char: parse_name: The name of the parser
-            :param char: ftype: extension of the file (could be csv, xls or xlsx)
-            :param dict: extra_fields: extra fields to add to the conversion dict. In the format
-                                     {fieldname: fieldtype}
-            :param list: header : specify header fields if the csv file has no header
-            """
+        :param char: parse_name: The name of the parser
+        :param char: ftype: extension of the file
+        :param dict: extra_fields: extra fields to add to the conversion dict.
+        :param list: header : specify header fields if the csv file
+        has no header
+        """
 
         super(RaiffeisenFileParser, self).__init__(parse_name, **kwargs)
         self.conversion_dict = {
@@ -67,11 +70,11 @@ class RaiffeisenFileParser(FileParser):
     def get_st_line_vals(self, line, *args, **kwargs):
         """
         This method must return a dict of vals that can be passed to create
-        method of statement line in order to record it. It is the responsibility
-        of every parser to give this dict of vals, so each one can implement his
-        own way of recording the lines.
-            :param:  line: a dict of vals that represent a line of result_row_list
-            :return: dict of values to give to the create method of statement line,
+        method of statement line in order to record it.
+            :param:  line: a dict of vals that represent a line of
+                           result_row_list
+            :return: dict of values to give to the create method of
+                     statement line,
         """
         res = {
             'name': line.get("Text"),
@@ -80,25 +83,30 @@ class RaiffeisenFileParser(FileParser):
             'ref': '/',
             'label': line.get("Text")
         }
-	
+
         return res
-        
+
     def _custom_format(self, *args, **kwargs):
         """
-        The file format is in iso-8859-15, must be converted to utf-8 before parsing.
+        The file format is in iso-8859-15, must be converted to
+        utf-8 before parsing.
         """
-        self.filebuffer = self.filebuffer.decode('iso-8859-15').encode('utf-8')
+        self.filebuffer = self.filebuffer.decode(
+            'iso-8859-15').encode('utf-8')
         return True
 
+
 class RaiffeisenDetailsFileParser(FileParser):
-    def __init__(self, parse_name, ftype='csv', extra_fields=None, header=None, **kwargs):
+
+    def __init__(self, parse_name, ftype='csv', extra_fields=None,
+                 header=None, **kwargs):
         """
-            :param char: parse_name: The name of the parser
-            :param char: ftype: extension of the file (could be csv, xls or xlsx)
-            :param dict: extra_fields: extra fields to add to the conversion dict. In the format
-                                     {fieldname: fieldtype}
-            :param list: header : specify header fields if the csv file has no header
-            """
+        :param char: parse_name: The name of the parser
+        :param char: ftype: extension of the file
+        :param dict: extra_fields: extra fields to add to the conversion dict.
+        :param list: header : specify header fields if the csv file
+                              has no header
+        """
 
         super(RaiffeisenDetailsFileParser, self).__init__(parse_name, **kwargs)
         self.conversion_dict = {
@@ -115,20 +123,21 @@ class RaiffeisenDetailsFileParser(FileParser):
         the providen name is raiffeisen_details_csvparser
         """
         return parser_name == 'raiffeisen_details_csvparser'
-        
+
     def _parse(self, *args, **kwargs):
         super(RaiffeisenDetailsFileParser, self)._parse(*args, **kwargs)
         first_balance = self.result_row_list[0].get('Balance').replace("'", '')
-        first_amount = self.result_row_list[0].get('Credit/Debit Amount').replace("'", '')
+        first_amount = self.result_row_list[0].get(
+            'Credit/Debit Amount').replace("'", '')
         self.balance_start = str(float(first_balance) - float(first_amount))
-        
+
         i = 1
         while not self.result_row_list[-i].get('Balance'):
             i += 1
         self.balance_end = self.result_row_list[-i].get('Balance')
-        
+
         return True
-        
+
     def _post(self, *args, **kwargs):
         """
         Transform/drop sub rows to be consistent
@@ -140,7 +149,7 @@ class RaiffeisenDetailsFileParser(FileParser):
         rate = 1
         currency = 'CHF'
         for row in self.result_row_list:
-            if row.get('Booked At'): #Main row
+            if row.get('Booked At'):  # Main row
                 rate = 1
                 currency = 'CHF'
                 reported_text = ''
@@ -159,7 +168,7 @@ class RaiffeisenDetailsFileParser(FileParser):
                         currency = text_rate[0].split(' ')[-2]
                 else:
                     cleanup_rows.append(row)
-            else: #Sub row
+            else:  # Sub row
                 if row.get('Text').startswith(u'Détails invisibles'):
                     if reported_line:
                         cleanup_rows.append(reported_line)
@@ -168,30 +177,31 @@ class RaiffeisenDetailsFileParser(FileParser):
                         continue
                 elif reported_text or reported_line:
                     row['Booked At'] = last_date
-                    name, amount = self._get_values(row, currency=currency, rate=rate)
+                    name, amount = self._get_values(
+                        row, currency=currency, rate=rate)
                     row['Text'] = reported_text + name
                     row['Credit/Debit Amount'] = amount
                     cleanup_rows.append(row)
-                    
+
         self.result_row_list = cleanup_rows
-        
+
         return super(RaiffeisenDetailsFileParser, self)._post(*args, **kwargs)
 
     def get_st_line_vals(self, line, *args, **kwargs):
         """
         This method must return a dict of vals that can be passed to create
-        method of statement line in order to record it. It is the responsibility
-        of every parser to give this dict of vals, so each one can implement his
-        own way of recording the lines.
-            :param:  line: a dict of vals that represent a line of result_row_list
-            :return: dict of values to give to the create method of statement line,
+        method of statement line in order to record it.
+            :param:  line: a dict of vals that represent a line of
+                           result_row_list
+            :return: dict of values to give to the create method of
+                     statement line,
         """
         # We try to extract a BVR reference
         result = re.match('.*(\d{27}).*', line.get('Text'))
         ref = '/'
         if result and not line.get('Text').startswith(u'Crèdit'):
             ref = result.group(1)
-        
+
         res = {
             'name': line.get("Text"),
             'date': line.get("Booked At", datetime.now().date()),
@@ -199,28 +209,32 @@ class RaiffeisenDetailsFileParser(FileParser):
             'ref': ref,
             'label': line.get("Text")
         }
-	
+
         return res
-        
+
     def _custom_format(self, *args, **kwargs):
         """
-        The file format is in iso-8859-15, must be converted to utf-8 before parsing.
+        The file format is in iso-8859-15, must be converted
+        to utf-8 before parsing.
         """
         self.filebuffer = self.filebuffer.decode('iso-8859-15').encode('utf-8')
         return True
-        
+
     def _parse_csv(self):
         ''' UnicodeDictReader is not able to determine delimiter... '''
         csv_file = tempfile.NamedTemporaryFile()
         csv_file.write(self.filebuffer)
         csv_file.flush()
         with open(csv_file.name, 'rU') as fobj:
-            reader = csv.DictReader(fobj, delimiter=';', fieldnames=self.fieldnames)
+            reader = csv.DictReader(
+                fobj, delimiter=';', fieldnames=self.fieldnames)
             rows = []
             for row in reader:
-                rows.append(dict([(key, unicode(value, 'utf-8')) for key, value in row.iteritems()]))
+                rows.append(
+                    dict([(key, unicode(value, 'utf-8'))
+                         for key, value in row.iteritems()]))
             return rows
-        
+
     def _get_values(self, line, currency='CHF', rate=1):
         name = ''
         amount = '0.0'
@@ -229,7 +243,7 @@ class RaiffeisenDetailsFileParser(FileParser):
             name = vals[0]
             amount = float(vals[1].replace("'", "")) * rate
         else:
-            raise orm.except_orm('ParsingError', 
-                                 _('Unable to parse amount for ligne %s') % line.get('Text'))
+            raise orm.except_orm('ParsingError',
+                                 _('Unable to parse amount for ligne %s') %
+                                 line.get('Text'))
         return name, str(amount)
-        

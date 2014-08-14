@@ -26,18 +26,18 @@
  'complexity': 'normal',
  'depends': [
      'account_statement_base_import',
-     ],
+ ],
  'description': """
- This module adds several import types to the module account_statement_base_import, in order to read swiss bank statements. It currently supports the following file formats :
- 
- * .v11, .esr, .bvr formats (ESR standard) for records of type 3 (type 4 is ready to be implemented)
+ This module adds several import types to the module
+ account_statement_base_import, in order to read swiss bank statements.
+ It currently supports the following file formats :
+
+ * .v11, .esr, .bvr formats (ESR standard) for records of type 3
+   (type 4 is ready to be implemented)
  * .g11 format from Postfinance S.A. for Direct Debit records of type 2
  * XML format from Postfinance S.A.
  * .csv format from Raiffeisen Bank
- * .csv format from UBS Bank [CH-FR] (not working currently)
- 
- This module supports commissions for transactions if the module account_statement_commission is installed.
-
+ * .csv format from UBS Bank [CH-FR]
  """,
  'website': 'http://www.compassion.ch/',
  'data': [],
@@ -46,4 +46,4 @@
  'images': [],
  'auto_install': False,
  'license': 'AGPL-3',
-}
+ }

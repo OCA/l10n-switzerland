@@ -21,7 +21,8 @@ from openerp.osv.osv import except_osv
 import tempfile
 import datetime
 import tarfile
-from account_statement_base_import.parser.parser import BankStatementImportParser
+from account_statement_base_import.parser.parser \
+    import BankStatementImportParser
 
 from lxml import etree
 
@@ -29,11 +30,11 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
+
 class XMLPFParser(BankStatementImportParser):
     """
     Parser for XML Postfinance Statements (can be wrapped in a tar.gz file)
     """
-
     def __init__(self, parse_name, ftype='xml', **kwargs):
         """
         :param char: parse_name: The name of the parser
@@ -41,13 +42,13 @@ class XMLPFParser(BankStatementImportParser):
         """
 
         super(XMLPFParser, self).__init__(parse_name, **kwargs)
-        
-        if ftype in ('xml','gz'):
+
+        if ftype in ('xml', 'gz'):
             self.ftype = ftype
         else:
             raise except_osv(_('User Error'),
-                             _('Invalid file type %s. Please use xml or gz') % ftype)
-
+                             _('Invalid file type %s. Please use xml or gz') %
+                             ftype)
 
     @classmethod
     def parser_for(cls, parser_name):
@@ -56,7 +57,7 @@ class XMLPFParser(BankStatementImportParser):
         the providen name is generic_csvxls_so
         """
         return parser_name == 'pf_xmlparser'
-    
+
     def _custom_format(self, *args, **kwargs):
         """
         Extract the XML statement if the given file is a tar gz file.
@@ -66,12 +67,12 @@ class XMLPFParser(BankStatementImportParser):
             pf_file.write(self.filebuffer)
             # We ensure that cursor is at beginning of file
             pf_file.seek(0)
-            
+
             tfile = tarfile.open(fileobj=pf_file, mode="r:gz")
             tfile_xml = [filename
                          for filename in tfile.getnames()
                          if filename.endswith('.xml')]
-            
+
             self.filebuffer = tfile.extractfile(tfile_xml[0]).read()
 
         return True
@@ -90,24 +91,29 @@ class XMLPFParser(BankStatementImportParser):
         r = reader.xpath("//SG5/MOA/C516")
         for move in r:
             if move.xpath(".//@Value='315'"):
-                self.balance_start=float(move.xpath("./D_5004/text()")[0])
-            
+                self.balance_start = float(move.xpath("./D_5004/text()")[0])
+
             if move.xpath(".//@Value='343'"):
-                self.balance_end=float(move.xpath("./D_5004/text()")[0])
-            
+                self.balance_end = float(move.xpath("./D_5004/text()")[0])
+
         r = reader.xpath("//SG6")
         res = []
         for move in r:
             if move.xpath(".//@Value='TGT'"):
-                date=datetime.datetime.strptime(move.xpath("DTM/C507/D_2380/text()")[0],"%Y%m%d").date()
+                date = datetime.datetime.strptime(
+                    move.xpath("DTM/C507/D_2380/text()")[0], "%Y%m%d").date()
                 if move.xpath(".//@Value='ZZZ'"):
-                    ref= move.xpath("RFF/C506/D_1154/text()")[1]
-                else: ref="/"
-                lib="\n".join(move.xpath("FTX/C108/D_4440/text()"))
-                amount=float(move.xpath("MOA/C516/D_5004/text()")[0])
-                if move.xpath("MOA/C516/D_5025/@Value='211'"): amount*=-1
-            
-                res.append({'ref': ref,'lib': lib,'date':date.strftime("%Y-%m-%d"),'amount':amount})
+                    ref = move.xpath("RFF/C506/D_1154/text()")[1]
+                else:
+                    ref = "/"
+                lib = "\n".join(move.xpath("FTX/C108/D_4440/text()"))
+                amount = float(move.xpath("MOA/C516/D_5004/text()")[0])
+                if move.xpath("MOA/C516/D_5025/@Value='211'"):
+                    amount *= -1
+
+                res.append(
+                    {'ref': ref, 'lib': lib,
+                        'date': date.strftime("%Y-%m-%d"), 'amount': amount})
 
         self.result_row_list = res
         return True
@@ -123,26 +129,15 @@ class XMLPFParser(BankStatementImportParser):
         No special conversion needed.
         """
         return True
-        
+
     def get_st_line_vals(self, line, *args, **kwargs):
         """
         This method must return a dict of vals that can be passed to create
-        method of statement line in order to record it. It is the responsibility
-        of every parser to give this dict of vals, so each one can implement his
-        own way of recording the lines.
-            :param:  line: a dict of vals that represent a line of result_row_list
-            :return: dict of values to give to the create method of statement line,
-                     it MUST contain at least:
-                {
-                    'name':value,
-                    'date':value,
-                    'amount':value,
-                    'ref':value,
-                    'label':value,
-                    'commission_amount':value,
-                }
-        In this generic parser, the commission is given for every line, so we store it
-        for each one.
+        method of statement line in order to record it.
+            :param:  line: a dict of vals that represent a line of
+                           result_row_list
+            :return: dict of values to give to the create method of
+                     statement line,
         """
         res = {
             'name': line.get('lib', line.get('ref', '/')),
@@ -151,5 +146,5 @@ class XMLPFParser(BankStatementImportParser):
             'ref': line.get('ref', '/'),
             'label': line.get('lib', ''),
         }
-	
+
         return res
