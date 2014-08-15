@@ -19,8 +19,22 @@
 #
 ##############################################################################
 
-from . import banking_export_ch_dd
-from . import bank
-from . import invoice
-from . import move_line
-from . import payment_order
+from openerp.osv import orm
+
+
+class account_move_line(orm.Model):
+    '''
+    Use hooks to add bvr ref generation if account is IBAN and has LSV
+    identifier
+    '''
+    _inherit = 'account.move.line'
+
+    def _is_generate_bvr(self, cr, uid, invoice, context=None):
+        ''' If linked bank account is an iban account with LSV identifier,
+            we also generate a bvr ref (as it's necessary in LSV file)
+        '''
+        val = super(account_move_line, self)._is_generate_bvr(cr, uid, invoice,
+                                                              context)
+        return val or (invoice.partner_bank_id and
+                       invoice.partner_bank_id.state == 'iban' and
+                       invoice.partner_bank_id.lsv_identifier)
