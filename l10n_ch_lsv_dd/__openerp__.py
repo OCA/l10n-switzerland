@@ -24,11 +24,11 @@
 {
     'name': 'LSV and Postfinance Direct Debit file generation',
     'summary': 'Create LSV and Direct Debit (postfinance) files',
-    'version': '0.1',
+    'version': '1.0',
     'license': 'AGPL-3',
     'author': 'Compassion',
     'website': 'http://www.compassion.ch',
-    'category': 'Banking addons',
+    'category': 'Localization',
     'depends': ['account_direct_debit',
                 'account_banking_mandate',
                 'l10n_ch_payment_slip_base_transaction_id'],
@@ -60,32 +60,41 @@ Features:
 Prerequisite for LSV file generation:
 -------------------------------------
 For LSV file generation, don't forget :
-    * To set your LSV identifier in your company settings.
-    * To set your BVR identifier in your company settings if you want to use \
-    BVR references.
+    * To set your LSV identifier in your beneficiary bank account.
+    * To set your BVR identifier in your beneficiary bank account if you want \
+    to use BVR references.
     * To setup a payment mode with payment type "LSV Direct Debit"
     * That each partner which is concerned by LSV has to have a valid bank \
     account with a valid mandate.
 
+Prerequisite for Postfiance Direct Debit file generation:
+---------------------------------------------------------
+For postfinance DD file generation, don't forget :
+    * To set your Postfinance DD identifier in your beneficiary BVR account.
+    * To setup a payment mode with payment type "Postfinance Direct Debit"
+    * That each partner which is concerned by Postfinance DD has to have a \
+    valid BV account with a valid mandate.
 
 Standard workflow:
 ------------------
     * Create some invoices for partners with well configured bank accounts.
-    * Create a Direct Debit Order with a payment mode having LSV payment type.
-    * Make sure that due dates are in range -10 day to +30 days if you chose \
-    "Due date" as preferred date.
+    * Create a Direct Debit order with a payment mode having LSV/DD payment \
+    type.
+    * Make sure that due dates are in the valid range if you chose "Due date" \
+    as preferred execution date.
     * Press "Confirm payments"
-    * Press "Make payments". This will launch the LSV file generation wizard.
+    * Press "Make payments". This will launch the LSV/DD file generation \
+    wizard.
     * Download the generated file and press "Validate". If you need to \
     download the file again, you can access the generated file with the \
     "Generated Direct Debit Files" menu.
 
-Actually, only BVR reference usage is implemented (using l10n_ch_payment_slip
-module). IPI usage is not implemented yet, this way an error occurs if no BVR
-ref are set in invoices.
+Currently, only BVR reference usage is implemented (using l10n_ch_payment_slip
+ module) for LSV refernece. IPI usage is not implemented yet, this way an
+ error occurs if no BVR ref are set in invoices.
 
 This module uses the framework provided by the banking addons, cf
-https://launchpad.net/banking-addons
+https://github.com/OCA/banking
     ''',
     'active': False,
     'installable': True,
