@@ -27,8 +27,8 @@
  'depends': [
      'account_statement_base_import',
  ],
- 'external_dependencies' : {
-    'python' : ['xlrd'],
+ 'external_dependencies': {
+     'python': ['xlrd'],
  },
  'description': """
  This module adds several import types to the module
@@ -41,7 +41,7 @@
  * XML format from Postfinance S.A.
  * .csv format from Raiffeisen Bank
  * .csv format from UBS Bank [CH-FR]
- 
+
  Warning : this module requires the python library 'xlrd'.
  """,
  'website': 'http://www.compassion.ch/',
