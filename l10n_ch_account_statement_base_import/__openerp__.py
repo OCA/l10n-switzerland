@@ -20,13 +20,16 @@
 ##############################################################################
 
 {'name': "Swiss bank statements import",
- 'version': '0.2',
+ 'version': '0.3',
  'author': 'Compassion CH',
  'category': 'Finance',
  'complexity': 'normal',
  'depends': [
      'account_statement_base_import',
  ],
+ 'external_dependencies' : {
+    'python' : ['xlrd'],
+ },
  'description': """
  This module adds several import types to the module
  account_statement_base_import, in order to read swiss bank statements.
@@ -38,6 +41,8 @@
  * XML format from Postfinance S.A.
  * .csv format from Raiffeisen Bank
  * .csv format from UBS Bank [CH-FR]
+ 
+ Warning : this module requires the python library 'xlrd'.
  """,
  'website': 'http://www.compassion.ch/',
  'data': [],
