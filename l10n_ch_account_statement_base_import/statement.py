@@ -87,14 +87,20 @@ class AccountStatementProfil(Model):
 
             tfile = tarfile.open(fileobj=pf_file, mode="r:gz")
             for filename in tfile.getnames():
-                if filename.endswith('.png'):
-                    attachment_data = {
-                        'name': filename,
-                        'datas': tfile.extractfile(filename).read(),
-                        'datas_fname': "%s.%s" % (
-                            datetime.datetime.now().date(), filename[-4:]),
-                        'res_model': 'account.bank.statement',
-                        'res_id': statement_id,
-                    }
-                    self.pool.get('ir.attachment').create(
-                        cr, uid, attachment_data, context=context)
+                if filename[-3:] not in ['xml', 'png']:
+                    continue
+                data = None
+                if filename[-3:] == 'png':
+                    data = tfile.extractfile(filename).read()
+                else:
+                    data = tfile.extractfile(filename).read().encode('base64')
+                attachment_data = {
+                    'name': filename,
+                    'datas': data,
+                    'datas_fname': "%s.%s" % (
+                        datetime.datetime.now().date(), filename[-4:]),
+                    'res_model': 'account.bank.statement',
+                    'res_id': statement_id,
+                }
+                self.pool.get('ir.attachment').create(
+                    cr, uid, attachment_data, context=context)
