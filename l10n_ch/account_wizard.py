@@ -30,11 +30,11 @@ class WizardMultiChartsAccounts(orm.TransientModel):
                                    chart_template_id=False, context=None):
         if context is None:
             context = {}
-        res = super(WizardMultiChartsAccounts, self).onchange_chart_template_id(
-            cr, uid, ids,
-            chart_template_id=chart_template_id,
-            context=context
-        )
+        res = super(WizardMultiChartsAccounts,
+                    self).onchange_chart_template_id(
+                        cr, uid, ids,
+                        chart_template_id=chart_template_id,
+                        context=context)
         # 0 is evaluated as False in python so we have to do this
         # because original wizard test code_digits value on a float widget
         if chart_template_id:
