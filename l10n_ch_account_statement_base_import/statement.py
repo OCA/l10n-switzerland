@@ -89,11 +89,7 @@ class AccountStatementProfil(Model):
             for filename in tfile.getnames():
                 if filename[-3:] not in ['xml', 'png']:
                     continue
-                data = None
-                if filename[-3:] == 'png':
-                    data = tfile.extractfile(filename).read()
-                else:
-                    data = tfile.extractfile(filename).read().encode('base64')
+                data = tfile.extractfile(filename).read().encode('base64')
                 attachment_data = {
                     'name': filename,
                     'datas': data,
