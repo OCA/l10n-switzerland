@@ -238,7 +238,7 @@ class RaiffeisenDetailsFileParser(FileParser):
     def _get_values(self, line, currency='CHF', rate=1):
         name = ''
         amount = '0.0'
-        vals = line.get('Text').split(' ' + currency + ' ')
+        vals = line.get('Text').rsplit(' ' + currency + ' ', 1)
         if len(vals) == 2:
             name = vals[0]
             amount = float(vals[1].replace("'", "")) * rate
