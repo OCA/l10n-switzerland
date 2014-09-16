@@ -582,10 +582,8 @@ class DTAFileGenerator(orm.TransientModel):
         # Iban and account number are the same field and
         # depends only on the type of account
         acc = bank.acc_number or ''
-        iban = elec_context['comp_bank_iban'].replace(' ', '') or ''
-        elec_context['comp_bank_iban'] = acc
+        elec_context['comp_bank_iban'] = acc.replace(' ', '') or ''
         elec_context['comp_bank_number'] = acc
-        elec_context['comp_bank_iban'] = iban
         if not elec_context['comp_bank_iban']:
             raise orm.except_orm(
                 _('Error'),
