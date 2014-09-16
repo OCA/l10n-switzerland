@@ -171,8 +171,9 @@ class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
                        'information for the invoice:\n%s') % (invoice_name))
                 )
             adherent_num = invoice.partner_bank_id.bvr_adherent_num
-            compliance = self._compile_check_bvr_add_num.match(adherent_num)
-            if invoice.partner_bank_id.bvr_adherent_num and not compliance:
+            compliance = self._compile_check_bvr_add_num.match(
+                adherent_num or '')
+            if adherent_num and not compliance:
                 raise orm.except_orm(
                     _('UserError'),
                     _(('Your bank BVR adherent number must contain only '
