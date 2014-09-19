@@ -56,3 +56,4 @@ l10n_ch_scan_bvr
 ----------------
 
 Allows you to scan the ESR/BVR references and automatically create the proper supplier invoices
+test
