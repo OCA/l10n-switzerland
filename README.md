@@ -56,3 +56,8 @@ l10n_ch_scan_bvr
 ----------------
 
 Allows you to scan the ESR/BVR references and automatically create the proper supplier invoices
+
+l10n_ch
+-------
+
+An up to date verion of swiss account chart. Be careful it duplicates the official module
