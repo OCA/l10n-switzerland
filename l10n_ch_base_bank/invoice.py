@@ -17,11 +17,11 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv.orm import Model
+from openerp import models, fields, api, _
 from openerp.tools import mod10r
 
 
-class AccountInvoice(orm.Model):
+class AccountInvoice(models.Model):
 
     _inherit = "account.invoice"
 
@@ -62,7 +62,7 @@ class AccountInvoice(orm.Model):
                 res['value']['reference_type'] = 'bvr'
             else:
                 res['value']['reference_type'] = 'none'
-                
+
         return res
 
     def _check_reference_type(self, cursor, user, ids, context=None):
