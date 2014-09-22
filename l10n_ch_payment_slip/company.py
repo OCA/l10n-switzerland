@@ -19,10 +19,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv.orm import Model, fields
+from openerp.osv import fields, orm
 
 
-class ResCompany(Model):
+class ResCompany(orm.Model):
     """override company in order to add bvr vertical and
     Horizontal print delta"""
     _inherit = "res.company"

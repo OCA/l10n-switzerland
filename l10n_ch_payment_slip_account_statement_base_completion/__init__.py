@@ -19,5 +19,5 @@
 #
 ##############################################################################
 
-from . import wizard
-from . import statement
+import wizard
+import statement

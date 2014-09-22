@@ -1,1 +1,1 @@
-from . import bvr_import
+import bvr_import

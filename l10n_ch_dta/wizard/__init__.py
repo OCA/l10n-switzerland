@@ -19,7 +19,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import create_dta
-from . import unicode2ascii
+import create_dta
+import unicode2ascii
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

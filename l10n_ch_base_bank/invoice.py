@@ -21,7 +21,7 @@ from openerp.osv.orm import Model
 from openerp.tools import mod10r
 
 
-class AccountInvoice(Model):
+class AccountInvoice(orm.Model):
 
     _inherit = "account.invoice"
 
