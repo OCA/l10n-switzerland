@@ -38,6 +38,6 @@
     "depends": ["l10n_ch"],
     "data": ["bank.xml"],
     "update_xml": [],
-    "active": False,
-    'installable': False,
+    "active": True,
+    'installable': True,
  }

@@ -27,7 +27,7 @@ This module works with C-channel or other OCR scanner.
 
 It helps you to create an invoice directly from the BVR Code. Find the menu entry
 called "Scan BVR" under Accounting -> Supplier. It open a popup from which you
-can scan the BVR number. It'll recognize the needed information and create an 
+can scan the BVR number. It'll recognize the needed information and create an
 invoice for the right supplier.
 
 If you have completed the field "Default product supplier invoice" on the concerned
@@ -45,5 +45,5 @@ It currently supports BVR and BVR+
  "data": ["wizard/scan_bvr_view.xml",
           "partner_view.xml",
           "bank_view.xml"],
- 'installable': False
+ 'installable': True
  }

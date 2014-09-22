@@ -26,7 +26,7 @@
  'license': 'AGPL-3',
  'category': 'Hidden',
  'depends' : ['l10n_ch_payment_slip',
-              'account_statement_base_completion',  # lp:banking-addons/bank-statement-reconcile-7.0 
+              'account_statement_base_completion',  # lp:banking-addons/bank-statement-reconcile-7.0
               ],
  'description': """
 Swiss Localization BVR/ESR - Bank statement Completion
@@ -47,6 +47,6 @@ transaction id field of the bank statement.
  'data': ['data.xml',
           ],
  'tests': [],
- 'installable': False,
- 'auto_install': True,
+ 'installable': True,
+ 'auto_install': False,
 }

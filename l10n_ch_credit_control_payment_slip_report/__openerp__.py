@@ -34,6 +34,6 @@
                             "credit_control_printer_view.xml",
                             "report.xml"
                         ],
-        "active": False,
-        'installable': False
+        "active": True,
+        'installable': True
 }

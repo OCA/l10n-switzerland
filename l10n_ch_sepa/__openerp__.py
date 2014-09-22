@@ -52,7 +52,7 @@ TODO: Needs to be fully tested with a FI
         "test/pain001_eu.yml",
         "test/pain001_ch.yml",
     ],
-    'installable': False,
+    'installable': True,
     "active": True,
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -26,7 +26,7 @@
  'license': 'AGPL-3',
  'category': 'Hidden',
  'depends' : ['l10n_ch_payment_slip',
-              'base_transaction_id',  # lp:banking-addons/bank-statement-reconcile-7.0 
+              'base_transaction_id',  # lp:banking-addons/bank-statement-reconcile-7.0
               ],
  'description': """
 Swiss Localization BVR/ESR - Transaction ID Compatibility
@@ -43,6 +43,6 @@ a new reference.
  'website': 'http://www.camptocamp.com',
  'data': [],
  'tests': [],
- 'installable': False,
- 'auto_install': True,
+ 'installable': True,
+ 'auto_install': False,
 }
