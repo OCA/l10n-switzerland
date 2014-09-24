@@ -110,7 +110,7 @@ class UBSFileParser(FileParser):
         res = {
             'name': label,
             'date': line.get("Date de comptabilisation",
-                             datetime.datetime.now().date()),
+                             datetime.date.today()),
             'amount': amount,
             'ref': '/',
             'label': label

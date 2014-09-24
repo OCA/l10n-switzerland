@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import datetime
+from datetime import date
 import time
 from openerp.osv.osv import except_osv
 from account_statement_base_import.parser.parser \
@@ -69,23 +69,12 @@ class G11FileParser(BankStatementImportParser):
 
     def _pre(self, *args, **kwargs):
         """
-        Check the total record and extract information from it.
+        Check the last total record.
         """
         self.lines = self.filebuffer.splitlines()
-        total_line = self.lines[-1]
-        if total_line[0:3] == '097':
-            self.balance_end = (
-                float(total_line[45:57]) / 100) - (
-                    float(total_line[101:113]) / 100)
-            # self.commission = float(total_line[131:142]) / 100  # not used
-            # self.amount_fail = float(total_line[77:89]) / 100  # not used
-            self.transactions = int(
-                total_line[57:69]) + int(
-                    total_line[89:101]) + int(
-                        total_line[113:125])
-            # Store the currency
-            self.currency = total_line[128:131]
-        else:
+        self.balance_start = 0.0
+        self.balance_end = 0.0
+        if self.lines[-1][0:3] != '097':
             raise except_osv(_("Wrong formatting"),
                              _("The total record could not be read. \
                              Please provide a valid g11 file."))
@@ -97,45 +86,61 @@ class G11FileParser(BankStatementImportParser):
         self.filebuffer in self.result_row_list instance property.
         """
         res = []
-        for line in self.lines[:-1]:
-            ref = line[15:42]
-            currency = line[42:45]
-            amount = float(line[45:57]) / 100
-            # test = line[108:116]
-            date = time.strftime(
-                '%Y-%m-%d', time.strptime(line[108:116], '%Y%m%d'))
-            # commission = float(line[141:147]) / 100
-            label = ''
+        for line in self.lines:
+            if line[0:3] == '097':
+                self._parse_total_line(line)
+            else:
+                ref = line[15:42]
+                currency = line[42:45]
+                amount = float(line[45:57]) / 100
+                transaction_date = time.strftime(
+                    '%Y-%m-%d', time.strptime(line[108:116], '%Y%m%d'))
+                # commission = float(line[141:147]) / 100
+                label = ''
 
-            if line[0:3] == '084':
-                # Fail / Debit record
-                reject_code = line[128:130]
-                if reject_code == '02':
-                    # Debit record
-                    amount *= -1
-                    label = reject_reason[reject_code]
-                else:
-                    # Failed transactions. Get the error reason and put it on
-                    # the OBI field.
-                    label = reject_reason[
-                        reject_code] + '\n' + _(
-                            "Amount to debit was %s %f") % (currency, amount)
-                    amount = 0.0
+                if line[0:3] == '084':
+                    # Fail / Debit record
+                    reject_code = line[128:130]
+                    if reject_code == '02':
+                        # Debit record
+                        amount *= -1
+                        label = reject_reason[reject_code]
+                    else:
+                        # Failed transactions. Get the error reason and
+                        # put it on the OBI field.
+                        label = reject_reason[
+                            reject_code] + '\n' + _(
+                                "Amount to debit was %s %f") % (
+                                    currency, amount)
+                        amount = 0.0
 
-            # Add information to OBI if the transaction is a test.
-            if line[5] == '3':
-                label = _("-- Test transaction --") + '\n' + label
+                # Add information to OBI if the transaction is a test.
+                if line[5] == '3':
+                    label = _("-- Test transaction --") + '\n' + label
 
-            res.append({
-                'ref': ref,
-                'currency': currency,
-                'amount': amount,
-                'date': date,
-                'label': label,
-            })
+                res.append({
+                    'ref': ref,
+                    'currency': currency,
+                    'amount': amount,
+                    'date': transaction_date,
+                    'label': label,
+                })
 
         self.result_row_list = res
         return True
+
+    def _parse_total_line(self, total_line):
+        self.balance_end += (
+            float(total_line[45:57]) / 100) - (
+                float(total_line[101:113]) / 100)
+        # self.commission = float(total_line[131:142]) / 100  # not used
+        # self.amount_fail = float(total_line[77:89]) / 100  # not used
+        self.transactions += int(
+            total_line[57:69]) + int(
+                total_line[89:101]) + int(
+                    total_line[113:125])
+        # Store the currency
+        self.currency = total_line[128:131]
 
     def _validate(self, *args, **kwargs):
         """
@@ -166,7 +171,7 @@ class G11FileParser(BankStatementImportParser):
         """
         res = {
             'name': line.get("label", "/"),
-            'date': line.get('date', datetime.datetime.now().date()),
+            'date': line.get('date', date.today()),
             'amount': line.get('amount', 0.0),
             'ref': line.get('ref', '/'),
             'label': line.get("label"),

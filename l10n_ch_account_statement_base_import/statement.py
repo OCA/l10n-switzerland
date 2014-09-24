@@ -26,7 +26,7 @@ from openerp.osv import osv
 import tempfile
 import tarfile
 import base64
-import datetime
+from datetime import date
 
 
 class AccountStatementProfil(Model):
@@ -94,7 +94,7 @@ class AccountStatementProfil(Model):
                     'name': filename,
                     'datas': data,
                     'datas_fname': "%s.%s" % (
-                        datetime.datetime.now().date(), filename[-4:]),
+                        date.today(), filename[-4:]),
                     'res_model': 'account.bank.statement',
                     'res_id': statement_id,
                 }

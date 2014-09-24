@@ -20,7 +20,7 @@
 ##############################################################################
 import re
 import time
-import datetime
+from datetime import date
 from openerp.osv.osv import except_osv
 from account_statement_base_import.parser.parser \
     import BankStatementImportParser
@@ -39,7 +39,7 @@ class V11FileParser(BankStatementImportParser):
     def __init__(self, parser_name, ftype='v11', **kwargs):
         super(V11FileParser, self).__init__(parser_name, **kwargs)
 
-        if ftype not in ('v11', 'esr', 'bvr'):
+        if ftype.lower() not in ('v11', 'esr', 'bvr'):
             raise except_osv(_('User Error'),
                              _('Invalid file type %s. Please use v11, \
                              esr or bvr') % ftype)
@@ -68,7 +68,9 @@ class V11FileParser(BankStatementImportParser):
         total_code = total_line[0:3]
         if total_code in ('999', '995'):
             self.record_type = 3
+            self.balance_start = 0
             self.balance_end = (float(total_line[39:51]) / 100)
+            self.number_transaction = int(total_line[51:63])
         elif is_total_record_type4(total_code):
             self.record_type = 4
         return True
@@ -93,21 +95,26 @@ class V11FileParser(BankStatementImportParser):
         """
         res = []
         for line in self.lines[:-1]:
-            reference = line[12:39]
-            amount = float(line[39:49]) / 100
-            date = time.strftime(
-                '%Y-%m-%d', time.strptime(line[65:71], '%y%m%d'))
-            cost = float(line[96:100]) / 100  # not used
+            if line[0:3] in ('999', '995'):
+                # Total line : addition the amount to the balance_end
+                self.balance_end += (float(line[39:51]) / 100)
+                self.number_transaction += int(line[51:63])
+            else:
+                reference = line[12:39]
+                amount = float(line[39:49]) / 100
+                date = time.strftime(
+                    '%Y-%m-%d', time.strptime(line[71:77], '%y%m%d'))
+                cost = float(line[96:100]) / 100  # not used
 
-            if line[2] == '5':
-                amount *= -1
-                cost *= -1
+                if line[2] == '5':
+                    amount *= -1
+                    cost *= -1
 
-            res.append({
-                'ref': reference,
-                'amount': amount,
-                'date': date,
-            })
+                res.append({
+                    'ref': reference,
+                    'amount': amount,
+                    'date': date,
+                })
 
         return res
 
@@ -124,10 +131,10 @@ class V11FileParser(BankStatementImportParser):
         Inherit this method to add validation for record type 4.
         """
         if self.record_type == 3:
-            if not len(self.result_row_list) == int(self.lines[-1][51:63]):
+            if not len(self.result_row_list) == self.number_transaction:
                 raise except_osv(_('Invalid data'),
                                  _('The number of read transactions doesn\'t match the \
-                                 total record in file'))
+                                 total records in file'))
 
         return True
 
@@ -148,7 +155,7 @@ class V11FileParser(BankStatementImportParser):
         """
         res = {
             'name': '/',
-            'date': line.get('date', datetime.datetime.now().date()),
+            'date': line.get('date', date.today()),
             'amount': line.get('amount', 0.0),
             'ref': line.get('ref', '/'),
         }

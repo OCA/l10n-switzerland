@@ -100,8 +100,10 @@ class XMLPFParser(BankStatementImportParser):
         res = []
         for move in r:
             if move.xpath(".//@Value='TGT'"):
-                date = datetime.datetime.strptime(
-                    move.xpath("DTM/C507/D_2380/text()")[0], "%Y%m%d").date()
+                transaction_date = move.xpath("DTM/C507/D_2380/text()")
+                if transaction_date:
+                    date = datetime.datetime.strptime(
+                        transaction_date[0], "%Y%m%d").date()
                 if move.xpath(".//@Value='ZZZ'"):
                     ref = move.xpath("RFF/C506/D_1154/text()")[1]
                 else:
@@ -111,9 +113,11 @@ class XMLPFParser(BankStatementImportParser):
                 if move.xpath("MOA/C516/D_5025/@Value='211'"):
                     amount *= -1
 
-                res.append(
-                    {'ref': ref, 'lib': lib,
-                        'date': date.strftime("%Y-%m-%d"), 'amount': amount})
+                line_res = {'ref': ref, 'lib': lib, 'amount': amount}
+                if date:
+                    line_res.update({'date': date.strftime(
+                        "%Y-%m-%d")})
+                res.append(line_res)
 
         self.result_row_list = res
         return True
@@ -141,7 +145,7 @@ class XMLPFParser(BankStatementImportParser):
         """
         res = {
             'name': line.get('lib', line.get('ref', '/')),
-            'date': line.get('date', datetime.datetime.now().date()),
+            'date': line.get('date', datetime.date.today()),
             'amount': line.get('amount', 0.0),
             'ref': line.get('ref', '/'),
             'label': line.get('lib', ''),

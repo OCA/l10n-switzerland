@@ -78,7 +78,7 @@ class RaiffeisenFileParser(FileParser):
         """
         res = {
             'name': line.get("Text"),
-            'date': line.get("Booked At", datetime.now().date()),
+            'date': line.get("Booked At", datetime.date.today()),
             'amount': line.get("Credit/Debit Amount", 0.0),
             'ref': '/',
             'label': line.get("Text")

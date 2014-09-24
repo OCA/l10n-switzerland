@@ -32,17 +32,21 @@ class l10n_ch_import(common.TransactionCase):
         # Define the currency to CHF
         currency_id = self.registry('res.currency').search(
             self.cr, self.uid, [('name', '=', 'CHF')])[0]
-        self.registry('res.company').write(self.cr, self.uid, self.company_a.id, {
-            'currency_id': currency_id
-        })
+        self.registry('res.company').write(
+            self.cr, self.uid, self.company_a.id, {
+                'currency_id': currency_id
+            })
         self.profile_obj = self.registry("account.statement.profile")
         self.account_bank_statement_obj = self.registry(
             "account.bank.statement")
-        # create the 2002, 2011-2012 fiscal years since imported test files reference
-        # statement lines in those years
-        self.fiscalyear_id = self._create_fiscalyear("2002", self.company_a.id)
-        self.fiscalyear_id = self._create_fiscalyear("2011", self.company_a.id)
-        self.fiscalyear_id = self._create_fiscalyear("2012", self.company_a.id)
+        # create the 2002, 2011-2012 fiscal years since imported
+        # test files reference statement lines in those years
+        self.fiscalyear_id = self._create_fiscalyear(
+            "2002", self.company_a.id)
+        self.fiscalyear_id = self._create_fiscalyear(
+            "2011", self.company_a.id)
+        self.fiscalyear_id = self._create_fiscalyear(
+            "2012", self.company_a.id)
         self.account_id = self.ref("account.a_recv")
         self.journal_id = self.ref("account.bank_journal")
         self.import_wizard_obj = self.registry('credit.statement.import')
@@ -62,7 +66,7 @@ class l10n_ch_import(common.TransactionCase):
     def _filename_to_abs_filename(self, file_name):
         dir_name = os.path.dirname(inspect.getfile(self.__class__))
         return os.path.join(dir_name, file_name)
-        
+
     def _create_statement_profile(self, import_type):
         self.profile_id = self.profile_obj.create(self.cr, self.uid, {
             "name": "BASE_PROFILE",
@@ -95,7 +99,7 @@ class l10n_ch_import(common.TransactionCase):
         file_name = self._filename_to_abs_filename(
             os.path.join("..", "data", "postfinance_xml.tar.gz"))
         statement = self._import_file(file_name)
-        
+
         # Validate imported statement
         self.assertEqual("/", statement.name)
         self.assertEqual(372797.79, statement.balance_start)
@@ -107,7 +111,7 @@ class l10n_ch_import(common.TransactionCase):
         self.assertEqual(st_line_obj.date, "2011-03-28")
         self.assertEqual(st_line_obj.amount, -227.30)
         self.assertEqual(st_line_obj.name, "ZAHLUNGSAUFTRAG NR. 30002102")
-        
+
     def test_v11_esr_file(self):
         """Test import from v11 file
         """
@@ -124,10 +128,10 @@ class l10n_ch_import(common.TransactionCase):
         self.assertTrue(statement.account_id)
         st_line_obj = statement.line_ids[0]
         # Read common infos of first line
-        self.assertEqual(st_line_obj.date, "2012-11-16")
+        self.assertEqual(st_line_obj.date, "2012-11-15")
         self.assertEqual(st_line_obj.amount, 65.00)
         self.assertEqual(st_line_obj.ref, "000000000000000264200013592")
-        
+
     def test_raiffeisen_detailed_file(self):
         """Test import from raiffeisen detailed csv file
         """
@@ -145,8 +149,11 @@ class l10n_ch_import(common.TransactionCase):
         # Read common infos of first line
         self.assertEqual(st_line_obj.date, "2014-08-06")
         self.assertEqual(st_line_obj.amount, 50.00)
-        self.assertEqual(st_line_obj.name, "Customer1 1/1202 GENEVE 6/CH/UBS/XXXX-XXXXXXXX COTISATION MENSUELLE ")
-        
+        self.assertEqual(
+            st_line_obj.name,
+            "Customer1 1/1202 GENEVE 6/CH/UBS/XXXX-XXXXXXXX "
+            "COTISATION MENSUELLE ")
+
     def test_ubs_file(self):
         """Test import from ubs csv file
         """
@@ -163,10 +170,11 @@ class l10n_ch_import(common.TransactionCase):
         self.assertTrue(statement.account_id)
         st_line_obj = statement.line_ids[0]
         # Read common infos of first line
-        self.assertEqual(st_line_obj.date, "2014-08-02")
+        self.assertEqual(st_line_obj.date, "2014-08-01")
         self.assertEqual(st_line_obj.amount, 236.10)
-        self.assertEqual(st_line_obj.name, "Dividend VN   472672     101368S3 NOKIA")
-        
+        self.assertEqual(st_line_obj.name,
+                         "Dividend VN   472672     101368S3 NOKIA")
+
     def test_g11_file(self):
         """Test import from g11 file
         """

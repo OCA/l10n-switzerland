@@ -19,8 +19,8 @@
 #
 ##############################################################################
 
-import g11_file_parser
-import postfinance_file_parser
-import raiffeisen_file_parser
-import ubs_file_parser
-import v11_file_parser
+from . import g11_file_parser
+from . import postfinance_file_parser
+from . import raiffeisen_file_parser
+from . import ubs_file_parser
+from . import v11_file_parser
