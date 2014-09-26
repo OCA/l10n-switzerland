@@ -45,6 +45,12 @@ Provides support of DTA payment file protocol to generate electronic payment fil
 This feature will be depreacted around the end of 2014.
 
 
+l10n_ch_lsv_dd
+--------------
+
+Provides support of LSV and Postfinance Direct Debit protocol to generate eletronic debit files.
+
+
 l10n_ch_sepa
 ------------
 
