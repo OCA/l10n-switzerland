@@ -88,15 +88,17 @@ class Bank(models.Model, BankCommon):
                 return False
         return True
 
-    def name_get(self, cursor, uid, ids, context=None):
+    @api.multi
+    def name_get(self):
         res = []
         cols = ('bic', 'name', 'street', 'city')
-        for bank in self.browse(cursor, uid, ids, context):
+        for bank in self:
             vals = (bank[x] for x in cols if bank[x])
             res.append((bank.id, ' - '.join(vals)))
         return res
 
-    def name_search(self, cursor, uid, name, args=None, operator='ilike', context=None, limit=80):
+    @api.model
+    def name_search(self, name, args=None, operator='ilike', limit=80):
         if args is None:
             args = []
         if context is None:
@@ -133,7 +135,7 @@ class ResPartnerBank(models.Model, BankCommon):
     _inherit = 'res.partner.bank'
 
     bvr_adherent_num = fields.Char(
-        'Bank BVR adherent number', size=11,
+        string='Bank BVR adherent number', size=11,
         help=("Your Bank adherent number to be printed in references of your BVR."
             "This is not a postal account number.")
         )
