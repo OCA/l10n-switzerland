@@ -45,6 +45,9 @@
         'security/ir.model.access.csv',
     ],
     'demo': [],
+    'test': [
+        'test/lsv-dd-test.yml',
+    ],
     'description': '''
 LSV and Postfinance Direct Debit file generator
 ===============================================
