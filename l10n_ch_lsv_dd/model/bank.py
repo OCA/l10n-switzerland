@@ -89,7 +89,6 @@ class res_partner_bank(orm.Model):
             raise orm.except_orm('ValidateError',
                                  _('LSV identifier should contain only ASCII'
                                    'caracters.'))
-            return False
 
         if not len(lsv_identifier) == 5:
             return False
@@ -106,7 +105,6 @@ class res_partner_bank(orm.Model):
             raise orm.except_orm('ValidateError',
                                  _('DD identifier should contain only ASCII '
                                    'caracters.'))
-            return False
 
         if not len(dd_identifier) == 6:
             return False
