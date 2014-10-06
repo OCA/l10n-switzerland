@@ -133,9 +133,8 @@ class ResPartnerBank(models.Model, BankCommon):
 
     bvr_adherent_num = fields.Char(
         string='Bank BVR adherent number', size=11,
-        help=("Your Bank adherent number to be printed in references of your BVR."
-            "This is not a postal account number.")
-        )
+        help="Your Bank adherent number to be printed in references of your BVR."
+             "This is not a postal account number.")
     acc_number = fields.Char(string='Account/IBAN Number', size=64)
     ccp = fields.Char(string='CCP', related='bank.ccp', store=True, readonly=True)
 
