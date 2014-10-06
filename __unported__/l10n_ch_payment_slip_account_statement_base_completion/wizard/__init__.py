@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-import bvr_import
+from . import bvr_import
