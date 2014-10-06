@@ -17,6 +17,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import payment
-import wizard
-import bank
+from . import payment
+from . import wizard
+from . import bank

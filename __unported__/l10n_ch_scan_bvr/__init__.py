@@ -21,5 +21,5 @@
 #
 ##############################################################################
 
-import wizard
-import partner
+from . import wizard
+from . import partner
