@@ -56,14 +56,11 @@ class Bank(models.Model, BankCommon):
     """Inherit res.bank class in order to add swiss specific field"""
     _inherit = 'res.bank'
 
-    ### Internal reference
-    code = fields.Char(string='Code', size=64)
-    ###Swiss unik bank identifier also use in IBAN number
-    clearing = fields.Char('Clearing number', size=64)
-    ### city of the bank
-    city = fields.Char(string='City', size=128)
-    ### ccp of the bank
-    ccp = fields.Char(string='CCP', size=64)
+    code = fields.Char(string='Code', size=64, help='Internal reference')
+    clearing = fields.Char(string='Clearing number', size=64,
+        help='Swiss unique bank identifier also used in IBAN number')
+    city = fields.Char(string='City', size=128, help="City of the bank")
+    ccp = fields.Char(string='CCP', size=64, help="ccp of the bank")
 
     def _check_ccp_duplication(self, cursor, uid, ids):
         p_acc_obj = self.pool['res.partner.bank']
@@ -147,11 +144,11 @@ class ResPartnerBank(models.Model, BankCommon):
         if isinstance(bid, list):
             bid = bid[0]
         if self.state not in ('bv', 'bvr'):
-            return current.acc_number
-        if self.bank and current.bank.ccp:
-            return current.bank.ccp
+            return self.acc_number
+        if self.bank and self.bank.ccp:
+            return self.bank.ccp
         else:
-            return current.acc_number
+            return self.acc_number
 
     @api.multi
     def _check_postal_num(self):

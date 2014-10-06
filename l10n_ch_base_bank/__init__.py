@@ -17,5 +17,5 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import bank
-import invoice
+from . import bank
+from . import invoice

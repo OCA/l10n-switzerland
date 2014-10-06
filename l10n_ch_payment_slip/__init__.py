@@ -17,8 +17,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import company
-import report
-import invoice
-import wizard
-import bank
+from . import company
+from . import report
+from . import invoice
+from . import wizard
+from . import bank
