@@ -61,17 +61,16 @@ class AccountInvoice(models.Model):
             else:
                 self.reference_type = 'none'
 
-    @api.multi
+    @api.constrains('reference_type')
     def _check_reference_type(self):
         """Check the supplier invoice reference type depending
         on the BVR reference type and the invoice partner bank type"""
         for invoice in self:
             if invoice.type in 'in_invoice':
                 if invoice.partner_bank_id.state == 'bvr' and invoice.reference_type != 'bvr':
-                    return False
-        return True
+                    raise Warning(_('Error:'), _('Invalid Bvr Number (wrong checksum).'))
 
-    @api.multi
+    @api.constrains('reference')
     def _check_bvr(self):
         """
         Function to validate a bvr reference like :
@@ -81,7 +80,7 @@ class AccountInvoice(models.Model):
         for invoice in self:
             if invoice.reference_type == 'bvr' and invoice.state != 'draft':
                 if not invoice.reference:
-                    return False
+                    raise Warning(_('Error:'), _('Invalid Bvr Number (wrong checksum).'))
                 ## In this case
                 # <010001000060190> 052550152684006+ 43435>
                 # the reference 052550152684006 do not match modulo 10
@@ -93,13 +92,6 @@ class AccountInvoice(models.Model):
                 if mod10r(invoice.reference[:-1]) != invoice.reference:
                     return False
         return True
-
-    _constraints = [
-        (_check_bvr, 'Error: Invalid Bvr Number (wrong checksum).',
-            ['reference']),
-        (_check_reference_type, 'Error: BVR reference is required.',
-            ['reference_type']),
-    ]
 
     # We can not use _default as we need invoice type
     @api.model
