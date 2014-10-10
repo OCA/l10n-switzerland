@@ -43,6 +43,6 @@ as reference.
  'website': 'http://www.camptocamp.com',
  'data': [],
  'tests': [],
- 'installable': True,
+ 'installable': False,
  'auto_install': False,
 }
