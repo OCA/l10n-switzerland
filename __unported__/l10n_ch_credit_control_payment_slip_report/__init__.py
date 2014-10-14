@@ -17,5 +17,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import credit_control_communication 
-import credit_control_printer
+from . import credit_control_communication
+from . import credit_control_printer
+from . import account

@@ -28,27 +28,45 @@ class ResCompany(Model):
     _inherit = "res.company"
 
     _columns = {
-        'bvr_delta_horz': fields.float('BVR Horz. Delta (mm)',
-            help='horiz. delta in mm 1.2 will print the bvr 1.2mm lefter, negative value is possible'),
+        'bvr_delta_horz': fields.float(
+            'BVR Horz. Delta (mm)',
+            help='horiz. delta in mm 1.2 will print the bvr 1.2mm lefter, '
+                 'negative value is possible'
+        ),
 
-        'bvr_delta_vert': fields.float('BVR Vert. Delta (mm)',
-            help='vert. delta in mm 1.2 will print the bvr 1.2mm lower, negative value is possible'),
+        'bvr_delta_vert': fields.float(
+            'BVR Vert. Delta (mm)',
+            help='vert. delta in mm 1.2 will print the bvr 1.2mm lower, '
+                 'negative value is possible'
+        ),
 
-        'bvr_scan_line_vert': fields.float('BVR vert. position for scan line (mm)',
-            help='Vert. position in mm for scan line'),
+        'bvr_scan_line_vert': fields.float(
+            'BVR vert. position for scan line (mm)',
+            help='Vert. position in mm for scan line'
+        ),
 
-        'bvr_scan_line_horz': fields.float('BVR horiz. position for scan line(mm)',
-            help='Horiz. position in mm for scan line'),
+        'bvr_scan_line_horz': fields.float(
+            'BVR horiz. position for scan line(mm)',
+            help='Horiz. position in mm for scan line'
+        ),
 
-        'bvr_add_vert': fields.float('BVR vert. position for address (mm)',
-            help='Vert. position in mm for address'),
+        'bvr_add_vert': fields.float(
+            'BVR vert. position for address (mm)',
+            help='Vert. position in mm for address'
+        ),
 
-        'bvr_add_horz': fields.float('BVR horiz. position address (mm)',
-            help='Horiz. position in mm for address'),
+        'bvr_add_horz': fields.float(
+            'BVR horiz. position address (mm)',
+            help='Horiz. position in mm for address'
+        ),
 
-        'bvr_scan_line_font_size': fields.float('BVR scan line font size (pt)'),
+        'bvr_scan_line_font_size': fields.float(
+            'BVR scan line font size (pt)'
+        ),
 
-        'bvr_scan_line_letter_spacing': fields.float('BVR scan line letter spacing'),
+        'bvr_scan_line_letter_spacing': fields.float(
+            'BVR scan line letter spacing'
+        ),
 
         'bvr_background': fields.boolean('Insert BVR background ?'),
     }
@@ -60,7 +78,5 @@ class ResCompany(Model):
         'bvr_scan_line_font_size': 11,
         'bvr_scan_line_letter_spacing': 2.55,
         'bvr_add_vert': 6,
-        'bvr_add_horz': 60,
+        'bvr_add_horz': 6,
     }
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -80,7 +80,7 @@ class WizardPain001(orm.TransientModel):
                 time.gmtime()),
             'res_model': data['model'],
             'res_id': data['id'],
-            }
+        }
         attachment_obj.create(cr, uid, vals, context=context)
 
     def create_pain_001(self, cr, uid, ids, context=None):
@@ -113,5 +113,3 @@ class WizardPain001(orm.TransientModel):
 
         current.write({'pain_001_file': pain_001_file})
         return True
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

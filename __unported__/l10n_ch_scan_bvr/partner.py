@@ -33,6 +33,3 @@ class ResPartner(Model):
                  "a line with the proper amount and this specified product"
         ),
     }
-
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -39,6 +39,7 @@
            top:${str(company.bvr_add_vert or '0.0').replace(',','.')}mm;
            left:${str(company.bvr_add_horz or '0.0').replace(',','.')}mm;
            font-size:12;
+           text-align:left;
           }
 
          .slip_bank_acc {
@@ -179,7 +180,7 @@
        <% inv = move.invoice %>
        <% setLang(inv.partner_id.lang) %>
        <!--adresses + info block -->
-        <table class="dest_address_bvr"  style="position:absolute;width:230px;word-wrap:break-word">
+        <table class="dest_address_bvr" style="position:absolute;width:230px;word-wrap:break-word">
           <% commercial_partner = inv.commercial_partner_id if hasattr(move.invoice, 'commercial_partner_id') else inv.partner_id %>
                 %if inv.partner_id.id != commercial_partner.id:
                 <tr><td>${commercial_partner.name or ''}</td></tr>
@@ -232,7 +233,7 @@
 
        <div id="slip_bank_acc" class="slip_bank_acc">${inv.partner_bank_id.print_account and inv.partner_bank_id.get_account_number() or ''}</div>
 
-       <div id="slip_amount" class="slip_amount"><span >${"&nbsp;".join(_space(('%.2f' % move.debit)[:-3], 1))}</span>  <span style="padding-left:6mm">${"&nbsp;".join(_space(('%.2f' % move.debit)[-2:], 1))}</span></div>
+       <div id="slip_amount" class="slip_amount"><span >${"&nbsp;".join(_space(('%.2f' % amount(move))[:-3], 1))}</span>  <span style="padding-left:6mm">${"&nbsp;".join(_space(('%.2f' % amount(move))[-2:], 1))}</span></div>
 
        %if  inv.partner_bank_id.print_partner:
        <div id="slip_comp" class="slip_comp">
@@ -247,7 +248,7 @@
 
     <!-- slip 2 elements -->
        <div id="slip2_ref" class="slip2_ref" >${_space(_get_ref(move))}</div>
-       <div id="slip2_amount" class="slip2_amount"><span>${"&nbsp;".join(_space(('%.2f' % move.debit)[:-3], 1))}</span>  <span style="padding-left:6mm">${"&nbsp;".join(_space(('%.2f' % move.debit)[-2:], 1))}</span></div>
+       <div id="slip2_amount" class="slip2_amount"><span>${"&nbsp;".join(_space(('%.2f' % amount(move))[:-3], 1))}</span>  <span style="padding-left:6mm">${"&nbsp;".join(_space(('%.2f' % amount(move))[-2:], 1))}</span></div>
        <div id="slip2_address_b" class="slip2_address_b">
            <table class="slip_add">
                <tr><td>
@@ -287,7 +288,7 @@
     <%
        ref_start_left   = 1.5
        ref_coef_space   = company.bvr_scan_line_letter_spacing or 2.55
-       tt = [ v for v in mod10r('01'+str('%.2f' % move.debit).replace('.','').rjust(10,'0')) ]
+       tt = [ v for v in mod10r('01'+str('%.2f' % amount(move)).replace('.','').rjust(10,'0')) ]
        tt.append('&gt;')
        tt += [v for v in _get_ref(move)]
        tt.append('+')
