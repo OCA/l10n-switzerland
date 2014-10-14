@@ -19,7 +19,12 @@
 #
 ##############################################################################
 
+<<<<<<< HEAD
 import msg_sepa
 import pain_001
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+=======
+from . import msg_sepa
+from . import pain_001
+>>>>>>> nbessi/update_80

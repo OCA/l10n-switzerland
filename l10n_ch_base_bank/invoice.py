@@ -32,9 +32,11 @@ class AccountInvoice(models.Model):
         it will retrieve and set the good bank partner bank"""
         # Inheriting old-style backward-compatible onchange from standard addons
         context = {}
-        res = super(AccountInvoice, self).onchange_partner_id(invoice_type, partner_id,
-                                                              date_invoice=False, payment_term=False,
-                                                              partner_bank_id=False, company_id=False)
+        res = super(AccountInvoice, self).onchange_partner_id(
+            invoice_type, partner_id,
+            date_invoice=False, payment_term=False,
+            partner_bank_id=False, company_id=False
+        )
         bank_id = False
         if partner_id:
             if invoice_type in ('in_invoice', 'in_refund'):
@@ -67,7 +69,8 @@ class AccountInvoice(models.Model):
         on the BVR reference type and the invoice partner bank type"""
         for invoice in self:
             if invoice.type in 'in_invoice':
-                if invoice.partner_bank_id.state == 'bvr' and invoice.reference_type != 'bvr':
+                if (invoice.partner_bank_id.state == 'bvr' and
+                    invoice.reference_type != 'bvr'):
                     raise Warning(_('Error:'), _('Invalid Bvr Number (wrong checksum).'))
 
     @api.constrains('reference')
@@ -80,7 +83,10 @@ class AccountInvoice(models.Model):
         for invoice in self:
             if invoice.reference_type == 'bvr' and invoice.state != 'draft':
                 if not invoice.reference:
-                    raise Warning(_('Error:'), _('Invalid Bvr Number (wrong checksum).'))
+                    raise Warning(
+                        _('Error:'),
+                        _('Invalid Bvr Number (wrong checksum).')
+                    )
                 ## In this case
                 # <010001000060190> 052550152684006+ 43435>
                 # the reference 052550152684006 do not match modulo 10

@@ -105,28 +105,44 @@ class Bank(models.Model, BankCommon):
         if name:
             for val in name.split(' '):
                 for col in cols:
-                    tmp_ids = self.search([(col, 'ilike', val)] + args, limit=limit)
+                    tmp_ids = self.search(
+                        [(col, 'ilike', val)] + args,
+                        limit=limit
+                        )
                     if tmp_ids:
                         ids += tmp_ids.ids
                         break
         # we sort by occurence
         to_ret_ids = list(set(ids))
-        to_ret_ids = sorted(to_ret_ids, key=lambda x: ids.count(x), reverse=True)
+        to_ret_ids = sorted(
+            to_ret_ids,
+            key=lambda x: ids.count(x),
+            reverse=True
+        )
         self._ids = to_ret_ids
         return self.name_get()
 
 class ResPartnerBank(models.Model, BankCommon):
     """
-    Inherit res.partner.bank class in order to add swiss specific fields and state controls
+    Inherit res.partner.bank class in order to add swiss specific fields
+    and state controls
+
     """
     _inherit = 'res.partner.bank'
 
     bvr_adherent_num = fields.Char(
         string='Bank BVR adherent number', size=11,
-        help="Your Bank adherent number to be printed in references of your BVR."
-             "This is not a postal account number.")
+        help="Your Bank adherent number to be printed "
+             "in references of your BVR."
+             "This is not a postal account number."
+        )
     acc_number = fields.Char(string='Account/IBAN Number')
-    ccp = fields.Char(string='CCP', related='bank.ccp', store=True, readonly=True)
+    ccp = fields.Char(
+        string='CCP',
+        related='bank.ccp',
+        store=True,
+        readonly=True
+    )
 
     @api.model
     def get_account_number(self):
@@ -147,9 +163,14 @@ class ResPartnerBank(models.Model, BankCommon):
                 continue
             if not p_bank.get_account_number():
                 continue
-            if not (self._check_9_pos_postal_num(p_bank.get_account_number()) or
-                    self._check_5_pos_postal_num(p_bank.get_account_number())):
-                raise Warning(_('Please enter a correct postal number. (01-23456-1 or 12345)'))
+            acc = p_bank.get_account_number()
+            if not (
+                    self._check_9_pos_postal_num(acc) or
+                    self._check_5_pos_postal_num(acc)):
+                raise Warning(
+                    _('Please enter a correct postal number. '
+                      '(01-23456-1 or 12345)')
+                )
 
     @api.constrains('acc_number', 'bank')
     def _check_ccp_duplication(self):
@@ -158,15 +179,19 @@ class ResPartnerBank(models.Model, BankCommon):
           at same time
         """
         for p_bank in self:
-            if not p_bank.state in ('bv', 'bvr'):
+            if p_bank.state not in ('bv', 'bvr'):
                 continue
             bank_ccp = p_bank.bank.ccp if p_bank.bank else False
             if not bank_ccp:
                 continue
-            part_bank_check = (self._check_5_pos_postal_num(p_bank.acc_number) or
-                               self._check_9_pos_postal_num(p_bank.acc_number))
-            bank_check = (self._check_5_pos_postal_num(p_bank.bank.ccp) or
-                          self._check_9_pos_postal_num(p_bank.bank.ccp))
+            part_bank_check = (
+                self._check_5_pos_postal_num(p_bank.acc_number) or
+                self._check_9_pos_postal_num(p_bank.acc_number)
+            )
+            bank_check = (
+                self._check_5_pos_postal_num(p_bank.bank.ccp) or
+                self._check_9_pos_postal_num(p_bank.bank.ccp)
+            )
             if part_bank_check and bank_check:
                 raise Warning(_('You can not enter a ccp both on the bank and on an account'
                                 ' of type BV, BVR'))

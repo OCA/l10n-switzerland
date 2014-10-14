@@ -34,4 +34,3 @@ MsgSEPAFactory.register_class('pain.001.ch', Pain001,
                               xsd_path=_xsd_path,
                               tmpl_dirs=_tmpl_dirs,
                               tmpl_name=_tmpl_name)
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
