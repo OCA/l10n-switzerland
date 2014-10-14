@@ -41,7 +41,8 @@ class account_statement_completion_rule(orm.Model):
         'function_to_call': fields.selection(_get_functions, 'Method'),
     }
 
-    def get_from_bvr_reference_and_invoice(self, cr, uid, st_line, context=None):
+    def get_from_bvr_reference_and_invoice(self, cr, uid, st_line,
+                                           context=None):
         """
         Match the partner based on the BVR reference field of the invoice.
         Then, call the generic st_line method to complete other values.

@@ -1,3 +1,9 @@
+Change with release 7.3
+   *) Remove compatibility code for BVR/ESR only Multi BVR/ESR is supported
+   *) Add credit control integration with ESR
+   *) Add intergation with account bank reconciliation addons https://launchpad.net/banking-addons/bank-statement-reconcile-7.0 with module  l10n_ch_payment_slip_base_transaction_id
+   *) Uniformize  management of reference
+
 Change with release 7.2
     L10n_ch_payment_slip pass to version 1.2 and now supports multi payment terms.
 

@@ -19,6 +19,7 @@
 ##############################################################################
 from openerp.osv import orm, fields
 
+
 class ResPartnerBank(orm.Model):
     """
     Inherit res.partner.bank class in order to add swiss specific fields
@@ -28,5 +29,6 @@ class ResPartnerBank(orm.Model):
      We leave it here in order
     """
     _inherit = "res.partner.bank"
-    _columns = {'dta_code': fields.char('DTA code', size=5),
-                }
+    _columns = {
+        'dta_code': fields.char('DTA code', size=5),
+    }

@@ -33,27 +33,34 @@ class test_scan_bvr(common.TransactionCase):
 
         #  I create a swiss bank with a BIC number
         Bank = self.registry('res.bank')
-        Partner= self.registry('res.partner')
+        Partner = self.registry('res.partner')
         PartnerBank = self.registry('res.partner.bank')
         self.Invoice = self.registry('account.invoice')
-        bank1_id = Bank.create(cr, uid, {
-            'name': 'Big swiss bank',
-            'bic': 'DRESDEFF300',
-            'country': self.ref('base.ch'),
-            })
-
+        bank1_id = Bank.create(
+            cr,
+            uid,
+            {
+                'name': 'Big swiss bank',
+                'bic': 'DRESDEFF300',
+                'country': self.ref('base.ch'),
+            }
+        )
 
         self.partner1 = Partner.browse(
             cr, uid, self.ref('base.res_partner_2'))
         #  I create a bank account
         # ok this is an iban but base_iban might not be installed
-        partner1bank1_id = PartnerBank.create(cr, uid, {
-            'state': 'bank',
-            'name': 'Account',
-            'bank': bank1_id,
-            'acc_number': 'CH9100767000S00023455',
-            'partner_id': self.ref('base.res_partner_2'),
-            })
+        partner1bank1_id = PartnerBank.create(
+            cr,
+            uid,
+            {
+                'state': 'bank',
+                'name': 'Account',
+                'bank': bank1_id,
+                'acc_number': 'CH9100767000S00023455',
+                'partner_id': self.ref('base.res_partner_2'),
+            }
+        )
 
         self.partner1bank1 = PartnerBank.browse(cr, uid, partner1bank1_id)
         self.purchase_journal_id = self.ref('account.expenses_journal')
@@ -65,12 +72,16 @@ class test_scan_bvr(common.TransactionCase):
         cr, uid = self.cr, self.uid
         bvr_string = '47045075054'
         wizard_id = self.ScanBVR.create(
-            cr, uid, {'bvr_string': bvr_string,
-                      'journal_id': self.purchase_journal_id,
-                      },
-            context={})
+            cr,
+            uid,
+            {
+                'bvr_string': bvr_string,
+                'journal_id': self.purchase_journal_id,
+            },
+            context={}
+        )
         try:
-            act_win = self.ScanBVR.validate_bvr_string(
+            self.ScanBVR.validate_bvr_string(
                 cr, uid, [wizard_id], context={})
         except:
             pass
@@ -98,11 +109,15 @@ class test_scan_bvr(common.TransactionCase):
         assert wizard.state == 'need_extra_info'
 
         self.ScanBVR.write(
-                cr, uid, wizard.id, {
-                    'partner_id': self.partner1.id,
-                    'bank_account_id': self.partner1bank1.id,
-                    },
-                context={})
+            cr,
+            uid,
+            wizard.id,
+            {
+                'partner_id': self.partner1.id,
+                'bank_account_id': self.partner1bank1.id,
+            },
+            context={}
+        )
 
         act_win = self.ScanBVR.validate_bvr_string(
             cr, uid, [wizard_id], context={})
