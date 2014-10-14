@@ -37,4 +37,4 @@ but can improve the user experience.
  'data': ['l10n_ch_better_zip.xml'],
  'demo_xml': [],
  'installable': False,
- 'active': False}
+ 'active': True}

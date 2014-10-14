@@ -19,11 +19,11 @@
 ##############################################################################
 import re
 
-from openerp.osv.orm import Model, fields
+from openerp.osv import fields, orm
 from openerp.tools import mod10r
 
 
-class AccountMoveLine(Model):
+class AccountMoveLine(orm.Model):
 
     _inherit = "account.move.line"
 
@@ -81,7 +81,7 @@ class AccountMoveLine(Model):
         return reference
 
 
-class AccountInvoice(Model):
+class AccountInvoice(orm.Model):
     """Inherit account.invoice in order to add bvr
     printing functionnalites. BVR is a Swiss payment vector"""
     _inherit = "account.invoice"
@@ -226,7 +226,7 @@ class AccountInvoice(Model):
                                                 context)
 
 
-class AccountTaxCode(Model):
+class AccountTaxCode(orm.Model):
     """Inherit account tax code in order
     to add a Case code"""
     _name = 'account.tax.code'

@@ -37,6 +37,6 @@ but can improve the user experience.
     "depends": ["l10n_ch"],
     "data": ["bank.xml"],
     "update_xml": [],
-    "active": False,
+    "active": True,
     'installable': False,
  }

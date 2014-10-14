@@ -8,9 +8,7 @@
       <field name="inherit_id" ref="account.invoice_supplier_form"/>
       <field name="arch" type="xml">
         <field name="partner_id" position="replace">
-          <field name="partner_id"
-                 on_change="onchange_partner_id(type, partner_id, date_invoice, payment_term, partner_bank_id)"
-                 select="1"/>
+          <field name="partner_id" select="1"/>
         </field>
       </field>
     </record>
@@ -23,9 +21,7 @@
       <field name="priority" eval="18"/>
       <field name="arch" type="xml">
         <field name="partner_bank_id" position="replace">
-          <field name="partner_bank_id"
-                 domain="[('partner_id', '=', partner_id)]"
-                 on_change="onchange_partner_bank(partner_bank_id)"/>
+          <field name="partner_bank_id" domain="[('partner_id', '=', partner_id)]"/>
         </field>
       </field>
     </record>
@@ -43,7 +39,7 @@
       </field>
     </record>
 
-    <record id="view__bank_search" model="ir.ui.view">
+    <record id="view_bank_search" model="ir.ui.view">
       <field name="name">res.bank.search</field>
       <field name="model">res.bank</field>
       <field name="arch" type="xml">

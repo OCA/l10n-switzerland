@@ -25,8 +25,14 @@
  'maintainer': 'Camptocamp',
  'license': 'AGPL-3',
  'category': 'Hidden',
+<<<<<<< HEAD
+ 'depends' : ['l10n_ch_dta',
+              'base_transaction_id',  # lp:banking-addons/bank-statement-reconcile-7.0
+              ],
+=======
  'depends': ['l10n_ch_dta',
              'base_transaction_id'],
+>>>>>>> nbessi/update_80
  'description': """
 Swiss bank electronic payment (DTA) - Transaction ID Compatibility
 ==================================================================
@@ -44,5 +50,10 @@ in the banking addons (https://launchpad.net/banking-addons).
  'data': [],
  'tests': [],
  'installable': False,
+<<<<<<< HEAD
+ 'auto_install': False,
+}
+=======
  'auto_install': True,
  }
+>>>>>>> nbessi/update_80

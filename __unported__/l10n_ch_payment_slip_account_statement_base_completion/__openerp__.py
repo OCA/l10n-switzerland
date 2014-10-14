@@ -25,8 +25,14 @@
  'maintainer': 'Camptocamp',
  'license': 'AGPL-3',
  'category': 'Hidden',
+<<<<<<< HEAD
+ 'depends' : ['l10n_ch_payment_slip',
+              'account_statement_base_completion',  # lp:banking-addons/bank-statement-reconcile-7.0
+              ],
+=======
  'depends': ['l10n_ch_payment_slip',
              'account_statement_base_completion'],
+>>>>>>> nbessi/update_80
  'description': """
 Swiss BVR/ESR Bank statement Completion
 =======================================
@@ -50,5 +56,10 @@ bank-statement-reconcile project in the banking addons
  'data': ['data.xml'],
  'tests': [],
  'installable': False,
+<<<<<<< HEAD
+ 'auto_install': False,
+}
+=======
  'auto_install': True,
  }
+>>>>>>> nbessi/update_80

@@ -19,10 +19,10 @@
 #
 ##############################################################################
 
-from openerp.osv.orm import Model, fields
+from openerp.osv import fields, orm
 
 
-class ResPartner(Model):
+class ResPartner(orm.Model):
     _inherit = 'res.partner'
 
     _columns = {

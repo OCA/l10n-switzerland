@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data noupdate="1">
+    <record id="bvr_header" model="ir.header_webkit">
+      <field name="orientation">Portrait</field>
+      <field name="format">A4</field>
+      <field name="html"><![CDATA[<html>
+      <head>
+      <style type="text/css">
+      ${css}
+      </style>
+      </head>
+      <body style="border:0; margin: 0;" onload="subst()">
+      </body>
+      </html>]]>
+      </field>
+      <field eval="40" name="margin_top"/>
+      <field eval="0.01" name="margin_bottom"/>
+      <field eval="0.01" name="margin_left"/>
+      <field eval="0.01" name="margin_right"/>
+      <field name="css" ><![CDATA[
+      body {
+      font-family:helvetica;
+      font-size:12;
+      }
+
+
+      .dest_address {
+      margin-left:60%;
+      font-size:12;
+      }
+      .header {
+      margin-left:0;
+      text-align:left;
+      width:300px;
+      font-size:12;
+      }
+
+      .title {
+      font-size:16;
+      font-weight: bold;
+
+      }
+
+
+      .basic_table{
+      text-align:center;
+      border:1px solid lightGrey;
+      border-collapse: collapse;
+      }
+      .basic_table td {
+      border:1px solid lightGrey;
+      font-size:12;
+
+
+      }
+
+      .list_table {
+      border-color:black;
+      text-align:center;
+      border-collapse: collapse;
+
+      }
+      .list_table td {
+      border-color:gray;
+      border-top:1px solid gray;
+      text-align:left;
+      font-size:12;
+      padding-right:3px
+      padding-left:3px
+      padding-top:3px
+      padding-bottom:3px
+      }
+
+      .list_table th {
+      border-bottom:2px solid black;
+      text-align:left;
+      font-size:12;
+      font-weight:bold;
+      padding-right:3px
+      padding-left:3px
+      }
+
+      .list_tabe thead {
+      display:table-header-group;
+      }
+
+
+      .total {
+      width:100%;
+      }
+      .lib {
+      width:10.3%;
+      }
+      .tot {
+      text-align:right;
+      width:15%;
+      }
+      .lefttot {
+      width:74%;
+      }
+      .tax {
+      width:50%;
+      }]]></field>
+      <field name="name">BVR header</field>
+    </record>
+    <!-- deprecated report to be merged with multi bvr report -->
+    <report auto="False"
+            id="report_bvr_html"
+            model="account.invoice"
+            name="invoice_bvr_webkit"
+            file="l10n_ch_payment_slip/report/bvr.mako"
+            string="BVR/ESR"
+            report_type="webkit"
+            webkit_header="bvr_header"
+            />
+  </data>
+</openerp>

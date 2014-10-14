@@ -72,6 +72,6 @@ but will remain in the data model via new banking addons dependence.
  'demo': [],
  'test': [],  # To be ported or migrate to unit tests or scenarios
  'auto_install': False,
- 'installable': False,
+ 'installable': True,
  'images': []
  }

@@ -21,7 +21,6 @@
 ##############################################################################
 from openerp.osv import orm, fields
 
-
 class ResPartner(orm.Model):
     _inherit = 'res.partner'
 

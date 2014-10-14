@@ -25,8 +25,14 @@
  'maintainer': 'Camptocamp',
  'license': 'AGPL-3',
  'category': 'Hidden',
+<<<<<<< HEAD
+ 'depends' : ['l10n_ch_payment_slip',
+              'base_transaction_id',  # lp:banking-addons/bank-statement-reconcile-7.0
+              ],
+=======
  'depends': ['l10n_ch_payment_slip',
              'base_transaction_id'],
+>>>>>>> nbessi/update_80
  'description': """
 Swiss BVR/ESR Transaction ID Compatibility
 ==========================================
@@ -48,5 +54,10 @@ bank-statement-reconcile project in the banking addons
  'data': [],
  'tests': [],
  'installable': False,
+<<<<<<< HEAD
+ 'auto_install': False,
+}
+=======
  'auto_install': True,
  }
+>>>>>>> nbessi/update_80
