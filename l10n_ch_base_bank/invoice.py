@@ -52,7 +52,8 @@ class AccountInvoice(Model):
                     to be able to filter in the view in the field
                     partner_bank_id
                     """
-                    res['value']['commercial_partner_id'] = p.commercial_partner_id.id
+                    p_id = p.commercial_partner_id.id
+                    res['value']['commercial_partner_id'] = p_id
                 if p.bank_ids:
                     bank_id = p.bank_ids[0].id
                 elif p.commercial_partner_id.bank_ids:
