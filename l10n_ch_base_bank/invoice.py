@@ -46,8 +46,21 @@ class AccountInvoice(Model):
                     partner_id,
                     context
                 )
+                if p.commercial_partner_id:
+                    """
+                    We set the commercial_partner_id in the view
+                    to be able to filter in the view in the field
+                    partner_bank_id
+                    """
+                    res['value']['commercial_partner_id'] = p.commercial_partner_id.id
                 if p.bank_ids:
                     bank_id = p.bank_ids[0].id
+                elif p.commercial_partner_id.bank_ids:
+                    """
+                    We search bank also on commercial_partner_id
+                    bank if not found on the current partner
+                    """
+                    bank_id = p.commercial_partner_id.bank_ids[0].id
                 res['value']['partner_bank_id'] = bank_id
             else:
                 user = self.pool.get('res.users').browse(

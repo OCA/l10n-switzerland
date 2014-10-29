@@ -15,6 +15,18 @@
       </field>
     </record>
 
+        <record model="ir.ui.view" id="account_report_company_form_view_supplier">
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+		    <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="commercial_partner_id" invisible="1"/>
+                </field>
+            </field>
+        </record>
+
+
     <record model="ir.ui.view" id="invoice_supplier_form8">
       <field name="name">account.invoice.supplier.form.inherit</field>
       <field name="model">account.invoice</field>
@@ -24,7 +36,7 @@
       <field name="arch" type="xml">
         <field name="partner_bank_id" position="replace">
           <field name="partner_bank_id"
-                 domain="[('partner_id', '=', partner_id)]"
+                 domain="['|',('partner_id','=',commercial_partner_id),('partner_id', '=', partner_id)]"
                  on_change="onchange_partner_bank(partner_bank_id)"/>
         </field>
       </field>
