@@ -53,8 +53,7 @@ def format_date(val):
 class UBSFileParser(FileParser):
 
     def __init__(self, parse_name, ftype='csv', **kwargs):
-        super(UBSFileParser, self).__init__(parse_name, ftype=ftype, **kwargs)
-        self.conversion_dict = {
+        conversion_dict = {
             "Date de comptabilisation": format_date,
             "Description 1": unicode,
             "Description 2": unicode,
@@ -62,7 +61,8 @@ class UBSFileParser(FileParser):
             "Débit": float_or_zero,
             "Crédit": float_or_zero,
         }
-        self.keys_to_validate = self.conversion_dict.keys()
+        super(UBSFileParser, self).__init__(
+            parse_name, ftype=ftype, extra_fields=conversion_dict, **kwargs)
 
     @classmethod
     def parser_for(cls, parser_name):

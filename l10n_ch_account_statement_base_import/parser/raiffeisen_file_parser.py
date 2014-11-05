@@ -50,14 +50,14 @@ class RaiffeisenFileParser(FileParser):
         :param list: header : specify header fields if the csv file
         has no header
         """
-
-        super(RaiffeisenFileParser, self).__init__(parse_name, **kwargs)
-        self.conversion_dict = {
+        conversion_dict = {
             'Text': unicode,
             'Booked At': datetime,
             'Credit/Debit Amount': float_or_zero,
         }
-        self.keys_to_validate = self.conversion_dict.keys()
+
+        super(RaiffeisenFileParser, self).__init__(
+            parse_name, ftype=ftype, extra_fields=conversion_dict, **kwargs)
 
     @classmethod
     def parser_for(cls, parser_name):
