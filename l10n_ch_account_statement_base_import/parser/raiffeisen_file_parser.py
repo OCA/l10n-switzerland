@@ -108,13 +108,12 @@ class RaiffeisenDetailsFileParser(FileParser):
                               has no header
         """
 
-        super(RaiffeisenDetailsFileParser, self).__init__(parse_name, **kwargs)
-        self.conversion_dict = {
+        conversion_dict = {
             'Text': unicode,
             'Booked At': datetime,
             'Credit/Debit Amount': float_or_zero,
         }
-        self.keys_to_validate = self.conversion_dict.keys()
+        super(RaiffeisenDetailsFileParser, self).__init__(parse_name, extra_fields=conversion_dict, **kwargs)
 
     @classmethod
     def parser_for(cls, parser_name):
