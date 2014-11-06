@@ -113,7 +113,8 @@ class RaiffeisenDetailsFileParser(FileParser):
             'Booked At': datetime,
             'Credit/Debit Amount': float_or_zero,
         }
-        super(RaiffeisenDetailsFileParser, self).__init__(parse_name, extra_fields=conversion_dict, **kwargs)
+        super(RaiffeisenDetailsFileParser, self).__init__(
+            parse_name, extra_fields=conversion_dict, **kwargs)
 
     @classmethod
     def parser_for(cls, parser_name):
