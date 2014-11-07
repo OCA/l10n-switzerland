@@ -11,6 +11,10 @@ env:
 
 virtualenv:
   system_site_packages: true
+  
+before_install:
+    - sudo apt-get update -qq
+    - sudo apt-get install -y python-xlrd
 
 install:
   - git clone https://github.com/OCA/partner-contact-management ${HOME}/partner-contact-management -b ${VERSION}
