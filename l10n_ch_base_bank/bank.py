@@ -154,7 +154,7 @@ class Bank(models.Model, BankCommon):
             key=lambda x: ids.count(x),
             reverse=True
         )
-        self.browse(to_ret_ids).name_get()
+        return self.browse(to_ret_ids).name_get()
 
 
 class ResPartnerBank(models.Model, BankCommon):
