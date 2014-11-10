@@ -80,7 +80,6 @@ class Bank(models.Model, BankCommon):
     )
     city = fields.Char(
         string='City',
-        size=128,
         help="City of the bank"
     )
     ccp = fields.Char(
