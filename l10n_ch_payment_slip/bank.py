@@ -17,10 +17,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm, fields
+from openerp import models, fields
 
 
-class ResPartnerBank(orm.Model):
+class ResPartnerBank(models.Model):
     """
     Inherit res.partner.bank class in order to add swiss specific fields
     such as:
@@ -29,8 +29,7 @@ class ResPartnerBank(orm.Model):
      We leave it here in order
     """
     _inherit = "res.partner.bank"
-    _columns = {
-        'print_bank': fields.boolean('Print Bank on BVR'),
-        'print_account': fields.boolean('Print Account Number on BVR'),
-        'print_partner': fields.boolean('Print Partner Address on BVR'),
-    }
+
+    print_bank = fields.Boolean('Print Bank on BVR')
+    print_account = fields.boolean('Print Account Number on BVR')
+    print_partner = fields.boolean('Print Partner Address on BVR')
