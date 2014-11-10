@@ -19,57 +19,55 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv.orm import Model, fields
+from openerpimport models, fields
 
 
-class ResCompany(Model):
+class ResCompany(models.Model):
     """override company in order to add bvr vertical and
     Horizontal print delta"""
     _inherit = "res.company"
 
-    _columns = {
-        'bvr_delta_horz': fields.float(
-            'BVR Horz. Delta (mm)',
-            help='horiz. delta in mm 1.2 will print the bvr 1.2mm lefter, '
-                 'negative value is possible'
-        ),
+    bvr_delta_horz = fields.Float(
+        'BVR Horz. Delta (mm)',
+        help='horiz. delta in mm 1.2 will print the bvr 1.2mm lefter, '
+        'negative value is possible'
+    )
 
-        'bvr_delta_vert': fields.float(
-            'BVR Vert. Delta (mm)',
-            help='vert. delta in mm 1.2 will print the bvr 1.2mm lower, '
-                 'negative value is possible'
-        ),
+    bvr_delta_vert = fields.Float(
+        'BVR Vert. Delta (mm)',
+        help='vert. delta in mm 1.2 will print the bvr 1.2mm lower, '
+        'negative value is possible'
+    )
 
-        'bvr_scan_line_vert': fields.float(
-            'BVR vert. position for scan line (mm)',
-            help='Vert. position in mm for scan line'
-        ),
+    bvr_scan_line_vert = fields.Float(
+        'BVR vert. position for scan line (mm)',
+        help=Vert. position in mm for scan line
+    )
 
-        'bvr_scan_line_horz': fields.float(
-            'BVR horiz. position for scan line(mm)',
-            help='Horiz. position in mm for scan line'
-        ),
+    bvr_scan_line_horz = fields.Float(
+        'BVR horiz. position for scan line(mm)',
+        help='Horiz. position in mm for scan line'
+    )
 
-        'bvr_add_vert': fields.float(
-            'BVR vert. position for address (mm)',
-            help='Vert. position in mm for address'
-        ),
+    bvr_add_vert = fields.Float(
+        'BVR vert. position for address (mm)',
+        help='Vert. position in mm for address'
+    )
 
-        'bvr_add_horz': fields.float(
-            'BVR horiz. position address (mm)',
-            help='Horiz. position in mm for address'
-        ),
+    bvr_add_horz = fields.Float(
+        'BVR horiz. position address (mm)',
+        help='Horiz. position in mm for address'
+    )
 
-        'bvr_scan_line_font_size': fields.float(
-            'BVR scan line font size (pt)'
-        ),
+    bvr_scan_line_font_size = fields.Float(
+        'BVR scan line font size (pt)'
+    )
 
-        'bvr_scan_line_letter_spacing': fields.float(
-            'BVR scan line letter spacing'
-        ),
+    bvr_scan_line_letter_spacing = fields.Float(
+        'BVR scan line letter spacing'
+    )
 
-        'bvr_background': fields.boolean('Insert BVR background ?'),
-    }
+    bvr_background = fields.Boolean('Insert BVR background ?')
 
     _defaults = {
         'bvr_delta_vert': -5,
