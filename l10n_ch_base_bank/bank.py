@@ -91,11 +91,15 @@ class Bank(models.Model, BankCommon):
     @api.constrains('acc_number', 'bank')
     def _check_ccp_duplication(self):
         """Ensure validity of input"""
-        p_acc_obj = self.env['res.partner.bank']
+        res_part_bank_model = self.env['res.partner.bank']
         for bank in self:
-            p_acc_ids = p_acc_obj.search([('bank', '=', bank.id)])
-            if p_acc_ids:
-                check = p_acc_obj._check_ccp_duplication(p_acc_ids)
+            part_bank_acc_ids = res_part_bank_model.search(
+                [('bank', '=', bank.id)]
+            )
+            if part_bank_acc_ids:
+                check = res_part_bank_model._check_ccp_duplication(
+                    part_bank_acc_ids
+                )
                 if not check:
                     return Warning(
                         _('You can not enter a ccp both on the'
