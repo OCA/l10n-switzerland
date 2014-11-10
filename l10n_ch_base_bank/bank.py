@@ -97,9 +97,7 @@ class Bank(models.Model, BankCommon):
                 [('bank', '=', bank.id)]
             )
             if part_bank_acc:
-                check = res_part_bank_model._check_ccp_duplication(
-                    part_bank_acc
-                )
+                check = part_bank_acc._check_ccp_duplication()
                 if not check:
                     return Warning(
                         _('You can not enter a ccp both on the'
