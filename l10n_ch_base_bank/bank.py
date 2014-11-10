@@ -93,12 +93,12 @@ class Bank(models.Model, BankCommon):
         """Ensure validity of input"""
         res_part_bank_model = self.env['res.partner.bank']
         for bank in self:
-            part_bank_acc_ids = res_part_bank_model.search(
+            part_bank_acc = res_part_bank_model.search(
                 [('bank', '=', bank.id)]
             )
-            if part_bank_acc_ids:
+            if part_bank_acc:
                 check = res_part_bank_model._check_ccp_duplication(
-                    part_bank_acc_ids
+                    part_bank_acc
                 )
                 if not check:
                     return Warning(
