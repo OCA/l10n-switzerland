@@ -140,7 +140,6 @@ class AccountInvoice(models.Model):
                 if (invoice.partner_bank_id.state == 'bvr' and
                         invoice.reference_type != 'bvr'):
                     raise Warning(
-                        _('Error:'),
                         _('Invalid Bvr Number (wrong checksum).')
                     )
 
@@ -163,7 +162,6 @@ class AccountInvoice(models.Model):
             if invoice.reference_type == 'bvr' and invoice.state != 'draft':
                 if not invoice.reference:
                     raise Warning(
-                        _('Error:'),
                         _('Invalid Bvr Number (wrong checksum).')
                     )
 <<<<<<< HEAD
