@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<openerp>
+  <data>
+   <record model="ir.ui.view" id="invoice_form_add_bvr_ref">
+      <field name="name">account.invoice.supplier.form.bvr.ref</field>
+      <field name="model">account.invoice</field>
+      <field name="type">form</field>
+      <field name="inherit_id" ref="account.invoice_form"/>
+      <field name="arch" type="xml">
+        <field name="date_due" position="after">
+          <field name="bvr_reference"/>
+        </field>
+      </field>
+    </record>
+  </data>
+</openerp>
