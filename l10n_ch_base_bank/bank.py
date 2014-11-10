@@ -122,7 +122,7 @@ class Bank(models.Model, BankCommon):
 
     @api.multi
     def name_get(self):
-        """Format displaed name"""
+        """Format displayed name"""
         res = []
         cols = ('bic', 'name', 'street', 'city')
         for bank in self:
