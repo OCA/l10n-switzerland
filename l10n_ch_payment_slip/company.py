@@ -28,35 +28,35 @@ class ResCompany(models.Model):
     _inherit = "res.company"
 
     bvr_delta_horz = fields.Float(
-        'BVR Horz. Delta (mm)',
-        help='horiz. delta in mm 1.2 will print the bvr 1.2mm lefter, '
+        'BVR Horz. Delta (px)',
+        help='horiz. delta in px 1.2 will print the bvr 1.2px lefter, '
         'negative value is possible'
     )
 
     bvr_delta_vert = fields.Float(
-        'BVR Vert. Delta (mm)',
-        help='vert. delta in mm 1.2 will print the bvr 1.2mm lower, '
+        'BVR Vert. Delta (px)',
+        help='vert. delta in px 1.2 will print the bvr 1.2px lower, '
         'negative value is possible'
     )
 
     bvr_scan_line_vert = fields.Float(
-        'BVR vert. position for scan line (mm)',
-        help=Vert. position in mm for scan line
+        'BVR vert. position for scan line (px)',
+        help=Vert. position in px for scan line
     )
 
     bvr_scan_line_horz = fields.Float(
-        'BVR horiz. position for scan line(mm)',
-        help='Horiz. position in mm for scan line'
+        'BVR horiz. position for scan line(px)',
+        help='Horiz. position in px for scan line'
     )
 
     bvr_add_vert = fields.Float(
-        'BVR vert. position for address (mm)',
-        help='Vert. position in mm for address'
+        'BVR vert. position for address (px)',
+        help='Vert. position in px for address'
     )
 
     bvr_add_horz = fields.Float(
-        'BVR horiz. position address (mm)',
-        help='Horiz. position in mm for address'
+        'BVR horiz. position address (px)',
+        help='Horiz. position in px for address'
     )
 
     bvr_scan_line_font_size = fields.Float(
@@ -68,13 +68,3 @@ class ResCompany(models.Model):
     )
 
     bvr_background = fields.Boolean('Insert BVR background ?')
-
-    _defaults = {
-        'bvr_delta_vert': -5,
-        'bvr_scan_line_vert': 265,
-        'bvr_scan_line_horz': 67,
-        'bvr_scan_line_font_size': 11,
-        'bvr_scan_line_letter_spacing': 2.55,
-        'bvr_add_vert': 6,
-        'bvr_add_horz': 6,
-    }
