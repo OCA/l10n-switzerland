@@ -58,7 +58,7 @@ class AccountInvoice(models.Model):
     def onchange_partner_id(self, invoice_type, partner_id, date_invoice=False,
                             payment_term=False, partner_bank_id=False,
                             company_id=False):
-        """ Function that is call when the partner of the invoice is changed
+        """ Function that is called when the partner of the invoice is changed
         it will retrieve and set the good bank partner bank"""
         res = super(AccountInvoice, self).onchange_partner_id(
             invoice_type, partner_id,
@@ -140,8 +140,8 @@ class AccountInvoice(models.Model):
             if invoice.type in 'in_invoice':
                 if (invoice.partner_bank_id.state == 'bvr' and
                         invoice.reference_type != 'bvr'):
-                    raise Warning(
-                        _('Invalid Bvr Number (wrong checksum).')
+                    raise exceptions.ValidationError(
+                        _('BVR/ESR Reference is required')
                     )
 
     @api.constrains('reference')
@@ -162,8 +162,8 @@ class AccountInvoice(models.Model):
         for invoice in self:
             if invoice.reference_type == 'bvr' and invoice.state != 'draft':
                 if not invoice.reference:
-                    raise exceptions.Warning(
-                        _('Invalid Bvr Number (wrong checksum).')
+                    raise exceptions.ValidationError(
+                        _('BVR/ESR Reference is required')
                     )
 <<<<<<< HEAD
 >>>>>>> [ADD] Added l10n_ch_base_bank migrated to the new api
@@ -179,7 +179,9 @@ class AccountInvoice(models.Model):
                     return True
                 #
                 if mod10r(invoice.reference[:-1]) != invoice.reference:
-                    return False
+                    raise exceptions.ValidationError(
+                        _('Invalid BVR/ESR Number (wrong checksum).')
+                    )
         return True
 
 <<<<<<< HEAD

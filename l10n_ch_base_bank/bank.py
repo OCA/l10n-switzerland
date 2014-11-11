@@ -51,7 +51,7 @@ class BankCommon(object):
     def _check_5_pos_postal_num(self, number):
         """
         Predicate that checks if a postal number
-        is in format xx-xxxxxx-x is correct,
+        is in format xxxxx is correct,
         return true if it matches the pattern
         and if check sum mod10 is ok
 
@@ -84,9 +84,9 @@ class Bank(models.Model, BankCommon):
         help="City of the bank"
     )
     ccp = fields.Char(
-        string='CCP',
+        string='CCP/CP-Konto',
         size=64,
-        help="ccp of the bank"
+        help="CCP/CP-Konto of the bank"
     )
 
     @api.constrains('acc_number', 'bank')
@@ -100,10 +100,10 @@ class Bank(models.Model, BankCommon):
             if part_bank_acc:
                 check = part_bank_acc._check_ccp_duplication()
                 if not check:
-                    raise exceptions.Warning(
-                        _('You can not enter a ccp both on the'
+                    raise exceptions.ValidationError(
+                        _('You can not enter a CCP/CP-Konto both on the'
                           ' bank and on an account'
-                          ' of type BV, BVR')
+                          ' of type BV, BVR/ESR')
                     )
         return True
 
@@ -115,7 +115,7 @@ class Bank(models.Model, BankCommon):
                 continue
             if not (self._check_9_pos_postal_num(bank.ccp) or
                     self._check_5_pos_postal_num(bank.ccp)):
-                raise exceptions.Warning(
+                raise exceptions.ValidationError(
                     _('Please enter a correct postal number. '
                       '(01-23456-1 or 12345)')
                 )
@@ -167,16 +167,16 @@ class ResPartnerBank(models.Model, BankCommon):
     _compile_check_bvr_add_num = re.compile('[0-9]*$')
 
     bvr_adherent_num = fields.Char(
-        string='Bank BVR adherent number', size=11,
+        string='Bank BVR/ESR adherent number', size=11,
         help="Your Bank adherent number to be printed "
-             "in references of your BVR."
+             "in references of your BVR/ESR. "
              "This is not a postal account number."
         )
     acc_number = fields.Char(
         string='Account/IBAN Number'
     )
     ccp = fields.Char(
-        string='CCP',
+        string='CCP/CP-Konto',
         related='bank.ccp',
         store=True,
         readonly=True
@@ -203,8 +203,8 @@ class ResPartnerBank(models.Model, BankCommon):
                 self.adherent_num
             )
             if not valid:
-                raise exceptions.Warning(
-                    'Your bank BVR adherent number must contain only '
+                raise exceptions.ValidationError(
+                    'Your bank BVR/ESR adherent number must contain only '
                     'digits!\nPlease check your company '
                 )
         return True
@@ -222,14 +222,14 @@ class ResPartnerBank(models.Model, BankCommon):
             if not (
                     self._check_9_pos_postal_num(acc) or
                     self._check_5_pos_postal_num(acc)):
-                raise exceptions.Warning(
+                raise exceptions.ValidationError(
                     _('Please enter a correct postal number. '
                       '(01-23456-1 or 12345)')
                 )
 
     @api.constrains('acc_number', 'bank')
     def _check_ccp_duplication(self):
-        """Ensure that there is not a ccp in bank and res partner bank
+        """Ensure that there is not a CCP/CP-Konto in bank and res partner bank
         at same time
 
         """
@@ -248,10 +248,10 @@ class ResPartnerBank(models.Model, BankCommon):
                 self._check_9_pos_postal_num(p_bank.bank.ccp)
             )
             if part_bank_check and bank_check:
-                raise exceptions.Warning(
-                    _('You can not enter a ccp both on '
+                raise exceptions.ValidationError(
+                    _('You can not enter a CCP/CP-Konto both on '
                       'the bank and on an account '
-                      'of type BV, BVR')
+                      'of type BV/ES, BVR/ESR')
                 )
 
     _sql_constraints = [('bvr_adherent_uniq', 'unique (bvr_adherent_num)',
