@@ -19,6 +19,7 @@
 ##############################################################################
 from openerp import models, api, _
 from openerp.tools import mod10r
+from openerp import exceptions
 
 
 class AccountInvoice(models.Model):
@@ -84,7 +85,7 @@ class AccountInvoice(models.Model):
         for invoice in self:
             if invoice.reference_type == 'bvr' and invoice.state != 'draft':
                 if not invoice.reference:
-                    raise Warning(
+                    raise exceptions.Warning(
                         _('Invalid Bvr Number (wrong checksum).')
                     )
                 # In this case
