@@ -18,16 +18,32 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+import StringIO
+import contextlib
 import re
+from PIL import Image, ImageDraw, ImageFont
 
 from openerp import models, fields, api, _
+from openerp.modules import get_module_resource
 from openerp import exceptions
 from openerp.tools.misc import mod10r
 
 
 class PaymentSlip(models.Model):
+    """From Version 8 payment slip are now a
+    new Model related to move line and
+    stored in database. This is done because
+    with previous implementation changing bank data
+    or anything else had as result to modify historical refs.
 
+    Now payment slip is genrated each time a customer invoice is validated
+    If you need to alter a payment slip you will have to cancel
+    and revalidate the related invoice
+    """
+    _fill_color = (0, 0, 0, 0)
+    _default_font_size = 20
     _compile_get_ref = re.compile('[^0-9]')
+    _compile_check_bvr = re.compile('[0-9][0-9]-[0-9]{3,6}-[0-9]')
 
     _name = 'l10n_ch.payment_slip'
 
@@ -48,6 +64,9 @@ class PaymentSlip(models.Model):
     scan_line_div = fields.Char('Scan Line Div',
                                 compute='compute_scan_line_div',
                                 store=True)
+
+    invoice_id = fields.Many2one('Related invoice',
+                                 related='move_line_id.invoice')
 
     @api.model
     def _can_generate(self, move_line):
@@ -141,6 +160,17 @@ class PaymentSlip(models.Model):
     @api.one
     @api.model
     def _compute_scan_line_list(self):
+        """Generate a list containing all element of scan line
+
+        the element are grouped by char or symbol
+
+        This will allows the free placment of each element
+        and enable a fine tuning of spacing
+
+        :return: a list of sting representing the scan bar
+
+        :rtype: list
+        """
         line = []
         if not self.can_generate(self.move_line_id):
             return []
@@ -181,8 +211,8 @@ class PaymentSlip(models.Model):
                  'move_line_id.debit',
                  'move_line_id.credit')
     def compute_scan_line_div(self):
-        """Compute the payment slip scan line to be used
-        by scanners
+        """Compute the payment slip scan line HTML div to be used
+        by scanners and inserted in report Qweb
 
         :return: scan line
         :rtype: str
@@ -264,6 +294,22 @@ class PaymentSlip(models.Model):
             return self.compute_slip_from_move_lines(move_lines)
 
     @api.one
+    def get_comm_partner(self):
+        invoice = self.move_line_id.invoice
+        if hasattr(invoice, 'commercial_partner_id'):
+            return invoice.commercial_partner_id
+        else:
+            return invoice.partner_id
+
+    @api.one
+    def not_same_name(self):
+        invoice = self.move_line_id.invoice
+        if hasattr(invoice, 'commercial_partner_id'):
+            return invoice.commercial_partner_id.id != invoice.partner_id.id
+        else:
+            return False
+
+    @api.one
     def _validate(self):
         """Check if the payment slip is ready to be printed"""
         invoice = self.move_line_id.invoice
@@ -279,3 +325,138 @@ class PaymentSlip(models.Model):
                   'information for the invoice:\n%s') % (invoice.name)
             )
         return True
+
+    @api.model
+    def police_absolute_path(self):
+        """Will get the ocrb police absolute path"""
+        path = get_module_resource(
+            'l10n_ch_payment_slip',
+            'static',
+            'scr',
+            'font',
+            'ocrbb.ttf',
+        )
+        return path
+
+    @api.model
+    def image_absolute_path(self, file_name):
+        """Will get the ocrb police absolute path"""
+        path = get_module_resource(
+            'static',
+            'scr',
+            'img',
+            file_name
+        )
+        return path
+
+    @api.model
+    def _get_text_font(self):
+        return ImageFont.truetype(self.police_absolute_path,
+                                  self._default_font_size)
+
+    @api.model
+    def _get_scan_line_text_font(self, company):
+        return ImageFont.truetype(
+            self.police_absolute_path,
+            company.bvr_scan_line_font_size or self._default_font_size
+        )
+
+    @api.model
+    def _draw_address(self, draw, font, invoice, initial_position, company):
+        com_partner = self.get_comm_partner()
+        x, y = initial_position
+        x += company.bvr_add_horz
+        y += company.bvr_add_vert
+        draw.text((x, y), com_partner.name, font=font, fill=self._fill_color)
+        width, height = font.getsize(com_partner.name)
+        for line in com_partner.contact_address.split("\n"):
+            width, height = font.getsize(line)
+            draw.text((x, y),
+                      com_partner.name,
+                      font=font,
+                      fill=self._fill_color)
+            y += self._default_font_size
+
+    @api.model
+    def _draw_bank(self, draw, font, bank, initial_position, company):
+        x, y = initial_position
+        x += company.bvr_delta_horz
+        y += company.bvr_delta_vert
+        draw.text((x, y), bank, font=font, fill=self._fill_color)
+
+    @api.model
+    def _draw_amont(self, draw, font, amount, initial_position, company):
+        x, y = initial_position
+        x += company.bvr_delta_horz
+        y += company.bvr_delta_vert
+        indice = 0
+        for car in amount:
+            width, height = font.getsize(car)
+            if indice:
+                # some font type return non numerical
+                x -= float(width) / 2.0
+            draw.text((x, y), car, font=font, fill=(0, 0, 0, 0))
+            x -= 11 + float(width) / 2.0
+            indice += 1
+
+    @api.model
+    def _draw_scan_line(self, draw, font, initial_position, company):
+        x, y = initial_position
+        x += company.bvr_scan_line_horz
+        y += company.bvr_scan_line_vert
+        indice = 0
+        for car in self._compute_scan_line_list():
+            width, height = font.getsize(car)
+            if indice:
+                # some font type return non numerical
+                x -= float(width) / 2.0
+            draw.text((x, y), car, font=font, fill=(0, 0, 0, 0))
+            x -= 11 + float(width) / 2.0
+            indice += 1
+
+    @api.model
+    def _draw_hook(self, draw):
+        pass
+
+    @api.model
+    @api.one
+    def draw_payment_slip(self):
+        """Generate the payment slip image"""
+        company = self.env.user_id.company_id
+        default_font = self._get_text_font()
+        invoice = self.move_line_id.invoice
+        scan_font = self._get_scan_line_text_font()
+        bank_acc = self.move_line_id.invoice.partner_bank_id
+        if company.bvr_background:
+            base_image_path = self.image_absolute_path('bvr.png')
+        else:
+            base_image_path = self.image_absolute_path('white.png')
+        base = Image.open(base_image_path).convert('RGBA')
+        draw = ImageDraw.Draw(base)
+        initial_position = (10, 43)
+        self._draw_address(draw, default_font, invoice,
+                           initial_position, company)
+        initial_position = (10, 355)
+        self._draw_address(draw, default_font, invoice,
+                           initial_position, company)
+        num_car, frac_car = ("%.2f" % self.amout_total).split('.')
+        self._draw_amont(draw, default_font, num_car,
+                         (214, 290), company)
+        self._draw_amont(draw, default_font, num_car,
+                         (304, 290), company)
+        self._draw_amont(draw, default_font, num_car,
+                         (560, 290), company)
+        self._draw_amont(draw, default_font, num_car,
+                         (650, 290), company)
+        if invoice.partner_bank_id.print_account:
+            self._draw_bank(draw, default_font,
+                            bank_acc.get_account_number(),
+                            (144, 240), company)
+            self._draw_bank(draw, default_font,
+                            bank_acc.get_account_number(),
+                            (490, 240), company)
+        self._draw_scan_line
+        self._draw_hook(draw, scan_font, (1296, 475), company)
+        with contextlib.closing(StringIO.StringIO()) as buff:
+            base.save(buff, 'PNG', dpi=(144, 144))
+            return buff.getvalue()
