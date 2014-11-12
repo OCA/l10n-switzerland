@@ -17,7 +17,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import models, fields, api
+from openerp import models, fields, api
 
 
 class AccountMoveLine(models.Model):
@@ -30,6 +30,7 @@ class AccountMoveLine(models.Model):
 class AccountInvoice(models.Model):
     """Inherit account.invoice in order to add bvr
     printing functionnalites. BVR is a Swiss payment vector"""
+
     _inherit = "account.invoice"
 
     @api.model
@@ -43,7 +44,7 @@ class AccountInvoice(models.Model):
 
     reference = fields.Char(copy=False)
 
-    reference_type = fields.selection(
+    reference_type = fields.Selection(
         _get_reference_type,
         string='Reference Type',
         required=True
@@ -62,7 +63,6 @@ class AccountInvoice(models.Model):
         # store=True,
     )
 
-    @api.one
     def get_payment_move_line(self):
         move_line_model = self.env['account.move.line']
         account_model = self.env['account.account']
@@ -74,6 +74,7 @@ class AccountInvoice(models.Model):
              ('account_id', 'in', tier_accounts.mapped('id'))]
         )
 
+    @api.model
     def _update_ref_on_account_analytic_line(self, ref, move_id):
         """Propagate reference on analytic line"""
         self.env.cr.execute(
@@ -85,7 +86,7 @@ class AccountInvoice(models.Model):
         )
         return True
 
-    @api.one
+    @api.model
     def _action_bvr_number_move_line(self, move_line, ref):
         """Propagate reference on move lines and analytic lines"""
         if not ref:
@@ -107,17 +108,16 @@ class AccountInvoice(models.Model):
 
         """
         res = super(AccountInvoice, self).action_number()
-        pay_slip_model = self.env['l10n_ch.payment_slip']
+        pay_slip = self.env['l10n_ch.payment_slip']
         for inv in self:
-            for pay_slip in pay_slip_model.compute_pay_slips_from_invoice(inv):
+            for pay_slip in pay_slip.compute_pay_slips_from_invoices(inv):
                 if inv.type in ('out_invoice', 'out_refund'):
                     ref = pay_slip.reference
                 elif inv.reference_type == 'bvr' and inv.reference:
                     ref = inv.reference
                 else:
                     ref = False
-                self._action_bvr_number_move_line(inv,
-                                                  pay_slip.move_line_id,
+                self._action_bvr_number_move_line(pay_slip.move_line_id,
                                                   ref)
         return res
 
@@ -127,6 +127,5 @@ class AccountTaxCode(models.Model):
     to add a Case code"""
     _name = 'account.tax.code'
     _inherit = "account.tax.code"
-    _columns = {
-        'code': fields.char('Case Code', size=512),
-    }
+
+    code = fields.Char('Case Code', size=512),

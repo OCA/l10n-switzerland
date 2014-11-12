@@ -19,14 +19,12 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm, fields
+from openerp import model, fields
 
 
-class ResPartner(orm.Model):
+class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    _columns = {
-        'ref_companies': fields.one2many(
-            'res.company', 'partner_id',
-            'Companies that refers to partner'),
-    }
+    ref_companies = fields.One2many(
+        'res.company', 'partner_id',
+        'Companies that refers to partner')
