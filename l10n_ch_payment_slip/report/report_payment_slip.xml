@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <template id="one_slip_per_page_document">
+    <t t-call="report.external_layout">
+        <div class="page">
+          <img t-att="{'src': 'data:image/PNG;base64,%s' % o.slip_image}" />
+        </div>
+    </t>
+</template>
+
+
+    <template id="one_slip_per_page">
+      <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+          <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'one_slip_per_page_document')"/>
+        </t>
+      </t>
+    </template>
+  </data>
+</openerp>
