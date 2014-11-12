@@ -22,3 +22,4 @@ from . import report
 from . import invoice
 from . import wizard
 from . import bank
+from . import payment_slip
