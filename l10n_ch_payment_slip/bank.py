@@ -31,5 +31,5 @@ class ResPartnerBank(models.Model):
     _inherit = "res.partner.bank"
 
     print_bank = fields.Boolean('Print Bank on BVR')
-    print_account = fields.boolean('Print Account Number on BVR')
-    print_partner = fields.boolean('Print Partner Address on BVR')
+    print_account = fields.Boolean('Print Account Number on BVR')
+    print_partner = fields.Boolean('Print Partner Address on BVR')

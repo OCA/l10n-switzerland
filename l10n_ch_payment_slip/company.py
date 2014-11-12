@@ -19,7 +19,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerpimport models, fields
+from openerp import models, fields
 
 
 class ResCompany(models.Model):
@@ -36,12 +36,12 @@ class ResCompany(models.Model):
     bvr_delta_vert = fields.Float(
         'BVR Vert. Delta (px)',
         help='vert. delta in px 1.2 will print the bvr 1.2px lower, '
-        'negative value is possible'
+             'negative value is possible'
     )
 
     bvr_scan_line_vert = fields.Float(
         'BVR vert. position for scan line (px)',
-        help=Vert. position in px for scan line
+        help='Vert. position in px for scan line'
     )
 
     bvr_scan_line_horz = fields.Float(
