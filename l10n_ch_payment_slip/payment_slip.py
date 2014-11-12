@@ -433,7 +433,7 @@ class PaymentSlip(models.Model):
         self._draw_amont(draw, amount_font, num_car,
                          (214, 290), company)
         self._draw_amont(draw, amount_font, frac_car,
-                         (304, 290), company)
+                         (306, 290), company)
         self._draw_amont(draw, amount_font, num_car,
                          (560, 290), company)
         self._draw_amont(draw, amount_font, frac_car,
