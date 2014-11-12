@@ -197,10 +197,10 @@ class ResPartnerBank(models.Model, BankCommon):
     @api.constrains('bvr_adherent_num')
     def _check_adherent_number(self):
         for p_bank in self:
-            if not self.adherent_num:
+            if not self.bvr_adherent_num:
                 continue
             valid = self._compile_check_bvr_add_num.match(
-                self.adherent_num
+                self.bvr_adherent_num
             )
             if not valid:
                 raise exceptions.ValidationError(
