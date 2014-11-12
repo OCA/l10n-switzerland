@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <report
+        id="one_slip_per_page_report"
+        model="account.invoice"
+        string="Payment Slip"
+        report_type="qweb-pdf"
+        name="l10n_ch_payment_slip.one_slip_per_page"
+        file="l10n_ch_payment_slip.one_slip_per_page"
+        />
+  </data>
+</openerp>

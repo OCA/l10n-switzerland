@@ -26,14 +26,12 @@
 Swiss Payment slip known as ESR/BVR
 ===================================
 
-This addon allows you to print the ESR/BVR report. As the reports are made
-with webkit report system, you'll need the wkhtmltopdf lirary installed on
-your system (http://wkhtmltopdf.org/).
+This addon allows you to print the ESR/BVR report Using Qweb report.
+The ESR/BVR is grenerated as an image and is availabe in a fields
+of the `l10n_ch.payment_slip` Model.
 
-Be sure to have the proper version (32 or 64 bit) installed and in
-your system path or define the path in
-
-    "Settings -> Technical -> Parameters -> System Parameters -> webkit_path".
+The ESR/BVR is created each time an invoice is validated.
+To modify it you have to cancel it and reconfirm the invoice.
 
 You can adjust the print out of ESR/BVR, which depend on each printer,
 for every company in the "BVR Data" tab.
@@ -54,8 +52,6 @@ reconciliation in multi payment context (unique reference needed on
 account.move.line). Many BVR can now be printed from on invoice for each
 payment terms.
 
-In the future, this field may be removed from this addon
-but will remain in the data model via new banking addons dependence.
 
 """,
  'version': '1.2',
@@ -66,12 +62,13 @@ but will remain in the data model via new banking addons dependence.
  'data': ["company_view.xml",
           "bank_view.xml",
           "account_invoice_view.xml",
-          "report/multi_report_webkit_html_view.xml",
           "wizard/bvr_import_view.xml",
+          "report/report_payment_slip.xml",
+          "report/report_declaration.xml",
           "data.xml"],
  'demo': [],
  'test': [],  # To be ported or migrate to unit tests or scenarios
  'auto_install': False,
- 'installable': False,
+ 'installable': True,
  'images': []
  }
