@@ -338,14 +338,16 @@ class PaymentSlip(models.Model):
         )
 
     @api.model
-    def _draw_address(self, draw, font, invoice, initial_position, company):
-        com_partner = self.get_comm_partner()
+    def _draw_address(self, draw, font, com_partner, initial_position,
+                      company):
         x, y = initial_position
         x += company.bvr_add_horz
         y += company.bvr_add_vert
         draw.text((x, y), com_partner.name, font=font, fill=self._fill_color)
         y += self._default_font_size
         for line in com_partner.contact_address.split("\n"):
+            if not line:
+                continue
             width, height = font.getsize(line)
             draw.text((x, y),
                       line,
@@ -361,12 +363,19 @@ class PaymentSlip(models.Model):
         draw.text((x, y), bank, font=font, fill=self._fill_color)
 
     @api.model
+    def _draw_ref(self, draw, font, ref, initial_position, company):
+        x, y = initial_position
+        x += company.bvr_delta_horz
+        y += company.bvr_delta_vert
+        draw.text((x, y), ref, font=font, fill=self._fill_color)
+
+    @api.model
     def _draw_amont(self, draw, font, amount, initial_position, company):
         x, y = initial_position
         x += company.bvr_delta_horz
         y += company.bvr_delta_vert
         indice = 0
-        for car in amount:
+        for car in amount[::-1]:
             width, height = font.getsize(car)
             if indice:
                 # some font type return non numerical
@@ -381,7 +390,7 @@ class PaymentSlip(models.Model):
         x += company.bvr_scan_line_horz
         y += company.bvr_scan_line_vert
         indice = 0
-        for car in self._compute_scan_line_list():
+        for car in self._compute_scan_line_list()[::-1]:
             width, height = font.getsize(car)
             if indice:
                 # some font type return non numerical
@@ -409,11 +418,16 @@ class PaymentSlip(models.Model):
             base_image_path = self.image_absolute_path('white.png')
         base = Image.open(base_image_path).convert('RGBA')
         draw = ImageDraw.Draw(base)
-        initial_position = (10, 43)
-        self._draw_address(draw, default_font, invoice,
-                           initial_position, company)
+        if invoice.partner_bank_id.print_partner:
+            initial_position = (10, 45)
+            self._draw_address(draw, default_font, company.partner_id,
+                               initial_position, company)
+            initial_position = (355, 45)
+            self._draw_address(draw, default_font, company.partner_id,
+                               initial_position, company)
+        com_partner = self.get_comm_partner()
         initial_position = (10, 355)
-        self._draw_address(draw, default_font, invoice,
+        self._draw_address(draw, default_font, com_partner,
                            initial_position, company)
         num_car, frac_car = ("%.2f" % self.amount_total).split('.')
         self._draw_amont(draw, amount_font, num_car,
@@ -427,11 +441,13 @@ class PaymentSlip(models.Model):
         if invoice.partner_bank_id.print_account:
             self._draw_bank(draw, default_font,
                             bank_acc.get_account_number(),
-                            (144, 240), company)
+                            (144, 245), company)
             self._draw_bank(draw, default_font,
                             bank_acc.get_account_number(),
-                            (490, 240), company)
-        self._draw_scan_line(draw, scan_font, (1000, 480), company)
+                            (490, 245), company)
+        self._draw_ref(draw, default_font, self.reference,
+                       (745, 195), company)
+        self._draw_scan_line(draw, scan_font, (1140, 485), company)
         self._draw_hook(draw)
         with contextlib.closing(StringIO.StringIO()) as buff:
             base.save(buff, 'PNG', dpi=(144, 144))
