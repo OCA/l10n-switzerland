@@ -23,7 +23,7 @@ import time
 from datetime import datetime
 import re
 import base64
-import unicode2ascii
+from . import unicode2ascii
 
 from openerp.osv import orm
 from openerp.tools.translate import _
@@ -78,6 +78,7 @@ def tr(string_in):
 
 
 class record(object):
+
     """Abstract class that provides common
     knowledge for any kind of post/bank account
 
@@ -139,10 +140,12 @@ class record(object):
 
 
 class postal_record(record):
+
     """Class that propose common
     knowledge for all postal account type
 
     """
+
     def __init__(self, global_context_dict, pool, pline):
         super(postal_record, self).__init__(global_context_dict, pool, pline)
         self.is_9_pos_adherent = False
@@ -171,6 +174,7 @@ class postal_record(record):
 
 
 class record_gt826(postal_record):
+
     """ BVR record implementation"""
 
     def init_local_context(self):
@@ -286,9 +290,11 @@ class record_gt826(postal_record):
 
 
 class record_gt827(postal_record):
+
     """
     Swiss internal (bvpost and bvbank) record implemetation
     """
+
     def validate_global_context_dict(self):
         """Validate record values"""
         super(record_gt827, self).validate_global_context_dict()
@@ -371,6 +377,7 @@ class record_gt827(postal_record):
 
 
 class record_gt836(record):
+
     """Implements iban record"""
 
     def validate_global_context_dict(self):
@@ -484,10 +491,12 @@ class record_gt836(record):
 
 
 class record_gt890(record):
+
     """Implements Total Record of DTA file
     if behaves like a account payment order
 
     """
+
     def init_local_context(self):
         """Initialise fields"""
         self.fields = [
@@ -629,14 +638,14 @@ class DTAFileGenerator(orm.TransientModel):
                 _('No bank account defined\n on line: %s') % pline.name
             )
         if not pline.bank_id.bank:
-                raise orm.except_orm(
-                    _('Error'),
-                    _('No bank defined for the bank account: %s\n'
-                      'on the partner: %s\n on line: %s') %
-                    (pline.bank_id.state,
-                     pline.partner_id.name,
-                     pline.name)
-                )
+            raise orm.except_orm(
+                _('Error'),
+                _('No bank defined for the bank account: %s\n'
+                  'on the partner: %s\n on line: %s') %
+                (pline.bank_id.state,
+                 pline.partner_id.name,
+                 pline.name)
+            )
         elec_context['sequence'] = str(seq).rjust(5).replace(' ', '0')
         am_to_pay = str(pline.amount_currency).replace('.', ',')
         elec_context['amount_to_pay'] = am_to_pay

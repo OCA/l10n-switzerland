@@ -30,6 +30,7 @@ from ..invoice import AccountInvoice
 
 
 class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
+
     """Report that output single BVR from invoice.
     This report is deprectated and will be merged
     with multi payment term BVR report when porting to V8"""

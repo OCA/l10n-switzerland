@@ -25,6 +25,7 @@ from l10n_ch_payment_slip.report import multi_report_webkit_html
 
 
 class CreditCommunication(orm.TransientModel):
+
     """Shell class used to provide a base model to email template
        and reporting.
        Il use this approche in version 7 a browse record will
@@ -43,6 +44,7 @@ class CreditCommunication(orm.TransientModel):
 
 class MultiBvrWebKitParserCreditControl(
         multi_report_webkit_html.L10nCHReportWebkitHtmlMulti):
+
     """We define a new parser because this report take move line
        In parameter insted of an invoice, so the function get_obj_reference
        return directly ids"""

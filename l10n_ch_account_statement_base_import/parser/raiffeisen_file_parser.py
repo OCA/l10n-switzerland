@@ -232,7 +232,7 @@ class RaiffeisenDetailsFileParser(FileParser):
             for row in reader:
                 rows.append(
                     dict([(key, unicode(value, 'utf-8'))
-                         for key, value in row.iteritems()]))
+                          for key, value in row.iteritems()]))
             return rows
 
     def _get_values(self, line, currency='CHF', rate=1):
