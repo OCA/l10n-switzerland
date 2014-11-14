@@ -21,6 +21,7 @@ from openerp.osv import orm, fields
 
 
 class ResPartnerBank(orm.Model):
+
     """
     Inherit res.partner.bank class in order to add swiss specific fields
     such as:

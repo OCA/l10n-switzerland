@@ -74,6 +74,7 @@ class MsgSEPA(object):
 
 
 class MsgSEPAFactory(object):
+
     """This class is a factory that creates SEPA message in order to allow
     redefinition of those message to match with different country
     implementations

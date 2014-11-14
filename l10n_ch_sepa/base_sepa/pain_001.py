@@ -30,7 +30,7 @@ from openerp import addons
 from openerp.osv import orm
 from openerp.tools.translate import _
 
-from msg_sepa import MsgSEPA, MsgSEPAFactory
+from .msg_sepa import MsgSEPA, MsgSEPAFactory
 
 
 class Pain001(MsgSEPA):

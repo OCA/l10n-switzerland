@@ -32,6 +32,7 @@ def is_total_record_type4(test):
 
 
 class V11FileParser(BankStatementImportParser):
+
     """
     A v11 file parser.
     """
