@@ -23,13 +23,14 @@
 import time
 import re
 import base64
-import unicode2ascii
 
 from openerp.exceptions import except_orm
 from openerp import models, fields, api, _
 from openerp.tools import mod10r
 
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from . import unicode2ascii
+
 
 TRANS = [(u'é', 'e'),
          (u'è', 'e'),
