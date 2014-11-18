@@ -65,40 +65,41 @@ class account_statement_completion_rule(orm.Model):
         # of references separated by semicolons and formatted with
         # spaces inside them.
         # For supplier invoices, search in 'reference'
-        query = ("SELECT id FROM account_invoice "
-                 "WHERE company_id = %s "
-                 "AND (%s = ANY (string_to_array( "
-                 "                 replace(bvr_reference, ' ', ''), "
-                 "               ';')) "
-                 "     AND type IN ('out_invoice', 'out_refund') "
-                 "     OR type IN ('in_invoice', 'in_refund') "
-                 "     AND reference_type = 'bvr' AND reference = %s "
-                 ")")
-        cr.execute(query, (st_line['company_id'][0],
-                           st_line['transaction_id'],
-                           st_line['transaction_id']))
-        rows = cr.fetchall()
-        invoice_ids = [row[0] for row in rows]
-        if len(invoice_ids) > 1:
-            raise ErrorTooManyPartner(
-                _('Line named "%s" (Ref:%s) was matched by more than '
-                  'one partner.') % (st_line['name'], st_line['ref']))
-        elif len(invoice_ids) == 1:
-            invoice = invoice_obj.browse(cr, uid, invoice_ids[0],
-                                         context=context)
-            res['partner_id'] = invoice.partner_id.id
-            # we want the move to have the same ref than the found
-            # invoice's move, thus it will be easier to link them for the
-            # accountants
-            if invoice.move_id:
-                res['ref'] = invoice.move_id.ref
-            st_vals = st_obj.get_values_for_line(
-                cr, uid,
-                profile_id=st_line['profile_id'],
-                master_account_id=st_line['master_account_id'],
-                partner_id=res.get('partner_id', False),
-                line_type=st_line['type'],
-                amount=st_line['amount'] if st_line['amount'] else 0.0,
-                context=context)
-            res.update(st_vals)
+        if st_line['transaction_id']:
+            query = ("SELECT id FROM account_invoice "
+                     "WHERE company_id = %s "
+                     "AND (%s = ANY (string_to_array( "
+                     "                 replace(bvr_reference, ' ', ''), "
+                     "               ';')) "
+                     "     AND type IN ('out_invoice', 'out_refund') "
+                     "     OR type IN ('in_invoice', 'in_refund') "
+                     "     AND reference_type = 'bvr' AND reference = %s "
+                     ")")
+            cr.execute(query, (st_line['company_id'][0],
+                               st_line['transaction_id'],
+                               st_line['transaction_id']))
+            rows = cr.fetchall()
+            invoice_ids = [row[0] for row in rows]
+            if len(invoice_ids) > 1:
+                raise ErrorTooManyPartner(
+                    _('Line named "%s" (Ref:%s) was matched by more than '
+                      'one partner.') % (st_line['name'], st_line['ref']))
+            elif len(invoice_ids) == 1:
+                invoice = invoice_obj.browse(cr, uid, invoice_ids[0],
+                                             context=context)
+                res['partner_id'] = invoice.partner_id.id
+                # we want the move to have the same ref than the found
+                # invoice's move, thus it will be easier to link them for the
+                # accountants
+                if invoice.move_id:
+                    res['ref'] = invoice.move_id.ref
+                st_vals = st_obj.get_values_for_line(
+                    cr, uid,
+                    profile_id=st_line['profile_id'],
+                    master_account_id=st_line['master_account_id'],
+                    partner_id=res.get('partner_id', False),
+                    line_type=st_line['type'],
+                    amount=st_line['amount'] if st_line['amount'] else 0.0,
+                    context=context)
+                res.update(st_vals)
         return res
