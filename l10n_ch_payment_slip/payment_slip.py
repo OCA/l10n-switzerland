@@ -470,9 +470,11 @@ class PaymentSlip(models.Model):
             dpi = base.info['dpi']
             if scale:
                 width, height = base.size
-                base.resize((int(width*scale), int(height*scale)),
-                            Image.ANTIALIAS)
-            base.save(buff, out_format, dpi=dpi)
+                base = base.resize((int(width*scale), int(height*scale)))
+            if out_format == 'PDF':
+                base.save(buff, out_format, dpi=dpi, resolution=dpi[0])
+            else:
+                base.save(buff, out_format, dpi=dpi)
             img_stream = buff.getvalue()
             if b64:
                 img_stream = base64.encodestring(img_stream)
