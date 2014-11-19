@@ -30,6 +30,7 @@
             <field name="amount_total"/>
             <field name="scan_line"/>
             <field name="slip_image"/>
+            <field name="a4_pdf"/>
           </group>
         </form>
       </field>

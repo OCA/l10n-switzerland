@@ -43,6 +43,7 @@ class PaymentSlip(models.Model):
     """
     _fill_color = (0, 0, 0, 255)
     _default_font_size = 20
+    _default_scan_font_size = 22
     _default_amount_font_size = 30
     _compile_get_ref = re.compile('[^0-9]')
     _compile_check_bvr = re.compile('[0-9][0-9]-[0-9]{3,6}-[0-9]')
@@ -72,7 +73,10 @@ class PaymentSlip(models.Model):
                                  comodel_name='account.invoice')
 
     slip_image = fields.Binary('Slip Image',
-                               compute="draw_payment_slip")
+                               compute="draw_payment_slip_image")
+
+    a4_pdf = fields.Binary('Slip A4 PDF',
+                           compute="draw_a4_report")
 
     @api.model
     def _can_generate(self, move_line):
@@ -271,9 +275,10 @@ class PaymentSlip(models.Model):
         :type move_lines: :py:class:`openerp.models.Model`
 
         """
+        move_lines = self.env['account.move.line'].browse()
         for invoice in invoices:
-            move_lines = invoice.get_payment_move_line()
-            return self.compute_pay_slips_from_move_lines(move_lines)
+            move_lines += invoice.get_payment_move_line()
+        return self.compute_pay_slips_from_move_lines(move_lines)
 
     def get_comm_partner(self):
         self.ensure_one()
@@ -334,7 +339,7 @@ class PaymentSlip(models.Model):
     def _get_scan_line_text_font(self, company):
         return ImageFont.truetype(
             self.police_absolute_path(),
-            company.bvr_scan_line_font_size or self._default_font_size
+            company.bvr_scan_line_font_size or self._default_scan_font_size
         )
 
     @api.model
@@ -396,15 +401,19 @@ class PaymentSlip(models.Model):
                 # some font type return non numerical
                 x -= float(width) / 2.0
             draw.text((x, y), car, font=font, fill=self._fill_color)
-            x -= 1.5 + float(width) / 2.0
+            x -= 1.4 + float(width) / 2.0
             indice += 1
 
     @api.model
     def _draw_hook(self, draw):
         pass
 
-    def draw_payment_slip(self):
+    def _draw_payment_slip(self, a4=False, out_format='PNG', scale=None,
+                           b64=False):
         """Generate the payment slip image"""
+        a4_offset = 0.0
+        if a4:
+            a4_offset = 1083
         self.ensure_one()
         company = self.env.user.company_id
         default_font = self._get_text_font()
@@ -413,44 +422,68 @@ class PaymentSlip(models.Model):
         scan_font = self._get_scan_line_text_font(company)
         bank_acc = self.move_line_id.invoice.partner_bank_id
         if company.bvr_background:
-            base_image_path = self.image_absolute_path('bvr.png')
+            if a4:
+                base_image_path = self.image_absolute_path('a4bvr.png')
+            else:
+                base_image_path = self.image_absolute_path('bvr.png')
         else:
-            base_image_path = self.image_absolute_path('white.png')
-        base = Image.open(base_image_path).convert('RGBA')
+            if a4:
+                base_image_path = self.image_absolute_path('a4.png')
+            else:
+                base_image_path = self.image_absolute_path('white.png')
+        base = Image.open(base_image_path).convert('RGB')
         draw = ImageDraw.Draw(base)
         if invoice.partner_bank_id.print_partner:
-            initial_position = (10, 45)
+            initial_position = (10, 45 + a4_offset)
             self._draw_address(draw, default_font, company.partner_id,
                                initial_position, company)
-            initial_position = (355, 45)
+            initial_position = (355, 45 + a4_offset)
             self._draw_address(draw, default_font, company.partner_id,
                                initial_position, company)
         com_partner = self.get_comm_partner()
-        initial_position = (10, 355)
+        initial_position = (10, 355 + a4_offset)
         self._draw_address(draw, default_font, com_partner,
                            initial_position, company)
         num_car, frac_car = ("%.2f" % self.amount_total).split('.')
         self._draw_amont(draw, amount_font, num_car,
-                         (214, 290), company)
+                         (214, 290 + a4_offset), company)
         self._draw_amont(draw, amount_font, frac_car,
-                         (306, 290), company)
+                         (306, 290 + a4_offset), company)
         self._draw_amont(draw, amount_font, num_car,
-                         (560, 290), company)
+                         (560, 290 + a4_offset), company)
         self._draw_amont(draw, amount_font, frac_car,
-                         (650, 290), company)
+                         (650, 290 + a4_offset), company)
+
         if invoice.partner_bank_id.print_account:
             self._draw_bank(draw, default_font,
                             bank_acc.get_account_number(),
-                            (144, 245), company)
+                            (144, 245 + a4_offset), company)
             self._draw_bank(draw, default_font,
                             bank_acc.get_account_number(),
-                            (490, 245), company)
+                            (490, 245 + a4_offset), company)
+
         self._draw_ref(draw, default_font, self.reference,
-                       (745, 195), company)
-        self._draw_scan_line(draw, scan_font, (1140, 485), company)
+                       (745, 195 + a4_offset), company)
+        self._draw_scan_line(draw, scan_font, (1140, 485 + a4_offset), company)
         self._draw_hook(draw)
         with contextlib.closing(StringIO.StringIO()) as buff:
-            base.save(buff, 'PNG', dpi=(144, 144))
+            dpi = base.info['dpi']
+            if scale:
+                width, height = base.size
+                base.resize((int(width*scale), int(height*scale)),
+                            Image.ANTIALIAS)
+            base.save(buff, out_format, dpi=dpi)
             img_stream = buff.getvalue()
-            self.slip_image = base64.encodestring(img_stream)
+            if b64:
+                img_stream = base64.encodestring(img_stream)
             return img_stream
+
+    def draw_payment_slip_image(self):
+        img = self._draw_payment_slip()
+        self.slip_image = base64.encodestring(img)
+        return img
+
+    def draw_a4_report(self):
+        img = self._draw_payment_slip(a4=True, out_format='PDF')
+        self.a4_pdf = base64.encodestring(img)
+        return img
