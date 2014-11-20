@@ -51,8 +51,8 @@ class Pain001(MsgSEPA):
 
         dirs = [addons.get_module_resource('l10n_ch_sepa',
                                            self._BASE_TMPL_DIR)]
-        for dir in tmpl_dirs:
-            dirs += [addons.get_module_resource('l10n_ch_sepa', dir)]
+        for tmpl_dir in tmpl_dirs:
+            dirs += [addons.get_module_resource('l10n_ch_sepa', tmpl_dir)]
 
         lookup = TemplateLookup(directories=dirs, input_encoding='utf-8',
                                 output_encoding='unicode',
@@ -114,15 +114,15 @@ class Pain001(MsgSEPA):
                     _('The selected company bank has no IBAN and no Account '
                       'number'))
 
-    def _gather_payment_data(self, cr, uid, id, context=None):
+    def _gather_payment_data(self, cr, uid, order_id, context=None):
         ''' Record the payment order data based on its id '''
         pool = pooler.get_pool(cr.dbname)
         payment_obj = pool.get('payment.order')
 
-        payment = payment_obj.browse(cr, uid, id, context=context)
+        payment = payment_obj.browse(cr, uid, order_id, context=context)
         self._data['payment'] = payment
 
-    def compute_export(self, cr, uid, id, context=None):
+    def compute_export(self, cr, uid, order_id, context=None):
         '''Compute the payment order 'id' as xml data using mako template'''
         pool = pooler.get_pool(cr.dbname)
         module_obj = pool['ir.module.module']
@@ -134,7 +134,7 @@ class Pain001(MsgSEPA):
                                         context=context)[0]
         module_version = this_module.latest_version
 
-        self._gather_payment_data(cr, uid, id, context=context)
+        self._gather_payment_data(cr, uid, order_id, context=context)
         self._check_data()
 
         try:

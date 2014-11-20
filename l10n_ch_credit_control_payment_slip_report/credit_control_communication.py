@@ -38,7 +38,7 @@ class CreditCommunication(orm.TransientModel):
         service = netsvc.LocalService(
             'report.invoice_bvr_webkit_multi_credit_control'
         )
-        result, format = service.create(cr, uid, line_ids, {}, {})
+        result, bvr_format = service.create(cr, uid, line_ids, {}, {})
         return result
 
 

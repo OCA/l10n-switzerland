@@ -47,20 +47,16 @@ class AccountInvoice(Model):
                     context
                 )
                 if p.commercial_partner_id:
-                    """
-                    We set the commercial_partner_id in the view
-                    to be able to filter in the view in the field
-                    partner_bank_id
-                    """
+                    #  We set the commercial_partner_id in the view
+                    # to be able to filter in the view in the field
+                    # partner_bank_id
                     p_id = p.commercial_partner_id.id
                     res['value']['commercial_partner_id'] = p_id
                 if p.bank_ids:
                     bank_id = p.bank_ids[0].id
                 elif p.commercial_partner_id.bank_ids:
-                    """
-                    We search bank also on commercial_partner_id
-                    bank if not found on the current partner
-                    """
+                    # We search bank also on commercial_partner_id
+                    # bank if not found on the current partner
                     bank_id = p.commercial_partner_id.bank_ids[0].id
                 res['value']['partner_bank_id'] = bank_id
             else:

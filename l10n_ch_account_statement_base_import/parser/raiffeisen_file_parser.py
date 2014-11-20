@@ -197,7 +197,7 @@ class RaiffeisenDetailsFileParser(FileParser):
                      statement line,
         """
         # We try to extract a BVR reference
-        result = re.match('.*(\d{27}).*', line.get('Text'))
+        result = re.match(r'.*(\d{27}).*', line.get('Text'))
         ref = '/'
         if result and not line.get('Text').startswith(u'Crèdit'):
             ref = result.group(1)

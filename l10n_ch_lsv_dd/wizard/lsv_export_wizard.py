@@ -256,7 +256,7 @@ class lsv_export_wizard(orm.TransientModel):
         ''' Create banking.export.ch.dd object '''
         banking_export_ch_dd_obj = self.pool.get('banking.export.ch.dd')
         vals = {
-            'payment_order_ids': [(6, 0, [id for id in p_o_ids])],
+            'payment_order_ids': [(6, 0, [p_o_id for p_o_id in p_o_ids])],
             'total_amount': total_amount,
             # Substract 1 for total line
             'nb_transactions': properties.get('seq_nb') - 1,
@@ -502,9 +502,9 @@ class lsv_export_wizard(orm.TransientModel):
         valid &= (int(iban_validation_str) % 97) == 1
         return valid
 
-    def _prepare_date(self, date):
+    def _prepare_date(self, format_date):
         ''' Returns date formatted to YYYYMMDD string '''
-        return date.strftime('%Y%m%d')
+        return format_date.strftime('%Y%m%d')
 
     def _replace_all(self, text, char_map):
         ''' Replace the char_map in text '''

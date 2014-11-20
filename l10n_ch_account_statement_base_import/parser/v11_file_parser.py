@@ -103,7 +103,7 @@ class V11FileParser(BankStatementImportParser):
             else:
                 reference = line[12:39]
                 amount = float(line[39:49]) / 100
-                date = time.strftime(
+                format_date = time.strftime(
                     '%Y-%m-%d', time.strptime(line[71:77], '%y%m%d'))
                 cost = float(line[96:100]) / 100  # not used
 
@@ -114,7 +114,7 @@ class V11FileParser(BankStatementImportParser):
                 res.append({
                     'ref': reference,
                     'amount': amount,
-                    'date': date,
+                    'date': format_date,
                 })
 
         return res

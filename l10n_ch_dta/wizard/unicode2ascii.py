@@ -113,8 +113,8 @@ EXTRA_LATIN_NAMES = {
     u'\N{LATIN SMALL LETTER H WITH STROKE}': u'h',
     u'\N{LATIN SMALL LETTER DOTLESS I}': u'i',
     u'\N{LATIN SMALL LETTER KRA}': u'q',
-    u'\N{LATIN CAPITAL LETTER L WITH STROKE}': u'L',
-    u'\N{LATIN SMALL LETTER L WITH STROKE}': u'l',
+    # u'\N{LATIN CAPITAL LETTER L WITH STROKE}': u'L',
+    # u'\N{LATIN SMALL LETTER L WITH STROKE}': u'l',
     u'\N{LATIN CAPITAL LETTER ENG}': u'N',
     u'\N{LATIN SMALL LETTER ENG}': u'n',
     u'\N{LATIN CAPITAL LIGATURE OE}': u'OE',
@@ -616,8 +616,8 @@ if __name__ == '__main__':
         default=8192,
         help='read/write in chunks of a given size (8192)'
     )
-    optz, argz = parser.parse_args()
-    if argz:
+    optz, argzz = parser.parse_args()
+    if argzz:
         parser.error('Only stdin -> stdout conversion suported')
 
     uc_filter(sys.stdin, sys.stdout, bs=optz.bs,
