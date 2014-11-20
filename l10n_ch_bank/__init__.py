@@ -17,6 +17,5 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import bank
-import data_import
-import res_config
+from . import bank
+from . import res_config
