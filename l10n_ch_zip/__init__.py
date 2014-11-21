@@ -1,8 +1,7 @@
-# b-*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2014 brain-tec AG (http://www.brain-tec.ch)
-#    All Right Reserved
+#    Author: Nicolas Bessi. Copyright Camptocamp SA / Migrated to version 8 by brain-tec AG
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as

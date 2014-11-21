@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
+#    Author: Nicolas Bessi. Copyright Camptocamp SA / Migrated to version 8 by brain-tec AG
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,9 +20,9 @@
 {
     'name': 'Switzerland - Bank list',
     'version': '8.0',
-    'author': 'brain-tec AG',
+    'author': 'Camptocamp (migrated to version 8 by brain-tec AG)',
     'category': 'Localisation',
-    'website': 'http://www.brain-tec.ch',
+    'website': 'http://www.camptocamp.com',
     'summary': 'Banks names, addresses and BIC codes',
     'description': """
 Swiss bank list
@@ -43,10 +42,12 @@ If you want to update all your banks, update via link 'Update Banks' in section 
     'data': [
               'bank.xml',
               'res_config_view.xml'
-              ],
+    ],
     'images': [],
     'demo': [],
     'auto_install': False,
     'installable': True,
     'application': True,
 }
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
