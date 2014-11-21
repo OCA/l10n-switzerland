@@ -1,8 +1,7 @@
-# b-*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2014 brain-tec AG (http://www.brain-tec.ch)
-#    All Right Reserved
+#    Author: Nicolas Bessi. Copyright Camptocamp SA / Migrated to version 8 by brain-tec AG
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,10 +19,10 @@
 ##############################################################################
 {
     'name': 'Switzerland - Postal codes (ZIP) list',
-    'version': '2.0.1',
-    'author': 'brain-tec AG',
+    'version': '1.1.0',
+    'author': 'Camptocamp (migrated to version 8 by brain-tec AG)',
     'category': 'Localisation',
-    'website': 'http://www.brain-tec.ch',
+    'website': 'http://www.camptocamp.com',
     'summary': 'Provides all Swiss postal codes for auto-completion',
     'description': """
 Swiss postal code (ZIP) list
