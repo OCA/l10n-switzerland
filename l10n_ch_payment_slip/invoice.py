@@ -59,11 +59,35 @@ class AccountInvoice(models.Model):
 
     bvr_reference = fields.Char(
         string='BVR ref',
-        # compute='_compute_full_bvr_name',
-        # store=True,
+        compute='_compute_full_bvr_name',
+        store=True,
     )
 
+    slip_ids = fields.One2many(
+        string='Related slip',
+        comodel_name='l10n_ch.payment_slip',
+        inverse_name='invoice_id'
+    )
+
+    @api.one
+    @api.depends('slip_ids')
+    def _compute_full_bvr_name(self):
+        """Concatenate related slip references
+
+        :return: reference comma separated
+        :rtype: str
+        """
+        if not self.slip_ids:
+            return ''
+        self.bvr_reference = ','.join(x.reference for x in self.slip_ids)
+
+
     def get_payment_move_line(self):
+        """Return the move line related to current invoice slips
+
+        :return: recordset of `account.move.line`
+        :rtype: :py:class:`openerp.model.Models`
+        """
         move_line_model = self.env['account.move.line']
         account_model = self.env['account.account']
         tier_accounts = account_model.search(
