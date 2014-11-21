@@ -24,189 +24,152 @@ import time
 import re
 
 from openerp.tools.translate import _
-from openerp.osv import orm, fields
-from openerp.tools import mod10r
+from openerp import models, fields, exceptions, api
+from openerp.tools.misc import mod10r
 
-REF = re.compile('[^0-9]')
+REF = re.compile(r'[^0-9]')
 
 
-class BvrImporterWizard(orm.TransientModel):
+class BvrImporterWizard(models.TransientModel):
 
     _name = 'bvr.import.wizard'
 
-    _columns = {'file': fields.binary('BVR File')}
+    v11file = fields.Binary('V11 File')
 
-    def _reconstruct_invoice_ref(self, cursor, user, reference, context=None):
-        """Try to get correct invoice/invoice line form ESV/BVR reference"""
-        id_invoice = False
-        # On fait d'abord une recherche sur toutes les factures
-        # we now search for an invoice
-        user_obj = self.pool['res.users']
-        user_current = user_obj.browse(cursor, user, user)
+    total_cost = fields.Float('Total cost of V11')
+    total_amount = fields.Float('Total amount of V11')
 
-        cursor.execute("SELECT inv.id, inv.number FROM account_invoice "
-                       "AS inv WHERE inv.company_id = %s "
-                       "And type='out_invoice'",
-                       (user_current.company_id.id,))
-        result_invoice = cursor.fetchall()
-        for inv_id, inv_name in result_invoice:
-            inv_name = REF.sub('0', str(inv_name))
-            if inv_name == reference:
-                id_invoice = inv_id
-                break
-        if id_invoice:
-            cursor.execute('SELECT l.id'
-                           '  FROM account_move_line l, account_invoice i'
-                           '    WHERE l.move_id = i.move_id '
-                           '    AND l.reconcile_id is NULL  '
-                           '    AND i.id IN %s', (tuple([id_invoice]),))
-            inv_line = []
-            for id_line in cursor.fetchall():
-                inv_line.append(id_line[0])
-            return inv_line
-        else:
-            return []
+    @api.model
+    def _get_line_amount(self, line, sum_amount=True):
+        """Returns the V11 line amount value
+        :param line: raw v11 line
+        :type line: str
 
-    def _parse_lines(self, cursor, uid, inlines, context=None):
-        """Parses raw v11 line and populate records list with dict"""
+        :param sum_amount: if True total_amount will be sum with current amount
+        :type sum_amount: bool
+
+        :return: current line amount
+        :rtype: float
+        """
+        amount = float(line[39:49]) + (float(line[49:51]) / 100)
+        if line[2] == '5':
+            amount *= -1
+        if sum_amount:
+            self.total_amount += amount
+        if round(amount - self.total_amount, 2) >= 0.01:
+            raise exceptions.Warning(
+                _('Total amount differ from the computed amount')
+            )
+        return amount
+
+    @api.model
+    def _get_line_cost(self, line, sum_cost=True):
+        """Returns the V11 line cost value
+        :param line: raw v11 line
+        :type line: str
+
+        :param sum_cost: if True cost_amount will be sum with current amount
+        :type sum_cost: bool
+
+        :return: current line cost
+        :rtype: float
+        """
+        cost = float(line[69:76]) + (float(line[76:78]) / 100)
+        if line[2] == '5':
+            cost *= -1
+        if sum_cost:
+            self.total_cost += cost
+        if round(cost - self.total_cost, 2) >= 0.01:
+            raise exceptions.Warning(
+                _('Total cost differ from the computed amount')
+            )
+        return cost
+
+    @api.model
+    def _create_record(self, line):
+        """Create a v11 record dict
+        :param line: raw v11 line
+        :type line: str
+
+        :return: current line dict representation
+        :rtype: dict
+
+        """
+        amount = self._get_line_amount(line)
+        cost = self._get_line_cost(line)
+        record = {
+            'reference': line[12:39],
+            'amount': amount,
+            'date': time.strftime(
+                '%Y-%m-%d',
+                time.strptime(line[65:71], '%y%m%d')
+            ),
+            'cost': cost,
+        }
+
+        if record['reference'] != mod10r(record['reference'][:-1]):
+            raise exceptions.Warning(
+                _('Recursive mod10 is invalid for reference: %s') %
+                record['reference']
+            )
+        return record
+
+    @api.model
+    def _parse_lines(self, inlines):
+        """Parses raw v11 line and populate records list with dict
+
+        :param inlines: string buffer of the V11 file
+        :type inlines: str
+
+        :return: list of dict representing a v11 entry
+        :rtype: list of dict
+        """
         records = []
-        total_amount = 0
-        total_cost = 0
         find_total = False
+        total_line_codes = ('999', '995')
         for lines in inlines:
             if not lines:  # manage new line at end of file
                 continue
             (line, lines) = (lines[:128], lines[128:])
             record = {}
-            if line[0:3] in ('999', '995'):
+            if line[0:3] in total_line_codes:
                 if find_total:
-                    raise orm.except_orm(_('Error'),
-                                         _('Too much total record found!'))
+                    raise exceptions.Warning(
+                        _('Too many total record found!')
+                    )
                 find_total = True
                 if lines:
-                    raise orm.except_orm(_('Error'),
-                                         _('Record found after total record!'))
-                amount = float(line[39:49]) + (float(line[49:51]) / 100)
-                cost = float(line[69:76]) + (float(line[76:78]) / 100)
-                if line[2] == '5':
-                    amount *= -1
-                    cost *= -1
-
-                if round(amount - total_amount, 2) >= 0.01 \
-                        or round(cost - total_cost, 2) >= 0.01:
-                    raise orm.except_orm(
-                        _('Error'),
-                        _('Total record different from the computed!')
+                    raise exceptions.Warning(
+                        _('Record found after total record')
                     )
                 if int(line[51:63]) != len(records):
-                    raise orm.except_orm(
-                        _('Error'),
-                        _('Number record different from the computed!')
+                    raise exceptions.Warning(
+                        _('Number of ecords differ from the computed one')
                     )
+                # Validaton of amount and costs
+                self._get_line_amount(line, sum_amount=False)
+                self._get_line_cost(line, sum_cost=False)
+
             else:
-                record = {
-                    'reference': line[12:39],
-                    'amount': float(line[39:47]) + (float(line[47:49]) / 100),
-                    'date': time.strftime(
-                        '%Y-%m-%d',
-                        time.strptime(line[65:71], '%y%m%d')
-                    ),
-                    'cost': float(line[96:98]) + (float(line[98:100]) / 100),
-                }
-
-                if record['reference'] != mod10r(record['reference'][:-1]):
-                    raise orm.except_orm(
-                        _('Error'),
-                        _('Recursive mod10 is invalid for reference: %s') %
-                        record['reference']
-                    )
-
-                if line[2] == '5':
-                    record['amount'] *= -1
-                    record['cost'] *= -1
-                total_amount += record['amount']
-                total_cost += record['cost']
+                record = self._create_record(line)
                 records.append(record)
         return records
 
-    # deprecated
-    def _create_voucher_from_record(self, cursor, uid, record,
-                                    statement, line_ids, context=None):
-        """Create a voucher with voucher line"""
-        context.update({'move_line_ids': line_ids})
-        voucher_obj = self.pool.get('account.voucher')
-        move_line_obj = self.pool.get('account.move.line')
-        voucher_line_obj = self.pool.get('account.voucher.line')
-        line = move_line_obj.browse(cursor, uid, line_ids[0])
-        partner_id = line.partner_id and line.partner_id.id or False
-        if not partner_id:
-            return False
-        move_id = line.move_id.id
-        result = voucher_obj.onchange_partner_id(cursor, uid, [],
-                                                 partner_id,
-                                                 statement.journal_id.id,
-                                                 abs(record['amount']),
-                                                 statement.currency.id,
-                                                 'receipt',
-                                                 statement.date,
-                                                 context=context)
-        default_account_id = statement.journal_id.default_credit_account_id.id
-        voucher_res = {'type': 'receipt',
-                       'name': record['reference'],
-                       'partner_id': partner_id,
-                       'journal_id': statement.journal_id.id,
-                       'account_id': result.get('account_id',
-                                                default_account_id),
-                       'company_id': statement.company_id.id,
-                       'currency_id': statement.currency.id,
-                       'date': record['date'] or time.strftime('%Y-%m-%d'),
-                       'amount': abs(record['amount']),
-                       'period_id': statement.period_id.id
-                       }
-        voucher_id = voucher_obj.create(cursor, uid, voucher_res,
-                                        context=context)
+    @api.model
+    def _prepare_line_vals(self, statement, record):
+        """Compute bank statement values to be used by `models.Model.create'
+        :param statement: current statement record
+        :type statement: :py:class:`openerp.models.Models` record
 
-        voucher_line_dict = False
-        if result['value']['line_cr_ids']:
-            for line_dict in result['value']['line_cr_ids']:
-                move_line = move_line_obj.browse(
-                    cursor, uid, line_dict['move_line_id'], context)
-                if move_id == move_line.move_id.id:
-                    voucher_line_dict = line_dict
-        if voucher_line_dict:
-            voucher_line_dict.update({'voucher_id': voucher_id})
-            voucher_line_obj.create(
-                cursor, uid, voucher_line_dict, context=context)
-        return voucher_id
+        :param record: dict reprenting parsed V11 line
+        :type record: dict
 
-    def _get_account(self, cursor, uid, line_ids, record, context=None):
-        """Get account from move line or from property"""
-        property_obj = self.pool.get('ir.property')
-        move_line_obj = self.pool.get('account.move.line')
-        account_id = False
-        if line_ids:
-            for line in move_line_obj.browse(
-                    cursor, uid, line_ids, context=context):
-                return line.account_id.id
-        if not account_id and not line_ids:
-            name = "property_account_receivable"
-            if record['amount'] < 0:
-                name = "property_account_payable"
-            account_id = property_obj.get(
-                cursor, uid, name, 'res.partner', context=context).id
-            if not account_id:
-                raise orm.except_orm(
-                    _('Error'),
-                    _('The properties account payable account receivable '
-                      'are not set')
-                )
-        return account_id
-
-    def _prepare_line_vals(self, cursor, uid, statement, record,
-                           voucher_enabled, context=None):
+        :returns: values
+        :rtype: dict
+        """
         # Remove the 11 first char because it can be adherent number
         # TODO check if 11 is the right number
-        move_line_obj = self.pool.get('account.move.line')
+        move_line_obj = self.env['account.move.line']
         reference = record['reference']
         values = {'name': '/',
                   'date': record['date'],
@@ -216,118 +179,73 @@ class BvrImporterWizard(orm.TransientModel):
                   'statement_id': statement.id,
                   }
         line_ids = move_line_obj.search(
-            cursor, uid,
-            [('ref', '=', reference),
+            [('transaction_ref', '=', reference),
              ('reconcile_id', '=', False),
              ('account_id.type', 'in', ['receivable', 'payable']),
              ('journal_id.type', '=', 'sale')],
             order='date desc',
-            context=context
         )
-        # For multiple payments
-        if not line_ids:
-            line_ids = move_line_obj.search(
-                cursor, uid,
-                [('transaction_ref', '=', reference),
-                 ('reconcile_id', '=', False),
-                 ('account_id.type', 'in', ['receivable', 'payable']),
-                 ('journal_id.type', '=', 'sale')],
-                order='date desc',
-                context=context
-            )
-        if not line_ids:
-            line_ids = self._reconstruct_invoice_ref(cursor, uid,
-                                                     reference, None)
-        if line_ids and voucher_enabled:
-            values['voucher_id'] = self._create_voucher_from_record(
-                cursor, uid, record,
-                statement, line_ids,
-                context=context
-            )
-        account_id = self._get_account(cursor, uid, line_ids,
-                                       record, context=context)
-        values['account_id'] = account_id
         if line_ids:
-            line = move_line_obj.browse(cursor, uid, line_ids[0])
+            line = move_line_obj.browse(line_ids[0])
             partner_id = line.partner_id.id
             num = line.invoice.number if line.invoice else False
             values['name'] = _('Inv. no %s') % num if num else values['name']
             values['partner_id'] = partner_id
         return values
 
-    def import_v11(self, cursor, uid, ids, data, context=None):
-        """Import v11 file and transfor it into statement lines"""
-        if context is None:
-            context = {}
-        module_obj = self.pool['ir.module.module']
-        voucher_enabled = module_obj.search(cursor,
-                                            uid,
-                                            [('name', '=', 'account_voucher'),
-                                             ('state', '=', 'installed')])
-        # if module installed we check ir.config_parameter
-        # to force disable of voucher
-        if voucher_enabled:
-            para = self.pool['ir.config_parameter'].get_param(
-                cursor,
-                uid,
-                'l10n_ch_payment_slip_voucher_disable',
-                default='0'
-            )
-            if para.lower() not in ['0', 'false']:  # If voucher is disabled
-                voucher_enabled = False
-        statement_line_obj = self.pool.get('account.bank.statement.line')
-        attachment_obj = self.pool.get('ir.attachment')
-        statement_obj = self.pool.get('account.bank.statement')
-        file = data['form']['file']
-        if not file:
-            raise orm.except_orm(_('UserError'),
-                                 _('Please select a file first!'))
-        statement_id = data['id']
-        lines = base64.decodestring(file).split("\n")
-        records = self._parse_lines(cursor, uid, lines, context=context)
+    def _import_v11(self):
+        """Import v11 file and transfor it into statement lines
 
-        statement = statement_obj.browse(cursor,
-                                         uid,
-                                         statement_id,
-                                         context=context)
+        :returns: action dict
+        :rtype: dict
+        """
+        statement_line_obj = self.env['account.bank.statement.line']
+        attachment_obj = self.env['ir.attachment']
+        statement_obj = self.env['account.bank.statement']
+        v11file = self.v11file
+        if not v11file:
+            raise exceptions.Warning(
+                _('Please select a file first!')
+            )
+        statement_id = self.env.context.get('active_id')
+        if not statement_id:
+            raise ValueError('The id of current satement is not in statement')
+        try:
+            lines = base64.decodestring(v11file).split("\n")
+        except ValueError as decode_err:
+            raise exceptions.Warning(
+                _('V11 file can not be decoded, '
+                  'it contains invalid caracter %s'),
+                repr(decode_err)
+            )
+        records = self._parse_lines(lines)
+
+        statement = statement_obj.browse(statement_id)
         for record in records:
-            values = self._prepare_line_vals(cursor, uid,
-                                             statement,
-                                             record,
-                                             voucher_enabled,
-                                             context=context)
-            statement_line_obj.create(cursor, uid, values, context=context)
+            values = self._prepare_line_vals(statement,
+                                             record)
+            statement_line_obj.create(values)
         attachment_obj.create(
-            cursor,
-            uid,
             {
-                'name': 'BVR %s' % time.strftime(
+                'name': 'V11 %s' % time.strftime(
                     "%Y-%m-%d_%H:%M:%S", time.gmtime()
                 ),
-                'datas': file,
+                'datas': self.v11file,
                 'datas_fname': 'BVR %s.txt' % time.strftime(
                     "%Y-%m-%d_%H:%M:%S", time.gmtime()
                 ),
                 'res_model': 'account.bank.statement',
-                'res_id': statement_id,
+                'res_id': statement.id,
             },
-            context=context
         )
 
         return {}
 
-    def import_bvr(self, cursor, uid, ids, context=None):
-        data = {}
-        if context is None:
-            context = {}
-        active_ids = context.get('active_ids', [])
-        active_id = context.get('active_id', False)
-        data['form'] = {}
-        data['ids'] = active_ids
-        data['id'] = active_id
-        data['form']['file'] = ''
-        res = self.read(cursor, uid, ids[0], ['file'])
-        if res:
-            data['form']['file'] = res['file']
-        self.import_v11(cursor, uid, ids, data, context=context)
-        return {}
+    @api.multi
+    def import_v11(self):
+        """Import v11 file and transfor it into statement lines
+
+        :returns: action dict
+        :rtype: dict
+        """
+        return self._import_v11()
