@@ -137,7 +137,7 @@ class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
         else:
             amount = str(amount)
         orig = amount
-        new = self._compile_comma_me.sub("\g<1>'\g<2>", amount)
+        new = self._compile_comma_me.sub(r"\g<1>'\g<2>", amount)
         if orig == new:
             return new
         else:
