@@ -45,14 +45,15 @@ class PaymentSlip(models.Model):
     _default_font_size = 20
     _default_scan_font_size = 22
     _default_amount_font_size = 30
-    _compile_get_ref = re.compile('[^0-9]')
-    _compile_check_bvr = re.compile('[0-9][0-9]-[0-9]{3,6}-[0-9]')
+    _compile_get_ref = re.compile(r'[^0-9]')
+    _compile_check_bvr = re.compile(r'[0-9][0-9]-[0-9]{3,6}-[0-9]')
 
     _name = 'l10n_ch.payment_slip'
     _rec_name = 'reference'
 
     reference = fields.Char('BVR/ESR Ref.',
                             compute='compute_ref',
+                            index=True,
                             store=True)
 
     move_line_id = fields.Many2one('account.move.line',
@@ -104,6 +105,11 @@ class PaymentSlip(models.Model):
                 invoice.partner_bank_id.state == 'bvr')
 
     def _get_adherent_number(self):
+        """Fetch the current slip bank adherent number.
+
+        :return: adherent number
+        :rtype: string
+        """
         self.ensure_one()
         move_line = self.move_line_id
         ad_number = ''
@@ -116,7 +122,6 @@ class PaymentSlip(models.Model):
 
         :return: total amount of payment slip
         :rtype: float
-
         """
         self.ensure_one()
         return self.move_line_id.debit
@@ -296,6 +301,12 @@ class PaymentSlip(models.Model):
         return self.compute_pay_slips_from_move_lines(move_lines)
 
     def get_comm_partner(self):
+        """Determine wich partner should be display
+        on the payment slip
+
+        :return: corresponding `res.partner` record
+        :rtype: :py:class:`openerp.models.Model`
+        """
         self.ensure_one()
         invoice = self.move_line_id.invoice
         if hasattr(invoice, 'commercial_partner_id'):
@@ -305,7 +316,10 @@ class PaymentSlip(models.Model):
 
     @api.one
     def _validate(self):
-        """Check if the payment slip is ready to be printed"""
+        """Check if the payment slip is ready to be printed
+
+        :return: True or raise an exception
+        :rtype: bool"""
         invoice = self.move_line_id.invoice
         if not invoice:
             raise exceptions.ValidationError(
@@ -321,8 +335,11 @@ class PaymentSlip(models.Model):
         return True
 
     @api.model
-    def police_absolute_path(self):
-        """Will get the ocrb police absolute path"""
+    def font_absolute_path(self):
+        """Will get the ocrb font absolute path
+
+        :return: path to the font
+        """
         path = get_module_resource('l10n_ch_payment_slip',
                                    'static',
                                    'src',
@@ -332,7 +349,13 @@ class PaymentSlip(models.Model):
 
     @api.model
     def image_absolute_path(self, file_name):
-        """Will get the ocrb police absolute path"""
+        """Will get image absolute path
+
+        :param file_name: name of image
+
+        :return: image path
+        :rtype: str
+        """
         path = get_module_resource('l10n_ch_payment_slip',
                                    'static',
                                    'src',
@@ -342,24 +365,55 @@ class PaymentSlip(models.Model):
 
     @api.model
     def _get_text_font(self):
-        return ImageFont.truetype(self.police_absolute_path(),
+        """Create a PIL font for addresses and bank
+        :return: PIL font for addresses and bnak
+        :rtype: :py:clas:`PIL. ImageFont.truetype`
+        """
+        return ImageFont.truetype(self.font_absolute_path(),
                                   self._default_font_size)
 
     @api.model
     def _get_amount_font(self):
-        return ImageFont.truetype(self.police_absolute_path(),
+        """Create a PIL font for amount
+        :return: PIL font for addresses and bnak
+        :rtype: :py:clas:`PIL. ImageFont.truetype`
+        """
+        return ImageFont.truetype(self.font_absolute_path(),
                                   self._default_amount_font_size)
 
     @api.model
     def _get_scan_line_text_font(self, company):
+        """Create a PIL font for scan line
+
+        :param company: current `res.company` record
+        :type company: :py:class:`openerp.models.Model`
+
+        :return: PIL font for addresses and bnak
+        :rtype: :py:clas:`PIL. ImageFont.truetype`
+        """
         return ImageFont.truetype(
-            self.police_absolute_path(),
+            self.font_absolute_path(),
             company.bvr_scan_line_font_size or self._default_scan_font_size
         )
 
     @api.model
     def _draw_address(self, draw, font, com_partner, initial_position,
                       company):
+        """Draw an address on canvas
+
+        :param font: font to use
+        :type font: :py:clas:`PIL. ImageFont.truetype`
+
+        :param com_partner: commercial partner record for model `res.partner`
+        :type com_partner: :py:class:`openerp.models.Model`
+
+        :para initial_position: tuple of coordinate (x, y)
+        :type initial_position: tuple
+
+        :param company: current `res.company` record
+        :type company: :py:class:`openerp.models.Model`
+
+        """
         x, y = initial_position
         x += company.bvr_add_horz
         y += company.bvr_add_vert
@@ -377,6 +431,21 @@ class PaymentSlip(models.Model):
 
     @api.model
     def _draw_bank(self, draw, font, bank, initial_position, company):
+        """Draw bank number on canvas
+
+        :param font: font to use
+        :type font: :py:clas:`PIL. ImageFont.truetype`
+
+        :param bank: bank number
+        :type bank: str
+
+        :para initial_position: tuple of coordinate (x, y)
+        :type initial_position: tuple
+
+        :param company: current `res.company` record
+        :type company: :py:class:`openerp.models.Model`
+
+        """
         x, y = initial_position
         x += company.bvr_delta_horz
         y += company.bvr_delta_vert
@@ -384,6 +453,21 @@ class PaymentSlip(models.Model):
 
     @api.model
     def _draw_ref(self, draw, font, ref, initial_position, company):
+        """Draw reference on canvas
+
+        :param font: font to use
+        :type font: :py:clas:`PIL. ImageFont.truetype`
+
+        :param ref: ref number
+        :type ref: str
+
+        :para initial_position: tuple of coordinate (x, y)
+        :type initial_position: tuple
+
+        :param company: current `res.company` record
+        :type company: :py:class:`openerp.models.Model`
+
+        """
         x, y = initial_position
         x += company.bvr_delta_horz
         y += company.bvr_delta_vert
@@ -391,6 +475,21 @@ class PaymentSlip(models.Model):
 
     @api.model
     def _draw_amont(self, draw, font, amount, initial_position, company):
+        """Draw reference on canvas
+
+        :param font: font to use
+        :type font: :py:clas:`PIL. ImageFont.truetype`
+
+        :param amount: ref number
+        :type amount: str
+
+        :para initial_position: tuple of coordinate (x, y)
+        :type initial_position: tuple
+
+        :param company: current `res.company` record
+        :type company: :py:class:`openerp.models.Model`
+
+        """
         x, y = initial_position
         x += company.bvr_delta_horz
         y += company.bvr_delta_vert
@@ -406,6 +505,18 @@ class PaymentSlip(models.Model):
 
     @api.model
     def _draw_scan_line(self, draw, font, initial_position, company):
+        """Draw reference on canvas
+
+        :param font: font to use
+        :type font: :py:clas:`PIL. ImageFont.truetype`
+
+        :para initial_position: tuple of coordinate (x, y)
+        :type initial_position: tuple
+
+        :param company: current `res.company` record
+        :type company: :py:class:`openerp.models.Model`
+
+        """
         x, y = initial_position
         x += company.bvr_scan_line_horz
         y += company.bvr_scan_line_vert
@@ -421,11 +532,27 @@ class PaymentSlip(models.Model):
 
     @api.model
     def _draw_hook(self, draw):
+        """Hook to add your own content on canvas"""
         pass
 
     def _draw_payment_slip(self, a4=False, out_format='PNG', scale=None,
                            b64=False):
-        """Generate the payment slip image"""
+        """Generate the payment slip image
+        :param a4: If set to True will print on slip on a A4 paper format
+        :type a4: bool
+
+        :param out_format: output format please refer to PIL documentation
+        :type out_format: str
+
+        :param scale: scale quadratic ration
+        :type scale: float
+
+        :param b64: If set to True the output image string
+                    will be encoded to base64
+
+        :return: slip image string
+        :rtype: str
+        """
         a4_offset = 0.0
         if a4:
             a4_offset = 1083
@@ -496,11 +623,13 @@ class PaymentSlip(models.Model):
             return img_stream
 
     def draw_payment_slip_image(self):
+        """Draw an us letter format slip in PNG"""
         img = self._draw_payment_slip()
         self.slip_image = base64.encodestring(img)
         return img
 
     def draw_a4_report(self):
+        """Draw an a4 format slip in PDF"""
         img = self._draw_payment_slip(a4=True, out_format='PDF')
         self.a4_pdf = base64.encodestring(img)
         return img
