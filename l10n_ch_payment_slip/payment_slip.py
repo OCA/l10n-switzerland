@@ -66,22 +66,37 @@ class PaymentSlip(models.Model):
 
     scan_line = fields.Char('Scan Line',
                             compute='compute_scan_line',
+                            readonly=True,
                             store=True)
 
     invoice_id = fields.Many2one(string='Related invoice',
                                  related='move_line_id.invoice',
+                                 store=True,
+                                 readonly=True,
                                  comodel_name='account.invoice')
 
     slip_image = fields.Binary('Slip Image',
+                               readonly=True,
                                compute="draw_payment_slip_image")
 
     a4_pdf = fields.Binary('Slip A4 PDF',
+                           readonly=True,
                            compute="draw_a4_report")
+
+    _sql_constraints = [('unique reference',
+                         'UNIQUE (reference)',
+                        'BVR/ESR reference must be unique')]
 
     @api.model
     def _can_generate(self, move_line):
-        ''' Determine if BVR should be generated or not. '''
-        # We check if the type is bvr, if not we return false
+        '''Predicate to determine if payment slip should be generated or not.
+
+        :param move_line: move line reocord
+        :type move_line: :py:class:`openerp.models.Model` record
+
+        :return: True if we can generate a payment slip
+        :rtype: bool
+        '''
         invoice = move_line.invoice
         if not invoice:
             return False
