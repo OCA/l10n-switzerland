@@ -67,7 +67,7 @@ payment terms.
           "report/report_declaration.xml",
           "data.xml"],
  'demo': [],
- 'test': [],  # To be ported or migrate to unit tests or scenarios
+ 'test': [],
  'auto_install': False,
  'installable': True,
  'images': []
