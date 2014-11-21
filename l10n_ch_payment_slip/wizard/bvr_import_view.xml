@@ -9,12 +9,12 @@
       <field name="arch" type="xml">
         <form string="BVR Import">
           <group width="525" colspan="4">
-            <field name="file"/>
+            <field name="v11file"/>
             <newline/>
-            <group colspan="4">
+            <footer colspan="4">
+              <button name="import_v11" string="Import" type="object" icon="gtk-ok"  colspan="2"/> or
               <button special="cancel" string="Cancel" icon="gtk-cancel"  colspan="2"/>
-              <button name="import_bvr" string="Import" type="object" icon="gtk-ok"  colspan="2"/>
-            </group>
+            </footer>
           </group>
         </form>
       </field>
@@ -37,7 +37,14 @@
       <field name="inherit_id" ref="account.view_bank_statement_form"/>
       <field name="arch" type="xml">
         <div name="import_buttons" position="inside">
-          <button name="%(wizard_bvr_import)d" states="draft,open" string="Import BVR" type="action"/>
+          <button
+              name="%(wizard_bvr_import)d"
+              states="draft,open"
+              class="oe_inline oe_stat_button"
+              string="Import v11"
+              widget="statinfo"
+              icon="fa-pencil-square-o"
+              type="action"/>
         </div>
       </field>
     </record>
