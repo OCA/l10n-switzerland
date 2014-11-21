@@ -19,6 +19,5 @@
 #
 ##############################################################################
 
-from . import base_sepa
 from . import l10n_ch
 from . import wizard

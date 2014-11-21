@@ -33,7 +33,7 @@ import base64
 
 from openerp.osv import orm, fields
 
-from l10n_ch_sepa.base_sepa.msg_sepa import MsgSEPAFactory
+from ..base_sepa.msg_sepa import MsgSEPAFactory
 
 
 class WizardPain001(orm.TransientModel):
