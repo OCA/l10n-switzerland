@@ -82,9 +82,9 @@ class AccountMoveLine(Model):
 
 
 class AccountInvoice(Model):
-
     """Inherit account.invoice in order to add bvr
     printing functionnalites. BVR is a Swiss payment vector"""
+
     _inherit = "account.invoice"
 
     _compile_get_ref = re.compile('[^0-9]')
@@ -228,9 +228,9 @@ class AccountInvoice(Model):
 
 
 class AccountTaxCode(Model):
-
     """Inherit account tax code in order
     to add a Case code"""
+
     _name = 'account.tax.code'
     _inherit = "account.tax.code"
     _columns = {

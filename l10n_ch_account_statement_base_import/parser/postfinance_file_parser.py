@@ -32,7 +32,6 @@ _logger = logging.getLogger(__name__)
 
 
 class XMLPFParser(BankStatementImportParser):
-
     """
     Parser for XML Postfinance Statements (can be wrapped in a tar.gz file)
     """

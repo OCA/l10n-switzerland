@@ -23,11 +23,11 @@ from openerp.osv import orm
 
 
 class account_move_line(orm.Model):
-
     '''
     Use hooks to add bvr ref generation if account is IBAN and has LSV
     identifier
     '''
+
     _inherit = 'account.move.line'
 
     def _is_generate_bvr(self, cr, uid, invoice, context=None):

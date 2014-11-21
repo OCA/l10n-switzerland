@@ -22,7 +22,6 @@ from openerp.osv import orm
 
 
 class account_move_line(orm.Model):
-
     """Overrride BVR amount to take in account dunning fees"""
 
     _inherit = "account.move.line"

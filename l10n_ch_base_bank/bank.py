@@ -53,7 +53,6 @@ class BankCommon(object):
 
 
 class Bank(orm.Model, BankCommon):
-
     """Inherit res.bank class in order to add swiss specific field"""
     _inherit = 'res.bank'
     _columns = {
@@ -145,7 +144,6 @@ class Bank(orm.Model, BankCommon):
 
 
 class ResPartnerBank(orm.Model, BankCommon):
-
     """
     Inherit res.partner.bank class in order to add swiss specific fields
     and state controls

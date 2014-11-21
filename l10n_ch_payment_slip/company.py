@@ -23,7 +23,6 @@ from openerp.osv.orm import Model, fields
 
 
 class ResCompany(Model):
-
     """override company in order to add bvr vertical and
     Horizontal print delta"""
     _inherit = "res.company"

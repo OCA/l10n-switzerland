@@ -23,7 +23,6 @@ from openerp.tools.float_utils import float_compare
 
 
 class test_scan_bvr(common.TransactionCase):
-
     """ Test the wizard for bvr line scanning """
 
     def setUp(self):

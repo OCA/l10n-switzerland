@@ -78,7 +78,6 @@ def tr(string_in):
 
 
 class record(object):
-
     """Abstract class that provides common
     knowledge for any kind of post/bank account
 
@@ -140,7 +139,6 @@ class record(object):
 
 
 class postal_record(record):
-
     """Class that propose common
     knowledge for all postal account type
 
@@ -174,7 +172,6 @@ class postal_record(record):
 
 
 class record_gt826(postal_record):
-
     """ BVR record implementation"""
 
     def init_local_context(self):
@@ -290,7 +287,6 @@ class record_gt826(postal_record):
 
 
 class record_gt827(postal_record):
-
     """
     Swiss internal (bvpost and bvbank) record implemetation
     """
@@ -377,7 +373,6 @@ class record_gt827(postal_record):
 
 
 class record_gt836(record):
-
     """Implements iban record"""
 
     def validate_global_context_dict(self):
@@ -491,7 +486,6 @@ class record_gt836(record):
 
 
 class record_gt890(record):
-
     """Implements Total Record of DTA file
     if behaves like a account payment order
 

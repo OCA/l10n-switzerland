@@ -30,7 +30,6 @@ SEPA_DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
 
 
 class MsgSEPA(object):
-
     _xsd_path = None
     _xml_data = None
 
@@ -74,7 +73,6 @@ class MsgSEPA(object):
 
 
 class MsgSEPAFactory(object):
-
     """This class is a factory that creates SEPA message in order to allow
     redefinition of those message to match with different country
     implementations

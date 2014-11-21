@@ -27,7 +27,6 @@ from openerp.addons.account_statement_base_completion.statement import (
 
 
 class account_statement_completion_rule(orm.Model):
-
     """ Add a rule based on BVR Reference """
     _inherit = "account.statement.completion.rule"
 

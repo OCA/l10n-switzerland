@@ -21,7 +21,6 @@ from openerp.osv import orm, fields
 
 
 class ResPartnerBank(orm.Model):
-
     """
     Inherit res.partner.bank class in order to add swiss specific fields
     such as:
@@ -29,6 +28,7 @@ class ResPartnerBank(orm.Model):
      - BVR print options for company accounts
      We leave it here in order
     """
+
     _inherit = "res.partner.bank"
     _columns = {
         'print_bank': fields.boolean('Print Bank on BVR'),
