@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <openerp>
     <data>
+
         <record id="view_account_config_settings_banks_ext" model="ir.ui.view">
             <field name="name">account settings banks</field>
             <field name="model">account.config.settings</field>

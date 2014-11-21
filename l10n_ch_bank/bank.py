@@ -1,8 +1,7 @@
-# b-*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2010 brain-tec AG (http://www.brain-tec.ch) 
-#    All Right Reserved
+#    Author: Nicolas Bessi. Copyright Camptocamp SA / Migrated to version 8 by brain-tec AG
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,28 +17,37 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm, fields
+
+from openerp.osv import osv, fields
 
 
-class res_bank_ext(orm.Model):
-    """Inherit res.bank class in order to add swiss specific fields"""
+class res_bank_ext(osv.osv):
+
+    " Inherit res.bank class in order to add swiss specific fields "
     _inherit = 'res.bank'
-    
-    # fields from the original file downloaded from here: http://www.six-interbank-clearing.com/de/home/bank-master-data/download-bc-bank-master.html
+
+    """ fields from the original file downloaded from here:
+    http://www.six-interbank-clearing.com/de/home/bank-master-data/download-bc-bank-master.html """
     _columns = {
-        'bank_gruppe': fields.char('Gruppe', size=2),
-        'bank_filialid': fields.char('Filial-ID', size=5),
-        'bank_clearing_neu': fields.char('BCNr neu', size=5),
+        " Gruppe "
+        'bank_group': fields.char('Group', size=2),
+        " Filial-ID "
+        'bank_branchid': fields.char('Branch-ID', size=5),
+        'bank_clearing_new': fields.char('BCNr new', size=5),
         'bank_sicnr': fields.char('SIC-Nr', size=6),
-        'bank_hauptsitz': fields.char('Hauptsitz', size=5),
+        " Hauptsitz "
+        'bank_headquarter': fields.char('Headquarter', size=5),
         'bank_bcart': fields.char('BC-Art', size=1),
-        'bank_valid_from': fields.char('gültig ab', size=8),
+        'bank_valid_from': fields.char('Valid from', size=8),
         'bank_sic': fields.char('SIC', size=1),
         'bank_eurosic': fields.char('euroSIC', size=1),
         'bank_lang': fields.char('Sprache', size=1),
-        'bank_postadresse': fields.char('Postadresse', size=35),
-        'bank_vorwahl': fields.char('Vorwahl', size=5),
-        'bank_postkonto': fields.char('Postkonto', size=35),  # ccp does not allow to enter entries like *30-38151-2 because of the '*' but this comes from the xls to import
+        'bank_postaladdress': fields.char('Postal address', size=35),
+        " Vorwahl "
+        'bank_areacode': fields.char('Area code', size=5),
+        """ Postkonto - ccp does not allow to enter entries like *30-38151-2
+        because of the '*' but this comes from the xls to import """
+        'bank_postaccount': fields.char('Post account', size=35),
     }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
