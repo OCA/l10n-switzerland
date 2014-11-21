@@ -29,6 +29,7 @@ class CreditCommunication(orm.TransientModel):
        and reporting.
        Il use this approche in version 7 a browse record will
        exist even if not saved"""
+
     _inherit = "credit.control.communication"
 
     def _generate_report_bvr(self, cr, uid, line_ids, context=None):
@@ -37,7 +38,7 @@ class CreditCommunication(orm.TransientModel):
         service = netsvc.LocalService(
             'report.invoice_bvr_webkit_multi_credit_control'
         )
-        result, format = service.create(cr, uid, line_ids, {}, {})
+        result, bvr_format = service.create(cr, uid, line_ids, {}, {})
         return result
 
 

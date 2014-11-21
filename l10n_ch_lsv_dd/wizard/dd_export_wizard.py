@@ -273,7 +273,7 @@ class post_dd_export_wizard(orm.TransientModel):
         ''' Create banking.export.ch.dd object '''
         banking_export_ch_dd_obj = self.pool.get('banking.export.ch.dd')
         vals = {
-            'payment_order_ids': [(6, 0, [id for id in p_o_ids])],
+            'payment_order_ids': [(6, 0, [p_o_id for p_o_id in p_o_ids])],
             'total_amount': total_amount,
             'nb_transactions': properties.get('nb_transactions'),
             'file': base64.encodestring(file_content),
@@ -371,7 +371,7 @@ class post_dd_export_wizard(orm.TransientModel):
         amount_str = '{:.2f}'.format(amount).replace('.', '').zfill(nb_char)
         return amount_str
 
-    def _gen_control_range(self, type, properties):
+    def _gen_control_range(self, trans_type, properties):
         vals = collections.OrderedDict()
         vals['file_id'] = '036'
         vals['due_date'] = properties.get('due_date')
@@ -380,7 +380,7 @@ class post_dd_export_wizard(orm.TransientModel):
         vals['reserve_1'] = ''.zfill(8)  # In 2 lines like in spec...
         vals['reserve_2'] = ''.zfill(9)
         vals['dd_order_no'] = str(properties.get('dd_order_no')).zfill(2)
-        vals['trans_type'] = type.zfill(2)
+        vals['trans_type'] = trans_type.zfill(2)
         vals['trans_serial_no'] = str(properties.get('trans_ser_no')).zfill(6)
         vals['reserve_3'] = ''.zfill(2)
         vals['reserve_4'] = ''.zfill(1)
@@ -476,9 +476,9 @@ class post_dd_export_wizard(orm.TransientModel):
 
         return requested_date
 
-    def _prepare_date(self, date):
+    def _prepare_date(self, format_date):
         ''' Returns date formatted to YYMMDD string '''
-        return date.strftime('%y%m%d')
+        return format_date.strftime('%y%m%d')
 
     def _setup_properties(self, cr, uid, context, wizard_id, payment_order):
         ''' These properties are the same for all lines of the DD file '''

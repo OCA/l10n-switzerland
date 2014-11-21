@@ -54,7 +54,7 @@ class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
         })
 
     _compile_get_ref = re.compile('[^0-9]')
-    _compile_comma_me = re.compile("^(-?\d+)(\d{3})")
+    _compile_comma_me = re.compile(r'^(-?\d+)(\d{3})')
     _compile_check_bvr = re.compile('[0-9][0-9]-[0-9]{3,6}-[0-9]')
     _compile_check_bvr_add_num = re.compile('[0-9]*$')
 
@@ -136,7 +136,7 @@ class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
         else:
             amount = str(amount)
         orig = amount
-        new = self._compile_comma_me.sub("\g<1>'\g<2>", amount)
+        new = self._compile_comma_me.sub(r"\g<1>'\g<2>", amount)
         if orig == new:
             return new
         else:

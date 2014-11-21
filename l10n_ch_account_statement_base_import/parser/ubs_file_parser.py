@@ -36,7 +36,7 @@ def UnicodeDictReader(utf8_data, **kwargs):
     csv_reader = csv.DictReader(utf8_data, dialect='ubs', **kwargs)
     for row in csv_reader:
         yield dict([(key, unicode(value, 'utf-8'))
-                   for key, value in row.iteritems()])
+                    for key, value in row.iteritems()])
 
 
 def float_or_zero(val):

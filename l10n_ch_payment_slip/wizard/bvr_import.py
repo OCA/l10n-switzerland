@@ -278,12 +278,12 @@ class BvrImporterWizard(orm.TransientModel):
         statement_line_obj = self.pool.get('account.bank.statement.line')
         attachment_obj = self.pool.get('ir.attachment')
         statement_obj = self.pool.get('account.bank.statement')
-        file = data['form']['file']
-        if not file:
+        import_file = data['form']['file']
+        if not import_file:
             raise orm.except_orm(_('UserError'),
                                  _('Please select a file first!'))
         statement_id = data['id']
-        lines = base64.decodestring(file).split("\n")
+        lines = base64.decodestring(import_file).split("\n")
         records = self._parse_lines(cursor, uid, lines, context=context)
 
         statement = statement_obj.browse(cursor,
@@ -304,7 +304,7 @@ class BvrImporterWizard(orm.TransientModel):
                 'name': 'BVR %s' % time.strftime(
                     "%Y-%m-%d_%H:%M:%S", time.gmtime()
                 ),
-                'datas': file,
+                'datas': import_file,
                 'datas_fname': 'BVR %s.txt' % time.strftime(
                     "%Y-%m-%d_%H:%M:%S", time.gmtime()
                 ),
