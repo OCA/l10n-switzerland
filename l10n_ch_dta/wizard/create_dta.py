@@ -169,7 +169,8 @@ class postal_record(record):
             raise except_orm(
                 _('Error'),
                 _('Wrong postal number format.\n'
-                  'It must be 12-123456-9 or 12345 format')
+                  'It must be 12-123456-9 or 12345 format \n'
+                  'on line %s' % (self.pline.name))
             )
 
 
