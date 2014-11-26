@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    File: views/hr_contract_view.xml
+    Module: l10n_ch_hr_payroll
+
+    Created by cyp@open-net.ch
+
+    Copyright (c) 2014-TODAY Open-Net Ltd.
+-->
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="hr_contract_form_l10n_ch_inherit">
+            <field name="name">hr.contract.form.inherit_ch_01</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <field name="struct_id" position="after">
+                    <field name="holiday_rate"/>
+                    <field name="lpp_rate"/>
+                    <field name="lpp_amount"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
