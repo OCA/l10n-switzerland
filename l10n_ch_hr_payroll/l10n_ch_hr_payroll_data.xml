@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+File: l10n_ch_hr_payroll_data.xml
+Module: l10n_ch_hr_payroll
+
+Created by sge@open-net.ch
+
+Copyright (c) 2014 Open-Net Ltd.
+-->
 <openerp>
     <data>
 <!-- HR SALARY RULE CATEGORIES-->
