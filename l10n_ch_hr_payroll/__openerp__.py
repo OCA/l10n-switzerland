@@ -28,9 +28,10 @@
 
 {
     'name': 'Switzerland - Payroll',
+    'summary': 'Swizerland Payroll Rules',
     'category': 'Localization',
     'author': 'Open-Net Sàrl',
-    'depends': ['decimal_precision','hr_payroll', 'hr_payroll_account'],
+    'depends': ['decimal_precision', 'hr_payroll', 'hr_payroll_account'],
     'version': '1.0.1',
     'description': """
 Swizerland Payroll Rules.
@@ -61,6 +62,9 @@ V1.0.0: 2014-11-07/Sge
 
 V1.0.1: 2014-11-11/Sge
     * Set the 'LPP rate'' digits to 'Payroll Rate' decimal accuracy
+
+V1.0.2:
+    * Add some minor changes, based on pull request #66 comments.
 
     """,
 
