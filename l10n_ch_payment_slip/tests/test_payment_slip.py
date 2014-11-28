@@ -18,11 +18,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import time
+import re
+
 import openerp.tests.common as test_common
 
 
 class TestPaymentSlip(test_common.TransactionCase):
+    _compile_get_ref = re.compile(r'[^0-9]')
 
     def setUp(self):
         super(TestPaymentSlip, self).setUp()
@@ -49,7 +51,7 @@ class TestPaymentSlip(test_common.TransactionCase):
                 'bank': self.bank.id,
                 'bank_name': self.bank.name,
                 'bank_bic': self.bank.bic,
-                'acc_number': '01-0123-23',
+                'acc_number': 'R 12312123',
                 'bvr_adherent_num': '1234567',
                 'print_bank': True,
                 'print_account': True,
@@ -94,6 +96,45 @@ class TestPaymentSlip(test_common.TransactionCase):
             if line.account_id.type in ('payable', 'receivable'):
                 self.assertTrue(slip)
                 self.assertEqual(slip.amount_total, 862.50)
-                self.assertEqual(slip.invoice.id, invoice.id)
+                self.assertEqual(slip.invoice_id.id, invoice.id)
             else:
                 self.assertFalse(slip)
+
+    def test_slip_validity(self):
+        """Test that confirming slip are valid"""
+        invoice = self.env['account.invoice'].create(
+            {
+                'type': 'out_invoice',
+                'partner_id': self.env.ref('base.res_partner_12').id,
+                'reference_type': 'none',
+                'name': 'A customer invoice',
+                'account_id': self.env.ref('account.a_recv').id,
+                'type': 'out_invoice',
+            }
+        )
+
+        self.env['account.invoice.line'].create(
+            {
+                'product_id': False,
+                'quantity': 1,
+                'price_unit': 862.50,
+                'invoice_id': invoice.id,
+                'name': 'product that cost 862.50 all tax included',
+            }
+        )
+        invoice.signal_workflow('invoice_open')
+        invoice.refresh()
+        for line in invoice.move_id.line_id:
+            slip = self.env['l10n_ch.payment_slip'].search(
+                [('move_line_id', '=', line.id)]
+            )
+            if line.account_id.type in ('payable', 'receivable'):
+                slip.reference
+                slip.scan_line
+                slip.slip_image
+                slip.a4_pdf
+                inv_num = line.invoice.number
+                line_ident = self._compile_get_ref.sub(
+                    '', "%s%s" % (inv_num, line.id)
+                )
+                self.assertIn(line_ident, slip.reference.replace(' ', ''))
