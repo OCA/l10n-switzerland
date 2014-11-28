@@ -144,12 +144,3 @@ class AccountInvoice(models.Model):
                 self._action_bvr_number_move_line(pay_slip.move_line_id,
                                                   ref)
         return res
-
-
-class AccountTaxCode(models.Model):
-    """Inherit account tax code in order
-    to add a Case code"""
-    _name = 'account.tax.code'
-    _inherit = "account.tax.code"
-
-    code = fields.Char('Case Code', size=512),
