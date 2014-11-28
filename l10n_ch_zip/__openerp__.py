@@ -20,22 +20,12 @@
 {
     'name': 'Switzerland - Postal codes (ZIP) list',
     'version': '1.1.0',
-    'author': 'Camptocamp (migrated to version 8 by brain-tec AG)',
+    'author': 'Camptocamp,brain-tec AG',
     'category': 'Localisation',
     'website': 'http://www.camptocamp.com',
     'summary': 'Provides all Swiss postal codes for auto-completion',
-    'description': """
-Swiss postal code (ZIP) list
-============================
-
-This module will load all Swiss postal codes (ZIP) in Odoo to
-ease the input of partners.
-
-It is not mandatory to use Odoo in Switzerland,
-but can improve the user experience.
-
-""",
     'depends': ['base', 'base_location'],
+    # FIXME: deprecated
     'init_xml': ['data/set_old_res_better_zip_entries_inactive.sql'],
     'data': ['l10n_ch_better_zip.xml'],
     'images': [],
@@ -44,5 +34,3 @@ but can improve the user experience.
     'installable': True,
     'application': True,
 }
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
