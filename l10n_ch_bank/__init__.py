@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Nicolas Bessi. Copyright Camptocamp SA / Migrated to version 8 by brain-tec AG
+#    Author: Nicolas Bessi, Olivier Jossen, Guewen Baconnier
+#    Copyright Camptocamp SA
+#    Copyright brain-tec AG
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,5 +22,3 @@
 
 from . import bank
 from . import res_config
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
