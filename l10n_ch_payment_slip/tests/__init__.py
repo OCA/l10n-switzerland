@@ -19,3 +19,6 @@
 #
 ##############################################################################
 from . import test_payment_slip
+fast_suite = [
+    test_payment_slip,
+]
