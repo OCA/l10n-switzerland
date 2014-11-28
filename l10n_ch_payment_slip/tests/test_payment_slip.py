@@ -63,7 +63,6 @@ class TestPaymentSlip(test_common.TransactionCase):
         """Test that confirming an invoice generate slips correctly"""
         invoice = self.env['account.invoice'].create(
             {
-                'type': 'out_invoice',
                 'partner_id': self.env.ref('base.res_partner_12').id,
                 'reference_type': 'none',
                 'name': 'A customer invoice',
@@ -104,7 +103,6 @@ class TestPaymentSlip(test_common.TransactionCase):
         """Test that confirming slip are valid"""
         invoice = self.env['account.invoice'].create(
             {
-                'type': 'out_invoice',
                 'partner_id': self.env.ref('base.res_partner_12').id,
                 'reference_type': 'none',
                 'name': 'A customer invoice',
@@ -129,10 +127,10 @@ class TestPaymentSlip(test_common.TransactionCase):
                 [('move_line_id', '=', line.id)]
             )
             if line.account_id.type in ('payable', 'receivable'):
-                slip.reference
-                slip.scan_line
-                slip.slip_image
-                slip.a4_pdf
+                self.assertTrue(slip.reference)
+                self.assertTrue(slip.scan_line)
+                self.assertTrue(slip.slip_image)
+                self.assertTrue(slip.a4_pdf)
                 inv_num = line.invoice.number
                 line_ident = self._compile_get_ref.sub(
                     '', "%s%s" % (inv_num, line.id)
