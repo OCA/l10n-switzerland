@@ -57,7 +57,7 @@ class AccountInvoice(models.Model):
         'Keep empty to use the default'
     )
 
-    bvr_reference = fields.Char(
+    bvr_reference = fields.Text(
         string='BVR ref',
         compute='_compute_full_bvr_name',
         store=True,
@@ -70,7 +70,7 @@ class AccountInvoice(models.Model):
     )
 
     @api.one
-    @api.depends('slip_ids')
+    @api.depends('slip_ids', 'state')
     def _compute_full_bvr_name(self):
         """Concatenate related slip references
 
