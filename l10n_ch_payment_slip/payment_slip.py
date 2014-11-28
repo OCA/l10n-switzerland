@@ -212,6 +212,9 @@ class PaymentSlip(models.Model):
         line.append(' ')
         bank = self.move_line_id.invoice.partner_bank_id.get_account_number()
         account_components = bank.split('-')
+        if len(account_components) != 3:
+            raise Warning(_('Please enter a correct postal number like: '
+                            '01-23456-1'))
         bank_identifier = "%s%s%s" % (
             account_components[0],
             account_components[1].rjust(6, '0'),
