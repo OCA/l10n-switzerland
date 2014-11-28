@@ -18,10 +18,10 @@
 #
 ##############################################################################
 
-from openerp.osv import osv, fields
+from openerp import models, fields
 
 
-class res_bank_ext(osv.osv):
+class ResBank(models.Model):
     """ Inherit res.bank class in order to add swiss specific fields
 
     Fields from the original file downloaded from here:
@@ -43,19 +43,18 @@ class res_bank_ext(osv.osv):
     """
     _inherit = 'res.bank'
 
-    _columns = {
-        'bank_group': fields.char('Group', size=2),
-        'bank_branchid': fields.char('Branch-ID', size=5),
-        'bank_clearing_new': fields.char('BCNr new', size=5),
-        'bank_sicnr': fields.char('SIC-Nr', size=6),
-        'bank_headquarter': fields.char('Headquarter', size=5),
-        'bank_bcart': fields.char('BC-Art', size=1),
-        # TODO: date?
-        'bank_valid_from': fields.char('Valid from', size=8),
-        'bank_sic': fields.char('SIC', size=1),
-        'bank_eurosic': fields.char('euroSIC', size=1),
-        'bank_lang': fields.char('Sprache', size=1),
-        'bank_postaladdress': fields.char('Postal address', size=35),
-        'bank_areacode': fields.char('Area code', size=5),
-        'bank_postaccount': fields.char('Post account', size=35),
-    }
+    bank_group = fields.Char(string='Group', size=2)
+    bank_branchid = fields.Char(string='Branch-ID', size=5)
+    bank_clearing_new = fields.Char(string='BCNr new', size=5)
+    bank_sicnr = fields.Char(string='SIC-Nr', size=6)
+    bank_headquarter = fields.Char(string='Headquarter', size=5)
+    bank_bcart = fields.Char(string='BC-Art', size=1)
+    # TODO: date?
+    bank_valid_from = fields.Char(string='Valid from', size=8)
+    bank_sic = fields.Char(string='SIC', size=1)
+    bank_eurosic = fields.Char(string='euroSIC', size=1)
+    # TODO: m2o?
+    bank_lang = fields.Char(string='Sprache', size=1)
+    bank_postaladdress = fields.Char(string='Postal address', size=35)
+    bank_areacode = fields.Char(string='Area code', size=5)
+    bank_postaccount = fields.Char(string='Post account', size=35)
