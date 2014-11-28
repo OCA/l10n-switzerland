@@ -7,8 +7,15 @@
       <field name="type">form</field>
       <field name="inherit_id" ref="account.invoice_form"/>
       <field name="arch" type="xml">
-        <field name="date_due" position="after">
-          <field name="bvr_reference"/>
+        <field name="tax_line" position="before">
+          <group colspan="4">
+          <field name="bvr_reference" colspan="4"/>
+          <button type="action"
+                  string="Open Payment Slips"
+                  groups="base.group_system"
+                  name="%(l10n_ch_payment_slip.action_slip_all)d"
+                  attrs="{'invisible': [('type', '!=', 'out_invoice')]}"/>
+          </group>
         </field>
       </field>
     </record>
@@ -43,23 +50,6 @@
         <tree version="7.0" string="Payment Slip">
             <field name="reference"/>
         </tree>
-      </field>
-    </record>
-
-    <record id="invoice_pay_slip_relation" model="ir.ui.view">
-      <field name="name">Payment slip button</field>
-      <field name="model">account.invoice</field>
-      <field name="inherit_id" ref="account.invoice_form"/>
-      <field name="arch" type="xml">
-        <header position="inside">
-          <button type="action"
-                  groups="account.group_account_invoice"
-                  string="Open Payment Slips"
-                  name="%(l10n_ch_payment_slip.action_slip_all)d"
-                  attrs="{'invisible': [('type', '!=', 'out_invoice')]}">
-
-          </button>
-        </header>
       </field>
     </record>
 
