@@ -51,8 +51,7 @@ class ResBank(models.Model):
     bank_sicnr = fields.Char(string='SIC-Nr', size=6)
     bank_headquarter = fields.Char(string='Headquarter', size=5)
     bank_bcart = fields.Char(string='BC-Art', size=1)
-    # TODO: date?
-    bank_valid_from = fields.Char(string='Valid from', size=8)
+    bank_valid_from = fields.Date(string='Valid from')
     bank_sic = fields.Char(string='SIC', size=1)
     bank_eurosic = fields.Char(string='euroSIC', size=1)
     # TODO: m2o?
