@@ -89,22 +89,17 @@ class Bank(models.Model, BankCommon):
         help="CCP/CP-Konto of the bank"
     )
 
-    @api.constrains('acc_number', 'bank')
+    @api.constrains('ccp')
     def _check_ccp_duplication(self):
         """Ensure validity of input"""
         res_part_bank_model = self.env['res.partner.bank']
         for bank in self:
-            part_bank_acc = res_part_bank_model.search(
+            part_bank_accs = res_part_bank_model.search(
                 [('bank', '=', bank.id)]
             )
-            if part_bank_acc:
-                check = part_bank_acc._check_ccp_duplication()
-                if not check:
-                    raise exceptions.ValidationError(
-                        _('You can not enter a CCP/CP-Konto both on the'
-                          ' bank and on an account'
-                          ' of type BV, BVR/ESR')
-                    )
+
+            if part_bank_accs:
+                part_bank_accs._check_ccp_duplication()
         return True
 
     @api.constrains('ccp')
@@ -113,8 +108,7 @@ class Bank(models.Model, BankCommon):
         for bank in self:
             if not bank.ccp:
                 continue
-            if not (self._check_9_pos_postal_num(bank.ccp) or
-                    self._check_5_pos_postal_num(bank.ccp)):
+            if not (self._check_9_pos_postal_num(bank.ccp)):
                 raise exceptions.ValidationError(
                     _('Please enter a correct postal number. '
                       '(01-23456-1 or 12345)')
@@ -216,9 +210,9 @@ class ResPartnerBank(models.Model, BankCommon):
         for p_bank in self:
             if p_bank.state not in ('bv', 'bvr'):
                 continue
-            if not p_bank.get_account_number():
-                continue
             acc = p_bank.get_account_number()
+            if not acc:
+                continue
             if not (
                     self._check_9_pos_postal_num(acc) or
                     self._check_5_pos_postal_num(acc)):
@@ -227,7 +221,7 @@ class ResPartnerBank(models.Model, BankCommon):
                       '(01-23456-1 or 12345)')
                 )
 
-    @api.constrains('acc_number', 'bank')
+    @api.constrains('acc_number', 'bank.ccp')
     def _check_ccp_duplication(self):
         """Ensure that there is not a CCP/CP-Konto in bank and res partner bank
         at same time
