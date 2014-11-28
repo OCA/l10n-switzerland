@@ -171,10 +171,10 @@ class BvrImporterWizard(models.TransientModel):
         # TODO check if 11 is the right number
         move_line_obj = self.env['account.move.line']
         reference = record['reference']
-        values = {'name': '/',
+        values = {'name': reference or '/',
                   'date': record['date'],
                   'amount': record['amount'],
-                  'ref': reference,
+                  'ref': '/',
                   'type': (record['amount'] >= 0 and 'customer') or 'supplier',
                   'statement_id': statement.id,
                   }
@@ -186,10 +186,11 @@ class BvrImporterWizard(models.TransientModel):
             order='date desc',
         )
         if line_ids:
+            # transaction_ref is propagated on all lines
             line = move_line_obj.browse(line_ids[0])
             partner_id = line.partner_id.id
             num = line.invoice.number if line.invoice else False
-            values['name'] = _('Inv. no %s') % num if num else values['name']
+            values['ref'] = _('Inv. no %s') % num if num else values['name']
             values['partner_id'] = partner_id
         return values
 
