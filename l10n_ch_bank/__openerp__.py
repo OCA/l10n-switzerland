@@ -26,25 +26,12 @@
     'category': 'Localisation',
     'website': 'http://www.camptocamp.com',
     'summary': 'Banks names, addresses and BIC codes',
-    'description': """
-Swiss bank list
-===============
-This module will load all Swiss banks in OpenERP with their name,
-address and BIC code to ease the input of bank account.
-
-It is not mandatory to use OpenERP in Switzerland,
-but can improve the user experience.
-
-IMPORTANT:
-The module contains the newest bank data (21.10.2014).
-If you want to update all your banks, update via link 'Update Banks' in section 'Bank & Cash' under 'Settings/Configuration/Accounting'.
-
-""",
-    'depends': ['l10n_ch', 'l10n_ch_base_bank'],
-    'data': [
-              'bank.xml',
-              'res_config_view.xml'
-    ],
+    'depends': ['l10n_ch',
+                'l10n_ch_base_bank',
+                ],
+    'data': ['bank.xml',
+             'res_config_view.xml'
+             ],
     'images': [],
     'demo': [],
     'auto_install': False,
