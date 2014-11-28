@@ -57,7 +57,8 @@ class ExtendedReport(models.Model):
             [x.close() for x in streams]
 
     @api.v7
-    def get_pdf(self, cr, uid, ids, report_name, html=None, data=None, context=None):
+    def get_pdf(self, cr, uid, ids, report_name, html=None, data=None,
+                context=None):
         if report_name == 'one_slip_per_page_from_invoice':
             slip_model = self.pool['l10n_ch.payment_slip']
             docs = slip_model.compute_pay_slips_from_invoices(
@@ -70,7 +71,8 @@ class ExtendedReport(models.Model):
                 context=context
             )
             if len(docs) == 1:
-                return docs[0]._draw_payment_slip(a4=True, b64=False, out_format='PDF')
+                return docs[0]._draw_payment_slip(a4=True, b64=False,
+                                                  out_format='PDF')
             else:
                 # Faster than self._merge_pdf but uses more memory
                 return self.merge_pdf_in_memory(docs)
