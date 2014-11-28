@@ -67,8 +67,7 @@ class PaymentSlip(models.Model):
 
     scan_line = fields.Char('Scan Line',
                             compute='compute_scan_line',
-                            readonly=True,
-                            store=True)
+                            readonly=True)
 
     invoice_id = fields.Many2one(string='Related invoice',
                                  related='move_line_id.invoice',
