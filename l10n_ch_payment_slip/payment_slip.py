@@ -474,7 +474,7 @@ class PaymentSlip(models.Model):
         draw.text((x, y), ref, font=font, fill=self._fill_color)
 
     @api.model
-    def _draw_amont(self, draw, font, amount, initial_position, company):
+    def _draw_amount(self, draw, font, amount, initial_position, company):
         """Draw reference on canvas
 
         :param font: font to use
@@ -587,14 +587,14 @@ class PaymentSlip(models.Model):
         self._draw_address(draw, default_font, com_partner,
                            initial_position, company)
         num_car, frac_car = ("%.2f" % self.amount_total).split('.')
-        self._draw_amont(draw, amount_font, num_car,
-                         (214, 290 + a4_offset), company)
-        self._draw_amont(draw, amount_font, frac_car,
-                         (306, 290 + a4_offset), company)
-        self._draw_amont(draw, amount_font, num_car,
-                         (560, 290 + a4_offset), company)
-        self._draw_amont(draw, amount_font, frac_car,
-                         (650, 290 + a4_offset), company)
+        self._draw_amount(draw, amount_font, num_car,
+                          (214, 290 + a4_offset), company)
+        self._draw_amount(draw, amount_font, frac_car,
+                          (306, 290 + a4_offset), company)
+        self._draw_amount(draw, amount_font, num_car,
+                          (560, 290 + a4_offset), company)
+        self._draw_amount(draw, amount_font, frac_car,
+                          (650, 290 + a4_offset), company)
 
         if invoice.partner_bank_id.print_account:
             self._draw_bank(draw, default_font,
