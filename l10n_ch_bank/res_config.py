@@ -18,63 +18,80 @@
 #
 ##############################################################################
 
-from openerp.osv import osv
+"""
+Adds a button allowing to reload all the banks from the XML file.
+Thus, if this module has already been installed but the data is changed,
+the user will be able to update the banks from the file.
+
+The import is done by cheating the import system:
+
+* It cheats the parser / importer so it works like if all the XML nodes have
+  a ``noupdate="0"`` attribute.
+* It temporarily modifies the entries in ``ir.model.data`` so they are
+  considered as updatable during the loading of the file.
+
+"""
+
+import logging
 import os
-from openerp.tools.convert import convert_xml_import
-from openerp.tools import misc
-import tempfile
+from contextlib import closing
+from lxml import etree
+
+from openerp import exceptions, _
+from openerp.osv import osv
+from openerp.tools import misc, convert, config
+from openerp.modules.module import get_module_resource
+
+
+_logger = logging.getLogger(__name__)
+
+
+MODULE = 'l10n_ch_bank'
+
+
+class ForceXMLImport(convert.xml_import):
+    """ Import a XML file
+
+    Disregarding of the noupdate flag of the XML file, it updates the
+    records from the XML considering that all nodes have a
+    ``noupdate="0"`` attribute.
+    """
+
+    def isnoupdate(self, data_node=None):
+        return False
+
+
+def force_xml_import(cr, xmlfile):
+    """ Import a XML file like if all nodes have a ``noupdate="0"``"""
+    doc = etree.parse(xmlfile)
+    rng_path = os.path.join(config['root_path'], 'import_xml.rng')
+    relaxng = etree.RelaxNG(etree.parse(rng_path))
+    try:
+        relaxng.assert_(doc)
+    except AssertionError:
+        _logger.error('The XML file does not fit the required schema !')
+        _logger.error(misc.ustr(relaxng.error_log.last_error))
+        raise exceptions.Warning(_('The banks file cannot be read.'))
+
+    obj = ForceXMLImport(cr, MODULE, {}, 'update')
+    obj.parse(doc.getroot(), mode='update')
 
 
 class base_config_settings(osv.TransientModel):
     _inherit = 'account.config.settings'
 
     def update_banks(self, cr, uid, ids, context=None):
-        """ first update field 'noupdate' in ir.model.data for all entries
-        related to model 'res.bank' and module 'l10n_ch' to 'False' """
-        sql = "update ir_model_data set noupdate = False where model = 'res.bank' and module = 'l10n_ch'"
-        cr.execute(sql)
-
-        """ create new xml file in temp folder and set noupdate Flag to False in order to update all the entries when the customer wants to update all the banks
-        set all bank's inactive which have an entry in ir_model_data -> this
-        means they were created by xml """
-        sql = "update res_bank set active = False where id in (select res_id from  ir_model_data where model = 'res.bank' and module = 'l10n_ch')"
-        cr.execute(sql)
-
-        filename = 'bank.xml'
-        noupdate = False
-        pathname = os.path.join('l10n_ch_bank', filename)
-        fp = misc.file_open(pathname)
-        try:
-            " read current xml "
-            xml_string = fp.read()
-            " create new xml to change noupdate 1 to 0 "
-            new_bank_xml_path = tempfile.mkstemp('.xml')[1]
-            new_bank_xml = open(new_bank_xml_path, 'w+')
-            new_bank_xml.write(
-                xml_string.replace(
-                    'data noupdate="1"',
-                    'data noupdate="0"'))
-            new_bank_xml.close()
-            fp = misc.file_open(new_bank_xml_path)
-            convert_xml_import(
-                cr,
-                'l10n_ch_bank',
-                fp,
-                {},
-                'update',
-                noupdate,
-                False)
-            " delete new_bank.xml file after all is done "
-            new_bank_xml.close()
-            os.unlink(new_bank_xml_path)
-        finally:
-            fp.close()
-        cr.commit()
-
-        """ set field 'noupdate' in ir.model.data for all entries related to
-        model 'res.bank' and module 'l10n_ch' back to 'True' """
-        sql = "update ir_model_data set noupdate = True where model = 'res.bank' and module = 'l10n_ch'"
-        cr.execute(sql)
+        """ Force the update of the banks from the XML file """
+        data_obj = self.pool['ir.model.data']
+        data_ids = data_obj.search(cr, uid,
+                                   [('module', '=', MODULE),
+                                    ('model', '=', 'res.bank')],
+                                   context=context)
+        # If the records in 'ir.model.data' have noupdate to True,
+        # the XML records won't be updated
+        data_obj.write(cr, uid, data_ids, {'noupdate': False}, context=context)
+        filepath = get_module_resource(MODULE, 'bank.xml')
+        with closing(misc.file_open(filepath)) as fp:
+            force_xml_import(cr, fp)
+        data_obj.write(cr, uid, data_ids, {'noupdate': True}, context=context)
         return True
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
