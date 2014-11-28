@@ -438,8 +438,8 @@ class PaymentSlip(models.Model):
         :param font: font to use
         :type font: :py:clas:`PIL. ImageFont.truetype`
 
-        :param bank: bank number
-        :type bank: str
+        :param bank: bank record
+        :type bank: :py:class:`openerp.model.Models`
 
         :para initial_position: tuple of coordinate (x, y)
         :type initial_position: tuple
@@ -451,7 +451,33 @@ class PaymentSlip(models.Model):
         x, y = initial_position
         x += company.bvr_delta_horz
         y += company.bvr_delta_vert
-        draw.text((x, y), bank, font=font, fill=self._fill_color)
+        width, height = font.getsize(bank.name)
+        draw.text((x, y), bank.name, font=font, fill=self._fill_color)
+        y += height
+        draw.text((x, y), "%s %s" % (bank.zip or '', bank.city or ''),
+                  font=font, fill=self._fill_color)
+
+    @api.model
+    def _draw_bank_account(self, draw, font, acc, initial_position, company):
+        """Draw bank account on canvas
+
+        :param font: font to use
+        :type font: :py:clas:`PIL. ImageFont.truetype`
+
+        :param ref: acc number
+        :type ref: str
+
+        :para initial_position: tuple of coordinate (x, y)
+        :type initial_position: tuple
+
+        :param company: current `res.company` record
+        :type company: :py:class:`openerp.models.Model`
+
+        """
+        x, y = initial_position
+        x += company.bvr_delta_horz
+        y += company.bvr_delta_vert
+        draw.text((x, y), acc, font=font, fill=self._fill_color)
 
     @api.model
     def _draw_ref(self, draw, font, ref, initial_position, company):
@@ -578,10 +604,10 @@ class PaymentSlip(models.Model):
         base = Image.open(base_image_path).convert('RGB')
         draw = ImageDraw.Draw(base)
         if invoice.partner_bank_id.print_partner:
-            initial_position = (10, 45 + a4_offset)
+            initial_position = (10, 105 + a4_offset)
             self._draw_address(draw, default_font, company.partner_id,
                                initial_position, company)
-            initial_position = (355, 45 + a4_offset)
+            initial_position = (355, 105 + a4_offset)
             self._draw_address(draw, default_font, company.partner_id,
                                initial_position, company)
         com_partner = self.get_comm_partner()
@@ -597,14 +623,19 @@ class PaymentSlip(models.Model):
                           (560, 290 + a4_offset), company)
         self._draw_amount(draw, amount_font, frac_car,
                           (650, 290 + a4_offset), company)
+        if invoice.partner_bank_id.print_bank:
+            self._draw_bank(draw, default_font, bank_acc.bank,
+                            (10, 50 + a4_offset), company)
+            self._draw_bank(draw, default_font, bank_acc.bank,
+                            (355, 50 + a4_offset), company)
 
         if invoice.partner_bank_id.print_account:
-            self._draw_bank(draw, default_font,
-                            bank_acc.get_account_number(),
-                            (144, 245 + a4_offset), company)
-            self._draw_bank(draw, default_font,
-                            bank_acc.get_account_number(),
-                            (490, 245 + a4_offset), company)
+            self._draw_bank_account(draw, default_font,
+                                    bank_acc.get_account_number(),
+                                    (144, 245 + a4_offset), company)
+            self._draw_bank_account(draw, default_font,
+                                    bank_acc.get_account_number(),
+                                    (490, 245 + a4_offset), company)
 
         self._draw_ref(draw, default_font, self.reference,
                        (745, 195 + a4_offset), company)
