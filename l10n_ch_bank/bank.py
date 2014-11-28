@@ -54,7 +54,6 @@ class ResBank(models.Model):
     bank_valid_from = fields.Date(string='Valid from')
     bank_sic = fields.Char(string='SIC', size=1)
     bank_eurosic = fields.Char(string='euroSIC', size=1)
-    # TODO: m2o?
     bank_lang = fields.Char(string='Sprache', size=1)
     bank_postaladdress = fields.Char(string='Postal address', size=35)
     bank_areacode = fields.Char(string='Area code', size=5)
