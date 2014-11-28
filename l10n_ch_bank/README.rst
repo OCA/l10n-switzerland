@@ -10,4 +10,4 @@ the user experience.
 .. important:: The module contains the newest bank data (21.10.2014).
    If you want to update all your banks, update them via the link
    'Update Banks' in the section 'Bank & Cash' under
-   ``Settings/Configuration/Accounting``.
+   ``Settings/Configuration/Invoicing``.
