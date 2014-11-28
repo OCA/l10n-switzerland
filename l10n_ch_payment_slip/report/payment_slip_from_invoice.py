@@ -54,7 +54,8 @@ class ExtendedReport(models.Model):
             raise
         finally:
             buff.close()
-            [x.close() for x in streams]
+            for stream in streams:
+                stream.close()
 
     @api.v7
     def get_pdf(self, cr, uid, ids, report_name, html=None, data=None,
