@@ -37,10 +37,9 @@ import os
 from contextlib import closing
 from lxml import etree
 
-from openerp import exceptions, _
-from openerp.osv import osv
-from openerp.tools import misc, convert, config
+from openerp import models, api, exceptions, _
 from openerp.modules.module import get_module_resource
+from openerp.tools import misc, convert, config
 
 
 _logger = logging.getLogger(__name__)
@@ -69,7 +68,7 @@ def force_xml_import(cr, xmlfile):
     try:
         relaxng.assert_(doc)
     except AssertionError:
-        _logger.error('The XML file does not fit the required schema !')
+        _logger.error('The XML file does not fit the required schema')
         _logger.error(misc.ustr(relaxng.error_log.last_error))
         raise exceptions.Warning(_('The banks file cannot be read.'))
 
@@ -77,21 +76,20 @@ def force_xml_import(cr, xmlfile):
     obj.parse(doc.getroot(), mode='update')
 
 
-class base_config_settings(osv.TransientModel):
+class base_config_settings(models.TransientModel):
     _inherit = 'account.config.settings'
 
-    def update_banks(self, cr, uid, ids, context=None):
+    @api.multi
+    def update_banks(self):
         """ Force the update of the banks from the XML file """
-        data_obj = self.pool['ir.model.data']
-        data_ids = data_obj.search(cr, uid,
-                                   [('module', '=', MODULE),
-                                    ('model', '=', 'res.bank')],
-                                   context=context)
+        data_obj = self.env['ir.model.data']
+        entries = data_obj.search([('module', '=', MODULE),
+                                   ('model', '=', 'res.bank')])
         # If the records in 'ir.model.data' have noupdate to True,
         # the XML records won't be updated
-        data_obj.write(cr, uid, data_ids, {'noupdate': False}, context=context)
+        entries.write({'noupdate': False})
         filepath = get_module_resource(MODULE, 'bank.xml')
         with closing(misc.file_open(filepath)) as fp:
-            force_xml_import(cr, fp)
-        data_obj.write(cr, uid, data_ids, {'noupdate': True}, context=context)
+            force_xml_import(self.env.cr, fp)
+        entries.write({'noupdate': True})
         return True
