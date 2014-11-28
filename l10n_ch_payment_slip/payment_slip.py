@@ -451,9 +451,8 @@ class PaymentSlip(models.Model):
         x, y = initial_position
         x += company.bvr_delta_horz
         y += company.bvr_delta_vert
-        width, height = font.getsize(bank.name)
         draw.text((x, y), bank.name, font=font, fill=self._fill_color)
-        y += height
+        y += self._default_font_size
         draw.text((x, y), "%s %s" % (bank.zip or '', bank.city or ''),
                   font=font, fill=self._fill_color)
 
