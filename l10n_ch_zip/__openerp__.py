@@ -24,7 +24,9 @@
     'category': 'Localisation',
     'website': 'http://www.camptocamp.com',
     'summary': 'Provides all Swiss postal codes for auto-completion',
-    'depends': ['base', 'base_location'],
+    'depends': ['base',
+                'base_location',  # in https://github.com/OCA/partner-contact/
+                ],
     'data': ['l10n_ch_better_zip.xml'],
     'images': [],
     'demo': [],
