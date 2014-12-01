@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Nicolas Bessi, Olivier Jossen, Guewen Baconnier
-#    Copyright Camptocamp SA
-#    Copyright brain-tec AG
+#    Author: Guewen Baconnier
+#    Copyright 2014 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,22 +18,20 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'Switzerland - Bank list',
-    'version': '8.0.9.0.0',
-    'author': 'Camptocamp, brain-tec AG',
-    'category': 'Localisation',
-    'website': 'http://www.camptocamp.com',
-    'summary': 'Banks names, addresses and BIC codes',
-    'depends': ['l10n_ch',
-                'l10n_ch_base_bank',
-                ],
-    'data': ['bank.xml',
-             'res_config_view.xml'
-             ],
-    'images': [],
-    'demo': [],
-    'auto_install': False,
-    'installable': True,
-    'application': True,
-}
+
+"""
+The banks have been created on the l10n_ch module because they used
+the wrong namespace (ie ``l10_ch.bank_0``). Now, the records are created
+in the correct module but we have to correct the existing records.
+"""
+
+
+def migrate(cr, version):
+    if not version:
+        return
+
+    query = ("UPDATE ir_model_data "
+             "SET module = 'l10n_ch_bank' "
+             "WHERE module = 'l10n_ch' "
+             "AND model = 'res.bank' ")
+    cr.execute(query)
