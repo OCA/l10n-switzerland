@@ -2,6 +2,156 @@
 <openerp>
     <data noupdate="1">
 
+        <!-- states -->
+
+        <record id="state_DE" model="res.country.state">
+            <field name="name">DE</field>
+            <field name="code">DE</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_BE" model="res.country.state">
+            <field name="name">BE</field>
+            <field name="code">BE</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_GL" model="res.country.state">
+            <field name="name">GL</field>
+            <field name="code">GL</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_AG" model="res.country.state">
+            <field name="name">AG</field>
+            <field name="code">AG</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_FL" model="res.country.state">
+            <field name="name">FL</field>
+            <field name="code">FL</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_SZ" model="res.country.state">
+            <field name="name">SZ</field>
+            <field name="code">SZ</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_AI" model="res.country.state">
+            <field name="name">AI</field>
+            <field name="code">AI</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_OW" model="res.country.state">
+            <field name="name">OW</field>
+            <field name="code">OW</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_LU" model="res.country.state">
+            <field name="name">LU</field>
+            <field name="code">LU</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_NW" model="res.country.state">
+            <field name="name">NW</field>
+            <field name="code">NW</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_BL" model="res.country.state">
+            <field name="name">BL</field>
+            <field name="code">BL</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_GR" model="res.country.state">
+            <field name="name">GR</field>
+            <field name="code">GR</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_IT" model="res.country.state">
+            <field name="name">IT</field>
+            <field name="code">IT</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_JU" model="res.country.state">
+            <field name="name">JU</field>
+            <field name="code">JU</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_FR" model="res.country.state">
+            <field name="name">FR</field>
+            <field name="code">FR</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_ZG" model="res.country.state">
+            <field name="name">ZG</field>
+            <field name="code">ZG</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_VD" model="res.country.state">
+            <field name="name">VD</field>
+            <field name="code">VD</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_ZH" model="res.country.state">
+            <field name="name">ZH</field>
+            <field name="code">ZH</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_AR" model="res.country.state">
+            <field name="name">AR</field>
+            <field name="code">AR</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_BS" model="res.country.state">
+            <field name="name">BS</field>
+            <field name="code">BS</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_TG" model="res.country.state">
+            <field name="name">TG</field>
+            <field name="code">TG</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_SG" model="res.country.state">
+            <field name="name">SG</field>
+            <field name="code">SG</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_SH" model="res.country.state">
+            <field name="name">SH</field>
+            <field name="code">SH</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_TI" model="res.country.state">
+            <field name="name">TI</field>
+            <field name="code">TI</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_NE" model="res.country.state">
+            <field name="name">NE</field>
+            <field name="code">NE</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_SO" model="res.country.state">
+            <field name="name">SO</field>
+            <field name="code">SO</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_UR" model="res.country.state">
+            <field name="name">UR</field>
+            <field name="code">UR</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_VS" model="res.country.state">
+            <field name="name">VS</field>
+            <field name="code">VS</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+        <record id="state_GE" model="res.country.state">
+            <field name="name">GE</field>
+            <field name="code">GE</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+
+        <!-- zip -->
+
         <record id="zip_104" model="res.better.zip">
             <field name="name">1000</field>
             <field name="city">Lausanne</field>
