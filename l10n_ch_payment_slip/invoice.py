@@ -81,7 +81,6 @@ class AccountInvoice(models.Model):
             return ''
         self.bvr_reference = ','.join(x.reference for x in self.slip_ids)
 
-
     def get_payment_move_line(self):
         """Return the move line related to current invoice slips
 
