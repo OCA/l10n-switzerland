@@ -711,7 +711,7 @@
             <field name="communitynumber_bfs">5591</field>
             <field name="valid_from">1996-06-10</field>
         </record>
-        <record id="zip_168" model="res.better.zip">
+        <record id="npa_1022 Chavannes-Renens" model="res.better.zip">
             <field name="name">1022</field>
             <field name="city">Chavannes-près-Renens</field>
             <field name="state_id" ref="state_VD"/>
@@ -809,7 +809,7 @@
             <field name="communitynumber_bfs">5643</field>
             <field name="valid_from">1986-05-21</field>
         </record>
-        <record id="zip_178" model="res.better.zip">
+        <record id="npa_1030 Bussigny-Lausanne" model="res.better.zip">
             <field name="name">1030</field>
             <field name="city">Bussigny</field>
             <field name="state_id" ref="state_VD"/>
@@ -823,7 +823,7 @@
             <field name="communitynumber_bfs">5624</field>
             <field name="valid_from">1989-03-08</field>
         </record>
-        <record id="zip_179" model="res.better.zip">
+        <record id="npa_1032 Romanel-s-Lausanne" model="res.better.zip">
             <field name="name">1032</field>
             <field name="city">Romanel-sur-Lausanne</field>
             <field name="state_id" ref="state_VD"/>
@@ -837,7 +837,7 @@
             <field name="communitynumber_bfs">5592</field>
             <field name="valid_from">1999-09-08</field>
         </record>
-        <record id="zip_180" model="res.better.zip">
+        <record id="npa_1033 Cheseaux-Lausanne" model="res.better.zip">
             <field name="name">1033</field>
             <field name="city">Cheseaux-sur-Lausanne</field>
             <field name="state_id" ref="state_VD"/>
@@ -907,7 +907,7 @@
             <field name="communitynumber_bfs">5535</field>
             <field name="valid_from">2002-11-01</field>
         </record>
-        <record id="zip_192" model="res.better.zip">
+        <record id="npa_1377 Oulens-Echallens" model="res.better.zip">
             <field name="name">1377</field>
             <field name="city">Oulens-sous-Echallens</field>
             <field name="state_id" ref="state_VD"/>
@@ -1047,7 +1047,7 @@
             <field name="communitynumber_bfs">5514</field>
             <field name="valid_from">2013-04-01</field>
         </record>
-        <record id="zip_202" model="res.better.zip">
+        <record id="npa_1053 Bretigny-Morrens" model="res.better.zip">
             <field name="name">1053</field>
             <field name="city">Bretigny-sur-Morrens</field>
             <field name="state_id" ref="state_VD"/>
@@ -1187,7 +1187,7 @@
             <field name="communitynumber_bfs">5513</field>
             <field name="valid_from">2002-12-01</field>
         </record>
-        <record id="zip_214" model="res.better.zip">
+        <record id="npa_1052 Mont-sur-Lausanne" model="res.better.zip">
             <field name="name">1052</field>
             <field name="city">Le Mont-sur-Lausanne</field>
             <field name="state_id" ref="state_VD"/>
@@ -1299,7 +1299,7 @@
             <field name="communitynumber_bfs">5791</field>
             <field name="valid_from">1996-08-06</field>
         </record>
-        <record id="zip_224" model="res.better.zip">
+        <record id="npa_1092 Belmont-Lausanne" model="res.better.zip">
             <field name="name">1092</field>
             <field name="city">Belmont-sur-Lausanne</field>
             <field name="state_id" ref="state_VD"/>
@@ -1453,7 +1453,7 @@
             <field name="communitynumber_bfs">5804</field>
             <field name="valid_from">2004-05-01</field>
         </record>
-        <record id="zip_237" model="res.better.zip">
+        <record id="npa_1063 Chapelle-s-Moudon" model="res.better.zip">
             <field name="name">1063</field>
             <field name="city">Chapelle-sur-Moudon</field>
             <field name="state_id" ref="state_VD"/>
@@ -1817,7 +1817,7 @@
             <field name="communitynumber_bfs">5644</field>
             <field name="valid_from">2004-08-01</field>
         </record>
-        <record id="zip_267" model="res.better.zip">
+        <record id="npa_1113 St-Saphorin-Morges" model="res.better.zip">
             <field name="name">1113</field>
             <field name="city">St-Saphorin-sur-Morges</field>
             <field name="state_id" ref="state_VD"/>
@@ -1957,7 +1957,7 @@
             <field name="communitynumber_bfs">5484</field>
             <field name="valid_from">2004-05-01</field>
         </record>
-        <record id="zip_279" model="res.better.zip">
+        <record id="npa_1134 Vufflens-Chteau" model="res.better.zip">
             <field name="name">1134</field>
             <field name="city">Vufflens-le-Château</field>
             <field name="state_id" ref="state_VD"/>
@@ -2391,7 +2391,7 @@
             <field name="communitynumber_bfs">5859</field>
             <field name="valid_from">1988-05-29</field>
         </record>
-        <record id="zip_317" model="res.better.zip">
+        <record id="npa_1186 Essertines-Rolle" model="res.better.zip">
             <field name="name">1186</field>
             <field name="city">Essertines-sur-Rolle</field>
             <field name="state_id" ref="state_VD"/>
@@ -4785,7 +4785,7 @@
             <field name="communitynumber_bfs">5496</field>
             <field name="valid_from">2005-08-01</field>
         </record>
-        <record id="zip_555" model="res.better.zip">
+        <record id="npa_1308 La Chaux-Cossonay" model="res.better.zip">
             <field name="name">1308</field>
             <field name="city">La Chaux (Cossonay)</field>
             <field name="state_id" ref="state_VD"/>
@@ -5093,7 +5093,7 @@
             <field name="communitynumber_bfs">5755</field>
             <field name="valid_from">1993-11-23</field>
         </record>
-        <record id="zip_580" model="res.better.zip">
+        <record id="npa_1358 Valeyres-Rances" model="res.better.zip">
             <field name="name">1358</field>
             <field name="city">Valeyres-sous-Rances</field>
             <field name="state_id" ref="state_VD"/>
@@ -5149,7 +5149,7 @@
             <field name="communitynumber_bfs">5746</field>
             <field name="valid_from">2009-04-01</field>
         </record>
-        <record id="zip_588" model="res.better.zip">
+        <record id="npa_1374 Corcelles-Chavorn" model="res.better.zip">
             <field name="name">1374</field>
             <field name="city">Corcelles-sur-Chavornay</field>
             <field name="state_id" ref="state_VD"/>
@@ -5247,7 +5247,7 @@
             <field name="communitynumber_bfs">5938</field>
             <field name="valid_from">1986-05-21</field>
         </record>
-        <record id="zip_607" model="res.better.zip">
+        <record id="npa_1417 Essertines-Yverdon" model="res.better.zip">
             <field name="name">1417</field>
             <field name="city">Essertines-sur-Yverdon</field>
             <field name="state_id" ref="state_VD"/>
@@ -5303,7 +5303,7 @@
             <field name="communitynumber_bfs">5556</field>
             <field name="valid_from">2001-12-01</field>
         </record>
-        <record id="zip_611" model="res.better.zip">
+        <record id="npa_1421 Fontaines-Grandson" model="res.better.zip">
             <field name="name">1421</field>
             <field name="city">Fontaines-sur-Grandson</field>
             <field name="state_id" ref="state_VD"/>
@@ -5457,7 +5457,7 @@
             <field name="communitynumber_bfs">5693</field>
             <field name="valid_from">2006-01-01</field>
         </record>
-        <record id="zip_622" model="res.better.zip">
+        <record id="npa_1412 Valeyres-Ursins" model="res.better.zip">
             <field name="name">1412</field>
             <field name="city">Valeyres-sous-Ursins</field>
             <field name="state_id" ref="state_VD"/>
@@ -5625,7 +5625,7 @@
             <field name="communitynumber_bfs">5554</field>
             <field name="valid_from">1986-05-21</field>
         </record>
-        <record id="zip_638" model="res.better.zip">
+        <record id="npa_1426 Corcelles-Concise" model="res.better.zip">
             <field name="name">1426</field>
             <field name="city">Corcelles-près-Concise</field>
             <field name="state_id" ref="state_VD"/>
@@ -5639,7 +5639,7 @@
             <field name="communitynumber_bfs">5555</field>
             <field name="valid_from">1996-06-10</field>
         </record>
-        <record id="zip_643" model="res.better.zip">
+        <record id="npa_1432 Belmont-Yverdon" model="res.better.zip">
             <field name="name">1432</field>
             <field name="city">Belmont-sur-Yverdon</field>
             <field name="state_id" ref="state_VD"/>
@@ -5737,7 +5737,7 @@
             <field name="communitynumber_bfs">5919</field>
             <field name="valid_from">1986-05-21</field>
         </record>
-        <record id="zip_654" model="res.better.zip">
+        <record id="npa_1441 Valeyres-Montagny" model="res.better.zip">
             <field name="name">1441</field>
             <field name="city">Valeyres-sous-Montagny</field>
             <field name="state_id" ref="state_VD"/>
@@ -5751,7 +5751,7 @@
             <field name="communitynumber_bfs">5933</field>
             <field name="valid_from">2012-11-01</field>
         </record>
-        <record id="zip_655" model="res.better.zip">
+        <record id="npa_1442 Montagny-Yverdon" model="res.better.zip">
             <field name="name">1442</field>
             <field name="city">Montagny-près-Yverdon</field>
             <field name="state_id" ref="state_VD"/>
@@ -5821,7 +5821,7 @@
             <field name="communitynumber_bfs">5568</field>
             <field name="valid_from">1997-02-21</field>
         </record>
-        <record id="zip_663" model="res.better.zip">
+        <record id="npa_1450 La Sagne VD" model="res.better.zip">
             <field name="name">1450</field>
             <field name="city">La Sagne (Ste-Croix)</field>
             <field name="state_id" ref="state_VD"/>
@@ -5877,7 +5877,7 @@
             <field name="communitynumber_bfs">5552</field>
             <field name="valid_from">2007-08-01</field>
         </record>
-        <record id="zip_667" model="res.better.zip">
+        <record id="npa_1450 Le Chteau-Croix" model="res.better.zip">
             <field name="name">1450</field>
             <field name="city">Le Château-de-Ste-Croix</field>
             <field name="state_id" ref="state_VD"/>
@@ -6101,7 +6101,7 @@
             <field name="communitynumber_bfs">5812</field>
             <field name="valid_from">2001-09-06</field>
         </record>
-        <record id="zip_698" model="res.better.zip">
+        <record id="npa_1538 Treytorrens-Payern" model="res.better.zip">
             <field name="name">1538</field>
             <field name="city">Treytorrens (Payerne)</field>
             <field name="state_id" ref="state_VD"/>
@@ -6143,7 +6143,7 @@
             <field name="communitynumber_bfs">5678</field>
             <field name="valid_from">1988-09-01</field>
         </record>
-        <record id="zip_705" model="res.better.zip">
+        <record id="npa_1512 Chavannes-s-Moudon" model="res.better.zip">
             <field name="name">1512</field>
             <field name="city">Chavannes-sur-Moudon</field>
             <field name="state_id" ref="state_VD"/>
@@ -6269,7 +6269,7 @@
             <field name="communitynumber_bfs">5669</field>
             <field name="valid_from">2001-07-01</field>
         </record>
-        <record id="zip_715" model="res.better.zip">
+        <record id="npa_1523 Granges-Marnand" model="res.better.zip">
             <field name="name">1523</field>
             <field name="city">Granges-près-Marnand</field>
             <field name="state_id" ref="state_VD"/>
@@ -6381,7 +6381,7 @@
             <field name="communitynumber_bfs">5831</field>
             <field name="valid_from">2001-11-01</field>
         </record>
-        <record id="zip_729" model="res.better.zip">
+        <record id="npa_1536 Combremont-Petit" model="res.better.zip">
             <field name="name">1536</field>
             <field name="city">Combremont-le-Petit</field>
             <field name="state_id" ref="state_VD"/>
@@ -6577,7 +6577,7 @@
             <field name="communitynumber_bfs">5671</field>
             <field name="valid_from">2001-01-03</field>
         </record>
-        <record id="zip_743" model="res.better.zip">
+        <record id="npa_1535 Combremont-Grand" model="res.better.zip">
             <field name="name">1535</field>
             <field name="city">Combremont-le-Grand</field>
             <field name="state_id" ref="state_VD"/>
@@ -6591,7 +6591,7 @@
             <field name="communitynumber_bfs">5831</field>
             <field name="valid_from">2000-10-01</field>
         </record>
-        <record id="zip_744" model="res.better.zip">
+        <record id="npa_1562 Corcelles-Payerne" model="res.better.zip">
             <field name="name">1562</field>
             <field name="city">Corcelles-près-Payerne</field>
             <field name="state_id" ref="state_VD"/>
@@ -7376,7 +7376,7 @@
             <field name="communitynumber_bfs">2143</field>
             <field name="valid_from">2003-02-01</field>
         </record>
-        <record id="zip_823" model="res.better.zip">
+        <record id="npa_1663 Molson-s-Gruyres" model="res.better.zip">
             <field name="name">1663</field>
             <field name="city">Moléson-sur-Gruyères</field>
             <field name="state_id" ref="state_FR"/>
@@ -7488,7 +7488,7 @@
             <field name="communitynumber_bfs">2163</field>
             <field name="valid_from">2008-03-01</field>
         </record>
-        <record id="zip_836" model="res.better.zip">
+        <record id="npa_1661 Pquier-Montbarry" model="res.better.zip">
             <field name="name">1661</field>
             <field name="city">Le Pâquier-Montbarry</field>
             <field name="state_id" ref="state_FR"/>
@@ -7726,7 +7726,7 @@
             <field name="communitynumber_bfs">2099</field>
             <field name="valid_from">2000-03-01</field>
         </record>
-        <record id="zip_864" model="res.better.zip">
+        <record id="npa_1676 Chavannes-Forts" model="res.better.zip">
             <field name="name">1676</field>
             <field name="city">Chavannes-les-Forts</field>
             <field name="state_id" ref="state_FR"/>
@@ -7810,7 +7810,7 @@
             <field name="communitynumber_bfs">5662</field>
             <field name="valid_from">2010-01-01</field>
         </record>
-        <record id="zip_882" model="res.better.zip">
+        <record id="npa_1683 Chesalles-Moudon" model="res.better.zip">
             <field name="name">1683</field>
             <field name="city">Chesalles-sur-Moudon</field>
             <field name="state_id" ref="state_VD"/>
@@ -7866,7 +7866,7 @@
             <field name="communitynumber_bfs">2223</field>
             <field name="valid_from">2009-04-01</field>
         </record>
-        <record id="zip_886" model="res.better.zip">
+        <record id="npa_1696 Vuisternens-Ogoz" model="res.better.zip">
             <field name="name">1696</field>
             <field name="city">Vuisternens-en-Ogoz</field>
             <field name="state_id" ref="state_FR"/>
@@ -7922,7 +7922,7 @@
             <field name="communitynumber_bfs">2113</field>
             <field name="valid_from">2001-07-01</field>
         </record>
-        <record id="zip_890" model="res.better.zip">
+        <record id="npa_1686 Grangettes-Romont" model="res.better.zip">
             <field name="name">1686</field>
             <field name="city">Grangettes-près-Romont</field>
             <field name="state_id" ref="state_FR"/>
@@ -7936,7 +7936,7 @@
             <field name="communitynumber_bfs">2079</field>
             <field name="valid_from">2002-07-01</field>
         </record>
-        <record id="zip_891" model="res.better.zip">
+        <record id="npa_1689 Chtelard-p-Romont" model="res.better.zip">
             <field name="name">1689</field>
             <field name="city">Le Châtelard-près-Romont</field>
             <field name="state_id" ref="state_FR"/>
@@ -7992,7 +7992,7 @@
             <field name="communitynumber_bfs">2086</field>
             <field name="valid_from">1996-09-05</field>
         </record>
-        <record id="zip_896" model="res.better.zip">
+        <record id="npa_1687 Vuisternens-Romont" model="res.better.zip">
             <field name="name">1687</field>
             <field name="city">Vuisternens-devant-Romont</field>
             <field name="state_id" ref="state_FR"/>
@@ -8076,7 +8076,7 @@
             <field name="communitynumber_bfs">2335</field>
             <field name="valid_from">1989-06-01</field>
         </record>
-        <record id="zip_911" model="res.better.zip">
+        <record id="npa_1611 Le Crt-p-Semsales" model="res.better.zip">
             <field name="name">1611</field>
             <field name="city">Le Crêt-près-Semsales</field>
             <field name="state_id" ref="state_FR"/>
@@ -8400,7 +8400,7 @@
             <field name="communitynumber_bfs">2220</field>
             <field name="valid_from">2003-09-01</field>
         </record>
-        <record id="zip_947" model="res.better.zip">
+        <record id="npa_1727 Corpataux-Magneden" model="res.better.zip">
             <field name="name">1727</field>
             <field name="city">Corpataux-Magnedens</field>
             <field name="state_id" ref="state_FR"/>
@@ -8793,7 +8793,7 @@
             <field name="communitynumber_bfs">2173</field>
             <field name="valid_from">2001-01-03</field>
         </record>
-        <record id="zip_995" model="res.better.zip">
+        <record id="npa_1695 Estavayer-Gibloux" model="res.better.zip">
             <field name="name">1695</field>
             <field name="city">Estavayer-le-Gibloux</field>
             <field name="state_id" ref="state_FR"/>
@@ -9271,7 +9271,7 @@
             <field name="communitynumber_bfs">5882</field>
             <field name="valid_from">2002-06-01</field>
         </record>
-        <record id="zip_1051" model="res.better.zip">
+        <record id="npa_1808 Monts-de-Corsier" model="res.better.zip">
             <field name="name">1808</field>
             <field name="city">Les Monts-de-Corsier</field>
             <field name="state_id" ref="state_VD"/>
@@ -9355,7 +9355,7 @@
             <field name="communitynumber_bfs">5885</field>
             <field name="valid_from">2002-06-01</field>
         </record>
-        <record id="zip_1057" model="res.better.zip">
+        <record id="npa_1806 St-Lgier-Chisaz" model="res.better.zip">
             <field name="name">1806</field>
             <field name="city">St-Légier-La Chiésaz</field>
             <field name="state_id" ref="state_VD"/>
@@ -9397,7 +9397,7 @@
             <field name="communitynumber_bfs">5609</field>
             <field name="valid_from">2002-04-01</field>
         </record>
-        <record id="zip_1061" model="res.better.zip">
+        <record id="npa_1071 St-Saphorin-Lavaux" model="res.better.zip">
             <field name="name">1071</field>
             <field name="city">St-Saphorin (Lavaux)</field>
             <field name="state_id" ref="state_VD"/>
@@ -9593,7 +9593,7 @@
             <field name="communitynumber_bfs">5886</field>
             <field name="valid_from">1998-08-18</field>
         </record>
-        <record id="zip_1077" model="res.better.zip">
+        <record id="npa_1669 Sciernes-d'Albeuve" model="res.better.zip">
             <field name="name">1669</field>
             <field name="city">Les Sciernes-d'Albeuve</field>
             <field name="state_id" ref="state_FR"/>
@@ -10615,7 +10615,7 @@
             <field name="communitynumber_bfs">6022</field>
             <field name="valid_from">1999-03-17</field>
         </record>
-        <record id="zip_1164" model="res.better.zip">
+        <record id="npa_1955 St-Pierre-Clages" model="res.better.zip">
             <field name="name">1955</field>
             <field name="city">St-Pierre-de-Clages</field>
             <field name="state_id" ref="state_VS"/>
@@ -10783,7 +10783,7 @@
             <field name="communitynumber_bfs">6218</field>
             <field name="valid_from">1997-02-24</field>
         </record>
-        <record id="zip_1177" model="res.better.zip">
+        <record id="npa_1922 Granges (Salvan)" model="res.better.zip">
             <field name="name">1922</field>
             <field name="city">Les Granges (Salvan)</field>
             <field name="state_id" ref="state_VS"/>
@@ -11539,7 +11539,7 @@
             <field name="communitynumber_bfs">6024</field>
             <field name="valid_from">2002-12-01</field>
         </record>
-        <record id="zip_1243" model="res.better.zip">
+        <record id="npa_1962 Pont-de-la-Morge" model="res.better.zip">
             <field name="name">1962</field>
             <field name="city">Pont-de-la-Morge (Sion)</field>
             <field name="state_id" ref="state_VS"/>
@@ -12631,7 +12631,7 @@
             <field name="communitynumber_bfs">6487</field>
             <field name="valid_from">2009-04-01</field>
         </record>
-        <record id="zip_1359" model="res.better.zip">
+        <record id="npa_2206 Geneveys-Coffrane" model="res.better.zip">
             <field name="name">2206</field>
             <field name="city">Les Geneveys-sur-Coffrane</field>
             <field name="state_id" ref="state_NE"/>
@@ -12827,7 +12827,7 @@
             <field name="communitynumber_bfs">6423</field>
             <field name="valid_from">2011-12-01</field>
         </record>
-        <record id="zip_1385" model="res.better.zip">
+        <record id="npa_2316 Ponts-de-Martel" model="res.better.zip">
             <field name="name">2316</field>
             <field name="city">Les Ponts-de-Martel</field>
             <field name="state_id" ref="state_NE"/>
@@ -12967,7 +12967,7 @@
             <field name="communitynumber_bfs">6436</field>
             <field name="valid_from">2002-08-01</field>
         </record>
-        <record id="zip_1403" model="res.better.zip">
+        <record id="npa_2414 Cerneux-Pquignot" model="res.better.zip">
             <field name="name">2414</field>
             <field name="city">Le Cerneux-Péquignot</field>
             <field name="state_id" ref="state_NE"/>
@@ -13879,7 +13879,7 @@
             <field name="communitynumber_bfs">434</field>
             <field name="valid_from">2003-04-01</field>
         </record>
-        <record id="zip_1488" model="res.better.zip">
+        <record id="npa_2608 Mtgne-Courtelary" model="res.better.zip">
             <field name="name">2608</field>
             <field name="city">Montagne-de-Courtelary</field>
             <field name="state_id" ref="state_BE"/>
@@ -13977,7 +13977,7 @@
             <field name="communitynumber_bfs">445</field>
             <field name="valid_from">1996-09-12</field>
         </record>
-        <record id="zip_1496" model="res.better.zip">
+        <record id="npa_2615 Montagne-Sonvilier" model="res.better.zip">
             <field name="name">2615</field>
             <field name="city">Montagne-de-Sonvilier</field>
             <field name="state_id" ref="state_BE"/>
@@ -14229,7 +14229,7 @@
             <field name="communitynumber_bfs">6753</field>
             <field name="valid_from">2002-08-01</field>
         </record>
-        <record id="zip_1518" model="res.better.zip">
+        <record id="npa_2345 Chaux-des-Breuleux" model="res.better.zip">
             <field name="name">2345</field>
             <field name="city">La Chaux-des-Breuleux</field>
             <field name="state_id" ref="state_JU"/>
@@ -15237,7 +15237,7 @@
             <field name="communitynumber_bfs">6790</field>
             <field name="valid_from">1996-09-13</field>
         </record>
-        <record id="zip_1608" model="res.better.zip">
+        <record id="npa_2903 Villars-Fontenais" model="res.better.zip">
             <field name="name">2903</field>
             <field name="city">Villars-sur-Fontenais</field>
             <field name="state_id" ref="state_JU"/>
@@ -16693,7 +16693,7 @@
             <field name="communitynumber_bfs">616</field>
             <field name="valid_from">1996-08-05</field>
         </record>
-        <record id="zip_1800" model="res.better.zip">
+        <record id="npa_3112 Allmendingen b BE" model="res.better.zip">
             <field name="name">3112</field>
             <field name="city">Allmendingen b. Bern</field>
             <field name="state_id" ref="state_BE"/>
@@ -17071,7 +17071,7 @@
             <field name="communitynumber_bfs">853</field>
             <field name="valid_from">2008-06-01</field>
         </record>
-        <record id="zip_1840" model="res.better.zip">
+        <record id="npa_3155 Helgisried" model="res.better.zip">
             <field name="name">3155</field>
             <field name="city">Helgisried-Rohrbach</field>
             <field name="state_id" ref="state_BE"/>
@@ -17141,7 +17141,7 @@
             <field name="communitynumber_bfs">852</field>
             <field name="valid_from">2009-03-01</field>
         </record>
-        <record id="zip_1847" model="res.better.zip">
+        <record id="npa_3172 Niederwangen BE" model="res.better.zip">
             <field name="name">3172</field>
             <field name="city">Niederwangen b. Bern</field>
             <field name="state_id" ref="state_BE"/>
@@ -17841,7 +17841,7 @@
             <field name="communitynumber_bfs">301</field>
             <field name="valid_from">1986-05-21</field>
         </record>
-        <record id="zip_1918" model="res.better.zip">
+        <record id="npa_3271 Radelfingen" model="res.better.zip">
             <field name="name">3271</field>
             <field name="city">Radelfingen b. Aarberg</field>
             <field name="state_id" ref="state_BE"/>
@@ -18275,7 +18275,7 @@
             <field name="communitynumber_bfs">409</field>
             <field name="valid_from">1989-06-01</field>
         </record>
-        <record id="zip_1962" model="res.better.zip">
+        <record id="npa_3325 Hettiswil" model="res.better.zip">
             <field name="name">3325</field>
             <field name="city">Hettiswil b. Hindelbank</field>
             <field name="state_id" ref="state_BE"/>
@@ -18485,7 +18485,7 @@
             <field name="communitynumber_bfs">977</field>
             <field name="valid_from">2002-06-01</field>
         </record>
-        <record id="zip_1986" model="res.better.zip">
+        <record id="npa_3373 Rthenbach Hbsee" model="res.better.zip">
             <field name="name">3373</field>
             <field name="city">Röthenbach Herzogenbuchsee</field>
             <field name="state_id" ref="state_BE"/>
@@ -18737,7 +18737,7 @@
             <field name="communitynumber_bfs">406</field>
             <field name="valid_from">2004-07-01</field>
         </record>
-        <record id="zip_2009" model="res.better.zip">
+        <record id="npa_3416 Affoltern BE" model="res.better.zip">
             <field name="name">3416</field>
             <field name="city">Affoltern im Emmental</field>
             <field name="state_id" ref="state_BE"/>
@@ -18779,7 +18779,7 @@
             <field name="communitynumber_bfs">956</field>
             <field name="valid_from">2014-03-01</field>
         </record>
-        <record id="zip_2012" model="res.better.zip">
+        <record id="npa_3419 Biembach" model="res.better.zip">
             <field name="name">3419</field>
             <field name="city">Biembach im Emmental</field>
             <field name="state_id" ref="state_BE"/>
@@ -18919,7 +18919,7 @@
             <field name="communitynumber_bfs">552</field>
             <field name="valid_from">1996-09-12</field>
         </record>
-        <record id="zip_2026" model="res.better.zip">
+        <record id="npa_3428 Wiler bUtzenstorf" model="res.better.zip">
             <field name="name">3428</field>
             <field name="city">Wiler b. Utzenstorf</field>
             <field name="state_id" ref="state_BE"/>
@@ -18933,7 +18933,7 @@
             <field name="communitynumber_bfs">554</field>
             <field name="valid_from">1996-09-12</field>
         </record>
-        <record id="zip_2027" model="res.better.zip">
+        <record id="npa_3432 Ltzelflh-Goldb" model="res.better.zip">
             <field name="name">3432</field>
             <field name="city">Lützelflüh-Goldbach</field>
             <field name="state_id" ref="state_BE"/>
@@ -18947,7 +18947,7 @@
             <field name="communitynumber_bfs">955</field>
             <field name="valid_from">1996-11-20</field>
         </record>
-        <record id="zip_2028" model="res.better.zip">
+        <record id="npa_3433 Schwanden i E" model="res.better.zip">
             <field name="name">3433</field>
             <field name="city">Schwanden im Emmental</field>
             <field name="state_id" ref="state_BE"/>
@@ -19143,7 +19143,7 @@
             <field name="communitynumber_bfs">951</field>
             <field name="valid_from">1986-05-21</field>
         </record>
-        <record id="zip_2045" model="res.better.zip">
+        <record id="npa_3463 Husernmoos" model="res.better.zip">
             <field name="name">3463</field>
             <field name="city">Häusernmoos im Emmental</field>
             <field name="state_id" ref="state_BE"/>
@@ -19157,7 +19157,7 @@
             <field name="communitynumber_bfs">951</field>
             <field name="valid_from">2000-04-01</field>
         </record>
-        <record id="zip_2046" model="res.better.zip">
+        <record id="npa_3464 Schmidigen-Mhlew" model="res.better.zip">
             <field name="name">3464</field>
             <field name="city">Schmidigen-Mühleweg</field>
             <field name="state_id" ref="state_BE"/>
@@ -19395,7 +19395,7 @@
             <field name="communitynumber_bfs">626</field>
             <field name="valid_from">2002-11-01</field>
         </record>
-        <record id="zip_2070" model="res.better.zip">
+        <record id="npa_3415 Schafhausen i E" model="res.better.zip">
             <field name="name">3415</field>
             <field name="city">Schafhausen im Emmental</field>
             <field name="state_id" ref="state_BE"/>
@@ -19451,7 +19451,7 @@
             <field name="communitynumber_bfs">614</field>
             <field name="valid_from">1995-03-14</field>
         </record>
-        <record id="zip_2074" model="res.better.zip">
+        <record id="npa_3674 Bleiken" model="res.better.zip">
             <field name="name">3674</field>
             <field name="city">Bleiken b. Oberdiessbach</field>
             <field name="state_id" ref="state_BE"/>
@@ -19577,7 +19577,7 @@
             <field name="communitynumber_bfs">901</field>
             <field name="valid_from">2002-06-01</field>
         </record>
-        <record id="zip_2087" model="res.better.zip">
+        <record id="npa_3538 Rthenbach i E" model="res.better.zip">
             <field name="name">3538</field>
             <field name="city">Röthenbach im Emmental</field>
             <field name="state_id" ref="state_BE"/>
@@ -19605,7 +19605,7 @@
             <field name="communitynumber_bfs">903</field>
             <field name="valid_from">2004-08-01</field>
         </record>
-        <record id="zip_2091" model="res.better.zip">
+        <record id="npa_3550 Langnau i E" model="res.better.zip">
             <field name="name">3550</field>
             <field name="city">Langnau im Emmental</field>
             <field name="state_id" ref="state_BE"/>
@@ -20011,7 +20011,7 @@
             <field name="communitynumber_bfs">935</field>
             <field name="valid_from">2002-03-01</field>
         </record>
-        <record id="zip_2134" model="res.better.zip">
+        <record id="npa_3623 Teuffenthal BE" model="res.better.zip">
             <field name="name">3623</field>
             <field name="city">Teuffenthal b. Thun</field>
             <field name="state_id" ref="state_BE"/>
@@ -20193,7 +20193,7 @@
             <field name="communitynumber_bfs">929</field>
             <field name="valid_from">1986-05-21</field>
         </record>
-        <record id="zip_2149" model="res.better.zip">
+        <record id="npa_3653 Oberhofen Thun'see" model="res.better.zip">
             <field name="name">3653</field>
             <field name="city">Oberhofen am Thunersee</field>
             <field name="state_id" ref="state_BE"/>
@@ -20235,7 +20235,7 @@
             <field name="communitynumber_bfs">938</field>
             <field name="valid_from">2008-10-01</field>
         </record>
-        <record id="zip_2152" model="res.better.zip">
+        <record id="npa_3656 Tschingel" model="res.better.zip">
             <field name="name">3656</field>
             <field name="city">Tschingel ob Gunten</field>
             <field name="state_id" ref="state_BE"/>
@@ -20263,7 +20263,7 @@
             <field name="communitynumber_bfs">938</field>
             <field name="valid_from">2005-11-01</field>
         </record>
-        <record id="zip_2154" model="res.better.zip">
+        <record id="npa_3657 Schwanden Sigrisw" model="res.better.zip">
             <field name="name">3657</field>
             <field name="city">Schwanden (Sigriswil)</field>
             <field name="state_id" ref="state_BE"/>
@@ -20431,7 +20431,7 @@
             <field name="communitynumber_bfs">567</field>
             <field name="valid_from">2001-09-28</field>
         </record>
-        <record id="zip_2170" model="res.better.zip">
+        <record id="npa_3713 Reichenbach i K" model="res.better.zip">
             <field name="name">3713</field>
             <field name="city">Reichenbach im Kandertal</field>
             <field name="state_id" ref="state_BE"/>
@@ -20655,7 +20655,7 @@
             <field name="communitynumber_bfs">762</field>
             <field name="valid_from">2012-07-01</field>
         </record>
-        <record id="zip_2191" model="res.better.zip">
+        <record id="npa_3757 Schwenden" model="res.better.zip">
             <field name="name">3757</field>
             <field name="city">Schwenden im Diemtigtal</field>
             <field name="state_id" ref="state_BE"/>
@@ -20683,7 +20683,7 @@
             <field name="communitynumber_bfs">763</field>
             <field name="valid_from">2003-02-01</field>
         </record>
-        <record id="zip_2193" model="res.better.zip">
+        <record id="npa_3762 Erlenbach i S" model="res.better.zip">
             <field name="name">3762</field>
             <field name="city">Erlenbach im Simmental</field>
             <field name="state_id" ref="state_BE"/>
@@ -20725,7 +20725,7 @@
             <field name="communitynumber_bfs">761</field>
             <field name="valid_from">2012-07-01</field>
         </record>
-        <record id="zip_2196" model="res.better.zip">
+        <record id="npa_3765 Oberwil i S" model="res.better.zip">
             <field name="name">3765</field>
             <field name="city">Oberwil im Simmental</field>
             <field name="state_id" ref="state_BE"/>
@@ -20795,7 +20795,7 @@
             <field name="communitynumber_bfs">793</field>
             <field name="valid_from">2007-10-01</field>
         </record>
-        <record id="zip_2204" model="res.better.zip">
+        <record id="npa_3773 Matten(StStephan)" model="res.better.zip">
             <field name="name">3773</field>
             <field name="city">Matten (St. Stephan)</field>
             <field name="state_id" ref="state_BE"/>
@@ -20991,7 +20991,7 @@
             <field name="communitynumber_bfs">593</field>
             <field name="valid_from">1996-09-04</field>
         </record>
-        <record id="zip_2219" model="res.better.zip">
+        <record id="npa_3800 Matten b Interl" model="res.better.zip">
             <field name="name">3800</field>
             <field name="city">Matten b. Interlaken</field>
             <field name="state_id" ref="state_BE"/>
@@ -21047,7 +21047,7 @@
             <field name="communitynumber_bfs">579</field>
             <field name="valid_from">2004-06-01</field>
         </record>
-        <record id="zip_2230" model="res.better.zip">
+        <record id="npa_3805 Goldswil" model="res.better.zip">
             <field name="name">3805</field>
             <field name="city">Goldswil b. Interlaken</field>
             <field name="state_id" ref="state_BE"/>
@@ -21061,7 +21061,7 @@
             <field name="communitynumber_bfs">590</field>
             <field name="valid_from">2004-10-01</field>
         </record>
-        <record id="zip_2231" model="res.better.zip">
+        <record id="npa_3806 Bnigen" model="res.better.zip">
             <field name="name">3806</field>
             <field name="city">Bönigen b. Interlaken</field>
             <field name="state_id" ref="state_BE"/>
@@ -21285,7 +21285,7 @@
             <field name="communitynumber_bfs">590</field>
             <field name="valid_from">1999-12-22</field>
         </record>
-        <record id="zip_2254" model="res.better.zip">
+        <record id="npa_3853 Niederried Interl" model="res.better.zip">
             <field name="name">3853</field>
             <field name="city">Niederried b. Interlaken</field>
             <field name="state_id" ref="state_BE"/>
@@ -21299,7 +21299,7 @@
             <field name="communitynumber_bfs">588</field>
             <field name="valid_from">2002-12-01</field>
         </record>
-        <record id="zip_2255" model="res.better.zip">
+        <record id="npa_3854 Oberried Brienz" model="res.better.zip">
             <field name="name">3854</field>
             <field name="city">Oberried am Brienzersee</field>
             <field name="state_id" ref="state_BE"/>
@@ -21369,7 +21369,7 @@
             <field name="communitynumber_bfs">785</field>
             <field name="valid_from">2003-07-01</field>
         </record>
-        <record id="zip_2264" model="res.better.zip">
+        <record id="npa_3858 Hofstetten BE" model="res.better.zip">
             <field name="name">3858</field>
             <field name="city">Hofstetten b. Brienz</field>
             <field name="state_id" ref="state_BE"/>
@@ -21775,7 +21775,7 @@
             <field name="communitynumber_bfs">6202</field>
             <field name="valid_from">1996-09-02</field>
         </record>
-        <record id="zip_2300" model="res.better.zip">
+        <record id="npa_3919 Blatten(Ltschen)" model="res.better.zip">
             <field name="name">3919</field>
             <field name="city">Blatten (Lötschen)</field>
             <field name="state_id" ref="state_VS"/>
@@ -22559,7 +22559,7 @@
             <field name="communitynumber_bfs">6234</field>
             <field name="valid_from">1988-05-29</field>
         </record>
-        <record id="zip_2371" model="res.better.zip">
+        <record id="npa_3971 Chermignon-Bas" model="res.better.zip">
             <field name="name">3971</field>
             <field name="city">Chermignon-d'en-Bas</field>
             <field name="state_id" ref="state_VS"/>
@@ -23497,7 +23497,7 @@
             <field name="communitynumber_bfs">2701</field>
             <field name="valid_from">1986-05-21</field>
         </record>
-        <record id="zip_2491" model="res.better.zip">
+        <record id="npa_4031 Basel UniSpital" model="res.better.zip">
             <field name="name">4031</field>
             <field name="city">Basel Universitätsspital</field>
             <field name="state_id" ref="state_BS"/>
@@ -26073,7 +26073,7 @@
             <field name="communitynumber_bfs">2601</field>
             <field name="valid_from">1996-09-12</field>
         </record>
-        <record id="zip_2728" model="res.better.zip">
+        <record id="npa_4515 Weissenstein" model="res.better.zip">
             <field name="name">4515</field>
             <field name="city">Weissenstein b. Solothurn</field>
             <field name="state_id" ref="state_SO"/>
@@ -27249,7 +27249,7 @@
             <field name="communitynumber_bfs">992</field>
             <field name="valid_from">1999-12-20</field>
         </record>
-        <record id="zip_2838" model="res.better.zip">
+        <record id="npa_3377 Walliswil bWangen" model="res.better.zip">
             <field name="name">3377</field>
             <field name="city">Walliswil b. Wangen</field>
             <field name="state_id" ref="state_BE"/>
@@ -27809,7 +27809,7 @@
             <field name="communitynumber_bfs">333</field>
             <field name="valid_from">1996-09-12</field>
         </record>
-        <record id="zip_2885" model="res.better.zip">
+        <record id="npa_4917 Busswil bMelchnau" model="res.better.zip">
             <field name="name">4917</field>
             <field name="city">Busswil b. Melchnau</field>
             <field name="state_id" ref="state_BE"/>
@@ -28075,7 +28075,7 @@
             <field name="communitynumber_bfs">953</field>
             <field name="valid_from">2014-06-01</field>
         </record>
-        <record id="zip_2907" model="res.better.zip">
+        <record id="npa_4953 Schwarzenbach BE" model="res.better.zip">
             <field name="name">4953</field>
             <field name="city">Schwarzenbach (Huttwil)</field>
             <field name="state_id" ref="state_BE"/>
@@ -30427,7 +30427,7 @@
             <field name="communitynumber_bfs">4233</field>
             <field name="valid_from">2002-07-01</field>
         </record>
-        <record id="zip_3125" model="res.better.zip">
+        <record id="npa_5626 Hermetschwil-Staff" model="res.better.zip">
             <field name="name">5626</field>
             <field name="city">Hermetschwil-Staffeln</field>
             <field name="state_id" ref="state_AG"/>
@@ -31939,7 +31939,7 @@
             <field name="communitynumber_bfs">783</field>
             <field name="valid_from">1996-09-04</field>
         </record>
-        <record id="zip_3282" model="res.better.zip">
+        <record id="npa_6084 Hasliberg Wasserw" model="res.better.zip">
             <field name="name">6084</field>
             <field name="city">Hasliberg Wasserwendi</field>
             <field name="state_id" ref="state_BE"/>
@@ -34221,7 +34221,7 @@
             <field name="communitynumber_bfs">1367</field>
             <field name="valid_from">2000-04-01</field>
         </record>
-        <record id="zip_3480" model="res.better.zip">
+        <record id="npa_6432 Rickenbach SZ" model="res.better.zip">
             <field name="name">6432</field>
             <field name="city">Rickenbach b. Schwyz</field>
             <field name="state_id" ref="state_SZ"/>
@@ -34515,7 +34515,7 @@
             <field name="communitynumber_bfs">1213</field>
             <field name="valid_from">1996-03-04</field>
         </record>
-        <record id="zip_3508" model="res.better.zip">
+        <record id="npa_6469 Haldi bSchattdorf" model="res.better.zip">
             <field name="name">6469</field>
             <field name="city">Haldi b. Schattdorf</field>
             <field name="state_id" ref="state_UR"/>
@@ -35103,7 +35103,7 @@
             <field name="communitynumber_bfs">5014</field>
             <field name="valid_from">2011-08-01</field>
         </record>
-        <record id="zip_3572" model="res.better.zip">
+        <record id="npa_6583 S Antonio" model="res.better.zip">
             <field name="name">6583</field>
             <field name="city">S. Antonio (Val Morobbia)</field>
             <field name="state_id" ref="state_TI"/>
@@ -35159,7 +35159,7 @@
             <field name="communitynumber_bfs">3805</field>
             <field name="valid_from">2004-04-01</field>
         </record>
-        <record id="zip_3576" model="res.better.zip">
+        <record id="npa_6541 Sta Maria" model="res.better.zip">
             <field name="name">6541</field>
             <field name="city">Sta. Maria in Calanca</field>
             <field name="state_id" ref="state_GR"/>
@@ -35747,7 +35747,7 @@
             <field name="communitynumber_bfs">5113</field>
             <field name="valid_from">2003-01-01</field>
         </record>
-        <record id="zip_3625" model="res.better.zip">
+        <record id="npa_6605 Monte Br Locarno" model="res.better.zip">
             <field name="name">6605</field>
             <field name="city">Monte Brè sopra Locarno</field>
             <field name="state_id" ref="state_TI"/>
@@ -36153,7 +36153,7 @@
             <field name="communitynumber_bfs">5121</field>
             <field name="valid_from">2005-08-01</field>
         </record>
-        <record id="zip_3655" model="res.better.zip">
+        <record id="npa_6645 Brione s Minusio" model="res.better.zip">
             <field name="name">6645</field>
             <field name="city">Brione sopra Minusio</field>
             <field name="state_id" ref="state_TI"/>
@@ -36461,7 +36461,7 @@
             <field name="communitynumber_bfs">5307</field>
             <field name="valid_from">1995-12-06</field>
         </record>
-        <record id="zip_3681" model="res.better.zip">
+        <record id="npa_6684 Campo (VM)" model="res.better.zip">
             <field name="name">6684</field>
             <field name="city">Campo (Vallemaggia)</field>
             <field name="state_id" ref="state_TI"/>
@@ -36503,7 +36503,7 @@
             <field name="communitynumber_bfs">5310</field>
             <field name="valid_from">2005-11-01</field>
         </record>
-        <record id="zip_3684" model="res.better.zip">
+        <record id="npa_6690 S Carlo" model="res.better.zip">
             <field name="name">6690</field>
             <field name="city">S. Carlo (Val Bavona)</field>
             <field name="state_id" ref="state_TI"/>
@@ -36965,7 +36965,7 @@
             <field name="communitynumber_bfs">5048</field>
             <field name="valid_from">1995-12-06</field>
         </record>
-        <record id="zip_3723" model="res.better.zip">
+        <record id="npa_6717 Dangio-Torre" model="res.better.zip">
             <field name="name">6717</field>
             <field name="city">Dangio</field>
             <field name="state_id" ref="state_TI"/>
@@ -39569,7 +39569,7 @@
             <field name="communitynumber_bfs">5178</field>
             <field name="valid_from">2012-05-01</field>
         </record>
-        <record id="zip_3953" model="res.better.zip">
+        <record id="npa_6995 Molinazzo" model="res.better.zip">
             <field name="name">6995</field>
             <field name="city">Molinazzo di Monteggio</field>
             <field name="state_id" ref="state_TI"/>
@@ -40003,7 +40003,7 @@
             <field name="communitynumber_bfs">3921</field>
             <field name="valid_from">1986-05-21</field>
         </record>
-        <record id="zip_4006" model="res.better.zip">
+        <record id="npa_7062 Passugg-Araschgen" model="res.better.zip">
             <field name="name">7062</field>
             <field name="city">Passugg</field>
             <field name="state_id" ref="state_GR"/>
@@ -40143,7 +40143,7 @@
             <field name="communitynumber_bfs">3513</field>
             <field name="valid_from">2008-06-01</field>
         </record>
-        <record id="zip_4016" model="res.better.zip">
+        <record id="npa_7084 Brienz/Brinzauls" model="res.better.zip">
             <field name="name">7084</field>
             <field name="city">Brienz/Brinzauls GR</field>
             <field name="state_id" ref="state_GR"/>
@@ -40843,7 +40843,7 @@
             <field name="communitynumber_bfs">3612</field>
             <field name="valid_from">1998-11-16</field>
         </record>
-        <record id="zip_4087" model="res.better.zip">
+        <record id="npa_7136 Obers Friggahs" model="res.better.zip">
             <field name="name">7136</field>
             <field name="city">Obersaxen Friggahüs</field>
             <field name="state_id" ref="state_GR"/>
@@ -41431,7 +41431,7 @@
             <field name="communitynumber_bfs">3962</field>
             <field name="valid_from">2006-06-01</field>
         </record>
-        <record id="zip_4140" model="res.better.zip">
+        <record id="npa_7223 Buchen" model="res.better.zip">
             <field name="name">7223</field>
             <field name="city">Buchen im Prättigau</field>
             <field name="state_id" ref="state_GR"/>
@@ -41613,7 +41613,7 @@
             <field name="communitynumber_bfs">3893</field>
             <field name="valid_from">1988-05-29</field>
         </record>
-        <record id="zip_4155" model="res.better.zip">
+        <record id="npa_7241 Conters" model="res.better.zip">
             <field name="name">7241</field>
             <field name="city">Conters im Prättigau</field>
             <field name="state_id" ref="state_GR"/>
@@ -41977,7 +41977,7 @@
             <field name="communitynumber_bfs">3296</field>
             <field name="valid_from">1993-02-02</field>
         </record>
-        <record id="zip_4196" model="res.better.zip">
+        <record id="npa_7325 Schwendi" model="res.better.zip">
             <field name="name">7325</field>
             <field name="city">Schwendi im Weisstannental</field>
             <field name="state_id" ref="state_SG"/>
@@ -42551,7 +42551,7 @@
             <field name="communitynumber_bfs">3694</field>
             <field name="valid_from">1996-08-02</field>
         </record>
-        <record id="zip_4249" model="res.better.zip">
+        <record id="npa_7436 Medels" model="res.better.zip">
             <field name="name">7436</field>
             <field name="city">Medels im Rheinwald</field>
             <field name="state_id" ref="state_GR"/>
@@ -43139,7 +43139,7 @@
             <field name="communitynumber_bfs">3784</field>
             <field name="valid_from">1996-12-18</field>
         </record>
-        <record id="zip_4304" model="res.better.zip">
+        <record id="npa_7505 Celerina" model="res.better.zip">
             <field name="name">7505</field>
             <field name="city">Celerina/Schlarigna</field>
             <field name="state_id" ref="state_GR"/>
@@ -43405,7 +43405,7 @@
             <field name="communitynumber_bfs">3847</field>
             <field name="valid_from">2009-04-01</field>
         </record>
-        <record id="zip_4330" model="res.better.zip">
+        <record id="npa_7536 Sta Maria V M" model="res.better.zip">
             <field name="name">7536</field>
             <field name="city">Sta. Maria Val Müstair</field>
             <field name="state_id" ref="state_GR"/>
@@ -43867,7 +43867,7 @@
             <field name="communitynumber_bfs">3561</field>
             <field name="valid_from">2009-05-01</field>
         </record>
-        <record id="zip_4375" model="res.better.zip">
+        <record id="npa_7741 S Carlo GR" model="res.better.zip">
             <field name="name">7741</field>
             <field name="city">S. Carlo (Poschiavo)</field>
             <field name="state_id" ref="state_GR"/>
@@ -45365,7 +45365,7 @@
             <field name="communitynumber_bfs">88</field>
             <field name="valid_from">2010-06-01</field>
         </record>
-        <record id="zip_4544" model="res.better.zip">
+        <record id="npa_8174 Stadel" model="res.better.zip">
             <field name="name">8174</field>
             <field name="city">Stadel b. Niederglatt</field>
             <field name="state_id" ref="state_ZH"/>
@@ -45841,7 +45841,7 @@
             <field name="communitynumber_bfs">2915</field>
             <field name="valid_from">2012-10-01</field>
         </record>
-        <record id="zip_4585" model="res.better.zip">
+        <record id="npa_8212 Neuhausen" model="res.better.zip">
             <field name="name">8212</field>
             <field name="city">Neuhausen am Rheinfall</field>
             <field name="state_id" ref="state_SH"/>
@@ -46331,7 +46331,7 @@
             <field name="communitynumber_bfs">4801</field>
             <field name="valid_from">2008-06-01</field>
         </record>
-        <record id="zip_4627" model="res.better.zip">
+        <record id="npa_8268 Mannenbach-Salenst" model="res.better.zip">
             <field name="name">8268</field>
             <field name="city">Mannenbach-Salenstein</field>
             <field name="state_id" ref="state_TG"/>
@@ -46639,7 +46639,7 @@
             <field name="communitynumber_bfs">213</field>
             <field name="valid_from">2012-11-01</field>
         </record>
-        <record id="zip_4653" model="res.better.zip">
+        <record id="npa_8307 Ottikon bKemptth" model="res.better.zip">
             <field name="name">8307</field>
             <field name="city">Ottikon b. Kemptthal</field>
             <field name="state_id" ref="state_ZH"/>
@@ -46905,7 +46905,7 @@
             <field name="communitynumber_bfs">4551</field>
             <field name="valid_from">2011-03-01</field>
         </record>
-        <record id="zip_4674" model="res.better.zip">
+        <record id="npa_8357 Guntershausen" model="res.better.zip">
             <field name="name">8357</field>
             <field name="city">Guntershausen b. Aadorf</field>
             <field name="state_id" ref="state_TG"/>
@@ -46975,7 +46975,7 @@
             <field name="communitynumber_bfs">4761</field>
             <field name="valid_from">1997-04-11</field>
         </record>
-        <record id="zip_4683" model="res.better.zip">
+        <record id="npa_8372 Wiezikon bSirnach" model="res.better.zip">
             <field name="name">8372</field>
             <field name="city">Wiezikon b. Sirnach</field>
             <field name="state_id" ref="state_TG"/>
@@ -47311,7 +47311,7 @@
             <field name="communitynumber_bfs">28</field>
             <field name="valid_from">2008-07-01</field>
         </record>
-        <record id="zip_4722" model="res.better.zip">
+        <record id="npa_8418 Schlatt" model="res.better.zip">
             <field name="name">8418</field>
             <field name="city">Schlatt b. Winterthur</field>
             <field name="state_id" ref="state_ZH"/>
@@ -47717,7 +47717,7 @@
             <field name="communitynumber_bfs">33</field>
             <field name="valid_from">2003-05-01</field>
         </record>
-        <record id="zip_4756" model="res.better.zip">
+        <record id="npa_8452 Adlikon" model="res.better.zip">
             <field name="name">8452</field>
             <field name="city">Adlikon b. Andelfingen</field>
             <field name="state_id" ref="state_ZH"/>
@@ -47913,7 +47913,7 @@
             <field name="communitynumber_bfs">227</field>
             <field name="valid_from">1997-04-11</field>
         </record>
-        <record id="zip_4773" model="res.better.zip">
+        <record id="npa_8404 Reutlingen" model="res.better.zip">
             <field name="name">8404</field>
             <field name="city">Reutlingen (Winterthur)</field>
             <field name="state_id" ref="state_ZH"/>
@@ -47983,7 +47983,7 @@
             <field name="communitynumber_bfs">36</field>
             <field name="valid_from">1996-03-06</field>
         </record>
-        <record id="zip_4779" model="res.better.zip">
+        <record id="npa_8471 Rutschwil" model="res.better.zip">
             <field name="name">8471</field>
             <field name="city">Rutschwil (Dägerlen)</field>
             <field name="state_id" ref="state_ZH"/>
@@ -47997,7 +47997,7 @@
             <field name="communitynumber_bfs">214</field>
             <field name="valid_from">2003-02-01</field>
         </record>
-        <record id="zip_4780" model="res.better.zip">
+        <record id="npa_8478 Thalheim" model="res.better.zip">
             <field name="name">8478</field>
             <field name="city">Thalheim an der Thur</field>
             <field name="state_id" ref="state_ZH"/>
@@ -48067,7 +48067,7 @@
             <field name="communitynumber_bfs">44</field>
             <field name="valid_from">2009-06-01</field>
         </record>
-        <record id="zip_4785" model="res.better.zip">
+        <record id="npa_8482 Sennhof" model="res.better.zip">
             <field name="name">8482</field>
             <field name="city">Sennhof (Winterthur)</field>
             <field name="state_id" ref="state_ZH"/>
@@ -48669,7 +48669,7 @@
             <field name="communitynumber_bfs">298</field>
             <field name="valid_from">1986-05-21</field>
         </record>
-        <record id="zip_4842" model="res.better.zip">
+        <record id="npa_8404 Stadel(Winterthur)" model="res.better.zip">
             <field name="name">8404</field>
             <field name="city">Stadel (Winterthur)</field>
             <field name="state_id" ref="state_ZH"/>
@@ -48739,7 +48739,7 @@
             <field name="communitynumber_bfs">4571</field>
             <field name="valid_from">2002-05-01</field>
         </record>
-        <record id="zip_4849" model="res.better.zip">
+        <record id="npa_8548 Ellikon a d Thur" model="res.better.zip">
             <field name="name">8548</field>
             <field name="city">Ellikon an der Thur</field>
             <field name="state_id" ref="state_ZH"/>
@@ -48781,7 +48781,7 @@
             <field name="communitynumber_bfs">4590</field>
             <field name="valid_from">2009-04-01</field>
         </record>
-        <record id="zip_4855" model="res.better.zip">
+        <record id="npa_8554 Mllheim-Wigoltgn" model="res.better.zip">
             <field name="name">8554</field>
             <field name="city">Müllheim-Wigoltingen</field>
             <field name="state_id" ref="state_TG"/>
@@ -49075,7 +49075,7 @@
             <field name="communitynumber_bfs">4756</field>
             <field name="valid_from">2009-05-01</field>
         </record>
-        <record id="zip_4891" model="res.better.zip">
+        <record id="npa_9217 Neukirch" model="res.better.zip">
             <field name="name">9217</field>
             <field name="city">Neukirch an der Thur</field>
             <field name="state_id" ref="state_TG"/>
@@ -49551,7 +49551,7 @@
             <field name="communitynumber_bfs">191</field>
             <field name="valid_from">1986-05-21</field>
         </record>
-        <record id="zip_4942" model="res.better.zip">
+        <record id="npa_8602 Wangen ZH" model="res.better.zip">
             <field name="name">8602</field>
             <field name="city">Wangen b. Dübendorf</field>
             <field name="state_id" ref="state_ZH"/>
@@ -49719,7 +49719,7 @@
             <field name="communitynumber_bfs">198</field>
             <field name="valid_from">1996-11-05</field>
         </record>
-        <record id="zip_4955" model="res.better.zip">
+        <record id="npa_8614 Bertschikon Gossau" model="res.better.zip">
             <field name="name">8614</field>
             <field name="city">Bertschikon (Gossau ZH)</field>
             <field name="state_id" ref="state_ZH"/>
@@ -49887,7 +49887,7 @@
             <field name="communitynumber_bfs">115</field>
             <field name="valid_from">1996-08-06</field>
         </record>
-        <record id="zip_4968" model="res.better.zip">
+        <record id="npa_8626 Ottikon" model="res.better.zip">
             <field name="name">8626</field>
             <field name="city">Ottikon (Gossau ZH)</field>
             <field name="state_id" ref="state_ZH"/>
@@ -51833,7 +51833,7 @@
             <field name="communitynumber_bfs">3292</field>
             <field name="valid_from">2011-12-01</field>
         </record>
-        <record id="zip_5128" model="res.better.zip">
+        <record id="npa_8895 Flumserberg Portel" model="res.better.zip">
             <field name="name">8895</field>
             <field name="city">Flumserberg Portels</field>
             <field name="state_id" ref="state_SG"/>
@@ -51847,7 +51847,7 @@
             <field name="communitynumber_bfs">3292</field>
             <field name="valid_from">2009-02-01</field>
         </record>
-        <record id="zip_5129" model="res.better.zip">
+        <record id="npa_8896 Flumserberg Bergh" model="res.better.zip">
             <field name="name">8896</field>
             <field name="city">Flumserberg Bergheim</field>
             <field name="state_id" ref="state_SG"/>
@@ -51861,7 +51861,7 @@
             <field name="communitynumber_bfs">3292</field>
             <field name="valid_from">2006-12-01</field>
         </record>
-        <record id="zip_5130" model="res.better.zip">
+        <record id="npa_8897 Flumserberg Theim" model="res.better.zip">
             <field name="name">8897</field>
             <field name="city">Flumserberg Tannenheim</field>
             <field name="state_id" ref="state_SG"/>
@@ -51875,7 +51875,7 @@
             <field name="communitynumber_bfs">3292</field>
             <field name="valid_from">2006-12-01</field>
         </record>
-        <record id="zip_5131" model="res.better.zip">
+        <record id="npa_8898 Flumserberg Tboden" model="res.better.zip">
             <field name="name">8898</field>
             <field name="city">Flumserberg Tannenbodenalp</field>
             <field name="state_id" ref="state_SG"/>
@@ -52351,7 +52351,7 @@
             <field name="communitynumber_bfs">244</field>
             <field name="valid_from">1987-09-01</field>
         </record>
-        <record id="zip_5170" model="res.better.zip">
+        <record id="npa_8955 Oetwil ad Limmat" model="res.better.zip">
             <field name="name">8955</field>
             <field name="city">Oetwil an der Limmat</field>
             <field name="state_id" ref="state_ZH"/>
@@ -53107,7 +53107,7 @@
             <field name="communitynumber_bfs">3102</field>
             <field name="valid_from">2009-03-01</field>
         </record>
-        <record id="zip_5261" model="res.better.zip">
+        <record id="npa_9112 Schachen bHerisau" model="res.better.zip">
             <field name="name">9112</field>
             <field name="city">Schachen b. Herisau</field>
             <field name="state_id" ref="state_AR"/>
@@ -53401,7 +53401,7 @@
             <field name="communitynumber_bfs">4495</field>
             <field name="valid_from">2002-02-01</field>
         </record>
-        <record id="zip_5283" model="res.better.zip">
+        <record id="npa_9215 Schnenberg TG" model="res.better.zip">
             <field name="name">9215</field>
             <field name="city">Schönenberg an der Thur</field>
             <field name="state_id" ref="state_TG"/>
@@ -54997,7 +54997,7 @@
             <field name="communitynumber_bfs">4606</field>
             <field name="valid_from">2009-05-01</field>
         </record>
-        <record id="zip_5413" model="res.better.zip">
+        <record id="npa_9508 Weingarten-Kalth" model="res.better.zip">
             <field name="name">9508</field>
             <field name="city">Weingarten-Kalthäusern</field>
             <field name="state_id" ref="state_TG"/>
@@ -55851,7 +55851,7 @@
             <field name="communitynumber_bfs">1711</field>
             <field name="valid_from">1996-03-04</field>
         </record>
-        <record id="zip_5501" model="res.better.zip">
+        <record id="npa_6911 Campione" model="res.better.zip">
             <field name="name">6911</field>
             <field name="city">Campione d'Italia</field>
             <field name="state_id" ref="state_IT"/>
@@ -56214,7 +56214,7 @@
             <field name="communitynumber_bfs">176</field>
             <field name="valid_from">1997-08-18</field>
         </record>
-        <record id="zip_5682" model="res.better.zip">
+        <record id="npa_3855 Schwanden-Brienz" model="res.better.zip">
             <field name="name">3855</field>
             <field name="city">Schwanden b. Brienz</field>
             <field name="state_id" ref="state_BE"/>
@@ -56256,7 +56256,7 @@
             <field name="communitynumber_bfs">6252</field>
             <field name="valid_from">1993-02-08</field>
         </record>
-        <record id="zip_5686" model="res.better.zip">
+        <record id="npa_3380 Walliswil-Nbipp" model="res.better.zip">
             <field name="name">3380</field>
             <field name="city">Walliswil b. Niederbipp</field>
             <field name="state_id" ref="state_BE"/>
@@ -56396,7 +56396,7 @@
             <field name="communitynumber_bfs">198</field>
             <field name="valid_from">2004-11-01</field>
         </record>
-        <record id="zip_5743" model="res.better.zip">
+        <record id="npa_1965 Chandolin-Savise" model="res.better.zip">
             <field name="name">1965</field>
             <field name="city">Chandolin (Savièse)</field>
             <field name="state_id" ref="state_VS"/>
@@ -56844,7 +56844,7 @@
             <field name="communitynumber_bfs">2066</field>
             <field name="valid_from">1989-06-01</field>
         </record>
-        <record id="zip_5785" model="res.better.zip">
+        <record id="npa_1694 Chavannes-Orsonnen" model="res.better.zip">
             <field name="name">1694</field>
             <field name="city">Chavannes-sous-Orsonnens</field>
             <field name="state_id" ref="state_FR"/>
@@ -57026,7 +57026,7 @@
             <field name="communitynumber_bfs">2114</field>
             <field name="valid_from">1996-09-05</field>
         </record>
-        <record id="zip_5798" model="res.better.zip">
+        <record id="npa_1653 Chtel-Montsalvens" model="res.better.zip">
             <field name="name">1653</field>
             <field name="city">Châtel-sur-Montsalvens</field>
             <field name="state_id" ref="state_FR"/>
@@ -57365,7 +57365,7 @@
             <field name="communitynumber_bfs">2225</field>
             <field name="valid_from">1996-09-05</field>
         </record>
-        <record id="zip_5823" model="res.better.zip">
+        <record id="npa_1695 Villarsel-Gibloux" model="res.better.zip">
             <field name="name">1695</field>
             <field name="city">Villarsel-le-Gibloux</field>
             <field name="state_id" ref="state_FR"/>
@@ -57379,7 +57379,7 @@
             <field name="communitynumber_bfs">2223</field>
             <field name="valid_from">2001-01-03</field>
         </record>
-        <record id="zip_5824" model="res.better.zip">
+        <record id="npa_1723 Villarsel-Marly" model="res.better.zip">
             <field name="name">1723</field>
             <field name="city">Villarsel-sur-Marly</field>
             <field name="state_id" ref="state_FR"/>
@@ -57576,7 +57576,7 @@
             <field name="communitynumber_bfs">5451</field>
             <field name="valid_from">1999-10-21</field>
         </record>
-        <record id="zip_5841" model="res.better.zip">
+        <record id="npa_1148 Chavannes-Veyron" model="res.better.zip">
             <field name="name">1148</field>
             <field name="city">Chavannes-le-Veyron</field>
             <field name="state_id" ref="state_VD"/>
@@ -57786,7 +57786,7 @@
             <field name="communitynumber_bfs">5693</field>
             <field name="valid_from">1989-06-01</field>
         </record>
-        <record id="zip_5858" model="res.better.zip">
+        <record id="npa_1041 Montaubion-Chardon" model="res.better.zip">
             <field name="name">1041</field>
             <field name="city">Montaubion-Chardonney</field>
             <field name="state_id" ref="state_VD"/>
@@ -58052,7 +58052,7 @@
             <field name="communitynumber_bfs">5912</field>
             <field name="valid_from">1989-06-01</field>
         </record>
-        <record id="zip_5878" model="res.better.zip">
+        <record id="npa_1443 Essert-s-Champvent" model="res.better.zip">
             <field name="name">1443</field>
             <field name="city">Essert-sous-Champvent</field>
             <field name="state_id" ref="state_VD"/>
@@ -58066,7 +58066,7 @@
             <field name="communitynumber_bfs">5905</field>
             <field name="valid_from">1989-06-01</field>
         </record>
-        <record id="zip_5879" model="res.better.zip">
+        <record id="npa_1443 Villars-Champvent" model="res.better.zip">
             <field name="name">1443</field>
             <field name="city">Villars-sous-Champvent</field>
             <field name="state_id" ref="state_VD"/>
@@ -58108,7 +58108,7 @@
             <field name="communitynumber_bfs">5938</field>
             <field name="valid_from">1989-06-01</field>
         </record>
-        <record id="zip_5882" model="res.better.zip">
+        <record id="npa_1407 Mzery-Donneloye" model="res.better.zip">
             <field name="name">1407</field>
             <field name="city">Mézery-près-Donneloye</field>
             <field name="state_id" ref="state_VD"/>
@@ -58262,7 +58262,7 @@
             <field name="communitynumber_bfs">298</field>
             <field name="valid_from">2008-01-01</field>
         </record>
-        <record id="zip_5895" model="res.better.zip">
+        <record id="npa_3283 Niederried b Kall" model="res.better.zip">
             <field name="name">3283</field>
             <field name="city">Niederried b. Kallnach</field>
             <field name="state_id" ref="state_BE"/>
@@ -58640,7 +58640,7 @@
             <field name="communitynumber_bfs">664</field>
             <field name="valid_from">2004-06-01</field>
         </record>
-        <record id="zip_5923" model="res.better.zip">
+        <record id="npa_3274 Bhl BE" model="res.better.zip">
             <field name="name">3274</field>
             <field name="city">Bühl b. Aarberg</field>
             <field name="state_id" ref="state_BE"/>
@@ -58906,7 +58906,7 @@
             <field name="communitynumber_bfs">1030</field>
             <field name="valid_from">2004-06-01</field>
         </record>
-        <record id="zip_5943" model="res.better.zip">
+        <record id="npa_6277 Lieli" model="res.better.zip">
             <field name="name">6277</field>
             <field name="city">Lieli LU</field>
             <field name="state_id" ref="state_LU"/>
@@ -59299,7 +59299,7 @@
             <field name="communitynumber_bfs">3619</field>
             <field name="valid_from">2006-02-01</field>
         </record>
-        <record id="zip_5973" model="res.better.zip">
+        <record id="npa_7116 St Martin" model="res.better.zip">
             <field name="name">7116</field>
             <field name="city">St. Martin (Lugnez)</field>
             <field name="state_id" ref="state_GR"/>
@@ -59831,7 +59831,7 @@
             <field name="communitynumber_bfs">4901</field>
             <field name="valid_from">2002-01-01</field>
         </record>
-        <record id="zip_6022" model="res.better.zip">
+        <record id="npa_8572 Guntershausen Berg" model="res.better.zip">
             <field name="name">8572</field>
             <field name="city">Guntershausen b. Berg</field>
             <field name="state_id" ref="state_TG"/>
@@ -61288,7 +61288,7 @@
             <field name="communitynumber_bfs">4021</field>
             <field name="valid_from">1993-12-23</field>
         </record>
-        <record id="zip_6239" model="res.better.zip">
+        <record id="npa_8106 Adlikon bRegensdf" model="res.better.zip">
             <field name="name">8106</field>
             <field name="city">Adlikon b. Regensdorf</field>
             <field name="state_id" ref="state_ZH"/>
@@ -61372,7 +61372,7 @@
             <field name="communitynumber_bfs">6118</field>
             <field name="valid_from">2008-05-01</field>
         </record>
-        <record id="zip_6245" model="res.better.zip">
+        <record id="npa_1965 Drne VS" model="res.better.zip">
             <field name="name">1965</field>
             <field name="city">Drône (Savièse)</field>
             <field name="state_id" ref="state_VS"/>
@@ -65562,7 +65562,7 @@
             <field name="communitynumber_bfs">4951</field>
             <field name="valid_from">1998-08-17</field>
         </record>
-        <record id="zip_7444" model="res.better.zip">
+        <record id="npa_8586 Buch b Kmmertshs" model="res.better.zip">
             <field name="name">8586</field>
             <field name="city">Buch b. Kümmertshausen</field>
             <field name="state_id" ref="state_TG"/>
@@ -65842,7 +65842,7 @@
             <field name="communitynumber_bfs">6135</field>
             <field name="valid_from">1999-02-08</field>
         </record>
-        <record id="zip_7529" model="res.better.zip">
+        <record id="npa_1912 Montagnon (Leytron" model="res.better.zip">
             <field name="name">1912</field>
             <field name="city">Montagnon (Leytron)</field>
             <field name="state_id" ref="state_VS"/>
@@ -65884,7 +65884,7 @@
             <field name="communitynumber_bfs">6139</field>
             <field name="valid_from">1999-02-08</field>
         </record>
-        <record id="zip_7532" model="res.better.zip">
+        <record id="npa_1932 Les Valettes" model="res.better.zip">
             <field name="name">1932</field>
             <field name="city">Les Valettes (Bovernier)</field>
             <field name="state_id" ref="state_VS"/>
@@ -65898,7 +65898,7 @@
             <field name="communitynumber_bfs">6131</field>
             <field name="valid_from">1999-02-08</field>
         </record>
-        <record id="zip_7533" model="res.better.zip">
+        <record id="npa_1933 Vens(Sembrancher)" model="res.better.zip">
             <field name="name">1933</field>
             <field name="city">Vens (Sembrancher)</field>
             <field name="state_id" ref="state_VS"/>
@@ -65912,7 +65912,7 @@
             <field name="communitynumber_bfs">6036</field>
             <field name="valid_from">1999-02-08</field>
         </record>
-        <record id="zip_7534" model="res.better.zip">
+        <record id="npa_1933 Chamoille" model="res.better.zip">
             <field name="name">1933</field>
             <field name="city">Chamoille (Sembrancher)</field>
             <field name="state_id" ref="state_VS"/>
@@ -65926,7 +65926,7 @@
             <field name="communitynumber_bfs">6035</field>
             <field name="valid_from">1999-02-08</field>
         </record>
-        <record id="zip_7535" model="res.better.zip">
+        <record id="npa_1933 La Garde" model="res.better.zip">
             <field name="name">1933</field>
             <field name="city">La Garde (Sembrancher)</field>
             <field name="state_id" ref="state_VS"/>
@@ -65954,7 +65954,7 @@
             <field name="communitynumber_bfs">6036</field>
             <field name="valid_from">1999-02-08</field>
         </record>
-        <record id="zip_7541" model="res.better.zip">
+        <record id="npa_1945 Fontaine Dessus" model="res.better.zip">
             <field name="name">1945</field>
             <field name="city">Fontaine Dessus (Liddes)</field>
             <field name="state_id" ref="state_VS"/>
@@ -65968,7 +65968,7 @@
             <field name="communitynumber_bfs">6033</field>
             <field name="valid_from">1999-02-08</field>
         </record>
-        <record id="zip_7542" model="res.better.zip">
+        <record id="npa_1945 Fontaine Dessous" model="res.better.zip">
             <field name="name">1945</field>
             <field name="city">Fontaine Dessous (Liddes)</field>
             <field name="state_id" ref="state_VS"/>
@@ -66010,7 +66010,7 @@
             <field name="communitynumber_bfs">6033</field>
             <field name="valid_from">1999-02-08</field>
         </record>
-        <record id="zip_7545" model="res.better.zip">
+        <record id="npa_1945 Rive Haute(Liddes)" model="res.better.zip">
             <field name="name">1945</field>
             <field name="city">Rive Haute (Liddes)</field>
             <field name="state_id" ref="state_VS"/>
@@ -66024,7 +66024,7 @@
             <field name="communitynumber_bfs">6033</field>
             <field name="valid_from">1999-02-08</field>
         </record>
-        <record id="zip_7546" model="res.better.zip">
+        <record id="npa_1945 Fornex(Liddes)" model="res.better.zip">
             <field name="name">1945</field>
             <field name="city">Fornex (Liddes)</field>
             <field name="state_id" ref="state_VS"/>
@@ -66038,7 +66038,7 @@
             <field name="communitynumber_bfs">6033</field>
             <field name="valid_from">1999-02-08</field>
         </record>
-        <record id="zip_7547" model="res.better.zip">
+        <record id="npa_1945 Les Moulins VS" model="res.better.zip">
             <field name="name">1945</field>
             <field name="city">Les Moulins VS (Liddes)</field>
             <field name="state_id" ref="state_VS"/>
@@ -66080,7 +66080,7 @@
             <field name="communitynumber_bfs">6033</field>
             <field name="valid_from">1999-02-08</field>
         </record>
-        <record id="zip_7550" model="res.better.zip">
+        <record id="npa_1945 Chez Petit(Liddes)" model="res.better.zip">
             <field name="name">1945</field>
             <field name="city">Chez Petit (Liddes)</field>
             <field name="state_id" ref="state_VS"/>
@@ -66094,7 +66094,7 @@
             <field name="communitynumber_bfs">6033</field>
             <field name="valid_from">1999-02-08</field>
         </record>
-        <record id="zip_7551" model="res.better.zip">
+        <record id="npa_1945 Petit Vichres" model="res.better.zip">
             <field name="name">1945</field>
             <field name="city">Petit Vichères (Liddes)</field>
             <field name="state_id" ref="state_VS"/>
@@ -66122,7 +66122,7 @@
             <field name="communitynumber_bfs">6031</field>
             <field name="valid_from">2007-12-01</field>
         </record>
-        <record id="zip_7559" model="res.better.zip">
+        <record id="npa_1955 Les Vrines" model="res.better.zip">
             <field name="name">1955</field>
             <field name="city">Les Vérines (Chamoson)</field>
             <field name="state_id" ref="state_VS"/>
@@ -66192,7 +66192,7 @@
             <field name="communitynumber_bfs">6265</field>
             <field name="valid_from">1999-02-09</field>
         </record>
-        <record id="zip_7564" model="res.better.zip">
+        <record id="npa_1965 St-Germain" model="res.better.zip">
             <field name="name">1965</field>
             <field name="city">St-Germain (Savièse)</field>
             <field name="state_id" ref="state_VS"/>
@@ -66220,7 +66220,7 @@
             <field name="communitynumber_bfs">6265</field>
             <field name="valid_from">1999-02-09</field>
         </record>
-        <record id="zip_7566" model="res.better.zip">
+        <record id="npa_1965 Mayens-de-la-Zour" model="res.better.zip">
             <field name="name">1965</field>
             <field name="city">Mayens-de-la-Zour (Savièse)</field>
             <field name="state_id" ref="state_VS"/>
@@ -66402,7 +66402,7 @@
             <field name="communitynumber_bfs">6087</field>
             <field name="valid_from">1999-02-09</field>
         </record>
-        <record id="zip_7579" model="res.better.zip">
+        <record id="npa_1971 Champlan" model="res.better.zip">
             <field name="name">1971</field>
             <field name="city">Champlan (Grimisuat)</field>
             <field name="state_id" ref="state_VS"/>
@@ -66416,7 +66416,7 @@
             <field name="communitynumber_bfs">6263</field>
             <field name="valid_from">2005-03-01</field>
         </record>
-        <record id="zip_7580" model="res.better.zip">
+        <record id="npa_1983 Lana (Evolne)" model="res.better.zip">
             <field name="name">1983</field>
             <field name="city">Lanna</field>
             <field name="state_id" ref="state_VS"/>
@@ -66444,7 +66444,7 @@
             <field name="communitynumber_bfs">6266</field>
             <field name="valid_from">1999-02-09</field>
         </record>
-        <record id="zip_7582" model="res.better.zip">
+        <record id="npa_1991 Pravidondaz" model="res.better.zip">
             <field name="name">1991</field>
             <field name="city">Pravidondaz (Salins)</field>
             <field name="state_id" ref="state_VS"/>
@@ -66514,7 +66514,7 @@
             <field name="communitynumber_bfs">6024</field>
             <field name="valid_from">2013-01-01</field>
         </record>
-        <record id="zip_7608" model="res.better.zip">
+        <record id="npa_1992 La Vernaz" model="res.better.zip">
             <field name="name">1992</field>
             <field name="city">La Vernaz (Les Agettes)</field>
             <field name="state_id" ref="state_VS"/>
@@ -66528,7 +66528,7 @@
             <field name="communitynumber_bfs">6081</field>
             <field name="valid_from">1999-02-18</field>
         </record>
-        <record id="zip_7609" model="res.better.zip">
+        <record id="npa_1992 Crte--l'Oeil" model="res.better.zip">
             <field name="name">1992</field>
             <field name="city">Crête-à-l'Oeil(Les Agettes)</field>
             <field name="state_id" ref="state_VS"/>
@@ -66556,7 +66556,7 @@
             <field name="communitynumber_bfs">6024</field>
             <field name="valid_from">2013-01-01</field>
         </record>
-        <record id="zip_7612" model="res.better.zip">
+        <record id="npa_1996 Condmines (Nendaz" model="res.better.zip">
             <field name="name">1996</field>
             <field name="city">Condémines (Nendaz)</field>
             <field name="state_id" ref="state_VS"/>
@@ -67676,7 +67676,7 @@
             <field name="communitynumber_bfs">6616</field>
             <field name="valid_from">2003-06-01</field>
         </record>
-        <record id="zip_7742" model="res.better.zip">
+        <record id="npa_1965 Monteiller-Savise" model="res.better.zip">
             <field name="name">1965</field>
             <field name="city">Monteiller (Savièse)</field>
             <field name="state_id" ref="state_VS"/>
@@ -70127,7 +70127,7 @@
             <field name="communitynumber_bfs">133</field>
             <field name="valid_from">2005-08-01</field>
         </record>
-        <record id="zip_8359" model="res.better.zip">
+        <record id="npa_8152 Glattpark(Opfikon)" model="res.better.zip">
             <field name="name">8152</field>
             <field name="city">Glattpark (Opfikon)</field>
             <field name="state_id" ref="state_ZH"/>
@@ -70967,7 +70967,7 @@
             <field name="communitynumber_bfs">1061</field>
             <field name="valid_from">2010-02-01</field>
         </record>
-        <record id="zip_8807" model="res.better.zip">
+        <record id="npa_8352 Ricketwil" model="res.better.zip">
             <field name="name">8352</field>
             <field name="city">Ricketwil (Winterthur)</field>
             <field name="state_id" ref="state_ZH"/>
@@ -71079,7 +71079,7 @@
             <field name="communitynumber_bfs">4289</field>
             <field name="valid_from">2007-11-01</field>
         </record>
-        <record id="zip_8823" model="res.better.zip">
+        <record id="npa_6039 Root Lngenbold" model="res.better.zip">
             <field name="name">6039</field>
             <field name="city">Root Längenbold SH</field>
             <field name="state_id" ref="state_LU"/>
@@ -71289,7 +71289,7 @@
             <field name="communitynumber_bfs">223</field>
             <field name="valid_from">2008-05-01</field>
         </record>
-        <record id="zip_8891" model="res.better.zip">
+        <record id="npa_8412 Hnikon" model="res.better.zip">
             <field name="name">8412</field>
             <field name="city">Hünikon (Neftenbach)</field>
             <field name="state_id" ref="state_ZH"/>
@@ -71919,7 +71919,7 @@
             <field name="communitynumber_bfs">2402</field>
             <field name="valid_from">2008-12-01</field>
         </record>
-        <record id="zip_8983" model="res.better.zip">
+        <record id="npa_9050 Appenzell Eggerst" model="res.better.zip">
             <field name="name">9050</field>
             <field name="city">Appenzell Eggerstanden</field>
             <field name="state_id" ref="state_AI"/>
@@ -71933,7 +71933,7 @@
             <field name="communitynumber_bfs">3103</field>
             <field name="valid_from">2010-03-01</field>
         </record>
-        <record id="zip_8984" model="res.better.zip">
+        <record id="npa_9050 Appenzell Enggenh" model="res.better.zip">
             <field name="name">9050</field>
             <field name="city">Appenzell Enggenhütten</field>
             <field name="state_id" ref="state_AI"/>
@@ -71947,7 +71947,7 @@
             <field name="communitynumber_bfs">3104</field>
             <field name="valid_from">2010-03-01</field>
         </record>
-        <record id="zip_8985" model="res.better.zip">
+        <record id="npa_9050 Appenzell Meister" model="res.better.zip">
             <field name="name">9050</field>
             <field name="city">Appenzell Meistersrüte</field>
             <field name="state_id" ref="state_AI"/>
@@ -73094,7 +73094,7 @@
             <field name="communitynumber_bfs">6083</field>
             <field name="valid_from">2011-04-01</field>
         </record>
-        <record id="zip_9158" model="res.better.zip">
+        <record id="npa_1985 Villaz VS" model="res.better.zip">
             <field name="name">1985</field>
             <field name="city">Villa (Evolène)</field>
             <field name="state_id" ref="state_VS"/>
@@ -73626,7 +73626,7 @@
             <field name="communitynumber_bfs">5586</field>
             <field name="valid_from">2012-05-01</field>
         </record>
-        <record id="zip_9267" model="res.better.zip">
+        <record id="npa_3075 Vielbringen Worb" model="res.better.zip">
             <field name="name">3075</field>
             <field name="city">Vielbringen b. Worb</field>
             <field name="state_id" ref="state_BE"/>
@@ -73682,7 +73682,7 @@
             <field name="communitynumber_bfs">4683</field>
             <field name="valid_from">2012-08-01</field>
         </record>
-        <record id="zip_9286" model="res.better.zip">
+        <record id="npa_8574 Dettighofen Lengw" model="res.better.zip">
             <field name="name">8574</field>
             <field name="city">Dettighofen (Lengwil)</field>
             <field name="state_id" ref="state_TG"/>
@@ -73878,7 +73878,7 @@
             <field name="communitynumber_bfs">261</field>
             <field name="valid_from">2013-01-01</field>
         </record>
-        <record id="zip_9303" model="res.better.zip">
+        <record id="npa_5225 Oberbzberg" model="res.better.zip">
             <field name="name">5225</field>
             <field name="city">Bözberg</field>
             <field name="state_id" ref="state_AG"/>
