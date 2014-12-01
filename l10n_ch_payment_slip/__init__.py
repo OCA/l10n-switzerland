@@ -19,7 +19,7 @@
 ##############################################################################
 from . import company
 from . import report
+from . import payment_slip
 from . import invoice
 from . import wizard
 from . import bank
-from . import payment_slip
