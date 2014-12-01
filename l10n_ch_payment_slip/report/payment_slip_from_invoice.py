@@ -18,8 +18,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import StringIO
-import pyPdf
 from openerp import api, models
 
 
@@ -31,35 +29,11 @@ class ExtendedReport(models.Model):
 
     _inherit = 'report'
 
-    def merge_pdf_in_memory(self, docs):
-        streams = []
-        writer = pyPdf.PdfFileWriter()
-        for doc in docs:
-            current_buff = StringIO.StringIO()
-            streams.append(current_buff)
-            current_buff.write(
-                doc._draw_payment_slip(a4=True, b64=False,
-                                       out_format='PDF')
-            )
-            current_buff.seek(0)
-            reader = pyPdf.PdfFileReader(current_buff)
-            for page in xrange(reader.getNumPages()):
-                writer.addPage(reader.getPage(page))
-        buff = StringIO.StringIO()
-        try:
-            # The writer close the reader file here
-            writer.write(buff)
-            return buff.getvalue()
-        except IOError:
-            raise
-        finally:
-            buff.close()
-            for stream in streams:
-                stream.close()
-
     @api.v7
     def get_pdf(self, cr, uid, ids, report_name, html=None, data=None,
                 context=None):
+        company = self.pool['res.users'].browse(cr, uid, uid,
+                                                context=context).company_id
         if report_name == 'one_slip_per_page_from_invoice':
             slip_model = self.pool['l10n_ch.payment_slip']
             docs = slip_model.compute_pay_slips_from_invoices(
@@ -75,8 +49,9 @@ class ExtendedReport(models.Model):
                 return docs[0]._draw_payment_slip(a4=True, b64=False,
                                                   out_format='PDF')
             else:
-                # Faster than self._merge_pdf but uses more memory
-                return self.merge_pdf_in_memory(docs)
+                if company.merge_mode == 'in_memory':
+                    return self.merge_pdf_in_memory(docs)
+                return self.merge_pdf_on_disk(docs)
         else:
             return super(ExtendedReport, self).get_pdf(
                 cr, uid, ids, report_name,
