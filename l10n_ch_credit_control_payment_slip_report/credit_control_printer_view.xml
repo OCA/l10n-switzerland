@@ -8,11 +8,13 @@
       <field name="type">form</field>
       <field name="arch" type="xml">
         <button name="print_lines" position="after">
-            <button name="print_linked_bvr" string="Print BVR" type="object" icon="gtk-execute" attrs="{'invisible': [('state', '==', 'done')]}"/>
+            <button name="print_linked_bvr"
+                    string="Print BVR (Will not mark lines)"
+                    type="object"
+                    class="oe_highlight"/>
         </button>
       </field>
     </record>
 
   </data>
 </openerp>
- 

@@ -18,23 +18,23 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm
+from openerp import models
 
 
-class account_move_line(orm.Model):
-    """Overrride BVR amount to take in account dunning fees"""
+class payment_slip(models.Model):
+    """implement amount hook"""
 
-    _inherit = "account.move.line"
+    _inherit = "l10n_ch.payment_slip"
 
-    def _get_bvr_amount(self, cr, uid, move, rtype=None):
-        """Hook to get amount in CHF for BVR
-        The amount must include dunning fees
+    def _compute_amount_hook(self):
+        """Hook to return the total amount of pyament slip
 
-        :param move: move line report
-        :param rtype: report type string just in case
-
-        :returns: BVR float amount
-
+        :return: total amount of payment slip
+        :rtype: float
         """
-        fees = getattr(move, 'bvr_dunning_fees', 0.0)
-        return move.debit + fees
+        amount = super(payment_slip, self)._compute_amount_hook()
+        credit_line = self.env['credit.control.line'].search(
+            [('move_line_id', '=', self.move_line_id.id)]
+        )
+
+        return amount + credit_line.dunning_fees_amount

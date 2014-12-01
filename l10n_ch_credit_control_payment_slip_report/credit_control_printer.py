@@ -17,26 +17,28 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{"name": "Switzerland - Printing of dunning BVR",
- "summary": "Print BVR/ESR slip related to credit control",
- "description": """
-Printing of dunning BVR
-=======================
-Add possibility to print BVR/ESR slip of related credit control lines.
-The dunning fees are printed on ESR but they will not affect the amount
-of move lines
-""",
- "version": "1.3.0",
- "author": "Camptocamp",
- "category": "Generic Modules/Others",
- "website": "http://www.camptocamp.com",
- "depends": ["account_credit_control",
-             "account_credit_control_dunning_fees",
-             "l10n_ch_payment_slip"
-             ],
- "data": ["credit_control_printer_view.xml",
-          "report.xml"
-          ],
- "active": False,
- "installable": True
- }
+import base64
+from openerp import models, fields, api, exceptions, _
+
+
+class CreditControlPrinter(models.TransientModel):
+    """Print lines"""
+    _inherit = 'credit.control.printer'
+
+    @api.multi
+    def print_linked_bvr(self):
+        """Print BVR from credit line
+        We do not use the communication
+        as it is not required and will be
+        less performent
+
+        """
+        self.ensure_one()
+        if not self.line_ids and not self.print_all:
+            raise exceptions.Warning.except_orm(
+                _('No credit control lines selected.')
+            )
+        credits = self.line_ids
+        report_name = 'slip_from_credit_control'
+        report_obj = self.env['report'].with_context(active_ids=credits.ids)
+        return report_obj.get_action(credits, report_name)
