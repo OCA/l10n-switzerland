@@ -25,8 +25,6 @@
     'website': 'http://www.camptocamp.com',
     'summary': 'Provides all Swiss postal codes for auto-completion',
     'depends': ['base', 'base_location'],
-    # FIXME: deprecated
-    'init_xml': ['data/set_old_res_better_zip_entries_inactive.sql'],
     'data': ['l10n_ch_better_zip.xml'],
     'images': [],
     'demo': [],
