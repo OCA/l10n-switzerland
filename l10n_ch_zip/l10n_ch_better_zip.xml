@@ -74312,5 +74312,175 @@
             <field name="communitynumber_bfs">5249</field>
             <field name="valid_from">2014-10-01</field>
         </record>
-    </data>
+
+        <!-- removed zips -->
+        <record id="npa_5224 Unterbzberg" model="res.better.zip">
+            <field name="name">5224</field>
+            <field name="city">Unterbözberg</field>
+            <field name="state_id" ref="state_AG"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_6162 Finsterwald LU" model="res.better.zip">
+            <field name="name">6162</field>
+            <field name="city">Finsterwald LU</field>
+            <field name="state_id" ref="state_LU"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_1582 Donatyre" model="res.better.zip">
+            <field name="name">1582</field>
+            <field name="city">Donatyre</field>
+            <field name="state_id" ref="state_VD"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_8762 Schwndi GL" model="res.better.zip">
+            <field name="name">8762</field>
+            <field name="city">Schwändi GL</field>
+            <field name="state_id" ref="state_GL"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_5224 Linn" model="res.better.zip">
+            <field name="name">5224</field>
+            <field name="city">Linn</field>
+            <field name="state_id" ref="state_AG"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_3636 Forst" model="res.better.zip">
+            <field name="name">3636</field>
+            <field name="city">Forst</field>
+            <field name="state_id" ref="state_BE"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_1934 Cotterg(Le Chble)" model="res.better.zip">
+            <field name="name">1934</field>
+            <field name="city">Cotterg(Le Châble)</field>
+            <field name="state_id" ref="state_VS"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_1948 Le Morgnes" model="res.better.zip">
+            <field name="name">1948</field>
+            <field name="city">Le Morgnes</field>
+            <field name="state_id" ref="state_VS"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_1947 Les Places" model="res.better.zip">
+            <field name="name">1947</field>
+            <field name="city">Les Places</field>
+            <field name="state_id" ref="state_VS"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_6133 Hergiswil LU" model="res.better.zip">
+            <field name="name">6133</field>
+            <field name="city">Hergiswil LU</field>
+            <field name="state_id" ref="state_LU"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_1947 Prarreyer" model="res.better.zip">
+            <field name="name">1947</field>
+            <field name="city">Prarreyer</field>
+            <field name="state_id" ref="state_VS"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_1934 Fontenelle" model="res.better.zip">
+            <field name="name">1934</field>
+            <field name="city">Fontenelle</field>
+            <field name="state_id" ref="state_VS"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_5224 Gallenkirch" model="res.better.zip">
+            <field name="name">5224</field>
+            <field name="city">Gallenkirch</field>
+            <field name="state_id" ref="state_AG"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_1947 Le Fregnoley" model="res.better.zip">
+            <field name="name">1947</field>
+            <field name="city">Le Fregnoley</field>
+            <field name="state_id" ref="state_VS"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_1215 Genve" model="res.better.zip">
+            <field name="name">1215</field>
+            <field name="city">Genève</field>
+            <field name="state_id" ref="state_GE"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_3053 Deisswil Mbuchsee" model="res.better.zip">
+            <field name="name">3053</field>
+            <field name="city">Deisswil Mbuchsee</field>
+            <field name="state_id" ref="state_BE"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_3628 Kienersrti" model="res.better.zip">
+            <field name="name">3628</field>
+            <field name="city">Kienersrüti</field>
+            <field name="state_id" ref="state_BE"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_3256 Bangerten" model="res.better.zip">
+            <field name="name">3256</field>
+            <field name="city">Bangerten</field>
+            <field name="state_id" ref="state_BE"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_1784 Cournillens" model="res.better.zip">
+            <field name="name">1784</field>
+            <field name="city">Cournillens</field>
+            <field name="state_id" ref="state_FR"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_1948 Le Planchamp" model="res.better.zip">
+            <field name="name">1948</field>
+            <field name="city">Le Planchamp</field>
+            <field name="state_id" ref="state_VS"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_8580 Hagenwil" model="res.better.zip">
+            <field name="name">8580</field>
+            <field name="city">Hagenwil</field>
+            <field name="state_id" ref="state_TG"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_3672 Aeschlen" model="res.better.zip">
+            <field name="name">3672</field>
+            <field name="city">Aeschlen</field>
+            <field name="state_id" ref="state_BE"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_3924 Gasenried" model="res.better.zip">
+            <field name="name">3924</field>
+            <field name="city">Gasenried</field>
+            <field name="state_id" ref="state_VS"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_6110 Fontannen" model="res.better.zip">
+            <field name="name">6110</field>
+            <field name="city">Fontannen</field>
+            <field name="state_id" ref="state_LU"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_1934 Montagnier" model="res.better.zip">
+            <field name="name">1934</field>
+            <field name="city">Montagnier</field>
+            <field name="state_id" ref="state_VS"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_1947 La Montoz" model="res.better.zip">
+            <field name="name">1947</field>
+            <field name="city">La Montoz</field>
+            <field name="state_id" ref="state_VS"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_1934 Villette" model="res.better.zip">
+            <field name="name">1934</field>
+            <field name="city">Villette</field>
+            <field name="state_id" ref="state_VS"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        <record id="npa_8330 Hermatswil" model="res.better.zip">
+            <field name="name">8330</field>
+            <field name="city">Hermatswil</field>
+            <field name="state_id" ref="state_ZH"/>
+            <field name="country_id" ref="base.ch"/>
+            <field eval="False" name="active"/></record>
+        </data>
 </openerp>
