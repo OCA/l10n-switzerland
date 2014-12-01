@@ -67,4 +67,11 @@ class ResCompany(models.Model):
         'BVR scan line letter spacing'
     )
 
+    merge_mode = fields.Selection(
+        [('in_memory', 'Merge Slips in Memory, faster but can exhaust memory'),
+         ('on_disk', 'Merge Slips on Disk, slower but safer')],
+        string="Payment Slips Merge Mode",
+        required=True,
+        default="in_memory"
+    )
     bvr_background = fields.Boolean('Insert BVR background ?')
