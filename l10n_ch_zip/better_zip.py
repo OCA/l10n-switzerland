@@ -72,4 +72,4 @@ class ResBetterZip(models.Model):
              "municipalities in Switzerland and the Principality of "
              "Liechtenstein",
     )
-    valid_from = fields.Char(string='Valid from', size=8)
+    valid_from = fields.Date(string='Valid from')
