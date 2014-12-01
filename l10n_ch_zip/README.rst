@@ -6,3 +6,9 @@ of partners.
 
 It is not mandatory to use them in Odoo in Switzerland, but can improve
 the user experience.
+
+Dependencies
+============
+
+The module ``base_location`` is required. It is available in
+https://github.com/OCA/partner-contact/
