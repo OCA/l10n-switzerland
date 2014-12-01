@@ -18,6 +18,7 @@
                             <field name="bvr_add_horz"/>
                             <field name="bvr_add_vert"/>
                             <field name="bvr_background"/>
+                            <field name="merge_mode"/>
                         </group>
                     </page>
                 </xpath>
