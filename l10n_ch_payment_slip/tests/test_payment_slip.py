@@ -18,6 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+import time
 import re
 
 import openerp.tests.common as test_common
@@ -81,7 +82,13 @@ class TestPaymentSlip(test_common.TransactionCase):
             }
         )
         invoice.signal_workflow('invoice_open')
-        invoice.refresh()
+        attempt = 0
+        while invoice.state != 'open':
+            time.sleep(0.1)
+            invoice.refresh()
+            attempt += 1
+            if attempt > 20:
+                break
         self.assertEqual(invoice.amount_total, 862.50)
         for line in invoice.move_id.line_id:
             if line.account_id.type in ('payable', 'receivable'):
@@ -121,7 +128,13 @@ class TestPaymentSlip(test_common.TransactionCase):
             }
         )
         invoice.signal_workflow('invoice_open')
-        invoice.refresh()
+        attempt = 0
+        while invoice.state != 'open':
+            invoice.refresh()
+            attempt += 1
+            time.sleep(0.1)
+            if attempt > 20:
+                break
         for line in invoice.move_id.line_id:
             slip = self.env['l10n_ch.payment_slip'].search(
                 [('move_line_id', '=', line.id)]

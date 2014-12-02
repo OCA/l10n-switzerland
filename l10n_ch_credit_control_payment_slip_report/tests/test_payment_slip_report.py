@@ -18,6 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+import time
 import openerp.tests.common as test_common
 
 
@@ -56,7 +57,8 @@ class TestPaymentSlipReport(test_common.TransactionCase):
             }
         )
 
-        self.invoice = self.env['account.invoice'].create(
+    def make_invoice(self):
+        invoice = self.env['account.invoice'].create(
             {
                 'partner_id': self.env.ref('base.res_partner_12').id,
                 'reference_type': 'none',
@@ -71,18 +73,26 @@ class TestPaymentSlipReport(test_common.TransactionCase):
                 'product_id': False,
                 'quantity': 1,
                 'price_unit': 862.50,
-                'invoice_id': self.invoice.id,
+                'invoice_id': invoice.id,
                 'name': 'product that cost 862.50 all tax included',
             }
         )
-        self.invoice.signal_workflow('invoice_open')
-        self.invoice.refresh()
-        self.assertEqual(self.invoice.amount_total, 862.50)
+        invoice.signal_workflow('invoice_open')
+        attempt = 0
+        while invoice.state != 'open':
+            time.sleep(0.1)
+            invoice.refresh()
+            attempt += 1
+            if attempt > 20:
+                break
+        self.assertEqual(invoice.amount_total, 862.50)
+        return invoice
 
     def test_fees_propagation(self):
         """Test that dunning fees are propagated in payment slip"""
+        invoice = self.make_invoice()
         move_line = self.env['account.move.line'].search(
-            [('invoice', '=', self.invoice.id),
+            [('invoice', '=', invoice.id),
              ('account_id.type', 'in', ('payable', 'receivable'))],
         )
         self.assertTrue(len(move_line), 1)
@@ -110,8 +120,9 @@ class TestPaymentSlipReport(test_common.TransactionCase):
 
     def test_priniting(self):
         """Test that we can print the report"""
+        invoice = self.make_invoice()
         move_line = self.env['account.move.line'].search(
-            [('invoice', '=', self.invoice.id),
+            [('invoice', '=', invoice.id),
              ('account_id.type', 'in', ('payable', 'receivable'))],
         )
         self.assertTrue(len(move_line), 1)
