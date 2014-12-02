@@ -162,7 +162,7 @@ class BvrImporterWizard(models.TransientModel):
                     )
                 if int(line[51:63]) != len(records):
                     raise exceptions.Warning(
-                        _('Number of ecords differ from the computed one')
+                        _('Number of records differ from the computed one')
                     )
                 # Validaton of amount and costs
                 amount = self._get_line_amount(line, sum_amount=False)
