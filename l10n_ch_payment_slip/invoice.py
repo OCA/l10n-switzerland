@@ -77,6 +77,8 @@ class AccountInvoice(models.Model):
         :return: reference comma separated
         :rtype: str
         """
+        if self.state not in ('open', 'paid'):
+            return ''
         if not self.slip_ids:
             return ''
         self.bvr_reference = ','.join(x.reference for x in self.slip_ids)
