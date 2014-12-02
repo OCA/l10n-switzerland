@@ -19,6 +19,8 @@
 #
 ##############################################################################
 from . import test_payment_slip
+from . import test_v11_import
 fast_suite = [
     test_payment_slip,
+    test_v11_import
 ]
