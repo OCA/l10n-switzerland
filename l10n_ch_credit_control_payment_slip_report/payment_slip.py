@@ -33,8 +33,11 @@ class payment_slip(models.Model):
         :rtype: float
         """
         amount = super(payment_slip, self)._compute_amount_hook()
-        credit_line = self.env['credit.control.line'].search(
-            [('move_line_id', '=', self.move_line_id.id)]
+        credit_lines = self.env['credit.control.line'].search(
+            [('move_line_id', '=', self.move_line_id.id),
+             ('state', 'in', ('to_be_sent', 'sent'))]
         )
-
-        return amount + credit_line.dunning_fees_amount
+        if credit_lines:
+            return amount + sum(line.dunning_fees_amount
+                                for line in credit_lines)
+        return amount
