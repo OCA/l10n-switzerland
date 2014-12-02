@@ -34,7 +34,8 @@ of move lines
              "account_credit_control_dunning_fees",
              "l10n_ch_payment_slip"],
  "data": ["credit_control_printer_view.xml",
-          "report.xml"],
+          "report.xml",
+          "security/ir.model.access.csv"],
  "active": False,
  "installable": True
  }

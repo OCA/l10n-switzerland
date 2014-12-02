@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+slip_credit_control,slip_credit_control,model_l10n_ch_payment_slip,account_credit_control.group_account_credit_control_user,1,1,0,0
+slip_credit_control_manager,slip_credit_control_manager,model_l10n_ch_payment_slip,account_credit_control.group_account_credit_control_manager,1,1,0,0
+slip_credit_control_info,slip_credit_control_info,model_l10n_ch_payment_slip,account_credit_control.group_account_credit_control_info,1,1,0,0
