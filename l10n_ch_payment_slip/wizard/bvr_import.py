@@ -33,9 +33,9 @@ REF = re.compile(r'[^0-9]')
 class BvrImporterWizard(models.TransientModel):
 
     _name = 'v11.import.wizard'
+    _total_line_codes = ('999', '995')
 
     v11file = fields.Binary('V11 File')
-
     total_cost = fields.Float('Total cost of V11')
     total_amount = fields.Float('Total amount of V11')
 
@@ -51,16 +51,25 @@ class BvrImporterWizard(models.TransientModel):
         :return: current line amount
         :rtype: float
         """
-        amount = float(line[39:49]) + (float(line[49:51]) / 100)
+        if line[0:3] in self._total_line_codes:
+            amount = float(line[39:51]) / 100.0
+        else:
+            amount = float(line[39:49]) / 100.0
         if line[2] == '5':
             amount *= -1
         if sum_amount:
             self.total_amount += amount
+        return amount
+
+    def _validate_total_amount(self, amount):
+        """Ensure total amount match given amount
+        :param: amount to validate
+        :type amount: float
+        """
         if round(amount - self.total_amount, 2) >= 0.01:
             raise exceptions.Warning(
                 _('Total amount differ from the computed amount')
             )
-        return amount
 
     @api.model
     def _get_line_cost(self, line, sum_cost=True):
@@ -74,16 +83,25 @@ class BvrImporterWizard(models.TransientModel):
         :return: current line cost
         :rtype: float
         """
-        cost = float(line[69:76]) + (float(line[76:78]) / 100)
+        if line[0:3] in self._total_line_codes:
+            cost = float(line[69:78]) / 100.0
+        else:
+            cost = float(line[96:100]) / 100.0
         if line[2] == '5':
             cost *= -1
         if sum_cost:
             self.total_cost += cost
+        return cost
+
+    def _validate_total_cost(self, cost):
+        """Ensure total cost match given cost
+        :param: cost to validate
+        :type cost: float
+        """
         if round(cost - self.total_cost, 2) >= 0.01:
             raise exceptions.Warning(
                 _('Total cost differ from the computed amount')
             )
-        return cost
 
     @api.model
     def _create_record(self, line):
@@ -126,13 +144,13 @@ class BvrImporterWizard(models.TransientModel):
         """
         records = []
         find_total = False
-        total_line_codes = ('999', '995')
         for lines in inlines:
             if not lines:  # manage new line at end of file
                 continue
             (line, lines) = (lines[:128], lines[128:])
             record = {}
-            if line[0:3] in total_line_codes:
+            # If line is a validation line
+            if line[0:3] in self._total_line_codes:
                 if find_total:
                     raise exceptions.Warning(
                         _('Too many total record found!')
@@ -147,9 +165,10 @@ class BvrImporterWizard(models.TransientModel):
                         _('Number of ecords differ from the computed one')
                     )
                 # Validaton of amount and costs
-                self._get_line_amount(line, sum_amount=False)
-                self._get_line_cost(line, sum_cost=False)
-
+                amount = self._get_line_amount(line, sum_amount=False)
+                cost = self._get_line_cost(line, sum_cost=False)
+                self._validate_total_amount(amount)
+                self._validate_total_cost(cost)
             else:
                 record = self._create_record(line)
                 records.append(record)
@@ -212,7 +231,7 @@ class BvrImporterWizard(models.TransientModel):
         if not statement_id:
             raise ValueError('The id of current satement is not in statement')
         try:
-            lines = base64.decodestring(v11file).split("\n")
+            lines = base64.decodestring(v11file).split("\r\n")
         except ValueError as decode_err:
             raise exceptions.Warning(
                 _('V11 file can not be decoded, '
