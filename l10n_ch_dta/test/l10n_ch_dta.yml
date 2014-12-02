@@ -1,0 +1,75 @@
+-
+  In order to test DTA generation I make an invoice and create the DTA from it.
+-
+  I create an invoice on 1st January for 7000 EUR
+-
+  !record {model: account.invoice, id: dta_account_invoice, view: False}:
+    company_id: base.main_company
+    journal_id: account.bank_journal
+    currency_id: base.EUR
+    partner_id: base.res_partner_2
+    account_id: account.a_pay
+    type : in_invoice
+    reference: 1234567890
+    date_invoice: !eval "'%s-01-01' %(datetime.now().year)"
+    period_id: account.period_1 
+    partner_bank_id: main_partner_bank
+    check_total : 7000
+-
+  I add an invoice line
+-
+  !record {model: account.invoice.line, id: dta_invoice_line, view: False}:
+    account_id: account.a_expense
+    name: '[PC1] Basic PC'
+    price_unit: 700.0
+    quantity: 10.0
+    product_id: product.product_product_1
+    uos_id: product.product_uom_unit
+    invoice_id: dta_account_invoice
+-
+  I Validate invoice by clicking on Validate button
+-
+  !workflow {model: account.invoice, action: invoice_open, ref: dta_account_invoice}
+-
+  I create my payment order to pay my invoice
+-
+  !record {model: payment.order, id: dta_payment_order}:
+    date_prefered: due
+    mode: payment_mode_dta
+    state: draft
+    total: 7000
+-
+  I add a payment line to my payment order
+-
+  !record {model: payment.line, id: dta_pay_line}:
+    amount: 7000
+    amount_currency: 7000
+    bank_id: agro_bank
+    communication: "1234567890"
+    company_currency: base.EUR
+    currency: base.EUR
+    move_line_id: !ref {model: account.move.line, search: "[('ref','=','1234567890')]"}
+    order_id: dta_payment_order
+    partner_id: base.res_partner_3
+    state: normal
+-
+  I generate a DTA file by using the wizard "Create DTA" for my payment order
+-
+  !python {model: create.dta.wizard}: |
+    self
+    import base64
+    data = {}
+    wiz_id = self.create(cr, uid, {})
+    wiz = self.browse(cr, uid, wiz_id)
+    pay_order_id =  ref("dta_payment_order")
+    data['ids'] = [pay_order_id]
+    data['id'] = pay_order_id
+    result = wiz._create_dta(data)
+    assert result, "No result returned"
+    attachment_obj = self.pool.get('ir.attachment')
+    attachment_ids = attachment_obj.search(cr, uid, [('res_model', '=', 'payment.order'), ('res_id', '=', data['id'])])
+    assert len(attachment_ids) == 1, "Not unique id"
+    attachment_browse = attachment_obj.browse(cr, uid, attachment_ids[0])
+    dta_file = base64.decodestring(attachment_browse.datas or '')
+    assert dta_file, "File is empty"
+    assert dta_file[:2] == "01", "File is not a DTA file"
