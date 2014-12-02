@@ -32,7 +32,7 @@ REF = re.compile(r'[^0-9]')
 
 class BvrImporterWizard(models.TransientModel):
 
-    _name = 'bvr.import.wizard'
+    _name = 'v11.import.wizard'
 
     v11file = fields.Binary('V11 File')
 

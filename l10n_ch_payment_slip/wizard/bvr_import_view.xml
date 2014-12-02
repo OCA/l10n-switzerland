@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
   <data>
-    <!-- Import BVR Wizard -->
-    <record id="bvr_import_view" model="ir.ui.view">
-      <field name="name">BVR Import Wizard</field>
-      <field name="model">bvr.import.wizard</field>
+    <!-- Import BVR v11 Wizard -->
+    <record id="v11_import_view" model="ir.ui.view">
+      <field name="name">V11 (BVR/ESR) Import Wizard</field>
+      <field name="model">v11.import.wizard</field>
       <field name="type">form</field>
       <field name="arch" type="xml">
-        <form string="BVR Import">
+        <form string="V11 BVR/ESR Import">
           <group width="525" colspan="4">
             <field name="v11file"/>
             <newline/>
@@ -20,13 +20,13 @@
       </field>
     </record>
 
-    <record id="wizard_bvr_import" model="ir.actions.act_window">
-      <field name="name">BVR Import</field>
+    <record id="wizard_v11_import" model="ir.actions.act_window">
+      <field name="name">V11 (BVR/ESR) Import</field>
       <field name="type">ir.actions.act_window</field>
-      <field name="res_model">bvr.import.wizard</field>
+      <field name="res_model">v11.import.wizard</field>
       <field name="view_type">form</field>
       <field name="view_mode">form</field>
-      <field name="view_id" ref="bvr_import_view"/>
+      <field name="view_id" ref="v11_import_view"/>
       <field name="target">new</field>
     </record>
 
@@ -38,7 +38,7 @@
       <field name="arch" type="xml">
         <div name="import_buttons" position="inside">
           <button
-              name="%(wizard_bvr_import)d"
+              name="%(wizard_v11_import)d"
               states="draft,open"
               class="oe_inline oe_stat_button"
               string="Import v11"
