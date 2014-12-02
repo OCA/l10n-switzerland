@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author Vincent Renaville. Copyright 2013 Camptocamp SA
+#    Author Vincent Renaville, Nicolas Bessi Copyright 2013 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -35,9 +35,6 @@ class ExtendedReport(models.TransientModel):
         company = self.pool['res.users'].browse(cr, uid, uid,
                                                 context=context).company_id
         if report_name == 'slip_from_credit_control':
-            # If we may have a lot of PDF to merge so we use
-            # report_model._merge_pdf(docs) instead of mergin in memory
-            # but is it a lot slower and generate a lot of temp files
             lines = self.pool['credit.control.line'].read(
                 cr,
                 uid,
