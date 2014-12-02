@@ -18,26 +18,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models
+from . import test_payment_slip_report
 
-
-class payment_slip(models.Model):
-    """implement amount hook"""
-
-    _inherit = "l10n_ch.payment_slip"
-
-    def _compute_amount_hook(self):
-        """Hook to return the total amount of pyament slip
-
-        :return: total amount of payment slip
-        :rtype: float
-        """
-        amount = super(payment_slip, self)._compute_amount_hook()
-        credit_lines = self.env['credit.control.line'].search(
-            [('move_line_id', '=', self.move_line_id.id),
-             ('state', 'in', ('to_be_sent', 'sent'))]
-        )
-        if credit_lines:
-            amount += sum(line.dunning_fees_amount
-                          for line in credit_lines)
-        return amount
+fast_suite = [
+    test_payment_slip_report
+]
