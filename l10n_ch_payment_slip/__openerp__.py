@@ -41,13 +41,10 @@ This is especialy useful when using pre-printed paper.
 An option also allow you to print the ESR/BVR in background when using
 white paper.
 
-This module will also allows you to reconcile from V11 files provided
-by financial institutes.
+This module will also allows you to import v11 files provided
+by financial institute into a bank statement
 
 To do so, use the wizard provided in bank statement.
-
-If voucher is installed importing V11 files will generate a voucher
-if possible in statement lines.
 
 This module also adds transaction_ref field on entries in order to manage
 reconciliation in multi payment context (unique reference needed on
