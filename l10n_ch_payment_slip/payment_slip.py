@@ -325,7 +325,7 @@ class PaymentSlip(models.Model):
         invoice = self.move_line_id.invoice
         if not invoice:
             raise exceptions.ValidationError(
-                _('No invoice related to move line %') % self.move_line_id.ref
+                _('No invoice related to move line %s') % self.move_line_id.ref
             )
         if not self._compile_check_bvr.match(
                 invoice.partner_bank_id.get_account_number() or ''):
