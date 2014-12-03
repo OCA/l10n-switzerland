@@ -90,13 +90,9 @@ class AccountInvoice(models.Model):
         :rtype: :py:class:`openerp.model.Models`
         """
         move_line_model = self.env['account.move.line']
-        account_model = self.env['account.account']
-        tier_accounts = account_model.search(
-            [('type', 'in', ['receivable', 'payable'])],
-        )
         return move_line_model.search(
             [('move_id', '=', self.move_id.id),
-             ('account_id', 'in', tier_accounts.mapped('id'))]
+             ('account_id.type', 'in',  ['receivable', 'payable'])]
         )
 
     @api.model

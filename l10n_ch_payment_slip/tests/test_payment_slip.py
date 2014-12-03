@@ -27,13 +27,12 @@ import openerp.tests.common as test_common
 class TestPaymentSlip(test_common.TransactionCase):
     _compile_get_ref = re.compile(r'[^0-9]')
 
-    def setUp(self):
-        super(TestPaymentSlip, self).setUp()
+    def make_bank(self):
         company = self.env.ref('base.main_company')
         self.assertTrue(company)
         partner = self.env.ref('base.main_partner')
         self.assertTrue(partner)
-        self.bank = self.env['res.bank'].create(
+        bank = self.env['res.bank'].create(
             {
                 'name': 'BCV',
                 'ccp': '01-1234-1',
@@ -41,7 +40,7 @@ class TestPaymentSlip(test_common.TransactionCase):
                 'clearing': '234234',
             }
         )
-        self.bank_account = self.env['res.partner.bank'].create(
+        bank_account = self.env['res.partner.bank'].create(
             {
                 'partner_id': partner.id,
                 'owner_name': partner.name,
@@ -49,9 +48,9 @@ class TestPaymentSlip(test_common.TransactionCase):
                 'city': partner.city,
                 'zip':  partner.zip,
                 'state': 'bvr',
-                'bank': self.bank.id,
-                'bank_name': self.bank.name,
-                'bank_bic': self.bank.bic,
+                'bank': bank.id,
+                'bank_name': bank.name,
+                'bank_bic': bank.bic,
                 'acc_number': 'R 12312123',
                 'bvr_adherent_num': '1234567',
                 'print_bank': True,
@@ -59,9 +58,11 @@ class TestPaymentSlip(test_common.TransactionCase):
                 'print_partner': True,
             }
         )
+        return bank_account
 
     def test_invoice_confirmation(self):
         """Test that confirming an invoice generate slips correctly"""
+        bank_account = self.make_bank()
         invoice = self.env['account.invoice'].create(
             {
                 'partner_id': self.env.ref('base.res_partner_12').id,
@@ -69,6 +70,7 @@ class TestPaymentSlip(test_common.TransactionCase):
                 'name': 'A customer invoice',
                 'account_id': self.env.ref('account.a_recv').id,
                 'type': 'out_invoice',
+                'partner_bank_id': bank_account.id
             }
         )
 
@@ -83,13 +85,13 @@ class TestPaymentSlip(test_common.TransactionCase):
         )
         invoice.signal_workflow('invoice_open')
         attempt = 0
-        while invoice.state != 'open':
-            time.sleep(0.1)
+        while not invoice.move_id:
             invoice.refresh()
+            time.sleep(0.1)
             attempt += 1
             if attempt > 20:
                 break
-        self.assertEqual(invoice.amount_total, 862.50)
+        self.assertTrue(invoice.move_id)
         for line in invoice.move_id.line_id:
             if line.account_id.type in ('payable', 'receivable'):
                 self.assertTrue(line.transaction_ref)
@@ -108,6 +110,8 @@ class TestPaymentSlip(test_common.TransactionCase):
 
     def test_slip_validity(self):
         """Test that confirming slip are valid"""
+        bank_account = self.make_bank()
+
         invoice = self.env['account.invoice'].create(
             {
                 'partner_id': self.env.ref('base.res_partner_12').id,
@@ -115,6 +119,7 @@ class TestPaymentSlip(test_common.TransactionCase):
                 'name': 'A customer invoice',
                 'account_id': self.env.ref('account.a_recv').id,
                 'type': 'out_invoice',
+                'partner_bank_id': bank_account.id
             }
         )
 
@@ -129,12 +134,13 @@ class TestPaymentSlip(test_common.TransactionCase):
         )
         invoice.signal_workflow('invoice_open')
         attempt = 0
-        while invoice.state != 'open':
+        while not invoice.move_id:
             invoice.refresh()
+            time.sleep(1)
             attempt += 1
-            time.sleep(0.1)
             if attempt > 20:
                 break
+        self.assertTrue(invoice.move_id)
         for line in invoice.move_id.line_id:
             slip = self.env['l10n_ch.payment_slip'].search(
                 [('move_line_id', '=', line.id)]

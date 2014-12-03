@@ -24,13 +24,12 @@ import openerp.tests.common as test_common
 
 class TestPaymentSlipReport(test_common.TransactionCase):
 
-    def setUp(self):
-        super(TestPaymentSlipReport, self).setUp()
+    def make_bank(self):
         company = self.env.ref('base.main_company')
         self.assertTrue(company)
         partner = self.env.ref('base.main_partner')
         self.assertTrue(partner)
-        self.bank = self.env['res.bank'].create(
+        bank = self.env['res.bank'].create(
             {
                 'name': 'BCV',
                 'ccp': '01-1234-1',
@@ -38,7 +37,7 @@ class TestPaymentSlipReport(test_common.TransactionCase):
                 'clearing': '234234',
             }
         )
-        self.bank_account = self.env['res.partner.bank'].create(
+        bank_account = self.env['res.partner.bank'].create(
             {
                 'partner_id': partner.id,
                 'owner_name': partner.name,
@@ -46,9 +45,9 @@ class TestPaymentSlipReport(test_common.TransactionCase):
                 'city': partner.city,
                 'zip':  partner.zip,
                 'state': 'bvr',
-                'bank': self.bank.id,
-                'bank_name': self.bank.name,
-                'bank_bic': self.bank.bic,
+                'bank': bank.id,
+                'bank_name': bank.name,
+                'bank_bic': bank.bic,
                 'acc_number': 'R 12312123',
                 'bvr_adherent_num': '1234567',
                 'print_bank': True,
@@ -56,8 +55,10 @@ class TestPaymentSlipReport(test_common.TransactionCase):
                 'print_partner': True,
             }
         )
+        return bank_account
 
     def make_invoice(self):
+        bank_account = self.make_bank()
         invoice = self.env['account.invoice'].create(
             {
                 'partner_id': self.env.ref('base.res_partner_12').id,
@@ -65,6 +66,7 @@ class TestPaymentSlipReport(test_common.TransactionCase):
                 'name': 'A customer invoice',
                 'account_id': self.env.ref('account.a_recv').id,
                 'type': 'out_invoice',
+                'partner_bank_id': bank_account.id,
             }
         )
 
@@ -79,12 +81,13 @@ class TestPaymentSlipReport(test_common.TransactionCase):
         )
         invoice.signal_workflow('invoice_open')
         attempt = 0
-        while invoice.state != 'open':
-            time.sleep(0.1)
+        while not invoice.move_id:
             invoice.refresh()
+            time.sleep(0.1)
             attempt += 1
             if attempt > 20:
                 break
+        self.assertTrue(invoice.move_id)
         self.assertEqual(invoice.amount_total, 862.50)
         return invoice
 
