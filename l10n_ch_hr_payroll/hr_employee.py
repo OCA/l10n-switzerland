@@ -36,4 +36,3 @@ class hr_employee(orm.Model):
         'children': fields.integer('Number of Children at school'),
         'children_student': fields.integer('Number of Children student'),
         }
-

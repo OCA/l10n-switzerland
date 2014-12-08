@@ -38,4 +38,3 @@ class hr_contract(orm.Model):
                                  digits_compute=dp.get_precision(
                                      'Payroll Rate')),
         }
-
