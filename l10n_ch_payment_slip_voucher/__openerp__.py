@@ -25,9 +25,9 @@
 This module allows you to import v11 files provided
 by financial institute into a payment voucher
 
-To do so, use the wizard provided in voucher.
+To do so, use the wizard provided under 'bank and cash'.
 """,
- 'version': '1.2',
+ 'version': '1.0',
  'author': 'Agile Business Group',
  'category': 'Localization',
  'website': 'http://www.agilebg.com',
