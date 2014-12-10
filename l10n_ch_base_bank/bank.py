@@ -221,7 +221,7 @@ class ResPartnerBank(models.Model, BankCommon):
                       '(01-23456-1 or 12345)')
                 )
 
-    @api.constrains('acc_number', 'bank.ccp')
+    @api.constrains('acc_number', 'bank')
     def _check_ccp_duplication(self):
         """Ensure that there is not a CCP/CP-Konto in bank and res partner bank
         at same time
