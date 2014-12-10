@@ -546,7 +546,7 @@ class DTAFileGenerator(models.TransientModel):
         elec_context = {}
         payment_obj = self.env['payment.order']
         payment = payment_obj.browse(data['id'])
-        elec_context['uid'] = str(self.env.user)
+        elec_context['uid'] = str(self.env.uid)
         elec_context['creation_date'] = fields.Date.today()
         if not payment.mode:
             raise except_orm(
@@ -670,11 +670,13 @@ class DTAFileGenerator(models.TransientModel):
             part = pline.bank_id.get_account_number() or ''
             elec_context['partner_bvr'] = part
         self._set_bank_data(pline, elec_context, seq)
+
+        dt = fields.Datetime
+        date_to_datetime = lambda date: dt.to_string(dt.from_string(date))
         if pline.order_id.date_scheduled:
-            date_value = fields.Datetime.from_string(
-                pline.order_id.date_scheduled)
+            date_value = date_to_datetime(pline.order_id.date_scheduled)
         elif pline.date:
-            date_value = fields.Datetime.from_string(pline.date)
+            date_value = date_to_datetime(pline.date)
         else:
             date_value = fields.Datetime.now()
         elec_context['date_value'] = date_value
