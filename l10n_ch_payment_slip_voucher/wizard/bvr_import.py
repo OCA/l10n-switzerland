@@ -28,6 +28,7 @@ class BvrImporterWizard(models.TransientModel):
     v11file = fields.Binary('V11 File')
     total_cost = fields.Float('Total cost of V11')
     total_amount = fields.Float('Total amount of V11')
+    journal_id = fields.Many2one('account.journal', "Journal", required=True)
 
     @api.model
     def _prepare_line_vals(self, statement, record):
