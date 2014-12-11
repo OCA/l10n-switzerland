@@ -29,30 +29,48 @@ class BvrImporterWizard(models.TransientModel):
     total_cost = fields.Float('Total cost of V11')
     total_amount = fields.Float('Total amount of V11')
     journal_id = fields.Many2one('account.journal', "Journal", required=True)
+    currency_id = fields.Many2one('res.currency', "Currency", required=True) # TODO default
 
-    @api.model
-    def _prepare_line_vals(self, statement, record):
-        """Compute voucher values to be used by `models.Model.create'
-        :param statement: current statement record
-        :type statement: :py:class:`openerp.models.Models` record
+    def _build_voucher_header(self, partner_id, record):
+        voucher_obj = self.env['account.voucher']
+        date = record['date'] or time.strftime('%Y-%m-%d')
+        voucher_vals {
+            'type': 'receipt',
+            'name': record['reference'],
+            'partner_id': partner_id,
+            'journal_id': self.journal_id.id,
+            'account_id': self.journal_id.default_credit_account_id.id,
+            'company_id': self.journal_id.company_id.id,
+            'currency_id': self.currency_id.id,
+            'date': date,
+            'amount': abs(record['amount']),
+            }
 
-        :param record: dict reprenting parsed V11 line
-        :type record: dict
+    def _build_voucher_lines(self, partner_id, record, voucher_id):
+        voucher_obj = self.env['account.voucher']
+        result = voucher_obj.onchange_partner_id(self.env.cr, self.env.uid, [],
+                                                 partner_id,
+                                                 self.journal_id.id,
+                                                 abs(record['amount']),
+                                                 self.currency_id.id,
+                                                 'receipt',
+                                                 date,
+                                                 context=self.env.context)
+        voucher_line_dict = False
+        if result['value']['line_cr_ids']:
+            for line_dict in result['value']['line_cr_ids']:
+                move_line = move_line_obj.browse(
+                    cursor, uid, line_dict['move_line_id'], context)
+                if move_id == move_line.move_id.id:
+                    voucher_line_dict = line_dict
+        if voucher_line_dict:
+            voucher_line_dict.update({'voucher_id': voucher_id})
+            voucher_line_obj.create(
+                cursor, uid, voucher_line_dict, context=context)
 
-        :returns: values
-        :rtype: dict
-        """
-        # Remove the 11 first char because it can be adherent number
-        # TODO check if 11 is the right number
+    def _search_move_lines(self, record):
         move_line_obj = self.env['account.move.line']
         reference = record['reference']
-        values = {'name': reference or '/',
-                  'date': record['date'],
-                  'amount': record['amount'],
-                  'ref': '/',
-                  'type': (record['amount'] >= 0 and 'customer') or 'supplier',
-                  'statement_id': statement.id,
-                  }
         line_ids = move_line_obj.search(
             [('transaction_ref', '=', reference),
              ('reconcile_id', '=', False),
@@ -60,14 +78,7 @@ class BvrImporterWizard(models.TransientModel):
              ('journal_id.type', '=', 'sale')],
             order='date desc',
         )
-        if line_ids:
-            # transaction_ref is propagated on all lines
-            line = move_line_obj.browse(line_ids[0])
-            partner_id = line.partner_id.id
-            num = line.invoice.number if line.invoice else False
-            values['ref'] = _('Inv. no %s') % num if num else values['name']
-            values['partner_id'] = partner_id
-        return values
+        return line_ids
 
     def _import_v11(self):
         """Import v11 file and transfor it into statement lines
@@ -91,11 +102,9 @@ class BvrImporterWizard(models.TransientModel):
                 repr(decode_err)
             )
         records = v11_wizard._parse_lines(lines)
-
+        move_lines = []
         for record in records:
-            values = self._prepare_line_vals(statement,
-                                             record)
-            statement_line_obj.create(values)
+            move_lines.append(self._search_move_lines(record))
         attachment_obj.create(
             {
                 'name': 'V11 %s' % time.strftime(
