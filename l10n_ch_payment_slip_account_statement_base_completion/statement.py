@@ -65,6 +65,8 @@ class account_statement_completion_rule(orm.Model):
         # of references separated by semicolons and formatted with
         # spaces inside them.
         # For supplier invoices, search in 'reference'
+        if not st_line['transaction_id']:
+            return res
         query = ("SELECT id FROM account_invoice "
                  "WHERE company_id = %s "
                  "AND (%s = ANY (string_to_array( "
