@@ -26,12 +26,19 @@ from openerp.tools.translate import _
 
 
 class BvrImporterWizard(models.TransientModel):
+
+    def _get_default_currency_id(self):
+        return self.env.user.company_id.currency_id.id
+
     _name = 'v11.import.wizard.voucher'
     v11file = fields.Binary('V11 File')
     total_cost = fields.Float('Total cost of V11')
     total_amount = fields.Float('Total amount of V11')
-    journal_id = fields.Many2one('account.journal', "Journal", required=True)
-    currency_id = fields.Many2one('res.currency', "Currency", required=True) # TODO default
+    journal_id = fields.Many2one(
+        'account.journal', "Journal", required=True)
+    currency_id = fields.Many2one(
+        'res.currency', "Currency", required=True,
+        default=_get_default_currency_id)
 
     def _build_voucher_header(self, partner, record):
         date = record['date'] or time.strftime('%Y-%m-%d')

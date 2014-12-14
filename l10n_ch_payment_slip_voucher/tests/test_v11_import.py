@@ -51,19 +51,16 @@ class TestV11import(test_common.TransactionCase):
                 # setting it manually because we can't predict the value
                 line.transaction_ref = '005095000000000000000000013'
 
-        v11_wizard = self.env['v11.import.wizard']
         v11_path = get_module_resource('l10n_ch_payment_slip',
                                        'tests',
                                        'test_v11_files',
                                        'test1.v11')
         with open(v11_path) as v11_file:
-            importer = self.env['v11.import.wizard.voucher'].create(
-                {
+            importer = self.env['v11.import.wizard.voucher'].create({
                 'v11file': base64.encodestring(v11_file.read()),
                 'currency_id': self.env.ref('base.EUR').id,
                 'journal_id': self.env.ref('account.bank_journal').id,
-                }
-            )
+                })
             std_importer = self.env['v11.import.wizard'].create({})
             v11_file.seek(0)
             lines = v11_file.read().split("\r\n")
