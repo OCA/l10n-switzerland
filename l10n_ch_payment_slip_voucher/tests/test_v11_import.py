@@ -29,11 +29,10 @@ class TestV11import(test_common.TransactionCase):
         invoice = self.env['account.invoice'].create(
             {
                 'partner_id': self.env.ref('base.res_partner_12').id,
-                'reference_type': 'bvr',
+                'reference_type': 'none',
                 'name': 'A customer invoice',
                 'account_id': self.env.ref('account.a_recv').id,
                 'type': 'out_invoice',
-                'reference': '005095000000000000000000013',
             }
         )
 
@@ -41,12 +40,16 @@ class TestV11import(test_common.TransactionCase):
             {
                 'product_id': False,
                 'quantity': 1,
-                'price_unit': 862.50,
+                'price_unit': 5415.0,
                 'invoice_id': invoice.id,
                 'name': 'product that cost 862.50 all tax included',
             }
         )
         invoice.signal_workflow('invoice_open')
+        for line in invoice.move_id.line_id:
+            if line.account_id.type == 'receivable':
+                # setting it manually because we can't predict the value
+                line.transaction_ref = '005095000000000000000000013'
 
         v11_wizard = self.env['v11.import.wizard']
         v11_path = get_module_resource('l10n_ch_payment_slip',
@@ -57,8 +60,8 @@ class TestV11import(test_common.TransactionCase):
             importer = self.env['v11.import.wizard.voucher'].create(
                 {
                 'v11file': base64.encodestring(v11_file.read()),
-                'currency_id': self.env.ref('base.CHF').id,
-                'journal_id': self.env.ref('account.bank_journal_usd').id,
+                'currency_id': self.env.ref('base.EUR').id,
+                'journal_id': self.env.ref('account.bank_journal').id,
                 }
             )
             std_importer = self.env['v11.import.wizard'].create({})
@@ -74,4 +77,10 @@ class TestV11import(test_common.TransactionCase):
                  'cost': 0.0,
                  'reference': '005095000000000000000000013'}
             )
-            importer.import_v11()
+            action = importer.import_v11()
+            domain_str = action['domain']
+            domain = eval(domain_str)
+            voucher_id = domain[0][2][0]
+            voucher = self.env['account.voucher'].browse(voucher_id)
+            voucher.proforma_voucher()
+            self.assertEqual(invoice.state, 'paid')

@@ -33,12 +33,12 @@ class BvrImporterWizard(models.TransientModel):
     journal_id = fields.Many2one('account.journal', "Journal", required=True)
     currency_id = fields.Many2one('res.currency', "Currency", required=True) # TODO default
 
-    def _build_voucher_header(self, partner_id, record):
+    def _build_voucher_header(self, partner, record):
         date = record['date'] or time.strftime('%Y-%m-%d')
         voucher_vals = {
             'type': 'receipt',
             'name': record['reference'],
-            'partner_id': partner_id,
+            'partner_id': partner.id,
             'journal_id': self.journal_id.id,
             'account_id': self.journal_id.default_credit_account_id.id,
             'company_id': self.journal_id.company_id.id,
@@ -48,49 +48,46 @@ class BvrImporterWizard(models.TransientModel):
             }
         return voucher_vals
 
-    def _build_voucher_lines(self, partner_id, record, voucher_id):
+    def _build_voucher_line(self, partner, record, voucher_id):
         voucher_obj = self.env['account.voucher']
         date = fields.Date.today()
-        result = voucher_obj.onchange_partner_id(self.env.cr, self.env.uid, [],
-                                                 partner_id,
+        result = voucher_obj.onchange_partner_id(partner.id,
                                                  self.journal_id.id,
                                                  abs(record['amount']),
                                                  self.currency_id.id,
                                                  'receipt',
-                                                 date,
-                                                 context=self.env.context)
+                                                 date)
         voucher_line_dict = False
         move_line_obj = self.env['account.move.line']
         if result['value']['line_cr_ids']:
             for line_dict in result['value']['line_cr_ids']:
-                move_line = move_line_obj.browse(
-                    self.env.cr, self.env.uid, line_dict['move_line_id'],
-                    self.env.context)
+                move_line = move_line_obj.browse(line_dict['move_line_id'])
                 if move_line.transaction_ref == record['reference']:
                     voucher_line_dict = line_dict
+                    break
         if voucher_line_dict:
             voucher_line_dict.update({'voucher_id': voucher_id})
         return voucher_line_dict
 
     def get_partner_from_ref(self, reference):
         move_line_obj = self.env['account.move.line']
-        partner_id = False
-        lines = move_line_obj.search(
+        line = move_line_obj.search(
             [('transaction_ref', '=', reference),
              ('reconcile_id', '=', False),
              ('account_id.type', 'in', ['receivable', 'payable']),
              ('journal_id.type', '=', 'sale')],
             order='date desc',
         )
-        for line in lines:
-            if partner_id and line.partner_id.id != partner_id:
-                raise exceptions.Warning(
-                    "Too many partners related to reference %s" % reference)
-            partner_id = line.partner_id.id
-        if not partner_id:
+        if not line:
+            raise exceptions.Warning(
+                "Can't find credit line for reference %s" % reference)
+        if len(line) > 1:
+            raise exceptions.Warning(
+                "Too many credit lines for reference %s" % reference)
+        if not line.partner_id:
             raise exceptions.Warning(
                 "Can't find a partner for reference %s" % reference)
-        return partner_id
+        return line.partner_id
 
     def _import_v11(self):
         """Import v11 file and transfor it into statement lines
@@ -123,11 +120,11 @@ class BvrImporterWizard(models.TransientModel):
         records = std_importer._parse_lines(lines)
         voucher_ids = []
         for record in records:
-            partner_id = self.get_partner_from_ref(record['reference'])
+            partner = self.get_partner_from_ref(record['reference'])
             voucher = voucher_obj.create(
-                self._build_voucher_header(partner_id, record))
+                self._build_voucher_header(partner, record))
             voucher_line_obj.create(
-                self._build_voucher_lines(partner_id, record, voucher.id))
+                self._build_voucher_line(partner, record, voucher.id))
             voucher_ids.append(voucher.id)
         for voucher_id in voucher_ids:
             attachment_obj.create(
