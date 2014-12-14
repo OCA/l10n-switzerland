@@ -41,7 +41,7 @@ class BvrImporterWizard(models.TransientModel):
         default=_get_default_currency_id)
 
     def _build_voucher_header(self, partner, record):
-        date = record['date'] or time.strftime('%Y-%m-%d')
+        date = record['date'] or fields.Date.today()
         voucher_vals = {
             'type': 'receipt',
             'name': record['reference'],
