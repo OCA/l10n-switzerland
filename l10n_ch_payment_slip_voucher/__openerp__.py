@@ -33,7 +33,6 @@ To do so, use the wizard provided under 'bank and cash'.
  'website': 'http://www.agilebg.com',
  'depends': ['l10n_ch_payment_slip'],
  'data': [
-     "data.xml",
      "wizard/bvr_import_view.xml",
      ],
  'demo': [],
