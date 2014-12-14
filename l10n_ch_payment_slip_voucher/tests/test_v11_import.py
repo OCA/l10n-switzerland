@@ -42,7 +42,7 @@ class TestV11import(test_common.TransactionCase):
                 'quantity': 1,
                 'price_unit': 5415.0,
                 'invoice_id': invoice.id,
-                'name': 'product that cost 862.50 all tax included',
+                'name': 'product',
             }
         )
         invoice.signal_workflow('invoice_open')
