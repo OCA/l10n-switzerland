@@ -97,7 +97,7 @@ class BvrImporterWizard(models.TransientModel):
         return line.partner_id
 
     def _import_v11(self):
-        """Import v11 file and transfor it into statement lines
+        """Import v11 file and transfor it into vouchers
 
         :returns: action dict
         :rtype: dict
