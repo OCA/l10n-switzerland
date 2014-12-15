@@ -48,6 +48,7 @@
     communication: "1234567890"
     company_currency: base.EUR
     currency: base.EUR
+    date: !eval "'%s-01-01' % datetime.now().year"
     move_line_id: !ref {model: account.move.line, search: "[('ref','=','1234567890')]"}
     order_id: dta_payment_order
     partner_id: base.res_partner_3
