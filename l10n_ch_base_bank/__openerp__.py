@@ -32,7 +32,7 @@ in invoice and add some Swiss specific fields on bank.
 
 This module is required if you want to use electornic payment in Switzerland.
 """,
- 'version': '1.1',
+ 'version': '1.2',
  'author': 'Camptocamp',
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
