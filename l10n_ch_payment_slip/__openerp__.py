@@ -53,7 +53,7 @@ payment terms.
 
 
 """,
- 'version': '1.2',
+ 'version': '2.0',
  'author': 'Camptocamp',
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
