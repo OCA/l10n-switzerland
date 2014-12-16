@@ -84,6 +84,7 @@ class TestPaymentSlip(test_common.TransactionCase):
             }
         )
         invoice.signal_workflow('invoice_open')
+        # Workflows are async. We have to wait for them to finish
         attempt = 0
         while not invoice.move_id:
             invoice.refresh()
@@ -133,6 +134,7 @@ class TestPaymentSlip(test_common.TransactionCase):
             }
         )
         invoice.signal_workflow('invoice_open')
+        # Workflows are async. We have to wait for them to finish
         attempt = 0
         while not invoice.move_id:
             invoice.refresh()
