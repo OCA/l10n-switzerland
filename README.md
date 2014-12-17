@@ -56,3 +56,9 @@ l10n_ch_scan_bvr
 ----------------
 
 Allows you to scan the ESR/BVR references and automatically create the proper supplier invoices
+
+l10n_ch_hr_payroll
+------------------
+
+Provide Swizerland Payroll Rules.
+Allow to specify a LPP range to contract and 2 kinds of children to employee.
