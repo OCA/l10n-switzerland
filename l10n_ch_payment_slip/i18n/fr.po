@@ -1,15 +1,16 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* l10n_ch_payment_slip
+# 	* l10n_ch_payment_slip
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-02 14:47+0000\n"
+"POT-Creation-Date: 2014-12-19 10:26+0000\n"
 "PO-Revision-Date: 2014-12-02 14:47+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -18,7 +19,7 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: view:res.company:l10n_ch_payment_slip.company_form_view
 msgid "BVR Data"
-msgstr "Donées BVR"
+msgstr "Données BVR"
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_delta_horz:0
@@ -43,17 +44,17 @@ msgstr "Décalage horizontal de la scanline en pixels"
 #. module: l10n_ch_payment_slip
 #: view:res.partner.bank:l10n_ch_payment_slip.l10nch_view_res_partner_bank_from_invoice_slip
 msgid "BVR options"
-msgstr ""
+msgstr "Options BVR"
 
 #. module: l10n_ch_payment_slip
 #: field:account.invoice,bvr_reference:0
 msgid "BVR ref"
-msgstr "Réference du BVR"
+msgstr "Référence du BVR"
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_scan_line_font_size:0
 msgid "BVR scan line font size (pt)"
-msgstr "Taill de la police de la scanline en points"
+msgstr "Taille de la police de la scanline en points"
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_scan_line_letter_spacing:0
@@ -63,12 +64,12 @@ msgstr "Espace entre les caractères de la scanline"
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_add_vert:0
 msgid "BVR vert. position for address (px)"
-msgstr "Décalage verticale de l'adresse en pixels"
+msgstr "Décalage vertical de l'adresse en pixels"
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_scan_line_vert:0
 msgid "BVR vert. position for scan line (px)"
-msgstr "Décalage vertical de la scanline en pixles"
+msgstr "Décalage vertical de la scanline en pixels"
 
 #. module: l10n_ch_payment_slip
 #: field:l10n_ch.payment_slip,reference:0
@@ -110,12 +111,12 @@ msgstr "Créé le"
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_add_horz:0
 msgid "Horiz. position in px for address"
-msgstr "Décalage horizontal de l'address en pixels"
+msgstr "Décalage horizontal de l'addresse en pixels"
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_scan_line_horz:0
 msgid "Horiz. position in px for scan line"
-msgstr "Décalage horizontal de la scanline en pixle"
+msgstr "Décalage horizontal de la scanline en pixels"
 
 #. module: l10n_ch_payment_slip
 #: field:l10n_ch.payment_slip,id:0
@@ -137,7 +138,7 @@ msgstr "Importer le fichier V11"
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_background:0
 msgid "Insert BVR background ?"
-msgstr "Insérer l'arrière plan dans le BVR"
+msgstr "Insérer l'arrière-plan dans le BVR"
 
 #. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:212
@@ -153,24 +154,25 @@ msgstr "Facture"
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_account_move_line
 msgid "Journal Items"
-msgstr "Entrées du journal"
+msgstr "Écritures comptables"
 
 #. module: l10n_ch_payment_slip
-#: field:l10n_ch.payment_slip,write_uid:0
-#: field:v11.import.wizard,write_uid:0
+#: field:l10n_ch.payment_slip,write_uid:0 field:v11.import.wizard,write_uid:0
 msgid "Last Updated by"
-msgstr "Dèrnière mise à jour par"
+msgstr "Dernière mise à jour par"
 
 #. module: l10n_ch_payment_slip
 #: field:l10n_ch.payment_slip,write_date:0
 #: field:v11.import.wizard,write_date:0
 msgid "Last Updated on"
-msgstr "Dèrnière mise à jour le"
+msgstr "Dernière mise à jour le"
 
 #. module: l10n_ch_payment_slip
 #: selection:res.company,merge_mode:0
 msgid "Merge Slips in Memory, faster but can exhaust memory"
-msgstr "Fusionne les rapports BVR en mémoire. Cela est plus rapide mais peut épuiser la mémoire"
+msgstr ""
+"Fusionne les rapports BVR en mémoire. Cela est plus rapide mais peut épuiser "
+"la mémoire"
 
 #. module: l10n_ch_payment_slip
 #: selection:res.company,merge_mode:0
@@ -178,16 +180,16 @@ msgid "Merge Slips on Disk, slower but safer"
 msgstr "Fuisonne les rapports BVR sur le disque. Plus lent mais plus sûr"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/payment_slip.py:328
+#: code:addons/l10n_ch_payment_slip/payment_slip.py:329
 #, python-format
 msgid "No invoice related to move line %s"
-msgstr "PAr de facture liée à la ligne %s"
+msgstr "Aucune facture liée à la ligne %s"
 
 #. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:165
 #, python-format
 msgid "Number of records differ from the computed one"
-msgstr "Le nombre d'entrée diffère de celui calculé"
+msgstr "Le nombre d'entrée diffère du nombre calculé"
 
 #. module: l10n_ch_payment_slip
 #: view:account.invoice:l10n_ch_payment_slip.invoice_form_add_bvr_ref
@@ -203,15 +205,20 @@ msgid "Payment Slip"
 msgstr "BVR"
 
 #. module: l10n_ch_payment_slip
+#: field:account.move.line,payment_slip_ids:0
+msgid "Payment Slips"
+msgstr "BVR"
+
+#. module: l10n_ch_payment_slip
 #: field:res.company,merge_mode:0
 msgid "Payment Slips Merge Mode"
 msgstr "Mode de fusion des rapports BVR"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/payment_slip.py:216
+#: code:addons/l10n_ch_payment_slip/payment_slip.py:215
 #, python-format
 msgid "Please enter a correct postal number like: 01-23456-1"
-msgstr "Veuillez saisir un CCP valdie exemple: 01-23456-1"
+msgstr "Veuillez saisir un CCP valide exemple: 01-23456-1"
 
 #. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:228
@@ -238,13 +245,13 @@ msgstr "Imprimer l'adresse sur le BVR"
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:161
 #, python-format
 msgid "Record found after total record"
-msgstr "Enregistrment trouvé après la validation du total"
+msgstr "Enregistrement trouvé après la validation du total"
 
 #. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:130
 #, python-format
 msgid "Recursive mod10 is invalid for reference: %s"
-msgstr "la référence %s est invalide (mod10)"
+msgstr "La référence %s est invalide"
 
 #. module: l10n_ch_payment_slip
 #: field:l10n_ch.payment_slip,invoice_id:0
@@ -270,18 +277,13 @@ msgstr "Rapport"
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:156
 #, python-format
 msgid "Too many total record found!"
-msgstr "Trop d'enregistrements touvés"
+msgstr "Trop d'enregistrements trouvés"
 
 #. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:71
 #, python-format
 msgid "Total amount differ from the computed amount"
 msgstr "Le montant total est différent du montant calculé"
-
-#. module: l10n_ch_payment_slip
-#: field:l10n_ch.payment_slip,amount_total:0
-msgid "Total amount of BVR/ESR"
-msgstr "Montant total du BVR"
 
 #. module: l10n_ch_payment_slip
 #: field:v11.import.wizard,total_amount:0
@@ -298,11 +300,6 @@ msgstr "Le coût total diffère du total calculé"
 #: field:v11.import.wizard,total_cost:0
 msgid "Total cost of V11"
 msgstr "Coût total du fichier v11"
-
-#. module: l10n_ch_payment_slip
-#: field:account.move.line,transaction_ref:0
-msgid "Transaction Ref."
-msgstr "Ref. de transaction"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.actions.act_window,name:l10n_ch_payment_slip.wizard_v11_import
@@ -323,7 +320,7 @@ msgstr "Fichier V11"
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:237
 #, python-format
 msgid "V11 file can not be decoded, it contains invalid caracter %s"
-msgstr ""
+msgstr "Le fichier V11 ne peut pas être décodé, il contient un caractère invalide %s."
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_add_vert:0
@@ -333,22 +330,34 @@ msgstr "Décalage vertical de l'adresse en pixels"
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_scan_line_vert:0
 msgid "Vert. position in px for scan line"
-msgstr "Décalage vertical de la scanline en pixel"
+msgstr "Décalage vertical de la scanline en pixels"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/payment_slip.py:333
+#: code:addons/l10n_ch_payment_slip/payment_slip.py:334
 #, python-format
-msgid "Your bank BVR number should be of the form 0X-XXX-X! Please check your company information for the invoice:\n"
+msgid ""
+"Your bank BVR number should be of the form 0X-XXX-X! Please check your "
+"company information for the invoice:\n"
 "%s"
-msgstr "Le CCP doit respecter le format suivant 0X-XXX-X pour la facture\n"
+msgstr ""
+"Le CCP doit respecter le format suivant 0X-XXX-X pour la facture\n"
 "%s"
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_delta_horz:0
-msgid "horiz. delta in px 1.2 will print the bvr 1.2px lefter, negative value is possible"
-msgstr "Décalage global horizontal du bvr en pixels"
+msgid ""
+"horiz. delta in px 1.2 will print the bvr 1.2px lefter, negative value is "
+"possible"
+msgstr "Décalage global horizontal du BVR en pixels"
+
+#. module: l10n_ch_payment_slip
+#: view:v11.import.wizard:l10n_ch_payment_slip.v11_import_view
+msgid "or"
+msgstr "ou"
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_delta_vert:0
-msgid "vert. delta in px 1.2 will print the bvr 1.2px lower, negative value is possible"
+msgid ""
+"vert. delta in px 1.2 will print the bvr 1.2px lower, negative value is "
+"possible"
 msgstr "Décalage global vertical du BVR en pixels"
