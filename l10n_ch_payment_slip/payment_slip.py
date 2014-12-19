@@ -142,7 +142,8 @@ class PaymentSlip(models.Model):
         return amt
 
     @api.one
-    @api.depends('move_line_id')
+    @api.depends('move_line_id',
+                 'move_line_id.invoice.number')
     def compute_ref(self):
         """Retrieve ESR/BVR reference from move line in order to print it
 
@@ -205,7 +206,7 @@ class PaymentSlip(models.Model):
         justified_amount = amount.replace('.', '').rjust(10, '0')
         line += [char for char in mod10r(justified_amount)]
         line.append('>')
-        line += [char for char in self.compute_ref()[0]]
+        line += [char for char in self.reference]
         line.append('+')
         line.append(' ')
         bank = self.move_line_id.invoice.partner_bank_id.get_account_number()
@@ -223,7 +224,9 @@ class PaymentSlip(models.Model):
         return line
 
     @api.one
-    @api.depends('move_line_id',
+    @api.depends('amount_total',
+                 'reference',
+                 'move_line_id',
                  'move_line_id.debit',
                  'move_line_id.credit')
     def compute_scan_line(self):
