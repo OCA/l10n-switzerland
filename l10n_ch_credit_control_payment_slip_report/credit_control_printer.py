@@ -29,12 +29,12 @@ class CreditControlPrinter(models.TransientModel):
         """Print BVR from credit line
         We do not use the communication
         as it is not required and will be
-        less performent
+        less efficient
 
         """
         self.ensure_one()
         if not self.line_ids and not self.print_all:
-            raise exceptions.Warning.except_orm(
+            raise exceptions.Warning(
                 _('No credit control lines selected.')
             )
         credits = self.line_ids
