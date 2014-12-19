@@ -19,113 +19,113 @@ msgstr ""
 #: model:res.partner.bank.type,format_layout:l10n_ch_base_bank.bv
 #: model:res.partner.bank.type,format_layout:l10n_ch_base_bank.bvr
 msgid "%(bank_name)s: %(acc_number)s"
-msgstr ""
+msgstr "%(bank_name)s : %(acc_number)s"
 
 #. module: l10n_ch_base_bank
 #: model:res.partner.bank.type,name:l10n_ch_base_bank.bv
 msgid "BV"
-msgstr ""
+msgstr "BV"
 
 #. module: l10n_ch_base_bank
 #: model:res.partner.bank.type,name:l10n_ch_base_bank.bvr
 msgid "BVR"
-msgstr ""
+msgstr "BVR"
 
 #. module: l10n_ch_base_bank
 #: code:addons/l10n_ch_base_bank/invoice.py:79
 #: code:addons/l10n_ch_base_bank/invoice.py:93
 #, python-format
 msgid "BVR/ESR Reference is required"
-msgstr ""
+msgstr "La référence BVR est requise"
 
 #. module: l10n_ch_base_bank
 #: model:ir.model,name:l10n_ch_base_bank.model_res_bank
 msgid "Bank"
-msgstr ""
+msgstr "Banque"
 
 #. module: l10n_ch_base_bank
 #: model:ir.model,name:l10n_ch_base_bank.model_res_partner_bank
 msgid "Bank Accounts"
-msgstr ""
+msgstr "Comptes bancaires"
 
 #. module: l10n_ch_base_bank
 #: field:res.partner.bank,bvr_adherent_num:0
 msgid "Bank BVR/ESR adherent number"
-msgstr ""
+msgstr "Numéro d'adhérent BVR"
 
 #. module: l10n_ch_base_bank
 #: view:res.bank:l10n_ch_base_bank.view_bank_search
 msgid "Banks"
-msgstr ""
+msgstr "Banques"
 
 #. module: l10n_ch_base_bank
 #: field:res.bank,ccp:0
 #: field:res.partner.bank,ccp:0
 msgid "CCP/CP-Konto"
-msgstr ""
+msgstr "Compte CCP/CP"
 
 #. module: l10n_ch_base_bank
 #: help:res.bank,ccp:0
 #: help:res.partner.bank,ccp:0
 msgid "CCP/CP-Konto of the bank"
-msgstr ""
+msgstr "Compte CCP/CP de la banque"
 
 #. module: l10n_ch_base_bank
 #: field:res.bank,clearing:0
 msgid "Clearing number"
-msgstr ""
+msgstr "Numéro de clearing"
 
 #. module: l10n_ch_base_bank
 #: field:res.bank,code:0
 msgid "Code"
-msgstr ""
+msgstr "Code"
 
 #. module: l10n_ch_base_bank
 #: help:res.bank,code:0
 msgid "Internal reference"
-msgstr ""
+msgstr "Référence interne"
 
 #. module: l10n_ch_base_bank
 #: code:addons/l10n_ch_base_bank/invoice.py:105
 #, python-format
 msgid "Invalid BVR/ESR Number (wrong checksum)."
-msgstr ""
+msgstr "Numéro BVR invalide"
 
 #. module: l10n_ch_base_bank
 #: model:ir.model,name:l10n_ch_base_bank.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Facture"
 
 #. module: l10n_ch_base_bank
 #: code:addons/l10n_ch_base_bank/bank.py:113
 #: code:addons/l10n_ch_base_bank/bank.py:220
 #, python-format
 msgid "Please enter a correct postal number. (01-23456-1 or 12345)"
-msgstr ""
+msgstr "Merci d'entrer un numéro postal correct (01-23456-1 ou 12345)."
 
 #. module: l10n_ch_base_bank
 #: view:res.bank:l10n_ch_base_bank.view_bank_search
 msgid "PostFinance"
-msgstr ""
+msgstr "PostFinance"
 
 #. module: l10n_ch_base_bank
 #: help:res.bank,clearing:0
 msgid "Swiss unique bank identifier also used in IBAN number"
-msgstr ""
+msgstr "Identifiant Suisse unique de la banque, utilisé dans le numéro IBAN"
 
 #. module: l10n_ch_base_bank
 #: sql_constraint:res.partner.bank:0
 msgid "The BVR adherent number must be unique !"
-msgstr ""
+msgstr "Le numéro d'adhérent BVR doit être unique"
 
 #. module: l10n_ch_base_bank
 #: code:addons/l10n_ch_base_bank/bank.py:246
 #, python-format
 msgid "You can not enter a CCP/CP-Konto both on the bank and on an account of type BV/ES, BVR/ESR"
-msgstr ""
+msgstr "Vous ne pouvez pas saisir un compte CCP/CP sur la banque ainsi que sur un compte de type BV/BVR."
 
 #. module: l10n_ch_base_bank
 #: help:res.partner.bank,bvr_adherent_num:0
 msgid "Your Bank adherent number to be printed in references of your BVR/ESR. This is not a postal account number."
-msgstr ""
+msgstr "Votre numéro d'adhérent qui doit être imprimé dans la référence du BVR. Ce n'est pas un code postal."
 
