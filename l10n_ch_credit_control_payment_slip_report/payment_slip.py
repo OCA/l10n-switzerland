@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models
+from openerp import models, api
 
 
 class payment_slip(models.Model):
@@ -40,3 +40,10 @@ class payment_slip(models.Model):
             credit_line = cr_line_obj.browse(credit_line_id)
             amount += credit_line.dunning_fees_amount
         return amount
+
+    # extend 'depends'
+    @api.one
+    @api.depends('move_line_id.credit_control_line_ids',
+                 'move_line_id.credit_control_line_ids.dunning_fees_amount')
+    def compute_amount(self):
+        return super(payment_slip, self).compute_amount()

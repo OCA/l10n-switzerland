@@ -91,8 +91,8 @@ class TestPaymentSlipReport(test_common.TransactionCase):
         self.assertEqual(invoice.amount_total, 862.50)
         return invoice
 
-    def test_fees_propagation(self):
-        """Test that dunning fees are propagated in payment slip"""
+    def test_amount_with_fees(self):
+        """Test that dunning fees are included in payment slip's amount"""
         invoice = self.make_invoice()
         move_line = self.env['account.move.line'].search(
             [('invoice', '=', invoice.id),
@@ -109,19 +109,18 @@ class TestPaymentSlipReport(test_common.TransactionCase):
              'date':  '2000-01-01',
              'balance_due': 100.00,
              'amount_due': 100.00,
-             'balance': 100.00,
              'policy_level_id': lvl.id,
              'state': 'to_be_sent'}
         )
-        slip = self.env['l10n_ch.payment_slip'].search(
-            [('move_line_id', '=', move_line.id)]
+        slip_obj = self.env['l10n_ch.payment_slip'].with_context(
+            __slip_credit_control_line_id=credit_line.id
         )
+        slip = slip_obj.search([('move_line_id', '=', move_line.id)])
         self.assertEqual(slip.amount_total, 862.50)
-        credit_line.write({'dunning_fees_amount': 30000})
-        slip.refresh()
+        credit_line.dunning_fees_amount = 30000
         self.assertEqual(slip.amount_total, 30862.50)
 
-    def test_priniting(self):
+    def test_printing(self):
         """Test that we can print the report"""
         invoice = self.make_invoice()
         move_line = self.env['account.move.line'].search(
@@ -139,7 +138,6 @@ class TestPaymentSlipReport(test_common.TransactionCase):
              'date':  '2000-01-01',
              'balance_due': 100.00,
              'amount_due': 100.00,
-             'balance': 100.00,
              'policy_level_id': lvl.id,
              'state': 'to_be_sent'}
         )
