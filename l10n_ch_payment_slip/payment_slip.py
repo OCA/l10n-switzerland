@@ -62,8 +62,7 @@ class PaymentSlip(models.Model):
                                    ondelete='cascade')
 
     amount_total = fields.Float('Total amount of BVR/ESR',
-                                compute='compute_amount',
-                                store=True)
+                                compute='compute_amount')
 
     scan_line = fields.Char('Scan Line',
                             compute='compute_scan_line',
@@ -117,12 +116,11 @@ class PaymentSlip(models.Model):
         return ad_number
 
     def _compute_amount_hook(self):
-        """Hook to return the total amount of pyament slip
+        """Hook to return the total amount of payment slip
 
         :return: total amount of payment slip
         :rtype: float
         """
-        self.ensure_one()
         return self.move_line_id.debit
 
     @api.one
@@ -130,9 +128,9 @@ class PaymentSlip(models.Model):
                  'move_line_id.debit',
                  'move_line_id.credit')
     def compute_amount(self):
-        """Return the total amount of pyament slip
+        """Return the total amount of payment slip
 
-        if you need to override please use
+        If you need to override please use
         :py:meth:`_compute_amount_hook`
 
         :return: total amount of payment slip

@@ -26,6 +26,11 @@ class AccountMoveLine(models.Model):
 
     transaction_ref = fields.Char('Transaction Ref.')
 
+    payment_slip_ids = fields.One2many(comodel_name='l10n_ch.payment_slip',
+                                       inverse_name='move_line_id',
+                                       string='Payment Slips',
+                                       readonly=True)
+
 
 class AccountInvoice(models.Model):
     """Inherit account.invoice in order to add bvr

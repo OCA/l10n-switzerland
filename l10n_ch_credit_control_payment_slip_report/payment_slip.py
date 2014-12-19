@@ -27,17 +27,16 @@ class payment_slip(models.Model):
     _inherit = "l10n_ch.payment_slip"
 
     def _compute_amount_hook(self):
-        """Hook to return the total amount of pyament slip
+        """Hook to return the total amount of payment slip
 
         :return: total amount of payment slip
         :rtype: float
         """
         amount = super(payment_slip, self)._compute_amount_hook()
-        credit_lines = self.env['credit.control.line'].search(
-            [('move_line_id', '=', self.move_line_id.id),
-             ('state', 'in', ('to_be_sent', 'sent'))]
-        )
-        if credit_lines:
-            amount += sum(line.dunning_fees_amount
-                          for line in credit_lines)
+        context = self.env.context
+        if context.get('__slip_credit_control_line_id'):
+            cr_line_obj = self.env['credit.control.line']
+            credit_line_id = context['__slip_credit_control_line_id']
+            credit_line = cr_line_obj.browse(credit_line_id)
+            amount += credit_line.dunning_fees_amount
         return amount

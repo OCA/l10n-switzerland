@@ -32,31 +32,24 @@ class ExtendedReport(models.TransientModel):
     @api.v7
     def get_pdf(self, cr, uid, ids, report_name, html=None, data=None,
                 context=None):
+        if context is None:
+            context = {}
         company = self.pool['res.users'].browse(cr, uid, uid,
                                                 context=context).company_id
         if report_name == 'slip_from_credit_control':
-            lines = self.pool['credit.control.line'].read(
-                cr,
-                uid,
-                ids,
-                ['move_line_id'],
-                context=context,
-            )
-            slips_ids = self.pool['l10n_ch.payment_slip'].search(
-                cr,
-                uid,
-                [('move_line_id', 'in',
-                  [line['move_line_id'][0] for line in lines])],
-                context=context
-            )
-            if not slips_ids:
-                return False
-            slips = self.pool['l10n_ch.payment_slip'].browse(
-                cr,
-                uid,
-                slips_ids,
-                context=context
-            )
+            cr_line_obj = self.pool['credit.control.line']
+            slip_obj = self.pool['l10n_ch.payment_slip']
+            slips = []
+            for cr_line in cr_line_obj.browse(cr, uid, ids, context=context):
+                slips_ids = slip_obj.search(
+                    cr, uid,
+                    [('move_line_id', '=', cr_line.move_line_id.id)],
+                    context=context
+                )
+                if not slips_ids:
+                    continue
+                ctx = dict(context, __slip_credit_control_line_id=cr_line.id)
+                slips = slip_obj.browse(cr, uid, slips_ids, context=ctx)
             if len(slips) == 1:
                 return slips[0]._draw_payment_slip(a4=True, b64=False,
                                                    out_format='PDF')
