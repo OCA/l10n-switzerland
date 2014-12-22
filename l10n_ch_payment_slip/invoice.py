@@ -117,6 +117,7 @@ class AccountInvoice(models.Model):
         """Propagate reference on move lines and analytic lines"""
         if not ref:
             return
+        ref = ref.replace(' ', '')  # remove formatting
         self.env.cr.execute('UPDATE account_move_line SET transaction_ref=%s'
                             '  WHERE id=%s', (ref, move_line.id))
         self._update_ref_on_account_analytic_line(ref, move_line.move_id.id)
