@@ -122,15 +122,19 @@ class AccountInvoice(models.Model):
             res['value']['partner_bank_id'] = bank_id
         return res
 
-    @api.onchange('partner_bank_id')
-    def onchange_partner_bank(self):
+    @api.multi
+    def onchange_partner_bank(self, partner_bank_id=False):
         """update the reference invoice_type depending of the partner bank"""
-        partner_bank = self.partner_bank_id
-        if partner_bank:
+        result = super(AccountInvoice, self).onchange_partner_bank(
+            partner_bank_id=partner_bank_id
+        )
+        if partner_bank_id:
+            partner_bank = self.env['res.partner.bank'].browse(partner_bank_id)
             if partner_bank.state == 'bvr':
-                self.reference_type = 'bvr'
+                result['value']['reference_type'] = 'bvr'
             else:
-                self.reference_type = 'none'
+                result['value']['reference_type'] = 'none'
+        return result
 
     @api.constrains('reference_type')
     def _check_reference_type(self):
