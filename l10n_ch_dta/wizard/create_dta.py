@@ -20,7 +20,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from datetime import datetime
 import time
 import re
 import base64
@@ -673,13 +672,11 @@ class DTAFileGenerator(models.TransientModel):
         self._set_bank_data(pline, elec_context, seq)
 
         if pline.order_id.date_scheduled:
-            date_value = datetime.strptime(pline.order_id.date_scheduled,
-                                           '%Y-%m-%d')
+            date_value = fields.Date.from_string(pline.order_id.date_scheduled)
         elif pline.date:
-            date_value = datetime.strptime(pline.date,
-                                           '%Y-%m-%d')
+            date_value = fields.Date.from_string(pline.date)
         else:
-            date_value = datetime.now()
+            date_value = fields.Date.from_string(fields.Datetime.now())
         elec_context['date_value'] = date_value.strftime("%y%m%d")
         return elec_context
 
