@@ -21,6 +21,7 @@
 #
 ##############################################################################
 import time
+from datetime import datetime
 import re
 import base64
 
@@ -676,7 +677,7 @@ class DTAFileGenerator(models.TransientModel):
         elif pline.date:
             date_value = fields.Date.from_string(pline.date)
         else:
-            date_value = fields.Date.from_string(fields.Datetime.now())
+            date_value = datetime.now().today()
         elec_context['date_value'] = date_value.strftime("%y%m%d")
         return elec_context
 
