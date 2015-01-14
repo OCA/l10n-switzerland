@@ -21,6 +21,7 @@
 #
 ##############################################################################
 import time
+from datetime import datetime
 import re
 import base64
 
@@ -547,7 +548,7 @@ class DTAFileGenerator(models.TransientModel):
         payment_obj = self.env['payment.order']
         payment = payment_obj.browse(data['id'])
         elec_context['uid'] = str(self.env.uid)
-        elec_context['creation_date'] = fields.Date.today()
+        elec_context['creation_date'] = time.strftime('%y%m%d')
         if not payment.mode:
             raise except_orm(
                 _('Error'),
@@ -671,15 +672,13 @@ class DTAFileGenerator(models.TransientModel):
             elec_context['partner_bvr'] = part
         self._set_bank_data(pline, elec_context, seq)
 
-        dt = fields.Datetime
-        date_to_datetime = lambda date: dt.to_string(dt.from_string(date))
         if pline.order_id.date_scheduled:
-            date_value = date_to_datetime(pline.order_id.date_scheduled)
+            date_value = fields.Date.from_string(pline.order_id.date_scheduled)
         elif pline.date:
-            date_value = date_to_datetime(pline.date)
+            date_value = fields.Date.from_string(pline.date)
         else:
-            date_value = fields.Datetime.now()
-        elec_context['date_value'] = date_value
+            date_value = datetime.now().today()
+        elec_context['date_value'] = date_value.strftime("%y%m%d")
         return elec_context
 
     @api.model
