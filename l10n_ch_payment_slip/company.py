@@ -59,7 +59,7 @@ class ResCompany(models.Model):
         help='Horiz. position in px for address'
     )
 
-    bvr_scan_line_font_size = fields.Float(
+    bvr_scan_line_font_size = fields.Integer(
         'BVR scan line font size (pt)'
     )
 
