@@ -134,7 +134,7 @@ class AccountStatementLine(orm.Model):
             if name == 'file_name':
                 attachment = attachment_obj.browse(cr, uid, attachment_ids[0],
                                                    context)
-                res[st_line.id] = attachment.name
+                res[st_line.id] = _('View file')
             elif name == 'ir_attachment':
                 res[st_line.id] = attachment_ids[0]
         return res
@@ -149,6 +149,9 @@ class AccountStatementLine(orm.Model):
 
     def download_attachment(self, cr, uid, ids, context=None):
         st_line = self.browse(cr, uid, ids[0], context)
+        view_id = self.pool.get('ir.model.data').get_object_reference(
+            cr, uid, 'l10n_ch_account_statement_base_import',
+            'attachement_form_postfinance')[1]
         if st_line.ir_attachment:
             return {
                 'type': 'ir.actions.act_window',
@@ -156,7 +159,8 @@ class AccountStatementLine(orm.Model):
                 'view_type': 'form',
                 'view_mode': 'form',
                 'res_model': 'ir.attachment',
+                'view_id': view_id,
                 'res_id': st_line.ir_attachment.id,
-                'target': 'current',
+                'target': 'new',
             }
         return True
