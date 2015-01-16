@@ -20,8 +20,7 @@
 ##############################################################################
 
 from openerp.tools.translate import _
-from openerp.osv.orm import Model
-from openerp.osv import osv
+from openerp.osv import orm, fields
 
 import tempfile
 import tarfile
@@ -29,7 +28,7 @@ import base64
 from datetime import date
 
 
-class AccountStatementProfil(Model):
+class AccountStatementProfil(orm.Model):
     _inherit = "account.statement.profile"
 
     def _get_import_type_selection(self, cr, uid, context=None):
@@ -57,7 +56,7 @@ class AccountStatementProfil(Model):
                                   context=context).journal_id
             if not (parser.currency == journal.currency.name or
                     parser.currency == journal.company_id.currency_id.name):
-                raise osv.except_osv(_("Wrong currency"),
+                raise orm.except_orm(_("Wrong currency"),
                                      _("The transactions you are importing \
                                      are not in the same currency than the \
                                      selected journal !"))
@@ -78,7 +77,8 @@ class AccountStatementProfil(Model):
     def _write_extra_statement_lines(self, cr, uid, parser, result_row_list,
                                      profile, statement_id, context):
         """ For Postfinance XML parser, we join the attached documents to
-            the statement. """
+            the statement_line or to the statement if a corresponding line
+            is not found. """
         if parser.parser_for('pf_xmlparser'):
             pf_file = tempfile.NamedTemporaryFile()
             pf_file.write(base64.b64decode(self.file_stream))
@@ -90,13 +90,73 @@ class AccountStatementProfil(Model):
                 if filename[-3:] not in ['xml', 'png']:
                     continue
                 data = tfile.extractfile(filename).read().encode('base64')
+                # Attach to bank statement by default
+                res_model = 'account.bank.statement'
+                res_id = statement_id
+                # Search statement_line concerned
+                statement = self.pool.get(res_model).browse(
+                    cr, uid, statement_id, context)
+                for st_line in statement.line_ids:
+                    if st_line.ref == filename[:-4]:
+                        res_model = 'account.bank.statement.line'
+                        res_id = st_line.id
+                        break;
+
                 attachment_data = {
                     'name': filename,
                     'datas': data,
                     'datas_fname': "%s.%s" % (
                         date.today(), filename[-4:]),
-                    'res_model': 'account.bank.statement',
-                    'res_id': statement_id,
+                    'res_model': res_model,
+                    'res_id': res_id,
                 }
                 self.pool.get('ir.attachment').create(
                     cr, uid, attachment_data, context=context)
+
+
+class AccountStatementLine(orm.Model):
+    """ Adds a field to retrieve attachment file of a line. """
+
+    _inherit = 'account.bank.statement.line'
+
+    def _get_attachment(self, cr, uid, ids, name, args, context=None):
+        attachment_obj = self.pool.get('ir.attachment')
+        res = dict()
+        for st_line in self.browse(cr, uid, ids, context):
+            attachment_ids = attachment_obj.search(
+                cr, uid, [('res_model', '=', self._name),
+                          ('res_id', '=', st_line.id)],
+                limit=1, context=context)
+            if not attachment_ids:
+                res[st_line.id] = False
+                continue
+
+            if name == 'file_name':
+                attachment = attachment_obj.browse(cr, uid, attachment_ids[0],
+                                                   context)
+                res[st_line.id] = attachment.name
+            elif name == 'ir_attachment':
+                res[st_line.id] = attachment_ids[0]
+        return res
+
+    _columns = {
+        'file_name': fields.function(_get_attachment, type='char',
+                                     string=_('Attachment')),
+        'ir_attachment': fields.function(
+            _get_attachment, type='many2one', obj='ir.attachment',
+            string='Attachment'),
+    }
+
+    def download_attachment(self, cr, uid, ids, context=None):
+        st_line = self.browse(cr, uid, ids[0], context)
+        if st_line.ir_attachment:
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Attachment',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'ir.attachment',
+                'res_id': st_line.ir_attachment.id,
+                'target': 'current',
+            }
+        return True

@@ -45,7 +45,7 @@
  Warning : this module requires the python library 'xlrd'.
  """,
  'website': 'http://www.compassion.ch/',
- 'data': [],
+ 'data': ['view/statement_view.xml'],
  'test': [],
  'installable': True,
  'images': [],

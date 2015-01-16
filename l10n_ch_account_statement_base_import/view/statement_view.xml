@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <record id="bank_statement_view_form_postfinance" model="ir.ui.view">
+         <field name="name">l10n_ch_bank_statement.view_form</field>
+         <field name="model">account.bank.statement</field>
+         <field name="inherit_id" ref="account_statement_base_completion.bank_statement_view_form2" />
+         <field eval="16" name="priority"/>
+         <field name="type">form</field>
+         <field name="arch" type="xml">
+             <data>
+                 <xpath expr="//tree/field[@name='already_completed']" position="after">
+                    <field name="file_name"/>
+                    <button name="download_attachment" type="object" icon="STOCK_SAVE" />
+                 </xpath>
+             </data>
+         </field>
+     </record>
+</data>
+</openerp>
