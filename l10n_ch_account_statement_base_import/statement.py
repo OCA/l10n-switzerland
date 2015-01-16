@@ -100,7 +100,7 @@ class AccountStatementProfil(orm.Model):
                     if st_line.ref == filename[:-4]:
                         res_model = 'account.bank.statement.line'
                         res_id = st_line.id
-                        break;
+                        break
 
                 attachment_data = {
                     'name': filename,
@@ -132,8 +132,6 @@ class AccountStatementLine(orm.Model):
                 continue
 
             if name == 'file_name':
-                attachment = attachment_obj.browse(cr, uid, attachment_ids[0],
-                                                   context)
                 res[st_line.id] = _('View file')
             elif name == 'ir_attachment':
                 res[st_line.id] = attachment_ids[0]
