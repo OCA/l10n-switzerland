@@ -206,7 +206,7 @@ class PaymentSlip(models.Model):
         justified_amount = amount.replace('.', '').rjust(10, '0')
         line += [char for char in mod10r(justified_amount)]
         line.append('>')
-        line += [char for char in self.reference]
+        line += [char for char in self.reference.replace(" ", "")]
         line.append('+')
         line.append(' ')
         bank = self.move_line_id.invoice.partner_bank_id.get_account_number()
