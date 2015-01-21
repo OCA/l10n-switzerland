@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <record id="paperformat_paymentslip" model="report.paperformat">
+        <field name="name">A4 no margin payment slip</field>
+        <field name="default" eval="True" />
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">0</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">0</field>
+        <field name="dpi">144</field>
+    </record>
+
+    <report
+        id="one_slip_per_page_from_invoice"
+        model="account.invoice"
+        string="Payment Slip"
+        report_type="qweb-pdf"
+        name="one_slip_per_page_from_invoice"
+        file="l10n_ch_payment_slip.one_slip_per_page"
+        />
+
+    <record id="one_slip_per_page_from_invoice" model="ir.actions.report.xml">
+        <field name="paperformat_id" ref="l10n_ch_payment_slip.paperformat_paymentslip"/>
+    </record>
+  </data>
+</openerp>

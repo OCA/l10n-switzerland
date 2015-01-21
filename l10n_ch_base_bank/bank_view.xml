@@ -1,27 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
   <data>
-    <record model="ir.ui.view" id="invoice_supplier_form6">
-      <field name="name">account.invoice.supplier.form.inherit</field>
-      <field name="model">account.invoice</field>
-      <field name="type">form</field>
-      <field name="inherit_id" ref="account.invoice_supplier_form"/>
-      <field name="arch" type="xml">
-        <field name="partner_id" position="replace">
-          <field name="partner_id" select="1"/>
-        </field>
-      </field>
-    </record>
-
     <record model="ir.ui.view" id="invoice_supplier_form8">
       <field name="name">account.invoice.supplier.form.inherit</field>
       <field name="model">account.invoice</field>
-      <field name="type">form</field>
       <field name="inherit_id" ref="account.invoice_supplier_form"/>
       <field name="priority" eval="18"/>
       <field name="arch" type="xml">
-        <field name="partner_bank_id" position="replace">
-          <field name="partner_bank_id" domain="[('partner_id', '=', partner_id)]"/>
+        <field name="partner_bank_id" position="attributes">
+          <attribute name="domain">[('partner_id', '=', partner_id)]</attribute>
         </field>
       </field>
     </record>
@@ -29,12 +16,10 @@
     <record model="ir.ui.view" id="invoice_form">
       <field name="name">account.invoice.form.inherit</field>
       <field name="model">account.invoice</field>
-      <field name="type">form</field>
       <field name="inherit_id" ref="account.invoice_form"/>
       <field name="arch" type="xml">
-        <field name="partner_bank_id" position="replace">
-          <field name="partner_bank_id"
-                 domain="[('partner_id.ref_companies', 'in', [company_id])]"/>
+        <field name="partner_bank_id" position="attributes">
+          <attribute name="domain">[('partner_id.ref_companies', 'in', [company_id])]</attribute>
         </field>
       </field>
     </record>
@@ -62,7 +47,6 @@
     <record model="ir.ui.view" id="add_custom_fields_on_bank">
       <field name="name">add custom fields on bank</field>
       <field name="model">res.bank</field>
-      <field name="type">form</field>
       <field name="inherit_id" ref="base.view_res_bank_form"/>
       <field name="arch" type="xml">
         <field name="bic" position="after">
@@ -76,7 +60,6 @@
     <record model="ir.ui.view" id="add_custom_fields_on_bank_list">
       <field name="name">add custom fields on bank list</field>
       <field name="model">res.bank</field>
-      <field name="type">form</field>
       <field name="inherit_id" ref="base.view_res_bank_tree"/>
       <field name="arch" type="xml">
         <field name="bic" position="after">
@@ -92,7 +75,6 @@
     <record model="ir.ui.view" id="add_ccp_on_res_partner_bank">
       <field name="name">Add ccp on res partner bank</field>
       <field name="model">res.partner.bank</field>
-      <field name="type">form</field>
       <field name="inherit_id" ref="base.view_partner_bank_form"/>
       <field name="arch" type="xml">
         <field name="bank_bic" position="after">

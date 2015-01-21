@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Nicolas Bessi. Copyright Camptocamp SA
+#    Author Vincent Renaville. Copyright 2013 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,30 +17,25 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-{'name': 'Switzerland - Bank type',
- 'summary': 'Types and number validation for swiss electronic pmnt. DTA, ESR',
- 'description': """
-Swiss bank type and fields
-==========================
-
-This addons will add different bank types required by specific swiss electronic
-payment like DTA and ESR. It allows to manage both Post and Bank systems.
-
-It'll perform some validation when entring bank account number or ESR number
-in invoice and add some Swiss specific fields on bank.
-
-This module is required if you want to use electornic payment in Switzerland.
+{"name": "Switzerland - Printing of dunning BVR",
+ "summary": "Print BVR/ESR slip related to credit control",
+ "description": """
+Printing of dunning BVR
+=======================
+Add possibility to print BVR/ESR slip of related credit control lines.
+The dunning fees are printed on ESR but they will not affect the amount
+of move lines
 """,
- 'version': '1.2',
- 'author': 'Camptocamp',
- 'category': 'Localization',
- 'website': 'http://www.camptocamp.com',
- 'depends': ['account'],
- 'data': ['bank_view.xml', 'bank_data.xml'],
- 'demo': [],
- 'test': [],
- 'auto_install': False,
- 'installable': True,
- 'images': []
+ "version": "1.3.0",
+ "author": "Camptocamp",
+ "category": "Generic Modules/Others",
+ "website": "http://www.camptocamp.com",
+ "depends": ["account_credit_control",
+             "account_credit_control_dunning_fees",
+             "l10n_ch_payment_slip"],
+ "data": ["credit_control_printer_view.xml",
+          "report.xml",
+          "security/ir.model.access.csv"],
+ "active": False,
+ "installable": True
  }

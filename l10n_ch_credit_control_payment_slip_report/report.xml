@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <report
+        id="slip_from_credit_control"
+        model="credit.control.line"
+        string="Payment Slip"
+        report_type="qweb-pdf"
+        name="slip_from_credit_control"
+        />
+
+  </data>
+</openerp>

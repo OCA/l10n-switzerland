@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<openerp>
+  <data>
+
+    <record id="action_slip_all" model="ir.actions.act_window">
+      <field name="name">Payment Slip</field>
+      <field name="res_model">l10n_ch.payment_slip</field>
+      <field name="domain">[('invoice_id', '=', active_id)]</field>
+    </record>
+
+   <record model="ir.ui.view" id="invoice_form_add_bvr_ref">
+      <field name="name">account.invoice.supplier.form.bvr.ref</field>
+      <field name="model">account.invoice</field>
+      <field name="type">form</field>
+      <field name="inherit_id" ref="account.invoice_form"/>
+      <field name="arch" type="xml">
+        <field name="tax_line" position="before">
+          <group colspan="4">
+          <field name="bvr_reference" colspan="4"/>
+          <button type="action"
+                  string="Open Payment Slips"
+                  groups="base.group_system"
+                  name="%(l10n_ch_payment_slip.action_slip_all)d"
+                  attrs="{'invisible': [('type', '!=', 'out_invoice')]}"/>
+          </group>
+        </field>
+      </field>
+    </record>
+
+    <record id="pay_slip_form" model="ir.ui.view">
+      <field name="name">pay slip form</field>
+      <field name="model">l10n_ch.payment_slip</field>
+      <field name="arch" type="xml">
+        <form version="7.0" string="Payment Slip">
+          <group>
+            <field name="reference"/>
+            <field name="move_line_id"/>
+            <field name="amount_total"/>
+            <field name="scan_line"/>
+            <field name="slip_image"/>
+            <field name="a4_pdf"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="pay_slip_lsit" model="ir.ui.view">
+      <field name="name">pay slip lsit</field>
+      <field name="model">l10n_ch.payment_slip</field>
+      <field name="arch" type="xml">
+        <tree version="7.0" string="Payment Slip">
+            <field name="reference"/>
+        </tree>
+      </field>
+    </record>
+
+  </data>
+</openerp>

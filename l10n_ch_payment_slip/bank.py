@@ -17,30 +17,19 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from openerp import models, fields
 
-{'name': 'Switzerland - Bank type',
- 'summary': 'Types and number validation for swiss electronic pmnt. DTA, ESR',
- 'description': """
-Swiss bank type and fields
-==========================
 
-This addons will add different bank types required by specific swiss electronic
-payment like DTA and ESR. It allows to manage both Post and Bank systems.
+class ResPartnerBank(models.Model):
+    """
+    Inherit res.partner.bank class in order to add swiss specific fields
+    such as:
+     - BVR data
+     - BVR print options for company accounts
+     We leave it here in order
+    """
+    _inherit = "res.partner.bank"
 
-It'll perform some validation when entring bank account number or ESR number
-in invoice and add some Swiss specific fields on bank.
-
-This module is required if you want to use electornic payment in Switzerland.
-""",
- 'version': '1.2',
- 'author': 'Camptocamp',
- 'category': 'Localization',
- 'website': 'http://www.camptocamp.com',
- 'depends': ['account'],
- 'data': ['bank_view.xml', 'bank_data.xml'],
- 'demo': [],
- 'test': [],
- 'auto_install': False,
- 'installable': True,
- 'images': []
- }
+    print_bank = fields.Boolean('Print Bank on BVR')
+    print_account = fields.Boolean('Print Account Number on BVR')
+    print_partner = fields.Boolean('Print Partner Address on BVR')
