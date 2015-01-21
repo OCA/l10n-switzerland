@@ -1,3 +1,18 @@
+Change with release 7.4
+   *) Migration of following addons to support Odoo 8:
+      - l10n_ch_bank
+      - l10n_ch_base_bank
+      - l10n_ch_credit_control_payment_slip_report
+      - l10n_ch_dta
+      - l10n_ch_hr_payroll
+      - l10n_ch_payment_slip
+      - l10n_ch_zip
+    *) All ported addons use the new API.
+    *) Report have been updated when possible to use QwebReport system.
+    *) Bank and Zip data are updated and have now more fields available.
+    *) BVR/ESR payment slip reporting is now totally refactorized. A payment slip has now his own model and
+       provied all function to generate an image/PDF in various size and output. It uses PIL/Pillow as a renderer.
+
 Change with release 7.3
    *) Remove compatibility code for BVR/ESR only Multi BVR/ESR is supported
    *) Add credit control integration with ESR
