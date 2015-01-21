@@ -49,7 +49,7 @@ class ExtendedReport(models.TransientModel):
                 if not slips_ids:
                     continue
                 ctx = dict(context, __slip_credit_control_line_id=cr_line.id)
-                slips = slip_obj.browse(cr, uid, slips_ids, context=ctx)
+                slips += slip_obj.browse(cr, uid, slips_ids, context=ctx)
             if len(slips) == 1:
                 return slips[0]._draw_payment_slip(a4=True, b64=False,
                                                    out_format='PDF')
