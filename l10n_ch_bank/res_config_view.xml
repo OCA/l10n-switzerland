@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="view_account_config_settings_banks_ext" model="ir.ui.view">
+            <field name="name">account settings banks</field>
+            <field name="model">account.config.settings</field>
+            <field name="inherit_id" ref="account.view_account_config_settings"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='payment_acquirer']" position="before">
+                    <div name='l10n_ch_bank_reload'>
+                        <label string="Click this button if you want to update to the actual bank datas."/>
+                        <button string="Update Banks" name="update_banks" type="object" class="oe_link" icon="gtk-go-forward"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
