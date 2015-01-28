@@ -27,6 +27,7 @@ from PIL import Image, ImageDraw, ImageFont
 from openerp import models, fields, api, _
 from openerp.modules import get_module_resource
 from openerp import exceptions
+from openerp.report import report_sxw
 from openerp.tools.misc import mod10r
 
 
@@ -399,6 +400,30 @@ class PaymentSlip(models.Model):
             company.bvr_scan_line_font_size or self._default_scan_font_size
         )
 
+    @api.multi
+    def _draw_description_line(self, draw, font, initial_position):
+        """ Draw a line above the payment slip
+
+        The line shows the invoice number and payment term.
+
+        """
+        x, y = initial_position
+        # align with the address
+        x += self.env.user.company_id.bvr_add_horz
+        invoice = self.move_line_id.invoice
+        date_maturity = self.move_line_id.date_maturity
+        message = _('Payment slip related to invoice %s '
+                    'due on the %s')
+        rml_parser = report_sxw.rml_parse(self.env.cr,
+                                          self.env.uid,
+                                          'payment_slip',
+                                          context=self.env.context)
+        fmt_date = rml_parser.formatLang(date_maturity, date=True)
+        draw.text((x, y),
+                  message % (invoice.number, fmt_date),
+                  font=font,
+                  fill=self._fill_color)
+
     @api.model
     def _draw_address(self, draw, font, com_partner, initial_position,
                       company):
@@ -603,6 +628,9 @@ class PaymentSlip(models.Model):
                 base_image_path = self.image_absolute_path('white.png')
         base = Image.open(base_image_path).convert('RGB')
         draw = ImageDraw.Draw(base)
+        if a4:
+            initial_position = (10, a4_offset - 40)
+            self._draw_description_line(draw, default_font, initial_position)
         if invoice.partner_bank_id.print_partner:
             initial_position = (10, 105 + a4_offset)
             self._draw_address(draw, default_font, company.partner_id,

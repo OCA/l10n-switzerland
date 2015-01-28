@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-19 10:26+0000\n"
+"POT-Creation-Date: 2015-01-28 10:55+0000\n"
 "PO-Revision-Date: 2014-12-02 14:47+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -180,7 +180,7 @@ msgid "Merge Slips on Disk, slower but safer"
 msgstr "Fuisonne les rapports BVR sur le disque. Plus lent mais plus sûr"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/payment_slip.py:329
+#: code:addons/l10n_ch_payment_slip/payment_slip.py:330
 #, python-format
 msgid "No invoice related to move line %s"
 msgstr "Aucune facture liée à la ligne %s"
@@ -215,7 +215,13 @@ msgid "Payment Slips Merge Mode"
 msgstr "Mode de fusion des rapports BVR"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/payment_slip.py:215
+#: code:addons/l10n_ch_payment_slip/payment_slip.py:415
+#, python-format
+msgid "Payment slip related to invoice %s due on the %s"
+msgstr "BVR attaché à la facture %s. Date d'échéance : %s"
+
+#. module: l10n_ch_payment_slip
+#: code:addons/l10n_ch_payment_slip/payment_slip.py:216
 #, python-format
 msgid "Please enter a correct postal number like: 01-23456-1"
 msgstr "Veuillez saisir un CCP valide exemple: 01-23456-1"
@@ -320,7 +326,8 @@ msgstr "Fichier V11"
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:237
 #, python-format
 msgid "V11 file can not be decoded, it contains invalid caracter %s"
-msgstr "Le fichier V11 ne peut pas être décodé, il contient un caractère invalide %s."
+msgstr ""
+"Le fichier V11 ne peut pas être décodé, il contient un caractère invalide %s."
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_add_vert:0
@@ -333,7 +340,7 @@ msgid "Vert. position in px for scan line"
 msgstr "Décalage vertical de la scanline en pixels"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/payment_slip.py:334
+#: code:addons/l10n_ch_payment_slip/payment_slip.py:335
 #, python-format
 msgid ""
 "Your bank BVR number should be of the form 0X-XXX-X! Please check your "
