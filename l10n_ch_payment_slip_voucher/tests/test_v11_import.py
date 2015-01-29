@@ -75,8 +75,7 @@ class TestV11import(test_common.TransactionCase):
                  'reference': '005095000000000000000000013'}
             )
             action = importer.import_v11()
-            domain_str = action['domain']
-            domain = eval(domain_str)
+            domain = action['domain']
             voucher_id = domain[0][2][0]
             voucher = self.env['account.voucher'].browse(voucher_id)
             voucher.proforma_voucher()

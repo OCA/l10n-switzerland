@@ -150,9 +150,7 @@ class BvrImporterWizard(models.TransientModel):
 
         action_res = self.env['ir.actions.act_window'].for_xml_id(
             'account_voucher', 'action_vendor_receipt')
-        action_res[
-            'domain'
-        ] = "[('id','in', ["+','.join(map(str, voucher_ids))+"])]"
+        action_res['domain'] = [('id', 'in', voucher_ids)]
         return action_res
 
     @api.multi
