@@ -139,21 +139,20 @@ class post_dd_export_wizard(orm.TransientModel):
                                     self._generate_total_record(
                                         properties, total_amount)))
                     total_amount = 0.0
-                    properties.update(
-                        {'dd_order_no': properties['dd_order_no'] + 1})
-                    properties.update({'trans_ser_no': 0})
-                    records.append(
-                        (None, self._generate_head_record(properties)))
-                    properties.update(
-                        {'trans_ser_no': properties['trans_ser_no'] + 1})
-                    previous_date = line.ml_maturity_date
                     due_date = self._get_treatment_date(
                         payment_order.date_prefered,
                         line.ml_maturity_date,
                         payment_order.date_scheduled,
                         line.name)
+                    properties.update({
+                        'dd_order_no': properties['dd_order_no'] + 1,
+                        'trans_ser_no': 0,
+                        'due_date': self._prepare_date(due_date)})
+                    records.append(
+                        (None, self._generate_head_record(properties)))
                     properties.update(
-                        {'due_date': self._prepare_date(due_date)})
+                        {'trans_ser_no': properties['trans_ser_no'] + 1})
+                    previous_date = line.ml_maturity_date
 
                 records.append((line, self._generate_debit_record(
                     line, properties, payment_order, cr, uid, context)))
