@@ -202,8 +202,8 @@ class PaymentSlip(models.Model):
         line = []
         if not self._can_generate(self.move_line_id):
             return []
-        amount = '01%.2f' % self.amount_total
-        justified_amount = amount.replace('.', '').rjust(10, '0')
+        justified_amount = '01%s' % unicode(
+            self.amount_total).replace('.', '').rjust(10, '0')
         line += [char for char in mod10r(justified_amount)]
         line.append('>')
         line += [char for char in self.reference.replace(" ", "")]
