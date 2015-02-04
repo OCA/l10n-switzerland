@@ -614,6 +614,9 @@ class PaymentSlip(models.Model):
         initial_position = (10, 355 + a4_offset)
         self._draw_address(draw, default_font, com_partner,
                            initial_position, company)
+        initial_position = (750, 330 + a4_offset)
+        self._draw_address(draw, default_font, com_partner,
+                           initial_position, company)
         num_car, frac_car = ("%.2f" % self.amount_total).split('.')
         self._draw_amount(draw, amount_font, num_car,
                           (214, 290 + a4_offset), company)
