@@ -36,6 +36,7 @@ This module is required if you want to use electornic payment in Switzerland.
  'author': 'Camptocamp',
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
+ 'license': 'AGPL-3',
  'depends': ['account'],
  'data': ['bank_view.xml', 'bank_data.xml'],
  'demo': [],
