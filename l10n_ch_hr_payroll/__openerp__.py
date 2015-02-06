@@ -36,6 +36,7 @@
     'auto_install': False,
     'demo': [],
     'website': 'http://open-net.ch',
+    'license': 'AGPL-3',
     'data': [
         'hr_contract_view.xml',
         'hr_employee_view.xml',
