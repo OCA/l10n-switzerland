@@ -43,6 +43,7 @@ It currently supports BVR and BVR+
  "author": "Camptocamp",
  "category": "Generic Modules/Others",
  "website": "http://www.camptocamp.com",
+ "license": "AGPL-3",
  "depends": ["l10n_ch",
              "l10n_ch_payment_slip"],
  "data": ["wizard/scan_bvr_view.xml",

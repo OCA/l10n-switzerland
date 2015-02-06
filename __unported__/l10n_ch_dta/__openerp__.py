@@ -32,6 +32,7 @@ This addons allows you to generate an electronic payment file for Swiss bank
  'author': 'Camptocamp',
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
+ 'license': 'AGPL-3',
  'depends': ['base', 'account_payment', 'l10n_ch_base_bank', 'document'],
  'data': ["wizard/create_dta_view.xml",
           "bank_view.xml"],
