@@ -30,30 +30,50 @@ class ExtendedReport(models.Model):
     _inherit = 'report'
 
     @api.v7
+    def _generate_one_slip_per_page_from_invoice_pdf(self, cr, uid, ids,
+                                                     context=None):
+        """Generate payment slip PDF(s) from report model.
+        If there is many pdf they are merged in memory or on
+        file system based on company settings
+
+        :return: the generated PDF content
+        """
+        user_model = self.pool['res.users']
+        slip_model = self.pool['l10n_ch.payment_slip']
+        invoice_model = self.pool['account.invoice']
+        company = user_model.browse(cr, uid, uid, context=context).company_id
+        invoice = invoice_model.browse(cr, uid, ids, context=context)
+        docs = slip_model.compute_pay_slips_from_invoices(
+            cr,
+            uid,
+            invoice,
+            context=context
+        )
+        if len(docs) == 1:
+            return docs[0]._draw_payment_slip(a4=True, b64=False,
+                                              out_format='PDF')
+        else:
+            if company.merge_mode == 'in_memory':
+                return self.merge_pdf_in_memory(docs)
+            return self.merge_pdf_on_disk(docs)
+
+    @api.v7
     def get_pdf(self, cr, uid, ids, report_name, html=None, data=None,
                 context=None):
-        company = self.pool['res.users'].browse(cr, uid, uid,
-                                                context=context).company_id
         if report_name == 'one_slip_per_page_from_invoice':
-            slip_model = self.pool['l10n_ch.payment_slip']
-            docs = slip_model.compute_pay_slips_from_invoices(
+            return self._generate_one_slip_per_page_from_invoice_pdf(
                 cr,
                 uid,
-                self.pool['account.invoice'].browse(cr,
-                                                    uid,
-                                                    ids,
-                                                    context=context),
+                ids,
                 context=context
             )
-            if len(docs) == 1:
-                return docs[0]._draw_payment_slip(a4=True, b64=False,
-                                                  out_format='PDF')
-            else:
-                if company.merge_mode == 'in_memory':
-                    return self.merge_pdf_in_memory(docs)
-                return self.merge_pdf_on_disk(docs)
         else:
             return super(ExtendedReport, self).get_pdf(
-                cr, uid, ids, report_name,
-                html=html, data=data, context=context
+                cr,
+                uid,
+                ids,
+                report_name,
+                html=html,
+                data=data,
+                context=context
             )
