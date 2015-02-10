@@ -19,17 +19,15 @@
 #
 ##############################################################################
 
-from openerp.osv.orm import Model, fields
+from openerp import models, fields
 
 
-class ResPartner(Model):
+class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    _columns = {
-        'supplier_invoice_default_product': fields.many2one(
-            'product.product',
-            'Default product supplier invoice',
-            help="Use by the scan BVR wizard, if completed, it'll generate "
-                 "a line with the proper amount and this specified product"
-        ),
-    }
+    supplier_invoice_default_product = fields.Many2one(
+        comodel_name='product.product',
+        string='Default product supplier invoice',
+        help="Use by the scan BVR wizard, if completed, it'll generate "
+             "a line with the proper amount and this specified product"
+    )
