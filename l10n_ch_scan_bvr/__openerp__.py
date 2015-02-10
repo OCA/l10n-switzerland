@@ -45,9 +45,10 @@ It currently supports BVR and BVR+
  "website": "http://www.camptocamp.com",
  "license": "AGPL-3",
  "depends": ["l10n_ch",
-             "l10n_ch_payment_slip"],
+             "l10n_ch_payment_slip",
+             "account"],
  "data": ["wizard/scan_bvr_view.xml",
           "partner_view.xml",
           "bank_view.xml"],
- 'installable': False
+ 'installable': True,
  }
