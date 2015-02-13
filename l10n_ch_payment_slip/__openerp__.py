@@ -57,6 +57,7 @@ payment terms.
  'author': 'Camptocamp',
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
+ 'license': 'AGPL-3',
  'depends': ['base',
              'account',
              'report',

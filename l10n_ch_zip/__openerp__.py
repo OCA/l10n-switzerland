@@ -25,6 +25,7 @@
     'author': 'Camptocamp,brain-tec AG',
     'category': 'Localisation',
     'website': 'http://www.camptocamp.com',
+    'license': 'AGPL-3',
     'summary': 'Provides all Swiss postal codes for auto-completion',
     'depends': ['base',
                 'base_location',  # in https://github.com/OCA/partner-contact/
