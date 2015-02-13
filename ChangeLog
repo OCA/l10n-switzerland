@@ -8,42 +8,42 @@ Changes with 7.4 release
       - l10n_ch_payment_slip
       - l10n_ch_zip
     *) All ported addons use the new API.
-    *) Report have been updated when possible to use the QwebReport system.
-    *) Bank and Zip data are updated and now have more fields available.
+    *) Reports have been updated when possible to use the QwebReport system.
+    *) Bank and Zip data have been updated and now have more fields available.
     *) BVR/ESR payment slip reporting is now totally refactorized. A payment slip now has its own model and
        provides all functions to generate an image/PDF in various size and output. It uses PIL/Pillow as a renderer.
 
 Changes with release 7.3
-   *) Remove compatibility code for BVR/ESR, only Multi BVR/ESR is supported
-   *) Add credit control integration with ESR
-   *) Add integration with account bank reconciliation addons https://launchpad.net/banking-addons/bank-statement-reconcile-7.0 with module  l10n_ch_payment_slip_base_transaction_id
-   *) Uniformize management of reference
+   *) Removed compatibility code for BVR/ESR, only Multi BVR/ESR is supported
+   *) Added credit control integration with ESR
+   *) Added integration with account bank reconciliation addons https://launchpad.net/banking-addons/bank-statement-reconcile-7.0 with module  l10n_ch_payment_slip_base_transaction_id
+   *) Uniformized management of reference
 
 Change with release 7.2
-    L10n_ch_payment_slip pass to version 1.2 and now supports multi payment terms.
+    L10n_ch_payment_slip passes to version 1.2 and now supports multi-payment terms.
 
 Changes with release 7.1
 
-  *) Add CCP account on res_bank but keep retro compatibility with old model.
+  *) Added CCP account on res_bank but keep retro compatibility with old model.
      If no CCP is set on bank, old behavior is kept.
      Be aware if you have customized bvr.mako you have to replace acc_number by get_account_number().
      This change allows to avoid duplication of res.partner.bank
 
-  *) Fix res.bank view
+  *) Fixed res.bank view
 
-  *) Improve res.bank name search by adding intelligent search
+  *) Improved res.bank name search by adding intelligent search
 
-  *) Add city to res.bank name_get
+  *) Added city to res.bank name_get
 
-  *) Add constraint to avoid wrong entries on res.partner.bank
+  *) Added constraint to avoid wrong entries on res.partner.bank
 
-  *) Disable invoice reference overwrite when validating an invoice
+  *) Disabled invoice reference overwrite when validating an invoice
 
   *) Better res.bank views in list mode
 
-  *) Fix BVR options in res.partner.bank views
+  *) Fixed BVR options in res.partner.bank views
 
-  *) Remove attachments from payment order view as document addon is fixed
+  *) Removed attachments from payment order view as document addon is fixed
 
   *) Various fixes of DTA wizard
 
@@ -83,6 +83,6 @@ Changes with release 7.0
 Changes with release 6.1
 
   *) Field IBAN disapeared and is now used as acc_number in res.partner.bank
-  *) Add a constraint on post numbers to fix 5 and 9 digits formats
-  *) Add condition texts in BVR invoices
-  *) Add PO files de, en, es, fr
+  *) Added a constraint on post numbers to fix 5 and 9 digits formats
+  *) Added condition texts in BVR invoices
+  *) Added PO files de, en, es, fr
