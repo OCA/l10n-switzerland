@@ -41,6 +41,7 @@ It currently supports the "pain.001" norm for Credit Transfert Initiation.
 
 """,
     "author": "Camptocamp",
+    "license": "AGPL-3",
     "depends": [
         "account",
         "l10n_ch",

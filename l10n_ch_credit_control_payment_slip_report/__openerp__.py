@@ -30,6 +30,7 @@ of move lines
  "author": "Camptocamp",
  "category": "Generic Modules/Others",
  "website": "http://www.camptocamp.com",
+ "license": "AGPL-3",
  "depends": ["account_credit_control",
              "account_credit_control_dunning_fees",
              "l10n_ch_payment_slip"],

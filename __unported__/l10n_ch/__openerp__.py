@@ -64,6 +64,7 @@ You can also find them on apps.odoo.com.
  'author': 'Camptocamp',
  'category': 'Localization/Account Charts',
  'website': 'http://www.camptocamp.com',
+ 'license': 'AGPL-3',
  'depends': ['account', 'l10n_multilang'],
  'data': ['sterchi_chart/account.xml',
           'sterchi_chart/vat2011.xml',
