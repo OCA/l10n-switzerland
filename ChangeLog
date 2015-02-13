@@ -1,4 +1,4 @@
-Changes with 7.4 release
+Changes with release 7.4 
    *) Migration of the following addons to support Odoo 8:
       - l10n_ch_bank
       - l10n_ch_base_bank
