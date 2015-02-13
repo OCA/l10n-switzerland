@@ -9,16 +9,16 @@ So I want that many Latin-1 characters have their umlaute's, etc., stripped.
 Some of it can be done automatically but some needs to be done by hand, that
 I can tell.
 """
+import sys
+import unicodedata
+
 __version__ = '1.0.1'
 __author__ = 'Jim Hefferon: ftpmaint at tug.ctan.org'
 __date__ = '2008-July-15'
 __notes__ = """As sources, used effbot's web site, and
     http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/251871
-and
-    man uni2ascii
+and man uni2ascii
 """
-import sys
-import unicodedata
 
 # These characters that are not done automatically by NFKD, and
 # have a name starting with "LATIN".    Some of these I found on the interwebs,
@@ -549,7 +549,10 @@ def build_dictionary():
     return d
 
 udict = build_dictionary()
-convert = lambda s: s.translate(udict)
+
+
+def convert(string):
+    return string.translate(udict)
 
 
 def coroutine(func):
