@@ -292,9 +292,11 @@ class scan_bvr(TransientModel):
             )
         date_due = time.strftime('%Y-%m-%d')
         # We will now compute the due date and fixe the payment term
-        payment_term_id = (account_info.partner_id.property_supplier_payment_term and
-                           account_info.partner_id.property_supplier_payment_term.id or
-                           False)
+        payment_term_id = (
+            account_info.partner_id.property_supplier_payment_term and
+            account_info.partner_id.property_supplier_payment_term.id or
+            False
+        )
         if payment_term_id:
             # We Calculate due_date
             inv_mod = pool.get('account.invoice')
