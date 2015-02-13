@@ -448,11 +448,16 @@ class lsv_export_wizard(orm.TransientModel):
         '''
         requested_date = date.today()
         if prefered_type == 'due':
-            requested_date = datetime.strptime(line_mat_date, DEFAULT_SERVER_DATE_FORMAT).date() \
-                or requested_date
+            tmp_date = datetime.strptime(
+                line_mat_date, DEFAULT_SERVER_DATE_FORMAT
+            ).date()
+            requested_date = tmp_date if tmp_date else requested_date
+
         elif prefered_type == 'fixed':
-            requested_date = datetime.strptime(order_sched_date, DEFAULT_SERVER_DATE_FORMAT).date() \
-                or requested_date
+            tmp_date = datetime.strptime(
+                order_sched_date, DEFAULT_SERVER_DATE_FORMAT
+            ).date()
+            requested_date = tmp_date if tmp_date else requested_date
 
         if requested_date > date.today() + timedelta(days=30) \
                 or requested_date < date.today() - timedelta(days=10):
