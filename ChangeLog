@@ -20,7 +20,7 @@ Changes with release 7.3
    *) Uniformized management of reference
 
 Change with release 7.2
-    L10n_ch_payment_slip passes to version 1.2 and now supports multi-payment terms.
+   *) L10n_ch_payment_slip passes to version 1.2 and now supports multi-payment terms.
 
 Changes with release 7.1
 
