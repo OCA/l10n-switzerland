@@ -206,7 +206,7 @@ class BvrImporterWizard(models.TransientModel):
         )
         if line_ids:
             # transaction_ref is propagated on all lines
-            line = move_line_obj.browse(line_ids[0])
+            line = line_ids
             partner_id = line.partner_id.id
             num = line.invoice.number if line.invoice else False
             values['ref'] = _('Inv. no %s') % num if num else values['name']
