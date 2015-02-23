@@ -206,7 +206,8 @@ class BvrImporterWizard(models.TransientModel):
         )
         if len(line) > 1:
             raise exceptions.Warning(
-                "Too many credit lines for reference %s" % reference)
+                _("Too many receivable/payable lines for reference %s")
+                % reference)
         if line:
             # transaction_ref is propagated on all lines
             partner_id = line.partner_id.id
