@@ -452,7 +452,6 @@ class PaymentSlip(models.Model):
             text.textLine(line)
         canvas.drawText(text)
 
-
     @api.multi
     def _draw_description_line(self, canvas, font, initial_position):
         """ Draw a line above the payment slip
@@ -475,7 +474,6 @@ class PaymentSlip(models.Model):
         canvas.setFont(font.name, font.size)
         canvas.drawString(x, y,
                           message % (invoice.number, fmt_date))
-
 
     @api.model
     def _draw_bank(self, canvas, font, bank, initial_position, company):
