@@ -29,6 +29,7 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.units import inch
 from openerp import models, fields, api, _
+from openerp.report import report_sxw
 from openerp.modules import get_module_resource
 from openerp import exceptions
 from openerp.tools.misc import mod10r
@@ -451,6 +452,31 @@ class PaymentSlip(models.Model):
             text.textLine(line)
         canvas.drawText(text)
 
+
+    @api.multi
+    def _draw_description_line(self, canvas, font, initial_position):
+        """ Draw a line above the payment slip
+
+        The line shows the invoice number and payment term.
+
+        """
+        x, y = initial_position
+        # align with the address
+        x += self.env.user.company_id.bvr_add_horz * inch
+        invoice = self.move_line_id.invoice
+        date_maturity = self.move_line_id.date_maturity
+        message = _('Payment slip related to invoice %s '
+                    'due on the %s')
+        rml_parser = report_sxw.rml_parse(self.env.cr,
+                                          self.env.uid,
+                                          'payment_slip',
+                                          context=self.env.context)
+        fmt_date = rml_parser.formatLang(date_maturity, date=True)
+        canvas.setFont(font.name, font.size)
+        canvas.drawString(x, y,
+                          message % (invoice.number, fmt_date))
+
+
     @api.model
     def _draw_bank(self, canvas, font, bank, initial_position, company):
         """Draw bank number on canvas
@@ -629,6 +655,11 @@ class PaymentSlip(models.Model):
                 canvas.drawImage(self.image_absolute_path('bvr.png'),
                                  0, 0, 8.271*inch, 4.174*inch)
             canvas.setFillColorRGB(*self._fill_color)
+            if a4:
+                initial_position = (0.05 * inch,  4.25 * inch)
+                self._draw_description_line(canvas,
+                                            default_font,
+                                            initial_position)
             if invoice.partner_bank_id.print_partner:
                 if (invoice.partner_bank_id.print_account or
                         invoice.partner_bank_id.bvr_adherent_num):
