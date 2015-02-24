@@ -176,7 +176,7 @@ class ResPartnerBank(models.Model, BankCommon):
         readonly=True
     )
 
-    @api.model
+    @api.multi
     def get_account_number(self):
         """Retrieve the correct bank number to used based on
         account type
