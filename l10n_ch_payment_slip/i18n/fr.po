@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* l10n_ch_payment_slip
+#       * l10n_ch_payment_slip
 #
 msgid ""
 msgstr ""
@@ -23,22 +23,22 @@ msgstr "Données BVR"
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_delta_horz:0
-msgid "BVR Horz. Delta (px)"
+msgid "BVR Horz. Delta (inch)"
 msgstr "Décalage horizontal global en pixels"
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_delta_vert:0
-msgid "BVR Vert. Delta (px)"
+msgid "BVR Vert. Delta (inch)"
 msgstr "Décalage vertical global en pixels"
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_add_horz:0
-msgid "BVR horiz. position address (px)"
+msgid "BVR horiz. position address (inch)"
 msgstr "Décalage horizontal de l'adresse en pixels"
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_scan_line_horz:0
-msgid "BVR horiz. position for scan line(px)"
+msgid "BVR horiz. position for scan line(inch)"
 msgstr "Décalage horizontal de la scanline en pixels"
 
 #. module: l10n_ch_payment_slip
@@ -63,12 +63,12 @@ msgstr "Espace entre les caractères de la scanline"
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_add_vert:0
-msgid "BVR vert. position for address (px)"
+msgid "BVR vert. position for address (inch)"
 msgstr "Décalage vertical de l'adresse en pixels"
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_scan_line_vert:0
-msgid "BVR vert. position for scan line (px)"
+msgid "BVR vert. position for scan line (inch)"
 msgstr "Décalage vertical de la scanline en pixels"
 
 #. module: l10n_ch_payment_slip
@@ -110,12 +110,12 @@ msgstr "Créé le"
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_add_horz:0
-msgid "Horiz. position in px for address"
+msgid "Horiz. position in inch for address"
 msgstr "Décalage horizontal de l'addresse en pixels"
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_scan_line_horz:0
-msgid "Horiz. position in px for scan line"
+msgid "Horiz. position in inch for scan line"
 msgstr "Décalage horizontal de la scanline en pixels"
 
 #. module: l10n_ch_payment_slip
@@ -324,12 +324,12 @@ msgstr "Le fichier V11 ne peut pas être décodé, il contient un caractère inv
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_add_vert:0
-msgid "Vert. position in px for address"
+msgid "Vert. position in inch for address"
 msgstr "Décalage vertical de l'adresse en pixels"
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_scan_line_vert:0
-msgid "Vert. position in px for scan line"
+msgid "Vert. position in inch for scan line"
 msgstr "Décalage vertical de la scanline en pixels"
 
 #. module: l10n_ch_payment_slip
@@ -346,7 +346,7 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_delta_horz:0
 msgid ""
-"horiz. delta in px 1.2 will print the bvr 1.2px lefter, negative value is "
+"horiz. delta in inch 1.2 will print the bvr 1.2 inch lefter, negative value is "
 "possible"
 msgstr "Décalage global horizontal du BVR en pixels"
 
@@ -358,6 +358,6 @@ msgstr "ou"
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_delta_vert:0
 msgid ""
-"vert. delta in px 1.2 will print the bvr 1.2px lower, negative value is "
+"vert. delta in inch 1.2 will print the bvr 1.2 inch lower, negative value is "
 "possible"
 msgstr "Décalage global vertical du BVR en pixels"

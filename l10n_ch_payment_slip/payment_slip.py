@@ -648,7 +648,8 @@ class PaymentSlip(models.Model):
             canvas_size = (595.27, 286.81)
         with contextlib.closing(StringIO.StringIO()) as buff:
             canvas = Canvas(buff,
-                            pagesize=canvas_size)
+                            pagesize=canvas_size,
+                            pageCompression=None)
             if company.bvr_background:
                 canvas.drawImage(self.image_absolute_path('bvr.png'),
                                  0, 0, 8.271*inch, 4.174*inch)

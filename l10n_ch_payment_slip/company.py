@@ -28,35 +28,35 @@ class ResCompany(models.Model):
     _inherit = "res.company"
 
     bvr_delta_horz = fields.Float(
-        'BVR Horz. Delta (px)',
-        help='horiz. delta in px 1.2 will print the bvr 1.2px lefter, '
+        'BVR Horz. Delta (inch)',
+        help='horiz. delta in inch 1.2 will print the bvr 1.2 inch lefter, '
         'negative value is possible'
     )
 
     bvr_delta_vert = fields.Float(
-        'BVR Vert. Delta (px)',
-        help='vert. delta in px 1.2 will print the bvr 1.2px lower, '
+        'BVR Vert. Delta (inch)',
+        help='vert. delta in inch 1.2 will print the bvr 1.2 inch lower, '
              'negative value is possible'
     )
 
     bvr_scan_line_vert = fields.Float(
-        'BVR vert. position for scan line (px)',
-        help='Vert. position in px for scan line'
+        'BVR vert. position for scan line (inch)',
+        help='Vert. position in inch for scan line'
     )
 
     bvr_scan_line_horz = fields.Float(
-        'BVR horiz. position for scan line(px)',
-        help='Horiz. position in px for scan line'
+        'BVR horiz. position for scan line(inch)',
+        help='Horiz. position in inch for scan line'
     )
 
     bvr_add_vert = fields.Float(
-        'BVR vert. position for address (px)',
-        help='Vert. position in px for address'
+        'BVR vert. position for address (inch)',
+        help='Vert. position in inch for address'
     )
 
     bvr_add_horz = fields.Float(
-        'BVR horiz. position address (px)',
-        help='Horiz. position in px for address'
+        'BVR horiz. position address (inch)',
+        help='Horiz. position in inch for address'
     )
 
     bvr_scan_line_font_size = fields.Integer(

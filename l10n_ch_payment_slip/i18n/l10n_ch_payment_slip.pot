@@ -22,22 +22,22 @@ msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_delta_horz:0
-msgid "BVR Horz. Delta (px)"
+msgid "BVR Horz. Delta (inch)"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_delta_vert:0
-msgid "BVR Vert. Delta (px)"
+msgid "BVR Vert. Delta (inch)"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_add_horz:0
-msgid "BVR horiz. position address (px)"
+msgid "BVR horiz. position address (inch)"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_scan_line_horz:0
-msgid "BVR horiz. position for scan line(px)"
+msgid "BVR horiz. position for scan line(inch)"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
@@ -62,12 +62,12 @@ msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_add_vert:0
-msgid "BVR vert. position for address (px)"
+msgid "BVR vert. position for address (inch)"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_scan_line_vert:0
-msgid "BVR vert. position for scan line (px)"
+msgid "BVR vert. position for scan line (inch)"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
@@ -109,12 +109,12 @@ msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_add_horz:0
-msgid "Horiz. position in px for address"
+msgid "Horiz. position in inch for address"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_scan_line_horz:0
-msgid "Horiz. position in px for scan line"
+msgid "Horiz. position in inch for scan line"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
@@ -322,12 +322,12 @@ msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_add_vert:0
-msgid "Vert. position in px for address"
+msgid "Vert. position in inch for address"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_scan_line_vert:0
-msgid "Vert. position in px for scan line"
+msgid "Vert. position in inch for scan line"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
@@ -339,7 +339,7 @@ msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_delta_horz:0
-msgid "horiz. delta in px 1.2 will print the bvr 1.2px lefter, negative value is possible"
+msgid "horiz. delta in inch 1.2 will print the bvr 1.2 inch lefter, negative value is possible"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
@@ -349,6 +349,5 @@ msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_delta_vert:0
-msgid "vert. delta in px 1.2 will print the bvr 1.2px lower, negative value is possible"
+msgid "vert. delta in inch 1.2 will print the bvr 1.2 inch lower, negative value is possible"
 msgstr ""
-
