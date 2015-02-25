@@ -652,7 +652,7 @@ class PaymentSlip(models.Model):
                             pageCompression=None)
             if company.bvr_background:
                 canvas.drawImage(self.image_absolute_path('bvr.png'),
-                                 0, 0, 8.271*inch, 4.174*inch)
+                                 0, 0, 8.271 * inch, 4.174 * inch)
             canvas.setFillColorRGB(*self._fill_color)
             if a4:
                 initial_position = (0.05 * inch,  4.25 * inch)
