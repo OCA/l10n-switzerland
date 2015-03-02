@@ -61,7 +61,7 @@ TODO :
 
 """,
  "version": "6.1",
- "author": "Camptocamp",
+ "author": "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Localization/Account Charts',
  "website": "http://www.camptocamp.com",
 

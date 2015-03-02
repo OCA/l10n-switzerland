@@ -47,7 +47,7 @@
         WARNING: This module has been developed in 6.0 and has never been launched in 6.1 yet
         
     """,
-    "author": "Camptocamp",
+    "author": "Camptocamp,Odoo Community Association (OCA)",
     "depends": [
             "base",
             "account",

@@ -33,7 +33,7 @@
     'depends' : [
                  'better_zip',
                  ],
-    'author' : 'Camptocamp',
+    'author' : "Camptocamp,Odoo Community Association (OCA)",
     'description': """better zip data for Switzerland""",
     'website': 'http://www.camptocamp.com',
     'init_xml': [],
