@@ -33,7 +33,7 @@ in invoice and add some Swiss specific fields on bank.
 This module is required if you want to use electornic payment in Switzerland.
 """,
  'version': '1.2',
- 'author': 'Camptocamp',
+ 'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
  'license': 'AGPL-3',

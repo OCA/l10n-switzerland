@@ -61,7 +61,7 @@ You can also find them on apps.odoo.com.
 
 """,
  'version': '7.1',
- 'author': 'Camptocamp',
+ 'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Localization/Account Charts',
  'website': 'http://www.camptocamp.com',
  'license': 'AGPL-3',

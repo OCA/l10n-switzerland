@@ -40,7 +40,7 @@ It currently supports BVR and BVR+
 
 """,
  "version": "1.0",
- "author": "Camptocamp",
+ "author": "Camptocamp,Odoo Community Association (OCA)",
  "category": "Generic Modules/Others",
  "website": "http://www.camptocamp.com",
  "license": "AGPL-3",
