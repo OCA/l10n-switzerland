@@ -26,7 +26,7 @@
     'summary': 'Create LSV and Direct Debit (postfinance) files',
     'version': '1.0',
     'license': 'AGPL-3',
-    'author': 'Compassion',
+    'author': "Compassion,Odoo Community Association (OCA)",
     'website': 'http://www.compassion.ch',
     'category': 'Localization',
     'depends': ['account_direct_debit',

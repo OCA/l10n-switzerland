@@ -22,7 +22,7 @@
  'summary': 'Provides all Swiss postal codes for auto-completion',
  'version': '1.0.1',
  'depends': ['base', 'base_location'],
- 'author': 'Camptocamp',
+ 'author': "Camptocamp,Odoo Community Association (OCA)",
  'description': """
 Swiss postal code (ZIP) list
 ============================

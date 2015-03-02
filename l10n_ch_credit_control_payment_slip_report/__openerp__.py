@@ -27,7 +27,7 @@ The dunning fees are printed on ESR but they will not affect the amount
 of move lines
 """,
  "version": "1.3.0",
- "author": "Camptocamp",
+ "author": "Camptocamp,Odoo Community Association (OCA)",
  "category": "Generic Modules/Others",
  "website": "http://www.camptocamp.com",
  "depends": ["account_credit_control",

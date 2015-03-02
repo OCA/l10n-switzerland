@@ -40,7 +40,7 @@ by country.
 It currently supports the "pain.001" norm for Credit Transfert Initiation.
 
 """,
-    "author": "Camptocamp",
+    "author": "Camptocamp,Odoo Community Association (OCA)",
     "depends": [
         "account",
         "l10n_ch",

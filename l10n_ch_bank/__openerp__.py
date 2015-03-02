@@ -31,7 +31,7 @@ but can improve the user experience.
 
  """,
     "version": "7.0",
-    "author": "Camptocamp",
+    "author": "Camptocamp,Odoo Community Association (OCA)",
     "category": "Localisation",
     "website": "http://www.camptocamp.com",
     "depends": ["l10n_ch"],

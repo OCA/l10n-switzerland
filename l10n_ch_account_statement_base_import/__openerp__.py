@@ -21,7 +21,7 @@
 
 {'name': "Swiss bank statements import",
  'version': '0.3',
- 'author': 'Compassion CH',
+ 'author': "Compassion CH,Odoo Community Association (OCA)",
  'category': 'Finance',
  'complexity': 'normal',
  'depends': [

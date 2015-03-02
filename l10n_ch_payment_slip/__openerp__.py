@@ -59,7 +59,7 @@ but will remain in the data model via new banking addons dependence.
 
 """,
  'version': '1.2',
- 'author': 'Camptocamp',
+ 'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
  'depends': ['base', 'report_webkit', 'l10n_ch_base_bank'],
