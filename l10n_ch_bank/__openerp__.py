@@ -22,7 +22,7 @@
 {
     'name': 'Switzerland - Bank list',
     'version': '8.0.9.0.0',
-    'author': 'Camptocamp, brain-tec AG',
+    'author': "Camptocamp, brain-tec AG,Odoo Community Association (OCA)",
     'category': 'Localisation',
     'website': 'http://www.camptocamp.com',
     'license': 'AGPL-3',
