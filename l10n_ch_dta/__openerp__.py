@@ -30,7 +30,7 @@ This addons allows you to generate an electronic payment file for Swiss bank
 
 """,
  'version': '1.0.1',
- 'author': 'Camptocamp',
+ 'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
  'license': 'AGPL-3',
