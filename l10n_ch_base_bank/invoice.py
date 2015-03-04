@@ -19,6 +19,8 @@
 ##############################################################################
 from openerp.osv.orm import Model
 from openerp.tools import mod10r
+from openerp.osv import fields, osv
+from openerp.tools.translate import _
 
 
 class AccountInvoice(Model):
@@ -87,12 +89,16 @@ class AccountInvoice(Model):
     def _check_reference_type(self, cursor, user, ids, context=None):
         """Check the supplier invoice reference type depending
         on the BVR reference type and the invoice partner bank type"""
+        message = ''
         for invoice in self.browse(cursor, user, ids):
             if invoice.type in 'in_invoice':
                 if (invoice.partner_bank_id and
                         invoice.partner_bank_id.state == 'bvr' and
                         invoice.reference_type != 'bvr'):
-                    return False
+                    message += _("Invoice '%s'") % (invoice.number,) + "\n"
+        if message != '':
+            raise osv.except_osv(_('Error: BVR reference is required'),
+                                 message)
         return True
 
     def _check_bvr(self, cr, uid, ids, context=None):
