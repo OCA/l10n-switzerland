@@ -133,9 +133,8 @@
 
     pay_order_id =  ref("pain001_payment_order")
     #set the payment order as the active id
-    context['active_ids'] = [pay_order_id]
-    context['active_id'] = pay_order_id
-    result = wiz.create_pain_001(context=context)
+    result = wiz.with_context(active_ids=[pay_order_id], active_id=pay_order_id).create_pain_001()
+
     assert result, "No result returned"
 
     data = wiz.read(['pain_001_file'])

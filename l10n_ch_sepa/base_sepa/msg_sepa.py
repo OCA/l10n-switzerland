@@ -30,7 +30,6 @@ SEPA_DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
 
 
 class MsgSEPA(object):
-
     _xsd_path = None
     _xml_data = None
 
