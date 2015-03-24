@@ -3,4 +3,4 @@
 partner-contact
 account-financial-tools
 bank-payment
-banck-statement-reconcile
+bank-statement-reconcile
