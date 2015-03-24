@@ -361,3 +361,8 @@ msgid ""
 "vert. delta in inch 1.2 will print the bvr 1.2 inch lower, negative value is "
 "possible"
 msgstr "Décalage global vertical du BVR en pouces"
+
+#. module: l10n_ch_payment_slip
+#: code:addons/l10n_ch_payment_slip/payment_slip.py:469
+msgid "Payment slip related to invoice %s due on the %s"
+msgstr "Bulletin relatif à la facture %s due le %s"
