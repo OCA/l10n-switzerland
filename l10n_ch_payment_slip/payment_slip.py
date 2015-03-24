@@ -385,6 +385,17 @@ class PaymentSlip(models.Model):
                                        self.font_absolute_path()))
 
     @api.model
+    def _get_samll_text_font(self):
+        """Register a :py:class:`reportlab.pdfbase.ttfonts.TTFont`
+        for recept reference
+        :return: a :py:class:`FontMeta` with font name and size
+        :rtype: :py:class:`FontMeta`
+        """
+        font_identifier = 'ocrb_font'
+        return FontMeta(name=font_identifier,
+        size=self._default_font_size * 0.7)
+
+    @api.model
     def _get_text_font(self):
         """Register a :py:class:`reportlab.pdfbase.ttfonts.TTFont`
         for addresses and bank
@@ -638,6 +649,7 @@ class PaymentSlip(models.Model):
         company = self.env.user.company_id
         self._register_fonts()
         default_font = self._get_text_font()
+        small_font = self._get_samll_text_font()
         amount_font = self._get_amount_font()
         invoice = self.move_line_id.invoice
         scan_font = self._get_scan_line_text_font(company)
@@ -675,7 +687,7 @@ class PaymentSlip(models.Model):
                 self._draw_address(canvas, default_font, company.partner_id,
                                    initial_position, company)
             com_partner = self.get_comm_partner()
-            initial_position = (0.05 * inch, 1.6 * inch)
+            initial_position = (0.05 * inch, 1.4 * inch)
             self._draw_address(canvas, default_font, com_partner,
                                initial_position, company)
             initial_position = (4.86 * inch, 2.2 * inch)
@@ -711,6 +723,8 @@ class PaymentSlip(models.Model):
 
             self._draw_ref(canvas, default_font, self.reference,
                            (4.9 * inch, 2.70 * inch), company)
+            self._draw_ref(canvas, small_font, self.reference,
+                           (0.05 * inch, 1.6 * inch), company)
             self._draw_scan_line(canvas,
                                  scan_font,
                                  (8.26 * inch - 4/10 * inch, 4/6 * inch),
