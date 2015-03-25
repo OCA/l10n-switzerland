@@ -61,11 +61,8 @@ class account_move_line(orm.Model):
                                     if mandate.state == 'active':
                                         line2bank[line.id] = bank.id
                                         return line2bank
-                        else:
-                            res = super(account_move_line, self).line2bank(
-                                cr, uid, ids, payment_mode_id, context=None)
-                            return res
-        return super(account_move_line, self).line2bank(
-            cr, uid, ids,
-            payment_mode_id,
-            context=None)
+                        
+        res = super(account_move_line, self).line2bank(
+            cr, uid, ids, payment_mode_id, context=None)
+        return res
+        
