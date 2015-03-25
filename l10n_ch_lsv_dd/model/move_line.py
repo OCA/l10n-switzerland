@@ -58,7 +58,7 @@ class account_move_line(orm.Model):
                         for bank in line.partner_id.bank_ids:
                             if bank.state in bank_type:
                                 for mandate in bank.mandate_ids:
-                                    if mandate.state != 'cancel':
+                                    if mandate.state == 'active':
                                         line2bank[line.id] = bank.id
                                         return line2bank
                         else:
