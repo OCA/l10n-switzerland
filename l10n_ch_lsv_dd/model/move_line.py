@@ -39,3 +39,33 @@ class account_move_line(orm.Model):
         return val or (invoice.partner_bank_id and
                        invoice.partner_bank_id.state == 'iban' and
                        invoice.partner_bank_id.lsv_identifier)
+
+    def line2bank(self, cr, uid, ids, payment_mode_id, context=None):
+        ''' Override line2bank to avoid choosing a bank that has only
+            cancelled mandate.
+        '''
+        pay_mode_obj = self.pool.get['payment.mode']
+        if payment_mode_id:
+            pay_mode = pay_mode_obj.browse(
+                cr, uid, payment_mode_id, context=context)
+            if pay_mode.type.payment_order_type == 'debit':
+                line2bank = dict()
+                bank_type = pay_mode_obj.suitable_bank_types(
+                    cr, uid, payment_mode_id, context=context)
+                for line in self.browse(cr, uid, ids, context=context):
+                    line2bank[line.id] = False
+                    if line.partner_id:
+                        for bank in line.partner_id.bank_ids:
+                            if bank.state in bank_type:
+                                for mandate in bank.mandate_ids:
+                                    if mandate.state != 'cancel':
+                                        line2bank[line.id] = bank.id
+                                        return line2bank
+                        else:
+                            res = super(account_move_line, self).line2bank(
+                                cr, uid, ids, payment_mode_id, context=None)
+                            return res
+        return super(account_move_line, self).line2bank(
+            cr, uid, ids,
+            payment_mode_id,
+            context=None)
