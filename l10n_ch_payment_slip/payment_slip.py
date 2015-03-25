@@ -393,7 +393,7 @@ class PaymentSlip(models.Model):
         """
         font_identifier = 'ocrb_font'
         return FontMeta(name=font_identifier,
-        size=self._default_font_size * 0.7)
+                        size=self._default_font_size * 0.7)
 
     @api.model
     def _get_text_font(self):
