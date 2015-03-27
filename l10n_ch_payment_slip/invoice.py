@@ -37,7 +37,8 @@ class AccountMoveLine(Model):
         """Hook to get amount in CHF for BVR"""
         return move.debit
 
-    def get_bvr_ref(self, cr, uid, move_line_id, context=None):
+    def get_bvr_ref(self, cr, uid, move_line_id,
+                    sequence_int=0, context=None):
         """Retrieve ESR/BVR reference from move line in order to print it
 
         Returns False when no BVR reference should be generated.  No
@@ -52,13 +53,11 @@ class AccountMoveLine(Model):
 
         if not self._is_generate_bvr(cr, uid, move_line.invoice, context):
             return ''
-
-        reference = self._compute_bvr_ref(cr, uid, move_line, context)
-        if (move_line.transaction_ref and
-                move_line.transaction_ref != reference):
-            # the line has already a transaction id and it is not
-            # a BVR reference
-            return ''
+        if move_line.transaction_ref:
+            return move_line.transaction_ref
+        reference = self._compute_bvr_ref(cr, uid,
+                                          move_line,
+                                          sequence_int, context)
         return reference
 
     def _is_generate_bvr(self, cr, uid, invoice, context=None):
@@ -67,15 +66,15 @@ class AccountMoveLine(Model):
         return (invoice.partner_bank_id and
                 invoice.partner_bank_id.state == 'bvr')
 
-    def _compute_bvr_ref(self, cr, uid, move_line, context=None):
+    def _compute_bvr_ref(self, cr, uid, move_line,
+                         sequence_int=0, context=None):
         ''' Default BVR reference computation '''
         res = ''
         if move_line.invoice.partner_bank_id.bvr_adherent_num:
             res = move_line.invoice.partner_bank_id.bvr_adherent_num
-        move_number = ''
-
+        move_number = str(sequence_int)
         if move_line.invoice.number:
-            compound = str(move_line.invoice.number) + str(move_line.id)
+            compound = str(move_line.invoice.number) + str(sequence_int)
             move_number = self._compile_get_ref.sub('', compound)
         reference = mod10r(res + move_number.rjust(26 - len(res), '0'))
         return reference
@@ -102,26 +101,24 @@ class AccountInvoice(Model):
                                context=None):
         res = {}
         move_line_obj = self.pool.get('account.move.line')
-        account_obj = self.pool.get('account.account')
-        tier_account_id = account_obj.search(
-            cr,
-            uid,
-            [('type', 'in', ['receivable', 'payable'])],
-            context=context
-        )
         for inv in self.browse(cr, uid, ids, context=context):
             move_lines = move_line_obj.search(
                 cr,
                 uid,
                 [('move_id', '=', inv.move_id.id),
-                 ('account_id', 'in', tier_account_id)],
+                 ('account_id', '=', inv.account_id.id)],
+                order='id',
                 context=context
             )
+            sequence_int = 0
             if move_lines:
                 refs = []
                 for move_line in move_line_obj.browse(cr, uid, move_lines,
                                                       context=context):
-                    refs.append(AccountInvoice._space(move_line.get_bvr_ref()))
+                    sequence_int += 1
+                    refs.append(AccountInvoice._space(move_line.get_bvr_ref(
+                        sequence_int=sequence_int,
+                        context=context)))
                 res[inv.id] = ' ; '.join(refs)
         return res
 
@@ -202,15 +199,19 @@ class AccountInvoice(Model):
                 cr, uid,
                 [('move_id', '=', inv.move_id.id),
                  ('account_id', '=', inv.account_id.id)],
+                order='id',
                 context=context
             )
             if not move_line_ids:
                 continue
             move_lines = move_line_obj.browse(cr, uid, move_line_ids,
                                               context=context)
+            sequence_int = 0
             for move_line in move_lines:
+                sequence_int += 1
                 if inv.type in ('out_invoice', 'out_refund'):
-                    ref = move_line.get_bvr_ref()
+                    ref = move_line.get_bvr_ref(sequence_int=sequence_int,
+                                                context=context)
                 elif inv.reference_type == 'bvr' and inv.reference:
                     ref = inv.reference
                 else:
