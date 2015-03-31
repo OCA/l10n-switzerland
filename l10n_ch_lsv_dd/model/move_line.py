@@ -50,18 +50,31 @@ class account_move_line(orm.Model):
                 cr, uid, payment_mode_id, context=context)
             if pay_mode.type.payment_order_type == 'debit':
                 line2bank = dict()
-                bank_type = pay_mode_obj.suitable_bank_types(
+                bank_types = pay_mode_obj.suitable_bank_types(
                     cr, uid, payment_mode_id, context=context)
                 for line in self.browse(cr, uid, ids, context=context):
                     line2bank[line.id] = False
                     if line.partner_id:
-                        for bank in line.partner_id.bank_ids:
-                            if bank.state in bank_type:
-                                for mandate in bank.mandate_ids:
-                                    if mandate.state == 'active':
-                                        line2bank[line.id] = bank.id
-                                        return line2bank
+                        bank_id = self._get_active_bank_account(
+                            cr, uid,
+                            line.partner_id.bank_ids,
+                            bank_types, context)
+                        if bank_id:
+                            line2bank[line.id] = bank_id
+                        else:
+                            line2bank.update(
+                                super(account_move_line, self).line2bank(
+                                    cr, uid, [line.id],
+                                    payment_mode_id, context=None))
+                return line2bank
+        return super(
+            account_move_line, self).line2bank(
+                cr, uid, ids, payment_mode_id, context=None)
 
-        res = super(account_move_line, self).line2bank(
-            cr, uid, ids, payment_mode_id, context=None)
-        return res
+    def _get_active_bank_account(
+            self, cr, uid, banks, bank_types, context=None):
+        for bank in banks:
+            if bank.state in bank_types:
+                for mandate in bank.mandate_ids:
+                    if mandate.state == 'active':
+                        return bank.id
