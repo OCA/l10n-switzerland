@@ -17,7 +17,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, api
+from openerp import models
 
 
 class BVRFromCreditControl(models.AbstractModel):
@@ -29,7 +29,6 @@ class ExtendedReport(models.TransientModel):
 
     _inherit = "report"
 
-    @api.v7
     def get_pdf(self, cr, uid, ids, report_name, html=None, data=None,
                 context=None):
         if context is None:
