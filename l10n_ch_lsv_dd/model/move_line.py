@@ -50,7 +50,7 @@ class account_move_line(orm.Model):
                 cr, uid, payment_mode_id, context=context)
             if pay_mode.type.payment_order_type == 'debit':
                 line2bank = dict()
-                bank_type = pay_mode_obj.suitable_bank_types(
+                bank_types = pay_mode_obj.suitable_bank_types(
                     cr, uid, payment_mode_id, context=context)
                 for line in self.browse(cr, uid, ids, context=context):
                     line2bank[line.id] = False
@@ -58,7 +58,7 @@ class account_move_line(orm.Model):
                         bank_id = self._get_active_bank_account(
                             cr, uid,
                             line.partner_id.bank_ids,
-                            bank_type, context)
+                            bank_types, context)
                         line2bank[line.id] = bank_id
                         if bank_id:
                             return line2bank[line.id]
@@ -68,9 +68,9 @@ class account_move_line(orm.Model):
         return res
 
     def _get_active_bank_account(
-            self, cr, uid, banks, bank_type, context=None):
+            self, cr, uid, banks, bank_types, context=None):
         for bank in banks:
-            if bank.state in bank_type:
+            if bank.state in bank_types:
                 for mandate in bank.mandate_ids:
                     if mandate.state == 'active':
                         return bank.id
