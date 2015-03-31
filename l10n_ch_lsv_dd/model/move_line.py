@@ -44,7 +44,7 @@ class account_move_line(orm.Model):
         ''' Override line2bank to avoid choosing a bank that has only
             cancelled mandate.
         '''
-        pay_mode_obj = self.pool.get['payment.mode']
+        pay_mode_obj = self.pool.get('payment.mode')
         if payment_mode_id:
             pay_mode = pay_mode_obj.browse(
                 cr, uid, payment_mode_id, context=context)
@@ -61,8 +61,7 @@ class account_move_line(orm.Model):
                                     if mandate.state == 'active':
                                         line2bank[line.id] = bank.id
                                         return line2bank
-                        
+
         res = super(account_move_line, self).line2bank(
             cr, uid, ids, payment_mode_id, context=None)
         return res
-        
