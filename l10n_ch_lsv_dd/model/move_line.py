@@ -55,13 +55,20 @@ class account_move_line(orm.Model):
                 for line in self.browse(cr, uid, ids, context=context):
                     line2bank[line.id] = False
                     if line.partner_id:
-                        for bank in line.partner_id.bank_ids:
-                            if bank.state in bank_type:
-                                for mandate in bank.mandate_ids:
-                                    if mandate.state == 'active':
-                                        line2bank[line.id] = bank.id
-                                        return line2bank
+                        bank_id = self._get_active_bank_account(
+                            cr, uid,
+                            line.partner_id.bank_ids,
+                            bank_type, context)
+                        line2bank[line.id] = bank_id
+                        if bank_id : return line2bank[line.id]
 
         res = super(account_move_line, self).line2bank(
             cr, uid, ids, payment_mode_id, context=None)
         return res
+
+    def _get_active_bank_account(self, cr, uid, banks, bank_type, context=None):
+        for bank in banks:
+            if bank.state in bank_type:
+                for mandate in bank.mandate_ids:
+                    if mandate.state == 'active':
+                        return bank.id
