@@ -76,5 +76,5 @@ class account_move_line(orm.Model):
         for bank in banks:
             if bank.state in bank_types:
                 for mandate in bank.mandate_ids:
-                    if mandate.state == 'active':
+                    if mandate.state == 'valid':
                         return bank.id
