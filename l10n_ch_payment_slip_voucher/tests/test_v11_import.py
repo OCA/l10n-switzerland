@@ -63,7 +63,7 @@ class TestV11import(test_common.TransactionCase):
                 })
             std_importer = self.env['v11.import.wizard'].create({})
             v11_file.seek(0)
-            lines = v11_file.read().split("\r\n")
+            lines = v11_file.readlines()
             records = std_importer._parse_lines(lines)
             self.assertTrue(len(records), 1)
             record = records[0]

@@ -35,7 +35,7 @@ class TestV11import(test_common.TransactionCase):
                 {'v11file': base64.encodestring(v11_file.read())}
             )
             v11_file.seek(0)
-            lines = v11_file.read().split("\r\n")
+            lines = v11_file.readlines()
             records = importer._parse_lines(lines)
             self.assertTrue(len(records), 1)
             record = records[0]
