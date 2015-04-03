@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import api, models
+from openerp import models
 
 
 class BVRFromInvoice(models.AbstractModel):
@@ -29,7 +29,6 @@ class ExtendedReport(models.Model):
 
     _inherit = 'report'
 
-    @api.v7
     def _generate_one_slip_per_page_from_invoice_pdf(self, cr, uid, ids,
                                                      context=None):
         """Generate payment slip PDF(s) from report model.
@@ -57,7 +56,6 @@ class ExtendedReport(models.Model):
                 return self.merge_pdf_in_memory(docs)
             return self.merge_pdf_on_disk(docs)
 
-    @api.v7
     def get_pdf(self, cr, uid, ids, report_name, html=None, data=None,
                 context=None):
         if report_name == 'one_slip_per_page_from_invoice':
