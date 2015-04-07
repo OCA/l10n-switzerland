@@ -19,7 +19,7 @@
 ##############################################################################
 from openerp.osv.orm import Model
 from openerp.tools import mod10r
-from openerp.osv import fields, osv
+from openerp.osv import osv
 from openerp.tools.translate import _
 
 
