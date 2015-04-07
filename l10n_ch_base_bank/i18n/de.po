@@ -27,4 +27,4 @@ msgstr "Fehler: BVR Reference wird benötigt"
 #: code:addons/l10n_base_bank/invoice.py:0
 #, python-format
 msgid "Invoice '%s'"
-msgstr "Rechung '%s'"
+msgstr "Rechnung '%s'"
