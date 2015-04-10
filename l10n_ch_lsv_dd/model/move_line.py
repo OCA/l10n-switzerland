@@ -65,11 +65,11 @@ class account_move_line(orm.Model):
                             line2bank.update(
                                 super(account_move_line, self).line2bank(
                                     cr, uid, [line.id],
-                                    payment_mode_id, context=None))
+                                    payment_mode_id, context=context))
                 return line2bank
         return super(
             account_move_line, self).line2bank(
-                cr, uid, ids, payment_mode_id, context=None)
+                cr, uid, ids, payment_mode_id, context=context)
 
     def _get_active_bank_account(
             self, cr, uid, banks, bank_types, context=None):
