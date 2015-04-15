@@ -53,9 +53,11 @@ class ExtendedReport(models.Model):
             return docs[0]._draw_payment_slip(a4=True, b64=False,
                                               out_format='PDF')
         else:
+            pdfs = (x._draw_payment_slip(a4=True, b64=False, out_format='PDF')
+                    for x in docs)
             if company.merge_mode == 'in_memory':
-                return self.merge_pdf_in_memory(docs)
-            return self.merge_pdf_on_disk(docs)
+                return self.merge_pdf_in_memory(pdfs)
+            return self.merge_pdf_on_disk(pdfs)
 
     @api.v7
     def get_pdf(self, cr, uid, ids, report_name, html=None, data=None,
