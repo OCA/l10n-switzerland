@@ -103,9 +103,8 @@ class AccountInvoice(Model):
         """
         invoices = self.browse(cr, uid, ids)
         for invoice in invoices:
-            if invoice.state not in ('draft', 'cancel'):
-                continue
-            if invoice.reference_type == 'bvr':
+            # do not check bvr on  draft and cancel invoices
+            if invoice.reference_type == 'bvr' and invoice.state not in  ('draft','cancel'):
                 if not invoice.reference:
                     return False
                 # In this case
