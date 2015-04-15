@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <!-- Import BVR v11 Wizard -->
+    <record id="v11_import_view" model="ir.ui.view">
+      <field name="name">V11 (BVR/ESR) Import Vouhers</field>
+      <field name="model">v11.import.wizard.voucher</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form>
+          <group width="525" colspan="4">
+            <field name="v11file"/>
+            <field name="journal_id" domain="[('type','in',['bank', 'cash'])]"/>
+            <field name="currency_id"/>
+            <newline/>
+            <footer colspan="4">
+              <button name="import_v11" string="Import" type="object" icon="gtk-ok"  colspan="2"/> or
+              <button special="cancel" string="Cancel" icon="gtk-cancel"  colspan="2"/>
+            </footer>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="wizard_v11_import" model="ir.actions.act_window">
+      <field name="name">V11 (BVR/ESR) Import into vouchers</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">v11.import.wizard.voucher</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="v11_import_view"/>
+      <field name="target">new</field>
+    </record>
+
+    <menuitem action="wizard_v11_import" sequence="13" name="V11 (BVR/ESR) Import"
+        id="menu_action_wizard_v11_import"  parent="account.menu_finance_receivables"/>
+  </data>
+</openerp>

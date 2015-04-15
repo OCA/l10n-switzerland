@@ -26,17 +26,45 @@ import openerp.tests.common as test_common
 class TestV11import(test_common.TransactionCase):
 
     def test_file_parsing(self):
+        invoice = self.env['account.invoice'].create(
+            {
+                'partner_id': self.env.ref('base.res_partner_12').id,
+                'reference_type': 'none',
+                'name': 'A customer invoice',
+                'account_id': self.env.ref('account.a_recv').id,
+                'type': 'out_invoice',
+            }
+        )
+
+        self.env['account.invoice.line'].create(
+            {
+                'product_id': False,
+                'quantity': 1,
+                'price_unit': 5415.0,
+                'invoice_id': invoice.id,
+                'name': 'product',
+            }
+        )
+        invoice.signal_workflow('invoice_open')
+        for line in invoice.move_id.line_id:
+            if line.account_id.type == 'receivable':
+                # setting it manually because we can't predict the value
+                line.transaction_ref = '005095000000000000000000013'
+
         v11_path = get_module_resource('l10n_ch_payment_slip',
                                        'tests',
                                        'test_v11_files',
                                        'test1.v11')
         with open(v11_path) as v11_file:
-            importer = self.env['v11.import.wizard'].create(
-                {'v11file': base64.encodestring(v11_file.read())}
-            )
+            importer = self.env['v11.import.wizard.voucher'].create({
+                'v11file': base64.encodestring(v11_file.read()),
+                'currency_id': self.env.ref('base.EUR').id,
+                'journal_id': self.env.ref('account.bank_journal').id,
+                })
+            std_importer = self.env['v11.import.wizard'].create({})
             v11_file.seek(0)
             lines = v11_file.readlines()
-            records = importer._parse_lines(lines)
+            records = std_importer._parse_lines(lines)
             self.assertTrue(len(records), 1)
             record = records[0]
             self.assertEqual(
@@ -46,28 +74,9 @@ class TestV11import(test_common.TransactionCase):
                  'cost': 0.0,
                  'reference': '005095000000000000000000013'}
             )
-
-    def test_statement_import(self):
-        statement = self.env['account.bank.statement'].create(
-            {
-                'journal_id': self.env.ref('account.bank_journal_usd').id,
-            }
-        )
-        importer_model = self.env['v11.import.wizard'].with_context(
-            active_id=statement.id
-        )
-        v11_path = get_module_resource('l10n_ch_payment_slip',
-                                       'tests',
-                                       'test_v11_files',
-                                       'test1.v11')
-        with open(v11_path) as v11_file:
-            importer = importer_model.create(
-                {'v11file': base64.encodestring(v11_file.read())}
-            )
-        importer.import_v11()
-        statement.refresh()
-        self.assertTrue(len(statement.line_ids), 1)
-        line = statement.line_ids[0]
-        self.assertEqual(line.name, '005095000000000000000000013')
-        self.assertEqual(line.ref, '/')
-        self.assertEqual(line.amount, 5415.0)
+            action = importer.import_v11()
+            domain = action['domain']
+            voucher_id = domain[0][2][0]
+            voucher = self.env['account.voucher'].browse(voucher_id)
+            voucher.proforma_voucher()
+            self.assertEqual(invoice.state, 'paid')
