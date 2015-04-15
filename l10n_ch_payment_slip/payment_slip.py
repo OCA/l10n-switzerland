@@ -565,6 +565,29 @@ class PaymentSlip(models.Model):
         canvas.drawString(x, y, ref)
 
     @api.model
+    def _draw_recipe_ref(self, canvas, font, ref, initial_position, company):
+        """Draw recipe reference on canvas
+
+        :param font: font to use
+        :type font: :py:class:`FontMeta`
+
+        :param ref: ref number
+        :type ref: str
+
+        :para initial_position: tuple of coordinate (x, y)
+        :type initial_position: tuple
+
+        :param company: current `res.company` record
+        :type company: :py:class:`openerp.models.Model`
+
+        """
+        x, y = initial_position
+        x += company.bvr_add_horz * inch
+        y += company.bvr_add_vert * inch
+        canvas.setFont(font.name, font.size)
+        canvas.drawString(x, y, ref)
+
+    @api.model
     def _draw_amount(self, canvas, font, amount, initial_position, company):
         """Draw reference on canvas
 
@@ -723,8 +746,8 @@ class PaymentSlip(models.Model):
 
             self._draw_ref(canvas, default_font, self.reference,
                            (4.9 * inch, 2.70 * inch), company)
-            self._draw_ref(canvas, small_font, self.reference,
-                           (0.05 * inch, 1.6 * inch), company)
+            self._draw_recipe_ref(canvas, small_font, self.reference,
+                                  (0.05 * inch, 1.6 * inch), company)
             self._draw_scan_line(canvas,
                                  scan_font,
                                  (8.26 * inch - 4/10 * inch, 4/6 * inch),
