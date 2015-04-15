@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- deprecated -->
 <openerp>
   <data>
     <template id="one_slip_per_page_document">
