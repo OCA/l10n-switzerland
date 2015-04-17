@@ -119,7 +119,6 @@
 -
   I set country to main company
 -
-
   !record {model: res.partner, id: base.main_partner}:
     country_id: base.ch
 
@@ -133,7 +132,8 @@
 
     pay_order_id =  ref("pain001_ch_payment_order")
     #set the payment order as the active id
-    result = wiz.with_context(active_ids=pay_order_id, active_id=pay_order_id).create_pain_001()
+    result = wiz.with_context(active_ids=[pay_order_id], active_id=pay_order_id).create_pain_001()
+
     assert result, "No result returned"
 
     data = wiz.read(['pain_001_file'])
