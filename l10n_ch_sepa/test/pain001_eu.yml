@@ -121,8 +121,8 @@
 -
   I set country to main company
 -
-  !record {model: res.partner, id: base.main_partner}:
-    country_id: base.ch
+  !python {model: res.partner, id: base.main_partner}: |
+    self.country_id = self.env.ref('base.ch')
 
 -
   Use the wizard to generate the pain 001 message
