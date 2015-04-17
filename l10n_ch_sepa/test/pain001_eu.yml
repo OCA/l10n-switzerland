@@ -6,6 +6,7 @@
   !record {model: res.bank, id: pain001_bank}:
     name: 'Big bank'
     bic: 'DRESDEFF300'
+    country: base.fr
 
 
 -
@@ -50,6 +51,7 @@
     account_id: account.a_pay
     type : in_invoice
     partner_id: base.res_partner_2
+    commercial_partner_id : base.res_partner_2
     reference_type: bvr
     reference: 111111111111111111111111111111
     date_invoice: !eval "'%s-01-01' %(datetime.now().year)"
@@ -119,9 +121,8 @@
 -
   I set country to main company
 -
-
-  !record {model: res.partner, id: base.main_partner}:
-    country_id: base.ch
+  !python {model: res.partner, id: base.main_partner}: |
+    self.country_id = self.env.ref('base.ch')
 
 -
   Use the wizard to generate the pain 001 message
