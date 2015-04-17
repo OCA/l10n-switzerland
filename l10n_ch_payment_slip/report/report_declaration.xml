@@ -20,7 +20,7 @@
         id="one_slip_per_page_from_invoice"
         model="account.invoice"
         string="Payment Slip"
-        report_type="qweb-pdf"
+        report_type="reportlab-pdf"
         name="one_slip_per_page_from_invoice"
         file="l10n_ch_payment_slip.one_slip_per_page"
         />

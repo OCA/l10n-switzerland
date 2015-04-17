@@ -22,6 +22,7 @@ import time
 import re
 
 import openerp.tests.common as test_common
+from openerp.report import render_report
 
 
 class TestPaymentSlip(test_common.TransactionCase):
@@ -60,8 +61,7 @@ class TestPaymentSlip(test_common.TransactionCase):
         )
         return bank_account
 
-    def test_invoice_confirmation(self):
-        """Test that confirming an invoice generate slips correctly"""
+    def make_invoice(self):
         bank_account = self.make_bank()
         invoice = self.env['account.invoice'].create(
             {
@@ -84,7 +84,7 @@ class TestPaymentSlip(test_common.TransactionCase):
             }
         )
         invoice.signal_workflow('invoice_open')
-        # Workflows are async. We have to wait for them to finish
+        # waiting for the cache to refresh
         attempt = 0
         while not invoice.move_id:
             invoice.refresh()
@@ -92,6 +92,11 @@ class TestPaymentSlip(test_common.TransactionCase):
             attempt += 1
             if attempt > 20:
                 break
+        return invoice
+
+    def test_invoice_confirmation(self):
+        """Test that confirming an invoice generate slips correctly"""
+        invoice = self.make_invoice()
         self.assertTrue(invoice.move_id)
         for line in invoice.move_id.line_id:
             if line.account_id.type in ('payable', 'receivable'):
@@ -111,37 +116,7 @@ class TestPaymentSlip(test_common.TransactionCase):
 
     def test_slip_validity(self):
         """Test that confirming slip are valid"""
-        bank_account = self.make_bank()
-
-        invoice = self.env['account.invoice'].create(
-            {
-                'partner_id': self.env.ref('base.res_partner_12').id,
-                'reference_type': 'none',
-                'name': 'A customer invoice',
-                'account_id': self.env.ref('account.a_recv').id,
-                'type': 'out_invoice',
-                'partner_bank_id': bank_account.id
-            }
-        )
-
-        self.env['account.invoice.line'].create(
-            {
-                'product_id': False,
-                'quantity': 1,
-                'price_unit': 862.50,
-                'invoice_id': invoice.id,
-                'name': 'product that cost 862.50 all tax included',
-            }
-        )
-        invoice.signal_workflow('invoice_open')
-        # Workflows are async. We have to wait for them to finish
-        attempt = 0
-        while not invoice.move_id:
-            invoice.refresh()
-            time.sleep(1)
-            attempt += 1
-            if attempt > 20:
-                break
+        invoice = self.make_invoice()
         self.assertTrue(invoice.move_id)
         for line in invoice.move_id.line_id:
             slip = self.env['l10n_ch.payment_slip'].search(
@@ -157,3 +132,16 @@ class TestPaymentSlip(test_common.TransactionCase):
                     '', "%s%s" % (inv_num, line.id)
                 )
                 self.assertIn(line_ident, slip.reference.replace(' ', ''))
+
+    def test_print_report(self):
+        invoice = self.make_invoice()
+        data, format = render_report(
+            self.env.cr,
+            self.env.uid,
+            [invoice.id],
+            'one_slip_per_page_from_invoice',
+            {},
+            context={'force_pdf': True},
+        )
+        self.assertTrue(data)
+        self.assertEqual(format, 'pdf')
