@@ -6,6 +6,7 @@
   !record {model: res.bank, id: pain001_bank}:
     name: 'Big bank'
     bic: 'DRESDEFF300'
+    country: base.fr
 
 
 -
