@@ -22,18 +22,18 @@ from openerp import api, models
 from openerp.report import render_report
 
 
-class BVRFromInvoice(models.AbstractModel):
-    _name = 'report.one_slip_per_page_from_invoice'
+class InvoiceBVRFromInvoice(models.AbstractModel):
+    _name = 'report.invoice_and_one_slip_per_page_from_invoice'
 
 
 class ExtendedReport(models.Model):
 
     _inherit = 'report'
 
-    def _compute_documents_list(self, cr, uid, ids, context=None):
+    def _compute_documents_list(self, cr, uid, invoice_ids, context=None):
         slip_model = self.pool['l10n_ch.payment_slip']
         invoice_model = self.pool['account.invoice']
-        for inv in invoice_model.browse(cr, uid, ids, context=context):
+        for inv in invoice_model.browse(cr, uid, invoice_ids, context=context):
             data, format = render_report(
                 cr,
                 uid,

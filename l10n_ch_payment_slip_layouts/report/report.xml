@@ -5,7 +5,7 @@
         id="invoice_and_one_slip_per_page_from_invoice"
         model="account.invoice"
         string="Invoice with Payment Slip"
-        report_type="qweb-pdf"
+        report_type="reportlab-pdf"
         name="invoice_and_one_slip_per_page_from_invoice"
         />
   </data>
