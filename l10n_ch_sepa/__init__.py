@@ -19,5 +19,5 @@
 #
 ##############################################################################
 
-from . import msg_sepa
-from . import pain_001
+from . import l10n_ch
+from . import wizard

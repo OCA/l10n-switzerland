@@ -46,6 +46,7 @@ It currently supports the "pain.001" norm for Credit Transfert Initiation.
         "account",
         "l10n_ch",
         "l10n_ch_base_bank",
+        "l10n_ch_payment_slip",
         "base_iban",
         "account_payment",
     ],
@@ -56,6 +57,6 @@ It currently supports the "pain.001" norm for Credit Transfert Initiation.
         "test/pain001_eu.yml",
         "test/pain001_ch.yml",
     ],
-    'installable': False,
+    "installable": True,
     "active": True,
 }
