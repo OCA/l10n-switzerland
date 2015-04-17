@@ -31,25 +31,23 @@
 import time
 import base64
 
-from openerp.osv import orm, fields
+from openerp import models, fields
 
-from l10n_ch_sepa.base_sepa.msg_sepa import MsgSEPAFactory
+from ..base_sepa.msg_sepa import MsgSEPAFactory
 
 
-class WizardPain001(orm.TransientModel):
+class WizardPain001(models.TransientModel):
     _name = "wizard.pain001"
 
-    _columns = {
-        'pain_001_file': fields.binary('XML File', readonly=True)
-    }
+    pain_001_file = fields.Binary('XML File', readonly=True)
 
     def _get_country_code(self, payment):
         ''' return the coutry code or None
         from the bank defined in a payment order'''
         if payment.mode.bank_id.bank.country:
             return payment.mode.bank_id.bank.country.code
-        elif payment.user_id.company_id.partner_id.country:
-            return payment.user_id.company_id.partner_id.country.code
+        elif payment.user_id.company_id.partner_id.country_id:
+            return payment.user_id.company_id.partner_id.country_id.code
         return None
 
     def _get_pain_def(self, country_code):

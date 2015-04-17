@@ -16,6 +16,7 @@ virtualenv:
 
 install:
   - pip install -q unidecode
+  - pip install unicodecsv
   - git clone https://github.com/OCA/partner-contact-management ${HOME}/partner-contact-management -b ${VERSION}
   - git clone https://github.com/OCA/bank-statement-reconcile ${HOME}/bank-statement-reconcile -b ${VERSION}
   - git clone https://github.com/OCA/account-financial-tools ${HOME}/account-financial-tools -b ${VERSION}
