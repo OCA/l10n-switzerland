@@ -28,13 +28,12 @@ class ir_actions_report_xml_reportlab(orm.Model):
 
     def __init__(self, cr, uid):
         """Old school hack to extend selection fields"""
-        res = super(ir_actions_report_xml_reportlab, self).__init__(cr, uid)
+        super(ir_actions_report_xml_reportlab, self).__init__(cr, uid)
         if not any(x for x in root._columns['report_type'].selection
                    if x[0] == 'reportlab-pdf'):
             root._columns['report_type'].selection.append(
                 ('reportlab-pdf', 'Report renderer')
             )
-        return res
 
     def _lookup_report(self, cr, name):
         cr.execute("SELECT * FROM ir_act_report_xml WHERE report_name=%s",
