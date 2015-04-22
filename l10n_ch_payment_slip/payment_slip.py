@@ -37,6 +37,18 @@ from openerp.tools.misc import mod10r
 FontMeta = namedtuple('FontMeta', ('name', 'size'))
 
 
+class PaymentSlipSettings(object):
+    """Slip report setting container"""
+    def validate(self):
+        "Hook function to validate parameters"""
+        pass
+
+    def __init__(self, **kwargs):
+        for param, value in kwargs.iteritems():
+            setattr(self, param, value)
+        self.validate()
+
+
 class PaymentSlip(models.Model):
     """From Version 8 payment slip are now a
     new Model related to move line and
@@ -418,23 +430,37 @@ class PaymentSlip(models.Model):
                         size=self._default_amount_font_size)
 
     @api.model
-    def _get_scan_line_text_font(self, company):
+    def _get_scan_line_text_font(self, print_settings):
         """Register a :py:class:`reportlab.pdfbase.ttfonts.TTFont`
         for scan line
+
+        :param print_settings: layouts print setting
+        :type print_settings: :py:class:`PaymentSlipSettings` or subclass
+
         :return: a :py:class:`FontMeta` with font name and size
         :rtype: :py:class:`FontMeta`
         """
         font_identifier = 'ocrb_font'
         # pdfmetrics.registerFont(TTFont(font_identifier,
         #                                self.font_absolute_path()))
-        size = company.bvr_scan_line_font_size or self._default_scan_font_size
+        size = (print_settings.bvr_scan_line_font_size or
+                self._default_scan_font_size)
         return FontMeta(name=font_identifier,
                         size=size)
 
     @api.model
-    def _draw_address(self, canvas, font, com_partner, initial_position,
-                      company):
+    def _draw_address(self, canvas, print_settings, initial_position, font,
+                      com_partner):
         """Draw an address on canvas
+
+        :param canvas: payment slip reportlab component to be drawn
+        :type canvas: :py:class:`reportlab.pdfgen.canvas.Canvas`
+
+        :param print_settings: layouts print setting
+        :type print_settings: :py:class:`PaymentSlipSettings` or subclass
+
+        :para initial_position: tuple of coordinate (x, y)
+        :type initial_position: tuple
 
         :param font: font to use
         :type font: :py:class:`FontMeta`
@@ -442,16 +468,10 @@ class PaymentSlip(models.Model):
         :param com_partner: commercial partner record for model `res.partner`
         :type com_partner: :py:class:`openerp.models.Model`
 
-        :para initial_position: tuple of coordinate (x, y)
-        :type initial_position: tuple
-
-        :param company: current `res.company` record
-        :type company: :py:class:`openerp.models.Model`
-
         """
         x, y = initial_position
-        x += company.bvr_add_horz * inch
-        y += company.bvr_add_vert * inch
+        x += print_settings.bvr_add_horz * inch
+        y += print_settings.bvr_add_vert * inch
         text = canvas.beginText()
         text.setTextOrigin(x, y)
         text.setFont(font.name, font.size)
@@ -464,15 +484,28 @@ class PaymentSlip(models.Model):
         canvas.drawText(text)
 
     @api.multi
-    def _draw_description_line(self, canvas, font, initial_position):
+    def _draw_description_line(self, canvas, print_settings, initial_position,
+                               font):
         """ Draw a line above the payment slip
 
         The line shows the invoice number and payment term.
 
+        :param canvas: payment slip reportlab component to be drawn
+        :type canvas: :py:class:`reportlab.pdfgen.canvas.Canvas`
+
+        :param print_settings: layouts print setting
+        :type print_settings: :py:class:`PaymentSlipSettings` or subclass
+
+        :para initial_position: tuple of coordinate (x, y)
+        :type initial_position: tuple
+
+        :param font: font to use
+        :type font: :py:class:`FontMeta`
+
         """
         x, y = initial_position
         # align with the address
-        x += self.env.user.company_id.bvr_add_horz * inch
+        x += print_settings.bvr_add_horz * inch
         invoice = self.move_line_id.invoice
         date_maturity = self.move_line_id.date_maturity
         message = _('Payment slip related to invoice %s '
@@ -487,8 +520,17 @@ class PaymentSlip(models.Model):
                           message % (invoice.number, fmt_date))
 
     @api.model
-    def _draw_bank(self, canvas, font, bank, initial_position, company):
+    def _draw_bank(self, canvas, print_settings, initial_position, font, bank):
         """Draw bank number on canvas
+
+        :param canvas: payment slip reportlab component to be drawn
+        :type canvas: :py:class:`reportlab.pdfgen.canvas.Canvas`
+
+        :param print_settings: layouts print setting
+        :type print_settings: :py:class:`PaymentSlipSettings` or subclass
+
+        :para initial_position: tuple of coordinate (x, y)
+        :type initial_position: tuple
 
         :param font: font to use
         :type font: :py:class:`FontMeta`
@@ -496,16 +538,10 @@ class PaymentSlip(models.Model):
         :param bank: bank record
         :type bank: :py:class:`openerp.model.Models`
 
-        :para initial_position: tuple of coordinate (x, y)
-        :type initial_position: tuple
-
-        :param company: current `res.company` record
-        :type company: :py:class:`openerp.models.Model`
-
         """
         x, y = initial_position
-        x += company.bvr_delta_horz * inch
-        y += company.bvr_delta_vert * inch
+        x += print_settings.bvr_delta_horz * inch
+        y += print_settings.bvr_delta_vert * inch
         text = canvas.beginText()
         text.setTextOrigin(x, y)
         text.setFont(font.name, font.size)
@@ -519,31 +555,48 @@ class PaymentSlip(models.Model):
         canvas.drawText(text)
 
     @api.model
-    def _draw_bank_account(self, canvas, font, acc, initial_position, company):
+    def _draw_bank_account(self, canvas, print_settings, initial_position,
+                           font, acc):
         """Draw bank account on canvas
 
-        :param font: font to use
-        :type font: :py:clas:`FontMeta`
 
-        :param ref: acc number
-        :type ref: str
+        :param canvas: payment slip reportlab component to be drawn
+        :type canvas: :py:class:`reportlab.pdfgen.canvas.Canvas`
+
+        :param print_settings: layouts print setting
+        :type print_settings: :py:class:`PaymentSlipSettings` or subclass
 
         :para initial_position: tuple of coordinate (x, y)
         :type initial_position: tuple
 
-        :param company: current `res.company` record
-        :type company: :py:class:`openerp.models.Model`
+        :param font: font to use
+        :type font: :py:class:`FontMeta`
+
+        :param acc: acc number
+        :type acc: str
+
+        :para initial_position: tuple of coordinate (x, y)
+        :type initial_position: tuple
 
         """
         x, y = initial_position
-        x += company.bvr_delta_horz * inch
-        y += company.bvr_delta_vert * inch
+        x += print_settings.bvr_delta_horz * inch
+        y += print_settings.bvr_delta_vert * inch
         canvas.setFont(font.name, font.size)
         canvas.drawString(x, y, acc)
 
     @api.model
-    def _draw_ref(self, canvas, font, ref, initial_position, company):
+    def _draw_ref(self, canvas, print_settings, initial_position, font, ref):
         """Draw reference on canvas
+
+        :param canvas: payment slip reportlab component to be drawn
+        :type canvas: :py:class:`reportlab.pdfgen.canvas.Canvas`
+
+        :param print_settings: layouts print setting
+        :type print_settings: :py:class:`PaymentSlipSettings` or subclass
+
+        :para initial_position: tuple of coordinate (x, y)
+        :type initial_position: tuple
 
         :param font: font to use
         :type font: :py:class:`FontMeta`
@@ -551,62 +604,64 @@ class PaymentSlip(models.Model):
         :param ref: ref number
         :type ref: str
 
-        :para initial_position: tuple of coordinate (x, y)
-        :type initial_position: tuple
-
-        :param company: current `res.company` record
-        :type company: :py:class:`openerp.models.Model`
-
         """
         x, y = initial_position
-        x += company.bvr_delta_horz * inch
-        y += company.bvr_delta_vert * inch
+        x += print_settings.bvr_delta_horz * inch
+        y += print_settings.bvr_delta_vert * inch
         canvas.setFont(font.name, font.size)
         canvas.drawString(x, y, ref)
 
     @api.model
-    def _draw_recipe_ref(self, canvas, font, ref, initial_position, company):
+    def _draw_recipe_ref(self, canvas, print_settings, initial_position,
+                         font, ref):
         """Draw recipe reference on canvas
 
+        :param canvas: payment slip reportlab component to be drawn
+        :type canvas: :py:class:`reportlab.pdfgen.canvas.Canvas`
+
+        :param print_settings: layouts print setting
+        :type print_settings: :py:class:`PaymentSlipSettings` or subclass
+
+        :para initial_position: tuple of coordinate (x, y)
+        :type initial_position: tuple
+
         :param font: font to use
         :type font: :py:class:`FontMeta`
 
         :param ref: ref number
         :type ref: str
 
-        :para initial_position: tuple of coordinate (x, y)
-        :type initial_position: tuple
-
-        :param company: current `res.company` record
-        :type company: :py:class:`openerp.models.Model`
-
         """
         x, y = initial_position
-        x += company.bvr_add_horz * inch
-        y += company.bvr_add_vert * inch
+        x += print_settings.bvr_add_horz * inch
+        y += print_settings.bvr_add_vert * inch
         canvas.setFont(font.name, font.size)
         canvas.drawString(x, y, ref)
 
     @api.model
-    def _draw_amount(self, canvas, font, amount, initial_position, company):
+    def _draw_amount(self, canvas, print_settings, initial_position,
+                     font, amount):
         """Draw reference on canvas
 
-        :param font: font to use
-        :type font: :py:class:`FontMeta`
+        :param canvas: payment slip reportlab component to be drawn
+        :type canvas: :py:class:`reportlab.pdfgen.canvas.Canvas`
 
-        :param amount: ref number
-        :type amount: str
+        :param print_settings: layouts print setting
+        :type print_settings: :py:class:`PaymentSlipSettings` or subclass
 
         :para initial_position: tuple of coordinate (x, y)
         :type initial_position: tuple
 
-        :param company: current `res.company` record
-        :type company: :py:class:`openerp.models.Model`
+        :param font: font to use
+        :type font: :py:class:`FontMeta`
+
+        :param amount: amount to print
+        :type amount: str
 
         """
         x, y = initial_position
-        x += company.bvr_delta_horz * inch
-        y += company.bvr_delta_vert * inch
+        x += print_settings.bvr_delta_horz * inch
+        y += print_settings.bvr_delta_vert * inch
         indice = 0
         canvas.setFont(font.name, font.size)
         for car in amount[::-1]:
@@ -619,22 +674,26 @@ class PaymentSlip(models.Model):
             indice += 1
 
     @api.model
-    def _draw_scan_line(self, canvas, font, initial_position, company):
+    def _draw_scan_line(self, canvas, print_settings, initial_position, font):
         """Draw reference on canvas
 
-        :param font: font to use
-        :type font: :py:class:`FontMeta`
+
+        :param canvas: payment slip reportlab component to be drawn
+        :type canvas: :py:class:`reportlab.pdfgen.canvas.Canvas`
+
+        :param print_settings: layouts print setting
+        :type print_settings: :py:class:`PaymentSlipSettings` or subclass
 
         :para initial_position: tuple of coordinate (x, y)
         :type initial_position: tuple
 
-        :param company: current `res.company` record
-        :type company: :py:class:`openerp.models.Model`
+        :param font: font to use
+        :type font: :py:class:`FontMeta`
 
         """
         x, y = initial_position
-        x += company.bvr_scan_line_horz * inch
-        y += company.bvr_scan_line_vert * inch
+        x += print_settings.bvr_scan_line_horz * inch
+        y += print_settings.bvr_scan_line_vert * inch
         canvas.setFont(font.name, font.size)
         for car in self._compute_scan_line_list()[::-1]:
             canvas.drawString(x, y, car)
@@ -642,27 +701,36 @@ class PaymentSlip(models.Model):
             x -= 0.1 * inch
 
     @api.model
-    def _draw_background(self, canvas, company):
+    def _draw_background(self, canvas, print_settings):
         """Draw payment slip background based on company setting
 
         :param canvas: payment slip reportlab component to be drawn
         :type canvas: :py:class:`reportlab.pdfgen.canvas.Canvas`
 
+        :param print_settings: layouts print setting
+        :type print_settings: :py:class:`PaymentSlipSettings` or subclass
 
-        :param company: current `res.company` record
-        :type company: :py:class:`openerp.models.Model`
         """
-        if company.bvr_background:
+        if print_settings.bvr_background:
             canvas.drawImage(self.image_absolute_path('bvr.png'),
                              0, 0, 8.271 * inch, 4.174 * inch)
 
     @api.model
-    def _draw_hook(self, draw):
+    def _draw_hook(self, draw, print_settings):
         """Hook to add your own content on canvas"""
         pass
 
+    @api.model
+    def _get_settings(self, report_name):
+        company = self.env.user.company_id
+        company_settings = {
+            col: getattr(company, col) for col in company._fields if
+            col.startswith('bvr_')
+        }
+        return PaymentSlipSettings(**company_settings)
+
     def _draw_payment_slip(self, a4=False, out_format='PDF', scale=None,
-                           b64=False):
+                           b64=False, report_name=None):
         """Generate the payment slip image
         :param a4: If set to True will print on slip on a A4 paper format
         :type a4: bool
@@ -685,6 +753,7 @@ class PaymentSlip(models.Model):
             )
         self.ensure_one()
         company = self.env.user.company_id
+        print_settings = self._get_settings(report_name)
         self._register_fonts()
         default_font = self._get_text_font()
         small_font = self._get_samll_text_font()
@@ -700,72 +769,87 @@ class PaymentSlip(models.Model):
             canvas = Canvas(buff,
                             pagesize=canvas_size,
                             pageCompression=None)
-            self._draw_background(canvas, company)
+            self._draw_background(canvas, print_settings)
             canvas.setFillColorRGB(*self._fill_color)
             if a4:
                 initial_position = (0.05 * inch,  4.50 * inch)
                 self._draw_description_line(canvas,
-                                            default_font,
-                                            initial_position)
+                                            print_settings,
+                                            initial_position,
+                                            default_font)
             if invoice.partner_bank_id.print_partner:
                 if (invoice.partner_bank_id.print_account or
                         invoice.partner_bank_id.bvr_adherent_num):
                     initial_position = (0.05 * inch,  3.30 * inch)
                 else:
                     initial_position = (0.05 * inch,  3.75 * inch)
-                self._draw_address(canvas, default_font, company.partner_id,
-                                   initial_position, company)
+                self._draw_address(canvas, print_settings, initial_position,
+                                   default_font, company.partner_id)
                 if (invoice.partner_bank_id.print_account or
                         invoice.partner_bank_id.bvr_adherent_num):
                     initial_position = (2.45 * inch, 3.30 * inch)
                 else:
                     initial_position = (2.45 * inch, 3.75 * inch)
-                self._draw_address(canvas, default_font, company.partner_id,
-                                   initial_position, company)
+                self._draw_address(canvas, print_settings, initial_position,
+                                   default_font, company.partner_id)
             com_partner = self.get_comm_partner()
             initial_position = (0.05 * inch, 1.4 * inch)
-            self._draw_address(canvas, default_font, com_partner,
-                               initial_position, company)
+            self._draw_address(canvas, print_settings, initial_position,
+                               default_font, com_partner)
             initial_position = (4.86 * inch, 2.2 * inch)
-            self._draw_address(canvas, default_font, com_partner,
-                               initial_position, company)
+            self._draw_address(canvas, print_settings, initial_position,
+                               default_font, com_partner)
             num_car, frac_car = ("%.2f" % self.amount_total).split('.')
-            self._draw_amount(canvas, amount_font, num_car,
-                              (1.48 * inch, 2.0 * inch), company)
-            self._draw_amount(canvas, amount_font, frac_car,
-                              (2.14 * inch, 2.0 * inch), company)
-            self._draw_amount(canvas, amount_font, num_car,
-                              (3.88 * inch, 2.0 * inch), company)
-            self._draw_amount(canvas, amount_font, frac_car,
-                              (4.50 * inch, 2.0 * inch), company)
+            self._draw_amount(canvas, print_settings,
+                              (1.48 * inch, 2.0 * inch),
+                              amount_font, num_car)
+            self._draw_amount(canvas, print_settings,
+                              (2.14 * inch, 2.0 * inch),
+                              amount_font, frac_car)
+            self._draw_amount(canvas, print_settings,
+                              (3.88 * inch, 2.0 * inch),
+                              amount_font, num_car)
+            self._draw_amount(canvas, print_settings,
+                              (4.50 * inch, 2.0 * inch),
+                              amount_font, frac_car)
             if invoice.partner_bank_id.print_bank:
                 self._draw_bank(canvas,
-                                default_font,
-                                bank_acc.bank,
+                                print_settings,
                                 (0.05 * inch, 3.75 * inch),
-                                company)
-                self._draw_bank(canvas,
                                 default_font,
-                                bank_acc.bank,
+                                bank_acc.bank)
+                self._draw_bank(canvas,
+                                print_settings,
                                 (2.45 * inch, 3.75 * inch),
-                                company)
+                                default_font,
+                                bank_acc.bank)
             if invoice.partner_bank_id.print_account:
-                self._draw_bank_account(canvas, default_font,
-                                        bank_acc.get_account_number(),
-                                        (1 * inch, 2.35 * inch), company)
-                self._draw_bank_account(canvas, default_font,
-                                        bank_acc.get_account_number(),
-                                        (3.4 * inch, 2.35 * inch), company)
+                self._draw_bank_account(canvas,
+                                        print_settings,
+                                        (1 * inch, 2.35 * inch),
+                                        default_font,
+                                        bank_acc.get_account_number())
+                self._draw_bank_account(canvas,
+                                        print_settings,
+                                        (3.4 * inch, 2.35 * inch),
+                                        default_font,
+                                        bank_acc.get_account_number())
 
-            self._draw_ref(canvas, default_font, self.reference,
-                           (4.9 * inch, 2.70 * inch), company)
-            self._draw_recipe_ref(canvas, small_font, self.reference,
-                                  (0.05 * inch, 1.6 * inch), company)
+            self._draw_ref(canvas,
+                           print_settings,
+                           (4.9 * inch, 2.70 * inch),
+                           default_font,
+                           self.reference)
+            self._draw_recipe_ref(canvas,
+                                  print_settings,
+                                  (0.05 * inch, 1.6 * inch),
+                                  small_font,
+                                  self.reference)
             self._draw_scan_line(canvas,
-                                 scan_font,
+                                 print_settings,
                                  (8.26 * inch - 4/10 * inch, 4/6 * inch),
-                                 company)
-            self._draw_hook(canvas)
+                                 scan_font)
+            self._draw_hook(canvas, print_settings)
             canvas.showPage()
             canvas.save()
             img_stream = buff.getvalue()
