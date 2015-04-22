@@ -30,7 +30,8 @@ class ExtendedReport(models.Model):
 
     _inherit = 'report'
 
-    def _compute_documents_list(self, cr, uid, invoice_ids, context=None):
+    def _compute_documents_list(self, cr, uid, invoice_ids,
+                                report_name=None, context=None):
         slip_model = self.pool['l10n_ch.payment_slip']
         invoice_model = self.pool['account.invoice']
         for inv in invoice_model.browse(cr, uid, invoice_ids, context=context):
@@ -50,12 +51,14 @@ class ExtendedReport(models.Model):
                 context=context
             )
             for slip in slips:
-                yield slip._draw_payment_slip(a4=True, b64=False,
+                yield slip._draw_payment_slip(a4=True,
+                                              b64=False,
+                                              report_name=report_name,
                                               out_format='PDF')
 
     @api.v7
     def _generate_inv_and_one_slip_per_page_from_invoice_pdf(
-            self, cr, uid, ids, context=None):
+            self, cr, uid, ids, report_name=None, context=None):
         """Generate invoice with payment slip PDF(s) on separate page
         from report model.
         PDF are merged in memory or on
@@ -65,7 +68,9 @@ class ExtendedReport(models.Model):
         """
         user_model = self.pool['res.users']
         company = user_model.browse(cr, uid, uid, context=context).company_id
-        docs = self._compute_documents_list(cr, uid, ids, context=context)
+        docs = self._compute_documents_list(cr, uid, ids,
+                                            report_name=report_name,
+                                            context=context)
         if company.merge_mode == 'in_memory':
             return self.merge_pdf_in_memory(docs)
         return self.merge_pdf_on_disk(docs)
@@ -78,6 +83,7 @@ class ExtendedReport(models.Model):
                 cr,
                 uid,
                 ids,
+                report_name=report_name,
                 context=context
             )
         else:
