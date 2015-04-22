@@ -39,15 +39,16 @@ FontMeta = namedtuple('FontMeta', ('name', 'size'))
 
 class PaymentSlipSettings(object):
     """Slip report setting container"""
-    def validate(self):
-        "Hook function to validate parameters"""
-        pass
 
     def __init__(self, report_name, **kwargs):
         for param, value in kwargs.iteritems():
             setattr(self, param, value)
         self.report_name = report_name
         self.validate()
+
+    def validate(self):
+        "Parameter Validationd hook"""
+        pass
 
 
 class PaymentSlip(models.Model):
