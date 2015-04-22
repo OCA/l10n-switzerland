@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+       <record model="ir.ui.view" id="company_form_view">
+            <field name="name">res.company.form.inherit.bvr</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="l10n_ch_payment_slip.company_form_view"/>
+            <field name="arch" type="xml">
+                <field name="bvr_background" position="after">
+                  <field name="bvr_background_on_merge"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

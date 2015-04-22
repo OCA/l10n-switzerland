@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
@@ -19,20 +18,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{'name': 'Payment slip alternate layout(s)',
- 'version': '0.1',
- 'author': 'Camptocamp, Odoo Community Association (OCA)',
- 'maintainer': 'Camptocamp, Odoo Community Association (OCA)',
- 'category': 'Accounting',
- 'complexity': 'normal',
- 'depends': ['base', 'account', 'l10n_ch_payment_slip'],
- 'website': 'http://www.camptocamp.com',
- 'data': ['report/report.xml',
-          'view/company_view.xml'],
- 'demo': [],
- 'test': [],
- 'installable': True,
- 'auto_install': False,
- 'license': 'AGPL-3',
- 'application': False,
- }
+from openerp import models, fields
+
+
+class ResCompany(models.Model):
+
+    _inherit = 'res.company'
+
+    bvr_background_on_merge = fields.Boolean(
+        'Insert BVR Background with invoice ?'
+    )
