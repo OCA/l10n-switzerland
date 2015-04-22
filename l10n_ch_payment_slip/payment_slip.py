@@ -642,6 +642,21 @@ class PaymentSlip(models.Model):
             x -= 0.1 * inch
 
     @api.model
+    def _draw_background(self, canvas, company):
+        """Draw payment slip background based on company setting
+
+        :param canvas: payment slip reportlab component to be drawn
+        :type canvas: :py:class:`reportlab.pdfgen.canvas.Canvas`
+
+
+        :param company: current `res.company` record
+        :type company: :py:class:`openerp.models.Model`
+        """
+        if company.bvr_background:
+            canvas.drawImage(self.image_absolute_path('bvr.png'),
+                             0, 0, 8.271 * inch, 4.174 * inch)
+
+    @api.model
     def _draw_hook(self, draw):
         """Hook to add your own content on canvas"""
         pass
@@ -685,9 +700,7 @@ class PaymentSlip(models.Model):
             canvas = Canvas(buff,
                             pagesize=canvas_size,
                             pageCompression=None)
-            if company.bvr_background:
-                canvas.drawImage(self.image_absolute_path('bvr.png'),
-                                 0, 0, 8.271 * inch, 4.174 * inch)
+            self._draw_background(canvas, company)
             canvas.setFillColorRGB(*self._fill_color)
             if a4:
                 initial_position = (0.05 * inch,  4.50 * inch)
