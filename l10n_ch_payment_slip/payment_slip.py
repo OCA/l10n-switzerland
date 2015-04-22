@@ -43,9 +43,10 @@ class PaymentSlipSettings(object):
         "Hook function to validate parameters"""
         pass
 
-    def __init__(self, **kwargs):
+    def __init__(self, report_name, **kwargs):
         for param, value in kwargs.iteritems():
             setattr(self, param, value)
+        self.report_name = report_name
         self.validate()
 
 
@@ -727,7 +728,7 @@ class PaymentSlip(models.Model):
             col: getattr(company, col) for col in company._fields if
             col.startswith('bvr_')
         }
-        return PaymentSlipSettings(**company_settings)
+        return PaymentSlipSettings(report_name, **company_settings)
 
     def _draw_payment_slip(self, a4=False, out_format='PDF', scale=None,
                            b64=False, report_name=None):
