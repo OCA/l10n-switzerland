@@ -87,11 +87,10 @@ class AccountCresusImport(models.TransientModel):
                     'line_id/debit', 'line_id/credit',
                     'line_id/account_tax_id',
                     'line_id/analytic_account_id']
-
-    def open_account_moves(self,ids):
-        move_ids = self.imported_move_ids[0][2]
+    @api.multi
+    def open_account_moves(self):
         res = {
-            'domain': str([('id', 'in', ids)]),
+            'domain': str([('id', 'in', self.imported_move_ids.ids)]),
             'name': 'Account Move',
             'view_type': 'form',
             'view_mode': 'tree,form',
@@ -180,7 +179,7 @@ class AccountCresusImport(models.TransientModel):
         if not result['messages']:
             self.state = 'done'
             self.report = _("Lines imported")
-            self.imported_move_ids = (6,0,[result['ids']])
+            self.imported_move_ids = result['ids']
         else:
             self.report = self.format_messages(result['messages'])
             self.state = 'error'
