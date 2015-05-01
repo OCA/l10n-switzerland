@@ -279,7 +279,7 @@ class AccountCresusImport(models.TransientModel):
             new_openerp_data.append(inverted_default_value)
 
         return new_openerp_data
-
+    @api_multi
     def _load_data(self, data):
         """Function that does the load of parsed CSV file.
 
