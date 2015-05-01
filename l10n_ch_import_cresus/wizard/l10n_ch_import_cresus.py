@@ -28,6 +28,7 @@ import tempfile
 from openerp import models, fields, api, exceptions
 from openerp.tools.translate import _
 from itertools import izip_longest
+from datetime import datetime
 
 _logger = logging.getLogger(__name__)
 
@@ -181,17 +182,13 @@ class AccountCresusImport(models.TransientModel):
             self.report = _("Lines imported")
             self.imported_move_ids = (6,0,[result['ids']])
         else:
-            msg = self.format_messages(result['messages'])
+            self.report = self.format_messages(result['messages'])
             self.state = 'error'
-            
-        return None
     
     @api.multi
     def _standardise_data(self, data):
         """ This function split one line of the CSV into multiple lines.
         Cresus just write one line per move, 
-        
-
         """
         new_openerp_data = []
         tax_obj = self.env['account.tax']
@@ -202,7 +199,9 @@ class AccountCresusImport(models.TransientModel):
         previous_date = False
         for line_cresus in data:
             is_negative = False
-            current_openerp_date = fields.datetime.now()
+            current_date_french_format = datetime.strptime(line_cresus['date'],
+                                                           '%d.%m.%Y')
+            current_openerp_date = fields.Date.to_string(current_date_french_format)
             default_value = standard_dict.copy()
             if (not previous_date) or previous_date != current_openerp_date:
                 default_value.update({'date': current_openerp_date})
@@ -279,7 +278,7 @@ class AccountCresusImport(models.TransientModel):
             new_openerp_data.append(inverted_default_value)
 
         return new_openerp_data
-    @api_multi
+    @api.multi
     def _load_data(self, data):
         """Function that does the load of parsed CSV file.
 
@@ -297,6 +296,7 @@ class AccountCresusImport(models.TransientModel):
         try:
             res = self.env['account.move'].load(self.HEAD_ODOO,
                                                  data_array)
+            
             self._manage_load_results(res)
         except Exception as exc:
             ex_type, sys_exc, tb = sys.exc_info()
@@ -308,11 +308,11 @@ class AccountCresusImport(models.TransientModel):
         finally:
             if self.state == 'error':
                 self.env.cr.rollback()
-        
-        return self.id
+                self.write({'report':self.report,'state':self.state})
+        return {}
 
     @api.multi
     def import_file(self):
         data = self._parse_csv()
         new_data = self._standardise_data(data)
-        self._load_data(new_data)
+        return self._load_data(new_data)
