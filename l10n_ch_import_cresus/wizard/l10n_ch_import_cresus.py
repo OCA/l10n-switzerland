@@ -25,11 +25,9 @@ import logging
 import base64
 import csv
 import tempfile
-from openerp import models, fields, api
+from openerp import models, fields, api, exceptions
 from openerp.tools.translate import _
 from itertools import izip_longest
-from datetime import datetime
-from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 
 _logger = logging.getLogger(__name__)
 
@@ -48,19 +46,21 @@ class AccountCresusImport(models.TransientModel):
         )
     journal_id = fields.Many2one('account.journal', 'Journal',
                                       required=True)
-    state = fields.Char(size=64,
-                        sting="Import state"
+    state = fields.Char(sting="Import state"
                         'Report',
-                        readonly=True
+                        readonly=True,
+                        default="draft"
                         )
     file = fields.Binary(
             'File',
             required=True
         )
-    help_html = fields.Html('Import help', readonly=True)
-
-    _defaults = {'state': 'draft',
-                 'help_html': _('''
+    imported_move_ids = fields.Many2many(
+        'account.move', 'import_cresus_move_rel',
+        string='Imported moves')
+    
+    help_html = fields.Html('Import help', readonly=True,
+                            default=_('''
                  In order to import your 'Cresus Salaires' .txt \
                  file you must complete the following requirements : </br>
                 * The accounts, analytical accounts used in the Cresus\
@@ -76,25 +76,21 @@ class AccountCresusImport(models.TransientModel):
                 (meaning: no balance brought forward in the new fiscal year)\
                 and all
                  Balance sheet account must have a deferral \
-                method = 'balance'. </br>'''
-                                )
-
-                 }
-
+                method = 'balance'. </br>'''))
+    
     HEAD_CRESUS = ['date', 'debit', 'credit', 'pce',
                    'ref', 'amount', 'typtvat', 'currency_amount',
                    'analytic_account']
-    HEAD_OPENERP = ['ref', 'date', 'period_id', 'journal_id',
+    HEAD_ODOO = ['ref', 'date', 'period_id', 'journal_id',
                     'line_id/account_id', 'line_id/partner_id', 'line_id/name',
                     'line_id/debit', 'line_id/credit',
                     'line_id/account_tax_id',
                     'line_id/analytic_account_id']
-    MOVE_IDS = []
 
-    def open_account_moves(self):
-        move_ids = self.MOVE_IDS
+    def open_account_moves(self,ids):
+        move_ids = self.imported_move_ids[0][2]
         res = {
-            'domain': str([('id', 'in', move_ids)]),
+            'domain': str([('id', 'in', ids)]),
             'name': 'Account Move',
             'view_type': 'form',
             'view_mode': 'tree,form',
@@ -133,8 +129,7 @@ class AccountCresusImport(models.TransientModel):
         """
         # We use tempfile in order to avoid memory error with large files
         with tempfile.TemporaryFile() as src:
-            imp = self.read(['file'])
-            content = imp[0]['file']
+            content = self.file
             delimiter = '\t'
             src.write(content)
             with tempfile.TemporaryFile() as decoded:
@@ -155,7 +150,7 @@ class AccountCresusImport(models.TransientModel):
             data = csv.DictReader(csv_file, fieldnames=self.HEAD_CRESUS,
                                   delimiter=delimiter)
         except csv.Error as error:
-            raise orm.except_orm(
+            raise exceptions.Warning(
                 _('CSV file is malformed'),
                 _("Please choose the correct separator \n"
                   "the error detail is : \n %s") % repr(error)
@@ -181,16 +176,15 @@ class AccountCresusImport(models.TransientModel):
 
         """
         # Import sucessful
-        state = msg = None
         if not result['messages']:
-            msg = _("Lines imported")
-            state = 'done'
+            self.state = 'done'
+            self.report = _("Lines imported")
+            self.imported_move_ids = (6,0,[result['ids']])
         else:
             msg = self.format_messages(result['messages'])
-            state = 'error'
-        self.write({'state': state})
-        self.MOVE_IDS = result['ids']
-        return (state, msg)
+            self.state = 'error'
+            
+        return None
     
     @api.multi
     def _standardise_data(self, data):
@@ -201,106 +195,87 @@ class AccountCresusImport(models.TransientModel):
         """
         new_openerp_data = []
         tax_obj = self.env['account.tax']
-        user_obj = self.env['res.users']
         account_obj = self.env['account.account']
-        cp = user_obj.browse([self.env.uid]).company_id
+        cp = self.env.user.company_id
         company_partner = cp.partner_id.name
-        standard_dict = dict(izip_longest(self.HEAD_OPENERP, []))
+        standard_dict = dict(izip_longest(self.HEAD_ODOO, []))
         previous_date = False
         for line_cresus in data:
             is_negative = False
-            current_date_french_format = datetime.strptime(line_cresus['date'],
-                                                           '%d.%m.%Y')
-            current_openerp_date = datetime.strftime(
-                current_date_french_format,
-                DEFAULT_SERVER_DATE_FORMAT)
+            current_openerp_date = fields.datetime.now()
             default_value = standard_dict.copy()
             if (not previous_date) or previous_date != current_openerp_date:
-                default_value['date'] = current_openerp_date
-                default_value['ref'] = line_cresus['pce']
-                default_value['journal_id'] = self.journal_id.name
-                default_value['period_id'] = self.period_id.code
+                default_value.update({'date': current_openerp_date})
+                default_value.update({'ref': line_cresus['pce']})
+                default_value.update({'journal_id': self.journal_id.name})
+                default_value.update({'period_id': self.period_id.code})
                 previous_date = current_openerp_date
             else:
-                default_value['date'] = None
-                default_value['ref'] = None
-                default_value['journal_id'] = None
-                default_value['period_id'] = None
+                default_value.update({'date': None})
+                default_value.update({'ref': None})
+                default_value.update({'journal_id': None})
+                default_value.update({'period_id': None})
             decimal_amount = float(
                 line_cresus['amount'].replace('\'', '').replace(' ', ''))
             if decimal_amount < 0:
-                default_value['line_id/credit'] = abs(decimal_amount)
-                default_value['line_id/debit'] = 0.0
-                default_value['line_id/account_id'] = line_cresus['debit']
+                default_value.update({'line_id/credit': abs(decimal_amount)})
+                default_value.update({'line_id/debit': 0.0})
+                default_value.update({'line_id/account_id': line_cresus['debit']})
                 is_negative = True
             else:
-                default_value['line_id/debit'] = abs(decimal_amount)
-                default_value['line_id/credit'] = 0.0
-                default_value['line_id/account_id'] = line_cresus['debit']
+                default_value.update({'line_id/debit': abs(decimal_amount)})
+                default_value.update({'line_id/credit': 0.0})
+                default_value.update({'line_id/account_id': line_cresus['debit']})
             tax_code = None
             analytic_code = None
             tax_code_inverted = None
             tax_current = None
             analytic_code_inverted = None
             if line_cresus['typtvat']:
-
-                tax_ids = tax_obj.search([('tax_cresus_mapping',
-                                                    '=',
-                                                    line_cresus['typtvat']),
-                                                   ('price_include',
-                                                    '=',
-                                                    True)],
-                                         limit=1)
-                if tax_ids:
-                    tax_current = tax_obj.read(tax_ids, ['name'])[0]
+                tax_current = tax_obj.search([('tax_cresus_mapping', '=',line_cresus['typtvat']),
+                                      ('price_include','=',True)],limit=1)
                     # Search for account that have a deferal method
             if tax_current or line_cresus['analytic_account']:
-                current_account_id = account_obj.search([
-                    ('code', '=', default_value['line_id/account_id'])])
-                if current_account_id:
-                    current_account = account_obj.browse(current_account_id)[0]
+                current_account = account_obj.search([
+                    ('code', '=', default_value['line_id/account_id'])],limit=1)
+                if current_account:
                     if current_account.user_type.close_method == 'none':
                         if tax_current:
-                            tax_code = tax_current['name']
+                            tax_code = tax_current.name
                         analytic_code = line_cresus['analytic_account']
-            default_value['line_id/account_tax_id'] = tax_code
-            default_value['line_id/partner_id'] = company_partner
-            default_value['line_id/name'] = line_cresus['ref']
-            default_value['line_id/analytic_account_id'] = analytic_code
+            default_value.update({'line_id/account_tax_id': tax_code})
+            default_value.update({'line_id/partner_id': company_partner})
+            default_value.update({'line_id/name': line_cresus['ref']})
+            default_value.update({'line_id/analytic_account_id': analytic_code})
             new_openerp_data.append(default_value)
             #
             # Generated the second line inverted
             #
             inverted_default_value = default_value.copy()
-            inverted_default_value['date'] = None
-            inverted_default_value['ref'] = None
-            inverted_default_value['journal_id'] = None
-            inverted_default_value['period_id'] = None
+            inverted_default_value.update({'date': None})
+            inverted_default_value.update({'ref': None})
+            inverted_default_value.update({'journal_id': None})
+            inverted_default_value.update({'period_id': None})
             if is_negative:
-                inverted_default_value['line_id/debit'] = abs(decimal_amount)
-                inverted_default_value['line_id/credit'] = 0.0
-                inverted_default_value['line_id/account_id']\
-                    = line_cresus['credit']
+                inverted_default_value.update({'line_id/debit': abs(decimal_amount)})
+                inverted_default_value.update({'line_id/credit': 0.0})
+                inverted_default_value.update({'line_id/account_id': line_cresus['credit']})
             else:
-                inverted_default_value['line_id/debit'] = 0.0
-                inverted_default_value['line_id/credit'] = abs(decimal_amount)
-                inverted_default_value['line_id/account_id']\
-                    = line_cresus['credit']
+                inverted_default_value.update({'line_id/debit': 0.0})
+                inverted_default_value.update({'line_id/credit': abs(decimal_amount)})
+                inverted_default_value.update({'line_id/account_id': line_cresus['credit']})
                 # Search for account that have a deferal method
             if tax_current or line_cresus['analytic_account']:
-                current_account_id = account_obj.search([
+                current_account = account_obj.search([
                     ('code', '=',
-                     inverted_default_value['line_id/account_id'])])
-                if current_account_id:
-                    current_account = account_obj.browse(current_account_id)[0]
+                     inverted_default_value.get('line_id/account_id'))])
+                if current_account:
                     if current_account.user_type.close_method == 'none':
                         if tax_current:
                             tax_code_inverted = tax_current['name']
                     analytic_code_inverted = line_cresus['analytic_account']
-            inverted_default_value['line_id/account_tax_id']\
-                = tax_code_inverted
-            inverted_default_value['line_id/analytic_account_id']\
-                = analytic_code_inverted
+            inverted_default_value.update({'line_id/account_tax_id': tax_code_inverted})
+            inverted_default_value.update({'line_id/analytic_account_id': analytic_code_inverted})
             new_openerp_data.append(inverted_default_value)
 
         return new_openerp_data
@@ -316,25 +291,24 @@ class AccountCresusImport(models.TransientModel):
         data_array = []
         for data_item_dict in data:
             data_item = []
-            for item in self.HEAD_OPENERP:
+            for item in self.HEAD_ODOO:
                 data_item.append(data_item_dict[item])
             data_array.append(data_item)
-        state = msg = None
         try:
-            res = self.env['account.move'].load(self.HEAD_OPENERP,
+            res = self.env['account.move'].load(self.HEAD_ODOO,
                                                  data_array)
-            state, msg = self._manage_load_results(res)
+            self._manage_load_results(res)
         except Exception as exc:
             ex_type, sys_exc, tb = sys.exc_info()
             tb_msg = ''.join(traceback.format_tb(tb, 30))
             _logger.error(tb_msg)
             _logger.error(repr(exc))
-            msg = _("Unexpected exception.\n %s \n %s" % (repr(exc), tb_msg))
-            state = 'error'
+            self.report = _("Unexpected exception.\n %s \n %s" % (repr(exc), tb_msg))
+            self.state = 'error'
         finally:
-            if state == 'error':
+            if self.state == 'error':
                 self.env.cr.rollback()
-            self.write({'report': msg})
+        
         return self.id
 
     @api.multi

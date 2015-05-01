@@ -26,9 +26,6 @@
         'account',
     ],
     'author': 'Camptocamp',
-    'description': """
-    Import Journal Entries from Cresus
-    """,
     'website': 'http://www.camptocamp.com',
     'data': [
         'wizard/l10n_ch_import_cresus_view.xml',
@@ -36,5 +33,4 @@
         'menu.xml',
     ],
     'installable': True,
-    'active': False,
 }
