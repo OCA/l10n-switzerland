@@ -42,8 +42,8 @@ class AccountCresusImport(models.TransientModel):
     period_id = fields.Many2one('account.period', 'Period',
                                 required=True)
     report = fields.Text(
-            'Report',
-            readonly=True
+        'Report',
+        readonly=True
         )
     journal_id = fields.Many2one('account.journal', 'Journal',
                                  required=True)
@@ -53,8 +53,8 @@ class AccountCresusImport(models.TransientModel):
                         default="draft"
                         )
     file = fields.Binary(
-            'File',
-            required=True
+        'File',
+        required=True
         )
     imported_move_ids = fields.Many2many(
         'account.move', 'import_cresus_move_rel',
@@ -200,28 +200,29 @@ class AccountCresusImport(models.TransientModel):
                 current_date_french_format)
             default_value = standard_dict.copy()
             if (not previous_date) or previous_date != current_openerp_date:
-                default_value.update({'date': current_openerp_date})
-                default_value.update({'ref': line_cresus['pce']})
-                default_value.update({'journal_id': self.journal_id.name})
-                default_value.update({'period_id': self.period_id.code})
+                default_value.update({'date': current_openerp_date,
+                                      'ref': line_cresus['pce'],
+                                      'journal_id': self.journal_id.name,
+                                      'period_id': self.period_id.code
+                                      })
                 previous_date = current_openerp_date
             else:
-                default_value.update({'date': None})
-                default_value.update({'ref': None})
-                default_value.update({'journal_id': None})
-                default_value.update({'period_id': None})
+                default_value.update({'date': None,
+                                      'ref': None,
+                                      'journal_id': None,
+                                      'period_id': None})
             decimal_amount = float(
                 line_cresus['amount'].replace('\'', '').replace(' ', ''))
             if decimal_amount < 0:
-                default_value.update({'line_id/credit': abs(decimal_amount)})
-                default_value.update({'line_id/debit': 0.0})
-                default_value.update({'line_id/account_id':
+                default_value.update({'line_id/credit': abs(decimal_amount),
+                                      'line_id/debit': 0.0,
+                                      'line_id/account_id':
                                       line_cresus['debit']})
                 is_negative = True
             else:
-                default_value.update({'line_id/debit': abs(decimal_amount)})
-                default_value.update({'line_id/credit': 0.0})
-                default_value.update({'line_id/account_id':
+                default_value.update({'line_id/debit': abs(decimal_amount),
+                                      'line_id/credit': 0.0,
+                                      'line_id/account_id':
                                       line_cresus['debit']})
             tax_code = None
             analytic_code = None
@@ -244,31 +245,31 @@ class AccountCresusImport(models.TransientModel):
                         if tax_current:
                             tax_code = tax_current.name
                         analytic_code = line_cresus['analytic_account']
-            default_value.update({'line_id/account_tax_id': tax_code})
-            default_value.update({'line_id/partner_id': company_partner})
-            default_value.update({'line_id/name': line_cresus['ref']})
-            default_value.update({'line_id/analytic_account_id':
+            default_value.update({'line_id/account_tax_id': tax_code,
+                                  'line_id/partner_id': company_partner,
+                                  'line_id/name': line_cresus['ref'],
+                                  'line_id/analytic_account_id':
                                   analytic_code})
             new_openerp_data.append(default_value)
             #
             # Generated the second line inverted
             #
             inverted_default_value = default_value.copy()
-            inverted_default_value.update({'date': None})
-            inverted_default_value.update({'ref': None})
-            inverted_default_value.update({'journal_id': None})
-            inverted_default_value.update({'period_id': None})
+            inverted_default_value.update({'date': None,
+                                           'ref': None,
+                                           'journal_id': None,
+                                           'period_id': None})
             if is_negative:
                 inverted_default_value.update({'line_id/debit':
-                                               abs(decimal_amount)})
-                inverted_default_value.update({'line_id/credit': 0.0})
-                inverted_default_value.update({'line_id/account_id':
+                                               abs(decimal_amount),
+                                               'line_id/credit': 0.0,
+                                               'line_id/account_id':
                                                line_cresus['credit']})
             else:
-                inverted_default_value.update({'line_id/debit': 0.0})
-                inverted_default_value.update({'line_id/credit':
-                                               abs(decimal_amount)})
-                inverted_default_value.update({'line_id/account_id':
+                inverted_default_value.update({'line_id/debit': 0.0,
+                                               'line_id/credit':
+                                               abs(decimal_amount),
+                                               'line_id/account_id':
                                                line_cresus['credit']})
                 # Search for account that have a deferal method
             if tax_current or line_cresus['analytic_account']:
@@ -281,8 +282,8 @@ class AccountCresusImport(models.TransientModel):
                             tax_code_inverted = tax_current['name']
                     analytic_code_inverted = line_cresus['analytic_account']
             inverted_default_value.update({'line_id/account_tax_id':
-                                           tax_code_inverted})
-            inverted_default_value.update({'line_id/analytic_account_id':
+                                           tax_code_inverted,
+                                          'line_id/analytic_account_id':
                                            analytic_code_inverted})
             new_openerp_data.append(inverted_default_value)
 
