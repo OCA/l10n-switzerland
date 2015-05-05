@@ -1,0 +1,163 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* l10n_ch_import_cresus
+#
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-17 11:38+0000\n"
+"PO-Revision-Date: 2015-03-17 11:38+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_ch_import_cresus
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:69
+#, python-format
+msgid "\n"
+"                 In order to import your 'Cresus Salaires' .txt                  file you must complete the following requirements : </br>  \n"
+"                * The accounts, analytical accounts used in the Cresus                 file must be previously created into Odoo  </br>\n"
+"                * The date of the entry will determine the period used                 in Odoo, so please ensure the period is created already. </br> \n"
+"                * If the Cresus file uses VAT codes (i.e: IPI),                 please make sure you have indicated this code in the related Odoo tax                (new field). Warning, the Odoo tax must be 'tax included'. If the tax does not exist you have to create it. </br> \n"
+"                * All PL accounts must have a deferral method = 'none'                (meaning: no balance brought forward in the new fiscal year) and all                 Balance sheet account must have a deferral method = 'balance'. </br>"
+msgstr "\n"
+"Pour importer votre fichier .txt généré par 'Cresus Salaires', vous devez préalablement vous assurer des points suivants : </br> \n"
+"* Les comptes et comptes analytiques utilisés dans le fichier doivent être préalablement créés dans Odoo.</br>\n"
+"* La date de l'écriture détermine la période comptable dans Odoo ; il faut donc que celle-ci soit bien créée.</br>\n"
+"* Si des codes TVA sont utilisés dans le fichier Crésus (ex : IPI), veuillez indiquer dans la taxe Odoo correspondante ce code (nouveau champs). Attention : Cette taxe doit être de" "type 'taxe incluse'. Si la taxe n'existe pas, vous devrez la créer.</br>\n"
+"* Les comptes de résultat doivent avoir impérativement une méthode de report à nouveau des soldes = 'Aucun' (signifiant : pas de report de solde) et les comptes de bilan doivent avoir"
+"une méthode de report à nouveau = Solde)</br>\n"
+
+#. module: l10n_ch_import_cresus
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:119
+#, python-format
+msgid "%s. -- Field: %s -- rows %s to %s"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: model:ir.ui.menu,name:l10n_ch_import_cresus.menu_account_cresus_import
+msgid "Accounting Cresus Import"
+msgstr "Import Ecritures Crésus"
+
+#. module: l10n_ch_import_cresus
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:161
+#, python-format
+msgid "CSV file is malformed"
+msgstr "Le format du fichier CSV est incorrect "
+
+#. module: l10n_ch_import_cresus
+#: field:account.cresus.import,company_id:0
+msgid "Company"
+msgstr "Société"
+
+#. module: l10n_ch_import_cresus
+#: view:account.tax:0
+msgid "Cresus"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: field:account.tax,tax_cresus_mapping:0
+msgid "Cresus tax name"
+msgstr "Code TVA cresus"
+
+#. module: l10n_ch_import_cresus
+#: code:_description:0
+#: model:ir.model,name:l10n_ch_import_cresus.model_account_cresus_import
+#, python-format
+msgid "Export Accounting"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: field:account.cresus.import,file:0
+msgid "File"
+msgstr "Fichier"
+
+#. module: l10n_ch_import_cresus
+#: view:account.cresus.import:0
+msgid "Help"
+msgstr "Aide"
+
+#. module: l10n_ch_import_cresus
+#: view:account.cresus.import:0
+msgid "Import File"
+msgstr "Import Fichier"
+
+#. module: l10n_ch_import_cresus
+#: model:ir.actions.act_window,name:l10n_ch_import_cresus.action_account_cresus_import
+msgid "Import Ecritures"
+msgstr "Import écritures"
+
+#. module: l10n_ch_import_cresus
+#: field:account.cresus.import,help_html:0
+msgid "Import help"
+msgstr "Import Aide"
+
+#. module: l10n_ch_import_cresus
+#: field:account.cresus.import,journal_id:0
+msgid "Journal"
+msgstr "Journal"
+
+#. module: l10n_ch_import_cresus
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:189
+#, python-format
+msgid "Lines imported"
+msgstr "Lignes importées"
+
+#. module: l10n_ch_import_cresus
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:162
+#, python-format
+msgid "Please choose the correct separator \n"
+"the error detail is : \n"
+" %s"
+msgstr "Veuillez sélectionner le bon séparateur de colonne"
+"Le message d'erreur est : \n"
+
+#. module: l10n_ch_import_cresus
+#: view:account.cresus.import:0
+msgid "Move / Move lines importer"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: field:account.cresus.import,period_id:0
+msgid "Period"
+msgstr "Période"
+
+#. module: l10n_ch_import_cresus
+#: view:account.tax:0
+msgid "Refunds"
+msgstr "Note de crédit"
+
+#. module: l10n_ch_import_cresus
+#: view:account.cresus.import:0
+#: field:account.cresus.import,report:0
+msgid "Report"
+msgstr "Rapport"
+
+#. module: l10n_ch_import_cresus
+#: code:_description:0
+#: model:ir.model,name:l10n_ch_import_cresus.model_account_tax
+#, python-format
+msgid "Tax"
+msgstr "Taxe"
+
+#. module: l10n_ch_import_cresus
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:347
+#, python-format
+msgid "Unexpected exception.\n"
+" %s \n"
+" %s"
+msgstr "Erreur"
+
+#. module: l10n_ch_import_cresus
+#: view:account.cresus.import:0
+msgid "View imported Moves"
+msgstr "Ecritures générées"
+
+#. module: l10n_ch_import_cresus
+#: field:account.cresus.import,state:0
+msgid "unknown"
+msgstr "inconnu"
+

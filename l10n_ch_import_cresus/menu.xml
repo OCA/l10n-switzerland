@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+    <record model="ir.actions.act_window" id="action_account_cresus_import">
+      <field name="name">Import Move lines</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">account.cresus.import</field>
+      <field name="domain"></field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="cresus_move_line_importer_form"/>
+    </record>
+
+
+        <menuitem
+            icon="STOCK_EXECUTE"
+            name="Accounting Cresus Import"
+            action="action_account_cresus_import"
+            id="menu_account_cresus_import"
+            parent="account.menu_finance_entries"
+            sequence="110"
+            />
+
+
+    </data>
+</openerp>

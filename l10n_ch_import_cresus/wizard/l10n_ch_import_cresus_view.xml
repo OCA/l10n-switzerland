@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    <record id="cresus_move_line_importer_form" model="ir.ui.view">
+      <field name="name">cresus move line importer</field>
+      <field name="model">account.cresus.import</field>
+      <field name="arch" type="xml">
+        <form string="Move / Move lines importer">
+          <footer>
+            <button name="import_file"
+                    type="object"
+                    string="Import file"
+                    class="oe_highlight"/>
+            <button name="open_account_moves"
+                    type="object"
+                    attrs="{'invisible': ['|',('state','=','draft'),('state','=','error')]}"
+                    string="View imported Moves"
+                    class="oe_highlight"/>
+             
+          </footer>
+          <group>
+            <div>
+              <field name="state" invisible="1"/>
+              <field name="file"
+                     class="oe_inline"/>
+            </div>
+          </group>
+          <group>
+            <field name="company_id"/>
+            <field name="period_id" domain="[('state', '=', 'draft')]"/>
+            <field name="journal_id" />
+          </group>
+          <notebook>
+            <page string="Report">
+              <field name="report"
+                     nolabel="1"
+                     colspan="4"/>
+            </page>
+
+            <page string="Import help">
+            	<field name="help_html"/>
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+    </data>
+</openerp>
