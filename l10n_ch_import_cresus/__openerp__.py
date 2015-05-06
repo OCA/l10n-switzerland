@@ -25,7 +25,7 @@
     'depends': [
         'account',
     ],
-    'author': 'Camptocamp',
+    'author': 'Camptocamp, Odoo Community Association (OCA)',
     'website': 'http://www.camptocamp.com',
     'data': [
         'wizard/l10n_ch_import_cresus_view.xml',
