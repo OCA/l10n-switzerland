@@ -197,16 +197,19 @@ class BvrImporterWizard(models.TransientModel):
                   'type': (record['amount'] >= 0 and 'customer') or 'supplier',
                   'statement_id': statement.id,
                   }
-        line_ids = move_line_obj.search(
+        line = move_line_obj.search(
             [('transaction_ref', '=', reference),
              ('reconcile_id', '=', False),
              ('account_id.type', 'in', ['receivable', 'payable']),
              ('journal_id.type', '=', 'sale')],
             order='date desc',
         )
-        if line_ids:
+        if len(line) > 1:
+            raise exceptions.Warning(
+                _("Too many receivable/payable lines for reference %s")
+                % reference)
+        if line:
             # transaction_ref is propagated on all lines
-            line = move_line_obj.browse(line_ids[0])
             partner_id = line.partner_id.id
             num = line.invoice.number if line.invoice else False
             values['ref'] = _('Inv. no %s') % num if num else values['name']
