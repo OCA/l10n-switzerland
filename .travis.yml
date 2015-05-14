@@ -30,7 +30,7 @@ install:
   - git clone https://github.com/OCA/banking.git ${HOME}/banking -b ${VERSION}
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly ${VERSION}
-  - sudo pip install unidecode
+  - pip install unidecode
 
 script:
   - travis_run_flake8
