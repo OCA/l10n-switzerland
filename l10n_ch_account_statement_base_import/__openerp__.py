@@ -20,35 +20,20 @@
 ##############################################################################
 
 {'name': "Swiss bank statements import",
- 'version': '0.3',
- 'author': "Compassion CH,Odoo Community Association (OCA)",
+ 'version': '0.4',
+ 'author': "Compassion CH, Camptocamp,Odoo Community Association (OCA)",
  'category': 'Finance',
  'complexity': 'normal',
  'depends': [
-     'account_statement_base_import',
+     'account_bank_statement_import',
  ],
  'external_dependencies': {
      'python': ['xlrd'],
  },
- 'description': """
- This module adds several import types to the module
- account_statement_base_import, in order to read swiss bank statements.
- It currently supports the following file formats :
-
- * .v11, .esr, .bvr formats (ESR standard) for records of type 3
-   (type 4 is ready to be implemented)
- * .g11 format from Postfinance S.A. for Direct Debit records of type 2
- * XML format from Postfinance S.A.
- * .csv format from Raiffeisen Bank
- * .csv format from UBS Bank [CH-FR]
-
- Warning : this module requires the python library 'xlrd'.
- """,
  'website': 'http://www.compassion.ch/',
- 'data': ['view/statement_view.xml'],
+ 'data': [],
  'test': [],
  'installable': True,
  'images': [],
  'auto_install': False,
- 'license': 'AGPL-3',
- }
+ 'license': 'AGPL-3'}
