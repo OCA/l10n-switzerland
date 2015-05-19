@@ -37,7 +37,6 @@ reject_reason = {
 
 
 class G11FileParser(BankStatementImportParser):
-
     """
     Parser for a .v11 file in the BVR DD type 2 format.
     """

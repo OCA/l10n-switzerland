@@ -35,6 +35,7 @@ class XMLPFParser(BankStatementImportParser):
     """
     Parser for XML Postfinance Statements (can be wrapped in a tar.gz file)
     """
+
     def __init__(self, parse_name, ftype='xml', **kwargs):
         """
         :param char: parse_name: The name of the parser
