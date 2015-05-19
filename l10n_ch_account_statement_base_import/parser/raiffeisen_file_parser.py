@@ -197,7 +197,7 @@ class RaiffeisenDetailsFileParser(FileParser):
                      statement line,
         """
         # We try to extract a BVR reference
-        result = re.match('.*(\d{27}).*', line.get('Text'))
+        result = re.match(r'.*(\d{27}).*', line.get('Text'))
         ref = '/'
         if result and not line.get('Text').startswith(u'Crèdit'):
             ref = result.group(1)
@@ -232,7 +232,7 @@ class RaiffeisenDetailsFileParser(FileParser):
             for row in reader:
                 rows.append(
                     dict([(key, unicode(value, 'utf-8'))
-                         for key, value in row.iteritems()]))
+                          for key, value in row.iteritems()]))
             return rows
 
     def _get_values(self, line, currency='CHF', rate=1):

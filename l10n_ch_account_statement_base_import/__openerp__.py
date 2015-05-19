@@ -21,7 +21,7 @@
 
 {'name': "Swiss bank statements import",
  'version': '0.3',
- 'author': 'Compassion CH',
+ 'author': "Compassion CH,Odoo Community Association (OCA)",
  'category': 'Finance',
  'complexity': 'normal',
  'depends': [
@@ -45,7 +45,7 @@
  Warning : this module requires the python library 'xlrd'.
  """,
  'website': 'http://www.compassion.ch/',
- 'data': [],
+ 'data': ['view/statement_view.xml'],
  'test': [],
  'installable': True,
  'images': [],
