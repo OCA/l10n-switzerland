@@ -39,7 +39,7 @@ class l10n_ch_import(common.TransactionCase):
         self.profile_obj = self.registry("account.statement.profile")
         self.account_bank_statement_obj = self.registry(
             "account.bank.statement")
-        # create the 2002, 2011-2012 fiscal years since imported
+        # create the 2002, 2011-2012, 2014 fiscal years since imported
         # test files reference statement lines in those years
         self.fiscalyear_id = self._create_fiscalyear(
             "2002", self.company_a.id)
@@ -47,6 +47,8 @@ class l10n_ch_import(common.TransactionCase):
             "2011", self.company_a.id)
         self.fiscalyear_id = self._create_fiscalyear(
             "2012", self.company_a.id)
+        self.fiscalyear_id = self._create_fiscalyear(
+            "2014", self.company_a.id)
         self.account_id = self.ref("account.a_recv")
         self.journal_id = self.ref("account.bank_journal")
         self.import_wizard_obj = self.registry('credit.statement.import')
