@@ -19,4 +19,4 @@
 #
 ##############################################################################
 from . import parser
-from . import statement
+from . import account_bank_statement_import
