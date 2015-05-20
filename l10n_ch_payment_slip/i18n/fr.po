@@ -99,7 +99,7 @@ msgstr "Import BVR"
 #: report:addons/l10n_ch_payment_slip/report/bvr.mako:198
 #: report:addons/l10n_ch_payment_slip/report/multi_bvr.mako:199
 msgid "Payment slip for:"
-msgstr ""
+msgstr "Bulletin de versement pour :"
 
 #. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/report/report_webkit_html.py:117
