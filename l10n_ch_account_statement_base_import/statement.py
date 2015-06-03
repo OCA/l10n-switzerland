@@ -26,6 +26,15 @@ import tempfile
 import tarfile
 import base64
 from datetime import date
+import hashlib
+
+
+class AccountBankStatement(orm.Model):
+    _inherit = "account.bank.statement"
+
+    _columns = {
+        'checksum': fields.char(_('Checksum')),
+        }
 
 
 class AccountStatementProfil(orm.Model):
@@ -71,8 +80,29 @@ class AccountStatementProfil(orm.Model):
         """
         self.file_stream = file_stream
 
-        return super(AccountStatementProfil, self)._statement_import(
-            cr, uid, ids, prof, parser, file_stream, ftype, context)
+        """
+        Calculate hash of the file to determinate if it already exist
+        """
+        hash = hashlib.md5(file_stream).hexdigest()
+        statement_obj = self.pool.get('account.bank.statement')
+
+        for statement_id in statement_obj.search(
+                cr, uid, [('profile_id', '=', prof.id)], context=context):
+            statement = statement_obj.browse(cr, uid, statement_id,
+                                             context=context)
+            if statement.checksum and (statement.checksum == hash):
+                raise orm.except_orm(_("Warning"),
+                                     _("Bank statement already imported on %s")
+                                     % statement.date)
+
+        id_new_statement = super(AccountStatementProfil, self). \
+            _statement_import(cr, uid, ids, prof, parser, file_stream, ftype,
+                              context)
+
+        statement_obj.write(cr, uid, [id_new_statement], {'checksum': hash},
+                            context=context)
+
+        return id_new_statement
 
     def _write_extra_statement_lines(self, cr, uid, parser, result_row_list,
                                      profile, statement_id, context):
