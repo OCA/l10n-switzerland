@@ -29,8 +29,6 @@ class payment_line(models.Model):
     def create(self, vals):
         """In case of BVR
         we will search if the invoice related has BVR reference"""
-        import pdb
-        pdb.set_trace()
         account_move_line_obj = self.env['account.move.line']
         move_line = account_move_line_obj.browse(vals['move_line_id'])
         account_invoice_obj = self.env['account.invoice']
