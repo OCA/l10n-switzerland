@@ -39,6 +39,6 @@ class payment_line(models.Model):
         if invoice:
             # if this invoice is a BVR invoice we take the BVR
             # reference instead of ref
-            if invoice.reference_type == 'bvr':
+            if invoice.reference_type == 'bvr' and invoice.bvr_reference:
                 vals['communication'] = invoice.bvr_reference
         return super(payment_line, self).create(vals)
