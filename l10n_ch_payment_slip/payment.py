@@ -28,17 +28,10 @@ class payment_line(models.Model):
     @api.returns('self', lambda value: value.id)
     def create(self, vals):
         """In case of BVR
-        we will search if the invoice related has BVR reference"""
+        we will search the transaction ref instead of ref for
+        communication field"""
         account_move_line_obj = self.env['account.move.line']
         move_line = account_move_line_obj.browse(vals['move_line_id'])
-        account_invoice_obj = self.env['account.invoice']
-        invoice = account_invoice_obj.search([('move_id',
-                                               '=',
-                                               move_line.move_id.id)])
-        # We found a invoice related to this move line
-        if invoice:
-            # if this invoice is a BVR invoice we take the BVR
-            # reference instead of ref
-            if invoice.reference_type == 'bvr' and invoice.reference:
-                vals['communication'] = invoice.reference
+        if move_line.transaction_ref:
+            vals['communication'] = move_line.transaction_ref
         return super(payment_line, self).create(vals)
