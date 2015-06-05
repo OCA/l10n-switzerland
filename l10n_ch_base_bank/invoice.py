@@ -176,7 +176,7 @@ class AccountInvoice(models.Model):
                     return False
 =======
         for invoice in self:
-            if invoice.reference_type == 'bvr' and invoice.state != 'draft':
+            if invoice.reference_type == 'bvr':
                 if not invoice.reference:
                     raise exceptions.ValidationError(
                         _('BVR/ESR Reference is required')
