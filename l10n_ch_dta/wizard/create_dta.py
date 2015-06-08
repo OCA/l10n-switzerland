@@ -608,7 +608,7 @@ class DTAFileGenerator(models.TransientModel):
 
         elec_context['partner_bank_code'] = pline.bank_id.bank_bic
         elec_context['reference'] = False
-        if hasattr(pline, 'transaction_ref'):
+        if hasattr(pline.move_line_id, 'transaction_ref'):
             if pline.move_line_id.transaction_ref:
                 elec_context['reference'] = pline.move_line_id.transaction_ref
         if not elec_context['reference']:
