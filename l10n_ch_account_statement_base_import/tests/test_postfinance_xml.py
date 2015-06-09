@@ -79,6 +79,10 @@ class PFXMLParserTest(BaseParserTest):
                              'ref': 'ZAHLUNGSAUFTRAG NR. 30002102'}
         self.assertEqual(first_transaction, statement['transactions'][0])
 
+    def test_attachement_extraction(self):
+        """Test if scan are extracted correctly"""
+        self.assertEqual(set(['20110404001203000100002', '20110407001203000200002']),
+                         set(self.parser.attachments.keys()))
 # here you can add more subtle and detailed test
 # for each _parse functions using forged element tree
 
@@ -109,6 +113,7 @@ class PostFinanceImportTest(BaseStatementImportTest):
         self.assertEqual(372982.55, statement.balance_end_real)
         self.assertEqual(24, len(statement.line_ids))
         self.assertTrue(statement.account_id)
+        self.assertEqual(2, len(statement.related_files))
         st_line = statement.line_ids[0]
         # Read common infos of first line
         self.assertEqual(st_line.date, "2011-03-28")

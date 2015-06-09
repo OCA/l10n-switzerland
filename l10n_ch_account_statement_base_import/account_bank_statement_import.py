@@ -18,8 +18,18 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, api, _, exceptions
+from openerp import models, api, _, exceptions, fields
 from .parser import base_parser
+
+
+class AccountBankStatement(models.Model):
+    _inherit = 'account.bank.statement'
+
+    related_files = fields.Many2many(
+        comodel_name='ir.attachment',
+        string='Related files',
+        readonly=True
+    )
 
 
 class account_bank_statement_import(models.TransientModel):
@@ -88,3 +98,35 @@ class account_bank_statement_import(models.TransientModel):
         """
         for parser_class in base_parser.BaseSwissParser.__subclasses__():
             yield parser_class(data_file)
+
+    def _create_bank_statements(self, stmts_vals):
+        """Override to support attachement
+        in the long run it should be deprecated by
+        https://github.com/OCA/bank-statement-import/issues/25
+        """
+        statement_ids, notifs = super(
+            account_bank_statement_import,
+            self
+        )._create_bank_statements(
+            stmts_vals
+        )
+        # statements value are sorted list so we received sorted statement_ids
+        index = 0
+        for st_vals in stmts_vals:
+            statement = self.env['account.bank.statement'].browse(
+                statement_ids[index]
+            )
+            attachments = self.env['ir.attachment'].browse()
+            for attach in st_vals['attachments']:
+                attachments += self.env['ir.attachment'].create(
+                    {
+                        'name': attach[0],
+                        'res_model': 'account.bank.statement',
+                        'res_id': statement_ids[index],
+                        'type': 'binary',
+                        'datas': attach[1],
+                    }
+                )
+            statement.related_files = attachments
+            index += 1
+        return statement_ids, notifs
