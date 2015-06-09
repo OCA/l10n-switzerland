@@ -31,7 +31,7 @@
      'python': ['xlrd'],
  },
  'website': 'http://www.compassion.ch/',
- 'data': [],
+ 'data': ['account_bank_statement_import_view.xml'],
  'test': [],
  'installable': True,
  'images': [],
