@@ -18,6 +18,7 @@
 ##############################################################################
 import datetime
 import re
+from os.path import splitext
 from tarfile import TarFile, TarError
 from cStringIO import StringIO
 from lxml import etree
@@ -42,7 +43,11 @@ class XMLPFParser(BaseSwissParser):
         Try to uncompress the file if possible
         """
         super(XMLPFParser, self).__init__(data_file)
+        self.is_tar = None
         self.data_file = self._get_content_from_stream(data_file)
+        self.attachments = None
+        if self.is_tar:
+            self.attachments = self._get_attachments_from_stream(data_file)
 
     def _get_content_from_stream(self, data_file):
         """Source file can be a raw or tar file. We try to guess the
@@ -61,9 +66,38 @@ class XMLPFParser(BaseSwissParser):
             xmls = [tar_content
                     for tar_content in tar_file.getnames()
                     if tar_content.endswith('.xml')]
+            self.is_tar = True
             return tar_file.extractfile(xmls[0]).read()
         except TarError:
             return data_file
+
+    def _get_attachments_from_stream(self, data_file):
+        """Retrive attachment from tar file.
+        Return a dict containing all attachment ready to be saved
+        in Odoo.
+
+        The key is the name of file without extention
+        The value the PNG content encoded in base64
+
+        :param data_file: raw statement file sent to openerp (not in b64)
+        :type data_file: basestring subclass
+
+        :return: Return a dict containing all attachment ready
+        to be saved in Odoo.
+        """
+        pf_file = StringIO(data_file)
+        pf_file.seek(0)
+        try:
+            attachments = {}
+            tar_file = TarFile.open(fileobj=pf_file, mode="r:gz")
+            for file_name in tar_file.getnames():
+                if file_name.endswith('.png'):
+                    key = splitext(file_name)[0]
+                    png_content = tar_file.extractfile(file_name).read()
+                    attachments[key] = png_content.encode('base64')
+            return attachments
+        except TarError:
+            return {}
 
     def ftype(self):
         """Gives the type of file we want to import
@@ -226,6 +260,25 @@ class XMLPFParser(BaseSwissParser):
             transactions.append(res)
         return transactions
 
+    def _parse_attachments(self, tree):
+        """Parse file statement to get wich attachement to use
+        :param tree: lxml element tree instance
+        :type tree: :py:class:`lxml.etree.element.Element`
+
+        :return: a list of attachement tuple (name, content)
+        :rtype: list
+        """
+        attachments = []
+        transaction_nodes = tree.xpath("//SG6")
+        for transaction in transaction_nodes:
+            desc = '/'
+            if transaction.xpath(".//@Value='ZZZ'"):
+                desc = transaction.xpath("RFF/C506/D_1154/text()")[1]
+            att = self.attachments.get(desc)
+            if att:
+                attachments.append((desc, att))
+        return attachments
+
     def _parse_statement_date(self, tree):
         """Parse file statement date from tree
         :param tree: lxml element tree instance
@@ -252,6 +305,7 @@ class XMLPFParser(BaseSwissParser):
         statement['balance_start'] = balance_start
         statement['balance_end_real'] = balance_stop
         statement['date'] = self._parse_statement_date(tree)
+        statement['attachments'] = self._parse_attachments(tree)
         statement['transactions'] = self._parse_transactions(tree)
         self.statements.append(statement)
         return True
