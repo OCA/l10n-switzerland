@@ -20,6 +20,8 @@
 ##############################################################################
 from openerp.tests import common
 from ..parser.postfinance_file_parser import XMLPFParser
+
+
 class BaseSwissImporterTest(common.TransactionCase):
 
     def test_get_parser(self):
