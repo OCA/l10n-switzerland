@@ -227,6 +227,8 @@ class XMLPFParser(BaseSwissParser):
         transactions = []
         transaction_nodes = tree.xpath("//SG6")
         for transaction in transaction_nodes:
+            if not transaction.xpath(".//@Value='TGT'"):
+                continue
             res = {}
             desc = '/'
             date = datetime.date.today()

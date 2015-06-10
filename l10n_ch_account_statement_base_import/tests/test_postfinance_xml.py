@@ -68,7 +68,7 @@ class PFXMLParserTest(BaseParserTest):
         self.assertTrue(all(isinstance(x, dict) for x in statement['transactions']))
         self.assertEqual(372797.79, statement['balance_start'])
         self.assertEqual(372982.55, statement['balance_end_real'])
-        self.assertEqual(24, len(statement['transactions']))
+        self.assertEqual(22, len(statement['transactions']))
         first_transaction = {'unique_import_id': '20110322001201000200001000000101',
                              'name': '20110322001201000200001000000101',
                              'partner_name': None,
@@ -111,7 +111,7 @@ class PostFinanceImportTest(BaseStatementImportTest):
         statement = statements[0]
         self.assertEqual(372797.79, statement.balance_start)
         self.assertEqual(372982.55, statement.balance_end_real)
-        self.assertEqual(24, len(statement.line_ids))
+        self.assertEqual(22, len(statement.line_ids))
         self.assertTrue(statement.account_id)
         self.assertEqual(2, len(statement.related_files))
         st_line = statement.line_ids[0]
