@@ -47,19 +47,22 @@ class account_bank_statement_import(models.TransientModel):
                 - currency code: string (e.g: 'EUR')
                     The ISO 4217 currency code, case insensitive
                 - account number: string (e.g: 'BE1234567890')
-                    The number of the bank account which the statement belongs to
-                - bank statements data: list of dict containing (optional items marked by o) :
+                 The number of the bank account which the statement belongs to
+                - bank statements data: list of dict containing
+                    (optional items marked by o) :
                     - 'name': string (e.g: '000000123')
                     - 'date': date (e.g: 2013-06-26)
                     -o 'balance_start': float (e.g: 8368.56)
                     -o 'balance_end_real': float (e.g: 8888.88)
                     - 'transactions': list of dict containing :
-                        - 'name': string (e.g: 'KBC-INVESTERINGSKREDIET 787-5562831-01')
+                        - 'name': string
+                          (e.g: 'KBC-INVESTERINGSKREDIET 787-5562831-01')
                         - 'date': date
                         - 'amount': float
                         - 'unique_import_id': string
                         -o 'account_number': string
-                            Will be used to find/create the res.partner.bank in odoo
+                            Will be used to find/create the
+                             res.partner.bank in odoo
                         -o 'note': string
                         -o 'partner_name': string
                         -o 'ref': string

@@ -65,33 +65,39 @@ class PFXMLParserTest(BaseParserTest):
         self.assertEqual(len(statements), 1)
         self.assertTrue(all(isinstance(x, dict) for x in statements))
         statement = statements[0]
-        self.assertTrue(all(isinstance(x, dict) for x in statement['transactions']))
+        self.assertTrue(all(isinstance(x, dict)
+                            for x in statement['transactions']))
         self.assertEqual(372797.79, statement['balance_start'])
         self.assertEqual(372982.55, statement['balance_end_real'])
         self.assertEqual(22, len(statement['transactions']))
-        first_transaction = {'unique_import_id': '20110322001201000200001000000101',
-                             'name': '20110322001201000200001000000101',
-                             'partner_name': None,
-                             'note': None,
-                             'amount': -227.3,
-                             'account_number': None,
-                             'date': '2011-03-28',
-                             'ref': 'ZAHLUNGSAUFTRAG NR. 30002102'}
+        first_transaction = {
+            'unique_import_id': '20110322001201000200001000000101',
+            'name': '20110322001201000200001000000101',
+            'partner_name': None,
+            'note': None,
+            'amount': -227.3,
+            'account_number': None,
+            'date': '2011-03-28',
+            'ref': 'ZAHLUNGSAUFTRAG NR. 30002102'
+        }
         self.assertEqual(first_transaction, statement['transactions'][0])
 
     def test_attachement_extraction(self):
         """Test if scan are extracted correctly"""
-        self.assertEqual(set(['20110404001203000100002', '20110407001203000200002']),
-                         set(self.parser.attachments.keys()))
+        self.assertEqual(
+            set(['20110404001203000100002', '20110407001203000200002']),
+            set(self.parser.attachments.keys())
+        )
 # here you can add more subtle and detailed test
 # for each _parse functions using forged element tree
+
 
 class PostFinanceImportTest(BaseStatementImportTest):
 
     def setUp(self):
         super(PostFinanceImportTest, self).setUp()
         # self.journal.write({'currency_id': self.company_a.currency_id.id})
-        bank_account = self.env['res.partner.bank'].create(
+        self.env['res.partner.bank'].create(
             {'footer': False,
              'company_id': self.company_a.id,
              'bank_name': 'test postfinance import',

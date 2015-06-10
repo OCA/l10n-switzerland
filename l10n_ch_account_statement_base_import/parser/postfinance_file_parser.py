@@ -125,13 +125,15 @@ class XMLPFParser(BaseSwissParser):
 
     def get_statements(self):
         """Return the list of bank statement dict.
-         Bank statements data: list of dict containing (optional items marked by o) :
+         Bank statements data: list of dict containing
+            (optional items marked by o) :
             - 'name': string (e.g: '000000123')
             - 'date': date (e.g: 2013-06-26)
             -o 'balance_start': float (e.g: 8368.56)
             -o 'balance_end_real': float (e.g: 8888.88)
             - 'transactions': list of dict containing :
-                - 'name': string (e.g: 'KBC-INVESTERINGSKREDIET 787-5562831-01')
+                - 'name': string
+                   (e.g: 'KBC-INVESTERINGSKREDIET 787-5562831-01')
                 - 'date': date
                 - 'amount': float
                 - 'unique_import_id': string
