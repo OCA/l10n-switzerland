@@ -33,7 +33,7 @@ class AccountBankStatement(orm.Model):
     _inherit = "account.bank.statement"
 
     _columns = {
-        'checksum': fields.char(_('Checksum')),
+        'checksum': fields.char(_('Checksum'), index=True),
         }
 
 
@@ -80,27 +80,27 @@ class AccountStatementProfil(orm.Model):
         """
         self.file_stream = file_stream
 
-        """
-        Calculate hash of the file to determinate if it already exist
-        """
-        hash = hashlib.md5(file_stream).hexdigest()
-        statement_obj = self.pool.get('account.bank.statement')
+        # Calculate hash of the file to determinate if it already exist
 
-        for statement_id in statement_obj.search(
-                cr, uid, [('profile_id', '=', prof.id)], context=context):
-            statement = statement_obj.browse(cr, uid, statement_id,
+        file_signature = hashlib.md5(file_stream).hexdigest()
+
+        statement_obj = self.pool.get('account.bank.statement')
+        statement_ids = statement_obj.search(
+            cr, uid, [('checksum', '=', file_signature)], context=context)
+
+        if statement_ids:
+            statement = statement_obj.browse(cr, uid, statement_ids[0],
                                              context=context)
-            if statement.checksum and (statement.checksum == hash):
-                raise orm.except_orm(_("Warning"),
-                                     _("Bank statement already imported on %s")
-                                     % statement.date)
+            raise orm.except_orm(_("Warning"),
+                                 _("Bank statement already imported on %s")
+                                 % statement.date)
 
         id_new_statement = super(AccountStatementProfil, self). \
             _statement_import(cr, uid, ids, prof, parser, file_stream, ftype,
                               context)
 
-        statement_obj.write(cr, uid, [id_new_statement], {'checksum': hash},
-                            context=context)
+        statement_obj.write(cr, uid, [id_new_statement],
+                            {'checksum': file_signature}, context=context)
 
         return id_new_statement
 
