@@ -44,7 +44,6 @@
             <field name="name">Create SEPA payment</field>
             <field name="value" eval="'ir.actions.act_window,%d'%action_create_pain_001" />
             <field name="key">action</field>
-            <field name="object" eval="1" />
         </record>
 
         <!-- TODO make available button depending on payment mode
