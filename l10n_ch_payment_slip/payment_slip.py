@@ -669,6 +669,8 @@ class PaymentSlip(models.Model):
                 'Only PDF payment slip are supported'
             )
         self.ensure_one()
+        lang = self.invoice_id.partner_id.lang
+        self = self.with_context(lang=lang)
         company = self.env.user.company_id
         self._register_fonts()
         default_font = self._get_text_font()
