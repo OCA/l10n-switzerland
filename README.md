@@ -62,3 +62,8 @@ l10n_ch_scan_bvr
 ----------------
 
 Allows you to scan the ESR/BVR references and automatically create the proper supplier invoices
+
+
+Translation Status
+------------------
+[![Transifex Status](https://www.transifex.com/projects/p/OCA-l10n-switzerland-7-0/chart/image_png)](https://www.transifex.com/projects/p/OCA-l10n-switzerland-7-0)
