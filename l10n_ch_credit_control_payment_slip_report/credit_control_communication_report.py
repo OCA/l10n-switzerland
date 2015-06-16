@@ -24,7 +24,7 @@ class BVRFromCreditControl(models.AbstractModel):
     _name = 'report.slip_from_credit_control'
 
 
-class ExtendedReport(models.TransientModel):
+class ExtendedReport(models.Model):
     """Print pay slip form credit line"""
 
     _inherit = "report"
