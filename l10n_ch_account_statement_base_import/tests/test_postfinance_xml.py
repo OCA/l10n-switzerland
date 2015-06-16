@@ -119,7 +119,7 @@ class PostFinanceImportTest(BaseStatementImportTest):
         self.assertEqual(372982.55, statement.balance_end_real)
         self.assertEqual(22, len(statement.line_ids))
         self.assertTrue(statement.account_id)
-        self.assertEqual(2, len(statement.related_files))
+        self.assertEqual(3, len(statement.related_files))
         st_line = statement.line_ids[0]
         # Read common infos of first line
         self.assertEqual(st_line.date, "2011-03-28")
