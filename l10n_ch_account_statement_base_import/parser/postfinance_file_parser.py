@@ -272,7 +272,7 @@ class XMLPFParser(BaseSwissParser):
         :return: a list of attachement tuple (name, content)
         :rtype: list
         """
-        attachments = []
+        attachments = [('xml statment', self.data_file.encode('base64'))]
         transaction_nodes = tree.xpath("//SG6")
         for transaction in transaction_nodes:
             desc = '/'
