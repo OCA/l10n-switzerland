@@ -62,3 +62,7 @@ l10n_ch_hr_payroll
 
 Provide Swizerland Payroll Rules.
 Allow to specify a LPP range to contract and 2 kinds of children to employee.
+
+Translation Status
+------------------
+[![Transifex Status](https://www.transifex.com/projects/p/OCA-l10n-switzerland-8-0/chart/image_png)](https://www.transifex.com/projects/p/OCA-l10n-switzerland-8-0)
