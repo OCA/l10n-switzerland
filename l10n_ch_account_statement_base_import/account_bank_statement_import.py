@@ -77,6 +77,12 @@ class account_bank_statement_import(models.TransientModel):
                 parser.parse()
                 currency_code = parser.get_currency()
                 account_number = parser.get_account_number()
+
+                acc_from_bvr_adherent = self.env['res.partner.bank'].search(
+                    [('bvr_adherent_num', '=', account_number)])
+                if acc_from_bvr_adherent:
+                    account_number = acc_from_bvr_adherent.acc_number
+
                 statements = parser.get_statements()
                 if not statements:
                     raise exceptions.Warning(_('Nothing to import'))

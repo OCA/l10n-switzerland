@@ -1,101 +1,168 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Emanuel Cino
-#    Copyright 2014 Compassion CH
-#
+#    Author: Steve Ferry
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
+#    GNU General Public License for more details.
 #
-#    You should have received a copy of the GNU Affero General Public License
+#    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from datetime import date
+import datetime
 import time
-from openerp.osv.osv import except_osv
-from account_statement_base_import.parser.parser \
-    import BankStatementImportParser
-from openerp.tools.translate import _
+import logging
 
-reject_reason = {
-    '01': _("Insufficient cover funds."),
-    '02': _("Debtor protestation."),
-    '03': _("Debtor’s account number and address do not match."),
-    '04': _("Postal account closed."),
-    '05': _("Postal account blocked/frozen."),
-    '06': _("Postal account holder deceased."),
-    '07': _("Postal account number non-existent.")
-}
+from openerp import fields, _
+
+from .base_parser import BaseSwissParser
+
+_logger = logging.getLogger(__name__)
 
 
-class G11FileParser(BankStatementImportParser):
+class G11Parser(BaseSwissParser):
     """
-    Parser for a .v11 file in the BVR DD type 2 format.
+    Parser for BVR DD type 2 Postfinance Statements
+    (can be wrapped in a g11 file)
     """
 
-    def __init__(self, parser_name, ftype='g11', **kwargs):
-        super(G11FileParser, self).__init__(parser_name, **kwargs)
+    _ftype = 'g11'
 
-        if ftype != 'g11':
-            raise except_osv(_('User Error'),
-                             _('Invalid file type %s. Please use g11') %
-                             ftype)
-
-        # Store the lines of the file in an array
-        self.lines = None
-
-        # Store the amount of failed transactions
-        self.amount_fail = 0.0
-
-        # Store the number of transactions.
-        self.transactions = 0
-
-    @classmethod
-    def parser_for(cls, parser_name):
-        return parser_name == 'g11_fileparser'
-
-    def _custom_format(self, *args, **kwargs):
-        # Nothing to do
-        return True
-
-    def _pre(self, *args, **kwargs):
+    def __init__(self, data_file):
+        """Constructor
+        Splitting data_file in lines
         """
-        Check the last total record.
-        """
-        self.lines = self.filebuffer.splitlines()
-        self.balance_start = 0.0
-        self.balance_end = 0.0
-        if self.lines[-1][0:3] != '097':
-            raise except_osv(_("Wrong formatting"),
-                             _("The total record could not be read. \
-                             Please provide a valid g11 file."))
-        return True
+        super(G11Parser, self).__init__(data_file)
+        self.lines = data_file.splitlines()
+        self.reject_reason = {
+            '01': _("Insufficient cover funds."),
+            '02': _("Debtor protestation."),
+            '03': _("Debtor’s account number and address do not match."),
+            '04': _("Postal account closed."),
+            '05': _("Postal account blocked/frozen."),
+            '06': _("Postal account holder deceased."),
+            '07': _("Postal account number non-existent.")
+        }
 
-    def _parse(self, *args, **kwargs):
+    def ftype(self):
+        """Gives the type of file we want to import
+
+        :return: imported file type
+        :rtype: string
         """
-        Implement a method in your parser to save the result of parsing
-        self.filebuffer in self.result_row_list instance property.
+        return super(G11Parser, self).ftype()
+
+    def get_currency(self):
+        """Returns the ISO currency code of the parsed file
+
+        :return: The ISO currency code of the parsed file eg: CHF
+        :rtype: string
         """
-        res = []
+        return super(G11Parser, self).get_currency()
+
+    def get_account_number(self):
+        """Return the account_number related to parsed file
+
+        :return: The account number of the parsed file
+        :rtype: string
+        """
+        return super(G11Parser, self).get_account_number()
+
+    def get_statements(self):
+        """Return the list of bank statement dict.
+         Bank statements data: list of dict containing
+            (optional items marked by o) :
+            - 'name': string (e.g: '000000123')
+            - 'date': date (e.g: 2013-06-26)
+            -o 'balance_start': float (e.g: 8368.56)
+            -o 'balance_end_real': float (e.g: 8888.88)
+            - 'transactions': list of dict containing :
+                - 'name': string
+                   (e.g: 'KBC-INVESTERINGSKREDIET 787-5562831-01')
+                - 'date': date
+                - 'amount': float
+                - 'unique_import_id': string
+                -o 'account_number': string
+                    Will be used to find/create the res.partner.bank in odoo
+                -o 'note': string
+                -o 'partner_name': string
+                -o 'ref': string
+
+        :return: a list of statement
+        :rtype: list
+        """
+        return super(G11Parser, self).get_statements()
+
+    def file_is_known(self):
+        """Predicate the tells if the parser can parse the data file
+
+        :return: True if file is supported
+        :rtype: bool
+        """
+        return self.lines[-1][0:3] == '097'
+
+    def _parse_account_number(self):
+        """Parse file account number
+
+        :return: the file account number or bvr adherent number
+        :rtype: string
+        """
+        return self.lines[1][6:12]
+
+    def _parse_currency_code(self):
+        """Parse file currency ISO code
+
+        :return: the currency ISO code of the file eg: CHF
+        :rtype: string
+        """
+        return self.lines[-1][128:131]
+
+    def _parse_statement_balance_end(self, total_line):
+        """Parse file start and end balance
+        :param total_line: Last line of the g11 file, named total line
+        :type tree: :py:class:`lxml.etree.element.Element`
+
+        :return: the file end balance
+        :rtype: float
+        """
+        if total_line[0:3] == '097':
+            return ((float(total_line[45:57]) / 100) -
+                    (float(total_line[101:113]) / 100))
+        return False
+
+    def _parse_transactions(self):
+        """Parse bank statement lines from file
+        list of dict containing :
+            - 'name': string (e.g: 'KBC-INVESTERINGSKREDIET 787-5562831-01')
+            - 'date': date
+            - 'amount': float
+            - 'unique_import_id': string
+            -o 'account_number': string
+                Will be used to find/create the res.partner.bank in odoo
+            -o 'note': string
+            -o 'partner_name': string
+            -o 'ref': string
+
+        :return: a list of transactions
+        :rtype: list
+        """
+        transactions = []
         for line in self.lines:
-            if line[0:3] == '097':
-                self._parse_total_line(line)
-            else:
+            if line[0:3] != '097':
                 ref = line[15:42]
                 currency = line[42:45]
                 amount = float(line[45:57]) / 100
                 transaction_date = time.strftime(
                     '%Y-%m-%d', time.strptime(line[108:116], '%Y%m%d'))
                 # commission = float(line[141:147]) / 100
-                label = ''
+                note = ''
 
                 if line[0:3] == '084':
                     # Fail / Debit record
@@ -103,11 +170,11 @@ class G11FileParser(BankStatementImportParser):
                     if reject_code == '02':
                         # Debit record
                         amount *= -1
-                        label = reject_reason[reject_code]
+                        note = self.reject_reason[reject_code]
                     else:
                         # Failed transactions. Get the error reason and
                         # put it on the OBI field.
-                        label = reject_reason[
+                        note = self.reject_reason[
                             reject_code] + '\n' + _(
                                 "Amount to debit was %s %f") % (
                                     currency, amount)
@@ -115,65 +182,51 @@ class G11FileParser(BankStatementImportParser):
 
                 # Add information to OBI if the transaction is a test.
                 if line[5] == '3':
-                    label = _("-- Test transaction --") + '\n' + label
+                    note = _("-- Test transaction --") + '\n' + note
 
-                res.append({
+                transactions.append({
+                    'name': '/',
                     'ref': ref,
-                    'currency': currency,
+                    'unique_import_id': ref,
                     'amount': amount,
                     'date': transaction_date,
-                    'label': label,
+                    'note': note,
                 })
+        return transactions
 
-        self.result_row_list = res
-        return True
-
-    def _parse_total_line(self, total_line):
-        self.balance_end += (
-            float(total_line[45:57]) / 100) - (
-                float(total_line[101:113]) / 100)
-        # self.commission = float(total_line[131:142]) / 100  # not used
-        # self.amount_fail = float(total_line[77:89]) / 100  # not used
-        self.transactions += int(
-            total_line[57:69]) + int(
-                total_line[89:101]) + int(
-                    total_line[113:125])
-        # Store the currency
-        self.currency = total_line[128:131]
-
-    def _validate(self, *args, **kwargs):
+    def validate(self, total_line):
+        """Validate the bank statement
+        :param total_line: Last line in the g11 file. Beginning with '097'
+        :return: Boolean
         """
-        Test we have the correct number of transactions.
-        """
-        if len(self.result_row_list) != self.transactions:
-            raise except_osv(_("Invalid number of transactions"),
-                             _("The number of transactions read is not \
-                             the same as the one provided in the \
-                             total record."))
+        if total_line[0:3] == '097':
+            transactions = 0
+            transactions += int(
+                total_line[57:69]) + int(
+                    total_line[89:101]) + int(
+                        total_line[113:125])
+            return (len(self.statements[0]['transactions']) == transactions)
+        return False
 
-        return True
-
-    def _post(self, *args, **kwargs):
+    def _parse_statement_date(self):
+        """Parse file statement date
+        :return: A date usable by Odoo in write or create dict
         """
-        Nothing to process here.
-        """
-        return True
+        date = datetime.date.today()
+        return fields.Date.to_string(date)
 
-    def get_st_line_vals(self, line, *args, **kwargs):
+    def _parse(self):
         """
-            Returns the values for creating the statement line.
-
-            :param:  line: a dict of vals that represent a line of
-                           result_row_list
-            :return: dict of values to give to the create method of
-                     statement line,
+        Launch the parsing through The g11 file.
         """
-        res = {
-            'name': line.get("label", "/"),
-            'date': line.get('date', date.today()),
-            'amount': line.get('amount', 0.0),
-            'ref': line.get('ref', '/'),
-            'label': line.get("label"),
-        }
-
-        return res
+        self.currency_code = self._parse_currency_code()
+        self.account_number = self._parse_account_number()
+        statement = {}
+        statement['balance_start'] = 0.0
+        statement['balance_end_real'] = self._parse_statement_balance(
+            self.lines[-1])
+        statement['date'] = self._parse_statement_date()
+        statement['attachments'] = []
+        statement['transactions'] = self._parse_transactions()
+        self.statements.append(statement)
+        return self.validate(self.lines[-1])
