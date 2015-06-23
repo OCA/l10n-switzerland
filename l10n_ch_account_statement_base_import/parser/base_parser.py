@@ -105,9 +105,12 @@ class BaseSwissParser(object):
         If the base behavior is enought the child implementation should consist
         in a simple call to super
         :return: The account number of the parsed file
-        :rtype: string
+        :rtype: dict
         """
-        return self.account_number
+        res = {
+        'account_number': self.account_number
+        }
+        return res
 
     @abstractmethod
     def get_statements(self):

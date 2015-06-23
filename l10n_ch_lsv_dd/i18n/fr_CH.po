@@ -1,0 +1,603 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# 	* l10n_ch_lsv_dd
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0-20140602-231022\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-08-11 11:26+0000\n"
+"PO-Revision-Date: 2014-08-11 15:12+0100\n"
+"Last-Translator: Cyril Sester\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: fr_CH\n"
+"X-Generator: Poedit 1.6.6\n"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:123
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:123
+#, python-format
+msgid "Line with ref %s has no associated valid mandate"
+msgstr "La ligne ayant la référence %s n'a aucun mandat valide associé."
+
+#. module: l10n_ch_lsv_dd
+#: view:res.partner.bank:0
+msgid "{'invisible': [('state','not in',['bvr', 'iban'])]}"
+msgstr "{'invisible': [('state','not in',['bvr', 'iban'])]}"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:238
+#, python-format
+msgid "Generated total line is not valid (%d instead of 700)"
+msgstr ""
+"La longueur de la ligne de total générée est invalide (%d au lieu de 700)"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:199
+#, python-format
+msgid "Generated line for ref %s with size %d is not valid (len should be 588)"
+msgstr ""
+"La ligne générée pour la référence %s de longueur %d est invalide (longueur "
+"devrait être 588)"
+
+#. module: l10n_ch_lsv_dd
+#: view:res.partner.bank:0
+msgid "{'invisible': [('state','not in',['bv', 'bvr'])]}"
+msgstr "{'invisible': [('state','not in',['bv', 'bvr'])]}"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:377
+#, python-format
+msgid "Given BV account number is to long ! (%s)"
+msgstr "Le numéro de compte BV donné est trop long (%s)"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:60
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:63
+#: selection:lsv.export.wizard,state:0 selection:post.dd.export.wizard,state:0
+#, python-format
+msgid "Create"
+msgstr "Créer"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:79
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:82
+#, python-format
+msgid "No payment order selected"
+msgstr "Aucune ordre de payment sélectionné"
+
+#. module: l10n_ch_lsv_dd
+#: view:payment.order:0
+msgid "Show invoices"
+msgstr "Voir les factures"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:305
+#, python-format
+msgid ""
+"Max authorized amount is CHF 10'000'000.00 or EUR 5'000'000.00 (%s %.2f "
+"given for ref %s)"
+msgstr ""
+"Le montant maximal autorisé est CHF 10'000'000 ou EUR 5'000'000 (%s %.2f "
+"donné pour la référence %s)"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/model/bank.py:35
+#: field:res.partner.bank,lsv_identifier:0
+#, python-format
+msgid "LSV Identifier"
+msgstr "Identifiant LSV"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/model/banking_export_ch_dd.py:60
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:51
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:54
+#: field:banking.export.ch.dd,filename:0 field:lsv.export.wizard,filename:0
+#: field:post.dd.export.wizard,filename:0
+#, python-format
+msgid "Filename"
+msgstr "Nom de fichier"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/model/bank.py:71 constraint:res.partner.bank:0
+#, python-format
+msgid "Invalid LSV Identifier."
+msgstr "Identifiant LSV invalide"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:61
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:64
+#: field:banking.export.ch.dd,state:0 field:lsv.export.wizard,state:0
+#: field:post.dd.export.wizard,state:0
+#, python-format
+msgid "State"
+msgstr "État"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:44
+#: selection:lsv.export.wizard,treatment_type:0
+#, python-format
+msgid "Production"
+msgstr "Production"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/model/banking_export_ch_dd.py:64
+#: selection:banking.export.ch.dd,state:0
+#, python-format
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: l10n_ch_lsv_dd
+#: view:banking.export.ch.dd:0
+msgid "Direct Debit export"
+msgstr "Export débit direct"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:218
+#, python-format
+msgid "Generated total line is not valid (%d instead of 43)"
+msgstr ""
+"La longueur de la ligne de total générée est invalide (%d au lieu de 43)"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:178
+#, python-format
+msgid "Generated head record with size %d is not valid (len should be 700)"
+msgstr ""
+"La longueur de l'enregistrement de tête généré est invalide (%d au lieu de "
+"700)"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:45
+#: selection:lsv.export.wizard,treatment_type:0
+#, python-format
+msgid "Test"
+msgstr "Test"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/model/bank.py:100
+#, python-format
+msgid "DD identifier should contain only ASCII caracters."
+msgstr "L'identifiant Débit Direct ne peut contenir que des caractères ASCII"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:347
+#, python-format
+msgid "Missing address for bank account %s"
+msgstr "Addresse manquante pour le compte bancaire %s"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/model/banking_export_ch_dd.py:67
+#: field:banking.export.ch.dd,type:0
+#, python-format
+msgid "Type"
+msgstr "Type"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/model/banking_export_ch_dd.py:65
+#: selection:banking.export.ch.dd,state:0
+#, python-format
+msgid "Sent"
+msgstr "Envoyé"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/model/banking_export_ch_dd.py:58
+#: field:banking.export.ch.dd,file:0
+#, python-format
+msgid "Generated file"
+msgstr "Fichier généré"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:61
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:64
+#: selection:lsv.export.wizard,state:0 selection:post.dd.export.wizard,state:0
+#, python-format
+msgid "Finish"
+msgstr "Terminé"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/model/bank.py:36
+#: help:res.partner.bank,lsv_identifier:0
+#, python-format
+msgid ""
+"Enter the LSV Identifier that has been attributed to your company to make "
+"LSV Direct Debits. This identifier is composed of 5 alphanumeric characters "
+"and is required to generate LSV direct debit orders."
+msgstr ""
+"L'identifiant LSV attribué à votre société. Cet identifiant se compose de 5 "
+"caractères alphanumériques et est requis afin de pouvoir générer un ordre de "
+"débit direct."
+
+#. module: l10n_ch_lsv_dd
+#: view:banking.export.ch.dd:0
+msgid "General Information"
+msgstr "Informations générales"
+
+#. module: l10n_ch_lsv_dd
+#: view:account.invoice.free:0
+msgid ""
+"This will extract payment lines corresponding to selected \n"
+"\t\t\t\t\tinvoices and put them in a cancelled payment order. This way, \n"
+"\t\t\t\t\tinvoices can be add to another payment order."
+msgstr ""
+"Ceci va extraire les lignes de paiement correspondantes aux factures "
+"séléctionnées et les déplacer dans un ordre de paiement annulé. De cette "
+"façon, les factures peuvent être réutilisées dans un autre ordre de "
+"paiement / débit."
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:47
+#: field:post.dd.export.wizard,banking_export_ch_dd_id:0
+#, python-format
+msgid "Direct Debit file"
+msgstr "Fichier de débit direct."
+
+#. module: l10n_ch_lsv_dd
+#: model:ir.model,name:l10n_ch_lsv_dd.model_banking_export_ch_dd
+msgid "banking.export.ch.dd"
+msgstr "banking.export.ch.dd"
+
+#. module: l10n_ch_lsv_dd
+#: view:lsv.export.wizard:0
+msgid "LSV export"
+msgstr "Export LSV"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:45
+#: field:lsv.export.wizard,treatment_type:0
+#, python-format
+msgid "Treatment type"
+msgstr "Type de traitement"
+
+#. module: l10n_ch_lsv_dd
+#: model:ir.model,name:l10n_ch_lsv_dd.model_lsv_export_wizard
+msgid "Export LSV Direct Debit File"
+msgstr "Exporter fichier LSV"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/model/bank.py:41
+#: field:res.partner.bank,post_dd_identifier:0
+#, python-format
+msgid "Postfinance DD Customer No."
+msgstr "Numéro d'adhérent Postfinance Débit Direct"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:218
+#, python-format
+msgid "Generated debit_record with size %d is not valid (len should be 700)"
+msgstr ""
+"La taille de l'enregistrement de débit ayant une longueur %d est invalide "
+"(longueur devrait être 700)"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:364
+#, python-format
+msgid "Unable to determine clearing number for account %s"
+msgstr ""
+"Impossible de déterminer le numéro de clearing bancaire pour le compte %s"
+
+#. module: l10n_ch_lsv_dd
+#: view:lsv.export.wizard:0 view:post.dd.export.wizard:0
+msgid "Validate"
+msgstr "Valider"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:157
+#, python-format
+msgid "Line with ref %s has not a correct CH or LI IBAN (%s given)"
+msgstr ""
+"La ligne avec la référence %s n'a pas de compte IBAN valide associé (%s "
+"donné)"
+
+#. module: l10n_ch_lsv_dd
+#: model:ir.actions.act_window,name:l10n_ch_lsv_dd.action_create_lsv
+msgid "Create LSV file"
+msgstr "Créer fichier LSV"
+
+#. module: l10n_ch_lsv_dd
+#: view:lsv.export.wizard:0 view:post.dd.export.wizard:0
+msgid "Generate"
+msgstr "Générer"
+
+#. module: l10n_ch_lsv_dd
+#: model:ir.model,name:l10n_ch_lsv_dd.model_post_dd_export_wizard
+msgid "Export Postfinance Direct Debit File"
+msgstr "Exporter fichier Postfinance Débit Direct."
+
+#. module: l10n_ch_lsv_dd
+#: model:ir.actions.act_window,name:l10n_ch_lsv_dd.action_create_post_dd
+msgid "Create Postfinance Direct Debit file"
+msgstr "Créer fichier Postfinance Débit Direct"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:310
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:293
+#, python-format
+msgid "Amount for line with ref %s is negative (%f given)"
+msgstr "Le montant de la ligne portant la référence %s est négatif (%f donné)"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/model/banking_export_ch_dd.py:54
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:55
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:58
+#: field:banking.export.ch.dd,nb_transactions:0
+#: field:lsv.export.wizard,nb_transactions:0
+#: field:post.dd.export.wizard,nb_transactions:0
+#, python-format
+msgid "Number of Transactions"
+msgstr "Nombre de transactions"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:434
+#, python-format
+msgid "Missing Postfinance direct debit identifier for account %s"
+msgstr "Identifiant Postfiance débit direct manquant pour le compte %s"
+
+#. module: l10n_ch_lsv_dd
+#: model:ir.model,name:l10n_ch_lsv_dd.model_account_invoice
+msgid "Invoice"
+msgstr "Facture"
+
+#. module: l10n_ch_lsv_dd
+#: selection:lsv.export.wizard,currency:0
+#: selection:post.dd.export.wizard,currency:0
+msgid "CHF"
+msgstr "CHF"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:317
+#, python-format
+msgid ""
+"Line with ref %s has %s currency and direct debit file %s (should be the "
+"same)"
+msgstr ""
+"La ligne portant la référence %s est dans la monnaie %s alors que le fichier "
+"de débit direct est dans la monnaie %s (ces 2 valeurs doivent être "
+"identiques)"
+
+#. module: l10n_ch_lsv_dd
+#: view:res.partner.bank:0
+msgid "Postfinance Direct Debit options"
+msgstr "Options Postfiance débit direct"
+
+#. module: l10n_ch_lsv_dd
+#: model:ir.model,name:l10n_ch_lsv_dd.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:420
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:407
+#, python-format
+msgid "Incorrect treatment date: %s for line with ref %s"
+msgstr ""
+"Date de traitement incorrecte (%s) pour la ligne portant la référence %s"
+
+#. module: l10n_ch_lsv_dd
+#: view:account.invoice.free:0
+msgid "or"
+msgstr "ou"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:189
+#, python-format
+msgid ""
+"Line with ref %s has ESR ref, but no valid ESR party number exists for ben "
+"account"
+msgstr ""
+"La ligne portant la référence %s a une référence BVR, mais aucun numéro "
+"d'adhérent au programme BVR n'existe pour le compte bénéficiaire."
+
+#. module: l10n_ch_lsv_dd
+#: view:account.invoice.free:0
+msgid "Free Invoices from payment order"
+msgstr "Libérer les factures de l'ordre de paiement/débit"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:300
+#, python-format
+msgid "Line with ref %s has %s currency and lsv file %s (should be the same)"
+msgstr ""
+"La ligne portant la référence %s est dans la monnaie %s alors que le fichier "
+"LSV est dans la monnaie %s (ces 2 valeurs doivent être identiques)"
+
+#. module: l10n_ch_lsv_dd
+#: model:ir.actions.act_window,name:l10n_ch_lsv_dd.action_account_banking_ch_dd
+#: model:ir.ui.menu,name:l10n_ch_lsv_dd.menu_account_banking_ch_dd
+msgid "Generated direct debit files"
+msgstr "Fichiers de débit direct générés"
+
+#. module: l10n_ch_lsv_dd
+#: view:account.invoice.free:0
+#: model:ir.actions.act_window,name:l10n_ch_lsv_dd.action_account_invoice_free
+msgid "Free Invoices"
+msgstr "Libérer les factures"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/model/bank.py:72 constraint:res.partner.bank:0
+#, python-format
+msgid "Invalid Postfiance DD Identifier."
+msgstr "Identifiant Postfiance Débit Direct invalide."
+
+#. module: l10n_ch_lsv_dd
+#: view:post.dd.export.wizard:0
+msgid "Postfiance Direct Debit export parameters"
+msgstr "Paramètres d'export Postfinance Débit Direct."
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/model/bank.py:84
+#, python-format
+msgid "LSV identifier should contain only ASCII caracters."
+msgstr "L'identifiant LSV ne peut contenir que des caractères ASCII."
+
+#. module: l10n_ch_lsv_dd
+#: view:lsv.export.wizard:0
+msgid "LSV export parameters"
+msgstr "Paramètres d'export LSV"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:440
+#, python-format
+msgid "Missing LSV identifier for account %s"
+msgstr "Identifiant LSV manquant pour le compte %s"
+
+#. module: l10n_ch_lsv_dd
+#: selection:lsv.export.wizard,currency:0
+#: selection:post.dd.export.wizard,currency:0
+msgid "EUR"
+msgstr "EUR"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/model/bank.py:43
+#: field:res.partner.bank,esr_party_number:0
+#, python-format
+msgid "ESR party number"
+msgstr "Numéro d'adhérent au programme BVR"
+
+#. module: l10n_ch_lsv_dd
+#: view:res.partner.bank:0
+msgid ""
+"{'invisible': ['|', ('state','not in',['bv', 'bvr', 'iban']), "
+"('company_id' ,'=', False)]}"
+msgstr ""
+"{'invisible': ['|', ('state','not in',['bv', 'bvr', 'iban']), "
+"('company_id' ,'=', False)]}"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/model/invoice.py:48
+#, python-format
+msgid "No payment line found !"
+msgstr "Aucune ligne de paiement trouvée !"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/model/payment_order.py:30
+#, python-format
+msgid "Related invoices"
+msgstr "Factures liées"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:358
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:329
+#, python-format
+msgid "Missing owner name for bank account %s"
+msgstr "Nom du détenteur manquant pour le compte %s"
+
+#. module: l10n_ch_lsv_dd
+#: model:ir.model,name:l10n_ch_lsv_dd.model_res_partner_bank
+msgid "Bank Accounts"
+msgstr "Comptes bancaires"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:288
+#, python-format
+msgid ""
+"Stop kidding... max authorized amount is CHF 99 999 999.99 (%.2f %s given "
+"for ref %s)"
+msgstr ""
+"Le montant maximum autorisé est CHF 99'999'999.99 (%.2f %s donné pour la la "
+"ligne portant la référence %s)"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:103
+#, python-format
+msgid "Ben IBAN is not a correct CH or LI IBAN (%s given)"
+msgstr ""
+"L'IBAN bénéficiaire n'est pas un IBAN valide en Suisse ou au Liechtenstein "
+"(%s)."
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/model/banking_export_ch_dd.py:53
+#: view:banking.export.ch.dd:0 field:banking.export.ch.dd,payment_order_ids:0
+#, python-format
+msgid "Payment Orders"
+msgstr "Ordres de paiements"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/model/bank.py:44
+#: help:res.partner.bank,esr_party_number:0
+#, python-format
+msgid ""
+"ESR party number is an identifier attributed to your bank to generate ESR "
+"references. This identifier is composed of up to 9 alphanumeric characters "
+"and is required when using ESR references in your LSV direct debit orders"
+msgstr ""
+"Le numéro d'adhérent au programme BVR est un identifiant attribué à votre "
+"banque qui l'autorise à émettre des BVR. Cet identifiant est composé de 9 "
+"caractères alphanumériques et est requis lorsque les références BVR sont "
+"utilisées dans vos ordres LSV."
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:45
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:48
+#: field:lsv.export.wizard,currency:0 field:post.dd.export.wizard,currency:0
+#, python-format
+msgid "Currency"
+msgstr "Monnaie"
+
+#. module: l10n_ch_lsv_dd
+#: model:ir.model,name:l10n_ch_lsv_dd.model_account_invoice_free
+msgid "account.invoice.free"
+msgstr "account.invoice.free"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/model/banking_export_ch_dd.py:55
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:57
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:60
+#: field:banking.export.ch.dd,total_amount:0
+#: field:lsv.export.wizard,total_amount:0
+#: field:post.dd.export.wizard,total_amount:0
+#, python-format
+msgid "Total Amount"
+msgstr "Montant total"
+
+#. module: l10n_ch_lsv_dd
+#: model:ir.actions.act_window,name:l10n_ch_lsv_dd.act_banking_export_ch_dd_payment_order
+msgid "Generated Direct Debit Files"
+msgstr "Fichiers de débit direct générés"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:49
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:52
+#: field:lsv.export.wizard,file:0 field:post.dd.export.wizard,file:0
+#, python-format
+msgid "File"
+msgstr "Fichier"
+
+#. module: l10n_ch_lsv_dd
+#: model:ir.model,name:l10n_ch_lsv_dd.model_payment_order
+msgid "Payment Order"
+msgstr "Ordre de Paiement"
+
+#. module: l10n_ch_lsv_dd
+#: view:account.invoice.free:0 view:lsv.export.wizard:0
+#: view:post.dd.export.wizard:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: l10n_ch_lsv_dd
+#: view:res.partner.bank:0
+msgid "LSV options"
+msgstr "Options LSV"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/model/banking_export_ch_dd.py:57
+#: field:banking.export.ch.dd,create_date:0
+#, python-format
+msgid "Generation Date"
+msgstr "Date de génération"
+
+#. module: l10n_ch_lsv_dd
+#: view:post.dd.export.wizard:0
+msgid "PostFinance Direct Debit export"
+msgstr "Export Postfinance débit direct"
+
+#. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:50
+#: field:lsv.export.wizard,banking_export_ch_dd_id:0
+#, python-format
+msgid "LSV file"
+msgstr "Fichier LSV"

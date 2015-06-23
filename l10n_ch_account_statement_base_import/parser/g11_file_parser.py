@@ -73,7 +73,9 @@ class G11Parser(BaseSwissParser):
         :return: The account number of the parsed file
         :rtype: string
         """
-        return super(G11Parser, self).get_account_number()
+        res = super(G11Parser, self).get_account_number()
+        res['fields_search'] = 'post_dd_identifier'
+        return res
 
     def get_statements(self):
         """Return the list of bank statement dict.
@@ -124,7 +126,7 @@ class G11Parser(BaseSwissParser):
         """
         return self.lines[-1][128:131]
 
-    def _parse_statement_balance_end(self, total_line):
+    def _parse_statement_balance_end(self):
         """Parse file start and end balance
         :param total_line: Last line of the g11 file, named total line
         :type tree: :py:class:`lxml.etree.element.Element`
@@ -132,10 +134,9 @@ class G11Parser(BaseSwissParser):
         :return: the file end balance
         :rtype: float
         """
-        if total_line[0:3] == '097':
-            return ((float(total_line[45:57]) / 100) -
-                    (float(total_line[101:113]) / 100))
-        return False
+        total_line = self.lines[-1]
+        return ((float(total_line[45:57]) / 100) -
+                (float(total_line[101:113]) / 100))
 
     def _parse_transactions(self):
         """Parse bank statement lines from file
@@ -194,19 +195,18 @@ class G11Parser(BaseSwissParser):
                 })
         return transactions
 
-    def validate(self, total_line):
+    def validate(self):
         """Validate the bank statement
         :param total_line: Last line in the g11 file. Beginning with '097'
         :return: Boolean
         """
-        if total_line[0:3] == '097':
-            transactions = 0
-            transactions += int(
-                total_line[57:69]) + int(
-                    total_line[89:101]) + int(
-                        total_line[113:125])
-            return (len(self.statements[0]['transactions']) == transactions)
-        return False
+        total_line = self.lines[-1]
+        transactions = 0
+        transactions += int(
+            total_line[57:69]) + int(
+                total_line[89:101]) + int(
+                    total_line[113:125])
+        return (len(self.statements[0]['transactions']) == transactions)
 
     def _parse_statement_date(self):
         """Parse file statement date
@@ -223,10 +223,9 @@ class G11Parser(BaseSwissParser):
         self.account_number = self._parse_account_number()
         statement = {}
         statement['balance_start'] = 0.0
-        statement['balance_end_real'] = self._parse_statement_balance(
-            self.lines[-1])
+        statement['balance_end_real'] = self._parse_statement_balance_end()
         statement['date'] = self._parse_statement_date()
         statement['attachments'] = []
         statement['transactions'] = self._parse_transactions()
         self.statements.append(statement)
-        return self.validate(self.lines[-1])
+        return self.validate()
