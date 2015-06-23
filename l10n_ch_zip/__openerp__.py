@@ -29,6 +29,7 @@
     'summary': 'Provides all Swiss postal codes for auto-completion',
     'depends': ['base',
                 'base_location',  # in https://github.com/OCA/partner-contact/
+                'l10n_ch_states',
                 ],
     'data': ['l10n_ch_better_zip.xml'],
     'images': [],
