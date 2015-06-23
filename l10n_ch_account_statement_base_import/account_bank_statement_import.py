@@ -86,7 +86,7 @@ class account_bank_statement_import(models.TransientModel):
                     if account_number_dict['fields_search'] in partner_bank:
                         acc_from_other_id = self.env['res.partner.bank'].\
                             search([(account_number_dict['fields_search'], '=',
-                                   account_number_dict['account_number'])])
+                                     account_number_dict['account_number'])])
                         if acc_from_other_id:
                             account_number = acc_from_other_id.acc_number
 
