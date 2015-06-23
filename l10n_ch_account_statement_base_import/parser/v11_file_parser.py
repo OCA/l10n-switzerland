@@ -1,106 +1,172 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Emanuel Cino
-#    Copyright 2014 Compassion CH
-#
+#    Author: Steve Ferry
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
+#    GNU General Public License for more details.
 #
-#    You should have received a copy of the GNU Affero General Public License
+#    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import re
+import datetime
 import time
-from datetime import date
-from openerp.osv.osv import except_osv
-from account_statement_base_import.parser.parser \
-    import BankStatementImportParser
-from openerp.tools.translate import _
+import logging
+
+from openerp import fields
+
+from .base_parser import BaseSwissParser
+
+_logger = logging.getLogger(__name__)
 
 
-def is_total_record_type4(test):
-    return re.compile("^9[89][12]$").match(test)
-
-
-class V11FileParser(BankStatementImportParser):
+class G11Parser(BaseSwissParser):
     """
-    A v11 file parser.
+    Parser for BVR DD type 2 Postfinance Statements
+    (can be wrapped in a g11 file)
     """
 
-    def __init__(self, parser_name, ftype='v11', **kwargs):
-        super(V11FileParser, self).__init__(parser_name, **kwargs)
+    _ftype = 'g11'
 
-        if ftype.lower() not in ('v11', 'esr', 'bvr'):
-            raise except_osv(_('User Error'),
-                             _('Invalid file type %s. Please use v11, \
-                             esr or bvr') % ftype)
-
-        # Store the record_type of the ESR file (can be of type 3 or 4).
-        self.record_type = None
-
-        # Store the lines of the file in an array
-        self.lines = None
-
-    @classmethod
-    def parser_for(cls, parser_name):
-        return parser_name == 'esr_fileparser'
-
-    def _custom_format(self, *args, **kwargs):
-        # Nothing to do
-        return True
-
-    def _pre(self, *args, **kwargs):
+    def __init__(self, data_file):
+        """Constructor
+        Splitting data_file in lines
         """
-        Check which kind of record type is the file, by looking at
-        the total line.
+        super(G11Parser, self).__init__(data_file)
+        self.fields_search = ''
+        self.lines = data_file.splitlines()
+
+    def ftype(self):
+        """Gives the type of file we want to import
+
+        :return: imported file type
+        :rtype: string
         """
-        self.lines = self.filebuffer.splitlines()
+        return super(G11Parser, self).ftype()
+
+    def get_currency(self):
+        """Returns the ISO currency code of the parsed file
+
+        :return: The ISO currency code of the parsed file eg: CHF
+        :rtype: string
+        """
+        return super(G11Parser, self).get_currency()
+
+    def get_account_number(self):
+        """Return the account_number related to parsed file
+
+        :return: The account number of the parsed file
+        :rtype: string
+        """
+        res = super(G11Parser, self).get_account_number()
+        if self.fields_search:
+            res['fields_search'] = self.fields_search
+        return res
+
+    def get_statements(self):
+        """Return the list of bank statement dict.
+         Bank statements data: list of dict containing
+            (optional items marked by o) :
+            - 'name': string (e.g: '000000123')
+            - 'date': date (e.g: 2013-06-26)
+            -o 'balance_start': float (e.g: 8368.56)
+            -o 'balance_end_real': float (e.g: 8888.88)
+            - 'transactions': list of dict containing :
+                - 'name': string
+                   (e.g: 'KBC-INVESTERINGSKREDIET 787-5562831-01')
+                - 'date': date
+                - 'amount': float
+                - 'unique_import_id': string
+                -o 'account_number': string
+                    Will be used to find/create the res.partner.bank in odoo
+                -o 'note': string
+                -o 'partner_name': string
+                -o 'ref': string
+
+        :return: a list of statement
+        :rtype: list
+        """
+        return super(G11Parser, self).get_statements()
+
+    def file_is_known(self):
+        """Predicate the tells if the parser can parse the data file
+
+        :return: True if file is supported
+        :rtype: bool
+        """
+        return (self.lines[-1][0:3] in ('999', '995'))
+
+    def _parse_account_number(self):
+        """Parse file account number
+        Lines from LSV type 3 always start with '2' and
+        lines from BVR type 3 never start with '2'. Use this condition to know
+        if it had to format the account number like xx-xxxxx-x
+
+        :return: the file account number or esr_party_number (LSV)
+        :rtype: string
+        """
+
+        first_line = self.lines[1]
+        account = first_line[3:12]
+        self.fields_search = 'esr_party_number'
+        if first_line[0] != '2':
+            # Formating account like xx-xxxxx-x
+            account = account[:2] + '-' + account[3:-1] + '-' + account[-1]
+            self.fields_search = None
+        return account
+
+    def _parse_currency_code(self):
+        """Parse file currency ISO code
+
+        :return: the currency ISO code of the file eg: CHF
+        :rtype: string
+        """
+        return 'CHF'
+
+    def _parse_statement_balance_end(self):
+        """Parse file start and end balance
+        :param total_line: Last line of the g11 file, named total line
+        :type tree: :py:class:`lxml.etree.element.Element`
+
+        :return: the file end balance
+        :rtype: float
+        """
         total_line = self.lines[-1]
-        total_code = total_line[0:3]
-        if total_code in ('999', '995'):
-            self.record_type = 3
-            self.balance_start = 0
-            self.balance_end = (float(total_line[39:51]) / 100)
-            self.number_transaction = int(total_line[51:63])
-        elif is_total_record_type4(total_code):
-            self.record_type = 4
-        return True
+        return (float(total_line[39:51]) / 100)
+        return False
 
-    def _parse(self, *args, **kwargs):
-        res = []
-        if self.record_type == 3:
-            res = self._parse_type3()
-        elif self.record_type == 4:
-            res = self._parse_type4()
-        else:
-            raise except_osv(_('User Error'),
-                             _('Invalid file. Please use a valid v11, \
-                             esr or bvr file.'))
+    def _parse_transactions(self):
+        """Parse bank statement lines from file
+        list of dict containing :
+            - 'name': string (e.g: 'KBC-INVESTERINGSKREDIET 787-5562831-01')
+            - 'date': date
+            - 'amount': float
+            - 'unique_import_id': string
+            -o 'account_number': string
+                Will be used to find/create the res.partner.bank in odoo
+            -o 'note': string
+            -o 'partner_name': string
+            -o 'ref': string
 
-        self.result_row_list = res
-        return True
-
-    def _parse_type3(self):
+        :return: a list of transactions
+        :rtype: list
         """
-        Parse ESR record of type 3
-        """
-        res = []
+        id = 0
+        transactions = []
         for line in self.lines[:-1]:
             if line[0:3] in ('999', '995'):
                 # Total line : addition the amount to the balance_end
                 self.balance_end += (float(line[39:51]) / 100)
                 self.number_transaction += int(line[51:63])
             else:
-                reference = line[12:39]
+                ref = line[12:39]
                 amount = float(line[39:49]) / 100
                 format_date = time.strftime(
                     '%Y-%m-%d', time.strptime(line[71:77], '%y%m%d'))
@@ -110,54 +176,44 @@ class V11FileParser(BankStatementImportParser):
                     amount *= -1
                     cost *= -1
 
-                res.append({
-                    'ref': reference,
+                transactions.append({
+                    'name': '/',
+                    'ref': ref,
+                    'unique_import_id': ref+"-"+str(id),
                     'amount': amount,
                     'date': format_date,
                 })
+                id += 1
+        return transactions
 
-        return res
+    def validate(self):
+        """Validate the bank statement
+        :param total_line: Last line in the g11 file. Beginning with '097'
+        :return: Boolean
+        """
+        total_line = self.lines[-1]
+        transactions = int(total_line[51:63])
+        return (len(self.statements[0]['transactions']) == transactions)
 
-    def _parse_type4(self):
+    def _parse_statement_date(self):
+        """Parse file statement date
+        :return: A date usable by Odoo in write or create dict
         """
-        Parse ESR record of type 4. This method is not implemented. Feel free
-        to inherit from this class in your module in order to implement it.
-        """
-        return NotImplementedError
+        date = datetime.date.today()
+        return fields.Date.to_string(date)
 
-    def _validate(self, *args, **kwargs):
+    def _parse(self):
         """
-        We check our results against the total line for record of type 3.
-        Inherit this method to add validation for record type 4.
+        Launch the parsing through The g11 file.
         """
-        if self.record_type == 3:
-            if not len(self.result_row_list) == self.number_transaction:
-                raise except_osv(_('Invalid data'),
-                                 _('The number of read transactions doesn\'t match the \
-                                 total records in file'))
+        self.currency_code = self._parse_currency_code()
+        self.account_number = self._parse_account_number()
+        statement = {}
+        statement['balance_start'] = 0.0
+        statement['balance_end_real'] = self._parse_statement_balance_end()
+        statement['date'] = self._parse_statement_date()
+        statement['attachments'] = []
+        statement['transactions'] = self._parse_transactions()
 
-        return True
-
-    def _post(self, *args, **kwargs):
-        """
-        Nothing to do here.
-        """
-        return True
-
-    def get_st_line_vals(self, line, *args, **kwargs):
-        """
-        This method must return a dict of vals that can be passed to create
-        method of statement line in order to record it.
-            :param:  line: a dict of vals that represent a line of
-                           result_row_list
-            :return: dict of values to give to the create method of
-                     statement line,
-        """
-        res = {
-            'name': '/',
-            'date': line.get('date', date.today()),
-            'amount': line.get('amount', 0.0),
-            'ref': line.get('ref', '/'),
-        }
-
-        return res
+        self.statements.append(statement)
+        return self.validate()
