@@ -76,14 +76,20 @@ class account_bank_statement_import(models.TransientModel):
             if parser.file_is_known():
                 parser.parse()
                 currency_code = parser.get_currency()
-                account_number = parser.get_account_number()
-
-                acc_from_bvr_adherent = self.env['res.partner.bank'].search(
-                    [('bvr_adherent_num', '=', account_number)])
-                if acc_from_bvr_adherent:
-                    account_number = acc_from_bvr_adherent.acc_number
-
+                account_number_dict = parser.get_account_number()
                 statements = parser.get_statements()
+
+                account_number = account_number_dict['account_number']
+
+                if 'fields_search' in account_number_dict:
+                    partner_bank = self.env['res.partner.bank']
+                    if account_number_dict['fields_search'] in partner_bank:
+                        acc_from_other_id = self.env['res.partner.bank'].\
+                            search([(account_number_dict['fields_search'], '=',
+                                     account_number_dict['account_number'])])
+                        if acc_from_other_id:
+                            account_number = acc_from_other_id.acc_number
+
                 if not statements:
                     raise exceptions.Warning(_('Nothing to import'))
                 return currency_code, account_number, statements
