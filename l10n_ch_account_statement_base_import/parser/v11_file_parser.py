@@ -19,9 +19,8 @@
 import datetime
 import time
 import logging
-import pdb
 
-from openerp import fields, _
+from openerp import fields
 
 from .base_parser import BaseSwissParser
 
@@ -110,7 +109,7 @@ class G11Parser(BaseSwissParser):
         lines from BVR type 3 never start with '2'. Use this condition to know
         if it had to format the account number like xx-xxxxx-x
 
-        :return: the file account number or bvr adherent number
+        :return: the file account number or esr_party_number (LSV)
         :rtype: string
         """
 
@@ -118,7 +117,7 @@ class G11Parser(BaseSwissParser):
         account = first_line[3:12]
         self.fields_search = 'esr_party_number'
         if first_line[0] != '2':
-        # Formating account like xx-xxxxx-x
+            # Formating account like xx-xxxxx-x
             account = account[:2] + '-' + account[3:-1] + '-' + account[-1]
             self.fields_search = None
         return account

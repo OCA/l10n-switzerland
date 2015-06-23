@@ -20,7 +20,7 @@
 ##############################################################################
 from openerp import models, api, _, exceptions, fields
 from .parser import base_parser
-import pdb
+
 
 class AccountBankStatement(models.Model):
     _inherit = 'account.bank.statement'
@@ -89,7 +89,7 @@ class account_bank_statement_import(models.TransientModel):
                                    account_number_dict['account_number'])])
                         if acc_from_other_id:
                             account_number = acc_from_other_id.acc_number
-                
+
                 if not statements:
                     raise exceptions.Warning(_('Nothing to import'))
                 return currency_code, account_number, statements

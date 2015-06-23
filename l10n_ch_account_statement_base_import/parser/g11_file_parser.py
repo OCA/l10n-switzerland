@@ -113,7 +113,7 @@ class G11Parser(BaseSwissParser):
     def _parse_account_number(self):
         """Parse file account number
 
-        :return: the file account number or bvr adherent number
+        :return: The file Post DD identifier
         :rtype: string
         """
         return self.lines[1][6:12]

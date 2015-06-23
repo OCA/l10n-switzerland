@@ -108,7 +108,7 @@ class BaseSwissParser(object):
         :rtype: dict
         """
         res = {
-        'account_number': self.account_number
+            'account_number': self.account_number
         }
         return res
 
