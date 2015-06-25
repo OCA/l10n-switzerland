@@ -132,8 +132,6 @@ class G11Parser(BaseSwissParser):
 
     def _parse_statement_balance_end(self):
         """Parse file start and end balance
-        :param total_line: Last line of the g11 file, named total line
-        :type tree: :py:class:`lxml.etree.element.Element`
 
         :return: the file end balance
         :rtype: float
