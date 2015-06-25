@@ -1,73 +1,199 @@
 # -*- coding: utf-8 -*-
-###############################################################################
+##############################################################################
 #
-#   Authors: David Wulliamoz <dwulliamoz@compassion.ch>
-#            Emanuel Cino <ecino@compassion.ch>
-#   Copyright 2013-2014 Compassion CH
+#    Author: Steve Ferry
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
-#   This program is free software: you can redistribute it and/or modify
-#   it under the terms of the GNU Affero General Public License as
-#   published by the Free Software Foundation, either version 3 of the
-#   License, or (at your option) any later version.
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
 #
-#   This program is distributed in the hope that it will be useful,
-#   but WITHOUT ANY WARRANTY; without even the implied warranty of
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#   GNU Affero General Public License for more details.
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#   You should have received a copy of the GNU Affero General Public License
-#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-###############################################################################
-
-from datetime import datetime
-import tempfile
+##############################################################################
+import datetime
+import logging
 import csv
 import re
-from account_statement_base_import.parser.file_parser import FileParser
+from openerp import fields, exceptions, _
 
-from openerp.osv import orm
-from openerp.tools.translate import _
+from .base_parser import BaseSwissParser
 
-import logging
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 
-def float_or_zero(val):
-    """ Conversion function used to manage
-    empty string into float usecase"""
-    return float(val) if val else 0.0
+class RaffaisenCSVParser(BaseSwissParser):
+    """
+    Parser for BVR DD type 2 Postfinance Statements
+    (can be wrapped in a g11 file)
+    """
 
+    _ftype = 'raffaisen_csv'
 
-class RaiffeisenFileParser(FileParser):
-
-    def __init__(self, parse_name, ftype='csv', extra_fields=None,
-                 header=None, **kwargs):
+    def __init__(self, data_file):
+        """Constructor
+        Splitting data_file in lines and fill a dict with key - value from the
+        csv file
         """
-        :param char: parse_name: The name of the parser
-        :param char: ftype: extension of the file
-        :param dict: extra_fields: extra fields to add to the conversion dict.
-        :param list: header : specify header fields if the csv file
-        has no header
-        """
-        conversion_dict = {
-            'Text': unicode,
-            'Booked At': datetime,
-            'Credit/Debit Amount': float_or_zero,
-        }
+        super(RaffaisenCSVParser, self).__init__(data_file)
+        rows = []
+        reader = csv.DictReader(self.data_file.splitlines(), delimiter=';')
 
-        super(RaiffeisenFileParser, self).__init__(
-            parse_name, ftype=ftype, extra_fields=conversion_dict, **kwargs)
+        for row in reader:
+            rows.append(
+                dict([(key, value)
+                      for key, value in row.iteritems()]))
 
-    @classmethod
-    def parser_for(cls, parser_name):
-        """
-        Used by the new_bank_statement_parser class factory. Return true if
-        the providen name is raiffeisen_csvparser
-        """
-        return parser_name == 'raiffeisen_csvparser'
+        self.rows = rows
+        self.fields_search = 'bvr_adherent_num'
 
-    def get_st_line_vals(self, line, *args, **kwargs):
+    def ftype(self):
+        """Gives the type of file we want to import
+
+        :return: imported file type
+        :rtype: string
+        """
+        return super(RaffaisenCSVParser, self).ftype()
+
+    def get_currency(self):
+        """Returns the ISO currency code of the parsed file
+
+        :return: The ISO currency code of the parsed file eg: CHF
+        :rtype: string
+        """
+        return super(RaffaisenCSVParser, self).get_currency()
+
+    def get_account_number(self):
+        """Return the account_number related to parsed file
+
+        :return: The account number of the parsed file
+        :rtype: string
+        """
+        res = super(RaffaisenCSVParser, self).get_account_number()
+        if self.fields_search:
+            res['fields_search'] = self.fields_search
+        return res
+
+    def get_statements(self):
+        """Return the list of bank statement dict.
+         Bank statements data: list of dict containing
+            (optional items marked by o) :
+            - 'name': string (e.g: '000000123')
+            - 'date': date (e.g: 2013-06-26)
+            -o 'balance_start': float (e.g: 8368.56)
+            -o 'balance_end_real': float (e.g: 8888.88)
+            - 'transactions': list of dict containing :
+                - 'name': string
+                   (e.g: 'KBC-INVESTERINGSKREDIET 787-5562831-01')
+                - 'date': date
+                - 'amount': float
+                - 'unique_import_id': string
+                -o 'account_number': string
+                    Will be used to find/create the res.partner.bank in odoo
+                -o 'note': string
+                -o 'partner_name': string
+                -o 'ref': string
+
+        :return: a list of statement
+        :rtype: list
+        """
+        return super(RaffaisenCSVParser, self).get_statements()
+
+    def file_is_known(self):
+        """Predicate the tells if the parser can parse the data file
+
+        :return: True if file is supported
+        :rtype: bool
+        """
+        return ('Booked At' in self.rows[0] and 'Text' in self.rows[0])
+
+    def _parse_account_number(self):
+        """Parse file account number
+        Search for a reference, the 9 first characters are the BVR
+        adherent number
+
+        :return: BVR adherent number
+        :rtype: string
+        """
+        account_number = ''
+        for line in self.rows:
+            # We try to extract a BVR reference
+            result = re.match(r'.*(\d{27}).*', line.get('Text'))
+            if result:
+                ref = result.group(1)
+                account_number = ref[:9]
+                break
+        return account_number
+
+    def _parse_currency_code(self):
+        """Parse file currency ISO code
+
+        :return: the currency ISO code of the file eg: CHF
+        :rtype: string
+        """
+        return 'CHF'
+
+    def _parse_statement_balance(self):
+        """Parse file start and end balance
+
+        :return: Tuple with the file start and end balance
+        :rtype: float
+        """
+        first_balance = float(self.rows[0].get('Balance').replace("'", ''))
+        first_amount = float(self.rows[0].get(
+            'Credit/Debit Amount').replace("'", ''))
+        balance_start = float(first_balance - first_amount)
+
+        i = 1
+        while not self.rows[-i].get('Balance'):
+            i += 1
+        balance_end = float(self.rows[-i].get('Balance'))
+
+        return balance_start, balance_end
+
+    def _parse_transactions(self):
+        """Parse bank statement lines from file
+        list of dict containing :
+            - 'name': string (e.g: 'KBC-INVESTERINGSKREDIET 787-5562831-01')
+            - 'date': date
+            - 'amount': float
+            - 'unique_import_id': string
+            -o 'account_number': string
+                Will be used to find/create the res.partner.bank in odoo
+            -o 'note': string
+            -o 'partner_name': string
+            -o 'ref': string
+
+        :return: a list of transactions
+        :rtype: list
+        """
+        transactions = []
+        id = 0
+        for row in self.rows:
+            transactions.append(self.get_st_line_vals(row, id))
+            id += 1
+
+        return transactions
+
+    def _get_values(self, line, currency='CHF', rate=1):
+        name = ''
+        amount = '0.0'
+        vals = line.get('Text').rsplit(' ' + currency + ' ', 1)
+        if len(vals) == 2:
+            name = vals[0]
+            amount = float(vals[1].replace("'", "")) * rate
+        else:
+            raise exceptions.Warning(
+                'ParsingError', _('Unable to parse amount for ligne %s') %
+                line.get('Text'))
+        return name, str(amount)
+
+    def get_st_line_vals(self, line, id):
         """
         This method must return a dict of vals that can be passed to create
         method of statement line in order to record it.
@@ -76,71 +202,29 @@ class RaiffeisenFileParser(FileParser):
             :return: dict of values to give to the create method of
                      statement line,
         """
+        # We try to extract a BVR reference
+        result = re.match(r'.*(\d{27}).*', line.get('Text'))
+        ref = '/'
+        test = 'Crèdit'.decode('iso-8859-15').encode('utf8')
+        if result and not line.get('Text').startswith(test):
+            ref = result.group(1)
+
+        uid = ref + '-' + str(id)
+        date = fields.Date.from_string(line.get("Booked At",
+                                                datetime.date.today()))
         res = {
             'name': line.get("Text"),
-            'date': line.get("Booked At", datetime.date.today()),
+            'date': line.get("Booked At", date),
             'amount': line.get("Credit/Debit Amount", 0.0),
-            'ref': '/',
-            'label': line.get("Text")
+            'ref': ref,
+            'unique_import_id': uid
         }
 
         return res
 
-    def _custom_format(self, *args, **kwargs):
+    def cleanup_rows(self, rows):
         """
-        The file format is in iso-8859-15, must be converted to
-        utf-8 before parsing.
-        """
-        self.filebuffer = self.filebuffer.decode(
-            'iso-8859-15').encode('utf-8')
-        return True
-
-
-class RaiffeisenDetailsFileParser(FileParser):
-
-    def __init__(self, parse_name, ftype='csv', extra_fields=None,
-                 header=None, **kwargs):
-        """
-        :param char: parse_name: The name of the parser
-        :param char: ftype: extension of the file
-        :param dict: extra_fields: extra fields to add to the conversion dict.
-        :param list: header : specify header fields if the csv file
-                              has no header
-        """
-
-        conversion_dict = {
-            'Text': unicode,
-            'Booked At': datetime,
-            'Credit/Debit Amount': float_or_zero,
-        }
-        super(RaiffeisenDetailsFileParser, self).__init__(
-            parse_name, extra_fields=conversion_dict, **kwargs)
-
-    @classmethod
-    def parser_for(cls, parser_name):
-        """
-        Used by the new_bank_statement_parser class factory. Return true if
-        the providen name is raiffeisen_details_csvparser
-        """
-        return parser_name == 'raiffeisen_details_csvparser'
-
-    def _parse(self, *args, **kwargs):
-        super(RaiffeisenDetailsFileParser, self)._parse(*args, **kwargs)
-        first_balance = self.result_row_list[0].get('Balance').replace("'", '')
-        first_amount = self.result_row_list[0].get(
-            'Credit/Debit Amount').replace("'", '')
-        self.balance_start = str(float(first_balance) - float(first_amount))
-
-        i = 1
-        while not self.result_row_list[-i].get('Balance'):
-            i += 1
-        self.balance_end = self.result_row_list[-i].get('Balance')
-
-        return True
-
-    def _post(self, *args, **kwargs):
-        """
-        Transform/drop sub rows to be consistent
+        Clean up rows to remove useless details for the statement line
         """
         cleanup_rows = []
         last_date = ''
@@ -148,16 +232,16 @@ class RaiffeisenDetailsFileParser(FileParser):
         reported_line = {}
         rate = 1
         currency = 'CHF'
-        for row in self.result_row_list:
+        for row in rows:
             if row.get('Booked At'):  # Main row
                 rate = 1
                 currency = 'CHF'
                 reported_text = ''
                 reported_line = {}
                 last_date = row.get('Booked At')
-                if row.get('Text').startswith(u'CrÃ©dit'):
+                if row.get('Text').startswith('Crédit'):
                     reported_text = row.get('Text')[7:] + ' '
-                elif row.get('Text').startswith(u'Virement postal'):
+                elif row.get('Text').startswith('Virement postal'):
                     reported_text = row.get('Text')[16:] + ' '
                 elif row.get('Text').startswith('Ordre collectif'):
                     rate = -1
@@ -169,7 +253,7 @@ class RaiffeisenDetailsFileParser(FileParser):
                 else:
                     cleanup_rows.append(row)
             else:  # Sub row
-                if row.get('Text').startswith(u'DÃ©tails invisibles'):
+                if row.get('Text').startswith('Détails invisibles'):
                     if reported_line:
                         cleanup_rows.append(reported_line)
                         reported_line = {}
@@ -183,67 +267,30 @@ class RaiffeisenDetailsFileParser(FileParser):
                     row['Credit/Debit Amount'] = amount
                     cleanup_rows.append(row)
 
-        self.result_row_list = cleanup_rows
+        return cleanup_rows
 
-        return super(RaiffeisenDetailsFileParser, self)._post(*args, **kwargs)
-
-    def get_st_line_vals(self, line, *args, **kwargs):
+    def _parse_statement_date(self):
+        """Parse file statement date
+        :return: A date usable by Odoo in write or create dict
         """
-        This method must return a dict of vals that can be passed to create
-        method of statement line in order to record it.
-            :param:  line: a dict of vals that represent a line of
-                           result_row_list
-            :return: dict of values to give to the create method of
-                     statement line,
-        """
-        # We try to extract a BVR reference
-        result = re.match(r'.*(\d{27}).*', line.get('Text'))
-        ref = '/'
-        if result and not line.get('Text').startswith(u'CrÃ¨dit'):
-            ref = result.group(1)
+        date = datetime.date.today()
+        return fields.Date.to_string(date)
 
-        res = {
-            'name': line.get("Text"),
-            'date': line.get("Booked At", datetime.now().date()),
-            'amount': line.get("Credit/Debit Amount", 0.0),
-            'ref': ref,
-            'label': line.get("Text")
-        }
-
-        return res
-
-    def _custom_format(self, *args, **kwargs):
+    def _parse(self):
         """
-        The file format is in iso-8859-15, must be converted
-        to utf-8 before parsing.
+        Launch the parsing through the Raffaisen csv file.
         """
-        self.filebuffer = self.filebuffer.decode('iso-8859-15').encode('utf-8')
+        self.account_number = self._parse_account_number()
+        balance_start, balance_end = self._parse_statement_balance()
+
+        self.rows = self.cleanup_rows(self.rows)
+        self.currency_code = self._parse_currency_code()
+        statement = {}
+        statement['balance_start'] = balance_start
+        statement['balance_end_real'] = balance_end
+        statement['date'] = self._parse_statement_date()
+        statement['attachments'] = []
+        statement['transactions'] = self._parse_transactions()
+
+        self.statements.append(statement)
         return True
-
-    def _parse_csv(self):
-        ''' UnicodeDictReader is not able to determine delimiter... '''
-        csv_file = tempfile.NamedTemporaryFile()
-        csv_file.write(self.filebuffer)
-        csv_file.flush()
-        with open(csv_file.name, 'rU') as fobj:
-            reader = csv.DictReader(
-                fobj, delimiter=';', fieldnames=self.fieldnames)
-            rows = []
-            for row in reader:
-                rows.append(
-                    dict([(key, unicode(value, 'utf-8'))
-                          for key, value in row.iteritems()]))
-            return rows
-
-    def _get_values(self, line, currency='CHF', rate=1):
-        name = ''
-        amount = '0.0'
-        vals = line.get('Text').rsplit(' ' + currency + ' ', 1)
-        if len(vals) == 2:
-            name = vals[0]
-            amount = float(vals[1].replace("'", "")) * rate
-        else:
-            raise orm.except_orm('ParsingError',
-                                 _('Unable to parse amount for ligne %s') %
-                                 line.get('Text'))
-        return name, str(amount)
