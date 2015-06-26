@@ -37,6 +37,10 @@ class account_bank_statement_import(models.TransientModel):
     _inherit = 'account.bank.statement.import'
 
     @api.model
+    def _get_hide_journal_field(self):
+        return self.env.context.get('journal_id') and True
+
+    @api.model
     def _parse_file(self, data_file):
         """ Each module adding a file support must extends this method.
         It processes the file if it can, returns super otherwise,
@@ -74,21 +78,30 @@ class account_bank_statement_import(models.TransientModel):
         """
         for parser in self._get_parsers(data_file):
             if parser.file_is_known():
+                # pdb.set_trace()
                 parser.parse()
                 currency_code = parser.get_currency()
-                account_number_dict = parser.get_account_number()
+                account_number = parser.get_account_number()
                 statements = parser.get_statements()
 
-                account_number = account_number_dict['account_number']
+                acc_number_postal_temp = account_number.split('-')
 
-                if 'fields_search' in account_number_dict:
-                    partner_bank = self.env['res.partner.bank']
-                    if account_number_dict['fields_search'] in partner_bank:
-                        acc_from_other_id = self.env['res.partner.bank'].\
-                            search([(account_number_dict['fields_search'], '=',
-                                     account_number_dict['account_number'])])
-                        if acc_from_other_id:
-                            account_number = acc_from_other_id.acc_number
+                partners_banks = self.env['res.partner.bank'].search([])
+                for partner_bank in partners_banks:
+                    account = partner_bank.acc_number.replace(' ', '')
+                    if len(acc_number_postal_temp) == 3:
+                        postal_account_array = account.split('-')
+                        if len(postal_account_array) == 3:
+                            id = 0
+                            while postal_account_array[1][id] == '0':
+                                id += 1
+                            if id < len(postal_account_array[1])-1:
+                                postal_account_array[1] = \
+                                    postal_account_array[1][id:]
+                            account = '-'.join(postal_account_array)
+                    if account.endswith(account_number):
+                        account_number = partner_bank.acc_number
+                        break
 
                 if not statements:
                     raise exceptions.Warning(_('Nothing to import'))
@@ -128,20 +141,21 @@ class account_bank_statement_import(models.TransientModel):
         # statements value are sorted list so we received sorted statement_ids
         index = 0
         for st_vals in stmts_vals:
-            statement = self.env['account.bank.statement'].browse(
-                statement_ids[index]
-            )
-            attachments = self.env['ir.attachment'].browse()
-            for attach in st_vals['attachments']:
-                attachments += self.env['ir.attachment'].create(
-                    {
-                        'name': attach[0],
-                        'res_model': 'account.bank.statement',
-                        'res_id': statement_ids[index],
-                        'type': 'binary',
-                        'datas': attach[1],
-                    }
+            if 'attachments' in st_vals:
+                statement = self.env['account.bank.statement'].browse(
+                    statement_ids[index]
                 )
-            statement.related_files = attachments
-            index += 1
+                attachments = self.env['ir.attachment'].browse()
+                for attach in st_vals['attachments']:
+                    attachments += self.env['ir.attachment'].create(
+                        {
+                            'name': attach[0],
+                            'res_model': 'account.bank.statement',
+                            'res_id': statement_ids[index],
+                            'type': 'binary',
+                            'datas': attach[1],
+                        }
+                    )
+                statement.related_files = attachments
+                index += 1
         return statement_ids, notifs

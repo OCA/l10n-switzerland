@@ -29,8 +29,7 @@ _logger = logging.getLogger(__name__)
 
 class RaffaisenCSVParser(BaseSwissParser):
     """
-    Parser for BVR DD type 2 Postfinance Statements
-    (can be wrapped in a g11 file)
+    Parser for Raffaisen CSV Statements
     """
 
     _ftype = 'raffaisen_csv'
@@ -40,6 +39,7 @@ class RaffaisenCSVParser(BaseSwissParser):
         Splitting data_file in lines and fill a dict with key - value from the
         csv file
         """
+
         super(RaffaisenCSVParser, self).__init__(data_file)
         rows = []
         reader = csv.DictReader(self.data_file.splitlines(), delimiter=';')
@@ -50,7 +50,6 @@ class RaffaisenCSVParser(BaseSwissParser):
                       for key, value in row.iteritems()]))
 
         self.rows = rows
-        self.fields_search = 'bvr_adherent_num'
 
     def ftype(self):
         """Gives the type of file we want to import
@@ -58,6 +57,7 @@ class RaffaisenCSVParser(BaseSwissParser):
         :return: imported file type
         :rtype: string
         """
+
         return super(RaffaisenCSVParser, self).ftype()
 
     def get_currency(self):
@@ -66,6 +66,7 @@ class RaffaisenCSVParser(BaseSwissParser):
         :return: The ISO currency code of the parsed file eg: CHF
         :rtype: string
         """
+
         return super(RaffaisenCSVParser, self).get_currency()
 
     def get_account_number(self):
@@ -74,10 +75,8 @@ class RaffaisenCSVParser(BaseSwissParser):
         :return: The account number of the parsed file
         :rtype: string
         """
-        res = super(RaffaisenCSVParser, self).get_account_number()
-        if self.fields_search:
-            res['fields_search'] = self.fields_search
-        return res
+
+        return super(RaffaisenCSVParser, self).get_account_number()
 
     def get_statements(self):
         """Return the list of bank statement dict.
@@ -102,6 +101,7 @@ class RaffaisenCSVParser(BaseSwissParser):
         :return: a list of statement
         :rtype: list
         """
+
         return super(RaffaisenCSVParser, self).get_statements()
 
     def file_is_known(self):
@@ -110,6 +110,7 @@ class RaffaisenCSVParser(BaseSwissParser):
         :return: True if file is supported
         :rtype: bool
         """
+
         return ('Booked At' in self.rows[0] and 'Text' in self.rows[0])
 
     def _parse_account_number(self):
@@ -120,6 +121,7 @@ class RaffaisenCSVParser(BaseSwissParser):
         :return: BVR adherent number
         :rtype: string
         """
+
         account_number = ''
         for line in self.rows:
             # We try to extract a BVR reference
@@ -136,6 +138,7 @@ class RaffaisenCSVParser(BaseSwissParser):
         :return: the currency ISO code of the file eg: CHF
         :rtype: string
         """
+
         return 'CHF'
 
     def _parse_statement_balance(self):
@@ -144,6 +147,7 @@ class RaffaisenCSVParser(BaseSwissParser):
         :return: Tuple with the file start and end balance
         :rtype: float
         """
+
         first_balance = float(self.rows[0].get('Balance').replace("'", ''))
         first_amount = float(self.rows[0].get(
             'Credit/Debit Amount').replace("'", ''))
@@ -172,6 +176,7 @@ class RaffaisenCSVParser(BaseSwissParser):
         :return: a list of transactions
         :rtype: list
         """
+
         transactions = []
         id = 0
         for row in self.rows:
@@ -202,6 +207,7 @@ class RaffaisenCSVParser(BaseSwissParser):
             :return: dict of values to give to the create method of
                      statement line,
         """
+
         # We try to extract a BVR reference
         result = re.match(r'.*(\d{27}).*', line.get('Text'))
         ref = '/'
@@ -226,6 +232,7 @@ class RaffaisenCSVParser(BaseSwissParser):
         """
         Clean up rows to remove useless details for the statement line
         """
+
         cleanup_rows = []
         last_date = ''
         reported_text = ''
@@ -273,6 +280,7 @@ class RaffaisenCSVParser(BaseSwissParser):
         """Parse file statement date
         :return: A date usable by Odoo in write or create dict
         """
+
         date = datetime.date.today()
         return fields.Date.to_string(date)
 
@@ -280,6 +288,7 @@ class RaffaisenCSVParser(BaseSwissParser):
         """
         Launch the parsing through the Raffaisen csv file.
         """
+
         self.account_number = self._parse_account_number()
         balance_start, balance_end = self._parse_statement_balance()
 

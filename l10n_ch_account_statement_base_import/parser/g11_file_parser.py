@@ -39,6 +39,7 @@ class G11Parser(BaseSwissParser):
         """Constructor
         Splitting data_file in lines
         """
+
         super(G11Parser, self).__init__(data_file)
         self.lines = data_file.splitlines()
         self.reject_reason = {
@@ -57,6 +58,7 @@ class G11Parser(BaseSwissParser):
         :return: imported file type
         :rtype: string
         """
+
         return super(G11Parser, self).ftype()
 
     def get_currency(self):
@@ -65,6 +67,7 @@ class G11Parser(BaseSwissParser):
         :return: The ISO currency code of the parsed file eg: CHF
         :rtype: string
         """
+
         return super(G11Parser, self).get_currency()
 
     def get_account_number(self):
@@ -73,9 +76,8 @@ class G11Parser(BaseSwissParser):
         :return: The account number of the parsed file
         :rtype: string
         """
-        res = super(G11Parser, self).get_account_number()
-        res['fields_search'] = 'post_dd_identifier'
-        return res
+
+        return super(G11Parser, self).get_account_number()
 
     def get_statements(self):
         """Return the list of bank statement dict.
@@ -100,6 +102,7 @@ class G11Parser(BaseSwissParser):
         :return: a list of statement
         :rtype: list
         """
+
         return super(G11Parser, self).get_statements()
 
     def file_is_known(self):
@@ -108,6 +111,7 @@ class G11Parser(BaseSwissParser):
         :return: True if file is supported
         :rtype: bool
         """
+
         return self.lines[-1][0:3] == '097'
 
     def _parse_account_number(self):
@@ -116,6 +120,7 @@ class G11Parser(BaseSwissParser):
         :return: The file Post DD identifier
         :rtype: string
         """
+
         return self.lines[1][6:12]
 
     def _parse_currency_code(self):
@@ -124,6 +129,7 @@ class G11Parser(BaseSwissParser):
         :return: the currency ISO code of the file eg: CHF
         :rtype: string
         """
+
         return self.lines[-1][128:131]
 
     def _parse_statement_balance_end(self):
@@ -132,6 +138,7 @@ class G11Parser(BaseSwissParser):
         :return: the file end balance
         :rtype: float
         """
+
         total_line = self.lines[-1]
         return ((float(total_line[45:57]) / 100) -
                 (float(total_line[101:113]) / 100))
@@ -152,6 +159,7 @@ class G11Parser(BaseSwissParser):
         :return: a list of transactions
         :rtype: list
         """
+
         transactions = []
         for line in self.lines:
             if line[0:3] != '097':
@@ -198,6 +206,7 @@ class G11Parser(BaseSwissParser):
         :param total_line: Last line in the g11 file. Beginning with '097'
         :return: Boolean
         """
+
         total_line = self.lines[-1]
         transactions = 0
         transactions += int(
@@ -210,6 +219,7 @@ class G11Parser(BaseSwissParser):
         """Parse file statement date
         :return: A date usable by Odoo in write or create dict
         """
+
         date = datetime.date.today()
         return fields.Date.to_string(date)
 
@@ -217,6 +227,7 @@ class G11Parser(BaseSwissParser):
         """
         Launch the parsing through The g11 file.
         """
+
         self.currency_code = self._parse_currency_code()
         self.account_number = self._parse_account_number()
         statement = {}
