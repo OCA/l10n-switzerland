@@ -107,10 +107,8 @@ class BaseSwissParser(object):
         :return: The account number of the parsed file
         :rtype: dict
         """
-        res = {
-            'account_number': self.account_number
-        }
-        return res
+
+        return self.account_number
 
     @abstractmethod
     def get_statements(self):

@@ -19,7 +19,6 @@
 import datetime
 import time
 import logging
-
 from openerp import fields
 
 from .base_parser import BaseSwissParser
@@ -27,20 +26,20 @@ from .base_parser import BaseSwissParser
 _logger = logging.getLogger(__name__)
 
 
-class G11Parser(BaseSwissParser):
+class V11Parser(BaseSwissParser):
     """
     Parser for BVR DD type 2 Postfinance Statements
     (can be wrapped in a g11 file)
     """
 
-    _ftype = 'g11'
+    _ftype = 'v11'
 
     def __init__(self, data_file):
         """Constructor
         Splitting data_file in lines
         """
-        super(G11Parser, self).__init__(data_file)
-        self.fields_search = ''
+
+        super(V11Parser, self).__init__(data_file)
         self.lines = data_file.splitlines()
 
     def ftype(self):
@@ -49,7 +48,8 @@ class G11Parser(BaseSwissParser):
         :return: imported file type
         :rtype: string
         """
-        return super(G11Parser, self).ftype()
+
+        return super(V11Parser, self).ftype()
 
     def get_currency(self):
         """Returns the ISO currency code of the parsed file
@@ -57,7 +57,8 @@ class G11Parser(BaseSwissParser):
         :return: The ISO currency code of the parsed file eg: CHF
         :rtype: string
         """
-        return super(G11Parser, self).get_currency()
+
+        return super(V11Parser, self).get_currency()
 
     def get_account_number(self):
         """Return the account_number related to parsed file
@@ -65,10 +66,8 @@ class G11Parser(BaseSwissParser):
         :return: The account number of the parsed file
         :rtype: string
         """
-        res = super(G11Parser, self).get_account_number()
-        if self.fields_search:
-            res['fields_search'] = self.fields_search
-        return res
+
+        return super(V11Parser, self).get_account_number()
 
     def get_statements(self):
         """Return the list of bank statement dict.
@@ -93,7 +92,8 @@ class G11Parser(BaseSwissParser):
         :return: a list of statement
         :rtype: list
         """
-        return super(G11Parser, self).get_statements()
+
+        return super(V11Parser, self).get_statements()
 
     def file_is_known(self):
         """Predicate the tells if the parser can parse the data file
@@ -101,26 +101,8 @@ class G11Parser(BaseSwissParser):
         :return: True if file is supported
         :rtype: bool
         """
+
         return (self.lines[-1][0:3] in ('999', '995'))
-
-    def _parse_account_number(self):
-        """Parse file account number
-        Lines from LSV type 3 always start with '2' and
-        lines from BVR type 3 never start with '2'. Use this condition to know
-        if it had to format the account number like xx-xxxxx-x
-
-        :return: the file account number or esr_party_number (LSV)
-        :rtype: string
-        """
-
-        first_line = self.lines[1]
-        account = first_line[3:12]
-        self.fields_search = 'esr_party_number'
-        if first_line[0] != '2':
-            # Formating account like xx-xxxxx-x
-            account = account[:2] + '-' + account[3:-1] + '-' + account[-1]
-            self.fields_search = None
-        return account
 
     def _parse_currency_code(self):
         """Parse file currency ISO code
@@ -128,6 +110,7 @@ class G11Parser(BaseSwissParser):
         :return: the currency ISO code of the file eg: CHF
         :rtype: string
         """
+
         return 'CHF'
 
     def _parse_statement_balance_end(self):
@@ -136,9 +119,9 @@ class G11Parser(BaseSwissParser):
         :return: the file end balance
         :rtype: float
         """
+
         total_line = self.lines[-1]
         return (float(total_line[39:51]) / 100)
-        return False
 
     def _parse_transactions(self):
         """Parse bank statement lines from file
@@ -156,6 +139,7 @@ class G11Parser(BaseSwissParser):
         :return: a list of transactions
         :rtype: list
         """
+
         id = 0
         transactions = []
         for line in self.lines[:-1]:
@@ -189,6 +173,7 @@ class G11Parser(BaseSwissParser):
         :param total_line: Last line in the g11 file. Beginning with '097'
         :return: Boolean
         """
+
         total_line = self.lines[-1]
         transactions = int(total_line[51:63])
         return (len(self.statements[0]['transactions']) == transactions)
@@ -197,6 +182,7 @@ class G11Parser(BaseSwissParser):
         """Parse file statement date
         :return: A date usable by Odoo in write or create dict
         """
+
         date = datetime.date.today()
         return fields.Date.to_string(date)
 
@@ -204,8 +190,8 @@ class G11Parser(BaseSwissParser):
         """
         Launch the parsing through The g11 file.
         """
+
         self.currency_code = self._parse_currency_code()
-        self.account_number = self._parse_account_number()
         statement = {}
         statement['balance_start'] = 0.0
         statement['balance_end_real'] = self._parse_statement_balance_end()

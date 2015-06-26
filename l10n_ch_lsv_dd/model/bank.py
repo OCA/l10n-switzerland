@@ -22,7 +22,6 @@ from openerp.osv import orm, fields
 from openerp.tools import mod10r
 from openerp.tools.translate import _
 
-
 class res_partner_bank(orm.Model):
 
     ''' Inherit res.partner.bank class in order to add swiss specific
@@ -32,6 +31,7 @@ class res_partner_bank(orm.Model):
      - Postfinance Direct Debit identifier
     '''
     _inherit = "res.partner.bank"
+
     _columns = {
         'lsv_identifier': fields.char(
             _('LSV Identifier'), size=5, help=_(
