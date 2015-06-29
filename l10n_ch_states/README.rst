@@ -17,12 +17,14 @@ To install this module, you need to:
 * download and install manually
 * or directly install it over Odoo-Apps
 
+
 Configuration
 =============
 
 To configure this module, you need to:
 
 * do nothing
+
 
 Usage
 =====
@@ -35,10 +37,12 @@ For further information, please visit:
 
 * https://www.odoo.com/forum/help-1
 
+
 Known issues / Roadmap
 ======================
 
 * actually there are no issues known
+
 
 Bug Tracker
 ===========
