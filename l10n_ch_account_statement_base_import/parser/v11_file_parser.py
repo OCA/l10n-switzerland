@@ -19,7 +19,6 @@
 import datetime
 import time
 import logging
-import pdb
 from openerp import fields
 
 from .base_parser import BaseSwissParser
@@ -104,28 +103,6 @@ class V11Parser(BaseSwissParser):
         """
 
         return (self.lines[-1][0:3] in ('999', '995'))
-
-    def _parse_account_number(self):
-        """Parse file account number
-        Lines from LSV type 3 always start with '2' and
-        lines from BVR type 3 never start with '2'. Use this condition to know
-        if it had to format the account number like xx-xxxxx-x
-
-        :return: the file account number or esr_party_number (LSV)
-        :rtype: string
-        """
-
-        first_line = self.lines[1]
-        account = first_line[3:12]
-        account_part = account[2:-1]
-        id = 0
-        while account_part[id] == '0':
-            id += 1
-        if id < len(account_part)-1:
-            account_part = account_part[id:]
-        account = account[:2] + '-' + account_part + '-' + account[-1]
-        pdb.set_trace()
-        return account
 
     def _parse_currency_code(self):
         """Parse file currency ISO code
@@ -215,7 +192,6 @@ class V11Parser(BaseSwissParser):
         """
 
         self.currency_code = self._parse_currency_code()
-        self.account_number = self._parse_account_number()
         statement = {}
         statement['balance_start'] = 0.0
         statement['balance_end_real'] = self._parse_statement_balance_end()

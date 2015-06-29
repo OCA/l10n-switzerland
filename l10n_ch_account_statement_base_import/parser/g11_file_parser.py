@@ -114,15 +114,6 @@ class G11Parser(BaseSwissParser):
 
         return self.lines[-1][0:3] == '097'
 
-    def _parse_account_number(self):
-        """Parse file account number
-
-        :return: The file Post DD identifier
-        :rtype: string
-        """
-
-        return self.lines[1][6:12]
-
     def _parse_currency_code(self):
         """Parse file currency ISO code
 
@@ -229,7 +220,6 @@ class G11Parser(BaseSwissParser):
         """
 
         self.currency_code = self._parse_currency_code()
-        self.account_number = self._parse_account_number()
         statement = {}
         statement['balance_start'] = 0.0
         statement['balance_end_real'] = self._parse_statement_balance_end()

@@ -113,25 +113,6 @@ class RaffaisenCSVParser(BaseSwissParser):
 
         return ('Booked At' in self.rows[0] and 'Text' in self.rows[0])
 
-    def _parse_account_number(self):
-        """Parse file account number
-        Search for a reference, the 9 first characters are the BVR
-        adherent number
-
-        :return: BVR adherent number
-        :rtype: string
-        """
-
-        account_number = ''
-        for line in self.rows:
-            # We try to extract a BVR reference
-            result = re.match(r'.*(\d{27}).*', line.get('Text'))
-            if result:
-                ref = result.group(1)
-                account_number = ref[:9]
-                break
-        return account_number
-
     def _parse_currency_code(self):
         """Parse file currency ISO code
 
@@ -289,7 +270,6 @@ class RaffaisenCSVParser(BaseSwissParser):
         Launch the parsing through the Raffaisen csv file.
         """
 
-        self.account_number = self._parse_account_number()
         balance_start, balance_end = self._parse_statement_balance()
 
         self.rows = self.cleanup_rows(self.rows)

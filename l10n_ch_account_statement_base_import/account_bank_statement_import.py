@@ -78,30 +78,10 @@ class account_bank_statement_import(models.TransientModel):
         """
         for parser in self._get_parsers(data_file):
             if parser.file_is_known():
-                # pdb.set_trace()
                 parser.parse()
                 currency_code = parser.get_currency()
                 account_number = parser.get_account_number()
                 statements = parser.get_statements()
-
-                acc_number_postal_temp = account_number.split('-')
-
-                partners_banks = self.env['res.partner.bank'].search([])
-                for partner_bank in partners_banks:
-                    account = partner_bank.acc_number.replace(' ', '')
-                    if len(acc_number_postal_temp) == 3:
-                        postal_account_array = account.split('-')
-                        if len(postal_account_array) == 3:
-                            id = 0
-                            while postal_account_array[1][id] == '0':
-                                id += 1
-                            if id < len(postal_account_array[1])-1:
-                                postal_account_array[1] = \
-                                    postal_account_array[1][id:]
-                            account = '-'.join(postal_account_array)
-                    if account.endswith(account_number):
-                        account_number = partner_bank.acc_number
-                        break
 
                 if not statements:
                     raise exceptions.Warning(_('Nothing to import'))

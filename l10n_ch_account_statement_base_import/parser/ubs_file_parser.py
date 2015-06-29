@@ -121,19 +121,7 @@ class UBSCSVParser(BaseSwissParser):
         :return: True if file is supported
         :rtype: bool
         """
-
-        return ('IBAN' in self.datas[1])
-
-    def _parse_account_number(self):
-        """Parse file account number
-
-        :return: the file account number (IBAN)
-        :rtype: string
-        """
-
-        first_line = self.datas[1]
-        account = first_line.get('IBAN')
-        return account
+        return len(self.datas) > 0 and ('IBAN' in self.datas[1])
 
     def _parse_currency_code(self):
         """Parse file currency ISO code
@@ -213,7 +201,6 @@ class UBSCSVParser(BaseSwissParser):
         """
 
         self.currency_code = self._parse_currency_code()
-        self.account_number = self._parse_account_number()
         balance_start, balance_end = self._parse_statement_balance()
         statement = {}
         statement['balance_start'] = balance_start
