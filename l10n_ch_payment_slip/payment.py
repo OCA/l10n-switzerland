@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Nicolas Bessi. Copyright Camptocamp SA
+#    Author: Vincent Renaville
+#    Copyright 2015 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,10 +18,20 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import company
-from . import report
-from . import payment_slip
-from . import invoice
-from . import wizard
-from . import bank
-from . import payment
+from openerp import models, api
+
+
+class payment_line(models.Model):
+    _inherit = 'payment.line'
+
+    @api.model
+    @api.returns('self', lambda value: value.id)
+    def create(self, vals):
+        """In case of BVR
+        we will search the transaction ref instead of ref for
+        communication field"""
+        account_move_line_obj = self.env['account.move.line']
+        move_line = account_move_line_obj.browse(vals['move_line_id'])
+        if move_line.transaction_ref:
+            vals['communication'] = move_line.transaction_ref
+        return super(payment_line, self).create(vals)
