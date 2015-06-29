@@ -173,7 +173,7 @@ class G11FileParser(BankStatementImportParser):
             'date': line.get('date', date.today()),
             'amount': line.get('amount', 0.0),
             'ref': line.get('ref', '/'),
-            'label': line.get("label"),
+            'label': line.get("label", "/"),
         }
 
         return res
