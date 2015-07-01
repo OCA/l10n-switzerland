@@ -296,7 +296,7 @@ class post_dd_export_wizard(orm.TransientModel):
             wf_service.trg_validate(uid, 'payment.order', order.id, 'done', cr)
             mandate_ids = [line.mandate_id.id for line in order.line_ids]
             self.pool['account.banking.mandate'].write(
-                cr, uid, mandate_ids, {
+                cr, uid, list(set(mandate_ids)), {
                     'last_debit_date': today_str}, context=context)
 
         # redirect to generated dd export
