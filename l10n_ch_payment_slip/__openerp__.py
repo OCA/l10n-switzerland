@@ -60,6 +60,7 @@ payment terms.
  'license': 'AGPL-3',
  'depends': ['base',
              'account',
+             'account_payment',
              'report',
              'l10n_ch_base_bank',
              'base_transaction_id'],
