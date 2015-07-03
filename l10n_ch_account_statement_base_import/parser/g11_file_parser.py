@@ -122,7 +122,7 @@ class G11FileParser(BankStatementImportParser):
                     'currency': currency,
                     'amount': amount,
                     'date': transaction_date,
-                    'label': label,
+                    'label': label or '/',
                 })
 
         self.result_row_list = res
