@@ -19,12 +19,12 @@
 #
 ##############################################################################
 
-from openerp.osv import orm
+from openerp import models, api, _
 from openerp import netsvc
-from openerp.tools.translate import _
+from openerp import exceptions
 
 
-class invoice(orm.Model):
+class invoice(models.Model):
 
     ''' Inherit invoice to add invoice freeing functionality. It's about
         moving related payment line in a new cancelled payment order. This
@@ -33,26 +33,31 @@ class invoice(orm.Model):
     '''
     _inherit = 'account.invoice'
 
-    def cancel_payment_lines(self, cr, uid, ids, context=None):
+    @api.multi
+    def cancel_payment_lines(self):
         ''' This function simply find related payment lines and move them
             in a new payment order.
         '''
-        mov_line_obj = self.pool.get('account.move.line')
-        pay_line_obj = self.pool.get('payment.line')
-        pay_order_obj = self.pool.get('payment.order')
+        mov_line_obj = self.env['account.move.line']
+        pay_line_obj = self.env['payment.line']
+        pay_order_obj = self.env['payment.order']
 
-        active_ids = context.get('active_ids')
-        move_ids = [inv.move_id.id for inv in self.browse(cr, uid,
-                                                          active_ids, context)]
+        active_ids = self.env.context.get('active_ids')
+        move_ids = [inv.move_id.id for inv in self.browse(active_ids)]
+        move_ids = [inv.move_id.id for inv in self.browse(active_ids)]
         move_line_ids = mov_line_obj.search(
-            cr, uid, [('move_id', 'in', move_ids)], context=context)
+            [('move_id', 'in', move_ids)], 
+            context=self.env.context
+        )
 
         pay_line_ids = pay_line_obj.search(
-            cr, uid, [('move_line_id', 'in', move_line_ids)], context=context)
+            [('move_line_id', 'in', move_line_ids)],
+            context=self.env.context
+        )
         if not pay_line_ids:
-            raise orm.except_orm('RuntimeError', _('No payment line found !'))
+            raise exceptions.Warning(_('No payment line found !'))
 
-        old_pay_order = pay_line_obj.browse(cr, uid, pay_line_ids[0]).order_id
+        old_pay_order = pay_line_obj.browse(pay_line_ids[0]).order_id
         vals = {
             'date_created': old_pay_order.date_created,
             'date_prefered': old_pay_order.date_prefered,
@@ -60,27 +65,26 @@ class invoice(orm.Model):
             'mode': old_pay_order.mode.id,
         }
 
-        pay_order_id = pay_order_obj.create(cr, uid, vals, context)
+        pay_order_id = pay_order_obj.create(vals)
         wf_service = netsvc.LocalService('workflow')
-        wf_service.trg_validate(uid, 'payment.order', pay_order_id, 'cancel',
-                                cr)
-        pay_line_obj.write(cr, uid, pay_line_ids, {'order_id': pay_order_id},
-                           context)
+        wf_service.trg_validate('payment.order', pay_order_id, 'cancel')
+        pay_line_obj.write(pay_line_ids, {'order_id': pay_order_id})
 
         return pay_order_id
 
 
-class account_invoice_free(orm.TransientModel):
+class account_invoice_free(models.TransientModel):
 
     ''' Wizard to free invoices. When job is done, user is redirected on new
         payment order.
     '''
     _name = 'account.invoice.free'
 
-    def invoice_free(self, cr, uid, ids, context=None):
-        inv_obj = self.pool.get('account.invoice')
+    @api.multi
+    def invoice_free(self):
+        inv_obj = self.env['account.invoice']
 
-        order_id = inv_obj.cancel_payment_lines(cr, uid, ids, context)
+        order_id = inv_obj.cancel_payment_lines()
 
         action = {
             'name': 'Payment order',

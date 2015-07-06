@@ -19,10 +19,10 @@
 #
 ##############################################################################
 
-from openerp.osv import orm
+from openerp import models
 
 
-class account_move_line(orm.Model):
+class account_move_line(models.Model):
     '''
     Use hooks to add bvr ref generation if account is IBAN and has LSV
     identifier
@@ -30,49 +30,43 @@ class account_move_line(orm.Model):
 
     _inherit = 'account.move.line'
 
-    def _is_generate_bvr(self, cr, uid, invoice, context=None):
+    def _is_generate_bvr(self, invoice):
         ''' If linked bank account is an iban account with LSV identifier,
             we also generate a bvr ref (as it's necessary in LSV file)
         '''
-        val = super(account_move_line, self)._is_generate_bvr(cr, uid, invoice,
-                                                              context)
+        val = super(account_move_line, self)._is_generate_bvr(invoice)
         return val or (invoice.partner_bank_id and
                        invoice.partner_bank_id.state == 'iban' and
                        invoice.partner_bank_id.lsv_identifier)
 
-    def line2bank(self, cr, uid, ids, payment_mode_id, context=None):
+    def line2bank(self, payment_mode_id):
         ''' Override line2bank to avoid choosing a bank that has only
             cancelled mandate.
         '''
-        pay_mode_obj = self.pool.get('payment.mode')
+        pay_mode_obj = self.env('payment.mode')
         if payment_mode_id:
-            pay_mode = pay_mode_obj.browse(
-                cr, uid, payment_mode_id, context=context)
+            pay_mode = pay_mode_obj.browse(payment_mode_id)
             if pay_mode.type.payment_order_type == 'debit':
                 line2bank = dict()
-                bank_types = pay_mode_obj.suitable_bank_types(
-                    cr, uid, payment_mode_id, context=context)
-                for line in self.browse(cr, uid, ids, context=context):
+                bank_types = pay_mode_obj.suitable_bank_types(payment_mode_id)
+                for line in self:
                     line2bank[line.id] = False
                     if line.partner_id:
                         bank_id = self._get_active_bank_account(
-                            cr, uid,
                             line.partner_id.bank_ids,
-                            bank_types, context)
+                            bank_types)
                         if bank_id:
                             line2bank[line.id] = bank_id
                         else:
                             line2bank.update(
                                 super(account_move_line, self).line2bank(
-                                    cr, uid, [line.id],
-                                    payment_mode_id, context=context))
+                                   [line.id],
+                                    payment_mode_id))
                 return line2bank
         return super(
-            account_move_line, self).line2bank(
-                cr, uid, ids, payment_mode_id, context=context)
+            account_move_line, self).line2bank(payment_mode_id)
 
-    def _get_active_bank_account(
-            self, cr, uid, banks, bank_types, context=None):
+    def _get_active_bank_account(self, banks, bank_types):
         for bank in banks:
             if bank.state in bank_types:
                 for mandate in bank.mandate_ids:
