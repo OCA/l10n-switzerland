@@ -18,11 +18,11 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm, fields
+from openerp import models, fields, api, _
 from openerp.tools import mod10r
-from openerp.tools.translate import _
+from openerp import exceptions
 
-class res_partner_bank(orm.Model):
+class res_partner_bank(models.Model):
 
     ''' Inherit res.partner.bank class in order to add swiss specific
     fields such as:
@@ -32,79 +32,87 @@ class res_partner_bank(orm.Model):
     '''
     _inherit = "res.partner.bank"
 
-    _columns = {
-        'lsv_identifier': fields.char(
-            _('LSV Identifier'), size=5, help=_(
+    lsv_identifier = fields.Char(
+            _('LSV Identifier'), 
+            size=5, 
+            help=_(
                 "Enter the LSV Identifier that has been attributed "
                 "to your company to make LSV Direct Debits. This identifier "
                 "is composed of 5 alphanumeric characters and is required "
-                "to generate LSV direct debit orders.")),
-        'post_dd_identifier': fields.char(
-            _('Postfinance DD Customer No.'), size=6),
-        'esr_party_number': fields.char(
-            _('ESR party number'), size=9, help=_(
+                "to generate LSV direct debit orders.")
+    )
+    
+    post_dd_identifier = fields.Char(
+        _('Postfinance DD Customer No.'),
+        size=6
+    )
+
+    esr_party_number = fields.Char(
+            _('ESR party number'), 
+            size=9, 
+            help=_(
                 "ESR party number is an identifier attributed to your "
                 "bank to generate ESR references. This identifier is "
                 "composed of up to 9 alphanumeric characters and is "
                 "required when using ESR references in your LSV direct "
-                "debit orders")),
-    }
+                "debit orders")
+    )
+    
 
     ################################
     #          Constraints         #
     ################################
 
-    def _check_lsv_identifier(self, cr, uid, ids):
-        for bank_account in self.browse(cr, uid, ids):
+    @api.constrains('lsv_identifier')
+    def _check_lsv_identifier(self):
+        for bank_account in self:
             # Check is only done if field is not empty
             if bank_account.lsv_identifier:
-                if not self.is_lsv_identifier_valid(
-                        cr, uid, bank_account.lsv_identifier):
-                    return False
+                if not self.is_lsv_identifier_valid(bank_account.lsv_identifier):
+                    raise exceptions.ValidationError(
+                        _("Invalid LSV Identifier.")
+                    )
         return True
 
-    def _check_post_dd_identifier(self, cr, uid, ids):
-        for bank_account in self.browse(cr, uid, ids):
+    @api.constrains('post_dd_identifier')
+    def _check_post_dd_identifier(self):
+        for bank_account in self:
             # Check is only done if field is not empty
             if bank_account.post_dd_identifier:
-                if not self.is_post_dd_ident_valid(
-                        cr, uid, bank_account.post_dd_identifier):
-                    return False
+                if not self.is_post_dd_ident_valid(bank_account.post_dd_identifier):
+                     raise exceptions.ValidationError(
+                        _("Invalid Postfiance DD Identifier.")
+                    )
         return True
 
-    _constraints = [
-        (_check_lsv_identifier, _("Invalid LSV Identifier."),
-            ['lsv_identifier']),
-        (_check_post_dd_identifier, _("Invalid Postfiance DD Identifier."),
-            ['post_dd_identifier']),
-    ]
-
-    def is_lsv_identifier_valid(self, cr, uid, lsv_identifier, context=None):
+    @api.model
+    def is_lsv_identifier_valid(self, lsv_identifier):
         """ Check if given LSV Identifier is valid """
         if not isinstance(lsv_identifier, basestring):
             return False
         try:
             lsv_identifier.decode('ascii')
         except UnicodeDecodeError:
-            raise orm.except_orm('ValidateError',
-                                 _('LSV identifier should contain only ASCII'
-                                   'caracters.'))
+            raise exceptions.ValidationError(
+                _('LSV identifier should contain only ASCII caracters.')
+            )
 
         if not len(lsv_identifier) == 5:
             return False
 
         return True
 
-    def is_post_dd_ident_valid(self, cr, uid, dd_identifier, context=None):
+    @api.model
+    def is_post_dd_ident_valid(self, dd_identifier):
         """ Check if given Postfinance DD Identifier is valid """
         if not isinstance(dd_identifier, basestring):
             return False
         try:
             dd_identifier.decode('ascii')
         except UnicodeDecodeError:
-            raise orm.except_orm('ValidateError',
-                                 _('DD identifier should contain only ASCII '
-                                   'caracters.'))
+            raise exceptions.ValidationError(
+                _('LSV identifier should contain only ASCII caracters.')
+            )
 
         if not len(dd_identifier) == 6:
             return False

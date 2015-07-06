@@ -18,16 +18,16 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm
-from openerp.tools.translate import _
+from openerp import models, api, _
 
 
-class payment_order(orm.Model):
+class payment_order(models.Model):
     _inherit = 'payment.order'
 
-    def show_invoices(self, cr, uid, ids, context=None):
+    @api.multi
+    def show_invoices(self):
         move_ids = [pay_line.move_line_id.move_id.id
-                    for pay_order in self.browse(cr, uid, ids, context)
+                    for pay_order in self
                     for pay_line in pay_order.line_ids]
 
         action = {
