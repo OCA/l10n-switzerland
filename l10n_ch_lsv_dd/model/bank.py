@@ -111,7 +111,7 @@ class res_partner_bank(models.Model):
             dd_identifier.decode('ascii')
         except UnicodeDecodeError:
             raise exceptions.ValidationError(
-                _('LSV identifier should contain only ASCII caracters.')
+                _('DD identifier should contain only ASCII caracters.')
             )
 
         if not len(dd_identifier) == 6:
