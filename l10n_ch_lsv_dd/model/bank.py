@@ -18,9 +18,9 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields, api, _
+from openerp import models, fields, api, _, exceptions
 from openerp.tools import mod10r
-from openerp import exceptions
+
 
 class res_partner_bank(models.Model):
 
@@ -33,31 +33,28 @@ class res_partner_bank(models.Model):
     _inherit = "res.partner.bank"
 
     lsv_identifier = fields.Char(
-            _('LSV Identifier'), 
-            size=5, 
-            help=_(
-                "Enter the LSV Identifier that has been attributed "
-                "to your company to make LSV Direct Debits. This identifier "
-                "is composed of 5 alphanumeric characters and is required "
-                "to generate LSV direct debit orders.")
+        _('LSV Identifier'),
+        size=5,
+        help=_(
+            "Enter the LSV Identifier that has been attributed "
+            "to your company to make LSV Direct Debits. This identifier "
+            "is composed of 5 alphanumeric characters and is required "
+            "to generate LSV direct debit orders.")
     )
-    
     post_dd_identifier = fields.Char(
         _('Postfinance DD Customer No.'),
         size=6
     )
-
     esr_party_number = fields.Char(
-            _('ESR party number'), 
-            size=9, 
-            help=_(
-                "ESR party number is an identifier attributed to your "
-                "bank to generate ESR references. This identifier is "
-                "composed of up to 9 alphanumeric characters and is "
-                "required when using ESR references in your LSV direct "
-                "debit orders")
+        _('ESR party number'),
+        size=9,
+        help=_(
+            "ESR party number is an identifier attributed to your "
+            "bank to generate ESR references. This identifier is "
+            "composed of up to 9 alphanumeric characters and is "
+            "required when using ESR references in your LSV direct "
+            "debit orders")
     )
-    
 
     ################################
     #          Constraints         #
@@ -68,7 +65,8 @@ class res_partner_bank(models.Model):
         for bank_account in self:
             # Check is only done if field is not empty
             if bank_account.lsv_identifier:
-                if not self.is_lsv_identifier_valid(bank_account.lsv_identifier):
+                if not self.is_lsv_identifier_valid(bank_account
+                                                    .lsv_identifier):
                     raise exceptions.ValidationError(
                         _("Invalid LSV Identifier.")
                     )
@@ -79,10 +77,10 @@ class res_partner_bank(models.Model):
         for bank_account in self:
             # Check is only done if field is not empty
             if bank_account.post_dd_identifier:
-                if not self.is_post_dd_ident_valid(bank_account.post_dd_identifier):
-                     raise exceptions.ValidationError(
-                        _("Invalid Postfiance DD Identifier.")
-                    )
+                if not self.is_post_dd_ident_valid(bank_account
+                                                   .post_dd_identifier):
+                    raise exceptions.ValidationError(_("Invalid Postfiance DD"
+                                                       "Identifier."))
         return True
 
     @api.model

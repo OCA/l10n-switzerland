@@ -43,7 +43,7 @@ class account_move_line(models.Model):
         ''' Override line2bank to avoid choosing a bank that has only
             cancelled mandate.
         '''
-        pay_mode_obj = self.env('payment.mode')
+        pay_mode_obj = self.env['payment.mode']
         if payment_mode_id:
             pay_mode = pay_mode_obj.browse(payment_mode_id)
             if pay_mode.type.payment_order_type == 'debit':
@@ -60,8 +60,7 @@ class account_move_line(models.Model):
                         else:
                             line2bank.update(
                                 super(account_move_line, self).line2bank(
-                                   [line.id],
-                                    payment_mode_id))
+                                    [line.id], payment_mode_id))
                 return line2bank
         return super(
             account_move_line, self).line2bank(payment_mode_id)
