@@ -29,7 +29,6 @@ from openerp.tools import mod10r
 from openerp import exceptions
 
 import logging
-import pdb
 logger = logging.getLogger(__name__)
 
 
@@ -93,7 +92,6 @@ class post_dd_export_wizard(models.TransientModel):
             raise exceptions.ValidationError(_('No payment order selected'))
             
         payment_order_ids = payment_order_obj.browse(active_ids)
-        pdb.set_trace()
         properties = self._setup_properties(self.id,
                                             payment_order_ids[0])
 
