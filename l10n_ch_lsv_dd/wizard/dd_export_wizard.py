@@ -29,6 +29,7 @@ from openerp.tools import mod10r
 from openerp import exceptions
 
 import logging
+import pdb
 logger = logging.getLogger(__name__)
 
 
@@ -75,7 +76,7 @@ class post_dd_export_wizard(models.TransientModel):
         [('create', _('Create')), ('finish', _('Finish'))], 
         _('State'), 
         readonly=True,
-        default='creat'
+        default='create'
     )
     
     @api.multi
@@ -92,8 +93,8 @@ class post_dd_export_wizard(models.TransientModel):
             raise exceptions.ValidationError(_('No payment order selected'))
             
         payment_order_ids = payment_order_obj.browse(active_ids)
-
-        properties = self._setup_properties(self.env.ids[0],
+        pdb.set_trace()
+        properties = self._setup_properties(self.id,
                                             payment_order_ids[0])
 
         records = []
@@ -190,7 +191,7 @@ class post_dd_export_wizard(models.TransientModel):
             'view_type': 'form',
             'view_mode': 'form,tree',
             'res_model': self._name,
-            'res_id': self.env.ids[0],
+            'res_id': self.id,
             'target': 'new',
         }
         return action
@@ -295,7 +296,7 @@ class post_dd_export_wizard(models.TransientModel):
         ''' Save the exported DD file: mark all payments in the file
             as 'sent'. Write 'last debit date' on mandate.
         '''
-        export_wizard = self.browse(self.env.ids[0])
+        export_wizard = self.browse(self.id)
         self.env['banking.export.ch.dd'].write(
             export_wizard.banking_export_ch_dd_id.id, {'state': 'sent'})
         wf_service = netsvc.LocalService('workflow')

@@ -97,7 +97,7 @@ class lsv_export_wizard(models.TransientModel):
         payment_order_ids = payment_order_obj.browse(active_ids)
 
         # common properties for all lines
-        properties = self._setup_properties(self.env.ids[0],
+        properties = self._setup_properties(self.id,
                                             payment_order_ids[0])
 
         total_amount = 0.0
@@ -170,7 +170,7 @@ class lsv_export_wizard(models.TransientModel):
             'view_type': 'form',
             'view_mode': 'form,tree',
             'res_model': self._name,
-            'res_id': self.env.ids[0],
+            'res_id': self.id,
             'target': 'new',
         }
         return action
@@ -276,7 +276,7 @@ class lsv_export_wizard(models.TransientModel):
         ''' Save the exported LSV file: mark all payments in the file
             as 'sent'. Write 'last debit date' on mandate.
         '''
-        export_wizard = self.browse(self.env.ids[0])
+        export_wizard = self.browse(self.id)
         self.env['banking.export.ch.dd'].write(
             export_wizard.banking_export_ch_dd_id.id, {
                 'state': 'sent'})
@@ -285,7 +285,7 @@ class lsv_export_wizard(models.TransientModel):
         for order in export_wizard.banking_export_ch_dd_id.payment_order_ids:
             wf_service.trg_validate('payment.order', order.id, 'done')
             mandate_ids = [line.mandate_id.id for line in order.line_ids]
-            self.pool['account.banking.mandate'].write(mandate_ids, {
+            self.env['account.banking.mandate'].write(mandate_ids, {
                 'last_debit_date': today_str})
 
         # redirect to generated lsv export
