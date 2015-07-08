@@ -34,7 +34,6 @@ class banking_export_ch_dd(models.Model):
     _rec_name = 'filename'
 
     @api.multi
-    @api.depends('type')
     def _generate_filename(self, arg):
         res = {}
         for dd_export in self:
