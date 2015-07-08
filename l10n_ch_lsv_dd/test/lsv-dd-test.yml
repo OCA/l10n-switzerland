@@ -68,7 +68,7 @@
 -
   !record {model: res.partner.bank, id: company_bank_ubs, view: False}:
     state: 'iban'
-    acc_number: 'CH31 8123 9000 0012 4568 9'
+    acc_number: 'CH93 0076 2011 6238 5295 7'
     partner_id: base.main_partner
     owner_name: 'Company'
     street: 'Company street'
@@ -79,7 +79,7 @@
 -
   !record {model: res.partner.bank, id: company_bank_post, view: False}:
     state: 'bvr'
-    acc_number: '25-9779-8'
+    acc_number: '25-9778-2'
     partner_id: base.main_partner
     owner_name: 'Company'
     street: 'Company street'
