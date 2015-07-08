@@ -21,18 +21,18 @@
 
 import base64
 import collections
-from openerp.osv import orm, fields
+from openerp import models, fields, api, _
 from datetime import date, datetime, timedelta
 from openerp import netsvc
 from openerp.tools import mod10r
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
-from openerp.tools.translate import _
+from openerp import exceptions
 
 import logging
 logger = logging.getLogger(__name__)
 
 
-class lsv_export_wizard(orm.TransientModel):
+class lsv_export_wizard(models.TransientModel):
 
     ''' LSV file generation wizard. This wizard is called
         when the "make payment" button on a direct debit order
@@ -41,53 +41,63 @@ class lsv_export_wizard(orm.TransientModel):
     _name = 'lsv.export.wizard'
     _description = 'Export LSV Direct Debit File'
 
-    _columns = {
-        'treatment_type': fields.selection([
-            ('P', _('Production')),
-            ('T', _('Test'))], _('Treatment type'), required=True),
-        'currency': fields.selection([
-            ('CHF', 'CHF'),
-            ('EUR', 'EUR')], _('Currency'), required=True),
-        'banking_export_ch_dd_id': fields.many2one(
-            'banking.export.ch.dd', _('LSV file'), readonly=True),
-        'file': fields.related(
-            'banking_export_ch_dd_id', 'file', string=_('File'),
-            type='binary', readonly=True),
-        'filename': fields.related(
-            'banking_export_ch_dd_id', 'filename', string=_('Filename'),
-            type='char', size=256, readonly=True),
-        'nb_transactions': fields.related(
-            'banking_export_ch_dd_id', 'nb_transactions', type='integer',
-            string=_('Number of Transactions'), readonly=True),
-        'total_amount': fields.related(
-            'banking_export_ch_dd_id', 'total_amount', type='float',
-            string=_('Total Amount'), readonly=True),
-        'state': fields.selection([
-            ('create', _('Create')),
-            ('finish', _('Finish'))], _('State'), readonly=True),
-    }
+    treatment_type = fields.Selection(
+        [('P', _('Production')),('T', _('Test'))], 
+        _('Treatment type'), 
+        required=True,
+        default='T'     # FIXME for release
+    )
+    currency = fields.Selection(
+        [('CHF', 'CHF'),('EUR', 'EUR')], 
+        _('Currency'), 
+        required=True,
+        default='CHF'
+    )
+    banking_export_ch_dd_id = fields.Many2one(
+        'banking.export.ch.dd', 
+        _('LSV file'), 
+        readonly=True
+    )
+    file = fields.Binary(
+        string=_('File'),
+        related='banking_export_ch_dd_id.file'
+    )
+    filename = fields.Char(
+        string=_('Filename'),
+        related='banking_export_ch_dd_id.filename',
+        size=256, 
+        readonly=True
+    )
+    nb_transactions = fields.Integer(
+        string=_('Number of Transactions'),
+        related='banking_export_ch_dd_id.nb_transactions'
+    )
+    total_amount = fields.Float(
+        string=_('Total Amount'),
+        related='banking_export_ch_dd_id.total_amount'
+    )
+    state = fields.Selection(
+        [('create', _('Create')),('finish', _('Finish'))], 
+        _('State'), 
+        readonly=True,
+        default='create'
+    )
 
-    _defaults = {
-        'treatment_type': 'T',  # FIXME for release
-        'currency': 'CHF',
-        'state': 'create',
-    }
-
-    def generate_lsv_file(self, cr, uid, ids, context=None):
+    @api.multi
+    def generate_lsv_file(self):
         ''' Generate direct debit export object including the lsv file
             content. Called by generate button.
         '''
-        payment_order_obj = self.pool.get('payment.order')
-        payment_line_obj = self.pool.get('payment.line')
+        payment_order_obj = self.env['payment.order']
+        payment_line_obj = self.env['payment.line']
 
-        active_ids = context.get('active_ids', [])
+        active_ids = self.env.context.get('active_ids', [])
         if not active_ids:
-            raise orm.except_orm('ValueError', _('No payment order selected'))
-        payment_order_ids = payment_order_obj.browse(cr, uid, active_ids,
-                                                     context)
+            raise exceptions.ValidationError(_('No payment order selected'))
+        payment_order_ids = payment_order_obj.browse(active_ids)
 
         # common properties for all lines
-        properties = self._setup_properties(cr, uid, context, ids[0],
+        properties = self._setup_properties(self.env.ids[0],
                                             payment_order_ids[0])
 
         total_amount = 0.0
@@ -99,19 +109,18 @@ class lsv_export_wizard(orm.TransientModel):
             ben_bank_id = payment_order.mode.bank_id
             clean_acc_number = ben_bank_id.acc_number.replace(' ', '')
             clean_acc_number = clean_acc_number.replace('-', '')
-            ben_address = self._get_account_address(cr, uid, ben_bank_id)
+            ben_address = self._get_account_address(ben_bank_id)
             properties.update({
                 'ben_address': ben_address,
                 'ben_iban': clean_acc_number,
-                'ben_clearing': self._get_clearing(cr, uid,
-                                                   payment_order.mode.bank_id),
+                'ben_clearing': self._get_clearing(payment_order.mode.bank_id),
             })
 
             if not self._is_ch_li_iban(properties.get('ben_iban')):
-                raise orm.except_orm(
-                    'ValueError',
+                raise exceptions.ValidationError(
                     _('Ben IBAN is not a correct CH or LI IBAN (%s given)') %
-                    properties.get('ben_iban'))
+                    properties.get('ben_iban')
+                )
 
             order_by = ''
             if payment_order.date_prefered == 'due':
@@ -120,41 +129,40 @@ class lsv_export_wizard(orm.TransientModel):
 
             # A direct db query is used because order parameter in model.search
             # doesn't support function fields
-            cr.execute(
+            self.env.cr.execute(
                 'SELECT payment_line.id FROM payment_line, account_move_line '
                 'WHERE payment_line.move_line_id = account_move_line.id '
                 'AND payment_line.order_id = %s '
                 'ORDER BY ' + order_by, (payment_order.id,))
-            sorted_line_ids = [row[0] for row in cr.fetchall()]
-            payment_lines = payment_line_obj.browse(cr, uid, sorted_line_ids,
-                                                    context)
+            sorted_line_ids = [row[0] for row in self.env.cr.fetchall()]
+            payment_lines = payment_line_obj.browse(sorted_line_ids)
 
             for line in payment_lines:
                 if not line.mandate_id or not line.mandate_id.state == "valid":
-                    raise orm.except_orm(
-                        'RuntimeError',
+                    raise exceptions.ValidationError(
                         _('Line with ref %s has no associated valid mandate') %
-                        line.name)
+                        line.name
+                    )
                 # Payment line is associated to generated line to make
                 # customizing easier.
                 lsv_lines.append((line, self._generate_debit_line(
-                    cr, uid, line, properties, payment_order, context)))
+                    line, properties, payment_order)))
                 properties.update({'seq_nb': properties['seq_nb'] + 1})
 
-        lsv_lines.append((None, self._generate_total_line(cr, uid, properties,
+        lsv_lines.append((None, self._generate_total_line(properties,
                                                           total_amount)))
 
-        lsv_lines = self._customize_lines(cr, uid, lsv_lines, properties,
-                                          context)
+        lsv_lines = self._customize_lines(lsv_lines, properties)
         file_content = ''.join(lsv_lines)  # Concatenate all lines
         file_content = ''.join(
             [ch if ord(ch) < 128 else '?' for ch in file_content])
 
-        export_id = self._create_lsv_export(cr, uid, context, active_ids,
-                                            total_amount, properties,
+        export_id = self._create_lsv_export(active_ids,
+                                            total_amount, 
+                                            properties,
                                             file_content)
-        self.write(cr, uid, ids, {'banking_export_ch_dd_id': export_id,
-                                  'state': 'finish'}, context=context)
+        self.write({'banking_export_ch_dd_id': export_id,
+                                  'state': 'finish'})
 
         action = {
             'name': 'Generated File',
@@ -162,33 +170,33 @@ class lsv_export_wizard(orm.TransientModel):
             'view_type': 'form',
             'view_mode': 'form,tree',
             'res_model': self._name,
-            'res_id': ids[0],
+            'res_id': self.env.ids[0],
             'target': 'new',
         }
         return action
 
-    def _generate_debit_line(self, cr, uid, line, properties, payment_order,
-                             context=None):
+    @api.model
+    def _generate_debit_line(selfline, properties, payment_order):
         ''' Convert each payment_line to lsv debit line '''
         deb_acc_number = line.bank_id.acc_number
         deb_acc_number = deb_acc_number.replace(' ', '').replace('-', '')
         if line.bank_id.state == 'iban' and not self._is_ch_li_iban(
                 deb_acc_number):
-            raise orm.except_orm(
-                'ValueError',
+            raise exceptions.ValidationError(
                 _('Line with ref %s has not a correct CH or LI IBAN'
-                  '(%s given)') % (line.name, deb_acc_number))
+                  '(%s given)') % (line.name, deb_acc_number)
+            )
         vals = collections.OrderedDict()
         vals['TA'] = '875'
         vals['VNR'] = '0'
         vals['VART'] = properties.get('treatment_type', 'P')
         vals['GVDAT'] = self._prepare_date(
-            self._get_treatment_date(cr, uid, payment_order.date_prefered,
+            self._get_treatment_date(payment_order.date_prefered,
                                      line.ml_maturity_date,
                                      payment_order.date_scheduled,
                                      line.name))
         vals['BCZP'] = self._complete_line(
-            self._get_clearing(cr, uid, line.bank_id), 5)
+            self._get_clearing(line.bank_id), 5)
         vals['EDAT'] = properties.get('edat')
         vals['BCZE'] = self._complete_line(properties.get('ben_clearing'), 5)
         vals['ABSID'] = properties.get('lsv_identifier')
@@ -201,21 +209,18 @@ class lsv_export_wizard(orm.TransientModel):
         vals['KTOZE'] = self._complete_line(properties.get('ben_iban'), 34)
         vals['ADRZE'] = properties.get('ben_address')
         vals['KTOZP'] = self._complete_line(deb_acc_number, 34)
-        vals['ADRZP'] = self._get_account_address(cr, uid, line.bank_id)
-        vals['MITZP'] = self._complete_line(self._get_communications(cr, uid,
-                                                                     line,
-                                                                     context),
-                                            140)
-        ref, ref_type = self._get_ref(cr, uid, context, line)
+        vals['ADRZP'] = self._get_account_address(line.bank_id)
+        vals['MITZP'] = self._complete_line(self._get_communications(line),140)
+        ref, ref_type = self._get_ref(line)
         vals['REFFL'] = ref_type
         vals['REFNR'] = self._complete_line(ref, 27)
         if vals['REFFL'] == 'A':
             if not properties.get('esr_party_number'):
-                raise orm.except_orm(
-                    'ValueError',
+                raise exceptions.ValidationError(
                     _('Line with ref %s has ESR ref, but no valid '
                       'ESR party number exists for ben account') %
-                    line.name)
+                    line.name
+                )
             vals['ESRTN'] = self._complete_line(
                 properties.get('esr_party_number'),
                 9)
@@ -225,13 +230,13 @@ class lsv_export_wizard(orm.TransientModel):
         if len(gen_line) == 588:  # Standard 875 line size
             return gen_line
         else:
-            raise orm.except_orm(
-                'RuntimeError',
+            raise exceptions.Warning(
                 _('Generated line for ref %s with size %d is not valid '
                   '(len should be 588)') %
-                (line.name, len(gen_line)))
+                (line.name, len(gen_line))
+            )
 
-    def _generate_total_line(self, cr, uid, properties, total_amount):
+    def _generate_total_line(self,properties, total_amount):
         ''' Generate total line according to total amount and properties '''
         vals = collections.OrderedDict()
         vals['TA'] = '890'
@@ -246,15 +251,15 @@ class lsv_export_wizard(orm.TransientModel):
         if len(line) == 43:
             return line
         else:
-            raise orm.except_orm(
-                'RuntimeError',
+            raise exceptions.Warning(
                 _('Generated total line is not valid (%d instead of 43)') %
-                len(line))
+                len(line)
+            )
 
-    def _create_lsv_export(self, cr, uid, context, p_o_ids, total_amount,
+    def _create_lsv_export(self, p_o_ids, total_amount,
                            properties, file_content):
         ''' Create banking.export.ch.dd object '''
-        banking_export_ch_dd_obj = self.pool.get('banking.export.ch.dd')
+        banking_export_ch_dd_obj = self.env['banking.export.ch.dd']
         vals = {
             'payment_order_ids': [(6, 0, [p_o_id for p_o_id in p_o_ids])],
             'total_amount': total_amount,
@@ -263,26 +268,25 @@ class lsv_export_wizard(orm.TransientModel):
             'file': base64.encodestring(file_content),
             'type': 'LSV',
         }
-        export_id = banking_export_ch_dd_obj.create(cr, uid, vals,
-                                                    context=context)
+        export_id = banking_export_ch_dd_obj.create(vals)
         return export_id
 
-    def confirm_export(self, cr, uid, ids, context=None):
+    @api.multi
+    def confirm_export(self):
         ''' Save the exported LSV file: mark all payments in the file
             as 'sent'. Write 'last debit date' on mandate.
         '''
-        export_wizard = self.browse(cr, uid, ids[0], context=context)
-        self.pool.get('banking.export.ch.dd').write(
-            cr, uid, export_wizard.banking_export_ch_dd_id.id, {
-                'state': 'sent'}, context=context)
+        export_wizard = self.browse(self.env.ids[0])
+        self.env['banking.export.ch.dd'].write(
+            export_wizard.banking_export_ch_dd_id.id, {
+                'state': 'sent'})
         wf_service = netsvc.LocalService('workflow')
         today_str = datetime.today().strftime(DEFAULT_SERVER_DATE_FORMAT)
         for order in export_wizard.banking_export_ch_dd_id.payment_order_ids:
-            wf_service.trg_validate(uid, 'payment.order', order.id, 'done', cr)
+            wf_service.trg_validate('payment.order', order.id, 'done')
             mandate_ids = [line.mandate_id.id for line in order.line_ids]
-            self.pool['account.banking.mandate'].write(
-                cr, uid, mandate_ids, {
-                    'last_debit_date': today_str}, context=context)
+            self.pool['account.banking.mandate'].write(mandate_ids, {
+                'last_debit_date': today_str})
 
         # redirect to generated lsv export
         action = {
@@ -296,14 +300,16 @@ class lsv_export_wizard(orm.TransientModel):
         }
         return action
 
-    def cancel_export(self, cr, uid, ids, context=None):
+    @api.multi
+    def cancel_export(self):
         ''' Cancel the export: delete export record '''
-        export_wizard = self.browse(cr, uid, ids[0], context=context)
-        self.pool.get('banking.export.ch.dd').unlink(
-            cr, uid, export_wizard.banking_export_ch_dd_id.id, context=context)
+        export_wizard = self.browse(self.env.ids[0])
+        self.env['banking.export.ch.dd'].unlink(
+            export_wizard.banking_export_ch_dd_id.id)
         return {'type': 'ir.actions.act_window_close'}
 
-    def _customize_lines(self, cr, uid, lsv_lines, properties, context=None):
+    @api.model
+    def _customize_lines(self, lsv_lines, properties):
         ''' Use this if you want to customize the generated lines.
             @param lsv_lines: list of tuples with tup[0]=payment line
                               and tup[1]=generated string.
@@ -322,27 +328,27 @@ class lsv_export_wizard(orm.TransientModel):
             line.amount_currency > 99999999.99) or (
                 properties.get('currency') == 'EUR' and
                 line.amount_currency > 99999999.99 / properties.get('rate')):
-            raise orm.except_orm(
-                'ValueError',
+            raise exceptions.ValidationError(
                 _('Stop kidding... max authorized amount is CHF 99 999 999.99 '
                   '(%.2f %s given for ref %s)') %
-                (line.amount_currency, properties.get('currency'), line.name))
+                (line.amount_currency, properties.get('currency'), line.name)
+            )
         elif line.amount_currency <= 0:
-            raise orm.except_orm(
-                'ValueError',
+            raise exceptions.ValidationError(
                 _('Amount for line with ref %s is negative (%f given)') %
-                (line.name, line.amount_currency))
+                (line.name, line.amount_currency)
+            )
 
     def _check_currency(self, line, properties):
         ''' Check that line currency is equal to lsv export currency '''
         if not line.currency.name == properties.get(
                 'currency'):  # All currencies have to be the same !
-            raise orm.except_orm(
-                'ValueError',
+            raise exceptions.ValidationError(
                 _('Line with ref %s has %s currency and lsv file %s '
                   '(should be the same)') %
                 (line.name, line.currency.name, properties.get(
-                    'currency', '')))
+                    'currency', ''))
+            )
 
     def _complete_line(self, string, nb_char):
         ''' In LSV file each field has a defined length.
@@ -361,16 +367,17 @@ class lsv_export_wizard(orm.TransientModel):
         amount_str = '{:.2f}'.format(amount).replace('.', ',').zfill(nb_char)
         return amount_str
 
-    def _get_account_address(self, cr, uid, bank_account):
+    def _get_account_address(self, bank_account):
         ''' Return account address for given bank_account.
             First 2 lines are mandatory !
         '''
         if bank_account.owner_name:
             bank_line1 = bank_account.owner_name
         else:
-            raise orm.except_orm('ValueError',
+            raise exceptions.ValidationError(
                                  _('Missing owner name for bank account %s')
-                                 % bank_account.acc_number)
+                                 % bank_account.acc_number
+            )
 
         bank_line2 = bank_account.street if bank_account.street else ''
         bank_line3 = bank_account.zip + ' ' + bank_account.city \
@@ -388,16 +395,17 @@ class lsv_export_wizard(orm.TransientModel):
                 bank_line2 = bank_line4
                 bank_line4 = ''
             else:
-                raise orm.except_orm('ValueError',
+                raise exceptions.ValidationError(
                                      _('Missing address for bank account %s')
-                                     % bank_account.acc_number)
+                                     % bank_account.acc_number
+                )
 
         return (self._complete_line(bank_line1, 35) +
                 self._complete_line(bank_line2, 35) +
                 self._complete_line(bank_line3, 35) +
                 self._complete_line(bank_line4, 35))
 
-    def _get_clearing(self, cr, uid, bank_account):
+    def _get_clearing(self,bank_account):
         clearing = ''
         if bank_account.bank.clearing:
             clearing = bank_account.bank.clearing
@@ -407,28 +415,25 @@ class lsv_export_wizard(orm.TransientModel):
             # (4 in machine-index) in CH-iban
             clearing = str(int(clean_acc_number[4:9]))
         else:
-            raise orm.except_orm(
-                'RuntimeError',
+            raise exceptions.ValidationError(
                 _('Unable to determine clearing number for account %s') %
-                bank_account.acc_number)
+                bank_account.acc_number
+            )
 
         return clearing
 
-    def _get_communications(self, cr, uid, line, context):
+    def _get_communications(self, line):
         ''' This method can be overloaded to fit your communication style '''
         return ''
 
-    def _get_ref(self, cr, uid, context, payment_line):
-        if self._is_bvr_ref(
-                cr,
-                uid,
-                payment_line.move_line_id.transaction_ref):
+    def _get_ref(self, payment_line):
+        if self._is_bvr_ref(payment_line.move_line_id.transaction_ref):
             return payment_line.move_line_id.transaction_ref.replace(
                 ' ', '').rjust(27, '0'), 'A'
         else:
             return '', 'B'  # If anyone uses IPI reference, get it here
 
-    def _is_bvr_ref(self, cr, uid, ref, context=None):
+    def _is_bvr_ref(self, ref):
         if not ref:
             return False  # Empty is not valid
         clean_ref = ref.replace(' ', '')
@@ -440,7 +445,7 @@ class lsv_export_wizard(orm.TransientModel):
 
         return True
 
-    def _get_treatment_date(self, cr, uid, prefered_type, line_mat_date,
+    def _get_treatment_date(self,prefered_type, line_mat_date,
                             order_sched_date, name):
         ''' Returns appropriate date according to payment_order and
             payment_order_line data.
@@ -517,16 +522,17 @@ class lsv_export_wizard(orm.TransientModel):
             text = text.replace(k, v)
         return text
 
-    def _setup_properties(self, cr, uid, context, wizard_id, payment_order):
+    def _setup_properties(self, wizard_id, payment_order):
         ''' These properties are the same for all lines of the LSV file '''
-        form = self.browse(cr, uid, wizard_id, context)
+        form = self.browse(wizard_id)
         if not payment_order.mode.bank_id.lsv_identifier:
-            raise orm.except_orm('ValueError',
+            raise exceptions.ValidationError(
                                  _('Missing LSV identifier for account %s')
-                                 % payment_order.mode.bank_id.acc_number)
-        currency_obj = self.pool.get('res.currency')
-        chf_id = currency_obj.search(cr, uid, [('name', '=', 'CHF')])
-        rate = currency_obj.read(cr, uid, chf_id[0], ['rate_silent'],
+                                 % payment_order.mode.bank_id.acc_number
+            )
+        currency_obj = self.env['res.currency']
+        chf_id = currency_obj.search([('name', '=', 'CHF')])
+        rate = currency_obj.read(chf_id[0], ['rate_silent'],
                                  context)['rate_silent']
 
         ben_bank_id = payment_order.mode.bank_id
