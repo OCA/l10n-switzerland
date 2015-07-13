@@ -28,7 +28,6 @@ from openerp.tools import mod10r
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 from openerp import exceptions
 
-import pdb
 import logging
 logger = logging.getLogger(__name__)
 
@@ -138,11 +137,11 @@ class lsv_export_wizard(models.TransientModel):
             payment_lines = payment_line_obj.browse(sorted_line_ids)
 
             for line in payment_lines:
-                #if not line.mandate_id or not line.mandate_id.state == "valid":
-                #    raise exceptions.ValidationError(
-                #        _('Line with ref %s has no associated valid mandate') %
-                #        line.name
-                #    )
+                if not line.mandate_id or not line.mandate_id.state == "valid":
+                    raise exceptions.ValidationError(
+                        _('Line with ref %s has no associated valid mandate') %
+                        line.name
+                    )
                 
                 # Payment line is associated to generated line to make
                 # customizing easier.
@@ -162,9 +161,8 @@ class lsv_export_wizard(models.TransientModel):
                                             total_amount, 
                                             properties,
                                             file_content)
-        #pdb.set_trace()
+
         self.write({'banking_export_ch_dd_id': export_id.id, 'state': 'finish'})
-        #pdb.set_trace()
         action = {
             'name': 'Generated File',
             'type': 'ir.actions.act_window',
@@ -174,7 +172,6 @@ class lsv_export_wizard(models.TransientModel):
             'res_id': self.id,
             'target': 'new',
         }
-        #pdb.set_trace()
         return action
 
     @api.model
@@ -238,7 +235,7 @@ class lsv_export_wizard(models.TransientModel):
                 (line.name, len(gen_line))
             )
 
-    def _generate_total_line(self,properties, total_amount):
+    def _generate_total_line(self, properties, total_amount):
         ''' Generate total line according to total amount and properties '''
         vals = collections.OrderedDict()
         vals['TA'] = '890'
@@ -258,11 +255,8 @@ class lsv_export_wizard(models.TransientModel):
                 len(line)
             )
 
-    def _create_lsv_export(self, p_o_ids, total_amount,
-                           properties, file_content):
+    def _create_lsv_export(self, p_o_ids, total_amount, properties, file_content):
         ''' Create banking.export.ch.dd object '''
-        
-        print '*** create_lsv_export ***'
         banking_export_ch_dd_obj = self.env['banking.export.ch.dd']
         vals = {
             'payment_order_ids': [(6, 0, [p_o_id for p_o_id in p_o_ids])],
@@ -280,8 +274,6 @@ class lsv_export_wizard(models.TransientModel):
         ''' Save the exported LSV file: mark all payments in the file
             as 'sent'. Write 'last debit date' on mandate.
         '''
-        
-        print '*** confirm_export ***'
         self.banking_export_ch_dd_id.write({'state': 'sent'})
         wf_service = netsvc.LocalService('workflow')
         today_str = datetime.today().strftime(DEFAULT_SERVER_DATE_FORMAT)
@@ -466,11 +458,11 @@ class lsv_export_wizard(models.TransientModel):
             ).date()
             requested_date = tmp_date if tmp_date else requested_date
         
-        #if requested_date > date.today() + timedelta(days=30) \
-        #        or requested_date < date.today() - timedelta(days=10):
-        #    raise exceptions.ValidationError(
-        #        _('Incorrect treatment date: %s for line with '
-        #                        'ref %s') % (requested_date, name))
+        if requested_date > date.today() + timedelta(days=30) \
+                or requested_date < date.today() - timedelta(days=10):
+            raise exceptions.ValidationError(
+                _('Incorrect treatment date: %s for line with '
+                                'ref %s') % (requested_date, name))
 
         return requested_date
 

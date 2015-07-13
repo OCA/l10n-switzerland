@@ -21,7 +21,6 @@
 from openerp import models, fields, api, _
 from openerp.addons.decimal_precision import decimal_precision as dp
 
-import pdb
 import logging
 logger = logging.getLogger(__name__)
 
@@ -34,11 +33,7 @@ class banking_export_ch_dd(models.Model):
     _name = 'banking.export.ch.dd'
     _rec_name = 'filename'
 
-    @api.one
-    @api.depends('type')
     def _generate_filename(self):
-        print '*** generate_filename ***'
-        print '*** ----------------- ***'
         self.ensure_one()
         ref = self.env['ir.sequence'].next_by_code('l10n.banking.export.filename')
         username = self.env.user.name
@@ -48,7 +43,12 @@ class banking_export_ch_dd(models.Model):
         else:
             res = 'dd_%s_%s.dd' % (ref, initials)
         self.filename = res
-        #pdb.set_trace()
+        return True
+
+    @api.model
+    def create(self, vals):
+        res = super(banking_export_ch_dd, self).create(vals)
+        res._generate_filename()
         return res
 
     payment_order_ids = fields.Many2many(
@@ -78,10 +78,8 @@ class banking_export_ch_dd(models.Model):
     )
     filename = fields.Char(
         string=_('Filename'),
-        compute='_generate_filename', 
         size=256, 
         readonly=True,
-        store=True
     )   
     state = fields.Selection(
         [('draft', _('Draft')),('sent', _('Sent')),], 
@@ -94,3 +92,4 @@ class banking_export_ch_dd(models.Model):
         size=128, 
         readonly=True
     )
+    
