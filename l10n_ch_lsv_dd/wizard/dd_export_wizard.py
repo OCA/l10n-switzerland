@@ -28,6 +28,7 @@ from openerp.tools import DEFAULT_SERVER_DATE_FORMAT as DF
 from openerp.tools import mod10r
 from openerp import exceptions
 
+import pdb
 import logging
 logger = logging.getLogger(__name__)
 
@@ -92,8 +93,7 @@ class post_dd_export_wizard(models.TransientModel):
             raise exceptions.ValidationError(_('No payment order selected'))
             
         payment_order_ids = payment_order_obj.browse(active_ids)
-        properties = self._setup_properties(self.id,
-                                            payment_order_ids[0])
+        properties = self._setup_properties(payment_order_ids[0])
 
         records = []
         overall_amount = 0
@@ -114,7 +114,7 @@ class post_dd_export_wizard(models.TransientModel):
                 'WHERE payment_line.move_line_id = account_move_line.id '
                 'AND payment_line.order_id = %s '
                 'ORDER BY ' + order_by, (payment_order.id,))
-            sorted_line_ids = [row[0] for row in cr.fetchall()]
+            sorted_line_ids = [row[0] for row in self.env.cr.fetchall()]
             payment_lines = payment_line_obj.browse(sorted_line_ids)
 
             if not payment_lines:
@@ -181,7 +181,7 @@ class post_dd_export_wizard(models.TransientModel):
         export_id = self._create_dd_export(active_ids,
                                            overall_amount, properties,
                                            file_content)
-        self.write({'banking_export_ch_dd_id': export_id, 'state': 'finish'})
+        self.write({'banking_export_ch_dd_id': export_id.id, 'state': 'finish'})
 
         action = {
             'name': 'Generated File',
@@ -225,8 +225,7 @@ class post_dd_export_wizard(models.TransientModel):
         vals['reserve_3'] = self._complete_line('', 2)
         vals['deb_account_no'] = self._get_post_account(line.bank_id)
         vals['reserve_4'] = self._complete_line('', 6)
-        vals['ref'] = self._complete_line(self._get_ref(cr, uid, context,
-                                                        line), 27)
+        vals['ref'] = self._complete_line(self._get_ref(line), 27)
         vals['reserve_5'] = self._complete_line('', 8)
         vals['deb_address'] = self._get_account_address(line.bank_id)
         vals['reserve_6'] = self._complete_line('', 35)
@@ -234,7 +233,7 @@ class post_dd_export_wizard(models.TransientModel):
         vals['reserve_8'] = self._complete_line('', 35)
         vals['reserve_9'] = self._complete_line('', 10)
         vals['reserve_10'] = self._complete_line('', 25)
-        communications = self._get_communications(cr, uid, line, context)
+        communications = self._get_communications(line)
         vals['communication'] = self._complete_line(communications, 140)
         vals['reserve_11'] = self._complete_line('', 3)
         vals['reserve_12'] = self._complete_line('', 1)
@@ -294,16 +293,14 @@ class post_dd_export_wizard(models.TransientModel):
         ''' Save the exported DD file: mark all payments in the file
             as 'sent'. Write 'last debit date' on mandate.
         '''
-        export_wizard = self.browse(self.id)
-        self.env['banking.export.ch.dd'].write(
-            export_wizard.banking_export_ch_dd_id.id, {'state': 'sent'})
+        self.banking_export_ch_dd_id.write({'state': 'sent'})
         wf_service = netsvc.LocalService('workflow')
         today_str = datetime.today().strftime(DF)
-        for order in export_wizard.banking_export_ch_dd_id.payment_order_ids:
-            wf_service.trg_validate('payment.order', order.id, 'done')
-            mandate_ids = [line.mandate_id.id for line in order.line_ids]
-            self.pool['account.banking.mandate'].write(
-                mandate_ids, {'last_debit_date': today_str})
+        for order in self.banking_export_ch_dd_id.payment_order_ids:
+            wf_service.trg_validate(self.env.uid, 'payment.order', order.id, 'done',    self.env.cr)
+            mandate = self.env['account.banking.mandate'].browse(
+                [line.mandate_id.id for line in order.line_ids])
+            mandate.write({'last_debit_date': today_str})
 
         # redirect to generated dd export
         action = {
@@ -312,7 +309,7 @@ class post_dd_export_wizard(models.TransientModel):
             'view_type': 'form',
             'view_mode': 'form,tree',
             'res_model': 'banking.export.ch.dd',
-            'res_id': export_wizard.banking_export_ch_dd_id.id,
+            'res_id': self.banking_export_ch_dd_id.id,
             'target': 'current',
         }
         return action
@@ -320,8 +317,7 @@ class post_dd_export_wizard(models.TransientModel):
     @api.multi
     def cancel_export(self):
         ''' Cancel the export: delete export record '''
-        export_wizard = self.browse(self.env.ids[0])
-        self.env['banking.export.ch.dd'].unlink(export_wizard.banking_export_ch_dd_id.id)
+        self.banking_export_ch_dd_id.unlink()
         return {'type': 'ir.actions.act_window_close'}
 
     
@@ -499,9 +495,8 @@ class post_dd_export_wizard(models.TransientModel):
         return format_date.strftime('%y%m%d')
 
     
-    def _setup_properties(self, wizard_id, payment_order):
+    def _setup_properties(self, payment_order):
         ''' These properties are the same for all lines of the DD file '''
-        form = self.browse(wizard_id)
         if not payment_order.mode.bank_id.post_dd_identifier:
             raise exceptions.ValidationError(
                 _('Missing Postfinance direct debit identifier for account '
@@ -513,7 +508,7 @@ class post_dd_export_wizard(models.TransientModel):
             'dd_order_no': 1,
             'trans_ser_no': 0,
             'nb_transactions': 0,
-            'currency': form.currency,
+            'currency': self.currency,
         }
 
         return properties

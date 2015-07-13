@@ -41,19 +41,12 @@ class invoice(models.Model):
         mov_line_obj = self.env['account.move.line']
         pay_line_obj = self.env['payment.line']
         pay_order_obj = self.env['payment.order']
-
         active_ids = self.env.context.get('active_ids')
         move_ids = [inv.move_id.id for inv in self.browse(active_ids)]
         move_ids = [inv.move_id.id for inv in self.browse(active_ids)]
-        move_line_ids = mov_line_obj.search(
-            [('move_id', 'in', move_ids)], 
-            context=self.env.context
-        )
+        move_line_ids = mov_line_obj.search([('move_id', 'in', move_ids)])
 
-        pay_line_ids = pay_line_obj.search(
-            [('move_line_id', 'in', move_line_ids)],
-            context=self.env.context
-        )
+        pay_line_ids = pay_line_obj.search([('move_line_id', 'in', move_line_ids)])
         if not pay_line_ids:
             raise exceptions.Warning(_('No payment line found !'))
 
@@ -83,9 +76,7 @@ class account_invoice_free(models.TransientModel):
     @api.multi
     def invoice_free(self):
         inv_obj = self.env['account.invoice']
-
         order_id = inv_obj.cancel_payment_lines()
-
         action = {
             'name': 'Payment order',
             'type': 'ir.actions.act_window',

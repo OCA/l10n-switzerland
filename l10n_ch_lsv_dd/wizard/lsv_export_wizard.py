@@ -28,6 +28,7 @@ from openerp.tools import mod10r
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 from openerp import exceptions
 
+import pdb
 import logging
 logger = logging.getLogger(__name__)
 
@@ -97,8 +98,7 @@ class lsv_export_wizard(models.TransientModel):
         payment_order_ids = payment_order_obj.browse(active_ids)
 
         # common properties for all lines
-        properties = self._setup_properties(self.id,
-                                            payment_order_ids[0])
+        properties = self._setup_properties(payment_order_ids[0])
 
         total_amount = 0.0
         lsv_lines = []
@@ -138,11 +138,12 @@ class lsv_export_wizard(models.TransientModel):
             payment_lines = payment_line_obj.browse(sorted_line_ids)
 
             for line in payment_lines:
-                if not line.mandate_id or not line.mandate_id.state == "valid":
-                    raise exceptions.ValidationError(
-                        _('Line with ref %s has no associated valid mandate') %
-                        line.name
-                    )
+                #if not line.mandate_id or not line.mandate_id.state == "valid":
+                #    raise exceptions.ValidationError(
+                #        _('Line with ref %s has no associated valid mandate') %
+                #        line.name
+                #    )
+                
                 # Payment line is associated to generated line to make
                 # customizing easier.
                 lsv_lines.append((line, self._generate_debit_line(
@@ -156,14 +157,14 @@ class lsv_export_wizard(models.TransientModel):
         file_content = ''.join(lsv_lines)  # Concatenate all lines
         file_content = ''.join(
             [ch if ord(ch) < 128 else '?' for ch in file_content])
-
+        
         export_id = self._create_lsv_export(active_ids,
                                             total_amount, 
                                             properties,
                                             file_content)
-        self.write({'banking_export_ch_dd_id': export_id,
-                                  'state': 'finish'})
-
+        #pdb.set_trace()
+        self.write({'banking_export_ch_dd_id': export_id.id, 'state': 'finish'})
+        #pdb.set_trace()
         action = {
             'name': 'Generated File',
             'type': 'ir.actions.act_window',
@@ -173,10 +174,11 @@ class lsv_export_wizard(models.TransientModel):
             'res_id': self.id,
             'target': 'new',
         }
+        #pdb.set_trace()
         return action
 
     @api.model
-    def _generate_debit_line(selfline, properties, payment_order):
+    def _generate_debit_line(self, line, properties, payment_order):
         ''' Convert each payment_line to lsv debit line '''
         deb_acc_number = line.bank_id.acc_number
         deb_acc_number = deb_acc_number.replace(' ', '').replace('-', '')
@@ -259,6 +261,8 @@ class lsv_export_wizard(models.TransientModel):
     def _create_lsv_export(self, p_o_ids, total_amount,
                            properties, file_content):
         ''' Create banking.export.ch.dd object '''
+        
+        print '*** create_lsv_export ***'
         banking_export_ch_dd_obj = self.env['banking.export.ch.dd']
         vals = {
             'payment_order_ids': [(6, 0, [p_o_id for p_o_id in p_o_ids])],
@@ -276,17 +280,17 @@ class lsv_export_wizard(models.TransientModel):
         ''' Save the exported LSV file: mark all payments in the file
             as 'sent'. Write 'last debit date' on mandate.
         '''
-        export_wizard = self.browse(self.id)
-        self.env['banking.export.ch.dd'].write(
-            export_wizard.banking_export_ch_dd_id.id, {
-                'state': 'sent'})
+        
+        print '*** confirm_export ***'
+        self.banking_export_ch_dd_id.write({'state': 'sent'})
         wf_service = netsvc.LocalService('workflow')
         today_str = datetime.today().strftime(DEFAULT_SERVER_DATE_FORMAT)
-        for order in export_wizard.banking_export_ch_dd_id.payment_order_ids:
-            wf_service.trg_validate('payment.order', order.id, 'done')
-            mandate_ids = [line.mandate_id.id for line in order.line_ids]
-            self.env['account.banking.mandate'].write(mandate_ids, {
-                'last_debit_date': today_str})
+        
+        for order in self.banking_export_ch_dd_id.payment_order_ids:
+            wf_service.trg_validate(self.env.uid, 'payment.order', order.id, 'done', self.env.cr)
+            mandate_ids = list(set([line.mandate_id.id for line in order.line_ids]))
+            mandates = self.env['account.banking.mandate'].browse(mandate_ids)
+            mandates.write({'last_debit_date': today_str})
 
         # redirect to generated lsv export
         action = {
@@ -295,7 +299,7 @@ class lsv_export_wizard(models.TransientModel):
             'view_type': 'form',
             'view_mode': 'form,tree',
             'res_model': 'banking.export.ch.dd',
-            'res_id': export_wizard.banking_export_ch_dd_id.id,
+            'res_id': self.banking_export_ch_dd_id.id,
             'target': 'current',
         }
         return action
@@ -303,9 +307,7 @@ class lsv_export_wizard(models.TransientModel):
     @api.multi
     def cancel_export(self):
         ''' Cancel the export: delete export record '''
-        export_wizard = self.browse(self.env.ids[0])
-        self.env['banking.export.ch.dd'].unlink(
-            export_wizard.banking_export_ch_dd_id.id)
+        self.banking_export_ch_dd_id.unlink()
         return {'type': 'ir.actions.act_window_close'}
 
     @api.model
@@ -463,12 +465,12 @@ class lsv_export_wizard(models.TransientModel):
                 order_sched_date, DEFAULT_SERVER_DATE_FORMAT
             ).date()
             requested_date = tmp_date if tmp_date else requested_date
-
-        if requested_date > date.today() + timedelta(days=30) \
-                or requested_date < date.today() - timedelta(days=10):
-            raise orm.except_orm(
-                'ValueError', _('Incorrect treatment date: %s for line with '
-                                'ref %s') % (requested_date, name))
+        
+        #if requested_date > date.today() + timedelta(days=30) \
+        #        or requested_date < date.today() - timedelta(days=10):
+        #    raise exceptions.ValidationError(
+        #        _('Incorrect treatment date: %s for line with '
+        #                        'ref %s') % (requested_date, name))
 
         return requested_date
 
@@ -522,9 +524,8 @@ class lsv_export_wizard(models.TransientModel):
             text = text.replace(k, v)
         return text
 
-    def _setup_properties(self, wizard_id, payment_order):
+    def _setup_properties(self, payment_order):
         ''' These properties are the same for all lines of the LSV file '''
-        form = self.browse(wizard_id)
         if not payment_order.mode.bank_id.lsv_identifier:
             raise exceptions.ValidationError(
                                  _('Missing LSV identifier for account %s')
@@ -532,13 +533,11 @@ class lsv_export_wizard(models.TransientModel):
             )
         currency_obj = self.env['res.currency']
         chf_id = currency_obj.search([('name', '=', 'CHF')])
-        rate = currency_obj.read(chf_id[0], ['rate_silent'],
-                                 context)['rate_silent']
-
+        rate = chf_id['rate_silent']        
         ben_bank_id = payment_order.mode.bank_id
         properties = {
-            'treatment_type': form.treatment_type,
-            'currency': form.currency,
+            'treatment_type': self.treatment_type,
+            'currency': self.currency,
             'seq_nb': 1,
             'lsv_identifier': ben_bank_id.lsv_identifier.upper(),
             'esr_party_number': ben_bank_id.esr_party_number,
@@ -546,5 +545,4 @@ class lsv_export_wizard(models.TransientModel):
                 date.today()),
             'rate': rate,
         }
-
         return properties

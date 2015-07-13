@@ -21,6 +21,7 @@
 from openerp import models, fields, api, _
 from openerp.addons.decimal_precision import decimal_precision as dp
 
+import pdb
 import logging
 logger = logging.getLogger(__name__)
 
@@ -33,17 +34,21 @@ class banking_export_ch_dd(models.Model):
     _name = 'banking.export.ch.dd'
     _rec_name = 'filename'
 
-    @api.multi
-    def _generate_filename(self, arg):
-        res = {}
-        for dd_export in self:
-            ref = self.env['ir.sequence'].next_by_code('l10n.banking.export.filename')
-            username = self.env.user.name
-            initials = ''.join([subname[0] for subname in username.split()])
-            if dd_export.type == 'LSV':
-                res[dd_export.id] = 'lsv_%s_%s.lsv' % (ref, initials)
-            else:
-                res[dd_export.id] = 'dd_%s_%s.dd' % (ref, initials)
+    @api.one
+    @api.depends('type')
+    def _generate_filename(self):
+        print '*** generate_filename ***'
+        print '*** ----------------- ***'
+        self.ensure_one()
+        ref = self.env['ir.sequence'].next_by_code('l10n.banking.export.filename')
+        username = self.env.user.name
+        initials = ''.join([subname[0] for subname in username.split()])
+        if self.type == 'LSV':
+            res = 'lsv_%s_%s.lsv' % (ref, initials)
+        else:
+            res = 'dd_%s_%s.dd' % (ref, initials)
+        self.filename = res
+        #pdb.set_trace()
         return res
 
     payment_order_ids = fields.Many2many(
@@ -72,10 +77,10 @@ class banking_export_ch_dd(models.Model):
         readonly=True
     )
     filename = fields.Char(
+        string=_('Filename'),
         compute='_generate_filename', 
         size=256, 
-        string=_('Filename'),
-        readonly=True, 
+        readonly=True,
         store=True
     )   
     state = fields.Selection(
