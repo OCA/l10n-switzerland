@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 #
-#  File: hr_employee.py
+#  File: migrations/8.0.1.0.08/pre-update-ir_model_data.py
 #  Module: l10n_ch_hr_payroll
 #
-#  Created by sge@open-net.ch
+#  Created by cyp@open-net.ch
 #
-#  Copyright (c) 2014 Open-Net Ltd.
+#  Copyright (c) 2015-TODAY Open-Net Ltd.
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -26,13 +26,20 @@
 #
 ##############################################################################
 
+"""
+Set the existings salary rules as non-updatable
+This will ensure the update of this module won't try
+to remove any existing rule not directly referenced.
+This is necessary because some rules may be already in use.
+"""
 
-from openerp.osv import fields, orm
 
+def migrate(cr, version):
+    if not version:
+        return
 
-class hr_employee(orm.Model):
-    _inherit = 'hr.employee'
-    _columns = {
-        'children': fields.integer('Number of Children at school'),
-        'children_student': fields.integer('Number of Children student'),
-        }
+    query = ("UPDATE ir_model_data "
+             "SET noupdate=true "
+             "WHERE module='l10n_ch_hr_payroll' "
+             "AND model='hr.salary.rule' ")
+    cr.execute(query)

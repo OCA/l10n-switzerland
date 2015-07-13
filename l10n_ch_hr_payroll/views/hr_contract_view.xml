@@ -18,7 +18,13 @@ Copyright (c) 2014 Open-Net Ltd.
       <field name="arch" type="xml">
         <field name="struct_id" position="after">
           <field name="lpp_rate"/>
+	  <field name="lpp_amount"/>
+	  <field name="holiday_rate"/>
         </field>
+	<field name="wage" position="before">
+	  <field name="worked_hours" on_change="compute_wage(worked_hours, hourly_rate)"/>
+	  <field name="hourly_rate"  on_change="compute_wage(worked_hours, hourly_rate)"/>
+	</field>
       </field>
     </record>
   </data>

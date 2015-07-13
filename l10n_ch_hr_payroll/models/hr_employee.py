@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 #
-#  File: hr_contract.py
+#  File: hr_employee.py
 #  Module: l10n_ch_hr_payroll
 #
 #  Created by sge@open-net.ch
 #
-#  Copyright (c) 2014 Open-Net Ltd.
+#  Copyright (c) 2014-TODAY Open-Net Ltd.
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -28,13 +28,11 @@
 
 
 from openerp.osv import fields, orm
-import openerp.addons.decimal_precision as dp
 
 
-class hr_contract(orm.Model):
-    _inherit = 'hr.contract'
+class hr_employee(orm.Model):
+    _inherit = 'hr.employee'
     _columns = {
-        'lpp_rate': fields.float('LPP Rate',
-                                 digits_compute=dp.get_precision(
-                                     'Payroll Rate')),
+        'children': fields.integer('Number of Children at school'),
+        'children_student': fields.integer('Number of Children student'),
         }

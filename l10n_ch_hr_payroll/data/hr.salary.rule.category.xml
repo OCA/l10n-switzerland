@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-File: l10n_ch_hr_payroll_data.xml
+File: hr.salary.rule.category.xml
 Module: l10n_ch_hr_payroll
 
 Created by sge@open-net.ch
@@ -8,8 +8,7 @@ Created by sge@open-net.ch
 Copyright (c) 2014 Open-Net Ltd.
 -->
 <openerp>
-    <data>
-<!-- HR SALARY RULE CATEGORIES-->
+    <data noupdate="1">
     <record id="hr_payroll_FALW" model="hr.salary.rule.category">
         <field name="name">Free allowance</field>
         <field name="code">FALW</field>
@@ -33,10 +32,6 @@ Copyright (c) 2014 Open-Net Ltd.
         <field name="name">Monthly Bonus</field>
         <field name="code">BONUS</field>
         <field name="parent_id" ref="hr_payroll.DED"/>
-    </record>
-    <record id="hr_payroll_P13" model="hr.salary.rule.category">
-        <field name="name">Provision 13th salary</field>
-        <field name="code">P13</field>
     </record>
     </data>
 </openerp>
