@@ -61,4 +61,3 @@ class hr_contract(orm.Model):
             'wage': wage,
         }
         return res
-
