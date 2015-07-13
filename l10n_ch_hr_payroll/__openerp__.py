@@ -26,6 +26,7 @@
 #
 ##############################################################################
 
+
 {
     'name': 'Switzerland - Payroll',
     'summary': 'Swizerland Payroll Rules',
@@ -38,11 +39,10 @@
     'website': 'http://open-net.ch',
     'license': 'AGPL-3',
     'data': [
-        'hr_contract_view.xml',
-        'hr_employee_view.xml',
-        'l10n_ch_hr_payroll_data.xml',
-        'data/hr.salary.rule-change.csv',
-        'data/hr.salary.rule-new.csv',
+        'data/hr.salary.rule.category.xml',
+        'data/hr.salary.rule.xml',
+        'views/hr_contract_view.xml',
+        'views/hr_employee_view.xml',
     ],
     'installable': True
 }
