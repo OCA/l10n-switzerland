@@ -19,9 +19,7 @@
 #
 ##############################################################################
 
-from openerp import models, api, _
-from openerp import netsvc
-from openerp import exceptions
+from openerp import models, api, _, netsvc, exceptions
 
 
 class invoice(models.Model):
@@ -43,14 +41,13 @@ class invoice(models.Model):
         pay_order_obj = self.env['payment.order']
         active_ids = self.env.context.get('active_ids')
         move_ids = [inv.move_id.id for inv in self.browse(active_ids)]
-        move_ids = [inv.move_id.id for inv in self.browse(active_ids)]
-        move_line_ids = mov_line_obj.search([('move_id', 'in', move_ids)])
-
-        pay_line_ids = pay_line_obj.search([('move_line_id', 'in', move_line_ids)])
-        if not pay_line_ids:
+        move_line_ids = mov_line_obj.search([('move_id', 'in', move_ids)]).ids
+        pay_lines = pay_line_obj.search([('move_line_id',
+                                          'in', move_line_ids)])
+        if not pay_lines:
             raise exceptions.Warning(_('No payment line found !'))
 
-        old_pay_order = pay_line_obj.browse(pay_line_ids[0]).order_id
+        old_pay_order = pay_line_obj.browse(pay_lines.ids[0]).order_id
         vals = {
             'date_created': old_pay_order.date_created,
             'date_prefered': old_pay_order.date_prefered,
@@ -58,12 +55,12 @@ class invoice(models.Model):
             'mode': old_pay_order.mode.id,
         }
 
-        pay_order_id = pay_order_obj.create(vals)
+        pay_order = pay_order_obj.create(vals)
         wf_service = netsvc.LocalService('workflow')
-        wf_service.trg_validate('payment.order', pay_order_id, 'cancel')
-        pay_line_obj.write(pay_line_ids, {'order_id': pay_order_id})
-
-        return pay_order_id
+        wf_service.trg_validate(self.env.uid, 'payment.order',
+                                pay_order.id, 'cancel', self.env.cr)
+        pay_lines.write({'order_id': pay_order.id})
+        return pay_order
 
 
 class account_invoice_free(models.TransientModel):
@@ -76,14 +73,14 @@ class account_invoice_free(models.TransientModel):
     @api.multi
     def invoice_free(self):
         inv_obj = self.env['account.invoice']
-        order_id = inv_obj.cancel_payment_lines()
+        order = inv_obj.cancel_payment_lines()
         action = {
             'name': 'Payment order',
             'type': 'ir.actions.act_window',
             'view_type': 'form',
             'view_mode': 'form, tree',
             'res_model': 'payment.order',
-            'res_id': order_id,
+            'res_id': order.id,
             'target': 'current',
         }
 

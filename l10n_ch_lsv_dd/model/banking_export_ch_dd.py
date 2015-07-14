@@ -35,7 +35,8 @@ class banking_export_ch_dd(models.Model):
 
     def _generate_filename(self):
         self.ensure_one()
-        ref = self.env['ir.sequence'].next_by_code('l10n.banking.export.filename')
+        ref = self.env['ir.sequence'].next_by_code('l10n.banking.'
+                                                   'export.filename')
         username = self.env.user.name
         initials = ''.join([subname[0] for subname in username.split()])
         if self.type == 'LSV':
@@ -52,11 +53,11 @@ class banking_export_ch_dd(models.Model):
         return res
 
     payment_order_ids = fields.Many2many(
-        'payment.order', 
+        'payment.order',
         'account_payment_order_ch_dd_rel',
-        'banking_export_ch_dd_id', 
+        'banking_export_ch_dd_id',
         'account_order_id',
-        _('Payment Orders'), 
+        _('Payment Orders'),
         readonly=True
     )
     nb_transactions = fields.Integer(
@@ -64,32 +65,31 @@ class banking_export_ch_dd(models.Model):
         readonly=True
     )
     total_amount = fields.Float(
-        _('Total Amount'), 
+        _('Total Amount'),
         readonly=True,
         digits_compute=dp.get_precision('Account')
     )
     create_date = fields.Datetime(
-        _('Generation Date'), 
+        _('Generation Date'),
         readonly=True
     )
     file = fields.Binary(
-        _('Generated file'), 
+        _('Generated file'),
         readonly=True
     )
     filename = fields.Char(
         string=_('Filename'),
-        size=256, 
+        size=256,
         readonly=True,
-    )   
+    )
     state = fields.Selection(
-        [('draft', _('Draft')),('sent', _('Sent')),], 
-        'State', 
+        [('draft', _('Draft')), ('sent', _('Sent'))],
+        'State',
         readonly=True,
         default='draft'
     )
     type = fields.Char(
-        _('Type'), 
-        size=128, 
+        _('Type'),
+        size=128,
         readonly=True
     )
-    

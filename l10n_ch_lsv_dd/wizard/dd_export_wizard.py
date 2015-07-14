@@ -22,13 +22,10 @@
 import base64
 import collections
 from datetime import date, datetime, timedelta
-from openerp import netsvc
-from openerp import models, fields, api, _
+from openerp import models, fields, api, _, netsvc, exceptions
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT as DF
 from openerp.tools import mod10r
-from openerp import exceptions
 
-import pdb
 import logging
 logger = logging.getLogger(__name__)
 
@@ -43,13 +40,13 @@ class post_dd_export_wizard(models.TransientModel):
     _description = 'Export Postfinance Direct Debit File'
 
     currency = fields.Selection(
-        [('CHF', 'CHF'),('EUR', 'EUR')], _('Currency'), 
+        [('CHF', 'CHF'), ('EUR', 'EUR')], _('Currency'),
         required=True,
         default='CHF'
     )
     banking_export_ch_dd_id = fields.Many2one(
-        'banking.export.ch.dd', 
-        _('Direct Debit file'), 
+        'banking.export.ch.dd',
+        _('Direct Debit file'),
         readonly=True
     )
     file = fields.Binary(
@@ -58,43 +55,43 @@ class post_dd_export_wizard(models.TransientModel):
     )
     filename = fields.Char(
         string=_('Filename'),
-        related='banking_export_ch_dd_id.filename', 
-        size=256, 
+        related='banking_export_ch_dd_id.filename',
+        size=256,
         readonly=True
     )
     nb_transactions = fields.Integer(
-        string=_('Number of Transactions'), 
-        related='banking_export_ch_dd_id.nb_transactions', 
+        string=_('Number of Transactions'),
+        related='banking_export_ch_dd_id.nb_transactions',
         readonly=True
     )
     total_amount = fields.Float(
-        string=_('Total Amount'), 
-        related='banking_export_ch_dd_id.total_amount', 
+        string=_('Total Amount'),
+        related='banking_export_ch_dd_id.total_amount',
         readonly=True
     )
     state = fields.Selection(
-        [('create', _('Create')), ('finish', _('Finish'))], 
-        _('State'), 
+        [('create', _('Create')), ('finish', _('Finish'))],
+        _('State'),
         readonly=True,
         default='create'
     )
-    
+
     @api.multi
     def generate_dd_file(self):
         ''' Generate direct debit export object including the direct
             debit file content.
             Called by generate button
         '''
+        self.ensure_one()
         payment_order_obj = self.env['payment.order']
         payment_line_obj = self.env['payment.line']
 
         active_ids = self.env.context.get('active_ids', [])
         if not active_ids:
             raise exceptions.ValidationError(_('No payment order selected'))
-            
+
         payment_order_ids = payment_order_obj.browse(active_ids)
         properties = self._setup_properties(payment_order_ids[0])
-
         records = []
         overall_amount = 0
 
@@ -116,7 +113,6 @@ class post_dd_export_wizard(models.TransientModel):
                 'ORDER BY ' + order_by, (payment_order.id,))
             sorted_line_ids = [row[0] for row in self.env.cr.fetchall()]
             payment_lines = payment_line_obj.browse(sorted_line_ids)
-
             if not payment_lines:
                 continue
 
@@ -174,14 +170,14 @@ class post_dd_export_wizard(models.TransientModel):
                                                               total_amount)))
             properties.update({'dd_order_no': properties['dd_order_no'] + 1})
 
-        records = self._customize_records(records, properties )
+        records = self._customize_records(records, properties)
         file_content = ''.join(records)  # Concatenate all records
         file_content = file_content.encode('iso8859-1')  # Required encoding
-
         export_id = self._create_dd_export(active_ids,
                                            overall_amount, properties,
                                            file_content)
-        self.write({'banking_export_ch_dd_id': export_id.id, 'state': 'finish'})
+        self.write({'banking_export_ch_dd_id': export_id.id,
+                    'state': 'finish'})
 
         action = {
             'name': 'Generated File',
@@ -205,9 +201,9 @@ class post_dd_export_wizard(models.TransientModel):
         else:
             raise exceptions.Warning(
                 _('Generated head record with size %d is not valid '
-                '(len should be 700)') % len(head_record)
+                  '(len should be 700)') % len(head_record)
             )
-    
+
     @api.model
     def _generate_debit_record(self, line, properties, payment_order):
         ''' Convert each payment_line to postfinance debit record
@@ -247,7 +243,7 @@ class post_dd_export_wizard(models.TransientModel):
         else:
             raise exceptions.Warning(
                 _('Generated debit_record with size %d is not valid '
-                '(len should be 700)') % len(debit_record)
+                  '(len should be 700)') % len(debit_record)
             )
 
     @api.model
@@ -273,9 +269,10 @@ class post_dd_export_wizard(models.TransientModel):
                 _('Generated total line is not valid (%d instead of 700)') %
                 len(total_record)
             )
-         
+
     @api.model
-    def _create_dd_export(self, p_o_ids, total_amount, properties, file_content):
+    def _create_dd_export(self, p_o_ids, total_amount,
+                          properties, file_content):
         ''' Create banking.export.ch.dd object '''
         banking_export_ch_dd_obj = self.env['banking.export.ch.dd']
         vals = {
@@ -288,7 +285,7 @@ class post_dd_export_wizard(models.TransientModel):
         export_id = banking_export_ch_dd_obj.create(vals)
         return export_id
 
-    @api.multi
+    @api.one
     def confirm_export(self):
         ''' Save the exported DD file: mark all payments in the file
             as 'sent'. Write 'last debit date' on mandate.
@@ -297,9 +294,10 @@ class post_dd_export_wizard(models.TransientModel):
         wf_service = netsvc.LocalService('workflow')
         today_str = datetime.today().strftime(DF)
         for order in self.banking_export_ch_dd_id.payment_order_ids:
-            wf_service.trg_validate(self.env.uid, 'payment.order', order.id, 'done',
-            self.env.cr)
-            mandate_ids = list(set([line.mandate_id.id for line in order.line_ids]))
+            wf_service.trg_validate(self.env.uid, 'payment.order', order.id,
+                                    'done', self.env.cr)
+            mandate_ids = list(set([line.
+                                    mandate_id.id for line in order.line_ids]))
             mandates = self.env['account.banking.mandate'].browse(mandate_ids)
             mandates.write({'last_debit_date': today_str})
 
@@ -340,15 +338,14 @@ class post_dd_export_wizard(models.TransientModel):
                     properties.get('currency') == 'EUR' and
                     line.amount_currency > 5000000.00):
             raise exceptions.ValidationError(
-                 _('Max authorized amount is CHF 10\'000\'000.00 '
+                _('Max authorized amount is CHF 10\'000\'000.00 '
                   'or EUR 5\'000\'000.00 (%s %.2f given for ref %s)') %
-                (properties.get('currency'), line.amount_currency, line.name)
-            )
+                (properties.get('currency'), line.amount_currency, line.name))
+
         elif line.amount_currency <= 0:
             raise exceptions.ValidationError(
                 _('Amount for line with ref %s is negative (%f '
-                  'given)') % (line.name, line.amount_currency)
-            )
+                  'given)') % (line.name, line.amount_currency))
 
     def _check_currency(self, line, properties):
         ''' Check that line currency is equal to dd export currency '''
@@ -359,7 +356,7 @@ class post_dd_export_wizard(models.TransientModel):
                 (line.name, line.currency.name, properties.get(
                     'currency', ''))
             )
-  
+
     def _complete_line(self, string, nb_char):
         ''' In DD file each field has a defined length.
             This way, lines have to be filled with spaces (or truncated).
@@ -369,12 +366,11 @@ class post_dd_export_wizard(models.TransientModel):
 
         return string.ljust(nb_char)
 
-    
     def _format_number(self, amount, nb_char):
         ''' Accepted format is "0000000012350" for "123.50" '''
         amount_str = '{:.2f}'.format(amount).replace('.', '').zfill(nb_char)
         return amount_str
-    
+
     def _gen_control_range(self, trans_type, properties):
         vals = collections.OrderedDict()
         vals['file_id'] = '036'
@@ -391,7 +387,7 @@ class post_dd_export_wizard(models.TransientModel):
         vals['reserve_5'] = ''.zfill(4)
 
         return ''.join(vals.values())
-   
+
     def _get_account_address(self, bank_account):
         ''' Return account address for given bank_account.
             First line is mandatory !
@@ -401,8 +397,7 @@ class post_dd_export_wizard(models.TransientModel):
         else:
             raise exceptions.ValidationError(
                 _('Missing owner name for bank account %s')
-                % bank_account.acc_number
-            )
+                % bank_account.acc_number)
 
         line2_owner_cmpl = ''
         line3_address = bank_account.street if bank_account.street else ''
@@ -414,7 +409,7 @@ class post_dd_export_wizard(models.TransientModel):
                 self._complete_line(line3_address, 35) +
                 self._complete_line(line4_zip, 10) +
                 self._complete_line(line5_city, 25))
-             
+
     def _get_post_account(self, bank_account):
         ''' Returns BV/BVR account in format 123456789 rather than
             12-345678-9
@@ -425,23 +420,20 @@ class post_dd_export_wizard(models.TransientModel):
             clean_account = clean_account[
                 0:2] + ''.zfill(9 - len(clean_account)) + clean_account[2:]
         elif len(clean_account) > 9:
-            raise orm.except_orm(
-                'ValueError',
-                _('Given BV account number is to long ! (%s)') %
-                clean_account)
+            raise exceptions.ValidationError(
+                _('Given BV account number is to long ! (%s)') % clean_account)
         return clean_account
-   
+
     def _get_communications(self, line):
         ''' This method can be overloaded to fit your communication style '''
         return ''
-   
+
     def _get_ref(self, payment_line):
         if self._is_bvr_ref(payment_line.move_line_id.transaction_ref):
             return payment_line.move_line_id.transaction_ref.replace(
                 ' ', '').rjust(27, '0')
-        else:
-            return ''
-  
+        return ''
+
     def _is_bvr_ref(self, ref):
         if not ref:
             return False  # Empty is not valid
@@ -453,7 +445,7 @@ class post_dd_export_wizard(models.TransientModel):
             return False
 
         return True
-   
+
     def _get_treatment_date(self, prefered_type, line_mat_date,
                             order_sched_date, name):
         ''' Returns appropriate date according to payment_order and
@@ -479,11 +471,11 @@ class post_dd_export_wizard(models.TransientModel):
             )
 
         return requested_date
-    
+
     def _prepare_date(self, format_date):
         ''' Returns date formatted to YYMMDD string '''
         return format_date.strftime('%y%m%d')
-   
+
     def _setup_properties(self, payment_order):
         ''' These properties are the same for all lines of the DD file '''
         if not payment_order.mode.bank_id.post_dd_identifier:

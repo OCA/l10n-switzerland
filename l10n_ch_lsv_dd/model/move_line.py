@@ -58,10 +58,9 @@ class account_move_line(models.Model):
                         if bank_id:
                             line2bank[line.id] = bank_id
                         else:
-                            line2bank.update(
-                                super(account_move_line, self).line2bank(
-                                   [line.id],
-                                    payment_mode_id))
+                            line2bank.update(super(account_move_line, self)
+                                             .line2bank([line.id],
+                                                        payment_mode_id))
                 return line2bank
         return super(
             account_move_line, self).line2bank(payment_mode_id)
