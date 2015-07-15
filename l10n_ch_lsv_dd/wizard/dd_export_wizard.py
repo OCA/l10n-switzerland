@@ -345,7 +345,8 @@ class post_dd_export_wizard(models.TransientModel):
         elif line.amount_currency <= 0:
             raise exceptions.ValidationError(
                 _('Amount for line with ref %s is negative (%f '
-                  'given)') % (line.name, line.amount_currency))
+                  'given)') % (line.name, line.amount_currency)
+            )
 
     def _check_currency(self, line, properties):
         ''' Check that line currency is equal to dd export currency '''
@@ -421,7 +422,8 @@ class post_dd_export_wizard(models.TransientModel):
                 0:2] + ''.zfill(9 - len(clean_account)) + clean_account[2:]
         elif len(clean_account) > 9:
             raise exceptions.ValidationError(
-                _('Given BV account number is to long ! (%s)') % clean_account)
+                _('Given BV account number is to long ! (%s)') % clean_account
+            )
         return clean_account
 
     def _get_communications(self, line):

@@ -282,8 +282,8 @@ class lsv_export_wizard(models.TransientModel):
         for order in self.banking_export_ch_dd_id.payment_order_ids:
             wf_service.trg_validate(self.env.uid, 'payment.order',
                                     order.id, 'done', self.env.cr)
-            mandate_ids = list(set([line.
-                                    mandate_id.id for line in order.line_ids]))
+            mandate_ids = list(set(
+                [line.mandate_id.id for line in order.line_ids]))
             mandates = self.env['account.banking.mandate'].browse(mandate_ids)
             mandates.write({'last_debit_date': today_str})
 
@@ -328,13 +328,12 @@ class lsv_export_wizard(models.TransientModel):
             raise exceptions.ValidationError(
                 _('Stop kidding... max authorized amount is CHF 99 999 999.99 '
                   '(%.2f %s given for ref %s)') %
-                (line.amount_currency, properties.get('currency'), line.name)
-            )
+                (line.amount_currency, properties.get('currency'), line.name))
+
         elif line.amount_currency <= 0:
             raise exceptions.ValidationError(
                 _('Amount for line with ref %s is negative (%f given)') %
-                (line.name, line.amount_currency)
-            )
+                (line.name, line.amount_currency))
 
     def _check_currency(self, line, properties):
         ''' Check that line currency is equal to lsv export currency '''
@@ -344,8 +343,7 @@ class lsv_export_wizard(models.TransientModel):
                 _('Line with ref %s has %s currency and lsv file %s '
                   '(should be the same)') %
                 (line.name, line.currency.name, properties.get(
-                    'currency', ''))
-            )
+                    'currency', '')))
 
     def _complete_line(self, string, nb_char):
         ''' In LSV file each field has a defined length.
@@ -412,8 +410,7 @@ class lsv_export_wizard(models.TransientModel):
         else:
             raise exceptions.ValidationError(
                 _('Unable to determine clearing number for account %s') %
-                bank_account.acc_number
-            )
+                bank_account.acc_number)
 
         return clearing
 
