@@ -32,8 +32,14 @@
     'summary': 'Swizerland Payroll Rules',
     'category': 'Localization',
     'author': "Open-Net Sàrl,Odoo Community Association (OCA)",
-    'depends': ['decimal_precision', 'hr_payroll', 'hr_payroll_account'],
-    'version': '1.0.1',
+    'depends': [
+        'decimal_precision',
+        'hr_payroll',
+        'hr_payroll_account',
+        'hr_contract',
+        'hr_attendance'
+    ],
+    'version': '1.0.8',
     'auto_install': False,
     'demo': [],
     'website': 'http://open-net.ch',
