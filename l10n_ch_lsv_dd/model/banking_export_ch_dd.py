@@ -35,8 +35,8 @@ class banking_export_ch_dd(models.Model):
 
     def _generate_filename(self):
         self.ensure_one()
-        ref = self.env['ir.sequence'].next_by_code('l10n.banking.'
-                                                   'export.filename')
+        ref = self.env['ir.sequence'].next_by_code(
+            'l10n.banking.export.filename')
         username = self.env.user.name
         initials = ''.join([subname[0] for subname in username.split()])
         if self.type == 'LSV':

@@ -40,14 +40,14 @@ class invoice(models.Model):
         pay_line_obj = self.env['payment.line']
         pay_order_obj = self.env['payment.order']
         active_ids = self.env.context.get('active_ids')
-        move_ids = [inv.move_id.id for inv in self.browse(active_ids)]
+        move_ids = self.browse(active_ids).mapped('move_id.id')
         move_line_ids = mov_line_obj.search([('move_id', 'in', move_ids)]).ids
         pay_lines = pay_line_obj.search([('move_line_id',
                                           'in', move_line_ids)])
         if not pay_lines:
             raise exceptions.Warning(_('No payment line found !'))
 
-        old_pay_order = pay_line_obj.browse(pay_lines.ids[0]).order_id
+        old_pay_order = pay_lines.ids[0].order_id
         vals = {
             'date_created': old_pay_order.date_created,
             'date_prefered': old_pay_order.date_prefered,

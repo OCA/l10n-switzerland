@@ -80,7 +80,7 @@ class lsv_export_wizard(models.TransientModel):
         default='create'
     )
 
-    @api.multi
+    @api.model
     def generate_lsv_file(self):
         ''' Generate direct debit export object including the lsv file
             content. Called by generate button.
