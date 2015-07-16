@@ -76,7 +76,7 @@ class post_dd_export_wizard(models.TransientModel):
         default='create'
     )
 
-    @api.model
+    @api.multi
     def generate_dd_file(self):
         ''' Generate direct debit export object including the direct
             debit file content.

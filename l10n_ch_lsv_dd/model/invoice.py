@@ -47,7 +47,7 @@ class invoice(models.Model):
         if not pay_lines:
             raise exceptions.Warning(_('No payment line found !'))
 
-        old_pay_order = pay_lines.ids[0].order_id
+        old_pay_order = pay_lines[0].order_id
         vals = {
             'date_created': old_pay_order.date_created,
             'date_prefered': old_pay_order.date_prefered,
