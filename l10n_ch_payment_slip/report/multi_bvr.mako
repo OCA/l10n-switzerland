@@ -169,14 +169,20 @@
              top:${str(203 + (company.bvr_delta_vert or 0.0)).replace(',','.')}mm;
              left:${str(67 + (company.bvr_delta_horz or 0.0)).replace(',','.')}mm;
            }
-
-          ${css}
+          
+           div.page {
+             position: relative;
+             page-break-before: always;
+           }
+           
+           ${css}
     </style>
 
    </head>
    <body topmargin="0px">
 
        %for move in objects:
+       <div class="page">
        <% inv = move.invoice %>
        <% setLang(inv.partner_id.lang) %>
        <!--adresses + info block -->
@@ -301,6 +307,7 @@
             <div class="digitref"  style="left:${ref_start_left + (ii*ref_coef_space)}mm;">${c}</div>
         %endfor
  </div>
+    </div>
     %endfor
 </body>
 </html>
