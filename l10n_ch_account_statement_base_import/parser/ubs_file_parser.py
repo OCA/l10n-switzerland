@@ -20,7 +20,7 @@ import datetime
 import logging
 import csv
 from openerp import fields
-
+import pdb
 from .base_parser import BaseSwissParser
 
 _logger = logging.getLogger(__name__)
@@ -53,7 +53,7 @@ class UBSCSVParser(BaseSwissParser):
         super(UBSCSVParser, self).__init__(data_file)
         rows = []
         self.lines = self.data_file.splitlines()
-        reader = csv.DictReader(self.lines[:-2], delimiter=';')
+        reader = csv.DictReader(self.lines[:-3], delimiter=';')
 
         for row in reader:
             rows.append(
@@ -163,7 +163,8 @@ class UBSCSVParser(BaseSwissParser):
 
         id = 0
         transactions = []
-        for line in self.datas[:-3]:
+        pdb.set_trace()
+        for line in self.datas:
             descriptions = [
                 line.get("Description 1", '/'), line.get("Description 2", ''),
                 line.get("Description 3", '')]
