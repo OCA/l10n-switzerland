@@ -149,7 +149,7 @@ class XMLPFParser(BankStatementImportParser):
             'date': line.get('date', datetime.date.today()),
             'amount': line.get('amount', 0.0),
             'ref': line.get('ref', '/'),
-            'label': line.get('lib', ''),
+            'label': line.get('lib', '/'),
         }
 
         return res
