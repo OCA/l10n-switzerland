@@ -20,7 +20,6 @@ import datetime
 import logging
 import csv
 from openerp import fields
-import pdb
 from .base_parser import BaseSwissParser
 
 _logger = logging.getLogger(__name__)
@@ -163,7 +162,6 @@ class UBSCSVParser(BaseSwissParser):
 
         id = 0
         transactions = []
-        pdb.set_trace()
         for line in self.datas:
             descriptions = [
                 line.get("Description 1", '/'), line.get("Description 2", ''),
