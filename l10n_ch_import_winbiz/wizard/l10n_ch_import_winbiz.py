@@ -194,27 +194,27 @@ class AccountWinbizImport(models.TransientModel):
                 #
                 # Generated the second line inverted
                 #
-                inverted_default_value = default_value.copy()
-                inverted_default_value.update({'date': None,
-                                               'ref': None,
-                                               'journal_id': None,
-                                               'period_id': None})
-                if is_negative:
-                    inverted_default_value.update({'line_id/debit':
-                                                   abs(decimal_amount),
-                                                   'line_id/credit': 0.0,
-                                                   'line_id/account_id':
-                                                   winbiz_item['lcaccount']})
-                else:
-                    inverted_default_value.update({'line_id/debit': 0.0,
-                                                   'line_id/credit':
-                                                   abs(decimal_amount),
-                                                   'line_id/account_id':
-                                                   winbiz_item['lcaccount']})
-                analytic_code_inverted = winbiz_item['lcanaccount']
-                inverted_default_value.update({'line_id/analytic_account_id':
-                                               analytic_code_inverted})
-                new_openerp_data.append(inverted_default_value)
+#                 inverted_default_value = default_value.copy()
+#                 inverted_default_value.update({'date': None,
+#                                                'ref': None,
+#                                                'journal_id': None,
+#                                                'period_id': None})
+#                 if is_negative:
+#                     inverted_default_value.update({'line_id/debit':
+#                                                    abs(decimal_amount),
+#                                                    'line_id/credit': 0.0,
+#                                                    'line_id/account_id':
+#                                                    winbiz_item['lcaccount2']})
+#                 else:
+#                     inverted_default_value.update({'line_id/debit': 0.0,
+#                                                    'line_id/credit':
+#                                                    abs(decimal_amount),
+#                                                    'line_id/account_id':
+#                                                    winbiz_item['lcaccount2']})
+#                 analytic_code_inverted = winbiz_item['lcanaccount']
+#                 inverted_default_value.update({'line_id/analytic_account_id':
+#                                                analytic_code_inverted})
+#                 new_openerp_data.append(inverted_default_value)
 
         return new_openerp_data
 
