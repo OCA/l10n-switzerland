@@ -12,6 +12,7 @@
             <field name="v11file"/>
             <field name="journal_id" domain="[('type','in',['bank', 'cash'])]"/>
             <field name="currency_id"/>
+            <field name="validate_vouchers"/>
             <newline/>
             <footer colspan="4">
               <button name="import_v11" string="Import" type="object" icon="gtk-ok"  colspan="2"/> or
