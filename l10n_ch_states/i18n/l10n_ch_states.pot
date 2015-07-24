@@ -1,0 +1,166 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* l10n_ch_states
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-23 13:57+0000\n"
+"PO-Revision-Date: 2015-06-23 13:57+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_AI
+msgid "Appenzell Inner Rhodes"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_AR
+msgid "Appenzell Outher Rhodes"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_AG
+msgid "Argovia"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_BS
+msgid "Basel-City"
+msgstr """
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_BL
+msgid "Basel-Country"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_BE
+msgid "Bern"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:ir.model,name:l10n_ch_states.model_res_country_state
+msgid "Country state"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_FR
+msgid "Fribourg"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_GE
+msgid "Geneva"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_DE
+msgid "Germany"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_GL
+msgid "Glarus"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_GR
+msgid "Grisons"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_IT
+msgid "Italy"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_JU
+msgid "Jura"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_LU
+msgid "Luzern"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_NE
+msgid "Neuchâtel"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_NW
+msgid "Nidwald"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_OW
+msgid "Obwald"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_FL
+msgid "Principality of Liechtenstein"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_SH
+msgid "Schaffhausen"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_SZ
+msgid "Schwyz"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_SO
+msgid "Solothurn"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_SG
+msgid "St. Gallen"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_TG
+msgid "Thurgovia"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_TI
+msgid "Ticino"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_UR
+msgid "Uri"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_VS
+msgid "Valais"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_VD
+msgid "Vaud"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_ZG
+msgid "Zug"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:res.country.state,name:l10n_ch_states.state_ZH
+msgid "Zurich"
+msgstr ""
