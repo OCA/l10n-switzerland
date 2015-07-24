@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
@@ -23,6 +22,8 @@
  'version': '0.1',
  'author': 'Camptocamp, Odoo Community Association (OCA)',
  'maintainer': 'Camptocamp, Odoo Community Association (OCA)',
+ 'summary': """Add new BVR/ESR payment slip layouts like invoice
+ with slip on same document""
  'category': 'Accounting',
  'complexity': 'normal',
  'depends': ['base', 'account', 'l10n_ch_payment_slip'],
