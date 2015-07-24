@@ -52,6 +52,8 @@ class ir_actions_report_xml_reportlab(orm.Model):
         Override to work with real pdf in testing and not html
         as we use reportlab as renderer
         """
+        if context is None:
+            context = {}
         if context.get('force_pdf'):
             new_report = self._lookup_report(cr, name)
             if isinstance(new_report, (str, unicode)):
