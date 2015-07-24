@@ -5,7 +5,7 @@ Alternative Layouts for payment slip report
 ===========================================
 
 This module was written alternate layouts to payment slip report.
-Currently this module onyl adds a new report layout  that merges invoices with related payment slips into a single PDF.
+Currently this module onyl adds a new report layout that merges invoices with related payment slips into a single PDF.
 Each slip is printed on his own page after the related invoice
 
 
