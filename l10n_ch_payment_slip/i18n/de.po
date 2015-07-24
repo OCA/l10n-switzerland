@@ -1,6 +1,6 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-# 	* l10n_ch_payment_slip
+#       * l10n_ch_payment_slip
 #
 msgid ""
 msgstr ""
@@ -57,7 +57,7 @@ msgstr "Horiz. position in mm für die Adresse"
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_bvr_background
 #: field:res.company,bvr_background:0
 msgid "Insert BVR background ?"
-msgstr "ESR Hintergrund einfügen ?"
+msgstr "ESR Hintergrund einfügen?"
 
 #. module: l10n_ch_payment_slip
 #: field:bvr.import.wizard,file:0
@@ -80,7 +80,7 @@ msgstr "ESR vertikale Position der Adresse in mm"
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_partner_bank_print_bank
 #: field:res.partner.bank,print_bank:0
 msgid "Print Bank on BVR"
-msgstr "Bank Daten auf dem ESR drucken"
+msgstr "Bank Daten auf den ESR drucken"
 
 #. module: l10n_ch_payment_slip
 #: field:account.move.line,transaction_ref:0
@@ -121,7 +121,7 @@ msgstr "Journal-Einträge"
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_partner_bank_print_account
 #: field:res.partner.bank,print_account:0
 msgid "Print Account Number on BVR"
-msgstr "Konto Nummer auf dem ESR drucken"
+msgstr "Kontonummer auf den ESR drucken"
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_delta_horz:0
