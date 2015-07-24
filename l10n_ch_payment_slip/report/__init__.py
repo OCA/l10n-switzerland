@@ -28,5 +28,6 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #
 ##############################################################################
+from . import ir_action
 from . import payment_slip_from_invoice
 from . import reports_common
