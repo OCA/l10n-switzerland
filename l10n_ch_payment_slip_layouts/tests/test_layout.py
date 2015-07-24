@@ -18,17 +18,43 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+import types
 import time
+import StringIO
+from contextlib import contextmanager, closing
 import re
+from mock import patch, MagicMock
+from reportlab.pdfgen.canvas import Canvas
 
 import openerp.tests.common as test_common
-from openerp.report import render_report
 
 
-class TestPaymentSlip(test_common.TransactionCase):
+def make_pdf():
+    canvas_size = (595.27, 841.89)
+    with closing(StringIO.StringIO()) as buff:
+        canvas = Canvas(buff,
+                        pagesize=canvas_size,
+                        pageCompression=None)
+        canvas.showPage()
+        canvas.save()
+        return buff.getvalue()
+
+
+@contextmanager
+def mock_render_report():
+    render = ('openerp.addons.l10n_ch_payment_slip.report.ir_action.'
+              'ir_actions_report_xml_reportlab.render_report')
+    pdf_mock = MagicMock()
+    pdf_mock.side_effect = [(make_pdf(), 'pdf')]
+    with patch(render, pdf_mock):
+        yield
+
+
+class TestPaymentSlipLayout(test_common.TransactionCase):
     _compile_get_ref = re.compile(r'[^0-9]')
 
-    def make_bank(self):
+    def setUp(self):
+        super(TestPaymentSlipLayout, self).setUp()
         company = self.env.ref('base.main_company')
         self.assertTrue(company)
         partner = self.env.ref('base.main_partner')
@@ -41,7 +67,7 @@ class TestPaymentSlip(test_common.TransactionCase):
                 'clearing': '234234',
             }
         )
-        bank_account = self.env['res.partner.bank'].create(
+        self.bank_account = self.env['res.partner.bank'].create(
             {
                 'partner_id': partner.id,
                 'owner_name': partner.name,
@@ -59,18 +85,15 @@ class TestPaymentSlip(test_common.TransactionCase):
                 'print_partner': True,
             }
         )
-        return bank_account
 
-    def make_invoice(self):
-        bank_account = self.make_bank()
-        invoice = self.env['account.invoice'].create(
+        self.invoice = self.env['account.invoice'].create(
             {
                 'partner_id': self.env.ref('base.res_partner_12').id,
                 'reference_type': 'none',
                 'name': 'A customer invoice',
                 'account_id': self.env.ref('account.a_recv').id,
                 'type': 'out_invoice',
-                'partner_bank_id': bank_account.id
+                'partner_bank_id': self.bank_account.id
             }
         )
 
@@ -79,69 +102,52 @@ class TestPaymentSlip(test_common.TransactionCase):
                 'product_id': False,
                 'quantity': 1,
                 'price_unit': 862.50,
-                'invoice_id': invoice.id,
+                'invoice_id': self.invoice.id,
                 'name': 'product that cost 862.50 all tax included',
             }
         )
-        invoice.signal_workflow('invoice_open')
-        # waiting for the cache to refresh
+        self.invoice.signal_workflow('invoice_open')
+        # We wait the invoice line cache to be refreshed
         attempt = 0
-        while not invoice.move_id:
-            invoice.refresh()
+        while not self.invoice.move_id:
+            self.invoice.refresh()
             time.sleep(0.1)
             attempt += 1
             if attempt > 20:
                 break
-        return invoice
 
-    def test_invoice_confirmation(self):
-        """Test that confirming an invoice generate slips correctly"""
-        invoice = self.make_invoice()
-        self.assertTrue(invoice.move_id)
-        for line in invoice.move_id.line_id:
-            if line.account_id.type in ('payable', 'receivable'):
-                self.assertTrue(line.transaction_ref)
-            else:
-                self.assertFalse(line.transaction_ref)
-        for line in invoice.move_id.line_id:
-            slip = self.env['l10n_ch.payment_slip'].search(
-                [('move_line_id', '=', line.id)]
+    def test_report_generator(self):
+        with mock_render_report():
+            # registry is used in order to avoid decorator hell
+            gen = self.registry['report']._compute_documents_list(
+                self.env.cr,
+                self.env.uid,
+                [self.invoice.id],
+                context={}
             )
-            if line.account_id.type in ('payable', 'receivable'):
-                self.assertTrue(slip)
-                self.assertEqual(slip.amount_total, 862.50)
-                self.assertEqual(slip.invoice_id.id, invoice.id)
-            else:
-                self.assertFalse(slip)
+            self.assertIsInstance(gen, types.GeneratorType)
+            pdfs = [x for x in gen]
+            self.assertTrue(len(pdfs) == 2)
 
-    def test_slip_validity(self):
-        """Test that confirming slip are valid"""
-        invoice = self.make_invoice()
-        self.assertTrue(invoice.move_id)
-        for line in invoice.move_id.line_id:
-            slip = self.env['l10n_ch.payment_slip'].search(
-                [('move_line_id', '=', line.id)]
+    def test_report_generator_merge(self):
+        with mock_render_report():
+            # registry is used in order to avoid decorator hell
+            gen = self.registry['report']._compute_documents_list(
+                self.env.cr,
+                self.env.uid,
+                [self.invoice.id],
+                context={}
             )
-            if line.account_id.type in ('payable', 'receivable'):
-                self.assertTrue(slip.reference)
-                self.assertTrue(slip.scan_line)
-                self.assertTrue(slip.slip_image)
-                self.assertTrue(slip.a4_pdf)
-                inv_num = line.invoice.number
-                line_ident = self._compile_get_ref.sub(
-                    '', "%s%s" % (inv_num, line.id)
-                )
-                self.assertIn(line_ident, slip.reference.replace(' ', ''))
+            self.assertIsInstance(gen, types.GeneratorType)
+            self.env['report'].merge_pdf_in_memory(gen)
 
-    def test_print_report(self):
-        invoice = self.make_invoice()
-        data, format = render_report(
-            self.env.cr,
-            self.env.uid,
-            [invoice.id],
-            'one_slip_per_page_from_invoice',
-            {},
-            context={'force_pdf': True},
-        )
-        self.assertTrue(data)
-        self.assertEqual(format, 'pdf')
+        with mock_render_report():
+            # registry is used in order to avoid decorator hell
+            gen = self.registry['report']._compute_documents_list(
+                self.env.cr,
+                self.env.uid,
+                [self.invoice.id],
+                context={}
+            )
+            self.assertIsInstance(gen, types.GeneratorType)
+            self.env['report'].merge_pdf_on_disk(gen)

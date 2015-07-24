@@ -68,7 +68,6 @@ payment terms.
           "bank_view.xml",
           "account_invoice_view.xml",
           "wizard/bvr_import_view.xml",
-          "report/report_payment_slip.xml",
           "report/report_declaration.xml",
           "security/ir.model.access.csv"],
  'demo': [],
