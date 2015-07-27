@@ -22,13 +22,11 @@
 import sys
 import traceback
 import logging
-import base64
 from lxml import etree
 from StringIO import StringIO
-from openerp import models, fields, api, exceptions
+from openerp import models, fields, api
 from openerp.tools.translate import _
 from itertools import izip_longest
-from datetime import datetime
 
 _logger = logging.getLogger(__name__)
 
@@ -136,17 +134,18 @@ class AccountWinbizImport(models.TransientModel):
         company_partner = cp.partner_id.name
         standard_dict = dict(izip_longest(self.HEAD_ODOO, []))
         previous_date = False
-        for action_winbiz,elem_winbiz in data:
-            ## Contruct dict with date
+        for action_winbiz, elem_winbiz in data:
+            # Contruct dict with date
             winbiz_item = {}
             for subelem in elem_winbiz.getchildren():
-                winbiz_item.update({subelem.tag : subelem.text})
+                winbiz_item.update({subelem.tag: subelem.text})
             is_negative = False
-            for amount_type in ['lnmntent','lnmntsal']:
+            for amount_type in ['lnmntent', 'lnmntsal']:
                 default_value = standard_dict.copy()
                 # We compute company part first after the employee
                 decimal_amount = float(winbiz_item[amount_type])
-                if (not previous_date) or previous_date != winbiz_item['st_date1']:
+                if (not previous_date) or \
+                        previous_date != winbiz_item['st_date1']:
                     default_value.update({'date': winbiz_item['st_date1'],
                                           'ref': _('Paye'),
                                           'journal_id': self.journal_id.name,
@@ -159,11 +158,11 @@ class AccountWinbizImport(models.TransientModel):
                                           'journal_id': None,
                                           'period_id': None})
                 if decimal_amount < 0:
-                    default_value.update({'line_id/credit': abs(decimal_amount),
+                    default_value.update({'line_id/credit':
+                                          abs(decimal_amount),
                                           'line_id/debit': 0.0,
                                           'line_id/account_id':
                                           winbiz_item['lcaccount']})
-                    is_negative = True
                 else:
                     default_value.update({'line_id/debit': abs(decimal_amount),
                                           'line_id/credit': 0.0,
@@ -214,7 +213,7 @@ class AccountWinbizImport(models.TransientModel):
 
     @api.multi
     def import_file(self):
-#        doc = etree.fromstring()
-        struct_xml = etree.iterparse(StringIO(self.file.decode('base64')),tag="c_liste_text")
+        struct_xml = etree.iterparse(StringIO(
+            self.file.decode('base64')), tag="c_liste_text")
         new_data = self._standardise_data(struct_xml)
         return self._load_data(new_data)
