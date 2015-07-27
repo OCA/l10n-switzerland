@@ -28,15 +28,10 @@ virtualenv:
   system_site_packages: true
 
 install:
-  - git clone --depth 1 https://github.com/OCA/partner-contact-management ${HOME}/partner-contact-management -b ${VERSION}
-  - git clone --depth 1 https://github.com/OCA/bank-statement-reconcile ${HOME}/bank-statement-reconcile -b ${VERSION}
-  - git clone --depth 1 https://github.com/OCA/bank-payment ${HOME}/bank-payment-b ${VERSION}
-  - git clone --depth 1 https://github.com/OCA/account-financial-tools ${HOME}/account-financial-tools -b ${VERSION}
+  - pip install unidecode
   - git clone --depth 1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
-  - git clone --depth 1 https://github.com/OCA/banking.git ${HOME}/banking -b ${VERSION}
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
-  - pip install unidecode
 
 script:
   - travis_run_tests
