@@ -139,7 +139,6 @@ class AccountWinbizImport(models.TransientModel):
             winbiz_item = {}
             for subelem in elem_winbiz.getchildren():
                 winbiz_item.update({subelem.tag: subelem.text})
-            is_negative = False
             for amount_type in ['lnmntent', 'lnmntsal']:
                 default_value = standard_dict.copy()
                 # We compute company part first after the employee
