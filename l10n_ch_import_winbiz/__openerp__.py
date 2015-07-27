@@ -29,7 +29,6 @@
     'website': 'http://www.camptocamp.com',
     'data': [
         'wizard/l10n_ch_import_winbiz_view.xml',
-        'account_tax_view.xml',
         'menu.xml',
     ],
     'installable': True,
