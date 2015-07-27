@@ -68,20 +68,8 @@ class AccountWinbizImport(models.TransientModel):
                  file must be previously created into Odoo  </br>
                 * The date of the entry will determine the period used\
                  in Odoo, so please ensure the period is created already. </br>
-                * If the Cresus file uses VAT codes (i.e: IPI), \
-                please make sure you have indicated this code in the \
-                related Odoo tax (new field). \
-                Warning, the Odoo tax must be 'tax included'. \
-                If the tax does not exist you have to create it. </br>
-                * All PL accounts must have a deferral method = 'none'\
-                (meaning: no balance brought forward in the new fiscal year)\
-                and all
-                 Balance sheet account must have a deferral \
-                method = 'balance'. </br>'''))
+                </br>'''))
 
-    TAG_WINBIZ = ['date', 'debit', 'credit', 'pce',
-                   'ref', 'amount', 'typtvat', 'currency_amount',
-                   'analytic_account']
     HEAD_ODOO = ['ref', 'date', 'period_id', 'journal_id',
                  'line_id/account_id', 'line_id/partner_id', 'line_id/name',
                  'line_id/debit', 'line_id/credit',
@@ -144,8 +132,6 @@ class AccountWinbizImport(models.TransientModel):
         Winbiz just write one line per move,
         """
         new_openerp_data = []
-        tax_obj = self.env['account.tax']
-        account_obj = self.env['account.account']
         cp = self.env.user.company_id
         company_partner = cp.partner_id.name
         standard_dict = dict(izip_longest(self.HEAD_ODOO, []))
@@ -184,38 +170,12 @@ class AccountWinbizImport(models.TransientModel):
                                           'line_id/account_id':
                                           winbiz_item['lcaccount']})
                 analytic_code = None
-                analytic_code_inverted = None
                 analytic_code = winbiz_item['lcanaccount']
                 default_value.update({'line_id/partner_id': company_partner,
                                       'line_id/name': _('Paye'),
                                       'line_id/analytic_account_id':
                                       analytic_code})
                 new_openerp_data.append(default_value)
-                #
-                # Generated the second line inverted
-                #
-#                 inverted_default_value = default_value.copy()
-#                 inverted_default_value.update({'date': None,
-#                                                'ref': None,
-#                                                'journal_id': None,
-#                                                'period_id': None})
-#                 if is_negative:
-#                     inverted_default_value.update({'line_id/debit':
-#                                                    abs(decimal_amount),
-#                                                    'line_id/credit': 0.0,
-#                                                    'line_id/account_id':
-#                                                    winbiz_item['lcaccount2']})
-#                 else:
-#                     inverted_default_value.update({'line_id/debit': 0.0,
-#                                                    'line_id/credit':
-#                                                    abs(decimal_amount),
-#                                                    'line_id/account_id':
-#                                                    winbiz_item['lcaccount2']})
-#                 analytic_code_inverted = winbiz_item['lcanaccount']
-#                 inverted_default_value.update({'line_id/analytic_account_id':
-#                                                analytic_code_inverted})
-#                 new_openerp_data.append(inverted_default_value)
-
         return new_openerp_data
 
     @api.multi
