@@ -4,7 +4,7 @@
 Module name
 ===========
 
-This module add the ability to import salary XML file from Winbiz software (www.winbiz.ch) 
+This module adds the ability to import salary XML file from Winbiz software (www.winbiz.ch) 
 
 Configuration
 =============
@@ -14,11 +14,11 @@ Configuration
 Usage
 =====
 In order to import your Winbiz Salary.txt 
-file you must complete the following requirements : 
-    * The accounts, analytical accounts used in the Winbiz
-      file must be previously created into Odoo
-    * The date of the entry will determine the period used
-      in Odoo, so please ensure the period is created already.
+file you must complete the following requirements:
+ * The accounts, analytical accounts used in the Winbiz
+   file must be previously created into Odoo
+ * The date of the entry will determine the period used
+   in Odoo, so please ensure the period is created already.
 
 
 Bug Tracker

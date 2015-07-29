@@ -6,7 +6,7 @@
       <field name="model">account.winbiz.import</field>
       <field name="arch" type="xml">
         <form string="Move / Move lines importer">
-          <footer>
+          <header>
             <button name="import_file"
                     type="object"
                     string="Import file"
@@ -16,8 +16,8 @@
                     attrs="{'invisible': ['|',('state','=','draft'),('state','=','error')]}"
                     string="View imported Moves"
                     class="oe_highlight"/>
-             
-          </footer>
+
+          </header>
           <group>
             <div>
               <field name="state" invisible="1"/>
