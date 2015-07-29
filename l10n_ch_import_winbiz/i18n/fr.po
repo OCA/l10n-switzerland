@@ -19,15 +19,15 @@ msgstr ""
 #: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:62
 #, python-format
 msgid "\n"
-"                 In order to import your 'Winbiz Salaires' .xml                  file you must complete the following requirements : </br>\n"
-"                * The accounts, analytical accounts used in the Cresus                 file must be previously created into Odoo  </br>\n"
-"                * The date of the entry will determine the period used                 in Odoo, so please ensure the period is created already. </br>\n"
-"                </br>"
+"                 In order to import your 'Winbiz Salaires' .xml                  file you must complete the following requirements :                 <ul>\n"
+"                <li> The accounts, analytical accounts used in the Cresus                 file must be previously created into Odoo  </li>\n"
+"                <li> The date of the entry will determine the period used                 in Odoo, so please ensure the period is created already. </li>\n"
+"                </ul>"
 msgstr "\n"
-"Pour importer votre fichier .xml généré par 'Winbiz Salaires', vous devez préalablement vous assurer des points suivants : </br> \n"
-"* Les comptes et comptes analytiques utilisés dans le fichier doivent être préalablement créés dans Odoo.</br>\n"
-"* La date de l'écriture détermine la période comptable dans Odoo ; il faut donc que celle-ci soit bien créée.</br>\n"
-</br>\n"
+"                 Pour importer votre fichier .xml généré par 'Winbiz Salaires', vous devez préalablement vous assurer des points suivants :<ul>\n"
+"                <li>Les comptes et comptes analytiques utilisés dans le fichier doivent être préalablement créés dans Odoo.</li>\n"
+"                <li>La date de l'écriture détermine la période comptable dans Odoo ; il faut donc que celle-ci soit bien créée.</li>\n"
+"                </ul>"
 
 #. module: l10n_ch_import_winbiz
 #: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:100
@@ -121,8 +121,8 @@ msgstr ""
 #: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:150
 #: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:174
 #, python-format
-msgid "Paye"
-msgstr ""
+msgid "Payslip"
+msgstr "Paye"
 
 #. module: l10n_ch_import_winbiz
 #: field:account.winbiz.import,period_id:0

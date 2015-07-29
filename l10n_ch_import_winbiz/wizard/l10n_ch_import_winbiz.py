@@ -23,10 +23,9 @@ import sys
 import traceback
 import logging
 from lxml import etree
-from StringIO import StringIO
-from openerp import models, fields, api
-from openerp.tools.translate import _
 from itertools import izip_longest
+from StringIO import StringIO
+from openerp import models, fields, api, _
 
 _logger = logging.getLogger(__name__)
 
@@ -61,12 +60,13 @@ class AccountWinbizImport(models.TransientModel):
     help_html = fields.Html('Import help', readonly=True,
                             default=_('''
                  In order to import your 'Winbiz Salaires' .xml \
-                 file you must complete the following requirements : </br>
-                * The accounts, analytical accounts used in the Cresus\
-                 file must be previously created into Odoo  </br>
-                * The date of the entry will determine the period used\
-                 in Odoo, so please ensure the period is created already. </br>
-                </br>'''))
+                 file you must complete the following requirements : \
+                <ul>
+                <li> The accounts, analytical accounts used in the Cresus\
+                 file must be previously created into Odoo  </li>
+                <li> The date of the entry will determine the period used\
+                 in Odoo, so please ensure the period is created already. </li>
+                </ul>'''))
 
     HEAD_ODOO = ['ref', 'date', 'period_id', 'journal_id',
                  'line_id/account_id', 'line_id/partner_id', 'line_id/name',
@@ -117,17 +117,17 @@ class AccountWinbizImport(models.TransientModel):
         """
         # Import sucessful
         if not result['messages']:
-            self.state = 'done'
-            self.report = _("Lines imported")
-            self.imported_move_ids = result['ids']
+            self.write({'state': 'done',
+                        'report': _("Lines imported"),
+                        'imported_move_ids': result['ids']})
         else:
-            self.report = self.format_messages(result['messages'])
-            self.state = 'error'
+            self.write({'report': self.format_messages(result['messages']),
+                        'state': 'error'})
 
     @api.multi
     def _standardise_data(self, data):
         """ This function split one line of the XML into multiple lines.
-        Winbiz just write one line per move,
+        Winbiz just writes one line per move.
         """
         new_openerp_data = []
         cp = self.env.user.company_id
@@ -146,7 +146,7 @@ class AccountWinbizImport(models.TransientModel):
                 if (not previous_date) or \
                         previous_date != winbiz_item['st_date1']:
                     default_value.update({'date': winbiz_item['st_date1'],
-                                          'ref': _('Paye'),
+                                          'ref': _('Payslip'),
                                           'journal_id': self.journal_id.name,
                                           'period_id': self.period_id.code
                                           })
@@ -170,7 +170,7 @@ class AccountWinbizImport(models.TransientModel):
                 analytic_code = None
                 analytic_code = winbiz_item['lcanaccount']
                 default_value.update({'line_id/partner_id': company_partner,
-                                      'line_id/name': _('Paye'),
+                                      'line_id/name': _('Payslip'),
                                       'line_id/analytic_account_id':
                                       analytic_code})
                 new_openerp_data.append(default_value)
@@ -180,7 +180,7 @@ class AccountWinbizImport(models.TransientModel):
     def _load_data(self, data):
         """Function that does the load of parsed CSV file.
 
-        If will log exception and susccess into the report fields.
+        It will log exception and susccess into the report fields.
 
         :param data: CSV file content (list of data list)
         """

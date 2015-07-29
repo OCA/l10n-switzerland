@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-27 08:57+0000\n"
-"PO-Revision-Date: 2015-07-27 08:57+0000\n"
+"POT-Creation-Date: 2015-07-29 11:25+0000\n"
+"PO-Revision-Date: 2015-07-29 11:25+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,13 +16,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: l10n_ch_import_winbiz
-#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:62
+#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:61
 #, python-format
 msgid "\n"
-"                 In order to import your 'Winbiz Salaires' .xml                  file you must complete the following requirements : </br>\n"
-"                * The accounts, analytical accounts used in the Cresus                 file must be previously created into Odoo  </br>\n"
-"                * The date of the entry will determine the period used                 in Odoo, so please ensure the period is created already. </br>\n"
-"                </br>"
+"                 In order to import your 'Winbiz Salaires' .xml                  file you must complete the following requirements :                 <ul>\n"
+"                <li> The accounts, analytical accounts used in the Cresus                 file must be previously created into Odoo  </li>\n"
+"                <li> The date of the entry will determine the period used                 in Odoo, so please ensure the period is created already. </li>\n"
+"                </ul>"
 msgstr ""
 
 #. module: l10n_ch_import_winbiz
@@ -114,10 +114,10 @@ msgid "Move / Move lines importer"
 msgstr ""
 
 #. module: l10n_ch_import_winbiz
-#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:150
-#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:174
+#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:149
+#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:173
 #, python-format
-msgid "Paye"
+msgid "Payslip"
 msgstr ""
 
 #. module: l10n_ch_import_winbiz
@@ -137,7 +137,7 @@ msgid "State"
 msgstr ""
 
 #. module: l10n_ch_import_winbiz
-#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:206
+#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:205
 #, python-format
 msgid "Unexpected exception.\n"
 " %s \n"
