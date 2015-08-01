@@ -27,7 +27,7 @@ on l10n_ch_states.
 
 import logging
 
-logger = logging.getLogger('__name__')
+logger = logging.getLogger('upgrade')
 
 
 def migrate(cr, version):
