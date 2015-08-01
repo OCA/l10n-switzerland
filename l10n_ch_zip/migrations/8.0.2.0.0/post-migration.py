@@ -58,8 +58,8 @@ def migrate(cr, version):
             old_state, new_state
         )
 
-        cr.execute("UPDATE res_partner " 
-                   "SET state_id = %s" 
+        cr.execute("UPDATE res_partner "
+                   "SET state_id = %s"
                    "WHERE state_id = %s", (new_state, old_state))
 
         cr.execute("UPDATE res_better_zip "
