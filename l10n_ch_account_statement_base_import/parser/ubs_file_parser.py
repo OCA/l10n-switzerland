@@ -19,6 +19,7 @@
 import datetime
 import logging
 import csv
+import uuid
 from openerp import fields
 from .base_parser import BaseSwissParser
 
@@ -160,7 +161,6 @@ class UBSCSVParser(BaseSwissParser):
         :rtype: list
         """
 
-        id = 0
         transactions = []
         for line in self.datas:
             descriptions = [
@@ -178,11 +178,10 @@ class UBSCSVParser(BaseSwissParser):
                 'amount': amount,
                 'ref': '/',
                 'note': label,
-                'unique_import_id': str(id)
+                'unique_import_id': str(uuid.uuid4())
             }
 
             transactions.append(res)
-            id += 1
 
         return transactions
 
