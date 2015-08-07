@@ -20,10 +20,10 @@ import datetime
 import logging
 import csv
 import re
+import uuid
 from openerp import fields, exceptions, _
 
 from .base_parser import BaseSwissParser
-
 _logger = logging.getLogger(__name__)
 
 
@@ -48,7 +48,6 @@ class RaffaisenCSVParser(BaseSwissParser):
             rows.append(
                 dict([(key, value)
                       for key, value in row.iteritems()]))
-
         self.rows = rows
 
     def ftype(self):
@@ -196,7 +195,6 @@ class RaffaisenCSVParser(BaseSwissParser):
         if result and not line.get('Text').startswith(test):
             ref = result.group(1)
 
-        uid = ref + '-' + str(id)
         date = fields.Date.from_string(line.get("Booked At",
                                                 datetime.date.today()))
         res = {
@@ -204,7 +202,7 @@ class RaffaisenCSVParser(BaseSwissParser):
             'date': line.get("Booked At", date),
             'amount': line.get("Credit/Debit Amount", 0.0),
             'ref': ref,
-            'unique_import_id': uid
+            'unique_import_id': str(uuid.uuid4())
         }
 
         return res

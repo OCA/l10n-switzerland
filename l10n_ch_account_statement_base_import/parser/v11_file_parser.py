@@ -19,6 +19,7 @@
 import datetime
 import time
 import logging
+import uuid
 from openerp import fields
 
 from .base_parser import BaseSwissParser
@@ -161,7 +162,7 @@ class V11Parser(BaseSwissParser):
                 transactions.append({
                     'name': '/',
                     'ref': ref,
-                    'unique_import_id': ref+"-"+str(id),
+                    'unique_import_id': str(uuid.uuid4()),
                     'amount': amount,
                     'date': format_date,
                 })
