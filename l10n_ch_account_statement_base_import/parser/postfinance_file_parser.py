@@ -280,7 +280,10 @@ class XMLPFParser(BaseSwissParser):
                 desc = transaction.xpath("RFF/C506/D_1154/text()")[1]
             att = self.attachments.get(desc)
             if att:
-                attachments.append((desc, att))
+                uid = [x.text for x in transaction.iter()
+                       if (x.prefix == 'PF' and x.tag.endswith('D_4754'))]
+                uid = uid[0] if uid else desc
+                attachments.append((uid, att))
         return attachments
 
     def _parse_statement_date(self, tree):
