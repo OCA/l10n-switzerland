@@ -22,14 +22,35 @@ from openerp import models, api, _, exceptions, fields
 from .parser import base_parser
 
 
-class AccountBankStatement(models.Model):
-    _inherit = 'account.bank.statement'
+class AccountBankStatementLine(models.Model):
+    _inherit = 'account.bank.statement.line'
 
-    related_files = fields.Many2many(
+    related_file = fields.Many2many(
         comodel_name='ir.attachment',
         string='Related files',
         readonly=True
     )
+
+    @api.multi
+    def get_data_for_reconciliations(
+            self, excluded_ids=None, search_reconciliation_proposition=True):
+
+        ret = super(
+            AccountBankStatementLine, self).get_data_for_reconciliations(
+                excluded_ids, search_reconciliation_proposition)
+        id = 0
+        for line in self:
+            ret[id]['st_line']['image_src'] = False
+            if line.related_file:
+                image = "data:" + line.related_file.file_type + ";base64," + \
+                    line.related_file.datas
+                ret[id]['st_line']['image_src'] = ['src', image]
+                ret[id]['st_line']['modal_id'] = [
+                    'id', 'img' + str(line.related_file.id)]
+                ret[id]['st_line']['data_target'] = [
+                    'data-target', '#img' + str(line.related_file.id)]
+            id += 1
+        return ret
 
 
 class account_bank_statement_import(models.TransientModel):
@@ -119,23 +140,21 @@ class account_bank_statement_import(models.TransientModel):
             stmts_vals
         )
         # statements value are sorted list so we received sorted statement_ids
-        index = 0
-        for st_vals in stmts_vals:
-            if 'attachments' in st_vals:
-                statement = self.env['account.bank.statement'].browse(
-                    statement_ids[index]
-                )
-                attachments = self.env['ir.attachment'].browse()
-                for attach in st_vals['attachments']:
-                    attachments += self.env['ir.attachment'].create(
+        for stmt_val in stmts_vals:
+            for attachment in stmt_val['attachments']:
+                statement_line = self.env[
+                    'account.bank.statement.line'].search(
+                        [('name', '=', attachment[0])]
+                    )
+                if statement_line:
+                    attachment = self.env['ir.attachment'].create(
                         {
-                            'name': attach[0],
-                            'res_model': 'account.bank.statement',
-                            'res_id': statement_ids[index],
+                            'name': attachment[0],
+                            'res_model': 'account.bank.statement.line',
+                            'res_id': statement_line.id,
                             'type': 'binary',
-                            'datas': attach[1],
+                            'datas': attachment[1],
                         }
                     )
-                statement.related_files = attachments
-                index += 1
+                    statement_line.related_file = [attachment.id]
         return statement_ids, notifs
