@@ -25,13 +25,14 @@
  'category': 'Finance',
  'complexity': 'normal',
  'depends': [
+     'account',
      'account_bank_statement_import',
  ],
  'external_dependencies': {
      'python': ['xlrd'],
  },
  'website': 'http://www.compassion.ch/',
- 'data': [],
+ 'qweb': ['static/src/xml/l10n_ch_statement_line_layout.xml'],
  'test': [],
  'installable': True,
  'images': [],
