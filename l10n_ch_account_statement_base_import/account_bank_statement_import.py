@@ -40,11 +40,11 @@ class AccountBankStatementLine(models.Model):
                 excluded_ids, search_reconciliation_proposition)
         id = 0
         for line in self:
-            ret[id]['st_line']['image_src'] = False
+            ret[id]['st_line']['img_src'] = False
             if line.related_file:
                 image = "data:" + line.related_file.file_type + ";base64," + \
                     line.related_file.datas
-                ret[id]['st_line']['image_src'] = ['src', image]
+                ret[id]['st_line']['img_src'] = ['src', image]
                 ret[id]['st_line']['modal_id'] = [
                     'id', 'img' + str(line.related_file.id)]
                 ret[id]['st_line']['data_target'] = [

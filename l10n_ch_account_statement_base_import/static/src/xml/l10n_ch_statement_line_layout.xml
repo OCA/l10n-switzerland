@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <templates id="template" xml:space="preserve">
-    
-  <t t-name="bank_statement_reconciliation_line_image">
-    <img t-att="line.image" style="width:400px;height:200px;"/>
-  </t>
-
   <t t-extend="bank_statement_reconciliation_line">
     
     <t t-jquery="span.line_info_button" t-operation="after">
-        <t t-if="line.image_src != false">
+        <t t-if="line.img_src != false">
             <div class="modal fade in" t-att="line.modal_id" role="dialog" data-backdrop="false">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -17,7 +12,7 @@
                     <h4 class="modal-title" id="myModalLabel" align="left">BVR <t t-esc="line.name" /></h4>
                   </div>
                   <div class="modal-body">
-                    <img t-att="line.image_src" class="img-responsive" />
+                    <img t-att="line.img_src" class="img-responsive" />
                   </div>
                 </div>
               </div>
