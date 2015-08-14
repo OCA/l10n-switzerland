@@ -60,6 +60,7 @@ class TestV11import(test_common.TransactionCase):
                 'v11file': base64.encodestring(v11_file.read()),
                 'currency_id': self.env.ref('base.EUR').id,
                 'journal_id': self.env.ref('account.bank_journal').id,
+                'validate_vouchers': True,
                 })
             std_importer = self.env['v11.import.wizard'].create({})
             v11_file.seek(0)
@@ -74,9 +75,5 @@ class TestV11import(test_common.TransactionCase):
                  'cost': 0.0,
                  'reference': '005095000000000000000000013'}
             )
-            action = importer.import_v11()
-            domain = action['domain']
-            voucher_id = domain[0][2][0]
-            voucher = self.env['account.voucher'].browse(voucher_id)
-            voucher.proforma_voucher()
+            importer.import_v11()
             self.assertEqual(invoice.state, 'paid')

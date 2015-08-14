@@ -39,6 +39,9 @@ class BvrImporterWizard(models.TransientModel):
     currency_id = fields.Many2one(
         'res.currency', "Currency", required=True,
         default=_get_default_currency_id)
+    validate_vouchers = fields.Boolean(
+        "Validate vouchers",
+        help="Activate this to automatically validate every created voucher")
 
     def _build_voucher_header(self, partner, record):
         date = record['date'] or fields.Date.today()
@@ -147,6 +150,9 @@ class BvrImporterWizard(models.TransientModel):
                     'res_id': voucher_id,
                 },
             )
+            if self.validate_vouchers:
+                voucher = voucher_obj.browse(voucher_id)
+                voucher.signal_workflow('proforma_voucher')
 
         action_res = self.env['ir.actions.act_window'].for_xml_id(
             'account_voucher', 'action_vendor_receipt')
