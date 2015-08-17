@@ -67,9 +67,9 @@ class CommonSlipReport(models.Model):
             reader = pyPdf.PdfFileReader(current_buff)
             for page in xrange(reader.getNumPages()):
                 writer.addPage(reader.getPage(page))
-            buff = tempfile.mkstemp(
-                suffix='.pdf',
-                prefix='credit_control_slip_merged')[0]
+        buff = tempfile.mkstemp(
+            suffix='.pdf',
+            prefix='credit_control_slip_merged')[0]
         try:
             buff = os.fdopen(buff, 'w+b')
             # The writer close the reader file here
