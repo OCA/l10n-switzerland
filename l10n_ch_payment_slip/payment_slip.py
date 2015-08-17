@@ -23,6 +23,7 @@ import base64
 import StringIO
 import contextlib
 import re
+import textwrap
 from collections import namedtuple
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.pdfbase import pdfmetrics
@@ -547,7 +548,8 @@ class PaymentSlip(models.Model):
         text = canvas.beginText()
         text.setTextOrigin(x, y)
         text.setFont(font.name, font.size)
-        lines = bank.name.split("\n")
+        bank_name = textwrap.fill(bank.name, 26)
+        lines = bank_name.split("\n")
         text.textOut(lines.pop(0))
         text.moveCursor(0.0, font.size)
         for line in lines:
