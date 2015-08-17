@@ -306,7 +306,7 @@ class XMLPFParser(BaseSwissParser):
         """
         tree = etree.fromstring(self.data_file)
         self.currency_code = self._parse_currency_code(tree)
-        self.account_number = self._parse_account_number(tree)
+        self.account_number = None
         statement = {}
         balance_start, balance_stop = self._parse_statement_balance(tree)
         statement['balance_start'] = balance_start
