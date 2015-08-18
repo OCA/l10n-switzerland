@@ -1,8 +1,8 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License: AGPL-3
 
-Module name
-===========
+l10n_ch_import_winbiz
+=====================
 
 This module adds the ability to import salary XML file from Winbiz software (www.winbiz.ch) 
 
