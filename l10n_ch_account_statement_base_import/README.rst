@@ -1,7 +1,7 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License: AGPL-3
 
-Module name
+Swiss bank statements import
 ===========
 
  This module adds several import types to the module
@@ -52,7 +52,7 @@ Contributors
 ------------
 
 * Nicolas Bessi <nicolas.bessi@camptocamp.com>
-* Please Compassion put your email here.
+* Emanuel Cino <ecino@compassion.ch>
 
 Maintainer
 ----------
