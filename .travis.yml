@@ -26,15 +26,13 @@ env:
 
 virtualenv:
   system_site_packages: true
-  
-before_install:
-    - sudo apt-get update -qq
-    - sudo apt-get install -y python-xlrd
 
 install:
   - pip install -q unidecode
   - pip install unicodecsv
+  - pip install xlrd
   - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
+  - git clone https://github.com/OCA/bank-statement-import.git ${HOME}/build/CompassionCH/bank-statement-import -b 8.0
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
 
