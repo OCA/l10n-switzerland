@@ -128,6 +128,7 @@ class account_bank_statement_import(models.TransientModel):
         for parser_class in base_parser.BaseSwissParser.__subclasses__():
             yield parser_class(data_file)
 
+    @api.model
     def _create_bank_statements(self, stmts_vals):
         """Override to support attachement
         in the long run it should be deprecated by
@@ -156,5 +157,5 @@ class account_bank_statement_import(models.TransientModel):
                             'datas': attachment[1],
                         }
                     )
-                    statement_line.related_file = [attachment.id]
+                    statement_line.related_file = attachment
         return statement_ids, notifs

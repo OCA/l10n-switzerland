@@ -20,7 +20,7 @@
 ##############################################################################
 
 {'name': "Swiss bank statements import",
- 'version': '0.4',
+ 'version': '8.0.0.4.0',
  'author': "Compassion CH, Camptocamp,Odoo Community Association (OCA)",
  'category': 'Finance',
  'complexity': 'normal',
