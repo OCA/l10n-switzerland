@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Steve Ferry
+#    Copyright (C) 2015 Compassion CH (http://www.compassion.ch)
+#    Releasing children from poverty in Jesus' name
+#    @author: Steve Ferry
+#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
 #    the Free Software Foundation, either version 3 of the License, or
