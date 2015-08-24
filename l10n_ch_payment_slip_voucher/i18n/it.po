@@ -79,7 +79,7 @@ msgstr "Importo totale del V11"
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,total_cost:0
 msgid "Total cost of V11"
-msgstr "Total cost of V11"
+msgstr "Costo totale del V11"
 
 #. module: l10n_ch_payment_slip_voucher
 #: model:ir.ui.menu,name:l10n_ch_payment_slip_voucher.menu_action_wizard_v11_import
