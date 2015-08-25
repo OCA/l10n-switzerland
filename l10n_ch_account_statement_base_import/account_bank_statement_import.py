@@ -22,6 +22,16 @@ from openerp import models, api, _, exceptions, fields
 from .parser import base_parser
 
 
+class AccountBankStatement(models.Model):
+    _inherit = 'account.bank.statement'
+
+    related_files = fields.Many2many(
+        comodel_name='ir.attachment',
+        string='Related files',
+        readonly=True
+    )
+
+
 class AccountBankStatementLine(models.Model):
     _inherit = 'account.bank.statement.line'
 
@@ -141,21 +151,33 @@ class account_bank_statement_import(models.TransientModel):
             stmts_vals
         )
         # statements value are sorted list so we received sorted statement_ids
+        id = 0
+        stmt_files = self.env['ir.attachment']
         for stmt_val in stmts_vals:
             for attachment in stmt_val['attachments']:
+                att_data = {
+                    'name': attachment[0],
+                    'type': 'binary',
+                    'datas': attachment[1],
+                }
                 statement_line = self.env[
                     'account.bank.statement.line'].search(
                         [('name', '=', attachment[0])]
                     )
                 if statement_line:
-                    attachment = self.env['ir.attachment'].create(
-                        {
-                            'name': attachment[0],
-                            'res_model': 'account.bank.statement.line',
-                            'res_id': statement_line.id,
-                            'type': 'binary',
-                            'datas': attachment[1],
-                        }
-                    )
+                    # Link directly attachement with the right statement line
+                    att_data['res_id'] = statement_line.id
+                    att_data['res_model'] = 'account.bank.statement.line'
+                    attachment = self.env['ir.attachment'].create(att_data)
                     statement_line.related_file = attachment
+                else:
+                    att_data['res_id'] = statement_ids[id]
+                    att_data['res_model'] = 'account.bank.statement'
+                    attachment = self.env['ir.attachment'].create(att_data)
+                    stmt_files |= attachment
+
+            statement = self.env['account.bank.statement'].browse(
+                statement_ids[id])
+            statement.related_files = stmt_files
+            id += 1
         return statement_ids, notifs

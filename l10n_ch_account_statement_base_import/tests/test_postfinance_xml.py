@@ -65,8 +65,8 @@ class PFXMLParserTest(BaseParserTest):
         self.assertEqual(len(statements), 1)
         self.assertTrue(all(isinstance(x, dict) for x in statements))
         statement = statements[0]
-        self.assertTrue(all(isinstance(x, dict)
-                            for x in statement['transactions']))
+        self.assertTrue(
+            all(isinstance(x, dict)for x in statement['transactions']))
         self.assertEqual(372797.79, statement['balance_start'])
         self.assertEqual(372982.55, statement['balance_end_real'])
         self.assertEqual(22, len(statement['transactions']))
@@ -119,7 +119,8 @@ class PostFinanceImportTest(BaseStatementImportTest):
         self.assertEqual(372982.55, statement.balance_end_real)
         self.assertEqual(22, len(statement.line_ids))
         self.assertTrue(statement.account_id)
-        self.assertEqual(3, len(statement.related_files))
+        self.assertEqual(3, len(statement.mapped('line_ids.related_file')) +
+                         len(statement.related_files))
         st_line = statement.line_ids[0]
         # Read common infos of first line
         self.assertEqual(st_line.date, "2011-03-28")
