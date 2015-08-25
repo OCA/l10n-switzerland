@@ -54,9 +54,13 @@ def migrate(cr, version):
         new_state = cr.fetchone()
 
         logger.info(
-            "Updating res_better_zip from id %s to id %s",
+            "Updating state_id from id %s to id %s",
             old_state, new_state
         )
+
+        cr.execute("UPDATE res_partner "
+                   "SET state_id = %s"
+                   "WHERE state_id = %s", (new_state, old_state))
 
         cr.execute("UPDATE res_better_zip "
                    "SET state_id = %s "
@@ -64,6 +68,10 @@ def migrate(cr, version):
 
         cr.execute("DELETE FROM res_country_state "
                    "WHERE id = %s;", (old_state,))
+
+    logger.info(
+        "Delete old states from ir_model_data"
+    )
 
     cr.execute("DELETE FROM ir_model_data "
                "WHERE module = 'l10n_ch_zip' "
