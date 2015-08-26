@@ -139,45 +139,42 @@ class account_bank_statement_import(models.TransientModel):
             yield parser_class(data_file)
 
     @api.model
-    def _create_bank_statements(self, stmts_vals):
+    def _create_bank_statement(self, stmt_vals):
         """Override to support attachement
         in the long run it should be deprecated by
         https://github.com/OCA/bank-statement-import/issues/25
         """
-        statement_ids, notifs = super(
+        statement_id, notifs = super(
             account_bank_statement_import,
             self
-        )._create_bank_statements(
-            stmts_vals
+        )._create_bank_statement(
+            stmt_vals
         )
-        # statements value are sorted list so we received sorted statement_ids
-        id = 0
-        stmt_files = self.env['ir.attachment']
-        for stmt_val in stmts_vals:
-            for attachment in stmt_val['attachments']:
-                att_data = {
-                    'name': attachment[0],
-                    'type': 'binary',
-                    'datas': attachment[1],
-                }
-                statement_line = self.env[
-                    'account.bank.statement.line'].search(
-                        [('name', '=', attachment[0])]
-                    )
-                if statement_line:
-                    # Link directly attachement with the right statement line
-                    att_data['res_id'] = statement_line.id
-                    att_data['res_model'] = 'account.bank.statement.line'
-                    attachment = self.env['ir.attachment'].create(att_data)
-                    statement_line.related_file = attachment
-                else:
-                    att_data['res_id'] = statement_ids[id]
-                    att_data['res_model'] = 'account.bank.statement'
-                    attachment = self.env['ir.attachment'].create(att_data)
-                    stmt_files |= attachment
 
-            statement = self.env['account.bank.statement'].browse(
-                statement_ids[id])
-            statement.related_files = stmt_files
-            id += 1
-        return statement_ids, notifs
+        stmt_files = self.env['ir.attachment']
+        for attachment in stmt_vals['attachments']:
+            att_data = {
+                'name': attachment[0],
+                'type': 'binary',
+                'datas': attachment[1],
+            }
+            statement_line = self.env[
+                'account.bank.statement.line'].search(
+                    [('name', '=', attachment[0])]
+                )
+            if statement_line:
+                # Link directly attachement with the right statement line
+                att_data['res_id'] = statement_line.id
+                att_data['res_model'] = 'account.bank.statement.line'
+                attachment = self.env['ir.attachment'].create(att_data)
+                statement_line.related_file = attachment
+            else:
+                att_data['res_id'] = statement_id
+                att_data['res_model'] = 'account.bank.statement'
+                attachment = self.env['ir.attachment'].create(att_data)
+                stmt_files |= attachment
+
+        statement = self.env['account.bank.statement'].browse(
+            statement_id)
+        statement.related_files = stmt_files
+        return statement_id, notifs
