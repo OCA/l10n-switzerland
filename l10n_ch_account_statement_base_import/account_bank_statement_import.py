@@ -144,6 +144,9 @@ class account_bank_statement_import(models.TransientModel):
         in the long run it should be deprecated by
         https://github.com/OCA/bank-statement-import/issues/25
         """
+        attachments = list(stmt_vals['attachments'])
+        stmt_vals.pop('attachments', None)
+
         statement_id, notifs = super(
             account_bank_statement_import,
             self
@@ -152,7 +155,7 @@ class account_bank_statement_import(models.TransientModel):
         )
 
         stmt_files = self.env['ir.attachment']
-        for attachment in stmt_vals['attachments']:
+        for attachment in attachments:
             att_data = {
                 'name': attachment[0],
                 'type': 'binary',
@@ -166,13 +169,13 @@ class account_bank_statement_import(models.TransientModel):
                 # Link directly attachement with the right statement line
                 att_data['res_id'] = statement_line.id
                 att_data['res_model'] = 'account.bank.statement.line'
-                attachment = self.env['ir.attachment'].create(att_data)
-                statement_line.related_file = attachment
+                att = self.env['ir.attachment'].create(att_data)
+                statement_line.related_file = att
             else:
                 att_data['res_id'] = statement_id
                 att_data['res_model'] = 'account.bank.statement'
-                attachment = self.env['ir.attachment'].create(att_data)
-                stmt_files |= attachment
+                att = self.env['ir.attachment'].create(att_data)
+                stmt_files |= att
 
         statement = self.env['account.bank.statement'].browse(
             statement_id)
