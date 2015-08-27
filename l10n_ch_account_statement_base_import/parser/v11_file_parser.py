@@ -45,6 +45,8 @@ class V11Parser(BaseSwissParser):
 
         super(V11Parser, self).__init__(data_file)
         self.lines = data_file.splitlines()
+        self.balance_end = 0.0
+        self.number_transaction = 0
 
     def ftype(self):
         """Gives the type of file we want to import
@@ -117,7 +119,7 @@ class V11Parser(BaseSwissParser):
 
         return 'CHF'
 
-    def _parse_statement_balance_end(self):
+    def _parse_stmt_balance_num_trans(self):
         """Parse file start and end balance
 
         :return: the file end balance
@@ -125,7 +127,7 @@ class V11Parser(BaseSwissParser):
         """
 
         total_line = self.lines[-1]
-        return (float(total_line[39:51]) / 100)
+        return (float(total_line[39:51])/100), int(total_line[51:63])
 
     def _parse_transactions(self):
         """Parse bank statement lines from file
@@ -178,9 +180,8 @@ class V11Parser(BaseSwissParser):
         :return: Boolean
         """
 
-        total_line = self.lines[-1]
-        transactions = int(total_line[51:63])
-        return (len(self.statements[0]['transactions']) == transactions)
+        return (len(self.statements[0]['transactions']) ==
+                self.number_transaction)
 
     def _parse_statement_date(self):
         """Parse file statement date
@@ -196,12 +197,14 @@ class V11Parser(BaseSwissParser):
         """
 
         self.currency_code = self._parse_currency_code()
+        self.balance_end, self.number_transaction = \
+            self._parse_stmt_balance_num_trans()
         statement = {}
         statement['balance_start'] = 0.0
-        statement['balance_end_real'] = self._parse_statement_balance_end()
         statement['date'] = self._parse_statement_date()
         statement['attachments'] = []
         statement['transactions'] = self._parse_transactions()
+        statement['balance_end_real'] = self.balance_end
 
         self.statements.append(statement)
         return self.validate()
