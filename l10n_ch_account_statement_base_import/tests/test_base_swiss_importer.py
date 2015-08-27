@@ -21,7 +21,7 @@
 from openerp.tests import common
 from ..parser.postfinance_file_parser import XMLPFParser
 from ..parser.g11_file_parser import G11Parser
-from ..parser.raiffeisen_file_parser import RaffaisenCSVParser
+from ..parser.raiffeisen_file_parser import RaffeisenCSVParser
 from ..parser.ubs_file_parser import UBSCSVParser
 from ..parser.v11_file_parser import V11Parser
 
@@ -36,7 +36,7 @@ class BaseSwissImporterTest(common.TransactionCase):
         self.assertTrue(any(isinstance(x, XMLPFParser) for x in parsers))
         self.assertTrue(any(isinstance(x, G11Parser) for x in parsers))
         self.assertTrue(
-            any(isinstance(x, RaffaisenCSVParser) for x in parsers))
+            any(isinstance(x, RaffeisenCSVParser) for x in parsers))
         self.assertTrue(any(isinstance(x, UBSCSVParser) for x in parsers))
         self.assertTrue(any(isinstance(x, V11Parser) for x in parsers))
         # add other parser detection below

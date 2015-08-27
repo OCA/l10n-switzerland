@@ -54,6 +54,7 @@ class G11Parser(BaseSwissParser):
             '06': _("Postal account holder deceased."),
             '07': _("Postal account number non-existent.")
         }
+        self.balance_end = 0.0
 
     def ftype(self):
         """Gives the type of file we want to import
@@ -126,14 +127,13 @@ class G11Parser(BaseSwissParser):
 
         return self.lines[-1][128:131]
 
-    def _parse_statement_balance_end(self):
+    def _parse_statement_balance_end(self, line=None):
         """Parse file start and end balance
 
         :return: the file end balance
         :rtype: float
         """
-
-        total_line = self.lines[-1]
+        total_line = line or self.lines[-1]
         return ((float(total_line[45:57]) / 100) -
                 (float(total_line[101:113]) / 100))
 
@@ -155,7 +155,7 @@ class G11Parser(BaseSwissParser):
         """
 
         transactions = []
-        for line in self.lines:
+        for line in self.lines[:-1]:
             if line[0:3] != '097':
                 ref = line[15:42]
                 currency = line[42:45]
@@ -193,6 +193,8 @@ class G11Parser(BaseSwissParser):
                     'date': transaction_date,
                     'note': note,
                 })
+            else:
+                self.balance_end += self._parse_statement_balance_end(line)
         return transactions
 
     def validate(self):
@@ -224,10 +226,11 @@ class G11Parser(BaseSwissParser):
 
         self.currency_code = self._parse_currency_code()
         statement = {}
+        self.balance_end = self._parse_statement_balance_end()
         statement['balance_start'] = 0.0
-        statement['balance_end_real'] = self._parse_statement_balance_end()
         statement['date'] = self._parse_statement_date()
         statement['attachments'] = []
         statement['transactions'] = self._parse_transactions()
+        statement['balance_end_real'] = self.balance_end
         self.statements.append(statement)
         return self.validate()

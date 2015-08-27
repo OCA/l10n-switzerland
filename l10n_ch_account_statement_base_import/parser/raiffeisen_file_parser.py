@@ -30,20 +30,19 @@ from .base_parser import BaseSwissParser
 _logger = logging.getLogger(__name__)
 
 
-class RaffaisenCSVParser(BaseSwissParser):
+class RaffeisenCSVParser(BaseSwissParser):
     """
     Parser for Raffaisen CSV Statements
     """
 
-    _ftype = 'raffaisen_csv'
+    _ftype = 'raffeisen_csv'
 
     def __init__(self, data_file):
         """Constructor
         Splitting data_file in lines and fill a dict with key - value from the
         csv file
         """
-
-        super(RaffaisenCSVParser, self).__init__(data_file)
+        super(RaffeisenCSVParser, self).__init__(data_file)
         rows = []
         reader = csv.DictReader(self.data_file.splitlines(), delimiter=';')
 
@@ -60,7 +59,7 @@ class RaffaisenCSVParser(BaseSwissParser):
         :rtype: string
         """
 
-        return super(RaffaisenCSVParser, self).ftype()
+        return super(RaffeisenCSVParser, self).ftype()
 
     def get_currency(self):
         """Returns the ISO currency code of the parsed file
@@ -69,7 +68,7 @@ class RaffaisenCSVParser(BaseSwissParser):
         :rtype: string
         """
 
-        return super(RaffaisenCSVParser, self).get_currency()
+        return super(RaffeisenCSVParser, self).get_currency()
 
     def get_account_number(self):
         """Return the account_number related to parsed file
@@ -78,7 +77,7 @@ class RaffaisenCSVParser(BaseSwissParser):
         :rtype: string
         """
 
-        return super(RaffaisenCSVParser, self).get_account_number()
+        return super(RaffeisenCSVParser, self).get_account_number()
 
     def get_statements(self):
         """Return the list of bank statement dict.
@@ -104,7 +103,7 @@ class RaffaisenCSVParser(BaseSwissParser):
         :rtype: list
         """
 
-        return super(RaffaisenCSVParser, self).get_statements()
+        return super(RaffeisenCSVParser, self).get_statements()
 
     def file_is_known(self):
         """Predicate the tells if the parser can parse the data file
