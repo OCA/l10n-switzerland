@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- view of fds_authentication_keys -->
+        <record model="ir.ui.view" id="fds_postfinance_files_form">
+            <field name="name">FDS PostFinance files form</field>
+            <field name="model">fds.postfinance.files</field>
+            <field name="arch" type="xml">
+                <form string="FDS PostFinance files">
+                    <group>
+                       <field name="fds_account_id" />
+                       <field name="bankStatment_id" attrs="{'invisible':[('state', '!=', 'finish')]}"/>
+                       <field name="files" filename="filename" attrs="{'invisible':[('state', '=', 'finish')]}"/>
+                       <field name="filename" attrs="{'invisible':[('state', '!=', 'finish')]}"/>
+                       <field name="directory_id" />
+                       <field name="journal_id" />
+                       <field name="state" />
+                   </group>
+                   <footer>
+                        <button string="Import to Bank Statements" name="import_button" type="object"  class="oe_highlight" icon="gtk-convert" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                        <button name="change2error_button" string="Corrupt file?" type="object" icon="gtk-cancel" confirm="Are you sure you want to do this?" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                        <button name="change2draft_button" string="Cancel corrupt file" type="object" icon="gtk-undo" confirm="Are you sure you want to do this?" attrs="{'invisible': [('state', '!=', 'error')]}"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>
