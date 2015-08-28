@@ -20,26 +20,17 @@
 ##############################################################################
 from openerp import models, api, _, exceptions, fields
 from .parser import base_parser
+import pdb
 
-
-class AccountBankStatement(models.Model):
-    _inherit = 'account.bank.statement'
+class AccountBankStatementLine(models.Model):
+    _inherit = 'account.bank.statement.line'
 
     related_files = fields.Many2many(
         comodel_name='ir.attachment',
         string='Related files',
         readonly=True
     )
-
-
-class AccountBankStatementLine(models.Model):
-    _inherit = 'account.bank.statement.line'
-
-    related_file = fields.Many2many(
-        comodel_name='ir.attachment',
-        string='Related files',
-        readonly=True
-    )
+    file_name = fields.Char(compute='_get_attachment')
 
     @api.multi
     def get_data_for_reconciliations(
@@ -51,16 +42,44 @@ class AccountBankStatementLine(models.Model):
         id = 0
         for line in self:
             ret[id]['st_line']['img_src'] = False
-            if line.related_file:
-                image = "data:" + line.related_file.file_type + ";base64," + \
-                    line.related_file.datas
-                ret[id]['st_line']['img_src'] = ['src', image]
-                ret[id]['st_line']['modal_id'] = [
-                    'id', 'img' + str(line.related_file.id)]
-                ret[id]['st_line']['data_target'] = [
-                    'data-target', '#img' + str(line.related_file.id)]
-            id += 1
+            if line.related_files:
+                for related_file in line.related_files:
+                    image = "data:" + related_file.file_type + ";base64," + \
+                        related_file.datas
+                    ret[id]['st_line']['img_src'] = ['src', image]
+                    ret[id]['st_line']['modal_id'] = [
+                        'id', 'img' + str(related_file.id)]
+                    ret[id]['st_line']['data_target'] = [
+                        'data-target', '#img' + str(related_file.id)]
+                id += 1
         return ret
+
+    @api.one
+    def _get_attachment(self):
+        res = dict()
+        if self.related_files:
+            self.file_name = _('View file')
+        else:
+            self.file_name = ''
+
+    @api.multi
+    def download_attachment(self):
+        self.ensure_one()
+        view_id = self.env['ir.model.data'].get_object_reference(
+            'l10n_ch_account_statement_base_import',
+            'attachement_form_postfinance')[1]
+        for related_file in self.related_files:
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Attachment',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'ir.attachment',
+                'view_id': view_id,
+                'res_id': related_file.id,
+                'target': 'new',
+            }
+        return True
 
 
 class account_bank_statement_import(models.TransientModel):
@@ -154,7 +173,6 @@ class account_bank_statement_import(models.TransientModel):
             stmt_vals
         )
 
-        stmt_files = self.env['ir.attachment']
         for attachment in attachments:
             att_data = {
                 'name': attachment[0],
@@ -170,14 +188,12 @@ class account_bank_statement_import(models.TransientModel):
                 att_data['res_id'] = statement_line.id
                 att_data['res_model'] = 'account.bank.statement.line'
                 att = self.env['ir.attachment'].create(att_data)
-                statement_line.related_file = att
+                statement_line.related_files |= att
             else:
                 att_data['res_id'] = statement_id
                 att_data['res_model'] = 'account.bank.statement'
                 att = self.env['ir.attachment'].create(att_data)
-                stmt_files |= att
 
         statement = self.env['account.bank.statement'].browse(
             statement_id)
-        statement.related_files = stmt_files
         return statement_id, notifs
