@@ -82,8 +82,7 @@ class UBSImportTest(BaseStatementImportTest):
         self.assertEqual(20827.00, statement.balance_end_real)
         self.assertEqual(6, len(statement.line_ids))
         # self.assertTrue(statement.account_id)
-        self.assertEqual(0, len(statement.mapped('line_ids.related_file')) +
-                         len(statement.related_files))
+        self.assertEqual(0, len(statement.mapped('line_ids.related_files')))
         st_line = statement.line_ids[0]
         # Read common infos of second line
         self.assertEqual(st_line.date, "2014-08-06")
