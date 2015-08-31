@@ -159,14 +159,14 @@ If it is not set you have to create it"""
                 _('Account Error'), _('BVR CheckSum Error 4 partie'))
 
         bvr_struct = {
-                'type': bvr_string[0:2],
-                'amount': 0.0,
-                'reference': bvr_string[4:31],
-                'bvrnumber': bvr_string[4:10],
-                'beneficiaire': self._create_bvr_account(bvr_string[33:42]),
-                'domain': 'beneficiaire',
-                'currency': ''
-            }
+            'type': bvr_string[0:2],
+            'amount': 0.0,
+            'reference': bvr_string[4:31],
+            'bvrnumber': bvr_string[4:10],
+            'beneficiaire': self._create_bvr_account(bvr_string[33:42]),
+            'domain': 'beneficiaire',
+            'currency': ''
+        }
 
         return bvr_struct
 
@@ -185,14 +185,14 @@ If it is not set you have to create it"""
                 _('AccountError'), _('BVR CheckSum Error 4 partie'))
 
         bvr_struct = {
-                'type': bvr_string[0:2],
-                'amount': float(bvr_string[2:12])/100,
-                'reference': bvr_string[14:41],
-                'bvrnumber': bvr_string[14:20],
-                'beneficiaire': self._create_bvr_account(bvr_string[43:52]),
-                'domain': 'beneficiaire',
-                'currency': ''
-            }
+            'type': bvr_string[0:2],
+            'amount': float(bvr_string[2:12])/100,
+            'reference': bvr_string[14:41],
+            'bvrnumber': bvr_string[14:20],
+            'beneficiaire': self._create_bvr_account(bvr_string[43:52]),
+            'domain': 'beneficiaire',
+            'currency': ''
+        }
 
         return bvr_struct
 
@@ -202,14 +202,14 @@ If it is not set you have to create it"""
                 _('Account Error'), _('BVR CheckSum Error Première partie'))
 
         bvr_struct = {
-                'type': bvr_string[0:2],
-                'amount': float(bvr_string[2:12])/100,
-                'reference': bvr_string[14:30],
-                'bvrnumber': '',
-                'beneficiaire': self._create_bvr_account(bvr_string[32:41]),
-                'domain': 'beneficiaire',
-                'currency': ''
-            }
+            'type': bvr_string[0:2],
+            'amount': float(bvr_string[2:12])/100,
+            'reference': bvr_string[14:30],
+            'bvrnumber': '',
+            'beneficiaire': self._create_bvr_account(bvr_string[32:41]),
+            'domain': 'beneficiaire',
+            'currency': ''
+        }
 
         return bvr_struct
 
@@ -219,14 +219,14 @@ If it is not set you have to create it"""
                 _('Account Error'), _('BVR CheckSum Error Première partie'))
 
         bvr_struct = {
-                'type': bvr_string[0:2],
-                'amount': float(bvr_string[7:16])/100,
-                'reference': bvr_string[18:33],
-                'bvrnumber': '000000',
-                'beneficiaire': self._create_bvr_account(bvr_string[34:40]),
-                'domain': 'beneficiaire',
-                'currency': ''
-            }
+            'type': bvr_string[0:2],
+            'amount': float(bvr_string[7:16])/100,
+            'reference': bvr_string[18:33],
+            'bvrnumber': '000000',
+            'beneficiaire': self._create_bvr_account(bvr_string[34:40]),
+            'domain': 'beneficiaire',
+            'currency': ''
+        }
 
         return bvr_struct
 
@@ -273,36 +273,36 @@ If it is not set you have to create it"""
             account = account_info.partner_id.property_account_receivable
         add_inv_id = self._get_invoice_address(account_info.partner_id.id)
         curr_invoice = {
-                'name': time.strftime('%Y-%m-%d'),
-                'partner_id': account_info.partner_id.id,
-                'address_invoice_id': add_inv_id,
-                'account_id': account.id,
-                'date_due': date_due,
-                'date_invoice': time.strftime('%Y-%m-%d'),
-                'payment_term': payment_term_id,
-                'reference_type': 'bvr',
-                'reference':  bvr_struct['reference'],
-                'amount_total':  bvr_struct['amount'],
-                'check_total':  bvr_struct['amount'],
-                'partner_bank_id': account_info.id,
-                'comment': '',
-                'currency_id': currency_id,
-                'journal_id':  self.journal_id.id,
-                'type': inv_type,
-            }
+            'name': time.strftime('%Y-%m-%d'),
+            'partner_id': account_info.partner_id.id,
+            'address_invoice_id': add_inv_id,
+            'account_id': account.id,
+            'date_due': date_due,
+            'date_invoice': time.strftime('%Y-%m-%d'),
+            'payment_term': payment_term_id,
+            'reference_type': 'bvr',
+            'reference':  bvr_struct['reference'],
+            'amount_total':  bvr_struct['amount'],
+            'check_total':  bvr_struct['amount'],
+            'partner_bank_id': account_info.id,
+            'comment': '',
+            'currency_id': currency_id,
+            'journal_id':  self.journal_id.id,
+            'type': inv_type,
+        }
 
         last_invoice = self.env['account.invoice'].create(curr_invoice)
         invoices = [last_invoice.id]
 
-        view_name = {
-            'in_invoice': 'account.invoice.supplier.form',
-            'out_invoice': 'account.invoice.form'
-        }[inv_type]
-        cr.execute(
-            'select id,name from ir_ui_view where model=%s and name=%s',
-            ('account.invoice', view_name)
-        )
-        view_res = cr.fetchone()
+#         view_name = {
+#             'in_invoice': 'account.invoice.supplier.form',
+#             'out_invoice': 'account.invoice.form'
+#         }[inv_type]
+#         cr.execute(
+#             'select id,name from ir_ui_view where model=%s and name=%s',
+#             ('account.invoice', view_name)
+#         )
+#         view_res = cr.fetchone()
 
         journal_type = {
             'in_invoice': 'purchase',
