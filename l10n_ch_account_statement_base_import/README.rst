@@ -47,6 +47,7 @@ Contributors
 ------------
 
 * Nicolas Bessi <nicolas.bessi@camptocamp.com>
+* Steve Ferry <steve.ferry1992@gmail.com>
 * Emanuel Cino <ecino@compassion.ch>
 
 Maintainer
