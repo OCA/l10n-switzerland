@@ -10,37 +10,37 @@ msgstr ""
 "POT-Creation-Date: 2015-08-17 12:24+0000\n"
 "PO-Revision-Date: 2015-08-14 09:04+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Italian (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/it/)\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: l10n_ch_payment_slip_voucher
 #: help:v11.import.wizard.voucher,validate_vouchers:0
 msgid "Activate this to automatically validate every created voucher"
-msgstr "Selezionare questo per validare automaticamente ogni voucher"
+msgstr ""
 
 #. module: l10n_ch_payment_slip_voucher
 #: view:v11.import.wizard.voucher:l10n_ch_payment_slip_voucher.v11_import_view
 msgid "Cancel"
-msgstr "Annulla"
+msgstr "Annuler"
 
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,create_uid:0
 msgid "Created by"
-msgstr "Created by"
+msgstr "Créé par"
 
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,create_date:0
 msgid "Created on"
-msgstr "Created on"
+msgstr "Créé le"
 
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,currency_id:0
 msgid "Currency"
-msgstr "Valuta"
+msgstr ""
 
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,id:0
@@ -50,66 +50,66 @@ msgstr "ID"
 #. module: l10n_ch_payment_slip_voucher
 #: view:v11.import.wizard.voucher:l10n_ch_payment_slip_voucher.v11_import_view
 msgid "Import"
-msgstr "Importa"
+msgstr "Importer"
 
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,journal_id:0
 msgid "Journal"
-msgstr "Sezionale"
+msgstr ""
 
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,write_uid:0
 msgid "Last Updated by"
-msgstr "Last Updated by"
+msgstr "Dernière mise à jour par"
 
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,write_date:0
 msgid "Last Updated on"
-msgstr "Last Updated on"
+msgstr "Dernière mise à jour le"
 
 #. module: l10n_ch_payment_slip_voucher
 #: code:addons/l10n_ch_payment_slip_voucher/wizard/bvr_import.py:115
 #, python-format
 msgid "Please select a file first!"
-msgstr "Bisogna prima selezionare un file"
+msgstr "Veuillez choisir un fichier"
 
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,total_amount:0
 msgid "Total amount of V11"
-msgstr "Importo totale del V11"
+msgstr "Montant total du fichier v11"
 
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,total_cost:0
 msgid "Total cost of V11"
-msgstr "Total cost of V11"
+msgstr "Coût total du fichier v11"
 
 #. module: l10n_ch_payment_slip_voucher
 #: model:ir.ui.menu,name:l10n_ch_payment_slip_voucher.menu_action_wizard_v11_import
 msgid "V11 (BVR/ESR) Import"
-msgstr "V11 (BVR/ESR) Import"
+msgstr "Importer le fichier BVR (V11)"
 
 #. module: l10n_ch_payment_slip_voucher
 #: model:ir.actions.act_window,name:l10n_ch_payment_slip_voucher.wizard_v11_import
 msgid "V11 (BVR/ESR) Import into vouchers"
-msgstr "V11 (BVR/ESR) Importazione vouchers"
+msgstr ""
 
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,v11file:0
 msgid "V11 File"
-msgstr "V11 File"
+msgstr "Fichier V11"
 
 #. module: l10n_ch_payment_slip_voucher
 #: code:addons/l10n_ch_payment_slip_voucher/wizard/bvr_import.py:121
 #, python-format
 msgid "V11 file can not be decoded, it contains invalid caracter %s"
-msgstr "Il file V11 non può essere decodificato, contiene il carattere non valido %s"
+msgstr "Le fichier V11 ne peut pas être décodé, il contient un caractère invalide %s."
 
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,validate_vouchers:0
 msgid "Validate vouchers"
-msgstr "Validare i vouchers"
+msgstr ""
 
 #. module: l10n_ch_payment_slip_voucher
 #: view:v11.import.wizard.voucher:l10n_ch_payment_slip_voucher.v11_import_view
 msgid "or"
-msgstr "o"
+msgstr "ou"

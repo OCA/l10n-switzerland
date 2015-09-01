@@ -1,32 +1,36 @@
-# Translation of OpenERP Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* l10n_ch_credit_control_payment_slip_report
-#
+# * l10n_ch_credit_control_payment_slip_report
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 7.0\n"
+"Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-19 10:28+0000\n"
-"PO-Revision-Date: 2014-01-14 17:24+0000\n"
-"Last-Translator: Vincent Renaville@camptocamp <vincent.renaville@camptocamp."
-"com>\n"
-"Language-Team: \n"
-"Language: \n"
+"POT-Creation-Date: 2015-08-17 12:24+0000\n"
+"PO-Revision-Date: 2015-06-17 13:35+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-14 05:59+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: l10n_ch_credit_control_payment_slip_report
-#: model:ir.model,name:l10n_ch_credit_control_payment_slip_report.model_credit_control_line
-msgid "A credit control line"
-msgstr "Une ligne de relance"
+#: field:account.move.line,credit_control_line_ids:0
+msgid "Credit Lines"
+msgstr ""
 
 #. module: l10n_ch_credit_control_payment_slip_report
 #: field:report.slip_from_credit_control,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
+
+#. module: l10n_ch_credit_control_payment_slip_report
+#: model:ir.model,name:l10n_ch_credit_control_payment_slip_report.model_account_move_line
+msgid "Journal Items"
+msgstr "Écritures comptables"
 
 #. module: l10n_ch_credit_control_payment_slip_report
 #: model:ir.model,name:l10n_ch_credit_control_payment_slip_report.model_credit_control_printer
