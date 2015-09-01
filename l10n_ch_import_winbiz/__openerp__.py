@@ -28,6 +28,7 @@
     'author': 'Camptocamp, Odoo Community Association (OCA)',
     'website': 'http://www.camptocamp.com',
     'data': [
+        'security/security.xml',
         'wizard/l10n_ch_import_winbiz_view.xml',
         'menu.xml',
     ],
