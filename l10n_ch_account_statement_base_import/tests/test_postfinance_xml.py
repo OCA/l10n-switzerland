@@ -88,15 +88,12 @@ class PFXMLParserTest(BaseParserTest):
             set(['20110404001203000100002', '20110407001203000200002']),
             set(self.parser.attachments.keys())
         )
-# here you can add more subtle and detailed test
-# for each _parse functions using forged element tree
 
 
 class PostFinanceImportTest(BaseStatementImportTest):
 
     def setUp(self):
         super(PostFinanceImportTest, self).setUp()
-        # self.journal.write({'currency_id': self.company_a.currency_id.id})
         self.env['res.partner.bank'].create(
             {'footer': False,
              'company_id': self.company_a.id,
@@ -106,6 +103,8 @@ class PostFinanceImportTest(BaseStatementImportTest):
              'partner_id': self.company_a.partner_id.id,
              'journal_id': self.journal.id}
         )
+        self.import_wizard_obj = self.import_wizard_obj.with_context(
+            journal_id=self.journal.id)
 
     def test_postfinance_xml_import(self):
         """Test if postfinance statement is correct"""

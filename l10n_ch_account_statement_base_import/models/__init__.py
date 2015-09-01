@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Author: Emanuel Cino
-#    Copyright 2014 Compassion CH
+#    Copyright 2014 Compassion Suisse
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,24 +18,4 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-{'name': "Swiss bank statements import",
- 'version': '8.0.1.0.0',
- 'author': "Compassion CH, Camptocamp,Odoo Community Association (OCA)",
- 'category': 'Finance',
- 'complexity': 'normal',
- 'depends': [
-     'account',
-     'account_bank_statement_import',
- ],
- 'external_dependencies': {
-     'python': ['xlrd'],
- },
- 'website': 'http://www.compassion.ch/',
- 'data': ['views/statement_line_view.xml'],
- 'qweb': ['static/src/xml/l10n_ch_statement_line_layout.xml'],
- 'test': [],
- 'installable': True,
- 'images': [],
- 'auto_install': False,
- 'license': 'AGPL-3'}
+from . import account_bank_statement_import
