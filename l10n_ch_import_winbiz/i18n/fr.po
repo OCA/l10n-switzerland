@@ -37,8 +37,8 @@ msgstr ""
 
 #. module: l10n_ch_import_winbiz
 #: model:ir.ui.menu,name:l10n_ch_import_winbiz.menu_account_winbiz_import
-msgid "Accounting Winbiz Import"
-msgstr "Import Ecritures Winbiz"
+msgid "Winbiz Import"
+msgstr "Import Winbiz"
 
 #. module: l10n_ch_import_winbiz
 #: field:account.winbiz.import,company_id:0

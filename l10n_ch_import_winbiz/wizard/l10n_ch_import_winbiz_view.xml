@@ -2,7 +2,7 @@
 <openerp>
     <data>
     <record id="winbiz_move_line_importer_form" model="ir.ui.view">
-      <field name="name">winbiz move line importer</field>
+      <field name="name">Winbiz move line importer</field>
       <field name="model">account.winbiz.import</field>
       <field name="arch" type="xml">
         <form string="Move / Move lines importer">
@@ -16,7 +16,6 @@
                     attrs="{'invisible': ['|',('state','=','draft'),('state','=','error')]}"
                     string="View imported Moves"
                     class="oe_highlight"/>
-
           </header>
           <group>
             <div>

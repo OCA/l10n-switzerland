@@ -33,11 +33,23 @@ _logger = logging.getLogger(__name__)
 class AccountWinbizImport(models.TransientModel):
     _name = 'account.winbiz.import'
     _description = 'Import Accounting Winbiz'
+    _rec_name = 'state'
+
+    @api.model
+    def _get_previous_period(self):
+        """
+        Get the previous period
+        """
+        date_now = fields.Datetime.now()
+        period_obj = self.env['account.period']
+        return period_obj.search([('date_stop', '<', date_now)],
+                                 order='date_stop desc', limit=1).id
 
     company_id = fields.Many2one('res.company', 'Company',
                                  invisible=True)
     period_id = fields.Many2one('account.period', 'Period',
-                                required=True)
+                                required=True,
+                                default=_get_previous_period)
     report = fields.Text(
         'Report',
         readonly=True
