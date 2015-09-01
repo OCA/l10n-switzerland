@@ -18,5 +18,5 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import parser
-from . import account_bank_statement_import
+from . import parsers
+from . import models

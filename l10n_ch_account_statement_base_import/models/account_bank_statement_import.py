@@ -19,8 +19,8 @@
 #
 ##############################################################################
 from openerp import models, api, _, exceptions, fields
-from .parser import base_parser
-import pdb
+from ..parsers import base_parser
+
 
 class AccountBankStatementLine(models.Model):
     _inherit = 'account.bank.statement.line'
