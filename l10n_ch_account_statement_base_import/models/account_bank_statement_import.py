@@ -56,7 +56,6 @@ class AccountBankStatementLine(models.Model):
 
     @api.one
     def _get_attachment(self):
-        res = dict()
         if self.related_files:
             self.file_name = _('View file')
         else:
@@ -194,6 +193,4 @@ class account_bank_statement_import(models.TransientModel):
                 att_data['res_model'] = 'account.bank.statement'
                 att = self.env['ir.attachment'].create(att_data)
 
-        statement = self.env['account.bank.statement'].browse(
-            statement_id)
         return statement_id, notifs
