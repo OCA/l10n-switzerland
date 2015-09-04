@@ -37,9 +37,10 @@
         'hr_payroll',
         'hr_payroll_account',
         'hr_contract',
-        'hr_attendance'
+        'hr_attendance',
+        'account'
     ],
-    'version': '1.0.8',
+    'version': '1.1',
     'auto_install': False,
     'demo': [],
     'website': 'http://open-net.ch',
@@ -49,6 +50,7 @@
         'data/hr.salary.rule.xml',
         'views/hr_contract_view.xml',
         'views/hr_employee_view.xml',
+        'views/hr_payroll_view.xml',
     ],
     'installable': True
 }

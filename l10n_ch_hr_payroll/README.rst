@@ -65,6 +65,9 @@ V1.0.8:
     * Added: a pre-migration script
     * pre-migration script correctly set
 
+V1.1:
+    * New: commissions and reimbursements management in pay slips and contracts
+
 Contributors
 ------------
 

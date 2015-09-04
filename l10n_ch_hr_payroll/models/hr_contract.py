@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 #
-#  File: hr_contract.py
+#  File: models/hr_contract.py
 #  Module: l10n_ch_hr_payroll
 #
-#  Created by sge@open-net.ch
+#  Created by cyp@open-net.ch
 #
 #  Copyright (c) 2015 Open-Net Ltd.
 ##############################################################################
@@ -27,37 +27,72 @@
 ##############################################################################
 
 
-from openerp.osv import fields, orm
+from openerp import models, fields, api
 import openerp.addons.decimal_precision as dp
 
 import logging
 _logger = logging.getLogger(__name__)
 
 
-class hr_contract(orm.Model):
+class hr_contract(models.Model):
     _inherit = 'hr.contract'
-    _columns = {
-        'lpp_rate': fields.float('LPP Rate',
-                                 digits_compute=dp.get_precision(
-                                     'Payroll Rate')),
-        'lpp_amount': fields.float('LPP Amount',
-                                   digits_compute=dp.get_precision(
-                                       'Account')),
-        'worked_hours': fields.float('Worked Hours'),
-        'hourly_rate': fields.float('Hourly Rate'),
-        'holiday_rate': fields.float('Holiday Rate')
-        }
 
-    def compute_wage(self, cr, uid, id,
-                     worked_hours, hourly_rate,
-                     context=None):
+    # ---------- Fields management
+
+    def _comp_wage_expenses(self):
+        self.reimbursement = 0
+        self.commission = 0
+
+        # Look in linked invoice lines
+        if self.employee_id.user_id:
+            filters = [
+                ('invoice_id.user_id', '=', self.employee_id.user_id.id),
+                ('invoice_id.slip_id', '=', self.id),
+                ('product_id', '!=', False),
+                ('invoice_id.state', '=', 'paid'),
+            ]
+            invl_obj = self.env['account.invoice.line']
+            for invl in invl_obj.search(filters):
+                if invl.product_id.hr_expense_ok:
+                    self.reimbursement += invl.price_subtotal
+                    continue
+                self.commission += invl.price_subtotal
+
+        # Look in linked expenses
+        filters = [
+            ('employee_id', '=', self.employee_id.id),
+            ('slip_id', '=', self.id),
+            ('state', '=', 'done'),
+        ]
+        expenses_obj = self.env['hr.expense.expense']
+        for expense in expenses_obj.search(filters):
+            self.commission += expense.amount
+
+
+    lpp_rate = fields.Float(string='LPP Rate',
+        digits=dp.get_precision('Payroll Rate'))
+    lpp_amount = fields.Float(string='LPP Amount',
+        digits=dp.get_precision('Account'))
+    worked_hours = fields.Float(string='Worked Hours')
+    hourly_rate = fields.Float(string='Hourly Rate')
+    holiday_rate = fields.Float(string='Holiday Rate')
+    reimbursement = fields.Float(string='Reimbursement',
+        compute='_comp_wage_expenses')
+    commission = fields.Float(string='Commission',
+        compute='_comp_wage_expenses')
+    comm_rate = fields.Float(string='Commissions Rate',
+        digits=dp.get_precision('Payroll Rate'))
+
+    # ---------- Utilities
+
+    @api.multi
+    def compute_wage(self, worked_hours, hourly_rate):
         """
-        Compute the wage from worked_hours and hourly_rate.
-        wage = worked_hours * hourly_rate
+            Compute the wage from worked_hours and hourly_rate.
         """
-        res = {'value': {}}
         wage = worked_hours * hourly_rate
-        res['value'] = {
-            'wage': wage,
+
+        res = {
+            'value': { 'wage': wage }
         }
         return res
