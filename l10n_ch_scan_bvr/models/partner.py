@@ -26,14 +26,15 @@
 
 from openerp import models, fields
 
+
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     # ------------------------- Fields management
-    
+
     supplier_invoice_default_product = fields.Many2one(
-            'product.product',
-            string='Default product supplier invoice',
-            help="""Used by the scan BVR wizard. If completed, 
-it'll generate a line with the proper amount and this specified product"""
-        )
+        'product.product',
+        string='Default product supplier invoice',
+        help="""Used by the scan BVR wizard. If completed, it'll generate
+ a line with the proper amount and this specified product"""
+    )

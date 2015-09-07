@@ -29,6 +29,7 @@ from openerp.exceptions import except_orm
 from openerp.tools import mod10r
 import time
 
+
 class WizardScanBvr(models.TransientModel):
     _name = 'scan.bvr'
     _description = 'BVR/ESR Scanning Wizard'
@@ -70,8 +71,9 @@ If set the invoice line will use it automatically."""
     @api.multi
     def do_create_invoice(self):
         for wiz in self:
-            return self._create_invoice(wiz.bvr_string, wiz.product, wiz.account, wiz.journal)
-    
+            return self._create_invoice(
+                wiz.bvr_string, wiz.product, wiz.account, wiz.journal)
+
         return False
 
     @api.multi
@@ -275,7 +277,7 @@ If set the invoice line will use it automatically."""
 
         last_invoice = self.env['account.invoice'].create(curr_invoice)
         invoices = [last_invoice.id]
-        
+
         invoice_line = {
             'name': 'BVR ' + bvr_struct['reference'],
             'invoice_id': last_invoice.id,
@@ -286,21 +288,22 @@ If set the invoice line will use it automatically."""
         if product:
             vals = invl_obj.product_id_change(
                 product.id, product.uom_id.id, qty=1,
-                name='', type=inv_type, partner_id=account_info.partner_id.id, 
+                name='', type=inv_type, partner_id=account_info.partner_id.id,
                 fposition_id=False, price_unit=product.lst_price,
                 currency_id=False, company_id=None)
             if vals.get('value', {}):
                 invoice_line.update(vals['value'])
-                invoice_line['invoice_line_tax_id'] = [(6,0,invoice_line['invoice_line_tax_id'])]
-        invl = invl_obj.create(invoice_line)
+                invoice_line['invoice_line_tax_id'] = \
+                    [(6, 0, invoice_line['invoice_line_tax_id'])]
+        invl_obj.create(invoice_line)
 
         journal_type = {
             'in_invoice': 'purchase',
             'out_invoice': 'sale'
         }[inv_type]
-        
+
         ctx = "{'type':'%s', 'journal_type': '%s'}" % (inv_type, journal_type)
-        
+
         return {
             'domain': "[('id', 'in', ["+','.join(map(str, invoices))+"])]",
             'name': 'Invoices',
