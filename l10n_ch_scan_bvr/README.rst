@@ -7,6 +7,7 @@ Scan BVR for Invoice
 ** Features list :**
     * This module Will work with C-channel or other OCR scanner
     * It will help you to create an invoice directly from the BVR Code, at this time it works with BVR and BVR+
+    * A product may be defined in the supplier's form so that it will be used on the generated invoice line
 
 History
 -------
@@ -17,9 +18,9 @@ V1.x: 2009/Nicolas Bessi and Vincent Renaville (CamptoCamp)
 V1.7: 2013-09-23/Cyp (Open-Net Sarl)
     * Ported to Odoo V7
 
-V1.8: 2015-08-3/Cyp (Open-Net Sarl)
+V1.8: 2015-09-07/Cyp (Open-Net Sarl)
     * Ported to Odoo V8
-    * Code reformatted to comply to OCA's standards
+    * Code reformatted to comply to OCA's standards and to the new API system
 
 Contributors
 ------------

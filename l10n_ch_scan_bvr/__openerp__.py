@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+#
+#  File: __openerp__.py
+#  Module: l10n_ch_scan_bvr
+#
 ##############################################################################
 #
 #    Author: Nicolas Bessi, Vincent Renaville
@@ -19,35 +23,20 @@
 #
 ##############################################################################
 
-{"name": "Switzerland - Scan ESR/BVR to create invoices",
- "description": """
-Scan ESR/BVR to create supplier invoices
-========================================
 
-This module works with C-channel or other OCR scanner.
-
-It helps you to create an invoice directly from the ESR/BVR Code.
-Find the menu entry called "Scan BVR" under Accounting -> Supplier.
-It open a popup from which you can scan the ESR/BVR number.
-It'll recognize the needed information and create an
-invoice for the right supplier.
-
-If you have completed the field "Default product supplier invoice"
-on the concerned supplier,
-it'll create a line with the proper amount and the given product.
-
-It currently supports BVR and BVR+
-
-""",
- "version": "1.0",
- "author": "Camptocamp,Odoo Community Association (OCA)",
- "category": "Generic Modules/Others",
- "website": "http://www.camptocamp.com",
- "license": "AGPL-3",
- "depends": ["l10n_ch",
-             "l10n_ch_payment_slip"],
- "data": ["wizard/scan_bvr_view.xml",
-          "partner_view.xml",
-          "bank_view.xml"],
- 'installable': False
- }
+{
+    'name': 'Switzerland - Scan ESR/BVR to create invoices',
+    'category': 'Accounting',
+    'author': "Open-Net, Camptocamp, Odoo Community Association (OCA)",
+    'depends': ['l10n_ch'],
+    'version': '1.8',
+    'demo': [],
+    'website': 'http://open-net.ch',
+    'license': 'AGPL-3',
+    'data': [
+        'views/partner_view.xml',
+        'wizard/scan_bvr_view.xml',
+    ],
+    'auto_install': False,
+    'installable': True
+}
