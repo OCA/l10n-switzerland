@@ -1,51 +1,53 @@
 # -*- coding: utf-8 -*-
-#
-#  File: __openerp__.py
-#  Module: l10n_ch_scan_bvr
-#
-#  Created by cyp@open-net.ch
-#  Original code by Nicolas Bessi and Vincent Renaville
-#  Copyright (c) 2009 CamptoCamp. All rights reserved.
-#
 ##############################################################################
 #
-# WARNING: This program as such is intended to be used by professional
-# programmers who take the whole responsability of assessing all potential
-# consequences resulting from its eventual inadequacies and bugs
-# End users who are looking for a ready-to-use solution with commercial
-# garantees and support are strongly adviced to contract a Free Software
-# Service Company
+#    Author: Nicolas Bessi, Vincent Renaville
+#    Copyright 2012 Camptocamp SA
 #
-# This program is Free Software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
 #
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
+{"name": "Switzerland - Scan ESR/BVR to create invoices",
+ "description": """
+Scan ESR/BVR to create supplier invoices
+========================================
 
-{
-    'name': 'Scan BVR for Invoice',
-    'summary': "Wizard used to create invoices from BVR's refs",
-    'category': 'Accounting',
-    'author': "Open-Net Sàrl, Odoo Community Association (OCA)",
-    'depends': ['l10n_ch'],
-    'version': '1.8',
-    'demo': [],
-    'website': 'http://open-net.ch',
-    'license': 'AGPL-3',
-    'data': [
-        'wizard/scan_bvr_view.xml',
-    ],
-    'auto_install': False,
-    'installable': True
-}
+This module works with C-channel or other OCR scanner.
+
+It helps you to create an invoice directly from the ESR/BVR Code.
+Find the menu entry called "Scan BVR" under Accounting -> Supplier.
+It open a popup from which you can scan the ESR/BVR number.
+It'll recognize the needed information and create an
+invoice for the right supplier.
+
+If you have completed the field "Default product supplier invoice"
+on the concerned supplier,
+it'll create a line with the proper amount and the given product.
+
+It currently supports BVR and BVR+
+
+""",
+ "version": "1.0",
+ "author": "Camptocamp,Odoo Community Association (OCA)",
+ "category": "Generic Modules/Others",
+ "website": "http://www.camptocamp.com",
+ "license": "AGPL-3",
+ "depends": ["l10n_ch",
+             "l10n_ch_payment_slip"],
+ "data": ["wizard/scan_bvr_view.xml",
+          "partner_view.xml",
+          "bank_view.xml"],
+ 'installable': False
+ }

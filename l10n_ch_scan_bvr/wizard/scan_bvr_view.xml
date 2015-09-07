@@ -1,63 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  File: wizard/scan_bvr_view.xml
-  Module: l10n_ch_scan_bvr
-
-  Created by cyp@open-net.ch
-
-  Copyright (c) 2013-TODAY Open-Net Ltd. All rights reserved.
--->
 <openerp>
-    <data>
+  <data>
 
-        <!-- 
-                The BVR scan wizard
-        -->
-        <record model="ir.ui.view" id="onsp_wiz_scan_bvr_form">
-            <field name="name">Open-Net Wizards: BVR scan</field>
-            <field name="model">onsp.wiz.scan_bvr</field>
-            <field name="arch" type="xml">
-                <form string="Build an invoice from a BVR number" version="7.0">
-                    <group>
-                        <group>
-                            <field name="bvr_string" on_change="on_change_bvr_string(bvr_string)"/>
-                            <field name="journal_id"/>
-                            <field name="currency_id" invisible="1"/>
-                        </group>
-                        <group>
-                            <field name="partner_id" on_change="on_change_partner(partner_id)"/>
-                            <field name="account_id" domain="[('partner_id', '=', partner_id),('state', 'like', 'bvr')]"/>
-                            <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
-                        </group>
-                    </group>
-                    <separator string="" colspan="4"/>
-    				<group col="14" colspan="4">
-                        <label string="" colspan="10"/>
-    					<button special="cancel" string="Cancel" icon="gtk-cancel" colspan="2"/>
-    					<button name="do_create_invoice" string="Validate" type="object" icon="gtk-ok" colspan="2"/>
-    				</group>
-                </form>
-            </field>
-        </record>
-    
-        <!-- 
-                Access to the BVR scan wizard
-        -->
-        <record model="ir.actions.act_window" id="onsp_wiz_scan_bvr_action">
-            <field name="name">BVR scan</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">onsp.wiz.scan_bvr</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">form</field>
-            <field name="view_id" ref="onsp_wiz_scan_bvr_form"/>
-            <field name="target">new</field>
-        </record>
+    <record id="scan_bvr_memory_form" model="ir.ui.view">
+      <field name="name">scan.bvr.memory.form</field>
+      <field name="model">scan.bvr</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="SCAN BVR">
+          <group col="2" colspan="2" >
+            <separator string="Bvr Scanning Result" colspan="2" />
+            <field name="bvr_string" required="1" colspan="2" /> 
+            <separator string="Invoice Journal" colspan="2" />
+            <field name="journal_id" domain="[('type', '=', 'purchase')]" required="1" colspan="2"/>
+          </group>
+          <group col="2" colspan="2" attrs="{'invisible': [('state','!=', 'need_extra_info')]}" >
+            <newline/>
+            <separator string="Partner"  colspan="2" />
+            <field name="partner_id" attrs="{'required': [('state','=', 'need_extra_info')]}" colspan="2"/>
+            <separator string="Partner Bank Account"  colspan="2" />
+            <field name="bank_account_id" colspan="2" attrs="{'required': [('state','=', 'need_extra_info')]}" 
+              domain="[('partner_id','=', partner_id)]"/>
+          </group>
+          <field name="state" readonly="1"/>
+          <group col="2" colspan="2" >
+            <button icon='gtk-cancel' special="cancel" string="Cancel" />
+            <button name="validate_bvr_string" string="Create" colspan="1" type="object" icon="gtk-go-forward" />
+          </group>
+        </form>
+      </field>
+    </record>
 
-        <menuitem icon="STOCK_INDENT" 
-            action="onsp_wiz_scan_bvr_action"
-            id="onsp_wiz_scan_bvr_menu"
-            parent="account.menu_finance_payables"
-            sequence="60"/>
+    <record id="action_scan_bvr" model="ir.actions.act_window">
+      <field name="name">Scan BVR</field>
+      <field name="res_model">scan.bvr</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name='view_id' ref='scan_bvr_memory_form' />
+      <field name="target">new</field>
+    </record>
 
-    </data>
+
+    <menuitem action="action_scan_bvr"
+      id="menu_scan_bvr"
+      parent="account.menu_finance_payables" />
+
+  </data>
 </openerp>
