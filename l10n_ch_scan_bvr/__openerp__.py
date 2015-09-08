@@ -1,11 +1,13 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #
-#  l10n_ch_scan_bvr
+#  File: __openerp__.py
+#  Module: l10n_ch_scan_bvr
 #
-#  Created by Nicolas Bessi and Vincent Renaville
-#
-#  Copyright (c) 2012 CamptoCamp. All rights reserved.
 ##############################################################################
+#
+#    Author: Nicolas Bessi, Vincent Renaville
+#    Copyright 2012 Camptocamp SA
+#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
 #    published by the Free Software Foundation, either version 3 of the
@@ -21,5 +23,20 @@
 #
 ##############################################################################
 
-from . import wizard
-from . import partner
+
+{
+    'name': 'Switzerland - Scan ESR/BVR to create invoices',
+    'category': 'Generic Modules/Others',
+    'author': "Camptocamp, Odoo Community Association (OCA), Open-Net",
+    'depends': ['l10n_ch'],
+    'version': '1.8',
+    'demo': [],
+    'website': 'http://camptocamp.com',
+    'license': 'AGPL-3',
+    'data': [
+        'views/partner_view.xml',
+        'wizard/scan_bvr_view.xml',
+    ],
+    'auto_install': False,
+    'installable': True
+}

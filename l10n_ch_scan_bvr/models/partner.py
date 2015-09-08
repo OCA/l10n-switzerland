@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
+#
+#  File: models/partner.py
+#  Module: l10n_ch_scan_bvr
+#
 ##############################################################################
 #
-#    Author: Nicolas Bessi
+#    Author: Nicolas Bessi, Vincent Renaville
 #    Copyright 2012 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -18,4 +22,19 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import scan_bvr
+
+
+from openerp import models, fields
+
+
+class ResPartner(models.Model):
+    _inherit = 'res.partner'
+
+    # ------------------------- Fields management
+
+    supplier_invoice_default_product = fields.Many2one(
+        'product.product',
+        string='Default product supplier invoice',
+        help="""Used by the scan BVR wizard. If completed, it'll generate
+ a line with the proper amount and this specified product"""
+    )

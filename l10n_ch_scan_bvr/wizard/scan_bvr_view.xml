@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: wizard/scan_bvr_view.xml
+  Module: l10n_ch_scan_bvr
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2013-TODAY Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+
+        <!-- 
+                The BVR scan wizard
+        -->
+        <record model="ir.ui.view" id="wiz_scan_bvr_form">
+            <field name="name">BVR/ESR Scanning Wizard</field>
+            <field name="model">scan.bvr</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Build an invoice from a BVR number" version="7.0">
+                    <group>
+                        <group>
+                            <field name="bvr_string" on_change="on_change_bvr_string(bvr_string)"/>
+                            <field name="journal"/>
+                            <field name="currency" invisible="1"/>
+                            <field name="amount" widget="monetary" options="{'currency_field': 'currency'}" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="partner" on_change="on_change_partner(partner)"/>
+                            <field name="product"/>
+                            <field name="account" domain="[('partner_id', '=', partner),('state', 'like', 'bvr')]"/>
+                        </group>
+                    </group>
+                    <separator string="" colspan="4"/>
+                    <group col="14" colspan="4">
+                        <label string="" colspan="10"/>
+                        
+                    </group>
+                </form>
+                <footer>
+                    <button string="Validate" name="do_create_invoice" type="object" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </field>
+        </record>
+    
+        <!-- 
+                Access to the BVR scan wizard
+        -->
+        <record model="ir.actions.act_window" id="wiz_scan_bvr_action">
+            <field name="name">BVR scan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">scan.bvr</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wiz_scan_bvr_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem icon="STOCK_INDENT" 
+            action="wiz_scan_bvr_action"
+            id="wiz_scan_bvr_menu"
+            parent="account.menu_finance_payables"
+            sequence="60"/>
+
+    </data>
+</openerp>

@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
+#
+#  File: wizard/__init__.py
+#  Module: l10n_ch_scan_bvr
+#
 ##############################################################################
 #
-#    Copyright 2014 Camptocamp SA
+#    Author: Nicolas Bessi, Vincent Renaville
+#    Copyright 2012 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,4 +23,4 @@
 #
 ##############################################################################
 
-from . import test_scan_bvr
+from . import scan_bvr
