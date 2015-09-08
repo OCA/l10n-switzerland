@@ -26,12 +26,12 @@
 
 {
     'name': 'Switzerland - Scan ESR/BVR to create invoices',
-    'category': 'Accounting',
-    'author': "Open-Net, Camptocamp, Odoo Community Association (OCA)",
+    'category': 'Generic Modules/Others',
+    'author': "Camptocamp, Odoo Community Association (OCA), Open-Net",
     'depends': ['l10n_ch'],
     'version': '1.8',
     'demo': [],
-    'website': 'http://open-net.ch',
+    'website': 'http://camptocamp.com',
     'license': 'AGPL-3',
     'data': [
         'views/partner_view.xml',

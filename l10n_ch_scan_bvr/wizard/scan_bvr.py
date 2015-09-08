@@ -85,9 +85,9 @@ If set the invoice line will use it automatically."""
         }
         bvr_struct = self._get_bvr_structurated(bvr_str)
         if bvr_struct:
-            partner_bank_obj = self.env['res.partner.bank']
+            PartnerBank = self.env['res.partner.bank']
             conds = [('acc_number', '=', bvr_struct[bvr_struct['domain']])]
-            for partner_bank in partner_bank_obj.search(conds):
+            for partner_bank in PartnerBank.search(conds):
                 vals = {
                     'partner': partner_bank.partner_id.id,
                     'account': partner_bank.id,
@@ -139,16 +139,16 @@ If set the invoice line will use it automatically."""
     def _construct_bvrplus_in_chf(self, bvr_string):
         if len(bvr_string) != 43:
             raise except_orm(
-                _('Account Error'), _('BVR CheckSum Error Première partie'))
+                _('Error'), _('BVR CheckSum Error, first part'))
         if mod10r(bvr_string[0:2]) != bvr_string[0:3]:
             raise except_orm(
-                _('Account Error'), _('BVR CheckSum Error Deuxième partie'))
+                _('Error'), _('BVR CheckSum Error, second part'))
         if mod10r(bvr_string[4:30]) != bvr_string[4:31]:
             raise except_orm(
-                _('Account Error'), _('BVR CheckSum Error troisème partie'))
+                _('Error'), _('BVR CheckSum Error, third part'))
         if mod10r(bvr_string[33:41]) != bvr_string[33:42]:
             raise except_orm(
-                _('Account Error'), _('BVR CheckSum Error 4 partie'))
+                _('Error'), _('BVR CheckSum Error, fourth part'))
 
         bvr_struct = {
             'type': bvr_string[0:2],
@@ -165,16 +165,16 @@ If set the invoice line will use it automatically."""
     def _construct_bvr_in_chf(self, bvr_string):
         if len(bvr_string) != 53:
             raise except_orm(
-                _('Account Error'), _('BVR CheckSum Error Première partie'))
+                _('Error'), _('BVR CheckSum Error, first part'))
         if mod10r(bvr_string[0:12]) != bvr_string[0:13]:
             raise except_orm(
-                _('AccountError'), _('BVR CheckSum Error Deuxième partie'))
+                _('Error'), _('BVR CheckSum Error, second part'))
         if mod10r(bvr_string[14:40]) != bvr_string[14:41]:
             raise except_orm(
-                _('Account Error'), _('BVR CheckSum Error troisème partie'))
+                _('Error'), _('BVR CheckSum Error, third part'))
         if mod10r(bvr_string[43:51]) != bvr_string[43:52]:
             raise except_orm(
-                _('AccountError'), _('BVR CheckSum Error 4 partie'))
+                _('Error'), _('BVR CheckSum Error, fourth part'))
 
         bvr_struct = {
             'type': bvr_string[0:2],
@@ -191,7 +191,7 @@ If set the invoice line will use it automatically."""
     def _construct_bvr_postal_in_chf(self, bvr_string):
         if len(bvr_string) != 42:
             raise except_orm(
-                _('Account Error'), _('BVR CheckSum Error Première partie'))
+                _('Error'), _('BVR CheckSum Error, first part'))
 
         bvr_struct = {
             'type': bvr_string[0:2],
@@ -208,7 +208,7 @@ If set the invoice line will use it automatically."""
     def _construct_bvr_postal_other_in_chf(self, bvr_string):
         if len(bvr_string) != 41:
             raise except_orm(
-                _('Account Error'), _('BVR CheckSum Error Première partie'))
+                _('Error'), _('BVR CheckSum Error, first part'))
 
         bvr_struct = {
             'type': bvr_string[0:2],
@@ -239,8 +239,8 @@ If set the invoice line will use it automatically."""
             account_info.partner_id.property_payment_term.id or False
         if payment_term_id:
             # We Calculate due_date
-            inv_obj = self.env['account.invoice']
-            res = inv_obj.onchange_payment_term_date_invoice(
+            InvoicesObj = self.env['account.invoice']
+            res = InvoicesObj.onchange_payment_term_date_invoice(
                 payment_term_id, time.strftime('%Y-%m-%d'))
             date_due = res['value']['date_due']
         #
@@ -275,7 +275,7 @@ If set the invoice line will use it automatically."""
             'type': inv_type,
         }
 
-        last_invoice = self.env['account.invoice'].create(curr_invoice)
+        last_invoice = InvoicesObj.create(curr_invoice)
         invoices = [last_invoice.id]
 
         invoice_line = {
@@ -284,9 +284,9 @@ If set the invoice line will use it automatically."""
             'price_unit': bvr_struct['amount'],
             'quantity': 1,
         }
-        invl_obj = self.env['account.invoice.line']
+        InvoicesLinesObj = self.env['account.invoice.line']
         if product:
-            vals = invl_obj.product_id_change(
+            vals = InvoicesLinesObj.product_id_change(
                 product.id, product.uom_id.id, qty=1,
                 name='', type=inv_type, partner_id=account_info.partner_id.id,
                 fposition_id=False, price_unit=product.lst_price,
@@ -295,7 +295,7 @@ If set the invoice line will use it automatically."""
                 invoice_line.update(vals['value'])
                 invoice_line['invoice_line_tax_id'] = \
                     [(6, 0, invoice_line['invoice_line_tax_id'])]
-        invl_obj.create(invoice_line)
+        InvoicesLinesObj.create(invoice_line)
 
         journal_type = {
             'in_invoice': 'purchase',

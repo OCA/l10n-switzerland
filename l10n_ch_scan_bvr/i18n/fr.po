@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: openobject-addons\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2015-08-25 22:50+0000\n"
-"PO-Revision-Date: 2013-08-25 22:50+0000\n"
+"PO-Revision-Date: 2015-09-08 16:57+0000\n"
 "Last-Translator: <cyp@open-net.ch>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,22 +18,39 @@ msgid "BVR string"
 msgstr "Chaîne du BVR"
 
 #. module: l10n_ch_scan_bvr
-#: field:scan.bvr,journal_id:0
+#: help:scan.bvr,bvr_string:0
+msgid "The line at the bottom right of the BVR"
+msgstr "La ligne au fond à droite du BVR"
+
+#. module: l10n_ch_scan_bvr
+#: field:scan.bvr,journal:0
 msgid "Journal"
 msgstr "Journal"
 
 #. module: l10n_ch_scan_bvr
-#: field:scan.bvr,partner_id:0
+#: field:scan.bvr,partner:0
 msgid "Partner"
 msgstr "Partenaire"
 
 #. module: l10n_ch_scan_bvr
-#: field:scan.bvr,account_id:0
+#: help:scan.bvr,partner:0
+msgid "The supplier who send the invoice.\n"
+"If it is not set you have to create it"
+msgstr "Le fournisseur qui envoie la facture.\nLe cas échéant, vous devrez en créer un."
+
+#. module: l10n_ch_scan_bvr
+#: field:scan.bvr,account:0
 msgid "Partner bank account"
 msgstr "Compte financier"
 
 #. module: l10n_ch_scan_bvr
-#: field:scan.bvr,currency_id:0
+#: help:scan.bvr,account:0
+msgid "The bank account of the supplier.\n"
+"If it is not set you have to create it"
+msgstr "Le compte bancaire du fournisseur.\nLe cas échéant, vous devrez en créer un."
+
+#. module: l10n_ch_scan_bvr
+#: field:scan.bvr,currency:0
 msgid "Currency"
 msgstr "Monnaie"
 
@@ -41,6 +58,28 @@ msgstr "Monnaie"
 #: field:scan.bvr,amount:0
 msgid "Amount"
 msgstr "Montant"
+
+#. module: l10n_ch_scan_bvr
+#: field:scan.bvr,product:0
+msgid "Related product"
+msgstr "Produit y relatif"
+
+#. module: l10n_ch_scan_bvr
+#: help:scan.bvr,product:0
+msgid "The product related to the supplier.\"
+"If set the invoice line will use it automatically."
+msgstr "Le produit relatif au fournisseur.\nChoisissez-en un et la ligne de facture le reprendra automatiquement."
+
+#. module: l10n_ch_scan_bvr
+#: field:scan.bvr,supplier_invoice_default_product:0
+msgid "Default product supplier invoice"
+msgstr "Produit par défaut pour facture fournisseur"
+
+#. module: l10n_ch_scan_bvr
+#: help:scan.bvr,supplier_invoice_default_product:0
+msgid "Used by the scan BVR wizard. If completed, it'll generate\"
+" a line with the proper amount and this specified product"
+msgstr "Utilisé par l'assistant 'Scan BVR'.\nChoisissez-en un et la ligne de facture le reprendra automatiquement, avec le bon montant."
 
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:0
@@ -57,3 +96,273 @@ msgstr "Valider"
 #: model:ir.ui.menu,name:ons_productivity_scan_bvr.onsp_wiz_scan_bvr_menu
 msgid "BVR scan"
 msgstr "Scan d'un BVR"
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid "Address Error"
+msgstr "Erreur sur l'adresse"
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid "No Address Assign to this partner"
+msgstr "Aucune adresse assignée à ce partenaire"
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:142
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:142
+#, python-format
+msgid "BVR CheckSum Error, first part"
+msgstr "Erreur de contrôle sur le BVR, première partie"
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:145
+#, python-format
+msgid "BVR CheckSum Error, second part"
+msgstr "Erreur de contrôle sur le BVR, deuxième partie"
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:148
+#, python-format
+msgid "BVR CheckSum Error, third part"
+msgstr "Erreur de contrôle sur le BVR, troisième partie"
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:151
+#, python-format
+msgid "BVR CheckSum Error, fourth part"
+msgstr "Erreur de contrôle sur le BVR, quatrième partie"
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:403
+#, python-format
+msgid "BVR Type error"
+msgstr "Erreur sur le type de BVR"
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:404
+#, python-format
+msgid "This kind of BVR is not supported at this time"
+msgstr "Ce type de BVR n'est actuellement pas supporté"
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/scan_bvr.py:136
+#, python-format
+msgid ""
+msgstr ""
