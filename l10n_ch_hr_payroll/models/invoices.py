@@ -29,11 +29,8 @@
 
 from openerp import models, fields, api
 
-import logging
-_logger = logging.getLogger(__name__)
 
-
-class account_invoice(models.Model):
+class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
     # ---------- Fields management

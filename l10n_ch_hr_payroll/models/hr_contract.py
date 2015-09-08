@@ -34,7 +34,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class hr_contract(models.Model):
+class HrContract(models.Model):
     _inherit = 'hr.contract'
 
     # ---------- Fields management
@@ -50,9 +50,10 @@ class hr_contract(models.Model):
                 ('invoice_id.slip_id', '=', self.id),
                 ('product_id', '!=', False),
                 ('invoice_id.state', '=', 'paid'),
+                ('invoice_id.type', '=', 'out_invoice'),
             ]
-            invl_obj = self.env['account.invoice.line']
-            for invl in invl_obj.search(filters):
+            InvoiceLineObj = self.env['account.invoice.line']
+            for invl in InvoiceLineObj.search(filters):
                 if invl.product_id.hr_expense_ok:
                     self.reimbursement += invl.price_subtotal
                     continue
@@ -62,10 +63,10 @@ class hr_contract(models.Model):
         filters = [
             ('employee_id', '=', self.employee_id.id),
             ('slip_id', '=', self.id),
-            ('state', '=', 'done'),
+            ('state', 'in', ['done','accepted']),
         ]
-        expenses_obj = self.env['hr.expense.expense']
-        for expense in expenses_obj.search(filters):
+        ExpensesObj = self.env['hr.expense.expense']
+        for expense in ExpensesObj.search(filters):
             self.commission += expense.amount
 
 

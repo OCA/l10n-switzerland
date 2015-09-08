@@ -29,11 +29,8 @@
 
 from openerp import models, fields, api
 
-import logging
-_logger = logging.getLogger(__name__)
 
-
-class hr_expense_expense(models.Model):
+class HrExpenseExpense(models.Model):
     _inherit = 'hr.expense.expense'
 
     # ---------- Fields management

@@ -29,11 +29,8 @@
 
 from openerp import models, fields, api
 
-import logging
-_logger = logging.getLogger(__name__)
 
-
-class hr_payslip(models.Model):
+class HrPayslip(models.Model):
     _inherit = 'hr.payslip'
 
     # ---------- Fields management
@@ -51,20 +48,19 @@ class hr_payslip(models.Model):
         slip_ids = [x.id for x in self]
 
         # First, detach invoices from the pay slips
-        inv_obj = self.env['account.invoice']
-        invoices = inv_obj.search([('slip_id', 'in', slip_ids)])
+        InvoiceObj = self.env['account.invoice']
+        invoices = InvoiceObj.search([('slip_id', 'in', slip_ids)])
         if invoices:
             invoices.write({'slip_id':False})
     
         # Second, detach expenses from the pay slips
-        exp_obj = self.env['hr.expense.expense']
-        expenses = exp_obj.search([('slip_id', 'in', slip_ids)])
+        ExpenseObj = self.env['hr.expense.expense']
+        expenses = ExpenseObj.search([('slip_id', 'in', slip_ids)])
         if expenses:
             expenses.write({'slip_id':False})
 
         # Then, re-link the invoices and the expenses using the criterias
-        inv_lines = self.env['account.invoice.line']
-        exp_obj = self.env['hr.expense.expense']
+        InvoiceLineObj = self.env['account.invoice.line']
         for payslip in self:
             # No contract? forget about it
             if not payslip.contract_id:
@@ -84,8 +80,9 @@ class hr_payslip(models.Model):
                 ('invoice_id.slip_id', '=', False),
                 ('product_id', '!=', False),
                 ('invoice_id.state', '=', 'paid'),
+                ('invoice_id.type', '=', 'out_invoice'),
             ]
-            for invl in inv_lines.search(filters):
+            for invl in InvoiceLineObj.search(filters):
                 if invl.invoice_id.id not in inv_ids:
                     inv_ids.append(invl.invoice_id.id)
                     invl.invoice_id.write({'slip_id': payslip.id})
@@ -95,10 +92,10 @@ class hr_payslip(models.Model):
             filters = [
                 ('employee_id', '=', employee_id),
                 ('slip_id', '=', False),
-                ('state', '=', 'done'),
+                ('state', '=', ['done','accepted']),
             ]
-            expenses = exp_obj.search(filters)
+            expenses = ExpenseObj.search(filters)
             if expenses:
                 expenses.write({'slip_id': payslip.id})
 
-        return super(hr_payslip, self).compute_sheet()
+        return super(HrPayslip, self).compute_sheet()
