@@ -33,7 +33,7 @@ class invoice(models.Model):
 
     @api.multi
     def cancel_payment_lines(self):
-        ''' This function simply find related payment lines and move them
+        ''' This function simply finds related payment lines and move them
             in a new payment order.
         '''
         mov_line_obj = self.env['account.move.line']
