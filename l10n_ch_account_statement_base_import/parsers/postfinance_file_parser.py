@@ -171,7 +171,7 @@ class XMLPFParser(BaseSwissParser):
         if not account_node:
             return
         if len(account_node) != 1:
-            raise ValueError('Many account found for postfinance statement')
+            raise ValueError('Many accounts found for postfinance statement')
         return account_node[0]
 
     def _parse_currency_code(self, tree):
