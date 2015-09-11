@@ -72,8 +72,8 @@ class XMLPFParser(BaseSwissParser):
             return data_file
 
     def _get_attachments_from_stream(self, data_file):
-        """Retrive attachment from tar file.
-        Return a dict containing all attachment ready to be saved
+        """Retrieve attachment from tar file.
+        Return a dict containing all attachments ready to be saved
         in Odoo.
 
         The key is the name of file without extention
