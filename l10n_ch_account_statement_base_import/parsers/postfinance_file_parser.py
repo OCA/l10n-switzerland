@@ -79,7 +79,7 @@ class XMLPFParser(BaseSwissParser):
         The key is the name of file without extension
         The value the PNG content encoded in base64
 
-        :param data_file: raw statement file sent to openerp (not in b64)
+        :param data_file: raw statement file sent to odoo (not in b64)
         :type data_file: basestring subclass
 
         :return: Return a dict containing all attachment ready
