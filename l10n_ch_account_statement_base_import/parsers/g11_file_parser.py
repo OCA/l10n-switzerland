@@ -216,8 +216,7 @@ class G11Parser(BaseSwissParser):
         :return: A date usable by Odoo in write or create dict
         """
 
-        date = datetime.date.today()
-        return fields.Date.to_string(date)
+        return fields.Date.today()
 
     def _parse(self):
         """
