@@ -498,7 +498,7 @@ msgid ""
 "Stop kidding... max authorized amount is CHF 99 999 999.99 (%.2f %s given "
 "for ref %s)"
 msgstr ""
-"Le montant maximum autorisé est CHF 99'999'999.99 (%.2f %s donné pour la la "
+"Le montant maximum autorisé est CHF 99'999'999.99 (%.2f %s donné pour la "
 "ligne portant la référence %s)"
 
 #. module: l10n_ch_lsv_dd
