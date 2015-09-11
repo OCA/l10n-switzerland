@@ -295,8 +295,7 @@ class XMLPFParser(BaseSwissParser):
         :rtype: string
         """
         # I was not able to find a correct segment group to extract the date
-        date = datetime.date.today()
-        return fields.Date.to_string(date)
+        return fields.Date.today()
 
     def _parse(self):
         """
