@@ -68,7 +68,7 @@ msgstr "Créer"
 #: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:82
 #, python-format
 msgid "No payment order selected"
-msgstr "Aucune ordre de payment sélectionné"
+msgstr "Aucun ordre de payment sélectionné"
 
 #. module: l10n_ch_lsv_dd
 #: view:payment.order:0
