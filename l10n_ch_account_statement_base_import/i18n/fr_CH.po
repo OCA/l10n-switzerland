@@ -110,7 +110,7 @@ msgid ""
 "The transactions you are importing are not in the same currency than the "
 "selected journal !"
 msgstr ""
-"Les transaction importées n'ont pas la même devise que celle du journal "
+"Les transactions importées n'ont pas la même devise que celle du journal "
 "sélectionné !"
 
 #. module: l10n_ch_account_statement_base_import
