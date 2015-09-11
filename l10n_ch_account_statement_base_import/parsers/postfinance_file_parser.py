@@ -76,7 +76,7 @@ class XMLPFParser(BaseSwissParser):
         Return a dict containing all attachments ready to be saved
         in Odoo.
 
-        The key is the name of file without extention
+        The key is the name of file without extension
         The value the PNG content encoded in base64
 
         :param data_file: raw statement file sent to openerp (not in b64)
