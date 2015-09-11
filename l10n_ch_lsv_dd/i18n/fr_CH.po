@@ -68,7 +68,7 @@ msgstr "Créer"
 #: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:82
 #, python-format
 msgid "No payment order selected"
-msgstr "Aucune ordre de payment sélectionné"
+msgstr "Aucun ordre de paiement sélectionné"
 
 #. module: l10n_ch_lsv_dd
 #: view:payment.order:0
@@ -498,7 +498,7 @@ msgid ""
 "Stop kidding... max authorized amount is CHF 99 999 999.99 (%.2f %s given "
 "for ref %s)"
 msgstr ""
-"Le montant maximum autorisé est CHF 99'999'999.99 (%.2f %s donné pour la la "
+"Le montant maximum autorisé est CHF 99'999'999.99 (%.2f %s donné pour la "
 "ligne portant la référence %s)"
 
 #. module: l10n_ch_lsv_dd
