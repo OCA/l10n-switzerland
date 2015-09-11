@@ -82,7 +82,7 @@ class XMLPFParser(BaseSwissParser):
         :param data_file: raw statement file sent to odoo (not in b64)
         :type data_file: basestring subclass
 
-        :return: Return a dict containing all attachment ready
+        :return: Return a dict containing all attachments ready
         to be saved in Odoo.
         """
         pf_file = StringIO(data_file)
@@ -265,11 +265,11 @@ class XMLPFParser(BaseSwissParser):
         return transactions
 
     def _parse_attachments(self, tree):
-        """Parse file statement to get wich attachement to use
+        """Parse file statement to get wich attachment to use
         :param tree: lxml element tree instance
         :type tree: :py:class:`lxml.etree.element.Element`
 
-        :return: a list of attachement tuple (name, content)
+        :return: a list of attachment tuple (name, content)
         :rtype: list
         """
         attachments = [('xml statment', self.data_file.encode('base64'))]
