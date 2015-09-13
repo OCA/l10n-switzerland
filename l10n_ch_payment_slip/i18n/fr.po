@@ -3,13 +3,14 @@
 # * l10n_ch_payment_slip
 # 
 # Translators:
+# Guewen Baconnier <guewen.baconnier@camptocamp.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-17 12:24+0000\n"
-"PO-Revision-Date: 2015-06-29 18:03+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"PO-Revision-Date: 2015-09-02 07:38+0000\n"
+"Last-Translator: Guewen Baconnier <guewen.baconnier@camptocamp.com>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -198,7 +199,7 @@ msgstr "BVR ouverts"
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_payment_line
 msgid "Payment Line"
-msgstr ""
+msgstr "Ligne de paiement"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.actions.act_window,name:l10n_ch_payment_slip.action_slip_all
@@ -287,7 +288,7 @@ msgstr "Rapport"
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:209
 #, python-format
 msgid "Too many receivable/payable lines for reference %s"
-msgstr ""
+msgstr "Trop de lignes débiteurs & créditeurs pour la référence %s"
 
 #. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:156
