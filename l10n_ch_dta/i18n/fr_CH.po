@@ -3,26 +3,25 @@
 # * l10n_ch_dta
 # 
 # Translators:
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-04 14:41+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Italian (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/it/)\n"
+"Last-Translator: <>\n"
+"Language-Team: French (Switzerland) (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/fr_CH/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fr_CH\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:553
 #, python-format
 msgid "No payment mode"
-msgstr "Nessuna modalità di pagamento"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:624
@@ -46,7 +45,7 @@ msgstr ""
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:594
 #, python-format
 msgid "No IBAN for the company bank account."
-msgstr "Numero IBAN per il conto bancario aziendale"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:564
@@ -73,7 +72,7 @@ msgstr ""
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:559
 #, python-format
 msgid "No bank account for the company."
-msgstr "Nesun conto bancario aziendale"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:171
@@ -87,7 +86,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: view:create.dta.wizard:0
 msgid "DTA Generation"
-msgstr "Generare DTA"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: view:res.partner.bank:0
@@ -97,7 +96,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: field:payment.order,dta_ids:0
 msgid "unknown"
-msgstr "Sconosciuto"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: model:ir.model,name:l10n_ch_dta.model_create_dta_wizard
@@ -139,7 +138,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: model:ir.model,name:l10n_ch_dta.model_payment_order
 msgid "Payment Order"
-msgstr "Ordine di Pagamento"
+msgstr "Ordre de Paiement"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:301
@@ -209,7 +208,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: model:ir.model,name:l10n_ch_dta.model_res_partner_bank
 msgid "Bank Accounts"
-msgstr ""
+msgstr "Comptes bancaires"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:283
@@ -246,4 +245,4 @@ msgstr ""
 #. module: l10n_ch_dta
 #: view:create.dta.wizard:0
 msgid "Cancel"
-msgstr "Annulla"
+msgstr "Annuler"

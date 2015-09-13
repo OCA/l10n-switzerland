@@ -10,58 +10,58 @@ msgstr ""
 "POT-Creation-Date: 2015-09-04 14:41+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/fr/)\n"
+"Language-Team: English (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/en/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_credit_control_payment_slip_report
 #: code:addons/l10n_ch_credit_control_payment_slip_report/credit_control_communication.py:57
 #, python-format
 msgid "BVR only support CHF currency"
-msgstr ""
+msgstr "BVR only support CHF currency"
 
 #. module: l10n_ch_credit_control_payment_slip_report
 #: code:addons/l10n_ch_credit_control_payment_slip_report/credit_control_printer.py:41
 #, python-format
 msgid "No credit control lines selected."
-msgstr "Pas de lignes de relances sélectionnées"
+msgstr "No credit control lines selected."
 
 #. module: l10n_ch_credit_control_payment_slip_report
 #: code:addons/l10n_ch_credit_control_payment_slip_report/credit_control_communication.py:56
 #, python-format
 msgid "ERROR"
-msgstr ""
+msgstr "ERROR"
 
 #. module: l10n_ch_credit_control_payment_slip_report
 #: view:credit.control.printer:0
 msgid "Print BVR"
-msgstr "Imprimer BVR"
+msgstr "Print BVR"
 
 #. module: l10n_ch_credit_control_payment_slip_report
 #: model:ir.model,name:l10n_ch_credit_control_payment_slip_report.model_credit_control_printer
 msgid "Mass printer"
-msgstr "Impression en masse"
+msgstr "Mass printer"
 
 #. module: l10n_ch_credit_control_payment_slip_report
 #: model:ir.actions.report.xml,name:l10n_ch_credit_control_payment_slip_report.report_bvr_html_multi_credit_control
 msgid "BVR/ESR multiple Credit control"
-msgstr "BVR/ESR multiple relance"
+msgstr "BVR/ESR multiple Credit control"
 
 #. module: l10n_ch_credit_control_payment_slip_report
 #: code:addons/l10n_ch_credit_control_payment_slip_report/credit_control_printer.py:40
 #, python-format
 msgid "Error"
-msgstr "Erreur"
+msgstr "Error"
 
 #. module: l10n_ch_credit_control_payment_slip_report
 #: model:ir.model,name:l10n_ch_credit_control_payment_slip_report.model_account_move_line
 msgid "Journal Items"
-msgstr ""
+msgstr "Journal Items"
 
 #. module: l10n_ch_credit_control_payment_slip_report
 #: model:ir.model,name:l10n_ch_credit_control_payment_slip_report.model_credit_control_communication
 msgid "credit control communication"
-msgstr "Communication de relance"
+msgstr "credit control communication"

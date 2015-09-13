@@ -1,0 +1,34 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# * l10n_ch_payment_slip_account_statement_base_completion
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: l10n-switzerland (7.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-04 14:41+0000\n"
+"PO-Revision-Date: 2015-09-04 14:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: l10n_ch_payment_slip_account_statement_base_completion
+#: code:addons/l10n_ch_payment_slip_account_statement_base_completion/statement.py:86
+#, python-format
+msgid "Line named \"%s\" (Ref:%s) was matched by more than one partner."
+msgstr ""
+
+#. module: l10n_ch_payment_slip_account_statement_base_completion
+#: model:ir.model,name:l10n_ch_payment_slip_account_statement_base_completion.model_bvr_import_wizard
+msgid "bvr.import.wizard"
+msgstr "bvr.import.wizard"
+
+#. module: l10n_ch_payment_slip_account_statement_base_completion
+#: model:ir.model,name:l10n_ch_payment_slip_account_statement_base_completion.model_account_statement_completion_rule
+msgid "account.statement.completion.rule"
+msgstr ""

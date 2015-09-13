@@ -10,12 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2015-09-04 14:41+0000\n"
 "PO-Revision-Date: 2015-09-04 14:41+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: French (Switzerland) (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/fr_CH/)\n"
+"Language-Team: English (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/en/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr_CH\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/v11_file_parser.py:44
@@ -23,19 +23,19 @@ msgstr ""
 msgid ""
 "Invalid file type %s. Please use v11,                              esr or "
 "bvr"
-msgstr ""
+msgstr "Invalid file type %s. Please use v11,                              esr or bvr"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/g11_file_parser.py:32
 #, python-format
 msgid "Postal account closed."
-msgstr "Compte postal supprimé"
+msgstr "Postal account closed."
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/postfinance_file_parser.py:51
 #, python-format
 msgid "Invalid file type %s. Please use xml or gz"
-msgstr "Type de fichier invalide (%s). Seuls les fichiers .xml ou .gz sont admis."
+msgstr "Invalid file type %s. Please use xml or gz"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/statement.py:69
@@ -44,7 +44,7 @@ msgid ""
 "The transactions you are importing                                      are "
 "not in the same currency than the                                      "
 "selected journal !"
-msgstr ""
+msgstr "The transactions you are importing                                      are not in the same currency than the                                      selected journal !"
 
 #. module: l10n_ch_account_statement_base_import
 #: field:account.bank.statement.line,file_name:0
@@ -52,37 +52,37 @@ msgstr ""
 #: code:addons/l10n_ch_account_statement_base_import/statement.py:172
 #, python-format
 msgid "Attachment"
-msgstr ""
+msgstr "Attachment"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/g11_file_parser.py:149
 #, python-format
 msgid "Invalid number of transactions"
-msgstr "Nombre de transactions incorrect."
+msgstr "Invalid number of transactions"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/g11_file_parser.py:35
 #, python-format
 msgid "Postal account number non-existent."
-msgstr "Le numéro du compte postal n'existe pas."
+msgstr "Postal account number non-existent."
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/g11_file_parser.py:31
 #, python-format
 msgid "Debtor’s account number and address do not match."
-msgstr "Le compte postal du débiteur ne concorde pas avec l'adresse du débiteur."
+msgstr "Debtor’s account number and address do not match."
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/v11_file_parser.py:135
 #, python-format
 msgid "Invalid data"
-msgstr "Données invalides."
+msgstr "Invalid data"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/raiffeisen_file_parser.py:247
 #, python-format
 msgid "Unable to parse amount for ligne %s"
-msgstr ""
+msgstr "Unable to parse amount for ligne %s"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/g11_file_parser.py:78
@@ -90,19 +90,19 @@ msgstr ""
 msgid ""
 "The total record could not be read.                              Please "
 "provide a valid g11 file."
-msgstr ""
+msgstr "The total record could not be read.                              Please provide a valid g11 file."
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/g11_file_parser.py:77
 #, python-format
 msgid "Wrong formatting"
-msgstr "Formattage incorrect."
+msgstr "Wrong formatting"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/statement.py:94
 #, python-format
 msgid "Warning"
-msgstr ""
+msgstr "Warning"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/g11_file_parser.py:48
@@ -111,88 +111,88 @@ msgstr ""
 #: code:addons/l10n_ch_account_statement_base_import/parser/v11_file_parser.py:85
 #, python-format
 msgid "User Error"
-msgstr "Erreur Utilisateur"
+msgstr "User Error"
 
 #. module: l10n_ch_account_statement_base_import
 #: model:ir.model,name:l10n_ch_account_statement_base_import.model_account_statement_profile
 msgid "Statement Profile"
-msgstr "Profil du relevé bancaire"
+msgstr "Statement Profile"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/g11_file_parser.py:29
 #, python-format
 msgid "Insufficient cover funds."
-msgstr "Pas de couverture."
+msgstr "Insufficient cover funds."
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/g11_file_parser.py:34
 #, python-format
 msgid "Postal account holder deceased."
-msgstr "Titulaire du compte décédé."
+msgstr "Postal account holder deceased."
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/statement.py:68
 #, python-format
 msgid "Wrong currency"
-msgstr "Mauvaise devise"
+msgstr "Wrong currency"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/statement.py:165
 #, python-format
 msgid "View file"
-msgstr ""
+msgstr "View file"
 
 #. module: l10n_ch_account_statement_base_import
 #: field:account.bank.statement,checksum:0
 #: code:addons/l10n_ch_account_statement_base_import/statement.py:36
 #, python-format
 msgid "Checksum"
-msgstr ""
+msgstr "Checksum"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/g11_file_parser.py:30
 #, python-format
 msgid "Debtor protestation."
-msgstr "Révocation par le débiteur."
+msgstr "Debtor protestation."
 
 #. module: l10n_ch_account_statement_base_import
 #: model:ir.model,name:l10n_ch_account_statement_base_import.model_account_bank_statement_line
 msgid "Bank Statement Line"
-msgstr ""
+msgstr "Bank Statement Line"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/g11_file_parser.py:33
 #, python-format
 msgid "Postal account blocked/frozen."
-msgstr "Compte postal bloqué."
+msgstr "Postal account blocked/frozen."
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/g11_file_parser.py:118
 #, python-format
 msgid "-- Test transaction --"
-msgstr "-- Transaction de test --"
+msgstr "-- Test transaction --"
 
 #. module: l10n_ch_account_statement_base_import
 #: view:ir.attachment:0
 msgid "Attachments"
-msgstr ""
+msgstr "Attachments"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/g11_file_parser.py:111
 #, python-format
 msgid "Amount to debit was %s %f"
-msgstr "Le montant à débiter était de %s %f."
+msgstr "Amount to debit was %s %f"
 
 #. module: l10n_ch_account_statement_base_import
 #: model:ir.model,name:l10n_ch_account_statement_base_import.model_account_bank_statement
 msgid "Bank Statement"
-msgstr ""
+msgstr "Bank Statement"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/statement.py:95
 #, python-format
 msgid "Bank statement already imported on %s"
-msgstr ""
+msgstr "Bank statement already imported on %s"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/v11_file_parser.py:86
@@ -200,7 +200,7 @@ msgstr ""
 msgid ""
 "Invalid file. Please use a valid v11,                              esr or "
 "bvr file."
-msgstr ""
+msgstr "Invalid file. Please use a valid v11,                              esr or bvr file."
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/v11_file_parser.py:136
@@ -208,13 +208,13 @@ msgstr ""
 msgid ""
 "The number of read transactions doesn't match the"
 "                                  total records in file"
-msgstr ""
+msgstr "The number of read transactions doesn't match the                                  total records in file"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/g11_file_parser.py:49
 #, python-format
 msgid "Invalid file type %s. Please use g11"
-msgstr "Type de fichier invalide (%s). Seuls les fichiers .g11 sont admis."
+msgstr "Invalid file type %s. Please use g11"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/g11_file_parser.py:150
@@ -222,4 +222,4 @@ msgstr "Type de fichier invalide (%s). Seuls les fichiers .g11 sont admis."
 msgid ""
 "The number of transactions read is not                              the same"
 " as the one provided in the                              total record."
-msgstr ""
+msgstr "The number of transactions read is not                              the same as the one provided in the                              total record."
