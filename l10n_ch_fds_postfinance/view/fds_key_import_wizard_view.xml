@@ -26,7 +26,7 @@
                         </page>
                     </notebook>
                 </group>
-                <group states="generate,finish">
+                <group states="generate,done">
                     <field name="user_name" />
                     <field name="public_key" filename="pub_filename" />
                     <field name="pub_filename" invisible="True"/>
@@ -38,8 +38,8 @@
                     <button string="Cancel" special="cancel" icon="gtk-cancel" states="default" />
                     <button string="Validate" name="confirm_keys_button" type="object" icon="gtk-apply" states="generate" />
                     <button string="Cancel" name="cancel_keys_button" type="object"  icon="gtk-cancel" states="generate" />
-                    <button string="Close" class="oe_highlightoe_link" special="cancel" icon="gtk-close" states="finish" />
-                    <button string="Send to Postfinance" name="send_keys_button" type="object" icon="gtk-go-forward" states="finish" />
+                    <button string="Close" class="oe_highlightoe_link" special="cancel" icon="gtk-close" states="done" />
+                    <button string="Send to Postfinance" name="send_keys_button" type="object" icon="gtk-go-forward" states="done" />
                 </footer>
             </form>
         </field>

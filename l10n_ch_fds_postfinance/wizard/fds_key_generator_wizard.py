@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Swiss Postfinance File Delivery Services module for Odoo
-#    Copyright (C) 2014 Compassion CH
+#    Copyright (C) 2015 Compassion CH
 #    @author: Nicolas Tran
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, exceptions
+from openerp import models, fields, api, exceptions, _
 import logging
 import base64
 
@@ -39,7 +39,7 @@ class fds_key_generator_wizard(models.TransientModel):
 
     user_id = fields.Many2one(
         comodel_name='res.users',
-        string='Employee',
+        string='User',
         required=True,
         help='assign the key to the user selected'
     )
@@ -50,7 +50,6 @@ class fds_key_generator_wizard(models.TransientModel):
         help='[info] keep one recored of the model fds_authentication_key'
     )
     user_name = fields.Char(
-        string='Employee',
         related='fds_authentication_keys_id.user_id.name',
         readonly=True,
         help='user previously selected'
@@ -82,7 +81,7 @@ class fds_key_generator_wizard(models.TransientModel):
     state = fields.Selection(
         selection=[('default', 'Default'),
                    ('generate', 'Generate'),
-                   ('finish', 'Finish')],
+                   ('done', 'Done')],
         readonly=True,
         default='default',
         help='[Info] keep state of the wizard'
@@ -115,7 +114,7 @@ class fds_key_generator_wizard(models.TransientModel):
             :returns action: configuration for the next wizard's view
         '''
         self.ensure_one()
-        self._state_finish_on()
+        self._state_done_on()
         return self._do_populate_tasks()
 
     @api.multi
@@ -139,8 +138,9 @@ class fds_key_generator_wizard(models.TransientModel):
         ############################
         # [TODO]
         # implement function to send
-        raise exceptions.Warning('Not implemented yet, download public key ' +
-                                 'and send the email to postfinance manually.')
+        raise exceptions.Warning(
+            _('Not implemented yet, download public key and send the email to'
+              ' postfinance manually.'))
 
     ##############################
     #          function          #
@@ -227,17 +227,15 @@ class fds_key_generator_wizard(models.TransientModel):
 
             :returns: None
         '''
-        self.ensure_one()
-        self.write({'state': 'generate'})
+        self.state = 'generate'
 
     @api.multi
-    def _state_finish_on(self):
-        ''' private function that change state to finish
+    def _state_done_on(self):
+        ''' private function that change state to done
 
             :returns: None
         '''
-        self.ensure_one()
-        self.write({'state': 'finish'})
+        self.state = 'done'
 
     @api.multi
     def _do_populate_tasks(self):
@@ -245,8 +243,7 @@ class fds_key_generator_wizard(models.TransientModel):
 
             :returns action: configuration for the next wizard's view
         '''
-        self.ensure_one()
-        action = {
+        return {
             'type': 'ir.actions.act_window',
             'view_type': 'form',
             'view_mode': 'form',
@@ -254,7 +251,6 @@ class fds_key_generator_wizard(models.TransientModel):
             'res_id': self.id,
             'target': 'new',
         }
-        return action
 
     @api.multi
     def _close_wizard(self):
@@ -262,5 +258,4 @@ class fds_key_generator_wizard(models.TransientModel):
 
             :returns action: close the wizard's view
         '''
-        self.ensure_one()
         return {'type': 'ir.actions.act_window_close'}

@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Swiss Postfinance File Delivery Services module for Odoo
-#    Copyright (C) 2014 Compassion CH
+#    Copyright (C) 2015 Compassion CH
 #    @author: Nicolas Tran
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,10 +21,10 @@
 ##############################################################################
 {
     'name': 'Swiss Postfinance File Delivery Services',
-    'summary': '''Import and upload files in FDS ''',
-    'version': '1.0',
+    'summary': 'Import and upload files in FDS',
+    'version': '8.0.1.0',
     'license': 'AGPL-3',
-    'author': 'Compassion CH',
+    'author': 'OCA (Odoo Community Association), Compassion CH',
     'website': 'http://www.compassion.ch/',
     'category': 'Finance',
     'depends': [

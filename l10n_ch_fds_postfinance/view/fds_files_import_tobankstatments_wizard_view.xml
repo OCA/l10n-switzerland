@@ -9,9 +9,9 @@
             <form>
                 <field name="state" invisible="True"/>
                 <group states="default">
-                    <p>click on update to download files.</p>
+                    <p>click on import to download files.</p>
                 </group>
-                <group states="finish">
+                <group states="done">
                     <separator string="results" />
                     <newline />
                     <field name="msg_file_imported" />
@@ -26,7 +26,7 @@
                 </group>
                 <footer>
                     <button string="import" name="import_button" type="object" class="oe_highlight" icon="gtk-apply" states="default" />
-                    <button string="Close" special="cancel" icon="gtk-close" states="error,errorSFTP,finish"/>
+                    <button string="Close" special="cancel" icon="gtk-close" states="error,errorSFTP,done"/>
                     <button string="Cancel" special="cancel" states="default" icon="gtk-cancel" />
                 </footer>
             </form>

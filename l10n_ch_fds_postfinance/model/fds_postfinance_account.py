@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Swiss Postfinance File Delivery Services module for Odoo
-#    Copyright (C) 2014 Compassion CH
+#    Copyright (C) 2015 Compassion CH
 #    @author: Nicolas Tran
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, exceptions
+from openerp import models, fields, api, exceptions, _
 import logging
 import base64
 import tempfile
@@ -37,53 +37,46 @@ class fds_postfinance_account(models.Model):
     _name = 'fds.postfinance.account'
 
     name = fields.Char(
-        string='Name',
-        required=True,
-        help='name'
+        required=True
     )
     hostname = fields.Char(
-        string='Hostname SFTP Server',
+        string='SFTP Hostname',
         default='fds.post.ch',
         required=True,
-        help='hostname of your sftp'
     )
-    postfinance_mail = fields.Char(
-        string='Mail PostFinance',
+    postfinance_email = fields.Char(
         default='fds@post.ch',
         required=True,
-        help='mail of fds postfinance'
+        help='E-mail of fds postfinance'
     )
     username = fields.Char(
-        string='Username SFTP Server',
+        string='SFTP Username',
         required=True,
-        help='username of your sftp account'
     )
     company_contact_id = fields.Many2one(
         comodel_name='res.users',
         string='Company Contact',
         ondelete='restrict',
         required=True,
-        help='user that have create/contact with the fds postfinance account' +
-             ', it will be use to send the public key to postfinance'
+        help='user that have create/contact with the fds postfinance account'
+             ', it will be used to send the public key to postfinance'
     )
     fds_authentication_keys_ids = fields.One2many(
         comodel_name='fds.authentication.keys',
         inverse_name='fds_account_id',
-        string='fds authentication key in this account',
-        help='user key for sftp connection'
+        string='Authentication keys',
     )
     fds_postfinance_files_ids = fields.One2many(
         comodel_name='fds.postfinance.files',
         inverse_name='fds_account_id',
-        string='fds postfinance content',
+        string='FDS Postfinance files',
         readonly=True,
-        help='downloaded file from sftp'
+        help='downloaded files from sftp'
     )
     fds_PF_files_directory_ids = fields.One2many(
         comodel_name='fds.postfinance.files.directory',
         inverse_name='fds_account_id',
-        string='fds postfinance files directory',
-        help='directory name of sftp FDS postfinnace'
+        string='FDS postfinance directories',
     )
 
     ##################################
@@ -104,10 +97,10 @@ class fds_postfinance_account(models.Model):
                if e.user_id == self.env.user]
 
         if not key:
-            raise exceptions.Warning('You don\'t have key')
+            raise exceptions.Warning(_("You don't have key"))
 
-        if not key[0].active_key:
-            raise exceptions.Warning('Key not active')
+        if not key[0].key_active:
+            raise exceptions.Warning(_('Key not active'))
 
         try:
             (tmp_key, tmp_d) = self._create_tmp_file(
@@ -127,7 +120,7 @@ class fds_postfinance_account(models.Model):
 
         except Exception as e:
             _logger.error("Unable to connect to the sftp: %s", e)
-            raise exceptions.Warning('Unable to connect to the sftp')
+            raise exceptions.Warning(_('Unable to connect to the sftp'))
 
         finally:
             try:
@@ -214,32 +207,32 @@ class fds_postfinance_account(models.Model):
 
             :returns None:
         '''
-        dir_exist = [e.name for e in self.fds_PF_files_directory_ids]
+        dir_exist = self.fds_PF_files_directory_ids.mapped('name')
 
         # add new directory
         directory_to_add = [dir for dir in directories if dir not in dir_exist]
-        for dir in directory_to_add:
-            values = {'name': dir, 'fds_account_id': self.id}
+        for directory in directory_to_add:
+            values = {'name': directory, 'fds_account_id': self.id}
             self.fds_PF_files_directory_ids.create(values)
-            _logger.info("[OK] add directory '%s' ", (dir))
+            _logger.info("[OK] add directory '%s' ", (directory))
 
         # change status if directory doesn't exist any more on the fds server
         dir_to_change = [dir for dir in dir_exist if dir not in directories]
-        for dir in dir_to_change:
+        for directory in dir_to_change:
             fds_directory_ids = self.fds_PF_files_directory_ids.search([
                 ['fds_account_id', '=', self.id],
-                ['name', '=', dir]])
+                ['name', '=', directory]])
             fds_directory_ids.write({
                 'still_on_server': False,
                 'allow_download_file': False,
                 'allow_upload_file': False})
-            _logger.info("[OK] disable directory '%s' ", (dir))
+            _logger.info("[OK] disable directory '%s' ", (directory))
 
         # check if 'still_on_server' correct
         dir_check = [e.name for e in self.fds_PF_files_directory_ids
                      if e.still_on_server is False and e.name in directories]
-        for dir in dir_check:
+        for directory in dir_check:
             fds_directory_ids = self.fds_PF_files_directory_ids.search([
                 ['fds_account_id', '=', self.id],
-                ['name', '=', dir]])
+                ['name', '=', directory]])
             fds_directory_ids.write({'still_on_server': True})
