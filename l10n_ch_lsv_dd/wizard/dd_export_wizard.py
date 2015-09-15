@@ -40,7 +40,7 @@ class post_dd_export_wizard(models.TransientModel):
     _description = 'Export Postfinance Direct Debit File'
 
     currency = fields.Selection(
-        [('CHF', 'CHF'), ('EUR', 'EUR')], _('Currency'),
+        [('CHF', 'CHF'), ('EUR', 'EUR')],
         required=True,
         default='CHF'
     )
