@@ -35,14 +35,6 @@ If the statement is not in the same currency that company please ensure that
 both journal and account have the currency (or secondary currency) properly
 set to statement currency.
 
-
-Known issues / Roadmap
-======================
-
-
-Credits
-=======
-
 Contributors
 ------------
 
