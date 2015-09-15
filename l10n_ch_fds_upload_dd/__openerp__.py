@@ -37,6 +37,7 @@
     'data': [
         'view/fds_inherit_post_dd_export_upload_wizard_view.xml',
         'view/fds_postfinance_account_dd_view.xml',
+        'security/ir.model.access.csv',
     ],
     'demo': [],
     'test': [],

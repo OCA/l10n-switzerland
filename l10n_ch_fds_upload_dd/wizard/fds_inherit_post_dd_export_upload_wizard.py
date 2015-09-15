@@ -122,7 +122,7 @@ class fds_inherit_post_dd_export_upload_wizard(models.TransientModel):
         if not key:
             raise exceptions.Warning('You don\'t have key')
 
-        if not key.active_key:
+        if not key.key_active:
             raise exceptions.Warning('Key not active')
 
         try:
