@@ -40,17 +40,17 @@ class banking_export_ch_dd(models.Model):
         username = self.env.user.name
         initials = ''.join([subname[0] for subname in username.split()])
         if self.type == 'LSV':
-            res = 'lsv_%s_%s.lsv' % (ref, initials)
+            rec = 'lsv_%s_%s.lsv' % (ref, initials)
         else:
-            res = 'dd_%s_%s.dd' % (ref, initials)
-        self.filename = res
+            rec = 'dd_%s_%s.dd' % (ref, initials)
+        self.filename = rec
         return True
 
     @api.model
     def create(self, vals):
-        res = super(banking_export_ch_dd, self).create(vals)
-        res._generate_filename()
-        return res
+        rec = super(banking_export_ch_dd, self).create(vals)
+        rec._generate_filename()
+        return rec
 
     payment_order_ids = fields.Many2many(
         'payment.order',
