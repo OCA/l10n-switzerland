@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Swiss Postfinance File Delivery Services module for Odoo
-#    Copyright (C) 2014 Compassion CH
+#    Copyright (C) 2015 Compassion CH
 #    @author: Nicolas Tran
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -45,7 +45,7 @@ class fds_key_clone_wizard(models.TransientModel):
     )
     state = fields.Selection(
         selection=[('default', 'Default'),
-                   ('finish', 'Finish')],
+                   ('done', 'Done')],
         readonly=True,
         default='default',
         help='[Info] keep state of the wizard'
@@ -65,13 +65,13 @@ class fds_key_clone_wizard(models.TransientModel):
         self._has_userkey(self.des_user_id)
         self.src_user_key_id.clone_key_to(self.des_user_id)
 
-        self._state_finish_on()
+        self._state_done_on()
         return self._do_populate_tasks()
 
     @api.multi
     def back_button(self):
         ''' go back to copy view.
-            Called by pressing other copy? button.
+            Called by pressing "Make another copy" button.
 
             :returns action: configuration for the next wizard's view
         '''
@@ -107,17 +107,15 @@ class fds_key_clone_wizard(models.TransientModel):
 
             :returns: None
         '''
-        self.ensure_one()
-        self.write({'state': 'default'})
+        self.state = 'default'
 
     @api.multi
-    def _state_finish_on(self):
-        ''' private function that change state to finish
+    def _state_done_on(self):
+        ''' private function that change state to done
 
             :returns: None
         '''
-        self.ensure_one()
-        self.write({'state': 'finish'})
+        self.state = 'done'
 
     @api.multi
     def _do_populate_tasks(self):
@@ -125,8 +123,7 @@ class fds_key_clone_wizard(models.TransientModel):
 
             :returns action: configuration for the next wizard's view
         '''
-        self.ensure_one()
-        action = {
+        return {
             'type': 'ir.actions.act_window',
             'view_type': 'form',
             'view_mode': 'form',
@@ -134,4 +131,3 @@ class fds_key_clone_wizard(models.TransientModel):
             'res_id': self.id,
             'target': 'new',
         }
-        return action

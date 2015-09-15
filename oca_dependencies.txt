@@ -5,4 +5,3 @@ account-financial-tools
 bank-payment
 bank-statement-import
 bank-statement-reconcile
-https://github.com/OCA/bank-statement-import.git
