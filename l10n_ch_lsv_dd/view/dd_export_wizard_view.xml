@@ -10,7 +10,7 @@
             <field name="name">Post dd export wizard view</field>
             <field name="model">post.dd.export.wizard</field>
             <field name="arch" type="xml">
-                <form string="PostFinance Direct Debit export" version="7.0">
+                <form string="PostFinance Direct Debit export">
                     <field name="state" invisible="True"/>
                     <separator string="Postfiance Direct Debit export parameters"/>
                     <group states="create">
