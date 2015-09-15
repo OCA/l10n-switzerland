@@ -37,6 +37,7 @@
     'data': [
         'view/fds_inherit_sepa_wizard_view.xml',
         'view/fds_postfinance_account_sepa_view.xml',
+        'security/ir.model.access.csv',
     ],
     'demo': [],
     'test': [],
