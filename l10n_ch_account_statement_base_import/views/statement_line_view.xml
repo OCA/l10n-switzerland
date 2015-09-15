@@ -12,7 +12,6 @@
                  <xpath expr="//sheet/notebook/page/field[@name='line_ids']/tree/field[@name='bank_account_id']" position="after">
                     <field name="file_name"/>
                     <button name="download_attachment" type="object" icon="STOCK_SAVE" />
-                    <br/><label string= "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"/>
                  </xpath>
              </data>
          </field>
@@ -27,7 +26,6 @@
          <field name="arch" type="xml">
             <form string="Attachments">
                 <field name="datas" widget="image" readonly="1"/>
-                <br/><label string= "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"/>
             </form>
          </field>
      </record>
