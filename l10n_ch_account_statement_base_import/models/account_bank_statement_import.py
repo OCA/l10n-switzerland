@@ -167,7 +167,7 @@ class account_bank_statement_import(models.TransientModel):
 
         statement_id, notifs = super(
             account_bank_statement_import,
-            self.gt
+            self
         )._create_bank_statement(
             stmt_vals
         )
