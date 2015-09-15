@@ -57,7 +57,7 @@ class banking_export_ch_dd(models.Model):
         'account_payment_order_ch_dd_rel',
         'banking_export_ch_dd_id',
         'account_order_id',
-        _('Payment Orders'),
+        'Payment Orders',
         readonly=True
     )
     nb_transactions = fields.Integer(
