@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Swiss Postfinance File Delivery Services module for Odoo
-#    Copyright (C) 2014 Compassion CH
+#    Copyright (C) 2015 Compassion CH
 #    @author: Nicolas Tran
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -35,42 +35,33 @@ class fds_authentication_keys(models.Model):
 
     user_id = fields.Many2one(
         comodel_name='res.users',
-        string='User id',
+        string='User',
         ondelete='restrict',
         readonly=True,
-        help='user to attribute the key'
     )
     fds_account_id = fields.Many2one(
         comodel_name='fds.postfinance.account',
-        string='FDS account id',
+        string='FDS account',
         ondelete='restrict',
         readonly=True,
-        help='key reliate to this fds account'
     )
     public_key = fields.Binary(
-        string='Public key',
         readonly=True,
-        help='public key'
     )
     private_key_crypted = fields.Binary(
         string='Private key crypted',
         readonly=True,
-        help='private key'
     )
     pub_filename = fields.Char(
         string='Public key filename',
         readonly=True,
-        help='filename of the public key'
     )
     ppk_filename = fields.Char(
         string='Private key filename',
         readonly=True,
-        help='filename of the private key'
     )
-    active_key = fields.Boolean(
-        string='Active key?',
+    key_active = fields.Boolean(
         default=True,
-        help='helper check box to know if the key is working'
     )
 
     @api.multi
@@ -122,6 +113,6 @@ class fds_authentication_keys(models.Model):
             'private_key_crypted': self.private_key_crypted,
             'pub_filename': self.pub_filename,
             'ppk_filename': self.ppk_filename,
-            'active_key': self.active_key}
+            'key_active': self.key_active}
 
         return self.create(values)
