@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Swiss Postfinance File Delivery Services module for Odoo
-#    Copyright (C) 2014 Compassion CH
+#    Copyright (C) 2015 Compassion CH
 #    @author: Nicolas Tran
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,6 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, exceptions
 import logging
 import base64
 import tempfile
@@ -28,36 +27,35 @@ import shutil
 import pysftp
 import os
 
+from openerp import models, fields, api, exceptions
+
 _logger = logging.getLogger(__name__)
 
 
 class fds_files_import_tobankstatments_wizard(models.TransientModel):
-    ''' This wizard check and download files in FDS Postfinance server
-        that was not already downloaded on the database.
+    ''' This wizard checks and downloads files in FDS Postfinance server
+        that were not already downloaded on the database.
         This wizard is called when we choose the update_fds for one FDS.
     '''
     _name = 'fds.files.import.tobankstatments.wizard'
 
     msg_file_imported = fields.Char(
-        'imported file',
-        default='',
+        'Imported files',
         readonly=True
     )
     msg_import_file_fail = fields.Char(
-        'imported file fail',
-        default='',
+        'File import failures',
         readonly=True
     )
     msg_exist_file = fields.Char(
-        'cancel exist imported file',
-        default='',
+        'Files already existing',
         readonly=True
     )
     state = fields.Selection(
         selection=[('default', 'Default'),
-                   ('finish', 'Finish'),
-                   ('error', 'ErrorPermission'),
-                   ('errorSFTP', 'errorSFTP')],
+                   ('done', 'Done'),
+                   ('error', 'Error Permission'),
+                   ('errorSFTP', 'Error SFTP')],
         readonly=True,
         default='default',
         help='[Info] keep state of the wizard'
@@ -81,7 +79,7 @@ class fds_files_import_tobankstatments_wizard(models.TransientModel):
             self.state = 'error'
             return self._do_populate_tasks()
 
-        if not key.active_key:
+        if not key.key_active:
             self.state = 'error'
             return self._do_populate_tasks()
 
@@ -104,7 +102,7 @@ class fds_files_import_tobankstatments_wizard(models.TransientModel):
 
             # import to bank statements
             self._import2bankStatements(fds_files_ids)
-            self.state = 'finish'
+            self.state = 'done'
         except Exception as e:
             self.state = 'errorSFTP'
             _logger.error("Unable to connect to the sftp: %s", e)
@@ -126,8 +124,8 @@ class fds_files_import_tobankstatments_wizard(models.TransientModel):
     ##############################
     @api.multi
     def _download_file(self, sftp, directories, tmp_directory, fds_id):
-        ''' private function that download files from the sftp server where the
-            directories were selected in the configuration of FDS.
+        ''' private function that downloads files from the sftp server where
+            the directories were selected in the configuration of FDS.
 
             :param (obj, (str, str), str, record:
                 - pysftp object
@@ -151,16 +149,17 @@ class fds_files_import_tobankstatments_wizard(models.TransientModel):
                     # save in the model fds_postfinance_files
                     path = os.path.join(tmp_directory, nameFile)
                     with open(path, "rb") as f:
-                        files = f.read()
+                        file_data = f.read()
                     values = {
                         'fds_account_id': fds_id.id,
-                        'files': base64.b64encode(files),
+                        'data': base64.b64encode(file_data),
                         'filename': nameFile,
                         'directory_id': dir_id}
                     fds_files_ids += fds_files_ids.create(values)
                 else:
                     self.msg_exist_file += nameFile + "; "
-                    _logger.info("[FAIL] file '%s' already exist", (nameFile))
+                    _logger.warning("[FAIL] file '%s' already exist",
+                                    (nameFile))
 
         return fds_files_ids
 
@@ -202,10 +201,8 @@ class fds_files_import_tobankstatments_wizard(models.TransientModel):
             ['fds_account_id', '=', fds_account.id]])
 
         # get username, hostname, key_pass
-        fds_account_obj = self.env['fds.postfinance.account']
-        fds_account_id = fds_account_obj.browse(fds_account.id)
-        hostname = fds_account_id.hostname
-        username = fds_account_id.username
+        hostname = fds_account.hostname
+        username = fds_account.username
         key_pass = fds_authentication_key_obj.config()
 
         return (fds_account, hostname, username, key, key_pass)

@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Swiss Postfinance File Delivery Services module for Odoo
-#    Copyright (C) 2014 Compassion CH
+#    Copyright (C) 2015 Compassion CH
 #    @author: Nicolas Tran
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -31,29 +31,27 @@ class fds_postfinance_files_directory(models.Model):
     name = fields.Char(
         string='Directory name',
         readonly=True,
-        help='name of the directory'
     )
     fds_account_id = fields.Many2one(
         comodel_name='fds.postfinance.account',
-        string='FDS account id',
+        string='FDS account',
         ondelete='restrict',
         readonly=True,
-        help='directory related with this FDS accout'
     )
     journal_id = fields.Many2one(
         comodel_name='account.journal',
         string='Journal',
-        help='choose one default journal (need to import to bank statment)'
+        help='default journal needed to import to bank statements'
     )
     allow_download_file = fields.Boolean(
         string='Allow download file?',
         default=False,
-        help='check it to allow download files from this FDS directory to DB'
+        help='check it to allow download files from this FDS directory'
     )
     allow_upload_file = fields.Boolean(
         string='Allow upload file?',
         default=False,
-        help='check it to allow upload files from BD to this FDS directory'
+        help='check it to allow upload files to this FDS directory'
     )
     still_on_server = fields.Boolean(
         string='Directory still on server?',

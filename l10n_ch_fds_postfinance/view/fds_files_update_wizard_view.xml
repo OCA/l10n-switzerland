@@ -9,7 +9,7 @@
             <form>
                 <field name="state" invisible="True"/>
                 <group states="default">
-                    <p>click on update to download files.</p>
+                    <p>click on import to download files.</p>
                 </group>
                 <group states="error">
                     <p>You don't have the permission.</p>
