@@ -78,7 +78,6 @@ class banking_export_ch_dd(models.Model):
         readonly=True
     )
     filename = fields.Char(
-        string=_('Filename'),
         size=256,
         readonly=True,
     )
