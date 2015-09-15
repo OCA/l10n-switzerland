@@ -3,22 +3,19 @@
 
 Postfinance File Delivery Services
 ==================================
-The file delivery services (FDS) is service offered by Postfinance AG Technology unit service.
+The file delivery services (FDS) is a service offered by Postfinance AG Technology unit service.
 
 FDS acts as a gateway between external networks and the Post CH SA. It enables mutual exchange of files between partners and Post CH applications.
 
 Benefit
 -------
-This module allow Odoo users to import files on their FDS PostFinance and convert imported files to bank statment.
+This module allows Odoo users to import files on their FDS PostFinance and convert imported files to bank statment.
 
 Features
 --------
 * list and import download files from FDS PostFinance SFTP to Bank Statement
 * generate authentication key for FDS Postfinance SFTP 
 * import authentication key for FDS Postfianance SFTP
-* [not implemented yet] send authentication key to FDS Postfiance mail 
-  (for now, download public key and send the email to postfinance manually)
-* [not implemented yet] timer to automatically import download files from FDS PostFinance SFTP to Bank Statement
 
 Installation
 ------------
@@ -42,6 +39,12 @@ Usage
 -----
 * to import files as bank statement, use the more button.
 * in case of error, the file is kept and you can import manually 
+
+Known issues / Roadmap
+----------------------
+* [not implemented yet] send authentication key to FDS Postfiance mail 
+  (for now, download public key and send the email to postfinance manually)
+* [not implemented yet] timer to automatically import download files from FDS PostFinance SFTP to Bank Statement
 
 Security user access
 --------------------
