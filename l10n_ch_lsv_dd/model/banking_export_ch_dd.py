@@ -82,7 +82,7 @@ class banking_export_ch_dd(models.Model):
         readonly=True,
     )
     state = fields.Selection(
-        [('draft', _('Draft')), ('sent', _('Sent'))],
+        [('draft', 'Draft'), ('sent', 'Sent')],
         'State',
         readonly=True,
         default='draft'
