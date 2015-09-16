@@ -30,7 +30,6 @@ _logger = logging.getLogger(__name__)
 
 
 class G11Parser(BaseSwissParser):
-
     """
     Parser for BVR DD type 2 Postfinance Statements
     (can be wrapped in a g11 file)
@@ -226,10 +225,12 @@ class G11Parser(BaseSwissParser):
         self.currency_code = self._parse_currency_code()
         statement = {}
         self.balance_end = self._parse_statement_balance_end()
-        statement.update({'balance_start': 0.0})
-        statement.update({'date': self._parse_statement_date()})
-        statement.update({'attachments': []})
-        statement.update({'transactions': self._parse_transactions()})
-        statement.update({'balance_end_real': self.balance_end})
+        statement.update({
+            'balance_start': 0.0,
+            'date': self._parse_statement_date(),
+            'attachments': [],
+            'transactions': self._parse_transactions(),
+            'balance_end_real': self.balance_end
+        })
         self.statements.append(statement)
         return self.validate()
