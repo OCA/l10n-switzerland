@@ -50,11 +50,9 @@ class post_dd_export_wizard(models.TransientModel):
         readonly=True
     )
     file = fields.Binary(
-        string=_('File'),
         related='banking_export_ch_dd_id.file'
     )
     filename = fields.Char(
-        string=_('Filename'),
         related='banking_export_ch_dd_id.filename',
         size=256,
         readonly=True
@@ -71,7 +69,6 @@ class post_dd_export_wizard(models.TransientModel):
     )
     state = fields.Selection(
         [('create', _('Create')), ('finish', _('Finish'))],
-        _('State'),
         readonly=True,
         default='create'
     )
@@ -213,31 +210,31 @@ class post_dd_export_wizard(models.TransientModel):
 
         vals = collections.OrderedDict()
         self._check_currency(line, properties)
-        vals['currency'] = properties.get('currency', 'CHF')
         self._check_amount(line, properties)
-        vals['amount'] = self._format_number(line.amount_currency, 13)
-        vals['reserve_1'] = self._complete_line('', 1)
-        vals['reserve_2'] = self._complete_line('', 3)
-        vals['reserve_3'] = self._complete_line('', 2)
-        vals['deb_account_no'] = self._get_post_account(line.bank_id)
-        vals['reserve_4'] = self._complete_line('', 6)
-        vals['ref'] = self._complete_line(self._get_ref(line), 27)
-        vals['reserve_5'] = self._complete_line('', 8)
-        vals['deb_address'] = self._get_account_address(line.bank_id)
-        vals['reserve_6'] = self._complete_line('', 35)
-        vals['reserve_7'] = self._complete_line('', 35)
-        vals['reserve_8'] = self._complete_line('', 35)
-        vals['reserve_9'] = self._complete_line('', 10)
-        vals['reserve_10'] = self._complete_line('', 25)
         communications = self._get_communications(line)
-        vals['communication'] = self._complete_line(communications, 140)
-        vals['reserve_11'] = self._complete_line('', 3)
-        vals['reserve_12'] = self._complete_line('', 1)
-        vals['orderer_info'] = self._complete_line('', 140)  # Not implemented
-        vals['reserve_13'] = self._complete_line('', 14)
-
+        vals.update([
+            ('currency', properties.get('currency', 'CHF')),
+            ('amount', self._format_number(line.amount_currency, 13)),
+            ('reserve_1', self._complete_line('', 1)),
+            ('reserve_2', self._complete_line('', 3)),
+            ('reserve_3', self._complete_line('', 2)),
+            ('deb_account_no', self._get_post_account(line.bank_id)),
+            ('reserve_4', self._complete_line('', 6)),
+            ('ref', self._complete_line(self._get_ref(line), 27)),
+            ('reserve_5', self._complete_line('', 8)),
+            ('deb_address', self._get_account_address(line.bank_id)),
+            ('reserve_6', self._complete_line('', 35)),
+            ('reserve_7', self._complete_line('', 35)),
+            ('reserve_8', self._complete_line('', 35)),
+            ('reserve_9', self._complete_line('', 10)),
+            ('reserve_10', self._complete_line('', 25)),
+            ('communication', self._complete_line(communications, 140)),
+            ('reserve_11', self._complete_line('', 3)),
+            ('reserve_12', self._complete_line('', 1)),
+            ('orderer_info', self._complete_line('', 140)),  # Not implemented
+            ('reserve_13', self._complete_line('', 14))
+        ])
         debit_record = control_range + ''.join(vals.values())
-
         if len(debit_record) == 700:  # Standard debit record size
             return debit_record
         else:
@@ -254,13 +251,14 @@ class post_dd_export_wizard(models.TransientModel):
         control_range = self._gen_control_range('97', properties)
 
         vals = collections.OrderedDict()
-        vals['currency'] = properties.get('currency', 'CHF')
-        vals['nb_transactions'] = str(
-            properties.get('trans_ser_no') -
-            1).zfill(6)
-        vals['total_amount'] = self._format_number(total_amount, 13)
-        vals['reserve_1'] = self._complete_line('', 628)
-
+        vals.update([
+            ('currency', properties.get('currency', 'CHF')),
+            ('nb_transactions', str(
+                properties.get('trans_ser_no') -
+                1).zfill(6)),
+            ('total_amount', self._format_number(total_amount, 13)),
+            ('reserve_1', self._complete_line('', 628)),
+        ])
         total_record = control_range + ''.join(vals.values())
         if len(total_record) == 700:
             return total_record
