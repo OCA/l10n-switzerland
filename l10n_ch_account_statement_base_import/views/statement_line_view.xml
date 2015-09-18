@@ -10,7 +10,7 @@
          <field name="arch" type="xml">
              <data>
                  <xpath expr="//sheet/notebook/page/field[@name='line_ids']/tree/field[@name='bank_account_id']" position="after">
-                    <field name="file_name" />
+                    <field name="file_name"/>
                     <button name="download_attachment" type="object" icon="STOCK_SAVE" />
                  </xpath>
              </data>

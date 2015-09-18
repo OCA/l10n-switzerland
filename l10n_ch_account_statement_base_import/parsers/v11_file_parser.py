@@ -19,7 +19,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import datetime
 import time
 import logging
 import uuid
@@ -188,8 +187,7 @@ class V11Parser(BaseSwissParser):
         :return: A date usable by Odoo in write or create dict
         """
 
-        date = datetime.date.today()
-        return fields.Date.to_string(date)
+        return fields.Date.today()
 
     def _parse(self):
         """

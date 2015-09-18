@@ -19,7 +19,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import datetime
 import time
 import logging
 import uuid
@@ -216,8 +215,7 @@ class G11Parser(BaseSwissParser):
         :return: A date usable by Odoo in write or create dict
         """
 
-        date = datetime.date.today()
-        return fields.Date.to_string(date)
+        return fields.Date.today()
 
     def _parse(self):
         """
@@ -227,10 +225,12 @@ class G11Parser(BaseSwissParser):
         self.currency_code = self._parse_currency_code()
         statement = {}
         self.balance_end = self._parse_statement_balance_end()
-        statement['balance_start'] = 0.0
-        statement['date'] = self._parse_statement_date()
-        statement['attachments'] = []
-        statement['transactions'] = self._parse_transactions()
-        statement['balance_end_real'] = self.balance_end
+        statement.update({
+            'balance_start': 0.0,
+            'date': self._parse_statement_date(),
+            'attachments': [],
+            'transactions': self._parse_transactions(),
+            'balance_end_real': self.balance_end
+        })
         self.statements.append(statement)
         return self.validate()

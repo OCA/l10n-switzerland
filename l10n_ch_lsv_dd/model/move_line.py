@@ -19,26 +19,27 @@
 #
 ##############################################################################
 
-from openerp import models
+from openerp import models, api
 
 
 class account_move_line(models.Model):
     '''
-    Use hooks to add bvr ref generation if account is IBAN and has LSV
+    Use hooks to add BVR ref generation if account is IBAN and has LSV
     identifier
     '''
 
     _inherit = 'account.move.line'
 
     def _is_generate_bvr(self, invoice):
-        ''' If linked bank account is an iban account with LSV identifier,
-            we also generate a bvr ref (as it's necessary in LSV file)
+        ''' If linked bank account is an IBAN account with LSV identifier,
+            we also generate a BVR ref (as it's necessary in LSV file)
         '''
         val = super(account_move_line, self)._is_generate_bvr(invoice)
         return val or (invoice.partner_bank_id and
                        invoice.partner_bank_id.state == 'iban' and
                        invoice.partner_bank_id.lsv_identifier)
 
+    @api.multi
     def line2bank(self, payment_mode_id):
         ''' Override line2bank to avoid choosing a bank that has only
             cancelled mandate.
@@ -59,11 +60,10 @@ class account_move_line(models.Model):
                             line2bank[line.id] = bank_id
                         else:
                             line2bank.update(
-                                super(account_move_line, self).line2bank(
-                                    [line.id], payment_mode_id))
+                                super(account_move_line, line).line2bank(
+                                    payment_mode_id))
                 return line2bank
-        return super(
-            account_move_line, self).line2bank(payment_mode_id)
+        return super(account_move_line, self).line2bank(payment_mode_id)
 
     def _get_active_bank_account(self, banks, bank_types):
         for bank in banks:
