@@ -56,9 +56,7 @@ class invoice(models.Model):
         }
 
         pay_order = pay_order_obj.create(vals)
-        wf_service = netsvc.LocalService('workflow')
-        wf_service.trg_validate(self.env.uid, 'payment.order',
-                                pay_order.id, 'cancel', self.env.cr)
+        pay_order.signal_workflow('cancel')
         pay_lines.write({'order_id': pay_order.id})
         return pay_order
 
@@ -72,6 +70,7 @@ class account_invoice_free(models.TransientModel):
 
     @api.multi
     def invoice_free(self):
+        pdb.set_trace()
         inv_obj = self.env['account.invoice']
         order = inv_obj.cancel_payment_lines()
         action = {
