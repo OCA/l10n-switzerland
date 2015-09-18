@@ -59,27 +59,3 @@ class invoice(models.Model):
         pay_order.signal_workflow('cancel')
         pay_lines.write({'order_id': pay_order.id})
         return pay_order
-
-
-class account_invoice_free(models.TransientModel):
-
-    ''' Wizard to free invoices. When job is done, user is redirected on new
-        payment order.
-    '''
-    _name = 'account.invoice.free'
-
-    @api.multi
-    def invoice_free(self):
-        inv_obj = self.env['account.invoice']
-        order = inv_obj.cancel_payment_lines()
-        action = {
-            'name': 'Payment order',
-            'type': 'ir.actions.act_window',
-            'view_type': 'form',
-            'view_mode': 'form, tree',
-            'res_model': 'payment.order',
-            'res_id': order.id,
-            'target': 'current',
-        }
-
-        return action

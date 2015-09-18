@@ -1,6 +1,6 @@
 ##############################################################################
 #
-#    Swiss localization Direct Debit module for Odoo
+#    Swiss localization Direct Debit module for OpenERP
 #    Copyright (C) 2014 Compassion (http://www.compassion.ch)
 #    @author: Cyril Sester <cyril.sester@outlook.com>
 #
@@ -19,7 +19,28 @@
 #
 ##############################################################################
 
-from . import export_utils
-from . import lsv_export_wizard
-from . import dd_export_wizard
-from . import invoice_free_wizard
+from openerp import models, api
+
+
+class account_invoice_free(models.TransientModel):
+
+    ''' Wizard to free invoices. When job is done, user is redirected on new
+        payment order.
+    '''
+    _name = 'account.invoice.free'
+
+    @api.multi
+    def invoice_free(self):
+        inv_obj = self.env['account.invoice']
+        order = inv_obj.cancel_payment_lines()
+        action = {
+            'name': 'Payment order',
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form, tree',
+            'res_model': 'payment.order',
+            'res_id': order.id,
+            'target': 'current',
+        }
+
+        return action
