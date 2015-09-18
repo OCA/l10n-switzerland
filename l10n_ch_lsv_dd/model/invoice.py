@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from openerp import models, api, _, netsvc, exceptions
+from openerp import models, api, _, exceptions
 
 
 class invoice(models.Model):
@@ -70,7 +70,6 @@ class account_invoice_free(models.TransientModel):
 
     @api.multi
     def invoice_free(self):
-        pdb.set_trace()
         inv_obj = self.env['account.invoice']
         order = inv_obj.cancel_payment_lines()
         action = {
