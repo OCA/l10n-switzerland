@@ -61,10 +61,9 @@ class account_move_line(models.Model):
                         else:
                             line2bank.update(
                                 super(account_move_line, line).line2bank(
-                                    payment_mode_id)
+                                    payment_mode_id))
                 return line2bank
-        return super(
-            account_move_line, self).line2bank(payment_mode_id)
+        return super(account_move_line, self).line2bank(payment_mode_id)
 
     def _get_active_bank_account(self, banks, bank_types):
         for bank in banks:
