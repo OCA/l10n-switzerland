@@ -72,7 +72,7 @@ You can also find them on apps.odoo.com.
  'demo': [],
  'test': [],
  'auto_install': False,
- 'installable': True,
+ 'installable': False,
  'images': ['images/config_chart_l10n_ch.jpeg',
             'images/l10n_ch_chart.jpeg']
  }
