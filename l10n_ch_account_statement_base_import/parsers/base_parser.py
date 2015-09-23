@@ -43,7 +43,6 @@ class BaseSwissParser(object):
         self.account_number = None
         self.statements = []
 
-    @abstractmethod
     def ftype(self):
         """Gives the type of file we want to import
         This method is abstract, we want to ensure that developper aware of it.
@@ -87,7 +86,6 @@ class BaseSwissParser(object):
         """
         pass
 
-    @abstractmethod
     def get_currency(self):
         """Returns the ISO currency code of the parsed file
         This method is abstract, we want to ensure that developper aware of it.
@@ -98,7 +96,6 @@ class BaseSwissParser(object):
         """
         return self.currency_code
 
-    @abstractmethod
     def get_account_number(self):
         """Return the account_number related to parsed file
         This method is abstract, we want to ensure that developper aware of it.
@@ -110,7 +107,6 @@ class BaseSwissParser(object):
 
         return self.account_number
 
-    @abstractmethod
     def get_statements(self):
         """Return the list of bank statement dict.
          Bank statements data: list of dict containing
