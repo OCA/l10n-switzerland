@@ -1,6 +1,6 @@
 ##############################################################################
 #
-#    Swiss localization Direct Debit module for OpenERP
+#    Swiss localization Direct Debit module for Odoo
 #    Copyright (C) 2014 Compassion (http://www.compassion.ch)
 #    @author: Cyril Sester <cyril.sester@outlook.com>
 #
@@ -22,3 +22,4 @@
 from . import export_utils
 from . import lsv_export_wizard
 from . import dd_export_wizard
+from . import invoice_free_wizard

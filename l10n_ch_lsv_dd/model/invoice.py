@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from openerp import models, api, _, netsvc, exceptions
+from openerp import models, api, _, exceptions
 
 
 class invoice(models.Model):
@@ -33,7 +33,7 @@ class invoice(models.Model):
 
     @api.multi
     def cancel_payment_lines(self):
-        ''' This function simply find related payment lines and move them
+        ''' This function simply finds related payment lines and move them
             in a new payment order.
         '''
         mov_line_obj = self.env['account.move.line']
@@ -56,32 +56,6 @@ class invoice(models.Model):
         }
 
         pay_order = pay_order_obj.create(vals)
-        wf_service = netsvc.LocalService('workflow')
-        wf_service.trg_validate(self.env.uid, 'payment.order',
-                                pay_order.id, 'cancel', self.env.cr)
+        pay_order.signal_workflow('cancel')
         pay_lines.write({'order_id': pay_order.id})
         return pay_order
-
-
-class account_invoice_free(models.TransientModel):
-
-    ''' Wizard to free invoices. When job is done, user is redirected on new
-        payment order.
-    '''
-    _name = 'account.invoice.free'
-
-    @api.multi
-    def invoice_free(self):
-        inv_obj = self.env['account.invoice']
-        order = inv_obj.cancel_payment_lines()
-        action = {
-            'name': 'Payment order',
-            'type': 'ir.actions.act_window',
-            'view_type': 'form',
-            'view_mode': 'form, tree',
-            'res_model': 'payment.order',
-            'res_id': order.id,
-            'target': 'current',
-        }
-
-        return action
