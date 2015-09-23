@@ -176,7 +176,7 @@ class RaffeisenCSVParser(BaseSwissParser):
             amount = float(vals[1].replace("'", "")) * rate
         else:
             raise exceptions.Warning(
-                'ParsingError', _('Unable to parse amount for ligne %s') %
+                'ParsingError', _('Unable to parse amount for line %s') %
                 line.get('Text'))
         return name, str(amount)
 

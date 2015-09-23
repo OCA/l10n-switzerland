@@ -288,7 +288,7 @@ class post_dd_export_wizard(models.TransientModel):
 
         # redirect to generated dd export
         action = {
-            'name': 'Generated File',
+            'name': _('Generated File'),
             'type': 'ir.actions.act_window',
             'view_type': 'form',
             'view_mode': 'form,tree',
