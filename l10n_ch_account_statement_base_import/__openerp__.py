@@ -32,7 +32,10 @@
      'python': ['xlrd'],
  },
  'website': 'http://www.compassion.ch/',
- 'data': ['views/statement_line_view.xml'],
+ 'data': [
+     'views/statement_line_view.xml',
+     'views/l10n_ch_account_statement_base_import.xml'
+     ],
  'qweb': ['static/src/xml/l10n_ch_statement_line_layout.xml'],
  'test': [],
  'installable': True,

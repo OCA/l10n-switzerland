@@ -32,27 +32,18 @@ class AccountBankStatementLine(models.Model):
     )
     file_name = fields.Char(compute='_get_attachment')
 
-    @api.multi
-    def get_data_for_reconciliations(
-            self, excluded_ids=None, search_reconciliation_proposition=True):
-
-        ret = super(
-            AccountBankStatementLine, self).get_data_for_reconciliations(
-                excluded_ids, search_reconciliation_proposition)
-        id = 0
-        for line in self:
-            ret[id]['st_line']['img_src'] = False
-            if line.related_files:
-                for related_file in line.related_files:
-                    image = "data:" + related_file.file_type + ";base64," + \
-                        related_file.datas
-                    ret[id]['st_line']['img_src'] = ['src', image]
-                    ret[id]['st_line']['modal_id'] = [
-                        'id', 'img' + str(related_file.id)]
-                    ret[id]['st_line']['data_target'] = [
-                        'data-target', '#img' + str(related_file.id)]
-                id += 1
-        return ret
+    @api.model
+    def get_statement_line_for_reconciliation(self, st_line):
+        data = super(AccountBankStatementLine,
+                     self).get_statement_line_for_reconciliation(st_line)
+        for related_file in st_line.related_files:
+            image = "data:" + related_file.file_type + ";base64," + \
+                related_file.datas
+            data['img_src'] = ['src', image]
+            data['modal_id'] = ['id', 'img' + str(related_file.id)]
+            data['data_target'] = [
+                'data-target', '#img' + str(related_file.id)]
+        return data
 
     @api.one
     def _get_attachment(self):
