@@ -48,6 +48,6 @@
     'test': [
         'test/lsv-dd-test.yml',
     ],
-    'active': False,
+    'auto_install': False,
     'installable': True,
 }

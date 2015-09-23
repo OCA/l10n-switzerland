@@ -21,9 +21,11 @@
 
 import base64
 import collections
-from openerp import models, fields, api, _, netsvc, exceptions
-from datetime import date, datetime, timedelta
-from openerp.tools import mod10r, DEFAULT_SERVER_DATE_FORMAT
+import string
+from datetime import date
+from . import export_utils
+
+from openerp import models, fields, api, _, exceptions
 
 import logging
 logger = logging.getLogger(__name__)
@@ -92,21 +94,21 @@ class lsv_export_wizard(models.TransientModel):
         active_ids = self.env.context.get('active_ids', [])
         if not active_ids:
             raise exceptions.ValidationError(_('No payment order selected'))
-        payment_order_ids = payment_order_obj.browse(active_ids)
+        payment_orders = payment_order_obj.browse(active_ids)
 
         # common properties for all lines
-        properties = self._setup_properties(payment_order_ids[0])
+        properties = self._setup_properties(payment_orders[0])
 
         total_amount = 0.0
         lsv_lines = []
 
-        for payment_order in payment_order_ids:
+        for payment_order in payment_orders:
             total_amount = total_amount + payment_order.total
 
-            ben_bank_id = payment_order.mode.bank_id
-            clean_acc_number = ben_bank_id.acc_number.replace(' ', '')
+            ben_bank = payment_order.mode.bank_id
+            clean_acc_number = ben_bank.acc_number.replace(' ', '')
             clean_acc_number = clean_acc_number.replace('-', '')
-            ben_address = self._get_account_address(ben_bank_id)
+            ben_address = self._get_account_address(ben_bank)
             properties.update({
                 'ben_address': ben_address,
                 'ben_iban': clean_acc_number,
@@ -163,7 +165,7 @@ class lsv_export_wizard(models.TransientModel):
         self.write({'banking_export_ch_dd_id': export_id.id,
                     'state': 'finish'})
         action = {
-            'name': 'Generated File',
+            'name': _('Generated File'),
             'type': 'ir.actions.act_window',
             'view_type': 'form',
             'view_mode': 'form,tree',
@@ -188,31 +190,31 @@ class lsv_export_wizard(models.TransientModel):
         vals['TA'] = '875'
         vals['VNR'] = '0'
         vals['VART'] = properties.get('treatment_type', 'P')
-        vals['GVDAT'] = self._prepare_date(
-            self._get_treatment_date(payment_order.date_prefered,
-                                     line.ml_maturity_date,
-                                     payment_order.date_scheduled,
-                                     line.name))
-        vals['BCZP'] = self._complete_line(
-            self._get_clearing(line.bank_id), 5)
+        vals['GVDAT'] = export_utils.get_treatment_date(
+            payment_order.date_prefered, line.ml_maturity_date,
+            payment_order.date_scheduled, line.name)
+        vals['BCZP'] = export_utils.complete_line(
+            5, self._get_clearing(line.bank_id))
         vals['EDAT'] = properties.get('edat')
-        vals['BCZE'] = self._complete_line(properties.get('ben_clearing'), 5)
+        vals['BCZE'] = export_utils.complete_line(
+            5, properties.get('ben_clearing'))
         vals['ABSID'] = properties.get('lsv_identifier')
         vals['ESEQ'] = str(properties.get('seq_nb')).zfill(7)
         vals['LSVID'] = properties.get('lsv_identifier')
-        self._check_currency(line, properties)
+        export_utils.check_currency(line, properties)
         vals['WHG'] = properties.get('currency', 'CHF')
         self._check_amount(line, properties)
         vals['BETR'] = self._format_number(line.amount_currency, 12)
-        vals['KTOZE'] = self._complete_line(properties.get('ben_iban'), 34)
+        vals['KTOZE'] = export_utils.complete_line(
+            34, properties.get('ben_iban'))
         vals['ADRZE'] = properties.get('ben_address')
-        vals['KTOZP'] = self._complete_line(deb_acc_number, 34)
+        vals['KTOZP'] = export_utils.complete_line(34, deb_acc_number)
         vals['ADRZP'] = self._get_account_address(line.bank_id)
-        vals['MITZP'] = self._complete_line(self._get_communications(line),
-                                            140)
+        vals['MITZP'] = export_utils.complete_line(
+            140, self._get_communications(line))
         ref, ref_type = self._get_ref(line)
         vals['REFFL'] = ref_type
-        vals['REFNR'] = self._complete_line(ref, 27)
+        vals['REFNR'] = export_utils.complete_line(27, ref)
         if vals['REFFL'] == 'A':
             if not properties.get('esr_party_number'):
                 raise exceptions.ValidationError(
@@ -220,11 +222,10 @@ class lsv_export_wizard(models.TransientModel):
                       'ESR party number exists for ben account') %
                     line.name
                 )
-            vals['ESRTN'] = self._complete_line(
-                properties.get('esr_party_number'),
-                9)
+            vals['ESRTN'] = export_utils.complete_line(
+                9, properties.get('esr_party_number'))
         else:
-            vals['ESRTN'] = self._complete_line('', 9)
+            vals['ESRTN'] = export_utils.complete_line(9)
         gen_line = ''.join(vals.values())
         if len(gen_line) == 588:  # Standard 875 line size
             return gen_line
@@ -276,15 +277,11 @@ class lsv_export_wizard(models.TransientModel):
             as 'sent'. Write 'last debit date' on mandate.
         '''
         self.banking_export_ch_dd_id.write({'state': 'sent'})
-        wf_service = netsvc.LocalService('workflow')
-        today_str = datetime.today().strftime(DEFAULT_SERVER_DATE_FORMAT)
+        today_str = fields.Date.today()
 
         for order in self.banking_export_ch_dd_id.payment_order_ids:
-            wf_service.trg_validate(self.env.uid, 'payment.order',
-                                    order.id, 'done', self.env.cr)
-            mandate_ids = list(set(
-                [line.mandate_id.id for line in order.line_ids]))
-            mandates = self.env['account.banking.mandate'].browse(mandate_ids)
+            order.signal_workflow('done')
+            mandates = order.mapped('line_ids.mandate_id')
             mandates.write({'last_debit_date': today_str})
 
         # redirect to generated lsv export
@@ -314,9 +311,9 @@ class lsv_export_wizard(models.TransientModel):
         '''
         return [tup[1] for tup in lsv_lines]
 
-    ##########################
-    #         Tools          #
-    ##########################
+    ##########################################################################
+    #                         Private Tools for LSV                          #
+    ##########################################################################
     def _check_amount(self, line, properties):
         ''' Max allowed amount is CHF 99'999'999.99.
             We need to also check EUR values...
@@ -334,25 +331,6 @@ class lsv_export_wizard(models.TransientModel):
             raise exceptions.ValidationError(
                 _('Amount for line with ref %s is negative (%f given)') %
                 (line.name, line.amount_currency))
-
-    def _check_currency(self, line, properties):
-        ''' Check that line currency is equal to lsv export currency '''
-        if not line.currency.name == properties.get(
-                'currency'):  # All currencies have to be the same !
-            raise exceptions.ValidationError(
-                _('Line with ref %s has %s currency and lsv file %s '
-                  '(should be the same)') %
-                (line.name, line.currency.name, properties.get(
-                    'currency', '')))
-
-    def _complete_line(self, string, nb_char):
-        ''' In LSV file each field has a defined length.
-            This way, lines have to be filled with spaces
-        '''
-        if len(string) > nb_char:
-            return string[:nb_char]
-
-        return string.ljust(nb_char)
 
     def _format_number(self, amount, nb_char):
         ''' Accepted formats are "00000000123,", "0000000123,1"
@@ -393,10 +371,10 @@ class lsv_export_wizard(models.TransientModel):
                     _('Missing address for bank account %s')
                     % bank_account.acc_number)
 
-        return (self._complete_line(bank_line1, 35) +
-                self._complete_line(bank_line2, 35) +
-                self._complete_line(bank_line3, 35) +
-                self._complete_line(bank_line4, 35))
+        return (export_utils.complete_line(35, bank_line1) +
+                export_utils.complete_line(35, bank_line2) +
+                export_utils.complete_line(35, bank_line3) +
+                export_utils.complete_line(35, bank_line4))
 
     def _get_clearing(self, bank_account):
         clearing = ''
@@ -419,93 +397,21 @@ class lsv_export_wizard(models.TransientModel):
         return ''
 
     def _get_ref(self, payment_line):
-        if self._is_bvr_ref(payment_line.move_line_id.transaction_ref):
+        if export_utils.is_bvr_ref(payment_line.move_line_id.transaction_ref):
             return payment_line.move_line_id.transaction_ref.replace(
                 ' ', '').rjust(27, '0'), 'A'
         return '', 'B'  # If anyone uses IPI reference, get it here
 
-    def _is_bvr_ref(self, ref):
-        if not ref:
-            return False  # Empty is not valid
-        clean_ref = ref.replace(' ', '')
-        if not clean_ref.isdigit() or len(clean_ref) > 27:
-            return False
-        clean_ref = clean_ref.rjust(27, '0')  # Add zeros to the left
-        if not clean_ref == mod10r(clean_ref[0:26]):
-            return False
-
-        return True
-
-    def _get_treatment_date(self, prefered_type, line_mat_date,
-                            order_sched_date, name):
-        ''' Returns appropriate date according to payment_order and
-            payment_order_line data.
-            Raises an error if treatment date is > today+30 or < today-10
-        '''
-        requested_date = date.today()
-        if prefered_type == 'due':
-            tmp_date = datetime.strptime(
-                line_mat_date, DEFAULT_SERVER_DATE_FORMAT
-            ).date()
-            requested_date = tmp_date if tmp_date else requested_date
-
-        elif prefered_type == 'fixed':
-            tmp_date = datetime.strptime(
-                order_sched_date, DEFAULT_SERVER_DATE_FORMAT
-            ).date()
-            requested_date = tmp_date if tmp_date else requested_date
-
-        if requested_date > date.today() + timedelta(days=30) \
-                or requested_date < date.today() - timedelta(days=10):
-            raise exceptions.ValidationError(
-                _('Incorrect treatment date: %s for line with ref %s')
-                % (requested_date, name))
-
-        return requested_date
-
     def _is_ch_li_iban(self, iban):
         ''' Check if given iban is valid ch or li iban '''
-        IBAN_CHAR_MAP = {
-            "A": "10",
-            "B": "11",
-            "C": "12",
-            "D": "13",
-            "E": "14",
-            "F": "15",
-            "G": "16",
-            "H": "17",
-            "I": "18",
-            "J": "19",
-            "K": "20",
-            "L": "21",
-            "M": "22",
-            "N": "23",
-            "O": "24",
-            "P": "25",
-            "Q": "26",
-            "R": "27",
-            "S": "28",
-            "T": "29",
-            "U": "30",
-            "V": "31",
-            "W": "32",
-            "X": "33",
-            "Y": "34",
-            "Z": "35"}
+        IBAN_CHAR_MAP = dict(
+            (string.uppercase[i], str(10 + i)) for i in range(26))
         iban_validation_str = self._replace_all(
-            iban[
-                4:] +
-            iban[
-                0:4],
-            IBAN_CHAR_MAP)
+            iban[4:] + iban[0:4], IBAN_CHAR_MAP)
         valid = len(iban) == 21
         valid &= iban[0:2].lower() in ['ch', 'li']
         valid &= (int(iban_validation_str) % 97) == 1
         return valid
-
-    def _prepare_date(self, format_date):
-        ''' Returns date formatted to YYYYMMDD string '''
-        return format_date.strftime('%Y%m%d')
 
     def _replace_all(self, text, char_map):
         ''' Replace the char_map in text '''
@@ -521,17 +427,16 @@ class lsv_export_wizard(models.TransientModel):
                 % payment_order.mode.bank_id.acc_number)
 
         currency_obj = self.env['res.currency']
-        chf_id = currency_obj.search([('name', '=', 'CHF')])
-        rate = chf_id['rate_silent']
-        ben_bank_id = payment_order.mode.bank_id
+        chf_currency = currency_obj.search([('name', '=', 'CHF')])
+        rate = chf_currency.rate_silent
+        ben_bank = payment_order.mode.bank_id
         properties = {
             'treatment_type': self.treatment_type,
             'currency': self.currency,
             'seq_nb': 1,
-            'lsv_identifier': ben_bank_id.lsv_identifier.upper(),
-            'esr_party_number': ben_bank_id.esr_party_number,
-            'edat': self._prepare_date(
-                date.today()),
+            'lsv_identifier': ben_bank.lsv_identifier.upper(),
+            'esr_party_number': ben_bank.esr_party_number,
+            'edat': date.today().strftime('%Y%m%d'),
             'rate': rate,
         }
         return properties
