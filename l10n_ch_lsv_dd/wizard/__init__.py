@@ -19,5 +19,6 @@
 #
 ##############################################################################
 
+from . import export_utils
 from . import lsv_export_wizard
 from . import dd_export_wizard

@@ -21,10 +21,9 @@
 
 import base64
 import collections
-from datetime import date, datetime, timedelta
-from openerp import models, fields, api, _, netsvc, exceptions
-from openerp.tools import DEFAULT_SERVER_DATE_FORMAT as DF
-from openerp.tools import mod10r
+from . import export_utils
+
+from openerp import models, fields, api, _, exceptions
 
 import logging
 logger = logging.getLogger(__name__)
@@ -84,45 +83,36 @@ class post_dd_export_wizard(models.TransientModel):
         '''
         self.ensure_one()
         payment_order_obj = self.env['payment.order']
-        payment_line_obj = self.env['payment.line']
 
         active_ids = self.env.context.get('active_ids', [])
         if not active_ids:
             raise exceptions.ValidationError(_('No payment order selected'))
 
-        payment_order_ids = payment_order_obj.browse(active_ids)
-        properties = self._setup_properties(payment_order_ids[0])
+        payment_orders = payment_order_obj.browse(active_ids)
+        properties = self._setup_properties(payment_orders[0])
         records = []
         overall_amount = 0
 
-        for payment_order in payment_order_ids:
+        for payment_order in payment_orders:
             overall_amount += payment_order.total
-            # Order payment_lines to simplify the setup of 'group orders'
-            order_by = ''
-            if payment_order.date_prefered == 'due':
-                order_by = 'account_move_line.date_maturity ASC, '
-            order_by += 'payment_line.bank_id'
-
-            # A direct db query is used because order parameter in
-            # model.search doesn't work over function fields
-            self.env.cr.execute(
-                'SELECT payment_line.id '
-                'FROM payment_line, account_move_line '
-                'WHERE payment_line.move_line_id = account_move_line.id '
-                'AND payment_line.order_id = %s '
-                'ORDER BY ' + order_by, (payment_order.id,))
-            sorted_line_ids = [row[0] for row in self.env.cr.fetchall()]
-            payment_lines = payment_line_obj.browse(sorted_line_ids)
-            if not payment_lines:
+            if not payment_order.line_ids:
                 continue
+
+            # Order payment_lines to simplify the setup of 'group orders'
+            payment_lines = payment_order.line_ids.sorted(
+                lambda pl: pl.bank_id.id)
+            if payment_order.date_prefered == 'due':
+                payment_lines = payment_lines.sorted(
+                    lambda pl: pl.move_line_id.date_maturity)
 
             # Setup dates for grouping comparison and head_record generation
             previous_date = payment_lines[0].ml_maturity_date
-            order_date = self._get_treatment_date(
-                payment_order.date_prefered, payment_lines[0].ml_maturity_date,
-                payment_order.date_scheduled, payment_lines[0].name)
-            properties.update({'due_date': self._prepare_date(order_date),
-                               'trans_ser_no': 0})
+            order_date = export_utils.get_treatment_date(
+                payment_order.date_prefered,
+                payment_lines[0].ml_maturity_date,
+                payment_order.date_scheduled, payment_lines[0].name,
+                format='%y%m%d')
+            properties.update({'due_date': order_date, 'trans_ser_no': 0})
 
             total_amount = 0.0
             # Records is a list of tuples (payment_line, generated line).
@@ -143,7 +133,7 @@ class post_dd_export_wizard(models.TransientModel):
                                     self._generate_total_record(
                                         properties, total_amount)))
                     total_amount = 0.0
-                    due_date = self._get_treatment_date(
+                    due_date = export_utils.get_treatment_date(
                         payment_order.date_prefered,
                         line.ml_maturity_date,
                         payment_order.date_scheduled,
@@ -151,7 +141,7 @@ class post_dd_export_wizard(models.TransientModel):
                     properties.update({
                         'dd_order_no': properties['dd_order_no'] + 1,
                         'trans_ser_no': 0,
-                        'due_date': self._prepare_date(due_date)})
+                        'due_date': due_date})
                     records.append(
                         (None, self._generate_head_record(properties)))
                     properties.update(
@@ -180,7 +170,7 @@ class post_dd_export_wizard(models.TransientModel):
                     'state': 'finish'})
 
         action = {
-            'name': 'Generated File',
+            'name': _('Generated File'),
             'type': 'ir.actions.act_window',
             'view_type': 'form',
             'view_mode': 'form,tree',
@@ -194,7 +184,7 @@ class post_dd_export_wizard(models.TransientModel):
     def _generate_head_record(self, properties):
         ''' Head record generation (Transaction type 00) '''
         control_range = self._gen_control_range('00', properties)
-        head_record = control_range + self._complete_line('', 650)
+        head_record = control_range + export_utils.complete_line(650)
 
         if len(head_record) == 700:  # Standard head record size
             return head_record
@@ -212,29 +202,31 @@ class post_dd_export_wizard(models.TransientModel):
         control_range = self._gen_control_range('47', properties)
 
         vals = collections.OrderedDict()
-        self._check_currency(line, properties)
+        export_utils.check_currency(line, properties)
         vals['currency'] = properties.get('currency', 'CHF')
         self._check_amount(line, properties)
         vals['amount'] = self._format_number(line.amount_currency, 13)
-        vals['reserve_1'] = self._complete_line('', 1)
-        vals['reserve_2'] = self._complete_line('', 3)
-        vals['reserve_3'] = self._complete_line('', 2)
+        vals['reserve_1'] = export_utils.complete_line(1)
+        vals['reserve_2'] = export_utils.complete_line(3)
+        vals['reserve_3'] = export_utils.complete_line(2)
         vals['deb_account_no'] = self._get_post_account(line.bank_id)
-        vals['reserve_4'] = self._complete_line('', 6)
-        vals['ref'] = self._complete_line(self._get_ref(line), 27)
-        vals['reserve_5'] = self._complete_line('', 8)
+        vals['reserve_4'] = export_utils.complete_line(6)
+        vals['ref'] = export_utils.complete_line(27, self._get_ref(line))
+        vals['reserve_5'] = export_utils.complete_line(8)
         vals['deb_address'] = self._get_account_address(line.bank_id)
-        vals['reserve_6'] = self._complete_line('', 35)
-        vals['reserve_7'] = self._complete_line('', 35)
-        vals['reserve_8'] = self._complete_line('', 35)
-        vals['reserve_9'] = self._complete_line('', 10)
-        vals['reserve_10'] = self._complete_line('', 25)
+        vals['reserve_6'] = export_utils.complete_line(35)
+        vals['reserve_7'] = export_utils.complete_line(35)
+        vals['reserve_8'] = export_utils.complete_line(35)
+        vals['reserve_9'] = export_utils.complete_line(10)
+        vals['reserve_10'] = export_utils.complete_line(25)
         communications = self._get_communications(line)
-        vals['communication'] = self._complete_line(communications, 140)
-        vals['reserve_11'] = self._complete_line('', 3)
-        vals['reserve_12'] = self._complete_line('', 1)
-        vals['orderer_info'] = self._complete_line('', 140)  # Not implemented
-        vals['reserve_13'] = self._complete_line('', 14)
+        vals['communication'] = export_utils.complete_line(
+            140, communications)
+        vals['reserve_11'] = export_utils.complete_line(3)
+        vals['reserve_12'] = export_utils.complete_line(1)
+        vals['orderer_info'] = export_utils.complete_line(
+            140)  # Not implemented
+        vals['reserve_13'] = export_utils.complete_line(14)
 
         debit_record = control_range + ''.join(vals.values())
 
@@ -259,7 +251,7 @@ class post_dd_export_wizard(models.TransientModel):
             properties.get('trans_ser_no') -
             1).zfill(6)
         vals['total_amount'] = self._format_number(total_amount, 13)
-        vals['reserve_1'] = self._complete_line('', 628)
+        vals['reserve_1'] = export_utils.complete_line(628)
 
         total_record = control_range + ''.join(vals.values())
         if len(total_record) == 700:
@@ -291,14 +283,10 @@ class post_dd_export_wizard(models.TransientModel):
             as 'sent'. Write 'last debit date' on mandate.
         '''
         self.banking_export_ch_dd_id.write({'state': 'sent'})
-        wf_service = netsvc.LocalService('workflow')
-        today_str = datetime.today().strftime(DF)
+        today_str = fields.Date.today()
         for order in self.banking_export_ch_dd_id.payment_order_ids:
-            wf_service.trg_validate(self.env.uid, 'payment.order', order.id,
-                                    'done', self.env.cr)
-            mandate_ids = list(set([line.
-                                    mandate_id.id for line in order.line_ids]))
-            mandates = self.env['account.banking.mandate'].browse(mandate_ids)
+            order.signal_workflow('done')
+            mandates = order.mapped('line_ids.mandate_id')
             mandates.write({'last_debit_date': today_str})
 
         # redirect to generated dd export
@@ -328,9 +316,9 @@ class post_dd_export_wizard(models.TransientModel):
         '''
         return [tup[1] for tup in records]
 
-    ##########################
-    #         Tools          #
-    ##########################
+    ##########################################################################
+    #                          Private Tools for DD                          #
+    ##########################################################################
     def _check_amount(self, line, properties):
         ''' Max allowed amount is CHF 10'000'000.00 and EUR 5'000'000.00 '''
         if (properties.get('currency') == 'CHF' and
@@ -347,25 +335,6 @@ class post_dd_export_wizard(models.TransientModel):
                 _('Amount for line with ref %s is negative (%f '
                   'given)') % (line.name, line.amount_currency)
             )
-
-    def _check_currency(self, line, properties):
-        ''' Check that line currency is equal to dd export currency '''
-        if not line.currency.name == properties.get('currency'):
-            raise exceptions.ValidationError(
-                _('Line with ref %s has %s currency and direct '
-                  'debit file %s (should be the same)') %
-                (line.name, line.currency.name, properties.get(
-                    'currency', ''))
-            )
-
-    def _complete_line(self, string, nb_char):
-        ''' In DD file each field has a defined length.
-            This way, lines have to be filled with spaces (or truncated).
-        '''
-        if len(string) > nb_char:
-            return string[:nb_char]
-
-        return string.ljust(nb_char)
 
     def _format_number(self, amount, nb_char):
         ''' Accepted format is "0000000012350" for "123.50" '''
@@ -405,11 +374,11 @@ class post_dd_export_wizard(models.TransientModel):
         line4_zip = bank_account.zip if bank_account.zip else ''
         line5_city = bank_account.city if bank_account.city else ''
 
-        return (self._complete_line(line1_owner, 35) +
-                self._complete_line(line2_owner_cmpl, 35) +
-                self._complete_line(line3_address, 35) +
-                self._complete_line(line4_zip, 10) +
-                self._complete_line(line5_city, 25))
+        return (export_utils.complete_line(35, line1_owner) +
+                export_utils.complete_line(35, line2_owner_cmpl) +
+                export_utils.complete_line(35, line3_address) +
+                export_utils.complete_line(10, line4_zip) +
+                export_utils.complete_line(25, line5_city))
 
     def _get_post_account(self, bank_account):
         ''' Returns BV/BVR account in format 123456789 rather than
@@ -431,52 +400,10 @@ class post_dd_export_wizard(models.TransientModel):
         return ''
 
     def _get_ref(self, payment_line):
-        if self._is_bvr_ref(payment_line.move_line_id.transaction_ref):
+        if export_utils.is_bvr_ref(payment_line.move_line_id.transaction_ref):
             return payment_line.move_line_id.transaction_ref.replace(
                 ' ', '').rjust(27, '0')
         return ''
-
-    def _is_bvr_ref(self, ref):
-        if not ref:
-            return False  # Empty is not valid
-        clean_ref = ref.replace(' ', '')
-        if not clean_ref.isdigit() or len(clean_ref) > 27:
-            return False
-        clean_ref = clean_ref.rjust(27, '0')  # Add zeros to the left
-        if not clean_ref == mod10r(clean_ref[0:26]):
-            return False
-
-        return True
-
-    def _get_treatment_date(self, prefered_type, line_mat_date,
-                            order_sched_date, name):
-        ''' Returns appropriate date according to payment_order and
-            payment_order_line data.
-            Raises an error if treatment date is > today+30 or < today-10
-        '''
-        requested_date = date.today()
-        if prefered_type == 'due':
-            requested_date = datetime.strptime(line_mat_date, DF).date() \
-                or requested_date
-        elif prefered_type == 'fixed':
-            requested_date = datetime.strptime(order_sched_date, DF).date() \
-                or requested_date
-
-        # Accepted dates are in range -90 to +90 days. We could go up
-        # to +1 year, but we should be sure that we have less than
-        # 1000 lines in payment order
-        if requested_date > date.today() + timedelta(days=90) \
-                or requested_date < date.today() - timedelta(days=90):
-            raise exceptions.ValidationError(
-                _('Incorrect treatment date: %s for line with '
-                  'ref %s') % (requested_date, name)
-            )
-
-        return requested_date
-
-    def _prepare_date(self, format_date):
-        ''' Returns date formatted to YYMMDD string '''
-        return format_date.strftime('%y%m%d')
 
     def _setup_properties(self, payment_order):
         ''' These properties are the same for all lines of the DD file '''
