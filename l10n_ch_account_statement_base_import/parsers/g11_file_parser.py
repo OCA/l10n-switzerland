@@ -55,59 +55,6 @@ class G11Parser(BaseSwissParser):
         }
         self.balance_end = 0.0
 
-    def ftype(self):
-        """Gives the type of file we want to import
-
-        :return: imported file type
-        :rtype: string
-        """
-
-        return super(G11Parser, self).ftype()
-
-    def get_currency(self):
-        """Returns the ISO currency code of the parsed file
-
-        :return: The ISO currency code of the parsed file eg: CHF
-        :rtype: string
-        """
-
-        return super(G11Parser, self).get_currency()
-
-    def get_account_number(self):
-        """Return the account_number related to parsed file
-
-        :return: The account number of the parsed file
-        :rtype: string
-        """
-
-        return super(G11Parser, self).get_account_number()
-
-    def get_statements(self):
-        """Return the list of bank statement dict.
-         Bank statements data: list of dict containing
-            (optional items marked by o) :
-            - 'name': string (e.g: '000000123')
-            - 'date': date (e.g: 2013-06-26)
-            -o 'balance_start': float (e.g: 8368.56)
-            -o 'balance_end_real': float (e.g: 8888.88)
-            - 'transactions': list of dict containing :
-                - 'name': string
-                   (e.g: 'KBC-INVESTERINGSKREDIET 787-5562831-01')
-                - 'date': date
-                - 'amount': float
-                - 'unique_import_id': string
-                -o 'account_number': string
-                    Will be used to find/create the res.partner.bank in odoo
-                -o 'note': string
-                -o 'partner_name': string
-                -o 'ref': string
-
-        :return: a list of statement
-        :rtype: list
-        """
-
-        return super(G11Parser, self).get_statements()
-
     def file_is_known(self):
         """Predicate the tells if the parser can parse the data file
 
