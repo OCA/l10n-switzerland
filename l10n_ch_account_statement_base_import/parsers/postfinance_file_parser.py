@@ -44,6 +44,7 @@ class XMLPFParser(BaseSwissParser):
         """
         super(XMLPFParser, self).__init__(data_file)
         self.is_tar = None
+        self.tar_source = data_file
         self.data_file = self._get_content_from_stream(data_file)
         self.attachments = None
         if self.is_tar:
@@ -223,7 +224,7 @@ class XMLPFParser(BaseSwissParser):
         :return: a list of attachment tuple (name, content)
         :rtype: list
         """
-        attachments = [('xml statment', self.data_file.encode('base64'))]
+        attachments = [('Statement File', self.tar_source.encode('base64'))]
         transaction_nodes = tree.xpath("//SG6")
         for transaction in transaction_nodes:
             desc = '/'

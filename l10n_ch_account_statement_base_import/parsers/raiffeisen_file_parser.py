@@ -220,12 +220,13 @@ class RaffeisenCSVParser(BaseSwissParser):
 
         self.rows = self.cleanup_rows(self.rows)
         self.currency_code = self._parse_currency_code()
-        statement = {}
-        statement['balance_start'] = balance_start
-        statement['balance_end_real'] = balance_end
-        statement['date'] = self._parse_statement_date()
-        statement['attachments'] = []
-        statement['transactions'] = self._parse_transactions()
-
+        statement = {
+            'balance_start': balance_start,
+            'date': self._parse_statement_date(),
+            'attachments': [('Statement File',
+                             self.data_file.encode('base64'))],
+            'transactions': self._parse_transactions(),
+            'balance_end_real': balance_end
+        }
         self.statements.append(statement)
         return True

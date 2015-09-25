@@ -144,12 +144,13 @@ class V11Parser(BaseSwissParser):
         self.currency_code = self._parse_currency_code()
         self.balance_end, self.number_transaction = \
             self._parse_stmt_balance_num_trans()
-        statement = {}
-        statement['balance_start'] = 0.0
-        statement['date'] = self._parse_statement_date()
-        statement['attachments'] = []
-        statement['transactions'] = self._parse_transactions()
-        statement['balance_end_real'] = self.balance_end
-
+        statement = {
+            'balance_start': 0.0,
+            'date': self._parse_statement_date(),
+            'attachments': [('Statement File',
+                             self.data_file.encode('base64'))],
+            'transactions': self._parse_transactions(),
+            'balance_end_real': self.balance_end
+        }
         self.statements.append(statement)
         return self.validate()
