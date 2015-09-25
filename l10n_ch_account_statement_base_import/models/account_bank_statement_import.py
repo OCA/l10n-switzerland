@@ -170,7 +170,7 @@ class account_bank_statement_import(models.TransientModel):
             }
             statement_line = self.env[
                 'account.bank.statement.line'].search(
-                    [('name', '=', attachment[0])]
+                    [('ref', '=', attachment[0])]
                 )
             if statement_line:
                 # Link directly attachement with the right statement line
