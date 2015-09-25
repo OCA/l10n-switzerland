@@ -198,7 +198,7 @@ class XMLPFParser(BaseSwissParser):
             if transaction.xpath(".//@Value='ZZZ'"):
                 desc = transaction.xpath("RFF/C506/D_1154/text()")[1]
 
-            res['ref'] = "\n".join(transaction.xpath("FTX/C108/D_4440/text()"))
+            res['name'] = "\n".join(transaction.xpath("FTX/C108/D_4440/text()"))
             amount = float(transaction.xpath("MOA/C516/D_5004/text()")[0])
             if transaction.xpath("MOA/C516/D_5025/@Value='211'"):
                 amount *= -1
@@ -209,7 +209,7 @@ class XMLPFParser(BaseSwissParser):
                    if (x.prefix == 'PF' and x.tag.endswith('D_4754'))]
             uid = uid[0] if uid else None
             res['unique_import_id'] = uid
-            res['name'] = uid if uid else desc
+            res['ref'] = uid if uid else desc
             res['account_number'] = None
             res['note'] = None
             res['partner_name'] = None
