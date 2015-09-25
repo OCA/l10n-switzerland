@@ -162,7 +162,6 @@ class account_bank_statement_import(models.TransientModel):
         )._create_bank_statement(
             stmt_vals
         )
-
         for attachment in attachments:
             att_data = {
                 'name': attachment[0],
