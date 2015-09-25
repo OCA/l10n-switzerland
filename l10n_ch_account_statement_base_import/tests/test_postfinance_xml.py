@@ -72,13 +72,13 @@ class PFXMLParserTest(BaseParserTest):
         self.assertEqual(22, len(statement['transactions']))
         first_transaction = {
             'unique_import_id': '20110322001201000200001000000101',
-            'name': '20110322001201000200001000000101',
+            'ref': '20110322001201000200001000000101',
             'partner_name': None,
             'note': None,
             'amount': -227.3,
             'account_number': None,
             'date': '2011-03-28',
-            'ref': 'ZAHLUNGSAUFTRAG NR. 30002102'
+            'name': 'ZAHLUNGSAUFTRAG NR. 30002102'
         }
         self.assertEqual(first_transaction, statement['transactions'][0])
 
@@ -123,5 +123,5 @@ class PostFinanceImportTest(BaseStatementImportTest):
         # Read common infos of first line
         self.assertEqual(st_line.date, "2011-03-28")
         self.assertEqual(st_line.amount, -227.30)
-        self.assertEqual(st_line.ref, "ZAHLUNGSAUFTRAG NR. 30002102")
-        self.assertEqual(st_line.name, "20110322001201000200001000000101")
+        self.assertEqual(st_line.name, "ZAHLUNGSAUFTRAG NR. 30002102")
+        self.assertEqual(st_line.ref, "20110322001201000200001000000101")
