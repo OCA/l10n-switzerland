@@ -170,14 +170,14 @@ class G11Parser(BaseSwissParser):
         """
 
         self.currency_code = self._parse_currency_code()
-        statement = {}
         self.balance_end = self._parse_statement_balance_end()
-        statement.update({
+        statement = {
             'balance_start': 0.0,
             'date': self._parse_statement_date(),
-            'attachments': [],
+            'attachments': [('Statement File',
+                             self.data_file.encode('base64'))],
             'transactions': self._parse_transactions(),
             'balance_end_real': self.balance_end
-        })
+        }
         self.statements.append(statement)
         return self.validate()
