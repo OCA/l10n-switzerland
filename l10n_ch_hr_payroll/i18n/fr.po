@@ -4,6 +4,8 @@
 #
 # Translators:
 #   Y-Ph. Crittin <cyp@open-net.ch>
+msgid ""
+msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-04 14:57+0000\n"
