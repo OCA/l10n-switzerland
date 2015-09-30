@@ -199,7 +199,7 @@ class post_dd_export_wizard(models.TransientModel):
         control_range = self._gen_control_range('47', properties)
 
         vals = collections.OrderedDict()
-        self._check_currency(line, properties)
+        export_utils.check_currency(line, properties)
         self._check_amount(line, properties)
         communications = self._get_communications(line)
         vals.update([
