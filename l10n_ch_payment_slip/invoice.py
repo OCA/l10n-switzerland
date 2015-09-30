@@ -18,6 +18,7 @@
 #
 ##############################################################################
 from openerp import models, fields, api
+import pdb
 
 
 class AccountMoveLine(models.Model):
@@ -136,6 +137,7 @@ class AccountInvoice(models.Model):
         field of the invoice.
 
         """
+        pdb.set_trace()
         res = super(AccountInvoice, self).action_number()
         pay_slip = self.env['l10n_ch.payment_slip']
         for inv in self:
@@ -149,6 +151,7 @@ class AccountInvoice(models.Model):
                     self._action_bvr_number_move_line(move_line_id,
                                                       ref)
             else:
+                pdb.set_trace()
                 for pay_slip in pay_slip.compute_pay_slips_from_invoices(inv):
                     ref = pay_slip.reference
                     self._action_bvr_number_move_line(pay_slip.move_line_id,
