@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#  File: __init__.py
+#  File: models/__init__.py
 #  Module: l10n_ch_hr_payroll
 #
 #  Created by sge@open-net.ch
@@ -28,3 +28,7 @@
 
 from . import hr_contract
 from . import hr_employee
+from . import hr_expenses
+from . import hr_payslip
+from . import invoices
+from . import account_move_line
