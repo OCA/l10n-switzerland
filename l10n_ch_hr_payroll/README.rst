@@ -18,7 +18,8 @@ This module allows you to manage the salaries of your employees
     * Add Holiday Rate to contract.
 
 ** For further information:** 
-    * Please visit http://open-net.ch/blog/la-comptabilite-salariale-suisse-avec-odoo-1/tag/salaires-6
+    * Payroll accounting: http://open-net.ch/blog/la-comptabilite-salariale-suisse-avec-odoo-1/tag/salaires-6
+    * Commissions and reimbursements management: http://open-net.ch/blog/la-comptabilite-salariale-suisse-avec-odoo-1/post/salaires-avec-odoo-commissions-et-notes-de-frais-78
 
 ** Remarks: **
     * To prevent overwriting your salary rules changes, an update from 1.0.8 and lower to 1.0.9 and higher creates duplicates of the salary rules. This is because with some migrated databases, one may encounter a difficulty with the existing rules (they can not be erased if they are already used). The solution is then to force the existing ones to be non-updatable. And this is done using an included pre-migration script.
