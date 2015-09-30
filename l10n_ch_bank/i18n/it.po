@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-17 12:24+0000\n"
+"POT-Creation-Date: 2015-09-23 17:28+0000\n"
 "PO-Revision-Date: 2015-06-17 13:35+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/it/)\n"
@@ -96,7 +96,7 @@ msgstr ""
 #. module: l10n_ch_bank
 #: field:res.bank,bank_valid_from:0
 msgid "Valid from"
-msgstr ""
+msgstr "Valido da"
 
 #. module: l10n_ch_bank
 #: field:res.bank,bank_eurosic:0
