@@ -61,3 +61,29 @@ msgstr "Taux Commissions"
 #: view:hr.contract:0
 msgid "Commissions / Rate"
 msgstr "Commission / taux"
+
+#. module: l10n_ch_hr_payslip
+#: field:account.invoice,slip_id:0
+#: field:account.move.line,slip_id:0
+msgid "Pay slip"
+msgstr "Bulletin de paye"
+
+#. module: l10n_ch_hr_payslip
+#: view:hr.payslip:0
+msgid "Salary elements"
+msgstr "Eléments de salaire"
+
+#. module: l10n_ch_hr_payslip
+#: view:hr.payslip:0
+msgid "Invoices"
+msgstr "Factures"
+
+#. module: l10n_ch_hr_payslip
+#: view:hr.payslip:0
+msgid "Expenses"
+msgstr "Dépenses"
+
+#. module: l10n_ch_hr_payslip
+#: view:hr.payslip:0
+msgid "Move lines"
+msgstr "Ecritures comptables"

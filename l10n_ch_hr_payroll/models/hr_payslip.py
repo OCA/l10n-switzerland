@@ -35,10 +35,12 @@ class HrPayslip(models.Model):
 
     # ---------- Fields management
 
-    reimbursements = fields.One2many('account.invoice', 'slip_id',
-        string='Reimbursements')
-    commissions = fields.One2many('hr.expense.expense', 'slip_id',
-        string='Commissions')
+    invoices = fields.One2many('account.invoice', 'slip_id',
+        string='Invoices')
+    expenses = fields.One2many('hr.expense.expense', 'slip_id',
+        string='Expenses')
+    move_lines = fields.One2many('account.move.line', 'slip_id',
+        string='Expenses')
 
     # ---------- Utilities
     
@@ -58,8 +60,16 @@ class HrPayslip(models.Model):
         expenses = ExpenseObj.search([('slip_id', 'in', slip_ids)])
         if expenses:
             expenses.write({'slip_id':False})
+    
+        # Third, detach account move lines from the pay slips
+        AccountMoveLineObj = self.env['account.move.line']
+        aml = AccountMoveLineObj.search([('slip_id', 'in', slip_ids)])
+        if aml:
+            aml.write({'slip_id':False})
 
-        # Then, re-link the invoices and the expenses using the criterias
+        ret = super(HrPayslip, self).compute_sheet()
+
+        # Then, re-link the invoices, the expenses and the account move lines using the criterias
         InvoiceLineObj = self.env['account.invoice.line']
         for payslip in self:
             # No contract? forget about it
@@ -77,15 +87,17 @@ class HrPayslip(models.Model):
             inv_ids = []
             filters = [
                 ('invoice_id.user_id', '=', user_id),
-                ('invoice_id.slip_id', '=', False),
                 ('product_id', '!=', False),
-                ('invoice_id.state', '=', 'paid'),
+                ('invoice_id.state', 'in', ['open','paid']),
                 ('invoice_id.type', '=', 'out_invoice'),
             ]
+            move_ids = []
             for invl in InvoiceLineObj.search(filters):
                 if invl.invoice_id.id not in inv_ids:
                     inv_ids.append(invl.invoice_id.id)
                     invl.invoice_id.write({'slip_id': payslip.id})
+                if invl.invoice_id.move_id and invl.invoice_id.move_id.id not in move_ids:
+                    move_ids.append(str(invl.invoice_id.move_id.id))
 
             # Look for expenses
             exp_ids = []
@@ -97,5 +109,25 @@ class HrPayslip(models.Model):
             expenses = ExpenseObj.search(filters)
             if expenses:
                 expenses.write({'slip_id': payslip.id})
+            
+            # Look for account move lines
+            if move_ids:
+                query = """select l3.id
+from account_move_line l1, account_move_line l2, account_move_line l3, account_account a
+where l1.move_id in (%s)
+and (
+(l1.reconcile_id=l2.reconcile_id and l2.reconcile_id != 0)
+  or
+(l1.reconcile_partial_id=l2.reconcile_partial_id and l2.reconcile_partial_id != 0))
+and l3.move_id=l2.move_id
+and (l3.reconcile_id=0 or l3.reconcile_id is null)
+and (l3.reconcile_partial_id=0 or l3.reconcile_partial_id is null)
+and l3.account_id=a.id
+and (l3.slip_id=0 or l3.slip_id is null)
+and a.type='liquidity'""" % ','.join(move_ids)
 
-        return super(HrPayslip, self).compute_sheet()
+                cr, uid, context = self.env.args
+                cr.execute(query)
+                move_line_ids = [str(x[0]) for x in cr.fetchall()]
+                if move_line_ids:
+                    cr.execute("update account_move_line set slip_id=%d where id in (%s)" % (payslip.id, ','.join(move_line_ids)))
