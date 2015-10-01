@@ -134,7 +134,7 @@ class post_dd_export_wizard(models.TransientModel):
                         payment_order.date_prefered,
                         line.ml_maturity_date,
                         payment_order.date_scheduled,
-                        line.name)
+                        line.name, format='%y%m%d')
                     properties.update({
                         'dd_order_no': properties['dd_order_no'] + 1,
                         'trans_ser_no': 0,
