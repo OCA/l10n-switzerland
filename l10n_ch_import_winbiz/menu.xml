@@ -8,6 +8,7 @@
       <field name="res_model">account.winbiz.import</field>
       <field name="domain"></field>
       <field name="view_type">form</field>
+      <field name="target">new</field>
       <field name="view_mode">tree,form</field>
       <field name="view_id" ref="winbiz_move_line_importer_form"/>
     </record>
