@@ -26,6 +26,8 @@ from lxml import etree
 from itertools import izip_longest
 from StringIO import StringIO
 from openerp import models, fields, api, _
+from openerp.modules.registry import RegistryManager
+
 
 _logger = logging.getLogger(__name__)
 
@@ -42,7 +44,8 @@ class AccountWinbizImport(models.TransientModel):
         """
         date_now = fields.Datetime.now()
         period_obj = self.env['account.period']
-        return period_obj.search([('date_stop', '<', date_now)],
+        return period_obj.search([('date_stop', '<', date_now),
+                                  ('state','=','open')],
                                  order='date_stop desc', limit=1).id
 
     company_id = fields.Many2one('res.company', 'Company',
@@ -131,7 +134,7 @@ class AccountWinbizImport(models.TransientModel):
         if not result['messages']:
             self.write({'state': 'done',
                         'report': _("Lines imported"),
-                        'imported_move_ids': result['ids']})
+                        'imported_move_ids': [(6,0,result['ids'])]})
         else:
             self.write({'report': self.format_messages(result['messages']),
                         'state': 'error'})
@@ -198,29 +201,33 @@ class AccountWinbizImport(models.TransientModel):
         """
         # Change data from dict to list of array
         data_array = []
+        error_report = ''
+        status_report = False
         for data_item_dict in data:
             data_item = []
             for item in self.HEAD_ODOO:
                 data_item.append(data_item_dict[item])
             data_array.append(data_item)
-        try:
-            res = self.env['account.move'].load(self.HEAD_ODOO,
-                                                data_array)
 
-            self._manage_load_results(res)
-        except Exception as exc:
-            ex_type, sys_exc, tb = sys.exc_info()
-            tb_msg = ''.join(traceback.format_tb(tb, 30))
-            _logger.error(tb_msg)
-            _logger.error(repr(exc))
-            self.report = _("Unexpected exception.\n %s \n %s" %
-                            (repr(exc), tb_msg))
-            self.state = 'error'
-        finally:
-            if self.state == 'error':
-                self.env.cr.rollback()
-                self.write({'report': self.report, 'state': self.state})
+       with api.Environment.manage():
+           try:
+                res = self.env['account.move'].load(self.HEAD_ODOO,data_array)
+                self._manage_load_results(res)
+            except Exception as exc:
+                ex_type, sys_exc, tb = sys.exc_info()
+                tb_msg = ''.join(traceback.format_tb(tb, 30))
+                _logger.error(tb_msg)
+                _logger.error(repr(exc))
+                error_report += _("Unexpected exception.\n %s \n %s \n") % \
+                                (repr(exc), tb_msg)
+                status_report = 'error'
+            if status_report == 'error':
+                import pdb
+                pdb.set_trace()
+                self.write({'state': status_report,
+                            'report': error_report})
         return {}
+
 
     @api.multi
     def import_file(self):
