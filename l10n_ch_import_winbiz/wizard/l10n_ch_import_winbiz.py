@@ -209,25 +209,30 @@ class AccountWinbizImport(models.TransientModel):
                 data_item.append(data_item_dict[item])
             data_array.append(data_item)
 
-       with api.Environment.manage():
-           try:
-                res = self.env['account.move'].load(self.HEAD_ODOO,data_array)
-                self._manage_load_results(res)
-            except Exception as exc:
-                ex_type, sys_exc, tb = sys.exc_info()
-                tb_msg = ''.join(traceback.format_tb(tb, 30))
-                _logger.error(tb_msg)
-                _logger.error(repr(exc))
-                error_report += _("Unexpected exception.\n %s \n %s \n") % \
-                                (repr(exc), tb_msg)
-                status_report = 'error'
-            if status_report == 'error':
-                import pdb
-                pdb.set_trace()
-                self.write({'state': status_report,
-                            'report': error_report})
-        return {}
-
+        try:
+            res = self.env['account.move'].load(self.HEAD_ODOO, data_array)
+            self._manage_load_results(res)
+        except Exception as exc:
+            ex_type, sys_exc, tb = sys.exc_info()
+            tb_msg = ''.join(traceback.format_tb(tb, 30))
+            _logger.error(tb_msg)
+            _logger.error(repr(exc))
+            error_report += _("Unexpected exception.\n %s \n %s \n") % \
+                (repr(exc), tb_msg)
+            status_report = 'error'
+        if status_report == 'error':
+            self.write({'state': status_report,
+                        'report': error_report})
+        return {
+            'name': 'Winbiz move line importer',
+            'type': 'ir.actions.act_window',
+            'res_model': 'account.winbiz.import',
+            'view_type': 'form',
+            'view_mode': 'form,tree',
+            'res_id': self.id,
+            'nodestroy': False,
+            'target': 'new',
+        }
 
     @api.multi
     def import_file(self):
