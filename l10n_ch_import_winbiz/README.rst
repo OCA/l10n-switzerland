@@ -15,10 +15,10 @@ Usage
 =====
 In order to import your Winbiz Salary.txt 
 file you must complete the following requirements:
- * The accounts, analytical accounts used in the Winbiz
-   file must be previously created into Odoo
- * The date of the entry will determine the period used
-   in Odoo, so please ensure the period is created already.
+    * The accounts, analytical accounts used in the Winbiz
+      file must be previously created into Odoo
+    * The date of the entry will determine the period used
+      in Odoo, so please ensure the period is created already.
 
 
 Bug Tracker

@@ -73,7 +73,7 @@ class AccountWinbizImport(models.TransientModel):
         string='Imported moves')
 
     help_html = fields.Html('Import help', readonly=True,
-                            default=_('''
+                            default='''
                  In order to import your 'Winbiz Salaires' .xml \
                  file you must complete the following requirements : \
                 <ul>
@@ -81,7 +81,7 @@ class AccountWinbizImport(models.TransientModel):
                  file must be previously created into Odoo  </li>
                 <li> The date of the entry will determine the period used\
                  in Odoo, so please ensure the period is created already. </li>
-                </ul>'''))
+                </ul>''')
 
     HEAD_ODOO = ['ref', 'date', 'period_id', 'journal_id',
                  'line_id/account_id', 'line_id/partner_id', 'line_id/name',

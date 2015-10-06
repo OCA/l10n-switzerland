@@ -27,6 +27,7 @@
     ],
     'author': 'Camptocamp, Odoo Community Association (OCA)',
     'website': 'http://www.camptocamp.com',
+    'license': 'AGPL-3',
     'data': [
         'security/security.xml',
         'wizard/l10n_ch_import_winbiz_view.xml',
