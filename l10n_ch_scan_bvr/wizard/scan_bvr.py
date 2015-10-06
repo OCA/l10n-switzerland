@@ -1,30 +1,16 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Nicolas Bessi Vincent Renaville
-#    Copyright 2013 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# Author: Nicolas Bessi Vincent Renaville
+# (c) 2013 Camptocamp SA
+# (c) 2015 Alex Comba - Agile Business Group
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 import time
 
-from openerp import models, exceptions, fields, _, pooler
+from openerp import fields, models, _, pooler
+from openerp.exceptions import Warning as UserError
 
 
-class scan_bvr(models.TransientModel):
+class ScanBvr(models.TransientModel):
 
     _name = "scan.bvr"
     _description = "BVR/ESR Scanning Wizard"
@@ -71,19 +57,19 @@ class scan_bvr(models.TransientModel):
     def _construct_bvrplus_in_chf(self, bvr_string):
 
         if len(bvr_string) != 43:
-            raise exceptions.Warning(
+            raise UserError(
                 _('BVR CheckSum Error in first part')
             )
         elif self._check_number(bvr_string[0:2]) != int(bvr_string[2]):
-            raise exceptions.Warning(
+            raise UserError(
                 _('BVR CheckSum Error in second part')
             )
         elif self._check_number(bvr_string[4:30]) != int(bvr_string[30]):
-            raise exceptions.Warning(
+            raise UserError(
                 _('BVR CheckSum Error in third part')
             )
         elif self._check_number(bvr_string[33:41]) != int(bvr_string[41]):
-            raise exceptions.Warning(
+            raise UserError(
                 _('BVR CheckSum Error in fourth part')
             )
         else:
@@ -102,19 +88,19 @@ class scan_bvr(models.TransientModel):
 
     def _construct_bvr_in_chf(self, bvr_string):
         if len(bvr_string) != 53:
-            raise exceptions.Warning(
+            raise UserError(
                 _('BVR CheckSum Error in first part')
             )
         elif self._check_number(bvr_string[0:12]) != int(bvr_string[12]):
-            raise exceptions.Warning(
+            raise UserError(
                 _('BVR CheckSum Error in second part')
             )
         elif self._check_number(bvr_string[14:40]) != int(bvr_string[40]):
-            raise exceptions.Warning(
+            raise UserError(
                 _('BVR CheckSum Error in third part')
             )
         elif self._check_number(bvr_string[43:51]) != int(bvr_string[51]):
-            raise exceptions.Warning(
+            raise UserError(
                 _('BVR CheckSum Error in fourth part')
             )
         else:
@@ -133,7 +119,7 @@ class scan_bvr(models.TransientModel):
 
     def _construct_bvr_postal_in_chf(self, bvr_string):
         if len(bvr_string) != 42:
-            raise exceptions.Warning(
+            raise UserError(
                 _('BVR CheckSum Error in first part')
             )
         else:
@@ -152,7 +138,7 @@ class scan_bvr(models.TransientModel):
 
     def _construct_bvr_postal_other_in_chf(self, bvr_string):
         if len(bvr_string) != 41:
-            raise exceptions.Warning(
+            raise UserError(
                 _('BVR CheckSum Error in first part')
             )
         else:
@@ -207,7 +193,7 @@ class scan_bvr(models.TransientModel):
                 )
                 for taxe in taxes:
                     if not taxe.price_include and taxe.amount != 0.0:
-                        raise exceptions.Warning(
+                        raise UserError(
                             _('The default product in this partner has '
                               'wrong taxes configuration')
                         )
@@ -432,12 +418,12 @@ class scan_bvr(models.TransientModel):
                 # We will set the currency , in this case it's allways CHF
                 bvr_struct['currency'] = 'CHF'
             else:
-                raise exceptions.Warning(_('This kind of BVR is not supported '
-                                           'at this time'))
+                raise UserError(_('This kind of BVR is not supported '
+                                  'at this time'))
             return bvr_struct
 
     def validate_bvr_string(self, cr, uid, ids, context):
-        # We will now retrive result
+        # We will now retrieve result
         bvr_data = self.browse(cr, uid, ids, context)[0]
         # BVR Standrard
         # 0100003949753>120000000000234478943216899+ 010001628>
