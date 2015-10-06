@@ -26,7 +26,6 @@ from lxml import etree
 from itertools import izip_longest
 from StringIO import StringIO
 from openerp import models, fields, api, _
-from openerp.modules.registry import RegistryManager
 
 
 _logger = logging.getLogger(__name__)
@@ -45,7 +44,7 @@ class AccountWinbizImport(models.TransientModel):
         date_now = fields.Datetime.now()
         period_obj = self.env['account.period']
         return period_obj.search([('date_stop', '<', date_now),
-                                  ('state','=','open')],
+                                  ('state', '=', 'open')],
                                  order='date_stop desc', limit=1).id
 
     company_id = fields.Many2one('res.company', 'Company',
@@ -134,7 +133,7 @@ class AccountWinbizImport(models.TransientModel):
         if not result['messages']:
             self.write({'state': 'done',
                         'report': _("Lines imported"),
-                        'imported_move_ids': [(6,0,result['ids'])]})
+                        'imported_move_ids': [(6, 0, result['ids'])]})
         else:
             self.write({'report': self.format_messages(result['messages']),
                         'state': 'error'})
