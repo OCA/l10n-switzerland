@@ -46,6 +46,10 @@ def get_treatment_date(prefered_type, line_mat_date, order_sched_date, name,
     elif prefered_type == 'fixed':
         requested_date = fields.Datetime.from_string(order_sched_date) \
             or today
+    elif prefered_type == 'now':
+        requested_date = today
+    else:
+        raise exceptions.Warning('Prefered type not implemented')
 
     # Accepted dates are in range -90 to +90 days. We could go up
     # to +1 year, but we should be sure that we have less than
