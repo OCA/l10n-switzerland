@@ -206,11 +206,11 @@ class ScanBvr(models.TransientModel):
         partner_bank = partner_bank_model.browse(data['bank_account'])
         if data['bvr_struct']['domain'] == 'name':
             partner_bank.write(
-                {'post_number': data['bvr_struct']['beneficiaire']})
+                {'ccp': data['bvr_struct']['beneficiaire']})
         else:
             partner_bank.write(
                 {'bvr_adherent_num': data['bvr_struct']['bvrnumber'],
-                 'bvr_number': data['bvr_struct']['beneficiaire']})
+                 'ccp': data['bvr_struct']['beneficiaire']})
         date_due = time.strftime('%Y-%m-%d')
         # We will now compute the due date and fixe the payment term
         payment_term_id = (account_info.partner_id.property_payment_term and
