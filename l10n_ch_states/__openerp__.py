@@ -22,7 +22,7 @@
     'name': 'Switzerland Country States',
     'category': 'Localisation',
     'summary': '',
-    'version': '1.0',
+    'version': '8.0.1.0.0',
     'author': 'copado MEDIA UG, Odoo Community Association (OCA)',
     'website': 'http://www.copado.de',
     'license': 'AGPL-3',
