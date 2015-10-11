@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-23 17:28+0000\n"
-"PO-Revision-Date: 2015-09-23 17:29+0000\n"
+"POT-Creation-Date: 2015-10-09 14:46+0000\n"
+"PO-Revision-Date: 2015-10-08 20:30+0000\n"
 "Last-Translator: Stefano <stefano.sforzi@agilebg.com>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -96,7 +96,7 @@ msgstr "Annulla"
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Società"
 
 #. module: l10n_ch_payment_slip
 #: field:l10n_ch.payment_slip,create_uid:0
