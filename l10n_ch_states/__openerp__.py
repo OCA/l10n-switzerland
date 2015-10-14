@@ -31,6 +31,6 @@
     ],
     'data': ['data/res_country_states.xml'],
     'demo': [],
-    'installable': True,
+    'installable': False,
     'application': False,
 }
