@@ -1,24 +1,6 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Nicolas Bessi. Copyright Camptocamp SA
-#    Financial contributors: Hasa SA, Open Net SA,
-#                            Prisme Solutions Informatique SA, Quod SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2012 Nicolas Bessi (Camptocamp SA)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import re
 from openerp import models, fields, api, _
 from openerp.tools import mod10r
@@ -71,12 +53,10 @@ class Bank(models.Model, BankCommon):
 
     code = fields.Char(
         string='Code',
-        size=64,
         help='Internal reference'
     )
     clearing = fields.Char(
         string='Clearing number',
-        size=64,
         help='Swiss unique bank identifier also used in IBAN number'
     )
     city = fields.Char(
@@ -85,7 +65,7 @@ class Bank(models.Model, BankCommon):
     )
     ccp = fields.Char(
         string='CCP/CP-Konto',
-        size=64,
+        size=11,
         help="CCP/CP-Konto of the bank"
     )
 
@@ -95,7 +75,7 @@ class Bank(models.Model, BankCommon):
         res_part_bank_model = self.env['res.partner.bank']
         for bank in self:
             part_bank_accs = res_part_bank_model.search(
-                [('bank', '=', bank.id)]
+                [('bank_id', '=', bank.id)]
             )
 
             if part_bank_accs:
@@ -108,7 +88,8 @@ class Bank(models.Model, BankCommon):
         for bank in self:
             if not bank.ccp:
                 continue
-            if not (self._check_9_pos_postal_num(bank.ccp)):
+            if not (self._check_9_pos_postal_num(bank.ccp) or
+                    self._check_5_pos_postal_num(bank.ccp)):
                 raise exceptions.ValidationError(
                     _('Please enter a correct postal number. '
                       '(01-23456-1 or 12345)')
@@ -171,20 +152,27 @@ class ResPartnerBank(models.Model, BankCommon):
     )
     ccp = fields.Char(
         string='CCP/CP-Konto',
-        related='bank.ccp',
+        related='bank_id.ccp',
         store=True,
         readonly=True
     )
+
+    @api.one
+    @api.depends('acc_number', 'ccp')
+    def _compute_acc_type(self):
+        if (self._check_9_pos_postal_num(self.acc_number) or
+                self._check_5_pos_postal_num(self.acc_number)):
+            self.acc_type = 'postal'
+            return
+        super(ResPartnerBank, self)._compute_acc_type()
 
     @api.multi
     def get_account_number(self):
         """Retrieve the correct bank number to used based on
         account type
         """
-        if self.state not in ('bv', 'bvr'):
-            return self.acc_number
-        if self.bank and self.bank.ccp:
-            return self.bank.ccp
+        if self.ccp:
+            return self.ccp
         else:
             return self.acc_number
 
@@ -203,50 +191,40 @@ class ResPartnerBank(models.Model, BankCommon):
                 )
         return True
 
-    @api.constrains('acc_number')
+    @api.constrains('ccp')
     def _check_postal_num(self):
         """Validate postal number format
         """
         for p_bank in self:
-            if p_bank.state not in ('bv', 'bvr'):
+            ccp = p_bank.ccp
+            if not ccp:
                 continue
-            acc = p_bank.get_account_number()
-            if not acc:
-                continue
-            if not (
-                    self._check_9_pos_postal_num(acc) or
-                    self._check_5_pos_postal_num(acc)):
+            if not (self._check_9_pos_postal_num(ccp) or
+                    self._check_5_pos_postal_num(ccp)):
                 raise exceptions.ValidationError(
                     _('Please enter a correct postal number. '
                       '(01-23456-1 or 12345)')
                 )
 
-    @api.constrains('acc_number', 'bank')
+    @api.constrains('acc_number', 'bank_id')
     def _check_ccp_duplication(self):
         """Ensure that there is not a CCP/CP-Konto in bank and res partner bank
         at same time
 
         """
         for p_bank in self:
-            if p_bank.state not in ('bv', 'bvr'):
-                continue
-            bank_ccp = p_bank.bank.ccp if p_bank.bank else False
-            if not bank_ccp:
-                continue
-            part_bank_check = (
-                self._check_5_pos_postal_num(p_bank.acc_number) or
-                self._check_9_pos_postal_num(p_bank.acc_number)
-            )
-            bank_check = (
-                self._check_5_pos_postal_num(p_bank.bank.ccp) or
-                self._check_9_pos_postal_num(p_bank.bank.ccp)
-            )
-            if part_bank_check and bank_check:
+            if p_bank.acc_type == 'postal' and p_bank.ccp:
                 raise exceptions.ValidationError(
                     _('You can not enter a CCP/CP-Konto both on '
                       'the bank and on an account '
                       'of type BV/ES, BVR/ESR')
                 )
+
+    @api.onchange('bank_id')
+    def onchange_bank(self):
+        """ If acc_number is empty and bank ccp is defined fill it """
+        if not self.acc_number and self.bank_id.ccp:
+            self.acc_number = 'Bank/CCP ' + self.bank_id.ccp
 
     _sql_constraints = [('bvr_adherent_uniq', 'unique (bvr_adherent_num)',
                          'The BVR adherent number must be unique !')]
