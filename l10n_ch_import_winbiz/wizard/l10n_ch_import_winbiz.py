@@ -44,7 +44,7 @@ class AccountWinbizImport(models.TransientModel):
         date_now = fields.Datetime.now()
         period_obj = self.env['account.period']
         return period_obj.search([('date_stop', '<', date_now),
-                                  ('state', '=', 'open')],
+                                  ('state', '=', 'draft')],
                                  order='date_stop desc', limit=1).id
 
     company_id = fields.Many2one('res.company', 'Company',
@@ -157,37 +157,44 @@ class AccountWinbizImport(models.TransientModel):
                 default_value = standard_dict.copy()
                 # We compute company part first after the employee
                 decimal_amount = float(winbiz_item[amount_type])
-                if (not previous_date) or \
-                        previous_date != winbiz_item['st_date1']:
-                    default_value.update({'date': winbiz_item['st_date1'],
-                                          'ref': _('Payslip'),
-                                          'journal_id': self.journal_id.name,
-                                          'period_id': self.period_id.code
-                                          })
-                    previous_date = winbiz_item['st_date1']
-                else:
-                    default_value.update({'date': None,
-                                          'ref': None,
-                                          'journal_id': None,
-                                          'period_id': None})
-                if decimal_amount < 0:
-                    default_value.update({'line_id/credit':
-                                          abs(decimal_amount),
-                                          'line_id/debit': 0.0,
+                print str(decimal_amount)
+                if decimal_amount:
+                    if (not previous_date) or \
+                            previous_date != winbiz_item['st_date1']:
+                        default_value.update({'date': winbiz_item['st_date1'],
+                                              'ref': _('Payslip'),
+                                              'journal_id': self.journal_id.name,
+                                              'period_id': self.period_id.code
+                                              })
+                        previous_date = winbiz_item['st_date1']
+                    else:
+                        default_value.update({'date': None,
+                                              'ref': None,
+                                              'journal_id': None,
+                                              'period_id': None})
+                    if decimal_amount < 0 and amount_type == 'lnmntsal':
+                        default_value.update({'line_id/credit':
+                                              abs(decimal_amount),
+                                              'line_id/debit': 0.0})
+                    elif decimal_amount > 0 and amount_type == 'lnmntsal':
+                        default_value.update({'line_id/debit': abs(decimal_amount),
+                                              'line_id/credit': 0.0})
+                    elif decimal_amount < 0 and amount_type == 'lnmntent':
+                        default_value.update({'line_id/debit': abs(decimal_amount),
+                                              'line_id/credit': 0.0})
+                    else:
+                        default_value.update({'line_id/credit':
+                                              abs(decimal_amount),
+                                              'line_id/debit': 0.0})
+                    analytic_code = None
+                    analytic_code = winbiz_item['lcanaccount']
+                    default_value.update({'line_id/partner_id': company_partner,
+                                          'line_id/name': _('Payslip'),
                                           'line_id/account_id':
-                                          winbiz_item['lcaccount']})
-                else:
-                    default_value.update({'line_id/debit': abs(decimal_amount),
-                                          'line_id/credit': 0.0,
-                                          'line_id/account_id':
-                                          winbiz_item['lcaccount']})
-                analytic_code = None
-                analytic_code = winbiz_item['lcanaccount']
-                default_value.update({'line_id/partner_id': company_partner,
-                                      'line_id/name': _('Payslip'),
-                                      'line_id/analytic_account_id':
-                                      analytic_code})
-                new_openerp_data.append(default_value)
+                                              winbiz_item['lcaccount'],
+                                          'line_id/analytic_account_id':
+                                          analytic_code})
+                    new_openerp_data.append(default_value)
         return new_openerp_data
 
     @api.multi
