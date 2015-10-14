@@ -1,150 +1,124 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Nicolas Bessi
-#    Copyright 2014 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-import openerp.tests.common as test_common
+# © 2014-2015 Nicolas Bessi (Camptocamp SA)
+# © 2015 Yannick Vaucher (Camptocamp SA)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+from openerp.tests import common
 from openerp.tools import mute_logger
 from openerp import exceptions
 
 
-class TestBank(test_common.TransactionCase):
+class TestBank(common.TransactionCase):
 
     def test_ccp_at_bank(self):
-        company = self.env.ref('base.main_company')
-        self.assertTrue(company)
-        partner = self.env.ref('base.main_partner')
-        self.assertTrue(partner)
-        self.bank = self.env['res.bank'].create(
-            {
-                'name': 'BCV',
-                'ccp': '01-1234-1',
-                'bic': '234234',
-                'clearing': '234234',
-            }
-        )
-        self.bank_account = self.env['res.partner.bank'].create(
-            {
-                'partner_id': partner.id,
-                'owner_name': partner.name,
-                'street':  partner.street,
-                'city': partner.city,
-                'zip':  partner.zip,
-                'state': 'bvr',
-                'bank': self.bank.id,
-                'bank_name': self.bank.name,
-                'bank_bic': self.bank.bic,
-                'acc_number': 'R 12312123',
-                'bvr_adherent_num': '1234567',
-            }
-        )
+        self.bank.write({
+            'ccp': '01-1234-1',
+        })
+        self.env['res.partner.bank'].create({
+            'partner_id': self.partner.id,
+            'bank_id': self.bank.id,
+            'acc_number': 'R 12312123',
+            'bvr_adherent_num': '1234567',
+        })
 
     def test_faulty_ccp_at_bank(self):
-        company = self.env.ref('base.main_company')
-        self.assertTrue(company)
-        partner = self.env.ref('base.main_partner')
-        self.assertTrue(partner)
         with self.assertRaises(exceptions.ValidationError):
             with mute_logger():
-                self.bank = self.env['res.bank'].create(
-                    {
-                        'name': 'BCV',
-                        'ccp': '2342342343423',
-                        'bic': '234234',
-                        'clearing': '234234',
-                    }
-                )
-
-                self.bank_account = self.env['res.partner.bank'].create(
-                    {
-                        'partner_id': partner.id,
-                        'owner_name': partner.name,
-                        'street':  partner.street,
-                        'city': partner.city,
-                        'zip':  partner.zip,
-                        'state': 'bvr',
-                        'bank': self.bank.id,
-                        'bank_name': self.bank.name,
-                        'bank_bic': self.bank.bic,
-                        'acc_number': 'R 12312123',
-                        'bvr_adherent_num': '1234567',
-
-                    }
-                )
+                self.bank.write({
+                    'ccp': '2342342343423',
+                })
+                self.env['res.partner.bank'].create({
+                    'partner_id': self.partner.id,
+                    'bank_id': self.bank.id,
+                    'acc_number': 'R 12312123',
+                    'bvr_adherent_num': '1234567',
+                })
 
     def test_non_bvr_bank(self):
-        company = self.env.ref('base.main_company')
-        self.assertTrue(company)
-        partner = self.env.ref('base.main_partner')
-        self.assertTrue(partner)
-        self.bank = self.env['res.bank'].create(
-            {
-                'name': 'BCV',
-                'bic': '234234',
-                'clearing': '234234',
-            }
-        )
-        self.bank_account = self.env['res.partner.bank'].create(
-            {
-                'partner_id': partner.id,
-                'owner_name': partner.name,
-                'street':  partner.street,
-                'city': partner.city,
-                'zip':  partner.zip,
-                'state': 'bank',
-                'bank': self.bank.id,
-                'bank_name': self.bank.name,
-                'bank_bic': self.bank.bic,
-                'acc_number': 'R 12312123',
-                'bvr_adherent_num': '1234567',
-            }
-        )
+        self.env['res.partner.bank'].create({
+            'partner_id': self.partner.id,
+            'bank_id': self.bank.id,
+            'acc_number': 'R 12312123',
+            'bvr_adherent_num': '1234567',
+        })
 
-    # Commented du to issue odoo#3422
-    # def test_duplicate_ccp(self):
-    #     company = self.env.ref('base.main_company')
-    #     self.assertTrue(company)
-    #     partner = self.env.ref('base.main_partner')
-    #     self.assertTrue(partner)
-    #     self.bank = self.env['res.bank'].create(
-    #         {
-    #             'name': 'BCV',
-    #             'bic': '234234',
-    #             'clearing': '234234',
-    #             'ccp': '01-1234-1',
-    #             'bvr_adherent_num': '1234567',
+    def test_duplicate_ccp(self):
+        self.bank.write({
+            'ccp': '01-1234-1',
+        })
+        with self.assertRaises(exceptions.ValidationError):
+            with mute_logger():
+                self.env['res.partner.bank'].create({
+                    'partner_id': self.partner.id,
+                    'bank_id': self.bank.id,
+                    'acc_number': '01-1234-1',
+                    'bvr_adherent_num': '1234567',
+                })
 
-    #         }
-    #     )
-    #     with self.assertRaises(exceptions.ValidationError):
-    #         with mute_logger():
-    #             self.bank_account = self.env['res.partner.bank'].create(
-    #                 {
-    #                     'partner_id': partner.id,
-    #                     'owner_name': partner.name,
-    #                     'street':  partner.street,
-    #                     'city': partner.city,
-    #                     'zip':  partner.zip,
-    #                     'state': 'bvr',
-    #                     'bank': self.bank.id,
-    #                     'bank_name': self.bank.name,
-    #                     'bank_bic': self.bank.bic,
-    #                     'acc_number': '01-1234-1',
-    #                     'bvr_adherent_num': '1234567',
-    #                 }
-    #             )
+    def test_constraint_adherent_number(self):
+        with self.assertRaises(exceptions.ValidationError):
+            with mute_logger():
+                self.env['res.partner.bank'].create({
+                    'partner_id': self.partner.id,
+                    'acc_number': '12312123',
+                    'bvr_adherent_num': 'Wrong bvr adherent number',
+                })
+
+    def test_constraint_cpp_on_partner_bank(self):
+        with self.assertRaises(exceptions.ValidationError):
+            with mute_logger():
+                self.env['res.partner.bank'].create({
+                    'partner_id': self.partner.id,
+                    'acc_number': '12312123',
+                    'bvr_adherent_num': 'Wrong bvr adherent number',
+                    'ccp': 'Not a CCP',
+                })
+
+    def test_get_account_number(self):
+        bank_account = self.env['res.partner.bank'].create({
+            'partner_id': self.partner.id,
+            'bank_id': self.bank.id,
+            'acc_number': 'R 12312123',
+            'bvr_adherent_num': '1234567',
+        })
+        acc_num = bank_account.get_account_number()
+        self.assertEqual(acc_num, bank_account.acc_number)
+        self.bank.write({
+            'ccp': '01-1234-1',
+        })
+        acc_num = bank_account.get_account_number()
+        self.assertEqual(acc_num, bank_account.ccp)
+
+    def test_onchange_bank(self):
+        self.bank.write({
+            'ccp': '01-1234-1',
+        })
+        bank_account = self.env['res.partner.bank'].new({
+            'partner_id': self.partner.id,
+            'bank_id': self.bank.id,
+            'acc_number': None,
+            'bvr_adherent_num': '1234567',
+        })
+        bank_account.onchange_bank()
+        self.assertEqual(bank_account.acc_number, 'Bank/CCP 01-1234-1')
+
+    def test_name_search(self):
+        result = self.env['res.bank'].name_search('BIC234234')
+        self.bank.code = 'CODE123'
+        self.assertEqual(result and result[0][0], self.bank.id)
+        result = self.env['res.bank'].name_search('CODE123')
+        self.assertEqual(result and result[0][0], self.bank.id)
+        self.bank.street = 'Route de Neuchâtel'
+        self.bank.city = 'Lausanne'
+        result = self.env['res.bank'].name_search('Route de Neuchâtel')
+        self.assertEqual(result and result[0][0], self.bank.id)
+        result = self.env['res.bank'].name_search('Lausanne')
+        self.assertEqual(result and result[0][0], self.bank.id)
+
+    def setUp(self):
+        super(TestBank, self).setUp()
+        self.partner = self.env.ref('base.main_partner')
+        self.bank = self.env['res.bank'].create({
+            'name': 'BCV',
+            'bic': 'BIC234234',
+            'clearing': 'CLEAR234234',
+        })
