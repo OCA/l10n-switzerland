@@ -38,5 +38,5 @@ of move lines
           "report.xml",
           "security/ir.model.access.csv"],
  "active": False,
- "installable": True
+ 'installable': False
  }

@@ -36,6 +36,6 @@
     'images': [],
     'demo': [],
     'auto_install': False,
-    'installable': True,
+    'installable': False,
     'application': True,
 }

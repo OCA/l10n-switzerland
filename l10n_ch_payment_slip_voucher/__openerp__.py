@@ -38,6 +38,6 @@ To do so, use the wizard provided under Accounting -> Customers.
  'demo': [],
  'test': [],
  'auto_install': False,
- 'installable': True,
+ 'installable': False,
  'images': []
  }

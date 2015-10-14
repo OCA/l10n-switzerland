@@ -40,6 +40,6 @@ This addons allows you to generate an electronic payment file for Swiss bank
  'demo': ["demo/dta_demo.xml"],
  'test': ["test/l10n_ch_dta.yml"],
  'auto_install': False,
- 'installable': True,
+ 'installable': False,
  'images': []
  }

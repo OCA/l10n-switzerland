@@ -57,6 +57,6 @@ It currently supports the "pain.001" norm for Credit Transfert Initiation.
         "test/pain001_eu.yml",
         "test/pain001_ch.yml",
     ],
-    "installable": True,
+    'installable': False,
     "active": True,
 }

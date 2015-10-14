@@ -32,5 +32,5 @@
         'account_tax_view.xml',
         'menu.xml',
     ],
-    'installable': True,
+    'installable': False,
 }
