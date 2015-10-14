@@ -42,6 +42,6 @@ This module is required if you want to use electornic payment in Switzerland.
  'demo': [],
  'test': [],
  'auto_install': False,
- 'installable': True,
+ 'installable': False,
  'images': []
  }
