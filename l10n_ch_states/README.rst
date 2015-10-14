@@ -1,12 +1,15 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
+    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 
+==========================
 Switzerland Country States
 ==========================
 
 This module extends res.country.states for Switzerland. It brings states with
 code and name for those who only want the states without cities.
-For those who also want cities, please install l10n_ch_zip.
+
+For those who also want cities, please install *Switzerland - Postal codes (ZIP) list*  (`l10n_ch_zip`).
 
 
 Installation
@@ -18,31 +21,12 @@ To install this module, you need to:
 * or directly install it over Odoo-Apps
 
 
-Configuration
-=============
-
-To configure this module, you need to:
-
-* do nothing
-
-
 Usage
 =====
 
-To use this module, you need to:
-
-* do nothing
-
-For further information, please visit:
-
-* https://www.odoo.com/forum/help-1
-
-
-Known issues / Roadmap
-======================
-
-* actually there are no issues known
-
+.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
+   :alt: Try me on Runbot
+   :target: https://runbot.odoo-community.org/runbot/125/9.0
 
 Bug Tracker
 ===========
