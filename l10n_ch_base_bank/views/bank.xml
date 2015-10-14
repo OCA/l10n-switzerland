@@ -77,7 +77,8 @@
       <field name="model">res.partner.bank</field>
       <field name="inherit_id" ref="base.view_partner_bank_form"/>
       <field name="arch" type="xml">
-        <field name="bank_bic" position="after">
+        <field name="bank_id" position="after">
+          <field name="bank_bic" invisible="1"/>
           <field name="ccp" attrs="{'invisible': [('bank_bic', '=', 'POFICHBEXXX')]}"/>
         </field>
       </field>
