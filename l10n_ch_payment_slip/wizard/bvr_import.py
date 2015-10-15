@@ -1,24 +1,6 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Nicolas Bessi. Copyright Camptocamp SA
-#    Financial contributors: Hasa SA, Open Net SA,
-#                            Prisme Solutions Informatique SA, Quod SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2014-2016 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import base64
 import time
 import re
@@ -67,7 +49,7 @@ class BvrImporterWizard(models.TransientModel):
         :type amount: float
         """
         if round(amount - self.total_amount, 2) >= 0.01:
-            raise exceptions.Warning(
+            raise exceptions.UserError(
                 _('Total amount differ from the computed amount')
             )
 
@@ -99,7 +81,7 @@ class BvrImporterWizard(models.TransientModel):
         :type cost: float
         """
         if round(cost - self.total_cost, 2) >= 0.01:
-            raise exceptions.Warning(
+            raise exceptions.UserError(
                 _('Total cost differ from the computed amount')
             )
 
@@ -126,7 +108,7 @@ class BvrImporterWizard(models.TransientModel):
         }
 
         if record['reference'] != mod10r(record['reference'][:-1]):
-            raise exceptions.Warning(
+            raise exceptions.UserError(
                 _('Recursive mod10 is invalid for reference: %s') %
                 record['reference']
             )
@@ -152,16 +134,16 @@ class BvrImporterWizard(models.TransientModel):
             # If line is a validation line
             if line[0:3] in self._total_line_codes:
                 if find_total:
-                    raise exceptions.Warning(
+                    raise exceptions.UserError(
                         _('Too many total record found!')
                     )
                 find_total = True
                 if lines:
-                    raise exceptions.Warning(
+                    raise exceptions.UserError(
                         _('Record found after total record')
                     )
                 if int(line[51:63]) != len(records):
-                    raise exceptions.Warning(
+                    raise exceptions.UserError(
                         _('Number of records differ from the computed one')
                     )
                 # Validaton of amount and costs
@@ -205,7 +187,7 @@ class BvrImporterWizard(models.TransientModel):
             order='date desc',
         )
         if len(line) > 1:
-            raise exceptions.Warning(
+            raise exceptions.UserError(
                 _("Too many receivable/payable lines for reference %s")
                 % reference)
         if line:
@@ -227,7 +209,7 @@ class BvrImporterWizard(models.TransientModel):
         statement_obj = self.env['account.bank.statement']
         v11file = self.v11file
         if not v11file:
-            raise exceptions.Warning(
+            raise exceptions.UserError(
                 _('Please select a file first!')
             )
         statement_id = self.env.context.get('active_id')
@@ -236,7 +218,7 @@ class BvrImporterWizard(models.TransientModel):
         try:
             lines = base64.decodestring(v11file).split("\r\n")
         except ValueError as decode_err:
-            raise exceptions.Warning(
+            raise exceptions.UserError(
                 _('V11 file can not be decoded, '
                   'it contains invalid caracter %s'),
                 repr(decode_err)

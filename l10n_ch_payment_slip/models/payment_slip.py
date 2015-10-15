@@ -1,23 +1,6 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Nicolas Bessi
-#    Copyright 2014 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2014-2016 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from __future__ import division
 import base64
 import StringIO
@@ -29,10 +12,9 @@ from reportlab.pdfgen.canvas import Canvas
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.units import inch
-from openerp import models, fields, api, _
+from openerp import models, fields, api, _, exceptions
 from openerp.report import report_sxw
 from openerp.modules import get_module_resource
-from openerp import exceptions
 from openerp.tools.misc import mod10r
 
 FontMeta = namedtuple('FontMeta', ('name', 'size'))
@@ -91,7 +73,7 @@ class PaymentSlip(models.Model):
                             readonly=True)
 
     invoice_id = fields.Many2one(string='Related invoice',
-                                 related='move_line_id.invoice',
+                                 related='move_line_id.invoice_id',
                                  store=True,
                                  readonly=True,
                                  comodel_name='account.invoice')
@@ -118,7 +100,7 @@ class PaymentSlip(models.Model):
         :return: True if we can generate a payment slip
         :rtype: bool
         '''
-        invoice = move_line.invoice
+        invoice = move_line.invoice_id
         if not invoice:
             return False
         return (invoice.partner_bank_id and
@@ -133,8 +115,8 @@ class PaymentSlip(models.Model):
         self.ensure_one()
         move_line = self.move_line_id
         ad_number = ''
-        if move_line.invoice.partner_bank_id.bvr_adherent_num:
-            ad_number = move_line.invoice.partner_bank_id.bvr_adherent_num
+        if move_line.invoice_id.partner_bank_id.bvr_adherent_num:
+            ad_number = move_line.invoice_id.partner_bank_id.bvr_adherent_num
         return ad_number
 
     def _compute_amount_hook(self):
@@ -165,7 +147,7 @@ class PaymentSlip(models.Model):
 
     @api.one
     @api.depends('move_line_id',
-                 'move_line_id.invoice.number')
+                 'move_line_id.invoice_id.number')
     def compute_ref(self):
         """Retrieve ESR/BVR reference from move line in order to print it
 
@@ -179,8 +161,8 @@ class PaymentSlip(models.Model):
         # We sould not use technical id but will keep it for historical reason
         move_number = str(move_line.id)
         ad_number = self._get_adherent_number()
-        if move_line.invoice.number:
-            compound = move_line.invoice.number + str(move_line.id)
+        if move_line.invoice_id.number:
+            compound = move_line.invoice_id.number + str(move_line.id)
             move_number = self._compile_get_ref.sub('', compound)
         reference = mod10r(
             ad_number + move_number.rjust(26 - len(ad_number), '0')
@@ -231,11 +213,13 @@ class PaymentSlip(models.Model):
         line += [char for char in self.reference.replace(" ", "")]
         line.append('+')
         line.append(' ')
-        bank = self.move_line_id.invoice.partner_bank_id.get_account_number()
+        partner_bank = self.move_line_id.invoice_id.partner_bank_id
+        bank = partner_bank.get_account_number()
         account_components = bank.split('-')
         if len(account_components) != 3:
-            raise Warning(_('Please enter a correct postal number like: '
-                            '01-23456-1'))
+            raise exceptions.UserError(
+                _('Please enter a correct postal number like: '
+                  '01-23456-1'))
         bank_identifier = "%s%s%s" % (
             account_components[0],
             account_components[1].rjust(6, '0'),
@@ -345,7 +329,7 @@ class PaymentSlip(models.Model):
 
         :return: True or raise an exception
         :rtype: bool"""
-        invoice = self.move_line_id.invoice
+        invoice = self.move_line_id.invoice_id
         if not invoice:
             raise exceptions.ValidationError(
                 _('No invoice related to move line %s') % self.move_line_id.ref
@@ -764,9 +748,9 @@ class PaymentSlip(models.Model):
         default_font = self._get_text_font()
         small_font = self._get_samll_text_font()
         amount_font = self._get_amount_font()
-        invoice = self.move_line_id.invoice
+        invoice = self.move_line_id.invoice_id
         scan_font = self._get_scan_line_text_font(company)
-        bank_acc = self.move_line_id.invoice.partner_bank_id
+        bank_acc = self.move_line_id.invoice_id.partner_bank_id
         if a4:
             canvas_size = (595.27, 841.89)
         else:

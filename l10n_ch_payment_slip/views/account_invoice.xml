@@ -14,7 +14,7 @@
       <field name="type">form</field>
       <field name="inherit_id" ref="account.invoice_form"/>
       <field name="arch" type="xml">
-        <field name="tax_line" position="before">
+        <field name="tax_line_ids" position="before">
           <group colspan="4">
           <field name="bvr_reference" colspan="4"/>
           <button type="action"
