@@ -188,8 +188,6 @@ class AccountCresusImport(models.TransientModel):
         new_openerp_data = []
         tax_obj = self.env['account.tax']
         account_obj = self.env['account.account']
-        cp = self.env.user.company_id
-        company_partner = cp.partner_id.name
         standard_dict = dict(izip_longest(self.HEAD_ODOO, []))
         previous_date = False
         for line_cresus in data:
@@ -246,7 +244,7 @@ class AccountCresusImport(models.TransientModel):
                             tax_code = tax_current.name
                         analytic_code = line_cresus['analytic_account']
             default_value.update({'line_id/account_tax_id': tax_code,
-                                  'line_id/partner_id': company_partner,
+                                  'line_id/partner_id': False,
                                   'line_id/name': line_cresus['ref'],
                                   'line_id/analytic_account_id':
                                   analytic_code})
