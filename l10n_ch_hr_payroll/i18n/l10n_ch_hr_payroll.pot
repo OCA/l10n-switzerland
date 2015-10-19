@@ -2,8 +2,8 @@
 # This file contains the translation of the following modules:
 # * l10n_ch_hr_payroll
 #
-# Translators:
-#   Y-Ph. Crittin <cyp@open-net.ch>
+msgid ""
+msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-04 14:57+0000\n"
@@ -13,98 +13,97 @@
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: \n"
 
 #. module: l10n_ch_hr_payslip
 #: field:hr.contract,lpp_rate:0
 msgid "LPP Rate"
-msgstr "Taux LPP"
+msgstr ""
 
 #. module: l10n_ch_hr_payslip
 #: field:hr.contract,lpp_amount:0
 msgid "LPP Amount"
-msgstr "Montant LPP"
+msgstr ""
 
 #. module: l10n_ch_hr_payslip
 #: field:hr.contract,worked_hours:0
 msgid "Worked Hours"
-msgstr "Heures travaillées"
+msgstr ""
 
 #. module: l10n_ch_hr_payslip
 #: field:hr.contract,hourly_rate:0
 msgid "Hourly Rate"
-msgstr "Taux horaire"
+msgstr ""
 
 #. module: l10n_ch_hr_payslip
 #: field:hr.contract,holiday_rate:0
 msgid "Holiday Rate"
-msgstr "Taux vacances"
+msgstr ""
 
 #. module: l10n_ch_hr_payslip
 #: field:hr.contract,reimbursement:0
 msgid "Reimbursement"
-msgstr "Remboursement"
+msgstr ""
 
 #. module: l10n_ch_hr_payslip
 #: field:hr.contract,commission:0
 msgid "Commission"
-msgstr "Commission"
+msgstr ""
 
 #. module: l10n_ch_hr_payslip
 #: field:hr.contract,comm_rate:0
 msgid "Commissions Rate"
-msgstr "Taux Commissions"
+msgstr ""
 
 #. module: l10n_ch_hr_payslip
 #: view:hr.contract
 msgid "Commissions / Rate"
-msgstr "Commission / taux"
+msgstr ""
 
 #. module: l10n_ch_hr_payslip
 #: field:account.invoice,slip_id:0
 #: field:account.move.line,slip_id:0
 #: field:hr.expense.expense,slip_id:0
 msgid "Pay slip"
-msgstr "Bulletin de paye"
+msgstr ""
 
 #. module: l10n_ch_hr_payslip
 #: view:hr.payslip
 msgid "Salary elements"
-msgstr "Eléments de salaire"
+msgstr ""
 
 #. module: l10n_ch_hr_payslip
 #: view:hr.payslip
 msgid "Invoices"
-msgstr "Factures"
+msgstr ""
 
 #. module: l10n_ch_hr_payslip
 #: view:hr.payslip
 msgid "Expenses"
-msgstr "Dépenses"
+msgstr ""
 
 #. module: l10n_ch_hr_payslip
 #: field:hr.employee,children:0
 msgid "Number of Children at school"
-msgstr "Nombre d'enfants en scolarité"
+msgstr ""
 
 #. module: l10n_ch_hr_payslip
 #: field:hr.employee,children_student:0
 msgid "Number of Children student"
-msgstr "Nombre d'enfants en études"
+msgstr ""
 
 #. module: l10n_ch_hr_payslip
 #: field:hr.payslip,invoices:0
 msgid "Invoices"
-msgstr "Factures"
+msgstr ""
 
 #. module: l10n_ch_hr_payslip
 #: field:hr.payslip,expenses:0
 msgid "Expenses"
-msgstr "Dépenses"
+msgstr ""
 
 #. module: l10n_ch_hr_payslip
 #: field:hr.payslip,move_lines:0
 #: view:hr.payslip
 msgid "Journal Items"
-msgstr "Écritures comptables"
+msgstr ""

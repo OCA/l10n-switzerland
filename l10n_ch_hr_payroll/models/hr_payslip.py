@@ -40,7 +40,7 @@ class HrPayslip(models.Model):
     expenses = fields.One2many('hr.expense.expense', 'slip_id',
                                string='Expenses')
     move_lines = fields.One2many('account.move.line', 'slip_id',
-                                 string='Expenses')
+                                 string='Journal Items')
 
     # ---------- Utilities
 
