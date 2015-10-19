@@ -134,7 +134,6 @@ the error detail is:
         """
         account_obj = self.env['account.account']
         company = self.company_id
-        partner_id = company.partner_id.id
         company_id = company.id
         journal_id = self.journal_id.id
         previous_pce = None
@@ -160,7 +159,7 @@ the error detail is:
                     self._find_analytic_account(line_cresus['analytic_account'], account)
                 lines.append(self.make_line(recto_amount, verso_amount,
                     account_id = account.id,
-                    partner_id = partner_id,
+                    partner_id = False,
                     name = line_cresus['ref'],
                     tax_line_id = tax.id,
                     analytic_account_id = analytic_account.id))
@@ -172,7 +171,7 @@ the error detail is:
                     self._find_analytic_account(line_cresus['analytic_account'], account)
                 lines.append(self.make_line(verso_amount, recto_amount,
                     account_id = account.id,
-                    partner_id = partner_id,
+                    partner_id = False,
                     name = line_cresus['ref'],
                     tax_line_id = tax.id,
                     analytic_account_id = analytic_account.id))
