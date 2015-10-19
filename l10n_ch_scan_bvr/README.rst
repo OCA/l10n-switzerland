@@ -50,8 +50,15 @@ Credits
 Contributors
 ------------
 
-* Alex Comba <alex.comba@agielbg.com>
+* Vincent Renaville <vincent.renaville@camptocamp.com>
+* Yannick Vaucher <yannick.vaucher@camptocamp.com>
+* Joël Grand-Guillaume <joel.grandguillaume@camptocamp.com>
+* Nicolas Bessi <nicolas.bessi@camptocamp.com>
+* Moises Lopez <moylop260@vauxoo.com>
+* Alexandre Fayolle <alexandre.fayolle@camptocamp.com>
+* César Andrés Sanchez <cesar-andres.sanchez@braintec-group.com>
 * Nicola Malcontenti <nicola.malcontenti@agilebg.com>
+* Alex Comba <alex.comba@agielbg.com>
 
 Maintainer
 ----------
