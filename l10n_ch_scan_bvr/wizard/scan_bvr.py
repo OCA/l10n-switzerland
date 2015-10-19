@@ -4,8 +4,6 @@
 # (c) 2015 Alex Comba - Agile Business Group
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-import time
-
 from openerp import api, fields, models, _
 from openerp.exceptions import Warning as UserError
 
@@ -196,6 +194,7 @@ class ScanBvr(models.TransientModel):
         invoice_tax_model = self.env['account.invoice.tax']
         currency_model = self.env['res.currency']
         partner_bank_model = self.env['res.partner.bank']
+        today = fields.Date.today()
         if data['bank_account']:
             account_info = self.env['res.partner.bank'].browse(
                 data['bank_account'])
@@ -211,7 +210,7 @@ class ScanBvr(models.TransientModel):
             partner_bank.write(
                 {'bvr_adherent_num': data['bvr_struct']['bvrnumber'],
                  'ccp': data['bvr_struct']['beneficiaire']})
-        date_due = time.strftime('%Y-%m-%d')
+        date_due = today
         # We will now compute the due date and fixe the payment term
         payment_term_id = (account_info.partner_id.property_payment_term and
                            account_info.partner_id.property_payment_term.id or
@@ -219,17 +218,15 @@ class ScanBvr(models.TransientModel):
         if payment_term_id:
             # We Calculate due_date
             res = invoice_model.onchange_payment_term_date_invoice(
-                payment_term_id,
-                time.strftime('%Y-%m-%d')
-            )
+                payment_term_id, today)
             date_due = res['value']['date_due']
 
         invoice_vals = {
-            'name': time.strftime('%Y-%m-%d'),
+            'name': today,
             'partner_id': account_info.partner_id.id,
             'account_id': account_info.partner_id.property_account_payable.id,
             'date_due': date_due,
-            'date_invoice': time.strftime('%Y-%m-%d'),
+            'date_invoice': today,
             'payment_term': payment_term_id,
             'reference_type': 'bvr',
             'reference': data['bvr_struct']['reference'],
