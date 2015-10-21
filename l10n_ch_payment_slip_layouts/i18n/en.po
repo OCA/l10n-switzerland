@@ -9,18 +9,18 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-17 12:24+0000\n"
 "PO-Revision-Date: 2015-07-24 13:37+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/fr/)\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: English (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_payment_slip_layouts
 #: model:ir.model,name:l10n_ch_payment_slip_layouts.model_res_company
 msgid "Companies"
-msgstr "Sociétés"
+msgstr "Companies"
 
 #. module: l10n_ch_payment_slip_layouts
 #: field:report.invoice_and_one_slip_per_page_from_invoice,id:0
@@ -30,14 +30,14 @@ msgstr "ID"
 #. module: l10n_ch_payment_slip_layouts
 #: field:res.company,bvr_background_on_merge:0
 msgid "Insert BVR Background with invoice ?"
-msgstr ""
+msgstr "Insert BVR Background with invoice ?"
 
 #. module: l10n_ch_payment_slip_layouts
 #: model:ir.actions.report.xml,name:l10n_ch_payment_slip_layouts.invoice_and_one_slip_per_page_from_invoice
 msgid "Invoice with Payment Slip"
-msgstr ""
+msgstr "Invoice with Payment Slip"
 
 #. module: l10n_ch_payment_slip_layouts
 #: model:ir.model,name:l10n_ch_payment_slip_layouts.model_report
 msgid "Report"
-msgstr "Rapport"
+msgstr "Report"

@@ -1,220 +1,49 @@
-# Translation of OpenERP Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#       * l10n_ch_dta
-#
+# * l10n_ch_dta
+# 
+# Translators:
+# Guewen Baconnier <guewen.baconnier@camptocamp.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 7.0\n"
+"Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-15 15:00+0000\n"
-"PO-Revision-Date: 2014-01-15 15:36+0000\n"
-"Last-Translator: Yannick Vaucher @ Camptocamp <Unknown>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-08-17 12:24+0000\n"
+"PO-Revision-Date: 2015-09-02 07:45+0000\n"
+"Last-Translator: Guewen Baconnier <guewen.baconnier@camptocamp.com>\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-14 05:59+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
-"Language: \n"
+"Content-Transfer-Encoding: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:489
-#, python-format
-msgid "No payment mode"
-msgstr ""
-
-#. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:535
-#, python-format
-msgid ""
-"No address defined \n"
-" for the partner: %s on line"
-msgstr ""
-
-#. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:556
-#, python-format
-msgid ""
-"No bank name defined\n"
-" for the bank account: %s\n"
-"on the partner: %s\n"
-" on line: %s"
-msgstr ""
-
-#. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:511
-#, python-format
-msgid "No IBAN for the company bank account."
-msgstr ""
-
-#. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:359
-#, python-format
-msgid ""
-"You must provide the bank city or the bic code for the partner bank: \n"
-" %s\n"
-" on line: %s"
-msgstr ""
-
-#. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:231
-#, python-format
-msgid ""
-"BVR reference number is not valid \n"
-" for the line: %s. \n"
-"Mod10 check failed"
-msgstr ""
-
-#. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:240
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:273
 #, python-format
 msgid ""
 "BVR reference number is not valid \n"
 "for the line: %s. \n"
 " Reference is too long for this type of beneficiary."
-msgstr ""
+msgstr "La référence BVR n'est pas valide pour la ligne : %s.\nLa référence est trop longue pour ce type de bénéficiaire."
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:497
-#, python-format
-msgid "You must provide a Clearing Number for your bank account."
-msgstr ""
-
-#. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:492
-#, python-format
-msgid "No bank account for the company."
-msgstr ""
-
-#. module: l10n_ch_dta
-#: view:create.dta.wizard:0
-msgid "DTA Generation"
-msgstr "Génération du fichier DTA"
-
-#. module: l10n_ch_dta
-#: view:res.partner.bank:0
-msgid "DTA options"
-msgstr "Options de DTA"
-
-#. module: l10n_ch_dta
-#: model:ir.model.fields,field_description:l10n_ch_dta.field_payment_order_dta_ids
-#: field:payment.order,dta_ids:0
-msgid "unknown"
-msgstr "unknown"
-
-#. module: l10n_ch_dta
-#: model:ir.model,name:l10n_ch_dta.model_create_dta_wizard
-msgid "create.dta.wizard"
-msgstr ""
-
-#. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:541
-#, python-format
-msgid ""
-"No bank account defined\n"
-" on line: %s"
-msgstr ""
-
-#. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:226
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:261
 #, python-format
 msgid ""
 "BVR reference number is not valid \n"
-" for the line: %s. \n"
+"for the line: %s. \n"
+"Mod10 check failed"
+msgstr "La référence BVR n'est pas valide pour la ligne : %s.\nLe contrôle d'intégrité Mod10 a échoué."
+
+#. module: l10n_ch_dta
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:253
+#, python-format
+msgid ""
+"BVR reference number is not valid \n"
+"for the line: %s. \n"
 "Reference is too long."
-msgstr ""
-
-#. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:544
-#, python-format
-msgid ""
-"No bank defined for the bank account: %s\n"
-"on the partner: %s\n"
-" on line: %s"
-msgstr ""
-
-#. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:608
-#, python-format
-msgid "The Bank type %s of the bank account: %s is not supported"
-msgstr ""
-
-#. module: l10n_ch_dta
-#: model:ir.model,name:l10n_ch_dta.model_payment_order
-msgid "Payment Order"
-msgstr "Ordre de Paiement"
-
-#. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:262
-#, python-format
-msgid ""
-"You must provide a bank number \n"
-"for the partner bank: %s\n"
-" on line: %s"
-msgstr ""
-
-#. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:249
-#, python-format
-msgid ""
-"You must provide a BVR number\n"
-"for the bank account: %son line: %s"
-msgstr ""
-
-#. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:267
-#, python-format
-msgid ""
-"You must provide a Clearing Number\n"
-"for the partner bank: %s\n"
-" on line %s"
-msgstr ""
-
-#. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:150
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:218
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:225
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:230
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:239
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:248
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:261
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:266
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:343
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:358
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:488
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:492
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:496
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:510
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:534
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:540
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:543
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:555
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:607
-#, python-format
-msgid "Error"
-msgstr ""
-
-#. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:219
-#, python-format
-msgid ""
-"You must provide a BVR referencenumber \n"
-" for the line: %s"
-msgstr ""
-
-#. module: l10n_ch_dta
-#: model:ir.model.fields,field_description:l10n_ch_dta.field_res_partner_bank_dta_code
-#: field:res.partner.bank,dta_code:0
-msgid "DTA code"
-msgstr "code DTA"
-
-#. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:151
-#, python-format
-msgid ""
-"Wrong postal number format.\n"
-"It must be 12-123456-9 or 12345 format"
-msgstr ""
+msgstr "La référence BVR n'est pas valide pour la ligne : %s.\nLa référence est trop longue."
 
 #. module: l10n_ch_dta
 #: model:ir.model,name:l10n_ch_dta.model_res_partner_bank
@@ -222,21 +51,219 @@ msgid "Bank Accounts"
 msgstr "Comptes bancaires"
 
 #. module: l10n_ch_dta
-#: view:create.dta.wizard:0
+#: view:create.dta.wizard:l10n_ch_dta.dta_create_view
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: l10n_ch_dta
+#: view:create.dta.wizard:l10n_ch_dta.dta_create_view
 #: model:ir.actions.act_window,name:l10n_ch_dta.action_dta_create
 msgid "Create DTA"
 msgstr "Créer DTA"
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:344
+#: field:create.dta.wizard,create_uid:0
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: l10n_ch_dta
+#: field:create.dta.wizard,create_date:0
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: l10n_ch_dta
+#: view:create.dta.wizard:l10n_ch_dta.dta_create_view
+msgid "DTA Generation"
+msgstr "Génération du fichier DTA"
+
+#. module: l10n_ch_dta
+#: field:res.partner.bank,dta_code:0
+msgid "DTA code"
+msgstr "code DTA"
+
+#. module: l10n_ch_dta
+#: view:res.partner.bank:l10n_ch_dta.l10nch_view_res_partner_bank_from_invoice_slip
+msgid "DTA options"
+msgstr "Options de DTA"
+
+#. module: l10n_ch_dta
+#: field:payment.order,dta_ids:0
+msgid "Dta ids"
+msgstr "Ids de DTA"
+
+#. module: l10n_ch_dta
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:171
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:243
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:252
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:260
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:272
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:285
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:302
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:309
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:401
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:418
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:554
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:560
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:565
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:574
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:595
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:630
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:639
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:644
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:661
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:731
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: l10n_ch_dta
+#: field:create.dta.wizard,id:0
+msgid "ID"
+msgstr "Id."
+
+#. module: l10n_ch_dta
+#: field:create.dta.wizard,write_uid:0
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: l10n_ch_dta
+#: field:create.dta.wizard,write_date:0
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: l10n_ch_dta
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:402
 #, python-format
 msgid ""
 "No IBAN defined \n"
 " for the bank account: %s\n"
 "on line: %s"
-msgstr ""
+msgstr "IBAN manquant\nsur le compte bancaire : %s\nsur la ligne : %s"
 
 #. module: l10n_ch_dta
-#: view:create.dta.wizard:0
-msgid "Cancel"
-msgstr "Annuler"
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:596
+#, python-format
+msgid "No IBAN for the company bank account."
+msgstr "IBAN manquant sur le compte bancaire de la société."
+
+#. module: l10n_ch_dta
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:631
+#, python-format
+msgid ""
+"No address defined \n"
+" for the partner: %s on line"
+msgstr "Adresse manquante sur le partenaire %s sur la ligne"
+
+#. module: l10n_ch_dta
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:640
+#, python-format
+msgid ""
+"No bank account defined\n"
+" on line: %s"
+msgstr "Compte bancaire manquant sur la ligne : %s"
+
+#. module: l10n_ch_dta
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:561
+#, python-format
+msgid "No bank account for the company."
+msgstr "Compte bancaire manquant sur la société"
+
+#. module: l10n_ch_dta
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:645
+#, python-format
+msgid ""
+"No bank defined for the bank account: %s\n"
+"on the partner: %s\n"
+" on line: %s"
+msgstr "La banque n'est pas définie sur le compte bancaire : %s sur le partenaire : %s sur la ligne : %s"
+
+#. module: l10n_ch_dta
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:662
+#, python-format
+msgid ""
+"No bank name defined\n"
+" for the bank account: %s\n"
+"on the partner: %s\n"
+" on line: %s"
+msgstr "Le compte bancaire est manquant sur le compte bancaire : %s sur le partenaire : %s sur la ligne : %s"
+
+#. module: l10n_ch_dta
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:555
+#, python-format
+msgid "No payment mode"
+msgstr "Mode de paiement manquant"
+
+#. module: l10n_ch_dta
+#: model:ir.model,name:l10n_ch_dta.model_payment_order
+msgid "Payment Order"
+msgstr "Ordre de paiement"
+
+#. module: l10n_ch_dta
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:732
+#, python-format
+msgid "The Bank type %s of the bank account: %s is not supported"
+msgstr "Le type de banque %s sur le compte bancaire %s n'est pas supporté"
+
+#. module: l10n_ch_dta
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:174
+#, python-format
+msgid ""
+"Wrong postal number format.\n"
+"It must be 12-123456-9 or 12345 format \n"
+"on line %s"
+msgstr "Format de numéro postal erroné sur la ligne %s.\nLe format doit être 12-123456-9 ou 12345."
+
+#. module: l10n_ch_dta
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:286
+#, python-format
+msgid ""
+"You must provide a BVR number\n"
+"for the bank account: %son line: %s"
+msgstr "Un numéro BVR doit être saisi sur le compte bancaire %s à la ligne %s"
+
+#. module: l10n_ch_dta
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:244
+#, python-format
+msgid ""
+"You must provide a BVR referencenumber \n"
+" for the line: %s"
+msgstr "Une référence BVR doit être saisie à la ligne %s"
+
+#. module: l10n_ch_dta
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:310
+#, python-format
+msgid ""
+"You must provide a Clearing Number\n"
+"for the partner bank: %s\n"
+" on line %s"
+msgstr "Un numéro de clearing pour la banque du partenaire %s doit être saisi à la ligne %s"
+
+#. module: l10n_ch_dta
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:575
+#, python-format
+msgid "You must provide a Clearing Number for the bank %s."
+msgstr "Un numéro de clearing doit être saisi pour la banque %s."
+
+#. module: l10n_ch_dta
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:303
+#, python-format
+msgid ""
+"You must provide a bank number \n"
+"for the partner bank: %s\n"
+" on line: %s"
+msgstr "Un numéro de banque doit être saisi pour la banque du partenaire %s à la ligne %s"
+
+#. module: l10n_ch_dta
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:419
+#, python-format
+msgid ""
+"You must provide the bank city or the bic code for the partner bank:\n"
+" %s\n"
+" on line: %s"
+msgstr "Une ville ou un code bic doit être saisi pour la banque du partenaire %s à la ligne %s"
+
+#. module: l10n_ch_dta
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:566
+#, python-format
+msgid "You must set a bank for the bank account with number %s"
+msgstr "Une banque doit être choisie pour le compte bancaire avec le numéro %s"

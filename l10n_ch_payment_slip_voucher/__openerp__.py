@@ -27,7 +27,7 @@ by financial institute into a payment voucher
 
 To do so, use the wizard provided under Accounting -> Customers.
 """,
- 'version': '1.0',
+ 'version': '8.0.1.0.0',
  'author': 'Agile Business Group',
  'category': 'Localization',
  'website': 'http://www.agilebg.com',

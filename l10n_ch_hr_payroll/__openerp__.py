@@ -39,7 +39,7 @@
         'hr_contract',
         'hr_attendance'
     ],
-    'version': '1.0.8',
+    'version': '8.0.1.0.8',
     'auto_install': False,
     'demo': [],
     'website': 'http://open-net.ch',

@@ -1,19 +1,21 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* l10n_ch_payment_slip
-#
+# * l10n_ch_payment_slip
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-02 14:47+0000\n"
-"PO-Revision-Date: 2014-12-02 14:47+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-08-17 12:24+0000\n"
+"PO-Revision-Date: 2015-06-29 18:03+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_payment_slip
 #: view:res.company:l10n_ch_payment_slip.company_form_view
@@ -140,7 +142,7 @@ msgid "Insert BVR background ?"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:212
+#: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:215
 #, python-format
 msgid "Inv. no %s"
 msgstr ""
@@ -156,8 +158,7 @@ msgid "Journal Items"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: field:l10n_ch.payment_slip,write_uid:0
-#: field:v11.import.wizard,write_uid:0
+#: field:l10n_ch.payment_slip,write_uid:0 field:v11.import.wizard,write_uid:0
 msgid "Last Updated by"
 msgstr ""
 
@@ -178,7 +179,7 @@ msgid "Merge Slips on Disk, slower but safer"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/payment_slip.py:328
+#: code:addons/l10n_ch_payment_slip/payment_slip.py:351
 #, python-format
 msgid "No invoice related to move line %s"
 msgstr ""
@@ -195,6 +196,11 @@ msgid "Open Payment Slips"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
+#: model:ir.model,name:l10n_ch_payment_slip.model_payment_line
+msgid "Payment Line"
+msgstr ""
+
+#. module: l10n_ch_payment_slip
 #: model:ir.actions.act_window,name:l10n_ch_payment_slip.action_slip_all
 #: model:ir.actions.report.xml,name:l10n_ch_payment_slip.one_slip_per_page_from_invoice
 #: view:l10n_ch.payment_slip:l10n_ch_payment_slip.pay_slip_form
@@ -203,18 +209,29 @@ msgid "Payment Slip"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
+#: field:account.move.line,payment_slip_ids:0
+msgid "Payment Slips"
+msgstr ""
+
+#. module: l10n_ch_payment_slip
 #: field:res.company,merge_mode:0
 msgid "Payment Slips Merge Mode"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/payment_slip.py:216
+#: code:addons/l10n_ch_payment_slip/payment_slip.py:514
+#, python-format
+msgid "Payment slip related to invoice %s due on the %s"
+msgstr ""
+
+#. module: l10n_ch_payment_slip
+#: code:addons/l10n_ch_payment_slip/payment_slip.py:237
 #, python-format
 msgid "Please enter a correct postal number like: 01-23456-1"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:228
+#: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:231
 #, python-format
 msgid "Please select a file first!"
 msgstr ""
@@ -267,6 +284,12 @@ msgid "Report"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
+#: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:209
+#, python-format
+msgid "Too many receivable/payable lines for reference %s"
+msgstr ""
+
+#. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:156
 #, python-format
 msgid "Too many total record found!"
@@ -276,11 +299,6 @@ msgstr ""
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:71
 #, python-format
 msgid "Total amount differ from the computed amount"
-msgstr ""
-
-#. module: l10n_ch_payment_slip
-#: field:l10n_ch.payment_slip,amount_total:0
-msgid "Total amount of BVR/ESR"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
@@ -300,11 +318,6 @@ msgid "Total cost of V11"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: field:account.move.line,transaction_ref:0
-msgid "Transaction Ref."
-msgstr ""
-
-#. module: l10n_ch_payment_slip
 #: model:ir.actions.act_window,name:l10n_ch_payment_slip.wizard_v11_import
 msgid "V11 (BVR/ESR) Import"
 msgstr ""
@@ -320,7 +333,7 @@ msgid "V11 File"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:237
+#: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:240
 #, python-format
 msgid "V11 file can not be decoded, it contains invalid caracter %s"
 msgstr ""
@@ -336,24 +349,28 @@ msgid "Vert. position in inch for scan line"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/payment_slip.py:333
+#: code:addons/l10n_ch_payment_slip/payment_slip.py:356
 #, python-format
-msgid "Your bank BVR number should be of the form 0X-XXX-X! Please check your company information for the invoice:\n"
+msgid ""
+"Your bank BVR number should be of the form 0X-XXX-X! Please check your company information for the invoice:\n"
 "%s"
-msgstr ""
-"%s"
+msgstr "%s"
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_delta_horz:0
-msgid "horiz. delta in inch 1.2 will print the bvr 1.2 inch lefter, negative value is possible"
+msgid ""
+"horiz. delta in inch 1.2 will print the bvr 1.2 inch lefter, negative value "
+"is possible"
+msgstr ""
+
+#. module: l10n_ch_payment_slip
+#: view:v11.import.wizard:l10n_ch_payment_slip.v11_import_view
+msgid "or"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_delta_vert:0
-msgid "vert. delta in inch 1.2 will print the bvr 1.2 inch lower, negative value is possible"
-msgstr ""
-
-#. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/payment_slip.py:469
-msgid "Payment slip related to invoice %s due on the %s"
+msgid ""
+"vert. delta in inch 1.2 will print the bvr 1.2 inch lower, negative value is"
+" possible"
 msgstr ""

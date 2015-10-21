@@ -1,20 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#       * l10n_ch_payment_slip
-#
+# * l10n_ch_payment_slip
+# 
+# Translators:
+# Guewen Baconnier <guewen.baconnier@camptocamp.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-19 10:26+0000\n"
-"PO-Revision-Date: 2014-12-02 14:47+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
-"Language: \n"
+"POT-Creation-Date: 2015-08-17 12:24+0000\n"
+"PO-Revision-Date: 2015-09-02 07:38+0000\n"
+"Last-Translator: Guewen Baconnier <guewen.baconnier@camptocamp.com>\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: l10n_ch_payment_slip
 #: view:res.company:l10n_ch_payment_slip.company_form_view
@@ -141,7 +143,7 @@ msgid "Insert BVR background ?"
 msgstr "Insérer l'arrière-plan dans le BVR"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:212
+#: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:215
 #, python-format
 msgid "Inv. no %s"
 msgstr "Facture no. %s"
@@ -170,9 +172,7 @@ msgstr "Dernière mise à jour le"
 #. module: l10n_ch_payment_slip
 #: selection:res.company,merge_mode:0
 msgid "Merge Slips in Memory, faster but can exhaust memory"
-msgstr ""
-"Fusionne les rapports BVR en mémoire. Cela est plus rapide mais peut épuiser "
-"la mémoire"
+msgstr "Fusionne les rapports BVR en mémoire. Cela est plus rapide mais peut épuiser la mémoire"
 
 #. module: l10n_ch_payment_slip
 #: selection:res.company,merge_mode:0
@@ -180,7 +180,7 @@ msgid "Merge Slips on Disk, slower but safer"
 msgstr "Fuisonne les rapports BVR sur le disque. Plus lent mais plus sûr"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/payment_slip.py:329
+#: code:addons/l10n_ch_payment_slip/payment_slip.py:351
 #, python-format
 msgid "No invoice related to move line %s"
 msgstr "Aucune facture liée à la ligne %s"
@@ -195,6 +195,11 @@ msgstr "Le nombre d'entrée diffère du nombre calculé"
 #: view:account.invoice:l10n_ch_payment_slip.invoice_form_add_bvr_ref
 msgid "Open Payment Slips"
 msgstr "BVR ouverts"
+
+#. module: l10n_ch_payment_slip
+#: model:ir.model,name:l10n_ch_payment_slip.model_payment_line
+msgid "Payment Line"
+msgstr "Ligne de paiement"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.actions.act_window,name:l10n_ch_payment_slip.action_slip_all
@@ -215,13 +220,19 @@ msgid "Payment Slips Merge Mode"
 msgstr "Mode de fusion des rapports BVR"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/payment_slip.py:215
+#: code:addons/l10n_ch_payment_slip/payment_slip.py:514
+#, python-format
+msgid "Payment slip related to invoice %s due on the %s"
+msgstr "Bulletin relatif à la facture %s due le %s"
+
+#. module: l10n_ch_payment_slip
+#: code:addons/l10n_ch_payment_slip/payment_slip.py:237
 #, python-format
 msgid "Please enter a correct postal number like: 01-23456-1"
 msgstr "Veuillez saisir un CCP valide exemple: 01-23456-1"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:228
+#: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:231
 #, python-format
 msgid "Please select a file first!"
 msgstr "Veuillez choisir un fichier"
@@ -274,6 +285,12 @@ msgid "Report"
 msgstr "Rapport"
 
 #. module: l10n_ch_payment_slip
+#: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:209
+#, python-format
+msgid "Too many receivable/payable lines for reference %s"
+msgstr "Trop de lignes débiteurs & créditeurs pour la référence %s"
+
+#. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:156
 #, python-format
 msgid "Too many total record found!"
@@ -317,7 +334,7 @@ msgid "V11 File"
 msgstr "Fichier V11"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:237
+#: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:240
 #, python-format
 msgid "V11 file can not be decoded, it contains invalid caracter %s"
 msgstr "Le fichier V11 ne peut pas être décodé, il contient un caractère invalide %s."
@@ -333,21 +350,18 @@ msgid "Vert. position in inch for scan line"
 msgstr "Décalage vertical de la scanline en pouces"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/payment_slip.py:334
+#: code:addons/l10n_ch_payment_slip/payment_slip.py:356
 #, python-format
 msgid ""
-"Your bank BVR number should be of the form 0X-XXX-X! Please check your "
-"company information for the invoice:\n"
+"Your bank BVR number should be of the form 0X-XXX-X! Please check your company information for the invoice:\n"
 "%s"
-msgstr ""
-"Le CCP doit respecter le format suivant 0X-XXX-X pour la facture\n"
-"%s"
+msgstr "Le CCP doit respecter le format suivant 0X-XXX-X pour la facture\n%s"
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_delta_horz:0
 msgid ""
-"horiz. delta in inch 1.2 will print the bvr 1.2 inch lefter, negative value is "
-"possible"
+"horiz. delta in inch 1.2 will print the bvr 1.2 inch lefter, negative value "
+"is possible"
 msgstr "Décalage global horizontal du BVR en pouces"
 
 #. module: l10n_ch_payment_slip
@@ -358,11 +372,6 @@ msgstr "ou"
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_delta_vert:0
 msgid ""
-"vert. delta in inch 1.2 will print the bvr 1.2 inch lower, negative value is "
-"possible"
+"vert. delta in inch 1.2 will print the bvr 1.2 inch lower, negative value is"
+" possible"
 msgstr "Décalage global vertical du BVR en pouces"
-
-#. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/payment_slip.py:469
-msgid "Payment slip related to invoice %s due on the %s"
-msgstr "Bulletin relatif à la facture %s due le %s"
