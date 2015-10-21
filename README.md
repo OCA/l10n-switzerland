@@ -64,6 +64,12 @@ Provide Swizerland Payroll Rules.
 Allow to specify a LPP range to contract and 2 kinds of children to employee.
 
 [//]: # (addons)
+Available addons
+----------------
+addon | version | summary
+--- | --- | ---
+[l10n_ch_states](l10n_ch_states/) | 9.0.1.0.0 | Switzerland Country States
+
 Unported addons
 ---------------
 addon | version | summary
@@ -83,7 +89,6 @@ addon | version | summary
 [l10n_ch_payment_slip_voucher](l10n_ch_payment_slip_voucher/) | 8.0.1.0.0 (unported) | Import Payment Slip (BVR/ESR) into vouchers
 [l10n_ch_scan_bvr](l10n_ch_scan_bvr/) | 1.0 (unported) | Switzerland - Scan ESR/BVR to create invoices
 [l10n_ch_sepa](l10n_ch_sepa/) | 8.0.1.0.0 (unported) | Generate pain.001 Credit Transfert Files for your payments
-[l10n_ch_states](l10n_ch_states/) | 8.0.1.0.0 (unported) | Switzerland Country States
 [l10n_ch_zip](l10n_ch_zip/) | 8.0.2.0.0 (unported) | Provides all Swiss postal codes for auto-completion
 
 [//]: # (end addons)
