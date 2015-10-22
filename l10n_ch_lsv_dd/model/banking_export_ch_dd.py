@@ -18,14 +18,14 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields, api, _
+from openerp import models, fields, api
 from openerp.addons.decimal_precision import decimal_precision as dp
 
 import logging
 logger = logging.getLogger(__name__)
 
 
-class banking_export_ch_dd(models.Model):
+class BankingExportChDd(models.Model):
 
     ''' Swiss Direct Debit export containing the file created
         by the appropriate wizard
@@ -48,33 +48,33 @@ class banking_export_ch_dd(models.Model):
 
     @api.model
     def create(self, vals):
-        rec = super(banking_export_ch_dd, self).create(vals)
+        rec = super(BankingExportChDd, self).create(vals)
         rec._generate_filename()
         return rec
 
     payment_order_ids = fields.Many2many(
         'payment.order',
         'account_payment_order_ch_dd_rel',
-        'banking_export_ch_dd_id',
+        'BankingExportChDd_id',
         'account_order_id',
         'Payment Orders',
         readonly=True
     )
     nb_transactions = fields.Integer(
-        _('Number of Transactions'),
+        'Number of Transactions',
         readonly=True
     )
     total_amount = fields.Float(
-        _('Total Amount'),
+        'Total Amount',
         readonly=True,
         digits_compute=dp.get_precision('Account')
     )
     create_date = fields.Datetime(
-        _('Generation Date'),
+        'Generation Date',
         readonly=True
     )
     file = fields.Binary(
-        _('Generated file'),
+        'Generated file',
         readonly=True
     )
     filename = fields.Char(
@@ -88,7 +88,7 @@ class banking_export_ch_dd(models.Model):
         default='draft'
     )
     type = fields.Char(
-        _('Type'),
+        'Type',
         size=128,
         readonly=True
     )

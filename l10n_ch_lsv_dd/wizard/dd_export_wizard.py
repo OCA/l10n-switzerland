@@ -29,7 +29,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class post_dd_export_wizard(models.TransientModel):
+class PostDdExportWizard(models.TransientModel):
 
     ''' Postfinance Direct Debit file generation wizard.
         This wizard is called when the "make payment" button on a
@@ -45,7 +45,7 @@ class post_dd_export_wizard(models.TransientModel):
     )
     banking_export_ch_dd_id = fields.Many2one(
         'banking.export.ch.dd',
-        _('Direct Debit file'),
+        'Direct Debit file',
         readonly=True
     )
     file = fields.Binary(
@@ -57,12 +57,12 @@ class post_dd_export_wizard(models.TransientModel):
         readonly=True
     )
     nb_transactions = fields.Integer(
-        string=_('Number of Transactions'),
+        'Number of Transactions',
         related='banking_export_ch_dd_id.nb_transactions',
         readonly=True
     )
     total_amount = fields.Float(
-        string=_('Total Amount'),
+        'Total Amount',
         related='banking_export_ch_dd_id.total_amount',
         readonly=True
     )

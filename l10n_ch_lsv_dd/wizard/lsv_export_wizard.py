@@ -31,7 +31,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class lsv_export_wizard(models.TransientModel):
+class LsvExportWizard(models.TransientModel):
 
     ''' LSV file generation wizard. This wizard is called
         when the "make payment" button on a direct debit order
@@ -42,42 +42,36 @@ class lsv_export_wizard(models.TransientModel):
 
     treatment_type = fields.Selection(
         [('P', _('Production')), ('T', _('Test'))],
-        _('Treatment type'),
         required=True,
         default='T'     # FIXME for release
     )
     currency = fields.Selection(
         [('CHF', 'CHF'), ('EUR', 'EUR')],
-        _('Currency'),
         required=True,
         default='CHF'
     )
     banking_export_ch_dd_id = fields.Many2one(
         'banking.export.ch.dd',
-        _('LSV file'),
+        'LSV file',
         readonly=True
     )
     file = fields.Binary(
-        string=_('File'),
         related='banking_export_ch_dd_id.file'
     )
     filename = fields.Char(
-        string=_('Filename'),
         related='banking_export_ch_dd_id.filename',
         size=256,
         readonly=True
     )
     nb_transactions = fields.Integer(
-        string=_('Number of Transactions'),
+        'Number of Transactions',
         related='banking_export_ch_dd_id.nb_transactions'
     )
     total_amount = fields.Float(
-        string=_('Total Amount'),
         related='banking_export_ch_dd_id.total_amount'
     )
     state = fields.Selection(
         [('create', _('Create')), ('finish', _('Finish'))],
-        _('State'),
         readonly=True,
         default='create'
     )

@@ -22,7 +22,7 @@
 from openerp import models, api
 
 
-class account_invoice_free(models.TransientModel):
+class AccountInvoiceFree(models.TransientModel):
 
     ''' Wizard to free invoices. When job is done, user is redirected on new
         payment order.

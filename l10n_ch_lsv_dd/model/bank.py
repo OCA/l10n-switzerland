@@ -22,7 +22,7 @@ from openerp import models, fields, api, _, exceptions
 from openerp.tools import mod10r
 
 
-class res_partner_bank(models.Model):
+class ResPartnerBank(models.Model):
 
     ''' Inherit res.partner.bank class in order to add swiss specific
     fields such as:
@@ -33,27 +33,25 @@ class res_partner_bank(models.Model):
     _inherit = "res.partner.bank"
 
     lsv_identifier = fields.Char(
-        _('LSV Identifier'),
+        'LSV Identifier',
         size=5,
-        help=_(
-            "Enter the LSV Identifier that has been attributed "
-            "to your company to make LSV Direct Debits. This identifier "
-            "is composed of 5 alphanumeric characters and is required "
-            "to generate LSV direct debit orders.")
+        help="Enter the LSV Identifier that has been attributed "
+             "to your company to make LSV Direct Debits. This identifier "
+             "is composed of 5 alphanumeric characters and is required "
+             "to generate LSV direct debit orders."
     )
     post_dd_identifier = fields.Char(
-        _('Postfinance DD Customer No.'),
+        'Postfinance DD Customer No.',
         size=6
     )
     esr_party_number = fields.Char(
-        _('ESR party number'),
+        'ESR party number',
         size=9,
-        help=_(
-            "ESR party number is an identifier attributed to your "
-            "bank to generate ESR references. This identifier is "
-            "composed of up to 9 alphanumeric characters and is "
-            "required when using ESR references in your LSV direct "
-            "debit orders")
+        help="ESR party number is an identifier attributed to your "
+             "bank to generate ESR references. This identifier is "
+             "composed of up to 9 alphanumeric characters and is "
+             "required when using ESR references in your LSV direct "
+             "debit orders"
     )
 
     ################################

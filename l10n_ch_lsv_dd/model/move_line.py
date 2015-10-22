@@ -22,7 +22,7 @@
 from openerp import models, api
 
 
-class account_move_line(models.Model):
+class AccountMoveLine(models.Model):
     '''
     Use hooks to add BVR ref generation if account is IBAN and has LSV
     identifier
@@ -34,7 +34,7 @@ class account_move_line(models.Model):
         ''' If linked bank account is an IBAN account with LSV identifier,
             we also generate a BVR ref (as it's necessary in LSV file)
         '''
-        val = super(account_move_line, self)._is_generate_bvr(invoice)
+        val = super(AccountMoveLine, self)._is_generate_bvr(invoice)
         return val or (invoice.partner_bank_id and
                        invoice.partner_bank_id.state == 'iban' and
                        invoice.partner_bank_id.lsv_identifier)
@@ -60,10 +60,10 @@ class account_move_line(models.Model):
                             line2bank[line.id] = bank_id
                         else:
                             line2bank.update(
-                                super(account_move_line, line).line2bank(
+                                super(AccountMoveLine, line).line2bank(
                                     payment_mode_id))
                 return line2bank
-        return super(account_move_line, self).line2bank(payment_mode_id)
+        return super(AccountMoveLine, self).line2bank(payment_mode_id)
 
     def _get_active_bank_account(self, banks, bank_types):
         for bank in banks:
