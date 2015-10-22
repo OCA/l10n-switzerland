@@ -22,7 +22,7 @@
 from openerp import models, api, _, exceptions
 
 
-class invoice(models.Model):
+class AccountInvoice(models.Model):
 
     ''' Inherit invoice to add invoice freeing functionality. It's about
         moving related payment line in a new cancelled payment order. This

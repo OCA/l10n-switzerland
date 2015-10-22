@@ -21,7 +21,7 @@
 from openerp import models, api, _
 
 
-class payment_order(models.Model):
+class PaymentOrder(models.Model):
     _inherit = 'payment.order'
 
     @api.multi

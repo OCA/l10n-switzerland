@@ -198,7 +198,8 @@ class XMLPFParser(BaseSwissParser):
             if transaction.xpath(".//@Value='ZZZ'"):
                 desc = transaction.xpath("RFF/C506/D_1154/text()")[1]
 
-            res['name'] = "\n".join(transaction.xpath("FTX/C108/D_4440/text()"))
+            res['name'] = "\n".join(transaction.xpath(
+                "FTX/C108/D_4440/text()"))
             amount = float(transaction.xpath("MOA/C516/D_5004/text()")[0])
             if transaction.xpath("MOA/C516/D_5025/@Value='211'"):
                 amount *= -1
