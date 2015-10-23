@@ -20,30 +20,13 @@
 ##############################################################################
 
 {'name': 'Switzerland - BVR/ESR Transaction ID Compatibility',
- 'version': '1.0',
+ 'version': '8.0.1.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'maintainer': 'Camptocamp',
  'license': 'AGPL-3',
  'category': 'Hidden',
  'depends': ['l10n_ch_payment_slip',
              'base_transaction_id'],
- 'description': """
-Swiss BVR/ESR Transaction ID Compatibility
-==========================================
-
-Link module between the Swiss localization BVR/ESR module
-(l10n_ch_payment_slip) and the module adding a transaction ID
-field (base_transaction_id).
-
-When an invoice has a transaction ID, no BVR reference should be generated
-because the reconciliation should be done with the transaction ID, not
-a new reference.
-
-This module is needed if you use the Swiss localization module and the
-bank-statement-reconcile project in the banking addons
-(https://launchpad.net/banking-addons).
-
- """,
  'website': 'http://www.camptocamp.com',
  'data': [],
  'tests': [],
