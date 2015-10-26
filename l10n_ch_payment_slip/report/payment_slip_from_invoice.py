@@ -19,7 +19,8 @@
 #
 ##############################################################################
 from openerp import models
-
+import logging
+_logger = logging.getLogger(__name__)
 
 class BVRFromInvoice(models.AbstractModel):
     _name = 'report.one_slip_per_page_from_invoice'
@@ -65,13 +66,33 @@ class ExtendedReport(models.Model):
     def get_pdf(self, cr, uid, ids, report_name, html=None, data=None,
                 context=None):
         if report_name == 'one_slip_per_page_from_invoice':
-            return self._generate_one_slip_per_page_from_invoice_pdf(
+            report = self._get_report_from_name(cr, uid, report_name)
+            save_in_attachment = self._check_attachment_use(cr, uid, ids, report)
+            if save_in_attachment and save_in_attachment['loaded_documents'].get(ids[0]):
+                return save_in_attachment['loaded_documents'][ids[0]]
+            content = self._generate_one_slip_per_page_from_invoice_pdf(
                 cr,
                 uid,
                 ids,
-                context=context,
-                report_name=report_name,
+                context=context
             )
+            if save_in_attachment.get(ids[0]):
+                attachment = {
+                    'name': save_in_attachment.get(ids[0]),
+                    'datas': base64.encodestring(content),
+                    'datas_fname': save_in_attachment.get(ids[0]),
+                    'res_model': save_in_attachment.get('model'),
+                    'res_id': ids[0],
+                }
+                try:
+                    self.pool['ir.attachment'].create(cr, uid, attachment)
+                except AccessError:
+                    _logger.warning("Cannot save PDF report %r as attachment",
+                                 attachment['name'])
+                else:
+                    _logger.info('The PDF document %s is now saved in the database',
+                                 attachment['name'])
+            return content
         else:
             return super(ExtendedReport, self).get_pdf(
                 cr,
