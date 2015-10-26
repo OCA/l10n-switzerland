@@ -18,13 +18,14 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models
+import base64
 import logging
+from openerp import models
+from openerp.exceptions import AccessError
 _logger = logging.getLogger(__name__)
 
 class BVRFromInvoice(models.AbstractModel):
     _name = 'report.one_slip_per_page_from_invoice'
-
 
 class ExtendedReport(models.Model):
 
