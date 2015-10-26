@@ -86,7 +86,6 @@ Unported addons
 ---------------
 addon | version | summary
 --- | --- | ---
-[l10n_ch](l10n_ch/) | 7.1 (unported) | Multilang swiss STERCHI account chart and taxes
 [l10n_ch_dta_base_transaction_id](l10n_ch_dta_base_transaction_id/) | 1.0 (unported) | Switzerland - Bank Payment File (DTA) Transaction ID Compatibility
 [l10n_ch_payment_slip_account_statement_base_completion](l10n_ch_payment_slip_account_statement_base_completion/) | 1.0 (unported) | Switzerland - BVR/ESR Bank statement Completion
 [l10n_ch_payment_slip_base_transaction_id](l10n_ch_payment_slip_base_transaction_id/) | 1.0 (unported) | Switzerland - BVR/ESR Transaction ID Compatibility
