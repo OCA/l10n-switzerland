@@ -1,0 +1,223 @@
+-
+  In order to test lsv and dd file generation, I will create a customer with
+  2 bank accounts (on for each debit mode) and go through the entire generation
+  process
+  
+  I create the partner
+-
+  !record {model: res.partner, id: customer, view: False}:
+    name: "LSV-DD test"
+-
+  I create one bank for LSV debit (as the clearing number is on the
+  bank object)
+-
+  !record {model: res.bank, id: bank_ubs, view: False}:
+    name: 'UBS AG'
+    code: 'ubs'
+    bic: 'UBSWCHZH86N'
+    clearing: '202'
+    street: 'Poststrasse 10'
+    zip: '8610'
+    city: 'Uster 1'
+-
+  I create one bank for DD (as the clearing number is on the
+  bank object)
+-
+  !record {model: res.bank, id: bank_post, view: False}:
+    name: 'Postfinance AG'
+    code: 'postfinance'
+    bic: 'POFICHBEXXX'
+    clearing: '9000'
+    street: 'Postfinance'
+    zip: '3030'
+    city: 'Bern'
+-
+  I create the partner bank account for LSV debit (account which will be debited)
+-
+  !record {model: res.partner.bank, id: partner_bank_ubs, view: False}:
+    state: 'iban'
+    acc_number: 'CH31 8123 9000 0012 4568 9'
+    partner_id: customer
+    owner_name: 'LSV-DD test'
+    street: 'Customer street'
+    bank: bank_ubs
+-
+  I create the partner bank account for DD (account which will be debited)
+-
+  !record {model: res.partner.bank, id: partner_bank_post, view: False}:
+    state: 'bv'
+    acc_number: '25-9779-8'
+    partner_id: customer
+    owner_name: 'LSV-DD test'
+    street: 'Customer street'
+    bank: bank_post
+-
+  Then add a mandate on LSV bank account
+-
+  !record {model: account.banking.mandate, id: ubs_mandate, view: False}:
+    partner_bank_id: partner_bank_ubs
+    signature_date: !eval "'%s-01-01' %(datetime.now().year)"
+-
+  Then add a mandate on DD bank account
+-
+  !record {model: account.banking.mandate, id: post_mandate, view: False}:
+    partner_bank_id: partner_bank_post
+    signature_date: !eval "'%s-01-01' %(datetime.now().year)"
+-
+  We need a company iban account with a lsv identifier (account which will be credited)
+-
+  !record {model: res.partner.bank, id: company_bank_ubs, view: False}:
+    state: 'iban'
+    acc_number: 'CH93 0076 2011 6238 5295 7'
+    partner_id: base.main_partner
+    owner_name: 'Company'
+    street: 'Company street'
+    bank: bank_ubs
+    lsv_identifier: 'AAAAA'
+-
+  We need a company bvr account with a dd identifier (account which will be credited)
+-
+  !record {model: res.partner.bank, id: company_bank_post, view: False}:
+    state: 'bvr'
+    acc_number: '25-9778-2'
+    partner_id: base.main_partner
+    owner_name: 'Company'
+    street: 'Company street'
+    bank: bank_post
+    post_dd_identifier: '123457'
+-
+  We need a payment mode to create a direct debit order. We create one for LSV.
+-
+  !record {model: payment.mode, id: lsv_pay_mode, view: False}:
+    journal: !ref {model: account.journal, search: "[('type','=','bank')]"}
+    bank_id: company_bank_ubs
+    name: 'LSV'
+    active: True
+    type: export_lsv
+-
+  And one for DD.
+-
+  !record {model: payment.mode, id: dd_pay_mode, view: False}:
+    journal: !ref {model: account.journal, search: "[('type','=','bank')]"}
+    bank_id: company_bank_post
+    name: 'DD'
+    active: True
+    type: export_post_dd
+-
+  I create an invoice to be debited with LSV
+-
+  !record {model: account.invoice, id: lsv_invoice, view: False}:
+    company_id: base.main_company
+    journal_id: !ref {model: account.journal, search: "[('type','=','bank')]"}
+    currency_id: base.CHF
+    account_id: account.a_recv
+    type : out_invoice
+    partner_id: customer
+    date_invoice: !eval "'%s-01-02' %(datetime.now().year)"
+    period_id: account.period_1
+    partner_bank_id: company_bank_ubs
+    bvr_reference: '42'
+    check_total: 7000
+-
+  I create an invoice to be debited with DD
+-
+  !record {model: account.invoice, id: dd_invoice, view: False}:
+    company_id: base.main_company
+    journal_id: !ref {model: account.journal, search: "[('type','=','bank')]"}
+    currency_id: base.CHF
+    account_id: account.a_recv
+    type : out_invoice
+    partner_id: customer
+    date_invoice: !eval "'%s-01-02' %(datetime.now().year)"
+    period_id: account.period_1
+    partner_bank_id: company_bank_post
+    bvr_reference: '111'
+    check_total: 6000
+-
+  I add an invoice line
+-
+  !record {model: account.invoice.line, id: lsv_invoice_line, view: False}:
+    account_id: account.a_expense
+    name: '[PC1] Basic PC'
+    price_unit: 700.0
+    quantity: 10.0
+    product_id: product.product_product_1
+    uos_id: product.product_uom_unit
+    invoice_id: lsv_invoice
+-
+  I add an invoice line
+-
+  !record {model: account.invoice.line, id: dd_invoice_line, view: False}:
+    account_id: account.a_expense
+    name: '[PC1] Basic PC'
+    price_unit: 600.0
+    quantity: 10.0
+    product_id: product.product_product_1
+    uos_id: product.product_uom_unit
+    invoice_id: dd_invoice
+-
+  I Validate invoice by clicking on Validate button
+-
+  !workflow {model: account.invoice, action: invoice_open, ref: lsv_invoice}
+-
+  I Validate invoice by clicking on Validate button
+-
+  !workflow {model: account.invoice, action: invoice_open, ref: dd_invoice}
+-
+  I create my LSV debit order
+-
+  !record {model: payment.order, id: lsv_payment_order}:
+    date_prefered: due
+    mode: lsv_pay_mode
+    state: draft
+    total: 7000
+-
+  I create my DD debit order
+-
+  !record {model: payment.order, id: dd_payment_order}:
+    date_prefered: due
+    mode: dd_pay_mode
+    state: draft
+    total: 6000
+-
+  I add a payment line to my payment order
+-
+  !record {model: payment.line, id: lsv_pay_line}:
+    amount: 7000
+    amount_currency: 7000
+    bank_id: partner_bank_ubs
+    communication: " "
+    company_currency: base.CHF
+    currency: base.CHF
+    move_line_id: !ref {model: account.move.line, search: "[('ref','=','42')]"}
+    order_id: lsv_payment_order
+    partner_id: customer
+    state: normal
+-
+  I add a payment line to my payment order
+-
+  !record {model: payment.line, id: dd_pay_line}:
+    amount: 6000
+    amount_currency: 6000
+    bank_id: partner_bank_post
+    communication: " "
+    company_currency: base.CHF
+    currency: base.CHF
+    move_line_id: !ref {model: account.move.line, search: "[('ref','=','111')]"}
+    order_id: dd_payment_order
+    partner_id: customer
+    state: normal
+-
+  I confirm the debit orders
+-
+  !workflow {model: payment.order, action: open, ref: lsv_payment_order}
+-
+  I confirm the debit orders
+-
+  !workflow {model: payment.order, action: open, ref: dd_payment_order}
+-
+  I click on "make payment"
+-
+  !python {model: payment.order}: |
+    self.set_done(cr, uid, [ref("lsv_payment_order")])
+    self.set_done(cr, uid, [ref("dd_payment_order")])

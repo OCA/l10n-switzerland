@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Guewen Baconnier
-#    Copyright 2014 Camptocamp SA
+#    Author: Emanuel Cino
+#    Copyright 2014 Compassion CH
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,18 +18,9 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-{'name': 'Switzerland - BVR/ESR Transaction ID Compatibility',
- 'version': '8.0.1.0',
- 'author': "Camptocamp,Odoo Community Association (OCA)",
- 'maintainer': 'Camptocamp',
- 'license': 'AGPL-3',
- 'category': 'Hidden',
- 'depends': ['l10n_ch_payment_slip',
-             'base_transaction_id'],
- 'website': 'http://www.camptocamp.com',
- 'data': [],
- 'tests': [],
- 'installable': True,
- 'auto_install': True,
- }
+from . import base_parser
+from . import postfinance_file_parser
+from . import g11_file_parser
+from . import raiffeisen_file_parser
+from . import ubs_file_parser
+from . import v11_file_parser

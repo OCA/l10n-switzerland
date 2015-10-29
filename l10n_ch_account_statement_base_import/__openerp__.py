@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Guewen Baconnier
-#    Copyright 2014 Camptocamp SA
+#    Author: Emanuel Cino
+#    Copyright 2014 Compassion CH
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,17 +19,26 @@
 #
 ##############################################################################
 
-{'name': 'Switzerland - BVR/ESR Transaction ID Compatibility',
+{'name': "Swiss bank statements import",
  'version': '8.0.1.0',
- 'author': "Camptocamp,Odoo Community Association (OCA)",
- 'maintainer': 'Camptocamp',
- 'license': 'AGPL-3',
- 'category': 'Hidden',
- 'depends': ['l10n_ch_payment_slip',
-             'base_transaction_id'],
- 'website': 'http://www.camptocamp.com',
- 'data': [],
- 'tests': [],
+ 'author': "Compassion CH, Camptocamp,Odoo Community Association (OCA)",
+ 'category': 'Finance',
+ 'complexity': 'normal',
+ 'depends': [
+     'account',
+     'account_bank_statement_import',
+ ],
+ 'external_dependencies': {
+     'python': ['xlrd'],
+ },
+ 'website': 'http://www.compassion.ch/',
+ 'data': [
+     'views/statement_line_view.xml',
+     'views/l10n_ch_account_statement_base_import.xml'
+     ],
+ 'qweb': ['static/src/xml/l10n_ch_statement_line_layout.xml'],
+ 'test': [],
  'installable': True,
- 'auto_install': True,
- }
+ 'images': [],
+ 'auto_install': False,
+ 'license': 'AGPL-3'}
