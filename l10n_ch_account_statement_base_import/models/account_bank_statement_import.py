@@ -150,11 +150,8 @@ class account_bank_statement_import(models.TransientModel):
     @api.model
     def _create_bank_statement(self, stmt_vals):
         """Override to support attachement
-        in the long run it should be deprecated by
-        https://github.com/OCA/bank-statement-import/issues/25
         """
-        attachments = list(stmt_vals['attachments'])
-        stmt_vals.pop('attachments', None)
+        attachments = list(stmt_vals.pop('attachments', list()))
 
         statement_id, notifs = super(
             account_bank_statement_import,
