@@ -10,7 +10,7 @@
             <field name="name">LSV export wizard view</field>
             <field name="model">lsv.export.wizard</field>
             <field name="arch" type="xml">
-                <form string="LSV export" version="7.0">
+                <form string="LSV export">
                     <field name="state" invisible="True"/>
                     <separator string="LSV export parameters"/>
                     <group states="create">

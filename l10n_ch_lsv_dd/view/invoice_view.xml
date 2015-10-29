@@ -10,7 +10,7 @@
       <field name="name">account.invoice.free.form</field>
       <field name="model">account.invoice.free</field>
       <field name="arch" type="xml">
-        <form string="Free Invoices from payment order" version="7.0">
+        <form string="Free Invoices from payment order">
           <p class="oe_grey">
             This will extract payment lines corresponding to selected
             invoices and put them in a cancelled payment order. This way,
