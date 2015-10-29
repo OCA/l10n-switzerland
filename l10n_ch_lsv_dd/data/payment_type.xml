@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2014 Compassion (http://www.compassion.ch)
+  @author: Cyril Sester <cyril.sester@outlook.com>
+  The licence is in the file __openerp__.py
+-->
+<openerp>
+  <data noupdate="1">
+    <record id="export_lsv" model="payment.mode.type">
+      <field name="name">LSV Direct Debit</field>
+      <field name="code">lsv</field>
+      <field name="suitable_bank_types"
+        eval="[(6,0,[ref('base_iban.bank_iban')])]" />
+      <field name="ir_model_id" ref="model_lsv_export_wizard"/>
+      <field name="payment_order_type">debit</field>
+    </record>
+
+    <record id="export_post_dd" model="payment.mode.type">
+      <field name="name">Postfinance Direct Debit</field>
+      <field name="code">postfinance.dd</field>
+      <field name="suitable_bank_types"
+        eval="[(6,0,[ref('l10n_ch_base_bank.bv')])]" />
+      <field name="ir_model_id" ref="model_post_dd_export_wizard"/>
+      <field name="payment_order_type">debit</field>
+    </record>
+  </data>
+</openerp>

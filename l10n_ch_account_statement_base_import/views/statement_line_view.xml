@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_bank_statement_form_l10n_ch" model="ir.ui.view">
+            <field name="name">account_statement_l10n_ch.view_form</field>
+            <field name="model">account.bank.statement</field>
+            <field name="inherit_id" ref="account.view_bank_statement_form" />
+            <field eval="16" name="priority"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//sheet/notebook/page/field[@name='line_ids']/tree/field[@name='bank_account_id']" position="after">
+                        <field name="file_name"/>
+                        <button name="download_attachment" type="object" icon="STOCK_SAVE" />
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <!-- Define a view on ir.attachment to see the attached picture -->
+        <record id="attachement_form_postfinance" model="ir.ui.view">
+            <field name="name">l10n_ch_bank_attachment.view_form</field>
+            <field name="model">ir.attachment</field>
+            <field eval="20" name="priority"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Attachments">
+                    <field name="datas" widget="image" readonly="1"/>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record model="ir.ui.view" id="l10nch_view_res_partner_bank_lsv_form">
+      <field name="name">res.partner_bank.form.l10n_ch.lsv</field>
+      <field name="model">res.partner.bank</field>
+      <field name="inherit_id" ref="l10n_ch_payment_slip.l10nch_view_res_partner_bank_from_invoice_slip"/>
+      <field name="arch" type="xml">
+        <data>
+          <group name="bank" position="after">
+            <group colspan="4">
+              <group name="lsv" string="LSV options" attrs="{'invisible': ['|', ('state','!=','iban'), ('company_id' ,'=', False)]}">
+                <field name="lsv_identifier" />
+                <field name="esr_party_number" />
+              </group>
+              <group />
+            </group>
+            <group colspan="4">
+              <group name="post_dd" string="Postfinance Direct Debit options" attrs="{'invisible': ['|', ('state','!=','bvr'), ('company_id' ,'=', False)]}">
+                <field name="post_dd_identifier" />
+              </group>
+              <group />
+            </group>
+          </group>
+          <xpath expr="//group[@string='BVR options']" position="attributes">
+            <attribute name="attrs">{'invisible': ['|', ('state','not in',['bv', 'bvr', 'iban']), ('company_id' ,'=', False)]}</attribute>
+          </xpath>
+          <field name="bvr_adherent_num" position="attributes">
+            <attribute name="attrs">{'invisible': [('state','not in',['bvr', 'iban'])]}</attribute>
+          </field>
+          <field name="print_bank" position="attributes">
+            <attribute name="attrs">{'invisible': [('state','not in',['bv', 'bvr'])]}</attribute>
+          </field>
+          <field name="print_account" position="attributes">
+            <attribute name="attrs">{'invisible': [('state','not in',['bv', 'bvr'])]}</attribute>
+          </field>
+          <field name="print_partner" position="attributes">
+            <attribute name="attrs">{'invisible': [('state','not in',['bv', 'bvr'])]}</attribute>
+          </field>
+        </data>
+      </field>
+    </record>
+  </data>
+</openerp>
