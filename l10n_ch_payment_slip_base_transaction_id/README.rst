@@ -11,4 +11,4 @@ a new reference.
 
 This module is needed if you use the Swiss localization module and the
 bank-statement-reconcile project in the banking addons
-(https://launchpad.net/banking-addons).
+(https://github.com/oca/bank-statement-reconcile).
