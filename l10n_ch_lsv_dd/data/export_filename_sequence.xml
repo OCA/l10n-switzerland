@@ -5,17 +5,17 @@
     The licence is in the file __openerp__.py
 -->
 <openerp>
-<data noupdate="1">
-	<record id="export_filename_seq_type" model="ir.sequence.type">
-		<field name="name">Swiss banking export filename</field>
-		<field name="code">l10n.banking.export.filename</field>
-	</record>
+  <data noupdate="1">
+    <record id="export_filename_seq_type" model="ir.sequence.type">
+      <field name="name">Swiss banking export filename</field>
+      <field name="code">l10n.banking.export.filename</field>
+    </record>
 
-	<record id="export_filename_seq" model="ir.sequence">
-		<field name="name">Swiss banking export filename</field>
-		<field name="code">l10n.banking.export.filename</field>
-		<field name="prefix"></field>
-		<field name="padding" eval="6"/>
-	</record>
-</data>
+    <record id="export_filename_seq" model="ir.sequence">
+      <field name="name">Swiss banking export filename</field>
+      <field name="code">l10n.banking.export.filename</field>
+      <field name="prefix"></field>
+      <field name="padding" eval="6"/>
+    </record>
+  </data>
 </openerp>

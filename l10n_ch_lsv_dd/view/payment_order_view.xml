@@ -18,8 +18,8 @@
         </record>
 
         <record
-		model="ir.actions.act_window"
-		id="action_create_lsv">
+          model="ir.actions.act_window"
+          id="action_create_lsv">
             <field name="name">Create LSV file</field>
             <field name="res_model">lsv.export.wizard</field>
             <field name="view_type">form</field>
@@ -28,8 +28,8 @@
         </record>
 
         <record
-		model="ir.values"
-		id="action_account_lsv_create_values">
+          model="ir.values"
+          id="action_account_lsv_create_values">
             <field name="key2">client_action_multi</field>
             <field name="model">payment.order</field>
             <field name="name">Create LSV file</field>
@@ -39,8 +39,8 @@
         </record>
 
         <record
-		model="ir.actions.act_window"
-		id="action_create_post_dd">
+          model="ir.actions.act_window"
+          id="action_create_post_dd">
             <field name="name">Create Postfinance Direct Debit file</field>
             <field name="res_model">post.dd.export.wizard</field>
             <field name="view_type">form</field>
@@ -49,8 +49,8 @@
         </record>
 
         <record
-		model="ir.values"
-		id="action_account_post_dd_create_values">
+          model="ir.values"
+          id="action_account_post_dd_create_values">
             <field name="key2">client_action_multi</field>
             <field name="model">payment.order</field>
             <field name="name">Create Postfinance Direct Debit file</field>
