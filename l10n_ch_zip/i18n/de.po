@@ -1,0 +1,117 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * l10n_ch_zip
+# 
+# Translators:
+# Thomas A. Jaeger, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: l10n-switzerland (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-30 22:30+0000\n"
+"PO-Revision-Date: 2015-11-03 11:23+0000\n"
+"Last-Translator: Thomas A. Jaeger\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: l10n_ch_zip
+#: field:res.better.zip,active:0
+msgid "Active"
+msgstr "Aktiv"
+
+#. module: l10n_ch_zip
+#: help:res.better.zip,lang2:0
+msgid ""
+"Additional language within a postcode.\n"
+"One alternative language code may appear for each postcode.\n"
+"1 = German, 2 = French, 3 = Italian, 4 = Romansh."
+msgstr "Zusätzliche Sprache in der gleichen PLZ.\nEine Alternativsprache kann pro PLZ erfasst werden\n1 = Deutsch, 2 = Französisch, 3 = Italienisch, 4 = Rätromanisch"
+
+#. module: l10n_ch_zip
+#: field:res.better.zip,additional_digit:0
+msgid "Additional poscode digits"
+msgstr "Zusätzliche PLZ Stellen"
+
+#. module: l10n_ch_zip
+#: field:res.better.zip,lang2:0
+msgid "Alternative language code"
+msgstr "Alternativer Sprachcode"
+
+#. module: l10n_ch_zip
+#: model:ir.model,name:l10n_ch_zip.model_res_better_zip
+msgid "City/locations completion object"
+msgstr "Stadt/Ort Abschlussobjekt"
+
+#. module: l10n_ch_zip
+#: field:res.better.zip,communitynumber_bfs:0
+msgid "FSO municipality number (BFSNR)"
+msgstr "Gemeindenummer (BFS-Nr)"
+
+#. module: l10n_ch_zip
+#: help:res.better.zip,sort:0
+msgid ""
+"Indicates if the postcode is included in the «sort file»(MAT[CH]sort): 0 = "
+"not included, 1 = included. Delivery information with addresses (only "
+"postcode and streets) are published in the sort file."
+msgstr "Zeigt, ob die PLZ im 'Sortfile' enthalten ist (MAT[CH]sort): 0 = not included, 1 = included. Lieferinformationen mit Adressen (nur PLZ und Strasse) werden im Sortfile angezeigt."
+
+#. module: l10n_ch_zip
+#: help:res.better.zip,post_delivery_through:0
+msgid ""
+"Indicates the post office (ONRP) that delivers most of the letters to the "
+"postcode addresses. This information can be used for bag addresses too."
+msgstr "Zeigt die Postadresse (ONRP), die die meisten Zeichen für die PLZ liefert. Diese Info kann für Paketadressen gebraucht werden."
+
+#. module: l10n_ch_zip
+#: help:res.better.zip,lang:0
+msgid ""
+"Language (language majority) within a postcode area. 1 = German, 2 = French,"
+" 3 = Italian, 4 = Romansh. For multi-lingual localities, the main language "
+"is indicated."
+msgstr "Hauptsprache in der gleichen PLZ. 1 = Deutsch, 2 = Französisch, 3 = Italienisch, 4 = Rätromanisch. Zeigt die Hauptsprache in mehrsprachigen Orten."
+
+#. module: l10n_ch_zip
+#: field:res.better.zip,lang:0
+msgid "Language code"
+msgstr "Sprachcode"
+
+#. module: l10n_ch_zip
+#: field:res.better.zip,post_delivery_through:0
+msgid "Mail delivery by"
+msgstr "Postzustellung durch"
+
+#. module: l10n_ch_zip
+#: help:res.better.zip,communitynumber_bfs:0
+msgid ""
+"Numbering used by the Federal Statistical Office for municipalities in "
+"Switzerland and the Principality of Liechtenstein"
+msgstr "Vom Bundesamt für Statistik benutzte Nummerierung für Gemeinden in der Schweiz und dem Fürstentum Liechtenstein "
+
+#. module: l10n_ch_zip
+#: field:res.better.zip,zip_type:0
+msgid "Postcode type"
+msgstr "PLZ Typ"
+
+#. module: l10n_ch_zip
+#: field:res.better.zip,sort:0
+msgid "Present in sort file"
+msgstr "Im Sort File enthalten"
+
+#. module: l10n_ch_zip
+#: help:res.better.zip,onrp:0
+msgid "Primary Key"
+msgstr "Hauptschlüssel"
+
+#. module: l10n_ch_zip
+#: field:res.better.zip,onrp:0
+msgid "Swiss Post classification no. (ONRP)"
+msgstr "Schweizer Post-Klassifizierungsnummer (ONRP)"
+
+#. module: l10n_ch_zip
+#: field:res.better.zip,valid_from:0
+msgid "Valid from"
+msgstr "Gültig seit"
