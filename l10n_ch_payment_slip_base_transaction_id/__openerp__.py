@@ -30,6 +30,6 @@
  'website': 'http://www.camptocamp.com',
  'data': [],
  'tests': [],
- 'installable': False,
+ 'installable': True,
  'auto_install': True,
  }
