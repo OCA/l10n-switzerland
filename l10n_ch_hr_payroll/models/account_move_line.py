@@ -53,11 +53,11 @@ where id=%d""" % (new_rec.partner_id.id, new_rec.move_id.id)
 
         return new_rec
 
-    def write(self, cr, uid, ids, vals, context=None, \
-        check=True, update_check=True):
-        
-        ret = super(AccountMoveLine, self).write(cr, uid, ids, vals, \
-            context=context, check=check, update_check=update_check)
+    def write(self, cr, uid, ids, vals, context=None,
+            check=True, update_check=True):
+
+        ret = super(AccountMoveLine, self).write(cr, uid, ids, vals,
+                context=context, check=check, update_check=update_check)
 
         # This is for the cases when the first account_move_line
         # doesn't have a partner_id but the others have one.
