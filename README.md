@@ -78,6 +78,7 @@ addon | version | summary
 [l10n_ch_import_cresus](l10n_ch_import_cresus/) | 8.0.1.0.0 | Account Import Cresus
 [l10n_ch_lsv_dd](l10n_ch_lsv_dd/) | 8.0.1.0 | Create LSV and Direct Debit (postfinance) files
 [l10n_ch_payment_slip](l10n_ch_payment_slip/) | 8.0.2.1.0 | Print ESR/BVR payment slip with your invoices
+[l10n_ch_payment_slip_base_transaction_id](l10n_ch_payment_slip_base_transaction_id/) | 8.0.1.0 | Switzerland - BVR/ESR Transaction ID Compatibility
 [l10n_ch_payment_slip_layouts](l10n_ch_payment_slip_layouts/) | 8.0.0.1.0 | Add new BVR/ESR payment slip layouts like invoice with slip on same document
 [l10n_ch_payment_slip_voucher](l10n_ch_payment_slip_voucher/) | 8.0.1.0.0 | Import Payment Slip (BVR/ESR) into vouchers
 [l10n_ch_scan_bvr](l10n_ch_scan_bvr/) | 8.0.1.0.0 | Switzerland - Scan ESR/BVR to create invoices
@@ -91,7 +92,6 @@ addon | version | summary
 --- | --- | ---
 [l10n_ch_dta_base_transaction_id](l10n_ch_dta_base_transaction_id/) | 1.0 (unported) | Switzerland - Bank Payment File (DTA) Transaction ID Compatibility
 [l10n_ch_payment_slip_account_statement_base_completion](l10n_ch_payment_slip_account_statement_base_completion/) | 1.0 (unported) | Switzerland - BVR/ESR Bank statement Completion
-[l10n_ch_payment_slip_base_transaction_id](l10n_ch_payment_slip_base_transaction_id/) | 8.0.1.0 (unported) | Switzerland - BVR/ESR Transaction ID Compatibility
 
 [//]: # (end addons)
 
