@@ -197,7 +197,7 @@ class fds_files_import_tobankstatments_wizard(models.TransientModel):
         # check key of active user
         fds_authentication_key_obj = self.env['fds.authentication.keys']
         key = fds_authentication_key_obj.search([
-            ['user_id', '=', self.env.user.id],
+            ['user_id', '=', self.env.uid],
             ['fds_account_id', '=', fds_account.id]])
 
         # get username, hostname, key_pass
