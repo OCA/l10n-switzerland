@@ -70,9 +70,9 @@ class fds_inherit_sepa_wizard(models.TransientModel):
     )
     state = fields.Selection(
         selection=[('default', 'Default'),
-                   ('finish', 'finish'),
-                   ('upload', 'upload'),
-                   ('confirm', 'confirm')],
+                   ('finish', 'Finish'),
+                   ('upload', 'Upload'),
+                   ('confirm', 'Confirm')],
         readonly=True,
         default='default',
         help='[Info] keep state of the wizard'
@@ -92,10 +92,10 @@ class fds_inherit_sepa_wizard(models.TransientModel):
         self.create_pain_001()
         attachment_obj = self.env['ir.attachment']
         payment_order_id = self.env.context.get('active_id')
-        file = attachment_obj.search([['res_id', '=', payment_order_id]])[0]
-        self.write({'attachment_id': file.id})
-        self.write({'payment_order_id': payment_order_id})
-        self.write({'state': 'finish'})
+        attachment_file = attachment_obj.search([['res_id', '=', payment_order_id]], limit=1)[0]
+        self.write({'attachment_id': attachment_file.id,
+                    'payment_order_id': payment_order_id,
+                    'state': 'finish'})
         return self._do_populate_tasks()
 
     @api.multi
@@ -122,8 +122,9 @@ class fds_inherit_sepa_wizard(models.TransientModel):
 
         # check if default upload directory is allowed
         dir_name = self.fds_account.upload_dd_directory.name
-        dir = self.fds_account_directory.search([('name', '=', dir_name)])
-        if not dir.allow_upload_file:
+        dir_handle = self.fds_account_directory.search([('name', '=',
+                                                         dir_name)])
+        if not dir_handle.allow_upload_file:
             self._state_upload_on()
             return self._do_populate_tasks()
 
@@ -155,7 +156,7 @@ class fds_inherit_sepa_wizard(models.TransientModel):
             tmp_key = self._create_tmp_file(key.private_key_crypted, tmp_d)[0]
             tmp_f = self._create_tmp_file(self.attachment_id.datas, tmp_d)[0]
             old_path_f = os.path.join(tmp_d, tmp_f.name)
-            new_path_f = os.path.join(tmp_d, ''.join(self.filename.split(':')))
+            new_path_f = os.path.join(tmp_d, self.filename.replace(':', ''))
             shutil.move(old_path_f, new_path_f)
 
             # upload to sftp
@@ -227,11 +228,11 @@ class fds_inherit_sepa_wizard(models.TransientModel):
         '''
         fds_authentication_key_obj = self.env['fds.authentication.keys']
         key = fds_authentication_key_obj.search([
-            ['user_id', '=', self.env.user.id],
+            ['user_id', '=', self.env.uid],
             ['fds_account_id', '=', self.fds_account.id]])
 
         if not key:
-            raise exceptions.Warning('You don\'t have key')
+            raise exceptions.Warning("You don't have a key")
 
         if not key.key_active:
             raise exceptions.Warning('Key not active')
