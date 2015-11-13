@@ -32,11 +32,11 @@ _logger = logging.getLogger(__name__)
 
 
 class fds_inherit_post_dd_export_upload_wizard(models.TransientModel):
-    ''' This addon allows you to upload the Direct Debit geberate file to
+    ''' This addon allows you to upload the Direct Debit generated file to
         your FDS Postfinance.
 
-        This addon will add upload button to the DD wizard.
-        This Class inherit from l10n_ch_lsv_dd.post_dd_export_wizard
+        This addon will add an upload button to the DD wizard.
+        This Class inherits from l10n_ch_lsv_dd.post_dd_export_wizard
     '''
     _inherit = 'post.dd.export.wizard'
 
@@ -88,8 +88,9 @@ class fds_inherit_post_dd_export_upload_wizard(models.TransientModel):
 
         # check if default upload directory is allowed
         dir_name = self.fds_account.upload_dd_directory.name
-        dir = self.fds_account_directory.search([('name', '=', dir_name)])
-        if not dir.allow_upload_file:
+        dir_handle = self.fds_account_directory.search([('name', '=',
+                                                         dir_name)])
+        if not dir_handle.allow_upload_file:
             self._state_upload_on()
             return self._do_populate_tasks()
 
@@ -116,11 +117,11 @@ class fds_inherit_post_dd_export_upload_wizard(models.TransientModel):
         # check key of active user
         fds_authentication_key_obj = self.env['fds.authentication.keys']
         key = fds_authentication_key_obj.search([
-            ['user_id', '=', self.env.user.id],
+            ['user_id', '=', self.env.uid],
             ['fds_account_id', '=', self.fds_account.id]])
 
         if not key:
-            raise exceptions.Warning('You don\'t have key')
+            raise exceptions.Warning("You don't have a key")
 
         if not key.key_active:
             raise exceptions.Warning('Key not active')
@@ -228,34 +229,31 @@ class fds_inherit_post_dd_export_upload_wizard(models.TransientModel):
 
     @api.multi
     def _state_finish_on(self):
-        ''' private function that change state to finish
+        ''' private function that changes state to finish
 
             :returns: None
         '''
-        self.ensure_one()
         self.write({'state': 'finish'})
 
     @api.multi
     def _state_upload_on(self):
-        ''' private function that change state to upload
+        ''' private function that changes state to upload
 
             :returns: None
         '''
-        self.ensure_one()
         self.write({'state': 'upload'})
 
     @api.multi
     def _state_confirm_on(self):
-        ''' private function that change state to confirm
+        ''' private function that changes state to confirm
 
             :returns: None
         '''
-        self.ensure_one()
         self.write({'state': 'confirm'})
 
     @api.multi
     def _do_populate_tasks(self):
-        ''' private function that continue with the same wizard.
+        ''' private function that continues with the same wizard.
 
             :returns action: configuration for the next wizard's view
         '''
