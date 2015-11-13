@@ -22,7 +22,7 @@
 {
     'name': 'Swiss Postfinance FDS direct debit upload',
     'summary': '''upload sepa files to FDS PostFinance''',
-    'version': '1.0',
+    'version': '8.0.1.0',
     'license': 'AGPL-3',
     'author': 'Compassion CH',
     'website': 'http://www.compassion.ch/',

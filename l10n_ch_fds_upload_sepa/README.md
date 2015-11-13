@@ -3,22 +3,25 @@
 
 Postfinance File Delivery Services
 ==================================
-The file delivery services (FDS) is a service offeried by the  Post CH's Technology unit service.
+The file delivery services (FDS) is a service offered by the  Post CH's
+Technology unit service.
 
-FDS acts as a gateway between external networks and the Post CH SA. It enables mutual exchange of files between partners and Post CH applications.
+FDS acts as a gateway between external networks and the Post CH SA. It enables
+mutual exchange of files between partners and Post CH applications.
 
 This Module
 -----------
-This module allow Odoo users to upload SEPA files on their FDS PostFinance
+This module allows Odoo users to upload SEPA files on their FDS PostFinance.
 
 Configuration
 -------------
-if you have only one fds account, you can select a default upload directory in the configuration
+If you have only one fds account, you can select a default upload directory in
+the configuration.
 
 Security user access
 --------------------
-this module follow direct debit order security access.
-To allow it: 
+This module follows direct debit order security access.
+To allow it:
 * Accounting & Finance -> Invoice & Payments
 * Administration -> Settings
 
@@ -29,7 +32,7 @@ Contributors
 ------------
 
 * Nicolas Tran <nox.tran@gmail.com>
-* Please Compassion put your email here.
+* Emanuel Cino <ecino@compassion.ch>
 
 Maintainer
 ----------
