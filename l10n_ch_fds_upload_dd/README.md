@@ -18,7 +18,7 @@ if you have only one fds account, you can select a default upload directory in t
 Security user access
 --------------------
 this module follow direct debit order security access.
-To allow it: 
+To allow it:
 * Accounting & Finance -> Invoice & Payments
 * Administration -> Settings
 * Sales -> see all leads
@@ -30,7 +30,7 @@ Contributors
 ------------
 
 * Nicolas Tran <nox.tran@gmail.com>
-* Please Compassion put your email here.
+* Emanuel Cino <ecino@compassion.ch>
 
 Maintainer
 ----------

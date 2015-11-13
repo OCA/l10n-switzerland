@@ -31,8 +31,8 @@ class fds_postfinance_account_dd(models.Model):
     upload_dd_directory = fields.Many2one(
         comodel_name='fds.postfinance.files.directory',
         string='default upload directory',
-        help='select one upload default directory.' +
-             ' if none, allow upload file first'
+        help='Select a default upload directory.'
+             ' If none, allow upload file first.'
     )
     historical_dd = fields.One2many(
         comodel_name='fds.postfinance.historical.dd',
