@@ -14,14 +14,14 @@ This module allows Odoo users to import files on their FDS PostFinance and conve
 Features
 --------
 * list and import download files from FDS PostFinance SFTP to Bank Statement
-* generate authentication key for FDS Postfinance SFTP 
+* generate authentication key for FDS Postfinance SFTP
 * import authentication key for FDS Postfianance SFTP
 
 Installation
 ------------
 To install this module, you need to add the fds postfinance module into your addons path.
 
-To encrypte new private key in the database, you need to add to your odoo config (odoo.conf): ssh_pwd = your_password 
+To encrypt new private key in the database, you need to add to your odoo config (odoo.conf): ssh_pwd = your_password
 
 Configuration
 -------------
@@ -38,11 +38,11 @@ Configuration
 Usage
 -----
 * to import files as bank statement, use the more button.
-* in case of error, the file is kept and you can import manually 
+* in case of error, the file is kept and you can import manually
 
 Known issues / Roadmap
 ----------------------
-* [not implemented yet] send authentication key to FDS Postfiance mail 
+* [not implemented yet] send authentication key to FDS Postfiance mail
   (for now, download public key and send the email to postfinance manually)
 * [not implemented yet] timer to automatically import download files from FDS PostFinance SFTP to Bank Statement
 
@@ -60,12 +60,12 @@ dependency:
 external dependency:
 --------------------
 * python module: pysftp
-* python module: pycrypto 
+* python module: pycrypto
 
 additional addons:       
 ------------------
-* upload PostFinance Direct Debit generate file to FDS PostFinance 
-* upload SEPA generate file to FDS PostFinance 
+* upload PostFinance Direct Debit generate file to FDS PostFinance
+* upload SEPA generate file to FDS PostFinance
 
 Credits
 =======
@@ -74,7 +74,7 @@ Contributors
 ------------
 
 * Nicolas Tran <nox.tran@gmail.com>
-* Please Compassion put your email here.
+* Emanuel Cino <ecino@compassion.ch>
 
 Maintainer
 ----------
