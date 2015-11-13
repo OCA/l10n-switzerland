@@ -8,15 +8,15 @@
             <field name="arch" type="xml">
                 <form string="FDS PostFinance files">
                     <group>
-                       <field name="fds_account_id" />
-                       <field name="bank_statement_id" attrs="{'invisible':[('state', '!=', 'done')]}"/>
-                       <field name="data" filename="filename" attrs="{'invisible':[('state', '=', 'done')]}"/>
-                       <field name="filename" attrs="{'invisible':[('state', '!=', 'done')]}"/>
-                       <field name="directory_id" />
-                       <field name="journal_id" />
-                       <field name="state" />
-                   </group>
-                   <footer>
+                        <field name="fds_account_id" />
+                        <field name="bank_statement_id" attrs="{'invisible':[('state', '!=', 'done')]}"/>
+                        <field name="data" filename="filename" attrs="{'invisible':[('state', '=', 'done')]}"/>
+                        <field name="filename" attrs="{'invisible':[('state', '!=', 'done')]}"/>
+                        <field name="directory_id" />
+                        <field name="journal_id" />
+                        <field name="state" />
+                    </group>
+                    <footer>
                         <button string="Import to Bank Statement" name="import_button" type="object"  class="oe_highlight" icon="gtk-convert" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
                         <button name="change2error_button" string="File Corrupt" type="object" icon="gtk-cancel" confirm="Are you sure you want to do this?" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
                         <button name="change2draft_button" string="Reset to draft" type="object" icon="gtk-undo" confirm="Are you sure you want to do this?" attrs="{'invisible': [('state', '!=', 'error')]}"/>
