@@ -255,7 +255,7 @@ class LsvExportWizard(models.TransientModel):
         ''' Create banking.export.ch.dd object '''
         banking_export_ch_dd_obj = self.env['banking.export.ch.dd']
         vals = {
-            'payment_order_ids': [(6, 0, [p_o_id for p_o_id in p_o_ids])],
+            'payment_order_ids': [(6, 0, p_o_ids)],
             'total_amount': total_amount,
             # Substract 1 for total line
             'nb_transactions': properties.get('seq_nb') - 1,
