@@ -20,7 +20,7 @@
 ##############################################################################
 
 {'name': 'Switzerland - Bank Payment File (DTA) Transaction ID Compatibility',
- 'version': '1.0',
+ 'version': '8.0.1.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'maintainer': 'Camptocamp',
  'license': 'AGPL-3',
@@ -43,6 +43,6 @@ in the banking addons (https://launchpad.net/banking-addons).
  'website': 'http://www.camptocamp.com',
  'data': [],
  'tests': [],
- 'installable': False,
+ 'installable': True,
  'auto_install': True,
  }
