@@ -199,30 +199,31 @@ class PostDdExportWizard(models.TransientModel):
         control_range = self._gen_control_range('47', properties)
 
         vals = collections.OrderedDict()
-        self._check_currency(line, properties)
+        export_utils.check_currency(line, properties)
         self._check_amount(line, properties)
         communications = self._get_communications(line)
         vals.update([
             ('currency', properties.get('currency', 'CHF')),
             ('amount', self._format_number(line.amount_currency, 13)),
-            ('reserve_1', self._complete_line('', 1)),
-            ('reserve_2', self._complete_line('', 3)),
-            ('reserve_3', self._complete_line('', 2)),
+            ('reserve_1', export_utils.complete_line(1)),
+            ('reserve_2', export_utils.complete_line(3)),
+            ('reserve_3', export_utils.complete_line(2)),
             ('deb_account_no', self._get_post_account(line.bank_id)),
-            ('reserve_4', self._complete_line('', 6)),
-            ('ref', self._complete_line(self._get_ref(line), 27)),
-            ('reserve_5', self._complete_line('', 8)),
+            ('reserve_4', export_utils.complete_line(6)),
+            ('ref', export_utils.complete_line(27, self._get_ref(line))),
+            ('reserve_5', export_utils.complete_line(8)),
             ('deb_address', self._get_account_address(line.bank_id)),
-            ('reserve_6', self._complete_line('', 35)),
-            ('reserve_7', self._complete_line('', 35)),
-            ('reserve_8', self._complete_line('', 35)),
-            ('reserve_9', self._complete_line('', 10)),
-            ('reserve_10', self._complete_line('', 25)),
-            ('communication', self._complete_line(communications, 140)),
-            ('reserve_11', self._complete_line('', 3)),
-            ('reserve_12', self._complete_line('', 1)),
-            ('orderer_info', self._complete_line('', 140)),  # Not implemented
-            ('reserve_13', self._complete_line('', 14))
+            ('reserve_6', export_utils.complete_line(35)),
+            ('reserve_7', export_utils.complete_line(35)),
+            ('reserve_8', export_utils.complete_line(35)),
+            ('reserve_9', export_utils.complete_line(10)),
+            ('reserve_10', export_utils.complete_line(25)),
+            ('communication', export_utils.complete_line(140,
+                                                         communications)),
+            ('reserve_11', export_utils.complete_line(3)),
+            ('reserve_12', export_utils.complete_line(1)),
+            ('orderer_info', export_utils.complete_line(140)),
+            ('reserve_13', export_utils.complete_line(14))
         ])
         debit_record = control_range + ''.join(vals.values())
         if len(debit_record) == 700:  # Standard debit record size
@@ -247,7 +248,7 @@ class PostDdExportWizard(models.TransientModel):
                 properties.get('trans_ser_no') -
                 1).zfill(6)),
             ('total_amount', self._format_number(total_amount, 13)),
-            ('reserve_1', self._complete_line('', 628)),
+            ('reserve_1', export_utils.complete_line(628)),
         ])
         total_record = control_range + ''.join(vals.values())
         if len(total_record) == 700:
