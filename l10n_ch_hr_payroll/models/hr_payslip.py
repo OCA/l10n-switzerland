@@ -103,11 +103,6 @@ class HrPayslip(models.Model):
             invoices.write({'slip_id': payslip.id})
             moves = invoices.mapped('move_id')
 
-            inv_lines = InvoiceLineObj.search(filters)
-            invoices = inv_lines.mapped('invoice_id')
-            invoices.write({'slip_id': payslip.id})
-            moves = invoices.mapped('move_id')
-
             # Look for expenses
             filters = [
                 ('employee_id', '=', employee_id),
@@ -134,7 +129,7 @@ and (l3.reconcile_id=0 or l3.reconcile_id is null)
 and (l3.reconcile_partial_id=0 or l3.reconcile_partial_id is null)
 and l3.account_id=a.id
 and (l3.slip_id=0 or l3.slip_id is null)
-and a.type='liquidity'""" % ','.join(moves)
+and a.type='liquidity'""" % ','.join([str(i) for i in moves.ids])
 
                 self.env.cr.execute(query)
                 move_line_ids = [str(x[0]) for x in self.env.cr.fetchall()]

@@ -27,7 +27,7 @@
 ##############################################################################
 
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 
 class AccountMoveLine(models.Model):
@@ -36,3 +36,40 @@ class AccountMoveLine(models.Model):
     # ---------- Fields management
 
     slip_id = fields.Many2one('hr.payslip', string='Pay slip')
+
+    # ---------- Instances management
+
+    @api.model
+    def create(self, vals):
+        new_rec = super(AccountMoveLine, self).create(vals)
+
+        # This is for the cases when the first account_move_line
+        # doesn't have a partner_id but the others have one.
+        if new_rec.account_id.type == 'payable' and new_rec.partner_id:
+            query = """update account_move
+set partner_id=%d
+where id=%d""" % (new_rec.partner_id.id, new_rec.move_id.id)
+            self._cr.execute(query)
+
+        return new_rec
+
+    def write(self, cr, uid, ids, vals, context=None,
+              check=True, update_check=True):
+
+        _super = super(AccountMoveLine, self)
+        ret = _super.write(
+            cr, uid, ids, vals, context=context,
+            check=check, update_check=update_check
+        )
+
+        # This is for the cases when the first account_move_line
+        # doesn't have a partner_id but the others have one.
+        for rec in self.browse(cr, uid, ids, context=context):
+            if rec.account_id.type != 'payable' or not rec.partner_id:
+                continue
+            query = """update account_move
+set partner_id=%d
+where id=%d""" % (rec.partner_id.id, rec.move_id.id)
+            cr.execute(query)
+
+        return ret
