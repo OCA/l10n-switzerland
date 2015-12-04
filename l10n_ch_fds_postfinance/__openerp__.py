@@ -21,27 +21,24 @@
 ##############################################################################
 {
     'name': 'Swiss Postfinance File Delivery Services',
-    'summary': 'Import and upload files in FDS',
+    'summary': 'Download files and import bank statements from FDS',
     'version': '8.0.1.0',
     'license': 'AGPL-3',
     'author': 'OCA (Odoo Community Association), Compassion CH',
     'website': 'http://www.compassion.ch/',
     'category': 'Finance',
-    'depends': [
-        'account_accountant',
-        'l10n_ch_account_statement_base_import'
-    ],
+    'depends': ['l10n_ch_account_statement_base_import'],
     'external_dependencies': {
         'python': ['pysftp', 'Crypto']
     },
     'data': [
-        'view/fds_authentication_keys_view.xml',
-        'view/fds_files_import_tobankstatments_wizard_view.xml',
-        'view/fds_key_clone_wizard_view.xml',
-        'view/fds_key_generator_wizard_view.xml',
-        'view/fds_key_import_wizard_view.xml',
-        'view/fds_postfinance_account_view.xml',
-        'view/fds_postfinance_files_view.xml',
+        'views/fds_authentication_keys_view.xml',
+        'views/fds_files_import_tobankstatments_wizard_view.xml',
+        'views/fds_key_clone_wizard_view.xml',
+        'views/fds_key_generator_wizard_view.xml',
+        'views/fds_key_import_wizard_view.xml',
+        'views/fds_postfinance_account_view.xml',
+        'views/fds_postfinance_file_view.xml',
         'security/ir.model.access.csv',
     ],
     'demo': [],

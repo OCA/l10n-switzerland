@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-16 10:23+0000\n"
-"PO-Revision-Date: 2015-09-16 12:24+0100\n"
+"POT-Creation-Date: 2015-12-04 11:03+0000\n"
+"PO-Revision-Date: 2015-12-04 13:03+0100\n"
 "Last-Translator: Emanuel Cino <ecino@compassion.ch>\n"
 "Language-Team: \n"
 "Language: fr_CH\n"
@@ -40,13 +40,13 @@ msgstr ""
 "                </p>\n"
 
 #. module: l10n_ch_fds_postfinance
-#: model:ir.actions.act_window,help:l10n_ch_fds_postfinance.action_fds_postfinance_files
+#: model:ir.actions.act_window,help:l10n_ch_fds_postfinance.action_fds_files
 msgid ""
 "<p class=\"oe_view_nocontent_create\">\n"
 "            Select the FDS PostFinance that you want to connect.</p><p>\n"
-"            This view will allow to list all contents of your FDS "
-"PostFinance repertory\n"
-"            and import selected files to Bank Statements. \n"
+"            This view will allow to list the content of your FDS PostFinance "
+"directory\n"
+"            and import selected files to Bank Statements.\n"
 "            If your FDS PostFinance don't appear, start by setup an account."
 "</p>\n"
 "            "
@@ -57,40 +57,45 @@ msgstr ""
 "                </p><p>\n"
 "            Cette vue vous permettra de répertorier le contenu de votre "
 "stockage FDS PostFinance \n"
-"            et importer les fichiers en relevés bancaires. \n"
+"            et télécharger les fichiers vers des relevés bancaires. \n"
 "            Si votre compte FDS PostFinance n'apparaît pas, veuillez le "
 "configurer au préalable. \n"
 "                </p>\n"
 "            "
 
 #. module: l10n_ch_fds_postfinance
-#: code:addons/l10n_ch_fds_postfinance/model/fds_postfinance_files.py:91
+#: field:fds.postfinance.account,user_id:0
+msgid "Account Owner"
+msgstr "Responsable du compte"
+
+#. module: l10n_ch_fds_postfinance
+#: code:addons/l10n_ch_fds_postfinance/models/fds_postfinance_file.py:91
 #, python-format
 msgid "Add default journal in acount conf"
 msgstr "Ajoutez le journal par défaut dans la configuration du compte"
 
 #. module: l10n_ch_fds_postfinance
-#: field:fds.postfinance.files.directory,allow_download_file:0
+#: field:fds.postfinance.directory,allow_download_file:0
 msgid "Allow download file?"
 msgstr "Autoriser le téléchargement de fichiers?"
 
 #. module: l10n_ch_fds_postfinance
-#: field:fds.postfinance.files.directory,allow_upload_file:0
+#: field:fds.postfinance.directory,allow_upload_file:0
 msgid "Allow upload file?"
 msgstr "Autoriser le téléversement de fichiers?"
 
 #. module: l10n_ch_fds_postfinance
-#: view:fds.postfinance.files:l10n_ch_fds_postfinance.fds_postfinance_files_form
-msgid "Are you sure you want to do this?"
-msgstr "Êtes-vous sûr de vouloir faire cela?"
+#: view:fds.postfinance.file:l10n_ch_fds_postfinance.fds_postfinance_files_form
+msgid "Are you sure?"
+msgstr "Etes-vous sûr ?"
 
 #. module: l10n_ch_fds_postfinance
-#: field:fds.postfinance.account,fds_authentication_keys_ids:0
+#: field:fds.postfinance.account,authentication_key_ids:0
 msgid "Authentication keys"
 msgstr "Clés d'authentification FDS"
 
 #. module: l10n_ch_fds_postfinance
-#: field:fds.postfinance.files,bank_statement_id:0
+#: field:fds.postfinance.file,bank_statement_id:0
 msgid "Bank Statement"
 msgstr "Relevé bancaire"
 
@@ -104,21 +109,21 @@ msgstr "Annuler"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.files.import.tobankstatments.wizard:l10n_ch_fds_postfinance.view_fds_files_import_tobankstatments_wizard_form
+msgid "Click on import to download files."
+msgstr "Cliquez sur Importer pour télécharger les fichiers"
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
+msgid "Clone key"
+msgstr "Cloner la clé"
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.files.import.tobankstatments.wizard:l10n_ch_fds_postfinance.view_fds_files_import_tobankstatments_wizard_form
 #: view:fds.key.clone.wizard:l10n_ch_fds_postfinance.view_fds_key_clone_wizard_form
 #: view:fds.key.generator.wizard:l10n_ch_fds_postfinance.view_fds_key_generator_wizard_form
 #: view:fds.key.import.wizard:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
 msgid "Close"
 msgstr "Fermer"
-
-#. module: l10n_ch_fds_postfinance
-#: field:fds.postfinance.account,company_contact_id:0
-msgid "Company Contact"
-msgstr "Contact associé"
-
-#. module: l10n_ch_fds_postfinance
-#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
-msgid "Configuration FDS directories"
-msgstr "Configuration répertoires FDS"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.key.clone.wizard:l10n_ch_fds_postfinance.view_fds_key_clone_wizard_form
@@ -137,8 +142,8 @@ msgstr "Copier la clé d'authentification:"
 #: field:fds.key.generator.wizard,create_uid:0
 #: field:fds.key.import.wizard,create_uid:0
 #: field:fds.postfinance.account,create_uid:0
-#: field:fds.postfinance.files,create_uid:0
-#: field:fds.postfinance.files.directory,create_uid:0
+#: field:fds.postfinance.directory,create_uid:0
+#: field:fds.postfinance.file,create_uid:0
 msgid "Created by"
 msgstr "Créé par"
 
@@ -149,13 +154,13 @@ msgstr "Créé par"
 #: field:fds.key.generator.wizard,create_date:0
 #: field:fds.key.import.wizard,create_date:0
 #: field:fds.postfinance.account,create_date:0
-#: field:fds.postfinance.files,create_date:0
-#: field:fds.postfinance.files.directory,create_date:0
+#: field:fds.postfinance.directory,create_date:0
+#: field:fds.postfinance.file,create_date:0
 msgid "Created on"
 msgstr "Créé le"
 
 #. module: l10n_ch_fds_postfinance
-#: field:fds.postfinance.files,data:0
+#: field:fds.postfinance.file,data:0
 msgid "Data"
 msgstr "Données"
 
@@ -168,17 +173,17 @@ msgid "Default"
 msgstr "Défaut"
 
 #. module: l10n_ch_fds_postfinance
-#: field:fds.postfinance.files,directory_id:0
+#: field:fds.postfinance.file,directory_id:0
 msgid "Directory"
 msgstr "Dossier"
 
 #. module: l10n_ch_fds_postfinance
-#: field:fds.postfinance.files.directory,name:0
+#: field:fds.postfinance.directory,name:0
 msgid "Directory name"
 msgstr "Nom de dossier"
 
 #. module: l10n_ch_fds_postfinance
-#: field:fds.postfinance.files.directory,still_on_server:0
+#: field:fds.postfinance.directory,still_on_server:0
 msgid "Directory still on server?"
 msgstr "Dossier encore sur le serveur?"
 
@@ -187,22 +192,32 @@ msgstr "Dossier encore sur le serveur?"
 #: selection:fds.key.clone.wizard,state:0
 #: selection:fds.key.generator.wizard,state:0
 #: selection:fds.key.import.wizard,state:0
-#: selection:fds.postfinance.files,state:0
+#: selection:fds.postfinance.file,state:0
 msgid "Done"
 msgstr "Effectué"
 
 #. module: l10n_ch_fds_postfinance
-#: selection:fds.postfinance.files,state:0
+#: model:ir.actions.act_window,name:l10n_ch_fds_postfinance.action_fds_files_import_tobankstatments_wizard
+msgid "Download FDS files"
+msgstr "Télécharger des fichiers FDS"
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
+msgid "Download History"
+msgstr "Historique des téléchargements"
+
+#. module: l10n_ch_fds_postfinance
+#: selection:fds.postfinance.file,state:0
 msgid "Draft"
 msgstr "Brouillon"
 
 #. module: l10n_ch_fds_postfinance
 #: help:fds.postfinance.account,postfinance_email:0
-msgid "E-mail of fds postfinance"
+msgid "E-mail of FDS Postfinance"
 msgstr "E-mail de Postfinance FDS"
 
 #. module: l10n_ch_fds_postfinance
-#: selection:fds.postfinance.files,state:0
+#: selection:fds.postfinance.file,state:0
 msgid "Error"
 msgstr "Erreur"
 
@@ -218,29 +233,33 @@ msgstr "Erreur SFTP"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
-msgid "FDS Authentication keys"
-msgstr "Clés d'authentification FDS"
+msgid "FDS Directories"
+msgstr "Répertoires FDS"
 
 #. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.file:l10n_ch_fds_postfinance.fds_postfinance_files_form
+msgid "FDS PostFinance file"
+msgstr "Fichier FDS Postfinance"
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_file_ids_form
 #: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
-#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_files_form
-#: view:fds.postfinance.files:l10n_ch_fds_postfinance.fds_postfinance_files_form
-#: model:ir.actions.act_window,name:l10n_ch_fds_postfinance.action_fds_postfinance_files
-#: model:ir.ui.menu,name:l10n_ch_fds_postfinance.menu_fds_postfinance_files
+#: model:ir.actions.act_window,name:l10n_ch_fds_postfinance.action_fds_files
+#: model:ir.ui.menu,name:l10n_ch_fds_postfinance.menu_fds_file_ids
 msgid "FDS PostFinance files"
 msgstr "Fichiers FDS Postfinance"
 
 #. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_file_ids_tree
 #: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
 #: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_tree
-#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_files_tree
 #: model:ir.actions.act_window,name:l10n_ch_fds_postfinance.action_fds_postfinance_account
 #: model:ir.ui.menu,name:l10n_ch_fds_postfinance.menu_fds_postfinance_configuration
 msgid "FDS Postfinance Account"
 msgstr "Compte FDS Postfinance"
 
 #. module: l10n_ch_fds_postfinance
-#: field:fds.postfinance.account,fds_postfinance_files_ids:0
+#: field:fds.postfinance.account,fds_file_ids:0
 msgid "FDS Postfinance files"
 msgstr "Fichiers FDS Postfinance"
 
@@ -256,9 +275,14 @@ msgid "FDS Postfinance import authentication keys parameters"
 msgstr "Paramètres d'import de clés d'authentification FDS Postfinance"
 
 #. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
+msgid "FDS Users"
+msgstr "Utilisateurs FDS"
+
+#. module: l10n_ch_fds_postfinance
 #: field:fds.authentication.keys,fds_account_id:0
-#: field:fds.postfinance.files,fds_account_id:0
-#: field:fds.postfinance.files.directory,fds_account_id:0
+#: field:fds.postfinance.directory,fds_account_id:0
+#: field:fds.postfinance.file,fds_account_id:0
 msgid "FDS account"
 msgstr "Compte FDS"
 
@@ -280,17 +304,12 @@ msgid "FDS files directory"
 msgstr "Répertoire FDS"
 
 #. module: l10n_ch_fds_postfinance
-#: model:ir.actions.act_window,name:l10n_ch_fds_postfinance.action_fds_files_import_tobankstatments_wizard
-msgid "FDS files import to bank Statments"
-msgstr "Import FDS à Relevé bancaires"
-
-#. module: l10n_ch_fds_postfinance
-#: field:fds.postfinance.account,fds_PF_files_directory_ids:0
+#: field:fds.postfinance.account,directory_ids:0
 msgid "FDS postfinance directories"
 msgstr "Répertoires FDS Postfinance"
 
 #. module: l10n_ch_fds_postfinance
-#: view:fds.postfinance.files:l10n_ch_fds_postfinance.fds_postfinance_files_form
+#: view:fds.postfinance.file:l10n_ch_fds_postfinance.fds_postfinance_files_form
 msgid "File Corrupt"
 msgstr "Fichier corrompu"
 
@@ -300,7 +319,7 @@ msgid "File import failures"
 msgstr "Erreurs d'importation"
 
 #. module: l10n_ch_fds_postfinance
-#: field:fds.postfinance.files,filename:0
+#: field:fds.postfinance.file,filename:0
 msgid "Filename"
 msgstr "Nom de fichier"
 
@@ -317,21 +336,11 @@ msgid "Generate"
 msgstr "Générer"
 
 #. module: l10n_ch_fds_postfinance
-#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
-msgid "Historical transaction import"
-msgstr "Historique d'imports"
-
-#. module: l10n_ch_fds_postfinance
-#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
-msgid "Historical transaction upload"
-msgstr "Historique d'exports"
-
-#. module: l10n_ch_fds_postfinance
 #: field:fds.authentication.keys,id:0
 #: field:fds.files.import.tobankstatments.wizard,id:0
 #: field:fds.key.clone.wizard,id:0 field:fds.key.generator.wizard,id:0
 #: field:fds.key.import.wizard,id:0 field:fds.postfinance.account,id:0
-#: field:fds.postfinance.files,id:0 field:fds.postfinance.files.directory,id:0
+#: field:fds.postfinance.directory,id:0 field:fds.postfinance.file,id:0
 msgid "ID"
 msgstr "ID"
 
@@ -341,7 +350,12 @@ msgid "Import"
 msgstr "Importer"
 
 #. module: l10n_ch_fds_postfinance
-#: view:fds.postfinance.files:l10n_ch_fds_postfinance.fds_postfinance_files_form
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
+msgid "Import key"
+msgstr "Importer la clé"
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.file:l10n_ch_fds_postfinance.fds_postfinance_files_form
 msgid "Import to Bank Statement"
 msgstr "Importer vers Relevé bancaire"
 
@@ -351,7 +365,7 @@ msgid "Imported files"
 msgstr "Fichiers importés"
 
 #. module: l10n_ch_fds_postfinance
-#: field:fds.postfinance.files.directory,journal_id:0
+#: field:fds.postfinance.directory,journal_id:0
 msgid "Journal"
 msgstr "Journal"
 
@@ -361,7 +375,7 @@ msgid "Key active"
 msgstr "Clé inactive"
 
 #. module: l10n_ch_fds_postfinance
-#: code:addons/l10n_ch_fds_postfinance/model/fds_postfinance_account.py:103
+#: code:addons/l10n_ch_fds_postfinance/models/fds_postfinance_account.py:104
 #, python-format
 msgid "Key not active"
 msgstr "Clé inactive"
@@ -373,8 +387,8 @@ msgstr "Clé inactive"
 #: field:fds.key.generator.wizard,write_uid:0
 #: field:fds.key.import.wizard,write_uid:0
 #: field:fds.postfinance.account,write_uid:0
-#: field:fds.postfinance.files,write_uid:0
-#: field:fds.postfinance.files.directory,write_uid:0
+#: field:fds.postfinance.directory,write_uid:0
+#: field:fds.postfinance.file,write_uid:0
 msgid "Last Updated by"
 msgstr "Modifié par"
 
@@ -385,8 +399,8 @@ msgstr "Modifié par"
 #: field:fds.key.generator.wizard,write_date:0
 #: field:fds.key.import.wizard,write_date:0
 #: field:fds.postfinance.account,write_date:0
-#: field:fds.postfinance.files,write_date:0
-#: field:fds.postfinance.files.directory,write_date:0
+#: field:fds.postfinance.directory,write_date:0
+#: field:fds.postfinance.file,write_date:0
 msgid "Last Updated on"
 msgstr "Modifié le"
 
@@ -401,7 +415,12 @@ msgid "Name"
 msgstr "Nom"
 
 #. module: l10n_ch_fds_postfinance
-#: code:addons/l10n_ch_fds_postfinance/wizard/fds_key_generator_wizard.py:142
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
+msgid "New key"
+msgstr "Nouvelle clé"
+
+#. module: l10n_ch_fds_postfinance
+#: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_generator_wizard.py:142
 #, python-format
 msgid ""
 "Not implemented yet, download public key and send the email to postfinance "
@@ -409,6 +428,16 @@ msgid ""
 msgstr ""
 "Non fonctionnel : veuillez télécharger la clé publique et envoyer un e-mail "
 "à postfinance manuellement."
+
+#. module: l10n_ch_fds_postfinance
+#: help:fds.postfinance.account,user_id:0
+msgid ""
+"Owner must have the rights to register new key pairs for this account. Its e-"
+"mail address will be used to send the keys of new users to PostFinance"
+msgstr ""
+"Le responsable doit avoir les droits de soumettre de nouvelles paires de "
+"clés pour ce compte. Son adresse e-mail sera celle utilisée pour envoyer les "
+"clés à PostFinance"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.account,postfinance_email:0
@@ -444,7 +473,7 @@ msgid "Public key filename"
 msgstr "Nom de fichier clé publique"
 
 #. module: l10n_ch_fds_postfinance
-#: view:fds.postfinance.files:l10n_ch_fds_postfinance.fds_postfinance_files_form
+#: view:fds.postfinance.file:l10n_ch_fds_postfinance.fds_postfinance_files_form
 msgid "Reset to draft"
 msgstr "Remettre à brouillon"
 
@@ -472,7 +501,7 @@ msgstr "Envoyer à Postfinance"
 #. module: l10n_ch_fds_postfinance
 #: field:fds.files.import.tobankstatments.wizard,state:0
 #: field:fds.key.clone.wizard,state:0 field:fds.key.generator.wizard,state:0
-#: field:fds.key.import.wizard,state:0 field:fds.postfinance.files,state:0
+#: field:fds.key.import.wizard,state:0 field:fds.postfinance.file,state:0
 msgid "State"
 msgstr "Etat"
 
@@ -482,7 +511,7 @@ msgid "To:"
 msgstr "A:"
 
 #. module: l10n_ch_fds_postfinance
-#: code:addons/l10n_ch_fds_postfinance/model/fds_postfinance_account.py:123
+#: code:addons/l10n_ch_fds_postfinance/models/fds_postfinance_account.py:124
 #, python-format
 msgid "Unable to connect to the sftp"
 msgstr "Impossible de se connecter au SFTP"
@@ -501,7 +530,12 @@ msgid "Validate"
 msgstr "Valider"
 
 #. module: l10n_ch_fds_postfinance
-#: code:addons/l10n_ch_fds_postfinance/model/fds_postfinance_account.py:100
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
+msgid "Verify directories"
+msgstr "Vérifier les répertoires"
+
+#. module: l10n_ch_fds_postfinance
+#: code:addons/l10n_ch_fds_postfinance/models/fds_postfinance_account.py:101
 #, python-format
 msgid "You don't have key"
 msgstr "Vous n'avez pas de clés"
@@ -519,9 +553,9 @@ msgid "[Info] keep state of the wizard"
 msgstr "[Info] retenir l'état de l'assistant"
 
 #. module: l10n_ch_fds_postfinance
-#: help:fds.postfinance.files.directory,still_on_server:0
+#: help:fds.postfinance.directory,still_on_server:0
 msgid "[info] if the directory still exist on the FDS sftp"
-msgstr "[info] si le dossier existe toujours sur le sftp FDS"
+msgstr "[info] si le dossier existe toujours sur le SFTP FDS"
 
 #. module: l10n_ch_fds_postfinance
 #: help:fds.key.generator.wizard,fds_authentication_keys_id:0
@@ -537,26 +571,16 @@ msgid "assign the key to the user selected"
 msgstr "Attribuer la clé à l'utilisateur sélectionné"
 
 #. module: l10n_ch_fds_postfinance
-#: help:fds.postfinance.files.directory,allow_download_file:0
+#: help:fds.postfinance.directory,allow_download_file:0
 msgid "check it to allow download files from this FDS directory"
 msgstr ""
 "Cochez pour activer le téléchargement de fichiers depuis ce répertoire FDS"
 
 #. module: l10n_ch_fds_postfinance
-#: help:fds.postfinance.files.directory,allow_upload_file:0
+#: help:fds.postfinance.directory,allow_upload_file:0
 msgid "check it to allow upload files to this FDS directory"
 msgstr ""
 "Cochez pour activer le téléversement de fichiers vers ce répertoire FDS"
-
-#. module: l10n_ch_fds_postfinance
-#: view:fds.files.import.tobankstatments.wizard:l10n_ch_fds_postfinance.view_fds_files_import_tobankstatments_wizard_form
-msgid "click on import to download files."
-msgstr "Cliquez sur Importer pour télécharger les fichiers"
-
-#. module: l10n_ch_fds_postfinance
-#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
-msgid "clone key"
-msgstr "Cloner la clé"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.key.clone.wizard:l10n_ch_fds_postfinance.view_fds_key_clone_wizard_form
@@ -574,14 +598,14 @@ msgid "copy/paste your public key"
 msgstr "Copiez-collez votre clé publique"
 
 #. module: l10n_ch_fds_postfinance
-#: help:fds.postfinance.files.directory,journal_id:0
+#: help:fds.postfinance.directory,journal_id:0
 msgid "default journal needed to import to bank statements"
 msgstr "journal par défaut utilisé pour importer vers relevé bancaire"
 
 #. module: l10n_ch_fds_postfinance
-#: help:fds.postfinance.account,fds_postfinance_files_ids:0
+#: help:fds.postfinance.account,fds_file_ids:0
 msgid "downloaded files from sftp"
-msgstr "Fichiers téléchargés du sftp"
+msgstr "Fichiers téléchargés du SFTP"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.files.import.tobankstatments.wizard:l10n_ch_fds_postfinance.view_fds_files_import_tobankstatments_wizard_form
@@ -594,22 +618,12 @@ msgid "import file"
 msgstr "Importer le fichier"
 
 #. module: l10n_ch_fds_postfinance
-#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
-msgid "import key"
-msgstr "Importer la clé"
-
-#. module: l10n_ch_fds_postfinance
 #: view:fds.key.import.wizard:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
 msgid "manual import"
 msgstr "Import manuel"
 
 #. module: l10n_ch_fds_postfinance
-#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
-msgid "new key"
-msgstr "Nouvelle clé"
-
-#. module: l10n_ch_fds_postfinance
-#: help:fds.postfinance.files,fds_account_id:0
+#: help:fds.postfinance.file,fds_account_id:0
 msgid "related FDS account"
 msgstr "Compte FDS associé"
 
@@ -634,61 +648,17 @@ msgid "select one key"
 msgstr "Sélectionnez un fichier"
 
 #. module: l10n_ch_fds_postfinance
-#: help:fds.postfinance.files,state:0
+#: help:fds.postfinance.file,state:0
 msgid "state of file"
 msgstr "Etat du fichier"
 
 #. module: l10n_ch_fds_postfinance
-#: help:fds.postfinance.files,data:0
+#: help:fds.postfinance.file,data:0
 msgid "the downloaded file data"
 msgstr "Les données du fichier téléchargé"
 
-#. module: l10n_ch_fds_postfinance
-#: help:fds.postfinance.account,company_contact_id:0
-msgid ""
-"user that have create/contact with the fds postfinance account, it will be "
-"used to send the public key to postfinance"
-msgstr ""
-"Utilisateur qui a contact avec PostFinance. Sera utilisé pour envoyer le clé "
-"publique."
+#~ msgid "Historical transaction import"
+#~ msgstr "Historique d'imports"
 
-#. module: l10n_ch_fds_postfinance
-#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
-msgid "verify directories"
-msgstr "Vérifiez les répertoires"
-
-#~ msgid "name of the directory"
-#~ msgstr "Nom du dossier"
-
-#~ msgid "Active key?"
-#~ msgstr "Clé active?"
-
-#~ msgid "Hostname SFTP Server"
-#~ msgstr "Nom d'hôte serveur SFTP"
-
-#~ msgid "Username SFTP Server"
-#~ msgstr "Nom d'utilisateur SFTP"
-
-#~ msgid "filename of the private key"
-#~ msgstr "Nom de fichier de la clé privée"
-
-#~ msgid "filename of the public key"
-#~ msgstr "Nom de fichier de la clé publique"
-
-#~ msgid "helper check box to know if the key is working"
-#~ msgstr "pour savoir si la clé est active"
-
-#~ msgid "hostname of your sftp"
-#~ msgstr "nom d'hôte du serveur sftp"
-
-#~ msgid "private key"
-#~ msgstr "Clé privée"
-
-#~ msgid "public key"
-#~ msgstr "Clé publique"
-
-#~ msgid "user to attribute the key"
-#~ msgstr "Utilisateur à qui attribuer la clé"
-
-#~ msgid "username of your sftp account"
-#~ msgstr "Utilisateur du compte sftp"
+#~ msgid "Historical transaction upload"
+#~ msgstr "Historique d'exports"
