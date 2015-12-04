@@ -23,21 +23,38 @@
 from openerp import models, fields
 
 
-class fds_postfinance_account_sepa(models.Model):
-    ''' Add default upload directory to the model fds.postfinance.account
+class FdsSepaUploadHistory(models.Model):
+    ''' History of SEPA FDS uploads
     '''
-    _inherit = 'fds.postfinance.account'
+    _name = 'fds.sepa.upload.history'
 
-    upload_sepa_directory = fields.Many2one(
-        comodel_name='fds.postfinance.files.directory',
-        string='default upload directory',
-        help='Select a default upload directory.'
-             ' If none, allow upload file first.'
-    )
-    historical_sepa = fields.One2many(
-        comodel_name='fds.postfinance.historical.sepa',
-        inverse_name='fds_account_id',
-        string='historical upload sepa',
+    fds_account_id = fields.Many2one(
+        comodel_name='fds.postfinance.account',
+        string='FDS account',
+        ondelete='restrict',
         readonly=True,
-        help='historical upload sepa'
+    )
+    payment_order_id = fields.Many2one(
+        comodel_name='payment.order',
+        string='Payment order',
+        ondelete='restrict',
+        readonly=True,
+    )
+    filename = fields.Char(
+        readonly=True,
+        help='Remote name of the uploaded file'
+    )
+    directory_id = fields.Many2one(
+        comodel_name='fds.postfinance.directory',
+        string='Directory',
+        ondelete='restrict',
+        readonly=True,
+        help='Remote directory where the file was uploaded'
+    )
+    state = fields.Selection(
+        selection=[('not_uploaded', 'Not Uploaded'),
+                   ('uploaded', 'Uploaded')],
+        readonly=True,
+        default='not_uploaded',
+        help='Upload state of the file'
     )

@@ -20,5 +20,16 @@
 #
 ##############################################################################
 
-from . import fds_postfinance_account_sepa
-from . import fds_postfinance_historical_sepa
+from openerp import models, fields
+
+
+class fds_postfinance_account_sepa(models.Model):
+    ''' Add SEPA upload history to the model fds.postfinance.account
+    '''
+    _inherit = 'fds.postfinance.account'
+
+    sepa_upload_ids = fields.One2many(
+        comodel_name='fds.sepa.upload.history',
+        inverse_name='fds_account_id',
+        readonly=True,
+    )
