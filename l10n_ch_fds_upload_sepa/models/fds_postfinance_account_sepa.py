@@ -24,20 +24,12 @@ from openerp import models, fields
 
 
 class fds_postfinance_account_sepa(models.Model):
-    ''' Add default upload directory to the model fds.postfinance.account
+    ''' Add SEPA upload history to the model fds.postfinance.account
     '''
     _inherit = 'fds.postfinance.account'
 
-    upload_sepa_directory = fields.Many2one(
-        comodel_name='fds.postfinance.files.directory',
-        string='default upload directory',
-        help='Select a default upload directory.'
-             ' If none, allow upload file first.'
-    )
-    historical_sepa = fields.One2many(
-        comodel_name='fds.postfinance.historical.sepa',
+    sepa_upload_ids = fields.One2many(
+        comodel_name='fds.sepa.upload.history',
         inverse_name='fds_account_id',
-        string='historical upload sepa',
         readonly=True,
-        help='historical upload sepa'
     )

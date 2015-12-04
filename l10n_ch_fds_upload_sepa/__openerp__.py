@@ -21,7 +21,7 @@
 ##############################################################################
 {
     'name': 'Swiss Postfinance FDS SEPA upload',
-    'summary': '''upload sepa files to FDS PostFinance''',
+    'summary': "Upload SEPA files to FDS PostFinance",
     'version': '8.0.1.0',
     'license': 'AGPL-3',
     'author': 'Compassion CH',
@@ -35,8 +35,8 @@
         'python': ['pysftp']
     },
     'data': [
-        'view/fds_inherit_sepa_wizard_view.xml',
-        'view/fds_postfinance_account_sepa_view.xml',
+        'views/fds_inherit_sepa_wizard_view.xml',
+        'views/fds_postfinance_account_sepa_view.xml',
         'security/ir.model.access.csv',
     ],
     'demo': [],

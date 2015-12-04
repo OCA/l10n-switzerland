@@ -23,41 +23,38 @@
 from openerp import models, fields
 
 
-class fds_postfinance_historical_sepa(models.Model):
-    ''' Add historical sepa to the model fds.postfinance.account
+class FdsSepaUploadHistory(models.Model):
+    ''' History of SEPA FDS uploads
     '''
-    _name = 'fds.postfinance.historical.sepa'
+    _name = 'fds.sepa.upload.history'
 
     fds_account_id = fields.Many2one(
         comodel_name='fds.postfinance.account',
-        string='FDS account id',
+        string='FDS account',
         ondelete='restrict',
         readonly=True,
-        help='file related to FDS account id'
     )
     payment_order_id = fields.Many2one(
         comodel_name='payment.order',
-        string='payment order id',
+        string='Payment order',
         ondelete='restrict',
         readonly=True,
-        help='payment order id'
     )
     filename = fields.Char(
-        string='Filename',
         readonly=True,
-        help='The name of the file'
+        help='Remote name of the uploaded file'
     )
     directory_id = fields.Many2one(
-        comodel_name='fds.postfinance.files.directory',
+        comodel_name='fds.postfinance.directory',
         string='Directory',
         ondelete='restrict',
         readonly=True,
-        help='location directory of the file'
+        help='Remote directory where the file was uploaded'
     )
     state = fields.Selection(
         selection=[('not_uploaded', 'Not Uploaded'),
                    ('uploaded', 'Uploaded')],
         readonly=True,
         default='not_uploaded',
-        help='state of file'
+        help='Upload state of the file'
     )
