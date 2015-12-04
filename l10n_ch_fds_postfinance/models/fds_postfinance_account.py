@@ -47,34 +47,35 @@ class fds_postfinance_account(models.Model):
     postfinance_email = fields.Char(
         default='fds@post.ch',
         required=True,
-        help='E-mail of fds postfinance'
+        help='E-mail of FDS Postfinance'
     )
     username = fields.Char(
         string='SFTP Username',
         required=True,
     )
-    company_contact_id = fields.Many2one(
+    user_id = fields.Many2one(
         comodel_name='res.users',
-        string='Company Contact',
+        string='Account Owner',
         ondelete='restrict',
         required=True,
-        help='user that have create/contact with the fds postfinance account'
-             ', it will be used to send the public key to postfinance'
+        help='Owner must have the rights to register new key pairs for this '
+             'account. Its e-mail address will be used to send the keys '
+             'of new users to PostFinance'
     )
-    fds_authentication_keys_ids = fields.One2many(
+    authentication_key_ids = fields.One2many(
         comodel_name='fds.authentication.keys',
         inverse_name='fds_account_id',
         string='Authentication keys',
     )
-    fds_postfinance_files_ids = fields.One2many(
-        comodel_name='fds.postfinance.files',
+    fds_file_ids = fields.One2many(
+        comodel_name='fds.postfinance.file',
         inverse_name='fds_account_id',
         string='FDS Postfinance files',
         readonly=True,
         help='downloaded files from sftp'
     )
-    fds_PF_files_directory_ids = fields.One2many(
-        comodel_name='fds.postfinance.files.directory',
+    directory_ids = fields.One2many(
+        comodel_name='fds.postfinance.directory',
         inverse_name='fds_account_id',
         string='FDS postfinance directories',
     )
@@ -83,7 +84,7 @@ class fds_postfinance_account(models.Model):
     #         Button action          #
     ##################################
     @api.multi
-    def verifyDirectories_button(self):
+    def verify_directories_button(self):
         ''' test connection and verify if directories are the same in the DB
 
             :returns None:
@@ -93,7 +94,7 @@ class fds_postfinance_account(models.Model):
         '''
         self.ensure_one()
 
-        key = [e for e in self.fds_authentication_keys_ids
+        key = [e for e in self.authentication_key_ids
                if e.user_id == self.env.user]
 
         if not key:
@@ -105,7 +106,7 @@ class fds_postfinance_account(models.Model):
         try:
             (tmp_key, tmp_d) = self._create_tmp_file(
                 key[0].private_key_crypted)
-            key_pass = self.fds_authentication_keys_ids.config()
+            key_pass = self.authentication_key_ids.config()
 
             # connect sftp
             with pysftp.Connection(self.hostname,
@@ -133,7 +134,7 @@ class fds_postfinance_account(models.Model):
                 _logger.error("remove tmp directory failed")
 
     @api.multi
-    def copyKey_button(self):
+    def copy_key_button(self):
         ''' copy an authentication key to another user.
 
             :returns action: popup fds key clone wizard
@@ -163,7 +164,7 @@ class fds_postfinance_account(models.Model):
         return action
 
     @api.multi
-    def importKey_button(self):
+    def import_key_button(self):
         ''' import an authentication key to a user.
 
             :returns action: popup fds key import wizard
@@ -207,19 +208,19 @@ class fds_postfinance_account(models.Model):
 
             :returns None:
         '''
-        dir_exist = self.fds_PF_files_directory_ids.mapped('name')
+        dir_exist = self.directory_ids.mapped('name')
 
         # add new directory
         directory_to_add = [dir for dir in directories if dir not in dir_exist]
         for directory in directory_to_add:
             values = {'name': directory, 'fds_account_id': self.id}
-            self.fds_PF_files_directory_ids.create(values)
+            self.directory_ids.create(values)
             _logger.info("[OK] add directory '%s' ", (directory))
 
         # change status if directory doesn't exist any more on the fds server
         dir_to_change = [dir for dir in dir_exist if dir not in directories]
         for directory in dir_to_change:
-            fds_directory_ids = self.fds_PF_files_directory_ids.search([
+            fds_directory_ids = self.directory_ids.search([
                 ['fds_account_id', '=', self.id],
                 ['name', '=', directory]])
             fds_directory_ids.write({
@@ -229,10 +230,10 @@ class fds_postfinance_account(models.Model):
             _logger.info("[OK] disable directory '%s' ", (directory))
 
         # check if 'still_on_server' correct
-        dir_check = [e.name for e in self.fds_PF_files_directory_ids
+        dir_check = [e.name for e in self.directory_ids
                      if e.still_on_server is False and e.name in directories]
         for directory in dir_check:
-            fds_directory_ids = self.fds_PF_files_directory_ids.search([
+            fds_directory_ids = self.directory_ids.search([
                 ['fds_account_id', '=', self.id],
                 ['name', '=', directory]])
             fds_directory_ids.write({'still_on_server': True})

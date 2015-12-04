@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Swiss Postfinance File Delivery Services module for Odoo
-#    Copyright (C) 2014 Compassion CH
+#    Copyright (C) 2015 Compassion CH
 #    @author: Nicolas Tran
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -20,8 +20,8 @@
 #
 ##############################################################################
 {
-    'name': 'Swiss Postfinance FDS direct debit upload',
-    'summary': '''upload sepa files to FDS PostFinance''',
+    'name': 'Swiss Postfinance FDS Direct Debit Upload',
+    'summary': 'Upload Direct Debit files to FDS PostFinance',
     'version': '8.0.1.0',
     'license': 'AGPL-3',
     'author': 'Compassion CH',
@@ -35,8 +35,8 @@
         'python': ['pysftp']
     },
     'data': [
-        'view/fds_inherit_post_dd_export_upload_wizard_view.xml',
-        'view/fds_postfinance_account_dd_view.xml',
+        'views/fds_inherit_post_dd_export_upload_wizard_view.xml',
+        'views/fds_postfinance_account_dd_view.xml',
         'security/ir.model.access.csv',
     ],
     'demo': [],

@@ -20,5 +20,16 @@
 #
 ##############################################################################
 
-from . import fds_postfinance_account_dd
-from . import fds_postfinance_historical_dd
+from openerp import models, fields
+
+
+class FdsPostfinanceAccountDD(models.Model):
+    ''' Add direct debit upload history to the model fds.postfinance.account
+    '''
+    _inherit = 'fds.postfinance.account'
+
+    dd_upload_ids = fields.One2many(
+        comodel_name='fds.dd.upload.history',
+        inverse_name='fds_account_id',
+        readonly=True,
+    )

@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Swiss Postfinance File Delivery Services module for Odoo
-#    Copyright (C) 2014 Compassion CH
+#    Copyright (C) 2015 Compassion CH
 #    @author: Nicolas Tran
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -20,24 +20,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields
-
-
-class fds_postfinance_account_dd(models.Model):
-    ''' Add default upload directory to the model fds.postfinance.account
-    '''
-    _inherit = 'fds.postfinance.account'
-
-    upload_dd_directory = fields.Many2one(
-        comodel_name='fds.postfinance.files.directory',
-        string='default upload directory',
-        help='Select a default upload directory.'
-             ' If none, allow upload file first.'
-    )
-    historical_dd = fields.One2many(
-        comodel_name='fds.postfinance.historical.dd',
-        inverse_name='fds_account_id',
-        string='historical upload dd',
-        readonly=True,
-        help='historical upload dd'
-    )
+from . import fds_authentication_keys
+from . import fds_postfinance_account
+from . import fds_postfinance_file
+from . import fds_postfinance_directory

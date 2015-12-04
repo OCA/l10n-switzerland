@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Swiss Postfinance File Delivery Services module for Odoo
-#    Copyright (C) 2015 Compassion CH
+#    Copyright (C) 2014 Compassion CH
 #    @author: Nicolas Tran
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,16 @@
 #
 ##############################################################################
 
-from . import fds_authentication_keys
-from . import fds_postfinance_account
-from . import fds_postfinance_files
-from . import fds_postfinance_files_directory
+from openerp import models, fields
+
+
+class fds_postfinance_account_sepa(models.Model):
+    ''' Add SEPA upload history to the model fds.postfinance.account
+    '''
+    _inherit = 'fds.postfinance.account'
+
+    sepa_upload_ids = fields.One2many(
+        comodel_name='fds.sepa.upload.history',
+        inverse_name='fds_account_id',
+        readonly=True,
+    )

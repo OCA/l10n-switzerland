@@ -18,17 +18,17 @@
                     </group>
 
                     <group states="upload">
-                        <field name="fds_account" widget="selection" edit="False"/>
-                        <field name="fds_account_directory" domain="[('allow_upload_file', '=', True), ('fds_account_id','=',fds_account)]" options="{'create': false, 'create_edit': false}"/>
+                        <field name="fds_account_id" widget="selection" edit="False"/>
+                        <field name="fds_directory_id" domain="[('allow_upload_file', '=', True), ('fds_account_id','=',fds_account_id)]" options="{'create': false, 'create_edit': false}"/>
                     </group>
 
                     <group states="confirm">
                         <p style="color:red"><strong>Upload successful</strong></p>
                     </group>
                     <footer>
-                        <button string="Generate File" name="generateFile_button" type="object" icon="gtk-execute" states="default"/>
-                        <button string="Upload to FDS" name="upload_generateFile_button" type="object" icon="gtk-network" states="finish"/>
-                        <button string="Confirm" name="send_generateFile_button" type="object" states="upload" icon="gtk-apply" class="oe_highlightoe_link"/>
+                        <button string="Generate File" name="generate_file_button" type="object" icon="gtk-execute" states="default"/>
+                        <button string="Upload to FDS" name="upload_generate_file_button" type="object" icon="gtk-network" states="finish"/>
+                        <button string="Confirm" name="send_generate_file_button" type="object" states="upload" icon="gtk-apply" class="oe_highlightoe_link"/>
                         <button string="Back" name="back_button" icon="gtk-undo" type="object" states="upload"/>
                         <button string="Close" special="cancel" icon="gtk-close" states="default,finish,confirm"/>
                         <button string="Cancel" name="cancel_button" type="object" icon="gtk-cancel" states="finish"/>
