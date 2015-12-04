@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_post_dd_export_wizard_form_inherited" model="ir.ui.view">
+            <field name="name">Post dd export wizard view - Upload extension</field>
+            <field name="model">post.dd.export.wizard</field>
+            <field name="inherit_id" ref="l10n_ch_lsv_dd.view_post_dd_export_wizard_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@states='finish']" position="after">
+                    <group states="upload">
+                        <field name="fds_account_id" widget="selection" edit="False"/>
+                        <field name="fds_directory_id" domain="[('allow_upload_file', '=', True), ('fds_account_id','=',fds_account)]"
+                               options="{'create': false, 'create_edit': false}"/>
+                    </group>
+
+                    <group states="confirm">
+                        <p style="color:red">
+                            <strong>Upload successful</strong>
+                        </p>
+                    </group>
+                </xpath>
+                <button name="confirm_export" position="after">
+                    <button string="Upload to FDS" name="upload_export_button" type="object" icon="gtk-network" states="finish"/>
+                    <button string="Confirm" name="send_export_button" type="object" states="upload" icon="gtk-apply" class="oe_highlightoe_link"/>
+                    <button string="Back" name="back_button" icon="gtk-undo" type="object" states="upload"/>
+                    <button string="Close" name="close_button" type="object" icon="gtk-close" states="confirm"/>
+                </button>
+            </field>
+        </record>
+    </data>
+</openerp>
