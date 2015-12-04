@@ -21,4 +21,4 @@
 ##############################################################################
 
 from . import fds_postfinance_account_dd
-from . import fds_postfinance_historical_dd
+from . import fds_dd_upload_history
