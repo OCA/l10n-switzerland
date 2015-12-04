@@ -40,10 +40,16 @@ class fds_inherit_post_dd_export_upload_wizard(models.TransientModel):
     '''
     _inherit = 'post.dd.export.wizard'
 
-    fds_account_directory = fields.Many2one(
-        comodel_name='fds.postfinance.files.directory',
-        string='FDS files directory',
-        help='select one upload directory or config your upload directory'
+    fds_account_id = fields.Many2one(
+        comodel_name='fds.postfinance.account',
+        string='FDS account',
+        default=lambda self: self._get_default_account()
+    )
+    fds_directory_id = fields.Many2one(
+        comodel_name='fds.postfinance.directory',
+        string='FDS directory',
+        help='Select one upload directory. Be sure to have at least one '
+             'directory configured with upload access rights.'
     )
     state = fields.Selection(
         selection=[('create', 'Create'),
@@ -52,12 +58,6 @@ class fds_inherit_post_dd_export_upload_wizard(models.TransientModel):
                    ('confirm', 'confirm')],
         readonly=True,
         default='create',
-        help='[Info] keep state of the wizard'
-    )
-    fds_account = fields.Many2one(
-        comodel_name='fds.postfinance.account',
-        string='FDS account',
-        help='select one FDS account or create a FDS account'
     )
 
     ##################################
@@ -65,66 +65,42 @@ class fds_inherit_post_dd_export_upload_wizard(models.TransientModel):
     ##################################
     @api.multi
     def upload_export_button(self):
-        ''' change the view to the wizard or directly upload the file if
-            only one FDS account and only one upload directory selected.
-            Called by pressing upload button.
+        ''' Change the view to allow uploading the generated file into a
+            FDS remote folder.
 
             :returns action: configuration for the next wizard's view
         '''
         self.ensure_one()
-
-        # check if only one fds account
-        existing_account_ids = self.fds_account.search([]).ids
-        if len(existing_account_ids) != 1:
-            self._state_upload_on()
-            return self._do_populate_tasks()
-
-        self.fds_account = existing_account_ids[0]
-
-        # check if default upload directory exist
-        if not self.fds_account.upload_dd_directory:
-            self._state_upload_on()
-            return self._do_populate_tasks()
-
-        # check if default upload directory is allowed
-        dir_name = self.fds_account.upload_dd_directory.name
-        dir_handle = self.fds_account_directory.search([('name', '=',
-                                                         dir_name)])
-        if not dir_handle.allow_upload_file:
-            self._state_upload_on()
-            return self._do_populate_tasks()
-
-        self.fds_account_directory = self.fds_account.upload_dd_directory
-        return self.send_export_button()
+        self.state = 'upload'
+        return self._refresh_wizard()
 
     @api.multi
     def send_export_button(self):
-        ''' upload pain_001 file to the FDS Postfinance by sftp
+        ''' Upload pain_001 file to the FDS Postfinance by SFTP
 
-            :returns action: configuration for the next wizard's view
+            :returns action: configuration for wizard's next view
             :raises Warning:
-                - If no fds account and directory selected
-                - if current user do not have key
-                - if connection to sftp cannot
+                - If no FDS account and directory selected
+                - If current user do not have key
+                - If connection to SFTP fails
         '''
         self.ensure_one()
-        if not self.fds_account:
+        if not self.fds_account_id:
             raise exceptions.Warning('Select a FDS account')
 
-        if not self.fds_account_directory:
+        if not self.fds_directory_id:
             raise exceptions.Warning('Select a directory')
 
         # check key of active user
-        fds_authentication_key_obj = self.env['fds.authentication.keys']
-        key = fds_authentication_key_obj.search([
+        fds_keys_obj = self.env['fds.authentication.keys']
+        key = fds_keys_obj.search([
             ['user_id', '=', self.env.uid],
-            ['fds_account_id', '=', self.fds_account.id]])
+            ['fds_account_id', '=', self.fds_account_id.id],
+            ['key_active', '=', True]])
 
         if not key:
-            raise exceptions.Warning("You don't have a key")
-
-        if not key.key_active:
-            raise exceptions.Warning('Key not active')
+            raise exceptions.Warning(
+                "You don't have access to the selected FDS account.")
 
         try:
             # create tmp file
@@ -134,16 +110,16 @@ class fds_inherit_post_dd_export_upload_wizard(models.TransientModel):
             old_path_f = os.path.join(tmp_d, tmp_f.name)
             new_path_f = os.path.join(tmp_d, self.filename)
             shutil.move(old_path_f, new_path_f)
-            key_pass = fds_authentication_key_obj.config()
+            key_pass = fds_keys_obj.config()
 
             # upload to sftp
-            with pysftp.Connection(self.fds_account.hostname,
-                                   username=self.fds_account.username,
+            with pysftp.Connection(self.fds_account_id.hostname,
+                                   username=self.fds_account_id.username,
                                    private_key=tmp_key.name,
                                    private_key_pass=key_pass) as sftp:
-                with sftp.cd(self.fds_account_directory.name):
+                with sftp.cd(self.fds_directory_id.name):
                     sftp.put(new_path_f)
-                    _logger.info("[OK] upload file (%s) to sftp",
+                    _logger.info("[OK] upload file (%s) to SFTP",
                                  (self.filename))
 
             # change to initial name file (mandatory because of the close)
@@ -151,8 +127,8 @@ class fds_inherit_post_dd_export_upload_wizard(models.TransientModel):
             self._state_confirm_on()
             self._add2historical()
         except Exception as e:
-            _logger.error("Unable to connect to the sftp: %s", e)
-            raise exceptions.Warning('Unable to connect to the sftp')
+            _logger.error("Unable to connect to the SFTP: %s", e)
+            raise exceptions.Warning('Unable to connect to the SFTP')
 
         finally:
             try:
@@ -168,7 +144,7 @@ class fds_inherit_post_dd_export_upload_wizard(models.TransientModel):
             except:
                 _logger.error("remove tmp directory failed")
 
-        return self._do_populate_tasks()
+        return self._refresh_wizard()
 
     @api.multi
     def back_button(self):
@@ -179,7 +155,7 @@ class fds_inherit_post_dd_export_upload_wizard(models.TransientModel):
         '''
         self.ensure_one()
         self._state_finish_on()
-        return self._do_populate_tasks()
+        return self._refresh_wizard()
 
     @api.multi
     def close_button(self):
@@ -190,6 +166,24 @@ class fds_inherit_post_dd_export_upload_wizard(models.TransientModel):
     ##############################
     #          function          #
     ##############################
+    def _get_default_account(self):
+        """ Select one account if only one exists. """
+        fds_accounts = self.env['fds.postfinance.account'].search([])
+        if len(fds_accounts) == 1:
+            return fds_accounts.id
+        else:
+            return False
+
+    @api.onchange('fds_account_id')
+    def _get_default_upload_directory(self):
+        self.ensure_one()
+        if self.fds_account_id:
+            default_directory = self.fds_account_id.directory_ids.filtered(
+                lambda d: d.name == 'debit-direct-upload' and
+                d.allow_upload_file)
+            if len(default_directory) == 1:
+                self.fds_directory_id = default_directory
+
     @api.multi
     def _create_tmp_file(self, data, tmp_directory=None):
         ''' private function that write data to a tmp file and if no tmp
@@ -220,9 +214,9 @@ class fds_inherit_post_dd_export_upload_wizard(models.TransientModel):
         self.ensure_one()
         values = {
             'banking_export_id': self.banking_export_ch_dd_id.id,
-            'fds_account_id': self.fds_account.id,
+            'fds_account_id': self.fds_account_id.id,
             'filename': self.filename,
-            'directory_id': self.fds_account_directory.id,
+            'directory_id': self.fds_directory_id.id,
             'state': 'uploaded'}
         historical_dd_obj = self.env['fds.postfinance.historical.dd']
         historical_dd_obj.create(values)
@@ -236,14 +230,6 @@ class fds_inherit_post_dd_export_upload_wizard(models.TransientModel):
         self.write({'state': 'finish'})
 
     @api.multi
-    def _state_upload_on(self):
-        ''' private function that changes state to upload
-
-            :returns: None
-        '''
-        self.write({'state': 'upload'})
-
-    @api.multi
     def _state_confirm_on(self):
         ''' private function that changes state to confirm
 
@@ -252,10 +238,10 @@ class fds_inherit_post_dd_export_upload_wizard(models.TransientModel):
         self.write({'state': 'confirm'})
 
     @api.multi
-    def _do_populate_tasks(self):
-        ''' private function that continues with the same wizard.
+    def _refresh_wizard(self):
+        ''' private function that refreshes the view of the current wizard.
 
-            :returns action: configuration for the next wizard's view
+            :returns action: action for reloading the current view.
         '''
         self.ensure_one()
         action = {

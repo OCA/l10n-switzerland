@@ -23,21 +23,13 @@
 from openerp import models, fields
 
 
-class fds_postfinance_account_dd(models.Model):
-    ''' Add default upload directory to the model fds.postfinance.account
+class FdsPostfinanceAccountDD(models.Model):
+    ''' Add direct debit upload history to the model fds.postfinance.account
     '''
     _inherit = 'fds.postfinance.account'
 
-    upload_dd_directory = fields.Many2one(
-        comodel_name='fds.postfinance.files.directory',
-        string='default upload directory',
-        help='Select a default upload directory.'
-             ' If none, allow upload file first.'
-    )
-    historical_dd = fields.One2many(
-        comodel_name='fds.postfinance.historical.dd',
+    dd_upload_ids = fields.One2many(
+        comodel_name='fds.dd.upload.history',
         inverse_name='fds_account_id',
-        string='historical upload dd',
         readonly=True,
-        help='historical upload dd'
     )

@@ -23,41 +23,38 @@
 from openerp import models, fields
 
 
-class fds_postfinance_historical_dd(models.Model):
-    ''' Add historical direct debit order to the model fds.postfinance.account
+class FdsDdUploadHistory(models.Model):
+    ''' History of direct debit uploads to FDS
     '''
-    _name = 'fds.postfinance.historical.dd'
+    _name = 'fds.dd.upload.history'
 
     fds_account_id = fields.Many2one(
         comodel_name='fds.postfinance.account',
-        string='FDS account id',
+        string='FDS account',
         ondelete='restrict',
         readonly=True,
-        help='file related to FDS account id'
     )
     banking_export_id = fields.Many2one(
         comodel_name='banking.export.ch.dd',
-        string='banking export id',
+        string='Direct debit export',
         ondelete='restrict',
         readonly=True,
-        help='bankng export id'
     )
     filename = fields.Char(
-        string='Filename',
         readonly=True,
-        help='The name of the file'
+        help='Remote name of the uploaded file'
     )
     directory_id = fields.Many2one(
-        comodel_name='fds.postfinance.files.directory',
+        comodel_name='fds.postfinance.directory',
         string='Directory',
         ondelete='restrict',
         readonly=True,
-        help='location directory of the file'
+        help='Remote directory where the file was uploaded'
     )
     state = fields.Selection(
         selection=[('not_uploaded', 'Not Uploaded'),
                    ('uploaded', 'Uploaded')],
         readonly=True,
         default='not_uploaded',
-        help='state of file'
+        help='Upload state of the file'
     )
