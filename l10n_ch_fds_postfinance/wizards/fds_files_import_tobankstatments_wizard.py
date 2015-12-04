@@ -89,7 +89,7 @@ class fds_files_import_tobankstatments_wizard(models.TransientModel):
 
             # get name of directory where download
             dir = [(e.name, e.id) for e in
-                   fds_id.fds_PF_files_directory_ids
+                   fds_id.directory_ids
                    if e.allow_download_file is True]
 
             # connect sftp

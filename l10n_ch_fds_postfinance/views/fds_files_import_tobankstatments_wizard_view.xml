@@ -3,13 +3,13 @@
 <data>
     <!-- view of this wizard -->
     <record model="ir.ui.view" id="view_fds_files_import_tobankstatments_wizard_form">
-        <field name="name">FDS files import to bank Statments wizard view</field>
+        <field name="name">Download FDS files view</field>
         <field name="model">fds.files.import.tobankstatments.wizard</field>
         <field name="arch" type="xml">
             <form>
                 <field name="state" invisible="True"/>
                 <group states="default">
-                    <p>click on import to download files.</p>
+                    <p>Click on import to download files.</p>
                 </group>
                 <group states="done">
                     <separator string="results" />
@@ -35,7 +35,7 @@
     
     <!-- More button Action in fds_postfinance_files -->
     <record model="ir.actions.act_window" id="action_fds_files_import_tobankstatments_wizard">
-        <field name="name">FDS files import to bank Statments</field>
+        <field name="name">Download FDS files</field>
         <field name="res_model">fds.files.import.tobankstatments.wizard</field>
         <field name="view_type">form</field>
         <field name="view_mode">form</field>
@@ -43,9 +43,8 @@
     </record>
     
     <record model="ir.values" id="action_fds_files_import_tobankstatments_wizard_values">
-        <field name="key2">client_action_multi</field>
         <field name="model">fds.postfinance.account</field>
-        <field name="name">FDS files import to bank Statments</field>
+        <field name="name">Download FDS files</field>
         <field name="value" eval="'ir.actions.act_window,%d'%action_fds_files_import_tobankstatments_wizard" />
         <field name="key">action</field>
         <field name="object" eval="1" />

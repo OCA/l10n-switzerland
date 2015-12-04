@@ -26,11 +26,11 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class fds_postfinance_files(models.Model):
+class FdsPostfinanceFile(models.Model):
     ''' Model of the information and files downloaded on FDS PostFinance
         (Keep files in the database)
     '''
-    _name = 'fds.postfinance.files'
+    _name = 'fds.postfinance.file'
 
     fds_account_id = fields.Many2one(
         comodel_name='fds.postfinance.account',
@@ -53,7 +53,7 @@ class fds_postfinance_files(models.Model):
         readonly=True
     )
     directory_id = fields.Many2one(
-        'fds.postfinance.files.directory',
+        'fds.postfinance.directory',
         string='Directory',
         ondelete='restrict',
         readonly=True,
