@@ -22,5 +22,5 @@
 
 from . import fds_authentication_keys
 from . import fds_postfinance_account
-from . import fds_postfinance_files
-from . import fds_postfinance_files_directory
+from . import fds_postfinance_file
+from . import fds_postfinance_directory

@@ -23,10 +23,10 @@
 from openerp import models, fields
 
 
-class fds_postfinance_files_directory(models.Model):
+class FdsPostfinanceDirectory(models.Model):
     ''' Keep directory name of each FDS folder in the database
     '''
-    _name = 'fds.postfinance.files.directory'
+    _name = 'fds.postfinance.directory'
 
     name = fields.Char(
         string='Directory name',
