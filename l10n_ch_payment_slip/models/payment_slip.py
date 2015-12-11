@@ -104,7 +104,8 @@ class PaymentSlip(models.Model):
         if not invoice:
             return False
         return (invoice.partner_bank_id and
-                invoice.partner_bank_id.state in ('bvr', 'bv'))
+                invoice.partner_bank_id.acc_type in ('postal') and
+                invoice.partner_bank_id.bvr_adherent_num)
 
     def _get_adherent_number(self):
         """Fetch the current slip bank adherent number.
