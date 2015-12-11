@@ -318,7 +318,7 @@ class PaymentSlip(models.Model):
         :rtype: :py:class:`openerp.models.Model`
         """
         self.ensure_one()
-        invoice = self.move_line_id.invoice
+        invoice = self.move_line_id.invoice_id
         if hasattr(invoice, 'commercial_partner_id'):
             return invoice.commercial_partner_id
         else:
@@ -494,7 +494,7 @@ class PaymentSlip(models.Model):
         x, y = initial_position
         # align with the address
         x += print_settings.bvr_add_horz * inch
-        invoice = self.move_line_id.invoice
+        invoice = self.move_line_id.invoice_id
         date_maturity = self.move_line_id.date_maturity
         message = _('Payment slip related to invoice %s '
                     'due on the %s')
@@ -808,12 +808,12 @@ class PaymentSlip(models.Model):
                                 print_settings,
                                 (0.05 * inch, 3.75 * inch),
                                 default_font,
-                                bank_acc.bank)
+                                bank_acc.bank_id)
                 self._draw_bank(canvas,
                                 print_settings,
                                 (2.45 * inch, 3.75 * inch),
                                 default_font,
-                                bank_acc.bank)
+                                bank_acc.bank_id)
             if invoice.partner_bank_id.print_account:
                 self._draw_bank_account(canvas,
                                         print_settings,
