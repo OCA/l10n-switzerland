@@ -110,7 +110,7 @@ class AccountInvoice(models.Model):
         self.env.invalidate_all()
 
     @api.multi
-    def action_number(self):
+    def invoice_validate(self):
         """ Copy the BVR/ESR reference in the transaction_ref of move lines.
 
         For customers invoices: the BVR reference is computed using
@@ -120,7 +120,6 @@ class AccountInvoice(models.Model):
         field of the invoice.
 
         """
-        res = super(AccountInvoice, self).action_number()
         pay_slip = self.env['l10n_ch.payment_slip']
         for inv in self:
             if inv.type in ('in_invoice', 'in_refund'):
@@ -137,4 +136,4 @@ class AccountInvoice(models.Model):
                     ref = pay_slip.reference
                     self._action_bvr_number_move_line(pay_slip.move_line_id,
                                                       ref)
-        return res
+        return super(AccountInvoice, self).invoice_validate()
