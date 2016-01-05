@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <!-- view of this wizard -->
+    <record model="ir.ui.view" id="view_fds_key_clone_wizard_form">
+        <field name="name">FDS key clone wizard view</field>
+        <field name="model">fds.key.clone.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="state" invisible="True"/>
+                <separator string="FDS Postfinance generate authentication keys parameters" />
+                <group states="default">
+                    <field name="src_user_key_id" options="{'create': false, 'create_edit': false}"/>
+                    <field name="des_user_id" options="{'create': false, 'create_edit': false}"/>
+                </group>
+                <group states="done">
+                    <p>copy successful</p>
+                </group>
+                <footer>
+                    <button string="Copy" name="copy_button"  type="object" class="oe_highlight" states="default" icon="gtk-apply"/>
+                    <button string="Cancel" special="cancel" icon="gtk-cancel" states="default" />
+                    <button string="Make another copy" name="back_button" type="object" icon="gtk-undo" states="done" />
+                    <button string="Close" class="oe_highlightoe_link" special="cancel" icon="gtk-close" states="done" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</data>
+</openerp>

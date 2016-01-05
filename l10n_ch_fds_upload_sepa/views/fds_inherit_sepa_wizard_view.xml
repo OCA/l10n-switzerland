@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <record id="wizard_pain_001_view_inherited" model="ir.ui.view">
+        <field name="name">Create SEPA Payment - Upload extension</field>
+        <field name="model">wizard.pain001</field>
+        <field name="inherit_id" ref="l10n_ch_sepa.wizard_pain_001_view"/>
+        <field name="arch" type="xml">
+            <form string="pain.001 file creation" position="replace">
+                <form string="pain.001 file creation">
+
+                    <field name="state" invisible="True"/>
+                    <separator string="SEPA Payment File"/>
+
+                    <group states='finish,confirm'>
+                        <field name="pain_001_file" filename="filename"/>
+                        <field name="filename" invisible="True"/>
+                    </group>
+
+                    <group states="upload">
+                        <field name="fds_account_id" widget="selection" edit="False"/>
+                        <field name="fds_directory_id" domain="[('allow_upload_file', '=', True), ('fds_account_id','=',fds_account_id)]" options="{'create': false, 'create_edit': false}"/>
+                    </group>
+
+                    <group states="confirm">
+                        <p style="color:red"><strong>Upload successful</strong></p>
+                    </group>
+                    <footer>
+                        <button string="Generate File" name="generate_file_button" type="object" icon="gtk-execute" states="default"/>
+                        <button string="Upload to FDS" name="upload_generate_file_button" type="object" icon="gtk-network" states="finish"/>
+                        <button string="Confirm" name="send_generate_file_button" type="object" states="upload" icon="gtk-apply" class="oe_highlightoe_link"/>
+                        <button string="Back" name="back_button" icon="gtk-undo" type="object" states="upload"/>
+                        <button string="Close" special="cancel" icon="gtk-close" states="default,finish,confirm"/>
+                        <button string="Cancel" name="cancel_button" type="object" icon="gtk-cancel" states="finish"/>
+                    </footer>
+                </form>
+            </form>
+
+        </field>
+    </record>
+</data>
+</openerp>

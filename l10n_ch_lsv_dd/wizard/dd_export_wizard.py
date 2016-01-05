@@ -322,8 +322,8 @@ class PostDdExportWizard(models.TransientModel):
                     properties.get('currency') == 'EUR' and
                     line.amount_currency > 5000000.00):
             raise exceptions.ValidationError(
-                _('Max authorized amount is CHF 10\'000\'000.00 '
-                  'or EUR 5\'000\'000.00 (%s %.2f given for ref %s)') %
+                _("Max authorized amount is CHF 10'000'000.00 "
+                  "or EUR 5'000'000.00 (%s %.2f given for ref %s)") %
                 (properties.get('currency'), line.amount_currency, line.name))
 
         elif line.amount_currency <= 0:
