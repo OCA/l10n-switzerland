@@ -75,6 +75,9 @@ addon | version | summary
 [l10n_ch_credit_control_payment_slip_report](l10n_ch_credit_control_payment_slip_report/) | 8.0.1.3.0 | Print BVR/ESR slip related to credit control
 [l10n_ch_dta](l10n_ch_dta/) | 8.0.1.0.1 | Electronic payment file for Swiss bank (DTA)
 [l10n_ch_dta_base_transaction_id](l10n_ch_dta_base_transaction_id/) | 8.0.1.0 | Switzerland - Bank Payment File (DTA) Transaction ID Compatibility
+[l10n_ch_fds_postfinance](l10n_ch_fds_postfinance/) | 8.0.1.0 | Download files and import bank statements from FDS
+[l10n_ch_fds_upload_dd](l10n_ch_fds_upload_dd/) | 8.0.1.0 | Upload Direct Debit files to FDS PostFinance
+[l10n_ch_fds_upload_sepa](l10n_ch_fds_upload_sepa/) | 8.0.1.0 | Upload SEPA files to FDS PostFinance
 [l10n_ch_hr_payroll](l10n_ch_hr_payroll/) | 8.0.1.2 | Swizerland Payroll Rules
 [l10n_ch_import_cresus](l10n_ch_import_cresus/) | 8.0.1.0.0 | Account Import Cresus
 [l10n_ch_lsv_dd](l10n_ch_lsv_dd/) | 8.0.1.0 | Create LSV and Direct Debit (postfinance) files
