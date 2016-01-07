@@ -80,6 +80,7 @@
         <field name="bank_id" position="after">
           <field name="bank_bic" invisible="1"/>
           <field name="ccp" attrs="{'invisible': [('bank_bic', '=', 'POFICHBEXXX')]}"/>
+          <!-- bvr_adherent_num added in l10n_ch_payment_slip -->
         </field>
       </field>
     </record>
