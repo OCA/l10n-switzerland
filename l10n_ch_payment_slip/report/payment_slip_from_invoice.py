@@ -25,11 +25,12 @@ class ExtendedReport(models.Model):
         slip_model = self.pool['l10n_ch.payment_slip']
         invoice_model = self.pool['account.invoice']
         company = user_model.browse(cr, uid, uid, context=context).company_id
-        invoice = invoice_model.browse(cr, uid, ids, context=context)
+        invoices = invoice_model.browse(cr, uid, ids, context=context)
+
         docs = slip_model.compute_pay_slips_from_invoices(
             cr,
             uid,
-            invoice,
+            invoices,
             context=context
         )
         if len(docs) == 1:
@@ -47,7 +48,8 @@ class ExtendedReport(models.Model):
 
     def get_pdf(self, cr, uid, ids, report_name, html=None, data=None,
                 context=None):
-        if report_name == 'one_slip_per_page_from_invoice':
+        if (report_name == 'l10n_ch_payment_slip.'
+                           'one_slip_per_page_from_invoice'):
             return self._generate_one_slip_per_page_from_invoice_pdf(
                 cr,
                 uid,

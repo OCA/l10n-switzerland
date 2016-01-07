@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # © 2012-2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from openerp import models, fields, api
+from openerp import _, api, exceptions, fields, models
 
 
 class AccountMoveLine(models.Model):
@@ -138,3 +138,32 @@ class AccountInvoice(models.Model):
                     self._action_bvr_number_move_line(pay_slip.move_line_id,
                                                       ref)
         return super(AccountInvoice, self).invoice_validate()
+
+    @api.multi
+    def print_bvr(self):
+        self.ensure_one()
+        self._check_bvr_generatable()
+        self.sent = True
+        return self.env['report'].get_action(
+            self, 'l10n_ch_payment_slip.one_slip_per_page_from_invoice')
+
+    @api.multi
+    def _check_bvr_generatable(self):
+        msg = []
+        for inv in self:
+            if inv.state in ('draft', 'cancel'):
+                msg.append(_('The invoice must be confirmed.'))
+            bank_acc = inv.partner_bank_id
+            if not bank_acc:
+                msg.append(_('The invoice needs a partner bank account.'))
+            else:
+                if not bank_acc.bvr_adherent_num:
+                    msg.append(_('The bank account {} used in invoice has no '
+                                 'BVR/ESR adherent number.'
+                                 ).format(bank_acc.acc_number))
+                if not bank_acc.acc_type != 'postal' or not bank_acc.ccp:
+                    msg.append(_('The bank account {} used in invoice needs to'
+                                 ' be a postal account or have a bank CCP.'
+                                 ).format(bank_acc.acc_number))
+            if msg:
+                raise exceptions.UserError('\n'.join(msg))
