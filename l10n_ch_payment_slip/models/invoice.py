@@ -83,7 +83,8 @@ class AccountInvoice(models.Model):
         move_line_model = self.env['account.move.line']
         return move_line_model.search(
             [('move_id', '=', self.move_id.id),
-             ('account_id.type', 'in',  ['receivable', 'payable'])]
+             ('account_id.user_type_id.type', 'in',
+              ['receivable', 'payable'])]
         )
 
     @api.model
