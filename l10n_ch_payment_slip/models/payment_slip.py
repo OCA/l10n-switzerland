@@ -107,7 +107,7 @@ class PaymentSlip(models.Model):
                 invoice.partner_bank_id.bvr_adherent_num and
                 (
                     invoice.partner_bank_id.acc_type == 'postal' or
-                    invoice.partner_bank_id.bank_ccp
+                    invoice.partner_bank_id.ccp
                 ))
 
     def _get_adherent_number(self):
