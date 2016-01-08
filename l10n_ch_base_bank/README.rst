@@ -20,8 +20,11 @@ Usage
 Account type will be discovered authomatically.
 
 * For IBAN accounts fill account number with IBAN.
-* For Postal account fill account number with postal account number in new or old format (ex. 01-23456-1 or 12345).
-* For bank account for BVR fill the CCP field and put bank account number (if known) in account number.
+* For Postal account fill account number with postal account number in IBAN, 9 digits or 6 digits format (ex. 01-23456-1 or 12345).
+
+Entering a postal number of 9 or 6 digits will auto-complete the bank with PostFinance. (You might create it if you haven't installed `l10n_ch_bank`)
+
+* For bank account for BVR, select the bank and fill the CCP field in bank, optionally fill the account number with bank number.
 
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
