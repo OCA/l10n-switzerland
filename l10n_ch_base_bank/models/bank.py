@@ -84,19 +84,6 @@ class Bank(models.Model, BankCommon):
     )
 
     @api.constrains('ccp')
-    def _check_ccp_duplication(self):
-        """Ensure validity of input"""
-        res_part_bank_model = self.env['res.partner.bank']
-        for bank in self:
-            part_bank_accs = res_part_bank_model.search(
-                [('bank_id', '=', bank.id)]
-            )
-
-            if part_bank_accs:
-                part_bank_accs._check_ccp_duplication()
-        return True
-
-    @api.constrains('ccp')
     def _check_postal_num(self):
         """Validate postal number format"""
         for bank in self:
@@ -182,12 +169,21 @@ class ResPartnerBank(models.Model, BankCommon):
         super(ResPartnerBank, self)._compute_acc_type()
 
     @api.one
-    @api.depends('acc_type', 'bank_id')
+    @api.depends('acc_type', 'bank_id.ccp')
     def _compute_ccp(self):
+        """ Compute CCP
+        It can be:
+        - a postal account, we use acc_number
+        - a postal account in iban format, we transform acc_number
+        - a bank account with CCP on the bank, we use ccp of the bank
+        - otherwise there is no CCP to use
+        """
         if self.acc_type == 'postal':
             self.ccp = self.acc_number
         elif self.acc_type == 'iban' and self.bank_id.bic == 'POFICHBEXXX':
             self.ccp = self._convert_iban_to_ccp(self.acc_number.strip())
+        elif self.bank_id.ccp:
+            self.ccp = self.bank_id.ccp
         else:
             self.ccp = False
 
@@ -215,35 +211,6 @@ class ResPartnerBank(models.Model, BankCommon):
                     'digits!\nPlease check your company '
                 )
         return True
-
-    @api.constrains('ccp')
-    def _check_postal_num(self):
-        """Validate postal number format
-        """
-        for p_bank in self:
-            ccp = p_bank.ccp
-            if not ccp:
-                continue
-            if not (self._check_9_pos_postal_num(ccp) or
-                    self._check_5_pos_postal_num(ccp)):
-                raise exceptions.ValidationError(
-                    _('Please enter a correct postal number. '
-                      '(01-23456-1 or 12345)')
-                )
-
-    @api.constrains('acc_number', 'bank_id')
-    def _check_ccp_duplication(self):
-        """Ensure that there is not a CCP/CP-Konto in bank and res partner bank
-        at same time
-
-        """
-        for p_bank in self:
-            if p_bank.acc_type == 'postal' and p_bank.ccp:
-                raise exceptions.ValidationError(
-                    _('You can not enter a CCP/CP-Konto both on '
-                      'the bank and on an account '
-                      'of type BV/ES, BVR/ESR')
-                )
 
     @api.onchange('acc_number', 'acc_type')
     def onchange_set_swiss_post_bank(self):
