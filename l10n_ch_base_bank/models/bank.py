@@ -46,6 +46,20 @@ class BankCommon(object):
             return False
         return True
 
+    def _convert_iban_to_ccp(self, iban):
+        """
+        Convert a Postfinance IBAN into an old postal number
+        """
+        if not iban[:2] == 'CH':
+            return False
+        part1 = iban[-9:-7]
+        part2 = iban[-7:-1].lstrip('0')
+        part3 = iban[-1:].lstrip('0')
+        ccp = '{}-{}-{}'.format(part1, part2, part3)
+        if not self._check_9_pos_postal_num(ccp):
+            return False
+        return ccp
+
 
 class Bank(models.Model, BankCommon):
     """Inherit res.bank class in order to add swiss specific field"""
@@ -151,20 +165,31 @@ class ResPartnerBank(models.Model, BankCommon):
         string='Account/IBAN Number'
     )
     ccp = fields.Char(
+        compute="_compute_ccp",
         string='CCP/CP-Konto',
-        related='bank_id.ccp',
         store=True,
         readonly=True
     )
 
     @api.one
-    @api.depends('acc_number', 'ccp')
+    @api.depends('acc_number')
     def _compute_acc_type(self):
-        if (self._check_9_pos_postal_num(self.acc_number) or
-                self._check_5_pos_postal_num(self.acc_number)):
+        if (self.acc_number and
+                (self._check_9_pos_postal_num(self.acc_number) or
+                 self._check_5_pos_postal_num(self.acc_number))):
             self.acc_type = 'postal'
             return
         super(ResPartnerBank, self)._compute_acc_type()
+
+    @api.one
+    @api.depends('acc_type', 'bank_id')
+    def _compute_ccp(self):
+        if self.acc_type == 'postal':
+            self.ccp = self.acc_number
+        elif self.acc_type == 'iban' and self.bank_id.bic == 'POFICHBEXXX':
+            self.ccp = self._convert_iban_to_ccp(self.acc_number.strip())
+        else:
+            self.ccp = False
 
     @api.multi
     def get_account_number(self):
@@ -179,10 +204,10 @@ class ResPartnerBank(models.Model, BankCommon):
     @api.constrains('bvr_adherent_num')
     def _check_adherent_number(self):
         for p_bank in self:
-            if not self.bvr_adherent_num:
+            if not p_bank.bvr_adherent_num:
                 continue
             valid = self._compile_check_bvr_add_num.match(
-                self.bvr_adherent_num
+                p_bank.bvr_adherent_num
             )
             if not valid:
                 raise exceptions.ValidationError(
@@ -219,6 +244,15 @@ class ResPartnerBank(models.Model, BankCommon):
                       'the bank and on an account '
                       'of type BV/ES, BVR/ESR')
                 )
+
+    @api.onchange('acc_number', 'acc_type')
+    def onchange_set_swiss_post_bank(self):
+        """ If acc_number is set to a postal number try to find the bank
+        """
+        if self.acc_type == 'postal':
+            post = self.env['res.bank'].search([('bic', '=', 'POFICHBEXXX')])
+            if post:
+                self.bank_id = post
 
     @api.onchange('bank_id')
     def onchange_bank(self):
