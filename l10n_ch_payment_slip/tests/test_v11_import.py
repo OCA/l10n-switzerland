@@ -31,9 +31,15 @@ class TestV11import(test_common.TransactionCase):
             )
 
     def test_statement_import(self):
+        journal_usd = self.env['account.journal'].create({
+            'name': 'USD Bank Journal - (test)',
+            'code': 'TUBK',
+            'type': 'bank',
+            'currency_id': self.env.ref('base.USD').id,
+        })
         statement = self.env['account.bank.statement'].create(
             {
-                'journal_id': self.env.ref('account.bank_journal_usd').id,
+                'journal_id': journal_usd.id,
             }
         )
         importer_model = self.env['v11.import.wizard'].with_context(

@@ -27,13 +27,7 @@ class TestPaymentSlip(test_common.TransactionCase):
         bank_account = self.env['res.partner.bank'].create(
             {
                 'partner_id': partner.id,
-                'owner_name': partner.name,
-                'street':  partner.street,
-                'city': partner.city,
-                'zip':  partner.zip,
-                'state': 'bvr',
-                'bank': bank.id,
-                'bank_name': bank.name,
+                'bank_id': bank.id,
                 'bank_bic': bank.bic,
                 'acc_number': 'R 12312123',
                 'bvr_adherent_num': '1234567',
@@ -46,26 +40,25 @@ class TestPaymentSlip(test_common.TransactionCase):
 
     def make_invoice(self):
         bank_account = self.make_bank()
-        invoice = self.env['account.invoice'].create(
-            {
-                'partner_id': self.env.ref('base.res_partner_12').id,
-                'reference_type': 'none',
-                'name': 'A customer invoice',
-                'account_id': self.env.ref('account.a_recv').id,
-                'type': 'out_invoice',
-                'partner_bank_id': bank_account.id
-            }
-        )
+        account = self.env['account.account'].search([('code', '=', '111000')])
 
-        self.env['account.invoice.line'].create(
-            {
-                'product_id': False,
-                'quantity': 1,
-                'price_unit': 862.50,
-                'invoice_id': invoice.id,
-                'name': 'product that cost 862.50 all tax included',
-            }
-        )
+        invoice = self.env['account.invoice'].create({
+            'partner_id': self.env.ref('base.res_partner_12').id,
+            'reference_type': 'none',
+            'name': 'A customer invoice',
+            'account_id': account.id,
+            'type': 'out_invoice',
+            'partner_bank_id': bank_account.id
+        })
+
+        self.env['account.invoice.line'].create({
+            'account_id': account.id,
+            'product_id': False,
+            'quantity': 1,
+            'price_unit': 862.50,
+            'invoice_id': invoice.id,
+            'name': 'product that cost 862.50 all tax included',
+        })
         invoice.signal_workflow('invoice_open')
         # waiting for the cache to refresh
         attempt = 0
@@ -81,16 +74,16 @@ class TestPaymentSlip(test_common.TransactionCase):
         """Test that confirming an invoice generate slips correctly"""
         invoice = self.make_invoice()
         self.assertTrue(invoice.move_id)
-        for line in invoice.move_id.line_id:
-            if line.account_id.type in ('payable', 'receivable'):
+        for line in invoice.move_id.line_ids:
+            if line.account_id.user_type_id.type in ('payable', 'receivable'):
                 self.assertTrue(line.transaction_ref)
             else:
                 self.assertFalse(line.transaction_ref)
-        for line in invoice.move_id.line_id:
+        for line in invoice.move_id.line_ids:
             slip = self.env['l10n_ch.payment_slip'].search(
                 [('move_line_id', '=', line.id)]
             )
-            if line.account_id.type in ('payable', 'receivable'):
+            if line.account_id.user_type_id.type in ('payable', 'receivable'):
                 self.assertTrue(slip)
                 self.assertEqual(slip.amount_total, 862.50)
                 self.assertEqual(slip.invoice_id.id, invoice.id)
@@ -101,11 +94,11 @@ class TestPaymentSlip(test_common.TransactionCase):
         """Test that confirming slip are valid"""
         invoice = self.make_invoice()
         self.assertTrue(invoice.move_id)
-        for line in invoice.move_id.line_id:
+        for line in invoice.move_id.line_ids:
             slip = self.env['l10n_ch.payment_slip'].search(
                 [('move_line_id', '=', line.id)]
             )
-            if line.account_id.type in ('payable', 'receivable'):
+            if line.account_id.user_type_id.type in ('payable', 'receivable'):
                 self.assertTrue(slip.reference)
                 self.assertTrue(slip.scan_line)
                 self.assertTrue(slip.slip_image)
@@ -122,7 +115,7 @@ class TestPaymentSlip(test_common.TransactionCase):
             self.env.cr,
             self.env.uid,
             [invoice.id],
-            'one_slip_per_page_from_invoice',
+            'l10n_ch_payment_slip.one_slip_per_page_from_invoice',
             {},
             context={'force_pdf': True},
         )
