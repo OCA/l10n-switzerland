@@ -34,7 +34,7 @@
               string="Open Payment Slips"
               groups="base.group_system"
               name="%(l10n_ch_payment_slip.action_slip_all)d"
-              attrs="{'invisible': [('type', '!=', 'out_invoice')]}"/>
+              attrs="{'invisible': ['|', ('type', '!=', 'out_invoice'), ('bvr_reference', '=', False)]}"/>
           </group>
         </field>
       </field>
