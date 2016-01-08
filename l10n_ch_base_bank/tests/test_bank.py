@@ -13,12 +13,23 @@ class TestBank(common.TransactionCase):
         self.bank.write({
             'ccp': '01-1234-1',
         })
-        self.env['res.partner.bank'].create({
+        bank_acc = self.env['res.partner.bank'].create({
             'partner_id': self.partner.id,
             'bank_id': self.bank.id,
             'acc_number': 'R 12312123',
             'bvr_adherent_num': '1234567',
         })
+        self.assertEqual(bank_acc.acc_type, 'bank')
+
+    def test_iban_ccp(self):
+        bank_acc = self.env['res.partner.bank'].create({
+            'partner_id': self.partner.id,
+            'bank_id': self.post_bank.id,
+            'acc_number': 'CH0909000000100080607',
+            'bvr_adherent_num': '1234567',
+        })
+        self.assertEqual(bank_acc.ccp, '10-8060-7')
+        self.assertEqual(bank_acc.acc_type, 'iban')
 
     def test_faulty_ccp_at_bank(self):
         with self.assertRaises(exceptions.ValidationError):
@@ -41,19 +52,6 @@ class TestBank(common.TransactionCase):
             'bvr_adherent_num': '1234567',
         })
 
-    def test_duplicate_ccp(self):
-        self.bank.write({
-            'ccp': '01-1234-1',
-        })
-        with self.assertRaises(exceptions.ValidationError):
-            with mute_logger():
-                self.env['res.partner.bank'].create({
-                    'partner_id': self.partner.id,
-                    'bank_id': self.bank.id,
-                    'acc_number': '01-1234-1',
-                    'bvr_adherent_num': '1234567',
-                })
-
     def test_constraint_adherent_number(self):
         with self.assertRaises(exceptions.ValidationError):
             with mute_logger():
@@ -61,16 +59,6 @@ class TestBank(common.TransactionCase):
                     'partner_id': self.partner.id,
                     'acc_number': '12312123',
                     'bvr_adherent_num': 'Wrong bvr adherent number',
-                })
-
-    def test_constraint_cpp_on_partner_bank(self):
-        with self.assertRaises(exceptions.ValidationError):
-            with mute_logger():
-                self.env['res.partner.bank'].create({
-                    'partner_id': self.partner.id,
-                    'acc_number': '12312123',
-                    'bvr_adherent_num': 'Wrong bvr adherent number',
-                    'ccp': 'Not a CCP',
                 })
 
     def test_get_account_number(self):
@@ -122,3 +110,11 @@ class TestBank(common.TransactionCase):
             'bic': 'BIC234234',
             'clearing': 'CLEAR234234',
         })
+        self.post_bank = self.env['res.bank'].search(
+            [('bic', '=', 'POFICHBEXXX')])
+        if not self.post_bank:
+            self.post_bank = self.env['res.bank'].create({
+                'name': 'Swiss post',
+                'bic': 'POFICHBEXXX',
+                'clearing': 'CLEAR234234',
+            })
