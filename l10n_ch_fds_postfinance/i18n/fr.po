@@ -10,11 +10,11 @@ msgstr ""
 "POT-Creation-Date: 2016-01-06 09:18+0000\n"
 "PO-Revision-Date: 2016-01-05 16:29+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: French (Switzerland) (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/fr_CH/)\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr_CH\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: l10n_ch_fds_postfinance
@@ -145,12 +145,12 @@ msgstr ""
 #: selection:fds.key.generator.wizard,state:0
 #: selection:fds.key.import.wizard,state:0
 msgid "Default"
-msgstr "Défaut"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.file,directory_id:0
 msgid "Directory"
-msgstr "Répertoire"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.directory,name:0
@@ -184,7 +184,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: selection:fds.postfinance.file,state:0
 msgid "Draft"
-msgstr "Brouillon"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: help:fds.postfinance.account,postfinance_email:0
@@ -194,7 +194,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: selection:fds.postfinance.file,state:0
 msgid "Error"
-msgstr ""
+msgstr "Erreur"
 
 #. module: l10n_ch_fds_postfinance
 #: selection:fds.files.import.tobankstatments.wizard,state:0
@@ -259,7 +259,7 @@ msgstr ""
 #: field:fds.postfinance.directory,fds_account_id:0
 #: field:fds.postfinance.file,fds_account_id:0
 msgid "FDS account"
-msgstr "Compte FDS"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.authentication.keys:l10n_ch_fds_postfinance.fds_authentication_keys_form
@@ -296,7 +296,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.file,filename:0
 msgid "Filename"
-msgstr "Nom de fichier"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.files.import.tobankstatments.wizard,msg_exist_file:0
@@ -308,7 +308,7 @@ msgstr ""
 #: selection:fds.key.generator.wizard,state:0
 #: selection:fds.key.import.wizard,state:0
 msgid "Generate"
-msgstr "Générer"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.authentication.keys,id:0
@@ -317,12 +317,12 @@ msgstr "Générer"
 #: field:fds.key.import.wizard,id:0 field:fds.postfinance.account,id:0
 #: field:fds.postfinance.directory,id:0 field:fds.postfinance.file,id:0
 msgid "ID"
-msgstr "ID"
+msgstr "Id."
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.key.import.wizard:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
 msgid "Import"
-msgstr ""
+msgstr "Importer"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
@@ -365,7 +365,7 @@ msgstr ""
 #: field:fds.postfinance.directory,write_uid:0
 #: field:fds.postfinance.file,write_uid:0
 msgid "Last Updated by"
-msgstr "Modifié par"
+msgstr "Dernière mise à jour par"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.authentication.keys,write_date:0
@@ -377,7 +377,7 @@ msgstr "Modifié par"
 #: field:fds.postfinance.directory,write_date:0
 #: field:fds.postfinance.file,write_date:0
 msgid "Last Updated on"
-msgstr "Modifié le"
+msgstr "Dernière mise à jour le"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.key.clone.wizard:l10n_ch_fds_postfinance.view_fds_key_clone_wizard_form
@@ -473,7 +473,7 @@ msgstr ""
 #: field:fds.key.clone.wizard,state:0 field:fds.key.generator.wizard,state:0
 #: field:fds.key.import.wizard,state:0 field:fds.postfinance.file,state:0
 msgid "State"
-msgstr "Etat"
+msgstr "Status"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.key.clone.wizard,des_user_id:0
@@ -489,7 +489,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
 msgid "Upload History"
-msgstr "Historique de téléversement"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.authentication.keys,user_id:0
@@ -502,7 +502,7 @@ msgstr ""
 #: view:fds.key.generator.wizard:l10n_ch_fds_postfinance.view_fds_key_generator_wizard_form
 #: view:fds.key.import.wizard:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
 msgid "Validate"
-msgstr "Valider"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
