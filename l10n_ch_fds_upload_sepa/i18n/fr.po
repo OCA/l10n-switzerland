@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-06 09:18+0000\n"
-"PO-Revision-Date: 2016-01-05 16:31+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: French (Switzerland) (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/fr_CH/)\n"
+"PO-Revision-Date: 2016-01-05 16:29+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr_CH\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
 msgid "Back"
-msgstr "Retour"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
@@ -35,7 +35,7 @@ msgstr "Fermer"
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
 msgid "Confirm"
-msgstr "Confirmer"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,create_uid:0
@@ -50,18 +50,18 @@ msgstr "Créé le"
 #. module: l10n_ch_fds_upload_sepa
 #: selection:wizard.pain001,state:0
 msgid "Default"
-msgstr "Défaut"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,directory_id:0
 msgid "Directory"
-msgstr "Répertoire"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,fds_account_id:0
 #: field:wizard.pain001,fds_account_id:0
 msgid "FDS account"
-msgstr "Compte FDS"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:wizard.pain001,fds_directory_id:0
@@ -71,122 +71,122 @@ msgstr ""
 #. module: l10n_ch_fds_upload_sepa
 #: field:wizard.pain001,attachment_id:0
 msgid "File attachment"
-msgstr "Pièce jointe"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,filename:0
 msgid "Filename"
-msgstr "Nom de fichier"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
 msgid "Generate File"
-msgstr "Générer le fichier"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,id:0
 msgid "ID"
-msgstr "ID"
+msgstr "Id."
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,write_uid:0
 msgid "Last Updated by"
-msgstr "Modifié par"
+msgstr "Dernière mise à jour par"
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,write_date:0
 msgid "Last Updated on"
-msgstr "Modifié le"
+msgstr "Dernière mise à jour le"
 
 #. module: l10n_ch_fds_upload_sepa
 #: selection:fds.sepa.upload.history,state:0
 msgid "Not Uploaded"
-msgstr "Non transmis"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,payment_order_id:0
 #: field:wizard.pain001,payment_order_id:0
 msgid "Payment order"
-msgstr "Ordre de paiement"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: help:fds.sepa.upload.history,directory_id:0
 msgid "Remote directory where the file was uploaded"
-msgstr "Répertoire distant où le fichier a été téléversé"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: help:fds.sepa.upload.history,filename:0
 msgid "Remote name of the uploaded file"
-msgstr "Nom du fichier transmis"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: view:fds.postfinance.account:l10n_ch_fds_upload_sepa.view_fds_postfinance_account_sepa_form_inherited
 msgid "SEPA"
-msgstr "SEPA"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
 msgid "SEPA Payment File"
-msgstr "Fichier de paiement SEPA"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: help:wizard.pain001,fds_directory_id:0
 msgid ""
 "Select one upload directory. Be sure to have at least one directory "
 "configured with upload access rights."
-msgstr "Choisissez un répertoire sur lequel téléverser le fichier. Soyez sûr d'avoir configuré au moins un répertoire avec les droits d'accès en téléversement."
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.postfinance.account,sepa_upload_ids:0
 msgid "Sepa upload ids"
-msgstr "Sepa upload ids"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,state:0 field:wizard.pain001,state:0
 msgid "State"
-msgstr "Etat"
+msgstr "Status"
 
 #. module: l10n_ch_fds_upload_sepa
 #: view:fds.postfinance.account:l10n_ch_fds_upload_sepa.view_fds_postfinance_account_sepa_form_inherited
 msgid "Upload History"
-msgstr "Historique de téléversement"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: help:fds.sepa.upload.history,state:0
 msgid "Upload state of the file"
-msgstr "Etat de transmission du fichier"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
 msgid "Upload successful"
-msgstr "Transmis"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
 msgid "Upload to FDS"
-msgstr "Téléverser sur FDS"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: selection:fds.sepa.upload.history,state:0
 msgid "Uploaded"
-msgstr "Transmis"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: selection:wizard.pain001,state:0
 msgid "confirm"
-msgstr "Confirmer"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: selection:wizard.pain001,state:0
 msgid "finish"
-msgstr "Terminer"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
 msgid "pain.001 file creation"
-msgstr "Création de fichier pain.001"
+msgstr "création du fichier pain.001"
 
 #. module: l10n_ch_fds_upload_sepa
 #: selection:wizard.pain001,state:0
 msgid "upload"
-msgstr "Téléverser"
+msgstr ""
