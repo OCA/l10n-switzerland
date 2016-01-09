@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-18 01:40+0000\n"
+"POT-Creation-Date: 2016-01-06 09:19+0000\n"
 "PO-Revision-Date: 2015-06-17 13:34+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: French (Switzerland) (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/fr_CH/)\n"
@@ -26,7 +26,7 @@ msgstr ""
 #. module: l10n_ch_sepa
 #: view:wizard.pain001:l10n_ch_sepa.wizard_pain_001_view
 msgid "Close"
-msgstr ""
+msgstr "Fermer"
 
 #. module: l10n_ch_sepa
 #: model:ir.actions.act_window,name:l10n_ch_sepa.action_create_pain_001
@@ -94,7 +94,7 @@ msgstr ""
 #. module: l10n_ch_sepa
 #: view:wizard.pain001:l10n_ch_sepa.wizard_pain_001_view
 msgid "Generate File"
-msgstr ""
+msgstr "Générer le fichier"
 
 #. module: l10n_ch_sepa
 #: field:wizard.pain001,id:0
@@ -132,7 +132,7 @@ msgstr ""
 #. module: l10n_ch_sepa
 #: view:wizard.pain001:l10n_ch_sepa.wizard_pain_001_view
 msgid "SEPA Payment File"
-msgstr ""
+msgstr "Fichier de paiement SEPA"
 
 #. module: l10n_ch_sepa
 #: code:addons/l10n_ch_sepa/base_sepa/msg_sepa.py:69
@@ -162,4 +162,4 @@ msgstr ""
 #. module: l10n_ch_sepa
 #: view:wizard.pain001:l10n_ch_sepa.wizard_pain_001_view
 msgid "pain.001 file creation"
-msgstr ""
+msgstr "Création de fichier pain.001"

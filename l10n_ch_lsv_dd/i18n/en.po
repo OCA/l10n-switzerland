@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-18 01:40+0000\n"
-"PO-Revision-Date: 2015-11-11 14:13+0000\n"
+"POT-Creation-Date: 2016-01-06 09:18+0000\n"
+"PO-Revision-Date: 2016-01-05 16:29+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -153,7 +153,7 @@ msgstr "Filename"
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:70
 #: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:74
-#: selection:lsv.export.wizard,state:0 selection:post.dd.export.wizard,state:0
+#: selection:lsv.export.wizard,state:0
 #, python-format
 msgid "Finish"
 msgstr "Finish"
@@ -516,9 +516,24 @@ msgid "Validate"
 msgstr "Validate"
 
 #. module: l10n_ch_lsv_dd
+#: selection:post.dd.export.wizard,state:0
+msgid "confirm"
+msgstr "confirm"
+
+#. module: l10n_ch_lsv_dd
+#: selection:post.dd.export.wizard,state:0
+msgid "finish"
+msgstr "finish"
+
+#. module: l10n_ch_lsv_dd
 #: view:account.invoice.free:l10n_ch_lsv_dd.account_invoice_free_view
 msgid "or"
 msgstr "or"
+
+#. module: l10n_ch_lsv_dd
+#: selection:post.dd.export.wizard,state:0
+msgid "upload"
+msgstr "upload"
 
 #. module: l10n_ch_lsv_dd
 #: view:res.partner.bank:l10n_ch_lsv_dd.l10nch_view_res_partner_bank_lsv_form
