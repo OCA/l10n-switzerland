@@ -181,7 +181,7 @@ class BvrImporterWizard(models.TransientModel):
                   }
         line = move_line_obj.search(
             [('transaction_ref', '=', reference),
-             ('reconcile_id', '=', False),
+             ('reconciled', '=', False),
              ('account_id.type', 'in', ['receivable', 'payable']),
              ('journal_id.type', '=', 'sale')],
             order='date desc',
