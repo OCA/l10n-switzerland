@@ -176,13 +176,12 @@ class BvrImporterWizard(models.TransientModel):
                   'date': record['date'],
                   'amount': record['amount'],
                   'ref': '/',
-                  'type': (record['amount'] >= 0 and 'customer') or 'supplier',
                   'statement_id': statement.id,
                   }
         line = move_line_obj.search(
             [('transaction_ref', '=', reference),
              ('reconciled', '=', False),
-             ('account_id.type', 'in', ['receivable', 'payable']),
+             ('account_id.user_type_id.type', 'in', ['receivable', 'payable']),
              ('journal_id.type', '=', 'sale')],
             order='date desc',
         )
