@@ -8,8 +8,6 @@ class AccountMoveLine(models.Model):
 
     _inherit = "account.move.line"
 
-    transaction_ref = fields.Char('Transaction Ref.')
-
     payment_slip_ids = fields.One2many(comodel_name='l10n_ch.payment_slip',
                                        inverse_name='move_line_id',
                                        string='Payment Slips',
