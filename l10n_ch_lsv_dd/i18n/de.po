@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-18 01:40+0000\n"
-"PO-Revision-Date: 2015-11-17 11:01+0000\n"
-"Last-Translator: Philipp Hug <philipp@hug.cx>\n"
+"POT-Creation-Date: 2016-01-11 14:20+0000\n"
+"PO-Revision-Date: 2016-01-05 16:29+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:331
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:332
 #: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:326
 #, python-format
 msgid "Amount for line with ref %s is negative (%f given)"
@@ -154,7 +154,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:70
 #: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:74
-#: selection:lsv.export.wizard,state:0 selection:post.dd.export.wizard,state:0
+#: selection:lsv.export.wizard,state:0
 #, python-format
 msgid "Finish"
 msgstr ""
@@ -188,14 +188,14 @@ msgstr ""
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:170
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:290
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:291
 #: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:162
 #, python-format
 msgid "Generated File"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:232
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:233
 #, python-format
 msgid "Generated debit_record with size %d is not valid (len should be 700)"
 msgstr ""
@@ -231,7 +231,7 @@ msgid "Generated total line is not valid (%d instead of 43)"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:257
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:258
 #, python-format
 msgid "Generated total line is not valid (%d instead of 700)"
 msgstr ""
@@ -242,7 +242,7 @@ msgid "Generation Date"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:390
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:391
 #, python-format
 msgid "Given BV account number is to long ! (%s)"
 msgstr ""
@@ -356,7 +356,7 @@ msgid "Line with ref %s has not a correct CH or LI IBAN(%s given)"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:325
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:326
 #, python-format
 msgid ""
 "Max authorized amount is CHF 10'000'000.00 or EUR 5'000'000.00 (%s %.2f "
@@ -370,7 +370,7 @@ msgid "Missing LSV identifier for account %s"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:408
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:409
 #, python-format
 msgid "Missing Postfinance direct debit identifier for account %s"
 msgstr ""
@@ -382,7 +382,7 @@ msgid "Missing address for bank account %s"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:365
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:366
 #: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:345
 #, python-format
 msgid "Missing owner name for bank account %s"
@@ -517,9 +517,24 @@ msgid "Validate"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
+#: selection:post.dd.export.wizard,state:0
+msgid "confirm"
+msgstr ""
+
+#. module: l10n_ch_lsv_dd
+#: selection:post.dd.export.wizard,state:0
+msgid "finish"
+msgstr ""
+
+#. module: l10n_ch_lsv_dd
 #: view:account.invoice.free:l10n_ch_lsv_dd.account_invoice_free_view
 msgid "or"
 msgstr "oder"
+
+#. module: l10n_ch_lsv_dd
+#: selection:post.dd.export.wizard,state:0
+msgid "upload"
+msgstr ""
 
 #. module: l10n_ch_lsv_dd
 #: view:res.partner.bank:l10n_ch_lsv_dd.l10nch_view_res_partner_bank_lsv_form

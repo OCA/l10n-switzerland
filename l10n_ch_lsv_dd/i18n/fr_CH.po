@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-06 09:18+0000\n"
+"POT-Creation-Date: 2016-01-11 14:20+0000\n"
 "PO-Revision-Date: 2016-01-05 16:29+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (Switzerland) (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/fr_CH/)\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:331
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:332
 #: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:326
 #, python-format
 msgid "Amount for line with ref %s is negative (%f given)"
@@ -187,14 +187,14 @@ msgstr "Fichiers de débit direct générés"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:170
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:290
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:291
 #: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:162
 #, python-format
 msgid "Generated File"
 msgstr "Fichier généré"
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:232
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:233
 #, python-format
 msgid "Generated debit_record with size %d is not valid (len should be 700)"
 msgstr "La taille de l'enregistrement de débit ayant une longueur %d est invalide (longueur devrait être 700)"
@@ -230,7 +230,7 @@ msgid "Generated total line is not valid (%d instead of 43)"
 msgstr "La longueur de la ligne de total générée est invalide (%d au lieu de 43)"
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:257
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:258
 #, python-format
 msgid "Generated total line is not valid (%d instead of 700)"
 msgstr "La longueur de la ligne de total générée est invalide (%d au lieu de 700)"
@@ -241,7 +241,7 @@ msgid "Generation Date"
 msgstr "Date de génération"
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:390
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:391
 #, python-format
 msgid "Given BV account number is to long ! (%s)"
 msgstr "Le numéro de compte BV donné est trop long (%s)"
@@ -355,7 +355,7 @@ msgid "Line with ref %s has not a correct CH or LI IBAN(%s given)"
 msgstr "La ligne avec la référence %s n'a pas de compte IBAN valide associé (%s donné)"
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:325
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:326
 #, python-format
 msgid ""
 "Max authorized amount is CHF 10'000'000.00 or EUR 5'000'000.00 (%s %.2f "
@@ -369,7 +369,7 @@ msgid "Missing LSV identifier for account %s"
 msgstr "Identifiant LSV manquant pour le compte %s"
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:408
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:409
 #, python-format
 msgid "Missing Postfinance direct debit identifier for account %s"
 msgstr "Identifiant Postfiance débit direct manquant pour le compte %s"
@@ -381,7 +381,7 @@ msgid "Missing address for bank account %s"
 msgstr "Addresse manquante pour le compte bancaire %s"
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:365
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:366
 #: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:345
 #, python-format
 msgid "Missing owner name for bank account %s"
