@@ -21,7 +21,10 @@
         'base_location',  # in https://github.com/OCA/partner-contact/
         'l10n_ch_states',  # in https://github.com/OCA/l10n-switzerland/
     ],
-    'data': ['data/l10n_ch_better_zip.xml'],
+    # We use csv file as xml is too slow
+    # unfortunately it doesn't work with noupdate thus we use a post_init hook
+    # 'init': ['data/res.better.zip.csv'],
+    'post_init_hook': 'post_init',
     'images': [],
     'demo': [],
     'auto_install': False,
