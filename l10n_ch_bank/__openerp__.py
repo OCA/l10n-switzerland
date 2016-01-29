@@ -13,9 +13,11 @@
     'depends': ['l10n_ch',
                 'l10n_ch_base_bank',
                 ],
-    'data': ['data/bank.xml',
-             'views/res_config.xml'
-             ],
+    # We use csv file as xml is too slow
+    # unfortunately it doesn't work with noupdate thus we use a post_init hook
+    # 'init': ['data/res.bank.csv'],
+    'post_init_hook': 'post_init',
+    'data': ['views/res_config.xml'],
     'images': [],
     'demo': [],
     'auto_install': False,
