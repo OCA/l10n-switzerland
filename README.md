@@ -69,6 +69,7 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
+[l10n_ch_base_bank](l10n_ch_base_bank/) | 9.0.1.0.0 | Types and number validation for swiss electronic pmnt. DTA, ESR
 [l10n_ch_states](l10n_ch_states/) | 9.0.1.0.0 | Switzerland Country States
 
 Unported addons
@@ -76,7 +77,6 @@ Unported addons
 addon | version | summary
 --- | --- | ---
 [l10n_ch_bank](l10n_ch_bank/) | 8.0.9.0.0 (unported) | Banks names, addresses and BIC codes
-[l10n_ch_base_bank](l10n_ch_base_bank/) | 8.0.1.2.0 (unported) | Types and number validation for swiss electronic pmnt. DTA, ESR
 [l10n_ch_credit_control_payment_slip_report](l10n_ch_credit_control_payment_slip_report/) | 8.0.1.3.0 (unported) | Print BVR/ESR slip related to credit control
 [l10n_ch_dta](l10n_ch_dta/) | 8.0.1.0.1 (unported) | Electronic payment file for Swiss bank (DTA)
 [l10n_ch_dta_base_transaction_id](l10n_ch_dta_base_transaction_id/) | 1.0 (unported) | Switzerland - Bank Payment File (DTA) Transaction ID Compatibility
