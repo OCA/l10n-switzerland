@@ -28,7 +28,7 @@ msgstr "Appenzell Ausserrhoden"
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_AG
 msgid "Argovia"
-msgstr "Argau"
+msgstr "Aargau"
 
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_BS
