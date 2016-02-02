@@ -124,6 +124,11 @@ class Bank(models.Model, BankCommon):
                     if tmp_ids:
                         ids += tmp_ids.ids
                         break
+        else:
+            ids = self.search(
+                args,
+                limit=limit
+                ).ids
         # we sort by occurence
         to_ret_ids = list(set(ids))
         to_ret_ids = sorted(
