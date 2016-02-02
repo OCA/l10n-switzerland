@@ -28,7 +28,7 @@ msgstr "Appenzell Ausserrhoden"
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_AG
 msgid "Argovia"
-msgstr "Argau"
+msgstr "Aargau"
 
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_BS
@@ -53,12 +53,12 @@ msgstr "Kantone"
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_FR
 msgid "Fribourg"
-msgstr "Fribourg"
+msgstr "Freiburg"
 
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_GE
 msgid "Geneva"
-msgstr "Genève"
+msgstr "Genf"
 
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_DE
@@ -93,7 +93,7 @@ msgstr "Luzern"
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_NE
 msgid "Neuchâtel"
-msgstr "Neuchâtel"
+msgstr "Neuenburg"
 
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_NW
@@ -138,7 +138,7 @@ msgstr "Thurgau"
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_TI
 msgid "Ticino"
-msgstr "Ticino"
+msgstr "Tessin"
 
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_UR
@@ -148,12 +148,12 @@ msgstr "Uri"
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_VS
 msgid "Valais"
-msgstr "Valais"
+msgstr "Wallis"
 
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_VD
 msgid "Vaud"
-msgstr "Vaud"
+msgstr "Waadt"
 
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_ZG
