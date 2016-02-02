@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- view of fds_authentication_keys -->
+        <record model="ir.ui.view" id="fds_postfinance_files_form">
+            <field name="name">FDS PostFinance file form</field>
+            <field name="model">fds.postfinance.file</field>
+            <field name="arch" type="xml">
+                <form string="FDS PostFinance file">
+                    <group>
+                        <field name="fds_account_id" />
+                        <field name="bank_statement_id" attrs="{'invisible':[('state', '!=', 'done')]}"/>
+                        <field name="data" filename="filename" attrs="{'invisible':[('state', '=', 'done')]}"/>
+                        <field name="filename" attrs="{'invisible':[('state', '!=', 'done')]}"/>
+                        <field name="directory_id" />
+                        <field name="journal_id" />
+                        <field name="state" />
+                    </group>
+                    <footer>
+                        <button string="Import to Bank Statement" name="import_button" type="object"  class="oe_highlight" icon="gtk-convert" states="draft"/>
+                        <button name="change2error_button" string="File Corrupt" type="object" icon="gtk-cancel" confirm="Are you sure?" states="draft"/>
+                        <button name="change2draft_button" string="Reset to draft" type="object" icon="gtk-undo" confirm="Are you sure?" states="error"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>
