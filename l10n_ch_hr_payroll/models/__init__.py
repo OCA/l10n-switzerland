@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#  File: __init__.py
+#  File: models/__init__.py
 #  Module: l10n_ch_hr_payroll
 #
 #  Created by sge@open-net.ch

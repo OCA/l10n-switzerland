@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 #
-#  File: hr_employee.py
+#  File: models/hr_employee.py
 #  Module: l10n_ch_hr_payroll
 #
-#  Created by sge@open-net.ch
+#  Created by cyp@open-net.ch
 #
 #  Copyright (c) 2014-TODAY Open-Net Ltd.
 ##############################################################################
@@ -27,12 +27,13 @@
 ##############################################################################
 
 
-from openerp.osv import fields, orm
+from openerp import fields, models
 
 
-class hr_employee(orm.Model):
+class HrEmployee(models.Model):
     _inherit = 'hr.employee'
-    _columns = {
-        'children': fields.integer('Number of Children at school'),
-        'children_student': fields.integer('Number of Children student'),
-        }
+
+    # ---------- Fields management
+
+    children = fields.Integer('Number of Children at school')
+    children_student = fields.Integer('Number of Children student')

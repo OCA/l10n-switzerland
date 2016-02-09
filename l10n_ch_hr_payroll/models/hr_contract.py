@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#  File: hr_contract.py
+#  File: models/hr_contract.py
 #  Module: l10n_ch_hr_payroll
 #
 #  Created by sge@open-net.ch
@@ -26,38 +26,15 @@
 #
 ##############################################################################
 
-
-from openerp.osv import fields, orm
+from openerp import fields, models
 import openerp.addons.decimal_precision as dp
 
-import logging
-_logger = logging.getLogger(__name__)
 
-
-class hr_contract(orm.Model):
+class HrContract(models.Model):
     _inherit = 'hr.contract'
-    _columns = {
-        'lpp_rate': fields.float('LPP Rate',
-                                 digits_compute=dp.get_precision(
-                                     'Payroll Rate')),
-        'lpp_amount': fields.float('LPP Amount',
-                                   digits_compute=dp.get_precision(
-                                       'Account')),
-        'worked_hours': fields.float('Worked Hours'),
-        'hourly_rate': fields.float('Hourly Rate'),
-        'holiday_rate': fields.float('Holiday Rate')
-        }
 
-    def compute_wage(self, cr, uid, id,
-                     worked_hours, hourly_rate,
-                     context=None):
-        """
-        Compute the wage from worked_hours and hourly_rate.
-        wage = worked_hours * hourly_rate
-        """
-        res = {'value': {}}
-        wage = worked_hours * hourly_rate
-        res['value'] = {
-            'wage': wage,
-        }
-        return res
+    holiday_rate = fields.Float(string='Holiday Rate')
+    lpp_rate = fields.Float(string='LPP Rate',
+                            digits=dp.get_precision('Payroll Rate'))
+    lpp_amount = fields.Float(string='LPP Amount',
+                              digits=dp.get_precision('Account'))
