@@ -13,7 +13,7 @@
                     <field name="communication"/>
                     <field name="amount" sum="Amount Total"/>
                     <field name="amount_currency" sum="Currency Amount Total" groups="base.group_multi_currency"/>
-                    <field name="currency" groups="base.group_multi_currency"/>
+                    <field name="currency_id" groups="base.group_multi_currency"/>
                     <field name="bank_id" domain="[('partner_id', '=', partner_id)]"/>
                     <field name="move_line_id" on_change="onchange_move_line(move_line_id,parent.mode)"/>
                     <field name="create_date"/>

@@ -57,7 +57,7 @@ class payment_mode(osv.osv):
         'name': fields.char('Name', required=True, help='Mode of Payment'),
         'bank_id': fields.many2one('res.partner.bank', "Bank account",
             required=True,help='Bank Account for the Payment Mode'),
-        'journal': fields.many2one('account.journal', 'Journal', required=True,
+        'journal_id': fields.many2one('account.journal', 'Journal', required=True,
             domain=[('type', 'in', ('bank','cash'))], help='Bank or Cash Journal for the Payment Mode'),
         'company_id': fields.many2one('res.company', 'Company',required=True),
         'partner_id':fields.related('company_id','partner_id',type='many2one',relation='res.partner',string='Partner',store=True,),
@@ -261,7 +261,7 @@ class payment_line(osv.osv):
         for line in self.browse(cursor, user, ids, context=context):
             ctx = context.copy()
             ctx['date'] = line.order_id.date_done or time.strftime('%Y-%m-%d')
-            res[line.id] = currency_obj.compute(cursor, user, line.currency.id,
+            res[line.id] = currency_obj.compute(cursor, user, line.currency_id.id,
                     line.company_currency.id,
                     line.amount_currency, context=ctx)
         return res
@@ -279,7 +279,7 @@ class payment_line(osv.osv):
     def _get_date(self, cr, uid, context=None):
         if context is None:
             context = {}
-        payment_order_obj = self.pool.get('account.payment')
+        payment_order_obj = self.pool.get('payment.register')
         date = False
 
         if context.get('order_id') and context['order_id']:
@@ -321,10 +321,10 @@ class payment_line(osv.osv):
         'name': fields.char('Your Reference', required=True),
         'communication': fields.char('Communication', required=True, help="Used as the message between ordering customer and current company. Depicts 'What do you want to say to the recipient about this order ?'"),
         'communication2': fields.char('Communication 2', help='The successor message of Communication.'),
-        'move_line_id': fields.many2one('account.move.line', 'Entry line', domain=[('reconcile_id', '=', False), ('account_id.type', '=', 'payable')], help='This Entry Line will be referred for the information of the ordering customer.'),
+        'move_line_id': fields.many2one('account.move.line', 'Entry line', domain=[('reconciled', '=', False), ('account_id.internal_type', '=', 'payable')], help='This Entry Line will be referred for the information of the ordering customer.'),
         'amount_currency': fields.float('Amount in Partner Currency', digits=(16, 2),
             required=True, help='Payment amount in the partner currency'),
-        'currency': fields.many2one('res.currency','Partner Currency', required=True),
+        'currency_id': fields.many2one('res.currency','Partner Currency', required=True),
         'company_currency': fields.many2one('res.currency', 'Company Currency', readonly=True),
         'bank_id': fields.many2one('res.partner.bank', 'Destination Bank Account'),
 #         'order_id': fields.many2one('payment.order', 'Order', required=True,
@@ -351,7 +351,7 @@ class payment_line(osv.osv):
         'name': lambda obj, cursor, user, context: obj.pool.get('ir.sequence'
             ).get(cursor, user, 'payment.register.line'),
         'state': 'normal',
-        'currency': _get_currency,
+        'currency_id': _get_currency,
         'company_currency': _get_currency,
         'date': _get_date,
     }
@@ -359,7 +359,7 @@ class payment_line(osv.osv):
         ('name_uniq', 'UNIQUE(name)', 'The payment line name must be unique!'),
     ]
 
-    def onchange_move_line(self, cr, uid, ids, move_line_id, payment_type, date_prefered, date_scheduled, currency=False, company_currency=False, context=None):
+    def onchange_move_line(self, cr, uid, ids, move_line_id, payment_type, date_prefered, date_scheduled, currency_id=False, company_currency=False, context=None):
         data = {}
         move_line_obj = self.pool.get('account.move.line')
 
@@ -369,7 +369,7 @@ class payment_line(osv.osv):
             line = move_line_obj.browse(cr, uid, move_line_id, context=context)
             data['amount_currency'] = line.amount_residual_currency
 
-            res = self.onchange_amount(cr, uid, ids, data['amount_currency'], currency,
+            res = self.onchange_amount(cr, uid, ids, data['amount_currency'], currency_id,
                                        company_currency, context)
             if res:
                 data['amount'] = res['value']['amount']
@@ -377,9 +377,9 @@ class payment_line(osv.osv):
             temp = line.currency_id and line.currency_id.id or False
             if not temp:
                 if line.invoice:
-                    data['currency'] = line.invoice.currency_id.id
+                    data['currency_id'] = line.invoice.currency_id.id
             else:
-                data['currency'] = temp
+                data['currency_id'] = temp
 
             # calling onchange of partner and updating data dictionary
             temp_dict = self.onchange_partner(cr, uid, ids, line.partner_id.id, payment_type)
@@ -396,12 +396,12 @@ class payment_line(osv.osv):
                 data['date'] = date_scheduled
         return {'value': data}
 
-    def onchange_amount(self, cr, uid, ids, amount, currency, cmpny_currency, context=None):
+    def onchange_amount(self, cr, uid, ids, amount, currency_id, cmpny_currency, context=None):
         if (not amount) or (not cmpny_currency):
             return {'value': {'amount': False}}
         res = {}
         currency_obj = self.pool.get('res.currency')
-        company_amount = currency_obj.compute(cr, uid, currency, cmpny_currency, amount)
+        company_amount = currency_obj.compute(cr, uid, currency_id, cmpny_currency, amount)
         res['amount'] = company_amount
         return {'value': res}
 

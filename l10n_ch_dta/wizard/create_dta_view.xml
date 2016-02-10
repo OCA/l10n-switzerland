@@ -32,7 +32,7 @@
             <field name="key2">client_action_multi</field>
             <field name="value" eval="'ir.actions.act_window,' +str(ref('action_dta_create'))" />
             <field name="key">action</field>
-            <field name="model">account.payment</field>
+            <field name="model">payment.register</field>
         </record>
     </data>
 </openerp>
