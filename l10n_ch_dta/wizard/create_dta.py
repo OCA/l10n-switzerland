@@ -711,7 +711,7 @@ class DTAFileGenerator(models.TransientModel):
 #         payment = payment_obj.browse(data['id'])
         seq = 1
         amount_tot = 0
-        amount_currency_tot = 0        
+#         amount_currency_tot = 0        
 
         for pline in payment_obj.browse(data['ids']).line_ids:
             elec_context = self._process_payment_lines(
@@ -763,7 +763,7 @@ class DTAFileGenerator(models.TransientModel):
         elec_context['sequence'] = sequence
         if dta:
             dta = dta + record_gt890(elec_context, self.pool, False).generate()
-        dta_data = _u2a(dta)
+#         dta_data = _u2a(dta)
         dta_data = base64.encodestring(dta)
 #         payment_obj.set_done([data['id']])
         dta_file_name = 'DTA%s.txt' % time.strftime(

@@ -19,5 +19,6 @@
 #
 ##############################################################################
 from . import payment_register
+from . import payment_register_line
 from . import account_move_line
 # from . import wizard
