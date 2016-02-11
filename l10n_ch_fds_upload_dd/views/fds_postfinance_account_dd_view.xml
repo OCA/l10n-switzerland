@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_fds_postfinance_account_lsv_dd_form_inherited" model="ir.ui.view">
+            <field name="name">FDS PostFinance account view - Direct debit extension</field>
+            <field name="model">fds.postfinance.account</field>
+            <field name="inherit_id" ref="l10n_ch_fds_postfinance.view_fds_postfinance_account_form"/>
+            <field name="arch" type="xml">
+                <page string="Upload History" position="inside">
+                    <separator string="Direct Debit Orders"/>
+                    <field name="dd_upload_ids">
+                        <tree create="false" default_order="create_date desc,state,filename">
+                            <field name="create_date" />
+                            <field name="banking_export_id" />
+                            <field name="directory_id" />
+                            <field name="filename" />
+                            <field name="state" />
+                        </tree>
+                    </field>
+                </page>
+            </field>
+        </record>
+    </data>
+</openerp>

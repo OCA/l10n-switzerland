@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <!-- view of this wizard -->
+    <record model="ir.ui.view" id="view_fds_key_generator_wizard_form">
+        <field name="name">FDS key generator wizard view</field>
+        <field name="model">fds.key.generator.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="state" invisible="True"/>
+                <separator string="FDS Postfinance generate authentication keys parameters" />
+                <group states="default">
+                    <field name="user_id" />
+                </group>
+                <group states="generate,done">
+                    <field name="user_name" />
+                    <field name="public_key" filename="pub_filename" />
+                    <field name="pub_filename" invisible="True"/>
+                    <field name="private_key_crypted" filename="ppk_filename" />
+                    <field name="ppk_filename" invisible="True"/>
+                </group>
+                <footer>
+                    <button string="Generate" name="generate_keys_button"  type="object" class="oe_highlight" states="default,generate" />
+                    <button string="Cancel" special="cancel" icon="gtk-cancel" states="default" />
+                    <button string="Validate" name="confirm_keys_button" type="object" icon="gtk-apply" states="generate" />
+                    <button string="Cancel" name="cancel_keys_button" type="object" icon="gtk-cancel" states="generate" />
+                    <button string="Close" class="oe_highlightoe_link" special="cancel" icon="gtk-close" states="done" />
+                    <button string="Send to Postfinance" name="send_keys_button" type="object" icon="gtk-go-forward" states="done" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <!-- More button Action in fds_postfinance_setup -->
+    <!--
+    <record model="ir.actions.act_window" id="action_default_fds_authentication_keys_wizard">
+        <field name="name">Generate FDS authentication keys</field>
+        <field name="res_model">fds.key.generator.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    
+    <record model="ir.values" id="action_default_fds_authentication_keys_wizard_values">
+        <field name="key2">client_action_multi</field>
+        <field name="model">fds.postfinance.account</field>
+        <field name="name">Generate FDS authentication keys</field>
+        <field name="value" eval="'ir.actions.act_window,%d'%action_default_fds_authentication_keys_wizard" />
+        <field name="key">action</field>
+        <field name="object" eval="1" />
+    </record>
+    -->
+</data>
+</openerp>

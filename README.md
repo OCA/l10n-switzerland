@@ -69,17 +69,21 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
+[l10n_ch_base_bank](l10n_ch_base_bank/) | 9.0.1.0.0 | Types and number validation for swiss electronic pmnt. DTA, ESR
 [l10n_ch_states](l10n_ch_states/) | 9.0.1.0.0 | Switzerland Country States
+[l10n_ch_zip](l10n_ch_zip/) | 9.0.2.0.0 | Provides all Swiss postal codes for auto-completion
 
 Unported addons
 ---------------
 addon | version | summary
 --- | --- | ---
 [l10n_ch_bank](l10n_ch_bank/) | 8.0.9.0.0 (unported) | Banks names, addresses and BIC codes
-[l10n_ch_base_bank](l10n_ch_base_bank/) | 8.0.1.2.0 (unported) | Types and number validation for swiss electronic pmnt. DTA, ESR
 [l10n_ch_credit_control_payment_slip_report](l10n_ch_credit_control_payment_slip_report/) | 8.0.1.3.0 (unported) | Print BVR/ESR slip related to credit control
 [l10n_ch_dta](l10n_ch_dta/) | 8.0.1.0.1 (unported) | Electronic payment file for Swiss bank (DTA)
 [l10n_ch_dta_base_transaction_id](l10n_ch_dta_base_transaction_id/) | 1.0 (unported) | Switzerland - Bank Payment File (DTA) Transaction ID Compatibility
+[l10n_ch_fds_postfinance](l10n_ch_fds_postfinance/) | 8.0.1.0 (unported) | Download files and import bank statements from FDS
+[l10n_ch_fds_upload_dd](l10n_ch_fds_upload_dd/) | 8.0.1.0 (unported) | Upload Direct Debit files to FDS PostFinance
+[l10n_ch_fds_upload_sepa](l10n_ch_fds_upload_sepa/) | 8.0.1.0 (unported) | Upload SEPA files to FDS PostFinance
 [l10n_ch_hr_payroll](l10n_ch_hr_payroll/) | 8.0.1.0.8 (unported) | Swizerland Payroll Rules
 [l10n_ch_import_cresus](l10n_ch_import_cresus/) | 8.0.1.0.0 (unported) | Account Import Cresus
 [l10n_ch_payment_slip](l10n_ch_payment_slip/) | 8.0.2.1.0 (unported) | Print ESR/BVR payment slip with your invoices
@@ -89,7 +93,6 @@ addon | version | summary
 [l10n_ch_payment_slip_voucher](l10n_ch_payment_slip_voucher/) | 8.0.1.0.0 (unported) | Import Payment Slip (BVR/ESR) into vouchers
 [l10n_ch_scan_bvr](l10n_ch_scan_bvr/) | 1.0 (unported) | Switzerland - Scan ESR/BVR to create invoices
 [l10n_ch_sepa](l10n_ch_sepa/) | 8.0.1.0.0 (unported) | Generate pain.001 Credit Transfert Files for your payments
-[l10n_ch_zip](l10n_ch_zip/) | 8.0.2.0.0 (unported) | Provides all Swiss postal codes for auto-completion
 
 [//]: # (end addons)
 

@@ -1,0 +1,153 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_ch_fds_upload_dd
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-12-04 15:23+0000\n"
+"PO-Revision-Date: 2015-12-04 16:36+0100\n"
+"Last-Translator: Emanuel Cino <ecino@compassion.ch>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.6.4\n"
+"Language: fr_CH\n"
+
+#. module: l10n_ch_fds_upload_dd
+#: view:post.dd.export.wizard:l10n_ch_fds_upload_dd.view_post_dd_export_wizard_form_inherited
+msgid "Back"
+msgstr "Retour"
+
+#. module: l10n_ch_fds_upload_dd
+#: view:post.dd.export.wizard:l10n_ch_fds_upload_dd.view_post_dd_export_wizard_form_inherited
+msgid "Close"
+msgstr "Fermer"
+
+#. module: l10n_ch_fds_upload_dd
+#: view:post.dd.export.wizard:l10n_ch_fds_upload_dd.view_post_dd_export_wizard_form_inherited
+msgid "Confirm"
+msgstr "Confirmer"
+
+#. module: l10n_ch_fds_upload_dd
+#: field:fds.dd.upload.history,create_uid:0
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: l10n_ch_fds_upload_dd
+#: field:fds.dd.upload.history,create_date:0
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: l10n_ch_fds_upload_dd
+#: field:fds.postfinance.account,dd_upload_ids:0
+msgid "Dd upload ids"
+msgstr "Dd upload ids"
+
+#. module: l10n_ch_fds_upload_dd
+#: view:fds.postfinance.account:l10n_ch_fds_upload_dd.view_fds_postfinance_account_lsv_dd_form_inherited
+msgid "Direct Debit Orders"
+msgstr "Ordres de Débit Direct"
+
+#. module: l10n_ch_fds_upload_dd
+#: field:fds.dd.upload.history,banking_export_id:0
+msgid "Direct debit export"
+msgstr "Export Débit Direct"
+
+#. module: l10n_ch_fds_upload_dd
+#: field:fds.dd.upload.history,directory_id:0
+msgid "Directory"
+msgstr "Répertoire"
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model,name:l10n_ch_fds_upload_dd.model_post_dd_export_wizard
+msgid "Export Postfinance Direct Debit File"
+msgstr "Exporter le fichier Postfinance Debit Direct"
+
+#. module: l10n_ch_fds_upload_dd
+#: field:fds.dd.upload.history,fds_account_id:0
+#: field:post.dd.export.wizard,fds_account_id:0
+msgid "FDS account"
+msgstr "Compte FDS"
+
+#. module: l10n_ch_fds_upload_dd
+#: field:post.dd.export.wizard,fds_directory_id:0
+msgid "FDS directory"
+msgstr "Répertoire FDS"
+
+#. module: l10n_ch_fds_upload_dd
+#: field:fds.dd.upload.history,filename:0
+msgid "Filename"
+msgstr "Nom de fichier"
+
+#. module: l10n_ch_fds_upload_dd
+#: field:fds.dd.upload.history,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: l10n_ch_fds_upload_dd
+#: field:fds.dd.upload.history,write_uid:0
+msgid "Last Updated by"
+msgstr "Modifié par"
+
+#. module: l10n_ch_fds_upload_dd
+#: field:fds.dd.upload.history,write_date:0
+msgid "Last Updated on"
+msgstr "Modifié le"
+
+#. module: l10n_ch_fds_upload_dd
+#: selection:fds.dd.upload.history,state:0
+msgid "Not Uploaded"
+msgstr "Non transmis"
+
+#. module: l10n_ch_fds_upload_dd
+#: help:fds.dd.upload.history,directory_id:0
+msgid "Remote directory where the file was uploaded"
+msgstr "Répertoire distant où le fichier a été téléversé"
+
+#. module: l10n_ch_fds_upload_dd
+#: help:fds.dd.upload.history,filename:0
+msgid "Remote name of the uploaded file"
+msgstr "Nom du fichier transmis"
+
+#. module: l10n_ch_fds_upload_dd
+#: help:post.dd.export.wizard,fds_directory_id:0
+msgid ""
+"Select one upload directory. Be sure to have at least one directory "
+"configured with upload access rights."
+msgstr ""
+"Choisissez un répertoire de téléversement. Soyez sûr d'avoir configuré au "
+"moins un répertoire avec les droits d'accès en téléversement."
+
+#. module: l10n_ch_fds_upload_dd
+#: field:fds.dd.upload.history,state:0
+msgid "State"
+msgstr "Etat"
+
+#. module: l10n_ch_fds_upload_dd
+#: view:fds.postfinance.account:l10n_ch_fds_upload_dd.view_fds_postfinance_account_lsv_dd_form_inherited
+msgid "Upload History"
+msgstr "Historique de téléversement"
+
+#. module: l10n_ch_fds_upload_dd
+#: help:fds.dd.upload.history,state:0
+msgid "Upload state of the file"
+msgstr "Etat de transmission du fichier"
+
+#. module: l10n_ch_fds_upload_dd
+#: view:post.dd.export.wizard:l10n_ch_fds_upload_dd.view_post_dd_export_wizard_form_inherited
+msgid "Upload successful"
+msgstr "Transmis"
+
+#. module: l10n_ch_fds_upload_dd
+#: view:post.dd.export.wizard:l10n_ch_fds_upload_dd.view_post_dd_export_wizard_form_inherited
+msgid "Upload to FDS"
+msgstr "Téléverser sur FDS"
+
+#. module: l10n_ch_fds_upload_dd
+#: selection:fds.dd.upload.history,state:0
+msgid "Uploaded"
+msgstr "Transmis"
