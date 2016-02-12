@@ -19,25 +19,27 @@
 #
 ##############################################################################
 
-{'name': 'Switzerland - Bank Payment File (DTA)',
- 'summary': 'Electronic payment file for Swiss bank (DTA)',
+{'name': 'Switzerland - Payment Register',
+ 'summary': 'Allow to register payments from invoices',
  'description': """
-Swiss bank electronic payment (DTA)
+
 ===================================
 
-This addons allows you to generate an electronic payment file for Swiss bank
-(known as DTA). You'll found the wizard in payment order.
+This addons allows you to generate .
 
 """,
- 'version': '8.0.1.0.1',
- 'author': "Camptocamp,Odoo Community Association (OCA)",
+ 'version': '9.0.1.0.1',
+ 'author': "",
  'category': 'Localization',
- 'website': 'http://www.camptocamp.com',
+ 'website': '',
  'license': 'AGPL-3',
- 'depends': ['base', 'l10n_ch_base_bank', 'l10n_ch_payment_register', 'document'],
- 'data': ["wizard/create_dta_view.xml",
-          ],
-         # "bank_view.xml"],
+ 'depends': ['base', 'l10n_ch_base_bank', 'document'],
+ 'data': ["wizard/payment_order_create_view.xml",
+          "views/payment_register_view.xml",
+          "views/payment_register_line_view.xml",
+          ], 
+          #["wizard/create_dta_view.xml",
+          # "bank_view.xml"],
  #'demo': ["demo/dta_demo.xml"],
  #'test': ["test/l10n_ch_dta.yml"],
  'auto_install': False,

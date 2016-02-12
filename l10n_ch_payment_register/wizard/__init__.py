@@ -2,7 +2,8 @@
 ##############################################################################
 #
 #    Author: Nicolas Bessi. Copyright Camptocamp SA
-#    Donors: Hasa Sàrl, Open Net Sàrl and Prisme Solutions Informatique SA
+#    Financial contributors: Hasa SA, Open Net SA,
+#                            Prisme Solutions Informatique SA, Quod SA
 #    Ported to v8.0 by Agile Business Group <http://www.agilebg.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -19,15 +20,5 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields
-
-
-class PaymentOrder(models.Model):
-    _inherit = 'payment.order'
-
-    dta_ids = fields.One2many(
-        'ir.attachment',
-        'res_id',
-        domain=[('res_model', '=', 'payment.order'),
-                ('name', 'like', 'DTA')]
-    )
+# from . import create_dta
+from . import payment_order_create
