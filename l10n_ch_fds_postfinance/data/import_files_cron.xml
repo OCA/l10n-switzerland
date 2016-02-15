@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2016 Compassion (http://www.compassion.ch)
+    @author Emanuel Cino <ecino@compassion.ch>
+    The licence is in the file __openerp__.py
+-->
+
+<openerp>
+    <data noupdate="1">
+        <record id="fds_import_cron" model="ir.cron">
+            <field name="name">Import FDS Files</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="function">import_files_cron</field>
+            <field name="model">fds.postfinance.account</field>
+            <field name="args" eval="()"/>
+            <field name="active" eval="False"/>
+        </record>
+    </data>
+</openerp>
