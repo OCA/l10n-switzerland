@@ -99,7 +99,7 @@ class FdsPostfinanceFile(models.Model):
             :return None:
         '''
         self.ensure_one()
-        self._sate_error_on()
+        self._state_error_on()
 
     @api.multi
     def change2draft_button(self):
@@ -127,8 +127,8 @@ class FdsPostfinanceFile(models.Model):
             values = {
                 'journal_id': self.directory_id.journal_id.id,
                 'data_file': self.data}
-            bs_imoprt_obj = self.env['account.bank.statement.import']
-            bank_wiz_imp = bs_imoprt_obj.create(values)
+            bs_import_obj = self.env['account.bank.statement.import']
+            bank_wiz_imp = bs_import_obj.create(values)
             bank_wiz_imp.import_file()
             self._state_done_on()
             self._add_bankStatement_ref()
@@ -137,6 +137,7 @@ class FdsPostfinanceFile(models.Model):
                          (self.filename))
             return True
         except:
+            self._state_error_on()
             _logger.warning("[FAIL] import file '%s' to bank Statements",
                             (self.filename))
             return False
@@ -170,7 +171,8 @@ class FdsPostfinanceFile(models.Model):
         self.ensure_one()
         self.write({'state': 'done'})
 
-    def _sate_error_on(self):
+    @api.multi
+    def _state_error_on(self):
         ''' private function that change state to error
 
             :returns: None
