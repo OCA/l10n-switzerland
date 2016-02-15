@@ -38,11 +38,6 @@ class FdsPostfinanceDirectory(models.Model):
         ondelete='restrict',
         readonly=True,
     )
-    journal_id = fields.Many2one(
-        comodel_name='account.journal',
-        string='Journal',
-        help='default journal needed to import to bank statements'
-    )
     allow_download_file = fields.Boolean(
         string='Allow download file?',
         default=False,
