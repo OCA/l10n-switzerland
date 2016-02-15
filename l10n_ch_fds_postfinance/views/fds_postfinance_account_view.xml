@@ -178,7 +178,7 @@
         <!-- link to this view in "Accounting->Bank and Cash->FDS Postfinance" -->
         <menuitem id="menu_fds_file_ids"
         name="FDS PostFinance files"
-        parent="account.menu_finance_bank_and_cash"
+        parent="account.account_account_menu"
         sequence="20"
         action="action_fds_files" />        
 
