@@ -137,6 +137,7 @@ class FdsPostfinanceFile(models.Model):
                          (self.filename))
             return True
         except:
+            self._state_error_on()
             _logger.warning("[FAIL] import file '%s' to bank Statements",
                             (self.filename))
             return False
