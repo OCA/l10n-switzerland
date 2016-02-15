@@ -22,3 +22,4 @@
 
 from . import fds_postfinance_account_dd
 from . import fds_dd_upload_history
+from . import account_payment_order
