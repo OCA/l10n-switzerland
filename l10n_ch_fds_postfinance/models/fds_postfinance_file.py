@@ -99,7 +99,7 @@ class FdsPostfinanceFile(models.Model):
             :return None:
         '''
         self.ensure_one()
-        self._sate_error_on()
+        self._state_error_on()
 
     @api.multi
     def change2draft_button(self):
@@ -170,7 +170,8 @@ class FdsPostfinanceFile(models.Model):
         self.ensure_one()
         self.write({'state': 'done'})
 
-    def _sate_error_on(self):
+    @api.multi
+    def _state_error_on(self):
         ''' private function that change state to error
 
             :returns: None
