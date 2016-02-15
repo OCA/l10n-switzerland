@@ -48,6 +48,8 @@
         <field name="value" eval="'ir.actions.act_window,%d'%action_fds_files_import_tobankstatments_wizard" />
         <field name="key">action</field>
         <field name="object" eval="1" />
+        <field name="res_id" eval="0" />
+        <field name="key2">client_action_multi</field>
     </record>
     
 </data>
