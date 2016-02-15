@@ -58,14 +58,6 @@ class FdsPostfinanceFile(models.Model):
         ondelete='restrict',
         readonly=True,
     )
-    journal_id = fields.Many2one(
-        comodel_name='account.journal',
-        related='directory_id.journal_id',
-        string='journal',
-        ondelete='restrict',
-        readonly=True,
-        help='default journal for this file'
-    )
     state = fields.Selection(
         selection=[('draft', 'Draft'),
                    ('done', 'Done'),
@@ -87,8 +79,6 @@ class FdsPostfinanceFile(models.Model):
         '''
         self.ensure_one()
 
-        if not self.directory_id.journal_id:
-            raise exceptions.Warning(_('Add default journal in acount conf'))
         self.import2bankStatements()
 
     @api.multi
@@ -125,7 +115,6 @@ class FdsPostfinanceFile(models.Model):
 
         try:
             values = {
-                'journal_id': self.directory_id.journal_id.id,
                 'data_file': self.data}
             bs_import_obj = self.env['account.bank.statement.import']
             bank_wiz_imp = bs_import_obj.create(values)
