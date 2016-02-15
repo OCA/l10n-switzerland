@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_post_dd_export_wizard_form_inherited" model="ir.ui.view">
+            <field name="name">Post dd export wizard view - Upload extension</field>
+            <field name="model">payment.order.upload.dd.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                <header>
+                    <button string="Upload to FDS"
+                            name="send_export_button"
+                            type="object"
+                            icon="gtk-network" states="upload" class="oe_highlight"/>
+                </header>
+                <field name="state" invisible="True"/>
+                <sheet>
+                    <group states="upload">
+                        <field name="fds_account_id" widget="selection" edit="False" required="1"/>
+                        <field name="fds_directory_id"
+                               domain="[('allow_upload_file', '=', True), ('fds_account_id','=',fds_account_id)]"
+                               options="{'create': false, 'create_edit': false}" required="1"/>
+                    </group>
+
+                    <group>
+                        <field name="filename" invisible="True"/>
+                        <field name="file_data" filename="filename"/>
+                    </group>
+
+                    <group states="finish">
+                        <p style="color:red">
+                            <strong>Upload successful</strong>
+                        </p>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+    </data>
+</openerp>
