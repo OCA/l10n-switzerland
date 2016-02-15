@@ -132,9 +132,9 @@ class fds_files_import_tobankstatments_wizard(models.TransientModel):
                 - (directory name, directory id) from fds.pf.files.directory
                 - tmp directory name
                 - fds account
-            :returns recordset: of download files (model fds.postfinance.files)
+            :returns recordset: of download files (model fds.postfinance.file)
         '''
-        fds_files_ids = self.env['fds.postfinance.files']
+        fds_files_ids = self.env['fds.postfinance.file']
         for d in directories:
             (dir_name, dir_id) = (d[0], d[1])
 
@@ -146,7 +146,7 @@ class fds_files_import_tobankstatments_wizard(models.TransientModel):
             for nameFile in list_name_files:
                 # check if file exist already
                 if not fds_files_ids.search([['filename', '=', nameFile]]):
-                    # save in the model fds_postfinance_files
+                    # save in the model fds_postfinance_file
                     path = os.path.join(tmp_directory, nameFile)
                     with open(path, "rb") as f:
                         file_data = f.read()
@@ -167,7 +167,7 @@ class fds_files_import_tobankstatments_wizard(models.TransientModel):
     def _import2bankStatements(self, fds_files_ids):
         ''' private function that import the files to bank statments
 
-            :param recordset: of model fds_postfinance_files
+            :param recordset: of model fds_postfinance_file
             :returns None:
         '''
         for fds_file in fds_files_ids:
