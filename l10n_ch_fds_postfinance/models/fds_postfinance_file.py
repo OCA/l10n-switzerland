@@ -127,8 +127,8 @@ class FdsPostfinanceFile(models.Model):
             values = {
                 'journal_id': self.directory_id.journal_id.id,
                 'data_file': self.data}
-            bs_imoprt_obj = self.env['account.bank.statement.import']
-            bank_wiz_imp = bs_imoprt_obj.create(values)
+            bs_import_obj = self.env['account.bank.statement.import']
+            bank_wiz_imp = bs_import_obj.create(values)
             bank_wiz_imp.import_file()
             self._state_done_on()
             self._add_bankStatement_ref()
