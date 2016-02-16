@@ -19,28 +19,29 @@
 #
 ##############################################################################
 
-import time
-
+# import time
 from openerp import models, fields, api, _
 
 
 class payment_mode(models.Model):
-    _name= 'payment.mode'
-    _description= 'Payment Mode'
-    
+    _name = 'payment.mode'
+    _description = 'Payment Mode'
+
     name = fields.Char('Name', required=True, help='Mode of Payment')
-    
+
     bank_id = fields.Many2one('res.partner.bank', "Bank account",
-            required=True,help='Bank Account for the Payment Mode')
-            
+                              required=True, 
+                              help='Bank Account for the Payment Mode')
+
     journal_id = fields.Many2one('account.journal', 'Journal', required=True,
-            domain=[('type', 'in', ('bank','cash'))], help='Bank or Cash Journal for the Payment Mode')
-            
-    company_id = fields.Many2one('res.company', 'Company',required=True,
-                                 default = lambda self,c: self.env('res.users').browse(c).company_id.id )
-    
-    partner_id = fields.Many2one('res.partner', related='company_id.partner_id', string='Partner', store=True)
-    
+                                 domain=[('type', 'in', ('bank', 'cash'))],
+                                 help='Bank or Cash Journal for the Payment Mode')
+
+    company_id = fields.Many2one('res.company', 'Company', required=True,
+                                 default=lambda self, c: self.env('res.users').browse(c).company_id.id)
+
+    partner_id = fields.Many2one('res.partner', related='company_id.partner_id',
+                                 string='Partner', store=True)
 
     def suitable_bank_types(self, payment_code=None, context=None):
         """Return the codes of the bank type that are suitable
@@ -53,7 +54,7 @@ class payment_mode(models.Model):
             WHERE pm.id = %s """, [payment_code])
         return [x[0] for x in self.env.cr.fetchall()]
 
-#TO DO if used
+# TO DO if used
 #     def onchange_company_id (self, cr, uid, ids, company_id=False, context=None):
 #         result = {}
 #         if company_id:
@@ -61,6 +62,4 @@ class payment_mode(models.Model):
 #             result['partner_id'] = partner_id
 #         return {'value': result}
 
-
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-

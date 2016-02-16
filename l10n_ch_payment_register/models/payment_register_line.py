@@ -29,15 +29,14 @@ class payment_line(models.Model):
     _description = 'Payment Line'
 
     def translate(self, orig):
-        return {
-                "due_date": "date_maturity",
+        return {"due_date": "date_maturity",
                 "reference": "ref"}.get(orig, orig)
 
-    def _info_owner(self, name=None, ):
+    def _info_owner(self, name=None):
         result = {}
         for line in self:
             owner = line.order_id.mode.bank_id.partner_id
-            result[line.id] = self._get_info_partner( owner)
+            result[line.id] = self._get_info_partner(owner)
         return result
 
     def _get_info_partner(self, partner_record):
@@ -46,10 +45,10 @@ class payment_line(models.Model):
         st = partner_record.street or ''
         st1 = partner_record.street2 or ''
         zip = partner_record.zip or ''
-        city = partner_record.city or  ''
+        city = partner_record.city or ''
         zip_city = zip + ' ' + city
         cntry = partner_record.country_id and partner_record.country_id.name or ''
-        return partner_record.name + "\n" + st + " " + st1 + "\n" + zip_city + "\n" +cntry
+        return partner_record.name + "\n" + st + " " + st1 + "\n" + zip_city + "\n" + cntry
 
     def _info_partner(self, name=None):
         result = {}
@@ -59,7 +58,7 @@ class payment_line(models.Model):
                 break
             result[line.id] = self._get_info_partner(line.partner_id)
         return result
-    
+
     @api.one
     def _compute_amount(self):
         amount = self.amount_currency
@@ -78,7 +77,7 @@ class payment_line(models.Model):
             return user.company_id.currency_id.id
         else:
             return currency_obj.search([('rate', '=', 1.0)])[0]
-    
+
     @api.one
     def _get_date(self):
         payment_order_obj = self.env['payment.register']
@@ -92,51 +91,87 @@ class payment_line(models.Model):
                 date = time.strftime('%Y-%m-%d')
         return date
 
-
     name = fields.Char('Your Reference', required=True)
-    communication = fields.Char('Communication', required=True, help="Used as the message between ordering customer and current company. Depicts 'What do you want to say to the recipient about this order ?'")
-    communication2 = fields.Char('Communication 2', help='The successor message of Communication.')
-    move_line_id = fields.Many2one('account.move.line', 'Entry line', 
-                                       domain=[('reconciled', '=', False), ('account_id.internal_type', '=', 'payable')], 
+    communication = fields.Char('Communication', required=True,
+                                help="Used as the message between ordering "
+                                "customer and current company. Depicts"
+                                "'What do you want to say to the recipient about this order ?'")
+
+    communication2 = fields.Char('Communication 2',
+                                 help='The successor message of Communication.')
+
+    move_line_id = fields.Many2one('account.move.line', 'Entry line',
+                                       domain=[('reconciled', '=', False), ('account_id.internal_type', '=', 'payable')],
                                        help='This Entry Line will be referred for the information of the ordering customer.')
+
     amount_currency = fields.Float('Amount in Partner Currency', digits=(16, 2),
-                                   required=True, help='Payment amount in the partner currency')
-    currency_id = fields.Many2one('res.currency','Partner Currency', required=True, default=_get_currency)
-    company_currency = fields.Many2one('res.currency', 'Company Currency', readonly=True, default=_get_currency)
+                                   required=True,
+                                   help='Payment amount in the partner currency')
+
+    currency_id = fields.Many2one('res.currency', 'Partner Currency',
+                                  required=True, default=_get_currency)
+
+    company_currency = fields.Many2one('res.currency', 'Company Currency',
+                                       readonly=True, default=_get_currency)
+
     bank_id = fields.Many2one('res.partner.bank', 'Destination Bank Account')
+
     order_id = fields.Many2one('payment.register', 'Order', required=True,
                                ondelete='cascade', select=True)
-    partner_id = fields.Many2one('res.partner', string="Partner", required=True, help='The Ordering Customer')
-    amount = fields.Float(compute="_compute_amount", string='Amount in Company Currency',  
+
+    partner_id = fields.Many2one('res.partner', string="Partner", required=True,
+                                 help='The Ordering Customer')
+
+    amount = fields.Float(compute="_compute_amount", string='Amount in Company Currency',
                           help='Payment amount in the company currency')
 
-    ml_date_created = fields.Datetime(related="move_line_id.create_date", string="Effective Date", help="Invoice Effective Date")
-    ml_maturity_date = fields.Date(related="move_line_id.date_maturity", string='Due Date')
-    ml_inv_ref = fields.Many2one('account.invoice', related="move_line_id.invoice_id",  string='Invoice Ref.')
-    
-    info_owner = fields.Text(compute="_info_owner", string="Owner Account", help='Address of the Main Partner')
-    info_partner = fields.Text(compute="_info_partner", string="Destination Account", help='Address of the Ordering Customer.')
-    date = fields.Date('Payment Date', help="If no payment date is specified, the bank will treat this payment line directly", default=_get_date)
-    state = fields.Selection([('normal','Free'), ('structured','Structured')], 'Communication Type', required=True, default='normal')
+    ml_date_created = fields.Datetime(related="move_line_id.create_date",
+                                      string="Effective Date",
+                                      help="Invoice Effective Date")
+
+    ml_maturity_date = fields.Date(related="move_line_id.date_maturity",
+                                   string='Due Date')
+
+    ml_inv_ref = fields.Many2one('account.invoice',
+                                 related="move_line_id.invoice_id",
+                                  string='Invoice Ref.')
+
+    info_owner = fields.Text(compute="_info_owner", string="Owner Account",
+                             help='Address of the Main Partner')
+
+    info_partner = fields.Text(compute="_info_partner",
+                               string="Destination Account",
+                                help='Address of the Ordering Customer.')
+
+    date = fields.Date('Payment Date', help="If no payment date is specified, the bank will treat this payment line directly",
+                        default=_get_date)
+
+    state = fields.Selection([('normal', 'Free'), ('structured', 'Structured')],
+                             'Communication Type', required=True,
+                             default='normal')
+
     bank_statement_line_id = fields.Many2one('account.bank.statement.line', 'Bank statement line')
-    company_id = fields.Many2one('res.company', related='order_id.company_id', string='Company', store=True, readonly=True)
-        
+
+    company_id = fields.Many2one('res.company', related='order_id.company_id',
+                                 string='Company', store=True, readonly=True)
+
     _sql_constraints = [
         ('name_uniq', 'UNIQUE(name)', 'The payment line name must be unique!'),
     ]
 
+# IMPLEMENT IF NECESSARY
 #     @api.multi
 #     @api.onchange('move_line_id')
 #     def onchange_move_line(self, cr, uid, ids, move_line_id, payment_type, date_prefered, date_scheduled, currency_id=False, company_currency=False, context=None):
 #         data = {}
 #         move_line_obj = self.pool.get('account.move.line')
-# 
+#
 #         data['amount_currency'] = data['communication'] = data['partner_id'] = data['bank_id'] = data['amount'] = False
-# 
+#
 #         if move_line_id:
 #             line = move_line_obj.browse(cr, uid, move_line_id, context=context)
 #             data['amount_currency'] = line.amount_residual_currency
-# 
+#
 #             res = self.onchange_amount(cr, uid, ids, data['amount_currency'], currency_id,
 #                                        company_currency, context)
 #             if res:
@@ -148,13 +183,13 @@ class payment_line(models.Model):
 #                     data['currency_id'] = line.invoice.currency_id.id
 #             else:
 #                 data['currency_id'] = temp
-# 
+#
 #             # calling onchange of partner and updating data dictionary
 #             temp_dict = self.onchange_partner(cr, uid, ids, line.partner_id.id, payment_type)
 #             data.update(temp_dict['value'])
-# 
+#
 #             data['communication'] = line.ref
-# 
+#
 #             if date_prefered == 'now':
 #                 #no payment date => immediate payment
 #                 data['date'] = False
@@ -172,18 +207,18 @@ class payment_line(models.Model):
 #         company_amount = currency_obj.compute(cr, uid, currency_id, cmpny_currency, amount)
 #         res['amount'] = company_amount
 #         return {'value': res}
-# 
+#
 #     def onchange_partner(self, cr, uid, ids, partner_id, payment_type, context=None):
 #         data = {}
 #         partner_obj = self.pool.get('res.partner')
 #         payment_mode_obj = self.pool.get('payment.mode')
 #         data['info_partner'] = data['bank_id'] = False
-# 
+#
 #         if partner_id:
 #             part_obj = partner_obj.browse(cr, uid, partner_id, context=context)
 #             partner = part_obj.name or ''
 #             data['info_partner'] = self._get_info_partner(cr, uid, part_obj, context=context)
-# 
+#
 #             if part_obj.bank_ids and payment_type:
 #                 bank_type = payment_mode_obj.suitable_bank_types(cr, uid, payment_type, context=context)
 #                 for bank in part_obj.bank_ids:
@@ -200,6 +235,4 @@ class payment_line(models.Model):
 #             res['communication2']['states']['normal'] = [('readonly', False)]
 #         return res
 
-
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-

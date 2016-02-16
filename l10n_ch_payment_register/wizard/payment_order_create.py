@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
+# b-*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
+#    Copyright (c) 2015 brain-tec AG (http://www.braintec-group.com)
+#    All Right Reserved
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -25,6 +25,7 @@ from lxml import etree
 from openerp import models, fields, api, _
 from openerp.tools.translate import _
 
+
 class payment_order_create(models.TransientModel):
     """
     Create a payment object with lines corresponding to the account move line
@@ -39,22 +40,28 @@ class payment_order_create(models.TransientModel):
     _name = 'payment.order.create'
     _description = 'payment.order.create'
 
-    duedate = fields.Date('Due Date', required=True, default = lambda *a: time.strftime('%Y-%m-%d'))
+    duedate = fields.Date('Due Date', required=True,
+                          default=lambda *a: time.strftime('%Y-%m-%d'))
+
     entries = fields.Many2many('account.move.line', 'line_pay_rel', 'pay_id', 'line_id')
 
     @api.model
-    def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
-        res = super(payment_order_create, self).fields_view_get(view_id=view_id, view_type=view_type,  toolbar=toolbar, submenu=False)
-        
+    def fields_view_get(self, view_id=None, view_type='form', toolbar=False,
+                        submenu=False):
+        res = super(payment_order_create, self).fields_view_get(view_id=view_id,
+                                                                view_type=view_type,
+                                                                toolbar=toolbar,
+                                                                submenu=False)
+
         context = dict(self._context or {})
         if context and 'line_ids' in context:
             doc = etree.XML(res['arch'])
             nodes = doc.xpath("//field[@name='entries']")
             for node in nodes:
-                node.set('domain', '[("id", "in", '+ str(context['line_ids'])+')]')
+                node.set('domain', '[("id", "in", ' + str(context['line_ids']) + ')]')
             res['arch'] = etree.tostring(doc)
         return res
-    
+
     @api.one
     def create_payment(self):
         order_obj = self.env['payment.register']
@@ -69,10 +76,10 @@ class payment_order_create(models.TransientModel):
         payment = order_obj.browse(context['active_id'])
         line2bank = line_obj.line2bank(line_ids)
 
-        ## Finally populate the current payment with new lines:
+        # # Finally populate the current payment with new lines:
         for line in line_obj.browse(line_ids):
             if payment.date_prefered == "now":
-                #no payment date => immediate payment
+                # no payment date => immediate payment
                 date_to_pay = False
             elif payment.date_prefered == 'due':
                 date_to_pay = line.date_maturity
@@ -88,8 +95,9 @@ class payment_order_create(models.TransientModel):
                     'communication': line.ref or '/',
                     'state': line.invoice_id and line.invoice_id.reference_type != 'none' and 'structured' or 'normal',
                     'date': date_to_pay,
-                    'currency_id': (line.invoice_id and line.invoice_id.currency_id.id) or line.journal_id.currency.id or line.journal_id.company_id.currency_id.id,
-                })
+                    'currency_id': (line.invoice_id and line.invoice_id.currency_id.id) or
+                                    (line.journal_id.currency.id or line.journal_id.company_id.currency_id.id),
+            })
         return {'type': 'ir.actions.act_window_close'}
 
     @api.multi
@@ -98,30 +106,34 @@ class payment_order_create(models.TransientModel):
         mod_obj = self.env['ir.model.data']
 
         search_due_date = self.duedate
-#        payment = self.pool.get('payment.order').browse(cr, uid, context['active_id'], context=context)
 
         # Search for move line to pay:
-        domain = [('reconciled', '=', False), ('account_id.internal_type', '=', 'payable'), ('credit', '>', 0), ('account_id.reconcile', '=', True)]
-        domain = domain + ['|', ('date_maturity', '<=', search_due_date), ('date_maturity', '=', False)]
+        domain = [('reconciled', '=', False),
+                  ('account_id.internal_type', '=', 'payable'),
+                  ('credit', '>', 0), ('account_id.reconcile', '=', True)]
+
+        domain = domain + ['|', ('date_maturity', '<=', search_due_date),
+                           ('date_maturity', '=', False)]
+
         line_ids = line_obj.search(domain)
-        
-        ctx = self.env.context.copy()   
-        ctx.update({'line_ids' : line_ids.ids})
-        
-        model_data_ids = mod_obj.search([('model', '=', 'ir.ui.view'), ('name', '=', 'view_payment_order_create_lines')])
+
+        ctx = self.env.context.copy()
+        ctx.update({'line_ids': line_ids.ids})
+
+        model_data_ids = mod_obj.search([('model', '=', 'ir.ui.view'), 
+                                         ('name', '=', 'view_payment_order_create_lines')])
+
         resource_id = mod_obj.browse(model_data_ids.ids)[0]['res_id']
         return {'name': _('Entry Lines'),
                 'context': ctx,
                 'view_type': 'form',
                 'view_mode': 'form',
                 'res_model': 'payment.order.create',
-                #'view_id': resource_id,
-                'views': [(resource_id,'form')],
+                # 'view_id': resource_id,
+                'views': [(resource_id, 'form')],
                 'type': 'ir.actions.act_window',
                 'target': 'new',
                 'domain': [('entries', 'in', line_ids.ids)],
-
-        }
-
+                }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

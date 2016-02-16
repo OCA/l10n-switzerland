@@ -23,6 +23,7 @@ from openerp import models, fields, api, _
 from openerp.tools.translate import _
 from openerp.exceptions import UserError, ValidationError
 
+
 class account_move_line(models.Model):
     _inherit = "account.move.line"
 
@@ -46,13 +47,13 @@ class account_move_line(models.Model):
                     line2bank[line.id] = False
                 else:
                     for bank in line.partner_id.bank_ids:
-#                         if bank.state in bank_type:
                         line2bank[line.id] = bank.id
                         break
                 if not line2bank.get(line.id) and line.partner_id.bank_ids:
                     line2bank[line.id] = line.partner_id.bank_ids[0].id
             else:
-                raise UserError(_('There is no partner defined on the entry line.'))                
+                raise UserError(_('There is no partner defined on the entry'
+                                  ' line.'))
         return line2bank
 
 
