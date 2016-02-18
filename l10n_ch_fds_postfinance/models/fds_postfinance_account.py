@@ -29,12 +29,13 @@ import shutil
 try:
     import pysftp
 except ImportError:
-    raise ImportError('This module needs pysftp to connect to the FDS. Please install pysftp on your system. (sudo pip install pysftp)')
+    raise ImportError(
+        'This module needs pysftp to connect to the FDS. Please install pysftp on your system. (sudo pip install pysftp)')
 
 _logger = logging.getLogger(__name__)
 
 
-class fds_postfinance_account(models.Model):
+class FdsPostfinanceAccount(models.Model):
     ''' the FDS PostFinance configuration that allow to connect to the
         PostFinance server
     '''
