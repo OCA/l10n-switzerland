@@ -119,7 +119,8 @@ class FdsPostfinanceFile(models.Model):
             bs_import_obj = self.env['account.bank.statement.import']
             bank_wiz_imp = bs_import_obj.create(values)
             result = bank_wiz_imp.import_file()
-            self.write({'bank_statement_id': result['context']['statement_ids'][0]})
+            self.write({'bank_statement_id': result[
+                       'context']['statement_ids'][0]})
             self._state_done_on()
             self._add_bankStatement_ref()
             self._remove_binary_file()
