@@ -619,11 +619,11 @@ class DTAFileGenerator(models.TransientModel):
         elec_context['reference'] = pline.name
 
         # TODO LATER
-#         if hasattr(pline.move_line_id, 'transaction_ref'):
-#             if pline.move_line_id.transaction_ref:
-#                 elec_context['reference'] = pline.move_line_id.transaction_ref
-#         if not elec_context['reference']:
-#             elec_context['reference'] = pline.move_line_id.ref
+# if hasattr(pline.move_line_id, 'transaction_ref'):
+#     if pline.move_line_id.transaction_ref:
+#         elec_context['reference'] = pline.move_line_id.transaction_ref
+# if not elec_context['reference']:
+#     elec_context['reference'] = pline.move_line_id.ref
 
         # Add support for owner of the account if exists..
         p_name = pline.partner_id.name if pline.partner_id else ''
@@ -672,8 +672,8 @@ class DTAFileGenerator(models.TransientModel):
 
         elec_context['partner_bank_name'] = (partner_bank_browse.bank_id.name
                                              or False)
-        elec_context['partner_bank_clearing'] = (partner_bank_browse.bank_id.\
-                                                 clearing or False)
+        elec_context['partner_bank_clearing'] =\
+            partner_bank_browse.bank_id.clearing or False
         if not elec_context['partner_bank_name']:
             raise except_orm(
                 _('Error'),
