@@ -27,10 +27,11 @@ try:
     from Crypto.PublicKey import RSA
     from Crypto import Random
 except ImportError:
-    raise ImportError('This module needs Crypto to generate SSH keys. Please install Crypto on your system. (sudo pip install Crypto)')
+    raise ImportError(
+        'This module needs Crypto to generate SSH keys. Please install Crypto on your system. (sudo pip install Crypto)')
 
 
-class fds_authentication_keys(models.Model):
+class FdsAuthenticationKeys(models.Model):
     ''' this class generate RSA key pair with the private key crypted and
         store the key in the database
     '''

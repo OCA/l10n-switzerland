@@ -27,7 +27,7 @@ import base64
 _logger = logging.getLogger(__name__)
 
 
-class fds_key_generator_wizard(models.TransientModel):
+class FdsKeyGeneratorWizard(models.TransientModel):
     ''' FDS Postfinance keys generator wizard.
         The goal is to generate and save in the database a pair key using RSA
         with the private key crypted
