@@ -20,5 +20,4 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-# from . import create_dta
 from . import payment_order_create

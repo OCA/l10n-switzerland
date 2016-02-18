@@ -1,4 +1,4 @@
-# b-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Copyright (c) 2015 brain-tec AG (http://www.braintec-group.com)
@@ -22,7 +22,7 @@
 {'name': 'Switzerland - Payment Register',
  'summary': 'Allow to register payments from invoices',
  'version': '9.0.1.0.1',
- 'author': "Miguel Tallón @ brain-tec",
+ 'author': "Odoo Community Association (OCA)",
  'category': 'Localization',
  'website': '',
  'license': 'AGPL-3',
