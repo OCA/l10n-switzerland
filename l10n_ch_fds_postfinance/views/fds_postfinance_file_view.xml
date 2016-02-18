@@ -13,7 +13,6 @@
                         <field name="data" filename="filename" attrs="{'invisible':[('state', '=', 'done')]}"/>
                         <field name="filename" attrs="{'invisible':[('state', '!=', 'done')]}"/>
                         <field name="directory_id" />
-                        <field name="journal_id" />
                         <field name="state" />
                     </group>
                     <footer>
