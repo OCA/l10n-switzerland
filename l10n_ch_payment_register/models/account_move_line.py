@@ -1,4 +1,4 @@
-# b-*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Copyright (c) 2015 brain-tec AG (http://www.braintec-group.com)
@@ -20,11 +20,10 @@
 ##############################################################################
 
 from openerp import models, fields, api, _
-from openerp.tools.translate import _
 from openerp.exceptions import UserError, ValidationError
 
 
-class account_move_line(models.Model):
+class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     @api.multi
@@ -55,6 +54,3 @@ class account_move_line(models.Model):
                 raise UserError(_('There is no partner defined on the entry'
                                   ' line.'))
         return line2bank
-
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

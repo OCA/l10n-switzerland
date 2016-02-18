@@ -1,4 +1,4 @@
-# b-*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Copyright (c) 2015 brain-tec AG (http://www.braintec-group.com)
@@ -23,7 +23,7 @@ import time
 from openerp import models, fields, api, _
 
 
-class payment_register(models.Model):
+class PaymentRegister(models.Model):
     _name = 'payment.register'
     _description = 'Payment Register'
     _rec_name = 'reference'
@@ -37,27 +37,32 @@ class payment_register(models.Model):
         return total
 
     date_scheduled = fields.Date('Scheduled Date',
-                                 states={'done':[('readonly', True)]},
-                                 help='Select a date if you have chosen Preferred Date to be fixed.')
+                                 states={'done': [('readonly', True)]},
+                                 help='Select a date if you have chosen '
+                                 'Preferred Date to be fixed.')
 
-    reference = fields.Char('Reference', required=1, states={'done': [('readonly', True)]},
-                            default=lambda self: self.env['ir.sequence'].get('payment.register'),
+    reference = fields.Char('Reference', required=1,
+                            states={'done': [('readonly', True)]},
+                            default=lambda self: self.env['ir.sequence'].\
+                            get('payment.register'),
                             copy=False)
 
-    mode = fields.Many2one('payment.mode', 'Payment Mode', select=True, 
-                            required=1, states={'done': [('readonly', True)]}, 
-                            help='Select the Payment Mode to be applied.')
+    mode = fields.Many2one('payment.mode', 'Payment Mode', select=True,
+                           required=1, states={'done': [('readonly', True)]},
+                           help='Select the Payment Mode to be applied.')
 
     state = fields.Selection([('draft', 'Draft'),
                               ('cancel', 'Cancelled'),
                               ('open', 'Confirmed'),
                               ('done', 'Done')], 'Status', select=True,
                              copy=False, default='draft',
-                             help='When an order is placed the status is \'Draft\'.\n'
-                              'Once the bank is confirmed the status is set to \'Confirmed\'.\n'
-                              'Then the order is paid the status is \'Done\'.')
+                             help='When an order is placed the status is '
+                             '\'Draft\'.\n Once the bank is confirmed the '
+                             'status is set to \'Confirmed\'.\n'
+                             'Then the order is paid the status is \'Done\'.')
 
-    line_ids = fields.One2many('payment.register.line', 'order_id', 'Payment lines',
+    line_ids = fields.One2many('payment.register.line', 'order_id',
+                               'Payment lines',
                                states={'done': [('readonly', True)]})
 
     total = fields.Float(compute='_compute_total', string="Total")
@@ -66,15 +71,15 @@ class payment_register(models.Model):
                               states={'done': [('readonly', True)]},
                               default=lambda self: self.env.uid)
 
-    date_prefered = fields.Selection([('now', 'Directly'),
-                                      ('due', 'Due date'),
-                                      ('fixed', 'Fixed date')
-                                      ], "Preferred Date", change_default=True,
-                                     default='due', required=True,
-                                     states={'done': [('readonly', True)]},
-                                     help="Choose an option for the Payment Order:'Fixed'" 
-                                     "stands for a date specified by you.'Directly' stands for the direct execution."
-                                     "'Due date' stands for the scheduled date of execution.")
+    date_prefered = fields.\
+        Selection([('now', 'Directly'), ('due', 'Due date'),
+                   ('fixed', 'Fixed date')
+                   ], "Preferred Date", change_default=True, default='due',
+                  required=True, states={'done': [('readonly', True)]},
+                  help="Choose an option for the Payment Order:'Fixed'"
+                       "stands for a date specified by you.'Directly' stands "
+                       "for the direct execution. 'Due date' stands for the "
+                       "scheduled date of execution.")
 
     date_created = fields.Date('Creation Date', readonly=True,
                                default=lambda *a: time.strftime('%Y-%m-%d'))
@@ -94,6 +99,12 @@ class payment_register(models.Model):
         return True
 
     @api.one
+    def set_to_confirmed(self):
+        self.write({'state': 'open'})
+#         self.create_workflow()
+        return True
+
+    @api.one
     def set_done(self):
         self.write({'date_done': time.strftime('%Y-%m-%d'), 'state': 'done'})
 #         self.signal_workflow('done')
@@ -105,7 +116,9 @@ class payment_register(models.Model):
         payment_line_obj = self.env['payment.register.line']
         payment_line_ids = []
 
-        if (vals.get('date_prefered', False) == 'fixed' and not vals.get('date_scheduled', False)) or vals.get('date_scheduled', False):
+        if ((vals.get('date_prefered', False) == 'fixed' and not
+             vals.get('date_scheduled', False)) or
+                vals.get('date_scheduled', False)):
             for order in self:
                 for line in order.line_ids:
                     payment_line_ids.append(line.id)
@@ -115,13 +128,12 @@ class payment_register(models.Model):
             vals.update({'date_scheduled': False})
             for order in self:
                 for line in order.line_ids:
-                    payment_line_obj.write([line.id], {'date': line.ml_maturity_date})
+                    payment_line_obj.write([line.id],
+                                           {'date': line.ml_maturity_date})
         elif vals.get('date_prefered', False) == 'now':
             vals.update({'date_scheduled': False})
             for order in self:
                 for line in order.line_ids:
                     payment_line_ids.append(line.id)
             payment_line_obj.write(payment_line_ids, {'date': False})
-        return super(payment_register, self).write(vals)
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+        return super(PaymentRegister, self).write(vals)

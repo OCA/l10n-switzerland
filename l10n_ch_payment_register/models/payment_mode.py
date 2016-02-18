@@ -1,4 +1,4 @@
-# b-*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Copyright (c) 2015 brain-tec AG (http://www.braintec-group.com)
@@ -23,24 +23,28 @@
 from openerp import models, fields, api, _
 
 
-class payment_mode(models.Model):
+class PaymentMode(models.Model):
     _name = 'payment.mode'
     _description = 'Payment Mode'
 
     name = fields.Char('Name', required=True, help='Mode of Payment')
 
     bank_id = fields.Many2one('res.partner.bank', "Bank account",
-                              required=True, 
+                              required=True,
                               help='Bank Account for the Payment Mode')
 
     journal_id = fields.Many2one('account.journal', 'Journal', required=True,
                                  domain=[('type', 'in', ('bank', 'cash'))],
-                                 help='Bank or Cash Journal for the Payment Mode')
+                                 help='Bank or Cash Journal for the '
+                                 'Payment Mode')
 
-    company_id = fields.Many2one('res.company', 'Company', required=True,
-                                 default=lambda self, c: self.env('res.users').browse(c).company_id.id)
+    company_id = fields.\
+        Many2one('res.company', 'Company', required=True,
+                 default=lambda self, c: self.env('res.users').\
+                 browse(c).company_id.id)
 
-    partner_id = fields.Many2one('res.partner', related='company_id.partner_id',
+    partner_id = fields.Many2one('res.partner',
+                                 related='company_id.partner_id',
                                  string='Partner', store=True)
 
     def suitable_bank_types(self, payment_code=None, context=None):
@@ -55,11 +59,11 @@ class payment_mode(models.Model):
         return [x[0] for x in self.env.cr.fetchall()]
 
 # TO DO if used
-#     def onchange_company_id (self, cr, uid, ids, company_id=False, context=None):
+#     def onchange_company_id (self, cr, uid, ids, company_id=False,
+#                              context=None):
 #         result = {}
 #         if company_id:
-#             partner_id = self.pool.get('res.company').browse(cr, uid, company_id, context=context).partner_id.id
+#             partner_id = self.pool.get('res.company').\
+#                browse(cr, uid, company_id, context=context).partner_id.id
 #             result['partner_id'] = partner_id
 #         return {'value': result}
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

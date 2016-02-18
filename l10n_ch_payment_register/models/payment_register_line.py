@@ -1,4 +1,4 @@
-# b-*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Copyright (c) 2015 brain-tec AG (http://www.braintec-group.com)
@@ -20,11 +20,10 @@
 ##############################################################################
 
 import time
-
 from openerp import models, fields, api, _
 
 
-class payment_line(models.Model):
+class PaymentLine(models.Model):
     _name = 'payment.register.line'
     _description = 'Payment Line'
 
@@ -44,11 +43,13 @@ class payment_line(models.Model):
             return False
         st = partner_record.street or ''
         st1 = partner_record.street2 or ''
-        zip = partner_record.zip or ''
+        zip1 = partner_record.zip or ''
         city = partner_record.city or ''
-        zip_city = zip + ' ' + city
-        cntry = partner_record.country_id and partner_record.country_id.name or ''
-        return partner_record.name + "\n" + st + " " + st1 + "\n" + zip_city + "\n" + cntry
+        zip_city = zip1 + ' ' + city
+        cntry = (partner_record.country_id and
+                 partner_record.country_id.name or '')
+        return (partner_record.name + "\n" + st + " " + st1 + "\n" +
+                zip_city + "\n" + cntry)
 
     def _info_partner(self, name=None):
         result = {}
@@ -63,8 +64,10 @@ class payment_line(models.Model):
     def _compute_amount(self):
         amount = self.amount_currency
         if self.company_currency:
-            self.with_context(date=self.order_id.date_done or time.strftime('%Y-%m-%d'))
-            amount = self.company_currency.compute(self.amount_currency, self.currency_id)
+            self.with_context(date=self.order_id.date_done or
+                              time.strftime('%Y-%m-%d'))
+            amount = self.company_currency.compute(self.amount_currency,
+                                                   self.currency_id)
         return amount
 
     @api.one
@@ -92,21 +95,27 @@ class payment_line(models.Model):
         return date
 
     name = fields.Char('Your Reference', required=True)
+
     communication = fields.Char('Communication', required=True,
                                 help="Used as the message between ordering "
-                                "customer and current company. Depicts"
-                                "'What do you want to say to the recipient about this order ?'")
+                                "customer and current company. Depicts "
+                                "'What do you want to say to the recipient "
+                                "about this order ?'")
 
     communication2 = fields.Char('Communication 2',
-                                 help='The successor message of Communication.')
+                                 help='The successor message of Communication')
 
-    move_line_id = fields.Many2one('account.move.line', 'Entry line',
-                                       domain=[('reconciled', '=', False), ('account_id.internal_type', '=', 'payable')],
-                                       help='This Entry Line will be referred for the information of the ordering customer.')
+    move_line_id = fields.\
+        Many2one('account.move.line', 'Entry line',
+                 domain=[('reconciled', '=', False),
+                         ('account_id.internal_type', '=', 'payable')],
+                 help='This Entry Line will be referred for the information of'
+                      ' the ordering customer.')
 
-    amount_currency = fields.Float('Amount in Partner Currency', digits=(16, 2),
-                                   required=True,
-                                   help='Payment amount in the partner currency')
+    amount_currency = fields.Float('Amount in Partner Currency',
+                                   digits=(16, 2), required=True,
+                                   help='Payment amount in the partner '
+                                   'currency')
 
     currency_id = fields.Many2one('res.currency', 'Partner Currency',
                                   required=True, default=_get_currency)
@@ -119,10 +128,12 @@ class payment_line(models.Model):
     order_id = fields.Many2one('payment.register', 'Order', required=True,
                                ondelete='cascade', select=True)
 
-    partner_id = fields.Many2one('res.partner', string="Partner", required=True,
+    partner_id = fields.Many2one('res.partner', string="Partner",
+                                 required=True,
                                  help='The Ordering Customer')
 
-    amount = fields.Float(compute="_compute_amount", string='Amount in Company Currency',
+    amount = fields.Float(compute="_compute_amount",
+                          string='Amount in Company Currency',
                           help='Payment amount in the company currency')
 
     ml_date_created = fields.Datetime(related="move_line_id.create_date",
@@ -134,23 +145,27 @@ class payment_line(models.Model):
 
     ml_inv_ref = fields.Many2one('account.invoice',
                                  related="move_line_id.invoice_id",
-                                  string='Invoice Ref.')
+                                 string='Invoice Ref.')
 
     info_owner = fields.Text(compute="_info_owner", string="Owner Account",
                              help='Address of the Main Partner')
 
     info_partner = fields.Text(compute="_info_partner",
                                string="Destination Account",
-                                help='Address of the Ordering Customer.')
+                               help='Address of the Ordering Customer.')
 
-    date = fields.Date('Payment Date', help="If no payment date is specified, the bank will treat this payment line directly",
-                        default=_get_date)
+    date = fields.Date('Payment Date',
+                       help="If no payment date is specified, the bank will "
+                       "treat this payment line directly",
+                       default=_get_date)
 
-    state = fields.Selection([('normal', 'Free'), ('structured', 'Structured')],
+    state = fields.Selection([('normal', 'Free'),
+                              ('structured', 'Structured')],
                              'Communication Type', required=True,
                              default='normal')
 
-    bank_statement_line_id = fields.Many2one('account.bank.statement.line', 'Bank statement line')
+    bank_statement_line_id = fields.Many2one('account.bank.statement.line',
+                                             'Bank statement line')
 
     company_id = fields.Many2one('res.company', related='order_id.company_id',
                                  string='Company', store=True, readonly=True)
@@ -234,5 +249,3 @@ class payment_line(models.Model):
 #             res['communication2']['states']['structured'] = [('readonly', True)]
 #             res['communication2']['states']['normal'] = [('readonly', False)]
 #         return res
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -7,17 +7,17 @@
             <field name="arch" type="xml">
                 <tree string="Payment Line">
                     <field name="order_id"/>
-                    <field name="ml_inv_ref" />
-                    <field name="ml_maturity_date"/>
+                    <field name="ml_inv_ref" />                    
                     <field name="partner_id"/>
                     <field name="communication"/>
-                    <field name="amount" sum="Amount Total"/>
-                    <field name="amount_currency" sum="Currency Amount Total" groups="base.group_multi_currency"/>
-                    <field name="currency_id" groups="base.group_multi_currency"/>
-                    <field name="bank_id" domain="[('partner_id', '=', partner_id)]"/>
-                    <field name="move_line_id" />
+                   
+                    <field name="bank_id" domain="[('partner_id', '=', partner_id)]"/>                    
+                    <field name="ml_maturity_date"/>
                     <field name="create_date"/>
-                    <field name="name"/>
+                    <field name="amount_currency" sum="Total amount"/>
+                    <field name="currency_id" />
+                    <field name="move_line_id" />
+                    <field name="name"/>                
                 </tree>
             </field>
         </record>        

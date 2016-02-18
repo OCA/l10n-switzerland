@@ -1,4 +1,4 @@
-# b-*- encoding: utf-8 -*-
+# b-*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Copyright (c) 2015 brain-tec AG (http://www.braintec-group.com)
@@ -21,15 +21,8 @@
 
 {'name': 'Switzerland - Payment Register',
  'summary': 'Allow to register payments from invoices',
- 'description': """
-
-===================================
-
-This addons allows you to generate .
-
-""",
  'version': '9.0.1.0.1',
- 'author': "",
+ 'author': "Miguel Tallón @ brain-tec",
  'category': 'Localization',
  'website': '',
  'license': 'AGPL-3',

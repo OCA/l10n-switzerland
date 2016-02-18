@@ -1,4 +1,4 @@
-# b-*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Copyright (c) 2015 brain-tec AG (http://www.braintec-group.com)
@@ -80,7 +80,7 @@ def tr(string_in):
     return res
 
 
-class record(object):
+class Record(object):
     """Abstract class that provides common
     knowledge for any kind of post/bank account
 
@@ -141,13 +141,13 @@ class record(object):
         return res
 
 
-class postal_record(record):
+class PostalRecord(Record):
     """Class that propose common
     knowledge for all postal account type
 
     """
     def __init__(self, global_context_dict, pool, pline):
-        super(postal_record, self).__init__(global_context_dict, pool, pline)
+        super(PostalRecord, self).__init__(global_context_dict, pool, pline)
         self.is_9_pos_adherent = False
 
     def validate_global_context_dict(self):
@@ -174,7 +174,7 @@ class postal_record(record):
             )
 
 
-class record_gt826(postal_record):
+class RecordGt826(PostalRecord):
     """ BVR record implementation"""
 
     def init_local_context(self):
@@ -236,7 +236,7 @@ class record_gt826(postal_record):
 
     def validate_global_context_dict(self):
         """Validate BVR record values"""
-        super(record_gt826, self).validate_global_context_dict()
+        super(RecordGt826, self).validate_global_context_dict()
         if not self.global_values['reference']:
             raise except_orm(
                 _('Error'),
@@ -289,13 +289,13 @@ class record_gt826(postal_record):
             )
 
 
-class record_gt827(postal_record):
+class RecordGt827(PostalRecord):
     """
     Swiss internal (bvpost and bvbank) record implemetation
     """
     def validate_global_context_dict(self):
         """Validate record values"""
-        super(record_gt827, self).validate_global_context_dict()
+        super(RecordGt827, self).validate_global_context_dict()
         if not self.global_values['partner_bank_number']:
             raise except_orm(
                 _('Error'),
@@ -374,7 +374,7 @@ class record_gt827(postal_record):
         })
 
 
-class record_gt836(record):
+class RecordGt836(Record):
     """Implements iban record"""
 
     def validate_global_context_dict(self):
@@ -487,7 +487,7 @@ class record_gt836(record):
         self.post.update({'option_motif': 'U'})
 
 
-class record_gt890(record):
+class RecordGt890(Record):
     """Implements Total Record of DTA file
     if behaves like a account payment order
 
@@ -670,8 +670,10 @@ class DTAFileGenerator(models.TransientModel):
 #         partner_bank_browse = self.get_partner_bank(pline.partner_id)
         partner_bank_browse = pline.bank_id
 
-        elec_context['partner_bank_name'] = partner_bank_browse.bank_id.name or False
-        elec_context['partner_bank_clearing'] = partner_bank_browse.bank_id.clearing or False
+        elec_context['partner_bank_name'] = (partner_bank_browse.bank_id.name
+                                             or False)
+        elec_context['partner_bank_clearing'] = (partner_bank_browse.bank_id.\
+                                                 clearing or False)
         if not elec_context['partner_bank_name']:
             raise except_orm(
                 _('Error'),
@@ -682,7 +684,8 @@ class DTAFileGenerator(models.TransientModel):
             )
         number = partner_bank_browse.acc_number or ''
         number = number.replace('.', '').replace('-', '') or False
-        elec_context['partner_bank_iban'] = partner_bank_browse.get_account_number()
+        elec_context['partner_bank_iban'] = partner_bank_browse.\
+            get_account_number()
         elec_context['partner_bank_number'] = number
         elec_context['partner_bvr'] = pline.bank_id.bvr_adherent_num or False
 #         if pline.bank_id.state in ('bv', 'bvr'):
@@ -725,13 +728,13 @@ class DTAFileGenerator(models.TransientModel):
             country_code = part.country_id.code if part.country_id else False
             if elec_pay in ['iban', 'Bank']:
                 # If iban => country=country code for space reason
-                record_type = record_gt836
+                record_type = RecordGt836
             elif country_code and country_code != 'CH':
-                record_type = record_gt836
+                record_type = RecordGt836
             elif elec_pay == 'bvr':
-                record_type = record_gt826
+                record_type = RecordGt826
             elif elec_pay == 'bv':
-                record_type = record_gt827
+                record_type = RecordGt827
             else:
                 name = res_partner_bank_obj.name_get(
                     self.env.cr,
@@ -761,7 +764,7 @@ class DTAFileGenerator(models.TransientModel):
         sequence = str(seq).rjust(5).replace(' ', '0')
         elec_context['sequence'] = sequence
         if dta:
-            dta = dta + record_gt890(elec_context, self.pool, False).generate()
+            dta = dta + RecordGt890(elec_context, self.pool, False).generate()
 #         dta_data = _u2a(dta)
         dta_data = base64.encodestring(dta)
 #         payment_obj.set_done([data['id']])
@@ -792,7 +795,8 @@ class DTAFileGenerator(models.TransientModel):
     @api.multi
     def get_partner_bank(self, partner_browse):
         # Take the res_partner_bank from partner_id and bank_id
-        partner_bank_ids = self.env['res.partner.bank'].search([('partner_id', '=', partner_browse.id)])
+        partner_bank_ids = self.env['res.partner.bank'].\
+            search([('partner_id', '=', partner_browse.id)])
 #                             ('bank_id', '=', pline.journal_id.bank_id.id) ])
 
         if not partner_bank_ids:
