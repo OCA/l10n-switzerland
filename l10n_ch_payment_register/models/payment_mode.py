@@ -20,7 +20,7 @@
 ##############################################################################
 
 # import time
-from openerp import models, fields, api, _
+from openerp import models, fields
 
 
 class PaymentMode(models.Model):
@@ -40,8 +40,8 @@ class PaymentMode(models.Model):
 
     company_id = fields.\
         Many2one('res.company', 'Company', required=True,
-                 default=lambda self, c: self.env('res.users').\
-                 browse(c).company_id.id)
+                 default=lambda self, c:
+                 self.env('res.users').browse(c).company_id.id)
 
     partner_id = fields.Many2one('res.partner',
                                  related='company_id.partner_id',

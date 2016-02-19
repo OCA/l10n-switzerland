@@ -19,8 +19,8 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, _
-from openerp.exceptions import UserError, ValidationError
+from openerp import models, api, _
+from openerp.exceptions import UserError
 
 
 class AccountMoveLine(models.Model):

@@ -20,7 +20,7 @@
 ##############################################################################
 
 import time
-from openerp import models, fields, api, _
+from openerp import models, fields, api
 
 
 class PaymentRegister(models.Model):
@@ -43,8 +43,8 @@ class PaymentRegister(models.Model):
 
     reference = fields.Char('Reference', required=1,
                             states={'done': [('readonly', True)]},
-                            default=lambda self: self.env['ir.sequence'].\
-                            get('payment.register'),
+                            default=lambda self:
+                            self.env['ir.sequence'].get('payment.register'),
                             copy=False)
 
     mode = fields.Many2one('payment.mode', 'Payment Mode', select=True,
