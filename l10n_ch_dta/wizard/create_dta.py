@@ -670,8 +670,8 @@ class DTAFileGenerator(models.TransientModel):
 #         partner_bank_browse = self.get_partner_bank(pline.partner_id)
         partner_bank_browse = pline.bank_id
 
-        elec_context['partner_bank_name'] = (partner_bank_browse.bank_id.name
-                                             or False)
+        elec_context['partner_bank_name'] =\
+            partner_bank_browse.bank_id.name or False
         elec_context['partner_bank_clearing'] =\
             partner_bank_browse.bank_id.clearing or False
         if not elec_context['partner_bank_name']:
