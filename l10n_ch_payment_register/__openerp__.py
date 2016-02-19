@@ -30,6 +30,7 @@
  'data': ["wizard/payment_order_create_view.xml",
           "views/payment_register_view.xml",
           "views/payment_register_line_view.xml",
+          'security/ir.model.access.csv',
           ],
  # 'demo': ["demo/dta_demo.xml"],
  # 'test': ["test/l10n_ch_dta.yml"],
