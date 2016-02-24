@@ -29,12 +29,14 @@ class PaymentRegister(models.Model):
     _rec_name = 'reference'
     _order = 'id desc'
 
-    @api.one
+    @api.multi
+    @api.depends('line_ids.amount')
     def _compute_total(self):
-        total = 0
-        for line in self.line_ids:
-            total += line.amount
-        return total
+        for payment_register in self:
+            total = 0
+            for line in payment_register.line_ids:
+                total += line.amount
+            payment_register.total = total
 
     date_scheduled = fields.Date('Scheduled Date',
                                  states={'done': [('readonly', True)]},
