@@ -43,7 +43,7 @@ Copyright (c) 2015 Open Net Sàrl
             <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
             <field name="quantity">1</field>
             <field name="sequence">111</field>
-            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="category_id" ref="hr_payroll.COMP"/>
             <field name="parent_rule_id" ref="AM"/>
         </record>
         <record id="AVS" model="hr.salary.rule">
