@@ -22,7 +22,7 @@ from openerp.osv import orm
 
 
 class BvrImporterWizard(orm.TransientModel):
-    _inherit = 'bvr.import.wizard'
+    _inherit = 'v11.import.wizard'
 
     def _prepare_line_vals(self, cursor, uid, statement, record,
                            voucher_enabled, context=None):
