@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 #  File: __init__.py
-#  Module: hr_payroll_extended
+#  Module: l10n_ch_hr_payroll
 #
 #  Created by sge@open-net.ch
 #
