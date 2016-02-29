@@ -116,7 +116,7 @@ class ScanBvr(models.TransientModel):
                 'type': bvr_string[0:2],
                 'amount': float(bvr_string[2:12]) / 100,
                 'reference': bvr_string[14:30],
-                'bvrnumber': '',
+                'bvrnumber': '000000',
                 'beneficiaire': self._create_bvr_account(bvr_string[32:41]),
                 'domain': '',
                 'currency': ''
