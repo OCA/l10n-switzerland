@@ -40,8 +40,8 @@ Credits
 
 Contributors
 ------------
-
-* Miguel Tallón <miguel.tallon@braintec-group.com>
+* Nicolas Bessi. Copyright Camptocamp SA
+* Miguel Tallón. Brain-tec
 
 Maintainer
 ----------
