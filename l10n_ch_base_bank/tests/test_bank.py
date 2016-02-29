@@ -34,7 +34,7 @@ class TestBank(test_common.TransactionCase):
             {
                 'name': 'BCV',
                 'ccp': '01-1234-1',
-                'bic': '234234',
+                'bic': '23423456',
                 'clearing': '234234',
             }
         )
@@ -65,7 +65,7 @@ class TestBank(test_common.TransactionCase):
                     {
                         'name': 'BCV',
                         'ccp': '2342342343423',
-                        'bic': '234234',
+                        'bic': '23423456',
                         'clearing': '234234',
                     }
                 )
@@ -95,7 +95,7 @@ class TestBank(test_common.TransactionCase):
         self.bank = self.env['res.bank'].create(
             {
                 'name': 'BCV',
-                'bic': '234234',
+                'bic': '23423456',
                 'clearing': '234234',
             }
         )
