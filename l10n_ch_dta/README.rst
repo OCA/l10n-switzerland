@@ -40,7 +40,7 @@ Credits
 
 Contributors
 ------------
-
+* Camptocamp SA
 * Miguel Tallón <miguel.tallon@braintec-group.com>
 
 Maintainer
