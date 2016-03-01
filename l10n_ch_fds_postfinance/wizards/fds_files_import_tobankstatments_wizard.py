@@ -41,15 +41,18 @@ class FdsFilesImportTobankstatmentsWizard(models.TransientModel):
 
     msg_file_imported = fields.Char(
         'Imported files',
-        readonly=True
+        readonly=True,
+        default=''
     )
     msg_import_file_fail = fields.Char(
         'File import failures',
-        readonly=True
+        readonly=True,
+        default=''
     )
     msg_exist_file = fields.Char(
         'Files already existing',
-        readonly=True
+        readonly=True,
+        default=''
     )
     state = fields.Selection(
         selection=[('default', 'Default'),

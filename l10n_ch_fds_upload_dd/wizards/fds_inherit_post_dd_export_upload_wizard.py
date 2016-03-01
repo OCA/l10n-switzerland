@@ -218,7 +218,7 @@ class FdsInheritPostDdExportUploadWizard(models.TransientModel):
             'filename': self.filename,
             'directory_id': self.fds_directory_id.id,
             'state': 'uploaded'}
-        historical_dd_obj = self.env['fds.postfinance.historical.dd']
+        historical_dd_obj = self.env['fds.dd.upload.history']
         historical_dd_obj.create(values)
 
     @api.multi
