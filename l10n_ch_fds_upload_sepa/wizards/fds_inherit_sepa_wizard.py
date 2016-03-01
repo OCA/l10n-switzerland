@@ -268,7 +268,7 @@ class fds_inherit_sepa_wizard(models.TransientModel):
             'filename': self.filename,
             'directory_id': self.fds_directory_id.id,
             'state': 'uploaded'}
-        historical_dd_obj = self.env['fds.postfinance.historical.sepa']
+        historical_dd_obj = self.env['fds.sepa.upload.history']
         historical_dd_obj.create(values)
 
     @api.multi

@@ -34,21 +34,13 @@
     </record>
     
     <!-- More button Action in fds_postfinance_files -->
-    <record model="ir.actions.act_window" id="action_fds_files_import_tobankstatments_wizard">
-        <field name="name">Download FDS files</field>
-        <field name="res_model">fds.files.import.tobankstatments.wizard</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-    </record>
-    
-    <record model="ir.values" id="action_fds_files_import_tobankstatments_wizard_values">
-        <field name="model">fds.postfinance.account</field>
-        <field name="name">Download FDS files</field>
-        <field name="value" eval="'ir.actions.act_window,%d'%action_fds_files_import_tobankstatments_wizard" />
-        <field name="key">action</field>
-        <field name="object" eval="1" />
-    </record>
-    
+    <act_window id="action_fds_files_import_tobankstatments_wizard"
+                name="Download FDS files"
+                res_model="fds.files.import.tobankstatments.wizard"
+                src_model="fds.postfinance.account"
+                view_mode="form"
+                view_type="form"
+                target="new"
+    />
 </data>
 </openerp>

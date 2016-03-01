@@ -41,15 +41,18 @@ class fds_files_import_tobankstatments_wizard(models.TransientModel):
 
     msg_file_imported = fields.Char(
         'Imported files',
-        readonly=True
+        readonly=True,
+        default=''
     )
     msg_import_file_fail = fields.Char(
         'File import failures',
-        readonly=True
+        readonly=True,
+        default=''
     )
     msg_exist_file = fields.Char(
         'Files already existing',
-        readonly=True
+        readonly=True,
+        default=''
     )
     state = fields.Selection(
         selection=[('default', 'Default'),
@@ -134,7 +137,7 @@ class fds_files_import_tobankstatments_wizard(models.TransientModel):
                 - fds account
             :returns recordset: of download files (model fds.postfinance.files)
         '''
-        fds_files_ids = self.env['fds.postfinance.files']
+        fds_files_ids = self.env['fds.postfinance.file']
         for d in directories:
             (dir_name, dir_id) = (d[0], d[1])
 
