@@ -181,3 +181,18 @@ class account_bank_statement_import(models.TransientModel):
                 att = self.env['ir.attachment'].create(att_data)
 
         return statement_id, notifs
+
+    @api.model
+    def _find_bank_account_id(self, account_number):
+        """ Override to find Postfinance account Given IBAN number """
+        bank_account_id = super(account_bank_statement_import, self).\
+            _find_bank_account_id(account_number)
+        if not bank_account_id and account_number and len(
+                account_number) == 21:
+            pf_formated_acc_number = account_number[9:].lstrip('0')
+            bank_account_ids = self.env['res.partner.bank'].search(
+                [('sanitized_acc_number', '=', pf_formated_acc_number)],
+                limit=1)
+            bank_account_id = bank_account_ids[0].id if bank_account_ids\
+                else None
+        return bank_account_id
