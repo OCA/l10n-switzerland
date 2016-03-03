@@ -26,10 +26,10 @@
  'complexity': 'normal',
  'depends': [
      'account',
-     'account_bank_statement_import',
+     'account_bank_statement_import_camt',
  ],
  'external_dependencies': {
-     'python': ['xlrd'],
+     'python': ['xlrd', 'wand'],
  },
  'website': 'http://www.compassion.ch/',
  'data': [
