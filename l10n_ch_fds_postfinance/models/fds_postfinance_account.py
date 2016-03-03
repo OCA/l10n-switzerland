@@ -46,7 +46,7 @@ class FdsPostfinanceAccount(models.Model):
     )
     hostname = fields.Char(
         string='SFTP Hostname',
-        default='fds.post.ch',
+        default='fdsbc.post.ch',
         required=True,
     )
     postfinance_email = fields.Char(
