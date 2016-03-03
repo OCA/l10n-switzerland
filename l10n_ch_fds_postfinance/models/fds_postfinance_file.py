@@ -22,6 +22,7 @@
 
 from openerp import models, fields, api
 import logging
+import pdb
 
 _logger = logging.getLogger(__name__)
 
@@ -61,7 +62,8 @@ class FdsPostfinanceFile(models.Model):
     state = fields.Selection(
         selection=[('draft', 'Draft'),
                    ('done', 'Done'),
-                   ('error', 'Error')],
+                   ('error', 'Error'),
+                   ('cancel', 'Cancelled')],
         readonly=True,
         default='draft',
         help='state of file'
@@ -77,9 +79,8 @@ class FdsPostfinanceFile(models.Model):
 
             :return None:
         '''
-        self.ensure_one()
-
-        self.import2bankStatements()
+        valid_files = self.filtered(lambda f: f.state == 'draft')
+        valid_files.import2bankStatements()
 
     @api.multi
     def change2error_button(self):
@@ -88,8 +89,8 @@ class FdsPostfinanceFile(models.Model):
 
             :return None:
         '''
-        self.ensure_one()
-        self._state_error_on()
+        valid_files = self.filtered(lambda f: f.state == 'draft')
+        valid_files._state_error_on()
 
     @api.multi
     def change2draft_button(self):
@@ -98,12 +99,22 @@ class FdsPostfinanceFile(models.Model):
 
             :return None:
         '''
-        self.state = 'draft'
+        self.write({'state': 'draft'})
+
+    @api.multi
+    def change2cancel_button(self):
+        ''' Put file in cancel state.
+            Called by pressing 'cancel' button.
+
+            :return None:
+        '''
+        valid_files = self.filtered(lambda f: f.state in ('error', 'draft'))
+        valid_files.write({'state': 'cancel'})
 
     ##############################
     #          function          #
     ##############################
-    @api.multi
+    @api.one
     def import2bankStatements(self):
         ''' convert the file to a record of model bankStatment.
 
@@ -111,8 +122,6 @@ class FdsPostfinanceFile(models.Model):
                 - True if the convert was succeed
                 - False otherwise
         '''
-        self.ensure_one()
-
         try:
             values = {
                 'data_file': self.data}
@@ -140,5 +149,4 @@ class FdsPostfinanceFile(models.Model):
 
             :returns: None
         '''
-        self.ensure_one()
         self.write({'state': 'error'})
