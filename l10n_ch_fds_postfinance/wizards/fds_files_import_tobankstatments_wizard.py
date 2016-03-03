@@ -27,7 +27,7 @@ import shutil
 import pysftp
 import os
 
-from openerp import models, fields, api, exceptions
+from openerp import models, fields, api
 
 _logger = logging.getLogger(__name__)
 
@@ -39,6 +39,12 @@ class fds_files_import_tobankstatments_wizard(models.TransientModel):
     '''
     _name = 'fds.files.import.tobankstatments.wizard'
 
+    fds_account_id = fields.Many2one(
+        'fds.postfinance.account',
+        'FDS Account',
+        required=True,
+        default=lambda self: self._get_fds_account()
+    )
     msg_file_imported = fields.Char(
         'Imported files',
         readonly=True,
@@ -51,6 +57,11 @@ class fds_files_import_tobankstatments_wizard(models.TransientModel):
     )
     msg_exist_file = fields.Char(
         'Files already existing',
+        readonly=True,
+        default=''
+    )
+    msg_import_file_ignore = fields.Char(
+        'Files ignored',
         readonly=True,
         default=''
     )
@@ -91,9 +102,7 @@ class fds_files_import_tobankstatments_wizard(models.TransientModel):
             (tmp_key, tmp_d) = self._create_tmp_file(key.private_key_crypted)
 
             # get name of directory where download
-            dir = [(e.name, e.id) for e in
-                   fds_id.directory_ids
-                   if e.allow_download_file is True]
+            dir = fds_id.directory_ids.filtered('allow_download_file')
 
             # connect sftp
             with pysftp.Connection(hostname,
@@ -125,6 +134,15 @@ class fds_files_import_tobankstatments_wizard(models.TransientModel):
     ##############################
     #          function          #
     ##############################
+    def _get_fds_account(self):
+        # get selected fds_postfinance_account id
+        account_obj = self.env['fds.postfinance.account']
+        active_ids = self.env.context.get('active_ids')
+        if active_ids and len(active_ids) == 1:
+            return account_obj.browse(active_ids[0])
+        fds_account = account_obj.search([], limit=1)
+        return fds_account
+
     @api.multi
     def _download_file(self, sftp, directories, tmp_directory, fds_id):
         ''' private function that downloads files from the sftp server where
@@ -132,14 +150,14 @@ class fds_files_import_tobankstatments_wizard(models.TransientModel):
 
             :param (obj, (str, str), str, record:
                 - pysftp object
-                - (directory name, directory id) from fds.pf.files.directory
+                - directories from fds.pf.files.directory
                 - tmp directory name
                 - fds account
             :returns recordset: of download files (model fds.postfinance.files)
         '''
         fds_files_ids = self.env['fds.postfinance.file']
         for d in directories:
-            (dir_name, dir_id) = (d[0], d[1])
+            dir_name = d.name
 
             with sftp.cd(dir_name):
                 list_name_files = sftp.listdir()
@@ -147,22 +165,31 @@ class fds_files_import_tobankstatments_wizard(models.TransientModel):
             _logger.info("[OK] download files in '%s' ", (dir_name))
 
             for nameFile in list_name_files:
+                skip = False
+                # Look for files to exclude
+                excluded = d.excluded_files.split(';')
+                for excluded_file in excluded:
+                    if excluded_file and excluded_file in nameFile:
+                        skip = True
+                        self.msg_import_file_ignore += nameFile + "; "
+                if skip:
+                    continue
                 # check if file exist already
-                if not fds_files_ids.search([['filename', '=', nameFile]]):
-                    # save in the model fds_postfinance_files
-                    path = os.path.join(tmp_directory, nameFile)
-                    with open(path, "rb") as f:
-                        file_data = f.read()
-                    values = {
-                        'fds_account_id': fds_id.id,
-                        'data': base64.b64encode(file_data),
-                        'filename': nameFile,
-                        'directory_id': dir_id}
-                    fds_files_ids += fds_files_ids.create(values)
-                else:
+                if fds_files_ids.search([['filename', '=', nameFile]]):
                     self.msg_exist_file += nameFile + "; "
                     _logger.warning("[FAIL] file '%s' already exist",
                                     (nameFile))
+                    continue
+                # save in the model fds_postfinance_files
+                path = os.path.join(tmp_directory, nameFile)
+                with open(path, "rb") as f:
+                    file_data = f.read()
+                values = {
+                    'fds_account_id': fds_id.id,
+                    'data': base64.b64encode(file_data),
+                    'filename': nameFile,
+                    'directory_id': d.id}
+                fds_files_ids += fds_files_ids.create(values)
 
         return fds_files_ids
 
@@ -191,24 +218,18 @@ class fds_files_import_tobankstatments_wizard(models.TransientModel):
             :raises Warning:
                 - if many FDS account selected
         '''
-        # get selected fds_postfiance_account id
-        active_ids = self.env.context.get('active_ids')
-        if len(active_ids) != 1:
-            raise exceptions.Warning('Select only one FDS account')
-        fds_account = self.env['fds.postfinance.account'].browse(active_ids[0])
-
         # check key of active user
         fds_authentication_key_obj = self.env['fds.authentication.keys']
         key = fds_authentication_key_obj.search([
             ['user_id', '=', self.env.uid],
-            ['fds_account_id', '=', fds_account.id]])
+            ['fds_account_id', '=', self.fds_account_id.id]])
 
         # get username, hostname, key_pass
-        hostname = fds_account.hostname
-        username = fds_account.username
+        hostname = self.fds_account_id.hostname
+        username = self.fds_account_id.username
         key_pass = fds_authentication_key_obj.config()
 
-        return (fds_account, hostname, username, key, key_pass)
+        return (self.fds_account_id, hostname, username, key, key_pass)
 
     @api.multi
     def _create_tmp_file(self, data, tmp_directory=None):

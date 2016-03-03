@@ -22,6 +22,7 @@
 
 from openerp import models, fields, api, exceptions, _
 import logging
+import pdb
 
 _logger = logging.getLogger(__name__)
 
@@ -69,7 +70,8 @@ class FdsPostfinanceFile(models.Model):
     state = fields.Selection(
         selection=[('draft', 'Draft'),
                    ('done', 'Done'),
-                   ('error', 'Error')],
+                   ('error', 'Error'),
+                   ('cancel', 'Cancelled')],
         readonly=True,
         default='draft',
         help='state of file'
@@ -85,11 +87,13 @@ class FdsPostfinanceFile(models.Model):
 
             :return None:
         '''
-        self.ensure_one()
+        valid_files = self.filtered(lambda f: f.state == 'draft')
+        for file in valid_files:
+            if not file.directory_id.journal_id:
+                raise exceptions.Warning(
+                    _('Add default journal in acount conf'))
 
-        if not self.directory_id.journal_id:
-            raise exceptions.Warning(_('Add default journal in acount conf'))
-        self.import2bankStatements()
+        valid_files.import2bankStatements()
 
     @api.multi
     def change2error_button(self):
@@ -98,8 +102,8 @@ class FdsPostfinanceFile(models.Model):
 
             :return None:
         '''
-        self.ensure_one()
-        self._sate_error_on()
+        valid_files = self.filtered(lambda f: f.state == 'draft')
+        valid_files._sate_error_on()
 
     @api.multi
     def change2draft_button(self):
@@ -108,12 +112,22 @@ class FdsPostfinanceFile(models.Model):
 
             :return None:
         '''
-        self.state = 'draft'
+        self.write({'state': 'draft'})
+
+    @api.multi
+    def change2cancel_button(self):
+        ''' Put file in cancel state.
+            Called by pressing 'cancel' button.
+
+            :return None:
+        '''
+        valid_files = self.filtered(lambda f: f.state in ('error', 'draft'))
+        valid_files.write({'state': 'cancel'})
 
     ##############################
     #          function          #
     ##############################
-    @api.multi
+    @api.one
     def import2bankStatements(self):
         ''' convert the file to a record of model bankStatment.
 
@@ -121,8 +135,6 @@ class FdsPostfinanceFile(models.Model):
                 - True if the convert was succeed
                 - False otherwise
         '''
-        self.ensure_one()
-
         try:
             values = {
                 'journal_id': self.directory_id.journal_id.id,
@@ -150,5 +162,4 @@ class FdsPostfinanceFile(models.Model):
 
             :returns: None
         '''
-        self.ensure_one()
         self.write({'state': 'error'})

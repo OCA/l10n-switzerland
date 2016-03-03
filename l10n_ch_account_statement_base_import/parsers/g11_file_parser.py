@@ -22,7 +22,7 @@
 import time
 import logging
 import uuid
-from openerp import fields, _
+from openerp import _
 
 from .base_parser import BaseSwissParser
 
@@ -161,8 +161,9 @@ class G11Parser(BaseSwissParser):
         """Parse file statement date
         :return: A date usable by Odoo in write or create dict
         """
-
-        return fields.Date.today()
+        date = self.lines[0][92:100]
+        fdate = date[0:4] + '-' + date[4:6] + '-' + date[6:]
+        return fdate
 
     def _parse(self):
         """

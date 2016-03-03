@@ -139,12 +139,17 @@ class XMLPFParser(BaseSwissParser):
         :return: the file account number
         :rtype: string
         """
-        account_node = tree.xpath('//SG2/FII/C078/D_3194/text()')
-        if not account_node:
-            return
-        if len(account_node) != 1:
-            raise ValueError('Many accounts found for postfinance statement')
-        return account_node[0]
+        account_number = None
+        if self.is_camt:
+            ns = tree.tag[1:tree.tag.index("}")]    # namespace
+            account_node = tree.xpath(
+                '//ns:Stmt/ns:Acct/ns:Id/ns:IBAN/text()',
+                namespaces={'ns': ns})
+        else:
+            account_node = tree.xpath('//SG2/FII/C078/D_3194/text()')
+        if account_node and len(account_node) == 1:
+            account_number = account_node[0]
+        return account_number
 
     def _parse_currency_code(self, tree):
         """Parse file currency ISO code using xml tree
@@ -247,7 +252,7 @@ class XMLPFParser(BaseSwissParser):
         :rtype: list
         """
         attachments = [('Statement File', self.tar_source.encode('base64'))]
-        if self.is_camt:
+        if self.is_camt and self.is_tar:
             ns = tree.tag[1:tree.tag.index("}")]    # namespace
             transaction_nodes = tree.xpath(
                 '//ns:Stmt/ns:Ntry/ns:AcctSvcrRef/text()',
@@ -258,7 +263,7 @@ class XMLPFParser(BaseSwissParser):
                 att = self.attachments.get(att_name[:87])
                 if att:
                     attachments.append((transaction, att))
-        else:
+        elif self.is_tar:
             transaction_nodes = tree.xpath("//SG6")
             for transaction in transaction_nodes:
                 desc = '/'
@@ -280,7 +285,19 @@ class XMLPFParser(BaseSwissParser):
         :return: A date usable by Odoo in write or create dict
         :rtype: string
         """
-        # I was not able to find a correct segment group to extract the date
+        if self.is_camt:
+            ns = tree.tag[1:tree.tag.index("}")]    # namespace
+            date = tree.xpath(
+                '//ns:GrpHdr/ns:CreDtTm/text()',
+                namespaces={'ns': ns})
+            if date:
+                return date[0][:10]
+        else:
+            date = tree.xpath('')
+            if date:
+                formatted_date = date[0][:4] + '-' + date[0][4:6] + '-' + \
+                    date[0][6:]
+                return formatted_date
         return fields.Date.today()
 
     def _parse(self):
@@ -292,11 +309,12 @@ class XMLPFParser(BaseSwissParser):
         if self.is_camt:
             tree = etree.fromstring(self.data_file)
             self.statements += self.camt_parser.parse(self.data_file)
-            self.statements[0]['attachments'] = self._parse_attachments(tree)
+            if self.statements:
+                self.statements[0]['attachments'] = self._parse_attachments(
+                    tree)
         else:
             tree = etree.fromstring(self.data_file)
             self.currency_code = self._parse_currency_code(tree)
-            self.account_number = None
             statement = {}
             balance_start, balance_stop = self._parse_statement_balance(tree)
             statement['balance_start'] = balance_start
@@ -305,4 +323,5 @@ class XMLPFParser(BaseSwissParser):
             statement['attachments'] = self._parse_attachments(tree)
             statement['transactions'] = self._parse_transactions(tree)
             self.statements.append(statement)
+        self.account_number = self._parse_account_number(tree)
         return True
