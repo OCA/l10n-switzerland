@@ -22,7 +22,6 @@
 
 from openerp import models, fields, api
 import logging
-import pdb
 
 _logger = logging.getLogger(__name__)
 
