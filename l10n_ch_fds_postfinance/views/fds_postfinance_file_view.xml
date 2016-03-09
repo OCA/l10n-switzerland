@@ -8,6 +8,9 @@
             <field name="model">fds.postfinance.file</field>
             <field name="arch" type="xml">
                 <form string="FDS PostFinance file">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                    </header>
                     <group>
                         <field name="fds_account_id" />
                         <field name="bank_statement_id" attrs="{'invisible':[('state', '!=', 'done')]}"/>

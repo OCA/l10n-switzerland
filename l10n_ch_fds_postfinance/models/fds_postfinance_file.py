@@ -20,9 +20,8 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, exceptions, _
+from openerp import models, fields, api
 import logging
-import pdb
 
 _logger = logging.getLogger(__name__)
 
@@ -64,7 +63,6 @@ class FdsPostfinanceFile(models.Model):
         related='directory_id.journal_id',
         string='journal',
         ondelete='restrict',
-        readonly=True,
         help='default journal for this file'
     )
     state = fields.Selection(
@@ -88,11 +86,6 @@ class FdsPostfinanceFile(models.Model):
             :return None:
         '''
         valid_files = self.filtered(lambda f: f.state == 'draft')
-        for file in valid_files:
-            if not file.directory_id.journal_id:
-                raise exceptions.Warning(
-                    _('Add default journal in acount conf'))
-
         valid_files.import2bankStatements()
 
     @api.multi
