@@ -4,13 +4,14 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
+# Stefano <stefano.sforzi@agilebg.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-17 12:24+0000\n"
-"PO-Revision-Date: 2015-08-04 10:29+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2016-01-11 14:20+0000\n"
+"PO-Revision-Date: 2016-03-07 21:15+0000\n"
+"Last-Translator: Stefano <stefano.sforzi@agilebg.com>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +26,7 @@ msgid ""
 "BVR reference number is not valid \n"
 "for the line: %s. \n"
 " Reference is too long for this type of beneficiary."
-msgstr ""
+msgstr "Referenza BVR non valida  \nalla riga: %s. \n Referenza troppo lunga per il tipo di beneficiario"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:261
@@ -34,7 +35,7 @@ msgid ""
 "BVR reference number is not valid \n"
 "for the line: %s. \n"
 "Mod10 check failed"
-msgstr ""
+msgstr "Referenza BVR non valida  \nalla riga : %s. \nMod10 check fallito"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:253
@@ -43,7 +44,7 @@ msgid ""
 "BVR reference number is not valid \n"
 "for the line: %s. \n"
 "Reference is too long."
-msgstr ""
+msgstr "Referenza BVR non valida \nalla riga: %s. \nReferenza troppo lunga"
 
 #. module: l10n_ch_dta
 #: model:ir.model,name:l10n_ch_dta.model_res_partner_bank
@@ -59,7 +60,7 @@ msgstr "Annulla"
 #: view:create.dta.wizard:l10n_ch_dta.dta_create_view
 #: model:ir.actions.act_window,name:l10n_ch_dta.action_dta_create
 msgid "Create DTA"
-msgstr ""
+msgstr "Crea DTA"
 
 #. module: l10n_ch_dta
 #: field:create.dta.wizard,create_uid:0
@@ -79,17 +80,17 @@ msgstr "Generare DTA"
 #. module: l10n_ch_dta
 #: field:res.partner.bank,dta_code:0
 msgid "DTA code"
-msgstr ""
+msgstr "Codice DTA"
 
 #. module: l10n_ch_dta
 #: view:res.partner.bank:l10n_ch_dta.l10nch_view_res_partner_bank_from_invoice_slip
 msgid "DTA options"
-msgstr ""
+msgstr "Opzione DTA"
 
 #. module: l10n_ch_dta
 #: field:payment.order,dta_ids:0
 msgid "Dta ids"
-msgstr ""
+msgstr "Dta ids"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:171
@@ -114,7 +115,7 @@ msgstr ""
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:731
 #, python-format
 msgid "Error"
-msgstr ""
+msgstr "Errore"
 
 #. module: l10n_ch_dta
 #: field:create.dta.wizard,id:0
@@ -138,7 +139,7 @@ msgid ""
 "No IBAN defined \n"
 " for the bank account: %s\n"
 "on line: %s"
-msgstr ""
+msgstr "No IBAN definto\nper il conto bancario: %s\nalla linea: %s"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:596
@@ -152,7 +153,7 @@ msgstr "Numero IBAN per il conto bancario aziendale"
 msgid ""
 "No address defined \n"
 " for the partner: %s on line"
-msgstr ""
+msgstr "Indirizzo non definito\nper il partner: %s alla riga"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:640
@@ -160,7 +161,7 @@ msgstr ""
 msgid ""
 "No bank account defined\n"
 " on line: %s"
-msgstr ""
+msgstr "Nessuna banca definita\nalla riga: %s"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:561
@@ -175,7 +176,7 @@ msgid ""
 "No bank defined for the bank account: %s\n"
 "on the partner: %s\n"
 " on line: %s"
-msgstr ""
+msgstr "Nessuna banca definita per il conto: %s\ndel partner: %s\nalla riga: %s"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:662
@@ -185,7 +186,7 @@ msgid ""
 " for the bank account: %s\n"
 "on the partner: %s\n"
 " on line: %s"
-msgstr ""
+msgstr "Nessuna banca definita: %s\nper il partner: %s\n alla riga: %s"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:555
@@ -211,7 +212,7 @@ msgid ""
 "Wrong postal number format.\n"
 "It must be 12-123456-9 or 12345 format \n"
 "on line %s"
-msgstr ""
+msgstr "Conto postale errato.\nDeve essere di tipo 12-123456-9 o 12345 \nalla riga %s"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:286
@@ -219,7 +220,7 @@ msgstr ""
 msgid ""
 "You must provide a BVR number\n"
 "for the bank account: %son line: %s"
-msgstr ""
+msgstr "Bisogno indicare un numero BVR \nper il conto bancario: %s alla riga: %s"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:244
@@ -227,7 +228,7 @@ msgstr ""
 msgid ""
 "You must provide a BVR referencenumber \n"
 " for the line: %s"
-msgstr ""
+msgstr "Indicare un numero di riferimento BVR \n alla riga: %s"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:310
@@ -236,13 +237,13 @@ msgid ""
 "You must provide a Clearing Number\n"
 "for the partner bank: %s\n"
 " on line %s"
-msgstr ""
+msgstr "Indicare un numero di Clearing \nper il conto bancario: %s\nalla riga %s"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:575
 #, python-format
 msgid "You must provide a Clearing Number for the bank %s."
-msgstr ""
+msgstr "Indicare un numero di Clearing per il conto %s."
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:303
@@ -251,7 +252,7 @@ msgid ""
 "You must provide a bank number \n"
 "for the partner bank: %s\n"
 " on line: %s"
-msgstr ""
+msgstr "Indicare un conto bancario \nper la banca del partner: %s\n alla riga: %s"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:419
@@ -260,10 +261,10 @@ msgid ""
 "You must provide the bank city or the bic code for the partner bank:\n"
 " %s\n"
 " on line: %s"
-msgstr ""
+msgstr "Indicare la località della banca o il codice bic per la banca del partner:\n %s\n alla riga: %s"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:566
 #, python-format
 msgid "You must set a bank for the bank account with number %s"
-msgstr ""
+msgstr "Indicare la banca per il conto bancario con il numero %s"
