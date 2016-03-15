@@ -12,7 +12,7 @@
         <field name="acc_number">123456</field>
         <field name="partner_id" ref="base.res_partner_2"/>
         <field name="state">bank</field>
-        <field name="bank_bic">1234</field>
+        <field name="bank_bic">12345678</field>
         <field name="bank_name">Fortis Bank Name</field>
         <field name="bank" ref="partner_bank"/>
     </record>
@@ -23,7 +23,7 @@
         <field name="state">dta_company</field>
         <field name="bank" ref="partner_bank"/>
         <field name="state">bank</field>
-        <field name="bank_bic">1234</field>
+        <field name="bank_bic">12345679</field>
         <field name="company_id" ref="base.main_company"/>
         <field name="acc_number">CH9100767000S00023455</field>
     </record>
