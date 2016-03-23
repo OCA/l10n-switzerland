@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Nicolas Bessi. Copyright Camptocamp SA
-#    Ported to v8.0 by Agile Business Group <http://www.agilebg.com>
+#    Copyright (c) 2015 brain-tec AG (http://www.braintec-group.com)
+#    All Right Reserved
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,21 +19,21 @@
 #
 ##############################################################################
 
-{'name': 'Switzerland - Bank Payment File (DTA)',
- 'summary': 'Electronic payment file for Swiss bank (DTA)',
+{'name': 'Switzerland - Payment Register',
+ 'summary': 'Allow to register payments from invoices',
  'version': '9.0.1.0.1',
- 'author': "Camptocamp,Odoo Community Association (OCA)",
+ 'author': "Odoo Community Association (OCA)",
  'category': 'Localization',
- 'website': 'http://www.camptocamp.com',
+ 'website': '',
  'license': 'AGPL-3',
- 'depends': ['base', 'l10n_ch_base_bank',
-             'l10n_ch_payment_register',
-             'document'],
- 'data': ["wizard/create_dta_view.xml",
+ 'depends': ['base', 'l10n_ch_base_bank', 'document'],
+ 'data': ["wizard/payment_order_create_view.xml",
+          "views/payment_register_view.xml",
+          "views/payment_register_line_view.xml",
+          'security/ir.model.access.csv',
           ],
- 'demo': ['../account/test/account_minimal_test.xml',
-          "demo/dta_demo.xml"],
- 'test': ["test/l10n_ch_dta.yml"],
+ # 'demo': ["demo/dta_demo.xml"],
+ # 'test': ["test/l10n_ch_dta.yml"],
  'auto_install': False,
  'installable': True,
  'images': []

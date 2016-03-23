@@ -2,6 +2,8 @@
 ##############################################################################
 #
 #    Author: Nicolas Bessi. Copyright Camptocamp SA
+#    Financial contributors: Hasa SA, Open Net SA,
+#                            Prisme Solutions Informatique SA, Quod SA
 #    Ported to v8.0 by Agile Business Group <http://www.agilebg.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -18,23 +20,4 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-{'name': 'Switzerland - Bank Payment File (DTA)',
- 'summary': 'Electronic payment file for Swiss bank (DTA)',
- 'version': '9.0.1.0.1',
- 'author': "Camptocamp,Odoo Community Association (OCA)",
- 'category': 'Localization',
- 'website': 'http://www.camptocamp.com',
- 'license': 'AGPL-3',
- 'depends': ['base', 'l10n_ch_base_bank',
-             'l10n_ch_payment_register',
-             'document'],
- 'data': ["wizard/create_dta_view.xml",
-          ],
- 'demo': ['../account/test/account_minimal_test.xml',
-          "demo/dta_demo.xml"],
- 'test': ["test/l10n_ch_dta.yml"],
- 'auto_install': False,
- 'installable': True,
- 'images': []
- }
+from . import payment_order_create
