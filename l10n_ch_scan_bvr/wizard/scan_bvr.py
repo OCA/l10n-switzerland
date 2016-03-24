@@ -268,7 +268,7 @@ class ScanBvr(models.TransientModel):
         if bvr_string is not False:
             # Get rid of leading and ending spaces of the BVR string
             bvr_string = bvr_string.strip()
-            
+
             # We will get the 2 first digits of the BVR string in order
             # to know the BVR type of this account
             bvr_type = bvr_string[0:2]
