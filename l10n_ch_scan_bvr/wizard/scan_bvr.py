@@ -193,7 +193,6 @@ class ScanBvr(models.TransientModel):
         invoice_model = self.env['account.invoice']
         invoice_tax_model = self.env['account.invoice.tax']
         currency_model = self.env['res.currency']
-        partner_bank_model = self.env['res.partner.bank']
         today = fields.Date.today()
         if data['bank_account']:
             account_info = self.env['res.partner.bank'].browse(
@@ -201,15 +200,6 @@ class ScanBvr(models.TransientModel):
         # We will now search the currency_id
         currency = currency_model.search(
             [('name', '=', data['bvr_struct']['currency'])])
-        # Account Modification
-        partner_bank = partner_bank_model.browse(data['bank_account'])
-        if data['bvr_struct']['domain'] == 'name':
-            partner_bank.write(
-                {'ccp': data['bvr_struct']['beneficiaire']})
-        else:
-            partner_bank.write(
-                {'bvr_adherent_num': data['bvr_struct']['bvrnumber'],
-                 'ccp': data['bvr_struct']['beneficiaire']})
         date_due = today
         # We will now compute the due date and fixe the payment term
         payment_term_id = account_info.partner_id.property_payment_term.id
