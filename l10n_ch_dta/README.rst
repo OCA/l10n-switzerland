@@ -6,7 +6,7 @@
 Switzerland DTA
 ==========================
 
-This module implements DTA. it is recommended to use with l10nch_payment_register module
+This module implements DTA. it is recommended to use with account_payment_order module
 
 
 
@@ -42,6 +42,7 @@ Contributors
 ------------
 * Camptocamp SA
 * Miguel Tallón <miguel.tallon@braintec-group.com>
+* Kumar Aberer <kumar.aberer@braintec-group.com>
 
 Maintainer
 ----------
