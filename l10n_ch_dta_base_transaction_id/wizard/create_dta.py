@@ -25,10 +25,10 @@ from openerp.osv import orm
 class DTAFileGenerator(orm.TransientModel):
     _inherit = "create.dta.wizard"
 
-    def _set_bank_data(self, cr, uid, data, pline, elec_context,
+    def _set_bank_data(self, cr, uid, pline, elec_context,
                        seq, context=None):
         super(DTAFileGenerator, self).\
-            _set_bank_data(cr, uid, data, pline,
+            _set_bank_data(cr, uid, pline,
                            elec_context, seq, context=context)
         if pline.move_line_id.transaction_ref:
             elec_context['reference'] = pline.move_line_id.transaction_ref
