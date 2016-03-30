@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<openerp>
+<odoo>
 <data>
     <!-- Transform into YAML for testing -->
     <record model="res.bank" id="partner_bank">
@@ -8,14 +8,12 @@
         <field name="code">123456</field>
     </record>
     
-  
-    
     <record model="res.partner.bank" id="agro_bank">
         <field name="acc_number">123456</field>
         <field name="partner_id" ref="base.res_partner_2"/>
         <field name="bank_bic">1234</field>
         <field name="bank_name">Fortis Bank Name</field>
-        <field name="bank_id" ref="partner_bank"/>              
+        <field name="bank_id" ref="partner_bank"/>
     </record>
 
     <record model="res.partner.bank" id="main_partner_bank">
@@ -26,11 +24,6 @@
         <field name="acc_number">CH9100767000S00023455</field>
     </record>
 
-	<!-- <record model="account.journal" id="account.sales_journal">
-        <field name="default_debit_account_id" ref="a_recv"/>
-    </record>-->
-
-
   <!-- Define a payment mode -->
   <record model="payment.mode" id="payment_mode_dta">
     <field name="name">DTA</field>
@@ -39,4 +32,4 @@
   </record>
 
 </data>
-</openerp>
+</odoo>

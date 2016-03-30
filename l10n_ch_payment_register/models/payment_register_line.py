@@ -4,22 +4,10 @@
 #    Copyright (c) 2015 brain-tec AG (http://www.braintec-group.com)
 #    All Right Reserved
 #
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 #
 ##############################################################################
 
-import time
 from openerp import models, fields, api
 
 
@@ -60,28 +48,24 @@ class PaymentLine(models.Model):
             result[line.id] = self._get_info_partner(line.partner_id)
         return result
 
-    @api.one
+    @api.depends('amount_currency', 'currency_id')
     def _compute_amount(self):
-        amount = self.amount_currency
-        if self.company_currency:
-            self.with_context(date=self.order_id.date_done or
-                              time.strftime('%Y-%m-%d'))
-            amount = self.company_currency.compute(self.amount_currency,
-                                                   self.currency_id)
-        return amount
+        for line in self:
+            if line.company_currency:
+                line.with_context(date=line.order_id.date_done or
+                                  fields.Date.today())
+                line.amount = line.company_currency.\
+                    compute(line.amount_currency, line.currency_id)
+            else:
+                line.amount = line.amount_currency
 
-    @api.one
+    @api.multi
     def _get_currency(self):
-        user_obj = self.env['res.users']
-        currency_obj = self.env['res.currency']
-        user = user_obj.browse(self._uid)
+        user = self.env.user
+        for line in self:
+            line.currency_id = user.company_id.currency_id.id
 
-        if user.company_id:
-            return user.company_id.currency_id.id
-        else:
-            return currency_obj.search([('rate', '=', 1.0)])[0]
-
-    @api.one
+    @api.multi
     def _get_date(self):
         payment_order_obj = self.env['payment.register']
         date = False
@@ -91,7 +75,7 @@ class PaymentLine(models.Model):
             if order.date_prefered == 'fixed':
                 date = order.date_scheduled
             else:
-                date = time.strftime('%Y-%m-%d')
+                date = fields.Date.today()
         return date
 
     name = fields.Char('Your Reference', required=True)
