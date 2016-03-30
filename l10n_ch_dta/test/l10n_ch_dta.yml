@@ -53,12 +53,11 @@
     move_line_id: !ref {model: account.move.line, search: "[('ref','=','1234567890')]"}
     order_id: dta_payment_order
     partner_id: base.res_partner_3
-    state: normal 
+    state: normal
 -
  I generate a DTA file by using the wizard "Create DTA" for my payment order
 -
   !python {model: create.dta.wizard}: |
-    self
     import base64
     data = {}
     wiz_id = self.create(cr, uid, {})
