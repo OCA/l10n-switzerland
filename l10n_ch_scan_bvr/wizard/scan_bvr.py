@@ -336,43 +336,34 @@ class ScanBvr(models.TransientModel):
         data = {}
         data['bvr_struct'] = self._get_bvr_structurated(self.bvr_string)
         partner_bank_model = self.env['res.partner.bank']
-        partner_bank = partner_bank_model
+        partner_bank = False
         # We will now search the account linked with this BVR
         if data['bvr_struct']['domain'] == 'name':
             domain = [('acc_number', '=', data['bvr_struct']['beneficiaire'])]
             partners_bank = partner_bank_model.search(domain)
-            partner_bank = (
-                partners_bank and len(partners_bank) == 1 and
-                partners_bank[0])
+            partner_bank = len(partners_bank) == 1 and partners_bank[0]
         else:
             # A postal account that refers to a bank is uniquely identified
             # by (beneficiaire + bvrnumber), at least by beneficiaire
-            domain = []
-            cond_1 = (
-                'acc_number', '=', data['bvr_struct']['beneficiaire'])
-            domain.append(cond_1)
+            domain = [('acc_number', '=', data['bvr_struct']['beneficiaire'])]
             partners_bank = partner_bank_model.search(domain)
             if len(partners_bank) == 1:
                 if (
                         not partners_bank[0].bvr_adherent_num or
                         partners_bank[0].bvr_adherent_num ==
                         data['bvr_struct']['bvrnumber']):
-                    partner_bank = partners_bank[0]
-            if len(partners_bank) > 1:
+                    partner_bank = partners_bank
+            elif len(partners_bank) > 1:
                 # We need to filter further by bvr_adherent_num
-                cond_2 = (
-                    'bvr_adherent_num', '=',
-                    data['bvr_struct']['bvrnumber'])
-                domain.append(cond_2)
-                partners_bank = partner_bank_model.search(domain)
-                partner_bank = (
-                    partners_bank and len(partners_bank) == 1 and
-                    partners_bank[0])
+                partners_bank = partners_bank.filtered(
+                    lambda r:
+                    r.bvr_adherent_num == data['bvr_struct']['bvrnumber'])
                 if len(partners_bank) > 1:
                     raise UserError(
                         _('There are more than one bank corresponding '
                           'to the current string.\n'
                           'Please check the banks configuration.'))
+                partner_bank = partners_bank
         # We will need to know if we need to create invoice line
         if partner_bank:
             # We have found the account corresponding to the
