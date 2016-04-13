@@ -30,7 +30,7 @@
     'name': 'Attendances - Timesheet',
     'summary': 'Attendances and timesheet improvements',
     'category': 'Human Resources',
-    'author': "Open-Net Sàrl",
+    'author': "Open-Net Sàrl, Odoo Community Association (OCA)",
     'depends': [
         'hr_payroll'
     ],
