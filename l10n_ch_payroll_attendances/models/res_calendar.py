@@ -33,7 +33,10 @@ from openerp import models, fields
 class Calendar(models.Model):
     _inherit = 'resource.calendar'
 
-    time_compensation_holiday_status = fields.Many2one(string="Time compensation destination", comodel_name='hr.holidays.status')
+    time_compensation_holiday_status = fields.Many2one(
+        string="Time compensation destination",
+        comodel_name='hr.holidays.status')
+
 
 class CalendarAttendances(models.Model):
     _inherit = 'resource.calendar.attendance'

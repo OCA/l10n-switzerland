@@ -28,9 +28,7 @@
 
 import datetime
 from openerp import models, fields, api, workflow
-import logging
 
-_logger = logging.getLogger(__name__)
 
 class Payslip(models.Model):
     _inherit = 'hr.payslip'
@@ -248,8 +246,8 @@ class Payslip(models.Model):
             nb_hours = payslip_attendance.nb_hours
             time_inc = payslip_attendance.time_increase
             compensatory_days += (nb_hours * time_inc)
-
-        leave_type = self.contract_id.working_hours.time_compensation_holiday_status
+        working_hours = self.contract_id.working_hours
+        leave_type = working_hours.time_compensation_holiday_status
 
         holiday_obj = self.env['hr.holidays']
         holiday_request = holiday_obj.search([('slip_id', '=', self.id)])
@@ -309,12 +307,18 @@ class PayslipAttendance(models.Model):
     @api.multi
     def _compute_tc(self):
         for attendance in self:
-            attendance.time_compensation = attendance.time_increase * attendance.nb_hours
+            time_inc = attendance.time_increase
+            nb_hours = attendance.nb_hours
+            attendance.time_compensation = time_inc * nb_hours
 
     @api.multi
     def _compute_sc(self):
         for attendance in self:
-            attendance.salary_compensation = attendance.salary_increase * attendance.nb_hours * attendance.payslip_id.contract_id.hourly_rate_attendance
+            sal_inc = attendance.salary_increase
+            nb_hours = attendance.nb_hours
+            contract = attendance.payslip_id.contract_id
+            hourly_rate = contract.hourly_rate_attendance
+            attendance.salary_compensation = sal_inc * nb_hours * hourly_rate
 
     name = fields.Char(string="Name")
     weekday = fields.Selection(selection=[
@@ -331,8 +335,10 @@ class PayslipAttendance(models.Model):
     nb_days = fields.Integer(string="Number of days")
     nb_hours = fields.Float(string="Number of hours")
     time_increase = fields.Float(string="Time compensation (%)")
-    time_compensation = fields.Float(string="Time compensation", compute="_compute_tc")
+    time_compensation = fields.Float(
+        string="Time compensation", compute="_compute_tc")
     salary_increase = fields.Float(string="Wage compensation (%)")
-    salary_compensation = fields.Float(string="Salary compensation", compute="_compute_sc")
+    salary_compensation = fields.Float(
+        string="Salary compensation", compute="_compute_sc")
     payslip_id = fields.Many2one(
         string="Linked to payslip", comodel_name='hr.payslip')
