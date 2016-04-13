@@ -1,0 +1,229 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* hr_payroll_attendances
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-02 10:23+0000\n"
+"PO-Revision-Date: 2016-03-02 10:23+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: hr_payroll_attendances
+#: model:ir.ui.view,arch_db:hr_payroll_attendances.hr_payslip_form_view
+msgid "Allocation requests"
+msgstr "Demande d'attributions"
+
+#. module: hr_payroll_attendances
+#: model:ir.ui.view,arch_db:hr_payroll_attendances.hr_payslip_form_view
+msgid "Attendance computaion result"
+msgstr "Calcul des présences"
+
+#. module: hr_payroll_attendances
+#: model:ir.ui.view,arch_db:hr_payroll_attendances.hr_payslip_form_view
+msgid "Attendances Computation"
+msgstr "Calcul des présences"
+
+#. module: hr_payroll_attendances
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_hr_payslip_auto_generated_holiday_ids
+msgid "Auto generated allocation request"
+msgstr "Demande d'attribution auto-générée"
+
+#. module: hr_payroll_attendances
+#: model:ir.ui.view,arch_db:hr_payroll_attendances.hr_payslip_form_view
+msgid "Auto generated allocation requests"
+msgstr "Demande d'attribution auto-générée"
+
+#. module: hr_payroll_attendances
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_hr_payslip_payslip_attendances
+msgid "Computation of attendances"
+msgstr "Calcul des présences"
+
+#. module: hr_payroll_attendances
+#: model:ir.ui.view,arch_db:hr_payroll_attendances.hr_payslip_form_view
+msgid "Computation result"
+msgstr "Résultat du calcul"
+
+#. module: hr_payroll_attendances
+#: model:ir.ui.view,arch_db:hr_payroll_attendances.hr_payslip_form_view
+msgid "Compute allocation requests"
+msgstr "Calculer les demandes d'attributions"
+
+#. module: hr_payroll_attendances
+#: model:ir.ui.view,arch_db:hr_payroll_attendances.hr_payslip_form_view
+msgid "Compute attendances"
+msgstr "Calculer les présences"
+
+#. module: hr_payroll_attendances
+#: model:ir.model,name:hr_payroll_attendances.model_hr_contract
+msgid "Contract"
+msgstr "Contrat"
+
+#. module: hr_payroll_attendances
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_hr_payslip_attendance_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: hr_payroll_attendances
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_hr_payslip_attendance_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: hr_payroll_attendances
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_hr_payslip_attendance_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: hr_payroll_attendances
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_resource_calendar_attendance_exclude_period
+msgid "Exclusive"
+msgstr "Exclusif"
+
+#. module: hr_payroll_attendances
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_hr_payslip_attendance_hour_from
+msgid "From"
+msgstr "De"
+
+#. module: hr_payroll_attendances
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_hr_contract_hourly_rate_attendance
+msgid "Hourly rate for attendance"
+msgstr "Tarif horaire pour le calcul des présences"
+
+#. module: hr_payroll_attendances
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_hr_payslip_attendance_id
+msgid "ID"
+msgstr "ID"
+
+#. module: hr_payroll_attendances
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_hr_payslip_attendance___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: hr_payroll_attendances
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_hr_payslip_attendance_write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: hr_payroll_attendances
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_hr_payslip_attendance_write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: hr_payroll_attendances
+#: model:ir.model,name:hr_payroll_attendances.model_hr_holidays
+msgid "Leave"
+msgstr "Congé"
+
+#. module: hr_payroll_attendances
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_hr_holidays_slip_id
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_hr_payslip_attendance_payslip_id
+msgid "Linked to payslip"
+msgstr "Relié à la feuille de paie"
+
+#. module: hr_payroll_attendances
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_hr_payslip_attendance_name
+msgid "Name"
+msgstr "Nom"
+
+#. module: hr_payroll_attendances
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_hr_payslip_attendance_nb_days
+msgid "Number of days"
+msgstr "Nombre de jours"
+
+#. module: hr_payroll_attendances
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_hr_payslip_attendance_nb_hours
+msgid "Number of hours"
+msgstr "Nombre d'heures"
+
+#. module: hr_payroll_attendances
+#: model:ir.model,name:hr_payroll_attendances.model_hr_payslip
+msgid "Pay Slip"
+msgstr "Feuille de paie"
+
+#. module: hr_payroll_attendances
+#: model:ir.ui.view,arch_db:hr_payroll_attendances.hr_payslip_form_view
+msgid "Period"
+msgstr "Période"
+
+#. module: hr_payroll_attendances
+#: model:ir.model,name:hr_payroll_attendances.model_resource_calendar
+msgid "Resource Calendar"
+msgstr "Calendrier de la ressource"
+
+#. module: hr_payroll_attendances
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_hr_payslip_attendance_time_increase
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_resource_calendar_attendance_time_increase
+msgid "Time compensation (%)"
+msgstr "Compensation horaire (%)"
+
+#. module: hr_payroll_attendances
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_resource_calendar_time_compensation_holiday_status
+msgid "Time compensation destination"
+msgstr "Type de congé pour la compensation horaire"
+
+#. module: hr_payroll_attendances
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_hr_payslip_attendance_hour_to
+msgid "To"
+msgstr "Vers"
+
+#. module: hr_payroll_attendances
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_hr_payslip_attendance_salary_increase
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_resource_calendar_attendance_salary_increase
+msgid "Wage compensation (%)"
+msgstr "Compensation salariale (%)"
+
+#. module: hr_payroll_attendances
+#: model:ir.model.fields,field_description:hr_payroll_attendances.field_hr_payslip_attendance_weekday
+msgid "Weekday"
+msgstr "Jour de la semaine"
+
+#. module: hr_payroll_attendances
+#: model:ir.model,name:hr_payroll_attendances.model_resource_calendar_attendance
+msgid "Work Detail"
+msgstr "Détail du travail"
+
+#. module: hr_payroll_attendances
+#: model:ir.model,name:hr_payroll_attendances.model_hr_payslip_attendance
+msgid "hr.payslip.attendance"
+msgstr "hr.payslip.attendance"
+
+#. module: hr_payroll_attendances
+#: selection:hr.payslip.attendance,weekday:0
+msgid "Monday"
+msgstr "Lundi"
+
+#. module: hr_payroll_attendances
+#: selection:hr.payslip.attendance,weekday:0
+msgid "Tuesday"
+msgstr "Mardi"
+
+#. module: hr_payroll_attendances
+#: selection:hr.payslip.attendance,weekday:0
+msgid "Wednesday"
+msgstr "Mercredi"
+
+#. module: hr_payroll_attendances
+#: selection:hr.payslip.attendance,weekday:0
+msgid "Thursday"
+msgstr "Jeudi"
+
+#. module: hr_payroll_attendances
+#: selection:hr.payslip.attendance,weekday:0
+msgid "Friday"
+msgstr "Vendredi"
+
+#. module: hr_payroll_attendances
+#: selection:hr.payslip.attendance,weekday:0
+msgid "Saturday"
+msgstr "Samedi"
+
+#. module: hr_payroll_attendances
+#: selection:hr.payslip.attendance,weekday:0
+msgid "Sunday"
+msgstr "Dimanche"

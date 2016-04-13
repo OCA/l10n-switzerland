@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    File: views/hr_payroll_view.xml
+    Module: l10n_ch_payroll_attendances
+
+    Created by dco@open-net.ch
+
+    Copyright (c) 2014-TODAY Open-Net Ltd.
+-->
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="hr_payslip_form_view">
+            <field name="name">hr_payslip_form_view</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <button name="compute_sheet" position="after">
+                    <button string="Compute attendances" type="object" states="draft" class="oe_highlight" name="compute_attendances"/>
+                </button>
+                <field name="number_of_hours" position="replace">
+                    <field name="number_of_hours" widget="float_time"/>
+                </field>
+                <xpath expr="//notebook/page[1]" position="after">
+                    <page string="Attendances Computation">
+                        <separator string="Computation result"/>
+                        <field name="payslip_attendances">
+                            <tree string="Computation result" editable="bottom">
+                                <field name="name"/>
+                                <field name="weekday"/>
+                                <field name="hour_from" widget="float_time"/>
+                                <field name="hour_to" widget="float_time"/>
+                                <field name="nb_hours" widget="float_time" class="oe_right" sum="Total hours"/>
+                                <field name="nb_days" sum="Total days"/>
+                                <field name="time_increase"/>
+                                <field name="time_compensation" widget="float_time" sum="Total time compensation"/>
+                                <field name="salary_increase"/>
+                                <field name="salary_compensation" sum="Total salary compensation"/>
+                            </tree>
+                            <form string="Attendance computaion result">
+                                <group col="2">
+                                    <field name="name"/>
+                                </group>
+                                <group col="2">
+                                    <field name="weekday"/>
+                                    <label for="hour_from" string="Period"/>
+                                    <div>
+                                        <field name="hour_from" widget="float_time" class="oe_inline"/> - <field name="hour_to" class="oe_inline" widget="float_time"/>
+                                    </div>
+                                </group>
+                                <group col="2">
+                                    <field name="nb_hours" widget="float_time"/>
+                                    <field name="nb_days"/>
+                                </group>
+                                <group col="2">
+                                    <field name="time_increase"/>
+                                    <field name="salary_increase"/>
+                                </group>
+                            </form>
+                        </field>
+                        <button name="compute_allocation_requests" type="object" string="Compute allocation requests"/>
+                        <separator string="Allocation requests"/>
+                        <field name="auto_generated_holiday_ids">
+                            <tree string="Auto generated allocation requests">
+                                <field name="name"/>
+                                <field name="holiday_status_id"/>
+                                <field name="number_of_days_temp" widget="float_time"/>
+                                <field name="state"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
