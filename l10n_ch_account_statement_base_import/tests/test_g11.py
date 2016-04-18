@@ -19,7 +19,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from ..parser.g11_file_parser import G11Parser
+from ..parsers.g11_file_parser import G11Parser
 from .common import BaseParserTest, BaseStatementImportTest
 
 

@@ -19,7 +19,7 @@
 #
 ##############################################################################
 import re
-from ..parser.postfinance_file_parser import XMLPFParser
+from ..parsers.postfinance_file_parser import XMLPFParser
 from .common import BaseParserTest, BaseStatementImportTest
 
 

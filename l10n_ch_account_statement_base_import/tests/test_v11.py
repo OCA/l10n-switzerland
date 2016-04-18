@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from ..parser.v11_file_parser import V11Parser
+from ..parsers.v11_file_parser import V11Parser
 from .common import BaseParserTest, BaseStatementImportTest
 
 
