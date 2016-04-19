@@ -193,7 +193,6 @@ class ScanBvr(models.TransientModel):
         invoice_model = self.env['account.invoice']
         invoice_tax_model = self.env['account.invoice.tax']
         currency_model = self.env['res.currency']
-        partner_bank_model = self.env['res.partner.bank']
         today = fields.Date.today()
         if data['bank_account']:
             account_info = self.env['res.partner.bank'].browse(
@@ -201,15 +200,6 @@ class ScanBvr(models.TransientModel):
         # We will now search the currency_id
         currency = currency_model.search(
             [('name', '=', data['bvr_struct']['currency'])])
-        # Account Modification
-        partner_bank = partner_bank_model.browse(data['bank_account'])
-        if data['bvr_struct']['domain'] == 'name':
-            partner_bank.write(
-                {'ccp': data['bvr_struct']['beneficiaire']})
-        else:
-            partner_bank.write(
-                {'bvr_adherent_num': data['bvr_struct']['bvrnumber'],
-                 'ccp': data['bvr_struct']['beneficiaire']})
         date_due = today
         # We will now compute the due date and fixe the payment term
         payment_term_id = account_info.partner_id.property_payment_term.id
@@ -345,21 +335,43 @@ class ScanBvr(models.TransientModel):
         #
         data = {}
         data['bvr_struct'] = self._get_bvr_structurated(self.bvr_string)
+        partner_bank_model = self.env['res.partner.bank']
+        partner_bank = False
         # We will now search the account linked with this BVR
         if data['bvr_struct']['domain'] == 'name':
             domain = [('acc_number', '=', data['bvr_struct']['beneficiaire'])]
+            partners_bank = partner_bank_model.search(domain)
+            partner_bank = len(partners_bank) == 1 and partners_bank[0]
         else:
-            domain = [
-                ('bvr_adherent_num', '=', data['bvr_struct']['bvrnumber'])]
-        partners_bank = self.env['res.partner.bank'].search(domain)
+            # A postal account that refers to a bank is uniquely identified
+            # by (beneficiaire + bvrnumber), at least by beneficiaire
+            domain = [('acc_number', '=', data['bvr_struct']['beneficiaire'])]
+            partners_bank = partner_bank_model.search(domain)
+            if len(partners_bank) == 1:
+                if (
+                        not partners_bank[0].bvr_adherent_num or
+                        partners_bank[0].bvr_adherent_num ==
+                        data['bvr_struct']['bvrnumber']):
+                    partner_bank = partners_bank
+            elif len(partners_bank) > 1:
+                # We need to filter further by bvr_adherent_num
+                partners_bank = partners_bank.filtered(
+                    lambda r:
+                    r.bvr_adherent_num == data['bvr_struct']['bvrnumber'])
+                if len(partners_bank) > 1:
+                    raise UserError(
+                        _('There are more than one bank corresponding '
+                          'to the current string.\n'
+                          'Please check the banks configuration.'))
+                partner_bank = partners_bank
         # We will need to know if we need to create invoice line
-        if partners_bank:
+        if partner_bank:
             # We have found the account corresponding to the
             # bvr_adhreent_number
             # so we can directly create the account
             data['id'] = self.id
-            data['partner_id'] = partners_bank.partner_id.id
-            data['bank_account'] = partners_bank.id
+            data['partner_id'] = partner_bank.partner_id.id
+            data['bank_account'] = partner_bank.id
             data['journal_id'] = self.journal_id.id
             action = self._create_direct_invoice(data)
             return action
