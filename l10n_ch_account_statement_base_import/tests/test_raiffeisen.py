@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from ..parser.raiffeisen_file_parser import RaffeisenCSVParser
+from ..parsers.raiffeisen_file_parser import RaffeisenCSVParser
 from .common import BaseParserTest, BaseStatementImportTest
 
 

@@ -19,7 +19,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from ..parser.ubs_file_parser import UBSCSVParser
+from ..parsers.ubs_file_parser import UBSCSVParser
 from .common import BaseParserTest, BaseStatementImportTest
 
 
