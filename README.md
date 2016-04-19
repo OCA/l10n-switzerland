@@ -69,8 +69,8 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
-[l10n_ch_base_bank](l10n_ch_base_bank/) | 9.0.1.0.0 | Types and number validation for Swiss electronic pmnt. DTA, ESR
-[l10n_ch_hr_payroll](l10n_ch_hr_payroll/) | 9.0.1.3 | Swiss Payroll Rules
+[l10n_ch_base_bank](l10n_ch_base_bank/) | 9.0.1.0.0 | Types and number validation for swiss electronic pmnt. DTA, ESR
+[l10n_ch_hr_payroll](l10n_ch_hr_payroll/) | 9.0.1.3 | Swizerland Payroll Rules
 [l10n_ch_states](l10n_ch_states/) | 9.0.1.0.0 | Switzerland Country States
 [l10n_ch_zip](l10n_ch_zip/) | 9.0.2.0.0 | Provides all Swiss postal codes for auto-completion
 
