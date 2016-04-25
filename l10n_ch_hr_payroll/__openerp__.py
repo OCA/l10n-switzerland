@@ -49,6 +49,7 @@
         'data/hr.salary.rule.category.xml',
         'data/hr.salary.rule.xml',
         'views/hr_employee_view.xml',
+        'views/hr_contract_view.xml'
     ],
     'installable': True
 }
