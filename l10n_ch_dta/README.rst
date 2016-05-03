@@ -6,8 +6,11 @@
 Switzerland DTA
 ==========================
 
+
 This module implements DTA. Note that it depends on these two modules: 
-    'l10n_ch_base_bank' and 'l10n_ch_payment_register'
+    'l10n_ch_base_bank' and 'account_payment_order'
+=======
+
 
 
 
@@ -49,6 +52,7 @@ Contributors
 * Nicola Malcontenti nicola.malcontenti@agilebg.com
 * Alex Comba alex.comba@agilebg.com
 * Miguel Tallón <miguel.tallon@braintec-group.com>
+* Kumar Aberer <kumar.aberer@braintec-group.com>
 
 Maintainer
 ----------

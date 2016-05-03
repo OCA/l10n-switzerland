@@ -27,7 +27,7 @@
  'website': 'http://www.camptocamp.com',
  'license': 'AGPL-3',
  'depends': ['base', 'l10n_ch_base_bank',
-             'l10n_ch_payment_register',
+             'account_payment_order',
              'document'],
  'data': ["wizard/create_dta_view.xml",
           ],
