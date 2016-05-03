@@ -133,8 +133,10 @@ class V11Parser(BaseSwissParser):
         """Parse file statement date
         :return: A date usable by Odoo in write or create dict
         """
-
-        return fields.Date.today()
+        year = fields.Date.today()[:4]
+        date = self.lines[0][61:65]
+        fdate = year + '-' + date[0:2] + '-' + date[2:]
+        return fdate
 
     def _parse(self):
         """

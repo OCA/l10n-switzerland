@@ -22,10 +22,12 @@ from os.path import splitext
 from tarfile import TarFile, TarError
 from cStringIO import StringIO
 from lxml import etree
+from wand.image import Image
 import logging
 
 from openerp import fields
 
+from .camt import PFCamtParser
 from .base_parser import BaseSwissParser
 
 _logger = logging.getLogger(__name__)
@@ -47,6 +49,8 @@ class XMLPFParser(BaseSwissParser):
         self.tar_source = data_file
         self.data_file = self._get_content_from_stream(data_file)
         self.attachments = None
+        self.is_camt = None
+        self.camt_parser = PFCamtParser()
         if self.is_tar:
             self.attachments = self._get_attachments_from_stream(data_file)
 
@@ -68,6 +72,7 @@ class XMLPFParser(BaseSwissParser):
                     for tar_content in tar_file.getnames()
                     if tar_content.endswith('.xml')]
             self.is_tar = True
+            self.file_name = splitext(xmls[0])[0]
             return tar_file.extractfile(xmls[0]).read()
         except TarError:
             return data_file
@@ -91,11 +96,20 @@ class XMLPFParser(BaseSwissParser):
         try:
             attachments = {}
             tar_file = TarFile.open(fileobj=pf_file, mode="r:gz")
+            accepted_formats = ['.tiff', '.png', '.jpeg', '.jpg']
             for file_name in tar_file.getnames():
-                if file_name.endswith('.png'):
+                accepted = reduce(lambda x, y: x or y, [
+                    file_name.endswith(format) for format in accepted_formats
+                ])
+                if accepted:
                     key = splitext(file_name)[0]
-                    png_content = tar_file.extractfile(file_name).read()
-                    attachments[key] = png_content.encode('base64')
+                    img_data = tar_file.extractfile(file_name).read()
+                    if file_name.endswith('.tiff'):
+                        # Convert to png for viewing the image in Odoo
+                        with Image(blob=img_data) as img:
+                            img.format = 'png'
+                            img_data = img.make_blob()
+                    attachments[key] = img_data.encode('base64')
             return attachments
         except TarError:
             return {}
@@ -107,7 +121,13 @@ class XMLPFParser(BaseSwissParser):
         :rtype: bool
         """
         try:
-            return re.search(r'\<IC\b', self.data_file) is not None
+            pf_xml = re.search(r'\<IC\b', self.data_file)
+            if pf_xml is None:
+                camt_xml = re.search('<GrpHdr>', self.data_file)
+                if camt_xml is None:
+                    return False
+                self.is_camt = True
+            return True
         except:
             return False
 
@@ -119,12 +139,17 @@ class XMLPFParser(BaseSwissParser):
         :return: the file account number
         :rtype: string
         """
-        account_node = tree.xpath('//SG2/FII/C078/D_3194/text()')
-        if not account_node:
-            return
-        if len(account_node) != 1:
-            raise ValueError('Many accounts found for postfinance statement')
-        return account_node[0]
+        account_number = None
+        if self.is_camt:
+            ns = tree.tag[1:tree.tag.index("}")]    # namespace
+            account_node = tree.xpath(
+                '//ns:Stmt/ns:Acct/ns:Id/ns:IBAN/text()',
+                namespaces={'ns': ns})
+        else:
+            account_node = tree.xpath('//SG2/FII/C078/D_3194/text()')
+        if account_node and len(account_node) == 1:
+            account_number = account_node[0]
+        return account_number
 
     def _parse_currency_code(self, tree):
         """Parse file currency ISO code using xml tree
@@ -138,7 +163,8 @@ class XMLPFParser(BaseSwissParser):
         if not currency_node:
             return
         if len(currency_node) != 1:
-            raise ValueError('Many currencies found for postfinance statement')
+            raise ValueError(
+                'Many currencies found for postfinance statement')
         return currency_node[0]
 
     def _parse_statement_balance(self, tree):
@@ -154,9 +180,9 @@ class XMLPFParser(BaseSwissParser):
         for move in balance_nodes:
             if move.xpath(".//@Value='315'"):
                 balance_start = float(move.xpath("./D_5004/text()")[0])
-
             if move.xpath(".//@Value='343'"):
                 balance_end = float(move.xpath("./D_5004/text()")[0])
+
         return balance_start, balance_end
 
     def _parse_transactions(self, tree):
@@ -226,17 +252,29 @@ class XMLPFParser(BaseSwissParser):
         :rtype: list
         """
         attachments = [('Statement File', self.tar_source.encode('base64'))]
-        transaction_nodes = tree.xpath("//SG6")
-        for transaction in transaction_nodes:
-            desc = '/'
-            if transaction.xpath(".//@Value='ZZZ'"):
-                desc = transaction.xpath("RFF/C506/D_1154/text()")[1]
-            att = self.attachments.get(desc)
-            if att:
-                uid = [x.text for x in transaction.iter()
-                       if (x.prefix == 'PF' and x.tag.endswith('D_4754'))]
-                uid = uid[0] if uid else desc
-                attachments.append((uid, att))
+        if self.is_camt and self.is_tar:
+            ns = tree.tag[1:tree.tag.index("}")]    # namespace
+            transaction_nodes = tree.xpath(
+                '//ns:Stmt/ns:Ntry/ns:AcctSvcrRef/text()',
+                namespaces={'ns': ns})
+            for transaction in transaction_nodes:
+                att_name = self.file_name + '-' + transaction
+                # Attachment files are limited to 87 char names
+                att = self.attachments.get(att_name[:87])
+                if att:
+                    attachments.append((transaction, att))
+        elif self.is_tar:
+            transaction_nodes = tree.xpath("//SG6")
+            for transaction in transaction_nodes:
+                desc = '/'
+                if transaction.xpath(".//@Value='ZZZ'"):
+                    desc = transaction.xpath("RFF/C506/D_1154/text()")[1]
+                att = self.attachments.get(desc)
+                if att:
+                    uid = [x.text for x in transaction.iter()
+                           if (x.prefix == 'PF' and x.tag.endswith('D_4754'))]
+                    uid = uid[0] if uid else desc
+                    attachments.append((uid, att))
         return attachments
 
     def _parse_statement_date(self, tree):
@@ -247,7 +285,19 @@ class XMLPFParser(BaseSwissParser):
         :return: A date usable by Odoo in write or create dict
         :rtype: string
         """
-        # I was not able to find a correct segment group to extract the date
+        if self.is_camt:
+            ns = tree.tag[1:tree.tag.index("}")]    # namespace
+            date = tree.xpath(
+                '//ns:GrpHdr/ns:CreDtTm/text()',
+                namespaces={'ns': ns})
+            if date:
+                return date[0][:10]
+        else:
+            date = tree.xpath('//DTM/D_2380/@Desc="Date"')
+            if date:
+                formatted_date = date[0][:4] + '-' + date[0][4:6] + '-' + \
+                    date[0][6:]
+                return formatted_date
         return fields.Date.today()
 
     def _parse(self):
@@ -256,15 +306,22 @@ class XMLPFParser(BaseSwissParser):
         property of the class from the parse result.
         This implementation expect one XML file to represents one statement
         """
-        tree = etree.fromstring(self.data_file)
-        self.currency_code = self._parse_currency_code(tree)
-        self.account_number = None
-        statement = {}
-        balance_start, balance_stop = self._parse_statement_balance(tree)
-        statement['balance_start'] = balance_start
-        statement['balance_end_real'] = balance_stop
-        statement['date'] = self._parse_statement_date(tree)
-        statement['attachments'] = self._parse_attachments(tree)
-        statement['transactions'] = self._parse_transactions(tree)
-        self.statements.append(statement)
+        if self.is_camt:
+            tree = etree.fromstring(self.data_file)
+            self.statements += self.camt_parser.parse(self.data_file)
+            if self.statements:
+                self.statements[0]['attachments'] = self._parse_attachments(
+                    tree)
+        else:
+            tree = etree.fromstring(self.data_file)
+            self.currency_code = self._parse_currency_code(tree)
+            statement = {}
+            balance_start, balance_stop = self._parse_statement_balance(tree)
+            statement['balance_start'] = balance_start
+            statement['balance_end_real'] = balance_stop
+            statement['date'] = self._parse_statement_date(tree)
+            statement['attachments'] = self._parse_attachments(tree)
+            statement['transactions'] = self._parse_transactions(tree)
+            self.statements.append(statement)
+        self.account_number = self._parse_account_number(tree)
         return True
