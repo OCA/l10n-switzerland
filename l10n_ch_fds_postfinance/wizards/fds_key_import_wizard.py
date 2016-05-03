@@ -27,7 +27,7 @@ import base64
 _logger = logging.getLogger(__name__)
 
 
-class fds_key_import_wizard(models.TransientModel):
+class FdsKeyImportWizard(models.TransientModel):
     ''' FDS Postfinance keys import wizard.
         The goal is to import existing key in the database.
 

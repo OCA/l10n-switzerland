@@ -32,7 +32,7 @@ from openerp import models, fields, api
 _logger = logging.getLogger(__name__)
 
 
-class fds_files_import_tobankstatments_wizard(models.TransientModel):
+class FdsFilesImportToBankStatementsWizard(models.TransientModel):
     ''' This wizard checks and downloads files in FDS Postfinance server
         that were not already downloaded on the database.
         This wizard is called when we choose the update_fds for one FDS.

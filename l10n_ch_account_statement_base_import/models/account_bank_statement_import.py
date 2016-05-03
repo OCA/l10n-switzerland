@@ -72,7 +72,7 @@ class AccountBankStatementLine(models.Model):
         return True
 
 
-class account_bank_statement_import(models.TransientModel):
+class AccountBankStatementImport(models.TransientModel):
 
     _inherit = 'account.bank.statement.import'
 
@@ -127,7 +127,7 @@ class account_bank_statement_import(models.TransientModel):
                     raise exceptions.Warning(_('Nothing to import'))
                 return currency_code, account_number, statements
         else:
-            return super(account_bank_statement_import, self)._parse_file(
+            return super(AccountBankStatementImport, self)._parse_file(
                 data_file)
 
     @api.model
@@ -154,7 +154,7 @@ class account_bank_statement_import(models.TransientModel):
         attachments = list(stmt_vals.pop('attachments', list()))
 
         statement_id, notifs = super(
-            account_bank_statement_import,
+            AccountBankStatementImport,
             self
         )._create_bank_statement(
             stmt_vals
@@ -185,14 +185,13 @@ class account_bank_statement_import(models.TransientModel):
     @api.model
     def _find_bank_account_id(self, account_number):
         """ Override to find Postfinance account Given IBAN number """
-        bank_account_id = super(account_bank_statement_import, self).\
+        bank_account_id = super(AccountBankStatementImport, self).\
             _find_bank_account_id(account_number)
         if not bank_account_id and account_number and len(
                 account_number) == 21:
             pf_formated_acc_number = account_number[9:].lstrip('0')
-            bank_account_ids = self.env['res.partner.bank'].search(
+            bank_account = self.env['res.partner.bank'].search(
                 [('sanitized_acc_number', '=', pf_formated_acc_number)],
                 limit=1)
-            bank_account_id = bank_account_ids[0].id if bank_account_ids\
-                else None
+            bank_account_id = bank_account.id
         return bank_account_id

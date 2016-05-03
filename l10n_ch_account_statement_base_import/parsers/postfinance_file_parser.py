@@ -293,7 +293,7 @@ class XMLPFParser(BaseSwissParser):
             if date:
                 return date[0][:10]
         else:
-            date = tree.xpath('')
+            date = tree.xpath('//DTM/D_2380/@Desc="Date"')
             if date:
                 formatted_date = date[0][:4] + '-' + date[0][4:6] + '-' + \
                     date[0][6:]
