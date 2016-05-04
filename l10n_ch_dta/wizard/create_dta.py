@@ -81,7 +81,7 @@ def tr(string_in):
     return res
 
 
-class record(object):
+class Record(object):
     """Abstract class that provides common
     knowledge for any kind of post/bank account
 
@@ -142,11 +142,12 @@ class record(object):
         return res
 
 
-class PostalRecord(record):
+class PostalRecord(Record):
     """Class that propose common
     knowledge for all postal account type
 
     """
+
     def __init__(self, global_context_dict, pool, pline):
         super(PostalRecord, self).__init__(global_context_dict, pool, pline)
         self.is_9_pos_adherent = False
@@ -294,6 +295,7 @@ class RecordGt827(PostalRecord):
     """
     Swiss internal (bvpost and bvbank) record implemetation
     """
+
     def validate_global_context_dict(self):
         """Validate record values"""
         super(RecordGt827, self).validate_global_context_dict()
@@ -375,7 +377,7 @@ class RecordGt827(PostalRecord):
         })
 
 
-class RecordGt836(record):
+class RecordGt836(Record):
     """Implements iban record"""
 
     def validate_global_context_dict(self):
@@ -488,11 +490,12 @@ class RecordGt836(record):
         self.post.update({'option_motif': 'U'})
 
 
-class RecordGt890(record):
+class RecordGt890(Record):
     """Implements Total Record of DTA file
     if behaves like a account payment order
 
     """
+
     def init_local_context(self):
         """Initialise fields"""
         self.fields = [
@@ -600,7 +603,8 @@ class DTAFileGenerator(models.TransientModel):
     @api.model
     def _set_bank_data(self, pline, elec_context, seq):
         elec_context['partner_bank_city'] = pline.bank_id.bank_id.city or False
-        elec_context['partner_bank_street'] = pline.bank_id.bank_id.street or ''
+        elec_context[
+            'partner_bank_street'] = pline.bank_id.bank_id.street or ''
         elec_context['partner_bank_zip'] = pline.bank_id.bank_id.zip or ''
         bank = pline.bank_id.bank_id
         b_country = bank.country.name if bank.country else ''
@@ -640,14 +644,14 @@ class DTAFileGenerator(models.TransientModel):
                 _('No bank account defined\n on line: %s') % pline.name
             )
         if not pline.bank_id.bank_id:
-                raise except_orm(
-                    _('Error'),
-                    _('No bank defined for the bank account: %s\n'
-                      'on the partner: %s\n on line: %s') %
-                    (pline.bank_id.acc_type,
-                     pline.partner_id.name,
-                     pline.name)
-                )
+            raise except_orm(
+                _('Error'),
+                _('No bank defined for the bank account: %s\n'
+                  'on the partner: %s\n on line: %s') %
+                (pline.bank_id.acc_type,
+                 pline.partner_id.name,
+                 pline.name)
+            )
         elec_context['sequence'] = str(seq).rjust(5).replace(' ', '0')
         am_to_pay = str(pline.amount_currency).replace('.', ',')
         elec_context['amount_to_pay'] = am_to_pay
