@@ -82,7 +82,6 @@ class TestScanBvr(common.TransactionCase):
         })
         act = wizard.validate_bvr_string()
         self.assertTrue(act['res_id'])
-        self.assertTrue(self.partner1bank1.bvr_adherent_num)
 
         new_invoice = self.env['account.invoice'].browse(act['res_id'])
         self.assertAlmostEqual(3949.75, new_invoice.amount_total, places=2)
