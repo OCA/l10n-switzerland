@@ -56,7 +56,6 @@ class AccountInvoice(models.Model):
         inverse_name='invoice_id'
     )
 
-    @api.one
     @api.depends('slip_ids', 'state')
     def _compute_full_bvr_name(self):
         """Concatenate related slip references
@@ -64,13 +63,13 @@ class AccountInvoice(models.Model):
         :return: reference comma separated
         :rtype: str
         """
-        if self.state not in ('open', 'paid'):
-            return ''
-        if not self.slip_ids:
-            return ''
-        self.bvr_reference = ', '.join(x.reference
-                                       for x in self.slip_ids
-                                       if x.reference)
+        for rec in self:
+            if (rec.state not in ('open', 'paid') or
+                    not rec.slip_ids):
+                continue
+            rec.bvr_reference = ', '.join(x.reference
+                                          for x in rec.slip_ids
+                                          if x.reference)
 
     def get_payment_move_line(self):
         """Return the move line related to current invoice slips
