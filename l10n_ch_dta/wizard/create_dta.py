@@ -664,9 +664,10 @@ class DTAFileGenerator(models.TransientModel):
             raise except_orm(
                 _('Error'),
                 _('No bank name defined\n for the bank account: %s\n'
-                  'on the partner: %s\n on line: %s') % (pline.bank_id.acc_type,
-                                                         pline.partner_id.name,
-                                                         pline.name)
+                  'on the partner: %s\n on line: %s') %
+                (pline.bank_id.acc_type,
+                 pline.partner_id.name,
+                 pline.name)
             )
         elec_context['partner_bank_iban'] = (
             pline.bank_id.get_account_number() or
