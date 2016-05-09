@@ -7,9 +7,8 @@ Switzerland DTA
 ==========================
 
 
-This module implements DTA. Note that it depends on these two modules: 
-    'l10n_ch_base_bank' and 'account_payment_order'
-=======
+This module implements DTA. Note that it depends on these two modules:
+'l10n_ch_base_bank' and 'account_payment_order'
 
 
 
