@@ -321,7 +321,8 @@ class PayslipAttendance(models.Model):
             attendance.salary_compensation = sal_inc * nb_hours * hourly_rate
 
     name = fields.Char(string="Name")
-    weekday = fields.Selection(selection=[
+    weekday = fields.Selection(
+        selection=[
             ('0', 'Monday'),
             ('1', 'Tuesday'),
             ('2', 'Wednesday'),
@@ -329,7 +330,9 @@ class PayslipAttendance(models.Model):
             ('4', 'Friday'),
             ('5', 'Saturday'),
             ('6', 'Sunday')
-        ], string="Week Day")
+        ],
+        string="Week Day"
+    )
     hour_from = fields.Float(string="From")
     hour_to = fields.Float(string="To")
     nb_days = fields.Integer(string="Number of days")
