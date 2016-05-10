@@ -44,6 +44,7 @@
         'views/hr_payroll_view.xml',
         'views/hr_contract_view.xml',
         'data/salary_rules.xml',
+        'security/ir.model.access.csv',
     ],
     'installable': True
 }
