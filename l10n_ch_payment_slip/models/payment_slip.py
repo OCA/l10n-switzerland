@@ -512,7 +512,7 @@ class PaymentSlip(models.Model):
 
     @api.model
     def _draw_bank(self, canvas, print_settings, initial_position, font, bank):
-        """Draw bank number on canvas
+        """Draw bank name, NPA and location on canvas
 
         :param canvas: payment slip reportlab component to be drawn
         :type canvas: :py:class:`reportlab.pdfgen.canvas.Canvas`
@@ -538,6 +538,7 @@ class PaymentSlip(models.Model):
         text.setFont(font.name, font.size)
         bank_name = textwrap.fill(bank.name, 26)
         lines = bank_name.split("\n")
+        lines.append(" ".join([bank.zip or '', bank.city or '']))
         text.textOut(lines.pop(0))
         text.moveCursor(0.0, font.size)
         for line in lines:
