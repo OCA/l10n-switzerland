@@ -1,5 +1,4 @@
 <odoo>
-<data>
     <record id="hr_payroll.hr_rule_comm" model="hr.salary.rule">
         <field name="amount_select">code</field>
         <field name="appears_on_payslip">True</field>
@@ -17,5 +16,4 @@ result = (contract.hourly_rate_attendance * time_to_compensate)
         <field name="sequence">300</field>
         <field name="category_id" ref="hr_payroll.ALW"/>
     </record>
-</data>
 </odoo>

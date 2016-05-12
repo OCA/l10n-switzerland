@@ -11,6 +11,16 @@ This module allows you to add commission and reimbursement to payslip
     * Add a link payslip to hr_holiday
     * Compute payslip attendances based on employe's schedule and employe's attendance
 
+Installation
+============
+To install this module, you need to:
+#. Go to Applications, search for the module and install by pressing the button.
+
+Configuration
+=============
+
+There is no configuration required to use this module.
+
 Usage
 =====
 - To start using this module, you need to configure a contract on your employees.
@@ -37,8 +47,43 @@ Usage
 - This result is used to create allocation request if time compensation was set.
 - It is also used to add salary compensation if you correctly set the corresponding rule into the salary structur of the employee.
 
+Known issues / Roadmap
+======================
+
+* ...
+
+Bug Tracker
+===========
+
+Bugs are tracked on `GitHub Issues
+<https://github.com/OCA/{project_repo}/issues>`_. In case of trouble, please
+check there if your issue has already been reported. If you spotted it first,
+help us smashing it by providing a detailed and welcomed feedback.
+
+Credits
+=======
+
+Images
+------
+
+* Odoo Community Association: `Icon <https://github.com/OCA/maintainer-tools/blob/master/template/module/static/description/icon.svg>`_.
 
 Contributors
 ------------
 
 * David Coninckx <dco@open-net.ch>
+
+Maintainer
+----------
+
+.. image:: https://odoo-community.org/logo.png
+   :alt: Odoo Community Association
+   :target: https://odoo-community.org
+
+This module is maintained by the OCA.
+
+OCA, or the Odoo Community Association, is a nonprofit organization whose
+mission is to support the collaborative development of Odoo features and
+promote its widespread use.
+
+To contribute to this module, please visit https://odoo-community.org.
