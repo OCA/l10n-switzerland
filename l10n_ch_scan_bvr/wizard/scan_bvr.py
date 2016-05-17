@@ -212,7 +212,8 @@ class ScanBvr(models.TransientModel):
                  'ccp': data['bvr_struct']['beneficiaire']})
         date_due = today
         # We will now compute the due date and fixe the payment term
-        payment_term_id = account_info.partner_id.property_payment_term.id
+        payment_term_id = (account_info.partner_id.
+                           property_supplier_payment_term.id)
         if payment_term_id:
             # We Calculate due_date
             res = invoice_model.onchange_payment_term_date_invoice(
