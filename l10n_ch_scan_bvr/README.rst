@@ -58,7 +58,7 @@ Contributors
 * Alexandre Fayolle <alexandre.fayolle@camptocamp.com>
 * César Andrés Sanchez <cesar-andres.sanchez@braintec-group.com>
 * Nicola Malcontenti <nicola.malcontenti@agilebg.com>
-* Alex Comba <alex.comba@agielbg.com>
+* Alex Comba <alex.comba@agilebg.com>
 
 Maintainer
 ----------
