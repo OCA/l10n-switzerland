@@ -30,17 +30,32 @@ class TestPayroll(common.TransactionCase):
             }
         )
         res_cal_att_obj = self.env['resource.calendar.attendance']
-        self.working_schedule_line = res_cal_att_obj.create(
+        self.working_schedule_line1 = res_cal_att_obj.create(
             {
                 'name': 'Monday',
                 'dayofweek': '0',
                 'hour_from': 8.0,
                 'hour_to': 17.0,
+                'date_from': '2016-05-23',
+                'date_to': '2016-05-23',
+                'time_increase': 0.1,
+                'salary_increase': 0.1,
+                'calendar_id': self.working_schedule.id,
+                'exclude_period': True,
+            }
+        )
+        self.working_schedule_line2 = res_cal_att_obj.create(
+            {
+                'name': 'Monday Night',
+                'dayofweek': '0',
+                'hour_from': 15.0,
+                'hour_to': 20.0,
                 'time_increase': 0.1,
                 'salary_increase': 0.1,
                 'calendar_id': self.working_schedule.id,
             }
         )
+
         self.employee.working_hours = self.working_schedule.id
 
         sign_in_datetime = fields.Datetime.to_string(
@@ -83,3 +98,5 @@ class TestPayroll(common.TransactionCase):
 
         self.assertEqual(self.payslip.payslip_attendances[0].nb_days, 1)
         self.assertEqual(self.payslip.payslip_attendances[0].nb_hours, 8)
+        self.assertEqual(self.payslip.payslip_attendances[1].nb_days, 1)
+        self.assertEqual(self.payslip.payslip_attendances[1].nb_hours, 1)
