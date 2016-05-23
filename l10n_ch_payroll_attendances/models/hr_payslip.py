@@ -45,6 +45,12 @@ class Payslip(models.Model):
         readonly=True, states={'draft': [('readonly', False)]}
     )
 
+    @api.multi
+    def unlink(self):
+        for payslip in self:
+            self.auto_generated_holiday_ids.unlink()
+        return super(Payslip, self).unlink()
+
     def _total_seconds(self, time):
         return time.hour * 3600 + time.minute * 60 + time.second
 
@@ -80,6 +86,8 @@ class Payslip(models.Model):
         match_time_from = time1_from
         match_time_to = time1_to
         if (time1_to <= time2_from):
+            return (False, False)
+        if (time1_from >= time2_to):
             return (False, False)
         if (time1_from < time2_from):
             match_time_from = time2_from
@@ -216,6 +224,7 @@ class Payslip(models.Model):
                                         hour_from, hour_to,
                                         match[2][0], match[2][1]
                                     ))
+
                                     if not cal_attendance.exclude_period:
                                         sec_to = self._total_seconds(
                                             match_period[1])
