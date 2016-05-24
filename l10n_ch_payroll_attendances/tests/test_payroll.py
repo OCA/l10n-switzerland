@@ -18,6 +18,7 @@ class TestPayroll(common.TransactionCase):
         self.working_schedule = self.env['resource.calendar'].create(
             {
                 'name': 'Test schedule',
+                'time_compensation_holiday_status': 1,
             }
         )
 
