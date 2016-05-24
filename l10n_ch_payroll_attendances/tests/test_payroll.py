@@ -59,6 +59,8 @@ class TestPayroll(common.TransactionCase):
 
         self.employee.working_hours = self.working_schedule.id
 
+        sign_in_past_month_datetime = fields.Datetime.to_string(
+            datetime.datetime(2016, 4, 23, 7, 0, 0))
         sign_out_to_remove_datetime = fields.Datetime.to_string(
             datetime.datetime(2016, 5, 22, 16, 0, 0))
         sign_in_datetime = fields.Datetime.to_string(
@@ -66,14 +68,21 @@ class TestPayroll(common.TransactionCase):
         sign_out_datetime = fields.Datetime.to_string(
             datetime.datetime(2016, 5, 23, 16, 0, 0))
 
-        self.attendance_sign_out_to_remove = self.env['hr.attendance'].create(
+        self.env['hr.attendance'].create(
+            {
+                'name': sign_in_past_month_datetime,
+                'action': 'sign_in',
+                'employee_id': self.employee.id,
+            }
+        )
+        self.env['hr.attendance'].create(
             {
                 'name': sign_out_to_remove_datetime,
                 'action': 'sign_out',
                 'employee_id': self.employee.id,
             }
         )
-        self.attendance_sign_in = self.env['hr.attendance'].create(
+        self.env['hr.attendance'].create(
             {
                 'name': sign_in_datetime,
                 'action': 'sign_in',
@@ -81,7 +90,7 @@ class TestPayroll(common.TransactionCase):
             }
         )
 
-        self.attendance_sign_out = self.env['hr.attendance'].create(
+        self.env['hr.attendance'].create(
             {
                 'name': sign_out_datetime,
                 'action': 'sign_out',
