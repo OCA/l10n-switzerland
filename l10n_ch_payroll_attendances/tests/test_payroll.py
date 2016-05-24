@@ -124,3 +124,4 @@ class TestPayroll(common.TransactionCase):
             self.payslip.payslip_attendances[0].time_compensation, 0.8)
         self.assertEqual(
             self.payslip.payslip_attendances[0].salary_compensation, 96)
+        self.payslip.process_sheet()
