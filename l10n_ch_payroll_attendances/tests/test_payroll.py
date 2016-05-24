@@ -27,6 +27,7 @@ class TestPayroll(common.TransactionCase):
                 'employee_id': self.employee.id,
                 'working_hours': self.working_schedule.id,
                 'wage': 0,
+                'hourly_rate_attendance': 120,
             }
         )
         res_cal_att_obj = self.env['resource.calendar.attendance']
@@ -58,11 +59,20 @@ class TestPayroll(common.TransactionCase):
 
         self.employee.working_hours = self.working_schedule.id
 
+        sign_out_to_remove_datetime = fields.Datetime.to_string(
+            datetime.datetime(2016, 5, 22, 16, 0, 0))
         sign_in_datetime = fields.Datetime.to_string(
             datetime.datetime(2016, 5, 23, 7, 0, 0))
         sign_out_datetime = fields.Datetime.to_string(
             datetime.datetime(2016, 5, 23, 16, 0, 0))
 
+        self.attendance_sign_out_to_remove = self.env['hr.attendance'].create(
+            {
+                'name': sign_out_to_remove_datetime,
+                'action': 'sign_out',
+                'employee_id': self.employee.id,
+            }
+        )
         self.attendance_sign_in = self.env['hr.attendance'].create(
             {
                 'name': sign_in_datetime,
@@ -100,3 +110,7 @@ class TestPayroll(common.TransactionCase):
         self.assertEqual(self.payslip.payslip_attendances[0].nb_hours, 8)
         self.assertEqual(self.payslip.payslip_attendances[1].nb_days, 1)
         self.assertEqual(self.payslip.payslip_attendances[1].nb_hours, 1)
+        self.assertEqual(
+            self.payslip.payslip_attendances[0].time_compensation, 0.8)
+        self.assertEqual(
+            self.payslip.payslip_attendances[0].salary_compensation, 96)
