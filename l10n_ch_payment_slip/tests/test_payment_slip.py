@@ -40,19 +40,21 @@ class TestPaymentSlip(test_common.TransactionCase):
 
     def make_invoice(self):
         bank_account = self.make_bank()
-        account = self.env['account.account'].search([('code', '=', '111000')])
+        account_model = self.env['account.account']
+        account_debtor = account_model.search([('code', '=', '1100')])
+        account_sale = account_model.search([('code', '=', '3200')])
 
         invoice = self.env['account.invoice'].create({
             'partner_id': self.env.ref('base.res_partner_12').id,
             'reference_type': 'none',
             'name': 'A customer invoice',
-            'account_id': account.id,
+            'account_id': account_debtor.id,
             'type': 'out_invoice',
             'partner_bank_id': bank_account.id
         })
 
         self.env['account.invoice.line'].create({
-            'account_id': account.id,
+            'account_id': account_sale.id,
             'product_id': False,
             'quantity': 1,
             'price_unit': 862.50,
@@ -103,7 +105,7 @@ class TestPaymentSlip(test_common.TransactionCase):
                 self.assertTrue(slip.scan_line)
                 self.assertTrue(slip.slip_image)
                 self.assertTrue(slip.a4_pdf)
-                inv_num = line.invoice.number
+                inv_num = line.invoice_id.number
                 line_ident = self._compile_get_ref.sub(
                     '', "%s%s" % (inv_num, line.id)
                 )
