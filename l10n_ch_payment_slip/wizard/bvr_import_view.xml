@@ -36,7 +36,7 @@
       <field name="type">form</field>
       <field name="inherit_id" ref="account.view_bank_statement_form"/>
       <field name="arch" type="xml">
-        <div name="import_buttons" position="inside">
+        <div name="button_box" position="inside">
           <button
               name="%(wizard_v11_import)d"
               states="draft,open"

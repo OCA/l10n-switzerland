@@ -1,23 +1,6 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Nicolas Bessi
-#    Copyright 2014 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2014-2016 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from openerp import models
 
 
@@ -42,11 +25,12 @@ class ExtendedReport(models.Model):
         slip_model = self.pool['l10n_ch.payment_slip']
         invoice_model = self.pool['account.invoice']
         company = user_model.browse(cr, uid, uid, context=context).company_id
-        invoice = invoice_model.browse(cr, uid, ids, context=context)
+        invoices = invoice_model.browse(cr, uid, ids, context=context)
+
         docs = slip_model.compute_pay_slips_from_invoices(
             cr,
             uid,
-            invoice,
+            invoices,
             context=context
         )
         if len(docs) == 1:
@@ -64,7 +48,8 @@ class ExtendedReport(models.Model):
 
     def get_pdf(self, cr, uid, ids, report_name, html=None, data=None,
                 context=None):
-        if report_name == 'one_slip_per_page_from_invoice':
+        if (report_name == 'l10n_ch_payment_slip.'
+                           'one_slip_per_page_from_invoice'):
             return self._generate_one_slip_per_page_from_invoice_pdf(
                 cr,
                 uid,
