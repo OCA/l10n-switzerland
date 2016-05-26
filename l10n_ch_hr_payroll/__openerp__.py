@@ -31,7 +31,7 @@
     'name': 'Switzerland - Payroll',
     'summary': 'Swizerland Payroll Rules',
     'category': 'Localization',
-    'author': "Open-Net Sàrl,Odoo Community Association (OCA)",
+    'author': "Open Net Sàrl,Odoo Community Association (OCA)",
     'depends': [
         'decimal_precision',
         'hr_payroll',
