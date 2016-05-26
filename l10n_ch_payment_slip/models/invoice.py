@@ -1,30 +1,12 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Nicolas Bessi. Copyright Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-from openerp import models, fields, api
+# © 2012-2016 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from openerp import _, api, exceptions, fields, models
 
 
 class AccountMoveLine(models.Model):
 
     _inherit = "account.move.line"
-
-    transaction_ref = fields.Char('Transaction Ref.')
 
     payment_slip_ids = fields.One2many(comodel_name='l10n_ch.payment_slip',
                                        inverse_name='move_line_id',
@@ -74,7 +56,6 @@ class AccountInvoice(models.Model):
         inverse_name='invoice_id'
     )
 
-    @api.one
     @api.depends('slip_ids', 'state')
     def _compute_full_bvr_name(self):
         """Concatenate related slip references
@@ -82,13 +63,13 @@ class AccountInvoice(models.Model):
         :return: reference comma separated
         :rtype: str
         """
-        if self.state not in ('open', 'paid'):
-            return ''
-        if not self.slip_ids:
-            return ''
-        self.bvr_reference = ', '.join(x.reference
-                                       for x in self.slip_ids
-                                       if x.reference)
+        for rec in self:
+            if (rec.state not in ('open', 'paid') or
+                    not rec.slip_ids):
+                continue
+            rec.bvr_reference = ', '.join(x.reference
+                                          for x in rec.slip_ids
+                                          if x.reference)
 
     def get_payment_move_line(self):
         """Return the move line related to current invoice slips
@@ -99,7 +80,8 @@ class AccountInvoice(models.Model):
         move_line_model = self.env['account.move.line']
         return move_line_model.search(
             [('move_id', '=', self.move_id.id),
-             ('account_id.type', 'in',  ['receivable', 'payable'])]
+             ('account_id.user_type_id.type', 'in',
+              ['receivable', 'payable'])]
         )
 
     @api.model
@@ -126,7 +108,7 @@ class AccountInvoice(models.Model):
         self.env.invalidate_all()
 
     @api.multi
-    def action_number(self):
+    def invoice_validate(self):
         """ Copy the BVR/ESR reference in the transaction_ref of move lines.
 
         For customers invoices: the BVR reference is computed using
@@ -136,7 +118,6 @@ class AccountInvoice(models.Model):
         field of the invoice.
 
         """
-        res = super(AccountInvoice, self).action_number()
         pay_slip = self.env['l10n_ch.payment_slip']
         for inv in self:
             if inv.type in ('in_invoice', 'in_refund'):
@@ -153,4 +134,33 @@ class AccountInvoice(models.Model):
                     ref = pay_slip.reference
                     self._action_bvr_number_move_line(pay_slip.move_line_id,
                                                       ref)
-        return res
+        return super(AccountInvoice, self).invoice_validate()
+
+    @api.multi
+    def print_bvr(self):
+        self.ensure_one()
+        self._check_bvr_generatable()
+        self.sent = True
+        return self.env['report'].get_action(
+            self, 'l10n_ch_payment_slip.one_slip_per_page_from_invoice')
+
+    @api.multi
+    def _check_bvr_generatable(self):
+        msg = []
+        for inv in self:
+            if inv.state in ('draft', 'cancel'):
+                msg.append(_('The invoice must be confirmed.'))
+            bank_acc = inv.partner_bank_id
+            if not bank_acc:
+                msg.append(_('The invoice needs a partner bank account.'))
+            else:
+                if not bank_acc.bvr_adherent_num:
+                    msg.append(_('The bank account {} used in invoice has no '
+                                 'BVR/ESR adherent number.'
+                                 ).format(bank_acc.acc_number))
+                if not bank_acc.acc_type != 'postal' or not bank_acc.ccp:
+                    msg.append(_('The bank account {} used in invoice needs to'
+                                 ' be a postal account or have a bank CCP.'
+                                 ).format(bank_acc.acc_number))
+            if msg:
+                raise exceptions.UserError('\n'.join(msg))
