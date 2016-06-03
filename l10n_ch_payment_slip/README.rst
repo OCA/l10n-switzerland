@@ -73,6 +73,7 @@ Contributors
 * Lorenzo Battistini <lorenzo.battistini@agilebg.com>
 * Paul Catinean <paulcatinean@gmail.com>
 * Paulius Sladkevičius <paulius@hbee.eu>
+* David Coninckx <dco@open-net.ch>
 
 Financial contributors
 ----------------------
