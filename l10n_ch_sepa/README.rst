@@ -2,14 +2,24 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-============================================
-Switzerland - ISO 20022 credit transfer file
-============================================
+==============================================================
+Switzerland - ISO 20022 credit transfer and direct debit files
+==============================================================
 
-This module adds support for *pain.001.001.03.ch.02* which is the format
-used in Switzerland for ISO 20022 credit transfers (SEPA or not SEPA).
+This module adds support for 2 file formats used in Switzerland:
 
-It implements the `guidelines for ISO 20022 credit transfers <http://www.six-interbank-clearing.com/dam/downloads/fr/standardization/iso/swiss-recommendations/implementation_guidelines_ct.pdf>`_ published by SIX Interbank Clearing.
+* *pain.001.001.03.ch.02* which is used for ISO 20022 credit transfers (SEPA or not SEPA),
+
+* *pain.008.001.02.ch.01* which is used for ISO 20022 direct debits.
+
+It implements the guidelines for `ISO 20022 credit transfers <http://www.six-interbank-clearing.com/dam/downloads/fr/standardization/iso/swiss-recommendations/implementation_guidelines_ct.pdf>`_ and `ISO 20022 direct debits <http://www.six-interbank-clearing.com/dam/downloads/en/standardization/iso/swiss-recommendations/implementation-guidelines-swiss-dd.pdf>`_ published by SIX Interbank Clearing.
+
+Installation
+============
+
+To support pain.001.001.03.ch.02 credit transfers, you should also install the OCA module *account_banking_sepa_credit_transfer*.
+
+To support pain.008.001.02.ch.01 direct debits, you should also install the OCA module *account_banking_sepa_direct_debit*.
 
 Configuration
 =============
@@ -17,6 +27,7 @@ Configuration
 In the menu *Accounting > Configuration > Management > Payment Methods*,
 select the payment method that has the code *sepa_credit_transfer* and
 set the *PAIN Version* to *pain.001.001.03.ch.02 (used in Switzerland)*.
+If you use direct debits, you should also select the payment method that has the code *sepa_direct_debit* and set the *PAIN Version* to *pain.008.001.02.ch.01*.
 
 Usage
 =====

@@ -35,20 +35,21 @@ class AccountPaymentOrder(models.Model):
         self.ensure_one()
         nsmap = super(AccountPaymentOrder, self).generate_pain_nsmap()
         pain_flavor = self.payment_mode_id.payment_method_id.pain_version
-        if pain_flavor == 'pain.001.001.03.ch.02':
+        if pain_flavor in ['pain.001.001.03.ch.02', 'pain.008.001.02.ch.01']:
             nsmap[None] = 'http://www.six-interbank-clearing.com/de/'\
-                          'pain.001.001.03.ch.02.xsd'
+                          '%s.xsd' % pain_flavor
+
         return nsmap
 
     @api.multi
     def generate_pain_attrib(self):
         self.ensure_one()
         pain_flavor = self.payment_mode_id.payment_method_id.pain_version
-        if pain_flavor == 'pain.001.001.03.ch.02':
+        if pain_flavor in ['pain.001.001.03.ch.02', 'pain.008.001.02.ch.01']:
             attrib = {
                 "{http://www.w3.org/2001/XMLSchema-instance}schemaLocation":
                 "http://www.six-interbank-clearing.com/de/"
-                "pain.001.001.03.ch.02.xsd  pain.001.001.03.ch.02.xsd"
+                "%s.xsd  %s.xsd" % (pain_flavor, pain_flavor)
                 }
             return attrib
         else:
