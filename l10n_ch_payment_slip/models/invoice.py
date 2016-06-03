@@ -158,7 +158,7 @@ class AccountInvoice(models.Model):
                     msg.append(_('The bank account {} used in invoice has no '
                                  'BVR/ESR adherent number.'
                                  ).format(bank_acc.acc_number))
-                if not bank_acc.acc_type == 'postal' or not bank_acc.ccp:
+                if not (bank_acc.acc_type == 'postal' or bank_acc.ccp):
                     msg.append(_('The bank account {} used in invoice needs to'
                                  ' be a postal account or have a bank CCP.'
                                  ).format(bank_acc.acc_number))
