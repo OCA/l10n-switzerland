@@ -78,7 +78,7 @@ addon | version | summary
 [l10n_ch_fds_postfinance](l10n_ch_fds_postfinance/) | 8.0.1.0.1 | Download files and import bank statements from FDS
 [l10n_ch_fds_upload_dd](l10n_ch_fds_upload_dd/) | 8.0.1.0.1 | Upload Direct Debit files to FDS PostFinance
 [l10n_ch_fds_upload_sepa](l10n_ch_fds_upload_sepa/) | 8.0.1.0.1 | Upload SEPA files to FDS PostFinance
-[l10n_ch_hr_payroll](l10n_ch_hr_payroll/) | 8.0.1.2 | Swizerland Payroll Rules
+[l10n_ch_hr_payroll](l10n_ch_hr_payroll/) | 8.0.1.2.0 | Swizerland Payroll Rules
 [l10n_ch_import_cresus](l10n_ch_import_cresus/) | 8.0.1.0.0 | Account Import Cresus
 [l10n_ch_lsv_dd](l10n_ch_lsv_dd/) | 8.0.1.0 | Create LSV and Direct Debit (postfinance) files
 [l10n_ch_payment_slip](l10n_ch_payment_slip/) | 8.0.2.1.0 | Print ESR/BVR payment slip with your invoices
