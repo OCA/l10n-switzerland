@@ -14,10 +14,13 @@
         "account_banking_pain_base",
         "l10n_ch_base_bank",
     ],
-    "data": ['views/account_payment_order.xml'],
+    "data": [
+        'views/account_payment_line.xml',
+        'views/bank_payment_line.xml',
+        ],
     "test": [
-        #"test/pain001_eu.yml",
-        #"test/pain001_ch.yml",
+        # "test/pain001_eu.yml",
+        # "test/pain001_ch.yml",
     ],
     'installable': True,
 }

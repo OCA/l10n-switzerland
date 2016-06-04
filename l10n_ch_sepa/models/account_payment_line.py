@@ -8,6 +8,8 @@ from openerp import models, fields
 class AccountPaymentLine(models.Model):
     _inherit = 'account.payment.line'
 
+    local_instrument = fields.Selection(
+        selection_add=[('CH01', 'CH01 (BVR)')])
     communication_type = fields.Selection(selection_add=[('bvr', 'BVR')])
 
     def invoice_reference_type2communication_type(self):
