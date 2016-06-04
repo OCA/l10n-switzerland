@@ -72,7 +72,7 @@ addon | version | summary
 [l10n_ch_bank](l10n_ch_bank/) | 9.0.1.0.0 | Banks names, addresses and BIC codes
 [l10n_ch_base_bank](l10n_ch_base_bank/) | 9.0.1.0.0 | Types and number validation for swiss electronic pmnt. DTA, ESR
 [l10n_ch_hr_payroll](l10n_ch_hr_payroll/) | 9.0.1.3.0 | Swizerland Payroll Rules
-[l10n_ch_payment_slip](l10n_ch_payment_slip/) | 9.0.2.1.0 | Print ESR/BVR payment slip with your invoices
+[l10n_ch_payment_slip](l10n_ch_payment_slip/) | 9.0.2.1.1 | Print ESR/BVR payment slip with your invoices
 [l10n_ch_states](l10n_ch_states/) | 9.0.1.0.0 | Switzerland Country States
 [l10n_ch_zip](l10n_ch_zip/) | 9.0.2.0.0 | Provides all Swiss postal codes for auto-completion
 
