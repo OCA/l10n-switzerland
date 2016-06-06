@@ -14,5 +14,6 @@ class AccountMoveLine(models.Model):
             payment_order)
         if self.invoice_id and self.invoice_id.reference_type == 'bvr':
             vals['local_instrument'] = 'CH01'
-            print "VALS ch01 vals=", vals
+            if vals['communication']:
+                vals['communication'] = vals['communication'].replace(' ', '')
         return vals
