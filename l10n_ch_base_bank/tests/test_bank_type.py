@@ -10,14 +10,12 @@ class TestBankType(common.TransactionCase):
         bank = self.env['res.bank'].create({
             'name': 'BCV',
             'ccp': '01-1234-1',
-            'bic': '234234',
+            'bic': 'BCVLCH2LXXX',
             'clearing': '234234',
         })
         bank_account = self.env['res.partner.bank'].create({
             'partner_id': self.partner.id,
             'bank_id': bank.id,
-            'bank_name': bank.name,
-            'bank_bic': bank.bic,
             'acc_number': 'Bank/CCP 01-1234-1',
         })
         self.assertEqual(bank_account.acc_type, 'bank')
@@ -25,14 +23,12 @@ class TestBankType(common.TransactionCase):
     def test_is_postal_account(self):
         bank = self.env['res.bank'].create({
             'name': 'BCV',
-            'bic': '234234',
+            'bic': 'BCVLCH2LXXX',
             'clearing': '234234',
         })
         bank_account = self.env['res.partner.bank'].create({
             'partner_id': self.partner.id,
             'bank_id': bank.id,
-            'bank_name': bank.name,
-            'bank_bic': bank.bic,
             'acc_number': '01-1234-1',
         })
         self.assertEqual(bank_account.acc_type, 'postal')
