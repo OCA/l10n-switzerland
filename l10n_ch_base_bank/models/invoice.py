@@ -17,24 +17,6 @@ class AccountInvoice(models.Model):
         selection.append(('bvr', _('BVR Reference')))
         return selection
 
-    @api.onchange('partner_id', 'company_id')
-    def onchange_partner_id_set_bank(self):
-        bank = False
-        if self.partner_id:
-            if self.type in ('in_invoice', 'in_refund'):
-                partner = self.partner_id
-                if partner.bank_ids:
-                    bank = partner.bank_ids[0]
-                self.partner_bank_id = bank
-            else:
-                user = self.env.user
-                bank_ids = user.company_id.partner_id.bank_ids
-                if bank_ids:
-                    self.partner_bank_id = bank_ids[0]
-                    bank = bank_ids[0]
-        if self.partner_bank_id != bank:
-            self.partner_bank_id = bank
-
     @api.onchange('reference')
     def onchange_reference(self):
         """Identify if the reference entered is of type BVR
