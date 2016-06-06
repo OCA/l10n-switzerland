@@ -82,7 +82,7 @@ class AccountPaymentOrder(models.Model):
             bank_line=bank_line)
 
     @api.model
-    def generate_party_bank_account(
+    def generate_party_acc_number(
             self, parent_node, party_type, order, partner_bank, gen_args,
             bank_line=None):
         if (
@@ -103,6 +103,6 @@ class AccountPaymentOrder(models.Model):
             party_account_other_id.text = partner_bank.ccp
             return True
         else:
-            return super(AccountPaymentOrder, self).generate_party_bank_account(
+            return super(AccountPaymentOrder, self).generate_party_acc_number(
                 parent_node, party_type, order, partner_bank, gen_args,
                 bank_line=bank_line)
