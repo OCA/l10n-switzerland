@@ -42,6 +42,11 @@ This module doesn't modify the standard usage of the modules
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/125/9.0
 
+Known issues / Roadmap
+======================
+
+* The direct debit file in pain.008.001.02.ch.01 format may be valid against the XSD, but not according to the guidelines of SIX Interbank Clearing. There is still some work to be done to make a good ISO20022 direct debit file for switzerland.
+
 Bug Tracker
 ===========
 
