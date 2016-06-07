@@ -19,7 +19,6 @@
         'views/bank_payment_line.xml',
         ],
     "test": [
-        # "test/pain001_eu.yml",
         # "test/pain001_ch.yml",
     ],
     'installable': True,

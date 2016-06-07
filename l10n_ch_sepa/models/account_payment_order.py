@@ -15,11 +15,10 @@ class AccountPaymentOrder(models.Model):
         self.ensure_one()
         sepa = super(AccountPaymentOrder, self).compute_sepa_final_hook(sepa)
         # BVR orders cannot be SEPA orders
-        if sepa:
-            for line in self.payment_line_ids:
-                if line.communication_type == 'bvr':
-                    sepa = False
-                    break
+        if sepa and any(
+                line.communication_type == 'bvr'
+                for line in self.payment_line_ids):
+            sepa = False
         return sepa
 
     @api.multi
@@ -92,7 +91,7 @@ class AccountPaymentOrder(models.Model):
             if not partner_bank.ccp:
                 raise UserError(_(
                     "The field 'CCP/CP-Konto' is not set on the bank "
-                    "'%s'.") % partner_bank.bank_id.ccp)
+                    "'%s'.") % partner_bank.bank_id.name)
             party_account = etree.SubElement(
                 parent_node, '%sAcct' % party_type)
             party_account_id = etree.SubElement(party_account, 'Id')
