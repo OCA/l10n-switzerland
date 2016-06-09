@@ -730,13 +730,7 @@ class DTAFileGenerator(models.TransientModel):
             elif elec_pay == 'bv':
                 record_type = RecordGt827
             else:
-                name = res_partner_bank_obj.name_get(
-                    self.env.cr,
-                    self.env.user,
-                    [pline.partner_bank_id.id],
-                    self._context
-                )
-                name = name[0][1]
+                name = pline.partner_bank_id.name_get()[0][1]
                 raise except_orm(
                     _('Error'),
                     _('The Bank type %s of the bank account: %s '
