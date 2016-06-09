@@ -20,3 +20,4 @@
 ##############################################################################
 from . import wizard
 from . import bank
+import account_payment_order

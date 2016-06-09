@@ -32,7 +32,7 @@
 -
   I create my payment order to pay my invoice
 -
-  !record {model: payment.order, id: dta_payment_order}:
+  !record {model: account.payment.order, id: dta_payment_order}:
     reference: TEst_pr_01
     date_prefered: due
     mode: payment_mode_dta
@@ -68,7 +68,7 @@
     result = wiz._create_dta(data)
     assert result, "No result returned"
     attachment_obj = self.pool.get('ir.attachment')
-    attachment_ids = attachment_obj.search(cr, uid, [('res_model', '=', 'payment.order'), ('res_id', '=', data['id'])])
+    attachment_ids = attachment_obj.search(cr, uid, [('res_model', '=', 'account.payment.order'), ('res_id', '=', data['id'])])
     assert len(attachment_ids) == 1, "Not unique id"
     attachment_browse = attachment_obj.browse(cr, uid, attachment_ids[0])
     dta_file = base64.decodestring(attachment_browse.datas or '')
