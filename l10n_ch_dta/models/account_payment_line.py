@@ -9,10 +9,10 @@ class AccountPaymentLine(models.Model):
     _inherit = 'account.payment.line'
     _description = 'Payment Lines'
 
-    communication_type = fields.Selection(selection_add=[('bvr', 'BVR')])
+    communication_type = fields.Selection(selection_add=[('bvr', 'bvr')])
 
     def invoice_reference_type2communication_type(self):
         res = super(AccountPaymentLine,
                     self).invoice_reference_type2communication_type()
-        res.update({'bvr': 'BVR'})
+        res.update({'bvr': 'bvr'})
         return res
