@@ -56,16 +56,16 @@ class TestSCT_CH(AccountingTestCase):
             'bank_id': ch_bank.id,
             })
         # create a payment mode
+        pay_method_id = self.env.ref(
+            'account_banking_sepa_credit_transfer.sepa_credit_transfer').id
         self.payment_mode = self.payment_mode_model.create({
             'name': 'CH credit transfer',
             'bank_account_link': 'fixed',
             'fixed_journal_id': self.bank_journal.id,
-            'payment_method_id': self.env.ref(
-                'account_banking_sepa_credit_transfer.sepa_credit_transfer').id,
+            'payment_method_id': pay_method_id,
             })
         self.payment_mode.payment_method_id.pain_version =\
             'pain.001.001.03.ch.02'
-        eur_currency_id = self.env.ref('base.EUR').id
         chf_currency_id = self.env.ref('base.CHF').id
         company.currency_id = chf_currency_id
         # Create a bank account
@@ -137,7 +137,8 @@ class TestSCT_CH(AccountingTestCase):
             '//p:PmtInf/p:PmtMtd', namespaces=namespaces)
         self.assertEquals(
             namespaces['p'],
-            'http://www.six-interbank-clearing.com/de/pain.001.001.03.ch.02.xsd')
+            'http://www.six-interbank-clearing.com/de/'
+            'pain.001.001.03.ch.02.xsd')
         self.assertEquals(pay_method_xpath[0].text, 'TRF')
         sepa_xpath = xml_root.xpath(
             '//p:PmtInf/p:PmtTpInf/p:SvcLvl/p:Cd', namespaces=namespaces)
