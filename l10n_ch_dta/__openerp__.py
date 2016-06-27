@@ -36,5 +36,6 @@
  'test': ["test/l10n_ch_dta.yml"],
  'auto_install': False,
  'installable': True,
+ 'post_init_hook': 'update_bank_journals',
  'images': []
  }
