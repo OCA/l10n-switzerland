@@ -3,9 +3,7 @@
 # © 2014 Serv. Tecnol. Avanzados - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, api, _
-from openerp.exceptions import UserError
-from lxml import etree
+from openerp import models, api
 
 
 class AccountPaymentOrder(models.Model):
@@ -18,8 +16,8 @@ class AccountPaymentOrder(models.Model):
         if self.payment_mode_id.payment_method_id.code != 'DTA':
             return super(AccountPaymentOrder, self).generate_payment_file()
 
-        #The following code is just so the existing wizard can be reused
-        #without completely refactoring it
+        # The following code is just so the existing wizard can be reused
+        # without completely refactoring it
         wizard_obj = self.env['create.dta.wizard']
         ctx = dict(self.env.context)
         ctx.update({'active_id': self.id})

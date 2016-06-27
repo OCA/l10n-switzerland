@@ -20,10 +20,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+
 import time
 from datetime import datetime
 import re
-import base64
 
 from openerp.exceptions import except_orm
 from openerp import models, fields, api, _
@@ -286,8 +286,8 @@ class RecordGt826(PostalRecord):
                 _('You must provide a BVR number\n'
                   'for the bank account: %s'
                   'on line: %s') % (
-                self.pline.partner_bank_id.get_account_number(),
-                self.pline.name)
+                    self.pline.partner_bank_id.get_account_number(),
+                    self.pline.name)
             )
 
 
@@ -405,8 +405,8 @@ class RecordGt836(Record):
                 _('Error'),
                 _('No IBAN defined \n for the bank account: %s\n'
                   'on line: %s') % (
-                self.pline.partner_bank_id.get_account_number(),
-                self.pline.name)
+                    self.pline.partner_bank_id.get_account_number(),
+                    self.pline.name)
             )
         # Bank code is swift (BIC address)
         if self.global_values['partner_bank_code']:
@@ -684,7 +684,7 @@ class DTAFileGenerator(models.TransientModel):
         number = number.replace('.', '').replace('-', '') or False
         elec_context['partner_bank_number'] = number
         elec_context['partner_bvr'] = ''
-        if pline.partner_bank_id.acc_type in ('bv', 'bvr','postal'):
+        if pline.partner_bank_id.acc_type in ('bv', 'bvr', 'postal'):
             part = pline.partner_bank_id.get_account_number() or ''
             elec_context['partner_bvr'] = part
         self._set_bank_data(pline, elec_context, seq)
@@ -704,7 +704,6 @@ class DTAFileGenerator(models.TransientModel):
         elec_context = self._initialize_elec_context(data)
         dta = ''
         payment_obj = self.env['account.payment.order']
-        res_partner_bank_obj = self.env['res.partner.bank']
         payment = payment_obj.browse(data['id'])
         seq = 1
         amount_tot = 0
