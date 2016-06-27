@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# © 2010-2016 Akretion (www.akretion.com)
-# © 2014 Serv. Tecnol. Avanzados - Pedro M. Baeza
+# © 2016 Braintec AG - Kumar Aberer <kumar.aberer@braintec-group.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp import models, api
