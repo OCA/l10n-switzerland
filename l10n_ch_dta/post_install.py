@@ -4,6 +4,7 @@
 
 from openerp import SUPERUSER_ID
 
+
 def update_bank_journals(cr, pool):
     ajo = pool['account.journal']
     journal_ids = ajo.search(
