@@ -7,11 +7,11 @@
         <field name="clearing">123456</field>
         <field name="code">123456</field>
     </record>
-    
+
     <record model="res.partner.bank" id="agro_bank">
         <field name="acc_number">123456</field>
         <field name="partner_id" ref="base.res_partner_2"/>
-        <field name="bank_bic">1234</field>
+        <field name="bank_bic">12345678</field>
         <field name="bank_name">Fortis Bank Name</field>
         <field name="bank_id" ref="partner_bank"/>
     </record>
@@ -19,17 +19,19 @@
     <record model="res.partner.bank" id="main_partner_bank">
         <field name="partner_id" ref="base.main_partner"/>
         <field name="bank_id" ref="partner_bank"/>
-        <field name="bank_bic">1234</field>
+        <field name="bank_bic">12345678</field>
         <field name="company_id" ref="base.main_company"/>
         <field name="acc_number">CH9100767000S00023455</field>
     </record>
 
   <!-- Define a payment mode -->
-  <record model="payment.mode" id="payment_mode_dta">
-    <field name="name">DTA</field>
-    <field name="bank_id" ref="main_partner_bank"/>
-    <field name="journal_id" model="account.journal" search="[('type','=','cash')]"/>
-  </record>
+    <record id="payment_mode_dta" model="account.payment.mode">
+        <field name="name">DTA</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="bank_account_link">variable</field>
+        <field name="payment_method_id" ref="dta_payment_method"/>
+        <field name="default_journal_ids" search="[('type', '=', 'bank')]"/>
+    </record>
 
 </data>
 </odoo>

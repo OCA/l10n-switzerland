@@ -33,7 +33,6 @@
           ],
  'demo': ['../account/test/account_minimal_test.xml',
           "demo/dta_demo.xml"],
- 'test': ["test/l10n_ch_dta.yml"],
  'auto_install': False,
  'installable': True,
  'post_init_hook': 'update_bank_journals',
