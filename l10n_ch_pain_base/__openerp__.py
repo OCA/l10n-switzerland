@@ -4,9 +4,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Switzerland - ISO 20022 payment file",
-    "summary": "Generate ISO 20022 credit transfert and direct debit files",
-    "version": "9.0.1.0.0",
+    "name": "Switzerland - ISO 20022",
+    "summary": "ISO 20022 base module for Switzerland",
+    "version": "9.0.1.0.1",
     "category": "Finance",
     "author": "Akretion,Camptocamp,Odoo Community Association (OCA)",
     "license": "AGPL-3",
@@ -18,8 +18,5 @@
         'views/account_payment_line.xml',
         'views/bank_payment_line.xml',
         ],
-    "test": [
-        # "test/pain001_ch.yml",
-    ],
     'installable': True,
 }
