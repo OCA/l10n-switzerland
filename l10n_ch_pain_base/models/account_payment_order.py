@@ -14,10 +14,9 @@ class AccountPaymentOrder(models.Model):
     def compute_sepa_final_hook(self, sepa):
         self.ensure_one()
         sepa = super(AccountPaymentOrder, self).compute_sepa_final_hook(sepa)
+        pain_flavor = self.payment_mode_id.payment_method_id.pain_version
         # BVR orders cannot be SEPA orders
-        if sepa and any(
-                line.communication_type == 'bvr'
-                for line in self.payment_line_ids):
+        if pain_flavor and '.ch.' in pain_flavor:
             sepa = False
         return sepa
 
