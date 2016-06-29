@@ -14,7 +14,6 @@ class TestCreateInvoice(common.TransactionCase):
         })
         invoice = self.env['account.invoice'].new(self.inv_values)
         invoice._onchange_partner_id()
-        invoice.onchange_partner_id_set_bank()
         self.assertEqual(invoice.partner_bank_id, self.bank_acc)
         self.assertNotEqual(invoice.reference_type, 'bvr')
 
@@ -31,7 +30,6 @@ class TestCreateInvoice(common.TransactionCase):
         })
         invoice = self.env['account.invoice'].new(self.inv_values)
         invoice._onchange_partner_id()
-        invoice.onchange_partner_id_set_bank()
         self.assertEqual(invoice.partner_bank_id, self.bank_acc)
         self.assertNotEqual(invoice.reference_type, 'bvr')
 
@@ -50,7 +48,6 @@ class TestCreateInvoice(common.TransactionCase):
         })
         invoice = self.env['account.invoice'].new(self.inv_values)
         invoice._onchange_partner_id()
-        invoice.onchange_partner_id_set_bank()
         self.assertEqual(invoice.partner_bank_id, self.bank_acc)
         self.assertNotEqual(invoice.reference_type, 'bvr')
 
@@ -70,7 +67,6 @@ class TestCreateInvoice(common.TransactionCase):
 
         with self.assertRaises(exceptions.ValidationError):
             invoice._onchange_partner_id()
-            invoice.onchange_partner_id_set_bank()
 
             invoice.reference = False
             invoice.reference_type = 'bvr'  # set manually bvr reference type
@@ -91,7 +87,6 @@ class TestCreateInvoice(common.TransactionCase):
 
         with self.assertRaises(exceptions.ValidationError):
             invoice._onchange_partner_id()
-            invoice.onchange_partner_id_set_bank()
 
             invoice.reference = '132000000000000000000000014'
 
@@ -111,11 +106,23 @@ class TestCreateInvoice(common.TransactionCase):
             'clearing': '234234',
         })
         # define company bank account
-        self.bank_acc = self.env['res.partner.bank'].create({
-            'partner_id': self.company.partner_id.id,
+        self.bank_journal = self.env['account.journal'].create({
+            'company_id': self.company.id,
+            'type': 'bank',
+            'code': 'BNK42',
             'bank_id': bank.id,
-            'acc_number': '01-1234-1',
+            'bank_acc_number': '01-1234-1',
         })
+        self.bank_acc = self.bank_journal.bank_account_id
+        self.payment_mode = self.env['account.payment.mode'].create({
+            'name': 'Inbound Credit transfer CH',
+            'company_id': self.company.id,
+            'bank_account_link': 'fixed',
+            'fixed_journal_id': self.bank_journal.id,
+            'payment_method_id':
+            self.env.ref('account.account_payment_method_manual_in').id,
+        })
+        self.partner.customer_payment_mode_id = self.payment_mode.id
         fields_list = [
             'company_id',
             'user_id',

@@ -9,7 +9,7 @@
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
  'license': 'AGPL-3',
- 'depends': ['account', 'base_iban'],
+ 'depends': ['account_payment_partner', 'base_iban'],
  'data': [
      'views/bank.xml',
      'views/invoice.xml',
