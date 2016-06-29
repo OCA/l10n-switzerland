@@ -90,7 +90,7 @@ class TestBank(common.TransactionCase):
         self.assertEqual(bank_account.acc_number, 'Bank/CCP 01-1234-1')
 
     def test_name_search(self):
-        result = self.env['res.bank'].name_search('BIC234234')
+        result = self.env['res.bank'].name_search('BIC23423')
         self.bank.code = 'CODE123'
         self.assertEqual(result and result[0][0], self.bank.id)
         result = self.env['res.bank'].name_search('CODE123')
@@ -107,7 +107,7 @@ class TestBank(common.TransactionCase):
         self.partner = self.env.ref('base.main_partner')
         self.bank = self.env['res.bank'].create({
             'name': 'BCV',
-            'bic': 'BIC234234',
+            'bic': 'BIC23423',
             'clearing': 'CLEAR234234',
         })
         self.post_bank = self.env['res.bank'].search(
