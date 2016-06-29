@@ -107,7 +107,7 @@ class TestCreateInvoice(common.TransactionCase):
         self.partner = self.env.ref('base.res_partner_12')
         bank = self.env['res.bank'].create({
             'name': 'BCV',
-            'bic': '234234',
+            'bic': 'BIC23423',
             'clearing': '234234',
         })
         # define company bank account
