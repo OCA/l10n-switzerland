@@ -11,8 +11,8 @@ from lxml import etree
 
 class TestSCT_CH(AccountingTestCase):
 
-    def test_sct_ch(self):
-        self.company = self.env['res.company']
+    def setUp(self):
+        super(TestSCT_CH, self).setUp()
         self.account_model = self.env['account.account']
         self.move_model = self.env['account.move']
         self.journal_model = self.env['account.journal']
@@ -25,7 +25,7 @@ class TestSCT_CH(AccountingTestCase):
         self.attachment_model = self.env['ir.attachment']
         self.invoice_model = self.env['account.invoice']
         self.invoice_line_model = self.env['account.invoice.line']
-        company = self.env.ref('base.main_company')
+        self.main_company = self.env.ref('base.main_company')
         self.partner_agrolait = self.env.ref('base.res_partner_2')
         self.account_expense = self.account_model.search([(
             'user_type_id',
@@ -42,7 +42,7 @@ class TestSCT_CH(AccountingTestCase):
             'ccp': '01-1234-1',
             })
         # create a ch bank account for my company
-        my_ch_partner_bank = self.partner_bank_model.create({
+        self.agrolait_partner_bank = self.partner_bank_model.create({
             'acc_number': 'CH0909000000100080607',
             'partner_id': self.env.ref('base.main_partner').id,
             'bank_id': ch_bank.id,
@@ -52,7 +52,7 @@ class TestSCT_CH(AccountingTestCase):
             'name': 'Company Bank journal',
             'type': 'bank',
             'code': 'BNKFB',
-            'bank_account_id': my_ch_partner_bank.id,
+            'bank_account_id': self.agrolait_partner_bank.id,
             'bank_id': ch_bank.id,
             })
         # create a payment mode
@@ -66,20 +66,22 @@ class TestSCT_CH(AccountingTestCase):
             })
         self.payment_mode.payment_method_id.pain_version =\
             'pain.001.001.03.ch.02'
-        chf_currency_id = self.env.ref('base.CHF').id
-        company.currency_id = chf_currency_id
+        self.chf_currency = self.env.ref('base.CHF')
+        self.main_company.currency_id = self.chf_currency.id
         # Create a bank account
-        ch_partner_bank = self.partner_bank_model.create({
+        self.agrolait_partner_bank = self.partner_bank_model.create({
             'acc_number': 'CH9100767000S00023455',
             'partner_id': self.partner_agrolait.id,
             'bank_id': ch_bank.id,
             })
+
+    def test_sct_ch(self):
         invoice1 = self.create_bvr_invoice(
             self.partner_agrolait.id,
-            ch_partner_bank.id, 42.0, '132000000000000000000000014')
+            self.agrolait_partner_bank.id, 42.0, '132000000000000000000000014')
         invoice2 = self.create_bvr_invoice(
             self.partner_agrolait.id,
-            ch_partner_bank.id, 12.0, '132000000000004')
+            self.agrolait_partner_bank.id, 12.0, '132000000000004')
         for inv in [invoice1, invoice2]:
             action = inv.create_account_payment_line()
         self.assertEquals(action['res_model'], 'account.payment.order')
@@ -96,7 +98,7 @@ class TestSCT_CH(AccountingTestCase):
         self.assertEquals(len(pay_lines), 2)
         agrolait_pay_line1 = pay_lines[0]
         accpre = self.env['decimal.precision'].precision_get('Account')
-        self.assertEquals(agrolait_pay_line1.currency_id.id, chf_currency_id)
+        self.assertEquals(agrolait_pay_line1.currency_id, self.chf_currency)
         self.assertEquals(
             agrolait_pay_line1.partner_bank_id, invoice1.partner_bank_id)
         self.assertEquals(float_compare(
@@ -113,7 +115,7 @@ class TestSCT_CH(AccountingTestCase):
             ('partner_id', '=', self.partner_agrolait.id)])
         self.assertEquals(len(bank_lines), 2)
         for bank_line in bank_lines:
-            self.assertEquals(bank_line.currency_id.id, chf_currency_id)
+            self.assertEquals(bank_line.currency_id, self.chf_currency)
             self.assertEquals(bank_line.communication_type, 'bvr')
             self.assertEquals(
                 bank_line.communication in [
@@ -161,7 +163,7 @@ class TestSCT_CH(AccountingTestCase):
             'partner_id': partner_id,
             'reference_type': 'bvr',
             'reference': reference,
-            'currency_id': self.env.ref('base.CHF').id,
+            'currency_id': self.chf_currency.id,
             'name': 'test',
             'account_id': self.account_payable.id,
             'type': type,
