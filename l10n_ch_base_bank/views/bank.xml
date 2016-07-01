@@ -1,28 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
   <data>
-    <record model="ir.ui.view" id="invoice_supplier_form8">
-      <field name="name">account.invoice.supplier.form.inherit</field>
-      <field name="model">account.invoice</field>
-      <field name="inherit_id" ref="account.invoice_supplier_form"/>
-      <field name="priority" eval="18"/>
-      <field name="arch" type="xml">
-        <field name="partner_bank_id" position="attributes">
-          <attribute name="domain">[('partner_id', '=', partner_id)]</attribute>
-        </field>
-      </field>
-    </record>
-
-    <record model="ir.ui.view" id="invoice_form">
-      <field name="name">account.invoice.form.inherit</field>
-      <field name="model">account.invoice</field>
-      <field name="inherit_id" ref="account.invoice_form"/>
-      <field name="arch" type="xml">
-        <field name="partner_bank_id" position="attributes">
-          <attribute name="domain">[('partner_id.ref_companies', 'in', [company_id])]</attribute>
-        </field>
-      </field>
-    </record>
 
     <record id="view_bank_search" model="ir.ui.view">
       <field name="name">res.bank.search</field>
@@ -30,7 +8,7 @@
       <field name="arch" type="xml">
         <search string="Banks">
           <filter name="Postfinance"
-                  icon="terp-check" string="PostFinance"
+                  string="PostFinance"
                   domain="[('bic', '=', 'POFICHBEXXX')]"
                   help="PostFinance"/>
           <field name="name"/>
@@ -85,4 +63,4 @@
     </record>
 
   </data>
-</openerp>
+</odoo>
