@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-16 01:38+0000\n"
+"POT-Creation-Date: 2016-07-02 02:47+0000\n"
 "PO-Revision-Date: 2016-03-14 15:17+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-l10n-switzerland-9-0/language/en/)\n"
@@ -24,19 +24,19 @@ msgid "BVR Reference"
 msgstr "BVR Reference"
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/invoice.py:78
+#: code:addons/l10n_ch_base_bank/models/invoice.py:60
 #, python-format
 msgid "BVR/ESR Reference is required"
 msgstr "BVR/ESR Reference is required"
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/invoice.py:59
+#: code:addons/l10n_ch_base_bank/models/invoice.py:41
 #, python-format
 msgid "BVR/ESR Reference type needs a postal account number on the customer."
 msgstr "BVR/ESR Reference type needs a postal account number on the customer."
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/invoice.py:64
+#: code:addons/l10n_ch_base_bank/models/invoice.py:46
 #, python-format
 msgid "BVR/ESR Reference type needs a postal account number on your company"
 msgstr "BVR/ESR Reference type needs a postal account number on your company"
@@ -88,7 +88,7 @@ msgid "Internal reference"
 msgstr "Internal reference"
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/invoice.py:90
+#: code:addons/l10n_ch_base_bank/models/invoice.py:72
 #, python-format
 msgid "Invalid BVR/ESR Number (wrong checksum)."
 msgstr "Invalid BVR/ESR Number (wrong checksum)."
