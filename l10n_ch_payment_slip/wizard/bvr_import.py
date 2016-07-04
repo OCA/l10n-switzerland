@@ -192,7 +192,7 @@ class BvrImporterWizard(models.TransientModel):
         if line:
             # transaction_ref is propagated on all lines
             partner_id = line.partner_id.id
-            num = line.invoice.number if line.invoice else False
+            num = line.invoice_id.number if line.invoice_id else False
             values['ref'] = _('Inv. no %s') % num if num else values['name']
             values['partner_id'] = partner_id
         return values
