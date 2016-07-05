@@ -39,7 +39,8 @@ class TestPaymentSlip(test_common.TransactionCase):
         return bank_account
 
     def make_invoice(self):
-        bank_account = self.make_bank()
+        if not hasattr(self, 'bank_account'):
+            self.bank_account = self.make_bank()
         account_model = self.env['account.account']
         account_debtor = account_model.search([('code', '=', '1100')])
         account_sale = account_model.search([('code', '=', '3200')])
@@ -50,7 +51,7 @@ class TestPaymentSlip(test_common.TransactionCase):
             'name': 'A customer invoice',
             'account_id': account_debtor.id,
             'type': 'out_invoice',
-            'partner_bank_id': bank_account.id
+            'partner_bank_id': self.bank_account.id
         })
 
         self.env['account.invoice.line'].create({
@@ -117,6 +118,37 @@ class TestPaymentSlip(test_common.TransactionCase):
             self.env.cr,
             self.env.uid,
             [invoice.id],
+            'l10n_ch_payment_slip.one_slip_per_page_from_invoice',
+            {},
+            context={'force_pdf': True},
+        )
+        self.assertTrue(data)
+        self.assertEqual(format, 'pdf')
+
+    def test_print_multi_report_merge_in_memory(self):
+        # default value as in memory
+        self.assertEqual(self.env.user.company_id.merge_mode, 'in_memory')
+        invoice1 = self.make_invoice()
+        invoice2 = self.make_invoice()
+        data, format = render_report(
+            self.env.cr,
+            self.env.uid,
+            [invoice1.id, invoice2.id],
+            'l10n_ch_payment_slip.one_slip_per_page_from_invoice',
+            {},
+            context={'force_pdf': True},
+        )
+        self.assertTrue(data)
+        self.assertEqual(format, 'pdf')
+
+    def test_print_multi_report_merge_on_disk(self):
+        self.env.user.company_id.merge_mode = 'on_disk'
+        invoice1 = self.make_invoice()
+        invoice2 = self.make_invoice()
+        data, format = render_report(
+            self.env.cr,
+            self.env.uid,
+            [invoice1.id, invoice2.id],
             'l10n_ch_payment_slip.one_slip_per_page_from_invoice',
             {},
             context={'force_pdf': True},
