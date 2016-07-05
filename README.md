@@ -1,3 +1,4 @@
+![Licence](https://img.shields.io/badge/licence-AGPL--3-blue.svg)
 [![Runbot Status](https://runbot.odoo-community.org/runbot/badge/flat/125/9.0.svg)](https://runbot.odoo-community.org/runbot/repo/github-com-oca-l10n-switzerland-125)
 [![Build Status](https://travis-ci.org/OCA/l10n-switzerland.svg?branch=9.0)](https://travis-ci.org/OCA/l10n-switzerland)
 [![Coverage Status](https://coveralls.io/repos/OCA/l10n-switzerland/badge.svg?branch=9.0)](https://coveralls.io/r/OCA/l10n-switzerland?branch=7.0)
@@ -46,11 +47,13 @@ Provides support of DTA payment file protocol to generate electronic payment fil
 This feature will be deprecated around the end of 2016.
 
 
-l10n_ch_sepa
-------------
+l10n_ch_pain_credit_transfert
+-----------------------------
 
 Provides support of SEPA/PAIN electronic payment file.
-Only credit transfer files are supported.
+
+
+(replaces former l10n_ch_sepa module)
 
 
 l10n_ch_scan_bvr
