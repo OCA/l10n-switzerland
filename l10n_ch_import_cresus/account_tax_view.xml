@@ -6,11 +6,11 @@
             <field name="model">account.tax</field>
             <field name="inherit_id" ref="account.view_tax_form" />
             <field name="arch" type="xml">
-                <group string="Refunds" position="after">
+                <xpath expr="//field[@name='refund_account_id']" position="after">
                     <group string="Cresus" name="Cresus">
                         <field name="tax_cresus_mapping"/>
                     </group>
-                </group>
+                </xpath>
             </field>
         </record>
 
@@ -19,9 +19,9 @@
             <field name="model">account.tax</field>
             <field name="inherit_id" ref="account.view_tax_tree" />
             <field name="arch" type="xml">
-                <field name="description" position="after">
+                <xpath expr="//field[@name='description']" position="after">
                         <field name="tax_cresus_mapping"/>
-                </field>
+                </xpath>
             </field>
         </record>
 
