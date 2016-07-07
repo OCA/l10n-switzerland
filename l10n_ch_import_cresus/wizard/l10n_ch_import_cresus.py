@@ -39,8 +39,6 @@ class AccountCresusImport(models.TransientModel):
 
     company_id = fields.Many2one('res.company', 'Company',
                                  invisible=True)
-    period_id = fields.Many2one('account.period', 'Period',
-                                required=True)
     report = fields.Text(
         'Report',
         readonly=True
@@ -82,7 +80,7 @@ class AccountCresusImport(models.TransientModel):
     HEAD_CRESUS = ['date', 'debit', 'credit', 'pce',
                    'ref', 'amount', 'typtvat', 'currency_amount',
                    'analytic_account']
-    HEAD_ODOO = ['ref', 'date', 'period_id', 'journal_id',
+    HEAD_ODOO = ['ref', 'date', 'journal_id',
                  'line_id/account_id', 'line_id/partner_id', 'line_id/name',
                  'line_id/debit', 'line_id/credit',
                  'line_id/account_tax_id',
@@ -202,15 +200,13 @@ class AccountCresusImport(models.TransientModel):
             if (not previous_date) or previous_date != current_openerp_date:
                 default_value.update({'date': current_openerp_date,
                                       'ref': line_cresus['pce'],
-                                      'journal_id': self.journal_id.name,
-                                      'period_id': self.period_id.code
+                                      'journal_id': self.journal_id.name
                                       })
                 previous_date = current_openerp_date
             else:
                 default_value.update({'date': None,
                                       'ref': None,
-                                      'journal_id': None,
-                                      'period_id': None})
+                                      'journal_id': None})
             decimal_amount = float(
                 line_cresus['amount'].replace('\'', '').replace(' ', ''))
             if decimal_amount < 0:
@@ -257,8 +253,7 @@ class AccountCresusImport(models.TransientModel):
             inverted_default_value = default_value.copy()
             inverted_default_value.update({'date': None,
                                            'ref': None,
-                                           'journal_id': None,
-                                           'period_id': None})
+                                           'journal_id': None})
             if is_negative:
                 inverted_default_value.update({'line_id/debit':
                                                abs(decimal_amount),
