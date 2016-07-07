@@ -21,7 +21,7 @@
 
 {
     'name': 'Account Import Cresus',
-    'version': '8.0.1.0.0',
+    'version': '9.0.1.0.0',
     'depends': [
         'account',
     ],
@@ -32,5 +32,5 @@
         'account_tax_view.xml',
         'menu.xml',
     ],
-    'installable': False,
+    'installable': True,
 }
