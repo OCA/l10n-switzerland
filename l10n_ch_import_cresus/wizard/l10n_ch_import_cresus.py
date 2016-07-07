@@ -178,6 +178,24 @@ class AccountCresusImport(models.TransientModel):
             self.report = self.format_messages(result['messages'])
             self.state = 'error'
 
+    def _parse_date(self, date_string):
+        """Parse a date coming from Cresus and put it in the format used by Odoo.
+
+           Both 01-01-70 and 01-01-1970 have been sighted in Cresus' output.
+
+           :param date_string: cresus data
+           :returns: a date string
+        """
+        for format in ['%d.%m.%y', '%d.%m.%Y']:
+            try:
+                dt = datetime.strptime(date_string, format)
+                break
+            except ValueError:
+                continue
+        else:
+            return False
+        return fields.Date.to_string(dt)
+
     @api.multi
     def _standardise_data(self, data):
         """ This function split one line of the CSV into multiple lines.
@@ -190,19 +208,18 @@ class AccountCresusImport(models.TransientModel):
         company_partner = cp.partner_id.name
         standard_dict = dict(izip_longest(self.HEAD_ODOO, []))
         previous_date = False
-        for line_cresus in data:
+        for index, line_cresus in enumerate(data, 1):
             is_negative = False
-            current_date_french_format = datetime.strptime(line_cresus['date'],
-                                                           '%d.%m.%Y')
-            current_openerp_date = fields.Date.to_string(
-                current_date_french_format)
+            current_date = self._parse_date(line_cresus['date'])
+            if not current_date:
+                raise ValueError("Invalid date -- row %s." % index)
             default_value = standard_dict.copy()
-            if (not previous_date) or previous_date != current_openerp_date:
-                default_value.update({'date': current_openerp_date,
+            if (not previous_date) or previous_date != current_date:
+                default_value.update({'date': current_date,
                                       'ref': line_cresus['pce'],
                                       'journal_id': self.journal_id.name
                                       })
-                previous_date = current_openerp_date
+                previous_date = current_date
             else:
                 default_value.update({'date': None,
                                       'ref': None,
