@@ -21,7 +21,6 @@
 
 import sys
 import traceback
-import logging
 import base64
 import csv
 import tempfile
@@ -29,8 +28,6 @@ from openerp import models, fields, api, exceptions
 from openerp.tools.translate import _
 from itertools import izip_longest
 from datetime import datetime
-
-_logger = logging.getLogger(__name__)
 
 
 class AccountCresusImport(models.TransientModel):
@@ -318,8 +315,6 @@ class AccountCresusImport(models.TransientModel):
     def _load_data(self, data):
         """Function that does the load of parsed CSV file.
 
-        If will log exception and susccess into the report fields.
-
         :param data: CSV file content (list of data list)
         """
         # Change data from dict to list of array
@@ -337,8 +332,6 @@ class AccountCresusImport(models.TransientModel):
         except Exception as exc:
             ex_type, sys_exc, tb = sys.exc_info()
             tb_msg = ''.join(traceback.format_tb(tb, 30))
-            _logger.error(tb_msg)
-            _logger.error(repr(exc))
             self.report = _("Unexpected exception.\n %s \n %s" %
                             (repr(exc), tb_msg))
             self.state = 'error'
