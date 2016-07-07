@@ -81,10 +81,10 @@ class AccountCresusImport(models.TransientModel):
                    'ref', 'amount', 'typtvat', 'currency_amount',
                    'analytic_account']
     HEAD_ODOO = ['ref', 'date', 'journal_id',
-                 'line_id/account_id', 'line_id/partner_id', 'line_id/name',
-                 'line_id/debit', 'line_id/credit',
-                 'line_id/account_tax_id',
-                 'line_id/analytic_account_id']
+                 'line_ids/account_id', 'line_ids/partner_id', 'line_ids/name',
+                 'line_ids/debit', 'line_ids/credit',
+                 'line_ids/tax_line_id',
+                 'line_ids/analytic_account_id']
 
     @api.multi
     def open_account_moves(self):
@@ -227,15 +227,15 @@ class AccountCresusImport(models.TransientModel):
             decimal_amount = float(
                 line_cresus['amount'].replace('\'', '').replace(' ', ''))
             if decimal_amount < 0:
-                default_value.update({'line_id/credit': abs(decimal_amount),
-                                      'line_id/debit': 0.0,
-                                      'line_id/account_id':
+                default_value.update({'line_ids/credit': abs(decimal_amount),
+                                      'line_ids/debit': 0.0,
+                                      'line_ids/account_id':
                                       line_cresus['debit']})
                 is_negative = True
             else:
-                default_value.update({'line_id/debit': abs(decimal_amount),
-                                      'line_id/credit': 0.0,
-                                      'line_id/account_id':
+                default_value.update({'line_ids/debit': abs(decimal_amount),
+                                      'line_ids/credit': 0.0,
+                                      'line_ids/account_id':
                                       line_cresus['debit']})
             tax_code = None
             analytic_code = None
@@ -250,18 +250,18 @@ class AccountCresusImport(models.TransientModel):
                                              limit=1)
             if tax_current or line_cresus['analytic_account']:
                 current_account = account_obj.search(
-                    [('code', '=', default_value['line_id/account_id'])],
+                    [('code', '=', default_value['line_ids/account_id'])],
                     limit=1)
                 if current_account:
                     # Search for account that have a deferal method
-                    if current_account.user_type.close_method == 'none':
+                    if current_account.user_type_id.include_initial_balance == False:
                         if tax_current:
                             tax_code = tax_current.name
                         analytic_code = line_cresus['analytic_account']
-            default_value.update({'line_id/account_tax_id': tax_code,
-                                  'line_id/partner_id': company_partner,
-                                  'line_id/name': line_cresus['ref'],
-                                  'line_id/analytic_account_id':
+            default_value.update({'line_ids/tax_line_id': tax_code,
+                                  'line_ids/partner_id': company_partner,
+                                  'line_ids/name': line_cresus['ref'],
+                                  'line_ids/analytic_account_id':
                                   analytic_code})
             new_openerp_data.append(default_value)
             #
@@ -272,30 +272,30 @@ class AccountCresusImport(models.TransientModel):
                                            'ref': None,
                                            'journal_id': None})
             if is_negative:
-                inverted_default_value.update({'line_id/debit':
+                inverted_default_value.update({'line_ids/debit':
                                                abs(decimal_amount),
-                                               'line_id/credit': 0.0,
-                                               'line_id/account_id':
+                                               'line_ids/credit': 0.0,
+                                               'line_ids/account_id':
                                                line_cresus['credit']})
             else:
-                inverted_default_value.update({'line_id/debit': 0.0,
-                                               'line_id/credit':
+                inverted_default_value.update({'line_ids/debit': 0.0,
+                                               'line_ids/credit':
                                                abs(decimal_amount),
-                                               'line_id/account_id':
+                                               'line_ids/account_id':
                                                line_cresus['credit']})
                 # Search for account that have a deferal method
             if tax_current or line_cresus['analytic_account']:
                 current_account = account_obj.search([
                     ('code', '=',
-                     inverted_default_value.get('line_id/account_id'))])
+                     inverted_default_value.get('line_ids/account_id'))])
                 if current_account:
-                    if current_account.user_type.close_method == 'none':
+                    if current_account.user_type_id.include_initial_balance == False:
                         if tax_current:
                             tax_code_inverted = tax_current['name']
                     analytic_code_inverted = line_cresus['analytic_account']
-            inverted_default_value.update({'line_id/account_tax_id':
+            inverted_default_value.update({'line_ids/tax_line_id':
                                            tax_code_inverted,
-                                          'line_id/analytic_account_id':
+                                          'line_ids/analytic_account_id':
                                            analytic_code_inverted})
             new_openerp_data.append(inverted_default_value)
 

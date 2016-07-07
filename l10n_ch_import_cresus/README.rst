@@ -24,9 +24,9 @@ file you must complete the following requirements :
       related Odoo tax (field : Cresus tax name).
       Warning, the Odoo tax must be 'tax included'.
       If the tax does not exist you have to create it.
-    * All PL accounts must have a deferral method = 'none'
+    * All PL accounts must have include\_initial\_balance = False
         (meaning: no balance brought forward in the new fiscal year) and all
-         Balance sheet account must have a deferral method = 'balance'.)
+         Balance sheet account must have a include\_initial\_balance = True.)
 
 
 Bug Tracker
