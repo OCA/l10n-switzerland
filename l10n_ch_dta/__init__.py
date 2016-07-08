@@ -18,6 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import payment
+
+from . import models
 from . import wizard
-from . import bank
+from .post_install import update_bank_journals
