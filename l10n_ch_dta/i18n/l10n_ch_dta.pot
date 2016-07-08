@@ -91,7 +91,7 @@ msgstr ""
 
 #. module: l10n_ch_dta
 #: model:ir.model.fields,field_description:l10n_ch_dta.field_payment_order_dta_ids
-#: field:payment.order,dta_ids:0
+#: field:account.payment.order,dta_ids:0
 msgid "unknown"
 msgstr ""
 

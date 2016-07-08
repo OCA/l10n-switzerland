@@ -87,7 +87,7 @@ msgid "DTA options"
 msgstr "Options de DTA"
 
 #. module: l10n_ch_dta
-#: field:payment.order,dta_ids:0
+#: field:account.payment.order,dta_ids:0
 msgid "Dta ids"
 msgstr "Ids de DTA"
 
