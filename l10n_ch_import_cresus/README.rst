@@ -1,33 +1,40 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-    :alt: License: AGPL-3
+   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   :alt: License: AGPL-3
 
-Module name
-===========
+=============
+Import Cresus
+=============
 
-This module add the ability to import CSV file from Cresus software (www.cresus.ch) 
+This module add the ability to import CSV file from Cresus software (www.cresus.ch)
+
+Installation
+============
+
+Nothing special to install this module. Just click on install in module list.
 
 Configuration
 =============
 
-
+No configuration is required to use this module.
 
 Usage
 =====
-In order to import your Cresus Salaires.txt 
+In order to import your 'Cresus Salaires' .txt
 file you must complete the following requirements : 
     * The accounts, analytical accounts used in the Cresus
       file must be previously created into Odoo
-    * The date of the entry will determine the period used
-      in Odoo, so please ensure the period is created already.
     * If the Cresus file uses VAT codes (i.e: IPI), 
       please make sure you have indicated this code in the
       related Odoo tax (field : Cresus tax name).
       Warning, the Odoo tax must be 'tax included'.
       If the tax does not exist you have to create it.
     * All PL accounts must have include\_initial\_balance = False
-        (meaning: no balance brought forward in the new fiscal year) and all
-         Balance sheet account must have a include\_initial\_balance = True.)
+      (meaning: no balance brought forward in the new fiscal year) and all
+      balance sheet accounts must have include\_initial\_balance = True.
 
+Known issues / Roadmap
+======================
 
 Bug Tracker
 ===========
@@ -44,7 +51,8 @@ Credits
 Contributors
 ------------
 
-* Vincent renaville <vincen.renaville@camptocamp.com>
+* Vincent Renaville <vincent.renaville@camptocamp.com>
+* Louis Bettens <lbe@open-net.ch>
 
 Maintainer
 ----------
