@@ -1,0 +1,155 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* l10n_ch_import_winbiz
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-27 08:57+0000\n"
+"PO-Revision-Date: 2015-07-27 08:57+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_ch_import_winbiz
+#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:62
+#, python-format
+msgid "\n"
+"                 In order to import your 'Winbiz Salaires' .xml                  file you must complete the following requirements :                 <ul>\n"
+"                <li> The accounts, analytical accounts used in the Cresus                 file must be previously created into Odoo  </li>\n"
+"                <li> The date of the entry will determine the period used                 in Odoo, so please ensure the period is created already. </li>\n"
+"                </ul>"
+msgstr "\n"
+"                 Pour importer votre fichier .xml généré par 'Winbiz Salaires', vous devez préalablement vous assurer des points suivants :<ul>\n"
+"                <li>Les comptes et comptes analytiques utilisés dans le fichier doivent être préalablement créés dans Odoo.</li>\n"
+"                <li>La date de l'écriture détermine la période comptable dans Odoo ; il faut donc que celle-ci soit bien créée.</li>\n"
+"                </ul>"
+
+#. module: l10n_ch_import_winbiz
+#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:100
+#, python-format
+msgid "%s. -- Field: %s -- rows %s to %s"
+msgstr ""
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.ui.menu,name:l10n_ch_import_winbiz.menu_account_winbiz_import
+msgid "Winbiz Import"
+msgstr "Import Winbiz"
+
+#. module: l10n_ch_import_winbiz
+#: field:account.winbiz.import,company_id:0
+msgid "Company"
+msgstr "Société"
+
+#. module: l10n_ch_import_winbiz
+#: field:account.winbiz.import,create_uid:0
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: l10n_ch_import_winbiz
+#: field:account.winbiz.import,create_date:0
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: l10n_ch_import_winbiz
+#: field:account.winbiz.import,file:0
+msgid "File"
+msgstr "Fichier"
+
+#. module: l10n_ch_import_winbiz
+#: field:account.winbiz.import,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.model,name:l10n_ch_import_winbiz.model_account_winbiz_import
+msgid "Import Accounting Winbiz"
+msgstr "Import Fichier"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.actions.act_window,name:l10n_ch_import_winbiz.action_account_winbiz_import
+msgid "Import Move lines"
+msgstr "Import écritures"
+
+#. module: l10n_ch_import_winbiz
+#: view:account.winbiz.import:l10n_ch_import_winbiz.winbiz_move_line_importer_form
+msgid "Import file"
+msgstr "Import Fichier"
+
+#. module: l10n_ch_import_winbiz
+#: view:account.winbiz.import:l10n_ch_import_winbiz.winbiz_move_line_importer_form
+#: field:account.winbiz.import,help_html:0
+msgid "Import help"
+msgstr "Import Aide"
+
+#. module: l10n_ch_import_winbiz
+#: field:account.winbiz.import,imported_move_ids:0
+msgid "Imported moves"
+msgstr ""
+
+#. module: l10n_ch_import_winbiz
+#: field:account.winbiz.import,journal_id:0
+msgid "Journal"
+msgstr "Journal"
+
+#. module: l10n_ch_import_winbiz
+#: field:account.winbiz.import,write_uid:0
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: l10n_ch_import_winbiz
+#: field:account.winbiz.import,write_date:0
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: l10n_ch_import_winbiz
+#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:121
+#, python-format
+msgid "Lines imported"
+msgstr "Lignes importées"
+
+#. module: l10n_ch_import_winbiz
+#: view:account.winbiz.import:l10n_ch_import_winbiz.winbiz_move_line_importer_form
+msgid "Move / Move lines importer"
+msgstr ""
+
+#. module: l10n_ch_import_winbiz
+#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:150
+#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:174
+#, python-format
+msgid "Payslip"
+msgstr "Paye"
+
+#. module: l10n_ch_import_winbiz
+#: field:account.winbiz.import,period_id:0
+msgid "Period"
+msgstr "Période"
+
+#. module: l10n_ch_import_winbiz
+#: view:account.winbiz.import:l10n_ch_import_winbiz.winbiz_move_line_importer_form
+#: field:account.winbiz.import,report:0
+msgid "Report"
+msgstr "Rapport"
+
+#. module: l10n_ch_import_winbiz
+#: field:account.winbiz.import,state:0
+msgid "State"
+msgstr "Status"
+
+#. module: l10n_ch_import_winbiz
+#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:206
+#, python-format
+msgid "Unexpected exception.\n"
+" %s \n"
+" %s"
+msgstr "Erreur"
+
+#. module: l10n_ch_import_winbiz
+#: view:account.winbiz.import:l10n_ch_import_winbiz.winbiz_move_line_importer_form
+msgid "View imported Moves"
+msgstr "Ecritures générées"
+
