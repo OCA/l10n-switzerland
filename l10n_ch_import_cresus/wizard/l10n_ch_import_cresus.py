@@ -58,18 +58,19 @@ class AccountCresusImport(models.TransientModel):
     help_html = fields.Html('Import help', readonly=True,
                             default=_('''
                  In order to import your 'Cresus Salaires' .txt \
-                 file you must complete the following requirements : </br>
-                * The accounts, analytical accounts used in the Cresus\
-                 file must be previously created into Odoo  </br>
-                * If the Cresus file uses VAT codes (i.e: IPI), \
-                please make sure you have indicated this code in the \
-                related Odoo tax (new field). \
-                Warning, the Odoo tax must be 'tax included'. \
-                If the tax does not exist you have to create it. </br>
-                * All PL accounts must have include_initial_balance = False\
-                (meaning: no balance brought forward in the new fiscal year)\
-                and all balance sheet accounts must have include_initial_balance\
-                = True.\</br>'''))
+                 file you must complete the following requirements: <ul>
+                 <li> The accounts, analytical accounts used in the Cresus \
+                 file must be previously created into Odoo. </li>
+                 <li> If the Cresus file uses VAT codes (i.e: IPI), \
+                 please make sure you have indicated this code in the \
+                 related Odoo tax (new field). \
+                 Warning, the Odoo tax must be 'tax included'. \
+                 If the tax does not exist you have to create it. </li>
+                 <li> All PL accounts must have include_initial_balance = False \
+                 (meaning: no balance brought forward in the new fiscal year) \
+                 and all balance sheet accounts must have include_initial_balance \
+                 = True.\
+                 </li></ul>'''))
 
     HEAD_CRESUS = ['date', 'debit', 'credit', 'pce',
                    'ref', 'amount', 'typtvat', 'currency_amount',
