@@ -7,6 +7,7 @@
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">account.cresus.import</field>
       <field name="domain"></field>
+      <field name="target">new</field>
       <field name="view_type">form</field>
       <field name="view_mode">tree,form</field>
       <field name="view_id" ref="cresus_move_line_importer_form"/>

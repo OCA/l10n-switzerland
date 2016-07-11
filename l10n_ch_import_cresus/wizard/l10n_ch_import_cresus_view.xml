@@ -5,7 +5,7 @@
       <field name="name">cresus move line importer</field>
       <field name="model">account.cresus.import</field>
       <field name="arch" type="xml">
-        <form string="Move / Move lines importer" create='0' edit='0' delete='0'>
+        <form string="Move / Move lines importer">
           <footer>
             <button name="import_file"
                     string="Import file"
@@ -16,8 +16,7 @@
                     string="View imported Moves"
                     type="object"
                     states="done"
-                    class="oe_highlight"/>
-             
+                    class="oe_highlight"/>            
           </footer>
           <group>
             <div>

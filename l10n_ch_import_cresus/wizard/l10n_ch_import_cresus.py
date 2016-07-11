@@ -338,7 +338,12 @@ class AccountCresusImport(models.TransientModel):
             if self.state == 'error':
                 self.env.cr.rollback()
                 self.write({'report': self.report, 'state': self.state})
-        return {}
+        return {'type': 'ir.actions.act_window',
+                'res_model': 'account.cresus.import',
+                'res_id': self.id,
+                'view_type': 'form',
+                'view_mode': 'form',
+                'target': 'new'}
 
     @api.multi
     def import_file(self):
