@@ -1,42 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
+<odoo>
     <record id="cresus_move_line_importer_form" model="ir.ui.view">
-      <field name="name">cresus move line importer</field>
-      <field name="model">account.cresus.import</field>
-      <field name="arch" type="xml">
-        <form string="Move / Move lines importer">
-          <footer>
-            <button name="import_file"
-                    string="Import file"
-                    type="object"
-                    states="draft"
-                    class="oe_highlight"/>
-          </footer>
-          <group>
-            <div>
-              <field name="state" invisible="1"/>
-              <field name="file"
-                     class="oe_inline"/>
-            </div>
-          </group>
-          <group>
-            <field name="company_id"/>
-            <field name="journal_id"/>
-          </group>
-          <notebook>
-            <page string="Report">
-              <field name="report"
-                     nolabel="1"
-                     colspan="4"/>
-            </page>
-
-            <page string="Import help">
-            	<field name="help_html"/>
-            </page>
-          </notebook>
-        </form>
-      </field>
+        <field name="name">cresus move line importer</field>
+        <field name="model">account.cresus.import</field>
+        <field name="arch" type="xml">
+            <form string="Move / Move lines importer">
+                <footer>
+                    <button
+                        name="import_file"
+                        string="Import file"
+                        type="object"
+                        states="draft"
+                        class="oe_highlight"
+                    />
+                </footer>
+                <group>
+                    <div>
+                        <field name="state" invisible="1"/>
+                        <field name="file" class="oe_inline"/>
+                    </div>
+                </group>
+                <group>
+                    <field name="company_id"/>
+                    <field name="journal_id"/>
+                </group>
+                <notebook>
+                    <page string="Report">
+                        <field name="report" nolabel="1" colspan="4"/>
+                    </page>
+                    <page string="Import help">
+                        <field name="help_html"/>
+                    </page>
+                </notebook>
+            </form>
+        </field>
     </record>
-    </data>
-</openerp>
+</odoo>
