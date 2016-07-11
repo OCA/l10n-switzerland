@@ -12,11 +12,6 @@
                     type="object"
                     states="draft"
                     class="oe_highlight"/>
-            <button name="open_account_moves"
-                    string="View imported Moves"
-                    type="object"
-                    states="done"
-                    class="oe_highlight"/>            
           </footer>
           <group>
             <div>
