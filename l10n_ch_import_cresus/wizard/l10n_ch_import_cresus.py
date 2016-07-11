@@ -45,13 +45,11 @@ class AccountCresusImport(models.TransientModel):
     state = fields.Selection(selection=[('draft', "Draft"),
                                         ('done', "Done"),
                                         ('error', "Error")],
-                        readonly=True,
-                        default='draft'
-                        )
+                             readonly=True,
+                             default='draft')
     file = fields.Binary(
         'File',
-        required=True
-        )
+        required=True)
     imported_move_ids = fields.Many2many(
         'account.move', 'import_cresus_move_rel',
         string='Imported moves')
@@ -67,11 +65,11 @@ class AccountCresusImport(models.TransientModel):
                  related Odoo tax (new field). \
                  Warning, the Odoo tax must be 'tax included'. \
                  If the tax does not exist you have to create it. </li>
-                 <li> All PL accounts must have include_initial_balance = False \
+                 <li> All PL accounts must have \
+                 include_initial_balance = False \
                  (meaning: no balance brought forward in the new fiscal year) \
-                 and all balance sheet accounts must have include_initial_balance \
-                 = True.\
-                 </li></ul>'''))
+                 and all balance sheet accounts must have
+                 include_initial_balance = True. </li></ul>'''))
 
     HEAD_CRESUS = ['date', 'debit', 'credit', 'pce',
                    'ref', 'amount', 'typtvat', 'currency_amount',
@@ -185,8 +183,8 @@ class AccountCresusImport(models.TransientModel):
 
             Cresus writes one csv line per move when there are just two lines
             (take some money from one account and put all of it in another),
-            and uses ellipses in more complex cases. What matters is the pce label,
-            which is the same on all lines of a move.
+            and uses ellipses in more complex cases. What matters is the pce
+            label, which is the same on all lines of a move.
         """
         new_openerp_data = []
         tax_obj = self.env['account.tax']
@@ -222,12 +220,14 @@ class AccountCresusImport(models.TransientModel):
 
             if line_cresus['debit'] != '...':
                 if is_negative:
-                    default_value.update({'line_ids/credit': abs(decimal_amount),
+                    default_value.update({'line_ids/credit':
+                                          abs(decimal_amount),
                                           'line_ids/debit': 0.0,
                                           'line_ids/account_id':
                                           line_cresus['debit']})
                 else:
-                    default_value.update({'line_ids/debit': abs(decimal_amount),
+                    default_value.update({'line_ids/debit':
+                                          abs(decimal_amount),
                                           'line_ids/credit': 0.0,
                                           'line_ids/account_id':
                                           line_cresus['debit']})
@@ -237,18 +237,17 @@ class AccountCresusImport(models.TransientModel):
                 tax_current = None
                 analytic_code_inverted = None
                 if line_cresus['typtvat']:
-                    tax_current = tax_obj.search([('tax_cresus_mapping',
-                                                   '=',
-                                                   line_cresus['typtvat']),
-                                                  ('price_include', '=', True)],
-                                                 limit=1)
+                    tax_current = tax_obj.search(
+                        [('tax_cresus_mapping', '=', line_cresus['typtvat']),
+                         ('price_include', '=', True)],
+                        limit=1)
                 if tax_current or line_cresus['analytic_account']:
                     current_account = account_obj.search(
                         [('code', '=', default_value['line_ids/account_id'])],
                         limit=1)
                     if current_account:
                         # Search for account that have a deferal method
-                        if current_account.user_type_id.include_initial_balance == False:
+                        if current_account.user_type_id.include_initial_balance is False:
                             if tax_current:
                                 tax_code = tax_current.name
                             analytic_code = line_cresus['analytic_account']
@@ -285,7 +284,7 @@ class AccountCresusImport(models.TransientModel):
                         ('code', '=',
                          inverted_default_value.get('line_ids/account_id'))])
                     if current_account:
-                        if current_account.user_type_id.include_initial_balance == False:
+                        if current_account.user_type_id.include_initial_balance is False:
                             if tax_current:
                                 tax_code_inverted = tax_current['name']
                         analytic_code_inverted = line_cresus['analytic_account']
@@ -331,8 +330,7 @@ class AccountCresusImport(models.TransientModel):
                     'res_id': self.id,
                     'view_type': 'form',
                     'view_mode': 'form',
-                    'target': 'new'
-                   }
+                    'target': 'new'}
         else:
             # show the resulting moves in main content area
             return {'domain': str([('id', 'in', self.imported_move_ids.ids)]),
@@ -341,8 +339,7 @@ class AccountCresusImport(models.TransientModel):
                     'view_mode': 'tree,form',
                     'res_model': 'account.move',
                     'view_id': False,
-                    'type': 'ir.actions.act_window',
-                   }
+                    'type': 'ir.actions.act_window'}
 
     @api.multi
     def import_file(self):
