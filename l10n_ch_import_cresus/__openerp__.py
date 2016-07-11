@@ -21,16 +21,20 @@
 
 {
     'name': 'Account Import Cresus',
+    'summary': 'Allows to import Cresus Salaires .txt files with journal entries into Odoo.',
     'version': '9.0.1.0.0',
+    'category': 'uncategorized',
+    'website': 'https://odoo-community.org/',
+    'author': 'Camptocamp, OpenNet, Odoo Community Association (OCA)',
+    'license': 'AGPL-3',
+    'application': False,
+    'installable': True,
     'depends': [
         'account',
     ],
-    'author': 'Camptocamp, Odoo Community Association (OCA)',
-    'website': 'http://www.camptocamp.com',
     'data': [
         'wizard/l10n_ch_import_cresus_view.xml',
         'account_tax_view.xml',
         'menu.xml',
     ],
-    'installable': True,
 }
