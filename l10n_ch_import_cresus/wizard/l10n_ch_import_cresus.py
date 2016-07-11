@@ -42,10 +42,11 @@ class AccountCresusImport(models.TransientModel):
         )
     journal_id = fields.Many2one('account.journal', 'Journal',
                                  required=True)
-    state = fields.Char(sting="Import state"
-                        'Report',
+    state = fields.Selection(selection=[('draft', "Draft"),
+                                        ('done', "Done"),
+                                        ('error', "Error")],
                         readonly=True,
-                        default="draft"
+                        default='draft'
                         )
     file = fields.Binary(
         'File',
