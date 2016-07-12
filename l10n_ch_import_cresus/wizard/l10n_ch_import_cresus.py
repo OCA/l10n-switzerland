@@ -8,7 +8,6 @@ import base64
 import csv
 import tempfile
 from openerp import models, fields, api, exceptions
-from openerp.tools.translate import _
 from itertools import izip_longest
 from datetime import datetime
 
@@ -37,23 +36,6 @@ class AccountCresusImport(models.TransientModel):
         'account.move', 'import_cresus_move_rel',
         string='Imported moves')
 
-    help_html = fields.Html('Import help', readonly=True,
-                            default=_('''
-                 In order to import your 'Cresus Salaires' .txt \
-                 file you must complete the following requirements: <ul>
-                 <li> The accounts, analytical accounts used in the Cresus \
-                 file must be previously created into Odoo. </li>
-                 <li> If the Cresus file uses VAT codes (i.e: IPI), \
-                 please make sure you have indicated this code in the \
-                 related Odoo tax (new field). \
-                 Warning, the Odoo tax must be 'tax included'. \
-                 If the tax does not exist you have to create it. </li>
-                 <li> All PL accounts must have \
-                 include_initial_balance = False \
-                 (meaning: no balance brought forward in the new fiscal year) \
-                 and all balance sheet accounts must have
-                 include_initial_balance = True. </li></ul>'''))
-
     HEAD_CRESUS = ['date', 'debit', 'credit', 'pce',
                    'ref', 'amount', 'typtvat', 'currency_amount',
                    'analytic_account']
@@ -73,7 +55,7 @@ class AccountCresusImport(models.TransientModel):
         res = []
         for msg in messages:
             rows = msg.get('rows', {})
-            res.append(_("%s. -- Field: %s -- rows %s to %s") % (
+            res.append("%s. -- Field: %s -- rows %s to %s" % (
                 msg.get('message', 'N/A'),
                 msg.get('field', 'N/A'),
                 rows.get('from', 'N/A'),
@@ -114,9 +96,9 @@ class AccountCresusImport(models.TransientModel):
                                   delimiter=delimiter)
         except csv.Error as error:
             raise exceptions.Warning(
-                _('CSV file is malformed'),
-                _("Please choose the correct separator \n"
-                  "the error detail is : \n %s") % repr(error)
+                'CSV file is malformed',
+                "Please choose the correct separator \n"
+                  "the error detail is : \n %s" % repr(error)
             )
         # Generator does not work with orm.BaseModel.load
         values = [x for x in data if x]
@@ -136,7 +118,7 @@ class AccountCresusImport(models.TransientModel):
         # Import sucessful
         if not result['messages']:
             self.state = 'done'
-            self.report = _("Lines imported")
+            self.report = "Lines imported"
             self.imported_move_ids = result['ids']
         else:
             self.report = self.format_messages(result['messages'])
@@ -300,8 +282,7 @@ class AccountCresusImport(models.TransientModel):
         except Exception as exc:
             ex_type, sys_exc, tb = sys.exc_info()
             tb_msg = ''.join(traceback.format_tb(tb, 30))
-            self.report = _("Unexpected exception.\n %s \n %s" %
-                            (repr(exc), tb_msg))
+            self.report = "Unexpected exception.\n %s \n %s" % (repr(exc), tb_msg)
             self.state = 'error'
         finally:
             if self.state == 'error':
