@@ -25,7 +25,7 @@ import logging
 from lxml import etree
 from itertools import izip_longest
 from StringIO import StringIO
-from openerp import models, fields, api, _
+from openerp import models, fields, api
 
 
 _logger = logging.getLogger(__name__)
@@ -95,7 +95,7 @@ class AccountWinbizImport(models.TransientModel):
         res = []
         for msg in messages:
             rows = msg.get('rows', {})
-            res.append(_("%s. -- Field: %s -- rows %s to %s") % (
+            res.append("%s. -- Field: %s -- rows %s to %s" % (
                 msg.get('message', 'N/A'),
                 msg.get('field', 'N/A'),
                 rows.get('from', 'N/A'),
@@ -116,7 +116,7 @@ class AccountWinbizImport(models.TransientModel):
         # Import sucessful
         if not result['messages']:
             self.write({'state': 'done',
-                        'report': _("Lines imported"),
+                        'report': "Lines imported",
                         'imported_move_ids': [(6, 0, result['ids'])]})
         else:
             self.write({'report': self.format_messages(result['messages']),
@@ -146,7 +146,7 @@ class AccountWinbizImport(models.TransientModel):
                     if (not previous_date) or \
                             previous_date != winbiz_item['st_date1']:
                         default_value.update({'date': winbiz_item['st_date1'],
-                                              'ref': _('Payslip'),
+                                              'ref': 'Payslip',
                                               'journal_id': self.journal_id.name
                                               })
                         previous_date = winbiz_item['st_date1']
@@ -171,7 +171,7 @@ class AccountWinbizImport(models.TransientModel):
                     analytic_code = None
                     analytic_code = winbiz_item['lcanaccount']
                     default_value.update({'line_ids/partner_id': company_partner,
-                                          'line_ids/name': _('Payslip'),
+                                          'line_ids/name': 'Payslip',
                                           'line_ids/account_id':
                                               winbiz_item['lcaccount'],
                                           'line_ids/analytic_account_id':
@@ -205,7 +205,7 @@ class AccountWinbizImport(models.TransientModel):
             tb_msg = ''.join(traceback.format_tb(tb, 30))
             _logger.error(tb_msg)
             _logger.error(repr(exc))
-            error_report += _("Unexpected exception.\n %s \n %s \n") % \
+            error_report += "Unexpected exception.\n %s \n %s \n" % \
                 (repr(exc), tb_msg)
             status_report = 'error'
         if status_report == 'error':
