@@ -16,8 +16,7 @@
 
         <menuitem
             icon="STOCK_EXECUTE"
-            name="Winbiz Import"
-            groups="l10n_ch_import_winbiz.group_winbiz_import"
+            name="Accounting Winbiz Import"
             action="action_account_winbiz_import"
             id="menu_account_winbiz_import"
             parent="account.menu_finance_entries"
