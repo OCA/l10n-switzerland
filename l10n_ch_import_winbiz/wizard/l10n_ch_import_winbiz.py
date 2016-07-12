@@ -22,7 +22,9 @@
 import sys
 import traceback
 import logging
+import base64
 from lxml import etree
+import tempfile
 from itertools import izip_longest
 from StringIO import StringIO
 from openerp import models, fields, api
@@ -103,6 +105,25 @@ class AccountWinbizImport(models.TransientModel):
             )
         return "\n \n".join(res)
 
+    def _parse_xml(self):
+        """Parse stored XML file in order to be usable by BaseModel.load method.
+
+        Manage base 64 decoding.
+
+        :param imp_id: current importer id
+        :returns: (head [list of first row], data [list of list])
+
+        """
+        # We use tempfile in order to avoid memory error with large files
+        with tempfile.TemporaryFile() as src:
+            content = self.file
+            src.write(content)
+            decoded = tempfile.TemporaryFile()
+            src.seek(0)
+            base64.decode(src, decoded)
+            decoded.seek(0)
+            return etree.iterparse(decoded, tag="ecritures")
+
     def _manage_load_results(self, result):
         """Manage the BaseModel.load function output and store exception.
 
@@ -131,52 +152,68 @@ class AccountWinbizImport(models.TransientModel):
         cp = self.env.user.company_id
         company_partner = cp.partner_id.name
         standard_dict = dict(izip_longest(self.HEAD_ODOO, []))
-        previous_date = False
+        counterpart = False
         for action_winbiz, elem_winbiz in data:
-            # Contruct dict with date
-            winbiz_item = {}
-            for subelem in elem_winbiz.getchildren():
-                winbiz_item.update({subelem.tag: subelem.text})
-            for amount_type in ['lnmntent', 'lnmntsal']:
-                default_value = standard_dict.copy()
-                # We compute company part first after the employee
-                decimal_amount = float(winbiz_item[amount_type])
-                print str(decimal_amount)
-                if decimal_amount:
-                    if (not previous_date) or \
-                            previous_date != winbiz_item['st_date1']:
-                        default_value.update({'date': winbiz_item['st_date1'],
-                                              'ref': 'Payslip',
-                                              'journal_id': self.journal_id.name
-                                              })
-                        previous_date = winbiz_item['st_date1']
-                    else:
-                        default_value.update({'date': None,
-                                              'ref': None,
-                                              'journal_id': None})
-                    if decimal_amount < 0 and amount_type == 'lnmntsal':
-                        default_value.update({'line_ids/credit':
-                                              abs(decimal_amount),
-                                              'line_ids/debit': 0.0})
-                    elif decimal_amount > 0 and amount_type == 'lnmntsal':
-                        default_value.update({'line_ids/debit': abs(decimal_amount),
-                                              'line_ids/credit': 0.0})
-                    elif decimal_amount < 0 and amount_type == 'lnmntent':
-                        default_value.update({'line_ids/debit': abs(decimal_amount),
-                                              'line_ids/credit': 0.0})
-                    else:
-                        default_value.update({'line_ids/credit':
-                                              abs(decimal_amount),
-                                              'line_ids/debit': 0.0})
-                    analytic_code = None
-                    analytic_code = winbiz_item['lcanaccount']
-                    default_value.update({'line_ids/partner_id': company_partner,
-                                          'line_ids/name': 'Payslip',
-                                          'line_ids/account_id':
-                                              winbiz_item['lcaccount'],
-                                          'line_ids/analytic_account_id':
-                                          analytic_code})
-                    new_openerp_data.append(default_value)
+            winbiz_item = {subelem.tag: subelem.text for subelem in elem_winbiz.getchildren()}
+            if counterpart and counterpart['ref'] != winbiz_item[u'pièce']:
+                if counterpart['line_ids/debit'] > counterpart['line_ids/credit']:
+                    counterpart['line_ids/debit'] -= counterpart['line_ids/credit']
+                    counterpart['line_ids/credit'] = 0.0
+                else:
+                    counterpart['line_ids/credit'] -= counterpart['line_ids/debit']
+                    counterpart['line_ids/debit'] = 0.0
+                counterpart = False
+                # it's already in new_openerp_data
+            default_value = standard_dict.copy()
+            if winbiz_item['multiple'] == 'false':
+                default_value.update({'date': winbiz_item['date'],
+                                      'ref': winbiz_item[u'pièce'],
+                                      'journal_id': self.journal_id.name})
+                default_value.update({'line_ids/partner_id': company_partner,
+                                      'line_ids/name': winbiz_item[u'libellé'],
+                                      'line_ids/debit': winbiz_item['montant'],
+                                      'line_ids/credit': 0.0,
+                                      'line_ids/account_id':
+                                          winbiz_item[u'cpt_débit']})
+                new_openerp_data.append(default_value)
+                inverted_default_value = default_value.copy()
+                inverted_default_value.update({'date': None,
+                                               'ref': None,
+                                               'journal_id': None})
+                inverted_default_value.update({'line_ids/partner_id': company_partner,
+                                               'line_ids/name': winbiz_item[u'libellé'],
+                                               'line_ids/debit': 0.0,
+                                               'line_ids/credit': winbiz_item['montant'],
+                                               'line_ids/account_id':
+                                                   winbiz_item[u'cpt_crédit']})
+                new_openerp_data.append(inverted_default_value)
+            elif not counterpart:
+                default_value.update({'date': winbiz_item['date'],
+                                      'ref': winbiz_item[u'pièce'],
+                                      'journal_id': self.journal_id.name})
+                #reverse_counterpart = (cpt_débit == 'Multiple')
+                default_value.update({'line_ids/partner_id': company_partner,
+                                      'line_ids/name': winbiz_item[u'libellé'],
+                                      'line_ids/debit': 0.0,
+                                      'line_ids/credit': 0.0,
+                                      'line_ids/account_id':
+                                          winbiz_item[u'cpt_débit']})
+                counterpart = default_value # keep mutating: amounts can only be deduced from following lines
+                new_openerp_data.append(default_value)
+            else:
+                default_value.update({'line_ids/partner_id': company_partner,
+                                      'line_ids/name': winbiz_item[u'libellé'],
+                                      'line_ids/debit': 0.0,
+                                      'line_ids/credit': 0.0})
+                if counterpart['line_ids/account_id'] == winbiz_item[u'cpt_débit']:
+                    counterpart['line_ids/debit'] += float(winbiz_item['montant'])
+                    default_value['line_ids/credit'] = float(winbiz_item['montant'])
+                    default_value['line_ids/account_id'] = winbiz_item[u'cpt_crédit']
+                else:
+                    counterpart['line_ids/credit'] += float(winbiz_item['montant'])
+                    default_value['line_ids/debit'] = float(winbiz_item['montant'])
+                    default_value['line_ids/account_id'] = winbiz_item[u'cpt_débit']
+                new_openerp_data.append(default_value)
         return new_openerp_data
 
     @api.multi
@@ -224,7 +261,6 @@ class AccountWinbizImport(models.TransientModel):
 
     @api.multi
     def import_file(self):
-        struct_xml = etree.iterparse(StringIO(
-            self.file.decode('base64')), tag="c_liste_text")
-        new_data = self._standardise_data(struct_xml)
+        data = self._parse_xml()
+        new_data = self._standardise_data(data)
         return self._load_data(new_data)
