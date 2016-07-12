@@ -36,22 +36,8 @@ class AccountWinbizImport(models.TransientModel):
     _description = 'Import Accounting Winbiz'
     _rec_name = 'state'
 
-    @api.model
-    def _get_previous_period(self):
-        """
-        Get the previous period
-        """
-        date_now = fields.Datetime.now()
-        period_obj = self.env['account.period']
-        return period_obj.search([('date_stop', '<', date_now),
-                                  ('state', '=', 'draft')],
-                                 order='date_stop desc', limit=1).id
-
     company_id = fields.Many2one('res.company', 'Company',
                                  invisible=True)
-    period_id = fields.Many2one('account.period', 'Period',
-                                required=True,
-                                default=_get_previous_period)
     report = fields.Text(
         'Report',
         readonly=True
@@ -78,11 +64,9 @@ class AccountWinbizImport(models.TransientModel):
                 <ul>
                 <li> The accounts, analytical accounts used in the Cresus\
                  file must be previously created into Odoo  </li>
-                <li> The date of the entry will determine the period used\
-                 in Odoo, so please ensure the period is created already. </li>
                 </ul>''')
 
-    HEAD_ODOO = ['ref', 'date', 'period_id', 'journal_id',
+    HEAD_ODOO = ['ref', 'date', 'journal_id',
                  'line_id/account_id', 'line_id/partner_id', 'line_id/name',
                  'line_id/debit', 'line_id/credit',
                  'line_id/account_tax_id',
@@ -163,15 +147,13 @@ class AccountWinbizImport(models.TransientModel):
                             previous_date != winbiz_item['st_date1']:
                         default_value.update({'date': winbiz_item['st_date1'],
                                               'ref': _('Payslip'),
-                                              'journal_id': self.journal_id.name,
-                                              'period_id': self.period_id.code
+                                              'journal_id': self.journal_id.name
                                               })
                         previous_date = winbiz_item['st_date1']
                     else:
                         default_value.update({'date': None,
                                               'ref': None,
-                                              'journal_id': None,
-                                              'period_id': None})
+                                              'journal_id': None})
                     if decimal_amount < 0 and amount_type == 'lnmntsal':
                         default_value.update({'line_id/credit':
                                               abs(decimal_amount),
