@@ -18,7 +18,7 @@
     ],
     'data': [
         'wizard/l10n_ch_import_cresus_view.xml',
-        'account_tax_view.xml',
-        'menu.xml',
+        'views/account_tax_view.xml',
+        'views/menu.xml',
     ],
 }
