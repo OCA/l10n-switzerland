@@ -67,10 +67,10 @@ class AccountWinbizImport(models.TransientModel):
                 </ul>''')
 
     HEAD_ODOO = ['ref', 'date', 'journal_id',
-                 'line_id/account_id', 'line_id/partner_id', 'line_id/name',
-                 'line_id/debit', 'line_id/credit',
-                 'line_id/account_tax_id',
-                 'line_id/analytic_account_id']
+                 'line_ids/account_id', 'line_ids/partner_id', 'line_ids/name',
+                 'line_ids/debit', 'line_ids/credit',
+                 'line_ids/tax_line_id',
+                 'line_ids/analytic_account_id']
 
     @api.multi
     def open_account_moves(self):
@@ -155,26 +155,26 @@ class AccountWinbizImport(models.TransientModel):
                                               'ref': None,
                                               'journal_id': None})
                     if decimal_amount < 0 and amount_type == 'lnmntsal':
-                        default_value.update({'line_id/credit':
+                        default_value.update({'line_ids/credit':
                                               abs(decimal_amount),
-                                              'line_id/debit': 0.0})
+                                              'line_ids/debit': 0.0})
                     elif decimal_amount > 0 and amount_type == 'lnmntsal':
-                        default_value.update({'line_id/debit': abs(decimal_amount),
-                                              'line_id/credit': 0.0})
+                        default_value.update({'line_ids/debit': abs(decimal_amount),
+                                              'line_ids/credit': 0.0})
                     elif decimal_amount < 0 and amount_type == 'lnmntent':
-                        default_value.update({'line_id/debit': abs(decimal_amount),
-                                              'line_id/credit': 0.0})
+                        default_value.update({'line_ids/debit': abs(decimal_amount),
+                                              'line_ids/credit': 0.0})
                     else:
-                        default_value.update({'line_id/credit':
+                        default_value.update({'line_ids/credit':
                                               abs(decimal_amount),
-                                              'line_id/debit': 0.0})
+                                              'line_ids/debit': 0.0})
                     analytic_code = None
                     analytic_code = winbiz_item['lcanaccount']
-                    default_value.update({'line_id/partner_id': company_partner,
-                                          'line_id/name': _('Payslip'),
-                                          'line_id/account_id':
+                    default_value.update({'line_ids/partner_id': company_partner,
+                                          'line_ids/name': _('Payslip'),
+                                          'line_ids/account_id':
                                               winbiz_item['lcaccount'],
-                                          'line_id/analytic_account_id':
+                                          'line_ids/analytic_account_id':
                                           analytic_code})
                     new_openerp_data.append(default_value)
         return new_openerp_data
