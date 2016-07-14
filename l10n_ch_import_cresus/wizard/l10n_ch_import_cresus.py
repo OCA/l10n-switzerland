@@ -139,7 +139,7 @@ the error detail is:
         journal_id = self.journal_id.id
         previous_pce = None
         lines = []
-        for index, line_cresus in enumerate(data, 1):
+        for self.index, line_cresus in enumerate(data, 1):
             if previous_pce is not None and previous_pce != line_cresus['pce']:
                 yield self.make_move(lines,
                     date=previous_date,
@@ -183,11 +183,28 @@ the error detail is:
             journal_id=journal_id)
 
     @api.multi
-    def _load_data(self, data):
+    def _import_file(self):
         move_obj = self.env['account.move']
-
+        data = self._parse_csv()
+        data = self._standardise_data(data)
         self.imported_move_ids = [move_obj.create(mv).id for mv in data]
 
+    @api.multi
+    def import_file(self):
+        try:
+            self._import_file()
+        except Exception as exc:
+            self.env.cr.rollback()
+            self.write({'state': 'error',
+                        'report': 'Error (at row %s):\n%s' % (self.index, exc)})
+            return {'name': 'Import Move lines',
+                    'type': 'ir.actions.act_window',
+                    'res_model': 'account.cresus.import',
+                    'res_id': self.id,
+                    'view_type': 'form',
+                    'view_mode': 'form',
+                    'target': 'new'}
+        self.state = 'done'
         # show the resulting moves in main content area
         return {'domain': str([('id', 'in', self.imported_move_ids.ids)]),
                 'name': 'Imported Journal Entries',
@@ -196,9 +213,3 @@ the error detail is:
                 'res_model': 'account.move',
                 'view_id': False,
                 'type': 'ir.actions.act_window'}
-
-    @api.multi
-    def import_file(self):
-        data = self._parse_csv()
-        new_data = self._standardise_data(data)
-        return self._load_data(new_data)
