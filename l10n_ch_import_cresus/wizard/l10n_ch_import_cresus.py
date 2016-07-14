@@ -157,8 +157,7 @@ class AccountCresusImport(models.TransientModel):
         cp = self.env.user.company_id
         company_partner = cp.partner_id.name
         standard_dict = dict(izip_longest(self.HEAD_ODOO, []))
-        previous_date = False
-        previous_pce = False
+        previous_pce = None
         for index, line_cresus in enumerate(data, 1):
             current_date = self._parse_date(line_cresus['date'])
             if not current_date:
@@ -166,7 +165,7 @@ class AccountCresusImport(models.TransientModel):
             default_value = standard_dict.copy()
             default_value['line_ids/name'] = line_cresus['ref']
 
-            if (not previous_pce) or previous_pce != line_cresus['pce']:
+            if previous_pce != line_cresus['pce']:
                 default_value.update({'date': current_date,
                                       'ref': line_cresus['pce'],
                                       'journal_id': self.journal_id.name
