@@ -18,10 +18,12 @@ class TestImport(common.TransactionCase):
         account_obj = self.env['account.account']
         analytic_account_obj = self.env['account.analytic.account']
 
-        user_type = self.env['account.account.type'].search([('include_initial_balance', '=', False)], limit=1)
-        for code in '1000 1010 1210 2200 2800 2915 6512 6513 6642 9100'.split():
+        user_type = self.env['account.account.type'].search(
+            [('include_initial_balance', '=', False)], limit=1)
+        for code in '1000 1010 1210 2200 2800 2915 6512 6513 6642 '\
+                    '9100'.split():
             found = account_obj.search([('code', '=', code)])
-            if found: # patch it within the transaction
+            if found:  # patch it within the transaction
                 found.user_type_id = user_type.id
             else:
                 account_obj.create({
@@ -29,18 +31,22 @@ class TestImport(common.TransactionCase):
                     'code': code,
                     'user_type_id': user_type.id,
                     'reconcile': True})
-        self.vat = tax_obj.create({'name': 'dummy VAT', 'price_include': True, 'amount': 4.2, 'tax_cresus_mapping': 'VAT'})
+        self.vat = tax_obj.create({
+            'name': 'dummy VAT',
+            'price_include': True,
+            'amount': 4.2,
+            'tax_cresus_mapping': 'VAT'})
         self.reserve = analytic_account_obj.create({
             'name': 'Fortune',
             'code': '10'})
 
     def test_import(self):
         journal_obj = self.env['account.journal']
-        account_obj = self.env['account.account']
         move_obj = self.env['account.move']
 
         wizard = self.env['account.cresus.import'].create({
-            'journal_id': journal_obj.search([('name', 'ilike', 'miscellaneous')], limit=1).id,
+            'journal_id': journal_obj.search(
+                [('name', 'ilike', 'miscellaneous')], limit=1).id,
             'file': b64encode('''\
 01.01.02	1000	9100		Solde à nouveau Caisse	1'000.00			10
 01.01.02	1010	9100		Solde à nouveau CCP	8'000.00			10

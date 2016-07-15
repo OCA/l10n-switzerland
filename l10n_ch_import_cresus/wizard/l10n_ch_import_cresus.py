@@ -2,13 +2,10 @@
 # Copyright 2015 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import sys
-import traceback
 import base64
 import csv
 import tempfile
 from openerp import models, fields, api, exceptions
-from itertools import izip_longest
 from datetime import datetime
 
 
@@ -40,17 +37,20 @@ class AccountCresusImport(models.TransientModel):
                    'ref', 'amount', 'typtvat', 'currency_amount',
                    'analytic_account']
 
-    ODOO_MOVE_ARGS = { 'ref', 'date', 'journal_id'}
+    ODOO_MOVE_ARGS = {'ref', 'date', 'journal_id'}
+
     @staticmethod
     def make_move(lines, **kwargs):
-        #assert set(kwargs.keys()) == self.ODOO_MOVE_ARGS
+        # assert set(kwargs.keys()) == self.ODOO_MOVE_ARGS
         kwargs.update({'line_ids': [(0, 0, ln) for ln in lines]})
         return kwargs
 
-    ODOO_LINE_ARGS = { 'account_id', 'partner_id', 'name', 'tax_line_id', 'analytic_account_id' }
+    ODOO_LINE_ARGS = {'account_id', 'partner_id', 'name',
+                      'tax_line_id', 'analytic_account_id'}
+
     @staticmethod
     def make_line(debit_amount, credit_amount, **kwargs):
-        #assert set(kwargs.keys()) == self.ODOO_LINE_ARGS
+        # assert set(kwargs.keys()) == self.ODOO_LINE_ARGS
         kwargs.update({'debit': debit_amount, 'credit': credit_amount})
         return kwargs
 
@@ -99,7 +99,8 @@ the error detail is:
             except ValueError:
                 continue
         else:
-            raise exceptions.ValidationError("Can't parse date '%s'" % date_string)
+            raise exceptions.ValidationError(
+                "Can't parse date '%s'" % date_string)
         return fields.Date.to_string(dt)
 
     def _find_account(self, code):
@@ -116,6 +117,7 @@ the error detail is:
         else:
             return tax_obj.search([('tax_cresus_mapping', '=', typtvat),
                                    ('price_include', '=', True)], limit=1)
+
     def _find_analytic_account(self, code, account):
         analytic_account_obj = self.env['account.analytic.account']
         if not code or account.user_type_id.include_initial_balance:
@@ -132,15 +134,14 @@ the error detail is:
             and uses ellipses in more complex cases. What matters is the pce
             label, which is the same on all lines of a move.
         """
-        account_obj = self.env['account.account']
-        company = self.company_id
-        company_id = company.id
         journal_id = self.journal_id.id
         previous_pce = None
+        previous_date = None
         lines = []
         for self.index, line_cresus in enumerate(data, 1):
             if previous_pce is not None and previous_pce != line_cresus['pce']:
-                yield self.make_move(lines,
+                yield self.make_move(
+                    lines,
                     date=previous_date,
                     ref=previous_pce,
                     journal_id=journal_id)
@@ -148,35 +149,39 @@ the error detail is:
             previous_pce = line_cresus['pce']
             previous_date = line_cresus['date']
 
-            recto_amount = float(line_cresus['amount'].replace('\'', '').replace(' ', ''))
+            recto_amount = float(line_cresus['amount'].replace('\'', '')
+                                                      .replace(' ', ''))
             verso_amount = 0.0
             if recto_amount < 0:
                 recto_amount, verso_amount = 0.0, -recto_amount
             if line_cresus['debit'] != '...':
                 account = self._find_account(line_cresus['debit'])
                 tax = self._find_tax(line_cresus['typtvat'], account)
-                analytic_account = \
-                    self._find_analytic_account(line_cresus['analytic_account'], account)
-                lines.append(self.make_line(recto_amount, verso_amount,
-                    account_id = account.id,
-                    partner_id = False,
-                    name = line_cresus['ref'],
-                    tax_line_id = tax.id,
-                    analytic_account_id = analytic_account.id))
+                analytic_account = self._find_analytic_account(
+                    line_cresus['analytic_account'], account)
+                lines.append(self.make_line(
+                    recto_amount, verso_amount,
+                    account_id=account.id,
+                    partner_id=False,
+                    name=line_cresus['ref'],
+                    tax_line_id=tax.id,
+                    analytic_account_id=analytic_account.id))
 
             if line_cresus['credit'] != '...':
                 account = self._find_account(line_cresus['credit'])
                 tax = self._find_tax(line_cresus['typtvat'], account)
-                analytic_account = \
-                    self._find_analytic_account(line_cresus['analytic_account'], account)
-                lines.append(self.make_line(verso_amount, recto_amount,
-                    account_id = account.id,
-                    partner_id = False,
-                    name = line_cresus['ref'],
-                    tax_line_id = tax.id,
-                    analytic_account_id = analytic_account.id))
+                analytic_account = self._find_analytic_account(
+                    line_cresus['analytic_account'], account)
+                lines.append(self.make_line(
+                    verso_amount, recto_amount,
+                    account_id=account.id,
+                    partner_id=False,
+                    name=line_cresus['ref'],
+                    tax_line_id=tax.id,
+                    analytic_account_id=analytic_account.id))
 
-        yield self.make_move(lines,
+        yield self.make_move(
+            lines,
             date=line_cresus['date'],
             ref=previous_pce,
             journal_id=journal_id)
@@ -194,8 +199,9 @@ the error detail is:
             self._import_file()
         except Exception as exc:
             self.env.cr.rollback()
-            self.write({'state': 'error',
-                        'report': 'Error (at row %s):\n%s' % (self.index, exc)})
+            self.write({
+                'state': 'error',
+                'report': 'Error (at row %s):\n%s' % (self.index, exc)})
             return {'name': 'Import Move lines',
                     'type': 'ir.actions.act_window',
                     'res_model': 'account.cresus.import',
