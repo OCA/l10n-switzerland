@@ -55,7 +55,7 @@ class TestImport(common.TransactionCase):
 01.01.02	9100	2915		Solde à nouveau Réserve générale	323.20			10
 07.01.2002	6642	1010	1	Frais de déplacement - Frauenfeld	45.00
 07.01.02	6513	1010	2	Frais de prospection - Tartempion	218.50
-12.01.02	6642	1010	3	Frais de déplacement - Tolochenaz	15.00
+12.01.02	1010	6642	3	Frais de déplacement - Tolochenaz	-15.00
 14.01.02	6512	...	4	Salt, (TVA) net, TVA = 13.17	173.38
 14.01.02	2200	...	4	Salt, 7.6% de TVA (TVA)	13.17	VAT
 14.01.02	...	1010	4	Salt Total, (TVA)	186.55
@@ -69,8 +69,10 @@ class TestImport(common.TransactionCase):
             self.assertEqual(l.analytic_account_id, self.reserve)
         self.assertEqual(res[1].date, '2002-01-07')
         self.assertEqual(res[2].date, '2002-01-07')
-        lines = res[3].line_ids
-        self.assertEqual(lines[0].account_id.code, '1010')
-        self.assertEqual(lines[0].credit, 15.0)
-
+        self.assertEqual(res[3].line_ids[0].account_id.code, '6642')
+        self.assertEqual(res[3].line_ids[0].debit, 15.0)
+        self.assertEqual(res[3].line_ids[0].credit, 0.0)
+        self.assertEqual(res[3].line_ids[1].account_id.code, '1010')
+        self.assertEqual(res[3].line_ids[1].debit, 0.0)
+        self.assertEqual(res[3].line_ids[1].credit, 15.0)
         self.assertEqual(res[4].line_ids[1].tax_line_id, self.vat)
