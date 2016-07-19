@@ -2,19 +2,11 @@
 # Copyright 2015 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import sys
-import traceback
-import logging
 import base64
 from lxml import etree
 import tempfile
-from itertools import izip_longest
-from StringIO import StringIO
 from openerp import models, fields, api, exceptions
 from datetime import datetime
-
-
-_logger = logging.getLogger(__name__)
 
 
 class AccountWinbizImport(models.TransientModel):
