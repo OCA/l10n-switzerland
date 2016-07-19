@@ -129,39 +129,66 @@ class AccountWinbizImport(models.TransientModel):
         journal_id = self.journal_id.id
         cp = self.env.user.company_id
         company_partner = cp.partner_id.name
+        incomplete = None
         previous_pce = None
         previous_date = None
         lines = []
         for self.index, winbiz_item in enumerate(data, 1):
             if previous_pce is not None and previous_pce != winbiz_item[u'pièce']:
+                if incomplete and incomplete['debit'] and incomplete['credit']:
+                    if incomplete['debit'] < incomplete['credit']:
+                        incomplete['credit'] -= incomplete['debit']
+                        incomplete['debit'] = 0
+                    else:
+                        incomplete['debit'] -= incomplete['credit']
+                        incomplete['credit'] = 0
                 yield self.make_move(
                     lines,
                     date=previous_date,
                     ref=previous_pce,
                     journal_id=journal_id)
                 lines = []
+                incomplete = None
             previous_pce = winbiz_item[u'pièce']
             previous_date = self._parse_date(winbiz_item[u'date'])
 
             amount = float(winbiz_item[u'montant'])
 
-            recto_line = self.make_line(
-                debit=amount,
-                account_id=self._find_account(winbiz_item[u'cpt_débit']).id,
-                partner_id=False,
-                name=winbiz_item[u'libellé'],
-                tax_line_id=None,
-                analytic_account_id=None)
-            lines.append(recto_line)
+            recto_line = verso_line = None
+            if winbiz_item[u'cpt_débit'] != 'Multiple':
+                account = self._find_account(winbiz_item[u'cpt_débit'])
+                if incomplete is not None and incomplete['account_id'] == account.id:
+                    incomplete['debit'] += amount
+                else:
+                    recto_line = self.make_line(
+                        debit=amount,
+                        account_id=account.id,
+                        partner_id=False,
+                        name=winbiz_item[u'libellé'],
+                        tax_line_id=None,
+                        analytic_account_id=None)
+                    lines.append(recto_line)
 
-            verso_line = self.make_line(
-                credit=amount,
-                account_id=self._find_account(winbiz_item[u'cpt_crédit']).id,
-                partner_id=False,
-                name=winbiz_item[u'libellé'],
-                tax_line_id=None,
-                analytic_account_id=None)
-            lines.append(verso_line)
+            if winbiz_item[u'cpt_crédit'] != 'Multiple':
+                account = self._find_account(winbiz_item[u'cpt_crédit'])
+                if incomplete is not None and incomplete['account_id'] == account.id:
+                    incomplete['credit'] += amount
+                else:
+                    verso_line = self.make_line(
+                        credit=amount,
+                        account_id=account.id,
+                        partner_id=False,
+                        name=winbiz_item[u'libellé'],
+                        tax_line_id=None,
+                        analytic_account_id=None)
+                    lines.append(verso_line)
+
+            if winbiz_item[u'cpt_débit'] == 'Multiple':
+                assert incomplete is None
+                incomplete = verso_line
+            if winbiz_item[u'cpt_crédit'] == 'Multiple':
+                assert incomplete is None
+                incomplete = recto_line
 
         yield self.make_move(
             lines,
