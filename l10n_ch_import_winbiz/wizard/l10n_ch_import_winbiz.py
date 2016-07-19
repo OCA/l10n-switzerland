@@ -145,6 +145,8 @@ class AccountWinbizImport(models.TransientModel):
             previous_date = self._parse_date(winbiz_item[u'date'])
 
             amount = float(winbiz_item[u'montant'])
+            if amount == 0:
+                continue
 
             recto_line = verso_line = None
             if winbiz_item[u'cpt_débit'] != 'Multiple':
