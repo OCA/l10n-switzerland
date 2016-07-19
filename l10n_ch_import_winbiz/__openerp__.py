@@ -14,7 +14,7 @@
     'data': [
         'security/security.xml',
         'wizard/l10n_ch_import_winbiz_view.xml',
-        'menu.xml',
+        'views/menu.xml',
     ],
     'installable': True,
 }
