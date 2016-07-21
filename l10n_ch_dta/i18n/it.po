@@ -3,15 +3,15 @@
 # * l10n_ch_dta
 # 
 # Translators:
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2014
+# OCA Transbot <transbot@odoo-community.org>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: l10n-switzerland (8.0)\n"
+"Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-17 12:24+0000\n"
-"PO-Revision-Date: 2015-08-04 10:29+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Italian (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/it/)\n"
+"POT-Creation-Date: 2016-07-09 02:50+0000\n"
+"PO-Revision-Date: 2016-07-09 02:50+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -46,49 +46,109 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
+#: model:account.journal,name:l10n_ch_dta.bank_journal
+msgid "Bank - Test"
+msgstr ""
+
+#. module: l10n_ch_dta
 #: model:ir.model,name:l10n_ch_dta.model_res_partner_bank
 msgid "Bank Accounts"
 msgstr "Conti bancari"
 
 #. module: l10n_ch_dta
-#: view:create.dta.wizard:l10n_ch_dta.dta_create_view
-msgid "Cancel"
-msgstr "Annulla"
-
-#. module: l10n_ch_dta
-#: view:create.dta.wizard:l10n_ch_dta.dta_create_view
-#: model:ir.actions.act_window,name:l10n_ch_dta.action_dta_create
-msgid "Create DTA"
+#: model:account.account,name:l10n_ch_dta.a_sale_finance
+msgid "Bank Accounts Interests - (test)"
 msgstr ""
 
 #. module: l10n_ch_dta
-#: field:create.dta.wizard,create_uid:0
+#: model:account.account,name:l10n_ch_dta.bnk
+msgid "Bank Current Account - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.a_expense_finance
+msgid "Bank Fees - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.a_capital
+msgid "Capital"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.cash
+msgid "Cash - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.journal,name:l10n_ch_dta.cash_journal
+msgid "Cash - Test"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:120
+#, python-format
+msgid "Check not implemented"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.cog
+msgid "Cost of Goods Sold - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:ir.model.fields,field_description:l10n_ch_dta.field_create_dta_wizard_create_uid
 msgid "Created by"
 msgstr "Created by"
 
 #. module: l10n_ch_dta
-#: field:create.dta.wizard,create_date:0
+#: model:ir.model.fields,field_description:l10n_ch_dta.field_create_dta_wizard_create_date
 msgid "Created on"
 msgstr "Created on"
 
 #. module: l10n_ch_dta
-#: view:create.dta.wizard:l10n_ch_dta.dta_create_view
-msgid "DTA Generation"
-msgstr "Generare DTA"
+#: model:account.account,name:l10n_ch_dta.a_pay
+msgid "Creditors - (test)"
+msgstr ""
 
 #. module: l10n_ch_dta
-#: field:res.partner.bank,dta_code:0
+#: model:account.journal,name:l10n_ch_dta.currency_diff_journal
+msgid "Currency Difference - Test"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.current_liabilities
+msgid "Current Liabilities - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.journal,name:l10n_ch_dta.sales_journal
+msgid "Customer Invoices - Test"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.payment.mode,name:l10n_ch_dta.payment_mode_dta
+msgid "DTA"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:ir.model.fields,field_description:l10n_ch_dta.field_res_partner_bank_dta_code
 msgid "DTA code"
 msgstr ""
 
 #. module: l10n_ch_dta
-#: view:res.partner.bank:l10n_ch_dta.l10nch_view_res_partner_bank_from_invoice_slip
-msgid "DTA options"
+#: model:account.account,name:l10n_ch_dta.a_recv
+msgid "Debtors - (test)"
 msgstr ""
 
 #. module: l10n_ch_dta
-#: field:payment.order,dta_ids:0
-msgid "Dta ids"
+#: model:ir.model.fields,field_description:l10n_ch_dta.field_create_dta_wizard_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.a_dividends
+msgid "Dividends"
 msgstr ""
 
 #. module: l10n_ch_dta
@@ -98,41 +158,82 @@ msgstr ""
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:260
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:272
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:285
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:302
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:309
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:401
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:418
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:554
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:560
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:565
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:574
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:595
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:630
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:639
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:644
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:661
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:731
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:304
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:312
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:405
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:423
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:561
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:567
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:572
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:581
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:602
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:640
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:649
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:654
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:672
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:734
 #, python-format
 msgid "Error"
 msgstr ""
 
 #. module: l10n_ch_dta
-#: field:create.dta.wizard,id:0
+#: model:account.account,name:l10n_ch_dta.a_expense
+msgid "Expenses - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.xfa
+msgid "Fixed Assets - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.income_fx_income
+msgid "Foreign Exchange Gain - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.income_fx_expense
+msgid "Foreign Exchange Loss - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:ir.model.fields,field_description:l10n_ch_dta.field_create_dta_wizard_id
 msgid "ID"
 msgstr "ID"
 
 #. module: l10n_ch_dta
-#: field:create.dta.wizard,write_uid:0
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:116
+#, python-format
+msgid "Init not implemented"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.transfer_account
+msgid "Internal Transfert Account - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:ir.model.fields,field_description:l10n_ch_dta.field_create_dta_wizard___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:ir.model.fields,field_description:l10n_ch_dta.field_create_dta_wizard_write_uid
 msgid "Last Updated by"
 msgstr "Last Updated by"
 
 #. module: l10n_ch_dta
-#: field:create.dta.wizard,write_date:0
+#: model:ir.model.fields,field_description:l10n_ch_dta.field_create_dta_wizard_write_date
 msgid "Last Updated on"
 msgstr "Last Updated on"
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:402
+#: model:account.journal,name:l10n_ch_dta.miscellaneous_journal
+msgid "Miscellaneous - Test"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:406
 #, python-format
 msgid ""
 "No IBAN defined \n"
@@ -141,13 +242,13 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:596
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:603
 #, python-format
 msgid "No IBAN for the company bank account."
 msgstr "Numero IBAN per il conto bancario aziendale"
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:631
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:641
 #, python-format
 msgid ""
 "No address defined \n"
@@ -155,7 +256,7 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:640
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:650
 #, python-format
 msgid ""
 "No bank account defined\n"
@@ -163,13 +264,13 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:561
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:568
 #, python-format
 msgid "No bank account for the company."
 msgstr "Nesun conto bancario aziendale"
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:645
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:655
 #, python-format
 msgid ""
 "No bank defined for the bank account: %s\n"
@@ -178,7 +279,7 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:662
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:673
 #, python-format
 msgid ""
 "No bank name defined\n"
@@ -188,20 +289,110 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:555
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:562
 #, python-format
 msgid "No payment mode"
 msgstr "Nessuna modalità di pagamento"
 
 #. module: l10n_ch_dta
-#: model:ir.model,name:l10n_ch_dta.model_payment_order
+#: model:account.account,name:l10n_ch_dta.ncas
+msgid "Non-current Assets - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.cas
+msgid "Non-current Liabilities - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.o_expense
+msgid "Opening Expense - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.o_income
+msgid "Opening Income - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:ir.model,name:l10n_ch_dta.model_account_payment_line
+msgid "Payment Lines"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:ir.model,name:l10n_ch_dta.model_account_payment_order
 msgid "Payment Order"
 msgstr "Ordine di Pagamento"
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:732
+#: model:account.account,name:l10n_ch_dta.prepayements
+msgid "Prepayments - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.a_sale
+msgid "Product Sales - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.a_expense_invest
+msgid "Purchase of Equipments - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.stk
+msgid "Purchased Stocks - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.rsa
+msgid "Reserve and Profit/Loss - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.a_salary_expense
+msgid "Salary Expenses - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.a_sale_invest
+msgid "Sale of Lands - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:735
 #, python-format
 msgid "The Bank type %s of the bank account: %s is not supported"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.journal,name:l10n_ch_dta.bank_journal_usd
+msgid "USD Bank - Test"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.usd_bnk
+msgid "USD Bank Account - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.a_current_year_earnings
+msgid "Unaffected Earnings"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.ova
+msgid "VAT Paid- (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.account,name:l10n_ch_dta.iva
+msgid "VAT Received - (test)"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:account.journal,name:l10n_ch_dta.expenses_journal
+msgid "Vendor Bills - Test"
 msgstr ""
 
 #. module: l10n_ch_dta
@@ -230,7 +421,7 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:310
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:313
 #, python-format
 msgid ""
 "You must provide a Clearing Number\n"
@@ -239,13 +430,13 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:575
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:582
 #, python-format
 msgid "You must provide a Clearing Number for the bank %s."
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:303
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:305
 #, python-format
 msgid ""
 "You must provide a bank number \n"
@@ -254,7 +445,7 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:419
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:424
 #, python-format
 msgid ""
 "You must provide the bank city or the bic code for the partner bank:\n"
@@ -263,7 +454,12 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:566
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:573
 #, python-format
 msgid "You must set a bank for the bank account with number %s"
+msgstr ""
+
+#. module: l10n_ch_dta
+#: model:ir.model,name:l10n_ch_dta.model_create_dta_wizard
+msgid "create.dta.wizard"
 msgstr ""
