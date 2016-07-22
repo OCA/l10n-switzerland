@@ -142,8 +142,5 @@ set slip_id=%d where id in (%s)""" % (payslip.id, ','.join(move_line_ids))
 
     def process_sheet(self):
         ExpenseObj = self.env['hr.expense.expense']
-        expenses = ExpenseObj.search([
-            ('slip_id', '=', self.id)
-        ])
-        expenses.write({'state': 'done'})
+        expenses.write({'state': 'done', 'slip_id' : self.id})
         return super(HrPayslip, self).process_sheet()
