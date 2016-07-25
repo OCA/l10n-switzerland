@@ -62,7 +62,7 @@ class TestImport(common.TransactionCase):
 ''')})
         wizard.import_file()
 
-        res = move_obj.browse(wizard.imported_move_ids.ids)
+        res = wizard.imported_move_ids
         self.assertEqual(len(res), 5)
         res.assert_balanced()
         for l in res[0].line_ids:

@@ -112,7 +112,7 @@ class AccountCresusImport(models.TransientModel):
     def _find_tax(self, typtvat, account):
         tax_obj = self.env['account.tax']
         if not typtvat or account.user_type_id.include_initial_balance:
-            return tax_obj.browse()
+            return tax_obj
         else:
             return tax_obj.search([('tax_cresus_mapping', '=', typtvat),
                                    ('price_include', '=', True)], limit=1)
@@ -120,7 +120,7 @@ class AccountCresusImport(models.TransientModel):
     def _find_analytic_account(self, code, account):
         analytic_account_obj = self.env['account.analytic.account']
         if not code or account.user_type_id.include_initial_balance:
-            return analytic_account_obj.browse()
+            return analytic_account_obj
         else:
             return analytic_account_obj.search([('code', '=', code)], limit=1)
 
