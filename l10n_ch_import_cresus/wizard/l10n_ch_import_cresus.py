@@ -75,11 +75,10 @@ class AccountCresusImport(models.TransientModel):
                     data = csv.DictReader(decoded, fieldnames=self.HEAD_CRESUS,
                                           delimiter=delimiter)
                 except csv.Error as error:
-                    raise exceptions.ValidationError('''\
-CSV file is malformed
-Please choose the correct separator
-the error detail is:
-%r''' % error)
+                    raise exceptions.ValidationError('CSV file is malformed\n'
+                                                     'Please choose the correct separator\n'
+                                                     'the error detail is:\n'
+                                                     '%r' % error)
                 for line in data:
                     line['date'] = self._parse_date(line['date'])
                     yield line

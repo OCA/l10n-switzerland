@@ -3,9 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name': 'Account Import Cresus',
-    'summary': 'Allows to import Cresus Salaires .txt files containing \
-                journal entries into Odoo.',
+    'name': 'Accounting Import Cresus',
+    'summary': 'Allows to import Crésus .txt files containing journal entries '
+               'into Odoo.',
     'version': '9.0.1.0.0',
     'category': 'accounting',
     'website': 'https://odoo-community.org/',
