@@ -148,8 +148,9 @@ class AccountCresusImport(models.TransientModel):
             previous_pce = line_cresus['pce']
             previous_date = line_cresus['date']
 
-            recto_amount = float(line_cresus['amount'].replace('\'', '')
-                                                      .replace(' ', ''))
+            from babel.numbers import parse_decimal
+            recto_amount = float(parse_decimal(line_cresus['amount'],
+                locale='de_CH'))
             verso_amount = 0.0
             if recto_amount < 0:
                 recto_amount, verso_amount = 0.0, -recto_amount
