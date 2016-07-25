@@ -5,15 +5,6 @@
         <field name="model">account.cresus.import</field>
         <field name="arch" type="xml">
             <form string="Move / Move lines importer">
-                <footer>
-                    <button
-                        name="import_file"
-                        string="Import file"
-                        type="object"
-                        states="draft"
-                        class="oe_highlight"
-                    />
-                </footer>
                 <group>
                     <div>
                         <field name="state" invisible="1"/>
@@ -37,6 +28,15 @@ In order to import your 'Cresus Salaires' .txt file you must complete the follow
                         </p>
                     </page>
                 </notebook>
+                <footer>
+                    <button
+                        name="import_file"
+                        string="Import file"
+                        type="object"
+                        states="draft"
+                        class="oe_highlight"
+                    />
+                </footer>
             </form>
         </field>
     </record>
