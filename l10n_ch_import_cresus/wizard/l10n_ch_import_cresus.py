@@ -42,7 +42,7 @@ class AccountCresusImport(models.TransientModel):
 
     @staticmethod
     def prepare_move(lines, **kwargs):
-        # assert set(kwargs.keys()) == self.ODOO_MOVE_ARGS
+        assert set(kwargs.keys()) == self.ODOO_MOVE_ARGS
         kwargs.update({'line_ids': [(0, 0, ln) for ln in lines]})
         return kwargs
 
@@ -51,7 +51,7 @@ class AccountCresusImport(models.TransientModel):
 
     @staticmethod
     def prepare_line(debit_amount, credit_amount, **kwargs):
-        # assert set(kwargs.keys()) == self.ODOO_LINE_ARGS
+        assert set(kwargs.keys()) == self.ODOO_LINE_ARGS
         kwargs.update({'debit': debit_amount, 'credit': credit_amount})
         return kwargs
 
