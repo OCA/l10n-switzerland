@@ -6,6 +6,7 @@ import base64
 import csv
 import tempfile
 from openerp import models, fields, api, exceptions
+from openerp.tools.translate import _
 from datetime import datetime
 
 
@@ -75,10 +76,10 @@ class AccountCresusImport(models.TransientModel):
                     data = csv.DictReader(decoded, fieldnames=self.HEAD_CRESUS,
                                           delimiter=delimiter)
                 except csv.Error as error:
-                    raise exceptions.ValidationError('CSV file is malformed\n'
-                                                     'Please choose the correct separator\n'
-                                                     'the error detail is:\n'
-                                                     '%r' % error)
+                    raise exceptions.ValidationError(_('CSV file is malformed\n'
+                                                       'Please choose the correct separator\n'
+                                                       'the error detail is:\n'
+                                                       '%r') % error)
                 for line in data:
                     line['date'] = self._parse_date(line['date'])
                     yield line
@@ -99,14 +100,14 @@ class AccountCresusImport(models.TransientModel):
                 continue
         else:
             raise exceptions.ValidationError(
-                "Can't parse date '%s'" % date_string)
+                _("Can't parse date '%s'") % date_string)
         return fields.Date.to_string(dt)
 
     def _find_account(self, code):
         account_obj = self.env['account.account']
         account = account_obj.search([('code', '=', code)], limit=1)
         if not account:
-            raise exceptions.MissingError("No account with code %s" % code)
+            raise exceptions.MissingError(_("No account with code %s") % code)
         return account
 
     def _find_tax(self, typtvat, account):
