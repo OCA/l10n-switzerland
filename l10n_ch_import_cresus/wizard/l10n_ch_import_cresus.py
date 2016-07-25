@@ -38,22 +38,39 @@ class AccountCresusImport(models.TransientModel):
                    'ref', 'amount', 'typtvat', 'currency_amount',
                    'analytic_account']
 
-    ODOO_MOVE_ARGS = {'ref', 'date', 'journal_id'}
+    def prepare_move(self, lines, date, ref, journal_id):
+        move = {}
+        move['date'] = date
+        move['ref'] = ref
+        move['journal_id'] = journal_id
+        move['line_ids'] = [(0, 0, ln) for ln in lines]
+        return move
 
-    @staticmethod
-    def prepare_move(lines, **kwargs):
-        assert set(kwargs.keys()) == self.ODOO_MOVE_ARGS
-        kwargs.update({'line_ids': [(0, 0, ln) for ln in lines]})
-        return kwargs
+    def prepare_line(self, name, debit_amount, credit_amount, account_code,
+                     cresus_tax_code, analytic_account_code):
+        account_obj = self.env['account.account']
+        tax_obj = self.env['account.tax']
+        analytic_account_obj = self.env['account.analytic.account']
 
-    ODOO_LINE_ARGS = {'account_id', 'partner_id', 'name',
-                      'tax_line_id', 'analytic_account_id'}
+        line = {}
+        line['name'] = name
+        line['debit'] = debit_amount
+        line['credit'] = credit_amount
 
-    @staticmethod
-    def prepare_line(debit_amount, credit_amount, **kwargs):
-        assert set(kwargs.keys()) == self.ODOO_LINE_ARGS
-        kwargs.update({'debit': debit_amount, 'credit': credit_amount})
-        return kwargs
+        account = account_obj.search([('code', '=', account_code)], limit=1)
+        if not account:
+            raise exceptions.MissingError(_("No account with code %s") % code)
+        line['account_id'] = account.id
+
+        if not account.user_type_id.include_initial_balance:
+            if cresus_tax_code:
+                tax = tax_obj.search([('tax_cresus_mapping', '=', cresus_tax_code),
+                                      ('price_include', '=', True)], limit=1)
+                line['tax_line_id'] = tax.id
+            if analytic_account_code:
+                analytic_account = analytic_account_obj.search([('code', '=', analytic_account_code)], limit=1)
+                line['analytic_account_id'] = analytic_account.id
+        return line
 
     def _parse_csv(self):
         """Parse stored CSV file.
@@ -103,28 +120,6 @@ class AccountCresusImport(models.TransientModel):
                 _("Can't parse date '%s'") % date_string)
         return fields.Date.to_string(dt)
 
-    def _find_account(self, code):
-        account_obj = self.env['account.account']
-        account = account_obj.search([('code', '=', code)], limit=1)
-        if not account:
-            raise exceptions.MissingError(_("No account with code %s") % code)
-        return account
-
-    def _find_tax(self, typtvat, account):
-        tax_obj = self.env['account.tax']
-        if not typtvat or account.user_type_id.include_initial_balance:
-            return tax_obj
-        else:
-            return tax_obj.search([('tax_cresus_mapping', '=', typtvat),
-                                   ('price_include', '=', True)], limit=1)
-
-    def _find_analytic_account(self, code, account):
-        analytic_account_obj = self.env['account.analytic.account']
-        if not code or account.user_type_id.include_initial_balance:
-            return analytic_account_obj
-        else:
-            return analytic_account_obj.search([('code', '=', code)], limit=1)
-
     @api.multi
     def _standardise_data(self, data):
         """ split accounting lines where needed
@@ -155,30 +150,22 @@ class AccountCresusImport(models.TransientModel):
             if recto_amount < 0:
                 recto_amount, verso_amount = 0.0, -recto_amount
             if line_cresus['debit'] != '...':
-                account = self._find_account(line_cresus['debit'])
-                tax = self._find_tax(line_cresus['typtvat'], account)
-                analytic_account = self._find_analytic_account(
-                    line_cresus['analytic_account'], account)
                 lines.append(self.prepare_line(
-                    recto_amount, verso_amount,
-                    account_id=account.id,
-                    partner_id=False,
                     name=line_cresus['ref'],
-                    tax_line_id=tax.id,
-                    analytic_account_id=analytic_account.id))
+                    debit_amount=recto_amount,
+                    credit_amount=verso_amount,
+                    account_code=line_cresus['debit'],
+                    cresus_tax_code=line_cresus['typtvat'],
+                    analytic_account_code=line_cresus['analytic_account']))
 
             if line_cresus['credit'] != '...':
-                account = self._find_account(line_cresus['credit'])
-                tax = self._find_tax(line_cresus['typtvat'], account)
-                analytic_account = self._find_analytic_account(
-                    line_cresus['analytic_account'], account)
                 lines.append(self.prepare_line(
-                    verso_amount, recto_amount,
-                    account_id=account.id,
-                    partner_id=False,
                     name=line_cresus['ref'],
-                    tax_line_id=tax.id,
-                    analytic_account_id=analytic_account.id))
+                    debit_amount=verso_amount,
+                    credit_amount=recto_amount,
+                    account_code=line_cresus['credit'],
+                    cresus_tax_code=line_cresus['typtvat'],
+                    analytic_account_code=line_cresus['analytic_account']))
 
         yield self.prepare_move(
             lines,
