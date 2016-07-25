@@ -40,7 +40,7 @@ class AccountCresusImport(models.TransientModel):
     ODOO_MOVE_ARGS = {'ref', 'date', 'journal_id'}
 
     @staticmethod
-    def make_move(lines, **kwargs):
+    def prepare_move(lines, **kwargs):
         # assert set(kwargs.keys()) == self.ODOO_MOVE_ARGS
         kwargs.update({'line_ids': [(0, 0, ln) for ln in lines]})
         return kwargs
@@ -49,7 +49,7 @@ class AccountCresusImport(models.TransientModel):
                       'tax_line_id', 'analytic_account_id'}
 
     @staticmethod
-    def make_line(debit_amount, credit_amount, **kwargs):
+    def prepare_line(debit_amount, credit_amount, **kwargs):
         # assert set(kwargs.keys()) == self.ODOO_LINE_ARGS
         kwargs.update({'debit': debit_amount, 'credit': credit_amount})
         return kwargs
@@ -139,7 +139,7 @@ class AccountCresusImport(models.TransientModel):
         lines = []
         for self.index, line_cresus in enumerate(data, 1):
             if previous_pce is not None and previous_pce != line_cresus['pce']:
-                yield self.make_move(
+                yield self.prepare_move(
                     lines,
                     date=previous_date,
                     ref=previous_pce,
@@ -158,7 +158,7 @@ class AccountCresusImport(models.TransientModel):
                 tax = self._find_tax(line_cresus['typtvat'], account)
                 analytic_account = self._find_analytic_account(
                     line_cresus['analytic_account'], account)
-                lines.append(self.make_line(
+                lines.append(self.prepare_line(
                     recto_amount, verso_amount,
                     account_id=account.id,
                     partner_id=False,
@@ -171,7 +171,7 @@ class AccountCresusImport(models.TransientModel):
                 tax = self._find_tax(line_cresus['typtvat'], account)
                 analytic_account = self._find_analytic_account(
                     line_cresus['analytic_account'], account)
-                lines.append(self.make_line(
+                lines.append(self.prepare_line(
                     verso_amount, recto_amount,
                     account_id=account.id,
                     partner_id=False,
@@ -179,7 +179,7 @@ class AccountCresusImport(models.TransientModel):
                     tax_line_id=tax.id,
                     analytic_account_id=analytic_account.id))
 
-        yield self.make_move(
+        yield self.prepare_move(
             lines,
             date=line_cresus['date'],
             ref=previous_pce,
