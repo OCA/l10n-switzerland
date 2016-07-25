@@ -59,16 +59,19 @@ class AccountCresusImport(models.TransientModel):
 
         account = account_obj.search([('code', '=', account_code)], limit=1)
         if not account:
-            raise exceptions.MissingError(_("No account with code %s") % code)
+            raise exceptions.MissingError(_("No account with code %s")
+                % account_code)
         line['account_id'] = account.id
 
         if not account.user_type_id.include_initial_balance:
             if cresus_tax_code:
-                tax = tax_obj.search([('tax_cresus_mapping', '=', cresus_tax_code),
-                                      ('price_include', '=', True)], limit=1)
+                tax = tax_obj.search([
+                    ('tax_cresus_mapping', '=', cresus_tax_code),
+                    ('price_include', '=', True)], limit=1)
                 line['tax_line_id'] = tax.id
             if analytic_account_code:
-                analytic_account = analytic_account_obj.search([('code', '=', analytic_account_code)], limit=1)
+                analytic_account = analytic_account_obj.search([
+                    ('code', '=', analytic_account_code)], limit=1)
                 line['analytic_account_id'] = analytic_account.id
         return line
 
@@ -93,10 +96,11 @@ class AccountCresusImport(models.TransientModel):
                     data = csv.DictReader(decoded, fieldnames=self.HEAD_CRESUS,
                                           delimiter=delimiter)
                 except csv.Error as error:
-                    raise exceptions.ValidationError(_('CSV file is malformed\n'
-                                                       'Please choose the correct separator\n'
-                                                       'the error detail is:\n'
-                                                       '%r') % error)
+                    raise exceptions.ValidationError(
+			_('CSV file is malformed\n'
+                        'Please choose the correct separator\n'
+                        'the error detail is:\n'
+                        '%r') % error)
                 for line in data:
                     line['date'] = self._parse_date(line['date'])
                     yield line
