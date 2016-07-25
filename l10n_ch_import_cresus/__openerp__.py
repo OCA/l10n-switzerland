@@ -7,7 +7,7 @@
     'summary': 'Allows to import Cresus Salaires .txt files containing \
                 journal entries into Odoo.',
     'version': '9.0.1.0.0',
-    'category': 'uncategorized',
+    'category': 'accounting',
     'website': 'https://odoo-community.org/',
     'author': 'Camptocamp, Open Net Sàrl, Odoo Community Association (OCA)',
     'license': 'AGPL-3',
