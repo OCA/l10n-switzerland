@@ -5,7 +5,7 @@
 from openerp import models, fields
 
 
-class account_tax(models.Model):
+class AccountTax(models.Model):
     _inherit = "account.tax"
 
     tax_cresus_mapping = fields.Char(
