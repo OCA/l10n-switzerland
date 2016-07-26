@@ -194,7 +194,7 @@ class AccountCresusImport(models.TransientModel):
             self.write({
                 'state': 'error',
                 'report': 'Error (at row %s):\n%s' % (self.index, exc)})
-            return {'name': _('Import Move lines'),
+            return {'name': _('Accounting Cresus Import'),
                     'type': 'ir.actions.act_window',
                     'res_model': 'account.cresus.import',
                     'res_id': self.id,

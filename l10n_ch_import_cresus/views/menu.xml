@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record model="ir.actions.act_window" id="action_account_cresus_import">
-        <field name="name">Import Move lines</field>
+        <field name="name">Accounting Cresus Import</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">account.cresus.import</field>
         <field name="domain"/>
