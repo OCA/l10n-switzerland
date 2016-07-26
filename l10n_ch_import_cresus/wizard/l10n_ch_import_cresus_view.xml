@@ -4,7 +4,7 @@
         <field name="name">cresus move line importer</field>
         <field name="model">account.cresus.import</field>
         <field name="arch" type="xml">
-            <form string="Move / Move lines importer">
+            <form>
                 <group>
                     <div>
                         <field name="state" invisible="1"/>
