@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-26 06:40+0000\n"
-"PO-Revision-Date: 2016-07-26 06:53+0000\n"
+"POT-Creation-Date: 2016-07-26 11:28+0000\n"
+"PO-Revision-Date: 2016-07-26 11:28+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -24,6 +24,18 @@ msgstr "Import Écritures Crésus"
 #: model:ir.ui.view,arch_db:l10n_ch_import_cresus.cresus_move_line_importer_form
 msgid "All PL accounts must have include_initial_balance = False (meaning: no balance brought forward in the new fiscal year) and all balance sheet accounts must have include_initial_balance = True."
 msgstr "Tous les comptes de résultat doivent avoir include_initial_balance = False (c'est à dire que le solde n'est pas reporter sur la nouvelle année fiscale), et tous les comptes du bilan doivent avoir include_initial_balance = True."
+
+#. module: l10n_ch_import_cresus
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:100
+#, python-format
+msgid "CSV file is malformed\n"
+"Please choose the correct separator\n"
+"the error detail is:\n"
+"%r"
+msgstr "Le fichier est corrompu\n"
+"Veuillez choisir le bon séparateur\n"
+"le détail de l'erreur est:\n"
+"%r"
 
 #. module: l10n_ch_import_cresus
 #: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:124
@@ -97,7 +109,9 @@ msgid "If the Cresus file uses VAT codes (i.e: IPI), please make sure you have i
 msgstr "Si le fichiers Crésus contient des codes de TVA (i.e: IPI), veuillez vous assurer que vous avez indiqué ce code dans la taxe Odoo correspondant (nouveau champ). Attention, la taxe Odoo doit être « taxe comprise ». Si cette taxe n'existe pas, vous devez la créer."
 
 #. module: l10n_ch_import_cresus
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:197
 #: model:ir.actions.act_window,name:l10n_ch_import_cresus.action_account_cresus_import
+#, python-format
 msgid "Import Move lines"
 msgstr "Importer des mouvements"
 
@@ -110,6 +124,12 @@ msgstr "Importer le fichier"
 #: model:ir.ui.view,arch_db:l10n_ch_import_cresus.cresus_move_line_importer_form
 msgid "Import help"
 msgstr "Aide import"
+
+#. module: l10n_ch_import_cresus
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:207
+#, python-format
+msgid "Imported Journal Entries"
+msgstr "Imported Journal Entries"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_imported_move_ids
@@ -147,7 +167,7 @@ msgid "Move / Move lines importer"
 msgstr "Move / Move lines importer"
 
 #. module: l10n_ch_import_cresus
-#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:62
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:63
 #, python-format
 msgid "No account with code %s"
 msgstr "Pas de compte dont le code serait %s"
@@ -172,3 +192,4 @@ msgstr "Taxe"
 #: model:ir.ui.view,arch_db:l10n_ch_import_cresus.cresus_move_line_importer_form
 msgid "The accounts, analytical accounts used in the Cresus file must be previously created into Odoo."
 msgstr "Les comptes et comptes analytiques utilisés dans le fichier Crésus doivent avoir été préalablement créés dans Odoo."
+
