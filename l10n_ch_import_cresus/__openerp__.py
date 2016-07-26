@@ -14,7 +14,7 @@
     'application': False,
     'installable': True,
     'depends': [
-        'account',
+        'account_accountant',
     ],
     'data': [
         'wizard/l10n_ch_import_cresus_view.xml',
