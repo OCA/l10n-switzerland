@@ -1,0 +1,12 @@
+01.01.02	1000	9100		Solde à nouveau Caisse	1'000.00			10
+01.01.02	1010	9100		Solde à nouveau CCP	8'000.00			10
+01.01.02	1210	9100		Solde à nouveau Matériel	100'000.00			10
+01.01.02	9100	2800		Solde à nouveau Capital	20'000.00			10
+01.01.02	9100	2915		Solde à nouveau Réserve générale	323.20			10
+07.01.2002	6642	1010	1	Frais de déplacement - Frauenfeld	45.00
+07.01.02	6513	1010	2	Frais de prospection - Tartempion	218.50
+12.01.02	1010	6642	3	Frais de déplacement - Tolochenaz	-15.00
+14.01.02	6512	...	4	Salt, (TVA) net, TVA = 13.17	173.38
+14.01.02	2200	...	4	Salt, 7.6% de TVA (TVA)	13.17	VAT
+14.01.02	...	1010	4	Salt Total, (TVA)	186.55
+

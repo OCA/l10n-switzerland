@@ -3,10 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import openerp.tests.common as common
-from base64 import b64encode
-import logging
-
-_logger = logging.getLogger(__name__)
+from openerp.modules import get_module_resource
+from StringIO import StringIO
+import base64
 
 
 class TestImport(common.TransactionCase):
@@ -42,23 +41,20 @@ class TestImport(common.TransactionCase):
 
     def test_import(self):
         journal_obj = self.env['account.journal']
+        misc = journal_obj.search(
+            [('name', 'ilike', 'miscellaneous')], limit=1)
 
+        test_file_path = get_module_resource('l10n_ch_import_cresus',
+                                             'tests',
+                                             'cresus.txt')
+        buf = StringIO()
+        with open(test_file_path) as f:
+            base64.encode(f, buf)
+        contents = buf.getvalue()
+        buf.close()
         wizard = self.env['account.cresus.import'].create({
-            'journal_id': journal_obj.search(
-                [('name', 'ilike', 'miscellaneous')], limit=1).id,
-            'file': b64encode('''\
-01.01.02	1000	9100		Solde à nouveau Caisse	1'000.00			10
-01.01.02	1010	9100		Solde à nouveau CCP	8'000.00			10
-01.01.02	1210	9100		Solde à nouveau Matériel	100'000.00			10
-01.01.02	9100	2800		Solde à nouveau Capital	20'000.00			10
-01.01.02	9100	2915		Solde à nouveau Réserve générale	323.20			10
-07.01.2002	6642	1010	1	Frais de déplacement - Frauenfeld	45.00
-07.01.02	6513	1010	2	Frais de prospection - Tartempion	218.50
-12.01.02	1010	6642	3	Frais de déplacement - Tolochenaz	-15.00
-14.01.02	6512	...	4	Salt, (TVA) net, TVA = 13.17	173.38
-14.01.02	2200	...	4	Salt, 7.6% de TVA (TVA)	13.17	VAT
-14.01.02	...	1010	4	Salt Total, (TVA)	186.55
-''')})
+            'journal_id': misc.id,
+            'file': contents})
         wizard.import_file()
 
         res = wizard.imported_move_ids
