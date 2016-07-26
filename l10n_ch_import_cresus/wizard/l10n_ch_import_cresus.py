@@ -194,7 +194,7 @@ class AccountCresusImport(models.TransientModel):
             self.write({
                 'state': 'error',
                 'report': 'Error (at row %s):\n%s' % (self.index, exc)})
-            return {'name': 'Import Move lines',
+            return {'name': _('Import Move lines'),
                     'type': 'ir.actions.act_window',
                     'res_model': 'account.cresus.import',
                     'res_id': self.id,
@@ -204,7 +204,7 @@ class AccountCresusImport(models.TransientModel):
         self.state = 'done'
         # show the resulting moves in main content area
         return {'domain': str([('id', 'in', self.imported_move_ids.ids)]),
-                'name': 'Imported Journal Entries',
+                'name': _('Imported Journal Entries'),
                 'view_type': 'form',
                 'view_mode': 'tree,form',
                 'res_model': 'account.move',
