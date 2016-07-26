@@ -9,65 +9,58 @@ from openerp import models, fields, api, exceptions
 from datetime import datetime
 
 FILE_EXPECTED_COLUMNS = [
-u'ecr_numero',
-u'numéro',
-u'ecr_noline',
-u'date',
-u'pièce',
-u'libellé',
-u'cpt_débit',
-u'cpt_crédit',
-u'montant',
-u'journal',
-u'ecr_monnai',
-u'ecr_cours',
-u'ecr_monmnt',
-u'ecr_monqte',
-u'ecr_tvatyp',
-u'ecr_tvatx',
-u'ecr_tvamnt',
-u'ecr_tvabn',
-u'ecr_tvadc',
-u'ecr_tvapt',
-u'ecr_tvaarr',
-u'ecr_tvamod',
-u'ecr_ana',
-u'ecr_diver1',
-u'ecr_verrou',
-u'ecr_ref1',
-u'ecr_ref2',
-u'ecr_ref1dc',
-u'ecr_ref2dc',
-u'ecr_type_d',
-u'ecr_type_c',
-u'ecr_mon_op',
-u'ecr_diver2',
-u'ecr_vtnum',
-u'ecr_vtcode',
-u'ecr_ext']
+  u'ecr_numero',
+  u'numéro',
+  u'ecr_noline',
+  u'date',
+  u'pièce',
+  u'libellé',
+  u'cpt_débit',
+  u'cpt_crédit',
+  u'montant',
+  u'journal',
+  u'ecr_monnai',
+  u'ecr_cours',
+  u'ecr_monmnt',
+  u'ecr_monqte',
+  u'ecr_tvatyp',
+  u'ecr_tvatx',
+  u'ecr_tvamnt',
+  u'ecr_tvabn',
+  u'ecr_tvadc',
+  u'ecr_tvapt',
+  u'ecr_tvaarr',
+  u'ecr_tvamod',
+  u'ecr_ana',
+  u'ecr_diver1',
+  u'ecr_verrou',
+  u'ecr_ref1',
+  u'ecr_ref2',
+  u'ecr_ref1dc',
+  u'ecr_ref2dc',
+  u'ecr_type_d',
+  u'ecr_type_c',
+  u'ecr_mon_op',
+  u'ecr_diver2',
+  u'ecr_vtnum',
+  u'ecr_vtcode',
+  u'ecr_ext']
 
 class AccountWinbizImport(models.TransientModel):
     _name = 'account.winbiz.import'
     _description = 'Import Accounting Winbiz'
     _rec_name = 'state'
 
-    company_id = fields.Many2one('res.company', 'Company',
-            invisible=True)
-    report = fields.Text(
-            'Report',
-            readonly=True
-            )
-    journal_id = fields.Many2one('account.journal', 'Journal',
-            required=True)
-    state = fields.Selection(selection=[('draft', "Draft"),
+    company_id = fields.Many2one('res.company', 'Company', invisible=True)
+    report = fields.Text('Report', readonly=True)
+    journal_id = fields.Many2one('account.journal', 'Journal', required=True)
+    state = fields.Selection(selection=[
+        ('draft', "Draft"),
         ('done', "Done"),
         ('error', "Error")],
         readonly=True,
         default='draft')
-    file = fields.Binary(
-            'File',
-            required=True
-            )
+    file = fields.Binary('File', required=True)
     imported_move_ids = fields.Many2many(
             'account.move', 'import_cresus_move_rel',
             string='Imported moves')
@@ -135,7 +128,7 @@ class AccountWinbizImport(models.TransientModel):
                     assert sheet.row(0)[n].value == tag
                 for i in xrange(1, sheet.nrows):
                     yield {tag: sheet.row(i)[n].value
-                        for n, tag in enumerate(FILE_EXPECTED_COLUMNS)}
+                           for n, tag in enumerate(FILE_EXPECTED_COLUMNS)}
 
     def _parse_date(self, date):
         """Parse a date coming from Excel.
@@ -143,7 +136,7 @@ class AccountWinbizImport(models.TransientModel):
            :param date: cell value
            :returns: datetime
         """
-        dt = datetime(*xldate_as_tuple(date_string, self.wb.datemode))
+        dt = datetime(*xldate_as_tuple(date, self.wb.datemode))
         return dt
 
     @api.multi
@@ -154,8 +147,6 @@ class AccountWinbizImport(models.TransientModel):
         """
 
         journal_id = self.journal_id.id
-        cp = self.env.user.company_id
-        company_partner = cp.partner_id.name
         incomplete = None
         previous_pce = None
         previous_date = None
@@ -225,7 +216,7 @@ class AccountWinbizImport(models.TransientModel):
                 ref=previous_pce,
                 journal_id=journal_id)
 
-        @api.multi
+    @api.multi
     def _import_file(self):
         self.index = None
         move_obj = self.env['account.move']
