@@ -3,11 +3,48 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import base64
-from lxml import etree
+from xlrd import open_workbook, xldate_as_tuple
 import tempfile
 from openerp import models, fields, api, exceptions
 from datetime import datetime
 
+FILE_EXPECTED_COLUMNS = [
+u'ecr_numero',
+u'numéro',
+u'ecr_noline',
+u'date',
+u'pièce',
+u'libellé',
+u'cpt_débit',
+u'cpt_crédit',
+u'montant',
+u'journal',
+u'ecr_monnai',
+u'ecr_cours',
+u'ecr_monmnt',
+u'ecr_monqte',
+u'ecr_tvatyp',
+u'ecr_tvatx',
+u'ecr_tvamnt',
+u'ecr_tvabn',
+u'ecr_tvadc',
+u'ecr_tvapt',
+u'ecr_tvaarr',
+u'ecr_tvamod',
+u'ecr_ana',
+u'ecr_diver1',
+u'ecr_verrou',
+u'ecr_ref1',
+u'ecr_ref2',
+u'ecr_ref1dc',
+u'ecr_ref2dc',
+u'ecr_type_d',
+u'ecr_type_c',
+u'ecr_mon_op',
+u'ecr_diver2',
+u'ecr_vtnum',
+u'ecr_vtcode',
+u'ecr_ext']
 
 class AccountWinbizImport(models.TransientModel):
     _name = 'account.winbiz.import'
@@ -15,33 +52,33 @@ class AccountWinbizImport(models.TransientModel):
     _rec_name = 'state'
 
     company_id = fields.Many2one('res.company', 'Company',
-                                 invisible=True)
+            invisible=True)
     report = fields.Text(
-        'Report',
-        readonly=True
-        )
+            'Report',
+            readonly=True
+            )
     journal_id = fields.Many2one('account.journal', 'Journal',
-                                 required=True)
+            required=True)
     state = fields.Selection(selection=[('draft', "Draft"),
-                                        ('done', "Done"),
-                                        ('error', "Error")],
-                             readonly=True,
-                             default='draft')
+        ('done', "Done"),
+        ('error', "Error")],
+        readonly=True,
+        default='draft')
     file = fields.Binary(
-        'File',
-        required=True
-        )
+            'File',
+            required=True
+            )
     imported_move_ids = fields.Many2many(
-        'account.move', 'import_cresus_move_rel',
-        string='Imported moves')
+            'account.move', 'import_cresus_move_rel',
+            string='Imported moves')
 
     help_html = fields.Html('Import help', readonly=True,
-                            default='''
+            default='''
                  In order to import your 'Winbiz Salaires' .xml \
-                 file you must complete the following requirements : \
-                <ul>
+                         file you must complete the following requirements : \
+                         <ul>
                 <li> The accounts, analytical accounts used in the Cresus\
-                 file must be previously created into Odoo  </li>
+                        file must be previously created into Odoo  </li>
                 </ul>''')
 
     ODOO_MOVE_ARGS = {'ref', 'date', 'journal_id'}
@@ -53,7 +90,7 @@ class AccountWinbizImport(models.TransientModel):
         return kwargs
 
     ODOO_LINE_ARGS = {'account_id', 'partner_id', 'name',
-                      'tax_line_id', 'analytic_account_id'}
+            'tax_line_id', 'analytic_account_id'}
 
     @staticmethod
     def make_line(debit=0.0, credit=0.0, **kwargs):
@@ -64,18 +101,18 @@ class AccountWinbizImport(models.TransientModel):
     @api.multi
     def open_account_moves(self):
         res = {
-            'domain': str([('id', 'in', self.imported_move_ids.ids)]),
-            'name': 'Account Move',
-            'view_type': 'form',
-            'view_mode': 'tree,form',
-            'res_model': 'account.move',
-            'view_id': False,
-            'type': 'ir.actions.act_window',
-        }
+                'domain': str([('id', 'in', self.imported_move_ids.ids)]),
+                'name': 'Account Move',
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'res_model': 'account.move',
+                'view_id': False,
+                'type': 'ir.actions.act_window',
+                }
         return res
 
-    def _parse_xml(self):
-        """Parse stored XML file.
+    def _parse_xls(self):
+        """Parse stored Excel file.
 
         Manage base 64 decoding.
 
@@ -87,34 +124,32 @@ class AccountWinbizImport(models.TransientModel):
         with tempfile.TemporaryFile() as src:
             content = self.file
             src.write(content)
-            with tempfile.TemporaryFile() as decoded:
+            with tempfile.NamedTemporaryFile() as decoded:
                 src.seek(0)
                 base64.decode(src, decoded)
                 decoded.seek(0)
-                for a, e in etree.iterparse(decoded, tag=u'c_tmpexport'):
-                    yield {kid.tag: kid.text for kid in e.getchildren()}
+                wb = open_workbook(decoded.name, encoding_override='cp1252')
+                self.wb = wb
+                sheet = wb.sheet_by_index(0)
+                for n, tag in enumerate(FILE_EXPECTED_COLUMNS):
+                    assert sheet.row(0)[n].value == tag
+                for i in xrange(1, sheet.nrows):
+                    yield {tag: sheet.row(i)[n].value
+                        for n, tag in enumerate(FILE_EXPECTED_COLUMNS)}
 
-    @staticmethod
-    def _parse_date(date_string):
-        """Parse a date coming from Winbiz and put it in the format used by Odoo.
+    def _parse_date(self, date):
+        """Parse a date coming from Excel.
 
-           :param date_string: winbiz data
-           :returns: a date string
+           :param date: cell value
+           :returns: datetime
         """
-        format = '%Y-%m-%d'
-        dt = datetime.strptime(date_string, format)
-        return fields.Date.to_string(dt)
-
-    def _find_account(self, code):
-        account_obj = self.env['account.account']
-        account = account_obj.search([('code', '=', code)], limit=1)
-        if not account:
-            raise exceptions.MissingError("No account with code %s" % code)
-        return account
+        dt = datetime(*xldate_as_tuple(date_string, self.wb.datemode))
+        return dt
 
     @api.multi
     def _standardise_data(self, data):
-        """ This function split one line of the XML into multiple lines.
+        """
+        This function split one line of the spreadsheet into multiple lines.
         Winbiz just writes one line per move.
         """
 
@@ -135,10 +170,10 @@ class AccountWinbizImport(models.TransientModel):
                         incomplete['debit'] -= incomplete['credit']
                         incomplete['credit'] = 0
                 yield self.make_move(
-                    lines,
-                    date=previous_date,
-                    ref=previous_pce,
-                    journal_id=journal_id)
+                        lines,
+                        date=previous_date,
+                        ref=previous_pce,
+                        journal_id=journal_id)
                 lines = []
                 incomplete = None
             previous_pce = winbiz_item[u'pièce']
@@ -155,12 +190,12 @@ class AccountWinbizImport(models.TransientModel):
                     incomplete['debit'] += amount
                 else:
                     recto_line = self.make_line(
-                        debit=amount,
-                        account_id=account.id,
-                        partner_id=False,
-                        name=winbiz_item[u'libellé'],
-                        tax_line_id=None,
-                        analytic_account_id=None)
+                            debit=amount,
+                            account_id=account.id,
+                            partner_id=False,
+                            name=winbiz_item[u'libellé'],
+                            tax_line_id=None,
+                            analytic_account_id=None)
                     lines.append(recto_line)
 
             if winbiz_item[u'cpt_crédit'] != 'Multiple':
@@ -169,12 +204,12 @@ class AccountWinbizImport(models.TransientModel):
                     incomplete['credit'] += amount
                 else:
                     verso_line = self.make_line(
-                        credit=amount,
-                        account_id=account.id,
-                        partner_id=False,
-                        name=winbiz_item[u'libellé'],
-                        tax_line_id=None,
-                        analytic_account_id=None)
+                            credit=amount,
+                            account_id=account.id,
+                            partner_id=False,
+                            name=winbiz_item[u'libellé'],
+                            tax_line_id=None,
+                            analytic_account_id=None)
                     lines.append(verso_line)
 
             if winbiz_item[u'cpt_débit'] == 'Multiple':
@@ -185,15 +220,16 @@ class AccountWinbizImport(models.TransientModel):
                 incomplete = recto_line
 
         yield self.make_move(
-            lines,
-            date=previous_date,
-            ref=previous_pce,
-            journal_id=journal_id)
+                lines,
+                date=previous_date,
+                ref=previous_pce,
+                journal_id=journal_id)
 
-    @api.multi
+        @api.multi
     def _import_file(self):
+        self.index = None
         move_obj = self.env['account.move']
-        data = self._parse_xml()
+        data = self._parse_xls()
         data = self._standardise_data(data)
         self.imported_move_ids = [move_obj.create(mv).id for mv in data]
 
@@ -205,7 +241,7 @@ class AccountWinbizImport(models.TransientModel):
             self.env.cr.rollback()
             self.write({
                 'state': 'error',
-                'report': 'Error (at row %s):\n%s' % (self.index, exc)})
+                'report': 'Error (at row %s):\n%r' % (self.index, exc)})
             return {'name': 'Import Move lines',
                     'type': 'ir.actions.act_window',
                     'res_model': 'account.winbiz.import',
