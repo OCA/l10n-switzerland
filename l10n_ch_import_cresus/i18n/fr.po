@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0e\n"
+"Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-26 11:28+0000\n"
-"PO-Revision-Date: 2016-07-26 11:57+0000\n"
+"POT-Creation-Date: 2016-07-26 13:51+0000\n"
+"PO-Revision-Date: 2016-07-26 13:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,10 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: l10n_ch_import_cresus
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:197
+#: model:ir.actions.act_window,name:l10n_ch_import_cresus.action_account_cresus_import
 #: model:ir.ui.menu,name:l10n_ch_import_cresus.menu_account_cresus_import
+#, python-format
 msgid "Accounting Cresus Import"
 msgstr "Import Écritures Crésus"
 
@@ -32,7 +35,7 @@ msgid "CSV file is malformed\n"
 "Please choose the correct separator\n"
 "the error detail is:\n"
 "%r"
-msgstr "Le fichier est corrompu\n"
+msgstr "Le fichier ne peut être lu\n"
 "Veuillez choisir le bon séparateur\n"
 "le détail de l'erreur est:\n"
 "%r"
@@ -101,19 +104,12 @@ msgstr "Fichier"
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.ui.view,arch_db:l10n_ch_import_cresus.cresus_move_line_importer_form
 msgid "If the Cresus file uses VAT codes (i.e: IPI), please make sure you have indicated this code in the related Odoo tax (new field). Warning, the Odoo tax must be 'tax included'. If the tax does not exist you have to create it."
 msgstr "Si le fichiers Crésus contient des codes de TVA (i.e: IPI), veuillez vous assurer que vous avez indiqué ce code dans la taxe Odoo correspondant (nouveau champ). Attention, la taxe Odoo doit être « taxe comprise ». Si cette taxe n'existe pas, vous devez la créer."
-
-#. module: l10n_ch_import_cresus
-#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:197
-#: model:ir.actions.act_window,name:l10n_ch_import_cresus.action_account_cresus_import
-#, python-format
-msgid "Import Move lines"
-msgstr "Importer des mouvements"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.ui.view,arch_db:l10n_ch_import_cresus.cresus_move_line_importer_form
@@ -129,7 +125,7 @@ msgstr "Aide import"
 #: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:207
 #, python-format
 msgid "Imported Journal Entries"
-msgstr "Imported Journal Entries"
+msgstr "Pièces comptables importées"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_imported_move_ids
@@ -154,17 +150,12 @@ msgstr "Dernière modification le"
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Mis à jour par"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_write_date
 msgid "Last Updated on"
-msgstr ""
-
-#. module: l10n_ch_import_cresus
-#: model:ir.ui.view,arch_db:l10n_ch_import_cresus.cresus_move_line_importer_form
-msgid "Move / Move lines importer"
-msgstr "Move / Move lines importer"
+msgstr "Mis à jour le"
 
 #. module: l10n_ch_import_cresus
 #: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:63
