@@ -42,7 +42,6 @@ class TestImport(common.TransactionCase):
 
     def test_import(self):
         journal_obj = self.env['account.journal']
-        move_obj = self.env['account.move']
 
         wizard = self.env['account.cresus.import'].create({
             'journal_id': journal_obj.search(

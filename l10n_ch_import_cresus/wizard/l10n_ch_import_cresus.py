@@ -59,8 +59,8 @@ class AccountCresusImport(models.TransientModel):
 
         account = account_obj.search([('code', '=', account_code)], limit=1)
         if not account:
-            raise exceptions.MissingError(_("No account with code %s")
-                % account_code)
+            raise exceptions.MissingError(
+                _("No account with code %s") % account_code)
         line['account_id'] = account.id
 
         if not account.user_type_id.include_initial_balance:
@@ -97,10 +97,10 @@ class AccountCresusImport(models.TransientModel):
                                           delimiter=delimiter)
                 except csv.Error as error:
                     raise exceptions.ValidationError(
-			_('CSV file is malformed\n'
-                        'Please choose the correct separator\n'
-                        'the error detail is:\n'
-                        '%r') % error)
+                        _('CSV file is malformed\n'
+                          'Please choose the correct separator\n'
+                          'the error detail is:\n'
+                          '%r') % error)
                 for line in data:
                     line['date'] = self._parse_date(line['date'])
                     yield line
@@ -150,7 +150,7 @@ class AccountCresusImport(models.TransientModel):
 
             from babel.numbers import parse_decimal
             recto_amount = float(parse_decimal(line_cresus['amount'],
-                locale='de_CH'))
+                                               locale='de_CH'))
             verso_amount = 0.0
             if recto_amount < 0:
                 recto_amount, verso_amount = 0.0, -recto_amount
