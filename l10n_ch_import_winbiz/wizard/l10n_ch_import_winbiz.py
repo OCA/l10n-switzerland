@@ -64,7 +64,7 @@ class AccountWinbizImport(models.TransientModel):
         default='draft')
     file = fields.Binary('File', required=True)
     imported_move_ids = fields.Many2many(
-            'account.move', 'import_cresus_move_rel',
+            'account.move', 'import_winbiz_move_rel',
             string='Imported moves')
 
     @api.multi
