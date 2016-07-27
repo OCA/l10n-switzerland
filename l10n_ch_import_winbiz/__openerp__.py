@@ -6,7 +6,7 @@
     'name': 'Account Import Winbiz',
     'version': '1.0',
     'depends': [
-        'account',
+        'account_accountant',
     ],
     'external_dependencies': {
         'python': ['xlrd'],
