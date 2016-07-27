@@ -10,6 +10,7 @@ from openerp.tools.translate import _
 from datetime import datetime
 
 FILE_EXPECTED_COLUMNS = [
+  u'multiple',
   u'ecr_numero',
   u'numéro',
   u'ecr_noline',
@@ -117,7 +118,8 @@ class AccountWinbizImport(models.TransientModel):
                 self.wb = wb
                 sheet = wb.sheet_by_index(0)
                 for n, tag in enumerate(FILE_EXPECTED_COLUMNS):
-                    assert sheet.row(0)[n].value == tag
+                    if sheet.row(0)[n].value != tag:
+                        raise exceptions.Warning(u"column %s has tag “%s”, “%s” expected" % (n, sheet.row(0)[n].value, tag))
                 for i in xrange(1, sheet.nrows):
                     yield {tag: sheet.row(i)[n].value
                            for n, tag in enumerate(FILE_EXPECTED_COLUMNS)}
