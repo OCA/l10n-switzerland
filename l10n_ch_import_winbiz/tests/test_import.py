@@ -47,7 +47,7 @@ class TestImport(common.TransactionCase):
         wizard = self.env['account.winbiz.import'].create({
             'journal_id': misc.id,
             'file': contents})
-        wizard.import_file()
+        wizard._import_file()
 
         res = wizard.imported_move_ids
         res.assert_balanced()
