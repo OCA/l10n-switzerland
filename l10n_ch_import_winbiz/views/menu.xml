@@ -12,7 +12,7 @@
     </record>
     <menuitem
         icon="STOCK_EXECUTE"
-        name="Accounting Winbiz Import"
+        name="Accounting WinBIZ Import"
         action="action_account_winbiz_import"
         id="menu_account_winbiz_import"
         parent="account.menu_finance_entries"

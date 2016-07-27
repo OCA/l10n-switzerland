@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="winbiz_move_line_importer_form" model="ir.ui.view">
-        <field name="name">Winbiz move line importer</field>
+        <field name="name">Accounting WinBIZ Import</field>
         <field name="model">account.winbiz.import</field>
         <field name="arch" type="xml">
             <form>
@@ -36,7 +36,12 @@
                         <field name="report" nolabel="1" colspan="4"/>
                     </page>
                     <page string="Import help">
-                        <field name="help_html"/>
+                 In order to import your Excel Spreadsheet you must complete the following requirements:
+                         <ul>
+                <li>The accounts used in the WinBIZ file must be previously created into Odoo </li>
+		<li>The lines should be ordered by “N°” for best results </li>
+		<li>The export encoding should be “Windows Ansi - 1252” (default)</li>
+                </ul>
                     </page>
                 </notebook>
             </form>

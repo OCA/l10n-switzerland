@@ -65,15 +65,6 @@ class AccountWinbizImport(models.TransientModel):
             'account.move', 'import_cresus_move_rel',
             string='Imported moves')
 
-    help_html = fields.Html('Import help', readonly=True,
-            default='''
-                 In order to import your 'Winbiz Salaires' .xml \
-                         file you must complete the following requirements : \
-                         <ul>
-                <li> The accounts, analytical accounts used in the Cresus\
-                        file must be previously created into Odoo  </li>
-                </ul>''')
-
     ODOO_MOVE_ARGS = {'ref', 'date', 'journal_id'}
 
     @staticmethod
@@ -233,7 +224,7 @@ class AccountWinbizImport(models.TransientModel):
             self.write({
                 'state': 'error',
                 'report': 'Error (at row %s):\n%r' % (self.index, exc)})
-            return {'name': 'Import Move lines',
+            return {'name': 'Accounting WinBIZ Import',
                     'type': 'ir.actions.act_window',
                     'res_model': 'account.winbiz.import',
                     'res_id': self.id,
