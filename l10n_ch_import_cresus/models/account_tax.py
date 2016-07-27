@@ -9,5 +9,4 @@ class AccountTax(models.Model):
     _inherit = "account.tax"
 
     tax_cresus_mapping = fields.Char(
-        size=128,
         string='Cresus tax name')
