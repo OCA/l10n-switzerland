@@ -6,6 +6,7 @@ import base64
 from xlrd import open_workbook, xldate_as_tuple
 import tempfile
 from openerp import models, fields, api, exceptions
+from openerp.tools.translate import _
 from datetime import datetime
 
 FILE_EXPECTED_COLUMNS = [
@@ -224,7 +225,7 @@ class AccountWinbizImport(models.TransientModel):
             self.write({
                 'state': 'error',
                 'report': 'Error (at row %s):\n%r' % (self.index, exc)})
-            return {'name': 'Accounting WinBIZ Import',
+            return {'name': _('Accounting WinBIZ Import'),
                     'type': 'ir.actions.act_window',
                     'res_model': 'account.winbiz.import',
                     'res_id': self.id,
@@ -234,7 +235,7 @@ class AccountWinbizImport(models.TransientModel):
         self.state = 'done'
         # show the resulting moves in main content area
         return {'domain': str([('id', 'in', self.imported_move_ids.ids)]),
-                'name': 'Imported Journal Entries',
+                'name': _('Imported Journal Entries'),
                 'view_type': 'form',
                 'view_mode': 'tree,form',
                 'res_model': 'account.move',
