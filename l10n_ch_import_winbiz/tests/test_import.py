@@ -19,8 +19,10 @@ class TestImport(common.TransactionCase):
 
         user_type = self.env['account.account.type'].search(
             [('include_initial_balance', '=', False)], limit=1)
-        for code in ['1000', '1010', '1210', '2200', '2800', '2915', '6512',
-                     '6513', '6642', '9100', '10101']:
+        for code in ['1000', '1010', '1020', '1050', '1061', '1120', '2000',
+                     '2010', '2091', '2200', '4000', '4051', '4055', '4095',
+                     '4210', '4300', '4400', '4412', '4510', '4511', '4590',
+                     '4600', '5472', '5700', '6200', '6207', '8100']:
             found = account_obj.search([('code', '=', code)])
             if found:  # patch it within the transaction
                 found.user_type_id = user_type.id
