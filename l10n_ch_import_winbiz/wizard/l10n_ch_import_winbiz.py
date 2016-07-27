@@ -67,23 +67,6 @@ class AccountWinbizImport(models.TransientModel):
             'account.move', 'import_cresus_move_rel',
             string='Imported moves')
 
-    ODOO_MOVE_ARGS = {'ref', 'date', 'journal_id'}
-
-    @staticmethod
-    def make_move(lines, **kwargs):
-        # assert set(kwargs.keys()) == self.ODOO_MOVE_ARGS
-        kwargs.update({'line_ids': [(0, 0, ln) for ln in lines]})
-        return kwargs
-
-    ODOO_LINE_ARGS = {'account_id', 'partner_id', 'name',
-            'tax_line_id', 'analytic_account_id'}
-
-    @staticmethod
-    def make_line(debit=0.0, credit=0.0, **kwargs):
-        # assert set(kwargs.keys()) == self.ODOO_LINE_ARGS
-        kwargs.update({'debit': debit, 'credit': credit})
-        return kwargs
-
     @api.multi
     def open_account_moves(self):
         res = {
@@ -140,7 +123,33 @@ class AccountWinbizImport(models.TransientModel):
         Winbiz just writes one line per move.
         """
 
+        # Helpers and their closures
+        account_obj = self.env['account.account']
+        def find_account(code):
+            res = account_obj.search([('code',  '=', code)], limit=1)
+            if not res:
+                raise exceptions.MissingError(
+                    _("No account with code %s") % code)
+            return res
+
         journal_id = self.journal_id.id
+        def prepare_move(lines, date, ref):
+            move = {}
+            move['date'] = date
+            move['ref'] = ref
+            move['journal_id'] = journal_id
+            move['line_ids'] = [(0, 0, ln) for ln in lines]
+            return move
+
+        def prepare_line(name, account, debit_amount=0.0, credit_amount=0.0):
+            line = {}
+            line['name'] = name
+            line['debit'] = debit_amount
+            line['credit'] = credit_amount
+            line['account_id'] = account.id
+            return line
+
+        # loop
         incomplete = None
         previous_pce = None
         previous_date = None
@@ -154,11 +163,7 @@ class AccountWinbizImport(models.TransientModel):
                     else:
                         incomplete['debit'] -= incomplete['credit']
                         incomplete['credit'] = 0
-                yield self.make_move(
-                        lines,
-                        date=previous_date,
-                        ref=previous_pce,
-                        journal_id=journal_id)
+                yield prepare_move(lines, previous_date, ref=previous_pce)
                 lines = []
                 incomplete = None
             previous_pce = winbiz_item[u'pièce']
@@ -170,31 +175,25 @@ class AccountWinbizImport(models.TransientModel):
 
             recto_line = verso_line = None
             if winbiz_item[u'cpt_débit'] != 'Multiple':
-                account = self._find_account(winbiz_item[u'cpt_débit'])
+                account = find_account(winbiz_item[u'cpt_débit'])
                 if incomplete is not None and incomplete['account_id'] == account.id:
                     incomplete['debit'] += amount
                 else:
-                    recto_line = self.make_line(
-                            debit=amount,
-                            account_id=account.id,
-                            partner_id=False,
+                    recto_line = prepare_line(
                             name=winbiz_item[u'libellé'],
-                            tax_line_id=None,
-                            analytic_account_id=None)
+                            debit_amount=amount,
+                            account=account)
                     lines.append(recto_line)
 
             if winbiz_item[u'cpt_crédit'] != 'Multiple':
-                account = self._find_account(winbiz_item[u'cpt_crédit'])
+                account = find_account(winbiz_item[u'cpt_crédit'])
                 if incomplete is not None and incomplete['account_id'] == account.id:
                     incomplete['credit'] += amount
                 else:
-                    verso_line = self.make_line(
-                            credit=amount,
-                            account_id=account.id,
-                            partner_id=False,
+                    verso_line = prepare_line(
                             name=winbiz_item[u'libellé'],
-                            tax_line_id=None,
-                            analytic_account_id=None)
+                            credit_amount=amount,
+                            account=account)
                     lines.append(verso_line)
 
             if winbiz_item[u'cpt_débit'] == 'Multiple':
@@ -204,11 +203,7 @@ class AccountWinbizImport(models.TransientModel):
                 assert incomplete is None
                 incomplete = recto_line
 
-        yield self.make_move(
-                lines,
-                date=previous_date,
-                ref=previous_pce,
-                journal_id=journal_id)
+        yield prepare_move(lines, previous_date, ref=previous_pce)
 
     @api.multi
     def _import_file(self):
