@@ -8,6 +8,9 @@
     'depends': [
         'account',
     ],
+    'external_dependencies': {
+        'python': ['xlrd'],
+    },
     'author': 'Camptocamp, Odoo Community Association (OCA)',
     'website': 'http://www.camptocamp.com',
     'license': 'AGPL-3',
