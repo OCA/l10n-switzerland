@@ -38,7 +38,7 @@
                  In order to import your Excel Spreadsheet you must complete the following requirements:
                          <ul>
                 <li>The accounts used in the WinBIZ file must be previously created into Odoo </li>
-		<li>The lines should be ordered by “Entry” for best results </li>
+		<li>The lines should be ordered by “N°” for best results </li>
 		<li>The export encoding should be “Windows Ansi - 1252” (default)</li>
                 </ul>
                     </page>
