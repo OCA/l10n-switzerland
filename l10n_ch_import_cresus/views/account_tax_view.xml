@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tax_form" model="ir.ui.view">
+        <field name="name">account.cresus.mapping.form</field>
+        <field name="model">account.tax</field>
+        <field name="inherit_id" ref="account.view_tax_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='refund_account_id']" position="after">
+                <group string="Cresus" name="Cresus">
+                    <field name="tax_cresus_mapping"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_tax_tree" model="ir.ui.view">
+        <field name="name">account.tax.tree</field>
+        <field name="model">account.tax</field>
+        <field name="inherit_id" ref="account.view_tax_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='description']" position="after">
+                <field name="tax_cresus_mapping"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
