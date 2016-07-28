@@ -55,7 +55,6 @@ class AccountWinbizImport(models.TransientModel):
 
     company_id = fields.Many2one('res.company', 'Company', invisible=True)
     report = fields.Text('Report', readonly=True)
-    journal_id = fields.Many2one('account.journal', 'Journal', required=True)
     state = fields.Selection(selection=[
         ('draft', "Draft"),
         ('done', "Done"),
@@ -132,12 +131,24 @@ class AccountWinbizImport(models.TransientModel):
                     _("No account with code %s") % code)
             return res
 
-        journal_id = self.journal_id.id
-        def prepare_move(lines, date, ref):
+        journal_obj = self.env['account.journal']
+        def find_journal(winbiz_code):
+            mapping = {
+                'a':'BILL',
+                'd':'MISC',
+                'i':'STJ',
+                'm':'MISC',
+                'o':'OJ',
+                's':'JS',
+                'v':'INV',
+                }
+            code = mapping[winbiz_code]
+            return journal_obj.search([('code', '=', code)], limit=1)
+        def prepare_move(lines, journal, date, ref):
             move = {}
             move['date'] = date
             move['ref'] = ref
-            move['journal_id'] = journal_id
+            move['journal_id'] = journal.id
             move['line_ids'] = [(0, 0, ln) for ln in lines]
             return move
 
@@ -163,11 +174,12 @@ class AccountWinbizImport(models.TransientModel):
                     else:
                         incomplete['debit'] -= incomplete['credit']
                         incomplete['credit'] = 0
-                yield prepare_move(lines, previous_date, ref=previous_pce)
+                yield prepare_move(lines, previous_journal, previous_date, ref=previous_pce)
                 lines = []
                 incomplete = None
             previous_pce = winbiz_item[u'pièce']
             previous_date = self._parse_date(winbiz_item[u'date'])
+            previous_journal = find_journal(winbiz_item[u'journal'])
 
             amount = float(winbiz_item[u'montant'])
             if amount == 0:
@@ -203,7 +215,7 @@ class AccountWinbizImport(models.TransientModel):
                 assert incomplete is None
                 incomplete = recto_line
 
-        yield prepare_move(lines, previous_date, ref=previous_pce)
+        yield prepare_move(lines, previous_journal, previous_date, ref=previous_pce)
 
     @api.multi
     def _import_file(self):
