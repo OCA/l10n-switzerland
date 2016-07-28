@@ -13,6 +13,14 @@ move ‘FO’
   (dated 2016-02-15)
   (in journal BILL)
   with lines:
+    line “TVA Achat vêtements travail”
+      credit = 3.05
+      account is ‘2000’
+      originator tax is ‘315’
+    line “TVA Achat vêtements travail”
+      debit = 3.05
+      account is ‘1061’
+      originator tax is ‘315’
     line “Achat vêtements travail”
       credit = 46.95
       account is ‘2000’
@@ -31,27 +39,28 @@ move ‘CA-0015’
       debit = 25.7
       account is ‘4210’
 
-move ‘FO’
-  (dated 2016-02-15)
-  (in journal BILL)
+move ‘SOLDINIT’
+  (dated 2016-01-01)
+  (in journal OJ)
   with lines:
-    line “TVA Achat vêtements travail”
-      credit = 3.05
+    line “Solde initial fournisseurs”
+      credit = 2750.0
       account is ‘2000’
-    line “TVA Achat vêtements travail”
-      debit = 3.05
-      account is ‘1061’
-
-move ‘’
-  (dated 2016-05-30)
-  (in journal BILL)
-  with lines:
-    line “Eau minérale”
-      credit = 12.7
+    line “Solde initial fournisseurs”
+      debit = 2750.0
+      account is ‘8100’
+    line “Solde initial banque”
+      credit = 25000.0
+      account is ‘8100’
+    line “Solde initial banque”
+      debit = 25000.0
+      account is ‘1020’
+    line “Solde initial caisse”
+      credit = 250.0
+      account is ‘8100’
+    line “Solde initial caisse”
+      debit = 250.0
       account is ‘1000’
-    line “Eau minérale”
-      debit = 12.7
-      account is ‘4210’
 
 move ‘BA-0020’
   (dated 2016-04-13)
@@ -60,9 +69,11 @@ move ‘BA-0020’
     line “TVA Service industriel, eau + chauffage”
       credit = 21.25
       account is ‘1020’
+      originator tax is ‘315’
     line “TVA Service industriel, eau + chauffage”
       debit = 21.25
       account is ‘1061’
+      originator tax is ‘315’
     line “Service industriel, eau + chauffage”
       credit = 327.0
       account is ‘1020’
@@ -72,9 +83,11 @@ move ‘BA-0020’
     line “TVA Frais de publicité”
       credit = 23.2
       account is ‘1020’
+      originator tax is ‘315’
     line “TVA Frais de publicité”
       debit = 23.2
       account is ‘1061’
+      originator tax is ‘315’
     line “Frais de publicité”
       credit = 356.8
       account is ‘1020’
@@ -90,9 +103,11 @@ move ‘BA-0020’
     line “TVA Téléphone 03.98”
       credit = 36.39
       account is ‘1020’
+      originator tax is ‘315’
     line “TVA Téléphone 03.98”
       debit = 36.39
       account is ‘1061’
+      originator tax is ‘315’
     line “Téléphone 03.98”
       credit = 559.91
       account is ‘1020’
@@ -102,9 +117,11 @@ move ‘BA-0020’
     line “TVA Fournitures de bureau”
       credit = 22.91
       account is ‘1020’
+      originator tax is ‘315’
     line “TVA Fournitures de bureau”
       debit = 22.91
       account is ‘1061’
+      originator tax is ‘315’
     line “Fournitures de bureau”
       credit = 352.54
       account is ‘1020’
@@ -117,23 +134,6 @@ move ‘BA-0020’
     line “XYZ SA, ass. mobilier”
       debit = 650.0
       account is ‘4300’
-
-move ‘’
-  (dated 2016-01-31)
-  (in journal MISC)
-  with lines:
-    line “TVA Ventes du mois”
-      credit = 4360.45
-      account is ‘2010’
-    line “TVA Ventes du mois”
-      debit = 4360.45
-      account is ‘1010’
-    line “Ventes du mois”
-      credit = 58139.55
-      account is ‘6200’
-    line “Ventes du mois”
-      debit = 58139.55
-      account is ‘1010’
 
 move ‘SOLDINIT’
   (dated 2016-01-01)
@@ -169,24 +169,61 @@ move ‘SOLDINIT’
     line “Solde initial débiteurs”
       debit = 15000.0
       account is ‘1050’
-    line “Solde initial fournisseurs”
-      credit = 2750.0
-      account is ‘2000’
-    line “Solde initial fournisseurs”
-      debit = 2750.0
-      account is ‘8100’
-    line “Solde initial banque”
-      credit = 25000.0
-      account is ‘8100’
-    line “Solde initial banque”
-      debit = 25000.0
-      account is ‘1020’
-    line “Solde initial caisse”
-      credit = 250.0
-      account is ‘8100’
-    line “Solde initial caisse”
-      debit = 250.0
+
+move ‘’
+  (dated 2016-01-31)
+  (in journal MISC)
+  with lines:
+    line “TVA Ventes du mois”
+      credit = 4360.45
+      account is ‘2010’
+      originator tax is ‘400’
+    line “TVA Ventes du mois”
+      debit = 4360.45
+      account is ‘1010’
+      originator tax is ‘400’
+    line “Ventes du mois”
+      credit = 58139.55
+      account is ‘6200’
+    line “Ventes du mois”
+      debit = 58139.55
+      account is ‘1010’
+    line “Eau minérale”
+      credit = 12.7
       account is ‘1000’
+    line “Eau minérale”
+      debit = 12.7
+      account is ‘4210’
+
+move ‘1001’
+  (dated 2016-02-02)
+  (in journal INV)
+  with lines:
+    line “TVA Facture n° 1001 à Karro Bastien La Vallée: Support Simibox WT / WB / EWT”
+      credit = 10.2
+      account is ‘2010’
+      originator tax is ‘410’
+    line “TVA Facture n° 1001 à Karro Bastien La Vallée: Support Simibox WT / WB / EWT”
+      debit = 10.2
+      account is ‘1050’
+      originator tax is ‘410’
+    line “Facture n° 1001 à Karro Bastien La Vallée: Support Simibox WT / WB / EWT”
+      credit = 134.1
+      account is ‘6207’
+    line “Facture n° 1001 à Karro Bastien La Vallée: Support Simibox WT / WB / EWT”
+      debit = 134.1
+      account is ‘1050’
+
+move ‘4’
+  (dated 2016-02-12)
+  (in journal INV)
+  with lines:
+    line “Paiement débiteur n° 4 de Karro Bastien La Vallée”
+      credit = 144.3
+      account is ‘1050’
+    line “Paiement débiteur n° 4 de Karro Bastien La Vallée”
+      debit = 144.3
+      account is ‘1020’
 
 move ‘SAL01’
   (dated 2016-01-31)
@@ -279,31 +316,3 @@ move ‘SAP01’
     line “ Paiement salaire janvier”
       debit = 18910.8
       account is ‘2000’
-
-move ‘1001’
-  (dated 2016-02-02)
-  (in journal INV)
-  with lines:
-    line “TVA Facture n° 1001 à Karro Bastien La Vallée: Support Simibox WT / WB / EWT”
-      credit = 10.2
-      account is ‘2010’
-    line “TVA Facture n° 1001 à Karro Bastien La Vallée: Support Simibox WT / WB / EWT”
-      debit = 10.2
-      account is ‘1050’
-    line “Facture n° 1001 à Karro Bastien La Vallée: Support Simibox WT / WB / EWT”
-      credit = 134.1
-      account is ‘6207’
-    line “Facture n° 1001 à Karro Bastien La Vallée: Support Simibox WT / WB / EWT”
-      debit = 134.1
-      account is ‘1050’
-
-move ‘4’
-  (dated 2016-02-12)
-  (in journal INV)
-  with lines:
-    line “Paiement débiteur n° 4 de Karro Bastien La Vallée”
-      credit = 144.3
-      account is ‘1050’
-    line “Paiement débiteur n° 4 de Karro Bastien La Vallée”
-      debit = 144.3
-      account is ‘1020’
