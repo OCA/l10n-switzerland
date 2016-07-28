@@ -48,6 +48,7 @@ FILE_EXPECTED_COLUMNS = [
   u'ecr_vtcode',
   u'ecr_ext']
 
+
 class AccountWinbizImport(models.TransientModel):
     _name = 'account.winbiz.import'
     _description = 'Import Accounting Winbiz'
@@ -63,8 +64,8 @@ class AccountWinbizImport(models.TransientModel):
         default='draft')
     file = fields.Binary('File', required=True)
     imported_move_ids = fields.Many2many(
-            'account.move', 'import_winbiz_move_rel',
-            string='Imported moves')
+        'account.move', 'import_winbiz_move_rel',
+        string='Imported moves')
 
     @api.multi
     def open_account_moves(self):
@@ -101,7 +102,10 @@ class AccountWinbizImport(models.TransientModel):
                 sheet = wb.sheet_by_index(0)
                 for n, tag in enumerate(FILE_EXPECTED_COLUMNS):
                     if sheet.row(0)[n].value != tag:
-                        raise exceptions.Warning(u"column %s has tag “%s”, “%s” expected" % (n, sheet.row(0)[n].value, tag))
+                        raise exceptions.Warning(
+                                u"column %s has tag “%s”,"
+                                u"“%s” expected"
+                                % (n, sheet.row(0)[n].value, tag))
                 for i in xrange(1, sheet.nrows):
                     yield {tag: sheet.row(i)[n].value
                            for n, tag in enumerate(FILE_EXPECTED_COLUMNS)}
@@ -123,7 +127,9 @@ class AccountWinbizImport(models.TransientModel):
         """
 
         # Helpers and their closures
+        journal_obj = self.env['account.journal']
         account_obj = self.env['account.account']
+
         def find_account(code):
             res = account_obj.search([('code',  '=', code)], limit=1)
             if not res:
@@ -131,19 +137,19 @@ class AccountWinbizImport(models.TransientModel):
                     _("No account with code %s") % code)
             return res
 
-        journal_obj = self.env['account.journal']
         def find_journal(winbiz_code):
             mapping = {
-                'a':'BILL',
-                'd':'MISC',
-                'i':'STJ',
-                'm':'MISC',
-                'o':'OJ',
-                's':'JS',
-                'v':'INV',
+                'a': 'BILL',
+                'd': 'MISC',
+                'i': 'STJ',
+                'm': 'MISC',
+                'o': 'OJ',
+                's': 'JS',
+                'v': 'INV',
                 }
             code = mapping[winbiz_code]
             return journal_obj.search([('code', '=', code)], limit=1)
+
         def prepare_move(lines, journal, date, ref):
             move = {}
             move['date'] = date
@@ -164,9 +170,10 @@ class AccountWinbizImport(models.TransientModel):
         incomplete = None
         previous_pce = None
         previous_date = None
+        previous_journal = None
         lines = []
         for self.index, winbiz_item in enumerate(data, 1):
-            if previous_pce is not None and previous_pce != winbiz_item[u'pièce']:
+            if previous_pce not in (None, winbiz_item[u'pièce']):
                 if incomplete and incomplete['debit'] and incomplete['credit']:
                     if incomplete['debit'] < incomplete['credit']:
                         incomplete['credit'] -= incomplete['debit']
@@ -174,7 +181,8 @@ class AccountWinbizImport(models.TransientModel):
                     else:
                         incomplete['debit'] -= incomplete['credit']
                         incomplete['credit'] = 0
-                yield prepare_move(lines, previous_journal, previous_date, ref=previous_pce)
+                yield prepare_move(lines, previous_journal, previous_date,
+                                   ref=previous_pce)
                 lines = []
                 incomplete = None
             previous_pce = winbiz_item[u'pièce']
@@ -188,7 +196,8 @@ class AccountWinbizImport(models.TransientModel):
             recto_line = verso_line = None
             if winbiz_item[u'cpt_débit'] != 'Multiple':
                 account = find_account(winbiz_item[u'cpt_débit'])
-                if incomplete is not None and incomplete['account_id'] == account.id:
+                if incomplete is not None \
+                        and incomplete['account_id'] == account.id:
                     incomplete['debit'] += amount
                 else:
                     recto_line = prepare_line(
@@ -199,7 +208,8 @@ class AccountWinbizImport(models.TransientModel):
 
             if winbiz_item[u'cpt_crédit'] != 'Multiple':
                 account = find_account(winbiz_item[u'cpt_crédit'])
-                if incomplete is not None and incomplete['account_id'] == account.id:
+                if incomplete is not None \
+                        and incomplete['account_id'] == account.id:
                     incomplete['credit'] += amount
                 else:
                     verso_line = prepare_line(
@@ -215,7 +225,8 @@ class AccountWinbizImport(models.TransientModel):
                 assert incomplete is None
                 incomplete = recto_line
 
-        yield prepare_move(lines, previous_journal, previous_date, ref=previous_pce)
+        yield prepare_move(lines, previous_journal, previous_date,
+                           ref=previous_pce)
 
     @api.multi
     def _import_file(self):
