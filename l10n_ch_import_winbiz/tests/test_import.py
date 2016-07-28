@@ -14,6 +14,9 @@ import os
 
 _logger = logging.getLogger(__name__)
 
+MOVE_UNIVERSAL_FIELDS = {'name', 'ref', 'date', 'journal_id', 'currency_id', 'rate_diff_partial_rec_id', 'state', 'line_ids', 'partner_id', 'amount', 'narration', 'company_id', 'matched_percentage', 'statement_line_id', 'dummy_account_id'}
+
+LINE_UNIVERSAL_FIELDS = {'name', 'quantity', 'product_uom_id', 'product_id', 'debit', 'credit', 'balance', 'debit_cash_basis', 'credit_cash_basis', 'balance_cash_basis', 'amount_currency', 'company_currency_id', 'currency_id', 'amount_residual', 'amount_residual_currency', 'account_id', 'move_id', 'narration', 'ref', 'payment_id', 'statement_id', 'reconciled', 'matched_debit_ids', 'matched_credit_ids', 'journal_id', 'blocked', 'date_maturity', 'date', 'analytic_line_ids', 'tax_ids', 'tax_line_id', 'analytic_account_id', 'company_id', 'counterpart', 'invoice_id', 'partner_id', 'user_type_id'}
 
 class TestImport(common.TransactionCase):
 
@@ -72,8 +75,14 @@ class TestImport(common.TransactionCase):
         # Get a predictable representation that can be compared across runs
         data = res.copy_data()
         for mv in data:
+            for f in mv.keys():
+                if f not in MOVE_UNIVERSAL_FIELDS:
+                    del mv[f]
             mv['journal_id'] = journal_obj.browse(mv['journal_id']).code
             for _, _, ln in mv['line_ids']:
+                for f in ln.keys():
+                    if f not in LINE_UNIVERSAL_FIELDS:
+                        del ln[f]
                 del ln['move_id']
                 ln['account_id'] = self.account_codes[ln['account_id']]
         pprint(data, temp)
