@@ -45,8 +45,9 @@ class TestImport(common.TransactionCase):
 
     def test_import(self):
         journal_obj = self.env['account.journal']
-        misc = journal_obj.search(
-            [('name', 'ilike', 'miscellaneous')], limit=1)
+        for i in 'BILL', 'MISC', 'STJ', 'OJ', 'JS', 'INV':
+            if not journal_obj.search([('code', '=', i)]):
+                journal_obj.create({'name': 'dummy '+i, 'code': i, 'type':'general'})
 
         def get_path(filename):
             res = get_resource_path('l10n_ch_import_winbiz', 'tests', filename)
@@ -62,7 +63,6 @@ class TestImport(common.TransactionCase):
         buf.close()
 
         wizard = self.env['account.winbiz.import'].create({
-            'journal_id': misc.id,
             'file': contents})
         wizard._import_file()
 
@@ -72,7 +72,7 @@ class TestImport(common.TransactionCase):
         # Get a predictable representation that can be compared across runs
         data = res.copy_data()
         for mv in data:
-            del mv['journal_id']
+            mv['journal_id'] = journal_obj.browse(mv['journal_id']).code
             for _, _, ln in mv['line_ids']:
                 del ln['move_id']
                 ln['account_id'] = self.account_codes[ln['account_id']]
