@@ -9,45 +9,6 @@ from openerp import models, fields, api, exceptions
 from openerp.tools.translate import _
 from datetime import datetime
 
-FILE_EXPECTED_COLUMNS = [
-  u'multiple',
-  u'ecr_numero',
-  u'numéro',
-  u'ecr_noline',
-  u'date',
-  u'pièce',
-  u'libellé',
-  u'cpt_débit',
-  u'cpt_crédit',
-  u'montant',
-  u'journal',
-  u'ecr_monnai',
-  u'ecr_cours',
-  u'ecr_monmnt',
-  u'ecr_monqte',
-  u'ecr_tvatyp',
-  u'ecr_tvatx',
-  u'ecr_tvamnt',
-  u'ecr_tvabn',
-  u'ecr_tvadc',
-  u'ecr_tvapt',
-  u'ecr_tvaarr',
-  u'ecr_tvamod',
-  u'ecr_ana',
-  u'ecr_diver1',
-  u'ecr_verrou',
-  u'ecr_ref1',
-  u'ecr_ref2',
-  u'ecr_ref1dc',
-  u'ecr_ref2dc',
-  u'ecr_type_d',
-  u'ecr_type_c',
-  u'ecr_mon_op',
-  u'ecr_diver2',
-  u'ecr_vtnum',
-  u'ecr_vtcode',
-  u'ecr_ext']
-
 
 class AccountWinbizImport(models.TransientModel):
     _name = 'account.winbiz.import'
@@ -100,15 +61,13 @@ class AccountWinbizImport(models.TransientModel):
                 wb = open_workbook(decoded.name, encoding_override='cp1252')
                 self.wb = wb
                 sheet = wb.sheet_by_index(0)
-                for n, tag in enumerate(FILE_EXPECTED_COLUMNS):
-                    if sheet.row(0)[n].value != tag:
-                        raise exceptions.Warning(
-                                u"column %s has tag “%s”,"
-                                u"“%s” expected"
-                                % (n, sheet.row(0)[n].value, tag))
-                for i in xrange(1, sheet.nrows):
-                    yield {tag: sheet.row(i)[n].value
-                           for n, tag in enumerate(FILE_EXPECTED_COLUMNS)}
+
+                def vals(n):
+                    return [c.value for c in sheet.row(n)]
+                head = vals(0)
+                res = [dict(zip(head, vals(i))) for i in xrange(1, sheet.nrows)]
+                res.sort(key=lambda e: e[u'numéro'])
+                return res
 
     def _parse_date(self, date):
         """Parse a date coming from Excel.
@@ -126,7 +85,7 @@ class AccountWinbizImport(models.TransientModel):
         Winbiz just writes one line per move.
         """
 
-        # Helpers and their closures
+        tax_obj = self.env['account.tax']
         journal_obj = self.env['account.journal']
         account_obj = self.env['account.account']
 
@@ -158,12 +117,15 @@ class AccountWinbizImport(models.TransientModel):
             move['line_ids'] = [(0, 0, ln) for ln in lines]
             return move
 
-        def prepare_line(name, account, debit_amount=0.0, credit_amount=0.0):
+        def prepare_line(name, account, originator_tax,
+                         debit_amount=0.0, credit_amount=0.0):
             line = {}
             line['name'] = name
             line['debit'] = debit_amount
             line['credit'] = credit_amount
             line['account_id'] = account.id
+            if originator_tax is not None:
+                line['tax_line_id'] = originator_tax.id
             return line
 
         # loop
@@ -171,6 +133,7 @@ class AccountWinbizImport(models.TransientModel):
         previous_pce = None
         previous_date = None
         previous_journal = None
+        previous_tax = None
         lines = []
         for self.index, winbiz_item in enumerate(data, 1):
             if previous_pce not in (None, winbiz_item[u'pièce']):
@@ -189,6 +152,25 @@ class AccountWinbizImport(models.TransientModel):
             previous_date = self._parse_date(winbiz_item[u'date'])
             previous_journal = find_journal(winbiz_item[u'journal'])
 
+            if winbiz_item['ecr_tvatx'] != 0.0:
+                if winbiz_item['ecr_tvadc'] == 'c':
+                    scope = 'sale'
+                else:
+                    assert winbiz_item['ecr_tvadc'] == 'd'
+                    scope = 'purchase'
+                tax = tax_obj.search([('amount', '=', winbiz_item['ecr_tvatx']),
+                                     ('type_tax_use', '=', scope)], limit=1)
+                if not tax:
+                    raise exceptions.MissingError("No tax found with amount = %r and type = %r" % (winbiz_item['ecr_tvatx'], scope))
+            else:
+                tax = None
+            if int(winbiz_item['ecr_tvatyp']) < 0:
+                assert previous_tax is not None
+                originator_tax = previous_tax
+            else:
+                originator_tax = None
+            previous_tax = tax
+
             amount = float(winbiz_item[u'montant'])
             if amount == 0:
                 continue
@@ -203,7 +185,8 @@ class AccountWinbizImport(models.TransientModel):
                     recto_line = prepare_line(
                             name=winbiz_item[u'libellé'],
                             debit_amount=amount,
-                            account=account)
+                            account=account,
+                            originator_tax=originator_tax)
                     lines.append(recto_line)
 
             if winbiz_item[u'cpt_crédit'] != 'Multiple':
@@ -215,7 +198,8 @@ class AccountWinbizImport(models.TransientModel):
                     verso_line = prepare_line(
                             name=winbiz_item[u'libellé'],
                             credit_amount=amount,
-                            account=account)
+                            account=account,
+                            originator_tax=originator_tax)
                     lines.append(verso_line)
 
             if winbiz_item[u'cpt_débit'] == 'Multiple':

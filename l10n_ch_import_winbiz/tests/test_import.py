@@ -38,6 +38,12 @@ class TestImport(common.TransactionCase):
                     'code': code,
                     'user_type_id': user_type.id,
                     'reconcile': True})
+        for code, amount, scope in [
+                ('310', 6.5, 'sale'), ('315', 6.5, 'purchase'),
+                ('400', 7.5, 'sale'), ('405', 7.5, 'purchase'),
+                ('410', 7.6, 'sale'), ('415', 7.6, 'purchase')]:
+            tax_obj.search([('name', '=', code)]).unlink()
+            tax_obj.create({'name':code,'amount':amount,'type_tax_use':scope})
 
     def test_import(self):
         journal_obj = self.env['account.journal']
@@ -85,6 +91,8 @@ class TestImport(common.TransactionCase):
                 if ln.credit:
                     p(u"      credit = %s" % ln.credit)
                 p(u"      account is ‘%s’" % ln.account_id.code)
+                if ln.tax_line_id:
+                    p(u"      originator tax is ‘%s’" % ln.tax_line_id.name)
         temp.seek(0)
         diff = list(difflib.unified_diff(gold.readlines(), temp.readlines(),
                                          gold.name,        temp.name))
