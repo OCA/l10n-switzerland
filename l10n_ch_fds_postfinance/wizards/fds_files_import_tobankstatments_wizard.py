@@ -24,6 +24,8 @@ import logging
 import base64
 import tempfile
 import shutil
+import traceback
+
 import pysftp
 import os
 
@@ -115,9 +117,11 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
             # import to bank statements
             self._import2bankStatements(fds_files_ids)
             self.state = 'done'
-        except Exception as e:
+        except Exception:
+            self.env.cr.rollback()
+            self.env.invalidate_all()
             self.state = 'errorSFTP'
-            _logger.error("Unable to connect to the sftp: %s", e)
+            _logger.error(traceback.print_exc())
         finally:
             try:
                 tmp_key.close()
