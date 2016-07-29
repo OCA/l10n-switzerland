@@ -10,7 +10,6 @@ import base64
 from pprint import pprint
 import difflib
 import tempfile
-import os
 
 _logger = logging.getLogger(__name__)
 
@@ -57,8 +56,7 @@ class TestImport(common.TransactionCase):
             return res
         input = open(get_path('input.xls'))
         gold = open(get_path('golden-output.txt'))
-        temp = tempfile.NamedTemporaryFile(prefix='odoo-l10n_ch_import_winbiz',
-                                           delete=False)
+        temp = tempfile.NamedTemporaryFile(prefix='odoo-l10n_ch_import_winbiz')
 
         buf = StringIO()
         base64.encode(input, buf)
@@ -93,4 +91,3 @@ class TestImport(common.TransactionCase):
             for i in diff:
                 _logger.error(i)
             self.fail("actual output doesn't match exptected output")
-        os.remove(temp.name) # intentionally keep it in case of test failure
