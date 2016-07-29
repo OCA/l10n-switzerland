@@ -7,15 +7,11 @@ from openerp.modules import get_resource_path
 import logging
 from StringIO import StringIO
 import base64
-from pprint import pprint
 import difflib
 import tempfile
 
 _logger = logging.getLogger(__name__)
 
-MOVE_UNIVERSAL_FIELDS = {'name', 'ref', 'date', 'journal_id', 'currency_id', 'rate_diff_partial_rec_id', 'state', 'line_ids', 'partner_id', 'amount', 'narration', 'company_id', 'matched_percentage', 'statement_line_id', 'dummy_account_id'}
-
-LINE_UNIVERSAL_FIELDS = {'name', 'quantity', 'product_uom_id', 'product_id', 'debit', 'credit', 'balance', 'debit_cash_basis', 'credit_cash_basis', 'balance_cash_basis', 'amount_currency', 'company_currency_id', 'currency_id', 'amount_residual', 'amount_residual_currency', 'account_id', 'move_id', 'narration', 'ref', 'payment_id', 'statement_id', 'reconciled', 'matched_debit_ids', 'matched_credit_ids', 'journal_id', 'blocked', 'date_maturity', 'date', 'analytic_line_ids', 'tax_ids', 'tax_line_id', 'analytic_account_id', 'company_id', 'counterpart', 'invoice_id', 'partner_id', 'user_type_id'}
 
 class TestImport(common.TransactionCase):
 
@@ -29,7 +25,6 @@ class TestImport(common.TransactionCase):
         user_type = self.env['account.account.type'].search(
             [('include_initial_balance', '=', False)], limit=1)
 
-        self.account_codes = {}
         for code in ['1000', '1010', '1020', '1050', '1061', '1120', '2000',
                      '2010', '2091', '2200', '4000', '4051', '4055', '4095',
                      '4210', '4300', '4400', '4412', '4510', '4511', '4590',
@@ -43,7 +38,6 @@ class TestImport(common.TransactionCase):
                     'code': code,
                     'user_type_id': user_type.id,
                     'reconcile': True})
-            self.account_codes[acc.id] = acc.code
 
     def test_import(self):
         journal_obj = self.env['account.journal']
@@ -71,23 +65,30 @@ class TestImport(common.TransactionCase):
         res.assert_balanced()
 
         # Get a predictable representation that can be compared across runs
-        data = res.copy_data()
-        for mv in data:
-            for f in mv.keys():
-                if f not in MOVE_UNIVERSAL_FIELDS:
-                    del mv[f]
-            mv['journal_id'] = journal_obj.browse(mv['journal_id']).code
-            for _, _, ln in mv['line_ids']:
-                for f in ln.keys():
-                    if f not in LINE_UNIVERSAL_FIELDS:
-                        del ln[f]
-                del ln['move_id']
-                ln['account_id'] = self.account_codes[ln['account_id']]
-        pprint(data, temp)
+        def p(u):
+            temp.write(u.encode('utf-8'))
+            temp.write('\n')
+
+        first = True
+        for mv in res:
+            if not first:
+                p(u"")
+            first = False
+            p(u"move ‘%s’" % mv.ref)
+            p(u"  (dated %s)" % mv.date)
+            p(u"  (in journal %s)" % mv.journal_id.code)
+            p(u"  with lines:")
+            for ln in mv.line_ids:
+                p(u"    line “%s”" % ln.name)
+                if ln.debit:
+                    p(u"      debit = %s" % ln.debit)
+                if ln.credit:
+                    p(u"      credit = %s" % ln.credit)
+                p(u"      account is ‘%s’" % ln.account_id.code)
         temp.seek(0)
         diff = list(difflib.unified_diff(gold.readlines(), temp.readlines(),
                                          gold.name,        temp.name))
         if len(diff) > 2:
             for i in diff:
-                _logger.error(i)
+                _logger.error(i.rstrip())
             self.fail("actual output doesn't match exptected output")
