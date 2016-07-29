@@ -30,7 +30,7 @@ class AccountBankStatementLine(models.Model):
         string='Related files',
         readonly=True
     )
-    file_name = fields.Char(compute='_get_attachment')
+    file_name = fields.Char(compute='_compute_file_name')
 
     @api.model
     def get_statement_line_for_reconciliation(self, st_line):
@@ -45,12 +45,13 @@ class AccountBankStatementLine(models.Model):
                 'data-target', '#img' + str(related_file.id)]
         return data
 
-    @api.one
-    def _get_attachment(self):
-        if self.related_files:
-            self.file_name = _('View file')
-        else:
-            self.file_name = ''
+    @api.multi
+    def _compute_file_name(self):
+        for line in self:
+            if line.related_files:
+                line.file_name = _('View file')
+            else:
+                line.file_name = ''
 
     @api.multi
     def download_attachment(self):
