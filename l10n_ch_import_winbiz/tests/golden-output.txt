@@ -24,9 +24,11 @@ move ‘FO’
     line “Achat vêtements travail”
       credit = 46.95
       account is ‘2000’
+      taxes = (‘315’)
     line “Achat vêtements travail”
       debit = 46.95
       account is ‘4095’
+      taxes = (‘315’)
 
 move ‘CA-0015’
   (dated 2016-03-15)
@@ -77,9 +79,11 @@ move ‘BA-0020’
     line “Service industriel, eau + chauffage”
       credit = 327.0
       account is ‘1020’
+      taxes = (‘315’)
     line “Service industriel, eau + chauffage”
       debit = 327.0
       account is ‘4412’
+      taxes = (‘315’)
     line “TVA Frais de publicité”
       credit = 23.2
       account is ‘1020’
@@ -91,9 +95,11 @@ move ‘BA-0020’
     line “Frais de publicité”
       credit = 356.8
       account is ‘1020’
+      taxes = (‘315’)
     line “Frais de publicité”
       debit = 356.8
       account is ‘4600’
+      taxes = (‘315’)
     line “Don au centre sportif”
       credit = 150.0
       account is ‘1020’
@@ -111,9 +117,11 @@ move ‘BA-0020’
     line “Téléphone 03.98”
       credit = 559.91
       account is ‘1020’
+      taxes = (‘315’)
     line “Téléphone 03.98”
       debit = 559.91
       account is ‘4511’
+      taxes = (‘315’)
     line “TVA Fournitures de bureau”
       credit = 22.91
       account is ‘1020’
@@ -125,9 +133,11 @@ move ‘BA-0020’
     line “Fournitures de bureau”
       credit = 352.54
       account is ‘1020’
+      taxes = (‘315’)
     line “Fournitures de bureau”
       debit = 352.54
       account is ‘4400’
+      taxes = (‘315’)
     line “XYZ SA, ass. mobilier”
       credit = 650.0
       account is ‘1020’
@@ -185,9 +195,11 @@ move ‘’
     line “Ventes du mois”
       credit = 58139.55
       account is ‘6200’
+      taxes = (‘400’)
     line “Ventes du mois”
       debit = 58139.55
       account is ‘1010’
+      taxes = (‘400’)
     line “Eau minérale”
       credit = 12.7
       account is ‘1000’
@@ -210,9 +222,11 @@ move ‘1001’
     line “Facture n° 1001 à Karro Bastien La Vallée: Support Simibox WT / WB / EWT”
       credit = 134.1
       account is ‘6207’
+      taxes = (‘410’)
     line “Facture n° 1001 à Karro Bastien La Vallée: Support Simibox WT / WB / EWT”
       debit = 134.1
       account is ‘1050’
+      taxes = (‘410’)
 
 move ‘4’
   (dated 2016-02-12)

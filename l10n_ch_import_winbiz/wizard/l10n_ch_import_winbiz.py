@@ -117,13 +117,15 @@ class AccountWinbizImport(models.TransientModel):
             move['line_ids'] = [(0, 0, ln) for ln in lines]
             return move
 
-        def prepare_line(name, account, originator_tax,
+        def prepare_line(name, account, tax, originator_tax,
                          debit_amount=0.0, credit_amount=0.0):
             line = {}
             line['name'] = name
             line['debit'] = debit_amount
             line['credit'] = credit_amount
             line['account_id'] = account.id
+            if tax is not None:
+                line['tax_ids'] = [(4, tax.id, 0)]
             if originator_tax is not None:
                 line['tax_line_id'] = originator_tax.id
             return line
@@ -186,6 +188,7 @@ class AccountWinbizImport(models.TransientModel):
                             name=winbiz_item[u'libellé'],
                             debit_amount=amount,
                             account=account,
+                            tax=tax,
                             originator_tax=originator_tax)
                     lines.append(recto_line)
 
@@ -199,6 +202,7 @@ class AccountWinbizImport(models.TransientModel):
                             name=winbiz_item[u'libellé'],
                             credit_amount=amount,
                             account=account,
+                            tax=tax,
                             originator_tax=originator_tax)
                     lines.append(verso_line)
 
@@ -215,7 +219,7 @@ class AccountWinbizImport(models.TransientModel):
     @api.multi
     def _import_file(self):
         self.index = None
-        move_obj = self.env['account.move']
+        move_obj = self.env['account.move'].with_context(dont_create_taxes=True)
         data = self._parse_xls()
         data = self._standardise_data(data)
         self.imported_move_ids = [move_obj.create(mv).id for mv in data]
