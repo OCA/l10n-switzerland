@@ -93,6 +93,8 @@ class TestImport(common.TransactionCase):
                 p(u"      account is ‘%s’" % ln.account_id.code)
                 if ln.tax_line_id:
                     p(u"      originator tax is ‘%s’" % ln.tax_line_id.name)
+                if ln.tax_ids:
+                    p(u"      taxes = (‘%s’)" % u"’, ‘".join(ln.tax_ids.mapped('name')))
         temp.seek(0)
         diff = list(difflib.unified_diff(gold.readlines(), temp.readlines(),
                                          gold.name,        temp.name))
