@@ -14,15 +14,11 @@ move ‘FO’
   (in journal BILL)
   with lines:
     line “TVA Achat vêtements travail”
-      credit = 3.05
-      account is ‘2000’
-      originator tax is ‘315’
-    line “TVA Achat vêtements travail”
       debit = 3.05
       account is ‘1061’
       originator tax is ‘315’
     line “Achat vêtements travail”
-      credit = 46.95
+      credit = 50.0
       account is ‘2000’
       taxes = (‘315’)
     line “Achat vêtements travail”
@@ -68,18 +64,10 @@ move ‘BA-0020’
   (dated 2016-04-13)
   (in journal MISC)
   with lines:
-    line “TVA Service industriel, eau + chauffage”
-      debit = 21.25
-      account is ‘1061’
-      originator tax is ‘315’
     line “Service industriel, eau + chauffage”
       debit = 327.0
       account is ‘4412’
       taxes = (‘315’)
-    line “TVA Frais de publicité”
-      debit = 23.2
-      account is ‘1061’
-      originator tax is ‘315’
     line “Frais de publicité”
       debit = 356.8
       account is ‘4600’
@@ -87,16 +75,12 @@ move ‘BA-0020’
     line “Don au centre sportif”
       debit = 150.0
       account is ‘4590’
-    line “TVA Téléphone 03.98”
-      debit = 36.39
-      account is ‘1061’
-      originator tax is ‘315’
     line “Téléphone 03.98”
       debit = 559.91
       account is ‘4511’
       taxes = (‘315’)
     line “TVA Fournitures de bureau”
-      debit = 22.91
+      debit = 103.75
       account is ‘1061’
       originator tax is ‘315’
     line “Fournitures de bureau”
@@ -153,16 +137,12 @@ move ‘’
       credit = 4360.45
       account is ‘2010’
       originator tax is ‘400’
-    line “TVA Ventes du mois”
-      debit = 4360.45
-      account is ‘1010’
-      originator tax is ‘400’
     line “Ventes du mois”
       credit = 58139.55
       account is ‘6200’
       taxes = (‘400’)
     line “Ventes du mois”
-      debit = 58139.55
+      debit = 62500.0
       account is ‘1010’
       taxes = (‘400’)
     line “Eau minérale”
@@ -180,16 +160,12 @@ move ‘1001’
       credit = 10.2
       account is ‘2010’
       originator tax is ‘410’
-    line “TVA Facture n° 1001 à Karro Bastien La Vallée: Support Simibox WT / WB / EWT”
-      debit = 10.2
-      account is ‘1050’
-      originator tax is ‘410’
     line “Facture n° 1001 à Karro Bastien La Vallée: Support Simibox WT / WB / EWT”
       credit = 134.1
       account is ‘6207’
       taxes = (‘410’)
     line “Facture n° 1001 à Karro Bastien La Vallée: Support Simibox WT / WB / EWT”
-      debit = 134.1
+      debit = 144.3
       account is ‘1050’
       taxes = (‘410’)
 

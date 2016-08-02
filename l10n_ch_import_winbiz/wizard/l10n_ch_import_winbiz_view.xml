@@ -29,6 +29,7 @@
                 </group>
                 <group>
                     <field name="company_id"/>
+                    <field name="enable_account_based_line_merging"/>
                 </group>
                 <notebook>
                     <page string="Report">
