@@ -64,6 +64,7 @@ class TestImport(common.TransactionCase):
         buf.close()
 
         wizard = self.env['account.winbiz.import'].create({
+            'enable_account_based_line_merging': True,
             'file': contents})
         wizard._import_file()
 

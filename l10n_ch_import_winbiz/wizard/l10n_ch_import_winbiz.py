@@ -16,6 +16,7 @@ class AccountWinbizImport(models.TransientModel):
     _rec_name = 'state'
 
     company_id = fields.Many2one('res.company', 'Company', invisible=True)
+    enable_account_based_line_merging = fields.Boolean("Group Balance Sheet accounts lines", default=False)
     report = fields.Text('Report', readonly=True)
     state = fields.Selection(selection=[
         ('draft', "Draft"),
@@ -87,28 +88,6 @@ class AccountWinbizImport(models.TransientModel):
         else:
             return datetime.datetime(*xldate_as_tuple(date, self.wb.datemode))
 
-    class LineIntermediate(object):
-        '''has a single ``amount`` attribute that's negative for debit, but can
-        be converted into a dict for the ORM ``create()`` with ``dict(self)``
-        '''
-        def __init__(self, name, account, amount=0, tax=None, originator_tax=None):
-            self.name = name
-            self.account = account
-            self.amount = amount
-            self.tax = tax
-            self.originator_tax = originator_tax
-        def __iter__(self):
-            yield 'name', self.name
-            yield 'account_id', self.account.id
-            if self.amount < 0:
-                yield 'debit', -self.amount
-            else:
-                yield 'credit', self.amount
-            if self.tax is not None:
-                yield 'tax_ids', [(4, self.tax.id, 0)]
-            if self.originator_tax is not None:
-                yield 'tax_line_id', self.originator_tax.id
-
     @api.multi
     def _standardise_data(self, data):
         """
@@ -139,14 +118,59 @@ class AccountWinbizImport(models.TransientModel):
                 }
             code = mapping[winbiz_code]
             return journal_obj.search([('code', '=', code)], limit=1)
-
         def prepare_move(lines, journal, date, ref):
             return {'line_ids': [(0, 0, dict(ln)) for ln in lines],
                     'journal_id': journal.id,
                     'date': date,
                     'ref': ref}
 
-        prepare_line = self.LineIntermediate
+        def account_line_merge(lines):
+            lines_orig = lines
+            lines = [ln for ln in lines if ln.account.user_type_id.include_initial_balance]
+            lines.sort(key=lambda ln: ln.account.code)
+            to_remove = []
+            previous = None
+            for current in lines:
+                if previous is not None \
+                        and previous.account == current.account:
+                    previous.amount += current.amount
+                    to_remove.append(current)
+                else:
+                    previous = current
+
+            lines = lines_orig
+            for elem in to_remove:
+                lines.remove(elem)
+            return lines
+
+        if self.enable_account_based_line_merging:
+            prepare_move_orig = prepare_move
+            def prepare_move(lines, journal, date, ref):
+                return prepare_move_orig(account_line_merge(lines), journal, date, ref)
+
+        class LineIntermediate(object):
+            '''has a single ``amount`` attribute that's negative for debit, but can
+            be converted into a dict for the ORM ``create()`` with ``dict(self)``
+            '''
+            def __init__(self, name, account, amount=0, tax=None, originator_tax=None):
+                self.name = name
+                self.account = account
+                self.amount = amount
+                self.tax = tax_obj if tax is None else tax
+                self.originator_tax = tax_obj if originator_tax is None else originator_tax
+            def __iter__(self):
+                yield 'name', self.name
+                yield 'account_id', self.account.id
+                if self.amount < 0:
+                    yield 'debit', -self.amount
+                else:
+                    yield 'credit', self.amount
+                if self.tax:
+                    yield 'tax_ids', [(4, self.tax.id, 0)]
+                if self.originator_tax:
+                    yield 'tax_line_id', self.originator_tax.id
+
+        prepare_line = LineIntermediate
 
         # loop
         incomplete = None
