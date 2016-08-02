@@ -69,81 +69,46 @@ move ‘BA-0020’
   (in journal MISC)
   with lines:
     line “TVA Service industriel, eau + chauffage”
-      credit = 21.25
-      account is ‘1020’
-      originator tax is ‘315’
-    line “TVA Service industriel, eau + chauffage”
       debit = 21.25
       account is ‘1061’
       originator tax is ‘315’
-    line “Service industriel, eau + chauffage”
-      credit = 327.0
-      account is ‘1020’
-      taxes = (‘315’)
     line “Service industriel, eau + chauffage”
       debit = 327.0
       account is ‘4412’
       taxes = (‘315’)
     line “TVA Frais de publicité”
-      credit = 23.2
-      account is ‘1020’
-      originator tax is ‘315’
-    line “TVA Frais de publicité”
       debit = 23.2
       account is ‘1061’
       originator tax is ‘315’
-    line “Frais de publicité”
-      credit = 356.8
-      account is ‘1020’
-      taxes = (‘315’)
     line “Frais de publicité”
       debit = 356.8
       account is ‘4600’
       taxes = (‘315’)
     line “Don au centre sportif”
-      credit = 150.0
-      account is ‘1020’
-    line “Don au centre sportif”
       debit = 150.0
       account is ‘4590’
-    line “TVA Téléphone 03.98”
-      credit = 36.39
-      account is ‘1020’
-      originator tax is ‘315’
     line “TVA Téléphone 03.98”
       debit = 36.39
       account is ‘1061’
       originator tax is ‘315’
     line “Téléphone 03.98”
-      credit = 559.91
-      account is ‘1020’
-      taxes = (‘315’)
-    line “Téléphone 03.98”
       debit = 559.91
       account is ‘4511’
       taxes = (‘315’)
-    line “TVA Fournitures de bureau”
-      credit = 22.91
-      account is ‘1020’
-      originator tax is ‘315’
     line “TVA Fournitures de bureau”
       debit = 22.91
       account is ‘1061’
       originator tax is ‘315’
     line “Fournitures de bureau”
-      credit = 352.54
-      account is ‘1020’
-      taxes = (‘315’)
-    line “Fournitures de bureau”
       debit = 352.54
       account is ‘4400’
       taxes = (‘315’)
     line “XYZ SA, ass. mobilier”
-      credit = 650.0
-      account is ‘1020’
-    line “XYZ SA, ass. mobilier”
       debit = 650.0
       account is ‘4300’
+    line “Paiements divers”
+      credit = 2500.0
+      account is ‘1020’
 
 move ‘SOLDINIT’
   (dated 2016-01-01)
@@ -246,26 +211,17 @@ move ‘SAL01’
     line “Corzo Jean: Retenue LPP coordonnée Janvier”
       credit = 150.75
       account is ‘4055’
-    line “Corzo Jean: Retenue LPP coordonnée Janvier”
-      debit = 150.75
-      account is ‘4000’
     line “Corzo Jean: Retenue AC Janvier”
       credit = 60.0
       account is ‘4051’
-    line “Corzo Jean: Retenue AC Janvier”
-      debit = 60.0
-      account is ‘4000’
     line “Corzo Jean: Retenue AVS Janvier”
       credit = 202.0
       account is ‘4051’
-    line “Corzo Jean: Retenue AVS Janvier”
-      debit = 202.0
-      account is ‘4000’
     line “Corzo Jean: Salaire net Janvier”
       credit = 3587.25
       account is ‘2000’
-    line “Corzo Jean: Salaire net Janvier”
-      debit = 3587.25
+    line “Corzo Jean: Salaire brut Janvier”
+      debit = 4000.0
       account is ‘4000’
 
 move ‘SAP01’
@@ -286,38 +242,23 @@ move ‘SAL01’
     line “Cotisation LPP fixe Janvier”
       credit = 1535.0
       account is ‘5472’
-    line “Cotisation LPP fixe Janvier”
-      debit = 1535.0
-      account is ‘4000’
     line “Cotisation AANP secteur A0 Janvier”
       credit = 265.2
       account is ‘5700’
-    line “Cotisation AANP secteur A0 Janvier”
-      debit = 265.2
-      account is ‘4000’
     line “Cotisation PC Famille Janvier”
       credit = 13.25
       account is ‘5700’
-    line “Cotisation PC Famille Janvier”
-      debit = 13.25
-      account is ‘4000’
     line “Cotisation AC Janvier”
       credit = 243.1
       account is ‘5700’
-    line “Cotisation AC Janvier”
-      debit = 243.1
-      account is ‘4000’
     line “Cotisation AVS Janvier”
       credit = 1132.65
       account is ‘5700’
-    line “Cotisation AVS Janvier”
-      debit = 1132.65
-      account is ‘4000’
     line “Salaire net Janvier”
       credit = 18910.8
       account is ‘2000’
-    line “Salaire net Janvier”
-      debit = 18910.8
+    line “Salaire brut Janvier”
+      debit = 22100.0
       account is ‘4000’
 
 move ‘SAP01’

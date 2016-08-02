@@ -87,6 +87,28 @@ class AccountWinbizImport(models.TransientModel):
         else:
             return datetime.datetime(*xldate_as_tuple(date, self.wb.datemode))
 
+    class LineIntermediate(object):
+        '''has a single ``amount`` attribute that's negative for debit, but can
+        be converted into a dict for the ORM ``create()`` with ``dict(self)``
+        '''
+        def __init__(self, name, account, amount=0, tax=None, originator_tax=None):
+            self.name = name
+            self.account = account
+            self.amount = amount
+            self.tax = tax
+            self.originator_tax = originator_tax
+        def __iter__(self):
+            yield 'name', self.name
+            yield 'account_id', self.account.id
+            if self.amount < 0:
+                yield 'debit', -self.amount
+            else:
+                yield 'credit', self.amount
+            if self.tax is not None:
+                yield 'tax_ids', [(4, self.tax.id, 0)]
+            if self.originator_tax is not None:
+                yield 'tax_line_id', self.originator_tax.id
+
     @api.multi
     def _standardise_data(self, data):
         """
@@ -119,25 +141,12 @@ class AccountWinbizImport(models.TransientModel):
             return journal_obj.search([('code', '=', code)], limit=1)
 
         def prepare_move(lines, journal, date, ref):
-            move = {}
-            move['date'] = date
-            move['ref'] = ref
-            move['journal_id'] = journal.id
-            move['line_ids'] = [(0, 0, ln) for ln in lines]
-            return move
+            return {'line_ids': [(0, 0, dict(ln)) for ln in lines],
+                    'journal_id': journal.id,
+                    'date': date,
+                    'ref': ref}
 
-        def prepare_line(name, account, tax, originator_tax,
-                         debit_amount=0.0, credit_amount=0.0):
-            line = {}
-            line['name'] = name
-            line['debit'] = debit_amount
-            line['credit'] = credit_amount
-            line['account_id'] = account.id
-            if tax is not None:
-                line['tax_ids'] = [(4, tax.id, 0)]
-            if originator_tax is not None:
-                line['tax_line_id'] = originator_tax.id
-            return line
+        prepare_line = self.LineIntermediate
 
         # loop
         incomplete = None
@@ -148,13 +157,6 @@ class AccountWinbizImport(models.TransientModel):
         lines = []
         for self.index, winbiz_item in enumerate(data, 1):
             if previous_pce not in (None, winbiz_item[u'pièce']):
-                if incomplete and incomplete['debit'] and incomplete['credit']:
-                    if incomplete['debit'] < incomplete['credit']:
-                        incomplete['credit'] -= incomplete['debit']
-                        incomplete['debit'] = 0
-                    else:
-                        incomplete['debit'] -= incomplete['credit']
-                        incomplete['credit'] = 0
                 yield prepare_move(lines, previous_journal, previous_date,
                                    ref=previous_pce)
                 lines = []
@@ -183,19 +185,15 @@ class AccountWinbizImport(models.TransientModel):
             previous_tax = tax
 
             amount = float(winbiz_item[u'montant'])
-            if amount == 0:
-                continue
-
             recto_line = verso_line = None
             if winbiz_item[u'cpt_débit'] != 'Multiple':
                 account = find_account(winbiz_item[u'cpt_débit'])
-                if incomplete is not None \
-                        and incomplete['account_id'] == account.id:
-                    incomplete['debit'] += amount
+                if incomplete is not None and incomplete.account == account:
+                    incomplete.amount -= amount
                 else:
                     recto_line = prepare_line(
                             name=winbiz_item[u'libellé'],
-                            debit_amount=amount,
+                            amount=(-amount),
                             account=account,
                             tax=tax,
                             originator_tax=originator_tax)
@@ -203,13 +201,12 @@ class AccountWinbizImport(models.TransientModel):
 
             if winbiz_item[u'cpt_crédit'] != 'Multiple':
                 account = find_account(winbiz_item[u'cpt_crédit'])
-                if incomplete is not None \
-                        and incomplete['account_id'] == account.id:
-                    incomplete['credit'] += amount
+                if incomplete is not None and incomplete.account == account:
+                    incomplete.amount += amount
                 else:
                     verso_line = prepare_line(
                             name=winbiz_item[u'libellé'],
-                            credit_amount=amount,
+                            amount=amount,
                             account=account,
                             tax=tax,
                             originator_tax=originator_tax)
