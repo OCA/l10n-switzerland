@@ -7,7 +7,7 @@ from xlrd import open_workbook, xldate_as_tuple
 import tempfile
 from openerp import models, fields, api, exceptions
 from openerp.tools.translate import _
-from datetime import datetime
+import datetime
 
 
 class AccountWinbizImport(models.TransientModel):
@@ -73,10 +73,19 @@ class AccountWinbizImport(models.TransientModel):
         """Parse a date coming from Excel.
 
            :param date: cell value
-           :returns: datetime
+           :returns: datetime.date
         """
-        dt = datetime(*xldate_as_tuple(date, self.wb.datemode))
-        return dt
+        if isinstance(date, basestring):
+            from babel import Locale
+            d, m, y = date.split('-')
+            d = int(d)
+            mapping = Locale('en').months['format']['abbreviated']
+            mapping = dict(zip(mapping.values(), mapping.keys()))
+            m = mapping[m]
+            y = 2000 + int(y)
+            return datetime.datetime(y, m, d)
+        else:
+            return datetime.datetime(*xldate_as_tuple(date, self.wb.datemode))
 
     @api.multi
     def _standardise_data(self, data):
