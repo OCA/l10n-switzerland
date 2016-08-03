@@ -43,7 +43,7 @@ class TestImport(common.TransactionCase):
                 ('400', 7.5, 'sale'), ('405', 7.5, 'purchase'),
                 ('410', 7.6, 'sale'), ('415', 7.6, 'purchase')]:
             tax_obj.search([('name', '=', code)]).unlink()
-            tax_obj.create({'name':code,'amount':amount,'type_tax_use':scope})
+            tax_obj.create({'name': code, 'amount': amount, 'price_include': True, 'type_tax_use': scope})
 
     def test_import(self):
         journal_obj = self.env['account.journal']

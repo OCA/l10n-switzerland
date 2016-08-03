@@ -195,7 +195,13 @@ class AccountWinbizImport(models.TransientModel):
                 else:
                     assert winbiz_item['ecr_tvadc'] == 'd'
                     scope = 'purchase'
+                if winbiz_item['ecr_tvabn'] == 2:
+                    included = True
+                else:
+                    assert winbiz_item['ecr_tvabn'] == 1
+                    included = False
                 tax = tax_obj.search([('amount', '=', winbiz_item['ecr_tvatx']),
+                                     ('price_include', '=', included),
                                      ('type_tax_use', '=', scope)], limit=1)
                 if not tax:
                     raise exceptions.MissingError("No tax found with amount = %r and type = %r" % (winbiz_item['ecr_tvatx'], scope))
