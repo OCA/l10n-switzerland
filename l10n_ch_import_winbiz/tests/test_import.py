@@ -68,6 +68,15 @@ class TestImport(common.TransactionCase):
                     'code': code,
                     'user_type_id': user_type[include_initial_balance].id,
                     'reconcile': True})
+
+        journal_obj = self.env['account.journal']
+        for code, winbiz_code in ('INV','v'), ('BILL','a'), ('MISC','d'), ('JS','s'), ( 'OJ', 'o'):
+            journal = journal_obj.search([('code', '=', code)])
+            if journal:
+                journal.write({'winbiz_mapping': winbiz_code})
+            else:
+                journal_obj.create({'name': 'dummy '+code, 'code': code, 'type':'general', 'winbiz_mapping': winbiz_code})
+
         for code, amount, scope in [
                 ('310', 6.5, 'sale'), ('315', 6.5, 'purchase'),
                 ('400', 7.5, 'sale'), ('405', 7.5, 'purchase'),
@@ -76,11 +85,6 @@ class TestImport(common.TransactionCase):
             tax_obj.create({'name': code, 'amount': amount, 'price_include': True, 'type_tax_use': scope})
 
     def test_import(self):
-        journal_obj = self.env['account.journal']
-        for i in 'BILL', 'MISC', 'STJ', 'OJ', 'JS', 'INV':
-            if not journal_obj.search([('code', '=', i)]):
-                journal_obj.create({'name': 'dummy '+i, 'code': i, 'type':'general'})
-
         def get_path(filename):
             res = get_resource_path('l10n_ch_import_winbiz', 'tests', filename)
             return res
