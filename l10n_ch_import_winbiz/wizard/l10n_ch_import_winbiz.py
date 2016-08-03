@@ -156,8 +156,23 @@ class AccountWinbizImport(models.TransientModel):
                 self.name = name
                 self.account = account
                 self.amount = amount
-                self.tax = tax_obj if tax is None else tax
-                self.originator_tax = tax_obj if originator_tax is None else originator_tax
+                self.tax = tax
+                self.originator_tax = originator_tax
+            @property
+            def tax(self):
+                return tax_obj if self._tax is None else self._tax
+            @tax.setter
+            def tax(self, tax):
+                self._tax = None if not tax else tax
+
+            @property
+            def originator_tax(self):
+                val = self._originator_tax
+                return tax_obj if val is None else val
+            @originator_tax.setter
+            def originator_tax(self, val):
+                self._originator_tax = None if not val else val
+
             def __iter__(self):
                 yield 'name', self.name
                 yield 'account_id', self.account.id
@@ -225,8 +240,9 @@ class AccountWinbizImport(models.TransientModel):
                             name=winbiz_item[u'libellé'],
                             amount=(-amount),
                             account=account,
-                            tax=tax,
                             originator_tax=originator_tax)
+                    if account.user_type_id.include_initial_balance is False:
+                        recto_line.tax = tax
                     lines.append(recto_line)
 
             if winbiz_item[u'cpt_crédit'] != 'Multiple':
@@ -238,8 +254,9 @@ class AccountWinbizImport(models.TransientModel):
                             name=winbiz_item[u'libellé'],
                             amount=amount,
                             account=account,
-                            tax=tax,
                             originator_tax=originator_tax)
+                    if account.user_type_id.include_initial_balance is False:
+                        verso_line.tax = tax
                     lines.append(verso_line)
 
             if winbiz_item[u'cpt_débit'] == 'Multiple':
