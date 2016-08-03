@@ -5,22 +5,6 @@
         <field name="model">account.winbiz.import</field>
         <field name="arch" type="xml">
             <form>
-                <header>
-                    <button
-                        name="import_file"
-                        type="object"
-                        states="draft"
-                        string="Import file"
-                        class="oe_highlight"
-                    />
-                    <button
-                        name="open_account_moves"
-                        type="object"
-                        states="done"
-                        string="View imported Moves"
-                        class="oe_highlight"
-                    />
-                </header>
                 <group>
                     <div>
                         <field name="state" invisible="1"/>
@@ -44,6 +28,15 @@
                 </ul>
                     </page>
                 </notebook>
+                <footer>
+                    <button
+                        name="import_file"
+                        type="object"
+                        states="draft"
+                        string="Import file"
+                        class="oe_highlight"
+                    />
+                </footer>
             </form>
         </field>
     </record>

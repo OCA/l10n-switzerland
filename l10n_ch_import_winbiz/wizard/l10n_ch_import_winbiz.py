@@ -29,19 +29,6 @@ class AccountWinbizImport(models.TransientModel):
         'account.move', 'import_winbiz_move_rel',
         string='Imported moves')
 
-    @api.multi
-    def open_account_moves(self):
-        res = {
-                'domain': str([('id', 'in', self.imported_move_ids.ids)]),
-                'name': 'Account Move',
-                'view_type': 'form',
-                'view_mode': 'tree,form',
-                'res_model': 'account.move',
-                'view_id': False,
-                'type': 'ir.actions.act_window',
-                }
-        return res
-
     def _parse_xls(self):
         """Parse stored Excel file.
 
