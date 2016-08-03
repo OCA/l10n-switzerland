@@ -106,18 +106,6 @@ class AccountWinbizImport(models.TransientModel):
                     _("No account with code %s") % code)
             return res
 
-        def find_journal(winbiz_code):
-            mapping = {
-                'a': 'BILL',
-                'd': 'MISC',
-                'i': 'STJ',
-                'm': 'MISC',
-                'o': 'OJ',
-                's': 'JS',
-                'v': 'INV',
-                }
-            code = mapping[winbiz_code]
-            return journal_obj.search([('code', '=', code)], limit=1)
         def prepare_move(lines, journal, date, ref):
             return {'line_ids': [(0, 0, dict(ln)) for ln in lines],
                     'journal_id': journal.id,
@@ -202,7 +190,10 @@ class AccountWinbizImport(models.TransientModel):
                 incomplete = None
             previous_pce = winbiz_item[u'pièce']
             previous_date = self._parse_date(winbiz_item[u'date'])
-            previous_journal = find_journal(winbiz_item[u'journal'])
+            journal = journal_obj.search([('winbiz_mapping', '=', winbiz_item[u'journal'])], limit=1)
+            if not journal:
+                raise exceptions.MissingError(u"No journal ‘%s’" % winbiz_item[u'journal'])
+            previous_journal = journal
 
             if winbiz_item['ecr_tvatx'] != 0.0:
                 if winbiz_item['ecr_tvadc'] == 'c':
