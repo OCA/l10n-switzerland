@@ -133,20 +133,6 @@ class AccountWinbizImport(models.TransientModel):
                 self.amount = amount
                 self.tax = tax
                 self.originator_tax = originator_tax
-            @property
-            def tax(self):
-                return tax_obj if self._tax is None else self._tax
-            @tax.setter
-            def tax(self, tax):
-                self._tax = None if not tax else tax
-
-            @property
-            def originator_tax(self):
-                val = self._originator_tax
-                return tax_obj if val is None else val
-            @originator_tax.setter
-            def originator_tax(self, val):
-                self._originator_tax = None if not val else val
 
             def __iter__(self):
                 yield 'name', self.name
