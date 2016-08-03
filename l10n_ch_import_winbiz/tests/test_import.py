@@ -20,23 +20,53 @@ class TestImport(common.TransactionCase):
 
         tax_obj = self.env['account.tax']
         account_obj = self.env['account.account']
-        analytic_account_obj = self.env['account.analytic.account']
 
-        user_type = self.env['account.account.type'].search(
-            [('include_initial_balance', '=', False)], limit=1)
+        user_type = {
+                include_initial_balance:
+                self.env['account.account.type'].search(
+                    [('include_initial_balance',
+                        '=', include_initial_balance)],
+                    limit=1) for include_initial_balance in [False, True]}
 
-        for code in ['1000', '1010', '1020', '1050', '1061', '1120', '2000',
-                     '2010', '2091', '2200', '4000', '4051', '4055', '4095',
-                     '4210', '4300', '4400', '4412', '4510', '4511', '4590',
-                     '4600', '5472', '5700', '6200', '6207', '8100']:
+        for code, include_initial_balance in [
+                ('1000', True),
+                ('1010', True),
+                ('1020', True),
+                ('1050', True),
+                ('1061', True),
+                ('1120', True),
+                ('2000', True),
+                ('2010', True),
+                ('2091', True),
+                ('2200', True),
+                ('4000', False),
+                ('4051', False),
+                ('4055', False),
+                ('4095', False),
+                ('4210', False),
+                ('4300', False),
+                ('4400', False),
+                ('4412', False),
+                ('4510', False),
+                ('4511', False),
+                ('4590', False),
+                ('4600', False),
+                ('5472', False),
+                ('5700', False),
+                ('6200', False),
+                ('6207', False),
+                ('8100', False),
+                ]:
             acc = account_obj.search([('code', '=', code)])
             if acc:  # patch it within the transaction
-                acc.user_type_id = user_type.id
+                acc.write({
+                    'user_type_id': user_type[include_initial_balance].id,
+                    'reconcile': True})
             else:
                 acc = account_obj.create({
                     'name': 'dummy %s' % code,
                     'code': code,
-                    'user_type_id': user_type.id,
+                    'user_type_id': user_type[include_initial_balance].id,
                     'reconcile': True})
         for code, amount, scope in [
                 ('310', 6.5, 'sale'), ('315', 6.5, 'purchase'),
