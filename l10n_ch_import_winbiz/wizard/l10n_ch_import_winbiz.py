@@ -168,11 +168,17 @@ class AccountWinbizImport(models.TransientModel):
                 raise exceptions.MissingError(u"No journal ‘%s’" % winbiz_item[u'journal'])
             previous_journal = journal
 
-            if winbiz_item['ecr_tvatx'] != 0.0:
-                if winbiz_item['ecr_tvadc'] == 'c':
+            # tvatyp:  0 no vat was applied (internal transfers for example)
+            #          1 there is vat but it's not on this line
+            #          2 sales vat
+            #          3 purchases vat
+            #         -1 pure vat
+            tvatyp = int(winbiz_item['ecr_tvatyp'])
+            if tvatyp > 1:
+                if tvatyp == 2:
                     scope = 'sale'
                 else:
-                    assert winbiz_item['ecr_tvadc'] == 'd'
+                    assert tvatyp == 3
                     scope = 'purchase'
                 if winbiz_item['ecr_tvabn'] == 2:
                     included = True
@@ -205,7 +211,7 @@ class AccountWinbizImport(models.TransientModel):
                             amount=(-amount),
                             account=account,
                             originator_tax=originator_tax)
-                    if account.user_type_id.include_initial_balance is False:
+                    if winbiz_item['ecr_tvadc'] == 'd':
                         recto_line.tax = tax
                     lines.append(recto_line)
 
@@ -219,7 +225,7 @@ class AccountWinbizImport(models.TransientModel):
                             amount=amount,
                             account=account,
                             originator_tax=originator_tax)
-                    if account.user_type_id.include_initial_balance is False:
+                    if winbiz_item['ecr_tvadc'] == 'c':
                         verso_line.tax = tax
                     lines.append(verso_line)
 
