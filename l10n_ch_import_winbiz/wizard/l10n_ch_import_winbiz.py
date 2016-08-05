@@ -242,10 +242,11 @@ class AccountWinbizImport(models.TransientModel):
     @api.multi
     def _import_file(self):
         self.index = None
-        move_obj = self.env['account.move'].with_context(dont_create_taxes=True)
+        move_obj = self.env['account.move']
         data = self._parse_xls()
         data = self._standardise_data(data)
-        self.imported_move_ids = [move_obj.create(mv).id for mv in data]
+        for mv in data:
+            self.with_context(dont_create_taxes=True).write({'imported_move_ids': [(0, False, mv)]})
 
     @api.multi
     def import_file(self):
