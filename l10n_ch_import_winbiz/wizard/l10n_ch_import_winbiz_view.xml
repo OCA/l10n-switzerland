@@ -21,11 +21,13 @@
                     </page>
                     <page string="Import help">
                  In order to import your Excel Spreadsheet you must complete the following requirements:
-                         <ul>
-                <li>The accounts used in the WinBIZ file must be previously created into Odoo </li>
-		<li>The lines should be ordered by “N°” for best results </li>
-		<li>The export encoding should be “Windows Ansi - 1252” (default)</li>
-                </ul>
+                        <ul>
+                            <li> The accounts used in the WinBIZ file must have been previously created into Odoo </li>
+                            <li> The WinBIZ journals must also exist and have their WinBIZ one-letter codes filled in into the ad-hoc field </li>
+                            <li> The taxes must exist. They will be matched with WinBIZ data based on amount, scope, and whether they are included in the price </li>
+                            <li> The lines should be ordered by “N°” for best results </li>
+                            <li> The export encoding should be “Windows Ansi - 1252” (default) </li>
+                        </ul>
                     </page>
                 </notebook>
                 <footer>
