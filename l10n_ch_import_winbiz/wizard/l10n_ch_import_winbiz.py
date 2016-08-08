@@ -16,7 +16,8 @@ class AccountWinbizImport(models.TransientModel):
     _rec_name = 'state'
 
     company_id = fields.Many2one('res.company', 'Company', invisible=True)
-    enable_account_based_line_merging = fields.Boolean("Group Balance Sheet accounts lines", default=False)
+    enable_account_based_line_merging = fields.Boolean(
+        "Group Balance Sheet accounts lines", default=False)
     report = fields.Text('Report', readonly=True)
     state = fields.Selection(selection=[
         ('draft', "Draft"),
@@ -53,7 +54,8 @@ class AccountWinbizImport(models.TransientModel):
                 def vals(n):
                     return [c.value for c in sheet.row(n)]
                 head = vals(0)
-                res = [dict(zip(head, vals(i))) for i in xrange(1, sheet.nrows)]
+                res = [dict(zip(head, vals(i)))
+                       for i in xrange(1, sheet.nrows)]
                 res.sort(key=lambda e: e[u'numéro'])
                 return res
 
@@ -101,7 +103,8 @@ class AccountWinbizImport(models.TransientModel):
 
         def account_line_merge(lines):
             lines_orig = lines
-            lines = [ln for ln in lines if ln.account.user_type_id.include_initial_balance]
+            lines = [ln for ln in lines
+                     if ln.account.user_type_id.include_initial_balance]
             lines.sort(key=lambda ln: ln.account.code)
             to_remove = []
             previous = None
@@ -120,14 +123,18 @@ class AccountWinbizImport(models.TransientModel):
 
         if self.enable_account_based_line_merging:
             prepare_move_orig = prepare_move
+
             def prepare_move(lines, journal, date, ref):
-                return prepare_move_orig(account_line_merge(lines), journal, date, ref)
+                return prepare_move_orig(account_line_merge(lines),
+                                         journal, date, ref)
 
         class LineIntermediate(object):
-            '''has a single ``amount`` attribute that's negative for debit, but can
-            be converted into a dict for the ORM ``create()`` with ``dict(self)``
+            '''has a single ``amount`` attribute that's negative for debit, but
+            can be converted into a dict for the ORM ``create()`` with
+            ``dict(self)``
             '''
-            def __init__(self, name, account, amount=0, tax=None, originator_tax=None):
+            def __init__(self, name, account, amount=0,
+                         tax=None, originator_tax=None):
                 self.name = name
                 self.account = account
                 self.amount = amount
@@ -163,9 +170,13 @@ class AccountWinbizImport(models.TransientModel):
                 incomplete = None
             previous_pce = winbiz_item[u'pièce']
             previous_date = self._parse_date(winbiz_item[u'date'])
-            journal = journal_obj.search([('winbiz_mapping', '=', winbiz_item[u'journal'])], limit=1)
+            journal = journal_obj.search(
+                [('winbiz_mapping', '=', winbiz_item[u'journal'])],
+                limit=1)
             if not journal:
-                raise exceptions.MissingError(u"No journal ‘%s’" % winbiz_item[u'journal'])
+                raise exceptions.MissingError(
+                    u"No journal ‘%s’"
+                    % winbiz_item[u'journal'])
             previous_journal = journal
 
             # tvatyp:  0 no vat was applied (internal transfers for example)
@@ -185,11 +196,14 @@ class AccountWinbizImport(models.TransientModel):
                 else:
                     assert winbiz_item['ecr_tvabn'] == 1
                     included = False
-                tax = tax_obj.search([('amount', '=', winbiz_item['ecr_tvatx']),
-                                     ('price_include', '=', included),
-                                     ('type_tax_use', '=', scope)], limit=1)
+                tax = tax_obj.search([
+                    ('amount', '=', winbiz_item['ecr_tvatx']),
+                    ('price_include', '=', included),
+                    ('type_tax_use', '=', scope)], limit=1)
                 if not tax:
-                    raise exceptions.MissingError("No tax found with amount = %r and type = %r" % (winbiz_item['ecr_tvatx'], scope))
+                    raise exceptions.MissingError(
+                        "No tax found with amount = %r and type = %r"
+                        % (winbiz_item['ecr_tvatx'], scope))
             else:
                 tax = None
             if int(winbiz_item['ecr_tvatyp']) < 0:
@@ -207,10 +221,10 @@ class AccountWinbizImport(models.TransientModel):
                     incomplete.amount -= amount
                 else:
                     recto_line = prepare_line(
-                            name=winbiz_item[u'libellé'],
-                            amount=(-amount),
-                            account=account,
-                            originator_tax=originator_tax)
+                        name=winbiz_item[u'libellé'],
+                        amount=(-amount),
+                        account=account,
+                        originator_tax=originator_tax)
                     if winbiz_item['ecr_tvadc'] == 'd':
                         recto_line.tax = tax
                     lines.append(recto_line)
@@ -221,10 +235,10 @@ class AccountWinbizImport(models.TransientModel):
                     incomplete.amount += amount
                 else:
                     verso_line = prepare_line(
-                            name=winbiz_item[u'libellé'],
-                            amount=amount,
-                            account=account,
-                            originator_tax=originator_tax)
+                        name=winbiz_item[u'libellé'],
+                        amount=amount,
+                        account=account,
+                        originator_tax=originator_tax)
                     if winbiz_item['ecr_tvadc'] == 'c':
                         verso_line.tax = tax
                     lines.append(verso_line)
@@ -242,11 +256,11 @@ class AccountWinbizImport(models.TransientModel):
     @api.multi
     def _import_file(self):
         self.index = None
-        move_obj = self.env['account.move']
         data = self._parse_xls()
         data = self._standardise_data(data)
         for mv in data:
-            self.with_context(dont_create_taxes=True).write({'imported_move_ids': [(0, False, mv)]})
+            self.with_context(dont_create_taxes=True) \
+                .write({'imported_move_ids': [(0, False, mv)]})
 
     @api.multi
     def import_file(self):

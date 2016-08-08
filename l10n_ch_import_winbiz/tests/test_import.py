@@ -22,10 +22,12 @@ class TestImport(common.TransactionCase):
         account_obj = self.env['account.account']
         journal_obj = self.env['account.journal']
 
-        user_type = {
-                include_initial_balance:
-                self.env['account.account.type'].create({'include_initial_balance': include_initial_balance, 'name': 'dummy'})
-                    for include_initial_balance in (False, True)}
+        user_type = {}
+        for include_initial_balance in False, True:
+            user_type[include_initial_balance] = \
+                self.env['account.account.type'].create({
+                    'include_initial_balance': include_initial_balance,
+                    'name': 'dummy'})
 
         for code, include_initial_balance in [
                 ('1000', True),
@@ -62,14 +64,27 @@ class TestImport(common.TransactionCase):
                 'user_type_id': user_type[include_initial_balance].id,
                 'reconcile': True})
 
-        for code, winbiz_code in ('INV','v'), ('BILL','a'), ('MISC','d'), ('JS','s'), ( 'OJ', 'o'):
-                journal_obj.create({'name': 'dummy '+code, 'code': code, 'type':'general', 'winbiz_mapping': winbiz_code})
+        for code, winbiz_code in [
+                ('INV', 'v'),
+                ('BILL', 'a'),
+                ('OJ', 'o'),
+                ('JS', 's'),
+                ('MISC', 'd')]:
+            journal_obj.create({
+                'code': code,
+                'winbiz_mapping': winbiz_code,
+                'name': 'dummy '+code,
+                'type': 'general'})
 
         for code, amount, scope in [
                 ('310', 6.5, 'sale'), ('315', 6.5, 'purchase'),
                 ('400', 7.5, 'sale'), ('405', 7.5, 'purchase'),
                 ('410', 7.6, 'sale'), ('415', 7.6, 'purchase')]:
-            tax_obj.create({'name': code, 'amount': amount, 'price_include': True, 'type_tax_use': scope})
+            tax_obj.create({
+                'name': code,
+                'amount': amount,
+                'type_tax_use': scope,
+                'price_include': True})
 
     def test_import(self):
         def get_path(filename):
@@ -116,7 +131,8 @@ class TestImport(common.TransactionCase):
                 if ln.tax_line_id:
                     p(u"      originator tax is ‘%s’" % ln.tax_line_id.name)
                 if ln.tax_ids:
-                    p(u"      taxes = (‘%s’)" % u"’, ‘".join(ln.tax_ids.mapped('name')))
+                    p(u"      taxes = (‘%s’)" % u"’, ‘".join(
+                        ln.tax_ids.mapped('name')))
         temp.seek(0)
         diff = list(difflib.unified_diff(gold.readlines(), temp.readlines(),
                                          gold.name,        temp.name))
