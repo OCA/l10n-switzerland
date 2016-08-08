@@ -6,17 +6,30 @@ l10n_ch_import_winbiz
 
 This module adds the ability to import salary XML file from Winbiz software (www.winbiz.ch) 
 
+Installation
+============
+
+This module can be installed from the web interface. It depends on the python
+package xlrd though.
+
+
 Configuration
 =============
 
+No configuration is required to use this module.
 
 
 Usage
 =====
-In order to import your Winbiz Salary.txt 
-file you must complete the following requirements:
-* The accounts, analytical accounts used in the Winbiz file must be previously created into Odoo
-* The date of the entry will determine the period used in Odoo, so please ensure the period is created already.
+In order to import your Excel Spreadsheet you must complete the following requirements:
+* The accounts used in the WinBIZ file must have been previously created into
+  Odoo
+* The WinBIZ journals must also exist and have their WinBIZ one-letter codes
+  filled in into the ad-hoc field
+* The taxes must exist. They will be matched with WinBIZ data based on amount,
+  scope, and whether they are included in the price
+* The lines should be ordered by “N°” for best results
+* The export encoding should be “Windows Ansi - 1252” (default)
 
 
 Bug Tracker
@@ -34,7 +47,8 @@ Credits
 Contributors
 ------------
 
-* Vincent renaville <vincent.renaville@camptocamp.com>
+* Vincent Renaville <vincent.renaville@camptocamp.com>
+* Louis Bettens <lbe@open-net.ch>
 
 Maintainer
 ----------
