@@ -58,11 +58,17 @@ class TestImport(common.TransactionCase):
                 ('6207', False),
                 ('8100', False),
                 ]:
-            account_obj.create({
-                'name': 'dummy %s' % code,
-                'code': code,
-                'user_type_id': user_type[include_initial_balance].id,
-                'reconcile': True})
+            acc = account_obj.search([('code', '=', code)])
+            if acc:
+                account_obj.write({
+                    'user_type_id': user_type[include_initial_balance].id,
+                    'reconcile': True})
+            else:
+                account_obj.create({
+                    'name': 'dummy %s' % code,
+                    'code': code,
+                    'user_type_id': user_type[include_initial_balance].id,
+                    'reconcile': True})
 
         for code, winbiz_code in [
                 ('INV', 'v'),
@@ -70,11 +76,16 @@ class TestImport(common.TransactionCase):
                 ('OJ', 'o'),
                 ('JS', 's'),
                 ('MISC', 'd')]:
-            journal_obj.create({
-                'code': code,
-                'winbiz_mapping': winbiz_code,
-                'name': 'dummy '+code,
-                'type': 'general'})
+            journal = journal_obj.search([('code', '=', code)])
+            if journal:
+                journal.write({
+                    'winbiz_mapping': winbiz_code})
+            else:
+                journal_obj.create({
+                    'code': code,
+                    'name': 'dummy '+code,
+                    'type': 'general',
+                    'winbiz_mapping': winbiz_code})
 
         for code, amount, scope in [
                 ('310', 6.5, 'sale'), ('315', 6.5, 'purchase'),
