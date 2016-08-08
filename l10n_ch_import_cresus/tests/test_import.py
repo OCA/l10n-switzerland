@@ -3,9 +3,14 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import openerp.tests.common as common
-from openerp.modules import get_module_resource
+from openerp.modules import get_resource_path
+import logging
 from StringIO import StringIO
 import base64
+import difflib
+import tempfile
+
+_logger = logging.getLogger(__name__)
 
 
 class TestImport(common.TransactionCase):
@@ -42,32 +47,66 @@ class TestImport(common.TransactionCase):
     def test_import(self):
         journal_obj = self.env['account.journal']
         misc = journal_obj.search(
-            [('name', 'ilike', 'miscellaneous')], limit=1)
+            [('code', '=', 'MISC')], limit=1)
+        if not misc:
+            misc = journal_obj.create({
+                'code': 'MISC',
+                'name': 'dummy MISC',
+                'type': 'general'})
 
-        test_file_path = get_module_resource('l10n_ch_import_cresus',
-                                             'tests',
-                                             'cresus.txt')
-        buf = StringIO()
-        with open(test_file_path) as f:
-            base64.encode(f, buf)
-        contents = buf.getvalue()
-        buf.close()
+        def get_path(filename):
+            res = get_resource_path('l10n_ch_import_cresus', 'tests', filename)
+            return res
+
+        with open(get_path('input.csv')) as src:
+            buf = StringIO()
+            base64.encode(src, buf)
+            contents = buf.getvalue()
+            buf.close()
+
         wizard = self.env['account.cresus.import'].create({
             'journal_id': misc.id,
             'file': contents})
         wizard._import_file()
 
         res = wizard.imported_move_ids
-        self.assertEqual(len(res), 5)
         res.assert_balanced()
-        for l in res[0].line_ids:
-            self.assertEqual(l.analytic_account_id, self.reserve)
-        self.assertEqual(res[1].date, '2002-01-07')
-        self.assertEqual(res[2].date, '2002-01-07')
-        self.assertEqual(res[3].line_ids[0].account_id.code, '6642')
-        self.assertEqual(res[3].line_ids[0].debit, 15.0)
-        self.assertEqual(res[3].line_ids[0].credit, 0.0)
-        self.assertEqual(res[3].line_ids[1].account_id.code, '1010')
-        self.assertEqual(res[3].line_ids[1].debit, 0.0)
-        self.assertEqual(res[3].line_ids[1].credit, 15.0)
-        self.assertEqual(res[4].line_ids[1].tax_line_id, self.vat)
+
+        gold = open(get_path('golden-output.txt'))
+        temp = tempfile.NamedTemporaryFile(prefix='odoo-l10n_ch_import_cresus')
+
+        # Get a predictable representation that can be compared across runs
+        def p(u):
+            temp.write(u.encode('utf-8'))
+            temp.write('\n')
+
+        first = True
+        for mv in res:
+            if not first:
+                p(u"")
+            first = False
+            p(u"move ‘%s’" % mv.ref)
+            p(u"  (dated %s)" % mv.date)
+            p(u"  (in journal %s)" % mv.journal_id.code)
+            p(u"  with lines:")
+            for ln in mv.line_ids:
+                p(u"    line “%s”" % ln.name)
+                if ln.debit:
+                    p(u"      debit = %s" % ln.debit)
+                if ln.credit:
+                    p(u"      credit = %s" % ln.credit)
+                p(u"      account is ‘%s’" % ln.account_id.code)
+                if ln.tax_line_id:
+                    p(u"      originator tax is ‘%s’" % ln.tax_line_id.name)
+                if ln.tax_ids:
+                    p(u"      taxes = (‘%s’)" % u"’, ‘".join(
+                        ln.tax_ids.mapped('name')))
+        temp.seek(0)
+        diff = list(difflib.unified_diff(gold.readlines(), temp.readlines(),
+                                         gold.name,        temp.name))
+        gold.close()
+        temp.close()
+        if len(diff) > 2:
+            for i in diff:
+                _logger.error(i.rstrip())
+            self.fail("actual output doesn't match exptected output")
