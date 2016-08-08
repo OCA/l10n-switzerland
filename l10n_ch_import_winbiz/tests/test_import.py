@@ -20,13 +20,12 @@ class TestImport(common.TransactionCase):
 
         tax_obj = self.env['account.tax']
         account_obj = self.env['account.account']
+        journal_obj = self.env['account.journal']
 
         user_type = {
                 include_initial_balance:
-                self.env['account.account.type'].search(
-                    [('include_initial_balance',
-                        '=', include_initial_balance)],
-                    limit=1) for include_initial_balance in [False, True]}
+                self.env['account.account.type'].create({'include_initial_balance': include_initial_balance, 'name': 'dummy'})
+                    for include_initial_balance in (False, True)}
 
         for code, include_initial_balance in [
                 ('1000', True),
@@ -57,31 +56,19 @@ class TestImport(common.TransactionCase):
                 ('6207', False),
                 ('8100', False),
                 ]:
-            acc = account_obj.search([('code', '=', code)])
-            if acc:  # patch it within the transaction
-                acc.write({
-                    'user_type_id': user_type[include_initial_balance].id,
-                    'reconcile': True})
-            else:
-                acc = account_obj.create({
-                    'name': 'dummy %s' % code,
-                    'code': code,
-                    'user_type_id': user_type[include_initial_balance].id,
-                    'reconcile': True})
+            account_obj.create({
+                'name': 'dummy %s' % code,
+                'code': code,
+                'user_type_id': user_type[include_initial_balance].id,
+                'reconcile': True})
 
-        journal_obj = self.env['account.journal']
         for code, winbiz_code in ('INV','v'), ('BILL','a'), ('MISC','d'), ('JS','s'), ( 'OJ', 'o'):
-            journal = journal_obj.search([('code', '=', code)])
-            if journal:
-                journal.write({'winbiz_mapping': winbiz_code})
-            else:
                 journal_obj.create({'name': 'dummy '+code, 'code': code, 'type':'general', 'winbiz_mapping': winbiz_code})
 
         for code, amount, scope in [
                 ('310', 6.5, 'sale'), ('315', 6.5, 'purchase'),
                 ('400', 7.5, 'sale'), ('405', 7.5, 'purchase'),
                 ('410', 7.6, 'sale'), ('415', 7.6, 'purchase')]:
-            tax_obj.search([('name', '=', code)]).unlink()
             tax_obj.create({'name': code, 'amount': amount, 'price_include': True, 'type_tax_use': scope})
 
     def test_import(self):
