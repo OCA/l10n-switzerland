@@ -180,10 +180,10 @@ class AccountCresusImport(models.TransientModel):
 
     @api.multi
     def _import_file(self):
-        move_obj = self.env['account.move']
         data = self._parse_csv()
         data = self._standardise_data(data)
-        self.imported_move_ids = [move_obj.create(mv).id for mv in data]
+        for mv in data:
+            self.write({'imported_move_ids': [(0, False, mv)]})
 
     @api.multi
     def import_file(self):
