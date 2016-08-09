@@ -47,7 +47,7 @@ class AccountCresusImport(models.TransientModel):
         return move
 
     def prepare_line(self, name, debit_amount, credit_amount, account_code,
-                     cresus_tax_code, analytic_account_code):
+                     cresus_tax_code, analytic_account_code, tax_ids):
         account_obj = self.env['account.account']
         tax_obj = self.env['account.tax']
         analytic_account_obj = self.env['account.analytic.account']
@@ -73,6 +73,9 @@ class AccountCresusImport(models.TransientModel):
                 analytic_account = analytic_account_obj.search([
                     ('code', '=', analytic_account_code)], limit=1)
                 line['analytic_account_id'] = analytic_account.id
+
+        if tax_ids:
+            line['tax_ids'] = [(4, id, 0) for id in tax_ids]
         return line
 
     def _parse_csv(self):
@@ -136,6 +139,7 @@ class AccountCresusImport(models.TransientModel):
         journal_id = self.journal_id.id
         previous_pce = None
         previous_date = None
+        previous_tax_id = None
         lines = []
         for self.index, line_cresus in enumerate(data, 1):
             if previous_pce is not None and previous_pce != line_cresus['pce']:
@@ -154,23 +158,34 @@ class AccountCresusImport(models.TransientModel):
             verso_amount = 0.0
             if recto_amount < 0:
                 recto_amount, verso_amount = 0.0, -recto_amount
+
+            tax_ids = [previous_tax_id] if previous_tax_id is not None else []
+            previous_tax_id = None
             if line_cresus['debit'] != '...':
-                lines.append(self.prepare_line(
+                line = self.prepare_line(
                     name=line_cresus['ref'],
                     debit_amount=recto_amount,
                     credit_amount=verso_amount,
                     account_code=line_cresus['debit'],
                     cresus_tax_code=line_cresus['typtvat'],
-                    analytic_account_code=line_cresus['analytic_account']))
+                    analytic_account_code=line_cresus['analytic_account'],
+                    tax_ids=tax_ids)
+                lines.append(line)
+                if 'tax_line_id' in line:
+                    previous_tax_id = line['tax_line_id']
 
             if line_cresus['credit'] != '...':
-                lines.append(self.prepare_line(
+                line = self.prepare_line(
                     name=line_cresus['ref'],
                     debit_amount=verso_amount,
                     credit_amount=recto_amount,
                     account_code=line_cresus['credit'],
                     cresus_tax_code=line_cresus['typtvat'],
-                    analytic_account_code=line_cresus['analytic_account']))
+                    analytic_account_code=line_cresus['analytic_account'],
+                    tax_ids=tax_ids)
+                lines.append(line)
+                if 'tax_line_id' in line:
+                    previous_tax_id = line['tax_line_id']
 
         yield self.prepare_move(
             lines,
@@ -183,7 +198,8 @@ class AccountCresusImport(models.TransientModel):
         data = self._parse_csv()
         data = self._standardise_data(data)
         for mv in data:
-            self.write({'imported_move_ids': [(0, False, mv)]})
+            self.with_context(dont_create_taxes=True) \
+                .write({'imported_move_ids': [(0, False, mv)]})
 
     @api.multi
     def import_file(self):

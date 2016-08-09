@@ -5,6 +5,7 @@ move ‘4’
     line “Salt Total, (TVA)”
       credit = 186.55
       account is ‘1010’
+      taxes = (‘dummy VAT’)
     line “Salt, 7.6% de TVA (TVA)”
       debit = 13.17
       account is ‘2200’
