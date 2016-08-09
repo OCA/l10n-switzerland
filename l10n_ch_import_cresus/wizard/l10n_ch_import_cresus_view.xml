@@ -21,9 +21,9 @@
                     </page>
                     <page string="Import help">
                         <p>
-In order to import your 'Cresus Salaires' .txt file you must complete the following requirements:
-<ul><li>The accounts, analytical accounts used in the Cresus file must be previously created into Odoo.</li>
-<li>If the Cresus file uses VAT codes (i.e: IPI), please make sure you have indicated this code in the related Odoo tax (new field). Warning, the Odoo tax must be 'tax included'. If the tax does not exist you have to create it.</li>
+In order to import your 'Crésus Salaires' .txt file you must complete the following requirements:
+<ul><li>The accounts, analytical accounts used in the Crésus file must be previously created into Odoo.</li>
+<li>If the Crésus file uses VAT codes (i.e: IPI), please make sure you have indicated this code in the related Odoo tax (field: Crésus tax name). Warning, the Odoo tax must be 'tax included'. If the tax does not exist you have to create it.</li>
 <li>All PL accounts must have include_initial_balance = False (meaning: no balance brought forward in the new fiscal year) and all balance sheet accounts must have include_initial_balance = True.</li></ul>
                         </p>
                     </page>

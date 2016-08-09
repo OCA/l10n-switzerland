@@ -109,9 +109,9 @@ class AccountCresusImport(models.TransientModel):
                     yield line
 
     def _parse_date(self, date_string):
-        """Parse a date coming from Cresus and put it in the format used by Odoo.
+        """Parse a date coming from Crésus and put it in the format used by Odoo.
 
-           Both 01.01.70 and 01.01.1970 have been sighted in Cresus' output.
+           Both 01.01.70 and 01.01.1970 have been sighted in Crésus' output.
 
            :param date_string: cresus data
            :returns: a date string
@@ -131,7 +131,7 @@ class AccountCresusImport(models.TransientModel):
     def _standardise_data(self, data):
         """ split accounting lines where needed
 
-            Cresus writes one csv line per move when there are just two lines
+            Crésus writes one csv line per move when there are just two lines
             (take some money from one account and put all of it in another),
             and uses ellipses in more complex cases. What matters is the pce
             label, which is the same on all lines of a move.
@@ -210,7 +210,7 @@ class AccountCresusImport(models.TransientModel):
             self.write({
                 'state': 'error',
                 'report': 'Error (at row %s):\n%s' % (self.index, exc)})
-            return {'name': _('Accounting Cresus Import'),
+            return {'name': _('Accounting Crésus Import'),
                     'type': 'ir.actions.act_window',
                     'res_model': 'account.cresus.import',
                     'res_id': self.id,
