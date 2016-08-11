@@ -101,14 +101,12 @@ class TestImport(common.TransactionCase):
         def get_path(filename):
             res = get_resource_path('l10n_ch_import_winbiz', 'tests', filename)
             return res
-        input = open(get_path('input.xls'))
-        gold = open(get_path('golden-output.txt'))
-        temp = tempfile.NamedTemporaryFile(prefix='odoo-l10n_ch_import_winbiz')
 
-        buf = StringIO()
-        base64.encode(input, buf)
-        contents = buf.getvalue()
-        buf.close()
+        with open(get_path('input.xls')) as src:
+            buf = StringIO()
+            base64.encode(src, buf)
+            contents = buf.getvalue()
+            buf.close()
 
         wizard = self.env['account.winbiz.import'].create({
             'enable_account_based_line_merging': True,
@@ -117,6 +115,9 @@ class TestImport(common.TransactionCase):
 
         res = wizard.imported_move_ids
         res.assert_balanced()
+
+        gold = open(get_path('golden-output.txt'))
+        temp = tempfile.NamedTemporaryFile(prefix='odoo-l10n_ch_import_winbiz')
 
         # Get a predictable representation that can be compared across runs
         def p(u):
