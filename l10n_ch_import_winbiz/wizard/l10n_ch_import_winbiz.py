@@ -2,12 +2,9 @@
 # Copyright 2015 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import base64
-from xlrd import open_workbook, xldate_as_tuple
-import tempfile
 from openerp import models, fields, api, exceptions
 from openerp.tools.translate import _
-import datetime
+import importers
 
 
 class AccountWinbizImport(models.TransientModel):
@@ -29,56 +26,13 @@ class AccountWinbizImport(models.TransientModel):
     imported_move_ids = fields.Many2many(
         'account.move', 'import_winbiz_move_rel',
         string='Imported moves')
-
-    def _parse_xls(self):
-        """Parse stored Excel file.
-
-        Manage base 64 decoding.
-
-        :param imp_id: current importer id
-        :returns: generator
-
-        """
-        # We use tempfile in order to avoid memory error with large files
-        with tempfile.TemporaryFile() as src:
-            content = self.file
-            src.write(content)
-            with tempfile.NamedTemporaryFile() as decoded:
-                src.seek(0)
-                base64.decode(src, decoded)
-                decoded.seek(0)
-                wb = open_workbook(decoded.name, encoding_override='cp1252')
-                self.wb = wb
-                sheet = wb.sheet_by_index(0)
-
-                def vals(n):
-                    return [c.value for c in sheet.row(n)]
-                head = vals(0)
-                res = [dict(zip(head, vals(i)))
-                       for i in xrange(1, sheet.nrows)]
-                res.sort(key=lambda e: e[u'numéro'])
-                return res
-
-    def _parse_date(self, date):
-        """Parse a date coming from Excel.
-
-           :param date: cell value
-           :returns: datetime.date
-        """
-        if isinstance(date, basestring):
-            from babel import Locale
-            d, m, y = date.split('-')
-            d = int(d)
-            mapping = Locale('en').months['format']['abbreviated']
-            mapping = dict(zip(mapping.values(), mapping.keys()))
-            m = mapping[m]
-            y = 2000 + int(y)
-            return datetime.datetime(y, m, d)
-        else:
-            return datetime.datetime(*xldate_as_tuple(date, self.wb.datemode))
+    file_format= fields.Selection(string="File Format", selection=[
+        ('xls', "Excel spreadsheet"),
+        ('xml', "XML data")],
+        default='xls')
 
     @api.multi
-    def _standardise_data(self, data):
+    def _standardise_data(self, data, importer):
         """
         This function split one line of the spreadsheet into multiple lines.
         Winbiz just writes one line per move.
@@ -169,7 +123,7 @@ class AccountWinbizImport(models.TransientModel):
                 lines = []
                 incomplete = None
             previous_pce = winbiz_item[u'pièce']
-            previous_date = self._parse_date(winbiz_item[u'date'])
+            previous_date = importer.parse_date(winbiz_item[u'date'])
             journal = journal_obj.search(
                 [('winbiz_mapping', '=', winbiz_item[u'journal'])],
                 limit=1)
@@ -255,9 +209,9 @@ class AccountWinbizImport(models.TransientModel):
 
     @api.multi
     def _import_file(self):
-        self.index = None
-        data = self._parse_xls()
-        data = self._standardise_data(data)
+        importer = importers.getImporter(self.file_format)
+        data = importer.parse_input(self.file)
+        data = self._standardise_data(data, importer)
         for mv in data:
             self.with_context(dont_create_taxes=True) \
                 .write({'imported_move_ids': [(0, False, mv)]})
