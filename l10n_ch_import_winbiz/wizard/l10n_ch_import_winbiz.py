@@ -145,10 +145,11 @@ class AccountWinbizImport(models.TransientModel):
                 else:
                     assert tvatyp == 3
                     scope = 'purchase'
-                if winbiz_item['ecr_tvabn'] == 2:
+                tvabn = int(winbiz_item['ecr_tvabn'])
+                if tvabn == 2:
                     included = True
                 else:
-                    assert winbiz_item['ecr_tvabn'] == 1
+                    assert tvabn == 1
                     included = False
                 tax = tax_obj.search([
                     ('amount', '=', winbiz_item['ecr_tvatx']),
