@@ -13,6 +13,7 @@ from abc import ABCMeta, abstractmethod
 
 class BaseImporter:
     __metaclass__ = ABCMeta
+
     def parse_input(self, content):
         """Parse the data as received from the web form and split it into rows.
 
@@ -46,9 +47,11 @@ class BaseImporter:
            :returns: datetime.date
         """
 
+
 class XLSImporter(BaseImporter):
     def __init__(self):
         self.wb = None
+
     def _parse_input_decoded(self, decoded):
         self.wb = open_workbook(decoded.name, encoding_override='cp1252')
         sheet = self.wb.sheet_by_index(0)
@@ -73,6 +76,7 @@ class XLSImporter(BaseImporter):
         else:
             return datetime.datetime(*xldate_as_tuple(date, self.wb.datemode))
 
+
 class XMLImporter(BaseImporter):
     def _parse_input_decoded(self, decoded):
         tree = ET.parse(decoded.name)
@@ -81,6 +85,7 @@ class XMLImporter(BaseImporter):
             return [row.attrib for row in rows]
         else:
             return [{el.tag: el.text or '' for el in row} for row in rows]
+
     def parse_date(self, date):
         return datetime.datetime.strptime(date, '%Y-%m-%d')
 
