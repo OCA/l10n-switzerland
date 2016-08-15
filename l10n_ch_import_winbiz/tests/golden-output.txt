@@ -169,10 +169,10 @@ move ‘SAP01’
   (dated 2016-01-26)
   (in journal JS)
   with lines:
-    line “ Paiement salaire janvier”
+    line “Paiement salaire janvier”
       credit = 18910.8
       account is ‘1020’
-    line “ Paiement salaire janvier”
+    line “Paiement salaire janvier”
       debit = 18910.8
       account is ‘2000’
 
