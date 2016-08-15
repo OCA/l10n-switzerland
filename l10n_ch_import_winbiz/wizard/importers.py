@@ -8,10 +8,17 @@ import base64
 from xlrd import open_workbook, xldate_as_tuple
 import xml.etree.ElementTree as ET
 from babel import Locale
+from abc import ABCMeta, abstractmethod
 
 
-class BaseImporter(object):
+class BaseImporter:
+    __metaclass__ = ABCMeta
     def parse_input(self, content):
+        """Parse the data as received from the web form and split it into rows.
+
+           :param content: base64-encoded string
+           :returns: list(dict(name: value))
+        """
         # We use tempfile in order to avoid memory error with large files
         with tempfile.TemporaryFile() as src:
             src.write(content)
@@ -22,6 +29,22 @@ class BaseImporter(object):
                 res = self._parse_input_decoded(decoded)
         res.sort(key=lambda e: e[u'numéro'])
         return res
+
+    @abstractmethod
+    def _parse_input_decoded(self, decoded):
+        """Receive the base64-decoded data and split it into rows.
+
+           :param decoded: file object
+           :returns: list(dict(name: value))
+        """
+
+    @abstractmethod
+    def parse_date(self, date):
+        """Parse a date in the data.
+
+           :param date: value
+           :returns: datetime.date
+        """
 
 class XLSImporter(BaseImporter):
     def __init__(self):
