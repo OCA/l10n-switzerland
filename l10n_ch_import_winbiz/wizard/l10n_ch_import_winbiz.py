@@ -176,7 +176,7 @@ class AccountWinbizImport(models.TransientModel):
                     incomplete.amount -= amount
                 else:
                     recto_line = prepare_line(
-                        name=winbiz_item[u'libellé'],
+                        name=winbiz_item[u'libellé'].strip(),
                         amount=(-amount),
                         account=account,
                         originator_tax=originator_tax)
@@ -190,7 +190,7 @@ class AccountWinbizImport(models.TransientModel):
                     incomplete.amount += amount
                 else:
                     verso_line = prepare_line(
-                        name=winbiz_item[u'libellé'],
+                        name=winbiz_item[u'libellé'].strip(),
                         amount=amount,
                         account=account,
                         originator_tax=originator_tax)
