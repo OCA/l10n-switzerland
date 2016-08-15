@@ -4,7 +4,7 @@
 
 from openerp import models, fields, api, exceptions
 from openerp.tools.translate import _
-import importers
+from openerp.addons.l10n_ch_import_winbiz.utils import importers
 
 
 class AccountWinbizImport(models.TransientModel):
@@ -26,7 +26,7 @@ class AccountWinbizImport(models.TransientModel):
     imported_move_ids = fields.Many2many(
         'account.move', 'import_winbiz_move_rel',
         string='Imported moves')
-    file_format= fields.Selection(string="File Format", selection=[
+    file_format = fields.Selection(string="File Format", selection=[
         ('xls', "Excel spreadsheet"),
         ('xml', "XML data")],
         default='xls')
@@ -129,7 +129,7 @@ class AccountWinbizImport(models.TransientModel):
                 limit=1)
             if not journal:
                 raise exceptions.MissingError(
-                    u"No journal ‘%s’"
+                    _(u"No journal ‘%s’")
                     % winbiz_item[u'journal'])
             previous_journal = journal
 
@@ -157,7 +157,7 @@ class AccountWinbizImport(models.TransientModel):
                     ('type_tax_use', '=', scope)], limit=1)
                 if not tax:
                     raise exceptions.MissingError(
-                        "No tax found with amount = %r and type = %r"
+                        _("No tax found with amount = %r and type = %r")
                         % (winbiz_item['ecr_tvatx'], scope))
             else:
                 tax = None

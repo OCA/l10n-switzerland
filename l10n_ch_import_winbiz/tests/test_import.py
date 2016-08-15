@@ -156,9 +156,12 @@ class TestImport(common.TransactionCase):
 
     def test_import_xls(self):
         self._test_import('input.xls', 'xls')
+
     def test_import_xml_element_oriented(self):
         self._test_import('input.element-oriented.xml', 'xml')
+
     def test_import_xml_attribute_oriented(self):
         self._test_import('input.attribute-oriented.xml', 'xml')
+
     def test_import_xml_raw_attribute_oriented(self):
         self._test_import('input.attribute-oriented.raw.xml', 'xml')

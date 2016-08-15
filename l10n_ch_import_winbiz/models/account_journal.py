@@ -5,7 +5,7 @@
 from openerp import models, fields
 
 
-class account_journal(models.Model):
+class AccountJournal(models.Model):
     _inherit = "account.journal"
 
     winbiz_mapping = fields.Char(string='WinBIZ journal code')
