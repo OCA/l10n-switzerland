@@ -27,7 +27,7 @@ class BaseImporter:
                 base64.decode(src, decoded)
                 decoded.seek(0)
                 res = self._parse_input_decoded(decoded)
-        res.sort(key=lambda e: e[u'numéro'])
+        res.sort(key=lambda e: int(e[u'numéro']))
         return res
 
     @abstractmethod
