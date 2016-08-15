@@ -80,7 +80,7 @@ class XMLImporter(BaseImporter):
         if len(rows[0].attrib):
             return [row.attrib for row in rows]
         else:
-            return [{el.tag: el.text for el in row} for row in rows]
+            return [{el.tag: el.text or '' for el in row} for row in rows]
     def parse_date(self, date):
         return datetime.datetime.strptime(date, '%Y-%m-%d')
 
