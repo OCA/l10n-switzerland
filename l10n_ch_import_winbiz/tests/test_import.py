@@ -97,12 +97,12 @@ class TestImport(common.TransactionCase):
                 'type_tax_use': scope,
                 'price_include': True})
 
-    def test_import(self):
+    def _test_import(self, input_file, input_format):
         def get_path(filename):
             res = get_resource_path('l10n_ch_import_winbiz', 'tests', filename)
             return res
 
-        with open(get_path('input.xls')) as src:
+        with open(get_path(input_file)) as src:
             buf = StringIO()
             base64.encode(src, buf)
             contents = buf.getvalue()
@@ -110,7 +110,8 @@ class TestImport(common.TransactionCase):
 
         wizard = self.env['account.winbiz.import'].create({
             'enable_account_based_line_merging': True,
-            'file': contents})
+            'file': contents,
+            'file_format': input_format})
         wizard._import_file()
 
         res = wizard.imported_move_ids
@@ -152,3 +153,12 @@ class TestImport(common.TransactionCase):
             for i in diff:
                 _logger.error(i.rstrip())
             self.fail("actual output doesn't match exptected output")
+
+    def test_import_xls(self):
+        self._test_import('input.xls', 'xls')
+    def test_import_xml_element_oriented(self):
+        self._test_import('input.element-oriented.xml', 'xml')
+    def test_import_xml_attribute_oriented(self):
+        self._test_import('input.attribute-oriented.xml', 'xml')
+    def test_import_xml_raw_attribute_oriented(self):
+        self._test_import('input.attribute-oriented.raw.xml', 'xml')
