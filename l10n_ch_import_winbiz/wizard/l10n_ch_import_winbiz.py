@@ -7,6 +7,62 @@ from openerp.tools.translate import _
 from openerp.addons.l10n_ch_import_winbiz.utils import importers
 
 
+def prepare_move(lines, journal, date, ref):
+    return {'line_ids': [(0, 0, dict(ln)) for ln in lines],
+            'journal_id': journal.id,
+            'date': date,
+            'ref': ref}
+
+
+def account_line_merge(lines):
+    lines_orig = lines
+    lines = [ln for ln in lines
+             if ln.account.user_type_id.include_initial_balance]
+    lines.sort(key=lambda ln: ln.account.code)
+    to_remove = []
+    previous = None
+    for current in lines:
+        if previous is not None \
+                and previous.account == current.account:
+            previous.amount += current.amount
+            to_remove.append(current)
+        else:
+            previous = current
+
+    lines = lines_orig
+    for elem in to_remove:
+        lines.remove(elem)
+    return lines
+
+
+class LineIntermediate(object):
+    '''has a single ``amount`` attribute that's negative for debit, but
+    can be converted into a dict for the ORM ``create()`` with
+    ``dict(self)``
+    '''
+    def __init__(self, name, account, amount=0,
+                 tax=None, originator_tax=None):
+        self.name = name
+        self.account = account
+        self.amount = amount
+        self.tax = tax
+        self.originator_tax = originator_tax
+
+    def __iter__(self):
+        yield 'name', self.name
+        yield 'account_id', self.account.id
+        if self.amount < 0:
+            yield 'debit', -self.amount
+        else:
+            yield 'credit', self.amount
+        if self.tax:
+            yield 'tax_ids', [(4, self.tax.id, 0)]
+        if self.originator_tax:
+            yield 'tax_line_id', self.originator_tax.id
+
+prepare_line = LineIntermediate
+
+
 class AccountWinbizImport(models.TransientModel):
     _name = 'account.winbiz.import'
     _description = 'Import Accounting Winbiz'
@@ -49,65 +105,12 @@ class AccountWinbizImport(models.TransientModel):
                     _("No account with code %s") % code)
             return res
 
-        def prepare_move(lines, journal, date, ref):
-            return {'line_ids': [(0, 0, dict(ln)) for ln in lines],
-                    'journal_id': journal.id,
-                    'date': date,
-                    'ref': ref}
-
-        def account_line_merge(lines):
-            lines_orig = lines
-            lines = [ln for ln in lines
-                     if ln.account.user_type_id.include_initial_balance]
-            lines.sort(key=lambda ln: ln.account.code)
-            to_remove = []
-            previous = None
-            for current in lines:
-                if previous is not None \
-                        and previous.account == current.account:
-                    previous.amount += current.amount
-                    to_remove.append(current)
-                else:
-                    previous = current
-
-            lines = lines_orig
-            for elem in to_remove:
-                lines.remove(elem)
-            return lines
-
         if self.enable_account_based_line_merging:
-            prepare_move_orig = prepare_move
-
-            def prepare_move(lines, journal, date, ref):
-                return prepare_move_orig(account_line_merge(lines),
-                                         journal, date, ref)
-
-        class LineIntermediate(object):
-            '''has a single ``amount`` attribute that's negative for debit, but
-            can be converted into a dict for the ORM ``create()`` with
-            ``dict(self)``
-            '''
-            def __init__(self, name, account, amount=0,
-                         tax=None, originator_tax=None):
-                self.name = name
-                self.account = account
-                self.amount = amount
-                self.tax = tax
-                self.originator_tax = originator_tax
-
-            def __iter__(self):
-                yield 'name', self.name
-                yield 'account_id', self.account.id
-                if self.amount < 0:
-                    yield 'debit', -self.amount
-                else:
-                    yield 'credit', self.amount
-                if self.tax:
-                    yield 'tax_ids', [(4, self.tax.id, 0)]
-                if self.originator_tax:
-                    yield 'tax_line_id', self.originator_tax.id
-
-        prepare_line = LineIntermediate
+            my_prepare_move = (lambda lines, journal, date, ref:
+                               prepare_move(account_line_merge(lines),
+                                            journal, date, ref))
+        else:
+            my_prepare_move = prepare_move
 
         # loop
         incomplete = None
@@ -118,8 +121,8 @@ class AccountWinbizImport(models.TransientModel):
         lines = []
         for self.index, winbiz_item in enumerate(data, 1):
             if previous_pce not in (None, winbiz_item[u'pièce']):
-                yield prepare_move(lines, previous_journal, previous_date,
-                                   ref=previous_pce)
+                yield my_prepare_move(lines, previous_journal, previous_date,
+                                      ref=previous_pce)
                 lines = []
                 incomplete = None
             previous_pce = winbiz_item[u'pièce']
@@ -205,8 +208,8 @@ class AccountWinbizImport(models.TransientModel):
                 assert incomplete is None
                 incomplete = recto_line
 
-        yield prepare_move(lines, previous_journal, previous_date,
-                           ref=previous_pce)
+        yield my_prepare_move(lines, previous_journal, previous_date,
+                              ref=previous_pce)
 
     @api.multi
     def _import_file(self):
