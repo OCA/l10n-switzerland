@@ -195,6 +195,7 @@ class AccountCresusImport(models.TransientModel):
 
     @api.multi
     def _import_file(self):
+        self.index = 0
         data = self._parse_csv()
         data = self._standardise_data(data)
         for mv in data:
