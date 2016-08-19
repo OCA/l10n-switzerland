@@ -52,8 +52,8 @@ Credits
 Contributors
 ------------
 
-* Vincent Renaville <vincent.renaville@camptocamp.com>
 * Louis Bettens <lbe@open-net.ch>
+* Vincent Renaville <vincent.renaville@camptocamp.com>
 
 Maintainer
 ----------
