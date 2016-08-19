@@ -26,8 +26,6 @@ In order to import your 'Crésus Salaires' .txt file you must complete the follo
 
 * If the Crésus file uses VAT codes (i.e: IPI), please make sure you have indicated this code in the related Odoo tax (field : Crésus tax name). Warning, the Odoo tax must be 'tax included'. If the tax does not exist you have to create it.
 
-* All PL accounts must have include\_initial\_balance = False (meaning: no balance brought forward in the new fiscal year) and all balance sheet accounts must have include\_initial\_balance = True.
-
 Known issues / Roadmap
 ======================
 
