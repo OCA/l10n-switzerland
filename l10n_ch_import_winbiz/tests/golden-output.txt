@@ -1,0 +1,246 @@
+move ‘BA-0020’
+  (dated 2016-04-13)
+  (in journal MISC)
+  with lines:
+    line “Service industriel, eau + chauffage”
+      debit = 327.0
+      account is ‘4412’
+      taxes = (‘315’)
+    line “Frais de publicité”
+      debit = 356.8
+      account is ‘4600’
+      taxes = (‘315’)
+    line “Don au centre sportif”
+      debit = 150.0
+      account is ‘4590’
+    line “Téléphone 03.98”
+      debit = 559.91
+      account is ‘4511’
+      taxes = (‘315’)
+    line “TVA Fournitures de bureau”
+      debit = 103.75
+      account is ‘1061’
+      originator tax is ‘315’
+    line “Fournitures de bureau”
+      debit = 352.54
+      account is ‘4400’
+      taxes = (‘315’)
+    line “XYZ SA, ass. mobilier”
+      debit = 650.0
+      account is ‘4300’
+    line “Paiements divers”
+      credit = 2500.0
+      account is ‘1020’
+
+move ‘CA-0015’
+  (dated 2016-03-15)
+  (in journal BILL)
+  with lines:
+    line “Boissons”
+      credit = 25.7
+      account is ‘1000’
+    line “Boissons”
+      debit = 25.7
+      account is ‘4210’
+
+move ‘FO’
+  (dated 2016-02-15)
+  (in journal BILL)
+  with lines:
+    line “TVA Achat vêtements travail”
+      debit = 3.05
+      account is ‘1061’
+      originator tax is ‘315’
+    line “Achat vêtements travail”
+      credit = 50.0
+      account is ‘2000’
+    line “Achat vêtements travail”
+      debit = 46.95
+      account is ‘4095’
+      taxes = (‘315’)
+
+move ‘4’
+  (dated 2016-02-12)
+  (in journal INV)
+  with lines:
+    line “Paiement débiteur n° 4 de Karro Bastien La Vallée”
+      credit = 144.3
+      account is ‘1050’
+    line “Paiement débiteur n° 4 de Karro Bastien La Vallée”
+      debit = 144.3
+      account is ‘1020’
+
+move ‘1001’
+  (dated 2016-02-02)
+  (in journal INV)
+  with lines:
+    line “TVA Facture n° 1001 à Karro Bastien La Vallée: Support Simibox WT / WB / EWT”
+      credit = 10.2
+      account is ‘2010’
+      originator tax is ‘410’
+    line “Facture n° 1001 à Karro Bastien La Vallée: Support Simibox WT / WB / EWT”
+      credit = 134.1
+      account is ‘6207’
+      taxes = (‘410’)
+    line “Facture n° 1001 à Karro Bastien La Vallée: Support Simibox WT / WB / EWT”
+      debit = 144.3
+      account is ‘1050’
+
+move ‘SAL01’
+  (dated 2016-01-31)
+  (in journal JS)
+  with lines:
+    line “Cotisation LPP fixe Janvier”
+      credit = 1535.0
+      account is ‘5472’
+    line “Cotisation AANP secteur A0 Janvier”
+      credit = 265.2
+      account is ‘5700’
+    line “Cotisation PC Famille Janvier”
+      credit = 13.25
+      account is ‘5700’
+    line “Cotisation AC Janvier”
+      credit = 243.1
+      account is ‘5700’
+    line “Cotisation AVS Janvier”
+      credit = 1132.65
+      account is ‘5700’
+    line “Salaire net Janvier”
+      credit = 18910.8
+      account is ‘2000’
+    line “Salaire brut Janvier”
+      debit = 22100.0
+      account is ‘4000’
+
+move ‘SAL01’
+  (dated 2016-01-31)
+  (in journal JS)
+  with lines:
+    line “Corzo Jean: Retenue LPP coordonnée Janvier”
+      credit = 150.75
+      account is ‘4055’
+    line “Corzo Jean: Retenue AC Janvier”
+      credit = 60.0
+      account is ‘4051’
+    line “Corzo Jean: Retenue AVS Janvier”
+      credit = 202.0
+      account is ‘4051’
+    line “Corzo Jean: Salaire net Janvier”
+      credit = 3587.25
+      account is ‘2000’
+    line “Corzo Jean: Salaire brut Janvier”
+      debit = 4000.0
+      account is ‘4000’
+
+move ‘’
+  (dated 2016-01-31)
+  (in journal MISC)
+  with lines:
+    line “TVA Ventes du mois”
+      credit = 4360.45
+      account is ‘2010’
+      originator tax is ‘400’
+    line “Ventes du mois”
+      credit = 58139.55
+      account is ‘6200’
+      taxes = (‘400’)
+    line “Ventes du mois”
+      debit = 62500.0
+      account is ‘1010’
+    line “Eau minérale”
+      credit = 12.7
+      account is ‘1000’
+    line “Eau minérale”
+      debit = 12.7
+      account is ‘4210’
+
+move ‘SAP01’
+  (dated 2016-01-28)
+  (in journal JS)
+  with lines:
+    line “Corzo Jean:  Paiement salaire janvier”
+      credit = 3587.25
+      account is ‘1020’
+    line “Corzo Jean:  Paiement salaire janvier”
+      debit = 3587.25
+      account is ‘2000’
+
+move ‘SAP01’
+  (dated 2016-01-26)
+  (in journal JS)
+  with lines:
+    line “Paiement salaire janvier”
+      credit = 18910.8
+      account is ‘1020’
+    line “Paiement salaire janvier”
+      debit = 18910.8
+      account is ‘2000’
+
+move ‘CA-0001’
+  (dated 2016-01-10)
+  (in journal BILL)
+  with lines:
+    line “Frais de port”
+      credit = 50.0
+      account is ‘1000’
+    line “Frais de port”
+      debit = 50.0
+      account is ‘4510’
+
+move ‘SOLDINIT’
+  (dated 2016-01-01)
+  (in journal OJ)
+  with lines:
+    line “Solde initial capital”
+      credit = 50000.0
+      account is ‘2200’
+    line “Solde initial capital”
+      debit = 50000.0
+      account is ‘8100’
+    line “Solde initial passifs transitoires”
+      credit = 2500.0
+      account is ‘2091’
+    line “Solde initial passifs transitoires”
+      debit = 2500.0
+      account is ‘8100’
+    line “Solde initial véhicules”
+      credit = 5000.0
+      account is ‘8100’
+    line “Solde initial véhicules”
+      debit = 5000.0
+      account is ‘1120’
+    line “Solde initial poste”
+      credit = 10000.0
+      account is ‘8100’
+    line “Solde initial poste”
+      debit = 10000.0
+      account is ‘1010’
+    line “Solde initial débiteurs”
+      credit = 15000.0
+      account is ‘8100’
+    line “Solde initial débiteurs”
+      debit = 15000.0
+      account is ‘1050’
+
+move ‘SOLDINIT’
+  (dated 2016-01-01)
+  (in journal OJ)
+  with lines:
+    line “Solde initial fournisseurs”
+      credit = 2750.0
+      account is ‘2000’
+    line “Solde initial fournisseurs”
+      debit = 2750.0
+      account is ‘8100’
+    line “Solde initial banque”
+      credit = 25000.0
+      account is ‘8100’
+    line “Solde initial banque”
+      debit = 25000.0
+      account is ‘1020’
+    line “Solde initial caisse”
+      credit = 250.0
+      account is ‘8100’
+    line “Solde initial caisse”
+      debit = 250.0
+      account is ‘1000’

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_journal_form" model="ir.ui.view">
+        <field name="name">account.winbiz.mapping.form</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='advanced_settings']/group" position="inside">
+                <group string="WinBIZ" name="winbiz">
+                    <field name="winbiz_mapping"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_account_bank_journal_tree" model="ir.ui.view">
+        <field name="name">account.journal.tree</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_bank_journal_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="winbiz_mapping"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
