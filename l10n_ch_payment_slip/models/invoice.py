@@ -13,6 +13,15 @@ class AccountMoveLine(models.Model):
                                        string='Payment Slips',
                                        readonly=True)
 
+    # Adding an index on invoice_id for the account.move.line.
+    # The goal is to optimize the related field on payment_slip,
+    # as updating the stored value will trigger a:
+    #     self.env['account.move.line'].search([('invoice_id', '=', [xxx])])
+    # for each invoice validation.
+    invoice_id = fields.Many2one(
+        'account.invoice', oldname="invoice", index=True
+    )
+
 
 class AccountInvoice(models.Model):
     """Inherit account.invoice in order to add bvr
