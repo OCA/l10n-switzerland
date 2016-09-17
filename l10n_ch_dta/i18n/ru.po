@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-26 16:08+0000\n"
-"PO-Revision-Date: 2016-09-16 21:46+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/fr/)\n"
+"PO-Revision-Date: 2015-09-04 14:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Russian (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:553
@@ -86,17 +86,17 @@ msgstr ""
 #. module: l10n_ch_dta
 #: view:create.dta.wizard:0
 msgid "DTA Generation"
-msgstr "Génération du fichier DTA"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: view:res.partner.bank:0
 msgid "DTA options"
-msgstr "Options de DTA"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: field:payment.order,dta_ids:0
 msgid "unknown"
-msgstr "unknown"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: model:ir.model,name:l10n_ch_dta.model_create_dta_wizard
@@ -138,7 +138,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: model:ir.model,name:l10n_ch_dta.model_payment_order
 msgid "Payment Order"
-msgstr "Ordre de Paiement"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:301
@@ -190,7 +190,7 @@ msgstr ""
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:733
 #, python-format
 msgid "Error"
-msgstr "Erreur"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:241
@@ -203,12 +203,12 @@ msgstr ""
 #. module: l10n_ch_dta
 #: field:res.partner.bank,dta_code:0
 msgid "DTA code"
-msgstr "code DTA"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: model:ir.model,name:l10n_ch_dta.model_res_partner_bank
 msgid "Bank Accounts"
-msgstr "Comptes bancaires"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:283
@@ -222,7 +222,7 @@ msgstr ""
 #: view:create.dta.wizard:0
 #: model:ir.actions.act_window,name:l10n_ch_dta.action_dta_create
 msgid "Create DTA"
-msgstr "Créer DTA"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:400
@@ -245,4 +245,4 @@ msgstr ""
 #. module: l10n_ch_dta
 #: view:create.dta.wizard:0
 msgid "Cancel"
-msgstr "Annuler"
+msgstr "Отменена"
