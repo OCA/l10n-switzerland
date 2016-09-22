@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="winbiz_move_line_importer_form" model="ir.ui.view">
+        <field name="name">Accounting WinBIZ Import</field>
+        <field name="model">account.winbiz.import</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <div>
+                        <field name="state" invisible="1"/>
+                        <field name="file" class="oe_inline"/>
+                    </div>
+                </group>
+                <group>
+                    <field name="file_format"/>
+                    <field name="company_id"/>
+                    <field name="enable_account_based_line_merging"/>
+                </group>
+                <notebook>
+                    <page string="Report">
+                        <field name="report" nolabel="1" colspan="4"/>
+                    </page>
+                    <page string="Import help">
+                 In order to import your Excel Spreadsheet you must complete the following requirements:
+                        <ul>
+                            <li> The accounts used in the WinBIZ file must have been previously created into Odoo </li>
+                            <li> The WinBIZ journals must also exist and have their WinBIZ one-letter codes filled in into the ad-hoc field </li>
+                            <li> The taxes must exist. They will be matched with WinBIZ data based on amount, scope, and whether they are included in the price </li>
+                            <li> The lines should be ordered by “N°” for best results </li>
+                            <li> The export encoding should be “Windows Ansi - 1252” (default) </li>
+                        </ul>
+                    </page>
+                </notebook>
+                <footer>
+                    <button
+                        name="import_file"
+                        type="object"
+                        states="draft"
+                        string="Import file"
+                        class="oe_highlight"
+                    />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

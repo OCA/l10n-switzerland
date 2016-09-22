@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.actions.act_window" id="action_account_winbiz_import">
+        <field name="name">Import Move lines</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.winbiz.import</field>
+        <field name="domain"/>
+        <field name="view_type">form</field>
+        <field name="target">new</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="winbiz_move_line_importer_form"/>
+    </record>
+    <menuitem
+        icon="STOCK_EXECUTE"
+        name="Accounting WinBIZ Import"
+        action="action_account_winbiz_import"
+        id="menu_account_winbiz_import"
+        parent="account.menu_finance_entries"
+        sequence="110"
+    />
+</odoo>
