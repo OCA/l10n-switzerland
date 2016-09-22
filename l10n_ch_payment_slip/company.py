@@ -67,6 +67,18 @@ class ResCompany(models.Model):
         'BVR scan line letter spacing'
     )
 
+    bvr_amount_line_horz = fields.Float(
+        'BVR horiz. position for amount line (inch)',
+        help='Horiz. position in inch for amount line',
+        default=0.00
+    )
+
+    bvr_amount_line_vert = fields.Float(
+        'BVR vert. position for amount line (inch)',
+        help='Vert. position in inch for amount line',
+        default=0.00,
+    )
+
     merge_mode = fields.Selection(
         [('in_memory', 'Merge Slips in Memory, faster but can exhaust memory'),
          ('on_disk', 'Merge Slips on Disk, slower but safer')],
