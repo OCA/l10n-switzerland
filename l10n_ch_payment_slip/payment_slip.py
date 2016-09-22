@@ -472,6 +472,7 @@ class PaymentSlip(models.Model):
         :type com_partner: :py:class:`openerp.models.Model`
 
         """
+
         x, y = initial_position
         x += print_settings.bvr_add_horz * inch
         y += print_settings.bvr_add_vert * inch
@@ -480,10 +481,30 @@ class PaymentSlip(models.Model):
         text.setFont(font.name, font.size)
         text.textOut(com_partner.name)
         text.moveCursor(0.0, font.size)
-        for line in com_partner.contact_address.split("\n"):
-            if not line:
-                continue
-            text.textLine(line)
+        pt_cpny_add = print_settings.bvr_print_cpny_address
+        
+        if pt_cpny_add == 'full':
+            for line in com_partner.contact_address.split("\n"):
+                if not line:
+                    continue
+                
+                text.textLine(line)
+        else:
+            city_line = (com_partner.zip or '') + ' ' + (com_partner.city or '') + ' ' + (com_partner.state_id.code or '')
+            if pt_cpny_add == 'first_line_only':
+                if com_partner.street:
+                    line = com_partner.street
+                    text.textLine(line)
+                    
+                text.textLine(city_line)
+                
+            if pt_cpny_add == 'second_line_only':
+                if com_partner.street2:
+                    line = com_partner.street2
+                    text.textLine(line)
+         
+                text.textLine(city_line)
+            
         canvas.drawText(text)
 
     @api.multi
@@ -556,6 +577,36 @@ class PaymentSlip(models.Model):
             if not line:
                 continue
             text.textLine(line)
+        canvas.drawText(text)
+
+    @api.model
+    def _draw_bank_zip_city(self, canvas, print_settings, initial_position, font, bank):
+        """Draw bank number on canvas
+
+        :param canvas: payment slip reportlab component to be drawn
+        :type canvas: :py:class:`reportlab.pdfgen.canvas.Canvas`
+
+        :param print_settings: layouts print setting
+        :type print_settings: :py:class:`PaymentSlipSettings` or subclass
+
+        :para initial_position: tuple of coordinate (x, y)
+        :type initial_position: tuple
+
+        :param font: font to use
+        :type font: :py:class:`FontMeta`
+
+        :param bank: bank record
+        :type bank: :py:class:`openerp.model.Models`
+
+        """
+        x, y = initial_position
+        x += print_settings.bvr_delta_horz * inch
+        y += print_settings.bvr_delta_vert * inch
+        text = canvas.beginText()
+        text.setTextOrigin(x, y)
+        text.setFont(font.name, font.size)
+        line = (bank.zip or '') + ' ' + (bank.city or '')
+        text.textLine(line)
         canvas.drawText(text)
 
     @api.model
@@ -778,7 +829,7 @@ class PaymentSlip(models.Model):
             self._draw_background(canvas, print_settings)
             canvas.setFillColorRGB(*self._fill_color)
             if a4:
-                initial_position = (0.05 * inch,  4.50 * inch)
+                initial_position = (0.05 * inch, 4.50 * inch)
                 self._draw_description_line(canvas,
                                             print_settings,
                                             initial_position,
@@ -786,9 +837,9 @@ class PaymentSlip(models.Model):
             if invoice.partner_bank_id.print_partner:
                 if (invoice.partner_bank_id.print_account or
                         invoice.partner_bank_id.bvr_adherent_num):
-                    initial_position = (0.05 * inch,  3.30 * inch)
+                    initial_position = (0.05 * inch, 3.30 * inch)
                 else:
-                    initial_position = (0.05 * inch,  3.75 * inch)
+                    initial_position = (0.05 * inch, 3.75 * inch)
                 self._draw_address(canvas, print_settings, initial_position,
                                    default_font, company.partner_id)
                 if (invoice.partner_bank_id.print_account or
@@ -829,6 +880,17 @@ class PaymentSlip(models.Model):
                                 (2.45 * inch, 3.75 * inch),
                                 default_font,
                                 bank_acc.bank)
+            if invoice.partner_bank_id.print_bank_zip:
+                self._draw_bank_zip_city(canvas,
+                                print_settings,
+                                (0.05 * inch, 3.60 * inch),
+                                default_font,
+                                bank_acc.bank)
+                self._draw_bank_zip_city(canvas,
+                                print_settings,
+                                (2.45 * inch, 3.60 * inch),
+                                default_font,
+                                bank_acc.bank)
             if invoice.partner_bank_id.print_account:
                 self._draw_bank_account(canvas,
                                         print_settings,
@@ -853,7 +915,7 @@ class PaymentSlip(models.Model):
                                   self.reference)
             self._draw_scan_line(canvas,
                                  print_settings,
-                                 (8.26 * inch - 4/10 * inch, 4/6 * inch),
+                                 (8.26 * inch - 4 / 10 * inch, 4 / 6 * inch),
                                  scan_font)
             self._draw_hook(canvas, print_settings)
             canvas.showPage()

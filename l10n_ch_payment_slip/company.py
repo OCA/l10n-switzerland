@@ -75,3 +75,17 @@ class ResCompany(models.Model):
         default="in_memory"
     )
     bvr_background = fields.Boolean('Insert BVR background ?')
+    
+    bvr_hide_cpny_country = fields.Boolean(
+        'BVR hide company country'
+    )
+    
+    bvr_print_cpny_address = fields.Selection(
+        string='BVR display company address',
+        selection=((
+            ('full', 'Full'),
+            ('first_line_only', 'First line only'),
+            ('second_line_only', 'Second line only'),
+            ('hide', 'Hide address'))),
+        default='full'
+    )
