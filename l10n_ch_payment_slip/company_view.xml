@@ -18,6 +18,8 @@
                             <field name="bvr_add_horz"/>
                             <field name="bvr_add_vert"/>
                             <field name="bvr_background"/>
+                            <field name="bvr_amount_line_horz"/>
+                            <field name="bvr_amount_line_vert"/>
                             <field name="merge_mode"/>
 	                    	<field name="bvr_print_cpny_address"/>
 							<field name="bvr_hide_cpny_country"/>

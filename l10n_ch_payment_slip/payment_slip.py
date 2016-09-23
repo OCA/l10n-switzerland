@@ -715,8 +715,8 @@ class PaymentSlip(models.Model):
 
         """
         x, y = initial_position
-        x += print_settings.bvr_delta_horz * inch
-        y += print_settings.bvr_delta_vert * inch
+        x += (print_settings.bvr_delta_horz * inch + print_settings.bvr_amount_line_horz * inch)
+        y += (print_settings.bvr_delta_vert * inch + print_settings.bvr_amount_line_vert * inch)
         indice = 0
         canvas.setFont(font.name, font.size)
         for car in amount[::-1]:
