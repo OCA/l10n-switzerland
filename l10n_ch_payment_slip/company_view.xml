@@ -21,7 +21,6 @@
 						<field name="bvr_amount_line_horz"/>
 						<field name="bvr_amount_line_vert"/>
 						<field name="merge_mode"/>
-						<field name="bvr_print_cpny_address"/>
 					</group>
 				</page>
 			</xpath>

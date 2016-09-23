@@ -481,32 +481,16 @@ class PaymentSlip(models.Model):
         text.setFont(font.name, font.size)
         text.textOut(com_partner.name)
         text.moveCursor(0.0, font.size)
-        pt_cpny_add = print_settings.bvr_print_cpny_address
+
         address_lines = com_partner.contact_address.split("\n")
         if com_partner.country_id:
             del address_lines[-1]
         
-        if pt_cpny_add == 'full':
-            for line in address_lines:
-                if not line:
-                    continue
-                
-                text.textLine(line)
-        else:
-            city_line = (com_partner.zip or '') + ' ' + (com_partner.city or '') + ' ' + (com_partner.state_id.code or '')
-            if pt_cpny_add == 'first_line_only':
-                if com_partner.street:
-                    line = com_partner.street
-                    text.textLine(line)
-                    
-                text.textLine(city_line)
-                
-            if pt_cpny_add == 'second_line_only':
-                if com_partner.street2:
-                    line = com_partner.street2
-                    text.textLine(line)
-         
-                text.textLine(city_line)
+        for line in address_lines:
+            if not line:
+                continue
+            
+            text.textLine(line)
             
         canvas.drawText(text)
 
