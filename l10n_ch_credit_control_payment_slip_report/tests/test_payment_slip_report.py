@@ -107,8 +107,8 @@ class TestPaymentSlipReport(test_common.TransactionCase):
              'partner_id': self.env.ref('base.res_partner_12').id,
              'channel': 'email',
              'date':  '2000-01-01',
-             'balance_due': 100.00,
-             'amount_due': 100.00,
+             'balance_due': 862.50,
+             'amount_due': 862.50,
              'policy_level_id': lvl.id,
              'state': 'to_be_sent'}
         )
