@@ -684,7 +684,7 @@ class DTAFileGenerator(models.TransientModel):
         number = number.replace('.', '').replace('-', '') or False
         elec_context['partner_bank_number'] = number
         elec_context['partner_bvr'] = ''
-        if pline.partner_bank_id.acc_type in ('bv', 'bvr', 'postal'):
+        if pline.partner_bank_id.acc_type == 'postal':
             part = pline.partner_bank_id.get_account_number() or ''
             elec_context['partner_bvr'] = part
         self._set_bank_data(pline, elec_context, seq)
@@ -724,11 +724,8 @@ class DTAFileGenerator(models.TransientModel):
                 record_type = RecordGt836
             elif country_code and country_code != 'CH':
                 record_type = RecordGt836
-            #in v9 bv and bvr do not exist any more
-            elif elec_pay in ['bvr', 'postal']:
+            elif elec_pay == 'postal':
                 record_type = RecordGt826
-            #elif elec_pay in ['bv', 'postal']:
-            #    record_type = RecordGt827
             else:
                 name = pline.partner_bank_id.name_get()[0][1]
                 raise except_orm(
