@@ -482,9 +482,12 @@ class PaymentSlip(models.Model):
         text.textOut(com_partner.name)
         text.moveCursor(0.0, font.size)
         pt_cpny_add = print_settings.bvr_print_cpny_address
+        address_lines = com_partner.contact_address.split("\n")
+        if com_partner.country_id:
+            del address_lines[-1]
         
         if pt_cpny_add == 'full':
-            for line in com_partner.contact_address.split("\n"):
+            for line in address_lines:
                 if not line:
                     continue
                 
@@ -577,35 +580,7 @@ class PaymentSlip(models.Model):
             if not line:
                 continue
             text.textLine(line)
-        canvas.drawText(text)
-
-    @api.model
-    def _draw_bank_zip_city(self, canvas, print_settings, initial_position, font, bank):
-        """Draw bank number on canvas
-
-        :param canvas: payment slip reportlab component to be drawn
-        :type canvas: :py:class:`reportlab.pdfgen.canvas.Canvas`
-
-        :param print_settings: layouts print setting
-        :type print_settings: :py:class:`PaymentSlipSettings` or subclass
-
-        :para initial_position: tuple of coordinate (x, y)
-        :type initial_position: tuple
-
-        :param font: font to use
-        :type font: :py:class:`FontMeta`
-
-        :param bank: bank record
-        :type bank: :py:class:`openerp.model.Models`
-
-        """
-        x, y = initial_position
-        x += print_settings.bvr_delta_horz * inch
-        y += print_settings.bvr_delta_vert * inch
-        text = canvas.beginText()
-        text.setTextOrigin(x, y)
-        text.setFont(font.name, font.size)
-        line = (bank.zip or '') + ' ' + (bank.city or '')
+        line = (bank.zip + '' or '') + ' ' + (bank.city or '')
         text.textLine(line)
         canvas.drawText(text)
 
@@ -878,17 +853,6 @@ class PaymentSlip(models.Model):
                 self._draw_bank(canvas,
                                 print_settings,
                                 (2.45 * inch, 3.75 * inch),
-                                default_font,
-                                bank_acc.bank)
-            if invoice.partner_bank_id.print_bank_zip:
-                self._draw_bank_zip_city(canvas,
-                                print_settings,
-                                (0.05 * inch, 3.60 * inch),
-                                default_font,
-                                bank_acc.bank)
-                self._draw_bank_zip_city(canvas,
-                                print_settings,
-                                (2.45 * inch, 3.60 * inch),
                                 default_font,
                                 bank_acc.bank)
             if invoice.partner_bank_id.print_account:

@@ -88,10 +88,6 @@ class ResCompany(models.Model):
     )
     bvr_background = fields.Boolean('Insert BVR background ?')
     
-    bvr_hide_cpny_country = fields.Boolean(
-        'BVR hide company country'
-    )
-    
     bvr_print_cpny_address = fields.Selection(
         string='BVR display company address',
         selection=((
