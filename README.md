@@ -67,6 +67,16 @@ l10n_ch_hr_payroll
 Provides Swiss Payroll Rules.
 Allows to specify a LPP range to contract and 2 kinds of children to employees.
 
+l10n_ch_import_cresus
+---------------------
+
+This module add the ability to import CSV file from Crésus software (www.cresus.ch)
+
+l10n_cd_import_winbiz
+---------------------
+
+Allows to import accounting from WinBIZ software (www.winbiz.ch) using Excel or XML format.
+
 [//]: # (addons)
 Available addons
 ----------------

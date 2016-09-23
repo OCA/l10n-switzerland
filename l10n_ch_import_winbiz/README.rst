@@ -4,7 +4,7 @@
 l10n_ch_import_winbiz
 =====================
 
-This module adds the ability to import salary XML file from Winbiz software (www.winbiz.ch) 
+Allows to import accounting from WinBIZ software (www.winbiz.ch) using Excel or XML format.
 
 Installation
 ============
