@@ -71,7 +71,7 @@ class UBSCSVParser(BaseSwissParser):
         :return: True if file is supported
         :rtype: bool
         """
-        return len(self.datas) > 0 and ('IBAN' in self.datas[1])
+        return len(self.datas) > 1 and ('IBAN' in self.datas[1])
 
     def _parse_currency_code(self):
         """Parse file currency ISO code
@@ -118,8 +118,8 @@ class UBSCSVParser(BaseSwissParser):
                 line.get("Description 3", '')]
             label = ' '.join(filter(None, descriptions))
 
-            debit = "Débit".decode('iso-8859-15')
-            credit = "Crédit".decode('iso-8859-15')
+            debit = u"DÃ©bit"
+            credit = u"CrÃ©dit"
             amount = - float_or_zero(line[debit]) or \
                 float_or_zero(line[credit]) or 0.0
             res = {
