@@ -13,5 +13,5 @@
         "l10n_ch_pain_base",
         "account_banking_sepa_credit_transfer",
     ],
-    'installable': True,
+    'installable': False,
 }
