@@ -12,7 +12,7 @@
     'author': 'Camptocamp, Open Net Sàrl, Odoo Community Association (OCA)',
     'license': 'AGPL-3',
     'application': False,
-    'installable': True,
+    'installable': False,
     'depends': [
         'account_accountant',
     ],

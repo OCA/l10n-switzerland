@@ -22,5 +22,5 @@
         'views/menu.xml',
     ],
     'application': False,
-    'installable': True,
+    'installable': False,
 }
