@@ -1,0 +1,116 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * l10n_ch_zip
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: l10n-switzerland (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-11 14:20+0000\n"
+"PO-Revision-Date: 2015-06-17 13:34+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Croatian (Croatia) (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/hr_HR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: hr_HR\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#. module: l10n_ch_zip
+#: field:res.better.zip,active:0
+msgid "Active"
+msgstr "Aktivan"
+
+#. module: l10n_ch_zip
+#: help:res.better.zip,lang2:0
+msgid ""
+"Additional language within a postcode.\n"
+"One alternative language code may appear for each postcode.\n"
+"1 = German, 2 = French, 3 = Italian, 4 = Romansh."
+msgstr ""
+
+#. module: l10n_ch_zip
+#: field:res.better.zip,additional_digit:0
+msgid "Additional poscode digits"
+msgstr ""
+
+#. module: l10n_ch_zip
+#: field:res.better.zip,lang2:0
+msgid "Alternative language code"
+msgstr ""
+
+#. module: l10n_ch_zip
+#: model:ir.model,name:l10n_ch_zip.model_res_better_zip
+msgid "City/locations completion object"
+msgstr ""
+
+#. module: l10n_ch_zip
+#: field:res.better.zip,communitynumber_bfs:0
+msgid "FSO municipality number (BFSNR)"
+msgstr ""
+
+#. module: l10n_ch_zip
+#: help:res.better.zip,sort:0
+msgid ""
+"Indicates if the postcode is included in the «sort file»(MAT[CH]sort): 0 = "
+"not included, 1 = included. Delivery information with addresses (only "
+"postcode and streets) are published in the sort file."
+msgstr ""
+
+#. module: l10n_ch_zip
+#: help:res.better.zip,post_delivery_through:0
+msgid ""
+"Indicates the post office (ONRP) that delivers most of the letters to the "
+"postcode addresses. This information can be used for bag addresses too."
+msgstr ""
+
+#. module: l10n_ch_zip
+#: help:res.better.zip,lang:0
+msgid ""
+"Language (language majority) within a postcode area. 1 = German, 2 = French,"
+" 3 = Italian, 4 = Romansh. For multi-lingual localities, the main language "
+"is indicated."
+msgstr ""
+
+#. module: l10n_ch_zip
+#: field:res.better.zip,lang:0
+msgid "Language code"
+msgstr ""
+
+#. module: l10n_ch_zip
+#: field:res.better.zip,post_delivery_through:0
+msgid "Mail delivery by"
+msgstr ""
+
+#. module: l10n_ch_zip
+#: help:res.better.zip,communitynumber_bfs:0
+msgid ""
+"Numbering used by the Federal Statistical Office for municipalities in "
+"Switzerland and the Principality of Liechtenstein"
+msgstr ""
+
+#. module: l10n_ch_zip
+#: field:res.better.zip,zip_type:0
+msgid "Postcode type"
+msgstr ""
+
+#. module: l10n_ch_zip
+#: field:res.better.zip,sort:0
+msgid "Present in sort file"
+msgstr ""
+
+#. module: l10n_ch_zip
+#: help:res.better.zip,onrp:0
+msgid "Primary Key"
+msgstr ""
+
+#. module: l10n_ch_zip
+#: field:res.better.zip,onrp:0
+msgid "Swiss Post classification no. (ONRP)"
+msgstr ""
+
+#. module: l10n_ch_zip
+#: field:res.better.zip,valid_from:0
+msgid "Valid from"
+msgstr ""

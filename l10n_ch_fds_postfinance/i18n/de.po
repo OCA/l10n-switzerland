@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-06 09:18+0000\n"
+"POT-Creation-Date: 2016-01-11 14:20+0000\n"
 "PO-Revision-Date: 2016-01-05 16:29+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/de/)\n"
@@ -387,7 +387,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.account,name:0
 msgid "Name"
-msgstr ""
+msgstr "Bezeichnung"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form

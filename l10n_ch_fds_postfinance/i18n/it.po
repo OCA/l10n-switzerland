@@ -145,7 +145,7 @@ msgstr ""
 #: selection:fds.key.generator.wizard,state:0
 #: selection:fds.key.import.wizard,state:0
 msgid "Default"
-msgstr ""
+msgstr "Default"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.file,directory_id:0

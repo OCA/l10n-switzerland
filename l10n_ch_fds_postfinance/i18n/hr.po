@@ -10,12 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2016-01-11 14:20+0000\n"
 "PO-Revision-Date: 2016-01-05 16:29+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/es/)\n"
+"Language-Team: Croatian (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: hr\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.actions.act_window,help:l10n_ch_fds_postfinance.action_fds_postfinance_account
@@ -80,7 +80,7 @@ msgstr ""
 #: view:fds.key.generator.wizard:l10n_ch_fds_postfinance.view_fds_key_generator_wizard_form
 #: view:fds.key.import.wizard:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "Odustani"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.files.import.tobankstatments.wizard:l10n_ch_fds_postfinance.view_fds_files_import_tobankstatments_wizard_form
@@ -120,7 +120,7 @@ msgstr ""
 #: field:fds.postfinance.directory,create_uid:0
 #: field:fds.postfinance.file,create_uid:0
 msgid "Created by"
-msgstr "Creado por"
+msgstr "Kreirao"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.authentication.keys,create_date:0
@@ -132,7 +132,7 @@ msgstr "Creado por"
 #: field:fds.postfinance.directory,create_date:0
 #: field:fds.postfinance.file,create_date:0
 msgid "Created on"
-msgstr "Creado en"
+msgstr "Kreirano"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.file,data:0
@@ -194,7 +194,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: selection:fds.postfinance.file,state:0
 msgid "Error"
-msgstr "Error"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: selection:fds.files.import.tobankstatments.wizard,state:0
@@ -365,7 +365,7 @@ msgstr ""
 #: field:fds.postfinance.directory,write_uid:0
 #: field:fds.postfinance.file,write_uid:0
 msgid "Last Updated by"
-msgstr "Última actualización por"
+msgstr "Zadnji ažurirao"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.authentication.keys,write_date:0
@@ -377,7 +377,7 @@ msgstr "Última actualización por"
 #: field:fds.postfinance.directory,write_date:0
 #: field:fds.postfinance.file,write_date:0
 msgid "Last Updated on"
-msgstr "Última actualización el"
+msgstr "Zadnje ažuriranje"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.key.clone.wizard:l10n_ch_fds_postfinance.view_fds_key_clone_wizard_form
@@ -387,7 +387,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.account,name:0
 msgid "Name"
-msgstr "Nombre"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
@@ -473,7 +473,7 @@ msgstr ""
 #: field:fds.key.clone.wizard,state:0 field:fds.key.generator.wizard,state:0
 #: field:fds.key.import.wizard,state:0 field:fds.postfinance.file,state:0
 msgid "State"
-msgstr "Estado"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.key.clone.wizard,des_user_id:0
