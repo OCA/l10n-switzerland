@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-04 14:41+0000\n"
-"PO-Revision-Date: 2015-09-04 14:42+0000\n"
+"POT-Creation-Date: 2016-09-17 19:49+0000\n"
+"PO-Revision-Date: 2016-09-18 14:23+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:120
 #, python-format
 msgid "Recursive mod10 is invalid for reference: %s"
-msgstr ""
+msgstr "Rekursiver mod10 ist ungültig für Referenz: %s "
 
 #. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:104
@@ -220,7 +220,7 @@ msgstr "ESR vertikale Korrektur in mm"
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:254
 #, python-format
 msgid "Inv. no %s"
-msgstr ""
+msgstr "Rg Nr. %s"
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_scan_line_vert:0
