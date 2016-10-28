@@ -29,7 +29,7 @@
 
 {
     'name': 'Switzerland - Payroll',
-    'summary': 'Swizerland Payroll Rules',
+    'summary': 'Switzerland Payroll Rules',
     'category': 'Localization',
     'author': "Open Net Sàrl,Odoo Community Association (OCA)",
     'depends': [
