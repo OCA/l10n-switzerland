@@ -13,4 +13,4 @@ class HrSalaryRuleCategory(models.Model):
 
     code = fields.Char(translate=True)
     name = fields.Char(translate=True)
-    note = fields.Char(translate=True)		 
+    note = fields.Char(translate=True)
