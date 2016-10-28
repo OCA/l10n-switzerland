@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# © 2016 David Coninckx (Opennet Sarl), Ermin Trevisan (twanda AG)
+# © 2012 David Coninckx (Opennet Sarl)
+# © 2016 Ermin Trevisan (twanda AG)
 # License into __openerp__.py.
 
 from . import hr_contract

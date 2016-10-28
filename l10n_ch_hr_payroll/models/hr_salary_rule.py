@@ -11,6 +11,6 @@ class HrSalaryRule(models.Model):
 
     # ---------- make code, name and note translatable
 
-    code = fields.Char(translate=True)
-    name = fields.Char(translate=True)
-    note = fields.Char(translate=True)		
+	code = fields.Char(translate=True)
+	name = fields.Char(translate=True)
+	note = fields.Char(translate=True)		

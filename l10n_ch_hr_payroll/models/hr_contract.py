@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # © 2012 David Coninckx (Opennet Sarl)
-# Make additional fields translatable by Ermin Trevisan (twanda AG)
+# © 2016 Ermin Trevisan (twanda AG)
 # License into __openerp__.py.
 
 from openerp import fields, models
