@@ -9,9 +9,10 @@ This module allows you to manage the salaries of your employees
 ** Features list :**
     * Add Swiss salary rule categories
     * Add Swiss salary rules
+    * Make code, name and note translatable in salary rules and salary rules categories
     * Add children in school to employee
-    * Add LPP range to contract
-    * Add LPP Amount to contract.
+    * Add OBP (Occupational Benefit Plan/LPP or BVG) range to contract
+    * Add OBP Amount to contract.
     * Add Holiday Rate to contract.
 
 ** For further information:**
@@ -32,13 +33,13 @@ V1.0.0: 2014-11-07/Sge
     * Add Contract LPP rate.
 
 V1.0.1: 2014-11-11/Sge
-    * Set the 'LPP rate'' digits to 'Payroll Rate' decimal accuracy.
+    * Set the 'OBP rate'' digits to 'Payroll Rate' decimal accuracy.
 
 V1.0.2:
     * Add some minor changes, based on pull request #66 comments.
 
 V1.0.3-4:
-    * Add LPP Amount to contract.
+    * Add OBP Amount to contract.
     * Add Worked Hours Rate to contract.
     * Add Hourly Rate to contract.
     * Compute the Wage of contract, based on Worked Hours and Hourly Rate.
@@ -76,6 +77,7 @@ Contributors
 
 * Sebastien Gendre <sge@open-net.ch>
 * Yvon-Philippe Crittin <cyp@open-net.ch>
+* Ermin Trevisan <trevi@twanda.com>
 
 Maintainer
 ----------
