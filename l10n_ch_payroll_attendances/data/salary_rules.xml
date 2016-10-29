@@ -1,0 +1,19 @@
+<odoo>
+    <record id="hr_payroll.hr_rule_comm" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">True</field>
+        <field name="code">COMP</field>
+        <field name="name">Salary compensation</field>
+        <field name="amount_python_compute">            
+time_to_compensate = 0.0
+if payslip.payslip_attendances:
+    for payslip_attendance in payslip.payslip_attendances:
+        if (payslip_attendance.salary_increase):
+            time_to_compensate += payslip_attendance.salary_increase * payslip_attendance.nb_hours
+result = (contract.hourly_rate_attendance * time_to_compensate)
+        </field>
+        <field name="quantity">1</field>
+        <field name="sequence">300</field>
+        <field name="category_id" ref="hr_payroll.ALW"/>
+    </record>
+</odoo>
