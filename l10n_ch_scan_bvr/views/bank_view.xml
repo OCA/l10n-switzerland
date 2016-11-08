@@ -4,11 +4,11 @@
     <record model="ir.ui.view" id="l10nch_view_res_partner_bank_from_invoice_slip_mod">
       <field name="name">res.partner_bank.form.l10n_ch</field>
       <field name="model">res.partner.bank</field>
-      <field name="inherit_id" ref="l10n_ch_payment_slip.l10nch_view_res_partner_bank_from_invoice_slip"/>
+      <field name="inherit_id" ref="l10n_ch_payment_slip.l10n_ch_view_res_partner_bank_from_invoice_slip"/>
       <field name="arch" type="xml">
-        <group string="BVR options" position="attributes">
-            <attribute name="attrs">{'invisible': [('state','not in',['bvr', 'bv'])]}</attribute>
-        </group>
+        <xpath expr="//group[child::field[@name='bvr_adherent_num']]" position="attributes">
+            <attribute name="attrs">{'invisible': []}</attribute>
+        </xpath>
       </field>
     </record>
   </data>
