@@ -486,6 +486,42 @@ class PaymentSlip(models.Model):
             text.textLine(line)
         canvas.drawText(text)
 
+    @api.model
+    def _draw_bank_address(
+            self, canvas, print_settings, initial_position, font, bank):
+        """Draw an bank address on canvas
+
+        :param canvas: payment slip reportlab component to be drawn
+        :type canvas: :py:class:`reportlab.pdfgen.canvas.Canvas`
+
+        :param print_settings: layouts print setting
+        :type print_settings: :py:class:`PaymentSlipSettings` or subclass
+
+        :para initial_position: tuple of coordinate (x, y)
+        :type initial_position: tuple
+
+        :param font: font to use
+        :type font: :py:class:`FontMeta`
+
+        :param bank: partner bank record for model `res.partner.bank`
+        :type bank: :py:class:`openerp.models.Model`
+
+        """
+        x, y = initial_position
+        x += print_settings.bvr_add_horz * inch
+        y += print_settings.bvr_add_vert * inch
+        text = canvas.beginText()
+        text.setTextOrigin(x, y)
+        text.setFont(font.name, font.size)
+        if bank.owner_name:
+            text.textOut(bank.owner_name)
+        text.moveCursor(0.0, font.size)
+        for line in bank._display_address().split("\n"):
+            if not line:
+                continue
+            text.textLine(line)
+        canvas.drawText(text)
+
     @api.multi
     def _draw_description_line(self, canvas, print_settings, initial_position,
                                font):
@@ -789,15 +825,17 @@ class PaymentSlip(models.Model):
                     initial_position = (0.05 * inch,  3.30 * inch)
                 else:
                     initial_position = (0.05 * inch,  3.75 * inch)
-                self._draw_address(canvas, print_settings, initial_position,
-                                   default_font, company.partner_id)
+                self._draw_bank_address(
+                    canvas, print_settings, initial_position, default_font,
+                    invoice.partner_bank_id)
                 if (invoice.partner_bank_id.print_account or
                         invoice.partner_bank_id.bvr_adherent_num):
                     initial_position = (2.45 * inch, 3.30 * inch)
                 else:
                     initial_position = (2.45 * inch, 3.75 * inch)
-                self._draw_address(canvas, print_settings, initial_position,
-                                   default_font, company.partner_id)
+                self._draw_bank_address(
+                    canvas, print_settings, initial_position, default_font,
+                    invoice.partner_bank_id)
             com_partner = self.get_comm_partner()
             initial_position = (0.05 * inch, 1.4 * inch)
             self._draw_address(canvas, print_settings, initial_position,
