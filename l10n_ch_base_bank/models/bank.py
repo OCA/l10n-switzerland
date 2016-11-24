@@ -212,8 +212,8 @@ class ResPartnerBank(models.Model, BankCommon):
             )
             if not valid:
                 raise exceptions.ValidationError(
-                    'Your bank BVR/ESR adherent number must contain only '
-                    'digits!\nPlease check your company '
+                    _('Your bank BVR/ESR adherent number must contain only '
+                      'digits!\nPlease check your company bank account.')
                 )
         return True
 
