@@ -31,6 +31,16 @@ class TestBank(common.TransactionCase):
         self.assertEqual(bank_acc.ccp, '10-8060-7')
         self.assertEqual(bank_acc.acc_type, 'iban')
 
+    def test_iban_ccp_with_spaces(self):
+        bank_acc = self.env['res.partner.bank'].create({
+            'partner_id': self.partner.id,
+            'bank_id': self.post_bank.id,
+            'acc_number': 'CH09 0900 0000 1000 8060 7',
+            'bvr_adherent_num': '1234567',
+        })
+        self.assertEqual(bank_acc.ccp, '10-8060-7')
+        self.assertEqual(bank_acc.acc_type, 'iban')
+
     def test_faulty_ccp_at_bank(self):
         with self.assertRaises(exceptions.ValidationError):
             with mute_logger():
