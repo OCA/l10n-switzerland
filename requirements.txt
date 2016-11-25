@@ -1,0 +1,5 @@
+unidecode
+unicodecsv
+# Excel support
+xlrd
+pycrypto
