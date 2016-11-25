@@ -5,10 +5,18 @@
 import datetime
 import tempfile
 import base64
-from xlrd import open_workbook, xldate_as_tuple
+import logging
+
 import xml.etree.ElementTree as ET
 from babel import Locale
 from abc import ABCMeta, abstractmethod
+
+_logger = logging.getLogger(__name__)
+
+try:
+    from xlrd import open_workbook, xldate_as_tuple
+except ImportError:
+    _logger.debug('Can not `from xlrd import open_workbook, xldate_as_tuple`.')
 
 
 class BaseImporter:
