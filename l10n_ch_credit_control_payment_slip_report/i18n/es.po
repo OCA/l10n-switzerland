@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 19:49+0000\n"
+"POT-Creation-Date: 2016-11-11 18:46+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/es/)\n"
@@ -59,7 +59,7 @@ msgstr "Error"
 #. module: l10n_ch_credit_control_payment_slip_report
 #: model:ir.model,name:l10n_ch_credit_control_payment_slip_report.model_account_move_line
 msgid "Journal Items"
-msgstr ""
+msgstr "Apuntes contables"
 
 #. module: l10n_ch_credit_control_payment_slip_report
 #: model:ir.model,name:l10n_ch_credit_control_payment_slip_report.model_credit_control_communication

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 19:49+0000\n"
+"POT-Creation-Date: 2016-11-11 18:46+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/fr/)\n"
@@ -120,7 +120,7 @@ msgstr ""
 #: selection:banking.export.ch.dd,state:0
 #, python-format
 msgid "Draft"
-msgstr ""
+msgstr "Brouillon"
 
 #. module: l10n_ch_lsv_dd
 #: view:banking.export.ch.dd:0
@@ -499,7 +499,7 @@ msgstr ""
 #: field:lsv.export.wizard,currency:0 field:post.dd.export.wizard,currency:0
 #, python-format
 msgid "Currency"
-msgstr ""
+msgstr "Devise"
 
 #. module: l10n_ch_lsv_dd
 #: model:ir.model,name:l10n_ch_lsv_dd.model_account_invoice_free

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 19:49+0000\n"
+"POT-Creation-Date: 2016-11-11 18:46+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/es/)\n"
@@ -37,7 +37,7 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Factura"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_account_tax_code
@@ -67,7 +67,7 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: view:bvr.import.wizard:0
 msgid "Import"
-msgstr ""
+msgstr "Importar"
 
 #. module: l10n_ch_payment_slip
 #: field:res.company,bvr_add_vert:0
@@ -109,7 +109,7 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_account_move_line
 msgid "Journal Items"
-msgstr ""
+msgstr "Apuntes contables"
 
 #. module: l10n_ch_payment_slip
 #: field:res.partner.bank,print_account:0
@@ -153,7 +153,7 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Compañías"
 
 #. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:84

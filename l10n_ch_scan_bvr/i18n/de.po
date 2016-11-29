@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 19:49+0000\n"
+"POT-Creation-Date: 2016-11-11 18:46+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/de/)\n"
@@ -24,19 +24,19 @@ msgstr ""
 #: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:181
 #, python-format
 msgid "BVR CheckSum Error in first part"
-msgstr ""
+msgstr "Prüfsummen-Fehler im ersten Teil der ESR "
 
 #. module: l10n_ch_scan_bvr
 #: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:100
 #: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:135
 #, python-format
 msgid "BVR CheckSum Error in third part"
-msgstr ""
+msgstr "Prüfsummen-Fehler im dritten Teil der ESR "
 
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:0
 msgid "Create"
-msgstr ""
+msgstr "Erstellen"
 
 #. module: l10n_ch_scan_bvr
 #: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:89
@@ -61,38 +61,38 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,state:0
 msgid "State"
-msgstr ""
+msgstr "Status"
 
 #. module: l10n_ch_scan_bvr
 #: selection:scan.bvr,state:0
 msgid "Need extra information"
-msgstr ""
+msgstr "Zusatzinformationen benötigt"
 
 #. module: l10n_ch_scan_bvr
 #: selection:scan.bvr,state:0
 msgid "New"
-msgstr ""
+msgstr "Neu"
 
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:0 field:scan.bvr,bank_account_id:0
 msgid "Partner Bank Account"
-msgstr ""
+msgstr "Partner Bankkonto"
 
 #. module: l10n_ch_scan_bvr
 #: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:236
 #, python-format
 msgid "Error !"
-msgstr ""
+msgstr "Fehler!"
 
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:0
 msgid "SCAN BVR"
-msgstr ""
+msgstr "Scan ESR"
 
 #. module: l10n_ch_scan_bvr
 #: selection:scan.bvr,state:0
 msgid "valid"
-msgstr ""
+msgstr "gültig"
 
 #. module: l10n_ch_scan_bvr
 #: help:res.partner,supplier_invoice_default_product:0
@@ -105,18 +105,18 @@ msgstr ""
 #: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:462
 #, python-format
 msgid "This kind of BVR is not supported at this time"
-msgstr ""
+msgstr "Dieser ESR wird momentan nicht unterstützt "
 
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:0
 msgid "Invoice Journal"
-msgstr ""
+msgstr "Rechnungsjournal"
 
 #. module: l10n_ch_scan_bvr
 #: model:ir.actions.act_window,name:l10n_ch_scan_bvr.action_scan_bvr
 #: model:ir.ui.menu,name:l10n_ch_scan_bvr.menu_scan_bvr
 msgid "Scan BVR"
-msgstr ""
+msgstr "Scan ESR"
 
 #. module: l10n_ch_scan_bvr
 #: view:res.partner.bank:0
@@ -128,38 +128,38 @@ msgstr "ESR Einstellungen"
 #: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:140
 #, python-format
 msgid "BVR CheckSum Error in fourth part"
-msgstr ""
+msgstr "Prüfsummen-Fehler im vierten Teil der ESR "
 
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,bvr_string:0
 msgid "BVR String"
-msgstr ""
+msgstr "ESR Zeichenfolge"
 
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:0
 msgid "Bvr Scanning Result"
-msgstr ""
+msgstr "ESR Scan Resultat"
 
 #. module: l10n_ch_scan_bvr
 #: field:res.partner,supplier_invoice_default_product:0
 msgid "Default product supplier invoice"
-msgstr ""
+msgstr "Standardprodukt für Eingangsrechnung"
 
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,journal_id:0
 msgid "Invoice journal"
-msgstr ""
+msgstr "Rechnungsjournal"
 
 #. module: l10n_ch_scan_bvr
 #: model:ir.model,name:l10n_ch_scan_bvr.model_scan_bvr
 msgid "BVR/ESR Scanning Wizard"
-msgstr ""
+msgstr "ESR Scan Wizard"
 
 #. module: l10n_ch_scan_bvr
 #: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:237
 #, python-format
 msgid "The default product in this partner has wrong taxes configuration"
-msgstr ""
+msgstr "Das Standardprodukt dieses Partners hat falsche Steuersätze (inkl. muss gesetzt sein)"
 
 #. module: l10n_ch_scan_bvr
 #: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:461
@@ -172,7 +172,7 @@ msgstr ""
 #: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:130
 #, python-format
 msgid "BVR CheckSum Error in second part"
-msgstr ""
+msgstr "Prüfsummen-Fehler im zweiten Teil der ESR "
 
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:0
