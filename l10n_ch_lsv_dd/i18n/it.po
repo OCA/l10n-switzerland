@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-11 14:20+0000\n"
-"PO-Revision-Date: 2016-10-04 09:42+0000\n"
+"PO-Revision-Date: 2016-11-25 14:57+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -54,7 +54,7 @@ msgstr "Annulla"
 #: selection:lsv.export.wizard,state:0 selection:post.dd.export.wizard,state:0
 #, python-format
 msgid "Create"
-msgstr ""
+msgstr "Crea"
 
 #. module: l10n_ch_lsv_dd
 #: model:ir.actions.act_window,name:l10n_ch_lsv_dd.action_create_lsv
@@ -106,7 +106,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: selection:banking.export.ch.dd,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Bozza"
 
 #. module: l10n_ch_lsv_dd
 #: field:res.partner.bank,esr_party_number:0

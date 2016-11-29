@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-11 14:20+0000\n"
-"PO-Revision-Date: 2016-09-09 12:24+0000\n"
+"PO-Revision-Date: 2016-11-25 14:55+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/vi/)\n"
 "MIME-Version: 1.0\n"
@@ -101,13 +101,13 @@ msgstr ""
 #: field:l10n_ch.payment_slip,create_uid:0
 #: field:v11.import.wizard,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Được tạo bởi"
 
 #. module: l10n_ch_payment_slip
 #: field:l10n_ch.payment_slip,create_date:0
 #: field:v11.import.wizard,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Được tạo vào"
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_add_horz:0
@@ -124,7 +124,7 @@ msgstr ""
 #: field:report.one_slip_per_page_from_invoice,id:0
 #: field:v11.import.wizard,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: l10n_ch_payment_slip
 #: view:v11.import.wizard:l10n_ch_payment_slip.v11_import_view
@@ -160,13 +160,13 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: field:l10n_ch.payment_slip,write_uid:0 field:v11.import.wizard,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Last Updated by"
 
 #. module: l10n_ch_payment_slip
 #: field:l10n_ch.payment_slip,write_date:0
 #: field:v11.import.wizard,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Cập nhật lần cuối vào"
 
 #. module: l10n_ch_payment_slip
 #: selection:res.company,merge_mode:0
@@ -366,7 +366,7 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: view:v11.import.wizard:l10n_ch_payment_slip.v11_import_view
 msgid "or"
-msgstr ""
+msgstr "hoặc"
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_delta_vert:0

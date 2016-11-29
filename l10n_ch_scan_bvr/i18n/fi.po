@@ -70,7 +70,7 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
 msgid "Cancel"
-msgstr ""
+msgstr "Peruuta"
 
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
@@ -132,7 +132,7 @@ msgstr "Uusi"
 #: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
 #: field:scan.bvr,partner_id:0
 msgid "Partner"
-msgstr ""
+msgstr "Kumppani"
 
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form

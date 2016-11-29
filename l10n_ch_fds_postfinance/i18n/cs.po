@@ -120,7 +120,7 @@ msgstr ""
 #: field:fds.postfinance.directory,create_uid:0
 #: field:fds.postfinance.file,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Vytvořil(a)"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.authentication.keys,create_date:0
@@ -132,7 +132,7 @@ msgstr ""
 #: field:fds.postfinance.directory,create_date:0
 #: field:fds.postfinance.file,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Vytvořeno"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.file,data:0
@@ -317,7 +317,7 @@ msgstr ""
 #: field:fds.key.import.wizard,id:0 field:fds.postfinance.account,id:0
 #: field:fds.postfinance.directory,id:0 field:fds.postfinance.file,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.key.import.wizard:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
@@ -365,7 +365,7 @@ msgstr ""
 #: field:fds.postfinance.directory,write_uid:0
 #: field:fds.postfinance.file,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Naposled upraveno"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.authentication.keys,write_date:0
@@ -377,7 +377,7 @@ msgstr ""
 #: field:fds.postfinance.directory,write_date:0
 #: field:fds.postfinance.file,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Naposled upraveno"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.key.clone.wizard:l10n_ch_fds_postfinance.view_fds_key_clone_wizard_form
@@ -387,7 +387,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.account,name:0
 msgid "Name"
-msgstr ""
+msgstr "Název"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form

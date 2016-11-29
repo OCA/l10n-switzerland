@@ -70,12 +70,12 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
 msgid "Create"
-msgstr ""
+msgstr "Criar"
 
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,create_uid:0
@@ -132,7 +132,7 @@ msgstr ""
 #: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
 #: field:scan.bvr,partner_id:0
 msgid "Partner"
-msgstr ""
+msgstr "Parceiro"
 
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
@@ -154,7 +154,7 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,state:0
 msgid "State"
-msgstr ""
+msgstr "Estado"
 
 #. module: l10n_ch_scan_bvr
 #: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:173

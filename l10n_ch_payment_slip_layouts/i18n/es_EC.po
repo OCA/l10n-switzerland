@@ -1,0 +1,43 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * l10n_ch_payment_slip_layouts
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: l10n-switzerland (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-11 14:20+0000\n"
+"PO-Revision-Date: 2015-07-24 13:37+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Spanish (Ecuador) (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/es_EC/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es_EC\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: l10n_ch_payment_slip_layouts
+#: model:ir.model,name:l10n_ch_payment_slip_layouts.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: l10n_ch_payment_slip_layouts
+#: field:report.invoice_and_one_slip_per_page_from_invoice,id:0
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: l10n_ch_payment_slip_layouts
+#: field:res.company,bvr_background_on_merge:0
+msgid "Insert BVR Background with invoice ?"
+msgstr ""
+
+#. module: l10n_ch_payment_slip_layouts
+#: model:ir.actions.report.xml,name:l10n_ch_payment_slip_layouts.invoice_and_one_slip_per_page_from_invoice
+msgid "Invoice with Payment Slip"
+msgstr ""
+
+#. module: l10n_ch_payment_slip_layouts
+#: model:ir.model,name:l10n_ch_payment_slip_layouts.model_report
+msgid "Report"
+msgstr ""

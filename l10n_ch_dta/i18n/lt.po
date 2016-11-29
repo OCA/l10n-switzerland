@@ -63,12 +63,12 @@ msgstr ""
 #. module: l10n_ch_dta
 #: field:create.dta.wizard,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Sukūrė"
 
 #. module: l10n_ch_dta
 #: field:create.dta.wizard,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Sukurta"
 
 #. module: l10n_ch_dta
 #: view:create.dta.wizard:l10n_ch_dta.dta_create_view
@@ -118,17 +118,17 @@ msgstr ""
 #. module: l10n_ch_dta
 #: field:create.dta.wizard,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: l10n_ch_dta
 #: field:create.dta.wizard,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Paskutinį kartą atnaujino"
 
 #. module: l10n_ch_dta
 #: field:create.dta.wizard,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Paskutinį kartą atnaujinta"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:402

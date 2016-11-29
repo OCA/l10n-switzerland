@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-11 14:20+0000\n"
-"PO-Revision-Date: 2016-09-09 12:26+0000\n"
+"PO-Revision-Date: 2016-11-22 16:30+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Greek (Greece) (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/el_GR/)\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgstr ""
 #: view:lsv.export.wizard:l10n_ch_lsv_dd.view_lsv_export_wizard_form
 #: view:post.dd.export.wizard:l10n_ch_lsv_dd.view_post_dd_export_wizard_form
 msgid "Cancel"
-msgstr ""
+msgstr "Άκυρο"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:70
@@ -273,7 +273,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: model:ir.model,name:l10n_ch_lsv_dd.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Τιμολόγιο"
 
 #. module: l10n_ch_lsv_dd
 #: model:ir.model,name:l10n_ch_lsv_dd.model_account_move_line
@@ -452,7 +452,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: selection:banking.export.ch.dd,state:0
 msgid "Sent"
-msgstr ""
+msgstr "Αποστολή"
 
 #. module: l10n_ch_lsv_dd
 #: view:payment.order:l10n_ch_lsv_dd.view_payment_order_invoice_button_form

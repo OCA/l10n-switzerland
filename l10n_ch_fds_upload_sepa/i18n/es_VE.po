@@ -40,12 +40,12 @@ msgstr ""
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creado en"
 
 #. module: l10n_ch_fds_upload_sepa
 #: selection:wizard.pain001,state:0
@@ -86,17 +86,17 @@ msgstr ""
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última actualización realizada por"
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultima actualizacion en"
 
 #. module: l10n_ch_fds_upload_sepa
 #: selection:fds.sepa.upload.history,state:0

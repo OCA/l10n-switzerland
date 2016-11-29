@@ -1,0 +1,165 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * l10n_ch_sepa
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: l10n-switzerland (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-11 14:20+0000\n"
+"PO-Revision-Date: 2015-06-17 13:34+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Serbian (Latin) (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/sr@latin/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sr@latin\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:74
+#, python-format
+msgid "A payment order is missing"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: view:wizard.pain001:l10n_ch_sepa.wizard_pain_001_view
+msgid "Close"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: model:ir.actions.act_window,name:l10n_ch_sepa.action_create_pain_001
+msgid "Create SEPA payment"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: field:wizard.pain001,create_uid:0
+msgid "Created by"
+msgstr "Kreirao"
+
+#. module: l10n_ch_sepa
+#: field:wizard.pain001,create_date:0
+msgid "Created on"
+msgstr "Kreiran"
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/msg_sepa.py:50
+#: code:addons/l10n_ch_sepa/base_sepa/msg_sepa.py:55
+#, python-format
+msgid "Error"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:85
+#, python-format
+msgid "ErrorCompanyBank No company bank is defined in payment"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:94
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:114
+#, python-format
+msgid ""
+"ErrorCompanyBankAccNumber The selected company bank has no IBAN and no "
+"Account number"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:89
+#, python-format
+msgid ""
+"ErrorCompanyBankBIC The selected company bank account has no BIC number"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:103
+#, python-format
+msgid "ErrorCreditorBank No bank selected for creditor of invoice %s"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:108
+#, python-format
+msgid ""
+"ErrorCreditorBankBIC Creditor bank account has no BIC number for invoice %s"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:79
+#, python-format
+msgid "ErrorPaymentState: Payment is in draft state. Please confirm it first."
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: view:wizard.pain001:l10n_ch_sepa.wizard_pain_001_view
+msgid "Generate File"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: field:wizard.pain001,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: l10n_ch_sepa
+#: field:wizard.pain001,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnja izmjena"
+
+#. module: l10n_ch_sepa
+#: field:wizard.pain001,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnja izmjena"
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/msg_sepa.py:50
+#, python-format
+msgid "No XML data found"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/msg_sepa.py:55
+#, python-format
+msgid "No XSD file found"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:70
+#, python-format
+msgid "No data has been entered"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: view:wizard.pain001:l10n_ch_sepa.wizard_pain_001_view
+msgid "SEPA Payment File"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/msg_sepa.py:69
+#, python-format
+msgid ""
+"The document validation has raised following errors: \n"
+"%s"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: field:wizard.pain001,pain_001_file:0
+msgid "XML File"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:152
+#, python-format
+msgid "XML is Empty ! An error has occured during XML generation"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/msg_sepa.py:68
+#, python-format
+msgid "XML is not Valid !"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: view:wizard.pain001:l10n_ch_sepa.wizard_pain_001_view
+msgid "pain.001 file creation"
+msgstr ""

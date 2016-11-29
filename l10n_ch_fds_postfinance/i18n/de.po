@@ -184,7 +184,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: selection:fds.postfinance.file,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Entwurf"
 
 #. module: l10n_ch_fds_postfinance
 #: help:fds.postfinance.account,postfinance_email:0
@@ -496,7 +496,7 @@ msgstr ""
 #: field:fds.key.generator.wizard,user_id:0
 #: field:fds.key.import.wizard,user_id:0
 msgid "User"
-msgstr ""
+msgstr "Benutzer"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.key.generator.wizard:l10n_ch_fds_postfinance.view_fds_key_generator_wizard_form

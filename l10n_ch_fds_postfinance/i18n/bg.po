@@ -169,7 +169,7 @@ msgstr ""
 #: selection:fds.key.import.wizard,state:0
 #: selection:fds.postfinance.file,state:0
 msgid "Done"
-msgstr ""
+msgstr "Готово"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.actions.act_window,name:l10n_ch_fds_postfinance.action_fds_files_import_tobankstatments_wizard

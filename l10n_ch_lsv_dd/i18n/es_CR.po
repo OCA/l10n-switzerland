@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-11 14:20+0000\n"
-"PO-Revision-Date: 2016-09-09 12:26+0000\n"
+"PO-Revision-Date: 2016-11-25 14:56+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Costa Rica) (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/es_CR/)\n"
 "MIME-Version: 1.0\n"
@@ -79,7 +79,7 @@ msgstr ""
 #: field:lsv.export.wizard,create_date:0
 #: field:post.dd.export.wizard,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creado en"
 
 #. module: l10n_ch_lsv_dd
 #: field:lsv.export.wizard,currency:0 field:post.dd.export.wizard,currency:0
@@ -250,7 +250,7 @@ msgstr ""
 #: field:account.invoice.free,id:0 field:banking.export.ch.dd,id:0
 #: field:lsv.export.wizard,id:0 field:post.dd.export.wizard,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/export_utils.py:60
@@ -501,7 +501,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: field:banking.export.ch.dd,type:0
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:384

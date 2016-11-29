@@ -75,7 +75,7 @@ msgstr "Cancelar"
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
 msgid "Create"
-msgstr ""
+msgstr "Crear"
 
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,create_uid:0

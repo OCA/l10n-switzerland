@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-11 14:20+0000\n"
-"PO-Revision-Date: 2016-09-16 21:46+0000\n"
+"PO-Revision-Date: 2016-11-25 14:55+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -84,7 +84,7 @@ msgstr "Créé le"
 #. module: l10n_ch_lsv_dd
 #: field:lsv.export.wizard,currency:0 field:post.dd.export.wizard,currency:0
 msgid "Currency"
-msgstr ""
+msgstr "Devise"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/model/bank.py:110
@@ -106,7 +106,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: selection:banking.export.ch.dd,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Brouillon"
 
 #. module: l10n_ch_lsv_dd
 #: field:res.partner.bank,esr_party_number:0
@@ -191,7 +191,7 @@ msgstr ""
 #: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:162
 #, python-format
 msgid "Generated File"
-msgstr ""
+msgstr "Fichier généré"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:233

@@ -1,0 +1,186 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * l10n_ch_scan_bvr
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: l10n-switzerland (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-11 14:20+0000\n"
+"PO-Revision-Date: 2015-10-27 12:30+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Danish (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/da/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: da\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:54
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:83
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:112
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:129
+#, python-format
+msgid "BVR CheckSum Error in first part"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:66
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:95
+#, python-format
+msgid "BVR CheckSum Error in fourth part"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:58
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:87
+#, python-format
+msgid "BVR CheckSum Error in second part"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:62
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:91
+#, python-format
+msgid "BVR CheckSum Error in third part"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: field:scan.bvr,bvr_string:0
+msgid "BVR String"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: view:res.partner.bank:l10n_ch_scan_bvr.l10nch_view_res_partner_bank_from_invoice_slip_mod
+msgid "BVR options"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: model:ir.model,name:l10n_ch_scan_bvr.model_scan_bvr
+msgid "BVR/ESR Scanning Wizard"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
+msgid "Bvr Scanning Result"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
+msgid "Cancel"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
+msgid "Create"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: field:scan.bvr,create_uid:0
+msgid "Created by"
+msgstr "Oprettet af"
+
+#. module: l10n_ch_scan_bvr
+#: field:scan.bvr,create_date:0
+msgid "Created on"
+msgstr "Oprettet den"
+
+#. module: l10n_ch_scan_bvr
+#: field:res.partner,supplier_invoice_default_product:0
+msgid "Default product supplier invoice"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: field:scan.bvr,id:0
+msgid "ID"
+msgstr "Id"
+
+#. module: l10n_ch_scan_bvr
+#: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
+msgid "Invoice Journal"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: field:scan.bvr,journal_id:0
+msgid "Invoice journal"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: field:scan.bvr,write_uid:0
+msgid "Last Updated by"
+msgstr "Sidst opdateret af"
+
+#. module: l10n_ch_scan_bvr
+#: field:scan.bvr,write_date:0
+msgid "Last Updated on"
+msgstr "Sidst opdateret den"
+
+#. module: l10n_ch_scan_bvr
+#: selection:scan.bvr,state:0
+msgid "Need extra information"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: selection:scan.bvr,state:0
+msgid "New"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: model:ir.model,name:l10n_ch_scan_bvr.model_res_partner
+#: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
+#: field:scan.bvr,partner_id:0
+msgid "Partner"
+msgstr "Partner"
+
+#. module: l10n_ch_scan_bvr
+#: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
+#: field:scan.bvr,bank_account_id:0
+msgid "Partner Bank Account"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
+msgid "SCAN BVR"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: model:ir.actions.act_window,name:l10n_ch_scan_bvr.action_scan_bvr
+#: model:ir.ui.menu,name:l10n_ch_scan_bvr.menu_scan_bvr
+msgid "Scan BVR"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: field:scan.bvr,state:0
+msgid "State"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:173
+#, python-format
+msgid "The default product in this partner has wrong taxes configuration"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:315
+#, python-format
+msgid "This kind of BVR is not supported at this time"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: help:res.partner,supplier_invoice_default_product:0
+msgid ""
+"Used by the scan BVR wizard. If completed, it'll generate a line with the "
+"proper amount and this specified product"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: selection:scan.bvr,state:0
+msgid "valid"
+msgstr ""
+
+#. module: l10n_ch_scan_bvr
+#: view:res.partner.bank:l10n_ch_scan_bvr.l10nch_view_res_partner_bank_from_invoice_slip_mod
+msgid "{'invisible': [('state','not in',['bvr', 'bv'])]}"
+msgstr ""

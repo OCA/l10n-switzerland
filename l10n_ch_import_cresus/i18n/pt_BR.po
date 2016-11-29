@@ -50,7 +50,7 @@ msgstr ""
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Empresa"
 
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,create_uid:0
@@ -162,7 +162,7 @@ msgstr ""
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,state:0
 msgid "State"
-msgstr ""
+msgstr "Estado"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.model,name:l10n_ch_import_cresus.model_account_tax

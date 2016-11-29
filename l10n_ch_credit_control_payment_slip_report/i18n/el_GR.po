@@ -56,4 +56,4 @@ msgstr ""
 #. module: l10n_ch_credit_control_payment_slip_report
 #: model:ir.model,name:l10n_ch_credit_control_payment_slip_report.model_report
 msgid "Report"
-msgstr ""
+msgstr "Αναφορά"

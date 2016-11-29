@@ -167,7 +167,7 @@ msgstr ""
 #. module: l10n_ch_import_cresus
 #: model:ir.model,name:l10n_ch_import_cresus.model_account_tax
 msgid "Tax"
-msgstr ""
+msgstr "Porez"
 
 #. module: l10n_ch_import_cresus
 #: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:318

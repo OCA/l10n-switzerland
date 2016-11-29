@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-11 14:20+0000\n"
-"PO-Revision-Date: 2016-09-09 12:25+0000\n"
+"PO-Revision-Date: 2016-11-25 14:57+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Estonian (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/et/)\n"
 "MIME-Version: 1.0\n"
@@ -30,12 +30,12 @@ msgstr "Loobu"
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Loonud"
 
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Loodud"
 
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,currency_id:0
@@ -45,7 +45,7 @@ msgstr ""
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: l10n_ch_payment_slip_voucher
 #: view:v11.import.wizard.voucher:l10n_ch_payment_slip_voucher.v11_import_view
@@ -60,12 +60,12 @@ msgstr ""
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Viimati uuendatud"
 
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Viimati uuendatud"
 
 #. module: l10n_ch_payment_slip_voucher
 #: code:addons/l10n_ch_payment_slip_voucher/wizard/bvr_import.py:115
@@ -112,4 +112,4 @@ msgstr ""
 #. module: l10n_ch_payment_slip_voucher
 #: view:v11.import.wizard.voucher:l10n_ch_payment_slip_voucher.v11_import_view
 msgid "or"
-msgstr ""
+msgstr "või"

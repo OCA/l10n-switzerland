@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-11 14:20+0000\n"
-"PO-Revision-Date: 2016-09-16 21:45+0000\n"
+"PO-Revision-Date: 2016-11-22 16:25+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgstr ""
 #: view:lsv.export.wizard:l10n_ch_lsv_dd.view_lsv_export_wizard_form
 #: view:post.dd.export.wizard:l10n_ch_lsv_dd.view_post_dd_export_wizard_form
 msgid "Cancel"
-msgstr ""
+msgstr "Preklic"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:70
@@ -54,7 +54,7 @@ msgstr ""
 #: selection:lsv.export.wizard,state:0 selection:post.dd.export.wizard,state:0
 #, python-format
 msgid "Create"
-msgstr ""
+msgstr "Ustvari"
 
 #. module: l10n_ch_lsv_dd
 #: model:ir.actions.act_window,name:l10n_ch_lsv_dd.action_create_lsv
@@ -106,7 +106,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: selection:banking.export.ch.dd,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Osnutek"
 
 #. module: l10n_ch_lsv_dd
 #: field:res.partner.bank,esr_party_number:0
@@ -273,7 +273,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: model:ir.model,name:l10n_ch_lsv_dd.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Račun"
 
 #. module: l10n_ch_lsv_dd
 #: model:ir.model,name:l10n_ch_lsv_dd.model_account_move_line
@@ -528,7 +528,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: view:account.invoice.free:l10n_ch_lsv_dd.account_invoice_free_view
 msgid "or"
-msgstr ""
+msgstr "ali"
 
 #. module: l10n_ch_lsv_dd
 #: selection:post.dd.export.wizard,state:0

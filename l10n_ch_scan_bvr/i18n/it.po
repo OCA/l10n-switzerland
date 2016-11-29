@@ -75,7 +75,7 @@ msgstr "Annulla"
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
 msgid "Create"
-msgstr ""
+msgstr "Crea"
 
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,create_uid:0
@@ -125,7 +125,7 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: selection:scan.bvr,state:0
 msgid "New"
-msgstr ""
+msgstr "Nuovo"
 
 #. module: l10n_ch_scan_bvr
 #: model:ir.model,name:l10n_ch_scan_bvr.model_res_partner

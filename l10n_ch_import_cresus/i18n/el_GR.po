@@ -151,13 +151,13 @@ msgstr ""
 #. module: l10n_ch_import_cresus
 #: view:account.tax:l10n_ch_import_cresus.view_tax_form
 msgid "Refunds"
-msgstr ""
+msgstr "Επιστροφές χρημάτων"
 
 #. module: l10n_ch_import_cresus
 #: view:account.cresus.import:l10n_ch_import_cresus.cresus_move_line_importer_form
 #: field:account.cresus.import,report:0
 msgid "Report"
-msgstr ""
+msgstr "Αναφορά"
 
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,state:0

@@ -52,7 +52,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: view:create.dta.wizard:l10n_ch_dta.dta_create_view
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #. module: l10n_ch_dta
 #: view:create.dta.wizard:l10n_ch_dta.dta_create_view
