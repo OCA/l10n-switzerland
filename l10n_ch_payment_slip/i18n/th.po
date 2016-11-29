@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-08 10:38+0000\n"
+"POT-Creation-Date: 2016-11-26 03:47+0000\n"
 "PO-Revision-Date: 2016-05-26 13:58+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Thai (http://www.transifex.com/oca/OCA-l10n-switzerland-9-0/language/th/)\n"
@@ -106,20 +106,20 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_create_uid
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_v11_import_wizard_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "สร้างโดย"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_create_date
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_v11_import_wizard_create_date
 msgid "Created on"
-msgstr ""
+msgstr "สร้างเมื่อ"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_display_name
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_report_one_slip_per_page_from_invoice_display_name
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_v11_import_wizard_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "ชื่อที่ใช้แสดง"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_bvr_add_horz
@@ -136,7 +136,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_report_one_slip_per_page_from_invoice_id
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_v11_import_wizard_id
 msgid "ID"
-msgstr ""
+msgstr "รหัส"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.ui.view,arch_db:l10n_ch_payment_slip.v11_import_view
@@ -174,19 +174,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_report_one_slip_per_page_from_invoice___last_update
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_v11_import_wizard___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "แก้ไขครั้งสุดท้ายเมื่อ"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_write_uid
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_v11_import_wizard_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "อัพเดทครั้งสุดท้ายโดย"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_write_date
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_v11_import_wizard_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "อัพเดทครั้งสุดท้ายเมื่อ"
 
 #. module: l10n_ch_payment_slip
 #: selection:res.company,merge_mode:0
@@ -437,7 +437,7 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: model:ir.ui.view,arch_db:l10n_ch_payment_slip.v11_import_view
 msgid "or"
-msgstr ""
+msgstr "หรือ"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_report_one_slip_per_page_from_invoice
