@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-11 18:46+0000\n"
+"POT-Creation-Date: 2016-11-29 13:34+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/fr/)\n"
@@ -278,7 +278,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: view:lsv.export.wizard:0 view:post.dd.export.wizard:0
 msgid "Validate"
-msgstr ""
+msgstr "Valider"
 
 #. module: l10n_ch_lsv_dd
 #: view:res.partner.bank:0
@@ -515,7 +515,7 @@ msgstr ""
 #: field:post.dd.export.wizard,total_amount:0
 #, python-format
 msgid "Total Amount"
-msgstr ""
+msgstr "Montant Total"
 
 #. module: l10n_ch_lsv_dd
 #: model:ir.actions.act_window,name:l10n_ch_lsv_dd.act_banking_export_ch_dd_payment_order
