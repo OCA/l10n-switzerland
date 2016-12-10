@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-26 03:47+0000\n"
+"POT-Creation-Date: 2016-12-07 01:44+0000\n"
 "PO-Revision-Date: 2016-05-26 13:58+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Spanish (Mexico) (http://www.transifex.com/oca/OCA-l10n-switzerland-9-0/language/es_MX/)\n"
@@ -100,7 +100,7 @@ msgstr "Cancelar"
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Compañías"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_create_uid
@@ -162,7 +162,7 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Factura"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_account_move_line
