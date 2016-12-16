@@ -2,11 +2,11 @@
 # Copyright 2012-2016 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import re
-from openerp import models, fields, api, _
-from openerp.tools import mod10r
-from openerp import exceptions
+from odoo import models, fields, api, _
+from odoo.tools import mod10r
+from odoo import exceptions
 
-from openerp.addons.base_iban.models.res_partner_bank import normalize_iban
+from odoo.addons.base_iban.models.res_partner_bank import normalize_iban
 
 
 class BankCommon(object):
