@@ -2,9 +2,9 @@
 # © 2014-2015 Nicolas Bessi (Camptocamp SA)
 # © 2015 Yannick Vaucher (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from openerp.tests import common
-from openerp.tools import mute_logger
-from openerp import exceptions
+from odoo.tests import common
+from odoo.tools import mute_logger
+from odoo import exceptions
 
 
 class TestBank(common.TransactionCase):
