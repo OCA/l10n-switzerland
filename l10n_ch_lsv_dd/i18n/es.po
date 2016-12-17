@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-11 18:46+0000\n"
+"POT-Creation-Date: 2016-12-10 04:00+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/es/)\n"
@@ -460,7 +460,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: model:ir.model,name:l10n_ch_lsv_dd.model_res_partner_bank
 msgid "Bank Accounts"
-msgstr ""
+msgstr "Cuentas bancarias"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:327
@@ -533,7 +533,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: model:ir.model,name:l10n_ch_lsv_dd.model_payment_order
 msgid "Payment Order"
-msgstr ""
+msgstr "Orden de pago"
 
 #. module: l10n_ch_lsv_dd
 #: view:account.invoice.free:0 view:lsv.export.wizard:0
