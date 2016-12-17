@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-11 14:20+0000\n"
-"PO-Revision-Date: 2016-11-25 14:55+0000\n"
+"PO-Revision-Date: 2016-12-16 12:42+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -415,7 +415,7 @@ msgstr "Zahlungsauftrag"
 #: view:banking.export.ch.dd:l10n_ch_lsv_dd.view_banking_export_ch_dd_form
 #: field:banking.export.ch.dd,payment_order_ids:0
 msgid "Payment Orders"
-msgstr ""
+msgstr "Zahlungsaufträge"
 
 #. module: l10n_ch_lsv_dd
 #: view:post.dd.export.wizard:l10n_ch_lsv_dd.view_post_dd_export_wizard_form
