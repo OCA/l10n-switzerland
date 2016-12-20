@@ -29,22 +29,7 @@ class AccountInvoice(models.Model):
 
     _inherit = "account.invoice"
 
-    @api.model
-    def _get_reference_type(self):
-        """Function used by the function field 'reference_type'
-        in order to initalise available BVR Reference Types
-        """
-        res = super(AccountInvoice, self)._get_reference_type()
-        res.append(('bvr', 'BVR'))
-        return res
-
     reference = fields.Char(copy=False)
-
-    reference_type = fields.Selection(
-        _get_reference_type,
-        string='Reference Type',
-        required=True
-    )
 
     partner_bank_id = fields.Many2one(
         'res.partner.bank',
