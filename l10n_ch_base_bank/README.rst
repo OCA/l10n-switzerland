@@ -29,7 +29,7 @@ Entering a postal number of 9 or 6 digits will auto-complete the bank with PostF
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/125/9.0
+   :target: https://runbot.odoo-community.org/runbot/125/10.0
 
 
 Bug Tracker
@@ -56,6 +56,7 @@ Contributors
 * Guewen Baconnier <guewen.baconnier@camptocamp.com>
 * Paul Catinean <paulcatinean@gmail.com>
 * Yannick Vaucher <yannick.vaucher@camptocamp.com>
+* Akim Juillerat <akim.juillerat@camptocamp.com>
 
 Financial contributors
 ----------------------
