@@ -10,11 +10,11 @@ msgstr ""
 "POT-Creation-Date: 2016-01-11 14:20+0000\n"
 "PO-Revision-Date: 2015-06-17 13:34+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/es/)\n"
+"Language-Team: Estonian (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
+"Language: et\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_sepa
@@ -26,7 +26,7 @@ msgstr ""
 #. module: l10n_ch_sepa
 #: view:wizard.pain001:l10n_ch_sepa.wizard_pain_001_view
 msgid "Close"
-msgstr "Cerrar"
+msgstr ""
 
 #. module: l10n_ch_sepa
 #: model:ir.actions.act_window,name:l10n_ch_sepa.action_create_pain_001
@@ -36,19 +36,19 @@ msgstr ""
 #. module: l10n_ch_sepa
 #: field:wizard.pain001,create_uid:0
 msgid "Created by"
-msgstr "Creado por"
+msgstr "Loonud"
 
 #. module: l10n_ch_sepa
 #: field:wizard.pain001,create_date:0
 msgid "Created on"
-msgstr "Creado en"
+msgstr "Loodud"
 
 #. module: l10n_ch_sepa
 #: code:addons/l10n_ch_sepa/base_sepa/msg_sepa.py:50
 #: code:addons/l10n_ch_sepa/base_sepa/msg_sepa.py:55
 #, python-format
 msgid "Error"
-msgstr "Error"
+msgstr ""
 
 #. module: l10n_ch_sepa
 #: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:85
@@ -104,12 +104,12 @@ msgstr "ID"
 #. module: l10n_ch_sepa
 #: field:wizard.pain001,write_uid:0
 msgid "Last Updated by"
-msgstr "Última actualización por"
+msgstr "Viimati uuendatud"
 
 #. module: l10n_ch_sepa
 #: field:wizard.pain001,write_date:0
 msgid "Last Updated on"
-msgstr "Última actualización el"
+msgstr "Viimati uuendatud"
 
 #. module: l10n_ch_sepa
 #: code:addons/l10n_ch_sepa/base_sepa/msg_sepa.py:50

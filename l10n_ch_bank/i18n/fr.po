@@ -60,17 +60,17 @@ msgstr ""
 #. module: l10n_ch_bank
 #: field:res.bank,bank_lang:0
 msgid "Language"
-msgstr ""
+msgstr "Langue"
 
 #. module: l10n_ch_bank
 #: field:res.bank,bank_postaccount:0
 msgid "Post account"
-msgstr ""
+msgstr "Compte postal"
 
 #. module: l10n_ch_bank
 #: field:res.bank,bank_postaladdress:0
 msgid "Postal address"
-msgstr ""
+msgstr "Adresse postale"
 
 #. module: l10n_ch_bank
 #: field:res.bank,bank_sic:0

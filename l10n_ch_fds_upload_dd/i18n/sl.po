@@ -30,7 +30,7 @@ msgstr ""
 #. module: l10n_ch_fds_upload_dd
 #: view:post.dd.export.wizard:l10n_ch_fds_upload_dd.view_post_dd_export_wizard_form_inherited
 msgid "Confirm"
-msgstr ""
+msgstr "Potrdi"
 
 #. module: l10n_ch_fds_upload_dd
 #: field:fds.dd.upload.history,create_uid:0
