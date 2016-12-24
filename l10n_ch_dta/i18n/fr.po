@@ -4,14 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
-# Sébastien LANGE (SYLEAM) <sebastien.lange@syleam.fr>, 2016
+# leemannd <denis.leemann@camptocamp.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-26 03:47+0000\n"
-"PO-Revision-Date: 2016-11-26 03:47+0000\n"
-"Last-Translator: Sébastien LANGE (SYLEAM) <sebastien.lange@syleam.fr>, 2016\n"
+"POT-Creation-Date: 2016-12-17 03:13+0000\n"
+"PO-Revision-Date: 2016-12-17 03:13+0000\n"
+"Last-Translator: leemannd <denis.leemann@camptocamp.com>, 2016\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,7 +55,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: model:account.journal,name:l10n_ch_dta.bank_journal
 msgid "Bank - Test"
-msgstr ""
+msgstr "Banque - Test"
 
 #. module: l10n_ch_dta
 #: model:ir.model,name:l10n_ch_dta.model_res_partner_bank
@@ -75,12 +75,12 @@ msgstr ""
 #. module: l10n_ch_dta
 #: model:account.account,name:l10n_ch_dta.a_expense_finance
 msgid "Bank Fees - (test)"
-msgstr ""
+msgstr "Taxes Bancaires - (test)"
 
 #. module: l10n_ch_dta
 #: model:account.account,name:l10n_ch_dta.a_capital
 msgid "Capital"
-msgstr ""
+msgstr "Capital"
 
 #. module: l10n_ch_dta
 #: model:account.account,name:l10n_ch_dta.cash
@@ -156,7 +156,7 @@ msgstr "Nom à afficher"
 #. module: l10n_ch_dta
 #: model:account.account,name:l10n_ch_dta.a_dividends
 msgid "Dividends"
-msgstr ""
+msgstr "Dividendes"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:171
@@ -186,7 +186,7 @@ msgstr "Erreur"
 #. module: l10n_ch_dta
 #: model:account.account,name:l10n_ch_dta.a_expense
 msgid "Expenses - (test)"
-msgstr ""
+msgstr "Dépenses - (test)"
 
 #. module: l10n_ch_dta
 #: model:account.account,name:l10n_ch_dta.xfa
