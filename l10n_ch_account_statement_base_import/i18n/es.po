@@ -52,7 +52,7 @@ msgstr ""
 #: code:addons/l10n_ch_account_statement_base_import/statement.py:172
 #, python-format
 msgid "Attachment"
-msgstr ""
+msgstr "Adjunto"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/g11_file_parser.py:149

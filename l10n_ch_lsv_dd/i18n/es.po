@@ -91,7 +91,7 @@ msgstr ""
 #: field:post.dd.export.wizard,filename:0
 #, python-format
 msgid "Filename"
-msgstr ""
+msgstr "Nombre de archivo"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/model/bank.py:76 constraint:res.partner.bank:0
