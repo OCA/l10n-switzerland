@@ -30,7 +30,7 @@ msgstr "Vazgeç"
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
 msgid "Close"
-msgstr ""
+msgstr "Kapat"
 
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
@@ -76,7 +76,7 @@ msgstr ""
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,filename:0
 msgid "Filename"
-msgstr ""
+msgstr "Dosya adı"
 
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited

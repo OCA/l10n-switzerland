@@ -94,7 +94,7 @@ msgstr ""
 #. module: l10n_ch_base_bank
 #: model:ir.model,name:l10n_ch_base_bank.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Фактура"
 
 #. module: l10n_ch_base_bank
 #: code:addons/l10n_ch_base_bank/bank.py:113

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-11 14:20+0000\n"
-"PO-Revision-Date: 2016-10-05 06:29+0000\n"
+"PO-Revision-Date: 2016-12-27 08:23+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Croatian (Croatia) (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/hr_HR/)\n"
 "MIME-Version: 1.0\n"
@@ -90,12 +90,12 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: view:v11.import.wizard:l10n_ch_payment_slip.v11_import_view
 msgid "Cancel"
-msgstr ""
+msgstr "Otkaži"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Poduzeća"
 
 #. module: l10n_ch_payment_slip
 #: field:l10n_ch.payment_slip,create_uid:0
@@ -150,7 +150,7 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Račun"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_account_move_line

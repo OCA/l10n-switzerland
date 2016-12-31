@@ -55,7 +55,7 @@ msgstr ""
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,create_date:0
@@ -116,12 +116,12 @@ msgstr ""
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultima actualización por"
 
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultima actualización en"
 
 #. module: l10n_ch_import_cresus
 #: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:177

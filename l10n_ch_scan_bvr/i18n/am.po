@@ -132,7 +132,7 @@ msgstr ""
 #: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
 #: field:scan.bvr,partner_id:0
 msgid "Partner"
-msgstr ""
+msgstr "ተባባሪ"
 
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form

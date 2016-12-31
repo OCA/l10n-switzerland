@@ -35,7 +35,7 @@ msgstr ""
 #. module: l10n_ch_fds_upload_dd
 #: field:fds.dd.upload.history,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: l10n_ch_fds_upload_dd
 #: field:fds.dd.upload.history,create_date:0
@@ -91,12 +91,12 @@ msgstr "ID"
 #. module: l10n_ch_fds_upload_dd
 #: field:fds.dd.upload.history,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultima actualización por"
 
 #. module: l10n_ch_fds_upload_dd
 #: field:fds.dd.upload.history,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultima actualización en"
 
 #. module: l10n_ch_fds_upload_dd
 #: selection:fds.dd.upload.history,state:0

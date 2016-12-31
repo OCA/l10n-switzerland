@@ -37,7 +37,7 @@ msgstr "Pièces jointes"
 #. module: l10n_ch_account_statement_base_import
 #: model:ir.model,name:l10n_ch_account_statement_base_import.model_account_bank_statement_line
 msgid "Bank Statement Line"
-msgstr ""
+msgstr "Ligne de Relevé Bancaire"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parsers/g11_file_parser.py:49

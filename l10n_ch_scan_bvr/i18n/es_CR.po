@@ -80,7 +80,7 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,create_date:0
@@ -110,12 +110,12 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultima actualización por"
 
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultima actualización en"
 
 #. module: l10n_ch_scan_bvr
 #: selection:scan.bvr,state:0
@@ -132,7 +132,7 @@ msgstr ""
 #: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
 #: field:scan.bvr,partner_id:0
 msgid "Partner"
-msgstr ""
+msgstr "Empresa"
 
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form

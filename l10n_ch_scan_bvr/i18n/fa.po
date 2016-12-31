@@ -70,7 +70,7 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
 msgid "Cancel"
-msgstr ""
+msgstr "لغو"
 
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form

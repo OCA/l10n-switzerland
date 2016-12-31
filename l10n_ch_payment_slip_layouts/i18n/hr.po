@@ -20,7 +20,7 @@ msgstr ""
 #. module: l10n_ch_payment_slip_layouts
 #: model:ir.model,name:l10n_ch_payment_slip_layouts.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Poduzeća"
 
 #. module: l10n_ch_payment_slip_layouts
 #: field:report.invoice_and_one_slip_per_page_from_invoice,id:0

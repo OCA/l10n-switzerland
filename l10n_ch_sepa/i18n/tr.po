@@ -26,7 +26,7 @@ msgstr ""
 #. module: l10n_ch_sepa
 #: view:wizard.pain001:l10n_ch_sepa.wizard_pain_001_view
 msgid "Close"
-msgstr ""
+msgstr "Kapat"
 
 #. module: l10n_ch_sepa
 #: model:ir.actions.act_window,name:l10n_ch_sepa.action_create_pain_001

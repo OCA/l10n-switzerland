@@ -80,12 +80,12 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat de"
 
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat la"
 
 #. module: l10n_ch_scan_bvr
 #: field:res.partner,supplier_invoice_default_product:0
@@ -95,7 +95,7 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
@@ -110,12 +110,12 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultima actualizare făcută de"
 
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultima actualizare la"
 
 #. module: l10n_ch_scan_bvr
 #: selection:scan.bvr,state:0
@@ -132,7 +132,7 @@ msgstr ""
 #: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
 #: field:scan.bvr,partner_id:0
 msgid "Partner"
-msgstr ""
+msgstr "Partener"
 
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:l10n_ch_scan_bvr.scan_bvr_memory_form
