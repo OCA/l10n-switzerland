@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 19:49+0000\n"
+"POT-Creation-Date: 2016-12-24 03:05+0000\n"
 "PO-Revision-Date: 2015-09-04 14:41+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/fr/)\n"
@@ -158,7 +158,7 @@ msgstr ""
 #. module: l10n_ch_account_statement_base_import
 #: model:ir.model,name:l10n_ch_account_statement_base_import.model_account_bank_statement_line
 msgid "Bank Statement Line"
-msgstr ""
+msgstr "Ligne de Relevé Bancaire"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parser/g11_file_parser.py:33
@@ -186,7 +186,7 @@ msgstr ""
 #. module: l10n_ch_account_statement_base_import
 #: model:ir.model,name:l10n_ch_account_statement_base_import.model_account_bank_statement
 msgid "Bank Statement"
-msgstr ""
+msgstr "Relevé bancaire"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/statement.py:95

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-29 13:34+0000\n"
+"POT-Creation-Date: 2016-12-24 03:05+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/fr/)\n"
@@ -204,7 +204,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: view:banking.export.ch.dd:0
 msgid "General Information"
-msgstr ""
+msgstr "Information générale"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:179
@@ -267,7 +267,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: model:ir.model,name:l10n_ch_lsv_dd.model_account_move_line
 msgid "Journal Items"
-msgstr ""
+msgstr "Écritures du journal"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:412
