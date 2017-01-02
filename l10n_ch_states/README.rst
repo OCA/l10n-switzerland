@@ -44,6 +44,7 @@ Contributors
 ------------
 
 * Mathias Neef <mn@copado.de>
+* Alvaro Estebanez (brain-tec AG)
 
 Maintainer
 ----------
