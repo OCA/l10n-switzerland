@@ -19,7 +19,7 @@
 #
 ##############################################################################
 {'name': 'Payment slip alternate layout(s)',
- 'version': '8.0.0.1.0',
+ 'version': '9.0.0.1.0',
  'author': 'Camptocamp, Odoo Community Association (OCA)',
  'maintainer': 'Camptocamp, Odoo Community Association (OCA)',
  'summary': """Add new BVR/ESR payment slip layouts like invoice
