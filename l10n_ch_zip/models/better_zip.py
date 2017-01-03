@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-# © 2011-2014 Nicolas Bessi (Camptocamp SA)
-# © 2014 Olivier Jossen (brain-tec AG)
-# © 2014 Guewen Baconnier (Camptocamp SA)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from openerp import models, fields
+# Copyright 2011-2017 Camptocamp SA
+# Copyright 2014 Olivier Jossen (brain-tec AG)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from odoo import models, fields
 
 
 class ResBetterZip(models.Model):
