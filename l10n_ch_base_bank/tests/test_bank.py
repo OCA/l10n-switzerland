@@ -2,9 +2,9 @@
 # © 2014-2015 Nicolas Bessi (Camptocamp SA)
 # © 2015 Yannick Vaucher (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from openerp.tests import common
-from openerp.tools import mute_logger
-from openerp import exceptions
+from odoo.tests import common
+from odoo.tools import mute_logger
+from odoo import exceptions
 
 
 class TestBank(common.TransactionCase):
@@ -26,6 +26,16 @@ class TestBank(common.TransactionCase):
             'partner_id': self.partner.id,
             'bank_id': self.post_bank.id,
             'acc_number': 'CH0909000000100080607',
+            'bvr_adherent_num': '1234567',
+        })
+        self.assertEqual(bank_acc.ccp, '10-8060-7')
+        self.assertEqual(bank_acc.acc_type, 'iban')
+
+    def test_iban_ccp_with_spaces(self):
+        bank_acc = self.env['res.partner.bank'].create({
+            'partner_id': self.partner.id,
+            'bank_id': self.post_bank.id,
+            'acc_number': 'CH09 0900 0000 1000 8060 7',
             'bvr_adherent_num': '1234567',
         })
         self.assertEqual(bank_acc.ccp, '10-8060-7')
