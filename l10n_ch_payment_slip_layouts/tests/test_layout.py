@@ -86,12 +86,15 @@ class TestPaymentSlipLayout(test_common.TransactionCase):
             }
         )
 
+        account_model = self.env['account.account']
+        account_debtor = account_model.search([('code', '=', '1100')])
+
         self.invoice = self.env['account.invoice'].create(
             {
                 'partner_id': self.env.ref('base.res_partner_12').id,
                 'reference_type': 'none',
                 'name': 'A customer invoice',
-                'account_id': self.env.ref('account.a_recv').id,
+                'account_id': account_debtor.id,
                 'type': 'out_invoice',
                 'partner_bank_id': self.bank_account.id
             }
