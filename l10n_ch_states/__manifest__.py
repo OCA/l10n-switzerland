@@ -22,8 +22,12 @@
     'name': 'Switzerland Country States',
     'category': 'Localisation',
     'summary': '',
-    'version': '9.0.1.0.0',
-    'author': 'copado MEDIA UG, Odoo Community Association (OCA)',
+    'version': '10.0.1.0.0',
+    'author': '''
+        copado MEDIA UG,
+        brain-tec AG,
+        Odoo Community Association (OCA)
+    ''',
     'website': 'http://www.copado.de',
     'license': 'AGPL-3',
     'depends': [
@@ -31,6 +35,6 @@
     ],
     'data': ['data/res_country_states.xml'],
     'demo': [],
-    'installable': False,
+    'installable': True,
     'application': False,
 }

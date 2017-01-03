@@ -1,7 +1,7 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License: AGPL-3
 
-    
+
 Swiss postal code (ZIP) list
 ============================
 
@@ -27,7 +27,7 @@ Dependencies
 The module ``base_location`` is required. It is available in
 https://github.com/OCA/partner-contact/
 
-Since Version 8.0.2.0 the module ``l10n_ch_states`` is required. 
+Since Version 8.0.2.0 the module ``l10n_ch_states`` is required.
 It is also available in https://github.com/OCA/l10n-switzerland
 
 
@@ -45,7 +45,7 @@ Usage
 To use this module, you need to:
 
 * Fill the new field in the partner form with a zip or a city from Switzerland
-* Than you get a list with possible entries. 
+* Than you get a list with possible entries.
 * The one you select is auto-filled in the zip-, citiy-, state- and country-field.
 
 For further information, please visit:
@@ -78,6 +78,7 @@ Contributors
 * Olivier Jossen (Brain Tec)
 * Guewen Baconnier (Camptocamp)
 * Mathias Neef (copadoMEDIA)
+* Alvaro Estebanez (Brain Tec)
 
 Maintainer
 ----------
