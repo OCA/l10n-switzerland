@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-  <data  noupdate="1">
+<odoo noupdate="1">
     <record id="state_AG" model="res.country.state">
       <field model="res.country" name="country_id" search="[('code','=','CH')]" />
       <field name="name">Argovia</field>
@@ -80,7 +79,7 @@
       <field model="res.country" name="country_id" search="[('code','=','CH')]" />
       <field name="name">Neuchâtel</field>
       <field name="code">NE</field>
-    </record> 
+    </record>
     <record id="state_NW" model="res.country.state">
       <field model="res.country" name="country_id" search="[('code','=','CH')]" />
       <field name="name">Nidwald</field>
@@ -90,7 +89,7 @@
       <field model="res.country" name="country_id" search="[('code','=','CH')]" />
       <field name="name">Obwald</field>
       <field name="code">OW</field>
-    </record>    
+    </record>
     <record id="state_SH" model="res.country.state">
       <field model="res.country" name="country_id" search="[('code','=','CH')]" />
       <field name="name">Schaffhausen</field>
@@ -145,7 +144,5 @@
       <field model="res.country" name="country_id" search="[('code','=','CH')]" />
       <field name="name">Zurich</field>
       <field name="code">ZH</field>
-    </record>    
-
-  </data>
-</openerp>
+    </record>
+</odoo>
