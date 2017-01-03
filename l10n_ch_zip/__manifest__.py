@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-# © 2011-2014 Nicolas Bessi (Camptocamp SA)
-# © 2014 Olivier Jossen (brain-tec AG)
-# © 2014 Guewen Baconnier (Camptocamp SA)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2011-2017 Camptocamp SA
+# Copyright 2014 Olivier Jossen (brain-tec AG)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     'name': 'Switzerland - Postal codes (ZIP) list',
-    'version': '9.0.2.0.0',
+    'version': '10.0.1.0.0',
     'author': '''
         Camptocamp,
         brain-tec AG,
@@ -28,6 +27,6 @@
     'images': [],
     'demo': [],
     'auto_install': False,
-    'installable': False,
+    'installable': True,
     'application': True,
 }
