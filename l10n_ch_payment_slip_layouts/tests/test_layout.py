@@ -70,13 +70,7 @@ class TestPaymentSlipLayout(test_common.TransactionCase):
         self.bank_account = self.env['res.partner.bank'].create(
             {
                 'partner_id': partner.id,
-                'owner_name': partner.name,
-                'street':  partner.street,
-                'city': partner.city,
-                'zip':  partner.zip,
-                'state': 'bvr',
-                'bank': bank.id,
-                'bank_name': bank.name,
+                'bank_id': bank.id,
                 'bank_bic': bank.bic,
                 'acc_number': 'R 12312123',
                 'bvr_adherent_num': '1234567',
