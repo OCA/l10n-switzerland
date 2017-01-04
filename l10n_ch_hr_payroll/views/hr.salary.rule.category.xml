@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+File: hr.salary.rule.category.xml
+Module: l10n_ch_hr_payroll
+
+Created by sge@open-net.ch
+
+Copyright (c) 2014 Open-Net Ltd.
+-->
+<openerp>
+    <data noupdate="1">
+    <record id="hr_payroll_FALW" model="hr.salary.rule.category">
+        <field name="name">Free allowance</field>
+        <field name="code">FALW</field>
+    </record>
+    <record id="hr_payroll_COSTS" model="hr.salary.rule.category">
+        <field name="name">Full Company Contribution</field>
+        <field name="code">COSTS</field>
+        <field name="parent_id" ref="hr_payroll.ALW"/>
+    </record>
+    <record id="hr_payroll_P13" model="hr.salary.rule.category">
+        <field name="name">Yearly provisions</field>
+        <field name="code">Y13</field>
+        <field name="parent_id" ref="hr_payroll.ALW"/>
+    </record>
+    <record id="hr_payroll_HSUP" model="hr.salary.rule.category">
+        <field name="name">Monthly Extra hours</field>
+        <field name="code">HSUP</field>
+        <field name="parent_id" ref="hr_payroll.DED"/>
+    </record>
+    <record id="hr_payroll_BONUS" model="hr.salary.rule.category">
+        <field name="name">Monthly Bonus</field>
+        <field name="code">BONUS</field>
+        <field name="parent_id" ref="hr_payroll.DED"/>
+    </record>
+    </data>
+</openerp>

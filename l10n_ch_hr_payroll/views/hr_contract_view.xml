@@ -18,8 +18,8 @@
             <field name="arch" type="xml">
                 <field name="struct_id" position="after">
                     <field name="holiday_rate"/>
-                    <field name="obp_rate"/>
-                    <field name="obp_amount"/>
+                    <field name="lpp_rate"/>
+                    <field name="lpp_amount"/>
                 </field>
             </field>
         </record>

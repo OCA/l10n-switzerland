@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+File: hr.salary.rule.xml
+Module: l10n_ch_hr_payroll
+
+Created by sge@open-net.ch
+Translated and changed source terms to English by trevi@twanda.com
+Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
+-->
+<openerp>
+    <data noupdate="1">
+        <record id="AM" model="hr.salary.rule">
+            <field name="amount_select">fix</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">MI_GE</field>
+            <field name="condition_select">none</field>
+            <field name="condition_range_max">999999</field>
+            <field name="name">Maternity Insurance GE</field>
+            <field name="note">Maternity Insurance for employees employed in the State of Geneva</field>
+            <field name="quantity">1</field>
+            <field name="sequence">110</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+        </record>
+        <record id="AM_E" model="hr.salary.rule">
+            <field name="amount_select">percentage</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">MI_GE_E</field>
+            <field name="condition_select">none</field>
+            <field name="name">Maternity Insurance Employee GE</field>
+            <field name="amount_percentage">-0.0410</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="quantity">1</field>
+            <field name="sequence">111</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="parent_rule_id" ref="AM"/>
+        </record>
+        <record id="AM_C" model="hr.salary.rule">
+            <field name="amount_select">percentage</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">MI_GE_C</field>
+            <field name="condition_select">none</field>
+            <field name="name">Maternity Insurance Company GE</field>
+            <field name="amount_percentage">0.0820</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="quantity">1</field>
+            <field name="sequence">111</field>
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="parent_rule_id" ref="AM"/>
+        </record>
+        <record id="AVS" model="hr.salary.rule">
+            <field name="amount_select">fix</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">OAI</field>
+            <field name="condition_select">none</field>
+            <field name="condition_range_max">999999</field>
+            <field name="name">OAI/II/IC</field>
+            <field name="note">Old Age Insurance, Invalidity Insurance, Income Compensation</field>
+            <field name="quantity">1</field>
+            <field name="sequence">110</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+        </record>
+        <record id="AVS_E" model="hr.salary.rule">
+            <field name="amount_select">percentage</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">OAI_E</field>
+            <field name="condition_select">none</field>
+            <field name="condition_range_min">2047.4</field>
+            <field name="condition_range_max">999999</field>
+            <field name="name">OAI/II/IC Employee</field>
+            <field name="amount_percentage">-5.15</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="quantity">1</field>
+            <field name="sequence">111</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="parent_rule_id" ref="AVS"/>
+        </record>
+        <record id="AVS_C" model="hr.salary.rule">
+            <field name="amount_select">percentage</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">OAI_C</field>
+            <field name="condition_select">none</field>
+            <field name="condition_range_min">2047.4</field>
+            <field name="condition_range_max">999999</field>
+            <field name="name">OAI/II/IC Company</field>
+            <field name="amount_percentage">10.3</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="quantity">1</field>
+            <field name="sequence">111</field>
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="parent_rule_id" ref="AVS"/>
+        </record>
+        <record id="AC" model="hr.salary.rule">
+            <field name="amount_select">fix</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">UI</field>
+            <field name="condition_select">none</field>
+            <field name="name">UI</field>
+            <field name="note">Unemployment insurance</field>
+            <field name="quantity">1</field>
+            <field name="sequence">120</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+        </record>
+        <record id="AC_E" model="hr.salary.rule">
+            <field name="amount_select">percentage</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">UI_E</field>
+            <field name="condition_select">range</field>
+            <field name="condition_range_max">12350</field>
+            <field name="name">UI Employee</field>
+            <field name="amount_percentage">-1.1</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="quantity">1</field>
+            <field name="condition_range">categories.BASIC + categories.ALW</field>
+            <field name="sequence">121</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="parent_rule_id" ref="AC"/>
+        </record>
+        <record id="AC_C" model="hr.salary.rule">
+            <field name="amount_select">percentage</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">UI_C</field>
+            <field name="condition_select">range</field>
+            <field name="condition_range_max">12350</field>
+            <field name="name">UI Company</field>
+            <field name="amount_percentage">2.2</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="quantity">1</field>
+            <field name="condition_range">categories.BASIC + categories.ALW</field>
+            <field name="sequence">121</field>
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="parent_rule_id" ref="AC"/>
+        </record>
+        <record id="AC_SE" model="hr.salary.rule">
+            <field name="amount_select">percentage</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">UI_SE</field>
+            <field name="condition_select">range</field>
+            <field name="condition_range_min">12350</field>
+            <field name="condition_range_max">999999</field>
+            <field name="name">UI Solidarity Rate Employee</field>
+            <field name="amount_percentage">-1</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="quantity">1</field>
+            <field name="condition_range">categories.BASIC + categories.ALW</field>
+            <field name="sequence">122</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="parent_rule_id" ref="AC"/>
+        </record>
+        <record id="AC_SC" model="hr.salary.rule">
+            <field name="amount_select">percentage</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">UI_SC</field>
+            <field name="condition_select">range</field>
+            <field name="condition_range_min">12350</field>
+            <field name="condition_range_max">999999</field>
+            <field name="name">UI Solidarity Rate Company</field>
+            <field name="amount_percentage">2</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="quantity">1</field>
+            <field name="condition_range">categories.BASIC + categories.ALW</field>
+            <field name="sequence">122</field>
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="parent_rule_id" ref="AC"/>
+        </record>
+        <record id="LPP" model="hr.salary.rule">
+            <field name="amount_select">fix</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">OBP</field>
+            <field name="condition_select">range</field>
+            <field name="condition_range_min">2056.25</field>
+            <field name="condition_range_max">7050</field>
+            <field name="name">OBP</field>
+            <field name="note">Occupational Benefit Plan</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="quantity">1</field>
+            <field name="condition_range">categories.BASIC + categories.ALW</field>
+            <field name="sequence">130</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+        </record>
+        <record id="LPP_E" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">OBP_E</field>
+            <field name="condition_select">python</field>
+            <field name="condition_range_min">2056.25</field>
+            <field name="condition_range_max">7050</field>
+            <field name="name">OBP Employee</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="amount_python_compute">minimum_legal = 2056.25 ; result = (categories.BASIC + categories.ALW - minimum_legal) * (((contract.lpp_rate)*-1)/100)</field>
+            <field name="condition_python">result = contract.lpp_rate > 0</field>
+            <field name="quantity">1</field>
+            <field name="sequence">131</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="parent_rule_id" ref="LPP"/>
+        </record>
+        <record id="LPP_C" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">OBP_C</field>
+            <field name="condition_select">python</field>
+            <field name="condition_range_min">2056.25</field>
+            <field name="condition_range_max">7050</field>
+            <field name="name">OBP Company</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="amount_python_compute">minimum_legal = 2056.25 ; result = (categories.BASIC + categories.ALW - minimum_legal) * 2*(contract.lpp_rate/100)</field>
+            <field name="condition_python">result = contract.lpp_rate > 0</field>
+            <field name="quantity">1</field>
+            <field name="sequence">132</field>
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="parent_rule_id" ref="LPP"/>
+        </record>
+        <record id="LPP_F_E" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">OBP_F_E</field>
+            <field name="condition_select">python</field>
+            <field name="condition_range_min">2056.25</field>
+            <field name="condition_range_max">7050</field>
+            <field name="name">OBP Fixed amount Employee</field>
+            <field name="amount_python_compute">result = -contract.lpp_amount</field>
+            <field name="condition_python">result = contract.lpp_amount > 0</field>
+            <field name="quantity">1</field>
+            <field name="sequence">133</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="parent_rule_id" ref="LPP"/>
+        </record>
+        <record id="LPP_F_C" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">OBP_F_C</field>
+            <field name="condition_select">python</field>
+            <field name="condition_range_min">2056.25</field>
+            <field name="condition_range_max">7050</field>
+            <field name="name">OBP Fixed amount Company</field>
+            <field name="amount_python_compute">result = 2*contract.lpp_amount</field>
+            <field name="condition_python">result = contract.lpp_amount > 0</field>
+            <field name="quantity">1</field>
+            <field name="sequence">134</field>
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="parent_rule_id" ref="LPP"/>
+        </record>
+        <record id="LAA" model="hr.salary.rule">
+            <field name="amount_select">fix</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">AI</field>
+            <field name="condition_select">none</field>
+            <field name="name">AI</field>
+            <field name="note">Accident and occupational disease insurance</field>
+            <field name="quantity">1</field>
+            <field name="sequence">140</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+        </record>
+        <record id="LAA_E" model="hr.salary.rule">
+            <field name="amount_select">percentage</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">AI_E</field>
+            <field name="condition_select">none</field>
+            <field name="name">AI Employee</field>
+            <field name="amount_percentage">-0.46</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="quantity">1</field>
+            <field name="sequence">141</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="parent_rule_id" ref="LAA"/>
+        </record>
+        <record id="LAA_C" model="hr.salary.rule">
+            <field name="amount_select">percentage</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">AI_C</field>
+            <field name="condition_select">none</field>
+            <field name="name">AI Company</field>
+            <field name="amount_percentage">0.92</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="quantity">1</field>
+            <field name="sequence">141</field>
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="parent_rule_id" ref="LAA"/>
+        </record>
+        <record id="LCA" model="hr.salary.rule">
+            <field name="amount_select">fix</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">SDA</field>
+            <field name="condition_select">none</field>
+            <field name="name">SDA</field>
+            <field name="note">Sickness Daily Allowance</field>
+            <field name="quantity">1</field>
+            <field name="sequence">150</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+        </record>
+        <record id="LCA_E" model="hr.salary.rule">
+            <field name="amount_select">percentage</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">SDA_E</field>
+            <field name="condition_select">none</field>
+            <field name="name">SDA Employee</field>
+            <field name="amount_percentage">-0.52</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="quantity">1</field>
+            <field name="sequence">151</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="parent_rule_id" ref="LCA"/>
+        </record>
+        <record id="LCA_C" model="hr.salary.rule">
+            <field name="amount_select">percentage</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">SDA_C</field>
+            <field name="condition_select">none</field>
+            <field name="name">SDA Company</field>
+            <field name="amount_percentage">1.04</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="quantity">1</field>
+            <field name="sequence">151</field>
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="parent_rule_id" ref="LCA"/>
+        </record>
+        <record id="PCF" model="hr.salary.rule">
+            <field name="amount_select">fix</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">FA_VD</field>
+            <field name="condition_select">none</field>
+            <field name="name">Fam. Allowance VD</field>
+            <field name="note">Family Allowance for employees employed in the State of Vaud</field>
+            <field name="quantity">1</field>
+            <field name="sequence">160</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+        </record>
+        <record id="PCF_E" model="hr.salary.rule">
+            <field name="amount_select">percentage</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">FA_VD_E</field>
+            <field name="condition_select">none</field>
+            <field name="name">Fam. Allowance VD Employee</field>
+            <field name="amount_percentage">-0.06</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="quantity">1</field>
+            <field name="sequence">161</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="parent_rule_id" ref="PCF"/>
+        </record>
+        <record id="PCF_C" model="hr.salary.rule">
+            <field name="amount_select">percentage</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">FA_VD_C</field>
+            <field name="condition_select">none</field>
+            <field name="name">Fam. Allowance VD Company</field>
+            <field name="amount_percentage">0.12</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="quantity">1</field>
+            <field name="sequence">161</field>
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="parent_rule_id" ref="PCF"/>
+        </record>
+        <record id="FADMIN" model="hr.salary.rule">
+            <field name="amount_select">percentage</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">FADMIN</field>
+            <field name="condition_select">none</field>
+            <field name="name">Administrative Fees</field>
+            <field name="note">Administrative Fees to the OAI</field>
+            <field name="amount_percentage">0.25</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="quantity">1</field>
+            <field name="sequence">210</field>
+            <field name="category_id" ref="hr_payroll_COSTS"/>
+        </record>
+        <record id="COTFAM" model="hr.salary.rule">
+            <field name="amount_select">percentage</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">CONFAM</field>
+            <field name="condition_select">none</field>
+            <field name="name">Contribution Family Allow.</field>
+            <field name="note">Contribution Family Allowance</field>
+            <field name="amount_percentage">2.275</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="quantity">1</field>
+            <field name="sequence">211</field>
+            <field name="category_id" ref="hr_payroll_COSTS"/>
+        </record>
+        <record id="ALFA" model="hr.salary.rule">
+            <field name="amount_select">fix</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">FAMA</field>
+            <field name="condition_select">none</field>
+            <field name="name">Family Allowances</field>
+            <field name="note">Family Allowances</field>
+            <field name="quantity">1</field>
+            <field name="condition_range">categories.BASIC + categories.ALW</field>
+            <field name="sequence">50</field>
+            <field name="category_id" ref="hr_payroll_FALW"/>
+        </record>
+        <record id="ALFA_E" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">FAMA_16</field>
+            <field name="condition_select">python</field>
+            <field name="name">Family Allowances - Children up to 16</field>
+            <field name="amount_python_compute">result = contract.employee_id.children * 230
+if contract.employee_id.children + contract.employee_id.children_student > 2:
+    result += contract.employee_id.children * 100</field>
+            <field name="condition_python">result = contract.employee_id.children > 0</field>
+            <field name="quantity">1</field>
+            <field name="condition_range">contract.employee_id.children</field>
+            <field name="sequence">51</field>
+            <field name="category_id" ref="hr_payroll_FALW"/>
+            <field name="parent_rule_id" ref="ALFA"/>
+        </record>
+        <record id="ALFA_E_R" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">FAMA_16_R</field>
+            <field name="condition_select">python</field>
+            <field name="name">Family Allowances - Children up to 16 (report)</field>
+            <field name="amount_python_compute">result = contract.employee_id.children * 230
+if contract.employee_id.children + contract.employee_id.children_student > 2:
+    result += contract.employee_id.children * 100
+result = -result</field>
+            <field name="condition_python">result = contract.employee_id.children > 0</field>
+            <field name="quantity">1</field>
+            <field name="condition_range">contract.employee_id.children</field>
+            <field name="sequence">51</field>
+            <field name="category_id" ref="hr_payroll_FALW"/>
+            <field name="parent_rule_id" ref="ALFA"/>
+        </record>
+        <record id="ALFA_F" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">FAMA_ED</field>
+            <field name="condition_select">python</field>
+            <field name="name">Family Allowances - Professional Education</field>
+            <field name="amount_python_compute">result = contract.employee_id.children_student * 300
+if contract.employee_id.children + contract.employee_id.children_student > 2:
+    result += contract.employee_id.children_student * 100</field>
+            <field name="condition_python">result = contract.employee_id.children_student > 0</field>
+            <field name="quantity">1</field>
+            <field name="condition_range">contract.employee_id.children_student</field>
+            <field name="sequence">51</field>
+            <field name="category_id" ref="hr_payroll_FALW"/>
+            <field name="parent_rule_id" ref="ALFA"/>
+        </record>
+        <record id="ALFA_F_R" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">FAMA_ED_R</field>
+            <field name="condition_select">python</field>
+            <field name="name">Family Allowances - Professional Education (report)</field>
+            <field name="amount_python_compute">result = contract.employee_id.children_student * 300
+if contract.employee_id.children + contract.employee_id.children_student > 2:
+    result += contract.employee_id.children_student * 100
+result = -result</field>
+            <field name="condition_python">result = contract.employee_id.children_student > 0</field>
+            <field name="quantity">1</field>
+            <field name="condition_range">contract.employee_id.children_student</field>
+            <field name="sequence">51</field>
+            <field name="category_id" ref="hr_payroll_FALW"/>
+            <field name="parent_rule_id" ref="ALFA"/>
+        </record>
+        <record id="FREP" model="hr.salary.rule">
+            <field name="amount_select">percentage</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">REPEX</field>
+            <field name="condition_select">none</field>
+            <field name="name">Representative Expenses</field>
+            <field name="note">Representative Expenses</field>
+            <field name="amount_percentage">5</field>
+            <field name="amount_percentage_base">categories.BASIC</field>
+            <field name="quantity">1</field>
+            <field name="sequence">40</field>
+            <field name="category_id" ref="hr_payroll_FALW"/>
+        </record>
+        <record id="P13" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">Y13</field>
+            <field name="condition_select">none</field>
+            <field name="name">Year-End Salary</field>
+            <field name="note">Year-end salary (13th monthly salary)</field>
+            <field name="quantity">1</field>
+            <field name="sequence">250</field>
+            <field name="category_id" ref="hr_payroll_P13"/>
+        </record>
+        <record id="P13_NET" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">Y13_NET</field>
+            <field name="condition_select">none</field>
+            <field name="name">13th Salary NET</field>
+            <field name="amount_python_compute">result = (categories.BASIC + categories.DED )/12</field>
+            <field name="quantity">1</field>
+            <field name="sequence">255</field>
+            <field name="category_id" ref="hr_payroll_P13"/>
+            <field name="parent_rule_id" ref="P13"/>
+        </record>
+        <record id="P13_AVS" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">Y13_OAI</field>
+            <field name="condition_select">none</field>
+            <field name="name">13th OAI</field>
+            <field name="amount_python_compute">result = AVS_C/12</field>
+            <field name="quantity">1</field>
+            <field name="sequence">260</field>
+            <field name="category_id" ref="hr_payroll_P13"/>
+            <field name="parent_rule_id" ref="P13"/>
+        </record>
+        <record id="P13_AC" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">Y13_UI</field>
+            <field name="condition_select">none</field>
+            <field name="name">13th UI</field>
+            <field name="amount_python_compute">result = AC_C/12</field>
+            <field name="quantity">1</field>
+            <field name="sequence">265</field>
+            <field name="category_id" ref="hr_payroll_P13"/>
+            <field name="parent_rule_id" ref="P13"/>
+        </record>
+        <record id="P13_LAA" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">Y13_AI</field>
+            <field name="condition_select">none</field>
+            <field name="name">13th AI</field>
+            <field name="amount_python_compute">result = LAA_C/12</field>
+            <field name="quantity">1</field>
+            <field name="sequence">280</field>
+            <field name="category_id" ref="hr_payroll_P13"/>
+            <field name="parent_rule_id" ref="P13"/>
+        </record>
+        <record id="P13_LCA" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">Y13_SDA</field>
+            <field name="condition_select">none</field>
+            <field name="name">13th SDA</field>
+            <field name="amount_python_compute">result = LCA_C/12</field>
+            <field name="quantity">1</field>
+            <field name="sequence">285</field>
+            <field name="category_id" ref="hr_payroll_P13"/>
+            <field name="parent_rule_id" ref="P13"/>
+        </record>
+        <record id="P13_LPP" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">Y13_OBP</field>
+            <field name="condition_select">none</field>
+            <field name="name">13th OBP Based on RATE</field>
+            <field name="amount_python_compute">result = LPP_C/12</field>
+            <field name="quantity">1</field>
+            <field name="sequence">270</field>
+            <field name="category_id" ref="hr_payroll_P13"/>
+            <field name="parent_rule_id" ref="P13"/>
+        </record>
+        <record id="P13_PCF" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">Y13_FA_VD</field>
+            <field name="condition_select">none</field>
+            <field name="name">13th FA_VD</field>
+            <field name="amount_python_compute">result = PCF_C/12</field>
+            <field name="quantity">1</field>
+            <field name="sequence">290</field>
+            <field name="category_id" ref="hr_payroll_P13"/>
+            <field name="parent_rule_id" ref="P13"/>
+        </record>
+        <record id="P13_FADMIN" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">Y13_FADMIN</field>
+            <field name="condition_select">none</field>
+            <field name="name">13th FADMIN</field>
+            <field name="amount_python_compute">result = FADMIN/12</field>
+            <field name="quantity">1</field>
+            <field name="sequence">295</field>
+            <field name="category_id" ref="hr_payroll_P13"/>
+            <field name="parent_rule_id" ref="P13"/>
+        </record>
+        <record id="I_VAC" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">COMHOLI</field>
+            <field name="condition_select">python</field>
+            <field name="name">Holiday Compensation</field>
+            <field name="note">Holiday Compensation</field>
+            <field name="amount_python_compute">result = (contract.wage * contract.holiday_rate) / 100</field>
+            <field name="condition_python">result = contract.holiday_rate > 0</field>
+            <field name="quantity">1</field>
+            <field name="sequence">25</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+        </record>
+        <record id="IMPS" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">ST</field>
+            <field name="condition_select">none</field>
+            <field name="name">Source Tax</field>
+            <field name="note">Source Tax</field>
+            <field name="amount_percentage">-2.27</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW + categories.FALW</field>
+            <field name="quantity">1</field>
+            <field name="sequence">151</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="parent_rule_id" ref="LCA"/>
+        </record>
+    <!-- </data> -->
+    <!-- <data> -->
+        <record id="hr_payroll.hr_rule_taxable" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">GROSS</field>
+            <field name="condition_select">none</field>
+            <field name="name">Gross</field>
+            <field name="amount_python_compute">result = categories.BASIC + categories.ALW + categories.FALW</field>
+            <field name="condition_python">result = rules.NET > categories.NET * 0.10</field>
+            <field name="quantity">1</field>
+            <field name="condition_range">contract.wage</field>
+            <field name="sequence">100</field>
+            <field name="category_id" ref="hr_payroll.GROSS"/>
+        </record>
+        <record id="hr_payroll.hr_rule_net" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">NET</field>
+            <field name="condition_select">none</field>
+            <field name="name">Net</field>
+            <field name="amount_python_compute">result = categories.BASIC + categories.ALW + categories.FALW + categories.DED</field>
+            <field name="condition_python">result = rules.NET > categories.NET * 0.10</field>
+            <field name="quantity">1</field>
+            <field name="condition_range">contract.wage</field>
+            <field name="sequence">200</field>
+            <field name="category_id" ref="hr_payroll.NET"/>
+        </record>
+    </data>
+</openerp>
