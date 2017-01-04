@@ -5,7 +5,7 @@ import os
 import tempfile
 import StringIO
 import pyPdf
-from openerp import models
+from odoo import models
 
 
 class CommonSlipReport(models.Model):

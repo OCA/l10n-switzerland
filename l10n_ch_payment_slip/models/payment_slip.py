@@ -12,10 +12,10 @@ from reportlab.pdfgen.canvas import Canvas
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.units import inch
-from openerp import models, fields, api, _, exceptions
-from openerp.report import report_sxw
-from openerp.modules import get_module_resource
-from openerp.tools.misc import mod10r
+from odoo import models, fields, api, _, exceptions
+from odoo.report import report_sxw
+from odoo.modules import get_module_resource
+from odoo.tools.misc import mod10r
 
 FontMeta = namedtuple('FontMeta', ('name', 'size'))
 

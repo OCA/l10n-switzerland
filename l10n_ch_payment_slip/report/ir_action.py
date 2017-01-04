@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # © 2012-2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from openerp import models
-from openerp.addons.base.ir.ir_actions import ir_actions_report_xml as root
+from odoo import models
+from odoo.addons.base.ir.ir_actions import IrActionsReportXml as root
 
 
 class IrActionsReportXMLReportlab(models.Model):
