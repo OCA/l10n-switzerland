@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* l10n_ch_hr_payroll
+#	* tw_l10n_ch_hr_payroll
 #
 msgid ""
 msgstr ""
@@ -15,567 +15,567 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.Y13_AI
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.Y13_AI
 msgid "13th AI"
 msgstr "13. LCA"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.Y13_FADMIN
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.Y13_FADMIN
 msgid "13th FADMIN"
 msgstr "13. SADMIN"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.Y13_FA_VD
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.Y13_FA_VD
 msgid "13th FA_VD"
 msgstr "13th FA_VD"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.Y13_OAI
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.Y13_OAI
 msgid "13th OAI"
 msgstr "13. AVS"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.Y13_OBP
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.Y13_OBP
 msgid "13th OBP Based on RATE"
 msgstr "13th OBP Based on RATE"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.Y13_SDA
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.Y13_SDA
 msgid "13th SDA"
 msgstr "13. LCA"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.Y13_NET
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.Y13_NET
 msgid "13th Salary NET"
 msgstr "13. mensilità NETTO"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.Y13_UI
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.Y13_UI
 msgid "13th UI"
 msgstr "13. AD"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.UI_C
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.UI_C
 msgid "AC Company"
 msgstr "AC Company"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.AI
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.AI
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.AI
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.AI
 msgid "AI"
 msgstr "LAINF"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.AI_C
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.AI_C
 msgid "AI Company"
 msgstr "LAINF Impresa"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.AI_E
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.AI_E
 msgid "AI Employee"
 msgstr "LAINF Dipendente"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.AI_C
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.AI_C
 msgid "AI_C"
 msgstr "LAINF_I"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.AI_E
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.AI_E
 msgid "AI_E"
 msgstr "LAINF_D"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,note:l10n_ch_hr_payroll.AI
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,note:tw_l10n_ch_hr_payroll.AI
 msgid "Accident and occupational disease insurance"
 msgstr "Legge federale sull'assicurazione contro gli infortuni"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.FADMIN
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.FADMIN
 msgid "Administrative Fees"
 msgstr "Spese d'amministrazione"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,note:l10n_ch_hr_payroll.FADMIN
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,note:tw_l10n_ch_hr_payroll.FADMIN
 msgid "Administrative Fees to the OAI"
 msgstr "Administrative Fees to the OAI"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule.category,code:l10n_ch_hr_payroll.hr_payroll_BONUS
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule.category,code:tw_l10n_ch_hr_payroll.hr_payroll_BONUS
 msgid "BONUS"
 msgstr "BONUS"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.COMHOLI
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.COMHOLI
 msgid "COMHOLI"
 msgstr "I_VAC"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.CONFAM
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.CONFAM
 msgid "CONFAM"
 msgstr "CONFAM"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule.category,code:l10n_ch_hr_payroll.hr_payroll_COSTS
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule.category,code:tw_l10n_ch_hr_payroll.hr_payroll_COSTS
 msgid "COSTS"
 msgstr "COSTS"
 
-#. module: l10n_ch_hr_payroll
-#: model:ir.model,name:l10n_ch_hr_payroll.model_hr_contract
+#. module: tw_l10n_ch_hr_payroll
+#: model:ir.model,name:tw_l10n_ch_hr_payroll.model_hr_contract
 msgid "Contract"
 msgstr "Contratto"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.CONFAM
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.CONFAM
 msgid "Contribution Family Allow."
 msgstr "Contribuzione Ass. Fam."
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,note:l10n_ch_hr_payroll.CONFAM
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,note:tw_l10n_ch_hr_payroll.CONFAM
 msgid "Contribution Family Allowance"
 msgstr "Contribuzione Assegni Familiari"
 
-#. module: l10n_ch_hr_payroll
-#: model:ir.model,name:l10n_ch_hr_payroll.model_hr_employee
+#. module: tw_l10n_ch_hr_payroll
+#: model:ir.model,name:tw_l10n_ch_hr_payroll.model_hr_employee
 msgid "Employee"
 msgstr "Dipendente"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.FADMIN
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.FADMIN
 msgid "FADMIN"
 msgstr "SADMIN"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule.category,code:l10n_ch_hr_payroll.hr_payroll_FALW
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule.category,code:tw_l10n_ch_hr_payroll.hr_payroll_FALW
 msgid "FALW"
 msgstr "FALW"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.FAMA
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.FAMA
 msgid "FAMA"
 msgstr "ASFA"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.FAMA_16
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.FAMA_16
 msgid "FAMA_16"
 msgstr "ASFA_16"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.FAMA_16_R
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.FAMA_16_R
 msgid "FAMA_16_R"
 msgstr "ASFA_16_R"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.FAMA_F
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.FAMA_F
 msgid "FAMA_E"
 msgstr "ASFA_F"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.FAMA_F_R
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.FAMA_F_R
 msgid "FAMA_E_R"
 msgstr "ASFA_F_R"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.FA_VD
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.FA_VD
 msgid "FA_VD"
 msgstr "FA_VD"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.FA_VD_C
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.FA_VD_C
 msgid "FA_VD_C"
 msgstr "AF_VD_I"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.FA_VD_E
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.FA_VD_E
 msgid "FA_VD_E"
 msgstr "AF_VD_D"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.FA_VD
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.FA_VD
 msgid "Fam. Allowance VD"
 msgstr "Ass. Familiari VD"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.FA_VD_C
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.FA_VD_C
 msgid "Fam. Allowance VD Company"
 msgstr "Ass. Familiari VD Impresa"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.FA_VD_E
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.FA_VD_E
 msgid "Fam. Allowance VD Employee"
 msgstr "Ass. Familiari VD Dipendente"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,note:l10n_ch_hr_payroll.FA_VD
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,note:tw_l10n_ch_hr_payroll.FA_VD
 msgid "Family Allowance for employees employed in the State of Vaud"
 msgstr "Family Allowance for employees employed in the State of Vaud"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.FAMA
-#: model:hr.salary.rule,note:l10n_ch_hr_payroll.FAMA
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.FAMA
+#: model:hr.salary.rule,note:tw_l10n_ch_hr_payroll.FAMA
 msgid "Family Allowances"
 msgstr "Assegni Familiari"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.FAMA_16
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.FAMA_16
 msgid "Family Allowances - Children up to 16"
 msgstr "Family Allowances - Children up to 16"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.FAMA_16_R
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.FAMA_16_R
 msgid "Family Allowances - Children up to 16 (report)"
 msgstr "Assegni familiari - Figli fino a 16 (report)"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.FAMA_F
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.FAMA_F
 msgid "Family Allowances - Professional Education"
 msgstr "Assegni familiari - Formazione professionale"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.FAMA_F_R
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.FAMA_F_R
 msgid "Family Allowances - Professional Education (report)"
 msgstr "Family Allowances - Professional Education (report)"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule.category,name:l10n_ch_hr_payroll.hr_payroll_FALW
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule.category,name:tw_l10n_ch_hr_payroll.hr_payroll_FALW
 msgid "Free allowance"
 msgstr "Free allowance"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule.category,name:l10n_ch_hr_payroll.hr_payroll_COSTS
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule.category,name:tw_l10n_ch_hr_payroll.hr_payroll_COSTS
 msgid "Full Company Contribution"
 msgstr "Full Company Contribution"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule.category,code:l10n_ch_hr_payroll.hr_payroll_HSUP
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule.category,code:tw_l10n_ch_hr_payroll.hr_payroll_HSUP
 msgid "HSUP"
 msgstr "HSUP"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.COMHOLI
-#: model:hr.salary.rule,note:l10n_ch_hr_payroll.COMHOLI
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.COMHOLI
+#: model:hr.salary.rule,note:tw_l10n_ch_hr_payroll.COMHOLI
 msgid "Holiday Compensation"
 msgstr "indennità di vacanza"
 
-#. module: l10n_ch_hr_payroll
-#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_contract_holiday_rate
+#. module: tw_l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:tw_l10n_ch_hr_payroll.field_hr_contract_holiday_rate
 msgid "Holiday Rate"
 msgstr "Costo vacanze"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.MI_C
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.MI_C
 msgid "MI_C"
 msgstr "AM_I"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.MI_E
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.MI_E
 msgid "MI_E"
 msgstr "AM_D"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.MI_GE
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.MI_GE
 msgid "MI_GE"
 msgstr "AM_GE"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.MI_C
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.MI_C
 msgid "Maternity Insurance Company GE"
 msgstr "Assicurazione Maternita Impresa GE"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.MI_E
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.MI_E
 msgid "Maternity Insurance Employee GE"
 msgstr "Assicurazione Maternita Dipendente GE"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.MI_GE
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.MI_GE
 msgid "Maternity Insurance GE"
 msgstr "Assicurazione Maternita GE"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,note:l10n_ch_hr_payroll.MI_GE
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,note:tw_l10n_ch_hr_payroll.MI_GE
 msgid "Maternity Insurance for employees employed in the State of Geneva"
 msgstr "Maternity Insurance for employees employed in the State of Geneva"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule.category,name:l10n_ch_hr_payroll.hr_payroll_BONUS
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule.category,name:tw_l10n_ch_hr_payroll.hr_payroll_BONUS
 msgid "Monthly Bonus"
 msgstr "Monthly Bonus"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule.category,name:l10n_ch_hr_payroll.hr_payroll_HSUP
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule.category,name:tw_l10n_ch_hr_payroll.hr_payroll_HSUP
 msgid "Monthly Extra hours"
 msgstr "Monthly Extra hours"
 
-#. module: l10n_ch_hr_payroll
-#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_employee_children_student
+#. module: tw_l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:tw_l10n_ch_hr_payroll.field_hr_employee_children_student
 msgid "Number of Children student"
 msgstr "Numero di figli studenti"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.OAI
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.OAI
 msgid "OAI"
 msgstr "AVS"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.OAI
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.OAI
 msgid "OAI/II/IC"
 msgstr "AVS/AI/IPG"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.OAI_C
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.OAI_C
 msgid "OAI/II/IC Company"
 msgstr "AVS/AI/IPG Impresa"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.OAI_E
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.OAI_E
 msgid "OAI/II/IC Employee"
 msgstr "AVS/AI/IPG Dipendente"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.OAI_C
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.OAI_C
 msgid "OAI_C"
 msgstr "AVS_I"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.OAI_E
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.OAI_E
 msgid "OAI_E"
 msgstr "AVS_D"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.OBP
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.OBP
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.OBP
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.OBP
 msgid "OBP"
 msgstr "LPP"
 
-#. module: l10n_ch_hr_payroll
-#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_contract_obp_amount
+#. module: tw_l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:tw_l10n_ch_hr_payroll.field_hr_contract_obp_amount
 msgid "OBP Amount"
 msgstr "OBP Amount"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.OBP_C
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.OBP_C
 msgid "OBP Company"
 msgstr "LPP Impresa"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.OBP_E
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.OBP_E
 msgid "OBP Employee"
 msgstr "LPP Dipendente"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.OBP_F_C
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.OBP_F_C
 msgid "OBP Fixed amount Company"
 msgstr "LPP Importo Fisso Impresa"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.OBP_F_E
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.OBP_F_E
 msgid "OBP Fixed amount Employee"
 msgstr "OBP Fixed amount Employee"
 
-#. module: l10n_ch_hr_payroll
-#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_contract_obp_rate
+#. module: tw_l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:tw_l10n_ch_hr_payroll.field_hr_contract_obp_rate
 msgid "OBP Rate"
 msgstr "OBP Rate"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.OBP_C
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.OBP_C
 msgid "OBP_C"
 msgstr "OBP_C"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.OBP_E
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.OBP_E
 msgid "OBP_E"
 msgstr "LPP_D"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.OBP_F_C
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.OBP_F_C
 msgid "OBP_F_C"
 msgstr "LPP_F_I"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.OBP_F_E
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.OBP_F_E
 msgid "OBP_F_E"
 msgstr "LPP_F_D"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,note:l10n_ch_hr_payroll.OBP
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,note:tw_l10n_ch_hr_payroll.OBP
 msgid "Occupational Benefit Plan"
 msgstr "Legge federale sulla previdenza professionale per la vecchiaia, i superstiti e l'invalidità"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,note:l10n_ch_hr_payroll.OAI
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,note:tw_l10n_ch_hr_payroll.OAI
 msgid "Old Age Insurance, Invalidity Insurance, Income Compensation"
 msgstr "Assicurazione per la vecchiaia, Assicurazione invalidità, Indennità per perdita di guadagno"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.REPEX
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.REPEX
 msgid "REPEX"
 msgstr "SPERE"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.REPEX
-#: model:hr.salary.rule,note:l10n_ch_hr_payroll.REPEX
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.REPEX
+#: model:hr.salary.rule,note:tw_l10n_ch_hr_payroll.REPEX
 msgid "Representative Expenses"
 msgstr "Spese di rappresentanza"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.SDA
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.SDA
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.SDA
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.SDA
 msgid "SDA"
 msgstr "LCA"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.SDA_C
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.SDA_C
 msgid "SDA Company"
 msgstr "LCA Impresa"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.SDA_E
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.SDA_E
 msgid "SDA Employee"
 msgstr "LCA Dipendente"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.SDA_C
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.SDA_C
 msgid "SDA_C"
 msgstr "LCA_I"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.SDA_E
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.SDA_E
 msgid "SDA_E"
 msgstr "LCA_D"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.ST
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.ST
 msgid "ST"
 msgstr "IMPF"
 
-#. module: l10n_ch_hr_payroll
-#: model:ir.model,name:l10n_ch_hr_payroll.model_hr_salary_rule_category
+#. module: tw_l10n_ch_hr_payroll
+#: model:ir.model,name:tw_l10n_ch_hr_payroll.model_hr_salary_rule_category
 msgid "Salary Rule Category"
 msgstr "Salary Rule Category"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,note:l10n_ch_hr_payroll.SDA
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,note:tw_l10n_ch_hr_payroll.SDA
 msgid "Sickness Daily Allowance"
 msgstr "Sickness Daily Allowance"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.ST
-#: model:hr.salary.rule,note:l10n_ch_hr_payroll.ST
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.ST
+#: model:hr.salary.rule,note:tw_l10n_ch_hr_payroll.ST
 msgid "Source Tax"
 msgstr "Imposta alla fonte"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.UI
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.UI
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.UI
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.UI
 msgid "UI"
 msgstr "AD"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.UI_E
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.UI_E
 msgid "UI Employee"
 msgstr "AD Dipendente"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.UI_SC
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.UI_SC
 msgid "UI Solidarity Rate Company"
 msgstr "AD Solidarietà Impresa"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.UI_SE
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.UI_SE
 msgid "UI Solidarity Rate Employee"
 msgstr "AD Solidarietà Dipendente"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.UI_C
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.UI_C
 msgid "UI_C"
 msgstr "AD_I"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.UI_E
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.UI_E
 msgid "UI_E"
 msgstr "AD_D"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.UI_SC
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.UI_SC
 msgid "UI_SC"
 msgstr "AD_SI"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.UI_SE
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.UI_SE
 msgid "UI_SE"
 msgstr "AD_SD"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,note:l10n_ch_hr_payroll.UI
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,note:tw_l10n_ch_hr_payroll.UI
 msgid "Unemployment insurance"
 msgstr "Assicurazione contro la disoccupazione"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.Y13
-#: model:hr.salary.rule.category,code:l10n_ch_hr_payroll.hr_payroll_Y13
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.Y13
+#: model:hr.salary.rule.category,code:tw_l10n_ch_hr_payroll.hr_payroll_Y13
 msgid "Y13"
 msgstr "13M"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.Y13_AI
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.Y13_AI
 msgid "Y13_AI"
 msgstr "13M_LAINF"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.Y13_FADMIN
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.Y13_FADMIN
 msgid "Y13_FADMIN"
 msgstr "13M_SADMIN"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.Y13_FA_VD
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.Y13_FA_VD
 msgid "Y13_FA_VD"
 msgstr "Y13_FA_VD"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.Y13_NET
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.Y13_NET
 msgid "Y13_NET"
 msgstr "13M_NETTO"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.Y13_OAI
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.Y13_OAI
 msgid "Y13_OAI"
 msgstr "13M_AVS"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.Y13_OBP
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.Y13_OBP
 msgid "Y13_OBP"
 msgstr "13M_LPP"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.Y13_SDA
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.Y13_SDA
 msgid "Y13_SDA"
 msgstr "13M_LCA"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,code:l10n_ch_hr_payroll.Y13_UI
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,code:tw_l10n_ch_hr_payroll.Y13_UI
 msgid "Y13_UI"
 msgstr "13M_AD"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,name:l10n_ch_hr_payroll.Y13
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:tw_l10n_ch_hr_payroll.Y13
 msgid "Year-End Salary"
 msgstr "tredicesima mensilità"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule,note:l10n_ch_hr_payroll.Y13
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule,note:tw_l10n_ch_hr_payroll.Y13
 msgid "Year-end salary (13th monthly salary)"
 msgstr "tredicesima mensilità"
 
-#. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule.category,name:l10n_ch_hr_payroll.hr_payroll_Y13
+#. module: tw_l10n_ch_hr_payroll
+#: model:hr.salary.rule.category,name:tw_l10n_ch_hr_payroll.hr_payroll_Y13
 msgid "Yearly provisions"
 msgstr "Yearly provisions"
 
-#. module: l10n_ch_hr_payroll
-#: model:ir.model,name:l10n_ch_hr_payroll.model_hr_salary_rule
+#. module: tw_l10n_ch_hr_payroll
+#: model:ir.model,name:tw_l10n_ch_hr_payroll.model_hr_salary_rule
 msgid "hr.salary.rule"
 msgstr "hr.salary.rule"
 
