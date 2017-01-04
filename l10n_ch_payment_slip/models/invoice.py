@@ -124,7 +124,7 @@ class AccountInvoice(models.Model):
                     self._action_bvr_number_move_line(move_line_id,
                                                       ref)
             else:
-                for pay_slip in pay_slip.compute_pay_slips_from_invoices(inv):
+                for pay_slip in pay_slip._compute_pay_slips_from_invoices(inv):
                     ref = pay_slip.reference
                     self._action_bvr_number_move_line(pay_slip.move_line_id,
                                                       ref)
