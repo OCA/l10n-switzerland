@@ -2,7 +2,6 @@
 # © 2012-2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import models, fields, api
-from odoo.addons.base.ir.ir_actions import IrActionsReportXml as root
 
 
 class IrActionsReportXMLReportlab(models.Model):
@@ -14,8 +13,8 @@ class IrActionsReportXMLReportlab(models.Model):
 
     @api.model
     def _lookup_report(self, name):
-        self.env.cr.execute("SELECT * FROM ir_act_report_xml WHERE report_name=%s",
-                    (name,))
+        self.env.cr.execute(
+            "SELECT * FROM ir_act_report_xml WHERE report_name=%s", (name,))
         report = self.env.cr.dictfetchone()
         if report and report['report_type'] == 'reportlab-pdf':
             return report['report_name']

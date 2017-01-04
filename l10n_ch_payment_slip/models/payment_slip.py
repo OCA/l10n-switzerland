@@ -723,7 +723,7 @@ class PaymentSlip(models.Model):
         return PaymentSlipSettings(report_name, **company_settings)
 
     def _compute_payment_slip(self, a4=False, out_format='PDF', scale=None,
-                           b64=False, report_name=None):
+                              b64=False, report_name=None):
         """Generate the payment slip image
         :param a4: If set to True will print on slip on a A4 paper format
         :type a4: bool
