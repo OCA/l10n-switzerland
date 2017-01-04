@@ -5,9 +5,9 @@ import base64
 import time
 import re
 
-from openerp.tools.translate import _
-from openerp import models, fields, exceptions, api
-from openerp.tools.misc import mod10r
+from odoo.tools.translate import _
+from odoo import models, fields, exceptions, api
+from odoo.tools.misc import mod10r
 
 REF = re.compile(r'[^0-9]')
 

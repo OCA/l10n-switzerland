@@ -3,11 +3,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import time
 import re
-
 from openerp import tools
-import openerp.tests.common as test_common
-from openerp.report import render_report
 from openerp.modules.module import get_module_resource
+import odoo.tests.common as test_common
+from odoo.report import render_report
 
 
 class TestPaymentSlip(test_common.TransactionCase):
