@@ -26,7 +26,7 @@ class ExtendedReport(models.Model):
         company = user_model.browse().company_id
         invoices = invoice_model.browse()
 
-        docs = slip_model.compute_pay_slips_from_invoices(invoices)
+        docs = slip_model._compute_pay_slips_from_invoices(invoices)
         if len(docs) == 1:
             return docs[0]._draw_payment_slip(a4=True,
                                               b64=False,

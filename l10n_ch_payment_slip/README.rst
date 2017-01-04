@@ -74,6 +74,7 @@ Contributors
 * Paul Catinean <paulcatinean@gmail.com>
 * Paulius Sladkevičius <paulius@hbee.eu>
 * David Coninckx <dco@open-net.ch>
+* Akim Juillerat <akim.juillerat@camptocamp.com>
 
 Financial contributors
 ----------------------
