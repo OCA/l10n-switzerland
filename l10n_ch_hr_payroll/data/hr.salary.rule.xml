@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 File: hr.salary.rule.xml
-Module: l10n_ch_hr_payroll
+Module: tw_l10n_ch_hr_payroll
 
 Created by sge@open-net.ch
 Translated and changed source terms to English by trevi@twanda.com
@@ -21,10 +21,10 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="sequence">110</field>
             <field name="category_id" ref="hr_payroll.DED"/>
         </record>
-        <record id="MI_GE_E" model="hr.salary.rule">
+        <record id="MI_E" model="hr.salary.rule">
             <field name="amount_select">percentage</field>
             <field name="appears_on_payslip">True</field>
-            <field name="code">MI_GE_E</field>
+            <field name="code">MI_E</field>
             <field name="condition_select">none</field>
             <field name="name">Maternity Insurance Employee GE</field>
             <field name="amount_percentage">-0.0410</field>
@@ -34,10 +34,10 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="category_id" ref="hr_payroll.DED"/>
             <field name="parent_rule_id" ref="MI_GE"/>
         </record>
-        <record id="MI_GE_C" model="hr.salary.rule">
+        <record id="MI_C" model="hr.salary.rule">
             <field name="amount_select">percentage</field>
             <field name="appears_on_payslip">True</field>
-            <field name="code">MI_GE_C</field>
+            <field name="code">MI_C</field>
             <field name="condition_select">none</field>
             <field name="name">Maternity Insurance Company GE</field>
             <field name="amount_percentage">0.0820</field>
@@ -121,7 +121,7 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="code">UI_C</field>
             <field name="condition_select">range</field>
             <field name="condition_range_max">12350</field>
-            <field name="name">UI Company</field>
+            <field name="name">AC Company</field>
             <field name="amount_percentage">2.2</field>
             <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
             <field name="quantity">1</field>
@@ -186,7 +186,7 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="condition_range_max">7050</field>
             <field name="name">OBP Employee</field>
             <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
-            <field name="amount_python_compute">minimum_legal = 2056.25 ; result = (categories.BASIC + categories.ALW - minimum_legal) * (((contract.lpp_rate)*-1)/100)</field>
+            <field name="amount_python_compute">minimum_legal = 2047.50 ; result = (categories.BASIC + categories.ALW - minimum_legal) * (((contract.lpp_rate)*-1)/100)</field>
             <field name="condition_python">result = contract.lpp_rate > 0</field>
             <field name="quantity">1</field>
             <field name="sequence">131</field>
@@ -202,7 +202,7 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="condition_range_max">7050</field>
             <field name="name">OBP Company</field>
             <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
-            <field name="amount_python_compute">minimum_legal = 2056.25 ; result = (categories.BASIC + categories.ALW - minimum_legal) * 2*(contract.obp_rate/100)</field>
+            <field name="amount_python_compute">minimum_legal = 2047.50 ; result = (categories.BASIC + categories.ALW - minimum_legal) * 2*(contract.obp_rate/100)</field>
             <field name="condition_python">result = contract.obp_rate > 0</field>
             <field name="quantity">1</field>
             <field name="sequence">132</field>
@@ -421,10 +421,10 @@ result = -result</field>
             <field name="category_id" ref="hr_payroll_FALW"/>
             <field name="parent_rule_id" ref="FAMA"/>
         </record>
-        <record id="FAMA_ED" model="hr.salary.rule">
+        <record id="FAMA_F" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">True</field>
-            <field name="code">FAMA_ED</field>
+            <field name="code">FAMA_E</field>
             <field name="condition_select">python</field>
             <field name="name">Family Allowances - Professional Education</field>
             <field name="amount_python_compute">result = contract.employee_id.children_student * 300
@@ -437,10 +437,10 @@ if contract.employee_id.children + contract.employee_id.children_student > 2:
             <field name="category_id" ref="hr_payroll_FALW"/>
             <field name="parent_rule_id" ref="FAMA"/>
         </record>
-        <record id="FAMA_ED_R" model="hr.salary.rule">
+        <record id="FAMA_F_R" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">True</field>
-            <field name="code">FAMA_ED_R</field>
+            <field name="code">FAMA_E_R</field>
             <field name="condition_select">python</field>
             <field name="name">Family Allowances - Professional Education (report)</field>
             <field name="amount_python_compute">result = contract.employee_id.children_student * 300
