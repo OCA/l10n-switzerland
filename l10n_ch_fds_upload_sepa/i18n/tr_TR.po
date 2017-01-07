@@ -10,12 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2016-01-11 14:20+0000\n"
 "PO-Revision-Date: 2016-01-05 16:29+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/fr/)\n"
+"Language-Team: Turkish (Turkey) (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: tr_TR\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
@@ -25,37 +25,37 @@ msgstr ""
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
 msgid "Cancel"
-msgstr "Annuler"
+msgstr "İptal et"
 
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
 msgid "Close"
-msgstr "Fermer"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
 msgid "Confirm"
-msgstr ""
+msgstr "Onayla"
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,create_uid:0
 msgid "Created by"
-msgstr "Créé par"
+msgstr "Oluşturan"
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,create_date:0
 msgid "Created on"
-msgstr "Créé le"
+msgstr "Oluşturulma tarihi"
 
 #. module: l10n_ch_fds_upload_sepa
 #: selection:wizard.pain001,state:0
 msgid "Default"
-msgstr "Par défaut"
+msgstr "Öntanımlı"
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,directory_id:0
 msgid "Directory"
-msgstr "Catégorie"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,fds_account_id:0
@@ -86,17 +86,17 @@ msgstr ""
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,id:0
 msgid "ID"
-msgstr "Id."
+msgstr "Kimlik"
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,write_uid:0
 msgid "Last Updated by"
-msgstr "Dernière mise à jour par"
+msgstr "En son güncelleyen "
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,write_date:0
 msgid "Last Updated on"
-msgstr "Dernière mise à jour le"
+msgstr "En son güncelleme tarihi"
 
 #. module: l10n_ch_fds_upload_sepa
 #: selection:fds.sepa.upload.history,state:0
@@ -144,7 +144,7 @@ msgstr ""
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,state:0 field:wizard.pain001,state:0
 msgid "State"
-msgstr "Status"
+msgstr "Hal"
 
 #. module: l10n_ch_fds_upload_sepa
 #: view:fds.postfinance.account:l10n_ch_fds_upload_sepa.view_fds_postfinance_account_sepa_form_inherited
@@ -184,7 +184,7 @@ msgstr ""
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
 msgid "pain.001 file creation"
-msgstr "création du fichier pain.001"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: selection:wizard.pain001,state:0
