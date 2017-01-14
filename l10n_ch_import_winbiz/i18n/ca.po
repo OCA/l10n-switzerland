@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
+# Carles Antoli <carlesantoli@hotmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-08 10:38+0000\n"
-"PO-Revision-Date: 2016-09-08 10:38+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2017-01-03 11:10+0000\n"
+"PO-Revision-Date: 2017-01-03 11:10+0000\n"
+"Last-Translator: Carles Antoli <carlesantoli@hotmail.com>, 2017\n"
 "Language-Team: Catalan (https://www.transifex.com/oca/teams/23907/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_import_winbiz
-#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:232
+#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:233
 #: model:ir.ui.menu,name:l10n_ch_import_winbiz.menu_account_winbiz_import
 #, python-format
 msgid "Accounting WinBIZ Import"
@@ -43,7 +44,7 @@ msgstr "Creat el"
 #. module: l10n_ch_import_winbiz
 #: model:ir.model.fields,field_description:l10n_ch_import_winbiz.field_account_winbiz_import_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Veure el nom"
 
 #. module: l10n_ch_import_winbiz
 #: selection:account.winbiz.import,state:0
@@ -58,7 +59,7 @@ msgstr ""
 #. module: l10n_ch_import_winbiz
 #: selection:account.winbiz.import,state:0
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #. module: l10n_ch_import_winbiz
 #: selection:account.winbiz.import,file_format:0
@@ -106,7 +107,7 @@ msgid "Import help"
 msgstr ""
 
 #. module: l10n_ch_import_winbiz
-#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:242
+#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:243
 #, python-format
 msgid "Imported Journal Entries"
 msgstr ""
@@ -131,7 +132,7 @@ msgstr ""
 #. module: l10n_ch_import_winbiz
 #: model:ir.model.fields,field_description:l10n_ch_import_winbiz.field_account_winbiz_import___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Darrera modificació el"
 
 #. module: l10n_ch_import_winbiz
 #: model:ir.model.fields,field_description:l10n_ch_import_winbiz.field_account_winbiz_import_write_uid
@@ -144,19 +145,19 @@ msgid "Last Updated on"
 msgstr "Darrera Actualització el"
 
 #. module: l10n_ch_import_winbiz
-#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:105
+#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:106
 #, python-format
 msgid "No account with code %s"
 msgstr ""
 
 #. module: l10n_ch_import_winbiz
-#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:135
+#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:136
 #, python-format
 msgid "No journal ‘%s’"
 msgstr ""
 
 #. module: l10n_ch_import_winbiz
-#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:163
+#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:164
 #, python-format
 msgid "No tax found with amount = %r and type = %r"
 msgstr ""
@@ -170,7 +171,7 @@ msgstr ""
 #. module: l10n_ch_import_winbiz
 #: model:ir.model.fields,field_description:l10n_ch_import_winbiz.field_account_winbiz_import_state
 msgid "State"
-msgstr ""
+msgstr "Estat"
 
 #. module: l10n_ch_import_winbiz
 #: model:ir.ui.view,arch_db:l10n_ch_import_winbiz.winbiz_move_line_importer_form
