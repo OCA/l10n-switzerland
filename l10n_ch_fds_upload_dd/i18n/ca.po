@@ -123,7 +123,7 @@ msgstr ""
 #. module: l10n_ch_fds_upload_dd
 #: field:fds.dd.upload.history,state:0
 msgid "State"
-msgstr ""
+msgstr "Estat"
 
 #. module: l10n_ch_fds_upload_dd
 #: view:fds.postfinance.account:l10n_ch_fds_upload_dd.view_fds_postfinance_account_lsv_dd_form_inherited

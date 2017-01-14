@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-11 14:20+0000\n"
-"PO-Revision-Date: 2016-11-25 14:55+0000\n"
+"PO-Revision-Date: 2017-01-13 09:29+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -50,12 +50,12 @@ msgstr "ID"
 #. module: l10n_ch_payment_slip_voucher
 #: view:v11.import.wizard.voucher:l10n_ch_payment_slip_voucher.v11_import_view
 msgid "Import"
-msgstr ""
+msgstr "Tuo"
 
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,journal_id:0
 msgid "Journal"
-msgstr ""
+msgstr "Piväkirja"
 
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,write_uid:0
@@ -112,4 +112,4 @@ msgstr ""
 #. module: l10n_ch_payment_slip_voucher
 #: view:v11.import.wizard.voucher:l10n_ch_payment_slip_voucher.v11_import_view
 msgid "or"
-msgstr ""
+msgstr "tai"

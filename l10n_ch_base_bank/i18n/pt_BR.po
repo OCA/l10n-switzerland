@@ -78,7 +78,7 @@ msgstr ""
 #. module: l10n_ch_base_bank
 #: field:res.bank,code:0
 msgid "Code"
-msgstr ""
+msgstr "Código"
 
 #. module: l10n_ch_base_bank
 #: help:res.bank,code:0

@@ -496,7 +496,7 @@ msgstr ""
 #: field:fds.key.generator.wizard,user_id:0
 #: field:fds.key.import.wizard,user_id:0
 msgid "User"
-msgstr ""
+msgstr "Usuario"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.key.generator.wizard:l10n_ch_fds_postfinance.view_fds_key_generator_wizard_form

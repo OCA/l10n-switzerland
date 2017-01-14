@@ -113,7 +113,7 @@ msgstr ""
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:731
 #, python-format
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #. module: l10n_ch_dta
 #: field:create.dta.wizard,id:0
