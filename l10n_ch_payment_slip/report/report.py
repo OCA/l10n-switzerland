@@ -27,8 +27,8 @@ class Report(models.Model):
         user_model = self.env['res.users']
         slip_model = self.env['l10n_ch.payment_slip']
         invoice_model = self.env['account.invoice']
-        company = user_model.browse().company_id
-        invoices = invoice_model.browse()
+        company = user_model.browse(self.env.uid).company_id
+        invoices = invoice_model.browse(self.ids)
 
         docs = slip_model._compute_pay_slips_from_invoices(invoices)
         if len(docs) == 1:
@@ -45,22 +45,16 @@ class Report(models.Model):
             return self.merge_pdf_on_disk(pdfs)
 
     @api.multi
-    def get_pdf(self, report_name, html=None, data=None):
+    def get_pdf(self, docids, report_name, html=None, data=None):
         if (report_name == 'l10n_ch_payment_slip.'
                            'one_slip_per_page_from_invoice'):
-            return self._generate_one_slip_per_page_from_invoice_pdf(
+            reports = self.browse(docids)
+            return reports._generate_one_slip_per_page_from_invoice_pdf(
                 report_name=report_name,
             )
         else:
-            return super(Report, self).get_pdf(report_name, html=html,
+            return super(Report, self).get_pdf(docids, report_name, html=html,
                                                data=data)
-
-    @api.v8  # noqa
-    def get_pdf(self, records, report_name, html=None, data=None):
-        return Report.get_pdf(
-            self._model, self._cr, self._uid, records.ids,
-            report_name, html=html, data=data, context=self._context
-        )
 
     def merge_pdf_in_memory(self, docs):
         streams = []
