@@ -22,7 +22,7 @@ class IrActionsReportXMLReportlab(models.Model):
             return super(IrActionsReportXMLReportlab, self)._lookup_report(
                 name)
 
-    @api.model
+    @api.multi
     def render_report(self, res_ids, name, data):
         """
         Override to work with real pdf in testing and not html
