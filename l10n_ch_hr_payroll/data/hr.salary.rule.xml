@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 File: hr.salary.rule.xml
-Module: tw_l10n_ch_hr_payroll
+Module: l10n_ch_hr_payroll
 
 Created by sge@open-net.ch
 Translated and changed source terms to English by trevi@twanda.com
@@ -9,7 +9,7 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
 -->
 <openerp>
     <data noupdate="1">
-        <record id="MI_GE" model="hr.salary.rule">
+        <record id="AM" model="hr.salary.rule">
             <field name="amount_select">fix</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">MI_GE</field>
@@ -21,10 +21,10 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="sequence">110</field>
             <field name="category_id" ref="hr_payroll.DED"/>
         </record>
-        <record id="MI_E" model="hr.salary.rule">
+        <record id="AM_E" model="hr.salary.rule">
             <field name="amount_select">percentage</field>
             <field name="appears_on_payslip">True</field>
-            <field name="code">MI_E</field>
+            <field name="code">MI_GE_E</field>
             <field name="condition_select">none</field>
             <field name="name">Maternity Insurance Employee GE</field>
             <field name="amount_percentage">-0.0410</field>
@@ -32,12 +32,12 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="quantity">1</field>
             <field name="sequence">111</field>
             <field name="category_id" ref="hr_payroll.DED"/>
-            <field name="parent_rule_id" ref="MI_GE"/>
+            <field name="parent_rule_id" ref="AM"/>
         </record>
-        <record id="MI_C" model="hr.salary.rule">
+        <record id="AM_C" model="hr.salary.rule">
             <field name="amount_select">percentage</field>
             <field name="appears_on_payslip">True</field>
-            <field name="code">MI_C</field>
+            <field name="code">MI_GE_C</field>
             <field name="condition_select">none</field>
             <field name="name">Maternity Insurance Company GE</field>
             <field name="amount_percentage">0.0820</field>
@@ -45,9 +45,9 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="quantity">1</field>
             <field name="sequence">111</field>
             <field name="category_id" ref="hr_payroll.COMP"/>
-            <field name="parent_rule_id" ref="MI_GE"/>
+            <field name="parent_rule_id" ref="AM"/>
         </record>
-        <record id="OAI" model="hr.salary.rule">
+        <record id="AVS" model="hr.salary.rule">
             <field name="amount_select">fix</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">OAI</field>
@@ -59,7 +59,7 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="sequence">110</field>
             <field name="category_id" ref="hr_payroll.DED"/>
         </record>
-        <record id="OAI_E" model="hr.salary.rule">
+        <record id="AVS_E" model="hr.salary.rule">
             <field name="amount_select">percentage</field>
             <field name="appears_on_payslip">True</field>
             <field name="code">OAI_E</field>
@@ -72,9 +72,9 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="quantity">1</field>
             <field name="sequence">111</field>
             <field name="category_id" ref="hr_payroll.DED"/>
-            <field name="parent_rule_id" ref="OAI"/>
+            <field name="parent_rule_id" ref="AVS"/>
         </record>
-        <record id="OAI_C" model="hr.salary.rule">
+        <record id="AVS_C" model="hr.salary.rule">
             <field name="amount_select">percentage</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">OAI_C</field>
@@ -87,9 +87,9 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="quantity">1</field>
             <field name="sequence">111</field>
             <field name="category_id" ref="hr_payroll.COMP"/>
-            <field name="parent_rule_id" ref="OAI"/>
+            <field name="parent_rule_id" ref="AVS"/>
         </record>
-        <record id="UI" model="hr.salary.rule">
+        <record id="AC" model="hr.salary.rule">
             <field name="amount_select">fix</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">UI</field>
@@ -100,7 +100,7 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="sequence">120</field>
             <field name="category_id" ref="hr_payroll.DED"/>
         </record>
-        <record id="UI_E" model="hr.salary.rule">
+        <record id="AC_E" model="hr.salary.rule">
             <field name="amount_select">percentage</field>
             <field name="appears_on_payslip">True</field>
             <field name="code">UI_E</field>
@@ -113,24 +113,24 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="condition_range">categories.BASIC + categories.ALW</field>
             <field name="sequence">121</field>
             <field name="category_id" ref="hr_payroll.DED"/>
-            <field name="parent_rule_id" ref="UI"/>
+            <field name="parent_rule_id" ref="AC"/>
         </record>
-        <record id="UI_C" model="hr.salary.rule">
+        <record id="AC_C" model="hr.salary.rule">
             <field name="amount_select">percentage</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">UI_C</field>
             <field name="condition_select">range</field>
             <field name="condition_range_max">12350</field>
-            <field name="name">AC Company</field>
+            <field name="name">UI Company</field>
             <field name="amount_percentage">2.2</field>
             <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
             <field name="quantity">1</field>
             <field name="condition_range">categories.BASIC + categories.ALW</field>
             <field name="sequence">121</field>
             <field name="category_id" ref="hr_payroll.COMP"/>
-            <field name="parent_rule_id" ref="UI"/>
+            <field name="parent_rule_id" ref="AC"/>
         </record>
-        <record id="UI_SE" model="hr.salary.rule">
+        <record id="AC_SE" model="hr.salary.rule">
             <field name="amount_select">percentage</field>
             <field name="appears_on_payslip">True</field>
             <field name="code">UI_SE</field>
@@ -144,9 +144,9 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="condition_range">categories.BASIC + categories.ALW</field>
             <field name="sequence">122</field>
             <field name="category_id" ref="hr_payroll.DED"/>
-            <field name="parent_rule_id" ref="UI"/>
+            <field name="parent_rule_id" ref="AC"/>
         </record>
-        <record id="UI_SC" model="hr.salary.rule">
+        <record id="AC_SC" model="hr.salary.rule">
             <field name="amount_select">percentage</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">UI_SC</field>
@@ -160,9 +160,9 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="condition_range">categories.BASIC + categories.ALW</field>
             <field name="sequence">122</field>
             <field name="category_id" ref="hr_payroll.COMP"/>
-            <field name="parent_rule_id" ref="UI"/>
+            <field name="parent_rule_id" ref="AC"/>
         </record>
-        <record id="OBP" model="hr.salary.rule">
+        <record id="LPP" model="hr.salary.rule">
             <field name="amount_select">fix</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">OBP</field>
@@ -177,7 +177,7 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="sequence">130</field>
             <field name="category_id" ref="hr_payroll.DED"/>
         </record>
-        <record id="OBP_E" model="hr.salary.rule">
+        <record id="LPP_E" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">True</field>
             <field name="code">OBP_E</field>
@@ -186,14 +186,14 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="condition_range_max">7050</field>
             <field name="name">OBP Employee</field>
             <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
-            <field name="amount_python_compute">minimum_legal = 2047.50 ; result = (categories.BASIC + categories.ALW - minimum_legal) * (((contract.lpp_rate)*-1)/100)</field>
+            <field name="amount_python_compute">minimum_legal = 2056.25 ; result = (categories.BASIC + categories.ALW - minimum_legal) * (((contract.lpp_rate)*-1)/100)</field>
             <field name="condition_python">result = contract.lpp_rate > 0</field>
             <field name="quantity">1</field>
             <field name="sequence">131</field>
             <field name="category_id" ref="hr_payroll.DED"/>
-            <field name="parent_rule_id" ref="OBP"/>
+            <field name="parent_rule_id" ref="LPP"/>
         </record>
-        <record id="OBP_C" model="hr.salary.rule">
+        <record id="LPP_C" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">OBP_C</field>
@@ -202,14 +202,14 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="condition_range_max">7050</field>
             <field name="name">OBP Company</field>
             <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
-            <field name="amount_python_compute">minimum_legal = 2047.50 ; result = (categories.BASIC + categories.ALW - minimum_legal) * 2*(contract.obp_rate/100)</field>
-            <field name="condition_python">result = contract.obp_rate > 0</field>
+            <field name="amount_python_compute">minimum_legal = 2056.25 ; result = (categories.BASIC + categories.ALW - minimum_legal) * 2*(contract.lpp_rate/100)</field>
+            <field name="condition_python">result = contract.lpp_rate > 0</field>
             <field name="quantity">1</field>
             <field name="sequence">132</field>
             <field name="category_id" ref="hr_payroll.COMP"/>
-            <field name="parent_rule_id" ref="OBP"/>
+            <field name="parent_rule_id" ref="LPP"/>
         </record>
-        <record id="OBP_F_E" model="hr.salary.rule">
+        <record id="LPP_F_E" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">True</field>
             <field name="code">OBP_F_E</field>
@@ -217,14 +217,14 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="condition_range_min">2056.25</field>
             <field name="condition_range_max">7050</field>
             <field name="name">OBP Fixed amount Employee</field>
-            <field name="amount_python_compute">result = -contract.obp_amount</field>
-            <field name="condition_python">result = contract.obp_amount > 0</field>
+            <field name="amount_python_compute">result = -contract.lpp_amount</field>
+            <field name="condition_python">result = contract.lpp_amount > 0</field>
             <field name="quantity">1</field>
             <field name="sequence">133</field>
             <field name="category_id" ref="hr_payroll.DED"/>
-            <field name="parent_rule_id" ref="OBP"/>
+            <field name="parent_rule_id" ref="LPP"/>
         </record>
-        <record id="OBP_F_C" model="hr.salary.rule">
+        <record id="LPP_F_C" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">OBP_F_C</field>
@@ -232,14 +232,14 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="condition_range_min">2056.25</field>
             <field name="condition_range_max">7050</field>
             <field name="name">OBP Fixed amount Company</field>
-            <field name="amount_python_compute">result = 2*contract.obp_amount</field>
-            <field name="condition_python">result = contract.obp_amount > 0</field>
+            <field name="amount_python_compute">result = 2*contract.lpp_amount</field>
+            <field name="condition_python">result = contract.lpp_amount > 0</field>
             <field name="quantity">1</field>
             <field name="sequence">134</field>
             <field name="category_id" ref="hr_payroll.COMP"/>
-            <field name="parent_rule_id" ref="OBP"/>
+            <field name="parent_rule_id" ref="LPP"/>
         </record>
-        <record id="AI" model="hr.salary.rule">
+        <record id="LAA" model="hr.salary.rule">
             <field name="amount_select">fix</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">AI</field>
@@ -250,7 +250,7 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="sequence">140</field>
             <field name="category_id" ref="hr_payroll.DED"/>
         </record>
-        <record id="AI_E" model="hr.salary.rule">
+        <record id="LAA_E" model="hr.salary.rule">
             <field name="amount_select">percentage</field>
             <field name="appears_on_payslip">True</field>
             <field name="code">AI_E</field>
@@ -261,9 +261,9 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="quantity">1</field>
             <field name="sequence">141</field>
             <field name="category_id" ref="hr_payroll.DED"/>
-            <field name="parent_rule_id" ref="AI"/>
+            <field name="parent_rule_id" ref="LAA"/>
         </record>
-        <record id="AI_C" model="hr.salary.rule">
+        <record id="LAA_C" model="hr.salary.rule">
             <field name="amount_select">percentage</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">AI_C</field>
@@ -274,9 +274,9 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="quantity">1</field>
             <field name="sequence">141</field>
             <field name="category_id" ref="hr_payroll.COMP"/>
-            <field name="parent_rule_id" ref="AI"/>
+            <field name="parent_rule_id" ref="LAA"/>
         </record>
-        <record id="SDA" model="hr.salary.rule">
+        <record id="LCA" model="hr.salary.rule">
             <field name="amount_select">fix</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">SDA</field>
@@ -287,7 +287,7 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="sequence">150</field>
             <field name="category_id" ref="hr_payroll.DED"/>
         </record>
-        <record id="SDA_E" model="hr.salary.rule">
+        <record id="LCA_E" model="hr.salary.rule">
             <field name="amount_select">percentage</field>
             <field name="appears_on_payslip">True</field>
             <field name="code">SDA_E</field>
@@ -298,9 +298,9 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="quantity">1</field>
             <field name="sequence">151</field>
             <field name="category_id" ref="hr_payroll.DED"/>
-            <field name="parent_rule_id" ref="SDA"/>
+            <field name="parent_rule_id" ref="LCA"/>
         </record>
-        <record id="SDA_C" model="hr.salary.rule">
+        <record id="LCA_C" model="hr.salary.rule">
             <field name="amount_select">percentage</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">SDA_C</field>
@@ -311,9 +311,9 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="quantity">1</field>
             <field name="sequence">151</field>
             <field name="category_id" ref="hr_payroll.COMP"/>
-            <field name="parent_rule_id" ref="SDA"/>
+            <field name="parent_rule_id" ref="LCA"/>
         </record>
-        <record id="FA_VD" model="hr.salary.rule">
+        <record id="PCF" model="hr.salary.rule">
             <field name="amount_select">fix</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">FA_VD</field>
@@ -324,7 +324,7 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="sequence">160</field>
             <field name="category_id" ref="hr_payroll.DED"/>
         </record>
-        <record id="FA_VD_E" model="hr.salary.rule">
+        <record id="PCF_E" model="hr.salary.rule">
             <field name="amount_select">percentage</field>
             <field name="appears_on_payslip">True</field>
             <field name="code">FA_VD_E</field>
@@ -335,9 +335,9 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="quantity">1</field>
             <field name="sequence">161</field>
             <field name="category_id" ref="hr_payroll.DED"/>
-            <field name="parent_rule_id" ref="FA_VD"/>
+            <field name="parent_rule_id" ref="PCF"/>
         </record>
-        <record id="FA_VD_C" model="hr.salary.rule">
+        <record id="PCF_C" model="hr.salary.rule">
             <field name="amount_select">percentage</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">FA_VD_C</field>
@@ -348,7 +348,7 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="quantity">1</field>
             <field name="sequence">161</field>
             <field name="category_id" ref="hr_payroll.COMP"/>
-            <field name="parent_rule_id" ref="FA_VD"/>
+            <field name="parent_rule_id" ref="PCF"/>
         </record>
         <record id="FADMIN" model="hr.salary.rule">
             <field name="amount_select">percentage</field>
@@ -363,7 +363,7 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="sequence">210</field>
             <field name="category_id" ref="hr_payroll_COSTS"/>
         </record>
-        <record id="CONFAM" model="hr.salary.rule">
+        <record id="COTFAM" model="hr.salary.rule">
             <field name="amount_select">percentage</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">CONFAM</field>
@@ -376,7 +376,7 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="sequence">211</field>
             <field name="category_id" ref="hr_payroll_COSTS"/>
         </record>
-        <record id="FAMA" model="hr.salary.rule">
+        <record id="ALFA" model="hr.salary.rule">
             <field name="amount_select">fix</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">FAMA</field>
@@ -388,7 +388,7 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="sequence">50</field>
             <field name="category_id" ref="hr_payroll_FALW"/>
         </record>
-        <record id="FAMA_16" model="hr.salary.rule">
+        <record id="ALFA_E" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">True</field>
             <field name="code">FAMA_16</field>
@@ -402,9 +402,9 @@ if contract.employee_id.children + contract.employee_id.children_student > 2:
             <field name="condition_range">contract.employee_id.children</field>
             <field name="sequence">51</field>
             <field name="category_id" ref="hr_payroll_FALW"/>
-            <field name="parent_rule_id" ref="FAMA"/>
+            <field name="parent_rule_id" ref="ALFA"/>
         </record>
-        <record id="FAMA_16_R" model="hr.salary.rule">
+        <record id="ALFA_E_R" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">True</field>
             <field name="code">FAMA_16_R</field>
@@ -419,12 +419,12 @@ result = -result</field>
             <field name="condition_range">contract.employee_id.children</field>
             <field name="sequence">51</field>
             <field name="category_id" ref="hr_payroll_FALW"/>
-            <field name="parent_rule_id" ref="FAMA"/>
+            <field name="parent_rule_id" ref="ALFA"/>
         </record>
-        <record id="FAMA_F" model="hr.salary.rule">
+        <record id="ALFA_F" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">True</field>
-            <field name="code">FAMA_E</field>
+            <field name="code">FAMA_ED</field>
             <field name="condition_select">python</field>
             <field name="name">Family Allowances - Professional Education</field>
             <field name="amount_python_compute">result = contract.employee_id.children_student * 300
@@ -435,12 +435,12 @@ if contract.employee_id.children + contract.employee_id.children_student > 2:
             <field name="condition_range">contract.employee_id.children_student</field>
             <field name="sequence">51</field>
             <field name="category_id" ref="hr_payroll_FALW"/>
-            <field name="parent_rule_id" ref="FAMA"/>
+            <field name="parent_rule_id" ref="ALFA"/>
         </record>
-        <record id="FAMA_F_R" model="hr.salary.rule">
+        <record id="ALFA_F_R" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">True</field>
-            <field name="code">FAMA_E_R</field>
+            <field name="code">FAMA_ED_R</field>
             <field name="condition_select">python</field>
             <field name="name">Family Allowances - Professional Education (report)</field>
             <field name="amount_python_compute">result = contract.employee_id.children_student * 300
@@ -452,9 +452,9 @@ result = -result</field>
             <field name="condition_range">contract.employee_id.children_student</field>
             <field name="sequence">51</field>
             <field name="category_id" ref="hr_payroll_FALW"/>
-            <field name="parent_rule_id" ref="FAMA"/>
+            <field name="parent_rule_id" ref="ALFA"/>
         </record>
-        <record id="REPEX" model="hr.salary.rule">
+        <record id="FREP" model="hr.salary.rule">
             <field name="amount_select">percentage</field>
             <field name="appears_on_payslip">True</field>
             <field name="code">REPEX</field>
@@ -467,7 +467,7 @@ result = -result</field>
             <field name="sequence">40</field>
             <field name="category_id" ref="hr_payroll_FALW"/>
         </record>
-        <record id="Y13" model="hr.salary.rule">
+        <record id="P13" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">Y13</field>
@@ -476,9 +476,9 @@ result = -result</field>
             <field name="note">Year-end salary (13th monthly salary)</field>
             <field name="quantity">1</field>
             <field name="sequence">250</field>
-            <field name="category_id" ref="hr_payroll_Y13"/>
+            <field name="category_id" ref="hr_payroll_P13"/>
         </record>
-        <record id="Y13_NET" model="hr.salary.rule">
+        <record id="P13_NET" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">Y13_NET</field>
@@ -487,82 +487,82 @@ result = -result</field>
             <field name="amount_python_compute">result = (categories.BASIC + categories.DED )/12</field>
             <field name="quantity">1</field>
             <field name="sequence">255</field>
-            <field name="category_id" ref="hr_payroll_Y13"/>
-            <field name="parent_rule_id" ref="Y13"/>
+            <field name="category_id" ref="hr_payroll_P13"/>
+            <field name="parent_rule_id" ref="P13"/>
         </record>
-        <record id="Y13_OAI" model="hr.salary.rule">
+        <record id="P13_AVS" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">Y13_OAI</field>
             <field name="condition_select">none</field>
             <field name="name">13th OAI</field>
-            <field name="amount_python_compute">result = OAI_C/12</field>
+            <field name="amount_python_compute">result = AVS_C/12</field>
             <field name="quantity">1</field>
             <field name="sequence">260</field>
-            <field name="category_id" ref="hr_payroll_Y13"/>
-            <field name="parent_rule_id" ref="Y13"/>
+            <field name="category_id" ref="hr_payroll_P13"/>
+            <field name="parent_rule_id" ref="P13"/>
         </record>
-        <record id="Y13_UI" model="hr.salary.rule">
+        <record id="P13_AC" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">Y13_UI</field>
             <field name="condition_select">none</field>
             <field name="name">13th UI</field>
-            <field name="amount_python_compute">result = UI_C/12</field>
+            <field name="amount_python_compute">result = AC_C/12</field>
             <field name="quantity">1</field>
             <field name="sequence">265</field>
-            <field name="category_id" ref="hr_payroll_Y13"/>
-            <field name="parent_rule_id" ref="Y13"/>
+            <field name="category_id" ref="hr_payroll_P13"/>
+            <field name="parent_rule_id" ref="P13"/>
         </record>
-        <record id="Y13_AI" model="hr.salary.rule">
+        <record id="P13_LAA" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">Y13_AI</field>
             <field name="condition_select">none</field>
             <field name="name">13th AI</field>
-            <field name="amount_python_compute">result = AI_C/12</field>
+            <field name="amount_python_compute">result = LAA_C/12</field>
             <field name="quantity">1</field>
             <field name="sequence">280</field>
-            <field name="category_id" ref="hr_payroll_Y13"/>
-            <field name="parent_rule_id" ref="Y13"/>
+            <field name="category_id" ref="hr_payroll_P13"/>
+            <field name="parent_rule_id" ref="P13"/>
         </record>
-        <record id="Y13_SDA" model="hr.salary.rule">
+        <record id="P13_LCA" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">Y13_SDA</field>
             <field name="condition_select">none</field>
             <field name="name">13th SDA</field>
-            <field name="amount_python_compute">result = SDA_C/12</field>
+            <field name="amount_python_compute">result = LCA_C/12</field>
             <field name="quantity">1</field>
             <field name="sequence">285</field>
-            <field name="category_id" ref="hr_payroll_Y13"/>
-            <field name="parent_rule_id" ref="Y13"/>
+            <field name="category_id" ref="hr_payroll_P13"/>
+            <field name="parent_rule_id" ref="P13"/>
         </record>
-        <record id="Y13_OBP" model="hr.salary.rule">
+        <record id="P13_LPP" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">Y13_OBP</field>
             <field name="condition_select">none</field>
             <field name="name">13th OBP Based on RATE</field>
-            <field name="amount_python_compute">result = OBP_C/12</field>
+            <field name="amount_python_compute">result = LPP_C/12</field>
             <field name="quantity">1</field>
             <field name="sequence">270</field>
-            <field name="category_id" ref="hr_payroll_Y13"/>
-            <field name="parent_rule_id" ref="Y13"/>
+            <field name="category_id" ref="hr_payroll_P13"/>
+            <field name="parent_rule_id" ref="P13"/>
         </record>
-        <record id="Y13_FA_VD" model="hr.salary.rule">
+        <record id="P13_PCF" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">Y13_FA_VD</field>
             <field name="condition_select">none</field>
             <field name="name">13th FA_VD</field>
-            <field name="amount_python_compute">result = FA_VD_C/12</field>
+            <field name="amount_python_compute">result = PCF_C/12</field>
             <field name="quantity">1</field>
             <field name="sequence">290</field>
-            <field name="category_id" ref="hr_payroll_Y13"/>
-            <field name="parent_rule_id" ref="Y13"/>
+            <field name="category_id" ref="hr_payroll_P13"/>
+            <field name="parent_rule_id" ref="P13"/>
         </record>
-        <record id="Y13_FADMIN" model="hr.salary.rule">
+        <record id="P13_FADMIN" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">False</field>
             <field name="code">Y13_FADMIN</field>
@@ -571,10 +571,10 @@ result = -result</field>
             <field name="amount_python_compute">result = FADMIN/12</field>
             <field name="quantity">1</field>
             <field name="sequence">295</field>
-            <field name="category_id" ref="hr_payroll_Y13"/>
-            <field name="parent_rule_id" ref="Y13"/>
+            <field name="category_id" ref="hr_payroll_P13"/>
+            <field name="parent_rule_id" ref="P13"/>
         </record>
-        <record id="COMHOLI" model="hr.salary.rule">
+        <record id="I_VAC" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">True</field>
             <field name="code">COMHOLI</field>
@@ -587,7 +587,7 @@ result = -result</field>
             <field name="sequence">25</field>
             <field name="category_id" ref="hr_payroll.ALW"/>
         </record>
-        <record id="ST" model="hr.salary.rule">
+        <record id="IMPS" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">True</field>
             <field name="code">ST</field>
@@ -599,7 +599,7 @@ result = -result</field>
             <field name="quantity">1</field>
             <field name="sequence">151</field>
             <field name="category_id" ref="hr_payroll.DED"/>
-            <field name="parent_rule_id" ref="SDA"/>
+            <field name="parent_rule_id" ref="LCA"/>
         </record>
     <!-- </data> -->
     <!-- <data> -->
