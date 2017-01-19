@@ -114,16 +114,6 @@ msgid "CONFAM"
 msgstr "CONFAM"
 
 #. module: l10n_ch_hr_payroll
-#: model:hr.salary.rule.category,code:l10n_ch_hr_payroll.hr_payroll_COSTS
-msgid "COSTS"
-msgstr "COSTS"
-
-#. module: l10n_ch_hr_payroll
-#: model:ir.model,name:l10n_ch_hr_payroll.model_hr_contract
-msgid "Contract"
-msgstr "Contrat"
-
-#. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.COTFAM
 msgid "Contribution Family Allow."
 msgstr "Cotisation Alloc. Fam."
@@ -132,6 +122,16 @@ msgstr "Cotisation Alloc. Fam."
 #: model:hr.salary.rule,note:l10n_ch_hr_payroll.COTFAM
 msgid "Contribution Family Allowance"
 msgstr "Cotisation Allocations Familiales"
+
+#. module: l10n_ch_hr_payroll
+#: model:hr.salary.rule.category,code:l10n_ch_hr_payroll.hr_payroll_COSTS
+msgid "COSTS"
+msgstr "COSTS"
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model,name:l10n_ch_hr_payroll.model_hr_contract
+msgid "Contract"
+msgstr "Contrat"
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model,name:l10n_ch_hr_payroll.model_hr_employee
@@ -493,12 +493,12 @@ msgstr "AC Solidarité Salarié"
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,code:l10n_ch_hr_payroll.AC_C
 msgid "UI_C"
-msgstr "UI_C"
+msgstr "AC_E"
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,code:l10n_ch_hr_payroll.AC_E
 msgid "UI_E"
-msgstr "UI_E"
+msgstr "AC_S"
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,code:l10n_ch_hr_payroll.AC_SC
@@ -580,3 +580,19 @@ msgstr "Annuelles provisions"
 #: model:ir.model,name:l10n_ch_hr_payroll.model_hr_salary_rule
 msgid "hr.salary.rule"
 msgstr "hr.salary.rule"
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_contract_lpp_amount
+msgid "LPP Amount"
+msgstr "Montant LPP"
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_contract_lpp_rate
+msgid "LPP Rate"
+msgstr "Taux LPP"
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_employee_children_student
+msgid "Number of Children student"
+msgstr "Nombre d'enfants aux études"
+

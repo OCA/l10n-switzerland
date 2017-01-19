@@ -60,6 +60,7 @@ class LineIntermediate(object):
         if self.originator_tax:
             yield 'tax_line_id', self.originator_tax.id
 
+
 prepare_line = LineIntermediate
 
 

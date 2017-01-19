@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-23 09:48+0000\n"
-"PO-Revision-Date: 2016-09-20 19:21+0000\n"
-"Last-Translator: Philipp Hug <philipp@hug.cx>\n"
+"POT-Creation-Date: 2016-12-07 01:44+0000\n"
+"PO-Revision-Date: 2016-12-06 21:26+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-l10n-switzerland-9-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -100,7 +100,7 @@ msgid "Invoice"
 msgstr "Rechnung"
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:95
+#: code:addons/l10n_ch_base_bank/models/bank.py:98
 #, python-format
 msgid "Please enter a correct postal number. (01-23456-1 or 12345)"
 msgstr "Bitte fügen Sie eine korrekte Postkontonummer ein. (z.B. 01-23456-1 oder 12345)"
@@ -126,3 +126,11 @@ msgid ""
 "Your Bank adherent number to be printed in references of your BVR/ESR. This "
 "is not a postal account number."
 msgstr "Die in der ESR zu druckende Teilnehmernummer ist kein Postkonto."
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/bank.py:218
+#, python-format
+msgid ""
+"Your bank BVR/ESR adherent number must contain only digits!\n"
+"Please check your company bank account."
+msgstr ""
