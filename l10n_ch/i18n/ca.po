@@ -10,12 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2017-01-14 04:18+0000\n"
 "PO-Revision-Date: 2015-09-04 14:41+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/fr/)\n"
+"Language-Team: Catalan (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: ca\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_82
@@ -4419,7 +4419,7 @@ msgstr ""
 #: model:account.account.template,name:l10n_ch.ch_5203
 #: model:account.account.template,name:l10n_ch.ch_5403
 msgid "Commissions"
-msgstr ""
+msgstr "Comissions"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_7502
@@ -4507,7 +4507,7 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_280_0
 msgid "Capital"
-msgstr "Capital"
+msgstr ""
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_2856
@@ -6124,7 +6124,7 @@ msgstr ""
 #: model:account.account.template,name:l10n_ch.ch_1400
 #: model:account.account.template,name:l10n_ch.ch_1940
 msgid "Actions"
-msgstr "Actions"
+msgstr ""
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_1719

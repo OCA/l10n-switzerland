@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-11 18:46+0000\n"
+"POT-Creation-Date: 2017-01-14 04:18+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/fi/)\n"
@@ -138,7 +138,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: model:ir.model,name:l10n_ch_dta.model_payment_order
 msgid "Payment Order"
-msgstr ""
+msgstr "Maksumääräys"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:301
@@ -190,7 +190,7 @@ msgstr ""
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:733
 #, python-format
 msgid "Error"
-msgstr ""
+msgstr "Virhe"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:241
@@ -208,7 +208,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: model:ir.model,name:l10n_ch_dta.model_res_partner_bank
 msgid "Bank Accounts"
-msgstr ""
+msgstr "Pankkitilit"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:283
