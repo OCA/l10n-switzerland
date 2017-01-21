@@ -54,7 +54,7 @@
             <field name="target">new</field>
         </record>
 
-        <menuitem id="menu_fds_import" parent="account.menu_finance_bank_and_cash" action="action_fds_import" sequence="8"/>
+        <menuitem id="menu_fds_import" parent="account.account_account_menu" action="action_fds_import" sequence="8"/>
 
     </data>
 </openerp>
