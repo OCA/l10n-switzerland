@@ -50,7 +50,7 @@ msgstr ""
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Yritys"
 
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,create_uid:0

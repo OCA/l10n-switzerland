@@ -43,12 +43,12 @@ msgstr ""
 #. module: l10n_ch_base_bank
 #: model:ir.model,name:l10n_ch_base_bank.model_res_bank
 msgid "Bank"
-msgstr ""
+msgstr "Pankk"
 
 #. module: l10n_ch_base_bank
 #: model:ir.model,name:l10n_ch_base_bank.model_res_partner_bank
 msgid "Bank Accounts"
-msgstr ""
+msgstr "Pankkitilit"
 
 #. module: l10n_ch_base_bank
 #: field:res.partner.bank,bvr_adherent_num:0
@@ -78,7 +78,7 @@ msgstr ""
 #. module: l10n_ch_base_bank
 #: field:res.bank,code:0
 msgid "Code"
-msgstr ""
+msgstr "Koodi"
 
 #. module: l10n_ch_base_bank
 #: help:res.bank,code:0

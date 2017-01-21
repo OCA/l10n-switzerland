@@ -48,7 +48,7 @@ msgstr "Luotu"
 #: code:addons/l10n_ch_sepa/base_sepa/msg_sepa.py:55
 #, python-format
 msgid "Error"
-msgstr ""
+msgstr "Virhe"
 
 #. module: l10n_ch_sepa
 #: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:85
