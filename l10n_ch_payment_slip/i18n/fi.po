@@ -90,7 +90,7 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_res_partner_bank
 msgid "Bank Accounts"
-msgstr ""
+msgstr "Pankkitilit"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.ui.view,arch_db:l10n_ch_payment_slip.v11_import_view
