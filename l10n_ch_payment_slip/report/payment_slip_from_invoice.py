@@ -1,24 +1,7 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Nicolas Bessi
-#    Copyright 2014 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-from openerp import models
+# © 2014-2016 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from openerp import api, models
 
 
 class BVRFromInvoice(models.AbstractModel):
@@ -42,11 +25,12 @@ class ExtendedReport(models.Model):
         slip_model = self.pool['l10n_ch.payment_slip']
         invoice_model = self.pool['account.invoice']
         company = user_model.browse(cr, uid, uid, context=context).company_id
-        invoice = invoice_model.browse(cr, uid, ids, context=context)
+        invoices = invoice_model.browse(cr, uid, ids, context=context)
+
         docs = slip_model.compute_pay_slips_from_invoices(
             cr,
             uid,
-            invoice,
+            invoices,
             context=context
         )
         if len(docs) == 1:
@@ -62,9 +46,11 @@ class ExtendedReport(models.Model):
                 return self.merge_pdf_in_memory(pdfs)
             return self.merge_pdf_on_disk(pdfs)
 
+    @api.v7
     def get_pdf(self, cr, uid, ids, report_name, html=None, data=None,
                 context=None):
-        if report_name == 'one_slip_per_page_from_invoice':
+        if (report_name == 'l10n_ch_payment_slip.'
+                           'one_slip_per_page_from_invoice'):
             return self._generate_one_slip_per_page_from_invoice_pdf(
                 cr,
                 uid,
@@ -82,3 +68,10 @@ class ExtendedReport(models.Model):
                 data=data,
                 context=context
             )
+
+    @api.v8  # noqa
+    def get_pdf(self, records, report_name, html=None, data=None):
+        return ExtendedReport.get_pdf(
+            self._model, self._cr, self._uid, records.ids,
+            report_name, html=html, data=data, context=self._context
+        )

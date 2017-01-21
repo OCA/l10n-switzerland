@@ -1,34 +1,17 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Nicolas Bessi
-#    Copyright 2015 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-from openerp.osv import orm
+# © 2012-2016 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from openerp import models
 from openerp.addons.base.ir.ir_actions import ir_actions_report_xml as root
 
 
-class ir_actions_report_xml_reportlab(orm.Model):
+class IrActionsReportXMLReportlab(models.Model):
 
     _inherit = 'ir.actions.report.xml'
 
     def __init__(self, cr, uid):
         """Old school hack to extend selection fields"""
-        super(ir_actions_report_xml_reportlab, self).__init__(cr, uid)
+        super(IrActionsReportXMLReportlab, self).__init__(cr, uid)
         if not any(x for x in root._columns['report_type'].selection
                    if x[0] == 'reportlab-pdf'):
             root._columns['report_type'].selection.append(
@@ -42,7 +25,7 @@ class ir_actions_report_xml_reportlab(orm.Model):
         if report and report['report_type'] == 'reportlab-pdf':
             return report['report_name']
         else:
-            return super(ir_actions_report_xml_reportlab, self)._lookup_report(
+            return super(IrActionsReportXMLReportlab, self)._lookup_report(
                 cr,
                 name
             )
@@ -65,7 +48,7 @@ class ir_actions_report_xml_reportlab(orm.Model):
                     data=data,
                     context=context
                 ), 'pdf'
-        return super(ir_actions_report_xml_reportlab, self).render_report(
+        return super(IrActionsReportXMLReportlab, self).render_report(
             cr,
             uid,
             res_ids,

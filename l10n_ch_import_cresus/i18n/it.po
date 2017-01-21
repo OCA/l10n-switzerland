@@ -3,15 +3,17 @@
 # * l10n_ch_import_cresus
 # 
 # Translators:
-# Stefano <stefano.sforzi@agilebg.com>, 2015
+# OCA Transbot <transbot@odoo-community.org>, 2016
+# Andrea Cometa <a.cometa@apuliasoftware.it>, 2016
+# Paolo Valier <paolo.valier@hotmail.it>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: l10n-switzerland (8.0)\n"
+"Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-23 17:28+0000\n"
-"PO-Revision-Date: 2015-09-23 17:29+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Italian (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/it/)\n"
+"POT-Creation-Date: 2016-11-26 03:47+0000\n"
+"PO-Revision-Date: 2016-11-26 03:47+0000\n"
+"Last-Translator: Paolo Valier <paolo.valier@hotmail.it>, 2016\n"
+"Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -19,58 +21,80 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_import_cresus
-#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:64
-#, python-format
-msgid ""
-"\n"
-"                 In order to import your 'Cresus Salaires' .txt                  file you must complete the following requirements : </br>\n"
-"                * The accounts, analytical accounts used in the Cresus                 file must be previously created into Odoo  </br>\n"
-"                * The date of the entry will determine the period used                 in Odoo, so please ensure the period is created already. </br>\n"
-"                * If the Cresus file uses VAT codes (i.e: IPI),                 please make sure you have indicated this code in the                 related Odoo tax (new field).                 Warning, the Odoo tax must be 'tax included'.                 If the tax does not exist you have to create it. </br>\n"
-"                * All PL accounts must have a deferral method = 'none'                (meaning: no balance brought forward in the new fiscal year)                and all\n"
-"                 Balance sheet account must have a deferral                 method = 'balance'. </br>"
-msgstr ""
-
-#. module: l10n_ch_import_cresus
-#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:114
-#, python-format
-msgid "%s. -- Field: %s -- rows %s to %s"
-msgstr ""
-
-#. module: l10n_ch_import_cresus
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:197
+#: model:ir.actions.act_window,name:l10n_ch_import_cresus.action_account_cresus_import
 #: model:ir.ui.menu,name:l10n_ch_import_cresus.menu_account_cresus_import
+#, python-format
 msgid "Accounting Cresus Import"
 msgstr ""
 
 #. module: l10n_ch_import_cresus
-#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:155
+#: model:ir.ui.view,arch_db:l10n_ch_import_cresus.cresus_move_line_importer_form
+msgid ""
+"All PL accounts must have include_initial_balance = False (meaning: no "
+"balance brought forward in the new fiscal year) and all balance sheet "
+"accounts must have include_initial_balance = True."
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:100
 #, python-format
-msgid "CSV file is malformed"
+msgid ""
+"CSV file is malformed\n"
+"Please choose the correct separator\n"
+"the error detail is:\n"
+"%r"
 msgstr ""
 
 #. module: l10n_ch_import_cresus
-#: field:account.cresus.import,company_id:0
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:124
+#, python-format
+msgid "Can't parse date '%s'"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_company_id
 msgid "Company"
-msgstr ""
+msgstr "Azienda"
 
 #. module: l10n_ch_import_cresus
-#: field:account.cresus.import,create_uid:0
+#: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_create_uid
 msgid "Created by"
 msgstr "Created by"
 
 #. module: l10n_ch_import_cresus
-#: field:account.cresus.import,create_date:0
+#: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_create_date
 msgid "Created on"
 msgstr "Created on"
 
 #. module: l10n_ch_import_cresus
-#: view:account.tax:l10n_ch_import_cresus.view_tax_form
+#: model:ir.ui.view,arch_db:l10n_ch_import_cresus.view_tax_form
 msgid "Cresus"
 msgstr ""
 
 #. module: l10n_ch_import_cresus
-#: field:account.tax,tax_cresus_mapping:0
+#: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_tax_tax_cresus_mapping
 msgid "Cresus tax name"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_display_name
+msgid "Display Name"
+msgstr "Nome da visualizzare"
+
+#. module: l10n_ch_import_cresus
+#: selection:account.cresus.import,state:0
+msgid "Done"
+msgstr "Completato"
+
+#. module: l10n_ch_import_cresus
+#: selection:account.cresus.import,state:0
+msgid "Draft"
+msgstr "Bozza"
+
+#. module: l10n_ch_import_cresus
+#: selection:account.cresus.import,state:0
+msgid "Error"
 msgstr ""
 
 #. module: l10n_ch_import_cresus
@@ -79,107 +103,96 @@ msgid "Export Accounting"
 msgstr ""
 
 #. module: l10n_ch_import_cresus
-#: field:account.cresus.import,file:0
+#: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_file
 msgid "File"
 msgstr ""
 
 #. module: l10n_ch_import_cresus
-#: field:account.cresus.import,id:0
+#: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_id
 msgid "ID"
 msgstr "ID"
 
 #. module: l10n_ch_import_cresus
-#: model:ir.actions.act_window,name:l10n_ch_import_cresus.action_account_cresus_import
-msgid "Import Move lines"
+#: model:ir.ui.view,arch_db:l10n_ch_import_cresus.cresus_move_line_importer_form
+msgid ""
+"If the Cresus file uses VAT codes (i.e: IPI), please make sure you have "
+"indicated this code in the related Odoo tax (new field). Warning, the Odoo "
+"tax must be 'tax included'. If the tax does not exist you have to create it."
 msgstr ""
 
 #. module: l10n_ch_import_cresus
-#: view:account.cresus.import:l10n_ch_import_cresus.cresus_move_line_importer_form
+#: model:ir.ui.view,arch_db:l10n_ch_import_cresus.cresus_move_line_importer_form
 msgid "Import file"
 msgstr ""
 
 #. module: l10n_ch_import_cresus
-#: view:account.cresus.import:l10n_ch_import_cresus.cresus_move_line_importer_form
-#: field:account.cresus.import,help_html:0
+#: model:ir.ui.view,arch_db:l10n_ch_import_cresus.cresus_move_line_importer_form
 msgid "Import help"
 msgstr ""
 
 #. module: l10n_ch_import_cresus
-#: field:account.cresus.import,imported_move_ids:0
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:207
+#, python-format
+msgid "Imported Journal Entries"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_imported_move_ids
 msgid "Imported moves"
 msgstr ""
 
 #. module: l10n_ch_import_cresus
-#: field:account.cresus.import,journal_id:0
+#: model:ir.ui.view,arch_db:l10n_ch_import_cresus.cresus_move_line_importer_form
+msgid ""
+"In order to import your 'Cresus Salaires' .txt file you must complete the "
+"following requirements:"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_journal_id
 msgid "Journal"
 msgstr "Sezionale"
 
 #. module: l10n_ch_import_cresus
-#: field:account.cresus.import,write_uid:0
+#: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import___last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: l10n_ch_import_cresus
+#: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_write_uid
 msgid "Last Updated by"
 msgstr "Last Updated by"
 
 #. module: l10n_ch_import_cresus
-#: field:account.cresus.import,write_date:0
+#: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_write_date
 msgid "Last Updated on"
 msgstr "Last Updated on"
 
 #. module: l10n_ch_import_cresus
-#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:177
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:63
 #, python-format
-msgid "Lines imported"
+msgid "No account with code %s"
 msgstr ""
 
 #. module: l10n_ch_import_cresus
-#: view:account.cresus.import:l10n_ch_import_cresus.cresus_move_line_importer_form
-msgid "Move / Move lines importer"
-msgstr ""
-
-#. module: l10n_ch_import_cresus
-#: field:account.cresus.import,period_id:0
-msgid "Period"
-msgstr "Periodo"
-
-#. module: l10n_ch_import_cresus
-#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:156
-#, python-format
-msgid ""
-"Please choose the correct separator \n"
-"the error detail is : \n"
-" %s"
-msgstr ""
-
-#. module: l10n_ch_import_cresus
-#: view:account.tax:l10n_ch_import_cresus.view_tax_form
-msgid "Refunds"
-msgstr "Ristorno"
-
-#. module: l10n_ch_import_cresus
-#: view:account.cresus.import:l10n_ch_import_cresus.cresus_move_line_importer_form
-#: field:account.cresus.import,report:0
+#: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_report
+#: model:ir.ui.view,arch_db:l10n_ch_import_cresus.cresus_move_line_importer_form
 msgid "Report"
 msgstr "Report"
 
 #. module: l10n_ch_import_cresus
-#: field:account.cresus.import,state:0
+#: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_state
 msgid "State"
 msgstr "Stato"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.model,name:l10n_ch_import_cresus.model_account_tax
 msgid "Tax"
-msgstr "Tassa"
+msgstr ""
 
 #. module: l10n_ch_import_cresus
-#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:318
-#, python-format
+#: model:ir.ui.view,arch_db:l10n_ch_import_cresus.cresus_move_line_importer_form
 msgid ""
-"Unexpected exception.\n"
-" %s \n"
-" %s"
-msgstr "Errore inaspettato\n%s\n%s"
-
-#. module: l10n_ch_import_cresus
-#: view:account.cresus.import:l10n_ch_import_cresus.cresus_move_line_importer_form
-msgid "View imported Moves"
-msgstr "Visualizzare Movimenti importati"
+"The accounts, analytical accounts used in the Cresus file must be previously"
+" created into Odoo."
+msgstr ""

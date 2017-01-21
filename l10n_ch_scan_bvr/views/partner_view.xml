@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record id="partner_default_product_supplier_invoice" model="ir.ui.view">
+      <field name="name">partner.default.supplier.invoice.product.form.view</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form" />
+      <field name="type">form</field>
+      <field name="groups_id" eval="[(4, ref('account.group_account_invoice'))]" />
+      <field name="arch" type="xml">
+        <group name="acc_sale" position="inside">
+          <field name="supplier_invoice_default_product"/>
+        </group>
+      </field>
+    </record>
+  </data>
+</openerp>

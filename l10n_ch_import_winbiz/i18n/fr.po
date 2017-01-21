@@ -1,0 +1,235 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * l10n_ch_import_winbiz
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-26 03:47+0000\n"
+"PO-Revision-Date: 2016-11-26 03:47+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: l10n_ch_import_winbiz
+#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:233
+#: model:ir.ui.menu,name:l10n_ch_import_winbiz.menu_account_winbiz_import
+#, python-format
+msgid "Accounting WinBIZ Import"
+msgstr "Import Écritures WinBIZ"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.model.fields,field_description:l10n_ch_import_winbiz.field_account_winbiz_import_company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.model.fields,field_description:l10n_ch_import_winbiz.field_account_winbiz_import_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.model.fields,field_description:l10n_ch_import_winbiz.field_account_winbiz_import_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.model.fields,field_description:l10n_ch_import_winbiz.field_account_winbiz_import_display_name
+msgid "Display Name"
+msgstr "Afficher le nom"
+
+#. module: l10n_ch_import_winbiz
+#: selection:account.winbiz.import,state:0
+msgid "Done"
+msgstr "Succès"
+
+#. module: l10n_ch_import_winbiz
+#: selection:account.winbiz.import,state:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: l10n_ch_import_winbiz
+#: selection:account.winbiz.import,state:0
+msgid "Error"
+msgstr "Erreur"
+
+#. module: l10n_ch_import_winbiz
+#: selection:account.winbiz.import,file_format:0
+msgid "Excel spreadsheet"
+msgstr "Feuille de calcul Excel"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.model.fields,field_description:l10n_ch_import_winbiz.field_account_winbiz_import_file
+msgid "File"
+msgstr "Fichier"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.model.fields,field_description:l10n_ch_import_winbiz.field_account_winbiz_import_file_format
+msgid "File Format"
+msgstr "Format de fichier"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.model.fields,field_description:l10n_ch_import_winbiz.field_account_winbiz_import_enable_account_based_line_merging
+msgid "Group Balance Sheet accounts lines"
+msgstr "Grouper les lignes sur les comptes de bilan"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.model.fields,field_description:l10n_ch_import_winbiz.field_account_winbiz_import_id
+msgid "ID"
+msgstr "Identifiant"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.model,name:l10n_ch_import_winbiz.model_account_winbiz_import
+msgid "Import Accounting Winbiz"
+msgstr "Import Fichier"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.actions.act_window,name:l10n_ch_import_winbiz.action_account_winbiz_import
+msgid "Import Move lines"
+msgstr "Import écritures"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.ui.view,arch_db:l10n_ch_import_winbiz.winbiz_move_line_importer_form
+msgid "Import file"
+msgstr "Import Fichier"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.ui.view,arch_db:l10n_ch_import_winbiz.winbiz_move_line_importer_form
+msgid "Import help"
+msgstr "Import Aide"
+
+#. module: l10n_ch_import_winbiz
+#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:243
+#, python-format
+msgid "Imported Journal Entries"
+msgstr "Pièces importées"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.model.fields,field_description:l10n_ch_import_winbiz.field_account_winbiz_import_imported_move_ids
+msgid "Imported moves"
+msgstr "Pièces importées"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.ui.view,arch_db:l10n_ch_import_winbiz.winbiz_move_line_importer_form
+msgid ""
+"In order to import your Excel Spreadsheet you must complete the following "
+"requirements:"
+msgstr ""
+"Pour importer votre feuille de calcul Excel, vous devez remplir les "
+"conditions suivantes :"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.model,name:l10n_ch_import_winbiz.model_account_journal
+msgid "Journal"
+msgstr "Journal"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.model.fields,field_description:l10n_ch_import_winbiz.field_account_winbiz_import___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.model.fields,field_description:l10n_ch_import_winbiz.field_account_winbiz_import_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.model.fields,field_description:l10n_ch_import_winbiz.field_account_winbiz_import_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: l10n_ch_import_winbiz
+#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:106
+#, python-format
+msgid "No account with code %s"
+msgstr "Pas de compte avec le code %s"
+
+#. module: l10n_ch_import_winbiz
+#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:136
+#, python-format
+msgid "No journal ‘%s’"
+msgstr "No journal ‘%s’"
+
+#. module: l10n_ch_import_winbiz
+#: code:addons/l10n_ch_import_winbiz/wizard/l10n_ch_import_winbiz.py:164
+#, python-format
+msgid "No tax found with amount = %r and type = %r"
+msgstr "Aucune taxe avec montant = %r et type = %r"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.model.fields,field_description:l10n_ch_import_winbiz.field_account_winbiz_import_report
+#: model:ir.ui.view,arch_db:l10n_ch_import_winbiz.winbiz_move_line_importer_form
+msgid "Report"
+msgstr "Rapport"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.model.fields,field_description:l10n_ch_import_winbiz.field_account_winbiz_import_state
+msgid "State"
+msgstr "État"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.ui.view,arch_db:l10n_ch_import_winbiz.winbiz_move_line_importer_form
+msgid ""
+"The WinBIZ journals must also exist and have their WinBIZ one-letter codes "
+"filled in into the ad-hoc field"
+msgstr ""
+"Les journaux WinBIZ doivent aussi exister et avoir leur code WinBIZ à une "
+"lettre renseigné dans le champ prévu à cet effet"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.ui.view,arch_db:l10n_ch_import_winbiz.winbiz_move_line_importer_form
+msgid ""
+"The accounts used in the WinBIZ file must have been previously created into "
+"Odoo"
+msgstr ""
+"Les comptes utilisés dans le fichier WinBIZ doivent avoir été créés "
+"préalablement dans Odoo"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.ui.view,arch_db:l10n_ch_import_winbiz.winbiz_move_line_importer_form
+msgid "The export encoding should be “Windows Ansi - 1252” (default)"
+msgstr ""
+"Le codage des caractères pour l'export doit être “Windows Ansi - 1252” "
+"(défaut)"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.ui.view,arch_db:l10n_ch_import_winbiz.winbiz_move_line_importer_form
+msgid "The lines should be ordered by “N°” for best results"
+msgstr "Les lignes doivent être triées par numéro pour de meilleurs résultats"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.ui.view,arch_db:l10n_ch_import_winbiz.winbiz_move_line_importer_form
+msgid ""
+"The taxes must exist. They will be matched with WinBIZ data based on amount,"
+" scope, and whether they are included in the price"
+msgstr ""
+"Les taxes doivent exister. Elle seront mises en correspondance avec les "
+"données WinBIZ en fonction de leur montant, portée et selon si elle sont "
+"incluses dans le prix"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.ui.view,arch_db:l10n_ch_import_winbiz.view_account_journal_form
+msgid "WinBIZ"
+msgstr "WinBIZ"
+
+#. module: l10n_ch_import_winbiz
+#: model:ir.model.fields,field_description:l10n_ch_import_winbiz.field_account_journal_winbiz_mapping
+msgid "WinBIZ journal code"
+msgstr "code de journal WinBIZ"
+
+#. module: l10n_ch_import_winbiz
+#: model:res.groups,name:l10n_ch_import_winbiz.group_winbiz_import
+msgid "Winbiz Import"
+msgstr "Import WinBIZ"
+
+#. module: l10n_ch_import_winbiz
+#: selection:account.winbiz.import,file_format:0
+msgid "XML data"
+msgstr "Données XML"

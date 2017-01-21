@@ -1,0 +1,49 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * l10n_ch_hr_payroll
+# 
+# Translators:
+# leemannd <denis.leemann@camptocamp.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: l10n-switzerland (9.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-17 03:13+0000\n"
+"PO-Revision-Date: 2016-12-21 20:10+0000\n"
+"Last-Translator: leemannd <denis.leemann@camptocamp.com>\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-9-0/language/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model,name:l10n_ch_hr_payroll.model_hr_contract
+msgid "Contract"
+msgstr "Contrat"
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model,name:l10n_ch_hr_payroll.model_hr_employee
+msgid "Employee"
+msgstr "Employé"
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_contract_holiday_rate
+msgid "Holiday Rate"
+msgstr "Taux de congé"
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_contract_lpp_amount
+msgid "LPP Amount"
+msgstr "Montant LPP"
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_contract_lpp_rate
+msgid "LPP Rate"
+msgstr "Taux LPP"
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_employee_children_student
+msgid "Number of Children student"
+msgstr "Nombre d'enfants aux études"
