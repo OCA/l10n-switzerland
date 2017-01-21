@@ -37,7 +37,6 @@
                     <field name="fds_account_id" />
                     <field name="directory_id" />
                     <field name="filename" />
-                    <field name="journal_id" />
                     <field name="create_date" />
                     <field name="state" />
                 </tree>
@@ -52,7 +51,6 @@
                 <search>
                     <field name="filename"/>
                     <field name="directory_id"/>
-                    <field name="journal_id"/>
                     <field name="state"/>
                     <filter name="active" string="Active" domain="[('state','!=','cancel')]"/>
                     <group expand="0" string="Group By...">
