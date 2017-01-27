@@ -11,7 +11,5 @@ class HrContract(models.Model):
     _inherit = 'hr.contract'
 
     holiday_rate = fields.Float(string='Holiday Rate')
-    lpp_rate = fields.Float(string='OBP Rate',
-                            digits=dp.get_precision('Payroll Rate'))
-    lpp_amount = fields.Float(string='OBP Amount', 
-                              digits=dp.get_precision('Account'))
+    lpp_rate = fields.Float(string='OBP Rate', digits=dp.get_precision('Payroll Rate'))
+    lpp_amount = fields.Float(string='OBP Amount', digits=dp.get_precision('Account'))

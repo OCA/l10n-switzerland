@@ -162,6 +162,47 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="category_id" ref="hr_payroll.COMP"/>
             <field name="parent_rule_id" ref="AC"/>
         </record>
+        <record id="SF_SH" model="hr.salary.rule">
+            <field name="amount_select">fix</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">SF_SH</field>
+            <field name="condition_select">none</field>
+            <field name="name">Social Fund Schaffhausen</field>
+            <field name="note">Social Fund Schaffhausen</field>
+            <field name="quantity">1</field>
+            <field name="sequence">125</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+        </record>
+        <record id="SF_SH_E" model="hr.salary.rule">
+            <field name="amount_select">percentage</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">SF_SH_E</field>
+            <field name="condition_select">range</field>
+            <field name="condition_range_max">12350</field>
+            <field name="name">Social Fonds SH Employee</field>
+            <field name="amount_percentage">-0.06</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="quantity">1</field>
+            <field name="condition_range">categories.BASIC + categories.ALW</field>
+            <field name="sequence">121</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="parent_rule_id" ref="SF_SH"/>
+        </record>
+        <record id="SF_SH_C" model="hr.salary.rule">
+            <field name="amount_select">percentage</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">SF_SH_C</field>
+            <field name="condition_select">range</field>
+            <field name="condition_range_max">12350</field>
+            <field name="name">Social Fonds SH Company</field>
+            <field name="amount_percentage">0.18</field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="quantity">1</field>
+            <field name="condition_range">categories.BASIC + categories.ALW</field>
+            <field name="sequence">121</field>
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="parent_rule_id" ref="SF_SH"/>
+        </record>
         <record id="LPP" model="hr.salary.rule">
             <field name="amount_select">fix</field>
             <field name="appears_on_payslip">False</field>
