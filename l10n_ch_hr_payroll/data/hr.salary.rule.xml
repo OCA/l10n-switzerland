@@ -555,6 +555,18 @@ result = -result</field>
             <field name="category_id" ref="hr_payroll_P13"/>
             <field name="parent_rule_id" ref="P13"/>
         </record>
+        <record id="P13_SF_SH" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">Y13_SF_SH</field>
+            <field name="condition_select">none</field>
+            <field name="name">13th Social Fund Schaffhausen</field>
+            <field name="amount_python_compute">result = SF_SH_C/12</field>
+            <field name="quantity">1</field>
+            <field name="sequence">266</field>
+            <field name="category_id" ref="hr_payroll_P13"/>
+            <field name="parent_rule_id" ref="P13"/>
+        </record>
         <record id="P13_LAA" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">False</field>
