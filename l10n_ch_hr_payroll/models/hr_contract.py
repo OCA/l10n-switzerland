@@ -10,8 +10,8 @@ import openerp.addons.decimal_precision as dp
 class HrContract(models.Model):
     _inherit = 'hr.contract'
 
-    holiday_rate = fields.Float(string='Holiday Rate', translate=True)
-    lpp_rate = fields.Float(string='OBP Rate', translate=True,
+    holiday_rate = fields.Float(string='Holiday Rate')
+    lpp_rate = fields.Float(string='OBP Rate',
                             digits=dp.get_precision('Payroll Rate'))
-    lpp_amount = fields.Float(string='OBP Amount', translate=True,
+    lpp_amount = fields.Float(string='OBP Amount', 
                               digits=dp.get_precision('Account'))
