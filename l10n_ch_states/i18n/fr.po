@@ -3,15 +3,16 @@
 # * l10n_ch_states
 # 
 # Translators:
-# Yannick Vaucher <yannick.vaucher@camptocamp.com>, 2015
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# leemannd <denis.leemann@camptocamp.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: l10n-switzerland (8.0)\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-09 14:46+0000\n"
-"PO-Revision-Date: 2015-10-06 13:46+0000\n"
-"Last-Translator: Yannick Vaucher <yannick.vaucher@camptocamp.com>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/fr/)\n"
+"POT-Creation-Date: 2017-01-14 04:14+0000\n"
+"PO-Revision-Date: 2017-01-14 04:14+0000\n"
+"Last-Translator: leemannd <denis.leemann@camptocamp.com>, 2017\n"
+"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -51,7 +52,7 @@ msgstr "Berne"
 #. module: l10n_ch_states
 #: model:ir.model,name:l10n_ch_states.model_res_country_state
 msgid "Country state"
-msgstr ""
+msgstr "Canton"
 
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_FR
