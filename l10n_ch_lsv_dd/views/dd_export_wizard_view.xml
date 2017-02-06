@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2014 Compassion (http://www.compassion.ch)
+  @author: Cyril Sester <cyril.sester@outlook.com>
+  The licence is in the file __openerp__.py
+-->
+<openerp>
+  <data>
+    <record id="view_post_dd_export_wizard_form" model="ir.ui.view">
+      <field name="name">Post dd export wizard view</field>
+      <field name="model">post.dd.export.wizard</field>
+      <field name="arch" type="xml">
+        <form string="PostFinance Direct Debit export">
+          <field name="state" invisible="True"/>
+          <separator string="Postfinance Direct Debit export parameters"/>
+          <group states="create">
+            <field name="currency" />
+          </group>
+          <group states="finish">
+            <field name="nb_transactions" />
+            <field name="total_amount" />
+            <field name="file" filename="filename"/>
+            <field name="filename" invisible="True"/>
+          </group>
+          <footer>
+            <button name="generate_dd_file" string="Generate" type="object" class="oe_highlight" states="create"/>
+            <button string="Cancel" class="oe_link" special="cancel" states="create" />
+            <button string="Validate" name="confirm_export" type="object" class="oe_highlight" states="finish"/>
+            <button string="Cancel" name="cancel_export" type="object" class="oe_link" states="finish"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+  </data>
+</openerp>
