@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <record model="ir.ui.view" id="view_partner_bank_lsv_dd_form">
+      <field name="name">view_partner_bank_lsv_dd_form</field>
+      <field name="model">res.partner.bank</field>
+      <field name="inherit_id" ref="base.view_partner_bank_form"/>
+      <field name="arch" type="xml">
+        <data>
+          <xpath expr="//group[descendant-or-self::field[@name='bank_id']]" position="after">
+            <group colspan="4">
+              <group name="lsv" string="LSV options" attrs="{'invisible': ['|', ('acc_type','!=','iban'), ('company_id' ,'=', False)]}">
+                <field name="lsv_identifier" />
+                <field name="esr_party_number" />
+              </group>
+              <group />
+            </group>
+            <group colspan="4">
+              <group name="post_dd" string="Postfinance Direct Debit options" attrs="{'invisible': ['|', ('acc_type','!=','postal'), ('company_id' ,'=', False)]}">
+                <field name="post_dd_identifier" />
+              </group>
+              <group />
+            </group>
+          </xpath>
+        </data>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="l10n_ch_view_res_partner_bank_from_invoice_slip_lsv_dd_form">
+      <field name="name">l10n_ch_view_res_partner_bank_from_invoice_slip_lsv_dd_form</field>
+      <field name="model">res.partner.bank</field>
+      <field name="inherit_id" ref="l10n_ch_payment_slip.l10n_ch_view_res_partner_bank_from_invoice_slip"/>
+      <field name="arch" type="xml">
+        <data>
+          <xpath expr="//group[descendant-or-self::field[@name='bvr_adherent_num']]" position="attributes">
+            <attribute name="attrs">{'invisible': ['|', ('acc_type','not in',['postal', 'iban']), ('company_id' ,'=', False)]}</attribute>
+          </xpath>
+          <field name="bvr_adherent_num" position="attributes">
+            <attribute name="attrs">{'invisible': [('acc_type','not in',['postal', 'iban'])]}</attribute>
+          </field>
+          <field name="print_bank" position="attributes">
+            <attribute name="attrs">{'invisible': [('acc_type','!=','postal')]}</attribute>
+          </field>
+          <field name="print_account" position="attributes">
+            <attribute name="attrs">{'invisible': [('acc_type','!=','postal')]}</attribute>
+          </field>
+          <field name="print_partner" position="attributes">
+            <attribute name="attrs">{'invisible': [('acc_type','!=','postal')]}</attribute>
+          </field>
+        </data>
+      </field>
+    </record>
+
+  </data>
+</openerp>

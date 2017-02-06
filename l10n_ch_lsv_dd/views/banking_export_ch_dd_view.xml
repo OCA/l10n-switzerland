@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2014 Compassion (http://www.compassion.ch)
+  @author: Cyril Sester <cyril.sester@outlook.com>
+  The licence is in the file __openerp__.py
+-->
+<openerp>
+    <data>
+        <record id="view_banking_export_ch_dd_form" model="ir.ui.view">
+            <field name="name">banking.export.ch.dd.form</field>
+            <field name="model">banking.export.ch.dd</field>
+            <field name="arch" type="xml">
+                <form string="Direct Debit export">
+                    <notebook>
+                        <page string="General Information">
+                            <field name="total_amount" />
+                            <field name="nb_transactions" />
+                            <field name="create_date" />
+                            <field name="type" />
+                            <field name="file" filename="filename"/>
+                            <field name="filename" invisible="True"/>
+                        </page>
+                        <page string="Payment Orders">
+                            <field name="payment_order_ids" colspan="4" nolabel="1">
+                                <tree colors="blue:state in ('draft');gray:state in ('cancel','done');black:state in ('open')" string="Payment Orders">
+                                    <field name="name"/>
+                                    <field name="date_generated"/>
+                                    <field name="date_uploaded"/>
+                                    <field name="total_company_currency"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_banking_export_ch_dd_tree" model="ir.ui.view">
+            <field name="name">banking.export.ch.dd.tree</field>
+            <field name="model">banking.export.ch.dd</field>
+            <field name="arch" type="xml">
+                <tree string="Direct Debit export">
+                    <field name="filename"/>
+                    <field name="create_date"/>
+                    <field name="nb_transactions"/>
+                    <field name="type" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_account_banking_ch_dd" model="ir.actions.act_window">
+            <field name="name">Generated direct debit files</field>
+            <field name="res_model">banking.export.ch.dd</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_account_banking_ch_dd"
+          parent="account_payment_order.payment_root"
+          action="action_account_banking_ch_dd"
+          groups="base.group_sale_manager,base.group_sale_salesman"
+          sequence="20" />
+
+        <act_window id="act_banking_export_ch_dd_payment_order"
+          name="Generated Direct Debit Files"
+          domain="[('payment_order_ids', '=', active_id)]"
+          res_model="banking.export.ch.dd"
+          src_model="account.payment.order"
+          view_type="form"
+          view_mode="tree,form" />
+
+        <act_window id="action_account_invoice_free"
+          multi="True"
+          key2="client_action_multi" name="Free Invoices"
+          res_model="account.invoice.confirm" src_model="account.invoice"
+          view_mode="form" target="new" view_type="form" />
+
+    </data>
+</openerp>
