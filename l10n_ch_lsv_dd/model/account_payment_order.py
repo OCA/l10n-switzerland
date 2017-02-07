@@ -19,6 +19,7 @@
 #
 ##############################################################################
 from openerp import models, api, _
+import base64
 
 
 class AccountPaymentOrder(models.Model):
@@ -41,3 +42,40 @@ class AccountPaymentOrder(models.Model):
         }
 
         return action
+
+    @api.multi
+    def generate_payment_file(self):
+        """ Overridden to consider LSV and DD.
+            Returns (payment file as string, filename)
+        """
+        self.ensure_one()
+
+        payment_method_code = self.payment_method_id.code
+
+        # We are going to re-use the wizard, thus we pass the active_ids through the context.
+        new_context = self._context.copy()
+        new_context.update({'active_ids': self.ids})
+
+        # We use as the currency that of the journal, or the currency of the company if not defined.
+        currency = self.journal_id.currency_id or self.journal_id.company_id.currency_id
+
+        if payment_method_code == 'lsv':
+            # The LSV can be generated as Test mode (the default) but we can generate a Production file.
+            lsv_treatment_type = self.env['ir.config_parameter'].sudo().get_param('lsv.treatment_type', 'T')
+            lsv_export_wizard = self.env['lsv.export.wizard'].\
+                create({'treatment_type': lsv_treatment_type,
+                        'currency': currency.name,
+                        })
+            lsv_export_wizard.with_context(new_context).generate_lsv_file()
+            return base64.decodestring(lsv_export_wizard.file), lsv_export_wizard.filename
+
+        elif payment_method_code == 'postfinance.dd':
+            dd_export_wizard = self.env['post.dd.export.wizard'].\
+                create({'currency': currency.name})
+            dd_export_wizard.with_context(new_context).generate_dd_file()
+            return base64.decodestring(dd_export_wizard.file), dd_export_wizard.filename
+
+        else:
+            res = super(AccountPaymentOrder, self).generate_payment_file()
+
+        return res
