@@ -30,6 +30,7 @@
              'account_payment_order',
              'document'],
  'data': ['data/account_payment_method.xml',
+ 'bank_view.xml'
           ],
  'demo': ['../account/test/account_minimal_test.xml',
           "demo/dta_demo.xml"],
