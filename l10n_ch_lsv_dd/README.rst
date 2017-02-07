@@ -88,7 +88,7 @@ Contributors
 
 * Cyril Sester <cyril.sester@outlook.com>
 * Steve Ferry <steve.ferry1992@gmail.com>
-* Carlos Serra-Toro
+* brain-tec AG
 
 Maintainer
 ----------
