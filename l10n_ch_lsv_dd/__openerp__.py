@@ -36,8 +36,9 @@
     ],
     'external_dependencies': {},
     'data': [
-        # 'data/payment_type.xml',
+        #'data/payment_type.xml',
         'data/export_filename_sequence.xml',
+        'views/account_payment_line_view.xml',
         'views/account_payment_order_view.xml',
         'views/banking_export_ch_dd_view.xml',
         'views/bank_view.xml',
