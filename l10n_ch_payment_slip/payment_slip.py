@@ -483,9 +483,6 @@ class PaymentSlip(models.Model):
         text.moveCursor(0.0, font.size)
 
         address_lines = com_partner.contact_address.split("\n")
-        if com_partner.country_id:
-            del address_lines[-1]
-
         for line in address_lines:
             if not line:
                 continue
