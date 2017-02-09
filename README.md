@@ -84,7 +84,7 @@ addon | version | summary
 --- | --- | ---
 [l10n_ch_bank](l10n_ch_bank/) | 9.0.1.0.0 | Banks names, addresses and BIC codes
 [l10n_ch_base_bank](l10n_ch_base_bank/) | 9.0.1.0.1 | Types and number validation for swiss electronic pmnt. DTA, ESR
-[l10n_ch_dta](l10n_ch_dta/) | 9.0.1.0.1 | Electronic payment file for Swiss bank (DTA)
+[l10n_ch_dta](l10n_ch_dta/) | 9.0.1.0.2 | Electronic payment file for Swiss bank (DTA)
 [l10n_ch_hr_payroll](l10n_ch_hr_payroll/) | 9.0.1.3.0 | Swizerland Payroll Rules
 [l10n_ch_import_cresus](l10n_ch_import_cresus/) | 9.0.1.0.0 | Allows to import Crésus .txt files containing journal entries into Odoo.
 [l10n_ch_import_winbiz](l10n_ch_import_winbiz/) | 9.0.1.0.1 | Accounting Import WinBIZ
