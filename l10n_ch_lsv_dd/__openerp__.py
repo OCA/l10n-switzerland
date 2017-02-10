@@ -32,6 +32,7 @@
     'depends': [
         'l10n_ch_payment_slip',
         'account_payment_order',
+        'account_payment_mode',
         'account_banking_mandate',
     ],
     'external_dependencies': {},
@@ -39,6 +40,7 @@
         'data/payment_type.xml',
         'data/export_filename_sequence.xml',
         'views/account_payment_line_view.xml',
+        'views/account_payment_method_view.xml',
         'views/account_payment_order_view.xml',
         'views/banking_export_ch_dd_view.xml',
         'views/bank_view.xml',

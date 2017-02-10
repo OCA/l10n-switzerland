@@ -1,8 +1,7 @@
 ##############################################################################
 #
-#    Swiss localization Direct Debit module for Odoo
-#    Copyright (C) 2014 Compassion (http://www.compassion.ch)
-#    @author: Cyril Sester <cyril.sester@outlook.com>
+#    Swiss localization Direct Debit module for OpenERP
+#    Copyright (C) 2017 brain-tec AG (http://www.braintec-group.com)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,10 +17,18 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from openerp import models, api, _, fields
 
-from . import account_payment_method
-from . import banking_export_ch_dd
-from . import bank
-from . import invoice
-from . import move_line
-from . import account_payment_order
+
+class AccountPaymentMethod(models.Model):
+    _inherit = 'account.payment.method'
+
+    lsv_treatment_type = fields.Selection(
+        [('P', _('Production')),
+         ('T', _('Test')),
+         ],
+        string="LSV Treatment Type",
+        required=True,
+        default='T',
+        help='Mode to use when generating an LSV payment file with this payment method.'
+    )
