@@ -2,6 +2,7 @@
 #
 #    Swiss localization Direct Debit module for OpenERP
 #    Copyright (C) 2014 Compassion (http://www.compassion.ch)
+#    Copyright (C) 2017 brain-tec AG (http://www.braintec-group.com)
 #    @author: Cyril Sester <cyril.sester@outlook.com>
 #
 #    This program is free software: you can redistribute it and/or modify

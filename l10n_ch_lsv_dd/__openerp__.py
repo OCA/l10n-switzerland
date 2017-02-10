@@ -36,7 +36,7 @@
     ],
     'external_dependencies': {},
     'data': [
-        #'data/payment_type.xml',
+        'data/payment_type.xml',
         'data/export_filename_sequence.xml',
         'views/account_payment_line_view.xml',
         'views/account_payment_order_view.xml',
@@ -49,7 +49,7 @@
     ],
     'demo': [],
     'test': [
-        # 'test/lsv-dd-test.yml',
+        'test/lsv-dd-test.yml',
     ],
     'auto_install': False,
     'installable': True,

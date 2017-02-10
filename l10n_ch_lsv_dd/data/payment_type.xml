@@ -8,17 +8,17 @@
 <openerp>
   <data noupdate="1">
 
-    <record id="export_lsv" model="account.payment.method" forcecreate="True">
+    <record id="export_lsv" model="account.payment.method">
       <field name="name">LSV Direct Debit</field>
       <field name="code">lsv</field>
-      <field name="payment_type">outbound</field>
+      <field name="payment_type">inbound</field>
       <field name="bank_account_required">True</field>
     </record>
 
-    <record id="export_post_dd" model="account.payment.method" forcecreate="True">
+    <record id="export_post_dd" model="account.payment.method">
       <field name="name">Postfinance Direct Debit</field>
       <field name="code">postfinance.dd</field>
-      <field name="payment_type">outbound</field>
+      <field name="payment_type">inbound</field>
       <field name="bank_account_required">True</field>
     </record>
 
