@@ -61,8 +61,7 @@ class AccountPaymentOrder(models.Model):
         currency = self.journal_id.currency_id or self.journal_id.company_id.currency_id
 
         if payment_method_code == 'lsv':
-            # The LSV can be generated as Test mode (the default) but we can generate a Production file.
-            lsv_treatment_type = self.env['ir.config_parameter'].sudo().get_param('lsv.treatment_type', 'T')
+            lsv_treatment_type = self.payment_method_id.lsv_treatment_type or 'T'
             lsv_export_wizard = self.env['lsv.export.wizard'].\
                 create({'treatment_type': lsv_treatment_type,
                         'currency': currency.name,
