@@ -1,0 +1,128 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * l10n_ch_zip
+# 
+# Translators:
+# TT <toni.tanner@leegroup.ch>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-04 03:30+0000\n"
+"PO-Revision-Date: 2017-02-04 03:30+0000\n"
+"Last-Translator: TT <toni.tanner@leegroup.ch>, 2017\n"
+"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: l10n_ch_zip
+#: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_active
+msgid "Active"
+msgstr "Aktiv"
+
+#. module: l10n_ch_zip
+#: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_lang2
+msgid ""
+"Additional language within a postcode.\n"
+"One alternative language code may appear for each postcode.\n"
+"1 = German, 2 = French, 3 = Italian, 4 = Romansh."
+msgstr ""
+"Zusätzliche Sprache innerhalb der Postleitzahl.\n"
+"Ein anderer Sprachcode kann für jede Postleitzahl in Erscheinung treten.\n"
+"1=Deutsch, 2=Französisch, 3=Italienisch, 4=Rätoromanisch"
+
+#. module: l10n_ch_zip
+#: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_additional_digit
+msgid "Additional poscode digits"
+msgstr "Zusätzliche Ziffern der Postleitzahl"
+
+#. module: l10n_ch_zip
+#: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_lang2
+msgid "Alternative language code"
+msgstr "Alternativer Sprachcode"
+
+#. module: l10n_ch_zip
+#: model:ir.model,name:l10n_ch_zip.model_res_better_zip
+msgid "City/locations completion object"
+msgstr ""
+
+#. module: l10n_ch_zip
+#: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_communitynumber_bfs
+msgid "FSO municipality number (BFSNR)"
+msgstr "Gemeindenummer nach dem Bundesamt für Statistik (BFSNR)"
+
+#. module: l10n_ch_zip
+#: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_sort
+msgid ""
+"Indicates if the postcode is included in the «sort file»(MAT[CH]sort): 0 = "
+"not included, 1 = included. Delivery information with addresses (only "
+"postcode and streets) are published in the sort file."
+msgstr ""
+"Beschreibt, ob die Postleitzahl enthalten ist im «sort file»(MAT[CH]sort): 0"
+" = nicht enthalten, 1 = enthalten. Lieferinformation mit Adresse (nur "
+"Postleitzahl und Strasse) werden im sort file publiziert."
+
+#. module: l10n_ch_zip
+#: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_post_delivery_through
+msgid ""
+"Indicates the post office (ONRP) that delivers most of the letters to the "
+"postcode addresses. This information can be used for bag addresses too."
+msgstr ""
+
+#. module: l10n_ch_zip
+#: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_lang
+msgid ""
+"Language (language majority) within a postcode area. 1 = German, 2 = French,"
+" 3 = Italian, 4 = Romansh. For multi-lingual localities, the main language "
+"is indicated."
+msgstr ""
+"Sprache (mehrheit) innerhalb einer Postleitzahlregion. 1=Deutsch, "
+"2=Französisch, 3=Italienisch, 4=Rätoromanisch. Für mehrsprachige Orte wird "
+"die Hauptsprache angegeben."
+
+#. module: l10n_ch_zip
+#: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_lang
+msgid "Language code"
+msgstr "Sprachcode"
+
+#. module: l10n_ch_zip
+#: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_post_delivery_through
+msgid "Mail delivery by"
+msgstr "Postversand durch"
+
+#. module: l10n_ch_zip
+#: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_communitynumber_bfs
+msgid ""
+"Numbering used by the Federal Statistical Office for municipalities in "
+"Switzerland and the Principality of Liechtenstein"
+msgstr ""
+"Nummerierung vom Bundesamt für Statistik für Ortschaften in der Schweiz und "
+"Fürstentum Liechtenstein."
+
+#. module: l10n_ch_zip
+#: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_zip_type
+msgid "Postcode type"
+msgstr "Art der Postleitzahl"
+
+#. module: l10n_ch_zip
+#: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_sort
+msgid "Present in sort file"
+msgstr "In der Sortierungsdatei vorhanden"
+
+#. module: l10n_ch_zip
+#: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_onrp
+msgid "Primary Key"
+msgstr "Primärschlüssel"
+
+#. module: l10n_ch_zip
+#: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_onrp
+msgid "Swiss Post classification no. (ONRP)"
+msgstr "Schweizerische Post klassifizierungsnummer (ONRP)"
+
+#. module: l10n_ch_zip
+#: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_valid_from
+msgid "Valid from"
+msgstr "Gültiges Formular"
