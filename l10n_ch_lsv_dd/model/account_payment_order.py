@@ -57,8 +57,12 @@ class AccountPaymentOrder(models.Model):
         new_context = self._context.copy()
         new_context.update({'active_ids': self.ids})
 
-        # We use as the currency that of the journal, or the currency of the company if not defined.
-        currency = self.journal_id.currency_id or self.journal_id.company_id.currency_id
+        # We use as the currency that of the bank account, or
+        # that of the journal, or that of the company.
+        currency = self.company_partner_bank_id.currency_id or \
+            self.journal_id.currency_id or \
+            self.journal_id.company_id.currency_id or \
+            False
 
         if payment_method_code == 'lsv':
             lsv_treatment_type = self.payment_method_id.lsv_treatment_type or 'T'
