@@ -20,6 +20,9 @@ from odoo.tools.misc import mod10r
 FontMeta = namedtuple('FontMeta', ('name', 'size'))
 
 
+ADDR_FORMAT = "%(street)s\n%(street2)s\n%(zip)s %(city)s"
+
+
 class PaymentSlipSettings(object):
     """Slip report setting container"""
 
@@ -440,9 +443,27 @@ class PaymentSlip(models.Model):
                         size=size)
 
     @api.model
+    def _get_address_lines(self, com_partner):
+        bvr_address_format = (
+            self.env['ir.config_parameter'].get_param('bvr.address.format') or
+            ADDR_FORMAT)
+        # use onchange to define our own temporary address format
+        with self.env.do_in_onchange():
+            # assign a fake country in case partner has no country set
+            com_partner.country_id = self.env['res.country'].new(
+                {'address_format': bvr_address_format}
+            )
+            address_lines = com_partner.contact_address.split("\n")
+        com_partner.invalidate_cache()
+        return address_lines
+
+    @api.model
     def _draw_address(self, canvas, print_settings, initial_position, font,
                       com_partner):
         """Draw an address on canvas
+
+        Address format can be changed by adding system parameter
+        `bvr.address.format`.
 
         :param canvas: payment slip reportlab component to be drawn
         :type canvas: :py:class:`reportlab.pdfgen.canvas.Canvas`
@@ -469,17 +490,7 @@ class PaymentSlip(models.Model):
         text.setFont(font.name, font.size)
         text.textOut(com_partner.name)
         text.moveCursor(0.0, font.size)
-
-        address_lines = com_partner.contact_address.split("\n")
-        if com_partner.country_id:
-            del address_lines[-1]
-
-        for line in address_lines:
-            if not line:
-                continue
-
-            text.textLine(line)
-
+        [text.textLine(l) for l in self._get_address_lines(com_partner) if l]
         canvas.drawText(text)
 
     @api.multi
