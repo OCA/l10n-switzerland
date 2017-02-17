@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2017 brain-tec AG (http://www.braintec-group.com)
+  The licence is in the file __openerp__.py
+-->
+<openerp>
+    <data>
+
+        <record id="swiss_bank_payment_line_form" model="ir.ui.view">
+            <field name="name">swiss.pain.base.bank.payment.line.form</field>
+            <field name="model">bank.payment.line</field>
+            <field name="inherit_id" ref="account_banking_pain_base.bank_payment_line_form"/>
+            <field name="arch" type="xml">
+                <field name="local_instrument" position="attributes">
+                    <!-- Set as visible because of pain.008.001.02.ch.03. -->
+                    <attribute name="invisible" eval="False" />
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

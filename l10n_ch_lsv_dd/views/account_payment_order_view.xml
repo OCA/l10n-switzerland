@@ -58,5 +58,26 @@
             <field name="key">action</field>
             <field name="object" eval="1" />
         </record>
+
+        <record
+          model="ir.actions.act_window"
+          id="action_create_sepa_dd">
+            <field name="name">Create Postfinance XML Direct Debit file</field>
+            <field name="res_model">xml.dd.export.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record
+          model="ir.values"
+          id="action_account_sepa_dd_create_values">
+            <field name="key2">client_action_multi</field>
+            <field name="model">account.payment.order</field>
+            <field name="name">Create Postfinance XML Direct Debit file</field>
+            <field name="value" eval="'ir.actions.act_window,%d'%action_create_sepa_dd" />
+            <field name="key">action</field>
+            <field name="object" eval="1" />
+        </record>
     </data>
 </openerp>

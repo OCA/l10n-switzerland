@@ -32,3 +32,18 @@ class AccountPaymentMethod(models.Model):
         default='T',
         help='Mode to use when generating an LSV payment file with this payment method.'
     )
+
+    pain_version = fields.Selection(selection_add=[
+        ('pain.008.001.02.ch.03',
+         'pain.008.001.02.ch.03 (XML Direct Debit)'),
+        ])
+
+    @api.multi
+    def get_xsd_file_path(self):
+        self.ensure_one()
+        pain_version = self.pain_version
+        if pain_version == 'pain.008.001.02.ch.03':
+            path = 'l10n_ch_lsv_dd/data/{0}.xsd'.format(pain_version)
+        else:
+            path = super(AccountPaymentMethod, self).get_xsd_file_path()
+        return path
