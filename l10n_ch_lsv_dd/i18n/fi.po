@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-14 04:18+0000\n"
+"POT-Creation-Date: 2017-02-04 03:33+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/fi/)\n"
@@ -278,7 +278,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: view:lsv.export.wizard:0 view:post.dd.export.wizard:0
 msgid "Validate"
-msgstr ""
+msgstr "Hyväksy"
 
 #. module: l10n_ch_lsv_dd
 #: view:res.partner.bank:0

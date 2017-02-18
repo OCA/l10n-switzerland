@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-04 14:41+0000\n"
-"PO-Revision-Date: 2015-09-04 14:42+0000\n"
+"POT-Creation-Date: 2017-02-04 03:33+0000\n"
+"PO-Revision-Date: 2017-02-17 15:46+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -191,7 +191,7 @@ msgstr ""
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:733
 #, python-format
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:241
