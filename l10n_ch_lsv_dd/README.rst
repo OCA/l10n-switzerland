@@ -48,7 +48,7 @@ Usage
       as preferred execution date.
     * Press "Confirm payments"
     * Press "Make payments". This will launch the LSV/DD file generation \
-    wizard.
+      wizard.
     * Download the generated file and press "Validate". If you need to \
       download the file again, you can access the generated file with the \
       "Generated Direct Debit Files" menu.

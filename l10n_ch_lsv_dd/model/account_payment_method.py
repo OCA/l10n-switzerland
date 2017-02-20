@@ -30,7 +30,8 @@ class AccountPaymentMethod(models.Model):
         string="LSV Treatment Type",
         required=True,
         default='T',
-        help='Mode to use when generating an LSV payment file with this payment method.'
+        help='Mode to use when generating an LSV payment file '
+             'with this payment method.'
     )
 
     pain_version = fields.Selection(selection_add=[

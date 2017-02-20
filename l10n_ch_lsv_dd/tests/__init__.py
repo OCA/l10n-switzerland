@@ -1,8 +1,7 @@
 ##############################################################################
 #
-#    Swiss localization Direct Debit module for Odoo
-#    Copyright (C) 2014 Compassion (http://www.compassion.ch)
-#    @author: Cyril Sester <cyril.sester@outlook.com>
+#    Swiss localization Direct Debit module for OpenERP
+#    Copyright (C) 2017 brain-tec AG (http://www.braintec-group.com)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,7 +18,12 @@
 #
 ##############################################################################
 
-from . import export_utils
-from . import lsv_export_wizard
-from . import dd_export_wizard
-from . import invoice_free_wizard
+from . import test_bank
+from . import test_lsv_export_wizard
+from . import test_dd_export_wizard
+
+checks = [
+    test_bank,
+    test_lsv_export_wizard,
+    test_dd_export_wizard,
+]
