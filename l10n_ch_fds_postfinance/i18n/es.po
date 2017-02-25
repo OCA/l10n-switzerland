@@ -150,7 +150,7 @@ msgstr "Por defecto"
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.file,directory_id:0
 msgid "Directory"
-msgstr ""
+msgstr "Directorio"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.directory,name:0

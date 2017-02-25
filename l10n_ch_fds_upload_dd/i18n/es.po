@@ -60,7 +60,7 @@ msgstr ""
 #. module: l10n_ch_fds_upload_dd
 #: field:fds.dd.upload.history,directory_id:0
 msgid "Directory"
-msgstr ""
+msgstr "Directorio"
 
 #. module: l10n_ch_fds_upload_dd
 #: model:ir.model,name:l10n_ch_fds_upload_dd.model_post_dd_export_wizard

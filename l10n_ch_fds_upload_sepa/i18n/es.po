@@ -55,7 +55,7 @@ msgstr "Por defecto"
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,directory_id:0
 msgid "Directory"
-msgstr ""
+msgstr "Directorio"
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,fds_account_id:0
