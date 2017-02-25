@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-10 04:00+0000\n"
+"POT-Creation-Date: 2017-02-04 03:33+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/es/)\n"
@@ -96,7 +96,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: field:payment.order,dta_ids:0
 msgid "unknown"
-msgstr ""
+msgstr "desconocido"
 
 #. module: l10n_ch_dta
 #: model:ir.model,name:l10n_ch_dta.model_create_dta_wizard

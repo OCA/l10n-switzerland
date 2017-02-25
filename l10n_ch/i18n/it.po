@@ -1,21 +1,22 @@
-# Italian translation for openerp-swiss-localization
-# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
-# This file is distributed under the same license as the openerp-swiss-localization package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
-#
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# * l10n_ch
+# 
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: openerp-swiss-localization\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-01-15 14:59+0000\n"
-"PO-Revision-Date: 2014-03-02 13:33+0000\n"
-"Last-Translator: Federico Vincenti <federico.vincenti@fevis.ch>\n"
-"Language-Team: Italian <it@li.org>\n"
+"Project-Id-Version: l10n-switzerland (7.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-04 03:33+0000\n"
+"PO-Revision-Date: 2017-02-18 17:29+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Italian (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-14 05:59+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"Content-Transfer-Encoding: \n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_82
@@ -4073,7 +4074,8 @@ msgstr ""
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_110_0
 msgid ""
-"Créances résultant de vente et de prestations de services (débiteurs-clients)"
+"Créances résultant de vente et de prestations de services (débiteurs-"
+"clients)"
 msgstr ""
 
 #. module: l10n_ch
@@ -4418,7 +4420,7 @@ msgstr ""
 #: model:account.account.template,name:l10n_ch.ch_5203
 #: model:account.account.template,name:l10n_ch.ch_5403
 msgid "Commissions"
-msgstr ""
+msgstr "Provvigioni"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_7502
