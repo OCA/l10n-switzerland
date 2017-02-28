@@ -698,7 +698,8 @@ class DTAFileGenerator(models.TransientModel):
             elec_pay = pline.partner_bank_id.acc_type  # Bank type
             part = pline.partner_id
             country_code = part.country_id.code if part.country_id else False
-            if elec_pay in ['iban', 'bank']:
+            if elec_pay in ['iban', 'bank'] and \
+               pline.communication_type != 'bvr':
                 # If iban => country=country code for space reason
                 record_type = RecordGt836
             elif country_code and country_code != 'CH':
