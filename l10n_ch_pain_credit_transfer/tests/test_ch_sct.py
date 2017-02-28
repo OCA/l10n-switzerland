@@ -2,9 +2,9 @@
 # © 2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp.addons.account.tests.account_test_classes\
+from odoo.addons.account.tests.account_test_classes\
     import AccountingTestCase
-from openerp.tools import float_compare
+from odoo.tools import float_compare
 import time
 from lxml import etree
 
@@ -268,5 +268,6 @@ class TestSCT_CH(AccountingTestCase):
             'name': 'Great service',
             'account_id': self.account_expense.id,
             })
-        invoice.signal_workflow('invoice_open')
+        invoice.invoice_validate()
+        invoice.action_move_create()
         return invoice
