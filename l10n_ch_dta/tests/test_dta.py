@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# © 2016 Braintec AG - Kumar Aberer <kumar.aberer@braintec-group.com>
+# Copyright 2016 Braintec AG - Kumar Aberer <kumar.aberer@braintec-group.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import time
 
-from openerp.addons.account.tests.account_test_classes \
+from odoo.addons.account.tests.account_test_classes \
     import AccountingTestCase
-from openerp.tools import float_compare
+from odoo.tools import float_compare
 
 
 class TestDTA(AccountingTestCase):
