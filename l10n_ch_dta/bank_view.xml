@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
   <record model="ir.ui.view" id="l10nch_view_res_partner_bank_from_invoice_slip">
     <field name="name">res.partner_bank.form.l10n_ch</field>
     <field name="model">res.partner.bank</field>
@@ -12,4 +13,5 @@
       </group>
     </field>
   </record>
+
 </odoo>
