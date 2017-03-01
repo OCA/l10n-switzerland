@@ -4,13 +4,24 @@
 
 import time
 
+from odoo import tools
+from odoo.tools import float_compare
+from odoo.modules.module import get_resource_path
+
 from odoo.addons.account.tests.account_test_classes \
     import AccountingTestCase
-from odoo.tools import float_compare
 
 
 class TestDTA(AccountingTestCase):
+
+    def _load(self, module, *args):
+        tools.convert_file(
+            self.cr, 'account_asset',
+            get_resource_path(module, *args),
+            {}, 'init', False, 'test', self.registry._assertion_report)
+
     def test_dta(self):
+        self._load('account', 'test', 'account_minimal_test.xml')
         self.company = self.env['res.company']
         self.account_model = self.env['account.account']
         self.move_model = self.env['account.move']
@@ -149,5 +160,6 @@ class TestDTA(AccountingTestCase):
             'name': 'Great service',
             'account_id': self.account_expense.id,
         })
-        invoice.signal_workflow('invoice_open')
+        invoice.invoice_validate()
+        invoice.action_move_create()
         return invoice
