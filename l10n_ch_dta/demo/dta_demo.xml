@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <odoo>
-<data>
     <!-- Transform into YAML for testing -->
     <record model="res.bank" id="partner_bank">
         <field name="name">Fortis s.a.</field>
@@ -33,5 +32,4 @@
         <field name="default_journal_ids" search="[('type', '=', 'bank')]"/>
     </record>
 
-</data>
 </odoo>

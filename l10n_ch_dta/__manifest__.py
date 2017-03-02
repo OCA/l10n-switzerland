@@ -1,27 +1,11 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Nicolas Bessi. Copyright Camptocamp SA
-#    Ported to v8.0 by Agile Business Group <http://www.agilebg.com>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# Copyright 2009 Camptocamp SA
+# Copyright 2015 Agile Business Group
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {'name': 'Switzerland - Bank Payment File (DTA)',
  'summary': 'Electronic payment file for Swiss bank (DTA)',
- 'version': '9.0.1.0.1',
+ 'version': '10.0.1.0.1',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
@@ -31,10 +15,9 @@
              'document'],
  'data': ['data/account_payment_method.xml',
           ],
- 'demo': ['../account/test/account_minimal_test.xml',
-          "demo/dta_demo.xml"],
+ 'demo': ["demo/dta_demo.xml"],
  'auto_install': False,
- 'installable': False,
+ 'installable': True,
  'post_init_hook': 'update_bank_journals',
  'images': []
  }
