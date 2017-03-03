@@ -92,7 +92,7 @@ class AccountPaymentOrder(models.Model):
 
         elif payment_method_code == 'sepa.ch.dd' and pain_flavor == 'pain.008.001.02.ch.03':
             file_content, file_name = self.generate_xml_ch_dd_file()
-            return base64.decodestring(file_content), file_name
+            return file_content, file_name
 
         else:
             res = super(AccountPaymentOrder, self).generate_payment_file()
