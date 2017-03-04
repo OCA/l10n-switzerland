@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# leemannd <denis.leemann@camptocamp.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-04 03:38+0000\n"
-"PO-Revision-Date: 2017-01-04 03:38+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2017-03-03 03:39+0000\n"
+"PO-Revision-Date: 2017-03-03 03:39+0000\n"
+"Last-Translator: leemannd <denis.leemann@camptocamp.com>, 2017\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -139,3 +140,5 @@ msgid ""
 "Your bank BVR/ESR adherent number must contain only digits!\n"
 "Please check your company bank account."
 msgstr ""
+"Votre numéro d'adhérent BVR/ESR de votre banque ne doit contenir que des chiffres!\n"
+"Veuillez vérifier le compte bancaire de votre société"
