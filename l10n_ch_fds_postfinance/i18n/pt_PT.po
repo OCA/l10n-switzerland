@@ -194,7 +194,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: selection:fds.postfinance.file,state:0
 msgid "Error"
-msgstr ""
+msgstr "Erro"
 
 #. module: l10n_ch_fds_postfinance
 #: selection:fds.files.import.tobankstatments.wizard,state:0
@@ -337,7 +337,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: field:fds.files.import.tobankstatments.wizard,msg_file_imported:0
 msgid "Imported files"
-msgstr ""
+msgstr "Ficheiros importados"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.directory,journal_id:0

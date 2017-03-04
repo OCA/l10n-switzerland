@@ -80,7 +80,7 @@ msgstr ""
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,file:0
 msgid "File"
-msgstr ""
+msgstr "Ficheiro"
 
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,id:0
@@ -90,7 +90,7 @@ msgstr "ID"
 #. module: l10n_ch_import_cresus
 #: model:ir.actions.act_window,name:l10n_ch_import_cresus.action_account_cresus_import
 msgid "Import Move lines"
-msgstr ""
+msgstr "Importar Linhas de Movimentos"
 
 #. module: l10n_ch_import_cresus
 #: view:account.cresus.import:l10n_ch_import_cresus.cresus_move_line_importer_form
@@ -157,7 +157,7 @@ msgstr "Notas de crédito"
 #: view:account.cresus.import:l10n_ch_import_cresus.cresus_move_line_importer_form
 #: field:account.cresus.import,report:0
 msgid "Report"
-msgstr ""
+msgstr "Relatório"
 
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,state:0
@@ -176,7 +176,7 @@ msgid ""
 "Unexpected exception.\n"
 " %s \n"
 " %s"
-msgstr ""
+msgstr "Excepção inesperada.\n%s \n%s "
 
 #. module: l10n_ch_import_cresus
 #: view:account.cresus.import:l10n_ch_import_cresus.cresus_move_line_importer_form
