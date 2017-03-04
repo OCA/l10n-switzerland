@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-10 04:00+0000\n"
+"POT-Creation-Date: 2017-02-25 03:48+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/pt_PT/)\n"
@@ -109,7 +109,7 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_account_move_line
 msgid "Journal Items"
-msgstr ""
+msgstr "Itens do Diário"
 
 #. module: l10n_ch_payment_slip
 #: field:res.partner.bank,print_account:0
@@ -197,7 +197,7 @@ msgstr ""
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:199
 #, python-format
 msgid "Error"
-msgstr ""
+msgstr "Erro"
 
 #. module: l10n_ch_payment_slip
 #: help:res.company,bvr_delta_vert:0
