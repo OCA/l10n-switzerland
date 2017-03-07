@@ -86,6 +86,7 @@ addon | version | summary
 [l10n_ch_base_bank](l10n_ch_base_bank/) | 10.0.1.0.0 | Types and number validation for swiss electronic pmnt. DTA, ESR
 [l10n_ch_dta](l10n_ch_dta/) | 10.0.1.0.1 | Electronic payment file for Swiss bank (DTA)
 [l10n_ch_pain_base](l10n_ch_pain_base/) | 10.0.1.0.0 | ISO 20022 base module for Switzerland
+[l10n_ch_pain_credit_transfer](l10n_ch_pain_credit_transfer/) | 10.0.1.0.0 | Generate ISO 20022 credit transfert (SEPA and not SEPA)
 [l10n_ch_states](l10n_ch_states/) | 10.0.1.0.0 | Switzerland Country States
 [l10n_ch_zip](l10n_ch_zip/) | 10.0.1.0.0 | Provides all Swiss postal codes for auto-completion
 
@@ -100,7 +101,6 @@ addon | version | summary
 [l10n_ch_hr_payroll](l10n_ch_hr_payroll/) | 9.0.1.3.0 (unported) | Swizerland Payroll Rules
 [l10n_ch_import_cresus](l10n_ch_import_cresus/) | 9.0.1.0.0 (unported) | Allows to import Crésus .txt files containing journal entries into Odoo.
 [l10n_ch_import_winbiz](l10n_ch_import_winbiz/) | 9.0.1.0.0 (unported) | Accounting Import WinBIZ
-[l10n_ch_pain_credit_transfer](l10n_ch_pain_credit_transfer/) | 9.0.1.0.0 (unported) | Generate ISO 20022 credit transfert (SEPA and not SEPA)
 [l10n_ch_pain_direct_debit](l10n_ch_pain_direct_debit/) | 9.0.1.0.0 (unported) | Generate ISO 20022 direct debits
 [l10n_ch_payment_slip](l10n_ch_payment_slip/) | 9.0.2.1.1 (unported) | Print ESR/BVR payment slip with your invoices
 [l10n_ch_payment_slip_account_statement_base_completion](l10n_ch_payment_slip_account_statement_base_completion/) | 1.0 (unported) | Switzerland - BVR/ESR Bank statement Completion
