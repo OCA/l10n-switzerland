@@ -33,7 +33,6 @@ class XmlDdExportWizard(models.TransientModel):
     currency = fields.Selection(
         [('CHF', 'CHF'),
          ('EUR', 'EUR'),
-         ('USD', 'USD'),
          ],
         required=True,
         default='CHF'

@@ -69,6 +69,12 @@ class LsvExportWizard(models.TransientModel):
     ''' LSV file generation wizard. This wizard is called
         when the "make payment" button on a direct debit order
         with payment type "LSV" is pressed
+
+        In version 8, this wizard was called from the option in the More
+        menu of a payment.order, but in version 9, to force the use of the
+        workflow, we removed the entries in the menu. To avoid moving around
+        the existing code, the wizard was kept (although now it can not
+        be launched, but only instantiated to be used).
     '''
     _name = 'lsv.export.wizard'
     _description = 'Export LSV Direct Debit File'
@@ -81,7 +87,6 @@ class LsvExportWizard(models.TransientModel):
     currency = fields.Selection(
         [('CHF', 'CHF'),
          ('EUR', 'EUR'),
-         ('USD', 'USD'),
          ],
         required=True,
         default='CHF'
