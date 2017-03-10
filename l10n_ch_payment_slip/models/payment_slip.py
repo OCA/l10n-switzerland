@@ -466,12 +466,12 @@ class PaymentSlip(models.Model):
         text = canvas.beginText()
         text.setTextOrigin(x, y)
         text.setFont(font.name, font.size)
-        text.textOut(com_partner.name)
+        text.textOut(com_partner.name[:23])
         text.moveCursor(0.0, font.size)
         for line in com_partner.contact_address.split("\n"):
             if not line:
                 continue
-            text.textLine(line)
+            text.textLine(line[:23])
         canvas.drawText(text)
 
     @api.multi
