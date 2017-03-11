@@ -137,7 +137,7 @@ msgstr "Erstellt am"
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.file,data:0
 msgid "Data"
-msgstr ""
+msgstr "Daten"
 
 #. module: l10n_ch_fds_postfinance
 #: selection:fds.files.import.tobankstatments.wizard,state:0
@@ -145,7 +145,7 @@ msgstr ""
 #: selection:fds.key.generator.wizard,state:0
 #: selection:fds.key.import.wizard,state:0
 msgid "Default"
-msgstr ""
+msgstr "Vorgabe"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.file,directory_id:0
@@ -296,7 +296,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.file,filename:0
 msgid "Filename"
-msgstr ""
+msgstr "Dateiname"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.files.import.tobankstatments.wizard,msg_exist_file:0
