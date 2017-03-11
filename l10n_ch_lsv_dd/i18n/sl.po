@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-11 18:46+0000\n"
+"POT-Creation-Date: 2017-03-04 03:41+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/sl/)\n"
@@ -144,7 +144,7 @@ msgstr ""
 #: selection:lsv.export.wizard,treatment_type:0
 #, python-format
 msgid "Test"
-msgstr ""
+msgstr "Test"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/model/bank.py:106

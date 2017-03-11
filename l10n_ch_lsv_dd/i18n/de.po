@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-10 04:00+0000\n"
+"POT-Creation-Date: 2017-03-04 03:41+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/de/)\n"
@@ -91,7 +91,7 @@ msgstr ""
 #: field:post.dd.export.wizard,filename:0
 #, python-format
 msgid "Filename"
-msgstr ""
+msgstr "Dateiname"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/model/bank.py:76 constraint:res.partner.bank:0
@@ -144,7 +144,7 @@ msgstr ""
 #: selection:lsv.export.wizard,treatment_type:0
 #, python-format
 msgid "Test"
-msgstr ""
+msgstr "Test"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/model/bank.py:106
@@ -249,7 +249,7 @@ msgstr ""
 #: selection:banking.export.ch.dd,state:0
 #, python-format
 msgid "Sent"
-msgstr ""
+msgstr "Gesendet"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/model/bank.py:43

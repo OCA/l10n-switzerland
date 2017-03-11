@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-04 03:33+0000\n"
+"POT-Creation-Date: 2017-03-04 03:40+0000\n"
 "PO-Revision-Date: 2015-09-04 14:41+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/de/)\n"
@@ -6124,7 +6124,7 @@ msgstr ""
 #: model:account.account.template,name:l10n_ch.ch_1400
 #: model:account.account.template,name:l10n_ch.ch_1940
 msgid "Actions"
-msgstr ""
+msgstr "Aktionen"
 
 #. module: l10n_ch
 #: model:account.account.template,name:l10n_ch.ch_1719
