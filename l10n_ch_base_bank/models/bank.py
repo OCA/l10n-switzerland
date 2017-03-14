@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2012-2016 Camptocamp
+# Copyright 2012-2017 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import re
 from odoo import models, fields, api, _
@@ -10,6 +10,10 @@ from odoo.addons.base_iban.models.res_partner_bank import normalize_iban
 
 
 class BankCommon(object):
+
+    def is_swiss_postal_num(self, number):
+        return (self._check_9_pos_postal_num(number) or
+                self._check_5_pos_postal_num(number))
 
     def _check_9_pos_postal_num(self, number):
         """
@@ -52,9 +56,9 @@ class BankCommon(object):
         """
         Convert a Postfinance IBAN into an old postal number
         """
-        if not iban[:2] == 'CH':
-            return False
         iban = normalize_iban(iban)
+        if not iban[:2].upper() == 'CH':
+            return False
         part1 = iban[-9:-7]
         part2 = iban[-7:-1].lstrip('0')
         part3 = iban[-1:].lstrip('0')
@@ -62,6 +66,16 @@ class BankCommon(object):
         if not self._check_9_pos_postal_num(ccp):
             return False
         return ccp
+
+    def _convert_iban_to_clearing(self, iban):
+        """
+        Convert a Swiss Iban to a clearing
+        """
+        iban = normalize_iban(iban)
+        if not iban[:2].upper() == 'CH':
+            return False
+        clearing = iban[4:9].lstrip('0')
+        return clearing
 
 
 class Bank(models.Model, BankCommon):
@@ -92,13 +106,16 @@ class Bank(models.Model, BankCommon):
         for bank in self:
             if not bank.ccp:
                 continue
-            if not (self._check_9_pos_postal_num(bank.ccp) or
-                    self._check_5_pos_postal_num(bank.ccp)):
+            if not self.is_swiss_postal_num(bank.ccp):
                 raise exceptions.ValidationError(
                     _('Please enter a correct postal number. '
                       '(01-23456-1 or 12345)')
                 )
         return True
+
+    @api.multi
+    def is_swiss_post(self):
+        return self.bic == 'POFICHBEXXX'
 
     @api.multi
     def name_get(self):
@@ -160,40 +177,18 @@ class ResPartnerBank(models.Model, BankCommon):
         string='Account/IBAN Number'
     )
     ccp = fields.Char(
-        compute="_compute_ccp",
         string='CCP/CP-Konto',
-        store=True,
-        readonly=True
+        store=True
     )
 
     @api.one
     @api.depends('acc_number')
     def _compute_acc_type(self):
         if (self.acc_number and
-                (self._check_9_pos_postal_num(self.acc_number) or
-                 self._check_5_pos_postal_num(self.acc_number))):
+                self.is_swiss_postal_num(self.acc_number)):
             self.acc_type = 'postal'
             return
         super(ResPartnerBank, self)._compute_acc_type()
-
-    @api.one
-    @api.depends('acc_type', 'bank_id.ccp')
-    def _compute_ccp(self):
-        """ Compute CCP
-        It can be:
-        - a postal account, we use acc_number
-        - a postal account in iban format, we transform acc_number
-        - a bank account with CCP on the bank, we use ccp of the bank
-        - otherwise there is no CCP to use
-        """
-        if self.acc_type == 'postal':
-            self.ccp = self.acc_number
-        elif self.acc_type == 'iban' and self.bank_id.bic == 'POFICHBEXXX':
-            self.ccp = self._convert_iban_to_ccp(self.acc_number.strip())
-        elif self.bank_id.ccp:
-            self.ccp = self.bank_id.ccp
-        else:
-            self.ccp = False
 
     @api.multi
     def get_account_number(self):
@@ -220,20 +215,139 @@ class ResPartnerBank(models.Model, BankCommon):
                 )
         return True
 
-    @api.onchange('acc_number', 'acc_type')
-    def onchange_set_swiss_post_bank(self):
-        """ If acc_number is set to a postal number try to find the bank
+    @api.constrains('ccp')
+    def _check_postal_num(self):
+        """Validate postal number format"""
+        for bank in self:
+            if not bank.ccp:
+                continue
+            if not self.is_swiss_postal_num(bank.ccp):
+                raise exceptions.ValidationError(
+                    _('Please enter a correct postal number. '
+                      '(01-23456-1 or 12345)')
+                )
+        return True
+
+    @api.multi
+    def _get_acc_name(self):
+        """ Return an account name for a bank account
+        to use with a ccp for BVR.
+        This method make sure to generate a unique name
         """
+        part_name = self.partner_id.name
+        if part_name:
+            acc_name = _("Bank/CCP {}").format(self.partner_id.name)
+        else:
+            acc_name = _("Bank/CCP Undefined")
+
+        exist_count = self.env['res.partner.bank'].search_count(
+            [('acc_number', '=like', acc_name)])
+        if exist_count:
+            name_exist = exist_count
+            while name_exist:
+                new_name = acc_name + " ({})".format(exist_count)
+                name_exist = self.env['res.partner.bank'].search_count(
+                    [('acc_number', '=', new_name)])
+                exist_count += 1
+            acc_name = new_name
+        return acc_name
+
+    @api.multi
+    def _get_ch_bank_from_iban(self):
+        """ Extract clearing number from iban to find the bank """
+        if self.acc_type != 'iban':
+            return False
+        clearing = self._convert_iban_to_clearing(self.acc_number)
+        return clearing and self.env['res.bank'].search(
+            [('clearing', '=', clearing)], limit=1)
+
+    @api.onchange('acc_number', 'acc_type')
+    def onchange_acc_number_set_swiss_bank(self):
+        """ Set the bank when possible
+        and set ccp when undefined
+        Bank is defined as:
+        - Found bank with CCP matching Bank CCP
+        - Swiss post when CCP is no matching a Bank CCP
+        - Found bank by clearing when using iban
+        For CCP it can be:
+        - a postal account, we copy acc_number
+        - a postal account in iban format, we transform acc_number
+        - a bank account with CCP on the bank, we use ccp of the bank
+        - otherwise there is no CCP to use
+        """
+        bank = self.bank_id
+        ccp = False
         if self.acc_type == 'postal':
-            post = self.env['res.bank'].search([('bic', '=', 'POFICHBEXXX')])
-            if post:
-                self.bank_id = post
+            ccp = self.acc_number
+            # Try to find a matching bank to the ccp entered in acc_number
+            # Overwrite existing bank if there is a match
+            bank = (
+                self.env['res.bank'].search([('ccp', '=', ccp)], limit=1) or
+                bank or
+                self.env['res.bank'].search([('bic', '=', 'POFICHBEXXX')],
+                                            limit=1))
+            if not bank.is_swiss_post():
+                self.acc_number = self._get_acc_name()
+        elif self.acc_type == 'iban':
+            if not bank:
+                bank = self._get_ch_bank_from_iban()
+            if bank:
+                if bank.is_swiss_post():
+                    ccp = self._convert_iban_to_ccp(self.acc_number.strip())
+                else:
+                    ccp = bank.ccp
+        elif self.bank_id.ccp:
+            ccp = self.bank_id.ccp
+        self.bank_id = bank
+        if not self.ccp:
+            self.ccp = ccp
+
+    @api.onchange('ccp')
+    def onchange_ccp_set_empty_acc_number(self):
+        """ If acc_number is empty and bank ccp is defined fill it """
+        if self.bank_id:
+            if not self.acc_number and self.ccp:
+                if self.bank_id.is_swiss_post():
+                    self.acc_number = self.ccp
+                else:
+                    self.acc_number = self._get_acc_name()
+            return
+
+        ccp = self.ccp
+        if ccp and self.is_swiss_postal_num(ccp):
+            bank = (
+                self.env['res.bank'].search([('ccp', '=', ccp)], limit=1) or
+                self.env['res.bank'].search([('bic', '=', 'POFICHBEXXX')],
+                                            limit=1))
+            if not self.acc_number:
+                if not bank.is_swiss_post():
+                    self.acc_number = self._get_acc_name()
+                else:
+                    self.acc_number = self.ccp
+            self.bank_id = bank
 
     @api.onchange('bank_id')
-    def onchange_bank(self):
+    def onchange_bank_set_acc_number(self):
         """ If acc_number is empty and bank ccp is defined fill it """
-        if not self.acc_number and self.bank_id.ccp:
-            self.acc_number = 'Bank/CCP ' + self.bank_id.ccp
+        if not self.bank_id:
+            return
+        if self.bank_id.is_swiss_post():
+            if not self.acc_number:
+                self.acc_number = self.ccp
+            elif not self.ccp and self.is_swiss_postal_num(self.acc_number):
+                self.ccp = self.acc_number
+        else:
+            if not self.acc_number and self.ccp:
+                self.acc_number = self._get_acc_name()
+            elif self.is_swiss_postal_num(self.acc_number):
+                self.ccp = self.acc_number
+                self.acc_number = self._get_acc_name()
+
+    @api.onchange('partner_id')
+    def onchange_partner_set_acc_number(self):
+        if self.acc_type == 'bank' and self.ccp:
+            if 'Bank/CCP' in self.acc_number:
+                self.acc_number = self._get_acc_name()
 
     _sql_constraints = [('bvr_adherent_uniq', 'unique (bvr_adherent_num)',
                          'The BVR adherent number must be unique !')]
