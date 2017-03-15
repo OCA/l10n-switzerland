@@ -419,7 +419,8 @@ class PostDdExportWizard(models.TransientModel):
             )
 
         properties = {
-            'dd_customer_no': payment_order.company_partner_bank_id.post_dd_identifier,
+            'dd_customer_no':
+                payment_order.company_partner_bank_id.post_dd_identifier,
             'dd_order_no': 1,
             'trans_ser_no': 0,
             'nb_transactions': 0,
