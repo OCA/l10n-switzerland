@@ -31,6 +31,11 @@ This is especialy useful when using pre-printed paper.
 An option also allow you to print the ESR/BVR in background when using
 white paper.
 
+By default address format on ESR/BVR is
+`%(street)s\n%(street2)s\n%(zip)s %(city)s`
+This can be change by setting System parameter
+`bvr.address.format`
+
 
 Usage
 =====
