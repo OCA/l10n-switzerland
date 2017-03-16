@@ -6,11 +6,9 @@
       <field name="model">res.partner.bank</field>
       <field name="inherit_id" ref="base.view_partner_bank_form"/>
       <field name="arch" type="xml">
-        <group name="bank" position="after">
-          <group string="DTA options" attrs="{'invisible': [('company_id', '=', False)]}">
+        <field name="bank_id" position="after">
             <field name="dta_code"/>
-          </group>
-        </group>
+        </field>
       </field>
     </record>
   </data>
