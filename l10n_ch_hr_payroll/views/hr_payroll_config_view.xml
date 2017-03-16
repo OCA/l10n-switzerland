@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+File: hr_payroll_config_view.xml
+Module: l10n_ch_hr_payroll
+
+Created by lfr@open-net.ch
+
+Copyright (c) 2017 Open Net Sàrl
+-->
+<odoo>
+    <data>
+      <record model="ir.ui.view" id="view_hr_payroll_config_form">
+            <field name="name">hr.payroll.config.form</field>
+            <field name="model">hr.payroll.config</field>
+            <field name="arch" type="xml">
+                <form string="Payroll Configuration">
+                    <notebook>
+                        <page string="Accounting">
+                            <div class="oe_title">
+                                <h1>General</h1>
+                            </div>
+                            <group>
+                                <field name="basic"/>
+                                <field name="net"/>
+                                <field name="cc"/>
+                            </group>
+                            <div class="oe_title">
+                                <h1>Standard Rules</h1>
+                            </div>
+                            <group>
+                                <group string="OAI/II/IC">
+                                    <field name="avs_d"/>
+                                    <field name="avs_c"/>
+                                </group>
+                                <group string="OBP">
+                                    <field name="lpp_d"/>
+                                    <field name="lpp_c"/>
+                                </group>
+                            </group>
+                            <group colspan="2">
+                                <field name="laa_c"/>
+                            </group>
+                            <div class="oe_title">
+                                <h1>Special Rules</h1>
+                            </div>
+                            <group>
+                                <field name="staff_ins"/>
+                                <field name="other_costs"/>
+                            </group>
+                        </page>
+                        <page string="Parameters">
+                            <group>
+                                <group string="OAI/II/IC">
+                                    <field name="avs_per"/>
+                                </group>
+                                <group string="OBP">
+                                    <field name="lpp_min"/>
+                                    <field name="lpp_max"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="UI">
+                                    <field name="ac_limit"/>
+                                    <field name="ac_per_in_limit"/>
+                                    <field name="ac_per_off_limit"/>
+                                </group>
+                                <group string="LPP Contract">
+                                    <field name="lpp_contract_ids" nolabel="1">
+                                        <tree string="LPP Contract" editable="top">
+                                            <field name="name"/>
+                                            <field name="dc_amount"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="AI">
+                                    <field name="laa_per"/>
+                                </group>
+                                <group string="SDA">
+                                    <field name="lca_per"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="Administrative Fees">
+                                    <field name="fadmin_per"/>
+                                </group>
+                            </group>
+                            </page>
+                    </notebook>
+                    <footer>
+                        <button name="save_configs" 
+                            string="Save" type="object" 
+                            class="btn-primary"/>
+                        <button string="Cancel" 
+                            class="btn-default" 
+                            special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+         <record id="action_view_hr_payroll_config" model="ir.actions.act_window">
+            <field name="name">Payroll Configuration</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.payroll.config</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_hr_payroll_config_form"/>
+            <field name="target">new</field>
+        </record>
+    
+    <menuitem name="Payroll Configuration" parent="hr_payroll.menu_hr_payroll_root" id="menu_hr_payroll_config"
+        action="action_view_hr_payroll_config" sequence="40"/>
+    </data>
+</odoo>

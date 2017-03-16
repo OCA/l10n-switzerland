@@ -7,7 +7,7 @@ Created by sge@open-net.ch
 
 Copyright (c) 2014 Open-Net Ltd.
 -->
-<openerp>
+<odoo>
   <data>
     <record model="ir.ui.view" id="hr_employee_form_l10n_ch_inherit">
       <field name="name">hr.employee.form.inherit_ch_01</field>
@@ -22,4 +22,4 @@ Copyright (c) 2014 Open-Net Ltd.
       </field>
     </record>
   </data>
-</openerp>
+</odoo>
