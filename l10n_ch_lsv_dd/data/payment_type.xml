@@ -25,6 +25,7 @@
     <record id="export_sepa_dd" model="account.payment.method">
       <field name="name">SEPA Direct Debit</field>
       <field name="code">sepa.ch.dd</field>
+      <field name="pain_version">pain.008.001.02.ch.03</field>
       <field name="payment_type">inbound</field>
       <field name="bank_account_required">True</field>
     </record>
