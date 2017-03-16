@@ -90,7 +90,7 @@ class AccountPaymentOrder(models.Model):
             if not partner_bank.ccp:
                 raise UserError(_(
                     "The field 'CCP/CP-Konto' is not set on the bank "
-                    "'%s'.") % partner_bank.bank_id.name)
+                    "account '%s'.") % partner_bank.name)
             party_account = etree.SubElement(
                 parent_node, '%sAcct' % party_type)
             party_account_id = etree.SubElement(party_account, 'Id')
