@@ -59,13 +59,13 @@ class TestSearchInvoice(common.TransactionCase):
         )
 
     def test_search_equal_whitespace_right(self):
-        self.assert_find_ref(
+        self.assert_not_find_ref(
             '272999000000000017040025019',
             '=', '27 29990 00000 00001 70400 25019'
         )
 
     def test_search_equal_whitespace_left(self):
-        self.assert_find_ref(
+        self.assert_not_find_ref(
             '27 29990 00000 00001 70400 25019',
             '=', '272999000000000017040025019'
         )
@@ -86,6 +86,18 @@ class TestSearchInvoice(common.TransactionCase):
             'like', '17 040025 01'
         )
 
+    def test_search_eqlike_whitespace_raw(self):
+        self.assert_not_find_ref(
+            '27 29990 00000 00001 70400 25019',
+            '=like', '17 040025 01'
+        )
+
+    def test_search_eqlike_whitespace_wildcards(self):
+        self.assert_find_ref(
+            '27 29990 00000 00001 70400 25019',
+            '=like', '%17 040025 01%'
+        )
+
     def test_search_different(self):
         self.assert_not_find_ref(
             '27 29990 00000 00001 70400 25019', 'like', '4273473'
@@ -101,5 +113,21 @@ class TestSearchInvoice(common.TransactionCase):
         invoice = self.env['account.invoice'].create(values)
         found = self.env['account.invoice'].search(
             [('partner_id', '=', self.partner.id)],
+        )
+        self.assertEqual(invoice, found)
+
+    def test_search_unary_operator(self):
+        values = {
+            'partner_id': self.partner.id,
+            'type': 'out_invoice',
+            'reference_type': 'bvr',
+            'reference': '27 29990 00000 00001 70400 25019',
+        }
+        invoice = self.env['account.invoice'].create(values)
+        found = self.env['account.invoice'].search(
+            ['|',
+             ('partner_id', '=', False),
+             ('reference', 'like', '2999000000'),
+             ],
         )
         self.assertEqual(invoice, found)
