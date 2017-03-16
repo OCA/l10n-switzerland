@@ -4,6 +4,7 @@
 #  Module: l10n_ch_hr_payroll
 #
 #  Created by sge@open-net.ch
+#  Updated by lfr@open-net.ch (2017)
 #
 #  Copyright (c) 2014-TODAY Open-Net Ltd. <http://www.open-net.ch>
 ##############################################################################
@@ -26,10 +27,9 @@
 #
 ##############################################################################
 
-
 {
     'name': 'Switzerland - Payroll',
-    'summary': 'Swizerland Payroll Rules',
+    'summary': 'Switzerland Payroll Rules',
     'category': 'Localization',
     'author': "Open Net Sàrl,Odoo Community Association (OCA)",
     'depends': [
@@ -40,7 +40,7 @@
         'hr_attendance',
         'account'
     ],
-    'version': '9.0.1.3.0',
+    'version': '10.0.1.0.0.0.3',
     'auto_install': False,
     'demo': [],
     'website': 'http://open-net.ch',
@@ -49,7 +49,10 @@
         'data/hr.salary.rule.category.xml',
         'data/hr.salary.rule.xml',
         'views/hr_employee_view.xml',
-        'views/hr_contract_view.xml'
+        'views/hr_contract_view.xml',
+        'views/hr_payroll_config_view.xml',
+        'views/hr_payslip_view.xml',
+        'views/lpp_contract_view.xml'
     ],
-    'installable': False
+    'installable': True
 }

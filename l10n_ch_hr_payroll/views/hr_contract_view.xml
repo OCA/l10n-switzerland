@@ -4,12 +4,12 @@
     Module: l10n_ch_hr_payroll
 
     Created by cyp@open-net.ch
+    Updated by lfr@open-net.ch (2017)
 
     Copyright (c) 2014-TODAY Open-Net Ltd.
 -->
-<openerp>
+<odoo>
     <data>
-
         <record model="ir.ui.view" id="hr_contract_form_l10n_ch_inherit">
             <field name="name">hr.contract.form.inherit_ch_01</field>
             <field name="model">hr.contract</field>
@@ -17,11 +17,33 @@
             <field name="priority" eval="20"/>
             <field name="arch" type="xml">
                 <field name="struct_id" position="after">
-                    <field name="holiday_rate"/>
                     <field name="lpp_rate"/>
                     <field name="lpp_amount"/>
                 </field>
             </field>
         </record>
+        <record model="ir.ui.view" id="hr_contract_form_l10n_ch_inherit2">
+            <field name="name">hr.contract.form.inherit_ch_02</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <field name="wage" position="before">
+                    <field name="wage_fulltime"/>
+                    <field name="occupation_rate"/>
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="hr_contract_form_l10n_ch_inherit3">
+            <field name="name">hr.contract.form.inherit_ch_03</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <field name="struct_id" position="after">
+                    <field name="lpp_contract_id" options="{'no_create': True, 'no_open': True}"/>
+                </field>
+            </field>
+        </record>
     </data>
-</openerp>
+</odoo>

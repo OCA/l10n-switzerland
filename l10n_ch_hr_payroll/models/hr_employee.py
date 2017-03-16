@@ -2,7 +2,6 @@
 # © 2012 David Coninckx (Opennet Sarl)
 # License into __openerp__.py.
 
-
 from openerp import fields, models
 
 
