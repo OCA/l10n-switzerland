@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_lpp_contract_manager,lpp_contract,model_lpp_contract,hr_payroll.group_hr_payroll_manager,1,1,1,1
+access_lpp_contract_officer,lpp_contract,model_lpp_contract,base.group_user,1,0,0,0
