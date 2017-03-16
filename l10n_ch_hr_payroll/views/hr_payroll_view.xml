@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="hr_salary_rule_list_l10n_ch_inherit1">
+        <field name="name">hr.salary.rule.list_l10n_ch_inherit1</field>
+        <field name="model">hr.salary.rule</field>
+        <field name="inherit_id" ref="hr_payroll.hr_salary_rule_list"/>
+        <field name="priority" eval="20"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="default_order" translation="off">sequence</attribute>
+            </xpath>
+            <xpath expr="//tree/field[@name='name']" position="before">
+                <field name="sequence"/>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="hr_payroll_struc_l10n_ch_inherit1">
+        <field name="name">hr.payroll.struc_l10n_ch_inherit2</field>
+        <field name="model">hr.payroll.structure</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_employee_grade_form"/>
+        <field name="priority" eval="20"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='rule_ids']/tree" position="attributes">
+                <attribute name="default_order" translation="off">sequence</attribute>
+            </xpath>
+            <xpath expr="//field[@name='rule_ids']/tree/field[@name='name']" position="before">
+                <field name="sequence"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

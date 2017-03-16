@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record model="ir.ui.view" id="view_hr_payroll_config_form">
+        <field name="name">hr.payroll.config.form</field>
+        <field name="model">hr.payroll.config</field>
+        <field name="arch" type="xml">
+            <form string="Payroll Configuration">
+                <notebook>
+                    <page string="Accounting">
+                        <div class="oe_title">
+                            <h1>General</h1>
+                        </div>
+                        <group>
+                            <field 
+                                name="basic" 
+                                domain="[
+                                ('user_type_id', '=', %(account.data_account_type_expenses)d),
+                                ('code', 'like', '5___')]"/>
+                            <field name="net"
+                                domain="[
+                                ('user_type_id', '=', %(account.data_account_type_payable)d),
+                                ('code', 'like', '20__')]"/>
+                            <field name="cc" 
+                                domain="[
+                                ('user_type_id', '=', %(account.data_account_type_expenses)d),
+                                ('code', 'like', '5___')]"/>
+                        </group>
+                        <div class="oe_title">
+                            <h1>Standard Rules</h1>
+                        </div>
+                        <group>
+                            <group string="OAI/II/IC">
+                                <field name="avs_d" 
+                                domain="[
+                                ('user_type_id', '=', %(account.data_account_type_current_liabilities)d),
+                                ('code', 'like', '22__')]"/>
+                                <field name="avs_c" 
+                                domain="[
+                                ('user_type_id', '=', %(account.data_account_type_expenses)d),
+                                ('code', 'like', '5___')]"/>
+                            </group>
+                            <group string="OBP">
+                                <field name="lpp_d" 
+                                domain="[
+                                ('user_type_id', '=', %(account.data_account_type_current_liabilities)d),
+                                ('code', 'like', '22__')]"/>
+                                <field name="lpp_c" 
+                                domain="[
+                                ('user_type_id', '=', %(account.data_account_type_expenses)d),
+                                ('code', 'like', '5___')]"/>
+                            </group>
+                        </group>
+                        <group colspan="2">
+                            <field name="laa_c" 
+                                domain="[
+                                ('user_type_id', '=', %(account.data_account_type_current_liabilities)d),
+                                ('code', 'like', '22__')]"/>
+                        </group>
+                        <div class="oe_title">
+                            <h1>Special Rules</h1>
+                        </div>
+                        <group>
+                            <field name="staff_ins" 
+                                domain="[
+                                ('user_type_id', '=', %(account.data_account_type_expenses)d),
+                                ('code', 'like', '5___')]"/>
+                            <field name="other_costs" 
+                                domain="[
+                                ('user_type_id', '=', %(account.data_account_type_expenses)d),
+                                ('code', 'like', '5___')]"/>
+                        </group>
+                    </page>
+                    <page string="Parameters">
+                        <group>
+                            <group string="OAI/II/IC">
+                                <field name="avs_per"/>
+                            </group>
+                            <group string="OBP">
+                                <field name="lpp_min"/>
+                                <field name="lpp_max"/>
+                            </group>
+                        </group>
+                        <group style="margin-bottom: -50px">
+                            <group string="UI">
+                                <field name="ac_limit"/>
+                                <field name="ac_per_in_limit"/>
+                                <field name="ac_per_off_limit"/>
+                            </group>
+                            <group string="LPP Contract">
+                                <field name="lpp_contract_ids" nolabel="1">
+                                    <tree string="LPP Contract" editable="top">
+                                        <field name="name"/>
+                                        <field name="dc_amount"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="AI">
+                                <field name="laa_per"/>
+                            </group>
+                            <group string="SDA">
+                                <field name="lca_per"/>
+                            </group>
+                        </group>
+                        <style>
+                            .family_group td.o_td_label{
+                                width: 30% !important;
+                            }
+                        </style>
+                        <group>
+                            <group string="Family Allowances" colspan="2" class="family_group">
+                                <field name="fa_amount_child"/>
+                                <field name="fa_amount_student"/>
+                                <field name="fa_min_number_childs"/>
+                                <field name="fa_amount_additional"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Administrative Fees">
+                                <field name="fadmin_per"/>
+                            </group>
+                        </group>
+                        </page>
+                        <page string="Cantonal rules">
+                            <group string="AS Families (VD)">
+                                <field name="pc_f_vd_per"/>
+                            </group>
+                            
+                        </page>
+                </notebook>
+                <footer>
+                    <button name="save_configs" 
+                        string="Save" type="object" 
+                        class="btn-primary"/>
+                    <button string="Cancel" 
+                        class="btn-default" 
+                        special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+     <record id="action_view_hr_payroll_config" model="ir.actions.act_window">
+        <field name="name">Payroll Configuration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.payroll.config</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_hr_payroll_config_form"/>
+        <field name="target">new</field>
+    </record>
+    
+    <menuitem 
+        name="Payroll Configuration" 
+        parent="hr_payroll.menu_hr_payroll_configuration" id="menu_hr_payroll_config" 
+        action="action_view_hr_payroll_config" 
+        groups="hr_payroll.group_hr_payroll_manager" 
+        sequence="40"/>
+</odoo>
