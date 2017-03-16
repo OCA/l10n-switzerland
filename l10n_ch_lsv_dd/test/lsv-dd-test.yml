@@ -1,6 +1,6 @@
 -
   In order to test lsv and dd file generation, I will create a customer with
-  2 bank accounts (on for each debit mode) and go through the entire generation
+  2 bank accounts (one for each debit mode) and go through the entire generation
   process
   
   I create the partner

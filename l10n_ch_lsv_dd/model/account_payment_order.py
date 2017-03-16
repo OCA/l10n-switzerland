@@ -289,7 +289,7 @@ class AccountPaymentOrder(models.Model):
 
         else:
             res = super(AccountPaymentOrder, self).generate_party_agent(
-                self, parent_node, party_type, order, partner_bank, gen_args,
+                parent_node, party_type, order, partner_bank, gen_args,
                 bank_line)
 
         return res
