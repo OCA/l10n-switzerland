@@ -23,13 +23,21 @@ class AccountInvoice(models.Model):
                 domain.append(arg)
                 continue
             if operator not in ('like', 'ilike', '=like', '=ilike',
-                                'not like', 'not ilike', '=',
-                                '!=', '<', '<=', '>', '>=', 'in', 'not in'):
+                                'not like', 'not ilike'):
                 domain.append(arg)
                 continue
             if value:
                 value = value.replace(' ', '')
-                if operator in ('like', 'ilike', 'not like', 'not ilike'):
+                if not value:
+                    # original value contains only spaces, the query
+                    # would return all rows, so avoid a costly search
+                    # and drop the domain triplet
+                    continue
+                # add wildcards for the like search, except if the operator
+                # is =like of =ilike because they are supposed to be there yet
+                if operator.startswith('='):
+                    operator = operator[1:]
+                else:
                     value = '%%%s%%' % (value,)
             query = ("SELECT id FROM account_invoice "
                      "WHERE REPLACE(reference, ' ', '') %s %%s" %
