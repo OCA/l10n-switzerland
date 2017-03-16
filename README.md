@@ -90,7 +90,7 @@ addon | version | summary
 [l10n_ch_import_winbiz](l10n_ch_import_winbiz/) | 9.0.1.0.1 | Accounting Import WinBIZ
 [l10n_ch_pain_base](l10n_ch_pain_base/) | 9.0.1.0.1 | ISO 20022 base module for Switzerland
 [l10n_ch_pain_credit_transfer](l10n_ch_pain_credit_transfer/) | 9.0.1.0.0 | Generate ISO 20022 credit transfert (SEPA and not SEPA)
-[l10n_ch_payment_slip](l10n_ch_payment_slip/) | 9.0.2.1.1 | Print ESR/BVR payment slip with your invoices
+[l10n_ch_payment_slip](l10n_ch_payment_slip/) | 9.0.2.2.0 | Print ESR/BVR payment slip with your invoices
 [l10n_ch_scan_bvr](l10n_ch_scan_bvr/) | 9.0.1.0.0 | Switzerland - Scan ESR/BVR to create invoices
 [l10n_ch_states](l10n_ch_states/) | 9.0.1.0.0 | Switzerland Country States
 [l10n_ch_zip](l10n_ch_zip/) | 9.0.2.0.0 | Provides all Swiss postal codes for auto-completion
