@@ -29,13 +29,15 @@ class TestPaymentSlip(test_common.TransactionCase):
                 'partner_id': partner.id,
                 'bank_id': bank.id,
                 'bank_bic': bank.bic,
-                'acc_number': 'R 12312123',
+                'acc_number': '01-1234-1',
                 'bvr_adherent_num': '1234567',
                 'print_bank': True,
                 'print_account': True,
                 'print_partner': True,
             }
         )
+        bank_account.onchange_acc_number_set_swiss_bank()
+        self.assertEqual(bank_account.ccp, '01-1234-1')
         return bank_account
 
     def make_invoice(self):
