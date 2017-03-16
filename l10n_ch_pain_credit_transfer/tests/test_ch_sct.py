@@ -8,57 +8,61 @@ from odoo.tools import float_compare
 import time
 from lxml import etree
 
+ch_iban = 'CH15 3881 5158 3845 3843 7'
+
 
 class TestSCT_CH(AccountingTestCase):
 
     def setUp(self):
         super(TestSCT_CH, self).setUp()
-        self.account_model = self.env['account.account']
-        self.move_model = self.env['account.move']
-        self.journal_model = self.env['account.journal']
-        self.payment_mode_model = self.env['account.payment.mode']
+        Account = self.env['account.account']
+        Journal = self.env['account.journal']
+        PaymentMode = self.env['account.payment.mode']
+
         self.payment_order_model = self.env['account.payment.order']
         self.payment_line_model = self.env['account.payment.line']
         self.bank_line_model = self.env['bank.payment.line']
         self.partner_bank_model = self.env['res.partner.bank']
-        self.bank_model = self.env['res.bank']
         self.attachment_model = self.env['ir.attachment']
         self.invoice_model = self.env['account.invoice']
         self.invoice_line_model = self.env['account.invoice.line']
+
         self.main_company = self.env.ref('base.main_company')
         self.partner_agrolait = self.env.ref('base.res_partner_2')
-        self.account_expense = self.account_model.search([(
+
+        self.account_expense = Account.search([(
             'user_type_id',
             '=',
             self.env.ref('account.data_account_type_expenses').id)], limit=1)
-        self.account_payable = self.account_model.search([(
+        self.account_payable = Account.search([(
             'user_type_id',
             '=',
             self.env.ref('account.data_account_type_payable').id)], limit=1)
         # Create a swiss bank
-        ch_bank = self.bank_model.create({
-            'name': 'Big swiss bank',
-            'bic': 'DRESDEFF300',
-            'ccp': '01-1234-1',
-            })
+        ch_bank1 = self.env['res.bank'].create({
+            'name': 'Alternative Bank Schweiz AG',
+            'bic': 'ALSWCH21XXX',
+            'clearing': '38815',
+            'ccp': '46-110-7',
+        })
         # create a ch bank account for my company
-        self.agrolait_partner_bank = self.partner_bank_model.create({
-            'acc_number': 'CH0909000000100080607',
+        self.cp_partner_bank = self.partner_bank_model.create({
+            'acc_number': ch_iban,
             'partner_id': self.env.ref('base.main_partner').id,
-            'bank_id': ch_bank.id,
             })
+        self.cp_partner_bank.onchange_acc_number_set_swiss_bank()
         # create journal
-        self.bank_journal = self.journal_model.create({
+        self.bank_journal = Journal.create({
             'name': 'Company Bank journal',
             'type': 'bank',
             'code': 'BNKFB',
-            'bank_account_id': self.agrolait_partner_bank.id,
-            'bank_id': ch_bank.id,
+            'bank_account_id': self.cp_partner_bank.id,
+            'bank_id': ch_bank1.id,
             })
         # create a payment mode
         pay_method_id = self.env.ref(
             'account_banking_sepa_credit_transfer.sepa_credit_transfer').id
-        self.payment_mode = self.payment_mode_model.create({
+        self.payment_mode = PaymentMode.create({
             'name': 'CH credit transfer',
             'bank_account_link': 'fixed',
             'fixed_journal_id': self.bank_journal.id,
@@ -69,11 +73,18 @@ class TestSCT_CH(AccountingTestCase):
         self.chf_currency = self.env.ref('base.CHF')
         self.eur_currency = self.env.ref('base.EUR')
         self.main_company.currency_id = self.chf_currency.id
-        # Create a bank account
+        ch_bank2 = self.env['res.bank'].create({
+            'name': 'Banque Cantonale Vaudoise',
+            'bic': 'BCVLCH2LXXX',
+            'clearing': '767',
+            'ccp': '01-1234-1',
+        })
+        # Create a bank account with clearing 767
         self.agrolait_partner_bank = self.partner_bank_model.create({
             'acc_number': 'CH9100767000S00023455',
             'partner_id': self.partner_agrolait.id,
-            'bank_id': ch_bank.id,
+            'bank_id': ch_bank2.id,
+            'ccp': '01-1234-1',
             })
 
     def test_sct_ch_payment_type1(self):
