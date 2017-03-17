@@ -52,7 +52,6 @@
         'views/dd_export_wizard_view.xml',
         'views/invoice_view.xml',
         'views/lsv_export_wizard_view.xml',
-        'views/sepa_dd_export_wizard_view.xml',
         'security/ir.model.access.csv',
     ],
     'demo': [],
