@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # © 2012 David Coninckx (Opennet Sarl)
 # © 2017 Leonardo Franja (Opennet Sarl)
-# License into __openerp__.py.
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from . import hr_payslip
 from . import hr_salary_rule

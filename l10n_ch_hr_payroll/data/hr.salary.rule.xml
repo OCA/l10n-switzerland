@@ -352,29 +352,39 @@ else:
             <field name="category_id" ref="hr_payroll.DED"/>
             <field name="parent_rule_id" ref="LPP"/>
         </record>
-        <record id="hr_payroll.hr_rule_taxable" model="hr.salary.rule">
-            <field name="amount_select">code</field>
+        <record id="BASIC_CH" model="hr.salary.rule">
             <field name="appears_on_payslip">True</field>
-            <field name="code">GROSS</field>
+            <field name="code">1000</field>
             <field name="condition_select">none</field>
             <field name="condition_range_max">999999</field>
-            <field name="name">Gross</field>
+            <field name="name">Basic CH</field>
+            <field name="sequence" eval="1"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.wage*payslip.working_rate/100</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+        </record>
+        <record id="GROSS_CH" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">5000</field>
+            <field name="condition_select">none</field>
+            <field name="condition_range_max">999999</field>
+            <field name="name">Gross CH</field>
             <field name="amount_python_compute">result = categories.BASIC + categories.ALW + categories.FALW</field>
             <field name="quantity">1</field>
-            <field name="condition_range">contract.wage</field>
             <field name="sequence">100</field>
             <field name="category_id" ref="hr_payroll.GROSS"/>
         </record>
-        <record id="hr_payroll.hr_rule_net" model="hr.salary.rule">
+        <record id="NET_CH" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">True</field>
-            <field name="code">NET</field>
+            <field name="code">6500</field>
             <field name="condition_select">none</field>
             <field name="condition_range_max">999999</field>
-            <field name="name">Net</field>
-            <field name="amount_python_compute">result = categories.BASIC + categories.ALW + categories.DED</field>
+            <field name="name">Net CH</field>
+            <field name="amount_python_compute">result = categories.BASIC + categories.ALW + categories.DED + categories.FALW</field>
             <field name="quantity">1</field>
-            <field name="condition_range">contract.wage</field>
             <field name="sequence">200</field>
             <field name="category_id" ref="hr_payroll.NET"/>
         </record>

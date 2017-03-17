@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # © 2017 Leonardo Franja (Opennet Sarl)
-# License into __openerp__.py.
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import openerp.addons.decimal_precision as dp
 from odoo import fields, models, api
@@ -32,7 +32,7 @@ class LPPContract(models.Model):
 class ResCompany(models.Model):
     _inherit = 'res.company'
 
-    # -CONFIGS-
+    # -Parameters-
     # UI(AC)
     ac_limit = fields.Float(
         string='Maximum limit',

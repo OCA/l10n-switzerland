@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # © 2017 Leonardo Franja (Opennet Sarl)
-# License into __openerp__.py.
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import openerp.addons.decimal_precision as dp
 from odoo import fields, models, api
 
 
@@ -40,10 +41,12 @@ class HrPayslipLine(models.Model):
     python_rate = fields.Float(
         compute='_compute_python_rate',
         string='Rate (%)',
+        digits=dp.get_precision('Payroll Rate'),
         store=True)
     python_amount = fields.Float(
         compute='_compute_python_amount',
         string='Amount',
+        digits=dp.get_precision('Account'),
         store=True)
 
     @api.depends('quantity', 'amount', 'rate')
