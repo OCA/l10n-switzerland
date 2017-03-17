@@ -24,25 +24,25 @@
                     <attribute name="invisible" translation="off">1</attribute>
                 </xpath>
                 <xpath expr="//field[@name='line_ids']/tree/field[@name='rate']" position="after">
-                    <field digits="(3, 3)" name="python_rate"/>
+                    <field name="python_rate"/>
                 </xpath>
                 <xpath expr="//field[@name='line_ids']/tree/field[@name='amount']" position="attributes">
                     <attribute name="invisible" translation="off">1</attribute>
                 </xpath>
                 <xpath expr="//field[@name='line_ids']/tree/field[@name='amount']" position="after">
-                    <field digits="(3, 3)" name="python_amount"/>
+                    <field name="python_amount"/>
                 </xpath>
                 <xpath expr="//field[@name='line_ids']/form/group/field[@name='rate']" position="attributes">
                     <attribute name="invisible" translation="off">1</attribute>
                 </xpath>
                 <xpath expr="//field[@name='line_ids']/form/group/field[@name='rate']" position="after">
-                    <field digits="(3, 3)" name="python_rate"/>
+                    <field name="python_rate"/>
                 </xpath>
                 <xpath expr="//field[@name='line_ids']/form/group/field[@name='amount']" position="attributes">
                     <attribute name="invisible" translation="off">1</attribute>
                 </xpath>
                 <xpath expr="//field[@name='line_ids']/form/group/field[@name='amount']" position="after">
-                    <field digits="(3, 3)" name="python_amount"/>
+                    <field name="python_amount"/>
                 </xpath>
             </field>
         </record>

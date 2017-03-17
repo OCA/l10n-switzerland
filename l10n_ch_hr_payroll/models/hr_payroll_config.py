@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # © 2017 Leonardo Franja (Opennet Sarl)
-# License into __openerp__.py.
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import openerp.addons.decimal_precision as dp
 from odoo import models, fields, api
@@ -19,10 +19,12 @@ class HrPayrollConfig(models.TransientModel):
             ('l10n_ch_hr_payroll.ALFA_VD', 'credit'),
             ('l10n_ch_hr_payroll.AVS_E', 'credit'),
             ('hr_payroll.BASIC', 'credit'),
+            ('l10n_ch_hr_payroll.BASIC_CH', 'credit'),
             ('l10n_ch_hr_payroll.LAA_E', 'credit'),
             ('l10n_ch_hr_payroll.LCA_E', 'credit'),
             ('l10n_ch_hr_payroll.LPP_E', 'credit'),
-            ('hr_payroll.hr_rule_net', 'credit')])
+            ('hr_payroll.hr_rule_net', 'credit'),
+            ('l10n_ch_hr_payroll.NET_CH', 'credit')])
 
         return all_equal
 
@@ -31,7 +33,8 @@ class HrPayrollConfig(models.TransientModel):
         all_equal = False
 
         all_equal = self.search_account_by_rule([
-            ('hr_payroll.BASIC', 'debit')])
+            ('hr_payroll.BASIC', 'debit'),
+            ('l10n_ch_hr_payroll.BASIC_CH', 'debit'),])
 
         return all_equal
 
@@ -39,7 +42,8 @@ class HrPayrollConfig(models.TransientModel):
     def _get_default_net(self):
         all_equal = False
         all_equal = self.search_account_by_rule([
-            ('hr_payroll.hr_rule_net', 'debit')])
+            ('hr_payroll.hr_rule_net', 'debit'),
+            ('l10n_ch_hr_payroll.NET_CH', 'credit')])
 
         return all_equal
 
@@ -166,6 +170,7 @@ class HrPayrollConfig(models.TransientModel):
         user_company_id = self.env.user.company_id
         return user_company_id.lpp_contract_ids
 
+    # Accounting
     # general
     cc = fields.Many2one(
         comodel_name='account.account',
@@ -229,6 +234,7 @@ class HrPayrollConfig(models.TransientModel):
         default=_get_default_other_costs,
         required=False)
 
+    # Parameters
     # UI(AC)
     ac_limit = fields.Float(
         string='Maximum limit',
@@ -285,6 +291,7 @@ class HrPayrollConfig(models.TransientModel):
         default=lambda self: self._get_default_configs('lpp_max'),
         digits=dp.get_precision('Account'),
         required=False)
+
     company_id = fields.Many2one(
         comodel_name='res.company',
         default=lambda self: self.env.user.company_id)
@@ -330,20 +337,24 @@ class HrPayrollConfig(models.TransientModel):
                 'l10n_ch_hr_payroll.ALFA_VD',
                 'l10n_ch_hr_payroll.AVS_E',
                 'hr_payroll.BASIC',
+                'l10n_ch_hr_payroll.BASIC_CH',
                 'l10n_ch_hr_payroll.LAA_E',
                 'l10n_ch_hr_payroll.LCA_E',
                 'l10n_ch_hr_payroll.LPP_E',
-                'hr_payroll.hr_rule_net'
+                'hr_payroll.hr_rule_net',
+                'l10n_ch_hr_payroll.NET_CH'
                 ], config.cc, 'credit')
 
             # basic
             config.assign_account_to_rule([
-                'hr_payroll.BASIC'
+                'hr_payroll.BASIC',
+                'l10n_ch_hr_payroll.BASIC_CH'
                 ], config.basic, 'debit')
 
             # net
             config.assign_account_to_rule([
-                'hr_payroll.hr_rule_net'
+                'hr_payroll.hr_rule_net',
+                'l10n_ch_hr_payroll.NET_CH'
                 ], config.net, 'debit')
 
             # avs_d

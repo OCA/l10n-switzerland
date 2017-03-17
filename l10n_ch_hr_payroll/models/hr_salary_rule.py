@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # © 2017 Leonardo Franja (Opennet Sarl)
-# License into __openerp__.py.
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import fields, models, api
 from odoo.tools.safe_eval import safe_eval
@@ -52,8 +52,8 @@ class HrSalaryRule(models.Model):
             if rule.amount_percentage_base:
                 rule.amount_base = \
                     float(safe_eval(rule.amount_percentage_base, localdict))
-            if rule.id == "l10n_ch_hr_payroll.LPP_C" or \
-               rule.id == "l10n_ch_hr_payroll.LPP_E":
+            if rule.id == self.env.ref("l10n_ch_hr_payroll.LPP_C").id or \
+                rule.id == self.env.ref("l10n_ch_hr_payroll.LPP_E").id:
                 rule.percentage = \
                     -float(safe_eval("contract.lpp_rate or 100", localdict))
         return res
