@@ -137,7 +137,7 @@ msgstr "Creado en"
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.file,data:0
 msgid "Data"
-msgstr ""
+msgstr "Datos"
 
 #. module: l10n_ch_fds_postfinance
 #: selection:fds.files.import.tobankstatments.wizard,state:0
