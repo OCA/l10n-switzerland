@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-04 03:41+0000\n"
+"POT-Creation-Date: 2017-03-11 03:40+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/fr/)\n"
@@ -528,7 +528,7 @@ msgstr ""
 #: field:lsv.export.wizard,file:0 field:post.dd.export.wizard,file:0
 #, python-format
 msgid "File"
-msgstr ""
+msgstr "Fichier"
 
 #. module: l10n_ch_lsv_dd
 #: model:ir.model,name:l10n_ch_lsv_dd.model_payment_order
