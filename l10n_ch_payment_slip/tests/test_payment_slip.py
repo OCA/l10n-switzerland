@@ -3,8 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import time
 import re
-from openerp import tools
-from openerp.modules.module import get_module_resource
 import odoo.tests.common as test_common
 from odoo.report import render_report
 
@@ -45,8 +43,24 @@ class TestPaymentSlip(test_common.TransactionCase):
         if not hasattr(self, 'bank_account'):
             self.bank_account = self.make_bank()
         account_model = self.env['account.account']
-        account_debtor = account_model.search([('code', '=', 'X1012')])
-        account_sale = account_model.search([('code', '=', 'X2020')])
+        account_debtor = account_model.search([('code', '=', '1100')])
+        if not account_debtor:
+            account_debtor = account_model.create({
+                'code': 1100,
+                'name': 'Debitors',
+                'user_type_id':
+                    self.env.ref('account.data_account_type_receivable').id,
+                'reconcile': True,
+            })
+        account_sale = account_model.search([('code', '=', '3200')])
+        if not account_sale:
+            account_sale = account_model.create({
+                'code': 3200,
+                'name': 'Goods sales',
+                'user_type_id':
+                    self.env.ref('account.data_account_type_revenue').id,
+                'reconcile': False,
+            })
 
         invoice = self.env['account.invoice'].create({
             'partner_id': self.env.ref('base.res_partner_12').id,
@@ -65,7 +79,7 @@ class TestPaymentSlip(test_common.TransactionCase):
             'invoice_id': invoice.id,
             'name': 'product that cost 862.50 all tax included',
         })
-        invoice.signal_workflow('invoice_open')
+        invoice.action_invoice_open()
         # waiting for the cache to refresh
         attempt = 0
         while not invoice.move_id:
@@ -158,13 +172,3 @@ class TestPaymentSlip(test_common.TransactionCase):
         )
         self.assertTrue(data)
         self.assertEqual(format, 'pdf')
-
-    def _load(self, module, *args):
-        tools.convert_file(
-            self.cr, 'account_asset',
-            get_module_resource(module, *args),
-            {}, 'init', False, 'test', self.registry._assertion_report)
-
-    def setUp(self):
-        super(TestPaymentSlip, self).setUp()
-        self._load('account', 'test', 'account_minimal_test.xml')
