@@ -4,8 +4,10 @@
 import time
 import re
 
+from openerp import tools
 import openerp.tests.common as test_common
 from openerp.report import render_report
+from openerp.modules.module import get_module_resource
 
 
 class TestPaymentSlip(test_common.TransactionCase):
@@ -29,21 +31,23 @@ class TestPaymentSlip(test_common.TransactionCase):
                 'partner_id': partner.id,
                 'bank_id': bank.id,
                 'bank_bic': bank.bic,
-                'acc_number': 'R 12312123',
+                'acc_number': '01-1234-1',
                 'bvr_adherent_num': '1234567',
                 'print_bank': True,
                 'print_account': True,
                 'print_partner': True,
             }
         )
+        bank_account.onchange_acc_number_set_swiss_bank()
+        self.assertEqual(bank_account.ccp, '01-1234-1')
         return bank_account
 
     def make_invoice(self):
         if not hasattr(self, 'bank_account'):
             self.bank_account = self.make_bank()
         account_model = self.env['account.account']
-        account_debtor = account_model.search([('code', '=', '1100')])
-        account_sale = account_model.search([('code', '=', '3200')])
+        account_debtor = account_model.search([('code', '=', 'X1012')])
+        account_sale = account_model.search([('code', '=', 'X2020')])
 
         invoice = self.env['account.invoice'].create({
             'partner_id': self.env.ref('base.res_partner_12').id,
@@ -206,3 +210,13 @@ class TestPaymentSlip(test_common.TransactionCase):
             address_lines,
             [u'93, Press Avenue', u'73377 Le Bourget du Lac']
         )
+
+    def _load(self, module, *args):
+        tools.convert_file(
+            self.cr, 'account_asset',
+            get_module_resource(module, *args),
+            {}, 'init', False, 'test', self.registry._assertion_report)
+
+    def setUp(self):
+        super(TestPaymentSlip, self).setUp()
+        self._load('account', 'test', 'account_minimal_test.xml')
