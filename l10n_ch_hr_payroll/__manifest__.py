@@ -52,7 +52,8 @@
         'views/hr_contract_view.xml',
         'views/hr_payroll_config_view.xml',
         'views/hr_payslip_view.xml',
-        'views/lpp_contract_view.xml'
+        'views/lpp_contract_view.xml',
+        'security/ir.model.access.csv'
     ],
     'installable': True
 }
