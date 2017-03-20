@@ -19,10 +19,12 @@ class HrContract(models.Model):
     wage_fulltime = fields.Float(
         string='Full-time Wage',
         digits=dp.get_precision('Account'),
+        default=0,
         required=True)
     occupation_rate = fields.Float(
         string='Occupation Rate (%)',
         digits=dp.get_precision('Account'),
+        default=100.0,
         required=True)
     lpp_contract_id = fields.Many2one(
         string='OBP Contract',
