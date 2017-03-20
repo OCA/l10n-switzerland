@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-15 14:02+0000\n"
-"PO-Revision-Date: 2017-03-15 14:02+0000\n"
+"POT-Creation-Date: 2017-03-20 08:54+0000\n"
+"PO-Revision-Date: 2017-03-20 08:54+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -59,6 +59,11 @@ msgid "Amount base"
 msgstr "Base importo"
 
 #. module: l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:l10n_ch_hr_payroll.BASIC_CH
+msgid "Basic CH"
+msgstr "Basic CH"
+
+#. module: l10n_ch_hr_payroll
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 msgid "Cancel"
 msgstr "Annulla"
@@ -82,6 +87,11 @@ msgstr "Id azienda"
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_lpp_contract_contract_id
 msgid "Contract id's"
 msgstr "Contract id's"
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_lpp_contract_name
+msgid "Contract name"
+msgstr "Nome contratto"
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_cc
@@ -152,6 +162,11 @@ msgid "General"
 msgstr "Generale"
 
 #. module: l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:l10n_ch_hr_payroll.GROSS_CH
+msgid "Gross CH"
+msgstr "Gross CH"
+
+#. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_basic
 msgid "Gross Salary"
 msgstr "Stipendio lordo"
@@ -168,11 +183,10 @@ msgid "Institutions of Providence (OBP)"
 msgstr "Istituzioni della Provvidenza (LPP)"
 
 #. module: l10n_ch_hr_payroll
-#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_contract_lpp_contract_id
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_lpp_contract_form
-msgid "OBP Contract"
-msgstr "Contrarre LPP"
+msgid "LPP Contract"
+msgstr "LPP Contract"
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config___last_update
@@ -193,12 +207,6 @@ msgid "Last Updated on"
 msgstr "Ultima modifica il"
 
 #. module: l10n_ch_hr_payroll
-#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_lpp_contract_ids
-#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_lpp_contract_ids
-msgid "OBP contract ids"
-msgstr "OBP contract ids"
-
-#. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_lpp_max
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_lpp_max
 msgid "Maximum legal"
@@ -217,9 +225,9 @@ msgid "Minimum legal"
 msgstr "Minimo legale"
 
 #. module: l10n_ch_hr_payroll
-#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_lpp_contract_name
-msgid "Contract name"
-msgstr "Nome contratto"
+#: model:hr.salary.rule,name:l10n_ch_hr_payroll.NET_CH
+msgid "Net CH"
+msgstr "Net CH"
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_net
@@ -227,14 +235,19 @@ msgid "Net Salary"
 msgstr "Salario netto"
 
 #. module: l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_employee_children_student
+msgid "Number of Children student"
+msgstr "Numero di figli studenti"
+
+#. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payslip_non_working_days
 msgid "Number of non-working days (not payable)"
 msgstr "Numero di giorni non lavorativi (non a pagamento)"
 
 #. module: l10n_ch_hr_payroll
-#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_employee_children_student
-msgid "Number of Children student"
-msgstr "Numero di figli studenti"
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payslip_working_days
+msgid "Number of working days"
+msgstr "Numero di giorni lavorativi"
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.AVS
@@ -254,6 +267,7 @@ msgstr "AVS/AI/IPG Dipendente"
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.LPP
+#: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.hr_contract_form_l10n_ch_inherit
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 msgid "OBP"
 msgstr "LPP"
@@ -269,14 +283,25 @@ msgid "OBP Company"
 msgstr "LPP Impresa"
 
 #. module: l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_contract_lpp_contract_id
+msgid "OBP Contract"
+msgstr "Contrarre LPP"
+
+#. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.LPP_E
 msgid "OBP Employee"
 msgstr "LPP Dipendente"
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_contract_lpp_rate
-msgid "OBP Rate"
-msgstr "LPP tasso"
+msgid "OBP Rate (%)"
+msgstr "OBP Rate (%)"
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_lpp_contract_ids
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_lpp_contract_ids
+msgid "OBP contract ids"
+msgstr "OBP contract ids"
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_contract_occupation_rate
@@ -393,6 +418,16 @@ msgid "Social charges (OBP)"
 msgstr "Oneri sociali (LPP)"
 
 #. module: l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:l10n_ch_hr_payroll.IMP_SRC
+msgid "Source Tax"
+msgstr "Ritenuta alla fonte"
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_contract_imp_src
+msgid "Source Tax (%)"
+msgstr "Ritenuta alla fonte (%)"
+
+#. module: l10n_ch_hr_payroll
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 msgid "Special Rules"
 msgstr "Regole speciali"
@@ -437,11 +472,6 @@ msgstr "AC La solidarietà del dipendente"
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payslip_working_rate
 msgid "Working Rate (%)"
 msgstr "Tasso di lavoro (%)"
-
-#. module: l10n_ch_hr_payroll
-#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payslip_working_days
-msgid "Number of working days"
-msgstr "Numero di giorni lavorativi"
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model,name:l10n_ch_hr_payroll.model_hr_payroll_config

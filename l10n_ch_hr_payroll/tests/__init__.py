@@ -6,3 +6,4 @@ from . import test_contract_lpp
 from . import test_max_lpp
 from . import test_min_lpp
 from . import test_no_lpp_rate
+from . import test_wizard

@@ -11,7 +11,7 @@ class HrContract(models.Model):
     _inherit = 'hr.contract'
 
     lpp_rate = fields.Float(
-        string='OBP Rate',
+        string='OBP Rate (%)',
         digits=dp.get_precision('Payroll Rate'))
     lpp_amount = fields.Float(
         string='OBP Amount',
@@ -28,6 +28,10 @@ class HrContract(models.Model):
         string='OBP Contract',
         comodel_name='lpp.contract',
         inverse_name='contract_id')
+
+    imp_src = fields.Float(
+        string='Source Tax (%)',
+        digits=dp.get_precision('Payroll Rate'))
 
     @api.onchange('occupation_rate', 'wage_fulltime')
     def _onchange_wage_rate_fulltime(self):

@@ -182,6 +182,23 @@ result = (per*(categories.BASIC + categories.ALW))/100
             <field name="sequence">210</field>
             <field name="category_id" ref="hr_payroll_COSTS"/>
         </record>
+        <record id="IMP_SRC" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">5060</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = contract.imp_src &gt; 0</field>
+            <field name="condition_range_max">999999</field>
+            <field name="name">Source Tax</field>
+            <field name="amount_python_compute">
+per = contract.imp_src
+result = -(per*(categories.BASIC + categories.ALW + categories.FALW))/100
+            </field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW + categories.FALW</field>
+            <field name="quantity">1</field>
+            <field name="sequence">160</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+        </record>
         <record id="LAA" model="hr.salary.rule">
             <field name="amount_select">fix</field>
             <field name="appears_on_payslip">False</field>
@@ -359,7 +376,6 @@ else:
             <field name="condition_range_max">999999</field>
             <field name="name">Basic CH</field>
             <field name="sequence" eval="1"/>
-            <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = contract.wage*payslip.working_rate/100</field>
             <field name="category_id" ref="hr_payroll.BASIC"/>
