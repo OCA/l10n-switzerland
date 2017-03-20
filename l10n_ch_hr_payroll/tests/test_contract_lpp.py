@@ -138,8 +138,8 @@ class TestContractLPP(common.TransactionCase):
         self.richard_payslip.compute_sheet()
 
         rule_lines = self.richard_payslip.line_ids.search([
-                ('salary_rule_id', 'in', self.rules_for_structure)
-            ])
+            ('salary_rule_id', 'in', self.rules_for_structure)
+        ])
 
         _logger.debug('Test w/ contract LPP')
 
