@@ -53,7 +53,11 @@ class HrSalaryRule(models.Model):
                 rule.amount_base = \
                     float(safe_eval(rule.amount_percentage_base, localdict))
             if rule.id == self.env.ref("l10n_ch_hr_payroll.LPP_C").id or \
-                rule.id == self.env.ref("l10n_ch_hr_payroll.LPP_E").id:
+                    rule.id == self.env.ref("l10n_ch_hr_payroll.LPP_E").id:
                 rule.percentage = \
                     -float(safe_eval("contract.lpp_rate or 100", localdict))
+
+            if rule.id == self.env.ref("l10n_ch_hr_payroll.IMP_SRC").id:
+                rule.percentage = \
+                    -float(safe_eval("contract.imp_src or 100", localdict))
         return res

@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import openerp.addons.decimal_precision as dp
-from odoo import fields, models, api
+from odoo import fields, models
 
 
 class LPPContract(models.Model):
@@ -90,14 +90,3 @@ class ResCompany(models.Model):
         string="OBP contract ids",
         comodel_name='lpp.contract',
         inverse_name='company_id')
-
-    @api.multi
-    def write(self, values):
-        for company in self:
-            res = super(ResCompany, company).write(values)
-
-            ids_to_unlink = self.env['lpp.contract'].search([
-                ('company_id', '=', False)
-            ])
-            ids_to_unlink.unlink()
-            return res

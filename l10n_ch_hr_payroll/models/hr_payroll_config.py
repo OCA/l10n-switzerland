@@ -18,12 +18,10 @@ class HrPayrollConfig(models.TransientModel):
             ('l10n_ch_hr_payroll.AC_E_SOL', 'credit'),
             ('l10n_ch_hr_payroll.ALFA_VD', 'credit'),
             ('l10n_ch_hr_payroll.AVS_E', 'credit'),
-            ('hr_payroll.BASIC', 'credit'),
             ('l10n_ch_hr_payroll.BASIC_CH', 'credit'),
             ('l10n_ch_hr_payroll.LAA_E', 'credit'),
             ('l10n_ch_hr_payroll.LCA_E', 'credit'),
             ('l10n_ch_hr_payroll.LPP_E', 'credit'),
-            ('hr_payroll.hr_rule_net', 'credit'),
             ('l10n_ch_hr_payroll.NET_CH', 'credit')])
 
         return all_equal
@@ -33,8 +31,7 @@ class HrPayrollConfig(models.TransientModel):
         all_equal = False
 
         all_equal = self.search_account_by_rule([
-            ('hr_payroll.BASIC', 'debit'),
-            ('l10n_ch_hr_payroll.BASIC_CH', 'debit'),])
+            ('l10n_ch_hr_payroll.BASIC_CH', 'debit')])
 
         return all_equal
 
@@ -42,8 +39,7 @@ class HrPayrollConfig(models.TransientModel):
     def _get_default_net(self):
         all_equal = False
         all_equal = self.search_account_by_rule([
-            ('hr_payroll.hr_rule_net', 'debit'),
-            ('l10n_ch_hr_payroll.NET_CH', 'credit')])
+            ('l10n_ch_hr_payroll.NET_CH', 'debit')])
 
         return all_equal
 
@@ -325,6 +321,12 @@ class HrPayrollConfig(models.TransientModel):
             value_field = -(getattr(self, value))
             company_id.write({value: value_field})
 
+    def delete_lpp_contracts(self):
+        ids_to_unlink = self.env['lpp.contract'].search([
+            ('company_id', '=', False)
+        ])
+        ids_to_unlink.unlink()
+
     # save and create configs
     @api.multi
     def save_configs(self):
@@ -336,24 +338,20 @@ class HrPayrollConfig(models.TransientModel):
                 'l10n_ch_hr_payroll.AC_E_SOL',
                 'l10n_ch_hr_payroll.ALFA_VD',
                 'l10n_ch_hr_payroll.AVS_E',
-                'hr_payroll.BASIC',
                 'l10n_ch_hr_payroll.BASIC_CH',
                 'l10n_ch_hr_payroll.LAA_E',
                 'l10n_ch_hr_payroll.LCA_E',
                 'l10n_ch_hr_payroll.LPP_E',
-                'hr_payroll.hr_rule_net',
                 'l10n_ch_hr_payroll.NET_CH'
                 ], config.cc, 'credit')
 
             # basic
             config.assign_account_to_rule([
-                'hr_payroll.BASIC',
                 'l10n_ch_hr_payroll.BASIC_CH'
                 ], config.basic, 'debit')
 
             # net
             config.assign_account_to_rule([
-                'hr_payroll.hr_rule_net',
                 'l10n_ch_hr_payroll.NET_CH'
                 ], config.net, 'debit')
 
@@ -410,5 +408,8 @@ class HrPayrollConfig(models.TransientModel):
 
             # -Save values in company
             config.values_to_company()
+
+            # Search lpp contracts without company id
+            config.delete_lpp_contracts()
 
         return True

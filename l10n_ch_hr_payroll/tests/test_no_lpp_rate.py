@@ -2,17 +2,18 @@
 # © 2017 Leonardo Franja (Open Net Sarl)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import logging
 import openerp.tests.common as common
 from datetime import datetime, timedelta
 from odoo.fields import Date
 
-import logging
 _logger = logging.getLogger(__name__)
 
-class TestMaxLPP(common.TransactionCase):
+
+class TestNoLPP(common.TransactionCase):
 
     def setUp(self):
-        super(TestMaxLPP, self).setUp()
+        super(TestNoLPP, self).setUp()
 
         # Some salary rules references
         self.basic_ch = self.ref('l10n_ch_hr_payroll.BASIC_CH')
@@ -31,7 +32,7 @@ class TestMaxLPP(common.TransactionCase):
         self.lca_e = self.ref('l10n_ch_hr_payroll.LCA_E')
         self.lpp_c = self.ref('l10n_ch_hr_payroll.LPP_C')
         self.lpp_e = self.ref('l10n_ch_hr_payroll.LPP_E')
-
+        self.imp_src = self.ref('l10n_ch_hr_payroll.IMP_SRC')
 
         # I create a new employee "Richard"
         self.richard_emp = self.env['hr.employee'].create({
@@ -42,9 +43,9 @@ class TestMaxLPP(common.TransactionCase):
 
         # List of rules needed
         self.rules_for_structure = [
-            self.basic_ch, 
-            self.gross_ch, 
-            self.net_ch, 
+            self.basic_ch,
+            self.gross_ch,
+            self.net_ch,
             self.ac_c,
             self.ac_e,
             self.ac_c_sol,
@@ -57,17 +58,19 @@ class TestMaxLPP(common.TransactionCase):
             self.lca_c,
             self.lca_e,
             self.lpp_c,
-            self.lpp_e
+            self.lpp_e,
+            self.imp_src
             ]
 
         # I create a salary structure for "Software Developer"
-        self.developer_pay_structure = self.env['hr.payroll.structure'].create({
-            'name': 'Salary Structure for Software Developer',
-            'code': 'SD',
-            'company_id': self.ref('base.main_company'),
-            'rule_ids': [(6, 0, self.rules_for_structure)],
-            'parent_id': 0
-        })
+        self.developer_pay_structure = self.env['hr.payroll.structure'].create(
+            {
+                'name': 'Salary Structure for Software Developer',
+                'code': 'SD',
+                'company_id': self.ref('base.main_company'),
+                'rule_ids': [(6, 0, self.rules_for_structure)],
+                'parent_id': 0
+            })
 
         # I create a contract for "Richard"
         self.richard_contract = self.env['hr.contract'].create({
@@ -77,6 +80,7 @@ class TestMaxLPP(common.TransactionCase):
             'wage_fulltime': 12000.0,
             'occupation_rate': 100.0,
             'wage': 0,
+            'imp_src': 0,
             'lpp_rate': 0,
             'lpp_amount': 200,
             'type_id': self.ref('hr_contract.hr_contract_type_emp'),
@@ -85,7 +89,7 @@ class TestMaxLPP(common.TransactionCase):
             'working_hours': self.ref('resource.timesheet_group1')
             })
 
-        #I create a payslip for "Richard"
+        # I create a payslip for "Richard"
         self.richard_payslip = self.env['hr.payslip'].create({
             'name': 'Payslip of Richard',
             'employee_id': self.richard_emp.id,
@@ -108,8 +112,8 @@ class TestMaxLPP(common.TransactionCase):
             'lpp_max': 7050.00
             })
 
-    def test_max_lpp(self):
-        _logger.info(' -- Test NO LPP RATE -- ')
+    def test_no_lpp(self):
+        _logger.debug(' -- Test NO LPP RATE -- ')
 
         # I click on 'Save' button on payroll configuration
         self.configs.save_configs()
@@ -129,25 +133,23 @@ class TestMaxLPP(common.TransactionCase):
                 ('salary_rule_id', 'in', self.rules_for_structure)
             ])
 
-        _logger.info('Test w/o LPP RATE')
+        _logger.debug('Test w/o LPP RATE')
 
         for line in rule_lines:
             # BASIC CH
             if line.salary_rule_id.id == self.basic_ch:
                 self.assertEqual(line.python_amount, 12000)
-                _logger.info('BASIC CH %s' % line.python_amount)
-            
+                _logger.debug('BASIC CH %s' % line.python_amount)
+
             # GROSS CH
             if line.salary_rule_id.id == self.gross_ch:
                 self.assertEqual(line.python_amount, round(12000+950, 2))
 
             # NET CH
             if line.salary_rule_id.id == self.net_ch:
-                self.assertEqual(
-                    line.python_amount, 
-                    round(11870.40, 2))
+                self.assertEqual(line.python_amount, 11870.40)
 
-            #UI (AC)
+            # UI (AC)
             if line.salary_rule_id.id == self.ac_c:
                 self.assertEqual(line.python_amount, 10500)
                 self.assertEqual(line.python_rate, -1.1)
@@ -156,7 +158,7 @@ class TestMaxLPP(common.TransactionCase):
                 self.assertEqual(line.python_amount, 10500)
                 self.assertEqual(line.python_rate, -1.1)
                 self.assertEqual(line.total, -132)
-            #UI (AC) - SOL
+            # UI (AC) - SOL
             if line.salary_rule_id.id == self.ac_c_sol:
                 self.assertEqual(
                     line.python_amount, 1500)
@@ -168,15 +170,21 @@ class TestMaxLPP(common.TransactionCase):
                 self.assertEqual(line.python_rate, -1)
                 self.assertEqual(line.total, -15)
 
-            #ALFA_VD
+            # ALFA_VD
             if line.salary_rule_id.id == self.alfa_vd:
                 self.assertEqual(
-                    line.python_amount, 
+                    line.python_amount,
                     round((2*250)+330+120, 2))
                 self.assertEqual(line.python_rate, 100)
                 self.assertEqual(line.total, 950)
 
-            #OAI (AVS)
+            # IMP_SRC
+            if line.salary_rule_id.id == self.imp_src:
+                self.assertEqual(line.python_amount, 0)
+                self.assertEqual(line.python_rate, 0)
+                self.assertEqual(line.total, 0)
+
+            # OAI (AVS)
             if line.salary_rule_id.id == self.avs_c:
                 self.assertEqual(line.python_amount, 12000)
                 self.assertEqual(line.python_rate, -5.125)
@@ -186,7 +194,7 @@ class TestMaxLPP(common.TransactionCase):
                 self.assertEqual(line.python_rate, -5.125)
                 self.assertEqual(line.total, -615)
 
-            #AI (LAA)
+            # AI (LAA)
             if line.salary_rule_id.id == self.laa_c:
                 self.assertEqual(line.python_amount, 12000)
                 self.assertEqual(line.python_rate, -0.46)
@@ -196,7 +204,7 @@ class TestMaxLPP(common.TransactionCase):
                 self.assertEqual(line.python_rate, -0.46)
                 self.assertEqual(line.total, -55.20)
 
-            #SDA (LCA)
+            # SDA (LCA)
             if line.salary_rule_id.id == self.lca_c:
                 self.assertEqual(line.python_amount, 12000)
                 self.assertEqual(line.python_rate, -0.52)
