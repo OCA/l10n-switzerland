@@ -53,37 +53,58 @@
                 <t t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip).sorted(key=lambda line: line.code)" t-as="line">
                     <t t-if="line.salary_rule_id.report_is_total_rule">
                         <tr>
-                            <td style="padding-top: 20px; padding-bottom: 20px;"><b><span t-field="line.code"/></b></td>
-                            <td style="padding-top: 20px; padding-bottom: 20px;"><b><span t-field="line.name"/></b></td>
-                            <td style="padding-top: 20px; padding-bottom: 20px;"><b><span t-field="line.amount"
-                                                                                          t-field-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
-                                                                                          t-if="line.salary_rule_id.report_display_details_columns"/></b></td>
-                            <td style="padding-top: 20px; padding-bottom: 20px;">
+                            <td style="padding-top: 20px; padding-bottom: 20px; border: 0px;">
+                                <b><span t-field="line.code"/></b>
+                            </td>
+                            <td style="padding-top: 20px; padding-bottom: 20px; border: 0px;">
+                                <b><span t-field="line.name"/></b>
+                            </td>
+                            <td class="text-right"
+                                style="padding-top: 20px; padding-bottom: 20px; border: 0px;">
+                                <b>
+                                    <span t-field="line.amount"
+                                          t-field-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                          t-if="line.salary_rule_id.report_display_details_columns"/>
+                                </b>
+                            </td>
+                            <td class="text-right"
+                                style="padding-top: 20px; padding-bottom: 20px; border: 0px;">
                                 <t t-if="line.salary_rule_id.report_display_details_columns">
                                     <b>
                                         <span t-field="line.rate"/> %
                                     </b>
                                 </t>
                             </td>
-                            <td style="padding-top: 20px; padding-bottom: 20px;"><b><span t-esc="line.total"
-                                                                                          t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></b></td>
+                            <td class="text-right"
+                                style="padding-top: 20px; padding-bottom: 20px; border: 0px;">
+                                <b>
+                                    <span t-esc="line.total"
+                                          t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
+                                </b>
+                            </td>
                         </tr>
                     </t>
                     <t t-if="not line.salary_rule_id.report_is_total_rule">
                         <tr>
-                            <td><span t-field="line.code"/></td>
-                            <td><span t-field="line.name"/></td>
-                            <td class="text-right">
+                            <td style="border: 0px;">
+                                <span t-field="line.code"/>
+                            </td>
+                            <td style="border: 0px;">
+                                <span t-field="line.name"/>
+                            </td>
+                            <td style="border: 0px;"
+                                class="text-right">
                                 <span t-field="line.amount"
                                       t-field-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
                                       t-if="line.salary_rule_id.report_display_details_columns"/>
                             </td>
-                            <td class="text-right">
+                            <td style="border: 0px;" class="text-right">
                                 <t t-if="line.salary_rule_id.report_display_details_columns">
                                     <span t-field="line.rate"/> %
                                 </t>
                             </td>
-                            <td class="text-right">
+                            <td style="border: 0px;"
+                                class="text-right">
                                 <span t-esc="line.total"
                                       t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
                             </td>
@@ -96,10 +117,12 @@
                 </t>
 
                 <tr>
-                    <td style="padding-top: 40px;" colspan="4">
+                    <td style="padding-top: 40px; border: 0px;"
+                        colspan="4">
                         <span t-field="o.employee_id.bank_account_id"/>
                     </td>
-                    <td style="padding-top: 40px;" class="text-right">
+                    <td style="padding-top: 40px; border: 0px;"
+                        class="text-right">
                         <t t-if="line_net_amount">
                             <span t-field="line_net_amount.total"
                                   t-field-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>

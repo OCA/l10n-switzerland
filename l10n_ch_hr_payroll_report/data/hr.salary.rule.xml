@@ -3,7 +3,7 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
 <odoo>
-    <data>
+    <data noupdate="1">
         <record id="l10n_ch_hr_payroll.AC" model="hr.salary.rule">
             <field name="report_is_total_rule">False</field>
             <field name="report_display_details_columns">True</field>
@@ -105,18 +105,18 @@
             <field name="report_is_net_amount">False</field>
         </record>
         <record id="l10n_ch_hr_payroll.BASIC_CH" model="hr.salary.rule">
-            <field name="report_is_total_rule">False</field>
-            <field name="report_display_details_columns">True</field>
+            <field name="report_is_total_rule">True</field>
+            <field name="report_display_details_columns">False</field>
             <field name="report_is_net_amount">False</field>
         </record>
         <record id="l10n_ch_hr_payroll.GROSS_CH" model="hr.salary.rule">
-            <field name="report_is_total_rule">False</field>
-            <field name="report_display_details_columns">True</field>
+            <field name="report_is_total_rule">True</field>
+            <field name="report_display_details_columns">False</field>
             <field name="report_is_net_amount">False</field>
         </record>
         <record id="l10n_ch_hr_payroll.NET_CH" model="hr.salary.rule">
-            <field name="report_is_total_rule">False</field>
-            <field name="report_display_details_columns">True</field>
+            <field name="report_is_total_rule">True</field>
+            <field name="report_display_details_columns">False</field>
             <field name="report_is_net_amount">True</field>
         </record>
     </data>
