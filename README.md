@@ -83,7 +83,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [l10n_ch_bank](l10n_ch_bank/) | 10.0.1.0.0 | Banks names, addresses and BIC codes
-[l10n_ch_base_bank](l10n_ch_base_bank/) | 10.0.1.0.0 | Types and number validation for swiss electronic pmnt. DTA, ESR
+[l10n_ch_base_bank](l10n_ch_base_bank/) | 10.0.1.1.0 | Types and number validation for swiss electronic pmnt. DTA, ESR
 [l10n_ch_dta](l10n_ch_dta/) | 10.0.1.0.1 | Electronic payment file for Swiss bank (DTA)
 [l10n_ch_pain_base](l10n_ch_pain_base/) | 10.0.1.0.0 | ISO 20022 base module for Switzerland
 [l10n_ch_pain_credit_transfer](l10n_ch_pain_credit_transfer/) | 10.0.1.0.0 | Generate ISO 20022 credit transfert (SEPA and not SEPA)
