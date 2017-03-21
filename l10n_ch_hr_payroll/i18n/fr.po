@@ -185,8 +185,8 @@ msgstr "Institutions de prévoyance (LPP)"
 #. module: l10n_ch_hr_payroll
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_lpp_contract_form
-msgid "LPP Contract"
-msgstr "LPP Contract"
+msgid "OBP Contract"
+msgstr "LPP Contrat"
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config___last_update

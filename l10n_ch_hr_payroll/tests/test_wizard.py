@@ -18,25 +18,25 @@ class TestWizard(common.TransactionCase):
 
         # Test 1
         self.account_1 = self.env['account.account'].search([
-            ('code', '=', '1001')], limit=1)
+            ('code', '=', '5000')], limit=1)
         self.account_2 = self.env['account.account'].search([
-            ('code', '=', '1100')], limit=1)
+            ('code', '=', '2000')], limit=1)
         self.account_3 = self.env['account.account'].search([
-            ('code', '=', '1220')], limit=1)
+            ('code', '=', '5800')], limit=1)
         self.account_4 = self.env['account.account'].search([
-            ('code', '=', '1530')], limit=1)
-        self.account_5 = self.env['account.account'].search([
-            ('code', '=', '1770')], limit=1)
-        self.account_6 = self.env['account.account'].search([
-            ('code', '=', '2100')], limit=1)
-        self.account_7 = self.env['account.account'].search([
-            ('code', '=', '1090')], limit=1)
-        self.account_8 = self.env['account.account'].search([
-            ('code', '=', '1280')], limit=1)
-        self.account_9 = self.env['account.account'].search([
-            ('code', '=', '1510')], limit=1)
-        self.account_10 = self.env['account.account'].search([
             ('code', '=', '2200')], limit=1)
+        self.account_5 = self.env['account.account'].search([
+            ('code', '=', '5700')], limit=1)
+        self.account_6 = self.env['account.account'].search([
+            ('code', '=', '2201')], limit=1)
+        self.account_7 = self.env['account.account'].search([
+            ('code', '=', '5700')], limit=1)
+        self.account_8 = self.env['account.account'].search([
+            ('code', '=', '2261')], limit=1)
+        self.account_9 = self.env['account.account'].search([
+            ('code', '=', '5900')], limit=1)
+        self.account_10 = self.env['account.account'].search([
+            ('code', '=', '5800')], limit=1)
 
         self.configs_test1 = self.configs.create({
             'cc': self.account_1.id,
@@ -135,13 +135,13 @@ class TestWizard(common.TransactionCase):
             ('l10n_ch_hr_payroll.LAA_E', 'credit'),
             ('l10n_ch_hr_payroll.LCA_E', 'credit'),
             ('l10n_ch_hr_payroll.LPP_E', 'credit'),
-            ('l10n_ch_hr_payroll.NET_CH', 'credit')
+            ('l10n_ch_hr_payroll.NET_CH', 'debit')
         ]
         list_rule_basic = [
             ('l10n_ch_hr_payroll.BASIC_CH', 'debit')
         ]
         list_rule_net = [
-            ('l10n_ch_hr_payroll.NET_CH', 'debit')
+            ('l10n_ch_hr_payroll.NET_CH', 'credit')
         ]
         list_rule_avs_d = [
             ('l10n_ch_hr_payroll.AC_C', 'debit'),
@@ -181,25 +181,25 @@ class TestWizard(common.TransactionCase):
 
         # Test if all the rules from the list have the same id as given
         self.assertEqual(True, rules_acc_equal_test(
-            self, list_rule_cc, '1001', self.account_1))
+            self, list_rule_cc, '5000', self.account_1))
         self.assertEqual(True, rules_acc_equal_test(
-            self, list_rule_basic, '1100', self.account_2))
+            self, list_rule_basic, '2000', self.account_2))
         self.assertEqual(True, rules_acc_equal_test(
-            self, list_rule_net, '1220', self.account_3))
+            self, list_rule_net, '5800', self.account_3))
         self.assertEqual(True, rules_acc_equal_test(
-            self, list_rule_avs_d, '1530', self.account_4))
+            self, list_rule_avs_d, '2200', self.account_4))
         self.assertEqual(True, rules_acc_equal_test(
-            self, list_rule_avs_c, '1770', self.account_5))
+            self, list_rule_avs_c, '5700', self.account_5))
         self.assertEqual(True, rules_acc_equal_test(
-            self, list_rule_lpp_d, '2100', self.account_6))
+            self, list_rule_lpp_d, '2201', self.account_6))
         self.assertEqual(True, rules_acc_equal_test(
-            self, list_rule_lpp_c, '1090', self.account_7))
+            self, list_rule_lpp_c, '5700', self.account_7))
         self.assertEqual(True, rules_acc_equal_test(
-            self, list_rule_laa_c, '1280', self.account_8))
+            self, list_rule_laa_c, '2261', self.account_8))
         self.assertEqual(True, rules_acc_equal_test(
-            self, list_rule_staff_ins, '1510', self.account_9))
+            self, list_rule_staff_ins, '5900', self.account_9))
         self.assertEqual(True, rules_acc_equal_test(
-            self, list_rule_other_costs, '2200', self.account_10))
+            self, list_rule_other_costs, '5800', self.account_10))
         _logger.debug('OK : Test Saved Rules')
 
         # Tests if values are in company
