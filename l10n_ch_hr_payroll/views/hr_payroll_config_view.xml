@@ -20,32 +20,63 @@ Copyright (c) 2017 Open Net Sàrl
                                 <h1>General</h1>
                             </div>
                             <group>
-                                <field name="basic"/>
-                                <field name="net"/>
-                                <field name="cc"/>
+                                <field 
+                                    name="basic" 
+                                    domain="[
+                                    ('user_type_id', '=', %(account.data_account_type_expenses)d),
+                                    ('code', 'like', '5___')]"/>
+                                <field name="net"
+                                    domain="[
+                                    ('user_type_id', '=', %(account.data_account_type_payable)d),
+                                    ('code', 'like', '20__')]"/>
+                                <field name="cc" 
+                                    domain="[
+                                    ('user_type_id', '=', %(account.data_account_type_expenses)d),
+                                    ('code', 'like', '5___')]"/>
                             </group>
                             <div class="oe_title">
                                 <h1>Standard Rules</h1>
                             </div>
                             <group>
                                 <group string="OAI/II/IC">
-                                    <field name="avs_d"/>
-                                    <field name="avs_c"/>
+                                    <field name="avs_d" 
+                                    domain="[
+                                    ('user_type_id', '=', %(account.data_account_type_current_liabilities)d),
+                                    ('code', 'like', '22__')]"/>
+                                    <field name="avs_c" 
+                                    domain="[
+                                    ('user_type_id', '=', %(account.data_account_type_expenses)d),
+                                    ('code', 'like', '5___')]"/>
                                 </group>
                                 <group string="OBP">
-                                    <field name="lpp_d"/>
-                                    <field name="lpp_c"/>
+                                    <field name="lpp_d" 
+                                    domain="[
+                                    ('user_type_id', '=', %(account.data_account_type_current_liabilities)d),
+                                    ('code', 'like', '22__')]"/>
+                                    <field name="lpp_c" 
+                                    domain="[
+                                    ('user_type_id', '=', %(account.data_account_type_expenses)d),
+                                    ('code', 'like', '5___')]"/>
                                 </group>
                             </group>
                             <group colspan="2">
-                                <field name="laa_c"/>
+                                <field name="laa_c" 
+                                    domain="[
+                                    ('user_type_id', '=', %(account.data_account_type_current_liabilities)d),
+                                    ('code', 'like', '22__')]"/>
                             </group>
                             <div class="oe_title">
                                 <h1>Special Rules</h1>
                             </div>
                             <group>
-                                <field name="staff_ins"/>
-                                <field name="other_costs"/>
+                                <field name="staff_ins" 
+                                    domain="[
+                                    ('user_type_id', '=', %(account.data_account_type_expenses)d),
+                                    ('code', 'like', '5___')]"/>
+                                <field name="other_costs" 
+                                    domain="[
+                                    ('user_type_id', '=', %(account.data_account_type_expenses)d),
+                                    ('code', 'like', '5___')]"/>
                             </group>
                         </page>
                         <page string="Parameters">
