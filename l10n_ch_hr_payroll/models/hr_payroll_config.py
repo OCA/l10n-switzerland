@@ -22,7 +22,7 @@ class HrPayrollConfig(models.TransientModel):
             ('l10n_ch_hr_payroll.LAA_E', 'credit'),
             ('l10n_ch_hr_payroll.LCA_E', 'credit'),
             ('l10n_ch_hr_payroll.LPP_E', 'credit'),
-            ('l10n_ch_hr_payroll.NET_CH', 'credit')])
+            ('l10n_ch_hr_payroll.NET_CH', 'debit')])
 
         return all_equal
 
@@ -39,7 +39,7 @@ class HrPayrollConfig(models.TransientModel):
     def _get_default_net(self):
         all_equal = False
         all_equal = self.search_account_by_rule([
-            ('l10n_ch_hr_payroll.NET_CH', 'debit')])
+            ('l10n_ch_hr_payroll.NET_CH', 'credit')])
 
         return all_equal
 
@@ -341,9 +341,11 @@ class HrPayrollConfig(models.TransientModel):
                 'l10n_ch_hr_payroll.BASIC_CH',
                 'l10n_ch_hr_payroll.LAA_E',
                 'l10n_ch_hr_payroll.LCA_E',
-                'l10n_ch_hr_payroll.LPP_E',
-                'l10n_ch_hr_payroll.NET_CH'
+                'l10n_ch_hr_payroll.LPP_E'
                 ], config.cc, 'credit')
+            config.assign_account_to_rule([
+                'l10n_ch_hr_payroll.NET_CH'
+                ], config.cc, 'debit')
 
             # basic
             config.assign_account_to_rule([
@@ -353,7 +355,7 @@ class HrPayrollConfig(models.TransientModel):
             # net
             config.assign_account_to_rule([
                 'l10n_ch_hr_payroll.NET_CH'
-                ], config.net, 'debit')
+                ], config.net, 'credit')
 
             # avs_d
             config.assign_account_to_rule([

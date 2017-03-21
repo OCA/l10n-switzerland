@@ -51,6 +51,7 @@
         'data/hr.salary.rule.xml',
         'views/hr_employee_view.xml',
         'views/hr_contract_view.xml',
+        'views/hr_payroll_view.xml',
         'views/hr_payroll_config_view.xml',
         'views/hr_payslip_view.xml',
         'views/lpp_contract_view.xml'
