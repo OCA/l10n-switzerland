@@ -110,7 +110,11 @@ Copyright (c) 2017 Open Net Sàrl
             <field name="target">new</field>
         </record>
     
-    <menuitem name="Payroll Configuration" parent="hr_payroll.menu_hr_payroll_root" id="menu_hr_payroll_config"
-        action="action_view_hr_payroll_config" sequence="40"/>
+    <menuitem 
+        name="Payroll Configuration" 
+        parent="hr_payroll.menu_hr_payroll_root" id="menu_hr_payroll_config" 
+        action="action_view_hr_payroll_config" 
+        groups="hr_payroll.group_hr_payroll_manager" 
+        sequence="40"/>
     </data>
 </odoo>
