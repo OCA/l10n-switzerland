@@ -13,7 +13,7 @@
             <field name="name">lpp.contract.form</field>
             <field name="model">lpp.contract</field>
             <field name="arch" type="xml">
-                <form string="LPP Contract">
+                <form string="OBP Contract">
                     <group>
                         <field name="name"/>
                         <field name="dc_amount"/>
