@@ -54,6 +54,7 @@
         'views/hr_payroll_view.xml',
         'views/hr_payroll_config_view.xml',
         'views/hr_payslip_view.xml',
+        'views/hr_payslip_line_view.xml',
         'views/lpp_contract_view.xml'
     ],
     'installable': True
