@@ -453,7 +453,8 @@ class PaymentSlip(models.Model):
             com_partner.country_id = self.env['res.country'].new(
                 {'address_format': bvr_address_format}
             )
-            address_lines = com_partner.contact_address.split("\n")
+            address_lines = com_partner._display_address(
+                without_company=True).split("\n")
         com_partner.invalidate_cache()
         return address_lines
 
