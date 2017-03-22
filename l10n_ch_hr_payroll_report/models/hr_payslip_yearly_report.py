@@ -47,8 +47,8 @@ class HrPayslipYearlyReport(models.Model):
     )
 
     def init(self):
-        tools.drop_view_if_exists(self._cr, self._table)
-        self._cr.execute("""CREATE or REPLACE VIEW %s as (
+        tools.drop_view_if_exists(self._cr, 'hr_payslip_yearly_report')
+        query = """CREATE or REPLACE VIEW hr_payslip_yearly_report as (
 SELECT
     hpl.id AS id,
     hp.employee_id AS employee_id,
@@ -65,4 +65,5 @@ INNER JOIN
     hr_payslip hp ON hpl.slip_id = hp.id
 INNER JOIN
     res_company c ON hp.company_id = c.id
-            )""" % self._table)
+            )"""
+        self._cr.execute(query)
