@@ -62,7 +62,7 @@
                             <td class="text-right"
                                 style="padding-top: 20px; padding-bottom: 20px; border: 0px;">
                                 <b>
-                                    <span t-field="line.amount"
+                                    <span t-field="line.python_amount"
                                           t-field-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
                                           t-if="line.salary_rule_id.report_display_details_columns"/>
                                 </b>
@@ -71,7 +71,7 @@
                                 style="padding-top: 20px; padding-bottom: 20px; border: 0px;">
                                 <t t-if="line.salary_rule_id.report_display_details_columns">
                                     <b>
-                                        <span t-field="line.rate"/> %
+                                        <span t-field="line.python_rate"/> %
                                     </b>
                                 </t>
                             </td>
@@ -94,13 +94,13 @@
                             </td>
                             <td style="border: 0px;"
                                 class="text-right">
-                                <span t-field="line.amount"
+                                <span t-field="line.python_amount"
                                       t-field-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
                                       t-if="line.salary_rule_id.report_display_details_columns"/>
                             </td>
                             <td style="border: 0px;" class="text-right">
                                 <t t-if="line.salary_rule_id.report_display_details_columns">
-                                    <span t-field="line.rate"/> %
+                                    <span t-field="line.python_rate"/> %
                                 </t>
                             </td>
                             <td style="border: 0px;"
