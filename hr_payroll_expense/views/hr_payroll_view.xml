@@ -10,10 +10,7 @@
             <xpath expr="//notebook" position="inside">
                 <page string="Expenses">
                     <field name="expense_ids" readonly="1">
-                        <tree colors="blue:state == 'draft';black:state in ('confirm','accepted','done');gray:state == 'cancelled'" string="Expenses" editable="top">
-                            <field name="employee_id"/>
-                            <field name="date"/>
-                            <field name="department_id"/>
+                        <tree string="Expenses">
                             <field name="name"/>
                             <field name="total_amount"/>
                             <field name="state"/>
