@@ -599,10 +599,6 @@ class PaymentSlip(models.Model):
                 continue
             text.textLine(line)
 
-        line = [str(bank.zip or ''), bank.city]
-        line = ' '.join([s for s in line if s])
-        text.textLine(line)
-
         canvas.drawText(text)
 
     @api.model
