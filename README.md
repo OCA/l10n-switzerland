@@ -65,6 +65,7 @@ Provide Swizerland Payroll Rules.
 Allow to specify a LPP range to contract and 2 kinds of children to employee.
 
 [//]: # (addons)
+
 Available addons
 ----------------
 addon | version | summary
