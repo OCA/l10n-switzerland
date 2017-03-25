@@ -78,6 +78,7 @@ l10n_cd_import_winbiz
 Allows to import accounting from WinBIZ software (www.winbiz.ch) using Excel or XML format.
 
 [//]: # (addons)
+
 Available addons
 ----------------
 addon | version | summary
