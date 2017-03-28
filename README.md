@@ -96,6 +96,7 @@ addon | version | summary
 [l10n_ch_states](l10n_ch_states/) | 9.0.1.0.0 | Switzerland Country States
 [l10n_ch_zip](l10n_ch_zip/) | 9.0.2.0.0 | Provides all Swiss postal codes for auto-completion
 
+
 Unported addons
 ---------------
 addon | version | summary
