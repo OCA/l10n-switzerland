@@ -204,7 +204,8 @@ class AccountPaymentOrder(models.Model):
             # <PmtInf>/<PmtTpInf>/<SvcLvl>/  <Prtry>
             if self.company_partner_bank_id.acc_type in ('postal', 'iban'):
                 service_level_value = etree.SubElement(service_level, 'Prtry')
-                if self.company_partner_bank_id.acc_type == 'postal':
+                if self.company_partner_bank_id.acc_type == 'postal' or \
+                   self.company_partner_bank_id.bank_id.bic == 'POFICHBEXXX':
                     prtry_value = 'CHDD'
                 else:
                     prtry_value = 'CHTA'
@@ -277,7 +278,7 @@ class AccountPaymentOrder(models.Model):
             party_agent_clearing_identification = \
                 etree.SubElement(party_agent_clearing, 'MmbId')
             party_agent_clearing_identification.text = \
-                partner_bank.bank_id.clearing
+                partner_bank.bank_id.clearing.zfill(5)
 
             # <CdtrAgt>/<FinInstnId>/  <Othr>
             party_agent_other = \
@@ -413,7 +414,7 @@ class AccountPaymentOrder(models.Model):
                 etree.SubElement(ori_debtor_agent_institution_clearing,
                                  'MmbId')
             ori_debtor_agent_institution_clearing_identification.text = \
-                partner_bank.bank_id.clearing
+                partner_bank.bank_id.clearing.zfill(5)
 
             # .../  <Dbtr>
             self.generate_party_block(
