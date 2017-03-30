@@ -460,18 +460,29 @@ class PaymentSlip(models.Model):
         :type com_partner: :py:class:`openerp.models.Model`
 
         """
+        longest_line = None
+
+        if font.size >= 11:
+            longest_line = 23
+        elif font.size == 10:
+            longest_line = 27
+        elif font.size == 9:
+            longest_line = 30
+        elif font.size <= 8:
+            longest_line = 34
+
         x, y = initial_position
         x += print_settings.bvr_add_horz * inch
         y += print_settings.bvr_add_vert * inch
         text = canvas.beginText()
         text.setTextOrigin(x, y)
         text.setFont(font.name, font.size)
-        text.textOut(com_partner.name[:23])
+        text.textOut(com_partner.name[:longest_line])
         text.moveCursor(0.0, font.size)
         for line in com_partner.contact_address.split("\n"):
             if not line:
                 continue
-            text.textLine(line[:23])
+            text.textLine(line[:longest_line])
         canvas.drawText(text)
 
     @api.multi
