@@ -223,3 +223,11 @@ class TestPaymentSlip(test_common.TransactionCase):
             address_lines,
             [u'93, Press Avenue', u'73377 Le Bourget du Lac']
         )
+
+    def test_print_bvr(self):
+        invoice = self.make_invoice()
+        bvr = invoice.print_bvr()
+        self.assertEqual(bvr['report_name'],
+                         'l10n_ch_payment_slip.one_slip_per_page_from_invoice')
+        self.assertEqual(bvr['report_file'],
+                         'l10n_ch_payment_slip.one_slip_per_page')
