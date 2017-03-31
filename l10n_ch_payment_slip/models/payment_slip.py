@@ -471,16 +471,16 @@ class PaymentSlip(models.Model):
         cutoff_length = None
 
         if max_line_length <= 23:
-            font_size = 11
+            font_size = min(11, font_size)
         elif max_line_length <= 27:
-            font_size = 10
+            font_size = min(10, font_size)
         elif max_line_length <= 30:
-            font_size = 9
+            font_size = min(9, font_size)
         else:
             # now we have smallest font, we cut off if length exceeds 34
             # characters
             cutoff_length = 34
-            font_size = 8
+            font_size = min(8, font_size)
 
         x, y = initial_position
         x += print_settings.bvr_add_horz * inch
