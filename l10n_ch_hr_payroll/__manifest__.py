@@ -49,6 +49,7 @@
         'security/ir.model.access.csv',
         'data/hr.salary.rule.category.xml',
         'data/hr.salary.rule.xml',
+        'views/hr_salary_rule_view.xml',
         'views/hr_employee_view.xml',
         'views/hr_contract_view.xml',
         'views/hr_payroll_view.xml',
