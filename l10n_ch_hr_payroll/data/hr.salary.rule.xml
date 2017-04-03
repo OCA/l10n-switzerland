@@ -102,7 +102,7 @@ result = (((categories.BASIC + categories.ALW) - limit)*per_off_limit)
         </record>
         <record id="ALFA_VD" model="hr.salary.rule">
             <field name="amount_select">code</field>
-            <field name="appears_on_payslip">False</field>
+            <field name="appears_on_payslip">True</field>
             <field name="code">3030_VD</field>
             <field name="condition_select">python</field>
             <field name="condition_python">result = contract.employee_id.children + contract.employee_id.children_student &gt; 0</field>
