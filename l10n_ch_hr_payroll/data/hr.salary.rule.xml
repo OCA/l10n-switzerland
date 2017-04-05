@@ -56,6 +56,18 @@ result = ((categories.BASIC + categories.ALW)*per_in_limit)
             <field name="category_id" ref="hr_payroll.DED"/>
             <field name="parent_rule_id" ref="AC"/>
         </record>
+        <record id="AC_SOL" model="hr.salary.rule">
+            <field name="amount_select">fix</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">5030</field>
+            <field name="condition_python">
+result = (categories.BASIC + categories.ALW) &gt; employee.company_id.ac_limit and (categories.BASIC + categories.ALW) - employee.company_id.ac_limit &gt; 0
+            </field>
+            <field name="name">UI SOL</field>
+            <field name="quantity">1</field>
+            <field name="sequence">122</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+        </record>
         <record id="AC_C_SOL" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">False</field>
@@ -74,9 +86,9 @@ result = (((categories.BASIC + categories.ALW) - limit)*per_off_limit)
             <field name="amount_percentage_base">(categories.BASIC + categories.ALW) - employee.company_id.ac_limit</field>
             <field name="quantity">1</field>
             <field name="condition_range">categories.BASIC + categories.ALW</field>
-            <field name="sequence">122</field>
+            <field name="sequence">123</field>
             <field name="category_id" ref="hr_payroll.COMP"/>
-            <field name="parent_rule_id" ref="AC"/>
+            <field name="parent_rule_id" ref="AC_SOL"/>
         </record>
         <record id="AC_E_SOL" model="hr.salary.rule">
             <field name="amount_select">code</field>
@@ -96,9 +108,9 @@ result = (((categories.BASIC + categories.ALW) - limit)*per_off_limit)
             <field name="amount_percentage_base">(categories.BASIC + categories.ALW) - employee.company_id.ac_limit</field>
             <field name="quantity">1</field>
             <field name="condition_range">categories.BASIC + categories.ALW</field>
-            <field name="sequence">122</field>
+            <field name="sequence">123</field>
             <field name="category_id" ref="hr_payroll.DED"/>
-            <field name="parent_rule_id" ref="AC"/>
+            <field name="parent_rule_id" ref="AC_SOL"/>
         </record>
         <record id="ALFA_VD" model="hr.salary.rule">
             <field name="amount_select">code</field>
