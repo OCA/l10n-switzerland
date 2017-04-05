@@ -33,10 +33,6 @@ to remove any existing rule not directly referenced.
 This is necessary because some rules may be already in use.
 """
 
-import logging
-#Get the logger
-_logger = logging.getLogger(__name__)
-
 
 def migrate(cr, version):
     if not version:
@@ -45,6 +41,7 @@ def migrate(cr, version):
     migrate_category(cr, 'hr_payroll_P13', 'ALW')
     migrate_category(cr, 'hr_payroll_HSUP', 'DED')
     migrate_category(cr, 'hr_payroll_BONUS', 'DED')
+
 
 def migrate_category(cr, old_cat, new_cat):
     query = ("SELECT res_id FROM ir_model_data "
@@ -58,26 +55,25 @@ def migrate_category(cr, old_cat, new_cat):
         # Update the references of the old category
         # to a new one
         query = ("SELECT res_id FROM ir_model_data "
-                "WHERE module='hr_payroll' and name = '%s' " % new_cat)
+                 "WHERE module='hr_payroll' and name = '%s' " % new_cat)
         cr.execute(query)
         new_cat_id = cr.fetchall()
         new_cat_id = new_cat_id[0][0]
 
         query = ("UPDATE hr_salary_rule "
-                "SET category_id=%s "
-                "WHERE category_id=%s" % (new_cat_id, old_cat_id))
+                 "SET category_id=%s "
+                 "WHERE category_id=%s" % (new_cat_id, old_cat_id))
         cr.execute(query)
 
         query = ("UPDATE hr_payslip_line "
-                "SET category_id=%s "
-                "WHERE category_id=%s" % (new_cat_id, old_cat_id))
+                 "SET category_id=%s "
+                 "WHERE category_id=%s" % (new_cat_id, old_cat_id))
         cr.execute(query)
 
         # Delete the old category
         query = ("DELETE FROM ir_model_data "
-            "WHERE res_id=%s" % old_cat_id)
+                 "WHERE res_id=%s" % old_cat_id)
         cr.execute(query)
         query = ("DELETE FROM hr_salary_rule_category "
-                "WHERE id=%s" % old_cat_id)
+                 "WHERE id=%s" % old_cat_id)
         cr.execute(query)
-
