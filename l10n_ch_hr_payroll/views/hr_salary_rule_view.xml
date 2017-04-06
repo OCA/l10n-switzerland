@@ -1,12 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-File: hr_salary_rule_view.xml
-Module: l10n_ch_hr_payroll
-
-Created lfr@open-net.ch
-
-Copyright (c) 2017 Open Net Sàrl
--->
 <odoo>
     <record id="hr_salary_rule_form_l10n_ch_inherit_info" model="ir.ui.view">
         <field name="name">hr.salary.rule.form.inherit_ch_info</field>

@@ -1,13 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-File: hr.salary.rule.category.xml
-Module: l10n_ch_hr_payroll
-
-Created by sge@open-net.ch
-Updated by lfr@open-net.ch (2017)
-
-Copyright (c) 2014 Open-Net Ltd.
--->
 <odoo>
     <data noupdate="1">
     <record id="hr_payroll_FALW" model="hr.salary.rule.category">

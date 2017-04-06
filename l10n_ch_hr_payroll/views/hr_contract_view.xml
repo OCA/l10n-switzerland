@@ -1,13 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    File: views/hr_contract_view.xml
-    Module: l10n_ch_hr_payroll
-
-    Created by cyp@open-net.ch
-    Updated by lfr@open-net.ch (2017)
-
-    Copyright (c) 2014-TODAY Open-Net Ltd.
--->
 <odoo>
     <data>
         <record model="ir.ui.view" id="hr_contract_form_l10n_ch_inherit">
