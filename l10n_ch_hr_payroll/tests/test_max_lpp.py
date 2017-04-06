@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# © 2017 Leonardo Franja (Open Net Sarl)
+# © 2017 Open Net Sàrl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
-import openerp.tests.common as common
+import odoo.tests.common as common
 from datetime import datetime, timedelta
 from odoo.fields import Date
 

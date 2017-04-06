@@ -1,12 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    File: views/hr_payroll_view.xml
-    Module: l10n_ch_hr_payroll
-
-    Created by lfr@open-net.ch
-
-    Copyright (c) 2017 Open Net Sàrl
--->
 <odoo>
     <data>
         <record model="ir.ui.view" id="hr_salary_rule_list_l10n_ch_inherit1">

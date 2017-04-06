@@ -1,13 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-File: hr.salary.rule.xml
-Module: l10n_ch_hr_payroll
-
-Created by sge@open-net.ch
-Updated by lfr@open-net.ch (2017)
-
-Copyright (c) 2015 Open Net Sàrl
--->
 <odoo>
     <data>
         <record id="AC" model="hr.salary.rule">

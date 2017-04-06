@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# © 2017 Leonardo Franja (Opennet Sarl)
+# © 2017 Open Net Sàrl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import openerp.addons.decimal_precision as dp
+import odoo.addons.decimal_precision as dp
 from odoo import fields, models, api
 
 
