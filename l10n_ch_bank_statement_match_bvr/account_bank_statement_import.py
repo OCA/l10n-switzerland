@@ -20,8 +20,11 @@ class AccountBankStatementImport(models.TransientModel):
         """
         if transaction['partner_id']:
             return
+        reference = transaction.get('ref')
+        if not reference:
+            return
         line = self.env['account.move.line'].search(
-            [('transaction_ref', '=', transaction['ref']),
+            [('transaction_ref', '=', reference),
              ('reconciled', '=', False),
              ('account_id.user_type_id.type', 'in', ['receivable', 'payable']),
              ('journal_id.type', '=', 'sale'),
@@ -31,7 +34,7 @@ class AccountBankStatementImport(models.TransientModel):
         if len(line) > 1:
             _logger.warning(
                 _("Too many receivable/payable lines for reference %s")
-                % transaction['ref'])
+                % reference)
             return
 
         if line:
