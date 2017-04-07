@@ -35,7 +35,7 @@ class FdsSepaUploadHistory(models.Model):
         readonly=True,
     )
     payment_order_id = fields.Many2one(
-        comodel_name='payment.order',
+        comodel_name='account.payment.order',
         string='Payment order',
         ondelete='restrict',
         readonly=True,

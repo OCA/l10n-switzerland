@@ -30,15 +30,17 @@ try:
     import pysftp
 except ImportError:
     raise ImportError(
-        'This module needs pysftp to connect to the FDS. Please install pysftp on your system. (sudo pip install pysftp)')
+        'This module needs pysftp to connect to the FDS. '
+        'Please install pysftp on your system. (sudo pip install pysftp)'
+    )
 
 _logger = logging.getLogger(__name__)
 
 
 class FdsPostfinanceAccount(models.Model):
-    ''' the FDS PostFinance configuration that allow to connect to the
+    """" the FDS PostFinance configuration that allow to connect to the
         PostFinance server
-    '''
+    """
     _name = 'fds.postfinance.account'
 
     name = fields.Char(
@@ -90,13 +92,13 @@ class FdsPostfinanceAccount(models.Model):
     ##################################
     @api.multi
     def verify_directories_button(self):
-        ''' test connection and verify if directories are the same in the DB
+        """"" test connection and verify if directories are the same in the DB
 
             :returns None:
             :raises Warning:
                 - if current user do not have key
                 - if unable to connect to sftp
-        '''
+        """
         self.ensure_one()
 
         key = [e for e in self.authentication_key_ids
@@ -114,14 +116,10 @@ class FdsPostfinanceAccount(models.Model):
             key_pass = self.authentication_key_ids.config()
 
             # connect sftp
-            cnopts = pysftp.CnOpts()
-            cnopts.hostkeys = None
-            with pysftp.Connection(self.hostname,
-                                   username=self.username,
-                                   private_key=tmp_key.name,
-                                   private_key_pass=key_pass,
-                                   cnopts=cnopts) as sftp:
-
+            with pysftp.Connection(
+                    self.hostname, username=self.username,
+                    private_key=tmp_key.name, private_key_pass=key_pass
+            ) as sftp:
                 directories = sftp.listdir()
 
             # save new directories

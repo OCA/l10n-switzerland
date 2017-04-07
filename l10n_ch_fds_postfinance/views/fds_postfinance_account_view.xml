@@ -66,7 +66,7 @@
                             </field>
                         </page>
 
-                        <page string="Download History">
+                        <page string="Download History" name="upload">
                             <field name="fds_file_ids">
                                 <tree string="FDS PostFinance files" create="false" default_order="state,filename">
                                     <field name="create_date" />
