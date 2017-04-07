@@ -184,6 +184,21 @@ class FdsPostfinanceAccount(models.Model):
         }
         return action
 
+    @api.model
+    def import_files_cron(self):
+        """
+        Import files for all Accounts defined.
+        :return: True
+        """
+        accounts = self.search([])
+        for account in accounts:
+            self.env['fds.files.import.tobankstatments.wizard'].create({
+                'fds_account_id': account.id,
+                'state': 'default'
+            }).import_button()
+            self.env.cr.commit()
+        return True
+
     ##############################
     #          function          #
     ##############################
