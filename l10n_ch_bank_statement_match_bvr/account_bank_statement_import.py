@@ -2,7 +2,12 @@
 # Copyright 2017 Open Net Sàrl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, exceptions, _
+import logging
+
+from openerp import models, _
+
+
+_logger = logging.getLogger(__name__)
 
 
 class AccountBankStatementImport(models.TransientModel):
@@ -24,9 +29,10 @@ class AccountBankStatementImport(models.TransientModel):
             order='date desc',
         )
         if len(line) > 1:
-            raise exceptions.UserError(
+            _logger.warning(
                 _("Too many receivable/payable lines for reference %s")
                 % transaction['ref'])
+            return
 
         if line:
             # transaction_ref is propagated on all lines
