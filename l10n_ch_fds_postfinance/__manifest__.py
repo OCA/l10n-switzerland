@@ -32,6 +32,7 @@
         'python': ['pysftp', 'Crypto']
     },
     'data': [
+        'data/import_files_cron.xml',
         'views/fds_authentication_keys_view.xml',
         'views/fds_files_import_tobankstatments_wizard_view.xml',
         'views/fds_key_clone_wizard_view.xml',
