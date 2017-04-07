@@ -27,7 +27,7 @@
     'author': 'Compassion CH, Odoo Community Association (OCA)',
     'website': 'http://www.compassion.ch/',
     'category': 'Finance',
-    'depends': [],
+    'depends': ['account'],
     'external_dependencies': {
         'python': ['pysftp', 'Crypto']
     },

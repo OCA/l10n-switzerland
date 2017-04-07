@@ -2,8 +2,8 @@
 ##############################################################################
 #
 #    Swiss Postfinance File Delivery Services module for Odoo
-#    Copyright (C) 2014 Compassion CH
-#    @author: Nicolas Tran
+#    Copyright (C) 2014-2016 Compassion CH
+#    @author: Nicolas Tran, Emanuel Cino
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -31,84 +31,45 @@ import os
 _logger = logging.getLogger(__name__)
 
 
-class FdsInheritSepaWizard(models.TransientModel):
-    ''' Allows to upload the generated SEPA electronic payment
+class PaymenOrderUploadSepaWizard(models.TransientModel):
+    """ Allows to upload the generated SEPA electronic payment
         file for Switzerland to FDS Postfinance.
-
-        This addon will add upload button to the SEPA wizard.
-    '''
-    _inherit = 'wizard.pain001'
+    """
+    _name = 'payment.order.upload.sepa.wizard'
+    _description = 'Upload SEPA to FDS'
 
     fds_account_id = fields.Many2one(
-        comodel_name='fds.postfinance.account',
-        string='FDS account',
+        'fds.postfinance.account', 'FDS Account',
         default=lambda self: self._get_default_account()
     )
     fds_directory_id = fields.Many2one(
-        comodel_name='fds.postfinance.directory',
-        string='FDS directory',
+        'fds.postfinance.directory', 'FDS Directory',
         help='Select one upload directory. Be sure to have at least one '
              'directory configured with upload access rights.'
     )
     attachment_id = fields.Many2one(
-        comodel_name='ir.attachment',
-        string='File attachment',
-        readonly=True,
+        'ir.attachment', required=True, ondelete='cascade'
+    )
+    file_data = fields.Binary(
+        'Generated File', related='attachment_id.datas', readonly=True
     )
     filename = fields.Char(
-        string='Attachment filename',
-        related='attachment_id.name',
-        readonly=True,
+        related='attachment_id.name', readonly=True
     )
     payment_order_id = fields.Many2one(
-        comodel_name='payment.order',
-        string='Payment order',
-        readonly=True,
+        'account.payment.order', 'Payment Order', required=True, readonly=True,
+        ondelete='cascade'
     )
-    state = fields.Selection(
-        selection=[('default', 'Default'),
-                   ('finish', 'finish'),
-                   ('upload', 'upload'),
-                   ('confirm', 'confirm')],
-        readonly=True,
-        default='default',
+    state = fields.Selection([
+        ('upload', 'upload'),
+        ('finish', 'finish')], readonly=True, default='upload'
     )
 
     ##################################
     #         Button action          #
     ##################################
     @api.multi
-    def generate_file_button(self):
-        ''' create a pain_001 file into wizard and add it as an attachment
-            Called by pressing generate button.
-
-            :returns action: configuration for the next wizard's view
-        '''
-        self.ensure_one()
-        self.create_pain_001()
-        attachment_obj = self.env['ir.attachment']
-        payment_order_id = self.env.context.get('active_id')
-        file = attachment_obj.search([['res_id', '=', payment_order_id]])[0]
-        self.write({
-            'attachment_id': file.id,
-            'payment_order_id': payment_order_id,
-            'state': 'finish'})
-        return self._refresh_wizard()
-
-    @api.multi
     def upload_generate_file_button(self):
-        ''' change the view to the wizard or directly upload the file if
-            only one FDS account and only one upload directory selected.
-            Called by pressing upload button.
-
-            :returns action: configuration for the next wizard's view
-        '''
-        self.ensure_one()
-        self._state_upload_on()
-        return self._refresh_wizard()
-
-    @api.multi
-    def send_generate_file_button(self):
         ''' upload pain_001 file to the FDS Postfinance by sftp
 
             :returns action: configuration for the next wizard's view
@@ -118,12 +79,6 @@ class FdsInheritSepaWizard(models.TransientModel):
                 - if unable to connect to sftp
         '''
         self.ensure_one()
-        if not self.fds_account_id:
-            raise exceptions.Warning('Select a FDS account')
-
-        if not self.fds_directory_id:
-            raise exceptions.Warning('Select a directory')
-
         (key, key_pass) = self._get_sftp_key()
 
         try:
@@ -136,21 +91,22 @@ class FdsInheritSepaWizard(models.TransientModel):
             shutil.move(old_path_f, new_path_f)
 
             # upload to sftp
-            with pysftp.Connection(self.fds_account_id.hostname,
-                                   username=self.fds_account_id.username,
-                                   private_key=tmp_key.name,
-                                   private_key_pass=key_pass) as sftp:
+            with pysftp.Connection(
+                    self.fds_account_id.hostname,
+                    username=self.fds_account_id.username,
+                    private_key=tmp_key.name,
+                    private_key_pass=key_pass) as sftp:
 
                 with sftp.cd(self.fds_directory_id.name):
                     sftp.put(new_path_f)
-                    _logger.info("[OK] upload file (%s) ", (self.filename))
+                    self.state = 'finish'
+                    self.env.cr.commit()
+                    _logger.info("[OK] upload file (%s) ", self.filename)
 
             # change to initial name file (mandatory because of the close)
             shutil.move(new_path_f, old_path_f)
-            self._state_confirm_on()
             self._add2historical()
         except Exception as e:
-            self.attachment_id.unlink()
             _logger.error("Unable to connect to the sftp: %s", e)
             raise exceptions.Warning('Unable to connect to the sftp')
 
@@ -168,28 +124,8 @@ class FdsInheritSepaWizard(models.TransientModel):
             except:
                 _logger.error("remove tmp directory failed")
 
-        return self._refresh_wizard()
-
-    @api.multi
-    def back_button(self):
-        ''' Go back to the finish view.
-            Called by pressing back button.
-
-            :returns action: configuration for the next wizard's view
-        '''
-        self.ensure_one()
-        self._state_finish_on()
-        return self._refresh_wizard()
-
-    @api.multi
-    def cancel_button(self):
-        ''' Remove the attachment create.
-            Called by pressing cancel button.
-
-            :returns: None
-        '''
-        self.ensure_one()
-        self.attachment_id.unlink()
+        self.payment_order_id.generated2uploaded()
+        return True
 
     ##############################
     #          function          #
@@ -270,45 +206,3 @@ class FdsInheritSepaWizard(models.TransientModel):
             'state': 'uploaded'}
         historical_dd_obj = self.env['fds.sepa.upload.history']
         historical_dd_obj.create(values)
-
-    @api.multi
-    def _state_finish_on(self):
-        ''' private function that change state to finish
-
-            :returns: None
-        '''
-        self.ensure_one()
-        self.write({'state': 'finish'})
-
-    @api.multi
-    def _state_upload_on(self):
-        ''' private function that change state to upload
-
-            :returns: None
-        '''
-        self.ensure_one()
-        self.state = 'upload'
-
-    @api.multi
-    def _state_confirm_on(self):
-        ''' private function that change state to confirm
-
-            :returns: None
-        '''
-        self.ensure_one()
-        self.write({'state': 'confirm'})
-
-    @api.multi
-    def _refresh_wizard(self):
-        ''' private function that continue with the same wizard.
-
-            :returns action: configuration for the next wizard's view
-        '''
-        self.ensure_one()
-        action = {'type': 'ir.actions.act_window',
-                  'view_type': 'form',
-                  'view_mode': 'form',
-                  'res_model': self._name,
-                  'res_id': self.id,
-                  'target': 'new'}
-        return action

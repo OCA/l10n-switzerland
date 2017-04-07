@@ -29,13 +29,14 @@
     'category': 'Finance',
     'depends': [
         'l10n_ch_fds_postfinance',
-        'l10n_ch_sepa',
+        'l10n_ch_pain_credit_transfer',
+        'account_payment_order',
     ],
     'external_dependencies': {
         'python': ['pysftp']
     },
     'data': [
-        'views/fds_inherit_sepa_wizard_view.xml',
+        'views/payment_order_upload_sepa_wizard_view.xml',
         'views/fds_postfinance_account_sepa_view.xml',
         'security/ir.model.access.csv',
     ],

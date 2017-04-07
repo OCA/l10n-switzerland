@@ -20,4 +20,4 @@
 #
 ##############################################################################
 
-from . import fds_inherit_sepa_wizard
+from . import payment_order_upload_sepa_wizard

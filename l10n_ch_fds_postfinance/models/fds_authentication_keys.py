@@ -28,7 +28,10 @@ try:
     from Crypto import Random
 except ImportError:
     raise ImportError(
-        'This module needs Crypto to generate SSH keys. Please install Crypto on your system. (sudo pip install Crypto)')
+        'This module needs Crypto to generate SSH keys. '
+        'Please install Crypto on your system. (sudo pip install Crypto)'
+    )
+
 
 class FdsAuthenticationKeys(models.Model):
     ''' this class generate RSA key pair with the private key crypted and
