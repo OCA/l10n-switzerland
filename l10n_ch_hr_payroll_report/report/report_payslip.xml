@@ -50,7 +50,7 @@
         <tbody position="replace">
             <t t-set="line_net_amount" t-value="False"/>
             <tbody>
-                <t t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip).sorted(key=lambda line: line.code)" t-as="line">
+                <t t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip and line.total).sorted(key=lambda line: line.code)" t-as="line">
                     <t t-if="line.salary_rule_id.report_is_total_rule">
                         <tr>
                             <td style="padding-top: 20px; padding-bottom: 20px; border: 0px;">
