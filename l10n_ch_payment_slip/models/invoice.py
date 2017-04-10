@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # © 2012-2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from openerp import _, api, exceptions, fields, models
+from odoo import _, api, exceptions, fields, models
 
 
 class AccountMoveLine(models.Model):
@@ -29,22 +29,7 @@ class AccountInvoice(models.Model):
 
     _inherit = "account.invoice"
 
-    @api.model
-    def _get_reference_type(self):
-        """Function used by the function field 'reference_type'
-        in order to initalise available BVR Reference Types
-        """
-        res = super(AccountInvoice, self)._get_reference_type()
-        res.append(('bvr', 'BVR'))
-        return res
-
     reference = fields.Char(copy=False)
-
-    reference_type = fields.Selection(
-        _get_reference_type,
-        string='Reference Type',
-        required=True
-    )
 
     partner_bank_id = fields.Many2one(
         'res.partner.bank',
@@ -139,7 +124,7 @@ class AccountInvoice(models.Model):
                     self._action_bvr_number_move_line(move_line_id,
                                                       ref)
             else:
-                for pay_slip in pay_slip.compute_pay_slips_from_invoices(inv):
+                for pay_slip in pay_slip._compute_pay_slips_from_invoices(inv):
                     ref = pay_slip.reference
                     self._action_bvr_number_move_line(pay_slip.move_line_id,
                                                       ref)

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-08 10:38+0000\n"
+"POT-Creation-Date: 2016-12-07 01:44+0000\n"
 "PO-Revision-Date: 2016-05-26 13:58+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Dutch (http://www.transifex.com/oca/OCA-l10n-switzerland-9-0/language/nl/)\n"
@@ -106,13 +106,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_create_uid
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_v11_import_wizard_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_create_date
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_v11_import_wizard_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_display_name
@@ -136,7 +136,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_report_one_slip_per_page_from_invoice_id
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_v11_import_wizard_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.ui.view,arch_db:l10n_ch_payment_slip.v11_import_view
@@ -162,7 +162,7 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Factuur"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_account_move_line
@@ -180,13 +180,13 @@ msgstr "Laatst bijgewerkt op"
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_write_uid
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_v11_import_wizard_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_write_date
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_v11_import_wizard_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: l10n_ch_payment_slip
 #: selection:res.company,merge_mode:0
@@ -437,7 +437,7 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: model:ir.ui.view,arch_db:l10n_ch_payment_slip.v11_import_view
 msgid "or"
-msgstr ""
+msgstr "of"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_report_one_slip_per_page_from_invoice
