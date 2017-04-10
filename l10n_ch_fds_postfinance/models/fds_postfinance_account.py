@@ -196,7 +196,6 @@ class FdsPostfinanceAccount(models.Model):
                 'fds_account_id': account.id,
                 'state': 'default'
             }).import_button()
-            self.env.cr.commit()
         return True
 
     ##############################

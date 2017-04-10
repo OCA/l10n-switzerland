@@ -20,7 +20,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, exceptions
+from openerp import models, fields, api, exceptions, _
 
 
 class FdsKeyCloneWizard(models.TransientModel):
@@ -97,7 +97,7 @@ class FdsKeyCloneWizard(models.TransientModel):
             ['fds_account_id', '=', current_fds_id]])
 
         if has_userkey:
-            raise exceptions.Warning('Keys user already exist')
+            raise exceptions.Warning(_('User has already keys'))
 
         return has_userkey
 

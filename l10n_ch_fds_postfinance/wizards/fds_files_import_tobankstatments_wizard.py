@@ -20,14 +20,20 @@
 #
 ##############################################################################
 
+import os
 import logging
 import base64
 import tempfile
 import shutil
 import traceback
 
-import pysftp
-import os
+try:
+    import pysftp
+except ImportError:
+    raise ImportError(
+        'This module needs pysftp to connect to the FDS. '
+        'Please install pysftp on your system. (sudo pip install pysftp)'
+    )
 
 from openerp import models, fields, api
 

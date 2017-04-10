@@ -19,14 +19,22 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+import openerp
 
-from openerp import models, fields, api, exceptions
+from openerp import models, fields, api, exceptions, _
 import logging
 import base64
 import tempfile
 import shutil
-import pysftp
 import os
+
+try:
+    import pysftp
+except ImportError:
+    raise ImportError(
+        'This module needs pysftp to connect to the FDS. '
+        'Please install pysftp on your system. (sudo pip install pysftp)'
+    )
 
 _logger = logging.getLogger(__name__)
 
@@ -81,48 +89,41 @@ class PaymenOrderUploadSepaWizard(models.TransientModel):
         self.ensure_one()
         (key, key_pass) = self._get_sftp_key()
 
-        try:
-            # create tmp file
-            tmp_d = tempfile.mkdtemp()
-            tmp_key = self._create_tmp_file(key.private_key_crypted, tmp_d)[0]
-            tmp_f = self._create_tmp_file(self.attachment_id.datas, tmp_d)[0]
-            old_path_f = os.path.join(tmp_d, tmp_f.name)
-            new_path_f = os.path.join(tmp_d, ''.join(self.filename.split(':')))
-            shutil.move(old_path_f, new_path_f)
+        # create tmp file
+        tmp_d = tempfile.mkdtemp()
+        tmp_key = self._create_tmp_file(key.private_key_crypted, tmp_d)[0]
+        tmp_f = self._create_tmp_file(self.attachment_id.datas, tmp_d)[0]
+        old_path_f = os.path.join(tmp_d, tmp_f.name)
+        new_path_f = os.path.join(tmp_d, ''.join(self.filename.split(':')))
+        shutil.move(old_path_f, new_path_f)
 
-            # upload to sftp
-            with pysftp.Connection(
-                    self.fds_account_id.hostname,
-                    username=self.fds_account_id.username,
-                    private_key=tmp_key.name,
-                    private_key_pass=key_pass) as sftp:
+        # upload to sftp
+        with pysftp.Connection(
+                self.fds_account_id.hostname,
+                username=self.fds_account_id.username,
+                private_key=tmp_key.name,
+                private_key_pass=key_pass) as sftp:
 
-                with sftp.cd(self.fds_directory_id.name):
-                    sftp.put(new_path_f)
-                    self.state = 'finish'
-                    self.env.cr.commit()
-                    _logger.info("[OK] upload file (%s) ", self.filename)
+            with sftp.cd(self.fds_directory_id.name):
+                # Here we want to commit to make sure we see
+                # the file was uploaded and avoid sending it again.
+                with api.Environment.manage():
+                    with openerp.registry(
+                            self.env.cr.dbname).cursor() as new_cr:
+                        new_env = api.Environment(
+                            new_cr, self.env.uid, self.env.context)
+                        wizard = self.with_env(new_env)
+                        sftp.put(new_path_f)
+                        wizard.state = 'finish'
+                        _logger.info("[OK] upload file (%s) ", wizard.filename)
 
-            # change to initial name file (mandatory because of the close)
-            shutil.move(new_path_f, old_path_f)
-            self._add2historical()
-        except Exception as e:
-            _logger.error("Unable to connect to the sftp: %s", e)
-            raise exceptions.Warning('Unable to connect to the sftp')
+        # change to initial name file (mandatory because of the close)
+        shutil.move(new_path_f, old_path_f)
+        self._add2historical()
 
-        finally:
-            try:
-                tmp_key.close()
-            except:
-                _logger.error("remove tmp_key file failed")
-            try:
-                tmp_f.close()
-            except:
-                _logger.error("remove tmp_f file failed")
-            try:
-                shutil.rmtree(tmp_d)
-            except:
-                _logger.error("remove tmp directory failed")
+        tmp_key.close()
+        tmp_f.close()
+        shutil.rmtree(tmp_d)
 
         self.payment_order_id.generated2uploaded()
         return True
@@ -162,10 +163,10 @@ class PaymenOrderUploadSepaWizard(models.TransientModel):
             ['fds_account_id', '=', self.fds_account_id.id]])
 
         if not key:
-            raise exceptions.Warning('You don\'t have key')
+            raise exceptions.Warning(_("You don't have an authentication key"))
 
         if not key.key_active:
-            raise exceptions.Warning('Key not active')
+            raise exceptions.Warning(_('Authentication key not active'))
 
         key_pass = fds_authentication_key_obj.config()
         return (key, key_pass)

@@ -113,7 +113,7 @@ class FdsPostfinanceFile(models.Model):
     ##############################
     #          function          #
     ##############################
-    @api.one
+    @api.multi
     def import2bankStatements(self):
         ''' convert the file to a record of model bankStatment.
 
@@ -121,27 +121,28 @@ class FdsPostfinanceFile(models.Model):
                 - True if the convert was succeed
                 - False otherwise
         '''
-        try:
-            values = {
-                'data_file': self.data}
-            bs_import_obj = self.env['account.bank.statement.import']
-            bank_wiz_imp = bs_import_obj.create(values)
-            import_result = bank_wiz_imp.import_file()
-            # Mark the file as imported, remove binary as it should be
-            # attached to the statement.
-            self.write({
-                'state': 'done',
-                'data': None,
-                'bank_statement_id':
-                import_result['context']['statement_ids'][0]})
-            _logger.info("[OK] import file '%s' to bank Statements",
-                         (self.filename))
-            return True
-        except:
-            self._state_error_on()
-            _logger.warning("[FAIL] import file '%s' to bank Statements",
-                            (self.filename))
-            return False
+        res = True
+        for pf_file in self:
+            try:
+                values = {'data_file': pf_file.data}
+                bs_import_obj = self.env['account.bank.statement.import']
+                bank_wiz_imp = bs_import_obj.create(values)
+                import_result = bank_wiz_imp.import_file()
+                # Mark the file as imported, remove binary as it should be
+                # attached to the statement.
+                pf_file.write({
+                    'state': 'done',
+                    'data': None,
+                    'bank_statement_id':
+                    import_result['context']['statement_ids'][0]})
+                _logger.info("[OK] import file '%s' to bank Statements",
+                             (pf_file.filename))
+            except:
+                pf_file._state_error_on()
+                _logger.warning("[FAIL] import file '%s' to bank Statements",
+                                (pf_file.filename))
+                res = False
+        return res
 
     def _state_error_on(self):
         ''' private function that change state to error

@@ -20,7 +20,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, exceptions
+from openerp import models, fields, api, exceptions, _
 import logging
 import base64
 
@@ -79,12 +79,12 @@ class FdsKeyImportWizard(models.TransientModel):
             return self._import_key('text')
         elif self.private_key_import_file or self.public_key_import_file:
             # miss 1 import file key
-            raise exceptions.Warning('Import key file missing')
+            raise exceptions.Warning(_('Import key file missing'))
         elif self.private_key_import_txt or self.public_key_import_txt:
             # miss 1 import text key
-            raise exceptions.Warning('Import key text missing')
+            raise exceptions.Warning(_('Import key text missing'))
         else:
-            raise exceptions.Warning('Import key not found')
+            raise exceptions.Warning(_('Import key not found'))
 
     ##############################
     #          function          #
@@ -109,7 +109,7 @@ class FdsKeyImportWizard(models.TransientModel):
             ppk = self.private_key_import_txt
         else:
             _logger.error("Bad implementation in fds_key_import_wizard")
-            raise exceptions.Warning('Error code. Contact your admin')
+            raise exceptions.Warning(_('Error code. Contact your admin'))
 
         keys = auth_key_obj.import_pairkey(pub, ppk)
         # save values
