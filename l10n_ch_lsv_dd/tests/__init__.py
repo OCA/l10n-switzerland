@@ -21,9 +21,4 @@
 from . import test_bank
 from . import test_lsv_export_wizard
 from . import test_dd_export_wizard
-
-checks = [
-    test_bank,
-    test_lsv_export_wizard,
-    test_dd_export_wizard,
-]
+from . import test_lsv_dd

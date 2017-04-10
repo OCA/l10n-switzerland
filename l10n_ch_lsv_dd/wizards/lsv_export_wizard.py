@@ -25,7 +25,7 @@ import string
 from datetime import date
 from . import export_utils
 
-from openerp import models, fields, api, _, exceptions
+from odoo import models, fields, api, _, exceptions
 
 import logging
 logger = logging.getLogger(__name__)
@@ -362,7 +362,8 @@ class LsvExportWizard(models.TransientModel):
         if (properties.get('currency') == 'CHF' and
             line.amount_currency > 99999999.99) or (
                 properties.get('currency') == 'EUR' and
-                line.amount_currency > 99999999.99 / properties.get('rate')):
+                line.amount_currency > 99999999.99 / properties.get('rate', 1)
+        ):
             raise exceptions.ValidationError(
                 _('Stop kidding... max authorized amount is CHF 99 999 999.99 '
                   '(%.2f %s given for ref %s)') %
@@ -438,8 +439,8 @@ class LsvExportWizard(models.TransientModel):
         return ''
 
     def _get_ref(self, payment_line):
-        if export_utils.is_bvr_ref(payment_line.move_line_id.transaction_ref):
-            return payment_line.move_line_id.transaction_ref.replace(
+        if export_utils.is_bvr_ref(payment_line.move_line_id.ref):
+            return payment_line.move_line_id.ref.replace(
                 ' ', '').rjust(27, '0'), 'A'
         return '', 'B'  # If anyone uses IPI reference, get it here
 
@@ -467,8 +468,7 @@ class LsvExportWizard(models.TransientModel):
                 _('Missing LSV identifier for account %s')
                 % payment_order.company_partner_bank_id.acc_number)
 
-        currency_obj = self.env['res.currency']
-        chf_currency = currency_obj.search([('name', '=', 'CHF')])
+        chf_currency = self.env.ref('base.CHF')
         rate = chf_currency.rate
         ben_bank = payment_order.company_partner_bank_id
         properties = {

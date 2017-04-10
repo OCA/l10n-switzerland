@@ -4,17 +4,15 @@
   @author: Cyril Sester <cyril.sester@outlook.com>
   The licence is in the file __openerp__.py
 -->
-<openerp>
-    <data>
-        <record id="view_payment_order_invoice_button_form" model="ir.ui.view">
-            <field name="name">payment.order.invoice.button.form</field>
-            <field name="model">account.payment.order</field>
-            <field name="inherit_id" ref="account_payment_order.account_payment_order_form"/>
-            <field name="arch" type="xml">
-                <field name="state" position="before">
-                    <button name="show_invoices" string="Show invoices" type="object" />
-                </field>
+<odoo>
+    <record id="view_payment_order_invoice_button_form" model="ir.ui.view">
+        <field name="name">payment.order.invoice.button.form</field>
+        <field name="model">account.payment.order</field>
+        <field name="inherit_id" ref="account_payment_order.account_payment_order_form"/>
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <button name="show_invoices" string="Show invoices" type="object" />
             </field>
-        </record>
-    </data>
-</openerp>
+        </field>
+    </record>
+</odoo>
