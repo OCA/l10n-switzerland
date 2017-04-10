@@ -17,7 +17,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, api, _, fields
+from odoo import models, api, _, fields
 
 
 class AccountPaymentMethod(models.Model):
@@ -37,7 +37,7 @@ class AccountPaymentMethod(models.Model):
     pain_version = fields.Selection(selection_add=[
         ('pain.008.001.02.ch.03',
          'pain.008.001.02.ch.03 (XML Direct Debit)'),
-        ])
+    ])
 
     @api.multi
     def get_xsd_file_path(self):

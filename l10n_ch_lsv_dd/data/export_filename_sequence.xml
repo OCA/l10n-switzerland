@@ -4,7 +4,7 @@
     @author Cyril Sester <cyril.sester@outlook.com>
     The licence is in the file __openerp__.py
 -->
-<openerp>
+<odoo>
   <data noupdate="1">
 
     <record id="export_filename_seq" model="ir.sequence">
@@ -14,4 +14,4 @@
       <field name="padding" eval="6"/>
     </record>
   </data>
-</openerp>
+</odoo>
