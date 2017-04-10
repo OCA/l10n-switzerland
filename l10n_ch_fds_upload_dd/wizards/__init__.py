@@ -20,4 +20,4 @@
 #
 ##############################################################################
 
-from . import fds_inherit_post_dd_export_upload_wizard
+from . import payment_order_upload_dd_wizard
