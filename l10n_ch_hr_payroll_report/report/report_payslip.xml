@@ -39,9 +39,9 @@
                 <tr>
                     <th>Code</th>
                     <th>Name</th>
-                    <th>Amount</th>
-                    <th>Rate</th>
-                    <th>Total</th>
+                    <th class="text-right">Amount</th>
+                    <th class="text-right">Rate</th>
+                    <th class="text-right">Total</th>
                 </tr>
             </thead>
         </thead>
