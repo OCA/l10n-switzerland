@@ -25,7 +25,7 @@ import string
 from datetime import date
 from . import export_utils
 
-from openerp import models, fields, api, _, exceptions
+from odoo import models, fields, api, _, exceptions
 
 import logging
 logger = logging.getLogger(__name__)
@@ -83,9 +83,9 @@ class LsvExportWizard(models.TransientModel):
     _description = 'Export LSV Direct Debit File'
 
     treatment_type = fields.Selection(
-        [('P', _('Production')), ('T', _('Test'))],
+        [('P', 'Production'), ('T', 'Test')],
         required=True,
-        default='T'     # FIXME for release
+        default='P'
     )
     currency = fields.Selection(
         [('CHF', 'CHF'),
@@ -115,7 +115,7 @@ class LsvExportWizard(models.TransientModel):
         related='banking_export_ch_dd_id.total_amount'
     )
     state = fields.Selection(
-        [('create', _('Create')), ('finish', _('Finish'))],
+        [('create', 'Create'), ('finish', 'Finish')],
         readonly=True,
         default='create'
     )
@@ -127,7 +127,7 @@ class LsvExportWizard(models.TransientModel):
         '''
         self.ensure_one()
         payment_order_obj = self.env['account.payment.order']
-        payment_line_obj = self.env['account.payment.line']
+        payment_line_obj = self.env['bank.payment.line']
 
         active_ids = self.env.context.get('active_ids', [])
         if not active_ids:
@@ -162,22 +162,25 @@ class LsvExportWizard(models.TransientModel):
 
             order_by = ''
             if payment_order.date_prefered == 'due':
-                order_by = 'account_move_line.date_maturity ASC, '
-            order_by += 'account_payment_line.partner_bank_id'
+                order_by = 'm.date_maturity ASC, '
+            order_by += 'al.partner_bank_id'
 
+            # FIXME this comment is not accurate. We could replace with
+            # a search but this would imply some rework with the ordering
             # A direct db query is used because order parameter in model.search
             # doesn't support function fields
             self.env.cr.execute("""
-                SELECT account_payment_line.id
-                FROM account_payment_line, account_move_line
-                WHERE account_payment_line.move_line_id = account_move_line.id
-                AND account_payment_line.order_id = %s
+                SELECT bl.id
+                FROM bank_payment_line bl
+                JOIN account_payment_line al ON al.bank_line_id = bl.id
+                JOIN account_move_line m ON al.move_line_id = m.id
+                WHERE bl.order_id = %s
                 ORDER BY """ + order_by, (payment_order.id,))
             sorted_line_ids = [row[0] for row in self.env.cr.fetchall()]
-            payment_lines = payment_line_obj.browse(sorted_line_ids)
+            payment_lines = payment_line_obj.browse(sorted_line_ids).exists()
 
             for line in payment_lines:
-                if not line.mandate_id or not line.mandate_id.state == "valid":
+                if line.mandate_id.state != "valid":
                     raise exceptions.ValidationError(
                         _('Line with ref %s has no associated valid mandate') %
                         line.name
@@ -232,7 +235,7 @@ class LsvExportWizard(models.TransientModel):
         vals['VNR'] = '0'
         vals['VART'] = properties.get('treatment_type', 'P')
         vals['GVDAT'] = export_utils.get_treatment_date(
-            payment_order.date_prefered, line.ml_maturity_date,
+            payment_order.date_prefered, line.date,
             payment_order.date_scheduled, line.name)
         vals['BCZP'] = export_utils.complete_line(
             5, self._get_clearing(line.partner_bank_id))
@@ -362,7 +365,8 @@ class LsvExportWizard(models.TransientModel):
         if (properties.get('currency') == 'CHF' and
             line.amount_currency > 99999999.99) or (
                 properties.get('currency') == 'EUR' and
-                line.amount_currency > 99999999.99 / properties.get('rate')):
+                line.amount_currency > 99999999.99 / properties.get('rate', 1)
+        ):
             raise exceptions.ValidationError(
                 _('Stop kidding... max authorized amount is CHF 99 999 999.99 '
                   '(%.2f %s given for ref %s)') %
@@ -392,11 +396,12 @@ class LsvExportWizard(models.TransientModel):
                 _('Missing owner name for bank account %s')
                 % bank_account.acc_number)
 
-        bank_line2 = bank_account.bank_id.street or ''
+        bank_line2 = bank_account.partner_id.street or ''
         bank_line3 = \
-            bank_account.bank_id.zip + ' ' + bank_account.bank_id.city \
-            if bank_account.bank_id.zip and bank_account.bank_id.city else ''
-        bank_line4 = bank_account.bank_id.country.name or ''
+            bank_account.partner_id.zip + ' ' + bank_account.partner_id.city \
+            if bank_account.partner_id.zip and bank_account.partner_id.city \
+            else ''
+        bank_line4 = bank_account.partner_id.country_id.name or ''
 
         # line2 is empty, we try to fill with something else
         if not bank_line2:
@@ -435,12 +440,12 @@ class LsvExportWizard(models.TransientModel):
 
     def _get_communications(self, line):
         ''' This method can be overloaded to fit your communication style '''
-        return ''
+        return line.communication
 
     def _get_ref(self, payment_line):
-        if export_utils.is_bvr_ref(payment_line.move_line_id.transaction_ref):
-            return payment_line.move_line_id.transaction_ref.replace(
-                ' ', '').rjust(27, '0'), 'A'
+        ref = payment_line.mapped('payment_line_ids')[0].communication
+        if export_utils.is_bvr_ref(ref):
+            return ref.replace(' ', '').rjust(27, '0'), 'A'
         return '', 'B'  # If anyone uses IPI reference, get it here
 
     def _is_ch_li_iban(self, iban):
@@ -467,8 +472,7 @@ class LsvExportWizard(models.TransientModel):
                 _('Missing LSV identifier for account %s')
                 % payment_order.company_partner_bank_id.acc_number)
 
-        currency_obj = self.env['res.currency']
-        chf_currency = currency_obj.search([('name', '=', 'CHF')])
+        chf_currency = self.env.ref('base.CHF')
         rate = chf_currency.rate
         ben_bank = payment_order.company_partner_bank_id
         properties = {

@@ -19,8 +19,8 @@
 #
 ##############################################################################
 
-from openerp.tests import TransactionCase
-from openerp import exceptions
+from odoo.tests import TransactionCase
+from odoo import exceptions
 from collections import namedtuple
 
 
@@ -50,7 +50,8 @@ class TestLsvExportWizard(TransactionCase):
     def test_check_amount_overflow_amount_chf(self):
         try:
             line = PaymentLineMockUp(self.max_amount_lsv_chf, "negative_line")
-            self.lsv_wiz._check_amount(line, {'currency': 'CHF'})
+            self.lsv_wiz._check_amount(line, {'currency': 'EUR',
+                                              'rate': self.rate})
         except exceptions.ValidationError:
             self.fail("_check_amount() for lsv.export.wizard raised "
                       "exceptions.ValidationError unexpectedly!")
@@ -59,7 +60,7 @@ class TestLsvExportWizard(TransactionCase):
             overflow_line_chf = PaymentLineMockUp(
                 self.max_amount_lsv_chf + self.one_cent, "overflow_chf_line")
             self.lsv_wiz._check_amount(
-                overflow_line_chf, {'currency': 'CHF'})
+                overflow_line_chf, {'currency': 'EUR'})
 
     def test_check_amount_overflow_amount_eur(self):
         try:

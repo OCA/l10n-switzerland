@@ -23,7 +23,7 @@ import base64
 import collections
 from . import export_utils
 
-from openerp import models, fields, api, _, exceptions
+from odoo import models, fields, api, _, exceptions
 
 import logging
 logger = logging.getLogger(__name__)
@@ -405,8 +405,8 @@ class PostDdExportWizard(models.TransientModel):
         return ''
 
     def _get_ref(self, payment_line):
-        if export_utils.is_bvr_ref(payment_line.move_line_id.transaction_ref):
-            return payment_line.move_line_id.transaction_ref.replace(
+        if export_utils.is_bvr_ref(payment_line.move_line_id.ref):
+            return payment_line.move_line_id.ref.replace(
                 ' ', '').rjust(27, '0')
         return ''
 
