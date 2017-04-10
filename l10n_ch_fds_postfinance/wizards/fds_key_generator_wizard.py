@@ -164,7 +164,7 @@ class FdsKeyGeneratorWizard(models.TransientModel):
             # recup selected fds_postfiance_account id
             active_ids = self.env.context.get('active_ids')
             if len(active_ids) != 1:
-                raise exceptions.Warning('Select only one FDS account')
+                raise exceptions.Warning(_('Select only one FDS account'))
 
             values = {
                 'user_id': self.user_id.id,
@@ -185,7 +185,7 @@ class FdsKeyGeneratorWizard(models.TransientModel):
 
         else:
             _logger.error("Bad implementation in fds_key_generator_wizard")
-            raise exceptions.Warning('Error code. Contact your admin')
+            raise exceptions.Warning(_('Error code. Contact your admin'))
 
     @api.multi
     def userkey_exist(self):
@@ -202,7 +202,7 @@ class FdsKeyGeneratorWizard(models.TransientModel):
             ['fds_account_id', '=', current_fds_id]])
 
         if userkey_exist and self.state == 'default':
-            raise exceptions.Warning('Keys user already exist')
+            raise exceptions.Warning(_('User keys already exist'))
 
         return userkey_exist
 
