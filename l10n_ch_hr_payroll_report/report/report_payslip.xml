@@ -57,7 +57,10 @@
                                 <b><span t-field="line.code"/></b>
                             </td>
                             <td style="padding-top: 20px; padding-bottom: 20px; border: 0px;">
-                                <b><span t-field="line.name"/></b>
+                                <b>
+                                    <span t-field="line.salary_rule_id.note" t-if="line.salary_rule_id.note"/>
+                                    <span t-field="line.name" t-if="not line.salary_rule_id.note"/>
+                                </b>
                             </td>
                             <td class="text-right"
                                 style="padding-top: 20px; padding-bottom: 20px; border: 0px;">
@@ -90,7 +93,8 @@
                                 <span t-field="line.code"/>
                             </td>
                             <td style="border: 0px;">
-                                <span t-field="line.name"/>
+                                <span t-field="line.salary_rule_id.note" t-if="line.salary_rule_id.note"/>
+                                <span t-field="line.name" t-if="not line.salary_rule_id.note"/>
                             </td>
                             <td style="border: 0px;"
                                 class="text-right">
