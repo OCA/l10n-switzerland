@@ -18,8 +18,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields, api
-from openerp.addons.decimal_precision import decimal_precision as dp
+from odoo import models, fields, api
+from odoo.addons import decimal_precision as dp
 
 import logging
 logger = logging.getLogger(__name__)
@@ -67,7 +67,7 @@ class BankingExportChDd(models.Model):
     total_amount = fields.Float(
         'Total Amount',
         readonly=True,
-        digits_compute=dp.get_precision('Account')
+        digits=dp.get_precision('Account')
     )
     create_date = fields.Datetime(
         'Generation Date',

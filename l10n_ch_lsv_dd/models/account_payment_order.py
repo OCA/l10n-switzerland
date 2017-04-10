@@ -19,10 +19,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, api, _
+from odoo import models, api, _
 import base64
 from lxml import etree
-from openerp.tools import float_round
+from odoo.tools import float_round
 
 ACCEPTED_PAIN_FLAVOURS = (
     'pain.001.001.03.ch.02',
@@ -164,8 +164,8 @@ class AccountPaymentOrder(models.Model):
     @api.model
     def generate_start_payment_info_block(
             self, parent_node, payment_info_ident,
-            priority, local_instrument, sequence_type, requested_date,
-            eval_ctx, gen_args):
+            priority, local_instrument, category_purpose, sequence_type,
+            requested_date, eval_ctx, gen_args):
         """ This is overridden because pain.008.001.03.ch.01 uses a different
             XML structure. The code is basically the same that can be found
             on the module account_banking_pain_base's method
@@ -234,8 +234,8 @@ class AccountPaymentOrder(models.Model):
                 super(AccountPaymentOrder, self).\
                 generate_start_payment_info_block(
                     parent_node, payment_info_ident,
-                    priority, local_instrument, sequence_type,
-                    requested_date, eval_ctx, gen_args)
+                    priority, local_instrument, category_purpose,
+                    sequence_type, requested_date, eval_ctx, gen_args)
 
         return payment_info, nb_of_transactions, control_sum
 
@@ -481,7 +481,7 @@ class AccountPaymentOrder(models.Model):
                     "self.name + '-' "
                     "+ requested_date.replace('-', '')  + '-' + priority + "
                     "'-' + local_instrument",
-                    prio, local_inst, False, req_date, {
+                    prio, local_inst, False, False, req_date, {
                         'self': self,
                         'priority': prio,
                         'requested_date': req_date,

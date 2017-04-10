@@ -2,7 +2,6 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-===============================================
 LSV and Postfinance Direct Debit file generator
 ===============================================
 
@@ -17,9 +16,8 @@ Features:
 Installation
 ============
 
-To install this module, you need to:
-
-* do this ...
+To install this module, you need to have the module account_banking_sepa_direct_debit found in OCA/bank-payment
+repository.
 
 Configuration
 =============
@@ -57,9 +55,6 @@ Usage
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/125/8.0
 
-.. repo_id is available in https://github.com/OCA/maintainer-tools/blob/master/tools/repos_with_ids.txt
-.. branch is "8.0" for example
-
 For further information, please visit:
 
 * https://www.odoo.com/forum/help-1
@@ -76,8 +71,7 @@ Bug Tracker
 
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/l10n-switzerland/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
-If you spotted it first, help us smashing it by providing a detailed and welcomed feedback
-`here <https://github.com/OCA/l10n-switzerland/issues/new?body=module:%20l10n_ch_lsv_dd%0Aversion:%208.0.1.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+If you spotted it first, help us smashing it by providing a detailed and welcomed feedback.
 
 
 Credits
@@ -88,7 +82,7 @@ Contributors
 
 * Cyril Sester <cyril.sester@outlook.com>
 * Steve Ferry <steve.ferry1992@gmail.com>
-* brain-tec AG
+* Carlos Serra-Toro <carlos.serra@braintec-group.com>
 
 Maintainer
 ----------

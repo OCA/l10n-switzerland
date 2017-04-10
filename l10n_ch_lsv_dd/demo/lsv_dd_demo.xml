@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2017 Emanuel Cino <ecino@compassion.ch>
+  The licence is in the file __manifest__.py
+-->
+<odoo>
+    <record id="bank_postfinance" model="res.bank">
+      <field name="name">Postfinance AG</field>
+      <field name="code">postfinance</field>
+      <field name="bic">POFICHBEXXX</field>
+      <field name="clearing">9000</field>
+      <field name="street">Postfinance</field>
+      <field name="zip">3030</field>
+      <field name="city">Bern</field>
+    </record>
+
+    <record id="bank_ubs" model="res.bank">
+      <field name="name">UBS AG</field>
+      <field name="code">ubs</field>
+      <field name="bic">UBSWCHZH86N</field>
+      <field name="clearing">202</field>
+      <field name="street">Poststrasse 10</field>
+      <field name="zip">8610</field>
+      <field name="city">Uster 1</field>
+    </record>
+
+    <!-- Partner account for debit LSV test -->
+    <record id="partner_bank_ubs" model="res.partner.bank">
+      <field name="acc_type">iban</field>
+      <field name="acc_number">CH31 8123 9000 0012 4568 9</field>
+      <field name="partner_id" ref="base.res_partner_2"/>
+      <field name="bank_id" ref="bank_ubs"/>
+    </record>
+
+    <!-- Partner account for debit DD test -->
+    <record id="partner_bank_postfinance" model="res.partner.bank">
+      <field name="acc_type">postal</field>
+      <field name="acc_number">25-9779-8</field>
+      <field name="partner_id" ref="base.res_partner_2"/>
+      <field name="bank_id" ref="bank_postfinance"/>
+    </record>
+
+    <!-- Partner account for XML DD test -->
+    <record id="partner_bank_postfinance_xml" model="res.partner.bank">
+      <field name="acc_type">postal</field>
+      <field name="acc_number">CH63 0900 0000 2500 9779 8</field>
+      <field name="partner_id" ref="base.res_partner_2"/>
+      <field name="bank_id" ref="bank_postfinance"/>
+    </record>
+
+    <!-- Mandates for authorizing debit -->
+    <record id="ubs_mandate" model="account.banking.mandate">
+      <field name="signature_date" eval="'%s-01-01' %(datetime.now().year)"/>
+      <field name="partner_bank_id" ref="partner_bank_ubs"/>
+    </record>
+    <record id="postfinance_mandate" model="account.banking.mandate">
+      <field name="signature_date" eval="'%s-01-01' %(datetime.now().year)"/>
+      <field name="partner_bank_id" ref="partner_bank_postfinance"/>
+    </record>
+    <record id="postfinance_xml_mandate" model="account.banking.mandate">
+      <field name="signature_date" eval="'%s-01-01' %(datetime.now().year)"/>
+      <field name="partner_bank_id" ref="partner_bank_postfinance_xml"/>
+    </record>
+
+
+</odoo>
