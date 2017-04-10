@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {'name': 'Switzerland - Payment Slip (BVR/ESR)',
  'summary': 'Print ESR/BVR payment slip with your invoices',
- 'version': '9.0.2.1.1',
+ 'version': '10.0.1.0.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
@@ -26,6 +26,6 @@
  'demo': [],
  'test': [],
  'auto_install': False,
- 'installable': False,
+ 'installable': True,
  'images': []
  }

@@ -2,7 +2,7 @@
 # © 2014-2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import base64
-from openerp.modules import get_module_resource
+from odoo.modules import get_module_resource
 import openerp.tests.common as test_common
 
 

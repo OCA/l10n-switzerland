@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # © 2012-2015 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from openerp import models, fields
+from odoo import models, fields
 
 
 class ResCompany(models.Model):
@@ -47,6 +47,18 @@ class ResCompany(models.Model):
 
     bvr_scan_line_letter_spacing = fields.Float(
         'BVR scan line letter spacing'
+    )
+
+    bvr_amount_line_horz = fields.Float(
+        'BVR horiz. position for amount line (inch)',
+        help='Horiz. position in inch for amount line',
+        default=0.00
+    )
+
+    bvr_amount_line_vert = fields.Float(
+        'BVR vert. position for amount line (inch)',
+        help='Vert. position in inch for amount line',
+        default=0.00,
     )
 
     merge_mode = fields.Selection(

@@ -12,12 +12,15 @@ from reportlab.pdfgen.canvas import Canvas
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.units import inch
-from openerp import models, fields, api, _, exceptions
-from openerp.report import report_sxw
-from openerp.modules import get_module_resource
-from openerp.tools.misc import mod10r
+from odoo import models, fields, api, _, exceptions
+from odoo.report import report_sxw
+from odoo.modules import get_module_resource
+from odoo.tools.misc import mod10r
 
 FontMeta = namedtuple('FontMeta', ('name', 'size'))
+
+
+ADDR_FORMAT = "%(street)s\n%(street2)s\n%(zip)s %(city)s"
 
 
 class PaymentSlipSettings(object):
@@ -56,7 +59,7 @@ class PaymentSlip(models.Model):
     _rec_name = 'reference'
 
     reference = fields.Char('BVR/ESR Ref.',
-                            compute='compute_ref',
+                            compute='_compute_ref',
                             index=True,
                             store=True)
 
@@ -66,10 +69,10 @@ class PaymentSlip(models.Model):
                                    ondelete='cascade')
 
     amount_total = fields.Float('Total amount of BVR/ESR',
-                                compute='compute_amount')
+                                compute='_compute_amount')
 
     scan_line = fields.Char('Scan Line',
-                            compute='compute_scan_line',
+                            compute='_compute_scan_line',
                             readonly=True)
 
     invoice_id = fields.Many2one(string='Related invoice',
@@ -80,11 +83,11 @@ class PaymentSlip(models.Model):
 
     slip_image = fields.Binary('Slip Image',
                                readonly=True,
-                               compute="draw_payment_slip_image")
+                               compute="_compute_payment_slip_image")
 
     a4_pdf = fields.Binary('Slip A4 PDF',
                            readonly=True,
-                           compute="draw_a4_report")
+                           compute="_compute_a4_report")
 
     _sql_constraints = [('unique reference',
                          'UNIQUE (reference)',
@@ -134,7 +137,7 @@ class PaymentSlip(models.Model):
     @api.depends('move_line_id',
                  'move_line_id.debit',
                  'move_line_id.credit')
-    def compute_amount(self):
+    def _compute_amount(self):
         """Return the total amount of payment slip
 
         If you need to override please use
@@ -150,7 +153,7 @@ class PaymentSlip(models.Model):
 
     @api.depends('move_line_id',
                  'move_line_id.invoice_id.number')
-    def compute_ref(self):
+    def _compute_ref(self):
         """Retrieve ESR/BVR reference from move line in order to print it
 
         Returns False when no BVR reference should be generated.  No
@@ -237,7 +240,7 @@ class PaymentSlip(models.Model):
                  'move_line_id',
                  'move_line_id.debit',
                  'move_line_id.credit')
-    def compute_scan_line(self):
+    def _compute_scan_line(self):
         """Compute the payment slip scan line to be used
         by scanners
 
@@ -276,7 +279,7 @@ class PaymentSlip(models.Model):
         return self.create({'move_line_id': move_line.id})
 
     @api.model
-    def compute_pay_slips_from_move_lines(self, move_lines):
+    def _compute_pay_slips_from_move_lines(self, move_lines):
         """Get or generate `l10n_ch.payment_slip` from
         `account.move.line` recordset
 
@@ -299,7 +302,7 @@ class PaymentSlip(models.Model):
         return pay_slips
 
     @api.model
-    def compute_pay_slips_from_invoices(self, invoices):
+    def _compute_pay_slips_from_invoices(self, invoices):
         """Generate ```l10n_ch.payment_slip``` from
         ```account.invoice``` recordset
 
@@ -310,7 +313,7 @@ class PaymentSlip(models.Model):
         move_lines = self.env['account.move.line'].browse()
         for invoice in invoices:
             move_lines += invoice.get_payment_move_line()
-        return self.compute_pay_slips_from_move_lines(move_lines)
+        return self._compute_pay_slips_from_move_lines(move_lines)
 
     def get_comm_partner(self):
         """Determine wich partner should be display
@@ -440,9 +443,28 @@ class PaymentSlip(models.Model):
                         size=size)
 
     @api.model
+    def _get_address_lines(self, com_partner):
+        bvr_address_format = (
+            self.env['ir.config_parameter'].get_param('bvr.address.format') or
+            ADDR_FORMAT)
+        # use onchange to define our own temporary address format
+        with self.env.do_in_onchange():
+            # assign a fake country in case partner has no country set
+            com_partner.country_id = self.env['res.country'].new(
+                {'address_format': bvr_address_format}
+            )
+            address_lines = com_partner._display_address(
+                without_company=True).split("\n")
+        com_partner.invalidate_cache()
+        return address_lines
+
+    @api.model
     def _draw_address(self, canvas, print_settings, initial_position, font,
                       com_partner):
         """Draw an address on canvas
+
+        Address format can be changed by adding system parameter
+        `bvr.address.format`.
 
         :param canvas: payment slip reportlab component to be drawn
         :type canvas: :py:class:`reportlab.pdfgen.canvas.Canvas`
@@ -460,6 +482,7 @@ class PaymentSlip(models.Model):
         :type com_partner: :py:class:`openerp.models.Model`
 
         """
+
         x, y = initial_position
         x += print_settings.bvr_add_horz * inch
         y += print_settings.bvr_add_vert * inch
@@ -468,10 +491,7 @@ class PaymentSlip(models.Model):
         text.setFont(font.name, font.size)
         text.textOut(com_partner.name)
         text.moveCursor(0.0, font.size)
-        for line in com_partner.contact_address.split("\n"):
-            if not line:
-                continue
-            text.textLine(line)
+        [text.textLine(l) for l in self._get_address_lines(com_partner) if l]
         canvas.drawText(text)
 
     @api.multi
@@ -545,6 +565,11 @@ class PaymentSlip(models.Model):
             if not line:
                 continue
             text.textLine(line)
+
+        line = [str(bank.zip or ''), bank.city]
+        line = ' '.join([s for s in line if s])
+        text.textLine(line)
+
         canvas.drawText(text)
 
     @api.model
@@ -653,8 +678,10 @@ class PaymentSlip(models.Model):
 
         """
         x, y = initial_position
-        x += print_settings.bvr_delta_horz * inch
-        y += print_settings.bvr_delta_vert * inch
+        x += (print_settings.bvr_delta_horz * inch +
+              print_settings.bvr_amount_line_horz * inch)
+        y += (print_settings.bvr_delta_vert * inch +
+              print_settings.bvr_amount_line_vert * inch)
         indice = 0
         canvas.setFont(font.name, font.size)
         for car in amount[::-1]:
@@ -767,7 +794,7 @@ class PaymentSlip(models.Model):
             self._draw_background(canvas, print_settings)
             canvas.setFillColorRGB(*self._fill_color)
             if a4:
-                initial_position = (0.05 * inch,  4.50 * inch)
+                initial_position = (0.05 * inch, 4.50 * inch)
                 self._draw_description_line(canvas,
                                             print_settings,
                                             initial_position,
@@ -775,9 +802,9 @@ class PaymentSlip(models.Model):
             if invoice.partner_bank_id.print_partner:
                 if (invoice.partner_bank_id.print_account or
                         invoice.partner_bank_id.bvr_adherent_num):
-                    initial_position = (0.05 * inch,  3.30 * inch)
+                    initial_position = (0.05 * inch, 3.30 * inch)
                 else:
-                    initial_position = (0.05 * inch,  3.75 * inch)
+                    initial_position = (0.05 * inch, 3.75 * inch)
                 self._draw_address(canvas, print_settings, initial_position,
                                    default_font, company.partner_id)
                 if (invoice.partner_bank_id.print_account or
@@ -842,7 +869,7 @@ class PaymentSlip(models.Model):
                                   self.reference)
             self._draw_scan_line(canvas,
                                  print_settings,
-                                 (8.26 * inch - 4/10 * inch, 4/6 * inch),
+                                 (8.26 * inch - 4 / 10 * inch, 4 / 6 * inch),
                                  scan_font)
             self._draw_hook(canvas, print_settings)
             canvas.showPage()
@@ -852,13 +879,13 @@ class PaymentSlip(models.Model):
                 img_stream = base64.encodestring(img_stream)
             return img_stream
 
-    def draw_payment_slip_image(self):
+    def _compute_payment_slip_image(self):
         """Draw an us letter format slip in PNG"""
         img = self._draw_payment_slip()
         self.slip_image = base64.encodestring(img)
         return img
 
-    def draw_a4_report(self):
+    def _compute_a4_report(self):
         """Draw an a4 format slip in PDF"""
         img = self._draw_payment_slip(a4=True, out_format='PDF')
         self.a4_pdf = base64.encodestring(img)
