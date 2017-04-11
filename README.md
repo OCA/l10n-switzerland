@@ -78,22 +78,24 @@ l10n_cd_import_winbiz
 Allows to import accounting from WinBIZ software (www.winbiz.ch) using Excel or XML format.
 
 [//]: # (addons)
+
 Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
 [l10n_ch_bank](l10n_ch_bank/) | 9.0.1.0.0 | Banks names, addresses and BIC codes
-[l10n_ch_base_bank](l10n_ch_base_bank/) | 9.0.1.0.1 | Types and number validation for swiss electronic pmnt. DTA, ESR
-[l10n_ch_dta](l10n_ch_dta/) | 9.0.1.0.2 | Electronic payment file for Swiss bank (DTA)
+[l10n_ch_base_bank](l10n_ch_base_bank/) | 9.0.1.1.1 | Types and number validation for swiss electronic pmnt. DTA, ESR
+[l10n_ch_dta](l10n_ch_dta/) | 9.0.1.0.3 | Electronic payment file for Swiss bank (DTA)
 [l10n_ch_hr_payroll](l10n_ch_hr_payroll/) | 9.0.1.3.0 | Swizerland Payroll Rules
 [l10n_ch_import_cresus](l10n_ch_import_cresus/) | 9.0.1.0.0 | Allows to import Crésus .txt files containing journal entries into Odoo.
 [l10n_ch_import_winbiz](l10n_ch_import_winbiz/) | 9.0.1.0.1 | Accounting Import WinBIZ
 [l10n_ch_pain_base](l10n_ch_pain_base/) | 9.0.1.0.1 | ISO 20022 base module for Switzerland
 [l10n_ch_pain_credit_transfer](l10n_ch_pain_credit_transfer/) | 9.0.1.0.0 | Generate ISO 20022 credit transfert (SEPA and not SEPA)
-[l10n_ch_payment_slip](l10n_ch_payment_slip/) | 9.0.2.1.1 | Print ESR/BVR payment slip with your invoices
+[l10n_ch_payment_slip](l10n_ch_payment_slip/) | 9.0.2.2.0 | Print ESR/BVR payment slip with your invoices
 [l10n_ch_scan_bvr](l10n_ch_scan_bvr/) | 9.0.1.0.0 | Switzerland - Scan ESR/BVR to create invoices
 [l10n_ch_states](l10n_ch_states/) | 9.0.1.0.0 | Switzerland Country States
 [l10n_ch_zip](l10n_ch_zip/) | 9.0.2.0.0 | Provides all Swiss postal codes for auto-completion
+
 
 Unported addons
 ---------------

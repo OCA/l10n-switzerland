@@ -20,6 +20,9 @@ from openerp.tools.misc import mod10r
 FontMeta = namedtuple('FontMeta', ('name', 'size'))
 
 
+ADDR_FORMAT = "%(street)s\n%(street2)s\n%(zip)s %(city)s"
+
+
 class PaymentSlipSettings(object):
     """Slip report setting container"""
 
@@ -440,9 +443,27 @@ class PaymentSlip(models.Model):
                         size=size)
 
     @api.model
+    def _get_address_lines(self, com_partner):
+        bvr_address_format = (
+            self.env['ir.config_parameter'].get_param('bvr.address.format') or
+            ADDR_FORMAT)
+        # use onchange to define our own temporary address format
+        with self.env.do_in_onchange():
+            # assign a fake country in case partner has no country set
+            com_partner.country_id = self.env['res.country'].new(
+                {'address_format': bvr_address_format}
+            )
+            address_lines = com_partner.contact_address.split("\n")
+        com_partner.invalidate_cache()
+        return address_lines
+
+    @api.model
     def _draw_address(self, canvas, print_settings, initial_position, font,
                       com_partner):
         """Draw an address on canvas
+
+        Address format can be changed by adding system parameter
+        `bvr.address.format`.
 
         :param canvas: payment slip reportlab component to be drawn
         :type canvas: :py:class:`reportlab.pdfgen.canvas.Canvas`
@@ -491,10 +512,9 @@ class PaymentSlip(models.Model):
         text.textOut(com_partner.name[:cutoff_length])
         # we are moving in the original font size to new position
         text.moveCursor(0.0, font.size)
-        for line in address_lines:
-            if not line:
-                continue
-            text.textLine(line[:cutoff_length])
+        [text.textLine(l[:cutoff_length]) 
+            for l in self._get_address_lines(com_partner) if l]
+
         canvas.drawText(text)
 
     @api.multi
@@ -568,6 +588,11 @@ class PaymentSlip(models.Model):
             if not line:
                 continue
             text.textLine(line)
+
+        line = [str(bank.zip or ''), bank.city]
+        line = ' '.join([s for s in line if s])
+        text.textLine(line)
+
         canvas.drawText(text)
 
     @api.model
@@ -676,8 +701,10 @@ class PaymentSlip(models.Model):
 
         """
         x, y = initial_position
-        x += print_settings.bvr_delta_horz * inch
-        y += print_settings.bvr_delta_vert * inch
+        x += (print_settings.bvr_delta_horz * inch +
+              print_settings.bvr_amount_line_horz * inch)
+        y += (print_settings.bvr_delta_vert * inch +
+              print_settings.bvr_amount_line_vert * inch)
         indice = 0
         canvas.setFont(font.name, font.size)
         for car in amount[::-1]:
@@ -790,7 +817,7 @@ class PaymentSlip(models.Model):
             self._draw_background(canvas, print_settings)
             canvas.setFillColorRGB(*self._fill_color)
             if a4:
-                initial_position = (0.05 * inch,  4.50 * inch)
+                initial_position = (0.05 * inch, 4.50 * inch)
                 self._draw_description_line(canvas,
                                             print_settings,
                                             initial_position,
@@ -798,9 +825,9 @@ class PaymentSlip(models.Model):
             if invoice.partner_bank_id.print_partner:
                 if (invoice.partner_bank_id.print_account or
                         invoice.partner_bank_id.bvr_adherent_num):
-                    initial_position = (0.05 * inch,  3.30 * inch)
+                    initial_position = (0.05 * inch, 3.30 * inch)
                 else:
-                    initial_position = (0.05 * inch,  3.75 * inch)
+                    initial_position = (0.05 * inch, 3.75 * inch)
                 self._draw_address(canvas, print_settings, initial_position,
                                    default_font, company.partner_id)
                 if (invoice.partner_bank_id.print_account or
@@ -865,7 +892,7 @@ class PaymentSlip(models.Model):
                                   self.reference)
             self._draw_scan_line(canvas,
                                  print_settings,
-                                 (8.26 * inch - 4/10 * inch, 4/6 * inch),
+                                 (8.26 * inch - 4 / 10 * inch, 4 / 6 * inch),
                                  scan_font)
             self._draw_hook(canvas, print_settings)
             canvas.showPage()

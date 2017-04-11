@@ -4,13 +4,23 @@
 
 import time
 
+from openerp import tools
+from openerp.tools import float_compare
+from openerp.modules.module import get_module_resource
 from openerp.addons.account.tests.account_test_classes \
     import AccountingTestCase
-from openerp.tools import float_compare
 
 
 class TestDTA(AccountingTestCase):
+
+    def _load(self, module, *args):
+        tools.convert_file(
+            self.cr, 'account_asset',
+            get_module_resource(module, *args),
+            {}, 'init', False, 'test', self.registry._assertion_report)
+
     def test_dta(self):
+        self._load('account', 'test', 'account_minimal_test.xml')
         self.company = self.env['res.company']
         self.account_model = self.env['account.account']
         self.move_model = self.env['account.move']

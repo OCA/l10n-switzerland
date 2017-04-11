@@ -21,7 +21,7 @@
 
 {'name': 'Switzerland - Bank Payment File (DTA)',
  'summary': 'Electronic payment file for Swiss bank (DTA)',
- 'version': '9.0.1.0.2',
+ 'version': '9.0.1.0.3',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
@@ -31,8 +31,7 @@
              'document'],
  'data': ['data/account_payment_method.xml',
           ],
- 'demo': ['../account/test/account_minimal_test.xml',
-          "demo/dta_demo.xml"],
+ 'demo': ["demo/dta_demo.xml"],
  'auto_install': False,
  'installable': True,
  'post_init_hook': 'update_bank_journals',
