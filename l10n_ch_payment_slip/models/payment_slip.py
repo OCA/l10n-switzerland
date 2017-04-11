@@ -512,7 +512,7 @@ class PaymentSlip(models.Model):
         text.textOut(com_partner.name[:cutoff_length])
         # we are moving in the original font size to new position
         text.moveCursor(0.0, font.size)
-        [text.textLine(l[:cutoff_length]) 
+        [text.textLine(l[:cutoff_length])
             for l in self._get_address_lines(com_partner) if l]
 
         canvas.drawText(text)
