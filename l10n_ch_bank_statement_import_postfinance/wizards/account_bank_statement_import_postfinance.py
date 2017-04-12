@@ -19,7 +19,8 @@ class AccountBankStatementImport(models.TransientModel, XMLPFParser):
     @api.model
     def _parse_file(self, data_file):
         try:
-            return self._parse(data_file)
+            res = self._parse(data_file)
+            return res
         except Exception as e:
             logger.error(e.message)
             return super(AccountBankStatementImport, self)._parse_file(
@@ -44,7 +45,8 @@ class AccountBankStatementImport(models.TransientModel, XMLPFParser):
             }
             statement_line = self.env[
                 'account.bank.statement.line'].search(
-                [('file_ref', '=', attachment[0])]
+                [('file_ref', '=', attachment[0]),
+                 ('statement_id', '=', statement_ids[0])]
             )
             if statement_line:
                 # Link directly attachement with the right statement line
@@ -59,9 +61,13 @@ class AccountBankStatementImport(models.TransientModel, XMLPFParser):
 
         return statement_ids, notifs
 
-    def _find_additional_data(self, currency_code, account_number):
-        """ Convert IBAN to CCP """
-        if account_number and len(account_number) == 21:
+    def _check_journal_bank_account(self, journal, account_number):
+        """ Convert IBAN to CCP  if bank account is not found. """
+        res = super(AccountBankStatementImport,
+                    self)._check_journal_bank_account(journal, account_number)
+        if not res and account_number and len(account_number) == 21:
             account_number = account_number[9:].lstrip('0')
-        return super(AccountBankStatementImport, self)._find_additional_data(
-            currency_code, account_number)
+            res = super(AccountBankStatementImport,
+                        self)._check_journal_bank_account(journal,
+                                                          account_number)
+        return res
