@@ -18,9 +18,4 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import test_base_swiss_importer
 from . import test_postfinance_xml
-from . import test_v11
-from . import test_g11
-from . import test_raiffeisen
-from . import test_ubs

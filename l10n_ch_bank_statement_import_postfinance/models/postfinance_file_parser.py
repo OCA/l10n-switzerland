@@ -16,18 +16,24 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import re
+from openerp.addons.account_bank_statement_import_camt.camt import CamtParser
+
+import logging
 from os.path import splitext
 from tarfile import TarFile, TarError
 from cStringIO import StringIO
 from lxml import etree
-from wand.image import Image
-import logging
-
-from openerp.addons.account_bank_statement_import_camt.camt import CamtParser
-
 
 _logger = logging.getLogger(__name__)
+
+
+try:
+    from wand.image import Image
+    wand = True
+except ImportError:
+    _logger.warning('Please install Wand (sudo pip wand) for Postfinance '
+                    'bank statement import supporting tiff attachments.')
+    wand = None
 
 
 class PFCamtParser(CamtParser):
@@ -46,20 +52,15 @@ class XMLPFParser(object):
     """
     Parser for XML Postfinance Statements (can be wrapped in a tar.gz file)
     """
-
     def _parse(self, data_file):
         """
         Launch the parsing through The XML file. It sets the various
         property of the class from the parse result.
         This implementation expect one XML file to represents one statement
         """
-        if not self._check_postfinance(data_file):
-            raise ValueError('Not a valid Postfinance statement')
-
-        tree = etree.fromstring(self.data_file)
+        tree = self._check_postfinance(data_file)
         self.currency_code = self._parse_currency_code(tree)
-        camt_parser = PFCamtParser()
-        currency, account_number, statements = camt_parser.parse(
+        currency, account_number, statements = self.camt_parser.parse(
             self.data_file)
         if statements:
             statements[0]['attachments'] = self._parse_attachments(
@@ -72,17 +73,24 @@ class XMLPFParser(object):
         :param data_file: file data
         :return: True/False
         """
+        self.camt_parser = PFCamtParser()
         self.tar_source = data_file
         self.data_file = self._get_content_from_stream()
         if self.is_tar:
             self.attachments = self._get_attachments_from_stream(data_file)
         else:
             self.attachments = None
-        camt_xml = re.search('<GrpHdr>', self.data_file) and re.search(
-            '<AcctSvcrRef>', self.data_file)
-        if camt_xml is None:
-            return False
-        return True
+        try:
+            root = etree.fromstring(
+                self.data_file, parser=etree.XMLParser(recover=True))
+        except etree.XMLSyntaxError:
+            root = None
+        if root is None:
+            raise ValueError(
+                'Not a valid xml file, or not an xml file at all.')
+        ns = root.tag[1:root.tag.index("}")]
+        self.camt_parser.check_version(ns, root)
+        return root
 
     def _get_content_from_stream(self):
         """Source file can be a raw or tar file. We try to guess the
@@ -125,7 +133,9 @@ class XMLPFParser(object):
         try:
             attachments = {}
             tar_file = TarFile.open(fileobj=pf_file, mode="r:gz")
-            accepted_formats = ['.tiff', '.png', '.jpeg', '.jpg']
+            accepted_formats = ['.png', '.jpeg', '.jpg']
+            if wand:
+                accepted_formats.append('.tiff')
             for file_name in tar_file.getnames():
                 accepted = reduce(lambda x, y: x or y, [
                     file_name.endswith(format) for format in accepted_formats

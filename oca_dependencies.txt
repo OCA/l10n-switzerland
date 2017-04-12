@@ -4,3 +4,4 @@ partner-contact
 account-financial-tools
 bank-payment
 bank-statement-reconcile
+bank-statement-import
