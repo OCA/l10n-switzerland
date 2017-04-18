@@ -339,7 +339,7 @@ class ResPartnerBank(models.Model, BankCommon):
         else:
             if not self.acc_number and self.ccp:
                 self.acc_number = self._get_acc_name()
-            elif self.is_swiss_postal_num(self.acc_number):
+            elif self.acc_number and self.is_swiss_postal_num(self.acc_number):
                 self.ccp = self.acc_number
                 self.acc_number = self._get_acc_name()
 
