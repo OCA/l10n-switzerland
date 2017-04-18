@@ -459,6 +459,33 @@ class PaymentSlip(models.Model):
         return address_lines
 
     @api.model
+    def _get_address_font_size(self, font_size, address_lines, com_partner):
+        """ Return a font size and if minimun font size the max length
+
+        :param font: font to use
+        :type font: :py:class:`FontMeta`
+
+        :returns: font_size, cutoff_length
+        """
+        max_line_length = max(len(l) for l in address_lines)
+        max_line_length = max(max_line_length, len(com_partner.name))
+
+        cutoff_length = None
+
+        if max_line_length <= 23:
+            font_size = min(11, font_size)
+        elif max_line_length <= 27:
+            font_size = min(10, font_size)
+        elif max_line_length <= 30:
+            font_size = min(9, font_size)
+        else:
+            # now we have smallest font, we cut off if length exceeds 34
+            # characters
+            cutoff_length = 34
+            font_size = min(8, font_size)
+        return font_size, cutoff_length
+
+    @api.model
     def _draw_address(self, canvas, print_settings, initial_position, font,
                       com_partner):
         """Draw an address on canvas
@@ -482,16 +509,22 @@ class PaymentSlip(models.Model):
         :type com_partner: :py:class:`openerp.models.Model`
 
         """
+        address_lines = self._get_address_lines(com_partner)
+
+        font_size, cutoff_length = self._get_address_font_size(
+            font.size, address_lines, com_partner)
 
         x, y = initial_position
         x += print_settings.bvr_add_horz * inch
         y += print_settings.bvr_add_vert * inch
         text = canvas.beginText()
         text.setTextOrigin(x, y)
-        text.setFont(font.name, font.size)
-        text.textOut(com_partner.name)
+        text.setFont(font.name, font_size)
+        text.textOut(com_partner.name[:cutoff_length])
+        # we are moving in the original font size to new position
         text.moveCursor(0.0, font.size)
-        [text.textLine(l) for l in self._get_address_lines(com_partner) if l]
+        [text.textLine(l[:cutoff_length]) for l in address_lines if l]
+
         canvas.drawText(text)
 
     @api.multi
@@ -565,10 +598,6 @@ class PaymentSlip(models.Model):
             if not line:
                 continue
             text.textLine(line)
-
-        line = [str(bank.zip or ''), bank.city]
-        line = ' '.join([s for s in line if s])
-        text.textLine(line)
 
         canvas.drawText(text)
 

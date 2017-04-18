@@ -224,6 +224,34 @@ class TestPaymentSlip(test_common.TransactionCase):
             [u'93, Press Avenue', u'73377 Le Bourget du Lac']
         )
 
+    def test_address_length(self):
+        invoice = self.make_invoice()
+        self.assertTrue(invoice.move_id)
+        line = invoice.move_id.line_ids[0]
+        slip = self.env['l10n_ch.payment_slip'].search(
+            [('move_line_id', '=', line.id)]
+        )
+        com_partner = slip.get_comm_partner()
+        address_lines = slip._get_address_lines(com_partner)
+        f_size = 11
+
+        len_tests = [
+            (15, (11, None)),
+            (23, (11, None)),
+            (26, (10, None)),
+            (27, (10, None)),
+            (30, (9, None)),
+            (32, (8, 34)),
+            (34, (8, 34)),
+            (40, (8, 34))]
+
+        for text_len, result in len_tests:
+            com_partner.name = 'x' * text_len
+            res = slip._get_address_font_size(
+                f_size, address_lines, com_partner)
+
+            self.assertEqual(res, result, "Wrong result for len %s" % text_len)
+
     def test_print_bvr(self):
         invoice = self.make_invoice()
         bvr = invoice.print_bvr()
