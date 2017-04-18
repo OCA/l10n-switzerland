@@ -19,7 +19,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
 from openerp import models, fields, api
 from openerp.tools.config import config
 
@@ -29,7 +28,7 @@ try:
 except ImportError:
     raise ImportError(
         'This module needs Crypto to generate SSH keys. '
-        'Please install Crypto on your system. (sudo pip install Crypto)'
+        'Please install pycrypto on your system. (sudo pip install pycrypto)'
     )
 
 
