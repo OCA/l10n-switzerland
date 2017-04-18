@@ -94,6 +94,15 @@ class TestBank(common.TransactionCase):
         self.assertEqual(bank_acc.ccp, '10-8060-7')
         self.assertEqual(bank_acc.acc_type, 'bank')
 
+    def test_bank_acc_number_not_defined(self):
+        bank_acc = self.env['res.partner.bank'].new({
+            'partner_id': self.partner.id,
+            'bank_id': self.bank,
+        })
+        bank_acc.onchange_bank_set_acc_number()
+        self.assertFalse(bank_acc.acc_number)
+        self.assertFalse(bank_acc.ccp)
+
     def test_ccp(self):
         bank_acc = self.env['res.partner.bank'].create({
             'partner_id': self.partner.id,
