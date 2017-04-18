@@ -481,16 +481,40 @@ class PaymentSlip(models.Model):
         :type com_partner: :py:class:`openerp.models.Model`
 
         """
+        address_lines = com_partner.contact_address.split("\n")
+
+        address_line_lengths = [len(line) for line in address_lines]
+        max_line_length = max(address_line_lengths)
+
+        max_line_length = max(max_line_length, len(com_partner.name))
+
+        font_size = font.size
+        cutoff_length = None
+
+        if max_line_length <= 23:
+            font_size = min(11, font_size)
+        elif max_line_length <= 27:
+            font_size = min(10, font_size)
+        elif max_line_length <= 30:
+            font_size = min(9, font_size)
+        else:
+            # now we have smallest font, we cut off if length exceeds 34
+            # characters
+            cutoff_length = 34
+            font_size = min(8, font_size)
 
         x, y = initial_position
         x += print_settings.bvr_add_horz * inch
         y += print_settings.bvr_add_vert * inch
         text = canvas.beginText()
         text.setTextOrigin(x, y)
-        text.setFont(font.name, font.size)
-        text.textOut(com_partner.name)
+        text.setFont(font.name, font_size)
+        text.textOut(com_partner.name[:cutoff_length])
+        # we are moving in the original font size to new position
         text.moveCursor(0.0, font.size)
-        [text.textLine(l) for l in self._get_address_lines(com_partner) if l]
+        [text.textLine(l[:cutoff_length])
+            for l in self._get_address_lines(com_partner) if l]
+
         canvas.drawText(text)
 
     @api.multi
