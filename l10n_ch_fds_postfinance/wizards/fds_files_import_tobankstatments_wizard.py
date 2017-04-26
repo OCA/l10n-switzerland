@@ -1,43 +1,28 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Swiss Postfinance File Delivery Services module for Odoo
-#    Copyright (C) 2015 Compassion CH
-#    @author: Nicolas Tran
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2015 Compassion CH (Nicolas Tran)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import os
-import logging
 import base64
-import tempfile
+import logging
+import os
 import shutil
+import tempfile
 import traceback
+
+from openerp import models, fields, api, _
+from openerp.exceptions import Warning as UserError
+
+_logger = logging.getLogger(__name__)
 
 try:
     import pysftp
+    SFTP_OK = True
 except ImportError:
-    raise ImportError(
+    SFTP_OK = False
+    _logger.error(
         'This module needs pysftp to connect to the FDS. '
         'Please install pysftp on your system. (sudo pip install pysftp)'
     )
-
-from openerp import models, fields, api
-
-_logger = logging.getLogger(__name__)
 
 
 class FdsFilesImportToBankStatementsWizard(models.TransientModel):
@@ -96,6 +81,8 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
             :returns action: configuration for the next wizard's view
         '''
         self.ensure_one()
+        if not SFTP_OK:
+            raise UserError(_("Please install pysftp to use this feature."))
         (fds_id, hostname, username, key, key_pass) = self._get_sftp_config()
         if not key:
             self.state = 'error'
@@ -175,22 +162,21 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
             sftp.get_d(dir_name, tmp_directory)
             _logger.info("[OK] download files in '%s' ", (dir_name))
 
+            # Look for files to exclude
+            excluded = d.excluded_files.split(';')
             for nameFile in list_name_files:
-                skip = False
-                # Look for files to exclude
-                excluded = d.excluded_files.split(';')
-                for excluded_file in excluded:
-                    if excluded_file and excluded_file in nameFile:
-                        skip = True
-                        self.msg_import_file_ignore += nameFile + "; "
-                if skip:
+                file_ignore = [f for f in excluded if f and f in nameFile]
+                if file_ignore:
+                    self.msg_import_file_ignore += "; ".join(file_ignore)
                     continue
+
                 # check if file exist already
                 if fds_files_ids.search([['filename', '=', nameFile]]):
                     self.msg_exist_file += nameFile + "; "
                     _logger.warning("[FAIL] file '%s' already exist",
                                     (nameFile))
                     continue
+
                 # save in the model fds_postfinance_files
                 path = os.path.join(tmp_directory, nameFile)
                 with open(path, "rb") as f:

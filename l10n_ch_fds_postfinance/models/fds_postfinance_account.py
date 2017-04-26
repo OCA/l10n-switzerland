@@ -1,24 +1,6 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Swiss Postfinance File Delivery Services module for Odoo
-#    Copyright (C) 2015 Compassion CH
-#    @author: Nicolas Tran
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2015 Compassion CH (Nicolas Tran)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp import models, fields, api, exceptions, _
 import logging
@@ -26,15 +8,18 @@ import base64
 import tempfile
 import shutil
 
+
+_logger = logging.getLogger(__name__)
+
 try:
     import pysftp
+    SFTP_OK = True
 except ImportError:
-    raise ImportError(
+    SFTP_OK = False
+    _logger.error(
         'This module needs pysftp to connect to the FDS. '
         'Please install pysftp on your system. (sudo pip install pysftp)'
     )
-
-_logger = logging.getLogger(__name__)
 
 
 class FdsPostfinanceAccount(models.Model):
@@ -92,7 +77,7 @@ class FdsPostfinanceAccount(models.Model):
     ##################################
     @api.multi
     def verify_directories_button(self):
-        """"" test connection and verify if directories are the same in the DB
+        """ test connection and verify if directories are the same in the DB
 
             :returns None:
             :raises Warning:
@@ -100,6 +85,9 @@ class FdsPostfinanceAccount(models.Model):
                 - if unable to connect to sftp
         """
         self.ensure_one()
+        if not SFTP_OK:
+            raise exceptions.Warning(
+                _("Please install pysftp to use this feature."))
 
         key = [e for e in self.authentication_key_ids
                if e.user_id == self.env.user]
