@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-07 01:44+0000\n"
-"PO-Revision-Date: 2016-12-06 21:26+0000\n"
+"POT-Creation-Date: 2017-04-18 13:43+0000\n"
+"PO-Revision-Date: 2017-04-01 11:29+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-l10n-switzerland-9-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -58,6 +58,18 @@ msgid "Bank BVR/ESR adherent number"
 msgstr "ESR Teilnehmernummer der Bank"
 
 #. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/bank.py:241
+#, python-format
+msgid "Bank/CCP Undefined"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/bank.py:239
+#, python-format
+msgid "Bank/CCP {}"
+msgstr ""
+
+#. module: l10n_ch_base_bank
 #: model:ir.ui.view,arch_db:l10n_ch_base_bank.view_bank_search
 msgid "Banks"
 msgstr "Banken"
@@ -100,7 +112,8 @@ msgid "Invoice"
 msgstr "Rechnung"
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:98
+#: code:addons/l10n_ch_base_bank/models/bank.py:111
+#: code:addons/l10n_ch_base_bank/models/bank.py:226
 #, python-format
 msgid "Please enter a correct postal number. (01-23456-1 or 12345)"
 msgstr "Bitte fügen Sie eine korrekte Postkontonummer ein. (z.B. 01-23456-1 oder 12345)"
@@ -128,7 +141,7 @@ msgid ""
 msgstr "Die in der ESR zu druckende Teilnehmernummer ist kein Postkonto."
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:218
+#: code:addons/l10n_ch_base_bank/models/bank.py:213
 #, python-format
 msgid ""
 "Your bank BVR/ESR adherent number must contain only digits!\n"

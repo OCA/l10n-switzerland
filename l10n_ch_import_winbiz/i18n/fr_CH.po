@@ -4,14 +4,13 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
-# leemannd <leemannd@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-29 13:50+0000\n"
-"PO-Revision-Date: 2016-11-29 13:50+0000\n"
-"Last-Translator: leemannd <leemannd@gmail.com>, 2016\n"
+"POT-Creation-Date: 2017-04-18 13:43+0000\n"
+"PO-Revision-Date: 2017-04-18 13:43+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: French (Switzerland) (https://www.transifex.com/oca/teams/23907/fr_CH/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,7 +53,7 @@ msgstr ""
 #. module: l10n_ch_import_winbiz
 #: selection:account.winbiz.import,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Brouillon"
 
 #. module: l10n_ch_import_winbiz
 #: selection:account.winbiz.import,state:0
