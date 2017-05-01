@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-03 02:58+0000\n"
+"POT-Creation-Date: 2017-03-18 03:45+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/zh_CN/)\n"
@@ -120,7 +120,7 @@ msgstr ""
 #: selection:banking.export.ch.dd,state:0
 #, python-format
 msgid "Draft"
-msgstr ""
+msgstr "草稿"
 
 #. module: l10n_ch_lsv_dd
 #: view:banking.export.ch.dd:0
@@ -267,7 +267,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: model:ir.model,name:l10n_ch_lsv_dd.model_account_move_line
 msgid "Journal Items"
-msgstr ""
+msgstr "日记帐项目"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:412

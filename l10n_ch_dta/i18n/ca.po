@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-07 03:38+0000\n"
+"POT-Creation-Date: 2017-03-18 03:44+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/ca/)\n"
@@ -96,7 +96,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: field:payment.order,dta_ids:0
 msgid "unknown"
-msgstr ""
+msgstr "desconegut "
 
 #. module: l10n_ch_dta
 #: model:ir.model,name:l10n_ch_dta.model_create_dta_wizard
@@ -138,7 +138,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: model:ir.model,name:l10n_ch_dta.model_payment_order
 msgid "Payment Order"
-msgstr ""
+msgstr "Ordre de pagament "
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:301
@@ -208,7 +208,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: model:ir.model,name:l10n_ch_dta.model_res_partner_bank
 msgid "Bank Accounts"
-msgstr ""
+msgstr "Comptes Bancaris "
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:283

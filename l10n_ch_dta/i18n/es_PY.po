@@ -10,11 +10,11 @@ msgstr ""
 "POT-Creation-Date: 2017-03-18 03:44+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/de/)\n"
+"Language-Team: Spanish (Paraguay) (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/es_PY/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
+"Language: es_PY\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_dta
@@ -96,7 +96,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: field:payment.order,dta_ids:0
 msgid "unknown"
-msgstr "unbekannt"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: model:ir.model,name:l10n_ch_dta.model_create_dta_wizard
@@ -138,7 +138,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: model:ir.model,name:l10n_ch_dta.model_payment_order
 msgid "Payment Order"
-msgstr "Zahlungsauftrag"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:301
@@ -190,7 +190,7 @@ msgstr ""
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:733
 #, python-format
 msgid "Error"
-msgstr "Fehler"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:241
@@ -208,7 +208,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: model:ir.model,name:l10n_ch_dta.model_res_partner_bank
 msgid "Bank Accounts"
-msgstr "Bankkonten"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:283
@@ -245,4 +245,4 @@ msgstr ""
 #. module: l10n_ch_dta
 #: view:create.dta.wizard:0
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "Cancelar"
