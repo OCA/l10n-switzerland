@@ -3,14 +3,13 @@
 # * l10n_ch_dta
 # 
 # Translators:
-# TT <toni.tanner@leegroup.ch>, 2017
 # OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-03 03:39+0000\n"
-"PO-Revision-Date: 2017-03-03 03:39+0000\n"
+"POT-Creation-Date: 2017-04-19 00:40+0000\n"
+"PO-Revision-Date: 2017-04-19 00:40+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
@@ -81,7 +80,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: model:ir.model.fields,field_description:l10n_ch_dta.field_create_dta_wizard_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Anzeigename"
 
 #. module: l10n_ch_dta
 #: model:ir.model.fields,field_description:l10n_ch_dta.field_create_dta_wizard_id
@@ -97,7 +96,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: model:ir.model.fields,field_description:l10n_ch_dta.field_create_dta_wizard___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zuletzt geändert am"
 
 #. module: l10n_ch_dta
 #: model:ir.model.fields,field_description:l10n_ch_dta.field_create_dta_wizard_write_uid

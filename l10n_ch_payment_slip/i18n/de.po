@@ -3,16 +3,15 @@
 # * l10n_ch_payment_slip
 # 
 # Translators:
-# Ermin Trevisan <trevi@twanda.com>, 2016
-# Philipp Hug <philipp@hug.cx>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: l10n-switzerland (9.0)\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-23 09:48+0000\n"
-"PO-Revision-Date: 2016-09-23 09:50+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-l10n-switzerland-9-0/language/de/)\n"
+"POT-Creation-Date: 2017-04-19 00:40+0000\n"
+"PO-Revision-Date: 2017-04-19 00:40+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -38,6 +37,11 @@ msgstr "ESR vert. Differenz (Inch)"
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_bvr_add_horz
 msgid "BVR horiz. position address (inch)"
 msgstr "ESR horiz. Adressposition (Inch)"
+
+#. module: l10n_ch_payment_slip
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_bvr_amount_line_horz
+msgid "BVR horiz. position for amount line (inch)"
+msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_bvr_scan_line_horz
@@ -68,6 +72,11 @@ msgstr "ESR Scanzeile Zeichenabstand"
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_bvr_add_vert
 msgid "BVR vert. position for address (inch)"
 msgstr "ESR vert. Adressposition (Inch)"
+
+#. module: l10n_ch_payment_slip
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_bvr_amount_line_vert
+msgid "BVR vert. position for amount line (inch)"
+msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_bvr_scan_line_vert
@@ -127,6 +136,11 @@ msgstr "Anzeigename"
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_bvr_add_horz
 msgid "Horiz. position in inch for address"
 msgstr "Horiz. Adressposition (inch)"
+
+#. module: l10n_ch_payment_slip
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_bvr_amount_line_horz
+msgid "Horiz. position in inch for amount line"
+msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_bvr_scan_line_horz
@@ -193,15 +207,19 @@ msgstr "Zuletzt aktualisiert am"
 #. module: l10n_ch_payment_slip
 #: selection:res.company,merge_mode:0
 msgid "Merge Slips in Memory, faster but can exhaust memory"
-msgstr "Führe Belege im Speicher zusammen. Das ist schneller, kann aber zu Hauptspeicherüberlastung führen."
+msgstr ""
+"Führe Belege im Speicher zusammen. Das ist schneller, kann aber zu "
+"Hauptspeicherüberlastung führen."
 
 #. module: l10n_ch_payment_slip
 #: selection:res.company,merge_mode:0
 msgid "Merge Slips on Disk, slower but safer"
-msgstr "Führe Belege auf der Speicherplatte zusammen, das ist langsamer, aber sicherer."
+msgstr ""
+"Führe Belege auf der Speicherplatte zusammen, das ist langsamer, aber "
+"sicherer."
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:339
+#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:342
 #, python-format
 msgid "No invoice related to move line %s"
 msgstr "Keine Rechnung bezieht sich auf Buchungszeile %s "
@@ -236,13 +254,13 @@ msgid "Payment Slips Merge Mode"
 msgstr "Methode zur Zusammenfassung der Einzahlungssscheine"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:502
+#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:555
 #, python-format
 msgid "Payment slip related to invoice %s due on the %s"
 msgstr "Einzahlungsschein betrifft Rechnung %s fällig am %s"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:224
+#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:227
 #, python-format
 msgid "Please enter a correct postal number like: 01-23456-1"
 msgstr "Bitte fügen Sie eine korrekte Postkontonummer ein: zB 01-23456-1"
@@ -316,27 +334,30 @@ msgid "Slip Image"
 msgstr "Einzahlungsschein Bild"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/invoice.py:167
+#: code:addons/l10n_ch_payment_slip/models/invoice.py:152
 #, python-format
 msgid "The bank account {} used in invoice has no BVR/ESR adherent number."
-msgstr "Das in der Rechnung verwendete Bankkonto {} hat keine ESR-konforme Nummer."
+msgstr ""
+"Das in der Rechnung verwendete Bankkonto {} hat keine ESR-konforme Nummer."
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/invoice.py:171
+#: code:addons/l10n_ch_payment_slip/models/invoice.py:156
 #, python-format
 msgid ""
 "The bank account {} used in invoice needs to be a postal account or have a "
 "bank CCP."
-msgstr "Das in der Rechnung verwendete Bankkonto {} muss ein Postkonto sein oder ein Bank-Postkonto."
+msgstr ""
+"Das in der Rechnung verwendete Bankkonto {} muss ein Postkonto sein oder ein"
+" Bank-Postkonto."
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/invoice.py:161
+#: code:addons/l10n_ch_payment_slip/models/invoice.py:146
 #, python-format
 msgid "The invoice must be confirmed."
 msgstr "Die Rechnung muss bestätigt sein."
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/invoice.py:164
+#: code:addons/l10n_ch_payment_slip/models/invoice.py:149
 #, python-format
 msgid "The invoice needs a partner bank account."
 msgstr "Die Rechnung muss ein Partner-Bankkonto definiert haben."
@@ -399,7 +420,8 @@ msgstr "V11 File"
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:221
 #, python-format
 msgid "V11 file can not be decoded, it contains invalid caracter %s"
-msgstr "V11-Datei kann nicht decodiert werden, sie enthält ungültige Zeichen %s"
+msgstr ""
+"V11-Datei kann nicht decodiert werden, sie enthält ungültige Zeichen %s"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_bvr_add_vert
@@ -407,12 +429,17 @@ msgid "Vert. position in inch for address"
 msgstr "Vert. Position in Inch für Adresse"
 
 #. module: l10n_ch_payment_slip
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_bvr_amount_line_vert
+msgid "Vert. position in inch for amount line"
+msgstr ""
+
+#. module: l10n_ch_payment_slip
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_bvr_scan_line_vert
 msgid "Vert. position in inch for scan line"
 msgstr "Vert. Position in Inch für Scan-Zeile"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:345
+#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:348
 #, python-format
 msgid ""
 "Your bank BVR number should be of the form 0X-XXX-X! Please check your company information for the invoice:\n"
@@ -424,7 +451,9 @@ msgstr "%s"
 msgid ""
 "horiz. delta in inch 1.2 will print the bvr 1.2 inch lefter, negative value "
 "is possible"
-msgstr "Horiz. Differenz z.B. 1.2 inch, druckt den ESR 1.2 Inch weiter links, ein negativer Wert ist möglich"
+msgstr ""
+"Horiz. Differenz z.B. 1.2 inch, druckt den ESR 1.2 Inch weiter links, ein "
+"negativer Wert ist möglich"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_ir_actions_report_xml
@@ -456,4 +485,6 @@ msgstr "v11.import.wizard"
 msgid ""
 "vert. delta in inch 1.2 will print the bvr 1.2 inch lower, negative value is"
 " possible"
-msgstr "Vertikale Differenz z.B. 1.2 Inch, druckt den ESR 1.2 Inch weiter unten, ein negativer Wert ist möglich"
+msgstr ""
+"Vertikale Differenz z.B. 1.2 Inch, druckt den ESR 1.2 Inch weiter unten, ein"
+" negativer Wert ist möglich"
