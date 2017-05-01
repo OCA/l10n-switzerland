@@ -184,7 +184,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: selection:fds.postfinance.file,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Ноорог"
 
 #. module: l10n_ch_fds_postfinance
 #: help:fds.postfinance.account,postfinance_email:0
@@ -342,7 +342,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.directory,journal_id:0
 msgid "Journal"
-msgstr ""
+msgstr "Журнал"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.authentication.keys,key_active:0

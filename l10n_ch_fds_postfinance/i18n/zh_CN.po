@@ -98,7 +98,7 @@ msgstr ""
 #: view:fds.key.generator.wizard:l10n_ch_fds_postfinance.view_fds_key_generator_wizard_form
 #: view:fds.key.import.wizard:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
 msgid "Close"
-msgstr ""
+msgstr "关闭"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.key.clone.wizard:l10n_ch_fds_postfinance.view_fds_key_clone_wizard_form
@@ -150,7 +150,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.file,directory_id:0
 msgid "Directory"
-msgstr ""
+msgstr "目录"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.directory,name:0
@@ -184,7 +184,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: selection:fds.postfinance.file,state:0
 msgid "Draft"
-msgstr ""
+msgstr "草稿"
 
 #. module: l10n_ch_fds_postfinance
 #: help:fds.postfinance.account,postfinance_email:0
@@ -342,7 +342,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.directory,journal_id:0
 msgid "Journal"
-msgstr ""
+msgstr "凭证簿"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.authentication.keys,key_active:0

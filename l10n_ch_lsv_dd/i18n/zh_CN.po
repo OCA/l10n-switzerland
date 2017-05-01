@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-11 14:20+0000\n"
-"PO-Revision-Date: 2016-12-08 11:55+0000\n"
+"PO-Revision-Date: 2017-04-20 03:15+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -106,7 +106,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: selection:banking.export.ch.dd,state:0
 msgid "Draft"
-msgstr ""
+msgstr "草稿"
 
 #. module: l10n_ch_lsv_dd
 #: field:res.partner.bank,esr_party_number:0
@@ -278,7 +278,7 @@ msgstr "发票"
 #. module: l10n_ch_lsv_dd
 #: model:ir.model,name:l10n_ch_lsv_dd.model_account_move_line
 msgid "Journal Items"
-msgstr ""
+msgstr "日记帐项目"
 
 #. module: l10n_ch_lsv_dd
 #: field:res.partner.bank,lsv_identifier:0

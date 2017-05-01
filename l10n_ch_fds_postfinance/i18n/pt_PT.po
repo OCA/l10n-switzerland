@@ -342,7 +342,7 @@ msgstr "Ficheiros importados"
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.directory,journal_id:0
 msgid "Journal"
-msgstr ""
+msgstr "Diário"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.authentication.keys,key_active:0

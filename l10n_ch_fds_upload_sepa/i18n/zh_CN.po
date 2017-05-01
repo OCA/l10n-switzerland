@@ -30,7 +30,7 @@ msgstr "取消"
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
 msgid "Close"
-msgstr ""
+msgstr "关闭"
 
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
@@ -55,7 +55,7 @@ msgstr ""
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,directory_id:0
 msgid "Directory"
-msgstr ""
+msgstr "目录"
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,fds_account_id:0

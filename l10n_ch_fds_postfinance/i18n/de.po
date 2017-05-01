@@ -478,7 +478,7 @@ msgstr "Status"
 #. module: l10n_ch_fds_postfinance
 #: field:fds.key.clone.wizard,des_user_id:0
 msgid "To:"
-msgstr ""
+msgstr "An:"
 
 #. module: l10n_ch_fds_postfinance
 #: code:addons/l10n_ch_fds_postfinance/models/fds_postfinance_account.py:124

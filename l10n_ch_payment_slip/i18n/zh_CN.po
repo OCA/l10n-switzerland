@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-11 14:20+0000\n"
-"PO-Revision-Date: 2016-12-27 08:25+0000\n"
+"PO-Revision-Date: 2017-04-20 03:15+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -155,7 +155,7 @@ msgstr "发票"
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_account_move_line
 msgid "Journal Items"
-msgstr ""
+msgstr "日记帐项目"
 
 #. module: l10n_ch_payment_slip
 #: field:l10n_ch.payment_slip,write_uid:0 field:v11.import.wizard,write_uid:0

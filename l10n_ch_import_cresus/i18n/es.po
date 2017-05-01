@@ -137,7 +137,7 @@ msgstr ""
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,period_id:0
 msgid "Period"
-msgstr ""
+msgstr "Periodo"
 
 #. module: l10n_ch_import_cresus
 #: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:156
