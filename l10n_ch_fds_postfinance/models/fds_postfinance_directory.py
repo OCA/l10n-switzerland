@@ -38,11 +38,6 @@ class FdsPostfinanceDirectory(models.Model):
         ondelete='restrict',
         readonly=True,
     )
-    journal_id = fields.Many2one(
-        comodel_name='account.journal',
-        string='Journal',
-        help='default journal needed to import to bank statements'
-    )
     allow_download_file = fields.Boolean(
         string='Allow download file?',
         default=False,
@@ -58,4 +53,10 @@ class FdsPostfinanceDirectory(models.Model):
         default=True,
         readonly=True,
         help='[info] if the directory still exist on the FDS sftp'
+    )
+    excluded_files = fields.Char(
+        default='',
+        help="Semicolon (;) separated patterns. If a filename matches one of "
+        "the given patterns, the file won't be downloaded from the remote "
+        "directory."
     )

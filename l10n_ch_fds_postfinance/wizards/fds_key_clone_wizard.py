@@ -23,7 +23,7 @@
 from openerp import models, fields, api, exceptions
 
 
-class fds_key_clone_wizard(models.TransientModel):
+class FdsKeyCloneWizard(models.TransientModel):
     ''' The goal is to copy one authentication key to another user.
 
         This wizard is called when we click on copy key on FDS authentication

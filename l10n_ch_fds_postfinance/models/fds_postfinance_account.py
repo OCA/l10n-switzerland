@@ -25,12 +25,17 @@ import logging
 import base64
 import tempfile
 import shutil
-import pysftp
+
+try:
+    import pysftp
+except ImportError:
+    raise ImportError(
+        'This module needs pysftp to connect to the FDS. Please install pysftp on your system. (sudo pip install pysftp)')
 
 _logger = logging.getLogger(__name__)
 
 
-class fds_postfinance_account(models.Model):
+class FdsPostfinanceAccount(models.Model):
     ''' the FDS PostFinance configuration that allow to connect to the
         PostFinance server
     '''
@@ -41,7 +46,7 @@ class fds_postfinance_account(models.Model):
     )
     hostname = fields.Char(
         string='SFTP Hostname',
-        default='fds.post.ch',
+        default='fdsbc.post.ch',
         required=True,
     )
     postfinance_email = fields.Char(
@@ -109,10 +114,13 @@ class fds_postfinance_account(models.Model):
             key_pass = self.authentication_key_ids.config()
 
             # connect sftp
+            cnopts = pysftp.CnOpts()
+            cnopts.hostkeys = None
             with pysftp.Connection(self.hostname,
                                    username=self.username,
                                    private_key=tmp_key.name,
-                                   private_key_pass=key_pass) as sftp:
+                                   private_key_pass=key_pass,
+                                   cnopts=cnopts) as sftp:
 
                 directories = sftp.listdir()
 
