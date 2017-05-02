@@ -486,7 +486,8 @@ class PaymentSlip(models.Model):
         address_line_lengths = [len(line) for line in address_lines]
         max_line_length = max(address_line_lengths)
 
-        max_line_length = max(max_line_length, len(com_partner.name))
+        if com_partner.name:
+            max_line_length = max(max_line_length, len(com_partner.name))
 
         font_size = font.size
         cutoff_length = None
@@ -509,7 +510,8 @@ class PaymentSlip(models.Model):
         text = canvas.beginText()
         text.setTextOrigin(x, y)
         text.setFont(font.name, font_size)
-        text.textOut(com_partner.name[:cutoff_length])
+        if com_partner.name:
+            text.textOut(com_partner.name[:cutoff_length])
         # we are moving in the original font size to new position
         text.moveCursor(0.0, font.size)
         [text.textLine(l[:cutoff_length])
