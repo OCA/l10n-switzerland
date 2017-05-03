@@ -457,16 +457,16 @@ npa_1553 Chtonnaye,10,Châtonnaye,1996-09-04,738,2068,base.ch,0,2,0,726,l10n_ch_
 npa_1554 Sdeilles,20,Sédeilles,2005-03-01,739,5830,base.ch,0,2,0,726,l10n_ch_states.state_VD,1554
 npa_1555 Villarzel,20,Villarzel,1996-09-04,740,5830,base.ch,0,2,0,726,l10n_ch_states.state_VD,1555
 npa_1682 Villars-Bramard,20,Villars-Bramard,2002-02-01,741,5831,base.ch,0,2,4,7663,l10n_ch_states.state_VD,1682
-npa_1682 Dompierre VD,20,Dompierre VD,2001-01-03,742,5671,base.ch,0,2,3,7663,l10n_ch_states.state_VD,1682
+npa_1682 Dompierre,20,Dompierre,2001-01-03,742,5671,base.ch,0,2,3,7663,l10n_ch_states.state_VD,1682
 npa_1535 Combremont-Grand,20,Combremont-le-Grand,2000-10-01,743,5831,base.ch,0,2,0,726,l10n_ch_states.state_VD,1535
 npa_1562 Corcelles-Payerne,10,Corcelles-près-Payerne,2004-05-01,744,5816,base.ch,1,2,0,726,l10n_ch_states.state_VD,1562
-npa_1563 Dompierre FR,20,Dompierre FR,2001-07-01,745,2014,base.ch,1,2,0,726,l10n_ch_states.state_FR,1563
+npa_1563 Dompierre,20,Dompierre,2001-07-01,745,2014,base.ch,1,2,0,726,l10n_ch_states.state_FR,1563
 npa_1564 Domdidier,10,Domdidier,1996-09-04,746,2013,base.ch,1,2,0,7660,l10n_ch_states.state_FR,1564
 npa_1565 Missy,20,Missy,2005-06-01,751,5821,base.ch,1,2,0,7660,l10n_ch_states.state_VD,1565
 npa_1475 Autavaux,20,Autavaux,2002-09-01,752,2052,base.ch,0,2,0,726,l10n_ch_states.state_FR,1475
 npa_1567 Delley,20,Delley,2005-11-01,753,2051,base.ch,0,2,0,770,l10n_ch_states.state_FR,1567
 npa_1568 Portalban,10,Portalban,1996-09-04,754,2051,base.ch,0,2,0,770,l10n_ch_states.state_FR,1568
-npa_1566 St-Aubin FR,10,St-Aubin FR,2005-06-01,755,2041,base.ch,1,2,0,7660,l10n_ch_states.state_FR,1566
+npa_1566 St-Aubin,10,St-Aubin,2005-06-01,755,2041,base.ch,1,2,0,7660,l10n_ch_states.state_FR,1566
 npa_1580 Avenches,10,Avenches,1996-09-04,757,5451,base.ch,1,2,0,7660,l10n_ch_states.state_VD,1580
 npa_1583 Villarepos,20,Villarepos,2004-04-01,759,2279,base.ch,0,2,0,7660,l10n_ch_states.state_FR,1583
 npa_1584 Villars-le-Grand,20,Villars-le-Grand,2002-12-01,763,5464,base.ch,0,2,0,7660,l10n_ch_states.state_VD,1584
@@ -511,14 +511,14 @@ npa_1648 Hauteville,20,Hauteville,2010-07-01,814,2137,base.ch,0,2,0,829,l10n_ch_
 npa_1656 Im Fang,20,Im Fang,2000-06-01,816,2138,base.ch,0,1,1,833,l10n_ch_states.state_FR,1656
 npa_1656 Jaun,10,Jaun,1996-09-03,817,2138,base.ch,0,1,0,833,l10n_ch_states.state_FR,1656
 npa_1657 Ablndschen,20,Abländschen,2001-06-08,818,843,base.ch,0,1,0,833,l10n_ch_states.state_BE,1657
-npa_1654 Cerniat FR,20,Cerniat FR,2010-06-01,819,2163,base.ch,0,2,0,833,l10n_ch_states.state_FR,1654
+npa_1654 Cerniat,20,Cerniat,2010-06-01,819,2163,base.ch,0,2,0,833,l10n_ch_states.state_FR,1654
 npa_1651 Villarvolard,20,Villarvolard,2002-11-01,820,2129,base.ch,0,2,0,832,l10n_ch_states.state_FR,1651
 npa_1652 Botterens,20,Botterens,2002-11-01,821,2123,base.ch,0,2,0,832,l10n_ch_states.state_FR,1652
 npa_1638 Morlon,20,Morlon,2003-02-01,822,2143,base.ch,0,2,0,7403,l10n_ch_states.state_FR,1638
 npa_1663 Molson-s-Gruyres,20,Moléson-sur-Gruyères,2002-05-01,823,2135,base.ch,0,2,4,842,l10n_ch_states.state_FR,1663
 npa_1632 Riaz,10,Riaz,1999-08-23,827,2148,base.ch,1,2,0,7403,l10n_ch_states.state_FR,1632
 npa_1633 Marsens,10,Marsens,2010-03-01,828,2140,base.ch,1,2,0,828,l10n_ch_states.state_FR,1633
-npa_1634 La Roche FR,10,La Roche FR,2010-06-01,829,2149,base.ch,1,2,0,829,l10n_ch_states.state_FR,1634
+npa_1634 La Roche,10,La Roche,2010-06-01,829,2149,base.ch,1,2,0,829,l10n_ch_states.state_FR,1634
 npa_1649 Pont-la-Ville,20,Pont-la-Ville,2004-01-01,830,2147,base.ch,0,2,0,829,l10n_ch_states.state_FR,1649
 npa_1635 La Tour-de-Trme,10,La Tour-de-Trême,1999-03-15,831,2125,base.ch,1,2,0,7403,l10n_ch_states.state_FR,1635
 npa_1636 Broc,10,Broc,1996-09-03,832,2124,base.ch,1,2,0,832,l10n_ch_states.state_FR,1636
@@ -589,16 +589,16 @@ npa_1738 Sangernboden,20,Sangernboden,2002-08-01,944,852,base.ch,0,1,0,962,l10n_
 npa_1716 Schwarzsee,10,Schwarzsee,2001-11-01,945,2299,base.ch,0,1,3,962,l10n_ch_states.state_FR,1716
 npa_1724 Bonnefontaine,20,Bonnefontaine,2003-09-01,946,2220,base.ch,0,2,8,926,l10n_ch_states.state_FR,1724
 npa_1727 Corpataux-Magneden,20,Corpataux-Magnedens,2011-06-01,947,2184,base.ch,0,2,0,983,l10n_ch_states.state_FR,1727
-npa_1728 Rossens FR,10,Rossens FR,1996-09-05,948,2222,base.ch,0,2,0,983,l10n_ch_states.state_FR,1728
+npa_1728 Rossens,10,Rossens,1996-09-05,948,2222,base.ch,0,2,0,983,l10n_ch_states.state_FR,1728
 npa_1719 Brnisried,10,Brünisried,1996-09-05,949,2292,base.ch,0,1,0,962,l10n_ch_states.state_FR,1719
-npa_1731 Ependes FR,10,Ependes FR,1996-09-05,950,2189,base.ch,0,2,0,926,l10n_ch_states.state_FR,1731
+npa_1731 Ependes,10,Ependes,1996-09-05,950,2189,base.ch,0,2,0,926,l10n_ch_states.state_FR,1731
 npa_1732 Arconciel,20,Arconciel,2002-11-01,951,2171,base.ch,0,2,0,926,l10n_ch_states.state_FR,1732
 npa_1733 Treyvaux,10,Treyvaux,1996-09-05,952,2226,base.ch,0,2,0,983,l10n_ch_states.state_FR,1733
 npa_1720 Chsopelloz,20,Chésopelloz,1996-09-05,955,2179,base.ch,0,2,2,939,l10n_ch_states.state_FR,1720
 npa_1712 Tafers,10,Tafers,1996-09-05,956,2306,base.ch,1,1,0,956,l10n_ch_states.state_FR,1712
 npa_1713 St Antoni,10,St. Antoni,1996-09-05,957,2302,base.ch,0,1,0,956,l10n_ch_states.state_FR,1713
 npa_1714 Heitenried,10,Heitenried,1996-09-05,958,2296,base.ch,0,1,0,956,l10n_ch_states.state_FR,1714
-npa_1715 Alterswil FR,10,Alterswil FR,1996-09-05,960,2291,base.ch,0,1,0,956,l10n_ch_states.state_FR,1715
+npa_1715 Alterswil,10,Alterswil,1996-09-05,960,2291,base.ch,0,1,0,956,l10n_ch_states.state_FR,1715
 npa_1716 Plaffeien,10,Plaffeien,1996-09-05,962,2299,base.ch,1,1,0,962,l10n_ch_states.state_FR,1716
 npa_1717 St Ursen,10,St. Ursen,1996-09-05,963,2304,base.ch,0,1,0,956,l10n_ch_states.state_FR,1717
 npa_1718 Rechthalten,10,Rechthalten,1996-09-05,964,2301,base.ch,0,1,0,956,l10n_ch_states.state_FR,1718
@@ -611,8 +611,8 @@ npa_1746 Prez-vers-Noraz,10,Prez-vers-Noréaz,1996-09-05,986,2221,base.ch,0,2,0,
 npa_1747 Corserey,20,Corserey,2003-12-01,987,2185,base.ch,0,2,0,986,l10n_ch_states.state_FR,1747
 npa_1748 Torny-le-Grand,20,Torny-le-Grand,2004-08-01,988,2115,base.ch,0,2,0,986,l10n_ch_states.state_FR,1748
 npa_1749 Middes,20,Middes,2004-08-01,989,2115,base.ch,0,2,0,986,l10n_ch_states.state_FR,1749
-npa_1740 Neyruz FR,10,Neyruz FR,1996-09-05,990,2211,base.ch,0,2,0,986,l10n_ch_states.state_FR,1740
-npa_1741 Cottens FR,10,Cottens FR,1996-09-05,991,2186,base.ch,0,2,0,986,l10n_ch_states.state_FR,1741
+npa_1740 Neyruz,10,Neyruz,1996-09-05,990,2211,base.ch,0,2,0,986,l10n_ch_states.state_FR,1740
+npa_1741 Cottens,10,Cottens,1996-09-05,991,2186,base.ch,0,2,0,986,l10n_ch_states.state_FR,1741
 npa_1744 Chnens,10,Chénens,1996-09-05,992,2177,base.ch,0,2,0,986,l10n_ch_states.state_FR,1744
 npa_1745 Lentigny,10,Lentigny,2010-04-01,993,2234,base.ch,0,2,0,986,l10n_ch_states.state_FR,1745
 npa_1742 Autigny,20,Autigny,2001-01-03,994,2173,base.ch,0,2,0,986,l10n_ch_states.state_FR,1742
@@ -623,7 +623,7 @@ zip_998,30,Villars-sur-Glâne 1,1996-09-05,998,2228,base.ch,0,2,1,998,l10n_ch_st
 zip_999,30,Villars-sur-Glâne 2,1996-09-05,999,2228,base.ch,0,2,2,999,l10n_ch_states.state_FR,1752
 npa_1753 Matran,10,Matran,1996-09-05,1000,2208,base.ch,0,2,0,926,l10n_ch_states.state_FR,1753
 npa_1754 Ros,20,Rosé,2001-09-03,1003,2174,base.ch,0,2,0,986,l10n_ch_states.state_FR,1754
-npa_1756 Onnens FR,20,Onnens FR,2009-11-01,1004,2234,base.ch,0,2,0,986,l10n_ch_states.state_FR,1756
+npa_1756 Onnens,20,Onnens,2009-11-01,1004,2234,base.ch,0,2,0,986,l10n_ch_states.state_FR,1756
 npa_1757 Noraz,10,Noréaz,1996-09-05,1005,2213,base.ch,0,2,0,986,l10n_ch_states.state_FR,1757
 npa_1690 Villaz-St-Pierre,10,Villaz-St-Pierre,1997-02-25,1007,2111,base.ch,0,2,0,7663,l10n_ch_states.state_FR,1690
 npa_1762 Givisiez,10,Givisiez,1996-09-05,1009,2197,base.ch,1,2,0,926,l10n_ch_states.state_FR,1762
@@ -643,7 +643,7 @@ npa_1789 Lugnorre,10,Lugnorre,1996-09-05,1028,2281,base.ch,0,2,0,1039,l10n_ch_st
 npa_1782 Belfaux,10,Belfaux,1996-09-05,1031,2175,base.ch,1,2,0,939,l10n_ch_states.state_FR,1782
 npa_1783 Pensier,20,Pensier,2009-04-01,1034,2243,base.ch,0,2,0,1037,l10n_ch_states.state_FR,1783
 npa_1784 Courtepin,10,Courtepin,2011-03-01,1037,2254,base.ch,1,2,0,1037,l10n_ch_states.state_FR,1784
-npa_1785 Cressier FR,10,Cressier FR,1996-09-05,1038,2257,base.ch,0,2,0,1037,l10n_ch_states.state_FR,1785
+npa_1785 Cressier,10,Cressier,1996-09-05,1038,2257,base.ch,0,2,0,1037,l10n_ch_states.state_FR,1785
 npa_1786 Sugiez,10,Sugiez,2008-11-01,1039,2280,base.ch,1,2,0,1039,l10n_ch_states.state_FR,1786
 npa_1787 Mtier (Vully),20,Môtier (Vully),2001-11-01,1042,2281,base.ch,0,2,0,1039,l10n_ch_states.state_FR,1787
 npa_1800 Vevey,20,Vevey,1986-05-21,1043,5890,base.ch,1,2,0,1046,l10n_ch_states.state_VD,1800
@@ -688,7 +688,7 @@ npa_1844 Villeneuve VD,10,Villeneuve VD,1998-09-10,1090,5414,base.ch,1,2,0,7665,
 npa_1847 Rennaz,20,Rennaz,2004-01-01,1091,5412,base.ch,0,2,0,7665,l10n_ch_states.state_VD,1847
 npa_1845 Noville,10,Noville,1986-05-21,1092,5408,base.ch,0,2,0,1092,l10n_ch_states.state_VD,1845
 npa_1846 Chessel,20,Chessel,2001-12-01,1093,5403,base.ch,0,2,0,1092,l10n_ch_states.state_VD,1846
-npa_1852 Roche VD,10,Roche VD,1986-05-21,1094,5413,base.ch,0,2,0,7170,l10n_ch_states.state_VD,1852
+npa_1852 Roche,10,Roche,1986-05-21,1094,5413,base.ch,0,2,0,7170,l10n_ch_states.state_VD,1852
 npa_1853 Yvorne,20,Yvorne,2002-04-01,1095,5415,base.ch,1,2,0,7170,l10n_ch_states.state_VD,1853
 npa_1854 Leysin,10,Leysin,2002-05-01,1096,5407,base.ch,1,2,0,8357,l10n_ch_states.state_VD,1854
 npa_1867 St-Triphon,20,St-Triphon,1999-09-22,1099,5409,base.ch,1,2,2,1112,l10n_ch_states.state_VD,1867
@@ -696,13 +696,13 @@ npa_1860 Aigle,10,Aigle,1996-09-03,1100,5401,base.ch,1,2,0,7170,l10n_ch_states.s
 npa_1856 Corbeyrier,20,Corbeyrier,2009-04-01,1103,5404,base.ch,1,2,0,7170,l10n_ch_states.state_VD,1856
 npa_1862 La Comballaz,20,La Comballaz,1998-08-18,1104,5410,base.ch,0,2,2,8357,l10n_ch_states.state_VD,1862
 npa_1862 Les Mosses,10,Les Mosses,1996-09-03,1105,5410,base.ch,0,2,0,8357,l10n_ch_states.state_VD,1862
-npa_1866 La Forclaz VD,20,La Forclaz VD,2004-05-01,1106,5410,base.ch,0,2,0,8357,l10n_ch_states.state_VD,1866
+npa_1866 La Forclaz,20,La Forclaz,2004-05-01,1106,5410,base.ch,0,2,0,8357,l10n_ch_states.state_VD,1866
 npa_1884 Humoz,20,Huémoz,1999-10-21,1107,5409,base.ch,1,2,3,7666,l10n_ch_states.state_VD,1884
 npa_1867 Panex,20,Panex,2001-08-13,1108,5409,base.ch,0,2,3,1112,l10n_ch_states.state_VD,1867
 npa_1863 Le Spey,20,Le Sépey,2009-04-01,1109,5410,base.ch,0,2,0,8357,l10n_ch_states.state_VD,1863
 npa_1864 Vers-l'Eglise,20,Vers-l'Eglise,2001-11-01,1110,5411,base.ch,0,2,0,8357,l10n_ch_states.state_VD,1864
 npa_1865 Les Diablerets,10,Les Diablerets,1996-09-03,1111,5411,base.ch,0,2,0,8357,l10n_ch_states.state_VD,1865
-npa_1867 Ollon VD,10,Ollon VD,1996-09-03,1112,5409,base.ch,1,2,0,1112,l10n_ch_states.state_VD,1867
+npa_1867 Ollon,10,Ollon,1996-09-03,1112,5409,base.ch,1,2,0,1112,l10n_ch_states.state_VD,1867
 npa_1868 Collombey,10,Collombey,2003-01-01,1113,6152,base.ch,1,2,0,1113,l10n_ch_states.state_VS,1868
 npa_1870 Monthey,20,Monthey,1998-03-02,1114,6153,base.ch,1,2,0,7219,l10n_ch_states.state_VS,1870
 zip_1115,30,Monthey 1,1996-09-03,1115,6153,base.ch,0,2,1,1115,l10n_ch_states.state_VS,1870
@@ -753,7 +753,7 @@ zip_1167,30,Martigny 1,1996-09-02,1167,6136,base.ch,0,2,1,1167,l10n_ch_states.st
 zip_1168,30,Martigny 2,1996-09-02,1168,6136,base.ch,0,2,2,1168,l10n_ch_states.state_VS,1920
 npa_1921 Martigny-Croix,10,Martigny-Croix,2004-03-01,1169,6137,base.ch,0,2,0,5637,l10n_ch_states.state_VS,1921
 npa_1923 Le Trtien,20,Le Trétien,1998-08-18,1171,6218,base.ch,0,2,2,5637,l10n_ch_states.state_VS,1923
-npa_1925 Le Chtelard VS,20,Le Châtelard VS,1999-12-09,1172,6214,base.ch,0,2,1,5637,l10n_ch_states.state_VS,1925
+npa_1925 Le Chtelard,20,Le Châtelard,1999-12-09,1172,6214,base.ch,0,2,1,5637,l10n_ch_states.state_VS,1925
 npa_1927 Chemin,20,Chemin,2003-02-01,1173,6036,base.ch,0,2,0,5637,l10n_ch_states.state_VS,1927
 npa_1929 Trient,20,Trient,2005-11-01,1174,6142,base.ch,0,2,0,5637,l10n_ch_states.state_VS,1929
 npa_1928 Ravoire,20,Ravoire,2002-04-01,1175,6137,base.ch,1,2,0,5637,l10n_ch_states.state_VS,1928
@@ -772,9 +772,9 @@ npa_1948 Sarreyer,20,Sarreyer,2007-12-01,1188,6031,base.ch,1,2,2,8355,l10n_ch_st
 npa_1945 Liddes,20,Liddes,2005-11-01,1189,6033,base.ch,0,2,0,1198,l10n_ch_states.state_VS,1945
 npa_1946 Bourg-St-Pierre,20,Bourg-St-Pierre,2002-01-01,1190,6032,base.ch,0,2,0,1198,l10n_ch_states.state_VS,1946
 npa_1943 Praz-de-Fort,20,Praz-de-Fort,2003-12-01,1191,6034,base.ch,0,2,0,1198,l10n_ch_states.state_VS,1943
-npa_1944 La Fouly VS,20,La Fouly VS,2009-04-01,1192,6034,base.ch,0,2,0,1198,l10n_ch_states.state_VS,1944
+npa_1944 La Fouly,20,La Fouly,2009-04-01,1192,6034,base.ch,0,2,0,1198,l10n_ch_states.state_VS,1944
 npa_1933 Sembrancher,10,Sembrancher,1999-03-17,1193,6035,base.ch,0,2,0,1198,l10n_ch_states.state_VS,1933
-npa_1934 Le Chble VS,10,Le Châble VS,2007-12-01,1194,6031,base.ch,1,2,0,8355,l10n_ch_states.state_VS,1934
+npa_1934 Le Chble,10,Le Châble,2007-12-01,1194,6031,base.ch,1,2,0,8355,l10n_ch_states.state_VS,1934
 npa_1936 Verbier,10,Verbier,2002-10-01,1195,6031,base.ch,1,2,0,1195,l10n_ch_states.state_VS,1936
 npa_1937 Orsires,10,Orsières,1997-02-24,1198,6034,base.ch,1,2,0,1198,l10n_ch_states.state_VS,1937
 npa_1938 Champex-Lac,20,Champex-Lac,2009-04-01,1199,6034,base.ch,0,2,0,1198,l10n_ch_states.state_VS,1938
@@ -793,7 +793,7 @@ npa_1974 Arbaz,20,Arbaz,2011-02-01,1215,6261,base.ch,0,2,0,1247,l10n_ch_states.s
 npa_1961 Vernamige,20,Vernamiège,2000-03-01,1216,6090,base.ch,0,2,0,1203,l10n_ch_states.state_VS,1961
 npa_1973 Nax,10,Nax,1997-02-24,1217,6090,base.ch,0,2,0,1203,l10n_ch_states.state_VS,1973
 npa_1968 Mase,20,Mase,2003-10-01,1218,6090,base.ch,0,2,0,1250,l10n_ch_states.state_VS,1968
-npa_1969 St-Martin VS,10,St-Martin VS,1997-02-24,1219,6087,base.ch,0,2,0,1250,l10n_ch_states.state_VS,1969
+npa_1969 St-Martin,10,St-Martin,1997-02-24,1219,6087,base.ch,0,2,0,1250,l10n_ch_states.state_VS,1969
 npa_1981 Vex,10,Vex,1997-02-24,1220,6089,base.ch,0,2,0,1225,l10n_ch_states.state_VS,1981
 npa_1982 Euseigne,20,Euseigne,2012-11-01,1221,6084,base.ch,0,2,0,1250,l10n_ch_states.state_VS,1982
 npa_1984 Les Haudres,10,Les Haudères,1988-05-29,1222,6083,base.ch,0,2,0,1250,l10n_ch_states.state_VS,1984
@@ -835,7 +835,7 @@ zip_1278,80,Neuchâtel 2 Distribution,1999-03-01,1278,6458,base.ch,0,2,60,1278,l
 zip_1286,30,Neuchâtel 3,1997-07-28,1286,6458,base.ch,0,2,0,1286,l10n_ch_states.state_NE,2003
 zip_1287,30,Neuchâtel 6,1997-07-28,1287,6458,base.ch,0,2,0,1287,l10n_ch_states.state_NE,2006
 npa_2012 Auvernier,10,Auvernier,2008-07-01,1288,6416,base.ch,1,2,0,7651,l10n_ch_states.state_NE,2012
-npa_2013 Colombier NE,10,Colombier NE,1996-09-09,1289,6416,base.ch,1,2,0,7651,l10n_ch_states.state_NE,2013
+npa_2013 Colombier,10,Colombier,1996-09-09,1289,6416,base.ch,1,2,0,7651,l10n_ch_states.state_NE,2013
 npa_2014 Ble,10,Bôle,1996-09-09,1290,6416,base.ch,1,2,0,7651,l10n_ch_states.state_NE,2014
 npa_2015 Areuse,20,Areuse,2006-07-01,1291,6404,base.ch,1,2,0,1292,l10n_ch_states.state_NE,2015
 npa_2016 Cortaillod,10,Cortaillod,1996-09-09,1292,6408,base.ch,1,2,0,1292,l10n_ch_states.state_NE,2016
@@ -846,38 +846,38 @@ npa_2024 St-Aubin-Sauges,10,St-Aubin-Sauges,1999-08-09,1298,6414,base.ch,1,2,0,1
 npa_2025 Chez-le-Bart,20,Chez-le-Bart,2004-10-01,1299,6410,base.ch,0,2,0,1298,l10n_ch_states.state_NE,2025
 npa_2028 Vaumarcus,20,Vaumarcus,2002-04-01,1303,6415,base.ch,1,2,0,1298,l10n_ch_states.state_NE,2028
 npa_2034 Peseux,10,Peseux,1996-09-10,1304,6412,base.ch,1,2,0,8269,l10n_ch_states.state_NE,2034
-npa_2035 Corcelles NE,10,Corcelles NE,1996-09-10,1305,6407,base.ch,1,2,0,8269,l10n_ch_states.state_NE,2035
+npa_2035 Corcelles,10,Corcelles,1996-09-10,1305,6407,base.ch,1,2,0,8269,l10n_ch_states.state_NE,2035
 npa_2036 Cormondrche,20,Cormondrèche,2005-11-01,1307,6407,base.ch,1,2,0,8269,l10n_ch_states.state_NE,2036
 npa_2042 Valangin,20,Valangin,2010-03-01,1308,6485,base.ch,0,2,0,1311,l10n_ch_states.state_NE,2042
 npa_2043 Boudevilliers,20,Boudevilliers,2003-03-01,1309,6487,base.ch,0,2,0,1311,l10n_ch_states.state_NE,2043
-npa_2046 Fontaines NE,10,Fontaines NE,1996-09-10,1310,6487,base.ch,0,2,0,1311,l10n_ch_states.state_NE,2046
+npa_2046 Fontaines,10,Fontaines,1996-09-10,1310,6487,base.ch,0,2,0,1311,l10n_ch_states.state_NE,2046
 npa_2052 Fontainemelon,10,Fontainemelon,2002-08-01,1311,6487,base.ch,1,2,0,1311,l10n_ch_states.state_NE,2052
 npa_2053 Cernier,10,Cernier,1996-09-10,1312,6487,base.ch,1,2,0,1311,l10n_ch_states.state_NE,2053
 npa_2054 Chzard-St-Martin,10,Chézard-St-Martin,1996-09-10,1313,6487,base.ch,0,2,0,1311,l10n_ch_states.state_NE,2054
 npa_2054 Les Vieux-Prs,20,Les Vieux-Prés,2001-04-01,1314,6487,base.ch,0,2,2,1311,l10n_ch_states.state_NE,2054
 npa_2056 Dombresson,10,Dombresson,1996-09-10,1316,6487,base.ch,0,2,0,1311,l10n_ch_states.state_NE,2056
 npa_2057 Villiers,20,Villiers,2002-07-01,1317,6487,base.ch,0,2,0,1311,l10n_ch_states.state_NE,2057
-npa_2058 Le Pquier NE,20,Le Pâquier NE,2002-08-01,1318,6487,base.ch,0,2,0,1311,l10n_ch_states.state_NE,2058
-npa_2063 Vilars NE,20,Vilars NE,2012-07-01,1321,6487,base.ch,0,2,0,1311,l10n_ch_states.state_NE,2063
+npa_2058 Le Pquier,20,Le Pâquier,2002-08-01,1318,6487,base.ch,0,2,0,1311,l10n_ch_states.state_NE,2058
+npa_2063 Vilars,20,Vilars,2012-07-01,1321,6487,base.ch,0,2,0,1311,l10n_ch_states.state_NE,2063
 npa_2065 Savagnier,10,Savagnier,1996-09-10,1322,6487,base.ch,0,2,0,1311,l10n_ch_states.state_NE,2065
 npa_2067 Chaumont,20,Chaumont,2004-07-01,1323,6458,base.ch,0,2,0,1278,l10n_ch_states.state_NE,2067
-npa_2068 Hauterive NE,10,Hauterive NE,2001-07-01,1324,6454,base.ch,1,2,0,1278,l10n_ch_states.state_NE,2068
+npa_2068 Hauterive,10,Hauterive,2001-07-01,1324,6454,base.ch,1,2,0,1278,l10n_ch_states.state_NE,2068
 npa_2072 St-Blaise,10,St-Blaise,1996-09-10,1325,6459,base.ch,1,2,0,7653,l10n_ch_states.state_NE,2072
 npa_2073 Enges,20,Enges,2003-12-01,1326,6453,base.ch,0,2,0,7653,l10n_ch_states.state_NE,2073
 npa_2074 Marin-Epagnier,20,Marin-Epagnier,2010-07-01,1327,6461,base.ch,1,2,0,7653,l10n_ch_states.state_NE,2074
 npa_3238 Gals,10,Gals,2005-04-01,1329,494,base.ch,0,1,0,1888,l10n_ch_states.state_BE,3238
-npa_2087 Cornaux NE,10,Cornaux NE,2011-07-01,1330,6451,base.ch,1,2,0,7653,l10n_ch_states.state_NE,2087
-npa_2088 Cressier NE,10,Cressier NE,1996-09-10,1331,6452,base.ch,0,2,0,7653,l10n_ch_states.state_NE,2088
+npa_2087 Cornaux,10,Cornaux,2011-07-01,1330,6451,base.ch,1,2,0,7653,l10n_ch_states.state_NE,2087
+npa_2088 Cressier,10,Cressier,1996-09-10,1331,6452,base.ch,0,2,0,7653,l10n_ch_states.state_NE,2088
 npa_2318 Brot-Plamboz,20,Brot-Plamboz,2001-11-01,1333,6433,base.ch,0,2,0,7346,l10n_ch_states.state_NE,2318
 npa_2103 Noiraigue,10,Noiraigue,1996-09-10,1334,6512,base.ch,0,2,0,1336,l10n_ch_states.state_NE,2103
 npa_2105 Travers,10,Travers,1996-09-10,1335,6512,base.ch,0,2,0,1336,l10n_ch_states.state_NE,2105
 npa_2108 Couvet,10,Couvet,1996-09-10,1336,6512,base.ch,1,2,0,1336,l10n_ch_states.state_NE,2108
-npa_2112 Mtiers NE,10,Môtiers NE,1996-09-10,1338,6512,base.ch,0,2,0,1336,l10n_ch_states.state_NE,2112
+npa_2112 Mtiers,10,Môtiers,1996-09-10,1338,6512,base.ch,0,2,0,1336,l10n_ch_states.state_NE,2112
 npa_2113 Boveresse,20,Boveresse,2004-04-01,1339,6512,base.ch,0,2,0,1336,l10n_ch_states.state_NE,2113
 npa_2114 Fleurier,10,Fleurier,1996-09-10,1341,6512,base.ch,1,2,0,1336,l10n_ch_states.state_NE,2114
 npa_2115 Buttes,10,Buttes,1996-09-10,1342,6512,base.ch,0,2,0,1336,l10n_ch_states.state_NE,2115
 npa_2117 La Cte-aux-Fes,10,La Côte-aux-Fées,1996-09-10,1343,6504,base.ch,0,2,0,1336,l10n_ch_states.state_NE,2117
-npa_2123 St-Sulpice NE,10,St-Sulpice NE,2001-11-01,1344,6512,base.ch,1,2,0,1336,l10n_ch_states.state_NE,2123
+npa_2123 St-Sulpice,10,St-Sulpice,2001-11-01,1344,6512,base.ch,1,2,0,1336,l10n_ch_states.state_NE,2123
 npa_2406 La Brvine,10,La Brévine,1996-09-19,1345,6432,base.ch,0,2,0,1345,l10n_ch_states.state_NE,2406
 npa_2126 Les Verrires,10,Les Verrières,1996-09-10,1346,6511,base.ch,0,2,0,1336,l10n_ch_states.state_NE,2126
 npa_2406 Le Brouillet,20,Le Brouillet,2002-11-01,1347,6432,base.ch,0,2,4,1345,l10n_ch_states.state_NE,2406
@@ -903,7 +903,7 @@ zip_1376,30,La Chaux-de-Fonds,1996-09-12,1376,6421,base.ch,0,2,1,1376,l10n_ch_st
 zip_1377,30,La Chaux-de-Fonds,1999-10-28,1377,6421,base.ch,0,2,0,1377,l10n_ch_states.state_NE,2304
 npa_2316 Petit-Martel,20,Petit-Martel,2001-11-01,1380,6437,base.ch,0,2,2,7346,l10n_ch_states.state_NE,2316
 npa_2338 Les Emibois,20,Les Emibois,2002-09-01,1383,6753,base.ch,1,2,0,9046,l10n_ch_states.state_JU,2338
-npa_2314 La Sagne NE,10,La Sagne NE,2011-12-01,1384,6423,base.ch,1,2,0,7346,l10n_ch_states.state_NE,2314
+npa_2314 La Sagne,10,La Sagne,2011-12-01,1384,6423,base.ch,1,2,0,7346,l10n_ch_states.state_NE,2314
 npa_2316 Ponts-de-Martel,10,Les Ponts-de-Martel,2011-12-01,1385,6437,base.ch,1,2,0,7346,l10n_ch_states.state_NE,2316
 npa_2322 Le Crt-du-Locle,20,Le Crêt-du-Locle,2005-04-01,1387,6421,base.ch,1,2,0,1372,l10n_ch_states.state_NE,2322
 npa_2325 Les Planchettes,20,Les Planchettes,2009-04-01,1388,6422,base.ch,0,2,0,1372,l10n_ch_states.state_NE,2325
@@ -947,20 +947,20 @@ npa_2534 Les Prs-d'Orvin,20,Les Prés-d'Orvin,1990-02-21,1445,438,base.ch,0,2,2,
 npa_2535 Frinvillier,20,Frinvillier,2004-04-01,1446,449,base.ch,0,2,0,1416,l10n_ch_states.state_BE,2535
 npa_2536 Plagne,10,Plagne,1986-05-21,1447,449,base.ch,0,2,0,1416,l10n_ch_states.state_BE,2536
 npa_2537 Vauffelin,20,Vauffelin,2004-04-01,1448,449,base.ch,0,2,0,1416,l10n_ch_states.state_BE,2537
-npa_2538 Romont BE,20,Romont BE,2004-04-01,1449,442,base.ch,0,2,0,1416,l10n_ch_states.state_BE,2538
+npa_2538 Romont,20,Romont,2004-04-01,1449,442,base.ch,0,2,0,1416,l10n_ch_states.state_BE,2538
 npa_2540 Grenchen,20,Grenchen,1996-09-12,1450,2546,base.ch,1,1,0,7175,l10n_ch_states.state_SO,2540
 zip_1451,30,Grenchen 1,1996-09-12,1451,2546,base.ch,0,1,1,1451,l10n_ch_states.state_SO,2540
 zip_1452,80,Grenchen 2,2014-06-30,1452,2546,base.ch,0,1,2,7175,l10n_ch_states.state_SO,2540
 npa_2542 Pieterlen,10,Pieterlen,1986-05-21,1455,392,base.ch,1,1,0,1455,l10n_ch_states.state_BE,2542
-npa_2543 Lengnau BE,10,Lengnau BE,1996-09-12,1456,387,base.ch,1,1,0,7175,l10n_ch_states.state_BE,2543
+npa_2543 Lengnau,10,Lengnau,1996-09-12,1456,387,base.ch,1,1,0,7175,l10n_ch_states.state_BE,2543
 npa_2544 Bettlach,10,Bettlach,1996-09-12,1457,2543,base.ch,1,1,0,7175,l10n_ch_states.state_SO,2544
 npa_2545 Selzach,10,Selzach,1996-09-12,1459,2556,base.ch,1,1,0,7175,l10n_ch_states.state_SO,2545
 npa_2552 Orpund,10,Orpund,1986-05-21,1461,744,base.ch,1,1,0,1416,l10n_ch_states.state_BE,2552
 npa_2553 Safnern,10,Safnern,1999-08-23,1462,746,base.ch,1,1,0,1455,l10n_ch_states.state_BE,2553
 npa_2554 Meinisberg,10,Meinisberg,1986-05-21,1463,390,base.ch,0,1,0,1455,l10n_ch_states.state_BE,2554
-npa_2555 Brgg BE,10,Brügg BE,1997-05-20,1464,733,base.ch,1,1,0,1416,l10n_ch_states.state_BE,2555
+npa_2555 Brgg,10,Brügg,1997-05-20,1464,733,base.ch,1,1,0,1416,l10n_ch_states.state_BE,2555
 npa_2556 Scheuren,20,Scheuren,2004-03-01,1466,747,base.ch,1,1,0,1416,l10n_ch_states.state_BE,2556
-npa_2557 Studen BE,10,Studen BE,1990-06-11,1467,749,base.ch,1,1,0,1416,l10n_ch_states.state_BE,2557
+npa_2557 Studen,10,Studen,1990-06-11,1467,749,base.ch,1,1,0,1416,l10n_ch_states.state_BE,2557
 npa_2558 Aegerten,10,Aegerten,1999-06-23,1468,731,base.ch,1,1,0,1416,l10n_ch_states.state_BE,2558
 npa_2560 Nidau,10,Nidau,1986-05-21,1469,743,base.ch,1,1,0,1416,l10n_ch_states.state_BE,2560
 npa_2562 Port,10,Port,1986-05-21,1470,745,base.ch,1,1,0,1416,l10n_ch_states.state_BE,2562
@@ -970,7 +970,7 @@ npa_2565 Jens,20,Jens,2002-01-01,1473,738,base.ch,0,1,0,1416,l10n_ch_states.stat
 npa_2572 Sutz,20,Sutz,2013-09-01,1475,750,base.ch,1,1,0,1416,l10n_ch_states.state_BE,2572
 npa_2575 Tuffelen,10,Täuffelen,1996-09-09,1477,751,base.ch,1,1,0,1477,l10n_ch_states.state_BE,2575
 npa_2576 Lscherz,20,Lüscherz,2012-03-01,1478,497,base.ch,0,1,0,1477,l10n_ch_states.state_BE,2576
-npa_2577 Siselen BE,20,Siselen BE,2011-03-01,1480,499,base.ch,0,1,0,1477,l10n_ch_states.state_BE,2577
+npa_2577 Siselen,20,Siselen,2011-03-01,1480,499,base.ch,0,1,0,1477,l10n_ch_states.state_BE,2577
 npa_3237 Brttelen,20,Brüttelen,2002-09-01,1481,491,base.ch,1,1,0,1888,l10n_ch_states.state_BE,3237
 npa_2603 Pry,10,Péry,2003-04-01,1482,439,base.ch,1,2,0,1485,l10n_ch_states.state_BE,2603
 npa_2604 La Heutte,20,La Heutte,2003-04-01,1483,436,base.ch,1,2,0,1485,l10n_ch_states.state_BE,2604
@@ -986,7 +986,7 @@ npa_2612 Cormoret,20,Cormoret,2003-05-01,1493,432,base.ch,1,2,0,1485,l10n_ch_sta
 npa_2613 Villeret,10,Villeret,1996-09-12,1494,448,base.ch,0,2,0,7658,l10n_ch_states.state_BE,2613
 npa_2615 Sonvilier,10,Sonvilier,1996-09-12,1495,445,base.ch,0,2,0,7658,l10n_ch_states.state_BE,2615
 npa_2615 Montagne-Sonvilier,20,Montagne-de-Sonvilier,1998-08-20,1496,445,base.ch,0,2,2,7658,l10n_ch_states.state_BE,2615
-npa_2616 Renan BE,10,Renan BE,1996-09-12,1497,441,base.ch,0,2,0,7658,l10n_ch_states.state_BE,2616
+npa_2616 Renan,10,Renan,1996-09-12,1497,441,base.ch,0,2,0,7658,l10n_ch_states.state_BE,2616
 npa_2710 Tavannes,10,Tavannes,1986-05-21,1498,713,base.ch,1,2,0,7655,l10n_ch_states.state_BE,2710
 npa_2712 Le Fuet,20,Le Fuet,2003-10-01,1502,706,base.ch,0,2,0,7656,l10n_ch_states.state_BE,2712
 npa_2714 Le Prdame,20,Le Prédame,2002-05-01,1503,6748,base.ch,0,2,2,7656,l10n_ch_states.state_JU,2714
@@ -1161,7 +1161,7 @@ npa_3072 Ostermundigen,20,Ostermundigen,1987-10-01,1770,363,base.ch,1,1,0,8131,l
 zip_1771,30,Ostermundigen 1,1993-09-09,1771,363,base.ch,0,1,1,1771,l10n_ch_states.state_BE,3072
 npa_3073 Gmligen,10,Gümligen,1989-03-29,1774,356,base.ch,1,1,0,7272,l10n_ch_states.state_BE,3073
 npa_3074 Muri b Bern,10,Muri b. Bern,1986-05-21,1775,356,base.ch,1,1,0,7272,l10n_ch_states.state_BE,3074
-npa_3075 Rfenacht BE,10,Rüfenacht BE,1986-05-21,1776,627,base.ch,1,1,0,7272,l10n_ch_states.state_BE,3075
+npa_3075 Rfenacht,10,Rüfenacht,1986-05-21,1776,627,base.ch,1,1,0,7272,l10n_ch_states.state_BE,3075
 npa_3076 Worb,10,Worb,2004-01-01,1777,627,base.ch,1,1,0,7333,l10n_ch_states.state_BE,3076
 npa_3077 Enggistein,20,Enggistein,2001-09-28,1781,627,base.ch,1,1,0,7333,l10n_ch_states.state_BE,3077
 npa_3078 Richigen,20,Richigen,2005-03-01,1782,627,base.ch,1,1,0,7333,l10n_ch_states.state_BE,3078
@@ -1182,7 +1182,7 @@ npa_3110 Mnsingen,10,Münsingen,1996-08-05,1799,616,base.ch,1,1,0,7322,l10n_ch_s
 npa_3112 Allmendingen b BE,20,Allmendingen b. Bern,2008-10-01,1800,630,base.ch,1,1,0,7272,l10n_ch_states.state_BE,3112
 npa_3114 Wichtrach,10,Wichtrach,2004-01-01,1803,632,base.ch,1,1,0,1803,l10n_ch_states.state_BE,3114
 npa_3115 Gerzensee,10,Gerzensee,2008-06-01,1804,866,base.ch,1,1,0,1803,l10n_ch_states.state_BE,3115
-npa_3116 Kirchdorf BE,10,Kirchdorf BE,1989-06-01,1807,872,base.ch,1,1,0,1803,l10n_ch_states.state_BE,3116
+npa_3116 Kirchdorf,10,Kirchdorf,1989-06-01,1807,872,base.ch,1,1,0,1803,l10n_ch_states.state_BE,3116
 npa_3629 Kiesen,10,Kiesen,1996-02-09,1810,611,base.ch,1,1,0,2071,l10n_ch_states.state_BE,3629
 npa_3628 Uttigen,10,Uttigen,1996-08-05,1812,885,base.ch,1,1,0,8014,l10n_ch_states.state_BE,3628
 npa_3122 Kehrsatz,10,Kehrsatz,1986-05-21,1813,870,base.ch,1,1,0,7260,l10n_ch_states.state_BE,3122
@@ -1512,7 +1512,7 @@ npa_3854 Oberried Brienz,10,Oberried am Brienzersee,2003-08-01,2255,589,base.ch,
 npa_3855 Brienz BE,10,Brienz BE,1996-09-04,2257,573,base.ch,1,1,0,7676,l10n_ch_states.state_BE,3855
 npa_3855 Axalp,10,Axalp,2001-11-01,2258,573,base.ch,1,1,1,7676,l10n_ch_states.state_BE,3855
 npa_3856 Brienzwiler,10,Brienzwiler,2008-06-01,2262,574,base.ch,1,1,0,7676,l10n_ch_states.state_BE,3856
-npa_3857 Unterbach BE,20,Unterbach BE,2003-07-01,2263,785,base.ch,1,1,0,7677,l10n_ch_states.state_BE,3857
+npa_3857 Unterbach,20,Unterbach,2003-07-01,2263,785,base.ch,1,1,0,7677,l10n_ch_states.state_BE,3857
 npa_3858 Hofstetten BE,10,Hofstetten b. Brienz,2002-07-01,2264,580,base.ch,1,1,0,7676,l10n_ch_states.state_BE,3858
 npa_3860 Meiringen,10,Meiringen,1996-09-04,2265,785,base.ch,1,1,0,7677,l10n_ch_states.state_BE,3860
 npa_3860 Rosenlaui,20,Rosenlaui,2008-10-01,2266,786,base.ch,0,1,2,7677,l10n_ch_states.state_BE,3860
@@ -3763,14 +3763,14 @@ npa_9043 Trogen,10,Trogen,1986-05-21,5231,3025,base.ch,1,1,0,5230,l10n_ch_states
 npa_9044 Wald AR,10,Wald AR,1992-11-16,5233,3036,base.ch,1,1,0,5338,l10n_ch_states.state_AR,9044
 npa_9050 Appenzell,10,Appenzell,1996-08-05,5234,3101,base.ch,1,1,0,7309,l10n_ch_states.state_AI,9050
 npa_9052 Niederteufen,20,Niederteufen,2010-04-01,5235,3024,base.ch,1,1,0,7710,l10n_ch_states.state_AR,9052
-npa_9053 Teufen AR,10,Teufen AR,1986-05-21,5236,3024,base.ch,1,1,0,7710,l10n_ch_states.state_AR,9053
-npa_9054 Haslen AI,20,Haslen AI,2008-03-01,5237,3104,base.ch,1,1,0,7309,l10n_ch_states.state_AI,9054
+npa_9053 Teufen,10,Teufen,1986-05-21,5236,3024,base.ch,1,1,0,7710,l10n_ch_states.state_AR,9053
+npa_9054 Haslen,20,Haslen,2008-03-01,5237,3104,base.ch,1,1,0,7309,l10n_ch_states.state_AI,9054
 npa_9055 Bhler,10,Bühler,1986-05-21,5238,3021,base.ch,1,1,0,7710,l10n_ch_states.state_AR,9055
 npa_9056 Gais,10,Gais,1987-08-01,5239,3022,base.ch,1,1,0,5239,l10n_ch_states.state_AR,9056
 npa_9057 Weissbad,10,Weissbad,2009-05-01,5241,3105,base.ch,1,1,0,7309,l10n_ch_states.state_AI,9057
 npa_9058 Brlisau,20,Brülisau,2009-05-01,5243,3103,base.ch,1,1,0,7309,l10n_ch_states.state_AI,9058
 npa_9062 Lustmhle,20,Lustmühle,2002-07-01,5244,3024,base.ch,1,1,0,7710,l10n_ch_states.state_AR,9062
-npa_9063 Stein AR,10,Stein AR,2010-11-01,5245,3005,base.ch,1,1,0,7710,l10n_ch_states.state_AR,9063
+npa_9063 Stein,10,Stein,2010-11-01,5245,3005,base.ch,1,1,0,7710,l10n_ch_states.state_AR,9063
 npa_9064 Hundwil,10,Hundwil,2008-05-01,5246,3002,base.ch,1,1,0,7310,l10n_ch_states.state_AR,9064
 npa_9100 Herisau,20,Herisau,1987-10-01,5247,3001,base.ch,1,1,0,7310,l10n_ch_states.state_AR,9100
 zip_5248,80,Herisau 1,2006-04-01,5248,3001,base.ch,0,1,1,7310,l10n_ch_states.state_AR,9100
@@ -3791,11 +3791,11 @@ npa_9125 Brunnadern,10,Brunnadern,1991-03-19,5269,3378,base.ch,1,1,0,5269,l10n_c
 npa_9126 Necker,20,Necker,2005-12-01,5270,3375,base.ch,1,1,0,5269,l10n_ch_states.state_SG,9126
 npa_9127 St Peterzell,10,St. Peterzell,2005-06-01,5271,3378,base.ch,1,1,0,5269,l10n_ch_states.state_SG,9127
 npa_9633 Bchli (Hemberg),20,Bächli (Hemberg),2009-05-01,5272,3372,base.ch,1,1,2,5269,l10n_ch_states.state_SG,9633
-npa_9200 Gossau SG,20,Gossau SG,1997-02-24,5273,3443,base.ch,1,1,0,7341,l10n_ch_states.state_SG,9200
+npa_9200 Gossau,20,Gossau,1997-02-24,5273,3443,base.ch,1,1,0,7341,l10n_ch_states.state_SG,9200
 zip_5274,80,Gossau SG 1,2008-01-01,5274,3443,base.ch,0,1,1,7341,l10n_ch_states.state_SG,9200
 zip_5275,30,Gossau SG 2,1997-02-24,5275,3443,base.ch,0,1,2,5275,l10n_ch_states.state_SG,9200
-npa_9203 Niederwil SG,10,Niederwil SG,1989-09-26,5276,3424,base.ch,1,1,0,7341,l10n_ch_states.state_SG,9203
-npa_9204 Andwil SG,10,Andwil SG,1986-05-21,5277,3441,base.ch,1,1,0,7341,l10n_ch_states.state_SG,9204
+npa_9203 Niederwil,10,Niederwil,1989-09-26,5276,3424,base.ch,1,1,0,7341,l10n_ch_states.state_SG,9203
+npa_9204 Andwil,10,Andwil,1986-05-21,5277,3441,base.ch,1,1,0,7341,l10n_ch_states.state_SG,9204
 npa_9205 Waldkirch,10,Waldkirch,1986-05-21,5278,3444,base.ch,1,1,0,5278,l10n_ch_states.state_SG,9205
 npa_9212 Arnegg,10,Arnegg,1986-05-21,5279,3443,base.ch,1,1,0,7341,l10n_ch_states.state_SG,9212
 npa_9213 Hauptwil,10,Hauptwil,2009-05-01,5280,4486,base.ch,1,1,0,7227,l10n_ch_states.state_TG,9213
@@ -4053,7 +4053,7 @@ npa_1670 Esmonts,20,Esmonts,1989-06-01,5787,2102,base.ch,0,2,3,7663,l10n_ch_stat
 npa_1673 Gillarens,20,Gillarens,1989-06-01,5788,2097,base.ch,0,2,2,7663,l10n_ch_states.state_FR,1673
 npa_1681 Hennens,20,Hennens,2001-09-06,5789,2063,base.ch,0,2,2,7663,l10n_ch_states.state_FR,1681
 npa_1688 Lieffrens,20,Lieffrens,1996-09-04,5790,2113,base.ch,0,2,2,7663,l10n_ch_states.state_FR,1688
-npa_1690 Lussy FR,20,Lussy FR,1996-09-04,5791,2116,base.ch,0,2,2,7663,l10n_ch_states.state_FR,1690
+npa_1690 Lussy,20,Lussy,1996-09-04,5791,2116,base.ch,0,2,2,7663,l10n_ch_states.state_FR,1690
 npa_1687 La Magne,20,La Magne,1996-09-04,5792,2113,base.ch,0,2,2,7663,l10n_ch_states.state_FR,1687
 npa_1674 Montet (Glne),20,Montet (Glâne),1989-06-01,5793,2089,base.ch,0,2,2,7663,l10n_ch_states.state_FR,1674
 npa_1674 Morlens,20,Morlens,1991-01-01,5794,2102,base.ch,0,2,3,7663,l10n_ch_states.state_FR,1674
@@ -4194,8 +4194,8 @@ npa_3366 Bollodingen,20,Bollodingen,1996-09-12,5939,973,base.ch,0,1,2,7276,l10n_
 npa_3367 Ochlenberg,20,Ochlenberg,1996-09-12,5940,985,base.ch,0,1,2,7276,l10n_ch_states.state_BE,3367
 npa_4704 Wolfisberg,20,Wolfisberg,1996-09-13,5941,996,base.ch,1,1,2,7181,l10n_ch_states.state_BE,4704
 npa_6289 Hmikon,20,Hämikon,2004-06-01,5942,1030,base.ch,1,1,2,3396,l10n_ch_states.state_LU,6289
-npa_6277 Lieli,20,Lieli LU,1989-06-01,5943,1032,base.ch,0,1,2,7690,l10n_ch_states.state_LU,6277
-npa_6284 Sulz LU,20,Sulz LU,2010-04-01,5944,1030,base.ch,1,1,2,3396,l10n_ch_states.state_LU,6284
+npa_6277 Lieli,20,Lieli,1989-06-01,5943,1032,base.ch,0,1,2,7690,l10n_ch_states.state_LU,6277
+npa_6284 Sulz,20,Sulz,2010-04-01,5944,1030,base.ch,1,1,2,3396,l10n_ch_states.state_LU,6284
 npa_6038 Honau,20,Honau,1996-08-05,5945,1057,base.ch,1,1,2,8203,l10n_ch_states.state_LU,6038
 npa_8777 Betschwanden,20,Betschwanden,1996-03-04,5946,1631,base.ch,0,1,2,8110,l10n_ch_states.state_GL,8777
 npa_8774 Leuggelbach,20,Leuggelbach,2003-02-01,5947,1631,base.ch,1,1,0,8110,l10n_ch_states.state_GL,8774
@@ -4252,7 +4252,7 @@ npa_8585 Herrenhof,20,Herrenhof,2002-12-01,6004,4681,base.ch,1,1,8,7223,l10n_ch_
 npa_8564 Sonterswil,20,Sonterswil,1998-08-17,6005,4701,base.ch,0,1,3,7442,l10n_ch_states.state_TG,8564
 npa_9562 Buch b Mrwil,20,Buch b. Märwil,2008-06-01,6006,4711,base.ch,1,1,2,5446,l10n_ch_states.state_TG,9562
 npa_9556 Zezikon,20,Zezikon,2008-06-01,6007,4711,base.ch,1,1,2,5446,l10n_ch_states.state_TG,9556
-npa_8512 Wetzikon TG,20,Wetzikon TG,1996-03-06,6010,4611,base.ch,0,1,3,4808,l10n_ch_states.state_TG,8512
+npa_8512 Wetzikon,20,Wetzikon,1996-03-06,6010,4611,base.ch,0,1,3,4808,l10n_ch_states.state_TG,8512
 npa_8360 Wallenwil,20,Wallenwil,1997-04-11,6012,4724,base.ch,1,1,2,4676,l10n_ch_states.state_TG,8360
 npa_8537 Uerschhausen,20,Uerschhausen,2005-08-01,6013,4821,base.ch,1,1,2,4808,l10n_ch_states.state_TG,8537
 npa_8505 Dettighofen,20,Dettighofen,1999-11-16,6014,4841,base.ch,1,1,2,4808,l10n_ch_states.state_TG,8505
@@ -4368,7 +4368,7 @@ npa_8106 Adlikon bRegensdf,20,Adlikon b. Regensdorf,1993-02-05,6239,96,base.ch,1
 zip_6240,80,Rorschach Zustellung,1999-04-08,6240,3215,base.ch,0,1,60,6240,l10n_ch_states.state_SG,9400
 npa_6343 Buonas,20,Buonas,1996-03-04,6241,1707,base.ch,1,1,2,7213,l10n_ch_states.state_ZG,6343
 npa_6343 Risch,20,Risch,1996-03-04,6242,1707,base.ch,1,1,3,7213,l10n_ch_states.state_ZG,6343
-npa_6343 Holzhusern ZG,20,Holzhäusern ZG,1996-03-04,6243,1707,base.ch,1,1,4,7213,l10n_ch_states.state_ZG,6343
+npa_6343 Holzhusern,20,Holzhäusern,1996-03-04,6243,1707,base.ch,1,1,4,7213,l10n_ch_states.state_ZG,6343
 npa_3945 Niedergampel,20,Niedergampel,2008-05-01,6244,6118,base.ch,1,1,1,8441,l10n_ch_states.state_VS,3945
 npa_1965 Drne VS,20,Drône (Savièse),1999-05-15,6245,6265,base.ch,1,2,8,8040,l10n_ch_states.state_VS,1965
 zip_6256,80,Morges Distribution,2003-10-01,6256,5638,base.ch,0,2,60,6256,l10n_ch_states.state_VD,1110
@@ -5205,12 +5205,12 @@ zip_9112,80,Lausanne CT,2011-10-01,9112,5586,base.ch,0,2,61,130,l10n_ch_states.s
 npa_3434 Landiswil,20,Landiswil,2010-08-01,9113,613,base.ch,0,1,1,7675,l10n_ch_states.state_BE,3434
 zip_9155,80,Urdorf Exchange,2010-10-01,9155,250,base.ch,0,1,0,7267,l10n_ch_states.state_ZH,8970
 npa_1984 La Tour VS,20,La Tour VS,2010-10-01,9156,6083,base.ch,0,2,1,1250,l10n_ch_states.state_VS,1984
-npa_1985 La Forclaz VS,20,La Forclaz VS,2011-04-01,9157,6083,base.ch,0,2,1,1250,l10n_ch_states.state_VS,1985
+npa_1985 La Forclaz,20,La Forclaz,2011-04-01,9157,6083,base.ch,0,2,1,1250,l10n_ch_states.state_VS,1985
 npa_1985 Villaz VS,20,Villa (Evolène),2011-04-01,9158,6083,base.ch,0,2,2,1250,l10n_ch_states.state_VS,1985
 zip_9159,80,Yverdon Conseil et vente,2010-11-01,9159,5914,base.ch,0,2,48,6257,l10n_ch_states.state_VD,1401
 zip_9161,80,Martigny PostFinance,2011-01-01,9161,6136,base.ch,0,2,48,5637,l10n_ch_states.state_VS,1920
 zip_9162,40,Ostermundigen KATA,2011-01-01,9162,363,base.ch,1,1,1,8131,l10n_ch_states.state_BE,3071
-npa_5412 Vogelsang AG,20,Vogelsang AG,2011-01-01,9164,4029,base.ch,1,1,1,3026,l10n_ch_states.state_AG,5412
+npa_5412 Vogelsang AG,20,Vogelsang,2011-01-01,9164,4029,base.ch,1,1,1,3026,l10n_ch_states.state_AG,5412
 zip_9203,80,Jona Buech Gewerbe,2011-02-01,9203,3340,base.ch,0,1,1,4981,l10n_ch_states.state_SG,8645
 zip_9204,80,Baden Täfern Gewerbe,2011-02-01,9204,4021,base.ch,0,1,1,6552,l10n_ch_states.state_AG,5405
 zip_9205,80,Härkingen BZ FP,2011-02-01,9205,2402,base.ch,0,1,68,8467,l10n_ch_states.state_SO,4621
@@ -5294,7 +5294,7 @@ zip_9395,80,Klingnau Wiesenweg,2014-07-01,9395,4309,base.ch,0,1,2,8196,l10n_ch_s
 zip_9400,80,Dietikon Silbern,2014-08-01,9400,243,base.ch,0,1,4,7267,l10n_ch_states.state_ZH,8953
 zip_9418,20,Campora,2014-10-01,9418,5249,base.ch,0,3,3,7318,l10n_ch_states.state_TI,6875
 npa_5224 Unterbzberg,,Unterbözberg,,,,base.ch,,,,,l10n_ch_states.state_AG,5224
-npa_6162 Finsterwald LU,,Finsterwald LU,,,,base.ch,,,,,l10n_ch_states.state_LU,6162
+npa_6162 Finsterwald LU,,Finsterwald,,,,base.ch,,,,,l10n_ch_states.state_LU,6162
 npa_1582 Donatyre,,Donatyre,,,,base.ch,,,,,l10n_ch_states.state_VD,1582
 npa_8762 Schwndi GL,,Schwändi GL,,,,base.ch,,,,,l10n_ch_states.state_GL,8762
 npa_5224 Linn,,Linn,,,,base.ch,,,,,l10n_ch_states.state_AG,5224
