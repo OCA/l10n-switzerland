@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-18 13:43+0000\n"
+"POT-Creation-Date: 2017-05-03 00:41+0000\n"
 "PO-Revision-Date: 2017-04-09 06:56+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-l10n-switzerland-9-0/language/it/)\n"
@@ -250,7 +250,7 @@ msgid "Payment Slips Merge Mode"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:545
+#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:547
 #, python-format
 msgid "Payment slip related to invoice %s due on the %s"
 msgstr "Polizza di versamento fattura n. %s scandenza il %s"
