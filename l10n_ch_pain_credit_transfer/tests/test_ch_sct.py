@@ -140,8 +140,13 @@ class TestSCT_CH(AccountingTestCase):
 
         action = self.payment_order.open2generated()
         self.assertEquals(self.payment_order.state, 'generated')
-        self.assertEquals(action['res_model'], 'ir.attachment')
-        attachment = self.attachment_model.browse(action['res_id'])
+        self.assertIn(action['res_model'], [
+            'ir.attachment', 'payment.order.upload.sepa.wizard'])
+        if action['res_model'] == 'ir.attachment':
+            attachment = self.attachment_model.browse(action['res_id'])
+        else:
+            attachment = self.env[action['res_model']].browse(
+                action['res_id']).attachment_id
         self.assertEquals(attachment.datas_fname[-4:], '.xml')
         xml_file = attachment.datas.decode('base64')
         xml_root = etree.fromstring(xml_file)
@@ -223,8 +228,13 @@ class TestSCT_CH(AccountingTestCase):
 
         action = self.payment_order.open2generated()
         self.assertEquals(self.payment_order.state, 'generated')
-        self.assertEquals(action['res_model'], 'ir.attachment')
-        attachment = self.attachment_model.browse(action['res_id'])
+        self.assertIn(action['res_model'], [
+            'ir.attachment', 'payment.order.upload.sepa.wizard'])
+        if action['res_model'] == 'ir.attachment':
+            attachment = self.attachment_model.browse(action['res_id'])
+        else:
+            attachment = self.env[action['res_model']].browse(
+                action['res_id']).attachment_id
         self.assertEquals(attachment.datas_fname[-4:], '.xml')
         xml_file = attachment.datas.decode('base64')
         xml_root = etree.fromstring(xml_file)
