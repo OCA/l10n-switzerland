@@ -10,8 +10,7 @@
     'website': 'http://www.camptocamp.com',
     'license': 'AGPL-3',
     'summary': 'Banks names, addresses and BIC codes',
-    'depends': ['l10n_ch',
-                'l10n_ch_base_bank',
+    'depends': ['l10n_ch_base_bank',
                 ],
     # We use csv file as xml is too slow
     # unfortunately it doesn't work with noupdate thus we use a post_init hook
