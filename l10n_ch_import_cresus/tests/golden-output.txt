@@ -1,0 +1,83 @@
+move ‘4’
+  (dated 2002-01-14)
+  (in journal MISC)
+  with lines:
+    line “Salt Total, (TVA)”
+      credit = 186.55
+      account is ‘1010’
+      taxes = (‘dummy VAT’)
+    line “Salt, 7.6% de TVA (TVA)”
+      debit = 13.17
+      account is ‘2200’
+      originator tax is ‘dummy VAT’
+    line “Salt, (TVA) net, TVA = 13.17”
+      debit = 173.38
+      account is ‘6512’
+
+move ‘3’
+  (dated 2002-01-12)
+  (in journal MISC)
+  with lines:
+    line “Frais de déplacement - Tolochenaz”
+      debit = 15.0
+      account is ‘6642’
+    line “Frais de déplacement - Tolochenaz”
+      credit = 15.0
+      account is ‘1010’
+
+move ‘2’
+  (dated 2002-01-07)
+  (in journal MISC)
+  with lines:
+    line “Frais de prospection - Tartempion”
+      credit = 218.5
+      account is ‘1010’
+    line “Frais de prospection - Tartempion”
+      debit = 218.5
+      account is ‘6513’
+
+move ‘1’
+  (dated 2002-01-07)
+  (in journal MISC)
+  with lines:
+    line “Frais de déplacement - Frauenfeld”
+      credit = 45.0
+      account is ‘1010’
+    line “Frais de déplacement - Frauenfeld”
+      debit = 45.0
+      account is ‘6642’
+
+move ‘’
+  (dated 2002-01-01)
+  (in journal MISC)
+  with lines:
+    line “Solde à nouveau Réserve générale”
+      credit = 323.2
+      account is ‘2915’
+    line “Solde à nouveau Réserve générale”
+      debit = 323.2
+      account is ‘9100’
+    line “Solde à nouveau Capital”
+      credit = 20000.0
+      account is ‘2800’
+    line “Solde à nouveau Capital”
+      debit = 20000.0
+      account is ‘9100’
+    line “Solde à nouveau Matériel”
+      credit = 100000.0
+      account is ‘9100’
+    line “Solde à nouveau Matériel”
+      debit = 100000.0
+      account is ‘1210’
+    line “Solde à nouveau CCP”
+      credit = 8000.0
+      account is ‘9100’
+    line “Solde à nouveau CCP”
+      debit = 8000.0
+      account is ‘1010’
+    line “Solde à nouveau Caisse”
+      credit = 1000.0
+      account is ‘9100’
+    line “Solde à nouveau Caisse”
+      debit = 1000.0
+      account is ‘1000’
