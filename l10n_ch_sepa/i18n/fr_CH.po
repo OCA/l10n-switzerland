@@ -1,0 +1,186 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# * l10n_ch_sepa
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: l10n-switzerland (7.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-01 19:47+0000\n"
+"PO-Revision-Date: 2015-09-04 14:43+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: French (Switzerland) (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/fr_CH/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr_CH\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:93
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:113
+#, python-format
+msgid "ErrorCompanyBankAccNumber"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:88
+#, python-format
+msgid "The selected company bank account has no BIC number"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:85
+#, python-format
+msgid "No company bank is defined in payment"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:152
+#, python-format
+msgid "An error has occured during XML generation"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/msg_sepa.py:55
+#, python-format
+msgid "No XSD file found"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:94
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:114
+#, python-format
+msgid "The selected company bank has no IBAN and no Account number"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:80
+#, python-format
+msgid "Payment is in draft state. Please confirm it first."
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/msg_sepa.py:68
+#, python-format
+msgid "XML is not Valid !"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:102
+#, python-format
+msgid "ErrorCreditorBank"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: model:ir.model,name:l10n_ch_sepa.model_wizard_pain001
+msgid "wizard.pain001"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:71
+#, python-format
+msgid "No data has been entered"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: view:wizard.pain001:0
+msgid "pain.001 file creation"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:87
+#, python-format
+msgid "ErrorCompanyBankBIC"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: view:wizard.pain001:0
+msgid "SEPA Payment File"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: view:wizard.pain001:0
+msgid "Generate File"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/msg_sepa.py:69
+#, python-format
+msgid ""
+"The document validation has raised following errors: \n"
+"%s"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:103
+#, python-format
+msgid "No bank selected for creditor of invoice %s"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:74
+#, python-format
+msgid "A payment order is missing"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:79
+#, python-format
+msgid "ErrorPaymentState"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/msg_sepa.py:50
+#: code:addons/l10n_ch_sepa/base_sepa/msg_sepa.py:55
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:71
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:74
+#, python-format
+msgid "Error"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/msg_sepa.py:50
+#, python-format
+msgid "No XML data found"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:84
+#, python-format
+msgid "ErrorCompanyBank"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:108
+#, python-format
+msgid "Creditor bank account has no BIC number for invoice %s"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:107
+#, python-format
+msgid "ErrorCreditorBankBIC"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: model:ir.actions.act_window,name:l10n_ch_sepa.action_create_pain_001
+msgid "Create SEPA payment"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:151
+#, python-format
+msgid "XML is Empty !"
+msgstr ""
+
+#. module: l10n_ch_sepa
+#: view:wizard.pain001:0
+msgid "Close"
+msgstr "Fermer"
+
+#. module: l10n_ch_sepa
+#: field:wizard.pain001,pain_001_file:0
+msgid "XML File"
+msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-04 03:33+0000\n"
+"POT-Creation-Date: 2017-05-01 19:47+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/fi/)\n"
@@ -163,7 +163,7 @@ msgstr ""
 #: field:banking.export.ch.dd,type:0
 #, python-format
 msgid "Type"
-msgstr ""
+msgstr "Tyyppi"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/model/bank.py:90
