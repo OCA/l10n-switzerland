@@ -1,0 +1,198 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * l10n_ch_fds_upload_dd
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Bole <bole@dajmi5.com>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-31 15:45+0000\n"
+"PO-Revision-Date: 2017-10-31 15:45+0000\n"
+"Last-Translator: Bole <bole@dajmi5.com>, 2017\n"
+"Language-Team: Croatian (Croatia) (https://www.transifex.com/oca/teams/23907/hr_HR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: hr_HR\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.ui.view,arch_db:l10n_ch_fds_upload_dd.view_post_dd_export_wizard_form_inherited
+msgid "<strong>Upload successful</strong>"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_filename
+msgid "Attachment Name"
+msgstr "Naziv priloga"
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_attachment_id
+msgid "Attachment id"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_create_uid
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_create_uid
+msgid "Created by"
+msgstr "Kreirao"
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_create_date
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_create_date
+msgid "Created on"
+msgstr "Kreirano"
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_postfinance_account_dd_upload_ids
+msgid "Dd upload ids"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.ui.view,arch_db:l10n_ch_fds_upload_dd.view_fds_postfinance_account_lsv_dd_form_inherited
+msgid "Direct Debit Orders"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_directory_id
+msgid "Directory"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_display_name
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_display_name
+msgid "Display Name"
+msgstr "Naziv"
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_fds_account_id
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_fds_account_id
+msgid "FDS account"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_fds_directory_id
+msgid "FDS directory"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_filename
+msgid "Filename"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_file_data
+msgid "Generated File"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_id
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_id
+msgid "ID"
+msgstr "ID"
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history___last_update
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard___last_update
+msgid "Last Modified on"
+msgstr "Zadnje modificirano"
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_write_uid
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_write_uid
+msgid "Last Updated by"
+msgstr "Zadnji ažurirao"
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_write_date
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_write_date
+msgid "Last Updated on"
+msgstr "Zadnje ažurirano"
+
+#. module: l10n_ch_fds_upload_dd
+#: selection:fds.dd.upload.history,state:0
+msgid "Not Uploaded"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model,name:l10n_ch_fds_upload_dd.model_account_payment_order
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_payment_order_id
+msgid "Payment Order"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_payment_order_id
+msgid "Payment order"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model.fields,help:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_directory_id
+msgid "Remote directory where the file was uploaded"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model.fields,help:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_filename
+msgid "Remote name of the uploaded file"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model.fields,help:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_fds_directory_id
+msgid ""
+"Select one upload directory. Be sure to have at least one directory "
+"configured with upload access rights."
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_state
+#: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_state
+msgid "State"
+msgstr "Oblast/Županija"
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model,name:l10n_ch_fds_upload_dd.model_payment_order_upload_dd_wizard
+msgid "Upload DD to FDS"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model.fields,help:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_state
+msgid "Upload state of the file"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.ui.view,arch_db:l10n_ch_fds_upload_dd.view_post_dd_export_wizard_form_inherited
+msgid "Upload to FDS"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: selection:fds.dd.upload.history,state:0
+msgid "Uploaded"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: code:addons/l10n_ch_fds_upload_dd/wizards/payment_order_upload_dd_wizard.py:104
+#, python-format
+msgid "You don't have access to the selected FDS account."
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model,name:l10n_ch_fds_upload_dd.model_fds_dd_upload_history
+msgid "fds.dd.upload.history"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: model:ir.model,name:l10n_ch_fds_upload_dd.model_fds_postfinance_account
+msgid "fds.postfinance.account"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: selection:payment.order.upload.dd.wizard,state:0
+msgid "finish"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_dd
+#: selection:payment.order.upload.dd.wizard,state:0
+msgid "upload"
+msgstr ""
