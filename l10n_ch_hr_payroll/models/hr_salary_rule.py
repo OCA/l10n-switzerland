@@ -37,12 +37,18 @@ class HrSalaryRule(models.Model):
         for rule in self:
             for rule_from, rules_to in list_fields_per.items():
                 for rule_to in rules_to:
-                    rule_to_modify = rule.env['hr.salary.rule'].search([
-                        ('id', '=', rule.env.ref(rule_to).id)
+                    data_id = self.env['ir.model.data'].search([
+                        ('module', '=', 'l10n_ch_hr_payroll'),
+                        ('name', '=', rule_to)
                     ])
+                    if len(data_id):
+                        rule_to_modify = rule.env['hr.salary.rule'].search([
+                            ('id', '=', rule.env.ref(rule_to).id)
+                        ])
 
-                    if rule_to_modify.id == rule.id:
-                        rule.percentage = getattr(rule.company_id, rule_from)
+                        if rule_to_modify.id == rule.id:
+                            rule.percentage = \
+                                getattr(rule.company_id, rule_from)
 
     @api.multi
     def compute_rule(self, localdict):
