@@ -135,7 +135,7 @@
     
     <menuitem 
         name="Payroll Configuration" 
-        parent="hr_payroll.menu_hr_payroll_root" id="menu_hr_payroll_config" 
+        parent="hr_payroll.menu_hr_payroll_configuration" id="menu_hr_payroll_config" 
         action="action_view_hr_payroll_config" 
         groups="hr_payroll.group_hr_payroll_manager" 
         sequence="40"/>
