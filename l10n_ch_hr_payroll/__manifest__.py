@@ -8,12 +8,9 @@
     'category': 'Localization',
     'author': "Open Net Sàrl,Odoo Community Association (OCA)",
     'depends': [
-        'decimal_precision',
-        'hr_payroll',
         'hr_payroll_account',
         'hr_contract',
-        'hr_attendance',
-        'account'
+        'hr_attendance'
     ],
     'version': '10.0.1.0.0',
     'auto_install': False,

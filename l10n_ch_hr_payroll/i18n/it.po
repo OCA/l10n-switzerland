@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-05 06:49+0000\n"
-"PO-Revision-Date: 2017-04-05 06:49+0000\n"
+"POT-Creation-Date: 2017-05-23 09:46+0000\n"
+"PO-Revision-Date: 2017-05-23 09:46+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -172,6 +172,11 @@ msgid "Gross Salary"
 msgstr "Stipendio lordo"
 
 #. module: l10n_ch_hr_payroll
+#: selection:hr.contract,wage_type:0
+msgid "Hourly"
+msgstr "Ogni ora"
+
+#. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_id
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_lpp_contract_id
 msgid "ID"
@@ -229,6 +234,11 @@ msgid "Minimum legal"
 msgstr "Minimo legale"
 
 #. module: l10n_ch_hr_payroll
+#: selection:hr.contract,wage_type:0
+msgid "Monthly"
+msgstr "Mensile"
+
+#. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.NET_CH
 msgid "Net CH"
 msgstr "Net CH"
@@ -247,6 +257,11 @@ msgstr "Numero di figli studenti"
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payslip_non_working_days
 msgid "Number of non-working days (not payable)"
 msgstr "Numero di giorni non lavorativi (non a pagamento)"
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payslip_worked_hours
+msgid "Number of worked hours"
+msgstr "Numero di ore lavorate"
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payslip_working_days
@@ -482,6 +497,12 @@ msgstr "AC La solidarietà del dipendente"
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.AC_SOL
 msgid "UI SOL"
 msgstr "AC La solidarietà"
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_contract_wage_type
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payslip_wage_type
+msgid "Wage Type"
+msgstr "Tipo di salario"
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payslip_working_rate

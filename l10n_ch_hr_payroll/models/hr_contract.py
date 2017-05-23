@@ -15,16 +15,6 @@ class HrContract(models.Model):
     lpp_amount = fields.Float(
         string='OBP Amount',
         digits=dp.get_precision('Account'))
-    wage_fulltime = fields.Float(
-        string='Full-time Wage',
-        digits=dp.get_precision('Account'),
-        default=0,
-        required=True)
-    occupation_rate = fields.Float(
-        string='Occupation Rate (%)',
-        digits=dp.get_precision('Account'),
-        default=100.0,
-        required=True)
     lpp_contract_id = fields.Many2one(
         string='OBP Contract',
         comodel_name='lpp.contract',
@@ -33,6 +23,19 @@ class HrContract(models.Model):
     imp_src = fields.Float(
         string='Source Tax (%)',
         digits=dp.get_precision('Payroll Rate'))
+
+    wage_type = fields.Selection(
+        string="Wage Type",
+        selection=[('month', "Monthly"), ('hour', "Hourly")],
+        default='month')
+    wage_fulltime = fields.Float(
+        string='Full-time Wage',
+        digits=dp.get_precision('Account'),
+        default=0)
+    occupation_rate = fields.Float(
+        string='Occupation Rate (%)',
+        digits=dp.get_precision('Account'),
+        default=100.0)
 
     @api.onchange('occupation_rate', 'wage_fulltime')
     def _onchange_wage_rate_fulltime(self):

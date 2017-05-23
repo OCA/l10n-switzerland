@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import odoo.addons.decimal_precision as dp
+from datetime import timedelta
 from odoo import fields, models, api
 
 
@@ -17,9 +18,43 @@ class HrPayslip(models.Model):
     working_rate = fields.Float(
         string='Working Rate (%)',
         readonly=True)
+    worked_hours = fields.Float(
+        string='Number of worked hours',
+        readonly=True,
+        compute='_compute_worked_hours')
+
+    wage_type = fields.Selection(related='contract_id.wage_type')
+
+    @api.multi
+    def _compute_worked_hours(self):
+        for payslip in self:
+            if payslip.contract_id.wage_type == 'hour':
+                dt = fields.Datetime
+                date_to = dt.from_string(payslip.date_to)
+                date_to = dt.to_string(date_to + timedelta(days=1))
+
+                all_time_records = self.env['hr.attendance'].search([
+                        ('employee_id', '=', payslip.employee_id.id),
+                        ('check_in', '>=', payslip.date_from),
+                        ('check_in', '<', date_to)
+                    ])
+                sum_all_hours = 0
+                for time_rec in all_time_records:
+                    sum_all_hours += time_rec.worked_hours
+
+                sum_minutes = (sum_all_hours - int(sum_all_hours))*60
+                sum_secunds = (sum_minutes - int(sum_minutes))/60
+                sum_wo_sec = sum_all_hours - sum_secunds
+
+                payslip.worked_hours = sum_wo_sec
+
+    @api.onchange('employee_id', 'date_from', 'date_to')
+    def _onchange_employee_worked_hours(self):
+        for payslip in self:
+            payslip._compute_worked_hours()
 
     @api.onchange('working_days', 'non_working_days')
-    def _onchange_worked_non_working_days(self):
+    def _onchange_working_non_working_days(self):
         for payslip in self:
             if payslip.working_days != 0:
                 worked_days = payslip.working_days - payslip.non_working_days
@@ -29,7 +64,8 @@ class HrPayslip(models.Model):
     @api.multi
     def compute_sheet(self):
         for payslip in self:
-            payslip._onchange_worked_non_working_days()
+            payslip._onchange_working_non_working_days()
+            payslip._onchange_employee_worked_hours()
             res = super(HrPayslip, payslip).compute_sheet()
         return res
 

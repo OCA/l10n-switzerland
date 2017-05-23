@@ -8,8 +8,9 @@
             <field name="priority" eval="20"/>
             <field name="arch" type="xml">
                 <field name="wage" position="before">
-                    <field name="wage_fulltime"/>
-                    <field name="occupation_rate"/>
+                    <field name="wage_type" widget="selection"/>
+                    <field name="wage_fulltime" attrs="{'invisible': [('wage_type', '!=', 'month')]}" />
+                    <field name="occupation_rate" attrs="{'invisible': [('wage_type', '!=', 'month')]}"/>
                 </field>
                 <field name="struct_id" position="after">
                     <field name="imp_src"/>
