@@ -380,7 +380,12 @@ else:
             <field name="name">Basic CH</field>
             <field name="sequence" eval="1"/>
             <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = contract.wage*payslip.working_rate/100</field>
+            <field name="amount_python_compute">
+if payslip.wage_type == 'hour':
+    result = contract.wage*payslip.worked_hours
+else:
+    result = contract.wage*payslip.working_rate/100
+            </field>
             <field name="category_id" ref="hr_payroll.BASIC"/>
         </record>
         <record id="GROSS_CH" model="hr.salary.rule">

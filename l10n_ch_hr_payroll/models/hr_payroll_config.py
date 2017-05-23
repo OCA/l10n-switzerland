@@ -2,7 +2,7 @@
 # © 2017 Open Net Sàrl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import openerp.addons.decimal_precision as dp
+import odoo.addons.decimal_precision as dp
 from odoo import models, fields, api
 
 
