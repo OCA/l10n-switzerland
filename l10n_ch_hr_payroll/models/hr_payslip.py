@@ -34,10 +34,10 @@ class HrPayslip(models.Model):
                 date_to = dt.to_string(date_to + timedelta(days=1))
 
                 all_time_records = self.env['hr.attendance'].search([
-                        ('employee_id', '=', payslip.employee_id.id),
-                        ('check_in', '>=', payslip.date_from),
-                        ('check_in', '<', date_to)
-                    ])
+                    ('employee_id', '=', payslip.employee_id.id),
+                    ('check_in', '>=', payslip.date_from),
+                    ('check_in', '<', date_to)
+                ])
                 sum_all_hours = 0
                 for time_rec in all_time_records:
                     sum_all_hours += time_rec.worked_hours
