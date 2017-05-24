@@ -87,14 +87,14 @@ class TestContractLPP(common.TransactionCase):
             'wage_fulltime': 7500.0,
             'occupation_rate': 20.0,
             'wage': 0,
+            'wage_type': 'month',
             'imp_src': 0,
             'lpp_contract_id': self.lpp_contract.id,
             'lpp_rate': 8.650,
             'lpp_amount': 0,
             'type_id': self.ref('hr_contract.hr_contract_type_emp'),
             'employee_id': self.richard_emp.id,
-            'struct_id': self.developer_pay_structure.id,
-            'working_hours': self.ref('resource.timesheet_group1')
+            'struct_id': self.developer_pay_structure.id
             })
 
         # I create a payslip for "Richard"
@@ -122,6 +122,7 @@ class TestContractLPP(common.TransactionCase):
 
     def test_contract_lpp(self):
         _logger.debug(' -- Test CONTRACT -- ')
+        _logger.debug(self.configs.avs_per)
 
         # I click on 'Save' button on payroll configuration
         self.configs.save_configs()
@@ -131,7 +132,7 @@ class TestContractLPP(common.TransactionCase):
         self.assertEqual(self.richard_contract.wage, 1500)
 
         # OnChange working days and non working days to calcule working rate
-        self.richard_payslip._onchange_worked_non_working_days()
+        self.richard_payslip._onchange_working_non_working_days()
         self.assertEqual(self.richard_payslip.working_rate, (26-12)/26.0*100)
 
         # I click on 'Compute Sheet' button on payslip

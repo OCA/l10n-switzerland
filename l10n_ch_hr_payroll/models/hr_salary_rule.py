@@ -21,17 +21,12 @@ class HrSalaryRule(models.Model):
     @api.multi
     def _compute_percentage_from_company(self):
         list_fields_per = {
-            'fadmin_per': ['l10n_ch_hr_payroll.FADMIN'],
-            'avs_per': ['l10n_ch_hr_payroll.AVS_C',
-                        'l10n_ch_hr_payroll.AVS_E'],
-            'laa_per': ['l10n_ch_hr_payroll.LAA_C',
-                        'l10n_ch_hr_payroll.LAA_E'],
-            'lca_per': ['l10n_ch_hr_payroll.LCA_C',
-                        'l10n_ch_hr_payroll.LCA_E'],
-            'ac_per_off_limit': ['l10n_ch_hr_payroll.AC_C_SOL',
-                                 'l10n_ch_hr_payroll.AC_E_SOL'],
-            'ac_per_in_limit': ['l10n_ch_hr_payroll.AC_C',
-                                'l10n_ch_hr_payroll.AC_E']
+            'fadmin_per': ['FADMIN'],
+            'avs_per': ['AVS_C', 'AVS_E'],
+            'laa_per': ['LAA_C', 'LAA_E'],
+            'lca_per': ['LCA_C', 'LCA_E'],
+            'ac_per_off_limit': ['AC_C_SOL', 'AC_E_SOL'],
+            'ac_per_in_limit': ['AC_C', 'AC_E']
         }
 
         for rule in self:
@@ -41,9 +36,10 @@ class HrSalaryRule(models.Model):
                         ('module', '=', 'l10n_ch_hr_payroll'),
                         ('name', '=', rule_to)
                     ])
+
                     if len(data_id):
                         rule_to_modify = rule.env['hr.salary.rule'].search([
-                            ('id', '=', rule.env.ref(rule_to).id)
+                            ('id', '=', data_id.res_id)
                         ])
 
                         if rule_to_modify.id == rule.id:

@@ -85,8 +85,7 @@ class TestNoLPP(common.TransactionCase):
             'lpp_amount': 200,
             'type_id': self.ref('hr_contract.hr_contract_type_emp'),
             'employee_id': self.richard_emp.id,
-            'struct_id': self.developer_pay_structure.id,
-            'working_hours': self.ref('resource.timesheet_group1')
+            'struct_id': self.developer_pay_structure.id
             })
 
         # I create a payslip for "Richard"
@@ -123,7 +122,7 @@ class TestNoLPP(common.TransactionCase):
         self.assertEqual(self.richard_contract.wage, 12000)
 
         # OnChange working days and non working days to calcule working rate
-        self.richard_payslip._onchange_worked_non_working_days()
+        self.richard_payslip._onchange_working_non_working_days()
         self.assertEqual(self.richard_payslip.working_rate, 100)
 
         # I click on 'Compute Sheet' button on payslip
