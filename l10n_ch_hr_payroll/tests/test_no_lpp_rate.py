@@ -77,15 +77,27 @@ class TestNoLPP(common.TransactionCase):
             'date_end': Date.to_string((datetime.now() + timedelta(days=365))),
             'date_start': Date.today(),
             'name': 'Contract for Richard',
-            'wage_fulltime': 12000.0,
-            'occupation_rate': 100.0,
-            'wage': 0,
+            'wage': 50,
             'imp_src': 0,
             'lpp_rate': 0,
             'lpp_amount': 200,
             'type_id': self.ref('hr_contract.hr_contract_type_emp'),
             'employee_id': self.richard_emp.id,
-            'struct_id': self.developer_pay_structure.id
+            'struct_id': self.developer_pay_structure.id,
+            'wage_type': 'hour'
+            })
+
+        # attendances to calc the worked hours
+        self.env['hr.attendance'].create({
+            'employee_id': self.richard_emp.id,
+            'check_in': '2017-05-14 07:30:00',
+            'check_out': '2017-05-14 17:00:00'
+            })
+
+        self.env['hr.attendance'].create({
+            'employee_id': self.richard_emp.id,
+            'check_in': '2017-05-17 07:30:00',
+            'check_out': '2017-05-17 17:00:00'
             })
 
         # I create a payslip for "Richard"
@@ -94,8 +106,8 @@ class TestNoLPP(common.TransactionCase):
             'employee_id': self.richard_emp.id,
             'company_id': self.ref('base.main_company'),
             'contract_id': self.richard_contract.id,
-            'working_days': 26,
-            'non_working_days': 0
+            'date_from': '2017-05-01',
+            'date_to': '2017-05-31'
             })
 
         # I create payroll config with company values
@@ -112,18 +124,14 @@ class TestNoLPP(common.TransactionCase):
             })
 
     def test_no_lpp(self):
-        _logger.debug(' -- Test NO LPP RATE -- ')
+        _logger.debug(' -- Test NO LPP RATE w/ Hours -- ')
 
         # I click on 'Save' button on payroll configuration
         self.configs.save_configs()
 
-        # OnChange wage full-time and occupation rate to calcule wage
-        self.richard_contract._onchange_wage_rate_fulltime()
-        self.assertEqual(self.richard_contract.wage, 12000)
-
-        # OnChange working days and non working days to calcule working rate
-        self.richard_payslip._onchange_working_non_working_days()
-        self.assertEqual(self.richard_payslip.working_rate, 100)
+        # compute worked hours based in attendances
+        self.richard_payslip._compute_worked_hours()
+        self.assertEqual(self.richard_payslip.worked_hours, 19)
 
         # I click on 'Compute Sheet' button on payslip
         self.richard_payslip.compute_sheet()
@@ -132,48 +140,46 @@ class TestNoLPP(common.TransactionCase):
             ('salary_rule_id', 'in', self.rules_for_structure)
         ])
 
-        _logger.debug('Test w/o LPP RATE')
+        _logger.debug('Test w/o LPP RATE w/ worked hours from attendance')
 
         for line in rule_lines:
             # BASIC CH
             if line.salary_rule_id.id == self.basic_ch:
-                self.assertEqual(line.python_amount, 12000)
+                self.assertEqual(line.python_amount, 950)
                 _logger.debug('BASIC CH %s' % line.python_amount)
 
             # GROSS CH
             if line.salary_rule_id.id == self.gross_ch:
-                self.assertEqual(line.python_amount, round(12000+950, 2))
+                self.assertEqual(line.python_amount, 1900)
 
             # NET CH
             if line.salary_rule_id.id == self.net_ch:
-                self.assertEqual(line.python_amount, 11870.40)
+                self.assertEqual(line.python_amount, 1631.55)
 
             # UI (AC)
             if line.salary_rule_id.id == self.ac_c:
-                self.assertEqual(line.python_amount, 10500)
+                self.assertEqual(line.python_amount, 950)
                 self.assertEqual(line.python_rate, -1.1)
-                self.assertEqual(line.total, -132)
+                self.assertEqual(line.total, -10.45)
             if line.salary_rule_id.id == self.ac_e:
-                self.assertEqual(line.python_amount, 10500)
+                self.assertEqual(line.python_amount, 950)
                 self.assertEqual(line.python_rate, -1.1)
-                self.assertEqual(line.total, -132)
+                self.assertEqual(line.total, -10.45)
             # UI (AC) - SOL
             if line.salary_rule_id.id == self.ac_c_sol:
                 self.assertEqual(
-                    line.python_amount, 1500)
-                self.assertEqual(line.python_rate, -1)
-                self.assertEqual(line.total, -15)
+                    line.python_amount, 0)
+                self.assertEqual(line.python_rate, 0)
+                self.assertEqual(line.total, 0)
             if line.salary_rule_id.id == self.ac_e_sol:
                 self.assertEqual(
-                    line.python_amount, 1500)
-                self.assertEqual(line.python_rate, -1)
-                self.assertEqual(line.total, -15)
+                    line.python_amount, 0)
+                self.assertEqual(line.python_rate, 0)
+                self.assertEqual(line.total, 0)
 
             # ALFA_VD
             if line.salary_rule_id.id == self.alfa_vd:
-                self.assertEqual(
-                    line.python_amount,
-                    round((2*250)+330+120, 2))
+                self.assertEqual(line.python_amount, 950)
                 self.assertEqual(line.python_rate, 100)
                 self.assertEqual(line.total, 950)
 
@@ -185,33 +191,33 @@ class TestNoLPP(common.TransactionCase):
 
             # OAI (AVS)
             if line.salary_rule_id.id == self.avs_c:
-                self.assertEqual(line.python_amount, 12000)
+                self.assertEqual(line.python_amount, 950)
                 self.assertEqual(line.python_rate, -5.125)
-                self.assertEqual(line.total, -615)
+                self.assertEqual(line.total, -48.69)
             if line.salary_rule_id.id == self.avs_e:
-                self.assertEqual(line.python_amount, 12000)
+                self.assertEqual(line.python_amount, 950)
                 self.assertEqual(line.python_rate, -5.125)
-                self.assertEqual(line.total, -615)
+                self.assertEqual(line.total, -48.69)
 
             # AI (LAA)
             if line.salary_rule_id.id == self.laa_c:
-                self.assertEqual(line.python_amount, 12000)
+                self.assertEqual(line.python_amount, 950)
                 self.assertEqual(line.python_rate, -0.46)
-                self.assertEqual(line.total, -55.20)
+                self.assertEqual(line.total, -4.37)
             if line.salary_rule_id.id == self.laa_e:
-                self.assertEqual(line.python_amount, 12000)
+                self.assertEqual(line.python_amount, 950)
                 self.assertEqual(line.python_rate, -0.46)
-                self.assertEqual(line.total, -55.20)
+                self.assertEqual(line.total, -4.37)
 
             # SDA (LCA)
             if line.salary_rule_id.id == self.lca_c:
-                self.assertEqual(line.python_amount, 12000)
+                self.assertEqual(line.python_amount, 950)
                 self.assertEqual(line.python_rate, -0.52)
-                self.assertEqual(line.total, -62.40)
+                self.assertEqual(line.total, -4.94)
             if line.salary_rule_id.id == self.lca_e:
-                self.assertEqual(line.python_amount, 12000)
+                self.assertEqual(line.python_amount, 950)
                 self.assertEqual(line.python_rate, -0.52)
-                self.assertEqual(line.total, -62.40)
+                self.assertEqual(line.total, -4.94)
 
             # OBP (LPP)
             if line.salary_rule_id.id == self.lpp_c:
