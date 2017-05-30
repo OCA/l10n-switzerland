@@ -132,29 +132,40 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def print_bvr(self):
-        self.ensure_one()
         self._check_bvr_generatable()
-        self.sent = True
+        self.write({
+            'sent': True
+        })
         return self.env['report'].get_action(
             self, 'l10n_ch_payment_slip.one_slip_per_page_from_invoice')
 
     @api.multi
     def _check_bvr_generatable(self):
-        msg = []
+        errors = []
         for inv in self:
+            msg = []
             if inv.state in ('draft', 'cancel'):
-                msg.append(_('The invoice must be confirmed.'))
+                msg.append(_('- The invoice must be confirmed.'))
             bank_acc = inv.partner_bank_id
             if not bank_acc:
-                msg.append(_('The invoice needs a partner bank account.'))
+                msg.append(_('- The invoice needs a partner bank account.'))
             else:
                 if not bank_acc.bvr_adherent_num:
-                    msg.append(_('The bank account {} used in invoice has no '
-                                 'BVR/ESR adherent number.'
-                                 ).format(bank_acc.acc_number))
+                    msg.append(
+                        _('- The bank account {} used in invoice has no '
+                          'BVR/ESR adherent number.'
+                          ).format(bank_acc.acc_number))
                 if not (bank_acc.acc_type == 'postal' or bank_acc.ccp):
-                    msg.append(_('The bank account {} used in invoice needs to'
-                                 ' be a postal account or have a bank CCP.'
-                                 ).format(bank_acc.acc_number))
+                    msg.append(
+                        _('- The bank account {} used in invoice needs to'
+                          ' be a postal account or have a bank CCP.'
+                          ).format(bank_acc.acc_number))
             if msg:
-                raise exceptions.UserError('\n'.join(msg))
+                if inv.number:
+                    invoice = 'Invoice %s :\n' % inv.number
+                else:
+                    invoice = 'Invoice (%s) :\n' % inv.partner_id.name
+
+                errors.append(invoice + '\n'.join(msg))
+        if errors:
+            raise exceptions.UserError('\n'.join(errors))
