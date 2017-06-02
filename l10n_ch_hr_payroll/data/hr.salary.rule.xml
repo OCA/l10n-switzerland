@@ -357,6 +357,23 @@ if contract.employee_id.children + contract.employee_id.children_student > 2:
             <field name="category_id" ref="hr_payroll_FALW"/>
             <field name="parent_rule_id" ref="ALFA"/>
         </record>
+        <record id="ALFA_E_R" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">ALFA_E_R</field>
+            <field name="condition_select">python</field>
+            <field name="name">Allocations familiales versées - Enfants à l'école obligatoire (report)</field>
+            <field name="amount_python_compute">result = contract.employee_id.children * 230
+if contract.employee_id.children + contract.employee_id.children_student > 2:
+    result += contract.employee_id.children * 100
+result = -result</field>
+            <field name="condition_python">result = contract.employee_id.children > 0</field>
+            <field name="quantity">1</field>
+            <field name="condition_range">contract.employee_id.children</field>
+            <field name="sequence">51</field>
+            <field name="category_id" ref="hr_payroll_FALW"/>
+            <field name="parent_rule_id" ref="ALFA"/>
+        </record>
         <record id="ALFA_F" model="hr.salary.rule">
             <field name="amount_select">code</field>
             <field name="appears_on_payslip">True</field>
@@ -366,6 +383,23 @@ if contract.employee_id.children + contract.employee_id.children_student > 2:
             <field name="amount_python_compute">result = contract.employee_id.children_student * 300
 if contract.employee_id.children + contract.employee_id.children_student > 2:
     result += contract.employee_id.children_student * 100</field>
+            <field name="condition_python">result = contract.employee_id.children_student > 0</field>
+            <field name="quantity">1</field>
+            <field name="condition_range">contract.employee_id.children_student</field>
+            <field name="sequence">51</field>
+            <field name="category_id" ref="hr_payroll_FALW"/>
+            <field name="parent_rule_id" ref="ALFA"/>
+        </record>
+        <record id="ALFA_F_R" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">ALFA_F_R</field>
+            <field name="condition_select">python</field>
+            <field name="name">Allocations familiales versées - Enfants en formation (report)</field>
+            <field name="amount_python_compute">result = contract.employee_id.children_student * 300
+if contract.employee_id.children + contract.employee_id.children_student > 2:
+    result += contract.employee_id.children_student * 100
+result = -result</field>
             <field name="condition_python">result = contract.employee_id.children_student > 0</field>
             <field name="quantity">1</field>
             <field name="condition_range">contract.employee_id.children_student</field>
