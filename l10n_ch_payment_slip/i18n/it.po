@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-19 00:40+0000\n"
-"PO-Revision-Date: 2017-04-19 00:40+0000\n"
+"POT-Creation-Date: 2017-06-02 00:43+0000\n"
+"PO-Revision-Date: 2017-06-02 00:43+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "MIME-Version: 1.0\n"
@@ -250,7 +250,7 @@ msgid "Payment Slips Merge Mode"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:555
+#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:557
 #, python-format
 msgid "Payment slip related to invoice %s due on the %s"
 msgstr "Polizza di versamento fattura n. %s scandenza il %s"
