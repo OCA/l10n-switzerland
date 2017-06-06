@@ -372,6 +372,51 @@ else:
             <field name="category_id" ref="hr_payroll.DED"/>
             <field name="parent_rule_id" ref="LPP"/>
         </record>
+        <record id="PC_F_VD" model="hr.salary.rule">
+            <field name="amount_select">fix</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">5063_VD</field>
+            <field name="condition_select">none</field>
+            <field name="condition_range_max">999999</field>
+            <field name="name">AS Families (VD)</field>
+            <field name="quantity">1</field>
+            <field name="sequence">165</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+        </record>
+        <record id="PC_F_VD_C" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">False</field>
+            <field name="code">5063_VD_C</field>
+            <field name="condition_select">none</field>
+            <field name="condition_range_max">999999</field>
+            <field name="name">AS Families (VD) Company</field>
+            <field name="amount_python_compute">
+per = employee.company_id.pc_f_vd_per
+result = (per*(categories.BASIC + categories.ALW))/100
+            </field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="quantity">1</field>
+            <field name="sequence">166</field>
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="parent_rule_id" ref="PC_F_VD"/>
+        </record>
+        <record id="PC_F_VD_E" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip">True</field>
+            <field name="code">5063_VD_E</field>
+            <field name="condition_select">none</field>
+            <field name="condition_range_max">999999</field>
+            <field name="name">AS Families (VD) Employee</field>
+            <field name="amount_python_compute">
+per = employee.company_id.pc_f_vd_per
+result = (per*(categories.BASIC + categories.ALW))/100
+            </field>
+            <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+            <field name="quantity">1</field>
+            <field name="sequence">166</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="parent_rule_id" ref="PC_F_VD"/>
+        </record>
         <record id="BASIC_CH" model="hr.salary.rule">
             <field name="appears_on_payslip">True</field>
             <field name="code">1000</field>

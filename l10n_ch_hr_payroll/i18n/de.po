@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-23 09:45+0000\n"
-"PO-Revision-Date: 2017-05-23 09:45+0000\n"
+"POT-Creation-Date: 2017-06-06 14:08+0000\n"
+"PO-Revision-Date: 2017-06-06 14:08+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -32,9 +32,29 @@ msgid "AI Employee"
 msgstr "UVG Arbeitnehmer"
 
 #. module: l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:l10n_ch_hr_payroll.PC_F_VD
+msgid "AS Families (VD)"
+msgstr "ZD Familien (VD)"
+
+#. module: l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:l10n_ch_hr_payroll.PC_F_VD_C
+msgid "AS Families (VD) Company"
+msgstr "ZD Familien (VD) Unternehmen"
+
+#. module: l10n_ch_hr_payroll
+#: model:hr.salary.rule,name:l10n_ch_hr_payroll.PC_F_VD_E
+msgid "AS Families (VD) Employee"
+msgstr "ZD Familien (VD) Arbeitnehmer"
+
+#. module: l10n_ch_hr_payroll
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 msgid "Accounting"
 msgstr "Finanzen"
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
+msgid "AS Families (VD)"
+msgstr "ZD Familien (VD)"
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.FADMIN
@@ -108,7 +128,7 @@ msgstr "Erstellt von"
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_create_date
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_lpp_contract_create_date
 msgid "Created on"
-msgstr "Angelegt am"
+msgstr "Erstellt am:"
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_laa_c
@@ -207,7 +227,7 @@ msgstr "Zuletzt geändert am"
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_write_uid
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_lpp_contract_write_uid
 msgid "Last Updated by"
-msgstr "Zuletzt aktualisiert durch"
+msgstr "Zuletzt aktualisiert von"
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_write_date
@@ -372,11 +392,13 @@ msgstr "Prozentsatz"
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_fadmin_per
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_laa_per
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_lca_per
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_pc_f_vd_per
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_ac_per_in_limit
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_avs_per
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_fadmin_per
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_laa_per
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_lca_per
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_pc_f_vd_per
 msgid "Percentage (%)"
 msgstr "Prozent (%)"
 

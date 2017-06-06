@@ -26,6 +26,8 @@ class TestMinLPP(common.TransactionCase):
         self.alfa_vd = self.ref('l10n_ch_hr_payroll.ALFA_VD')
         self.avs_c = self.ref('l10n_ch_hr_payroll.AVS_C')
         self.avs_e = self.ref('l10n_ch_hr_payroll.AVS_E')
+        self.pc_f_vd_c = self.ref('l10n_ch_hr_payroll.PC_F_VD_C')
+        self.pc_f_vd_e = self.ref('l10n_ch_hr_payroll.PC_F_VD_E')
         self.laa_c = self.ref('l10n_ch_hr_payroll.LAA_C')
         self.laa_e = self.ref('l10n_ch_hr_payroll.LAA_E')
         self.lca_c = self.ref('l10n_ch_hr_payroll.LCA_C')
@@ -53,6 +55,8 @@ class TestMinLPP(common.TransactionCase):
             self.alfa_vd,
             self.avs_c,
             self.avs_e,
+            self.pc_f_vd_c,
+            self.pc_f_vd_e,
             self.laa_c,
             self.laa_e,
             self.lca_c,
@@ -104,6 +108,7 @@ class TestMinLPP(common.TransactionCase):
             'ac_per_off_limit': 1.0,
             'ac_per_in_limit': 1.1,
             'avs_per': 5.125,
+            'pc_f_vd_per': 0.06,
             'fadmin_per': 0.25,
             'laa_per': 0.46,
             'lca_per': 0.52,
@@ -146,7 +151,7 @@ class TestMinLPP(common.TransactionCase):
 
             # NET CH
             if line.salary_rule_id.id == self.net_ch:
-                self.assertEqual(line.python_amount, 2164.06)
+                self.assertEqual(line.python_amount, 2163.16)
 
             # UI (AC)
             if line.salary_rule_id.id == self.ac_c:
@@ -186,6 +191,16 @@ class TestMinLPP(common.TransactionCase):
                 self.assertEqual(line.python_amount, 1500)
                 self.assertEqual(line.python_rate, -5.125)
                 self.assertEqual(line.total, -76.88)
+
+            # AS Families (PC Famille)
+            if line.salary_rule_id.id == self.pc_f_vd_c:
+                self.assertEqual(line.python_amount, 1500)
+                self.assertEqual(line.python_rate, -0.06)
+                self.assertEqual(line.total, -0.90)
+            if line.salary_rule_id.id == self.pc_f_vd_e:
+                self.assertEqual(line.python_amount, 1500)
+                self.assertEqual(line.python_rate, -0.06)
+                self.assertEqual(line.total, -0.90)
 
             # AI (LAA)
             if line.salary_rule_id.id == self.laa_c:
