@@ -18,6 +18,7 @@ class HrPayrollConfig(models.TransientModel):
             ('l10n_ch_hr_payroll.AC_E_SOL', 'credit'),
             ('l10n_ch_hr_payroll.ALFA_VD', 'credit'),
             ('l10n_ch_hr_payroll.AVS_E', 'credit'),
+            ('l10n_ch_hr_payroll.PC_F_VD_E', 'credit'),
             ('l10n_ch_hr_payroll.BASIC_CH', 'credit'),
             ('l10n_ch_hr_payroll.LAA_E', 'credit'),
             ('l10n_ch_hr_payroll.LCA_E', 'credit'),
@@ -55,6 +56,8 @@ class HrPayrollConfig(models.TransientModel):
             ('l10n_ch_hr_payroll.ALFA_VD', 'debit'),
             ('l10n_ch_hr_payroll.AVS_C', 'debit'),
             ('l10n_ch_hr_payroll.AVS_E', 'debit'),
+            ('l10n_ch_hr_payroll.PC_F_VD_C', 'debit'),
+            ('l10n_ch_hr_payroll.PC_F_VD_E', 'debit'),
             ('l10n_ch_hr_payroll.FADMIN', 'credit')])
 
         return all_equal
@@ -65,7 +68,8 @@ class HrPayrollConfig(models.TransientModel):
         all_equal = self.search_account_by_rule([
             ('l10n_ch_hr_payroll.AC_C', 'credit'),
             ('l10n_ch_hr_payroll.AC_C_SOL', 'credit'),
-            ('l10n_ch_hr_payroll.AVS_C', 'credit')])
+            ('l10n_ch_hr_payroll.AVS_C', 'credit'),
+            ('l10n_ch_hr_payroll.PC_F_VD_C', 'credit')])
 
         return all_equal
 
@@ -276,6 +280,13 @@ class HrPayrollConfig(models.TransientModel):
         digits=dp.get_precision('Payroll Rate'),
         required=False)
 
+    # AS Families (PC Familles)
+    pc_f_vd_per = fields.Float(
+        string="Percentage (%)",
+        default=lambda self: self._get_default_configs('pc_f_vd_per'),
+        digits=dp.get_precision('Payroll Rate'),
+        required=False)
+
     # OBP(LPP)
     lpp_min = fields.Float(
         string="Minimum legal",
@@ -310,7 +321,8 @@ class HrPayrollConfig(models.TransientModel):
             'ac_per_in_limit',
             'avs_per',
             'laa_per',
-            'lca_per'
+            'lca_per',
+            'pc_f_vd_per'
         ]
 
         for value in list_fields:
@@ -338,6 +350,7 @@ class HrPayrollConfig(models.TransientModel):
                 'l10n_ch_hr_payroll.AC_E_SOL',
                 'l10n_ch_hr_payroll.ALFA_VD',
                 'l10n_ch_hr_payroll.AVS_E',
+                'l10n_ch_hr_payroll.PC_F_VD_E',
                 'l10n_ch_hr_payroll.BASIC_CH',
                 'l10n_ch_hr_payroll.LAA_E',
                 'l10n_ch_hr_payroll.LCA_E',
@@ -365,7 +378,9 @@ class HrPayrollConfig(models.TransientModel):
                 'l10n_ch_hr_payroll.AC_E_SOL',
                 'l10n_ch_hr_payroll.ALFA_VD',
                 'l10n_ch_hr_payroll.AVS_C',
-                'l10n_ch_hr_payroll.AVS_E'
+                'l10n_ch_hr_payroll.AVS_E',
+                'l10n_ch_hr_payroll.PC_F_VD_C',
+                'l10n_ch_hr_payroll.PC_F_VD_E'
                 ], config.avs_d, 'debit')
             config.assign_account_to_rule([
                 'l10n_ch_hr_payroll.FADMIN'
@@ -375,7 +390,8 @@ class HrPayrollConfig(models.TransientModel):
             config.assign_account_to_rule([
                 'l10n_ch_hr_payroll.AC_C',
                 'l10n_ch_hr_payroll.AC_C_SOL',
-                'l10n_ch_hr_payroll.AVS_C'
+                'l10n_ch_hr_payroll.AVS_C',
+                'l10n_ch_hr_payroll.PC_F_VD_C'
                 ], config.avs_c, 'credit')
 
             # lpp_d

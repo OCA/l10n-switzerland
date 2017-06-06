@@ -53,6 +53,7 @@ class TestWizard(common.TransactionCase):
             'ac_per_off_limit': 1.2,
             'ac_per_in_limit': 2.1,
             'avs_per': 5.123,
+            'pc_f_vd_per': 0.06,
             'fadmin_per': 0.23,
             'laa_per': 0.49,
             'lca_per': 0.82,
@@ -86,6 +87,7 @@ class TestWizard(common.TransactionCase):
         self.assertEqual(self.configs_default.ac_per_off_limit, 1.0)
         self.assertEqual(self.configs_default.ac_per_in_limit, 1.1)
         self.assertEqual(self.configs_default.avs_per, 5.125)
+        self.assertEqual(self.configs_default.pc_f_vd_per, 0.06)
         self.assertEqual(self.configs_default.fadmin_per, 0)
         self.assertEqual(self.configs_default.laa_per, 0)
         self.assertEqual(self.configs_default.lca_per, 0)
@@ -131,6 +133,7 @@ class TestWizard(common.TransactionCase):
             ('l10n_ch_hr_payroll.AC_E_SOL', 'credit'),
             ('l10n_ch_hr_payroll.ALFA_VD', 'credit'),
             ('l10n_ch_hr_payroll.AVS_E', 'credit'),
+            ('l10n_ch_hr_payroll.PC_F_VD_E', 'credit'),
             ('l10n_ch_hr_payroll.BASIC_CH', 'credit'),
             ('l10n_ch_hr_payroll.LAA_E', 'credit'),
             ('l10n_ch_hr_payroll.LCA_E', 'credit'),
@@ -151,12 +154,15 @@ class TestWizard(common.TransactionCase):
             ('l10n_ch_hr_payroll.ALFA_VD', 'debit'),
             ('l10n_ch_hr_payroll.AVS_C', 'debit'),
             ('l10n_ch_hr_payroll.AVS_E', 'debit'),
+            ('l10n_ch_hr_payroll.PC_F_VD_C', 'debit'),
+            ('l10n_ch_hr_payroll.PC_F_VD_E', 'debit'),
             ('l10n_ch_hr_payroll.FADMIN', 'credit')
         ]
         list_rule_avs_c = [
             ('l10n_ch_hr_payroll.AC_C', 'credit'),
             ('l10n_ch_hr_payroll.AC_C_SOL', 'credit'),
-            ('l10n_ch_hr_payroll.AVS_C', 'credit')
+            ('l10n_ch_hr_payroll.AVS_C', 'credit'),
+            ('l10n_ch_hr_payroll.PC_F_VD_C', 'credit')
         ]
         list_rule_lpp_d = [
             ('l10n_ch_hr_payroll.LPP_C', 'debit'),
@@ -207,6 +213,7 @@ class TestWizard(common.TransactionCase):
         self.assertEqual(self.company.ac_per_off_limit, -1.2)
         self.assertEqual(self.company.ac_per_in_limit, -2.1)
         self.assertEqual(self.company.avs_per, -5.123)
+        self.assertEqual(self.company.pc_f_vd_per, -0.06)
         self.assertEqual(self.company.fadmin_per, 0.23)
         self.assertEqual(self.company.laa_per, -0.49)
         self.assertEqual(self.company.lca_per, -0.82)

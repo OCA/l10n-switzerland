@@ -75,6 +75,13 @@ class ResCompany(models.Model):
         digits=dp.get_precision('Payroll Rate'),
         required=False)
 
+    # AS Families (PC Famille)
+    pc_f_vd_per = fields.Float(
+        string="Percentage (%)",
+        default='-0.06',
+        digits=dp.get_precision('Payroll Rate'),
+        required=False)
+
     # OBP(LPP)
     lpp_min = fields.Float(
         string="Minimum legal",

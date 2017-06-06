@@ -105,6 +105,9 @@
                                 </group>
                             </group>
                             <group>
+                                <group string="AS Families (VD)">
+                                    <field name="pc_f_vd_per"/>
+                                </group>
                                 <group string="Administrative Fees">
                                     <field name="fadmin_per"/>
                                 </group>

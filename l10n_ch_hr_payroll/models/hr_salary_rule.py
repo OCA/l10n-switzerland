@@ -23,6 +23,7 @@ class HrSalaryRule(models.Model):
         list_fields_per = {
             'fadmin_per': ['FADMIN'],
             'avs_per': ['AVS_C', 'AVS_E'],
+            'pc_f_vd_per': ['PC_F_VD_C', 'PC_F_VD_E'],
             'laa_per': ['LAA_C', 'LAA_E'],
             'lca_per': ['LCA_C', 'LCA_E'],
             'ac_per_off_limit': ['AC_C_SOL', 'AC_E_SOL'],
