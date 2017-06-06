@@ -187,9 +187,8 @@ class XMLPFParser(object):
                 '//ns:Stmt/ns:Ntry/ns:AcctSvcrRef/text()',
                 namespaces={'ns': ns})
             for transaction in transaction_nodes:
-                att_name = self.file_name + '-' + transaction
-                # Attachment files are limited to 87 char names
-                att = self.attachments.get(att_name[:87])
+                att_name = self.file_name + '-' + transaction[:23]
+                att = self.attachments.get(att_name)
                 if att:
                     attachments.append((transaction, att))
         return attachments
