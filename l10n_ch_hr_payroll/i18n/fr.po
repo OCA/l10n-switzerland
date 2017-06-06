@@ -113,7 +113,7 @@ msgstr "Créé le"
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_laa_c
 msgid "Debts AI"
-msgstr "Dettes LAA"
+msgstr "Dettes LAA/LAAC/IND"
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_lpp_contract_dc_amount
