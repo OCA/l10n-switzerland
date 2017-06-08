@@ -380,7 +380,10 @@ class scan_bvr(TransientModel):
                 # We will test if the BVR have an Adherent Number if not we
                 # will make the search of the account base on
                 # his name non base on the BVR adherent number
-                bvr_struct['domain'] = 'name'
+                if (bvr_struct['bvrnumber'] == '000000'):
+                    bvr_struct['domain'] = 'name'
+                else:
+                    bvr_struct['domain'] = 'bvr_adherent_num'
                 # We will set the currency , in this case it's allways CHF
                 bvr_struct['currency'] = 'CHF'
             elif bvr_type == '01':
@@ -403,7 +406,10 @@ class scan_bvr(TransientModel):
                 # We will test if the BVR have an Adherent Number
                 # if not we will make the search of the account base on
                 # his name non base on the BVR adherent number
-                bvr_struct['domain'] = 'bvr_adherent_num'
+                if (bvr_struct['bvrnumber'] == '000000'):
+                    bvr_struct['domain'] = 'name'
+                else:
+                    bvr_struct['domain'] = 'bvr_adherent_num'
                 # We will set the currency , in this case it's allways CHF
                 bvr_struct['currency'] = 'CHF'
             elif bvr_type == '04':
