@@ -91,7 +91,7 @@ class PaymentSlip(models.Model):
 
     _sql_constraints = [('unique reference',
                          'UNIQUE (reference)',
-                        'BVR/ESR reference must be unique')]
+                         'BVR/ESR reference must be unique')]
 
     @api.model
     def _can_generate(self, move_line):
@@ -342,8 +342,8 @@ class PaymentSlip(models.Model):
                     _('No invoice related to move line %s'
                       ) % rec.move_line_id.ref
                 )
-            if not rec._compile_check_bvr.match(
-                    invoice.partner_bank_id.get_account_number() or ''):
+            if not rec._compile_check_bvr.match(invoice.partner_bank_id.
+                                                get_account_number() or ''):
                 raise exceptions.ValidationError(
                     _('Your bank BVR number should be of the form 0X-XXX-X! '
                       'Please check your company '
@@ -556,7 +556,8 @@ class PaymentSlip(models.Model):
                           message % (invoice.number, fmt_date))
 
     @api.model
-    def _draw_bank(self, canvas, print_settings, initial_position, font, bank):
+    def _draw_bank_address(self, canvas, print_settings,
+                           initial_position, font, bank):
         """Draw bank name, NPA and location on canvas
 
         :param canvas: payment slip reportlab component to be drawn
@@ -576,8 +577,8 @@ class PaymentSlip(models.Model):
 
         """
         x, y = initial_position
-        x += print_settings.bvr_delta_horz * inch
-        y += print_settings.bvr_delta_vert * inch
+        x += print_settings.bvr_add_horz * inch
+        y += print_settings.bvr_add_vert * inch
         text = canvas.beginText()
         text.setTextOrigin(x, y)
         text.setFont(font.name, font.size)
@@ -767,7 +768,7 @@ class PaymentSlip(models.Model):
         company_settings = {
             col: getattr(company, col) for col in company._fields if
             col.startswith('bvr_')
-        }
+            }
         return PaymentSlipSettings(report_name, **company_settings)
 
     def _draw_payment_slip(self, a4=False, out_format='PDF', scale=None,
@@ -856,16 +857,16 @@ class PaymentSlip(models.Model):
                               (4.50 * inch, 2.0 * inch),
                               amount_font, frac_car)
             if invoice.partner_bank_id.print_bank:
-                self._draw_bank(canvas,
-                                print_settings,
-                                (0.05 * inch, 3.75 * inch),
-                                default_font,
-                                bank_acc.bank_id)
-                self._draw_bank(canvas,
-                                print_settings,
-                                (2.45 * inch, 3.75 * inch),
-                                default_font,
-                                bank_acc.bank_id)
+                self._draw_bank_address(canvas,
+                                        print_settings,
+                                        (0.05 * inch, 3.75 * inch),
+                                        default_font,
+                                        bank_acc.bank_id)
+                self._draw_bank_address(canvas,
+                                        print_settings,
+                                        (2.45 * inch, 3.75 * inch),
+                                        default_font,
+                                        bank_acc.bank_id)
             if invoice.partner_bank_id.print_account:
                 self._draw_bank_account(canvas,
                                         print_settings,
