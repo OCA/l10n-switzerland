@@ -1,3 +1,5 @@
+/* Copyright 2014-2017 Compassion CH
+ * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). */
 /* This is Javascript extension of module account
    in order to add custom reconcile buttons in the
    Manual Reconcile view */
