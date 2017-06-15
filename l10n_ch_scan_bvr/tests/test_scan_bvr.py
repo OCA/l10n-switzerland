@@ -6,8 +6,8 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 import openerp.tests.common as common
-from openerp import tools
-from openerp.modules.module import get_module_resource
+from odoo import tools
+from odoo.modules.module import get_module_resource
 
 
 class TestScanBvr(common.TransactionCase):

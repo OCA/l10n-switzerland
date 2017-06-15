@@ -9,7 +9,7 @@ Scan ESR/BVR to create supplier invoices
 This module works with C-channel or other OCR scanner.
 
 It helps you to create an invoice directly from the ESR/BVR Code.
-Find the menu entry called "Scan BVR" under Accounting -> Supplier.
+Find the menu entry called "Scan BVR" under Invoicing -> Purchases.
 It opens a popup from which you can scan the ESR/BVR number.
 It'll recognize the needed information and create an
 invoice for the right supplier.
@@ -26,11 +26,11 @@ Usage
 To use this module, you need to:
 
 * Optionally define a product in any supplier's form you may use
-* Open the wizard: " Accounting > BVR Scan"
+* Open the wizard: "Invoicing > Purchases > Scan BVR"
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/125/9.0
+   :target: https://runbot.odoo-community.org/runbot/125/10.0
 
 Bug Tracker
 ===========
@@ -43,6 +43,10 @@ If you spotted it first, help us smashing it by providing a detailed and welcome
 
 Credits
 =======
+Images
+------
+
+* Odoo Community Association: `Icon <https://github.com/OCA/maintainer-tools/blob/master/template/module/static/description/icon.svg>`_.
 
 Contributors
 ------------
@@ -57,6 +61,14 @@ Contributors
 * Nicola Malcontenti <nicola.malcontenti@agilebg.com>
 * Alex Comba <alex.comba@agilebg.com>
 * Álvaro Estébanez López <alvaro.estebanez@braintec-group.com>
+
+Funders
+-------
+
+The development of this module has been financially supported by:
+
+* Camptocamp
+* Brain-tec
 
 Maintainer
 ----------
