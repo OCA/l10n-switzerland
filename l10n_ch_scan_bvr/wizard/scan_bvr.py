@@ -5,27 +5,14 @@
 # Copyright 2016 Alvaro Estebanez - Brain-tec AG
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from openerp import api, fields, models, _
-from openerp.exceptions import Warning as UserError
+from odoo import api, fields, models, _
+from odoo.exceptions import Warning as UserError
 
 
 class ScanBvr(models.TransientModel):
 
     _name = "scan.bvr"
     _description = "BVR/ESR Scanning Wizard"
-
-    journal_id = fields.Many2one(comodel_name='account.journal',
-                                 string="Invoice journal",
-                                 default='_default_journal')
-    bvr_string = fields.Char(size=128, string='BVR String')
-    partner_id = fields.Many2one(comodel_name='res.partner', string="Partner")
-    bank_account_id = fields.Many2one(comodel_name='res.partner.bank',
-                                      string="Partner Bank Account")
-    state = fields.Selection(
-        [('new', 'New'),
-         ('valid', 'valid'),
-         ('need_extra_info', 'Need extra information')],
-        'State', default='new')
 
     @api.model
     def _default_journal(self):
@@ -41,6 +28,19 @@ class ScanBvr(models.TransientModel):
                 return False
         else:
             return False
+
+    journal_id = fields.Many2one(comodel_name='account.journal',
+                                 string="Invoice journal",
+                                 default=lambda self: self._default_journal())
+    bvr_string = fields.Char(size=128, string='BVR String')
+    partner_id = fields.Many2one(comodel_name='res.partner', string="Partner")
+    bank_account_id = fields.Many2one(comodel_name='res.partner.bank',
+                                      string="Partner Bank Account")
+    state = fields.Selection(
+        [('new', 'New'),
+         ('valid', 'valid'),
+         ('need_extra_info', 'Need extra information')],
+        'State', default='new')
 
     def _check_number(self, part_validation):
         nTab = [0, 9, 4, 6, 8, 2, 7, 1, 3, 5]
@@ -157,7 +157,7 @@ class ScanBvr(models.TransientModel):
             }
             specs = invoice_line_model._onchange_spec()
             default_values = invoice_line_model.default_get(specs)
-            invoice_line_vals = specs.copy()
+            invoice_line_vals = {k: None for k in specs.keys()}
             invoice_line_vals.update(default_values)
             invoice_line_vals.update(my_vals)
             product_onchange_result = invoice_line_model.onchange(
@@ -169,7 +169,7 @@ class ScanBvr(models.TransientModel):
                 if isinstance(val, tuple):
                     value[name] = val[0]
 
-                    invoice_line_vals.update(value)
+            invoice_line_vals.update(value)
 
             invoice_line_vals.update(
                 {'price_unit': data['bvr_struct']['amount']})
@@ -197,6 +197,12 @@ class ScanBvr(models.TransientModel):
         # We will now search the currency_id
         currency = currency_model.search(
             [('name', '=', data['bvr_struct']['currency'])])
+        if not currency:
+            raise UserError(
+                _('Unknown or deactivated currency: %s') % (
+                    data['bvr_struct']['currency'],
+                )
+            )
         date_due = today
         # We will now compute the due date and fixe the payment term
         payment_term_id = (account_info.partner_id.
