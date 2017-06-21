@@ -1,30 +1,15 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015 Odoo S. A.
-# Copyright 2015 Laurent Mignon <laurent.mignon@acsone.eu>
-# Copyright 2015 Ronald Portier <rportier@therp.nl>
-# Copyright 2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# Copyright 2017 Emanuel Cino <ecino@compassion.ch>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
-
-from ..models.postfinance_file_parser import XMLPFParser
 
 from openerp import api, models
 
 logger = logging.getLogger(__name__)
 
 
-class AccountBankStatementImport(models.TransientModel, XMLPFParser):
+class AccountBankStatementImport(models.TransientModel):
     _inherit = "account.bank.statement.import"
-
-    @api.model
-    def _parse_file(self, data_file):
-        try:
-            res = self._parse(data_file)
-            return res
-        except Exception as e:
-            logger.error(e.message)
-            return super(AccountBankStatementImport, self)._parse_file(
-                data_file)
 
     @api.model
     def _create_bank_statements(self, stmt_vals):
@@ -60,14 +45,3 @@ class AccountBankStatementImport(models.TransientModel, XMLPFParser):
                 self.env['ir.attachment'].create(att_data)
 
         return statement_ids, notifs
-
-    def _check_journal_bank_account(self, journal, account_number):
-        """ Convert IBAN to CCP  if bank account is not found. """
-        res = super(AccountBankStatementImport,
-                    self)._check_journal_bank_account(journal, account_number)
-        if not res and account_number and len(account_number) == 21:
-            account_number = account_number[9:].lstrip('0')
-            res = super(AccountBankStatementImport,
-                        self)._check_journal_bank_account(journal,
-                                                          account_number)
-        return res
