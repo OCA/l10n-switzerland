@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
     <record id="hr_payroll_FALW" model="hr.salary.rule.category">
         <field name="name">Free allowance</field>
         <field name="code">FALW</field>
@@ -14,5 +13,4 @@
         <field name="name">Information</field>
         <field name="code">INFO</field>
     </record>
-    </data>
 </odoo>
