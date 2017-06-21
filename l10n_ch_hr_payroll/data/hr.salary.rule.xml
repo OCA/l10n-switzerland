@@ -114,8 +114,8 @@ result = 0
 result += contract.employee_id.children * 250
 result += contract.employee_id.children_student *330
 if contract.employee_id.children + contract.employee_id.children_student &gt; 2:
-child_supp = contract.employee_id.children + contract.employee_id.children_student - 2
-result += child_supp * 120</field>
+    child_supp = contract.employee_id.children + contract.employee_id.children_student - 2
+    result += child_supp * 120</field>
         <field name="quantity">1</field>
         <field name="condition_range">categories.BASIC + categories.ALW</field>
         <field name="sequence">50</field>
@@ -317,19 +317,19 @@ minimum_legal = employee.company_id.lpp_min
 maximum_range = employee.company_id.lpp_max
 amount = contract.wage_fulltime * 12
 if contract.lpp_rate != 0:
-if contract.lpp_contract_id:
-    amount = amount - contract.lpp_contract_id.dc_amount
-amount = amount / 12
-amount = amount * (contract.occupation_rate / 100)
-amount = amount * (payslip.working_rate / 100)
-if amount &gt; maximum_range:
-    result = -(maximum_range)*((contract.lpp_rate)/100)
-elif amount &lt; minimum_legal and not contract.lpp_contract_id:
-    result = -(minimum_legal)*((contract.lpp_rate)/100)
+    if contract.lpp_contract_id:
+        amount = amount - contract.lpp_contract_id.dc_amount
+    amount = amount / 12
+    amount = amount * (contract.occupation_rate / 100)
+    amount = amount * (payslip.working_rate / 100)
+    if amount &gt; maximum_range:
+        result = -(maximum_range)*((contract.lpp_rate)/100)
+    elif amount &lt; minimum_legal and not contract.lpp_contract_id:
+        result = -(minimum_legal)*((contract.lpp_rate)/100)
+    else:
+        result = -(amount)*((contract.lpp_rate)/100)
 else:
-    result = -(amount)*((contract.lpp_rate)/100)
-else:
-result = -contract.lpp_amount</field>
+    result = -contract.lpp_amount</field>
         <field name="amount_percentage_base">
             -contract.lpp_amount or ((((contract.wage_fulltime*12) - (contract.lpp_contract_id.dc_amount or 0))/12)*(contract.occupation_rate/100)*(payslip.working_rate/100))
         </field>
@@ -350,19 +350,19 @@ minimum_legal = employee.company_id.lpp_min
 maximum_range = employee.company_id.lpp_max
 amount = contract.wage_fulltime * 12
 if contract.lpp_rate != 0:
-if contract.lpp_contract_id:
-    amount = amount - contract.lpp_contract_id.dc_amount
-amount = amount / 12
-amount = amount * (contract.occupation_rate / 100)
-amount = amount * (payslip.working_rate / 100)
-if amount &gt; maximum_range:
-    result = -(maximum_range)*((contract.lpp_rate)/100)
-elif amount &lt; minimum_legal and not contract.lpp_contract_id:
-    result = -(minimum_legal)*((contract.lpp_rate)/100)
+    if contract.lpp_contract_id:
+        amount = amount - contract.lpp_contract_id.dc_amount
+    amount = amount / 12
+    amount = amount * (contract.occupation_rate / 100)
+    amount = amount * (payslip.working_rate / 100)
+    if amount &gt; maximum_range:
+        result = -(maximum_range)*((contract.lpp_rate)/100)
+    elif amount &lt; minimum_legal and not contract.lpp_contract_id:
+        result = -(minimum_legal)*((contract.lpp_rate)/100)
+    else:
+        result = -(amount)*((contract.lpp_rate)/100)
 else:
-    result = -(amount)*((contract.lpp_rate)/100)
-else:
-result = -contract.lpp_amount</field>
+    result = -contract.lpp_amount</field>
         <field name="amount_percentage_base">
             -contract.lpp_amount or ((((contract.wage_fulltime*12) - (contract.lpp_contract_id.dc_amount or 0))/12)*(contract.occupation_rate/100)*(payslip.working_rate/100))
         </field>
@@ -426,9 +426,9 @@ result = (per*(categories.BASIC + categories.ALW))/100
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
 if payslip.wage_type == 'hour':
-result = contract.wage*payslip.worked_hours
+    result = contract.wage*payslip.worked_hours
 else:
-result = contract.wage*payslip.working_rate/100
+    result = contract.wage*payslip.working_rate/100
         </field>
         <field name="category_id" ref="hr_payroll.BASIC"/>
     </record>
