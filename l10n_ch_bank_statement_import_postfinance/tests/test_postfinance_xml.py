@@ -22,7 +22,6 @@
 ##############################################################################
 import base64
 import re
-from ..models.postfinance_file_parser import XMLPFParser
 from openerp.modules import get_module_resource
 from openerp.tests import common
 
@@ -41,12 +40,12 @@ class PFXMLParserTest(common.TransactionCase):
 
     def setUp(self):
         super(PFXMLParserTest, self).setUp()
-        self.parser = XMLPFParser()
         self.data_file = get_file_content('demo_pf_ch.tar.gz')
+        self.parser = self.env['account.bank.statement.import.camt.parser']
 
     def test_file_uncompress(self):
         """Test that tar file is uncompressed correctly"""
-        self.parser._check_postfinance(self.data_file)
+        self.parser._check_postfinance_attachments(self.data_file)
         self.assertTrue(
             re.search(r'\<BkToCstmrStmt', self.parser.data_file)
         )
@@ -61,18 +60,20 @@ class PFXMLParserTest(common.TransactionCase):
 <BkToCstmrStmt><GrpHdr></GrpHdr></BkToCstmrStmt>
 </Document>
 """
-        self.parser._check_postfinance(raw)
+        self.parser._check_postfinance_attachments(raw)
         self.assertEqual(self.parser.data_file, raw)
 
-    def test_file_type_detection(self):
-        """Test file type detection"""
-        self.assertIsNotNone(self.parser._check_postfinance(self.data_file))
-        with self.assertRaises(ValueError):
-            self.parser._check_postfinance('BANG')
+    def test_attachments_detection(self):
+        """Test attachments detection"""
+        self.parser._check_postfinance_attachments(self.data_file)
+        self.assertIsNotNone(self.parser.attachments)
+        self.parser.attachments = None
+        self.parser._check_postfinance_attachments('BANG')
+        self.assertIsNone(self.parser.attachments)
 
     def test_parse(self):
         """Test file is correctly parsed"""
-        currency_code, account_number, statements = self.parser._parse(
+        currency_code, account_number, statements = self.parser.parse(
             self.data_file)
         self.assertEqual('CH0309000000250090342', account_number)
         self.assertEqual('CHF', currency_code)
@@ -97,7 +98,7 @@ class PFXMLParserTest(common.TransactionCase):
 
     def test_attachement_extraction(self):
         """Test if scan are extracted correctly"""
-        attachments = self.parser._parse(self.data_file)[2][0]['attachments']
+        attachments = self.parser.parse(self.data_file)[2][0]['attachments']
         self.assertEqual(
             set(['Statement File',
                  '20160414001203000300003', '20160414001203000300004',
