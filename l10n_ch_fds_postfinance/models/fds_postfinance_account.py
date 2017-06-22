@@ -104,10 +104,15 @@ class FdsPostfinanceAccount(models.Model):
             key_pass = self.authentication_key_ids.config()
 
             # connect sftp
+            cnopts = pysftp.CnOpts()
+            cnopts.hostkeys = None
             with pysftp.Connection(
-                    self.hostname, username=self.username,
-                    private_key=tmp_key.name, private_key_pass=key_pass
-            ) as sftp:
+                    self.hostname,
+                    username=self.username,
+                    private_key=tmp_key.name,
+                    private_key_pass=key_pass,
+                    cnopts=cnopts) as sftp:
+
                 directories = sftp.listdir()
 
             # save new directories
