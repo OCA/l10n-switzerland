@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-19 00:40+0000\n"
-"PO-Revision-Date: 2017-04-19 00:40+0000\n"
+"POT-Creation-Date: 2017-06-22 00:56+0000\n"
+"PO-Revision-Date: 2017-06-22 00:56+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: l10n_ch_pain_base
-#: code:addons/l10n_ch_pain_base/models/account_payment_order.py:72
+#: code:addons/l10n_ch_pain_base/models/account_payment_order.py:73
 #, python-format
 msgid ""
 "For pain.001.001.03.ch.02, for non-BVR payments, the BIC is required on the "
@@ -44,7 +44,7 @@ msgid "Payment Order"
 msgstr "Ordre de paiement"
 
 #. module: l10n_ch_pain_base
-#: code:addons/l10n_ch_pain_base/models/account_payment_order.py:91
+#: code:addons/l10n_ch_pain_base/models/account_payment_order.py:92
 #, python-format
 msgid "The field 'CCP/CP-Konto' is not set on the bank account '%s'."
 msgstr ""
