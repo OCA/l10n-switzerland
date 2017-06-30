@@ -25,7 +25,7 @@ import string
 from datetime import date
 from . import export_utils
 
-from openerp import models, fields, api, _, exceptions
+from odoo import models, fields, api, _, exceptions
 
 import logging
 logger = logging.getLogger(__name__)

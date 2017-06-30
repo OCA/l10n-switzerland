@@ -25,12 +25,13 @@
 {
     'name': 'LSV and Postfinance Direct Debit file generation',
     'summary': 'Create LSV and Direct Debit (postfinance) files',
-    'version': '9.0.1.0.0',
+    'version': '10.0.1.0.0',
     'license': 'AGPL-3',
     'author': "brain-tec AG,Compassion,Odoo Community Association (OCA)",
     'website': 'http://www.compassion.ch,http://www.braintec-group.com',
     'category': 'Localization',
     'depends': [
+        'l10n_ch',
         'l10n_ch_payment_slip',
         'account_payment_order',
         'account_payment_mode',

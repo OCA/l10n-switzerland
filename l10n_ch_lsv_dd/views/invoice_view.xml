@@ -4,8 +4,7 @@
   @author: Cyril Sester <cyril.sester@outlook.com>
   The licence is in the file __openerp__.py
 -->
-<openerp>
-  <data>
+<odoo>
     <record id="account_invoice_free_view" model="ir.ui.view">
       <field name="name">account.invoice.free.form</field>
       <field name="model">account.invoice.free</field>
@@ -30,5 +29,4 @@
       key2="client_action_multi" name="Free Invoices"
       res_model="account.invoice.free" src_model="account.invoice"
       view_mode="form" target="new" view_type="form" />
-  </data>
-</openerp>
+</odoo>

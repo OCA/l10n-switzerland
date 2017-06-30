@@ -19,8 +19,8 @@
 #
 ##############################################################################
 from datetime import datetime, timedelta
-from openerp import fields, exceptions, _
-from openerp.tools import mod10r
+from odoo import fields, exceptions, _
+from odoo.tools import mod10r
 
 # Mapping between Latin-1 to ascii characters, used for LSV.
 LSV_LATIN1_TO_ASCII_MAPPING = {

@@ -4,8 +4,7 @@
   @author: Cyril Sester <cyril.sester@outlook.com>
   The licence is in the file __openerp__.py
 -->
-<openerp>
-  <data>
+<odoo>
     <record id="view_post_dd_export_wizard_form" model="ir.ui.view">
       <field name="name">Post dd export wizard view</field>
       <field name="model">post.dd.export.wizard</field>
@@ -31,5 +30,4 @@
         </form>
       </field>
     </record>
-  </data>
-</openerp>
+</odoo>

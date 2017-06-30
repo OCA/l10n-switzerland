@@ -19,10 +19,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, api, _
+from odoo import models, api, _
 import base64
 from lxml import etree
-from openerp.tools import float_round
+from odoo.tools import float_round
 
 ACCEPTED_PAIN_FLAVOURS = (
     'pain.001.001.03.ch.02',

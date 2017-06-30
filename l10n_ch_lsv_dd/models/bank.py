@@ -18,8 +18,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields, api, _, exceptions
-from openerp.tools import mod10r
+from odoo import models, fields, api, _, exceptions
+from odoo.tools import mod10r
 
 
 class ResPartnerBank(models.Model):

@@ -19,8 +19,8 @@
 #
 ##############################################################################
 
-from openerp.tests import TransactionCase
-from openerp import exceptions
+from odoo.tests import TransactionCase
+from odoo import exceptions
 from collections import namedtuple
 
 
