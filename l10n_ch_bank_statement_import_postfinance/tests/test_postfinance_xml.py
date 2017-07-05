@@ -22,8 +22,8 @@
 ##############################################################################
 import base64
 import re
-from openerp.modules import get_module_resource
-from openerp.tests import common
+from odoo.modules import get_module_resource
+from odoo.tests import common
 
 
 def get_file_content(filename):
