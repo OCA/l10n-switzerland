@@ -22,7 +22,7 @@ from tarfile import TarFile, TarError
 from cStringIO import StringIO
 from lxml import etree
 
-from openerp import models
+from odoo import models
 
 _logger = logging.getLogger(__name__)
 
@@ -51,7 +51,7 @@ class XMLPFParser(models.AbstractModel):
         currency, account_number, statements = super(XMLPFParser, self).parse(
             self.data_file)
 
-        if statements and self.attachments:
+        if statements and getattr(self, 'attachments', False):
             statements[0]['attachments'] = self._parse_attachments()
 
         return currency, account_number, statements
