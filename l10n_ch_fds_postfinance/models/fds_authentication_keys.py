@@ -3,8 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
-from openerp import models, fields, api
-from openerp.tools.config import config
+from odoo import models, fields, api
+from odoo.tools.config import config
 
 logger = logging.getLogger(__name__)
 

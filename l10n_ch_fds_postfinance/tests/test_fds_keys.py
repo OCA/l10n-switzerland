@@ -3,8 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import mock
 
-from openerp.exceptions import Warning as UserError
-from openerp.tests.common import TransactionCase
+from odoo.exceptions import Warning as UserError
+from odoo.tests.common import TransactionCase
 
 auth_keys = 'openerp.addons.l10n_ch_fds_postfinance.models' \
     '.fds_authentication_keys.FdsAuthenticationKeys'

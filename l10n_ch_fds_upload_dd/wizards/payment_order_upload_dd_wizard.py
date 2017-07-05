@@ -25,7 +25,7 @@ import os
 from tempfile import mkstemp
 
 import openerp
-from openerp import models, fields, api, exceptions, _
+from odoo import models, fields, api, exceptions, _
 
 try:
     import pysftp
