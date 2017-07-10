@@ -100,11 +100,14 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
             dir = fds_id.directory_ids.filtered('allow_download_file')
 
             # connect sftp
+            cnopts = pysftp.CnOpts()
+            cnopts.hostkeys = None
             with pysftp.Connection(
                     hostname,
                     username=username,
                     private_key=tmp_key.name,
-                    private_key_pass=key_pass) as sftp:
+                    private_key_pass=key_pass,
+                    cnopts=cnopts) as sftp:
 
                 fds_files_ids = self._download_file(sftp, dir, tmp_d, fds_id)
 
