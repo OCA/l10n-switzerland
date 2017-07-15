@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-11 18:46+0000\n"
+"POT-Creation-Date: 2017-07-01 05:07+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/pt_BR/)\n"
@@ -71,7 +71,7 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: selection:scan.bvr,state:0
 msgid "New"
-msgstr ""
+msgstr "Novo"
 
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:0 field:scan.bvr,bank_account_id:0
