@@ -27,9 +27,9 @@
                         <p>SFTP unable to connect.</p>
                     </group>
                     <footer>
-                        <button string="import" name="import_button" type="object" class="oe_highlight" icon="gtk-apply" states="default" />
-                        <button string="Close" special="cancel" icon="gtk-close" states="error,errorSFTP,done"/>
-                        <button string="Cancel" special="cancel" states="default" icon="gtk-cancel" />
+                        <button string="import" name="import_button" type="object" class="oe_highlight" states="default" />
+                        <button string="Close" special="cancel" states="error,errorSFTP,done"/>
+                        <button string="Cancel" special="cancel" states="default" />
                     </footer>
                 </form>
             </field>
