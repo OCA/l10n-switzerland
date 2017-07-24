@@ -20,9 +20,9 @@
                         <field name="state" />
                     </group>
                     <footer>
-                        <button string="Import to Bank Statement" name="import_button" type="object"  class="oe_highlight" icon="gtk-convert" states="draft"/>
-                        <button name="change2error_button" string="File Corrupt" type="object" icon="gtk-cancel" confirm="Are you sure?" states="draft"/>
-                        <button name="change2draft_button" string="Reset to draft" type="object" icon="gtk-undo" confirm="Are you sure?" states="error"/>
+                        <button string="Import to Bank Statement" name="import_button" type="object"  class="oe_highlight" states="draft"/>
+                        <button name="change2error_button" string="File Corrupt" type="object" confirm="Are you sure?" states="draft"/>
+                        <button name="change2draft_button" string="Reset to draft" type="object" confirm="Are you sure?" states="error"/>
                     </footer>
                 </form>
             </field>
