@@ -69,3 +69,10 @@ class ResCompany(models.Model):
         default="in_memory"
     )
     bvr_background = fields.Boolean('Insert BVR background ?')
+
+    bvr_header_partner_address = fields.Boolean(
+        'Header partner address',
+        default=False,
+        help='Enabling this will print partner address top-right on the '
+             'page header',
+    )

@@ -20,6 +20,7 @@
                             <field name="bvr_amount_line_horz"/>
                             <field name="bvr_amount_line_vert"/>
                             <field name="bvr_background"/>
+                            <field name="bvr_header_partner_address"/>
                             <field name="merge_mode"/>
                         </group>
                     </page>
