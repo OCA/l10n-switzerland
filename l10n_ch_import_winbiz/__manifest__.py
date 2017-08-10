@@ -4,7 +4,7 @@
 
 {
     'name': 'Accounting Import WinBIZ',
-    'version': '9.0.1.0.0',
+    'version': '10.0.1.0.0',
     'category': 'Localization',
     'website': 'https://opennet.ch',
     'author': 'Open Net Sàrl, Camptocamp, Odoo Community Association (OCA)',
@@ -22,5 +22,5 @@
         'views/menu.xml',
     ],
     'application': False,
-    'installable': False,
+    'installable': True,
 }
