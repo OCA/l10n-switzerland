@@ -7,13 +7,13 @@
     'name': 'Accounting Import Cresus',
     'summary': 'Allows to import Crésus .txt files containing journal entries '
                'into Odoo.',
-    'version': '9.0.1.0.0',
+    'version': '10.0.1.0.0',
     'category': 'accounting',
     'website': 'https://odoo-community.org/',
     'author': 'Camptocamp, Open Net Sàrl, Odoo Community Association (OCA)',
     'license': 'AGPL-3',
     'application': False,
-    'installable': False,
+    'installable': True,
     'depends': [
         'account_accountant',
     ],

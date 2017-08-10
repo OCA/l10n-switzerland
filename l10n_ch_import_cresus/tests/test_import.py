@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import openerp.tests.common as common
-from openerp.modules import get_resource_path
+from odoo.modules import get_resource_path
 import logging
 from StringIO import StringIO
 import base64

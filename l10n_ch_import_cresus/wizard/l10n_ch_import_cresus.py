@@ -6,8 +6,8 @@
 import base64
 import csv
 import tempfile
-from openerp import models, fields, api, exceptions
-from openerp.tools.translate import _
+from odoo import models, fields, api, exceptions
+from odoo.tools.translate import _
 from datetime import datetime
 
 
