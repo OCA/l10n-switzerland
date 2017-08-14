@@ -17,7 +17,8 @@ class HrPayslip(models.Model):
         string='Number of non-working days (not payable)')
     working_rate = fields.Float(
         string='Working Rate (%)',
-        readonly=True)
+        readonly=True,
+        default=100)
     worked_hours = fields.Float(
         string='Number of worked hours',
         readonly=True,
@@ -60,6 +61,8 @@ class HrPayslip(models.Model):
                 worked_days = payslip.working_days - payslip.non_working_days
                 payslip.working_rate = \
                     worked_days/float(payslip.working_days)*100
+            elif payslip.working_days == 0 and payslip.non_working_days == 0:
+                payslip.working_rate = 100
 
     @api.multi
     def compute_sheet(self):
