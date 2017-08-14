@@ -23,7 +23,7 @@ class TestMaxLPP(common.TransactionCase):
         self.ac_c_sol = self.ref('l10n_ch_hr_payroll.AC_C_SOL')
         self.ac_e = self.ref('l10n_ch_hr_payroll.AC_E')
         self.ac_e_sol = self.ref('l10n_ch_hr_payroll.AC_E_SOL')
-        self.alfa_vd = self.ref('l10n_ch_hr_payroll.ALFA_VD')
+        self.alfa = self.ref('l10n_ch_hr_payroll.ALFA')
         self.avs_c = self.ref('l10n_ch_hr_payroll.AVS_C')
         self.avs_e = self.ref('l10n_ch_hr_payroll.AVS_E')
         self.pc_f_vd_c = self.ref('l10n_ch_hr_payroll.PC_F_VD_C')
@@ -52,7 +52,7 @@ class TestMaxLPP(common.TransactionCase):
             self.ac_e,
             self.ac_c_sol,
             self.ac_e_sol,
-            self.alfa_vd,
+            self.alfa,
             self.avs_c,
             self.avs_e,
             self.pc_f_vd_c,
@@ -113,7 +113,11 @@ class TestMaxLPP(common.TransactionCase):
             'laa_per': 0.46,
             'lca_per': 0.52,
             'lpp_min': 2056.25,
-            'lpp_max': 7050.00
+            'lpp_max': 7050.00,
+            'fa_amount_child':250,
+            'fa_amount_student':330,
+            'fa_min_number_childs': 3,
+            'fa_amount_addicitional':120
             })
 
     def test_max_lpp(self):
@@ -175,8 +179,8 @@ class TestMaxLPP(common.TransactionCase):
                 self.assertEqual(line.python_rate, -1)
                 self.assertEqual(line.total, -15)
 
-            # ALFA_VD
-            if line.salary_rule_id.id == self.alfa_vd:
+            # ALFA
+            if line.salary_rule_id.id == self.alfa:
                 self.assertEqual(
                     line.python_amount,
                     round((2*250)+330+120, 2))

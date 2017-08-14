@@ -58,7 +58,11 @@ class TestWizard(common.TransactionCase):
             'laa_per': 0.49,
             'lca_per': 0.82,
             'lpp_min': 2086.25,
-            'lpp_max': 7010.00
+            'lpp_max': 7010.00,
+            'fa_amount_child':250,
+            'fa_amount_student':330,
+            'fa_min_number_childs': 3,
+            'fa_amount_addicitional':120
             })
 
         self.company = self.env.user.company_id
@@ -93,6 +97,10 @@ class TestWizard(common.TransactionCase):
         self.assertEqual(self.configs_default.lca_per, 0)
         self.assertEqual(self.configs_default.lpp_min, 2056.25)
         self.assertEqual(self.configs_default.lpp_max, 7050.00)
+        self.assertEqual(self.configs_default.fa_amount_child, 0)
+        self.assertEqual(self.configs_default.fa_amount_student, 0)
+        self.assertEqual(self.configs_default.fa_min_number_childs, 3)
+        self.assertEqual(self.configs_default.fa_amount_addicitional, 0)
         _logger.debug('OK : Test Defaults Wizard')
 
         # Delete connection with the company
@@ -131,7 +139,7 @@ class TestWizard(common.TransactionCase):
         list_rule_cc = [
             ('l10n_ch_hr_payroll.AC_E', 'credit'),
             ('l10n_ch_hr_payroll.AC_E_SOL', 'credit'),
-            ('l10n_ch_hr_payroll.ALFA_VD', 'credit'),
+            ('l10n_ch_hr_payroll.ALFA', 'credit'),
             ('l10n_ch_hr_payroll.AVS_E', 'credit'),
             ('l10n_ch_hr_payroll.PC_F_VD_E', 'credit'),
             ('l10n_ch_hr_payroll.BASIC_CH', 'credit'),
@@ -151,7 +159,7 @@ class TestWizard(common.TransactionCase):
             ('l10n_ch_hr_payroll.AC_C_SOL', 'debit'),
             ('l10n_ch_hr_payroll.AC_E', 'debit'),
             ('l10n_ch_hr_payroll.AC_E_SOL', 'debit'),
-            ('l10n_ch_hr_payroll.ALFA_VD', 'debit'),
+            ('l10n_ch_hr_payroll.ALFA', 'debit'),
             ('l10n_ch_hr_payroll.AVS_C', 'debit'),
             ('l10n_ch_hr_payroll.AVS_E', 'debit'),
             ('l10n_ch_hr_payroll.PC_F_VD_C', 'debit'),
@@ -219,4 +227,8 @@ class TestWizard(common.TransactionCase):
         self.assertEqual(self.company.lca_per, -0.82)
         self.assertEqual(self.company.lpp_min, 2086.25)
         self.assertEqual(self.company.lpp_max, 7010.00)
+        self.assertEqual(self.company.fa_amount_child, 250)
+        self.assertEqual(self.company.fa_amount_student, 330)
+        self.assertEqual(self.company.fa_amount_student, 3)
+        self.assertEqual(self.company.fa_amount_addicitional, 120)
         _logger.debug('OK : Test Saved Values sent to company')
