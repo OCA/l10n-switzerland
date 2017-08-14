@@ -59,10 +59,10 @@ class TestWizard(common.TransactionCase):
             'lca_per': 0.82,
             'lpp_min': 2086.25,
             'lpp_max': 7010.00,
-            'fa_amount_child':250,
-            'fa_amount_student':330,
+            'fa_amount_child': 250,
+            'fa_amount_student': 330,
             'fa_min_number_childs': 3,
-            'fa_amount_addicitional':120
+            'fa_amount_addicitional': 120
             })
 
         self.company = self.env.user.company_id
@@ -229,6 +229,6 @@ class TestWizard(common.TransactionCase):
         self.assertEqual(self.company.lpp_max, 7010.00)
         self.assertEqual(self.company.fa_amount_child, 250)
         self.assertEqual(self.company.fa_amount_student, 330)
-        self.assertEqual(self.company.fa_amount_student, 3)
+        self.assertEqual(self.company.fa_min_number_childs, 3)
         self.assertEqual(self.company.fa_amount_addicitional, 120)
         _logger.debug('OK : Test Saved Values sent to company')
