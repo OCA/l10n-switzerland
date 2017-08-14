@@ -114,7 +114,7 @@ class ResCompany(models.Model):
         default='3',
         digits=dp.get_precision('Account'),
         required=False)
-    fa_amount_addicitional = fields.Float(
+    fa_amount_additional = fields.Float(
         string="Additional allowance amount",
         default='0',
         digits=dp.get_precision('Account'),

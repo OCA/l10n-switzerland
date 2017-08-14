@@ -116,7 +116,7 @@ result += contract.employee_id.children_student * employee.company_id.fa_amount_
 min_number_childs = employee.company_id.fa_min_number_childs - 1
 if contract.employee_id.children + contract.employee_id.children_student &gt; min_number_childs:
     child_supp = contract.employee_id.children + contract.employee_id.children_student - min_number_childs
-    result += child_supp * employee.company_id.fa_amount_addicitional</field>
+    result += child_supp * employee.company_id.fa_amount_additional</field>
         <field name="quantity">1</field>
         <field name="condition_range">categories.BASIC + categories.ALW</field>
         <field name="sequence">50</field>

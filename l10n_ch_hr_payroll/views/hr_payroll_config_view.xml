@@ -109,7 +109,7 @@
                                     <field name="fa_amount_child"/>
                                     <field name="fa_amount_student"/>
                                     <field name="fa_min_number_childs"/>
-                                    <field name="fa_amount_addicitional"/>
+                                    <field name="fa_amount_additional"/>
                                 </group>
                             </group>
                         </group>

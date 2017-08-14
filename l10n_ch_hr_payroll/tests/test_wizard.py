@@ -62,7 +62,7 @@ class TestWizard(common.TransactionCase):
             'fa_amount_child': 250,
             'fa_amount_student': 330,
             'fa_min_number_childs': 3,
-            'fa_amount_addicitional': 120
+            'fa_amount_additional': 120
             })
 
         self.company = self.env.user.company_id
@@ -100,7 +100,7 @@ class TestWizard(common.TransactionCase):
         self.assertEqual(self.configs_default.fa_amount_child, 0)
         self.assertEqual(self.configs_default.fa_amount_student, 0)
         self.assertEqual(self.configs_default.fa_min_number_childs, 3)
-        self.assertEqual(self.configs_default.fa_amount_addicitional, 0)
+        self.assertEqual(self.configs_default.fa_amount_additional, 0)
         _logger.debug('OK : Test Defaults Wizard')
 
         # Delete connection with the company
@@ -230,5 +230,5 @@ class TestWizard(common.TransactionCase):
         self.assertEqual(self.company.fa_amount_child, 250)
         self.assertEqual(self.company.fa_amount_student, 330)
         self.assertEqual(self.company.fa_min_number_childs, 3)
-        self.assertEqual(self.company.fa_amount_addicitional, 120)
+        self.assertEqual(self.company.fa_amount_additional, 120)
         _logger.debug('OK : Test Saved Values sent to company')

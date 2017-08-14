@@ -117,7 +117,7 @@ class TestMaxLPP(common.TransactionCase):
             'fa_amount_child': 250,
             'fa_amount_student': 330,
             'fa_min_number_childs': 3,
-            'fa_amount_addicitional': 120
+            'fa_amount_additional': 120
             })
 
     def test_max_lpp(self):
