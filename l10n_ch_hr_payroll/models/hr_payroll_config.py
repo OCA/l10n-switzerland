@@ -16,7 +16,7 @@ class HrPayrollConfig(models.TransientModel):
         all_equal = self.search_account_by_rule([
             ('l10n_ch_hr_payroll.AC_E', 'credit'),
             ('l10n_ch_hr_payroll.AC_E_SOL', 'credit'),
-            ('l10n_ch_hr_payroll.ALFA_VD', 'credit'),
+            ('l10n_ch_hr_payroll.ALFA', 'credit'),
             ('l10n_ch_hr_payroll.AVS_E', 'credit'),
             ('l10n_ch_hr_payroll.PC_F_VD_E', 'credit'),
             ('l10n_ch_hr_payroll.BASIC_CH', 'credit'),
@@ -53,7 +53,7 @@ class HrPayrollConfig(models.TransientModel):
             ('l10n_ch_hr_payroll.AC_C_SOL', 'debit'),
             ('l10n_ch_hr_payroll.AC_E', 'debit'),
             ('l10n_ch_hr_payroll.AC_E_SOL', 'debit'),
-            ('l10n_ch_hr_payroll.ALFA_VD', 'debit'),
+            ('l10n_ch_hr_payroll.ALFA', 'debit'),
             ('l10n_ch_hr_payroll.AVS_C', 'debit'),
             ('l10n_ch_hr_payroll.AVS_E', 'debit'),
             ('l10n_ch_hr_payroll.PC_F_VD_C', 'debit'),
@@ -159,16 +159,18 @@ class HrPayrollConfig(models.TransientModel):
     # configs default values
     @api.model
     def _get_default_configs(self, config):
-        user_company_id = self.env.user.company_id
-        val = getattr(user_company_id, config)
+        val = getattr(self.env.user.company_id, config)
         if val < 0:
             val = -val
         return val
 
     @api.model
     def _get_default_lpp_contracts(self):
-        user_company_id = self.env.user.company_id
-        return user_company_id.lpp_contract_ids
+        return self.env.user.company_id.lpp_contract_ids
+
+    company_id = fields.Many2one(
+        comodel_name='res.company',
+        default=lambda self: self.env.user.company_id)
 
     # Accounting
     # general
@@ -299,9 +301,28 @@ class HrPayrollConfig(models.TransientModel):
         digits=dp.get_precision('Account'),
         required=False)
 
-    company_id = fields.Many2one(
-        comodel_name='res.company',
-        default=lambda self: self.env.user.company_id)
+    # Family allowances
+    fa_amount_child = fields.Float(
+        string="Amount per child",
+        default=lambda self: self._get_default_configs('fa_amount_child'),
+        digits=dp.get_precision('Account'),
+        required=False)
+    fa_amount_student = fields.Float(
+        string="Amount per student",
+        default=lambda self: self._get_default_configs('fa_amount_student'),
+        digits=dp.get_precision('Account'),
+        required=False)
+    fa_min_number_childs = fields.Float(
+        string="Additional allowance for the",
+        default=lambda self: self._get_default_configs('fa_min_number_childs'),
+        digits=dp.get_precision('Account'),
+        required=False)
+    fa_amount_addicitional = fields.Float(
+        string="Additional allowance amount",
+        default=lambda self: self._get_default_configs('fa_amount_addicitional'),
+        digits=dp.get_precision('Account'),
+        required=False)
+
     lpp_contract_ids = fields.One2many(
         string="OBP contract ids",
         related="company_id.lpp_contract_ids",
@@ -309,12 +330,16 @@ class HrPayrollConfig(models.TransientModel):
         ondelete='cascade')
 
     def values_to_company(self):
-        company_id = self.env.user.company_id
+        company_id = self.company_id
         list_fields = [
             'ac_limit',
             'fadmin_per',
             'lpp_min',
-            'lpp_max'
+            'lpp_max',
+            'fa_amount_child',
+            'fa_amount_student',
+            'fa_min_number_childs',
+            'fa_amount_addicitional'
         ]
         list_fields_neg = [
             'ac_per_off_limit',
@@ -348,7 +373,7 @@ class HrPayrollConfig(models.TransientModel):
             config.assign_account_to_rule([
                 'l10n_ch_hr_payroll.AC_E',
                 'l10n_ch_hr_payroll.AC_E_SOL',
-                'l10n_ch_hr_payroll.ALFA_VD',
+                'l10n_ch_hr_payroll.ALFA',
                 'l10n_ch_hr_payroll.AVS_E',
                 'l10n_ch_hr_payroll.PC_F_VD_E',
                 'l10n_ch_hr_payroll.BASIC_CH',
@@ -376,7 +401,7 @@ class HrPayrollConfig(models.TransientModel):
                 'l10n_ch_hr_payroll.AC_C_SOL',
                 'l10n_ch_hr_payroll.AC_E',
                 'l10n_ch_hr_payroll.AC_E_SOL',
-                'l10n_ch_hr_payroll.ALFA_VD',
+                'l10n_ch_hr_payroll.ALFA',
                 'l10n_ch_hr_payroll.AVS_C',
                 'l10n_ch_hr_payroll.AVS_E',
                 'l10n_ch_hr_payroll.PC_F_VD_C',

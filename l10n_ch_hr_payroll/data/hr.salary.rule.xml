@@ -102,20 +102,21 @@ result = (((categories.BASIC + categories.ALW) - limit)*per_off_limit)
         <field name="category_id" ref="hr_payroll.DED"/>
         <field name="parent_rule_id" ref="AC_SOL"/>
     </record>
-    <record id="ALFA_VD" model="hr.salary.rule">
+    <record id="ALFA" model="hr.salary.rule">
         <field name="amount_select">code</field>
         <field name="appears_on_payslip">True</field>
-        <field name="code">3030_VD</field>
+        <field name="code">3030</field>
         <field name="condition_select">python</field>
         <field name="condition_python">result = contract.employee_id.children + contract.employee_id.children_student &gt; 0</field>
-        <field name="name">Family Allowances (VD)</field>
+        <field name="name">Family Allowances</field>
         <field name="amount_python_compute">
 result = 0
-result += contract.employee_id.children * 250
-result += contract.employee_id.children_student *330
-if contract.employee_id.children + contract.employee_id.children_student &gt; 2:
-    child_supp = contract.employee_id.children + contract.employee_id.children_student - 2
-    result += child_supp * 120</field>
+result += contract.employee_id.children * employee.company_id.fa_amount_child
+result += contract.employee_id.children_student * employee.company_id.fa_amount_student
+min_number_childs = employee.company_id.fa_min_number_childs - 1
+if contract.employee_id.children + contract.employee_id.children_student &gt; min_number_childs:
+    child_supp = contract.employee_id.children + contract.employee_id.children_student - min_number_childs
+    result += child_supp * employee.company_id.fa_amount_addicitional</field>
         <field name="quantity">1</field>
         <field name="condition_range">categories.BASIC + categories.ALW</field>
         <field name="sequence">50</field>
