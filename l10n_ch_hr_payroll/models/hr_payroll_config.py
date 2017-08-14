@@ -319,7 +319,8 @@ class HrPayrollConfig(models.TransientModel):
         required=False)
     fa_amount_addicitional = fields.Float(
         string="Additional allowance amount",
-        default=lambda self: self._get_default_configs('fa_amount_addicitional'),
+        default=lambda self:
+            self._get_default_configs('fa_amount_addicitional'),
         digits=dp.get_precision('Account'),
         required=False)
 

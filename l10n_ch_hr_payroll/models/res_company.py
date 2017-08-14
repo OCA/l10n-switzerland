@@ -119,4 +119,3 @@ class ResCompany(models.Model):
         default='0',
         digits=dp.get_precision('Account'),
         required=False)
-

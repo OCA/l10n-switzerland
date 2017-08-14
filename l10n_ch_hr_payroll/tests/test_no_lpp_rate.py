@@ -126,9 +126,10 @@ class TestNoLPP(common.TransactionCase):
             'lca_per': 0.52,
             'lpp_min': 2056.25,
             'lpp_max': 7050.00,
-            'fa_amount_child':250,
+            'fa_amount_child': 250,
+            'fa_amount_student': 330,
             'fa_min_number_childs': 3,
-            'fa_amount_addicitional':120
+            'fa_amount_addicitional': 120
             })
 
     def test_no_lpp(self):
