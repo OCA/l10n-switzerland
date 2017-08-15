@@ -100,12 +100,12 @@ class ResCompany(models.Model):
 
     # -Family Allowances-
     fa_amount_child = fields.Float(
-        string="Amount per child",
+        string="Amount per child (0-16)",
         default='0',
         digits=dp.get_precision('Account'),
         required=False)
     fa_amount_student = fields.Float(
-        string="Amount per student",
+        string="Amount per student (16+)",
         default='0',
         digits=dp.get_precision('Account'),
         required=False)
