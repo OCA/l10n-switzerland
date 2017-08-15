@@ -312,10 +312,9 @@ class HrPayrollConfig(models.TransientModel):
         default=lambda self: self._get_default_configs('fa_amount_student'),
         digits=dp.get_precision('Account'),
         required=False)
-    fa_min_number_childs = fields.Float(
+    fa_min_number_childs = fields.Integer(
         string="Additional allowance for the",
         default=lambda self: self._get_default_configs('fa_min_number_childs'),
-        digits=dp.get_precision('Account'),
         required=False)
     fa_amount_additional = fields.Float(
         string="Additional allowance amount",

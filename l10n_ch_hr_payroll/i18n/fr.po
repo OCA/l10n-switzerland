@@ -536,25 +536,25 @@ msgstr "Taux de travail (%)"
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_fa_amount_child
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_fa_amount_child
 msgid "Amount per child"
-msgstr "Montant par enfants"
+msgstr "Montant par enfant (0-16)"
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_fa_amount_student
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_fa_amount_student
 msgid "Amount per student"
-msgstr "Montant par enfants en formation"
+msgstr "Montant par enfant en formation (16+)"
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_fa_min_number_childs
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_fa_min_number_childs
 msgid "Additional allowance for the"
-msgstr "Allocation complémentaire de le"
+msgstr "Allocation majorée dès le n-ième enfant"
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_fa_amount_additional
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_fa_amount_additional
 msgid "Additional allowance amount"
-msgstr "Montant d'allocation complémentaire"
+msgstr "Montant de la majoration"
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
