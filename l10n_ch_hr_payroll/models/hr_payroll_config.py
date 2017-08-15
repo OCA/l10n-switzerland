@@ -303,12 +303,12 @@ class HrPayrollConfig(models.TransientModel):
 
     # Family allowances
     fa_amount_child = fields.Float(
-        string="Amount per child",
+        string="Amount per child (0-16)",
         default=lambda self: self._get_default_configs('fa_amount_child'),
         digits=dp.get_precision('Account'),
         required=False)
     fa_amount_student = fields.Float(
-        string="Amount per student",
+        string="Amount per student (16+)",
         default=lambda self: self._get_default_configs('fa_amount_student'),
         digits=dp.get_precision('Account'),
         required=False)

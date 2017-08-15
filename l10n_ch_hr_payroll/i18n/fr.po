@@ -535,13 +535,13 @@ msgstr "Taux de travail (%)"
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_fa_amount_child
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_fa_amount_child
-msgid "Amount per child"
+msgid "Amount per child (0-16)"
 msgstr "Montant par enfant (0-16)"
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_fa_amount_student
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_fa_amount_student
-msgid "Amount per student"
+msgid "Amount per student  (16+)"
 msgstr "Montant par enfant en formation (16+)"
 
 #. module: l10n_ch_hr_payroll
