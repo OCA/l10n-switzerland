@@ -7,7 +7,7 @@ Created by sge@open-net.ch
 
 Copyright (c) 2014 Open-Net Ltd.
 -->
-<openerp>
+<odoo>
     <data noupdate="1">
     <record id="hr_payroll_FALW" model="hr.salary.rule.category">
         <field name="name">Free allowance</field>
@@ -34,4 +34,4 @@ Copyright (c) 2014 Open-Net Ltd.
         <field name="parent_id" ref="hr_payroll.DED"/>
     </record>
     </data>
-</openerp>
+</odoo>
