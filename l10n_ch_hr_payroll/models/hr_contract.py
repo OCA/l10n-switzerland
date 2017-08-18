@@ -2,8 +2,8 @@
 # © 2012 David Coninckx (Opennet Sarl)
 # License into __openerp__.py.
 
-from openerp import fields, models
-import openerp.addons.decimal_precision as dp
+from odoo import fields, models
+import odoo.addons.decimal_precision as dp
 
 
 class HrContract(models.Model):

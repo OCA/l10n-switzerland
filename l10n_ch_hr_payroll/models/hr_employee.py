@@ -3,7 +3,7 @@
 # License into __openerp__.py.
 
 
-from openerp import fields, models
+from odoo import fields, models
 
 
 class HrEmployee(models.Model):
