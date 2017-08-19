@@ -162,7 +162,7 @@ msgstr ""
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,state:0
 msgid "State"
-msgstr ""
+msgstr "Staat/Provincie"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.model,name:l10n_ch_import_cresus.model_account_tax

@@ -144,7 +144,7 @@ msgstr ""
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,state:0 field:wizard.pain001,state:0
 msgid "State"
-msgstr ""
+msgstr "Status"
 
 #. module: l10n_ch_fds_upload_sepa
 #: view:fds.postfinance.account:l10n_ch_fds_upload_sepa.view_fds_postfinance_account_sepa_form_inherited

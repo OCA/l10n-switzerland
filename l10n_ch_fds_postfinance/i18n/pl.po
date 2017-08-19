@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Language: pl\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>=14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.actions.act_window,help:l10n_ch_fds_postfinance.action_fds_postfinance_account
@@ -473,7 +473,7 @@ msgstr ""
 #: field:fds.key.clone.wizard,state:0 field:fds.key.generator.wizard,state:0
 #: field:fds.key.import.wizard,state:0 field:fds.postfinance.file,state:0
 msgid "State"
-msgstr ""
+msgstr "Stan"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.key.clone.wizard,des_user_id:0

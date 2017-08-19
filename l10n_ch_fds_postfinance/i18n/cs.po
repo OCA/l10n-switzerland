@@ -473,7 +473,7 @@ msgstr ""
 #: field:fds.key.clone.wizard,state:0 field:fds.key.generator.wizard,state:0
 #: field:fds.key.import.wizard,state:0 field:fds.postfinance.file,state:0
 msgid "State"
-msgstr ""
+msgstr "Stav"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.key.clone.wizard,des_user_id:0

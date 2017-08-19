@@ -72,7 +72,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.file,bank_statement_id:0
 msgid "Bank Statement"
-msgstr ""
+msgstr "Extracto bancario"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.files.import.tobankstatments.wizard:l10n_ch_fds_postfinance.view_fds_files_import_tobankstatments_wizard_form
