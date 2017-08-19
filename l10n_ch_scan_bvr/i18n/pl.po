@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-24 03:05+0000\n"
+"POT-Creation-Date: 2017-07-15 03:51+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Polish (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/pl/)\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Language: pl\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 #. module: l10n_ch_scan_bvr
 #: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:90
@@ -61,7 +61,7 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,state:0
 msgid "State"
-msgstr ""
+msgstr "Stan"
 
 #. module: l10n_ch_scan_bvr
 #: selection:scan.bvr,state:0

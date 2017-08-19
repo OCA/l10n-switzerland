@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-18 03:45+0000\n"
+"POT-Creation-Date: 2017-07-15 03:51+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/zh_CN/)\n"
@@ -106,7 +106,7 @@ msgstr ""
 #: field:post.dd.export.wizard,state:0
 #, python-format
 msgid "State"
-msgstr ""
+msgstr "状态"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:46

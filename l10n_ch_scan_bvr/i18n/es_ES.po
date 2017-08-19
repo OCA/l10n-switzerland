@@ -10,11 +10,11 @@ msgstr ""
 "POT-Creation-Date: 2017-07-15 03:51+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Swedish (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/sv/)\n"
+"Language-Team: Spanish (Spain) (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/es_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sv\n"
+"Language: es_ES\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_scan_bvr
@@ -61,7 +61,7 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,state:0
 msgid "State"
-msgstr "Status"
+msgstr "Estado"
 
 #. module: l10n_ch_scan_bvr
 #: selection:scan.bvr,state:0
@@ -177,10 +177,10 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: view:scan.bvr:0
 msgid "Cancel"
-msgstr "Avbryt"
+msgstr "Cancelar"
 
 #. module: l10n_ch_scan_bvr
 #: model:ir.model,name:l10n_ch_scan_bvr.model_res_partner view:scan.bvr:0
 #: field:scan.bvr,partner_id:0
 msgid "Partner"
-msgstr "Företag"
+msgstr ""
