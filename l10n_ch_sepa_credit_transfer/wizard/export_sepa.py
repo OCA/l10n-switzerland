@@ -84,31 +84,20 @@ class BankingExportSepaWizard(orm.TransientModel):
                 pain_flavor)
 
         if pain_flavor == 'pain.001.003.03.ch.02':
-            gen_args = {
-                'bic_xml_tag': bic_xml_tag,
-                'name_maxsize': name_maxsize,
-                'convert_to_ascii': convert_to_ascii,
-                'payment_method': 'TRF',
-                'pain_flavor': pain_flavor,
-                'sepa_export': sepa_export,
-                'file_obj': self.pool['banking.export.sepa'],
-                'pain_xsd_file':
-                'l10n_ch_sepa_credit_transfer/data/%s.xsd'
-                % pain_flavor,
-            }
+            module = 'l10n_ch_sepa_credit_transfer'
         else:
-            gen_args = {
-                'bic_xml_tag': bic_xml_tag,
-                'name_maxsize': name_maxsize,
-                'convert_to_ascii': convert_to_ascii,
-                'payment_method': 'TRF',
-                'pain_flavor': pain_flavor,
-                'sepa_export': sepa_export,
-                'file_obj': self.pool['banking.export.sepa'],
-                'pain_xsd_file':
-                'account_banking_sepa_credit_transfer/data/%s.xsd'
-                % pain_flavor,
-            }
+            module = 'account_banking_sepa_credit_transfer'
+        gen_args = {
+            'bic_xml_tag': bic_xml_tag,
+            'name_maxsize': name_maxsize,
+            'convert_to_ascii': convert_to_ascii,
+            'payment_method': 'TRF',
+            'pain_flavor': pain_flavor,
+            'sepa_export': sepa_export,
+            'file_obj': self.pool['banking.export.sepa'],
+            'pain_xsd_file': '%s/data/%s.xsd' % (module, pain_flavor)
+        }
+
 
         pain_ns = {
             'xsi': 'http://www.w3.org/2001/XMLSchema-instance',

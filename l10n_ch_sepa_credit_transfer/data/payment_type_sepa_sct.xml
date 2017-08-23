@@ -8,7 +8,7 @@
 
 <record id="export_sepa_sct_001_001_03_ch" model="payment.mode.type">
     <field name="name">SEPA Credit Transfer v03 CH (recommended)</field>
-    <field name="code">pain.001.001.03.ch.02</field>
+    <field name="code">pain.001.003.03.ch.02</field>
     <field name="suitable_bank_types"
        eval="[(6,0,[ref('base_iban.bank_iban')])]" />
     <field name="ir_model_id" ref="model_banking_export_sepa_wizard"/>

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Yannick Vaucher
-#    Copyright 2011 Camptocamp SA
+#    Author: Anar Baghirli
+#    Copyright 2017 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -37,7 +37,7 @@ as the Swiss standards are slightly different.
 It intends to be reusable to accept new definition of specific standards
 by country.
 
-It currently supports the "pain.001" norm for Credit Transfert Initiation.
+It currently supports the "pain.008" norm for Direct Debit Initiation.
 
 """,
     "author": "Camptocamp,Odoo Community Association (OCA)",
