@@ -22,5 +22,5 @@
         'data/hr.salary.rule.category.xml',
         'data/hr.salary.rule.xml'
     ],
-    'installable': False
+    'installable': True
 }
