@@ -349,5 +349,5 @@ class ResPartnerBank(models.Model, BankCommon):
             if 'Bank/CCP' in self.acc_number:
                 self.acc_number = self._get_acc_name()
 
-    _sql_constraints = [('bvr_adherent_uniq', 'unique (bvr_adherent_num)',
-                         'The BVR adherent number must be unique !')]
+    _sql_constraints = [('bvr_adherent_uniq', 'unique (bvr_adherent_num, ccp)',
+                         'The BVR adherent number/ccp pair must be unique !')]
