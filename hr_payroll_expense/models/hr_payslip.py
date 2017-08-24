@@ -46,5 +46,8 @@ class HrPayslip(models.Model):
             hr_expense_s = hr_expense.search([
                 ('sheet_id', '=', expense.id)
             ])
-            hr_expense_s.state = 'done'
+
+            hr_expense_s.write({
+                'state': 'done'
+            })
         return super(HrPayslip, self).action_payslip_done()
