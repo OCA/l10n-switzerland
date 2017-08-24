@@ -19,6 +19,7 @@
      "views/company.xml",
      "views/bank.xml",
      "views/account_invoice.xml",
+     "wizard/bvr_batch_print.xml",
      "wizard/bvr_import_view.xml",
      "report/report_declaration.xml",
      "security/ir.model.access.csv"
