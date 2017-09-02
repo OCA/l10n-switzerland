@@ -36,12 +36,12 @@ msgstr ""
 #. module: l10n_ch_sepa
 #: field:wizard.pain001,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: l10n_ch_sepa
 #: field:wizard.pain001,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: l10n_ch_sepa
 #: code:addons/l10n_ch_sepa/base_sepa/msg_sepa.py:50
@@ -104,12 +104,12 @@ msgstr "ID"
 #. module: l10n_ch_sepa
 #: field:wizard.pain001,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: l10n_ch_sepa
 #: field:wizard.pain001,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: l10n_ch_sepa
 #: code:addons/l10n_ch_sepa/base_sepa/msg_sepa.py:50

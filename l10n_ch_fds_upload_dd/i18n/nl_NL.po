@@ -35,12 +35,12 @@ msgstr ""
 #. module: l10n_ch_fds_upload_dd
 #: field:fds.dd.upload.history,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: l10n_ch_fds_upload_dd
 #: field:fds.dd.upload.history,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: l10n_ch_fds_upload_dd
 #: field:fds.postfinance.account,dd_upload_ids:0
@@ -91,12 +91,12 @@ msgstr "ID"
 #. module: l10n_ch_fds_upload_dd
 #: field:fds.dd.upload.history,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: l10n_ch_fds_upload_dd
 #: field:fds.dd.upload.history,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: l10n_ch_fds_upload_dd
 #: selection:fds.dd.upload.history,state:0

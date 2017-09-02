@@ -80,7 +80,7 @@ msgstr ""
 #: view:fds.key.generator.wizard:l10n_ch_fds_postfinance.view_fds_key_generator_wizard_form
 #: view:fds.key.import.wizard:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
 msgid "Cancel"
-msgstr ""
+msgstr "Verwijderen"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.files.import.tobankstatments.wizard:l10n_ch_fds_postfinance.view_fds_files_import_tobankstatments_wizard_form
@@ -120,7 +120,7 @@ msgstr ""
 #: field:fds.postfinance.directory,create_uid:0
 #: field:fds.postfinance.file,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.authentication.keys,create_date:0
@@ -132,7 +132,7 @@ msgstr ""
 #: field:fds.postfinance.directory,create_date:0
 #: field:fds.postfinance.file,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.file,data:0
@@ -365,7 +365,7 @@ msgstr ""
 #: field:fds.postfinance.directory,write_uid:0
 #: field:fds.postfinance.file,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.authentication.keys,write_date:0
@@ -377,7 +377,7 @@ msgstr ""
 #: field:fds.postfinance.directory,write_date:0
 #: field:fds.postfinance.file,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.key.clone.wizard:l10n_ch_fds_postfinance.view_fds_key_clone_wizard_form

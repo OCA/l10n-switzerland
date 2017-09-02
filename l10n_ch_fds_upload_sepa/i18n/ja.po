@@ -30,7 +30,7 @@ msgstr "キャンセル"
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
 msgid "Close"
-msgstr ""
+msgstr "閉じる"
 
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited

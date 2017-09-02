@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-11 14:20+0000\n"
+"POT-Creation-Date: 2017-08-19 04:50+0000\n"
 "PO-Revision-Date: 2015-06-17 13:35+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/sl/)\n"
@@ -60,7 +60,7 @@ msgstr ""
 #. module: l10n_ch_bank
 #: field:res.bank,bank_lang:0
 msgid "Language"
-msgstr ""
+msgstr "Jezik"
 
 #. module: l10n_ch_bank
 #: field:res.bank,bank_postaccount:0

@@ -25,7 +25,7 @@ msgstr ""
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
 msgid "Cancel"
-msgstr ""
+msgstr "Verwijderen"
 
 #. module: l10n_ch_fds_upload_sepa
 #: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
@@ -40,12 +40,12 @@ msgstr ""
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: l10n_ch_fds_upload_sepa
 #: selection:wizard.pain001,state:0
@@ -91,12 +91,12 @@ msgstr "ID"
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: l10n_ch_fds_upload_sepa
 #: field:fds.sepa.upload.history,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: l10n_ch_fds_upload_sepa
 #: selection:fds.sepa.upload.history,state:0

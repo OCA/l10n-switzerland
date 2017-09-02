@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-17 12:24+0000\n"
+"POT-Creation-Date: 2017-08-19 04:50+0000\n"
 "PO-Revision-Date: 2015-06-17 13:35+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/it/)\n"
@@ -99,7 +99,7 @@ msgstr "Fattura"
 
 #. module: l10n_ch_base_bank
 #: code:addons/l10n_ch_base_bank/bank.py:113
-#: code:addons/l10n_ch_base_bank/bank.py:220
+#: code:addons/l10n_ch_base_bank/bank.py:225
 #, python-format
 msgid "Please enter a correct postal number. (01-23456-1 or 12345)"
 msgstr "Inserire il numero corretto del conto postale. (es. 01-23456-1)"
@@ -120,7 +120,7 @@ msgid "The BVR adherent number must be unique !"
 msgstr "Il numero di adesione PVR deve essere univoco"
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/bank.py:246
+#: code:addons/l10n_ch_base_bank/bank.py:251
 #, python-format
 msgid ""
 "You can not enter a CCP/CP-Konto both on the bank and on an account of type "
