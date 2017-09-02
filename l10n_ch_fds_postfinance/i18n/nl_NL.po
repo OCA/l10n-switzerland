@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-03 03:53+0000\n"
-"PO-Revision-Date: 2017-06-03 03:53+0000\n"
+"POT-Creation-Date: 2017-08-25 02:50+0000\n"
+"PO-Revision-Date: 2017-08-25 02:50+0000\n"
 "Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -61,7 +61,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_key_generator_wizard_form
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
 msgid "Cancel"
-msgstr ""
+msgstr "Verwijderen"
 
 #. module: l10n_ch_fds_postfinance
 #: selection:fds.postfinance.file,state:0
@@ -112,7 +112,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_create_uid
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_authentication_keys_create_date
@@ -124,7 +124,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_create_date
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_data
@@ -437,7 +437,7 @@ msgstr "Laatst gewijzigd op"
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_write_uid
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_authentication_keys_write_date
@@ -449,7 +449,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_write_date
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_key_clone_wizard_form

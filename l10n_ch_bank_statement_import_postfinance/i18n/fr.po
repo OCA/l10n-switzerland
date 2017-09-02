@@ -1,0 +1,57 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * l10n_ch_bank_statement_import_postfinance
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Hosni Hadj-Taher <inactive+hajhasni@transifex.com>, 2017
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2017
+# Quentin THEURET <odoo@kerpeo.com>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-25 02:50+0000\n"
+"PO-Revision-Date: 2017-08-25 02:50+0000\n"
+"Last-Translator: Quentin THEURET <odoo@kerpeo.com>, 2017\n"
+"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: l10n_ch_bank_statement_import_postfinance
+#: model:ir.model,name:l10n_ch_bank_statement_import_postfinance.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr "Ligne de Relevé Bancaire"
+
+#. module: l10n_ch_bank_statement_import_postfinance
+#: model:ir.model.fields,field_description:l10n_ch_bank_statement_import_postfinance.field_account_bank_statement_line_datas
+msgid "File Content"
+msgstr "Contenu du fichier"
+
+#. module: l10n_ch_bank_statement_import_postfinance
+#: model:ir.model.fields,field_description:l10n_ch_bank_statement_import_postfinance.field_account_bank_statement_line_file_ref
+msgid "File ref"
+msgstr "Réf. Fichier"
+
+#. module: l10n_ch_bank_statement_import_postfinance
+#: model:ir.model,name:l10n_ch_bank_statement_import_postfinance.model_account_bank_statement_import
+msgid "Import Bank Statement"
+msgstr "Import Relevé bancaire"
+
+#. module: l10n_ch_bank_statement_import_postfinance
+#: model:ir.ui.view,arch_db:l10n_ch_bank_statement_import_postfinance.account_bank_statement_import_view
+msgid "Postfinance Format (.xml, .tar.gz)"
+msgstr "Format Postfinance (.xml, .tar.gz)"
+
+#. module: l10n_ch_bank_statement_import_postfinance
+#: model:ir.model.fields,field_description:l10n_ch_bank_statement_import_postfinance.field_account_bank_statement_line_related_file
+msgid "Related file"
+msgstr "Fichier lié"
+
+#. module: l10n_ch_bank_statement_import_postfinance
+#: model:ir.model,name:l10n_ch_bank_statement_import_postfinance.model_account_bank_statement_import_camt_parser
+msgid "account.bank.statement.import.camt.parser"
+msgstr "account.bank.statement.import.camt.parser"

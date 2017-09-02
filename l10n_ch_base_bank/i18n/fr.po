@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-18 13:43+0000\n"
-"PO-Revision-Date: 2017-04-01 11:28+0000\n"
+"POT-Creation-Date: 2017-08-25 02:50+0000\n"
+"PO-Revision-Date: 2017-08-24 16:09+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-9-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -131,8 +131,8 @@ msgstr "Identifiant Suisse unique de la banque, utilisé dans le numéro IBAN"
 
 #. module: l10n_ch_base_bank
 #: sql_constraint:res.partner.bank:0
-msgid "The BVR adherent number must be unique !"
-msgstr "Le numéro d'adhérent BVR doit être unique"
+msgid "The BVR adherent number/ccp pair must be unique !"
+msgstr ""
 
 #. module: l10n_ch_base_bank
 #: model:ir.model.fields,help:l10n_ch_base_bank.field_res_partner_bank_bvr_adherent_num
