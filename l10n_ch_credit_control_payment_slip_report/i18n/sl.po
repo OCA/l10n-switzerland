@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-26 16:08+0000\n"
+"POT-Creation-Date: 2017-08-19 04:42+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/sl/)\n"
@@ -27,7 +27,7 @@ msgstr ""
 #: code:addons/l10n_ch_credit_control_payment_slip_report/credit_control_printer.py:41
 #, python-format
 msgid "No credit control lines selected."
-msgstr ""
+msgstr "Nobena postavka kreditnega nadzora ni izbrana."
 
 #. module: l10n_ch_credit_control_payment_slip_report
 #: code:addons/l10n_ch_credit_control_payment_slip_report/credit_control_communication.py:56
@@ -43,7 +43,7 @@ msgstr ""
 #. module: l10n_ch_credit_control_payment_slip_report
 #: model:ir.model,name:l10n_ch_credit_control_payment_slip_report.model_credit_control_printer
 msgid "Mass printer"
-msgstr ""
+msgstr "Masovni tiskalnik"
 
 #. module: l10n_ch_credit_control_payment_slip_report
 #: model:ir.actions.report.xml,name:l10n_ch_credit_control_payment_slip_report.report_bvr_html_multi_credit_control
@@ -64,4 +64,4 @@ msgstr ""
 #. module: l10n_ch_credit_control_payment_slip_report
 #: model:ir.model,name:l10n_ch_credit_control_payment_slip_report.model_credit_control_communication
 msgid "credit control communication"
-msgstr ""
+msgstr "komunikacija kreditnega nadzora"
