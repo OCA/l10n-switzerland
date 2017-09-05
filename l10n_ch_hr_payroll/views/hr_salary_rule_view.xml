@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="hr_salary_rule_form_l10n_ch_inherit_info" model="ir.ui.view">
+        <field name="name">hr.salary.rule.form.inherit_ch_info</field>
+        <field name="model">hr.salary.rule</field>
+        <field name="inherit_id" ref="hr_payroll_account.hr_salary_rule_form_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/notebook/page/group/field[@name='account_debit']" position="attributes">
+                <attribute name="attrs">{'readonly':[('category_id','=',%(hr_payroll_INFO)d)]}</attribute>
+            </xpath>
+            <xpath expr="/form/notebook/page/group/field[@name='account_credit']" position="attributes">
+                <attribute name="attrs">{'readonly':[('category_id','=',%(hr_payroll_INFO)d)]}</attribute>
+            </xpath>
+            <xpath expr="/form/notebook/page/group/field[@name='analytic_account_id']" position="attributes">
+                <attribute name="attrs">{'readonly':[('category_id','=',%(hr_payroll_INFO)d)]}</attribute>
+            </xpath>
+            <xpath expr="/form/notebook/page/group/field[@name='account_tax_id']" position="attributes">
+                <attribute name="attrs">{'readonly':[('category_id','=',%(hr_payroll_INFO)d)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="hr_payslip_form_l10n_ch_inherit">
+        <field name="name">hr.payslip.form.inherit_ch_01</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+        <field name="priority" eval="20"/>
+        <field name="arch" type="xml">
+            <field name="credit_note" position="after">
+                <field name="working_days" attrs="{'invisible': [('wage_type', '!=', 'month')]}" />
+                <field digits="(3, 0)" attrs="{'invisible': [('wage_type', '!=', 'month')]}"  name="working_rate"/>
+                <field name="non_working_days" attrs="{'invisible': [('wage_type', '!=', 'month')]}" />
+                <field name="worked_hours" attrs="{'invisible': [('wage_type', '!=', 'hour')]}" widget="float_time" />
+                <field name="wage_type" attrs="{'invisible': 1}" />
+            </field>
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='rate']" position="attributes">
+                <attribute name="invisible" translation="off">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='rate']" position="after">
+                <field name="python_rate"/>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='amount']" position="attributes">
+                <attribute name="invisible" translation="off">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='amount']" position="after">
+                <field name="python_amount"/>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/form/group/field[@name='rate']" position="attributes">
+                <attribute name="invisible" translation="off">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/form/group/field[@name='rate']" position="after">
+                <field name="python_rate"/>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/form/group/field[@name='amount']" position="attributes">
+                <attribute name="invisible" translation="off">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/form/group/field[@name='amount']" position="after">
+                <field name="python_amount"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
