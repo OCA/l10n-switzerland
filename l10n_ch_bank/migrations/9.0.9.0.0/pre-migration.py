@@ -14,7 +14,7 @@ def migrate(cr, version):
 
     query = (
         "UPDATE ir_model_data"
-        "  SET name = 'bank_'||res_bank.clearing||_||res_bank.bank_branchid"
+        "  SET name = 'bank_'||res_bank.clearing||'_'||res_bank.bank_branchid"
         "  FROM res_bank"
         "  WHERE module = 'l10n_ch_bank'"
         "    AND model = 'res.bank'"
