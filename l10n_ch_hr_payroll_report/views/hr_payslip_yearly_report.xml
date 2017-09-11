@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Julien Coux (Camptocamp)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record id="view_report_hr_payslip_yearly_report_filter" model="ir.ui.view">
+        <field name="name">hr.payslip.yearly.report.select</field>
+        <field name="model">hr.payslip.yearly.report</field>
+        <field name="arch" type="xml">
+            <search string="Search">
+                <group>
+                    <field name="employee_id"/>
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="year"/>
+                    <field name="month"/>
+                </group>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_employee_id" string="Employee" context="{'group_by':'employee_id'}"/>
+                    <filter name="group_by_code_and_name" string="Code and name" context="{'group_by':'code_and_name'}"/>
+                    <filter name="group_by_year" string="Year" context="{'group_by':'year'}"/>
+                    <filter name="group_by_month" string="Month" context="{'group_by':'month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_report_hr_payslip_yearly_report_pivot">
+        <field name="name">hr.payslip.yearly.report.pivot</field>
+        <field name="model">hr.payslip.yearly.report</field>
+        <field name="arch" type="xml">
+            <pivot string="Pay Slip Yearly Report" disable_linking="True">
+                <field name="code_and_name" type="row"/>
+                <field name="year" type="col"/>
+                <field name="month" type="col"/>
+                <field name="total" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_report_hr_payslip_yearly_report_tree" model="ir.actions.act_window">
+        <field name="name">Pay Slip Yearly Report</field>
+        <field name="res_model">hr.payslip.yearly.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">pivot</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Julien Coux (Camptocamp)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <!-- Hr payroll reports main menu -->
+
+    <menuitem id="main_menu_hr_payroll_reports"
+              parent="hr_payroll.menu_hr_payroll_root"
+              name="Reports"
+              sequence="50"/>
+
+    <!-- Hr payslip yearly report -->
+
+    <menuitem action="action_report_hr_payslip_yearly_report_tree"
+              id="menu_action_report_hr_payslip_yearly_report_tree"
+              parent="l10n_ch_hr_payroll_report.main_menu_hr_payroll_reports"
+              sequence="10"/>
+
+</odoo>

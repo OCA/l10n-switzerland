@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Julien Coux (Camptocamp)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+    <record id="l10n_ch_hr_payroll.AC" model="hr.salary.rule">
+        <field name="report_is_total_rule">False</field>
+        <field name="report_display_details_columns">True</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.AC_C" model="hr.salary.rule">
+        <field name="report_is_total_rule">False</field>
+        <field name="report_display_details_columns">True</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.AC_E" model="hr.salary.rule">
+        <field name="report_is_total_rule">False</field>
+        <field name="report_display_details_columns">True</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.AC_C_SOL" model="hr.salary.rule">
+        <field name="report_is_total_rule">False</field>
+        <field name="report_display_details_columns">True</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.AC_E_SOL" model="hr.salary.rule">
+        <field name="report_is_total_rule">False</field>
+        <field name="report_display_details_columns">True</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.ALFA" model="hr.salary.rule">
+        <field name="report_is_total_rule">False</field>
+        <field name="report_display_details_columns">True</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.AVS" model="hr.salary.rule">
+        <field name="report_is_total_rule">False</field>
+        <field name="report_display_details_columns">True</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.AVS_C" model="hr.salary.rule">
+        <field name="report_is_total_rule">False</field>
+        <field name="report_display_details_columns">True</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.AVS_E" model="hr.salary.rule">
+        <field name="report_is_total_rule">False</field>
+        <field name="report_display_details_columns">True</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.FADMIN" model="hr.salary.rule">
+        <field name="report_is_total_rule">False</field>
+        <field name="report_display_details_columns">True</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.IMP_SRC" model="hr.salary.rule">
+        <field name="report_is_total_rule">False</field>
+        <field name="report_display_details_columns">True</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.LAA" model="hr.salary.rule">
+        <field name="report_is_total_rule">False</field>
+        <field name="report_display_details_columns">True</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.LAA_C" model="hr.salary.rule">
+        <field name="report_is_total_rule">False</field>
+        <field name="report_display_details_columns">True</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.LAA_E" model="hr.salary.rule">
+        <field name="report_is_total_rule">False</field>
+        <field name="report_display_details_columns">True</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.LCA" model="hr.salary.rule">
+        <field name="report_is_total_rule">False</field>
+        <field name="report_display_details_columns">True</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.LCA_C" model="hr.salary.rule">
+        <field name="report_is_total_rule">False</field>
+        <field name="report_display_details_columns">True</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.LCA_E" model="hr.salary.rule">
+        <field name="report_is_total_rule">False</field>
+        <field name="report_display_details_columns">True</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.LPP" model="hr.salary.rule">
+        <field name="report_is_total_rule">False</field>
+        <field name="report_display_details_columns">True</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.LPP_C" model="hr.salary.rule">
+        <field name="report_is_total_rule">False</field>
+        <field name="report_display_details_columns">True</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.LPP_E" model="hr.salary.rule">
+        <field name="report_is_total_rule">False</field>
+        <field name="report_display_details_columns">True</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.BASIC_CH" model="hr.salary.rule">
+        <field name="report_is_total_rule">True</field>
+        <field name="report_display_details_columns">False</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.GROSS_CH" model="hr.salary.rule">
+        <field name="report_is_total_rule">True</field>
+        <field name="report_display_details_columns">False</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.NET_CH" model="hr.salary.rule">
+        <field name="report_is_total_rule">True</field>
+        <field name="report_display_details_columns">False</field>
+        <field name="report_is_net_amount">True</field>
+    </record>
+    <record id="l10n_ch_hr_payroll.TOTAL_DED" model="hr.salary.rule">
+        <field name="report_is_total_rule">True</field>
+        <field name="report_display_details_columns">False</field>
+        <field name="report_is_net_amount">False</field>
+    </record>
+</odoo>

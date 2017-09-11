@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2017 Julien Coux (Camptocamp)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record id="hr_salary_rule_specific_form" model="ir.ui.view">
+        <field name="name">hr.salary.rule.specific.form</field>
+        <field name="model">hr.salary.rule</field>
+        <field name="inherit_id" ref="hr_payroll.hr_salary_rule_form"/>
+        <field name="arch" type="xml">
+
+            <notebook position="inside">
+                <page string="Report options">
+                    <group>
+                        <field name="report_is_total_rule"/>
+                        <field name="report_display_details_columns"/>
+                        <field name="report_is_net_amount"/>
+                    </group>
+                </page>
+            </notebook>
+
+        </field>
+    </record>
+
+</odoo>

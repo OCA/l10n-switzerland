@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Julien Coux (Camptocamp)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <template id="report_payslip" inherit_id="hr_payroll.report_payslip">
+
+        <h2 position="before">
+            <div class="oe_structure row">
+                <div class="col-xs-8"/>
+                <div class="col-xs-4">
+                    <div t-field="o.employee_id.address_home_id"
+                         t-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": True, "phone_icons": True}'/>
+                </div>
+            </div>
+        </h2>
+
+        <h2 position="replace">
+            <br/>
+            <br/>
+            <h2>Pay Slip <span t-field="o.date_from" t-field-options='{"format": "MMMM Y"}'/></h2>
+            <div>Today date: <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d. %m. %Y')"/></div>
+            <br/>
+            <br/>
+        </h2>
+
+        <p t-field="o.name" position="attributes">
+            <attribute name="class">hidden</attribute>
+        </p>
+
+        <table class="table table-condensed table-bordered" position="attributes">
+            <attribute name="class">hidden</attribute>
+        </table>
+
+        <!-- Replace all thead to simplify the override -->
+        <thead position="replace">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th class="text-right">Amount</th>
+                    <th class="text-right">Rate</th>
+                    <th class="text-right">Total</th>
+                </tr>
+            </thead>
+        </thead>
+
+        <!-- Replace all tbody to simplify the override -->
+        <tbody position="replace">
+            <t t-set="line_net_amount" t-value="False"/>
+            <tbody>
+                <t t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip and line.total).sorted(key=lambda line: line.sequence)" t-as="line">
+                    <t t-if="line.salary_rule_id.report_is_total_rule">
+                        <tr>
+                            <td style="padding-top: 20px; padding-bottom: 20px; border: 0px;">
+                                <b><span t-field="line.code"/></b>
+                            </td>
+                            <td style="padding-top: 20px; padding-bottom: 20px; border: 0px;">
+                                <b>
+                                    <span t-field="line.salary_rule_id.note" t-if="line.salary_rule_id.note"/>
+                                    <span t-field="line.name" t-if="not line.salary_rule_id.note"/>
+                                </b>
+                            </td>
+                            <td class="text-right"
+                                style="padding-top: 20px; padding-bottom: 20px; border: 0px;">
+                                <b>
+                                    <span t-field="line.python_amount"
+                                          t-field-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                          t-if="line.salary_rule_id.report_display_details_columns"/>
+                                </b>
+                            </td>
+                            <td class="text-right"
+                                style="padding-top: 20px; padding-bottom: 20px; border: 0px;">
+                                <t t-if="line.salary_rule_id.report_display_details_columns">
+                                    <b>
+                                        <span t-field="line.python_rate"/> %
+                                    </b>
+                                </t>
+                            </td>
+                            <td class="text-right"
+                                style="padding-top: 20px; padding-bottom: 20px; border: 0px;">
+                                <b>
+                                    <span t-esc="line.total"
+                                          t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
+                                </b>
+                            </td>
+                        </tr>
+                    </t>
+                    <t t-if="not line.salary_rule_id.report_is_total_rule">
+                        <tr>
+                            <td style="border: 0px;">
+                                <span t-field="line.code"/>
+                            </td>
+                            <td style="border: 0px;">
+                                <span t-field="line.salary_rule_id.note" t-if="line.salary_rule_id.note"/>
+                                <span t-field="line.name" t-if="not line.salary_rule_id.note"/>
+                            </td>
+                            <td style="border: 0px;"
+                                class="text-right">
+                                <span t-field="line.python_amount"
+                                      t-field-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                      t-if="line.salary_rule_id.report_display_details_columns"/>
+                            </td>
+                            <td style="border: 0px;" class="text-right">
+                                <t t-if="line.salary_rule_id.report_display_details_columns">
+                                    <span t-field="line.python_rate"/> %
+                                </t>
+                            </td>
+                            <td style="border: 0px;"
+                                class="text-right">
+                                <span t-esc="line.total"
+                                      t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
+                            </td>
+
+                        </tr>
+                    </t>
+                    <t t-if="line.salary_rule_id.report_is_net_amount">
+                        <t t-set="line_net_amount" t-value="line"/>
+                    </t>
+                </t>
+
+                <tr>
+                    <td style="padding-top: 40px; border: 0px;"
+                        colspan="4">
+                        <span t-field="o.employee_id.bank_account_id"/>
+                    </td>
+                    <td style="padding-top: 40px; border: 0px;"
+                        class="text-right">
+                        <t t-if="line_net_amount">
+                            <span t-field="line_net_amount.total"
+                                  t-field-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
+                        </t>
+                    </td>
+                </tr>
+            </tbody>
+        </tbody>
+
+        <p class="text-right" position="attributes">
+            <attribute name="class">hidden</attribute>
+        </p>
+
+    </template>
+
+</odoo>
