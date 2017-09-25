@@ -1,79 +1,46 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Nicolas Bessi Vincent Renaville
-#    Copyright 2013 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# Author: Nicolas Bessi Vincent Renaville
+# Copyright 2013 Camptocamp SA
+# Copyright 2015 Alex Comba - Agile Business Group
+# Copyright 2016 Alvaro Estebanez - Brain-tec AG
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-import time
-
-from openerp.osv import orm
-from openerp.osv.orm import TransientModel, fields
-from openerp.tools.translate import _
-from openerp import pooler
+from odoo import api, fields, models, _
+from odoo.exceptions import Warning as UserError
 
 
-class scan_bvr(TransientModel):
+class ScanBvr(models.TransientModel):
 
     _name = "scan.bvr"
     _description = "BVR/ESR Scanning Wizard"
 
-    _columns = {
-        'journal_id': fields.many2one('account.journal',
-                                      string="Invoice journal"),
-        'bvr_string': fields.char(size=128,
-                                  string='BVR String'),
-        'partner_id': fields.many2one('res.partner',
-                                      string="Partner"),
-        'bank_account_id': fields.many2one('res.partner.bank',
-                                           string="Partner Bank Account"),
-        'state': fields.selection(
-            [
-                ('new', 'New'),
-                ('valid', 'valid'),
-                ('need_extra_info', 'Need extra information'),
-            ],
-            'State'
-        ),
-    }
-
-    def _default_journal(self, cr, uid, context=None):
-        pool = pooler.get_pool(cr.dbname)
-        user = pool.get('res.users').browse(cr, uid, uid, context=context)
-        if user.company_id:
+    @api.model
+    def _default_journal(self):
+        if self.env.user.company_id:
             # We will get purchase journal linked with this company
-            journal_ids = pool.get('account.journal').search(
-                cr,
-                uid,
+            journals = self.env['account.journal'].search(
                 [('type', '=', 'purchase'),
-                 ('company_id', '=', user.company_id.id)],
-                context=context
+                 ('company_id', '=', self.env.user.company_id.id)],
             )
-            if len(journal_ids) == 1:
-                return journal_ids[0]
+            if len(journals) == 1:
+                return journals[0]
             else:
                 return False
         else:
             return False
 
-    _defaults = {
-        'state': 'new',
-        'journal_id': _default_journal,
-    }
+    journal_id = fields.Many2one(comodel_name='account.journal',
+                                 string="Invoice journal",
+                                 default=lambda self: self._default_journal())
+    bvr_string = fields.Char(size=128, string='BVR String')
+    partner_id = fields.Many2one(comodel_name='res.partner', string="Partner")
+    bank_account_id = fields.Many2one(comodel_name='res.partner.bank',
+                                      string="Partner Bank Account")
+    state = fields.Selection(
+        [('new', 'New'),
+         ('valid', 'valid'),
+         ('need_extra_info', 'Need extra information')],
+        'State', default='new')
 
     def _check_number(self, part_validation):
         nTab = [0, 9, 4, 6, 8, 2, 7, 1, 3, 5]
@@ -83,101 +50,83 @@ class scan_bvr(TransientModel):
         return (10 - resultnumber) % 10
 
     def _construct_bvrplus_in_chf(self, bvr_string):
-
-            if len(bvr_string) != 43:
-                raise orm.except_orm(
-                    _('Validation Error'),
-                    _('BVR CheckSum Error in first part')
-                )
-            elif self._check_number(bvr_string[0:2]) != int(bvr_string[2]):
-                raise orm.except_orm(
-                    _('Validation Error'),
-                    _('BVR CheckSum Error in second part')
-                )
-            elif self._check_number(bvr_string[4:30]) != int(bvr_string[30]):
-                raise orm.except_orm(
-                    _('Validation Error'),
-                    _('BVR CheckSum Error in third part')
-                )
-            elif self._check_number(bvr_string[33:41]) != int(bvr_string[41]):
-                raise orm.except_orm(
-                    _('Validation Error'),
-                    _('BVR CheckSum Error in fourth part')
-                )
-            else:
-                bvr_struct = {
-                    'type': bvr_string[0:2],
-                    'amount': 0.0,
-                    'reference': bvr_string[4:31],
-                    'bvrnumber': bvr_string[4:10],
-                    'beneficiaire': self._create_bvr_account(
-                        bvr_string[33:42]
-                    ),
-                    'domain': '',
-                    'currency': ''
-                }
-                return bvr_struct
+        if len(bvr_string) != 43:
+            raise UserError(
+                _('BVR CheckSum Error in first part')
+            )
+        elif self._check_number(bvr_string[0:2]) != int(bvr_string[2]):
+            raise UserError(
+                _('BVR CheckSum Error in second part')
+            )
+        elif self._check_number(bvr_string[4:30]) != int(bvr_string[30]):
+            raise UserError(
+                _('BVR CheckSum Error in third part')
+            )
+        elif self._check_number(bvr_string[33:41]) != int(bvr_string[41]):
+            raise UserError(
+                _('BVR CheckSum Error in fourth part')
+            )
+        else:
+            bvr_struct = {
+                'type': bvr_string[0:2],
+                'amount': 0.0,
+                'reference': bvr_string[4:31],
+                'bvrnumber': bvr_string[4:10],
+                'beneficiaire': self._create_bvr_account(bvr_string[33:42]),
+                'domain': '',
+                'currency': ''
+            }
+            return bvr_struct
 
     def _construct_bvr_in_chf(self, bvr_string):
-            if len(bvr_string) != 53:
-                raise orm.except_orm(
-                    _('Validation Error'),
-                    _('BVR CheckSum Error in first part')
-                )
-            elif self._check_number(bvr_string[0:12]) != int(bvr_string[12]):
-                raise orm.except_orm(
-                    _('Validation Error'),
-                    _('BVR CheckSum Error in second part')
-                )
-            elif self._check_number(bvr_string[14:40]) != int(bvr_string[40]):
-                raise orm.except_orm(
-                    _('Validation Error'),
-                    _('BVR CheckSum Error in third part')
-                )
-            elif self._check_number(bvr_string[43:51]) != int(bvr_string[51]):
-                raise orm.except_orm(
-                    _('Validation Error'),
-                    _('BVR CheckSum Error in fourth part')
-                )
-            else:
-                bvr_struct = {
-                    'type': bvr_string[0:2],
-                    'amount': float(bvr_string[2:12]) / 100,
-                    'reference': bvr_string[14:41],
-                    'bvrnumber': bvr_string[14:20],
-                    'beneficiaire': self._create_bvr_account(
-                        bvr_string[43:52]
-                    ),
-                    'domain': '',
-                    'currency': ''
-                }
-                return bvr_struct
+        if len(bvr_string) != 53:
+            raise UserError(
+                _('BVR CheckSum Error in first part')
+            )
+        elif self._check_number(bvr_string[0:12]) != int(bvr_string[12]):
+            raise UserError(
+                _('BVR CheckSum Error in second part')
+            )
+        elif self._check_number(bvr_string[14:40]) != int(bvr_string[40]):
+            raise UserError(
+                _('BVR CheckSum Error in third part')
+            )
+        elif self._check_number(bvr_string[43:51]) != int(bvr_string[51]):
+            raise UserError(
+                _('BVR CheckSum Error in fourth part')
+            )
+        else:
+            bvr_struct = {
+                'type': bvr_string[0:2],
+                'amount': float(bvr_string[2:12]) / 100,
+                'reference': bvr_string[14:41],
+                'bvrnumber': bvr_string[14:20],
+                'beneficiaire': self._create_bvr_account(bvr_string[43:52]),
+                'domain': '',
+                'currency': ''
+            }
+            return bvr_struct
 
     def _construct_bvr_postal_in_chf(self, bvr_string):
-            if len(bvr_string) != 42:
-                raise orm.except_orm(
-                    _('Validation Error'),
-                    _('BVR CheckSum Error in first part')
-                )
-            else:
-
-                bvr_struct = {
-                    'type': bvr_string[0:2],
-                    'amount': float(bvr_string[2:12]) / 100,
-                    'reference': bvr_string[14:30],
-                    'bvrnumber': '',
-                    'beneficiaire': self._create_bvr_account(
-                        bvr_string[32:41]
-                    ),
-                    'domain': '',
-                    'currency': ''
-                }
-                return bvr_struct
+        if len(bvr_string) != 42:
+            raise UserError(
+                _('BVR CheckSum Error in first part')
+            )
+        else:
+            bvr_struct = {
+                'type': bvr_string[0:2],
+                'amount': float(bvr_string[2:12]) / 100,
+                'reference': bvr_string[14:30],
+                'bvrnumber': '000000',
+                'beneficiaire': self._create_bvr_account(bvr_string[32:41]),
+                'domain': '',
+                'currency': ''
+            }
+            return bvr_struct
 
     def _construct_bvr_postal_other_in_chf(self, bvr_string):
         if len(bvr_string) != 41:
-            raise orm.except_orm(
-                _('Validation Error'),
+            raise UserError(
                 _('BVR CheckSum Error in first part')
             )
         else:
@@ -187,165 +136,111 @@ class scan_bvr(TransientModel):
                 'amount': float(bvr_string[7:16]) / 100,
                 'reference': bvr_string[18:33],
                 'bvrnumber': '000000',
-                'beneficiaire': self._create_bvr_account(
-                    bvr_string[34:40]
-                ),
+                'beneficiaire': self._create_bvr_account(bvr_string[34:40]),
                 'domain': '',
                 'currency': ''
             }
             return bvr_struct
 
-    def _create_invoice_line(self, cr, uid, ids, data, context):
-            invoice_line_ids = False
-            pool = pooler.get_pool(cr.dbname)
-            invoice_line_obj = pool.get('account.invoice.line')
-            # First we write partner_id
-            self.write(cr, uid, ids, {'partner_id': data['partner_id']})
-            # We check that this partner have a default product
-            accounts_data = pool.get('res.partner').read(
-                cr, uid,
-                data['partner_id'],
-                ['supplier_invoice_default_product'],
-                context=context
-            )
-            if accounts_data['supplier_invoice_default_product']:
-                product_onchange_result = invoice_line_obj.product_id_change(
-                    cr, uid, ids,
-                    accounts_data['supplier_invoice_default_product'][0],
-                    uom_id=False,
-                    qty=0,
-                    name='',
-                    type='in_invoice',
-                    partner_id=data['partner_id'],
-                    fposition_id=False,
-                    price_unit=False,
-                    currency_id=False,
-                    context=context,
-                    company_id=None
-                )
-                # We will check that the tax specified
-                # on the product is price include or amount is 0
-                if product_onchange_result['value']['invoice_line_tax_id']:
-                    taxes = pool.get('account.tax').browse(
-                        cr, uid,
-                        product_onchange_result['value']['invoice_line_tax_id']
-                    )
-                    for taxe in taxes:
-                        if not taxe.price_include and taxe.amount != 0.0:
-                            raise orm.except_orm(
-                                _('Error !'),
-                                _('The default product in this partner has '
-                                  'wrong taxes configuration')
-                            )
-                prod = accounts_data['supplier_invoice_default_product'][0]
-                account = product_onchange_result['value']['account_id']
-                taxes = product_onchange_result['value']['invoice_line_tax_id']
-                invoice_line_vals = {
-                    'product_id': prod,
-                    'account_id': account,
-                    'name': product_onchange_result['value']['name'],
-                    'uos_id': product_onchange_result['value']['uos_id'],
-                    'price_unit': data['bvr_struct']['amount'],
-                    'invoice_id': data['invoice_id'],
-                    'invoice_line_tax_id': [(6, 0, taxes)],
-                }
-                invoice_line_ids = invoice_line_obj.create(
-                    cr, uid, invoice_line_vals, context=context)
-            return invoice_line_ids
+    @api.multi
+    def _create_invoice_line(self, data):
+        invoice_line = invoice_line_model = self.env['account.invoice.line']
+        # First we write partner_id
+        self.write({'partner_id': data['partner_id']})
+        # We check that this partner have a default product
+        partner = self.env['res.partner'].browse(data['partner_id'])
+        if partner.supplier_invoice_default_product:
+            prod = partner.supplier_invoice_default_product
+            my_vals = {
+                'product_id': prod.id,
+                'invoice_id': data['invoice_id'],
+            }
+            specs = invoice_line_model._onchange_spec()
+            default_values = invoice_line_model.default_get(specs)
+            invoice_line_vals = {k: None for k in specs.keys()}
+            invoice_line_vals.update(default_values)
+            invoice_line_vals.update(my_vals)
+            product_onchange_result = invoice_line_model.onchange(
+                invoice_line_vals, ['product_id'], specs)
+            value = product_onchange_result.get('value', {})
 
-    def _create_direct_invoice(self, cr, uid, ids, data, context):
-        pool = pooler.get_pool(cr.dbname)
+            for name, val in value.iteritems():
+
+                if isinstance(val, tuple):
+                    value[name] = val[0]
+
+            invoice_line_vals.update(value)
+
+            invoice_line_vals.update(
+                {'price_unit': data['bvr_struct']['amount']})
+            invoice_line = invoice_line_model.create(invoice_line_vals)
+            # We will check that the tax specified
+            # on the product is price include or amount is 0
+            if invoice_line.invoice_line_tax_ids:
+                for taxe in invoice_line.invoice_line_tax_ids:
+                    if not taxe.price_include and taxe.amount != 0.0:
+                        raise UserError(
+                            _('The default product in this partner has '
+                              'wrong taxes configuration')
+                        )
+        return invoice_line
+
+    @api.multi
+    def _create_direct_invoice(self, data):
         # We will call the function, that create invoice line
-        account_invoice_obj = pool.get('account.invoice')
-        account_invoice_tax_obj = pool.get('account.invoice.tax')
+        invoice_model = self.env['account.invoice']
+        currency_model = self.env['res.currency']
+        today = fields.Date.today()
         if data['bank_account']:
-            account_info = pool.get('res.partner.bank').browse(
-                cr, uid, data['bank_account'],
-                context=context
-            )
+            account_info = self.env['res.partner.bank'].browse(
+                data['bank_account'])
         # We will now search the currency_id
-        currency_search = pool.get('res.currency').search(
-            cr, uid,
-            [('name',
-              '=',
-              data['bvr_struct']['currency'])],
-            context=context
-        )
-        currency_id = pool.get('res.currency').browse(cr, uid,
-                                                      currency_search[0],
-                                                      context=context)
-        # Account Modification
-        if data['bvr_struct']['domain'] == 'name':
-            pool.get('res.partner.bank').write(
-                cr, uid,
-                data['bank_account'],
-                {'post_number': data['bvr_struct']['beneficiaire']},
-                context=context
+        currency = currency_model.search(
+            [('name', '=', data['bvr_struct']['currency'])])
+        if not currency:
+            raise UserError(
+                _('Unknown or deactivated currency: %s') % (
+                    data['bvr_struct']['currency'],
+                )
             )
-        else:
-            pool.get('res.partner.bank').write(
-                cr, uid,
-                data['bank_account'],
-                {'bvr_adherent_num': data['bvr_struct']['bvrnumber'],
-                 'bvr_number': data['bvr_struct']['beneficiaire']},
-                context=context
-            )
-        date_due = time.strftime('%Y-%m-%d')
+        date_due = today
         # We will now compute the due date and fixe the payment term
-        payment_term_id = (account_info.partner_id.property_payment_term and
-                           account_info.partner_id.property_payment_term.id or
-                           False)
+        payment_term_id = (account_info.partner_id.
+                           property_supplier_payment_term_id.id)
         if payment_term_id:
-            # We Calculate due_date
-            inv_mod = pool.get('account.invoice')
-            res = inv_mod.onchange_payment_term_date_invoice(
-                cr, uid, [],
-                payment_term_id,
-                time.strftime('%Y-%m-%d')
-            )
-            date_due = res['value']['date_due']
+            # We Calculate @due_date
+            with self.env.do_in_onchange():
+                virtual_inv = self.env['account.invoice'].new({
+                    'date_invoice': today,
+                    'payment_term_id': payment_term_id,
+                })
+                virtual_inv._onchange_payment_term_date_invoice()
+                date_due = virtual_inv.date_due
 
-        curr_invoice = {
-            'name': time.strftime('%Y-%m-%d'),
+        invoice_vals = {
+            'name': today,
             'partner_id': account_info.partner_id.id,
-            'account_id': account_info.partner_id.property_account_payable.id,
+            'account_id':
+                account_info.partner_id.property_account_payable_id.id,
             'date_due': date_due,
-            'date_invoice': time.strftime('%Y-%m-%d'),
-            'payment_term': payment_term_id,
+            'date_invoice': today,
+            'payment_term_id': payment_term_id,
             'reference_type': 'bvr',
             'reference': data['bvr_struct']['reference'],
             'amount_total': data['bvr_struct']['amount'],
-            'check_total': data['bvr_struct']['amount'],
             'partner_bank_id': account_info.id,
             'comment': '',
-            'currency_id': currency_id.id,
+            'currency_id': currency.id,
             'journal_id': data['journal_id'],
             'type': 'in_invoice',
         }
-
-        last_invoice = account_invoice_obj.create(
-            cr, uid,
-            curr_invoice,
-            context=context
-        )
-        data['invoice_id'] = last_invoice
-        self._create_invoice_line(cr, uid, ids, data, context)
+        invoice = invoice_model.create(invoice_vals)
+        data['invoice_id'] = invoice.id
+        self._create_invoice_line(data)
         # Now we create taxes lines
-        computed_tax = account_invoice_tax_obj.compute(cr,
-                                                       uid,
-                                                       last_invoice,
-                                                       context=context)
-        inv = account_invoice_obj.browse(cr,
-                                         uid,
-                                         last_invoice,
-                                         context=context)
-        account_invoice_obj.check_tax_lines(cr,
-                                            uid,
-                                            inv,
-                                            computed_tax,
-                                            account_invoice_tax_obj)
+        invoice.compute_taxes()
         action = {
-            'domain': "[('id','=', " + str(last_invoice) + ")]",
+            'domain': "[('id','=', " + str(invoice.id) + ")]",
             'name': 'Invoices',
             'view_type': 'form',
             'view_mode': 'form',
@@ -353,7 +248,7 @@ class scan_bvr(TransientModel):
             'view_id': False,
             'context': "{'type':'out_invoice'}",
             'type': 'ir.actions.act_window',
-            'res_id': last_invoice
+            'res_id': invoice.id
         }
         return action
 
@@ -368,83 +263,45 @@ class scan_bvr(TransientModel):
 
     def _get_bvr_structurated(self, bvr_string):
         if bvr_string is not False:
-            # We will get the 2 frist digit of the BVr string in order
-            # to now the BVR type of this account
+            # Get rid of leading and ending spaces of the BVR string
+            bvr_string = bvr_string.strip()
+
+            # We will get the 2 first digits of the BVR string in order
+            # to know the BVR type of this account
             bvr_type = bvr_string[0:2]
+            bvr_struct = {}
             if bvr_type == '01' and len(bvr_string) == 42:
                 # This BVR is the type of BVR in CHF
                 # WE will call the function and Call
                 bvr_struct = self._construct_bvr_postal_in_chf(bvr_string)
-                # We will test if the BVR have an Adherent Number if not we
-                # will make the search of the account base on
-                # his name non base on the BVR adherent number
-                if (bvr_struct['bvrnumber'] == '000000'):
-                    bvr_struct['domain'] = 'name'
-                else:
-                    bvr_struct['domain'] = 'bvr_adherent_num'
                 # We will set the currency , in this case it's allways CHF
                 bvr_struct['currency'] = 'CHF'
             elif bvr_type == '01':
                 # This BVR is the type of BVR in CHF
                 # We will call the function and Call
                 bvr_struct = self._construct_bvr_in_chf(bvr_string)
-                # We will test if the BVR have an Adherent Number if not
-                # we will make the search of the account base on
-                # his name non base on the BVR adherent number
-                if (bvr_struct['bvrnumber'] == '000000'):
-                    bvr_struct['domain'] = 'name'
-                else:
-                    bvr_struct['domain'] = 'bvr_adherent_num'
                 # We will set the currency , in this case it's allways CHF
                 bvr_struct['currency'] = 'CHF'
             elif bvr_type == '03':
                 # It will be (At this time) the same work
                 # as for a standard BVR with 01 code
                 bvr_struct = self._construct_bvr_postal_in_chf(bvr_string)
-                # We will test if the BVR have an Adherent Number
-                # if not we will make the search of the account base on
-                # his name non base on the BVR adherent number
-                if (bvr_struct['bvrnumber'] == '000000'):
-                    bvr_struct['domain'] = 'name'
-                else:
-                    bvr_struct['domain'] = 'bvr_adherent_num'
                 # We will set the currency , in this case it's allways CHF
                 bvr_struct['currency'] = 'CHF'
             elif bvr_type == '04':
                 # It the BVR postal in CHF
                 bvr_struct = self._construct_bvrplus_in_chf(bvr_string)
-                # We will test if the BVR have an Adherent Number
-                # if not we will make the search of the account base on
-                # his name non base on the BVR adherent number
-                if (bvr_struct['bvrnumber'] == '000000'):
-                    bvr_struct['domain'] = 'name'
-                else:
-                    bvr_struct['domain'] = 'bvr_adherent_num'
                 # We will set the currency , in this case it's allways CHF
                 bvr_struct['currency'] = 'CHF'
             elif bvr_type == '21':
                 # It for a BVR in Euro
                 bvr_struct = self._construct_bvr_in_chf(bvr_string)
-                # We will test if the BVR have an Adherent Number if
-                # not we will make the search of the account base on
-                # his name non base on the BVR adherent number
-                if (bvr_struct['bvrnumber'] == '000000'):
-                    bvr_struct['domain'] = 'name'
-                else:
-                    bvr_struct['domain'] = 'bvr_adherent_num'
                 # We will set the currency , in this case it's allways CHF
                 bvr_struct['currency'] = 'EUR'
             ##
             elif bvr_type == '31':
                 # It the BVR postal in CHF
                 bvr_struct = self._construct_bvrplus_in_chf(bvr_string)
-                # We will test if the BVR have an Adherent Number if not
-                # we will make the search of the account base on
-                # his name non base on the BVR adherent number
-                if (bvr_struct['bvrnumber'] == '000000'):
-                    bvr_struct['domain'] = 'name'
-                else:
-                    bvr_struct['domain'] = 'bvr_adherent_num'
                 # We will set the currency , in this case it's allways CHF
                 bvr_struct['currency'] = 'EUR'
 
@@ -452,24 +309,23 @@ class scan_bvr(TransientModel):
                 # It the BVR postal in CHF
                 bvr_struct = self._construct_bvr_postal_other_in_chf(
                     bvr_string)
-                # We will test if the BVR have an Adherent Number
-                # if not we will make the search of the account base on
-                # his name non base on the BVR adherent number
-                if (bvr_struct['bvrnumber'] == '000000'):
-                    bvr_struct['domain'] = 'name'
-                else:
-                    bvr_struct['domain'] = 'bvr_adherent_num'
                 # We will set the currency , in this case it's allways CHF
                 bvr_struct['currency'] = 'CHF'
             else:
-                raise orm.except_orm(_('BVR Type error'),
-                                     _('This kind of BVR is not supported '
-                                       'at this time'))
+                raise UserError(_('This kind of BVR is not supported '
+                                  'at this time'))
+            # We will test if the BVR has an Adherent Number if not we
+            # will make the search of the account base on
+            # his name non base on the BVR adherent number
+            if (bvr_struct['bvrnumber'] == '000000'):
+                bvr_struct['domain'] = 'name'
+            else:
+                bvr_struct['domain'] = 'bvr_adherent_num'
             return bvr_struct
 
-    def validate_bvr_string(self, cr, uid, ids, context):
-        # We will now retrive result
-        bvr_data = self.browse(cr, uid, ids, context)[0]
+    @api.multi
+    def validate_bvr_string(self):
+        self.ensure_one()
         # BVR Standrard
         # 0100003949753>120000000000234478943216899+ 010001628>
         # BVR without BVr Reference
@@ -485,61 +341,45 @@ class scan_bvr(TransientModel):
         # Explode and check  the BVR Number and structurate it
         #
         data = {}
-        data['bvr_struct'] = self._get_bvr_structurated(
-            bvr_data.bvr_string)
+        data['bvr_struct'] = self._get_bvr_structurated(self.bvr_string)
+        partner_bank_model = self.env['res.partner.bank']
+        partner_bank = False
         # We will now search the account linked with this BVR
         if data['bvr_struct']['domain'] == 'name':
-            domain = [('acc_number', '=', data['bvr_struct']['beneficiaire'])]
-            partner_bank_search = self.pool.get('res.partner.bank').search(
-                cr,
-                uid,
-                domain,
-                context=context
-            )
+            domain = [('ccp', '=', data['bvr_struct']['beneficiaire'])]
         else:
-            domain = [
-                ('bvr_adherent_num', '=', data['bvr_struct']['bvrnumber'])
-            ]
-            partner_bank_search = self.pool.get('res.partner.bank').search(
-                cr,
-                uid,
-                domain,
-                context=context
-            )
+            domain = \
+                [('ccp', '=', data['bvr_struct']['beneficiaire']),
+                 ('bvr_adherent_num', '=', data['bvr_struct']['bvrnumber'])]
+        partner_bank = partner_bank_model.search(domain, limit=1)
         # We will need to know if we need to create invoice line
-        if partner_bank_search:
+        if partner_bank:
             # We have found the account corresponding to the
             # bvr_adhreent_number
             # so we can directly create the account
-            partner_bank_result = self.pool.get('res.partner.bank').browse(
-                cr,
-                uid,
-                partner_bank_search[0],
-                context=context
-            )
-            data['id'] = bvr_data.id
-            data['partner_id'] = partner_bank_result.partner_id.id
-            data['bank_account'] = partner_bank_result.id
-            data['journal_id'] = bvr_data.journal_id.id
-            action = self._create_direct_invoice(cr, uid, ids, data, context)
+            data['id'] = self.id
+            data['partner_id'] = partner_bank.partner_id.id
+            data['bank_account'] = partner_bank.id
+            data['journal_id'] = self.journal_id.id
+            action = self._create_direct_invoice(data)
             return action
-        elif bvr_data.bank_account_id:
-            data['id'] = bvr_data.id
-            data['partner_id'] = bvr_data.partner_id.id
-            data['journal_id'] = bvr_data.journal_id.id
-            data['bank_account'] = bvr_data.bank_account_id.id
-            action = self._create_direct_invoice(cr, uid, ids, data, context)
+        elif self.bank_account_id:
+            data['id'] = self.id
+            data['partner_id'] = self.partner_id.id
+            data['journal_id'] = self.journal_id.id
+            data['bank_account'] = self.bank_account_id.id
+            action = self._create_direct_invoice(data)
             return action
         else:
             # we haven't found a valid bvr_adherent_number
             # we will need to create or update a bank account
-            self.write(cr, uid, ids, {'state': 'need_extra_info'})
+            self.state = 'need_extra_info'
             return {
                 'type': 'ir.actions.act_window',
                 'res_model': 'scan.bvr',
                 'view_mode': 'form',
                 'view_type': 'form',
-                'res_id': bvr_data.id,
+                'res_id': self.id,
                 'views': [(False, 'form')],
                 'target': 'new',
             }

@@ -1,88 +1,70 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Yannick Vaucher
-#    Copyright 2014 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# Author: Yannick Vaucher
+# Copyright 2014 Camptocamp SA
+# Copyright 2015 Alex Comba - Agile Business Group
+# Copyright 2016 Alvaro Estebanez - Brain-tec AG
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
+
 import openerp.tests.common as common
-from openerp.tools.float_utils import float_compare
+from odoo import tools
+from odoo.modules.module import get_module_resource
 
 
-class test_scan_bvr(common.TransactionCase):
+class TestScanBvr(common.TransactionCase):
     """ Test the wizard for bvr line scanning """
 
-    def setUp(self):
-        super(test_scan_bvr, self).setUp()
-        cr, uid = self.cr, self.uid
+    def _load(self, module, *args):
+        tools.convert_file(self.cr, 'l10n_ch_scan_bvr',
+                           get_module_resource(module, *args),
+                           {}, 'init', False, 'test',
+                           self.registry._assertion_report)
 
-        self.ScanBVR = self.registry('scan.bvr')
+    def setUp(self):
+        super(TestScanBvr, self).setUp()
+        self._load('account', 'test', 'account_minimal_test.xml')
+        self.ScanBVR = self.env['scan.bvr']
 
         #  I create a swiss bank with a BIC number
-        Bank = self.registry('res.bank')
-        Partner = self.registry('res.partner')
-        PartnerBank = self.registry('res.partner.bank')
-        self.Invoice = self.registry('account.invoice')
-        bank1_id = Bank.create(
-            cr,
-            uid,
-            {
-                'name': 'Big swiss bank',
-                'bic': 'DRESDEFF300',
-                'country': self.ref('base.ch'),
-            }
-        )
-
-        self.partner1 = Partner.browse(
-            cr, uid, self.ref('base.res_partner_2'))
+        Bank = self.env['res.bank']
+        PartnerBank = self.env['res.partner.bank']
+        bank1 = Bank.create({
+            'name': 'Big swiss bank',
+            'bic': 'DRESDEFF300',
+            'country': self.ref('base.ch'),
+            'ccp': 1234,
+        })
+        self.partner1 = self.env.ref('base.res_partner_2')
+        tax22 = self.env['account.tax'].create({
+            'name': '22%',
+            'amount': 22,
+            'price_include': True,
+        })
+        product1 = self.env['product.product'].create({
+            'name': 'product1',
+            'list_price': 10.00,
+            'supplier_taxes_id': [(6, 0, [tax22.id])]
+        })
+        self.partner1.supplier_invoice_default_product = product1.id
         #  I create a bank account
         # ok this is an iban but base_iban might not be installed
-        partner1bank1_id = PartnerBank.create(
-            cr,
-            uid,
-            {
-                'state': 'bank',
-                'name': 'Account',
-                'bank': bank1_id,
-                'acc_number': 'CH9100767000S00023455',
-                'partner_id': self.ref('base.res_partner_2'),
-            }
-        )
+        partner1bank1 = PartnerBank.create({
+            'bank_id': bank1.id,
+            'acc_number': 'CH9100767000S00023455',
+            'partner_id': self.ref('base.res_partner_2'),
+        })
+        self.partner1bank1 = PartnerBank.browse(partner1bank1.id)
+        self.purchase_journal_id = \
+            self.ref('l10n_ch_scan_bvr.expenses_journal')
 
-        self.partner1bank1 = PartnerBank.browse(cr, uid, partner1bank1_id)
-        self.purchase_journal_id = self.ref('account.expenses_journal')
-
-    def test_00_action_scan_wrong_bvr(self):
-        """ Check use of wrongly defined bvr line
-
-        """
-        cr, uid = self.cr, self.uid
+    def _test_00_action_scan_wrong_bvr(self):
+        """ Check use of wrongly defined bvr line """
         bvr_string = '47045075054'
-        wizard_id = self.ScanBVR.create(
-            cr,
-            uid,
-            {
-                'bvr_string': bvr_string,
-                'journal_id': self.purchase_journal_id,
-            },
-            context={}
-        )
+        wizard = self.ScanBVR.create({
+            'bvr_string': bvr_string,
+            'journal_id': self.purchase_journal_id,
+        })
         try:
-            self.ScanBVR.validate_bvr_string(
-                cr, uid, [wizard_id], context={})
+            wizard.validate_bvr_string()
         except:
             pass
         else:
@@ -96,34 +78,22 @@ class test_scan_bvr(common.TransactionCase):
         0100003949753>120000000000234478943216899+ 010001628>
 
         """
-        cr, uid = self.cr, self.uid
         bvr_string = '0100003949753>120000000000234478943216899+ 010001628>'
-        wizard_id = self.ScanBVR.create(
-            cr, uid, {'bvr_string': bvr_string,
-                      'journal_id': self.purchase_journal_id,
-                      }, context={})
-        act_win = self.ScanBVR.validate_bvr_string(
-            cr, uid, [wizard_id], context={})
-        wizard = self.ScanBVR.browse(
-            cr, uid, wizard_id, context=None)
-        assert wizard.state == 'need_extra_info'
+        wizard = self.ScanBVR.create({
+            'bvr_string': bvr_string,
+            'journal_id': self.purchase_journal_id,
+        })
+        act = wizard.validate_bvr_string()
+        self.assertEqual(wizard.state, 'need_extra_info')
 
-        self.ScanBVR.write(
-            cr,
-            uid,
-            wizard.id,
-            {
-                'partner_id': self.partner1.id,
-                'bank_account_id': self.partner1bank1.id,
-            },
-            context={}
-        )
+        wizard.write({
+            'partner_id': self.partner1.id,
+            'bank_account_id': self.partner1bank1.id,
+        })
+        chf = self.env.ref('base.CHF')
+        chf.active = True
+        act = wizard.validate_bvr_string()
+        self.assertTrue(act['res_id'])
 
-        act_win = self.ScanBVR.validate_bvr_string(
-            cr, uid, [wizard_id], context={})
-        assert act_win['res_id']
-        assert self.partner1bank1.bvr_adherent_num
-
-        new_invoice = self.Invoice.browse(cr, uid, act_win['res_id'])
-        assert float_compare(new_invoice.amount_total, 3949.75,
-                             precision_rounding=0.01) == 0
+        new_invoice = self.env['account.invoice'].browse(act['res_id'])
+        self.assertAlmostEqual(3949.75, new_invoice.amount_total, places=2)
