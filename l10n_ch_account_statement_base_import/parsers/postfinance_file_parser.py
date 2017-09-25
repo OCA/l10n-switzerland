@@ -22,7 +22,7 @@ from os.path import splitext
 from tarfile import TarFile, TarError
 from cStringIO import StringIO
 from lxml import etree
-from wand.image import Image
+
 import logging
 
 from openerp import fields
@@ -31,6 +31,11 @@ from .camt import PFCamtParser
 from .base_parser import BaseSwissParser
 
 _logger = logging.getLogger(__name__)
+
+try:
+    from wand.image import Image
+except ImportError:
+    _logger.debug('Cannot `from wand.image import Image`')
 
 
 class XMLPFParser(BaseSwissParser):
