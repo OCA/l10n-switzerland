@@ -30,3 +30,18 @@ def migrate(env, version):
         DELETE FROM ir_model_data
         WHERE model = 'payment.mode.type' AND module = 'l10n_ch_lsv_dd';
     """)
+    openupgrade.logged_query(env.cr, """
+        DELETE FROM payment_mode_type WHERE code IN ('lsv','postfinance.dd');
+    """)
+    # Load xml to map to correct record
+    env.cr.execute("SELECT id FROM account_payment_method WHERE code = 'lsv'")
+    lsv_id = env.cr.fetchone()[0]
+    env.cr.execute(
+        "SELECT id FROM account_payment_method WHERE code = 'postfinance.dd'")
+    dd_id = env.cr.fetchone()[0]
+    openupgrade.add_xmlid(
+        env.cr, 'l10n_ch_lsv_dd', 'export_lsv', 'account.payment.method',
+        lsv_id)
+    openupgrade.add_xmlid(
+        env.cr, 'l10n_ch_lsv_dd', 'export_lsv', 'account.payment.method',
+        dd_id)
