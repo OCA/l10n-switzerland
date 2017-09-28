@@ -164,8 +164,8 @@ class AccountPaymentOrder(models.Model):
     @api.model
     def generate_start_payment_info_block(
             self, parent_node, payment_info_ident,
-            priority, local_instrument, sequence_type, requested_date,
-            eval_ctx, gen_args):
+            priority, local_instrument, category_purpose, sequence_type,
+            requested_date, eval_ctx, gen_args):
         """ This is overridden because pain.008.001.03.ch.01 uses a different
             XML structure. The code is basically the same that can be found
             on the module account_banking_pain_base's method
@@ -234,7 +234,7 @@ class AccountPaymentOrder(models.Model):
                 super(AccountPaymentOrder, self).\
                 generate_start_payment_info_block(
                     parent_node, payment_info_ident,
-                    priority, local_instrument, sequence_type,
+                    priority, local_instrument, category_purpose, sequence_type,
                     requested_date, eval_ctx, gen_args)
 
         return payment_info, nb_of_transactions, control_sum
