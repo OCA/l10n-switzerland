@@ -33,7 +33,7 @@ class AccountPaymentOrder(models.Model):
         :return: window action
         """
         action = super(AccountPaymentOrder, self).open2generated()
-        if self.payment_method_id.code == 'postfinance.dd':
+        if self.payment_method_id.code in ('postfinance.dd', 'sepa.ch.dd'):
             upload_obj = self.env['payment.order.upload.dd.wizard']
             attachment_id = action['res_id']
             upload_wizard = upload_obj.create({

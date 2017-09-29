@@ -234,8 +234,8 @@ class AccountPaymentOrder(models.Model):
                 super(AccountPaymentOrder, self).\
                 generate_start_payment_info_block(
                     parent_node, payment_info_ident,
-                    priority, local_instrument, category_purpose, sequence_type,
-                    requested_date, eval_ctx, gen_args)
+                    priority, local_instrument, category_purpose,
+                    sequence_type, requested_date, eval_ctx, gen_args)
 
         return payment_info, nb_of_transactions, control_sum
 
@@ -481,7 +481,7 @@ class AccountPaymentOrder(models.Model):
                     "self.name + '-' "
                     "+ requested_date.replace('-', '')  + '-' + priority + "
                     "'-' + local_instrument",
-                    prio, local_inst, False, req_date, {
+                    prio, local_inst, False, False, req_date, {
                         'self': self,
                         'priority': prio,
                         'requested_date': req_date,
