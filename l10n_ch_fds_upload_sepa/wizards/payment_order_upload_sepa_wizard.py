@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 # © 2015-2017 Compassion CH (Nicolas Tran, Emanuel Cino)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+from tempfile import mkstemp
+
 import openerp
 
 from odoo import models, fields, api, exceptions, _
 import logging
 import base64
-import tempfile
-import shutil
 import os
 
 
@@ -78,18 +78,20 @@ class PaymenOrderUploadSepaWizard(models.TransientModel):
         (key, key_pass) = self._get_sftp_key()
 
         # create tmp file
-        tmp_d = tempfile.mkdtemp()
-        tmp_key = self._create_tmp_file(key.private_key_crypted, tmp_d)[0]
-        tmp_f = self._create_tmp_file(self.attachment_id.datas, tmp_d)[0]
-        old_path_f = os.path.join(tmp_d, tmp_f.name)
-        new_path_f = os.path.join(tmp_d, ''.join(self.filename.split(':')))
-        shutil.move(old_path_f, new_path_f)
+        key_fd, key_file = mkstemp()
+        data_fd, data_file = mkstemp()
+        try:
+            os.write(key_fd, base64.b64decode(key.private_key_crypted))
+            os.write(data_fd, base64.b64decode(self.attachment_id.datas))
+        finally:
+            os.close(key_fd)
+            os.close(data_fd)
 
         # upload to sftp
         with pysftp.Connection(
                 self.fds_account_id.hostname,
                 username=self.fds_account_id.username,
-                private_key=tmp_key.name,
+                private_key=key_file,
                 private_key_pass=key_pass) as sftp:
 
             with sftp.cd(self.fds_directory_id.name):
@@ -101,17 +103,16 @@ class PaymenOrderUploadSepaWizard(models.TransientModel):
                         new_env = api.Environment(
                             new_cr, self.env.uid, self.env.context)
                         wizard = self.with_env(new_env)
-                        sftp.put(new_path_f)
+                        sftp.put(data_file,
+                                 remotepath=self.attachment_id.name.replace(
+                                     '/', '-'))
                         wizard.state = 'finish'
                         _logger.info("[OK] upload file (%s) ", wizard.filename)
 
-        # change to initial name file (mandatory because of the close)
-        shutil.move(new_path_f, old_path_f)
         self._add2historical()
 
-        tmp_key.close()
-        tmp_f.close()
-        shutil.rmtree(tmp_d)
+        os.remove(key_file)
+        os.remove(data_file)
 
         self.payment_order_id.generated2uploaded()
         return True
@@ -158,27 +159,6 @@ class PaymenOrderUploadSepaWizard(models.TransientModel):
 
         key_pass = fds_authentication_key_obj.config()
         return (key, key_pass)
-
-    @api.multi
-    def _create_tmp_file(self, data, tmp_directory=None):
-        ''' private function that write data to a tmp file and if no tmp
-            directory use, create one.
-
-            :param str data: data in base64 format
-            :param str tmp_directory: path of the directory
-            :returns (obj file, str directory): obj of type tempfile
-        '''
-        self.ensure_one()
-        try:
-            if not tmp_directory:
-                tmp_directory = tempfile.mkdtemp()
-
-            tmp_file = tempfile.NamedTemporaryFile(dir=tmp_directory)
-            tmp_file.write(base64.b64decode(data))
-            tmp_file.flush()
-            return (tmp_file, tmp_directory)
-        except Exception as e:
-            _logger.error("Bad handling tmp in fds_inherit_sepa_wizard: %s", e)
 
     @api.multi
     def _add2historical(self):
