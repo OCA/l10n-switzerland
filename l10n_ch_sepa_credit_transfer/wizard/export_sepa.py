@@ -28,6 +28,78 @@ from lxml import etree
 class BankingExportSepaWizard(orm.TransientModel):
     _inherit = 'banking.export.sepa.wizard'
 
+    def generate_party_block(
+            self, cr, uid, parent_node, party_type, order, name, iban, bic,
+            eval_ctx, gen_args, context=None):
+        '''Generate the piece of the XML file corresponding to Name+IBAN+BIC
+        This code is mutualized between TRF and DD'''
+        assert order in ('B', 'C'), "Order can be 'B' or 'C'"
+        if party_type == 'Cdtr':
+            party_type_label = 'Creditor'
+        elif party_type == 'Dbtr':
+            party_type_label = 'Debtor'
+        party_name = self._prepare_field(
+            cr, uid, '%s Name' % party_type_label, name, eval_ctx,
+            gen_args.get('name_maxsize'),
+            gen_args=gen_args, context=context)
+        piban = self._prepare_field(
+            cr, uid, '%s IBAN' % party_type_label, iban, eval_ctx,
+            gen_args=gen_args,
+            context=context)
+        if 'sepa_export' in eval_ctx:
+            if eval_ctx['sepa_export'].payment_order_ids[0].\
+                    mode.bank_id.state == 'iban':
+                viban = self._validate_iban(cr, uid, piban, context=context)
+            else:
+                viban = piban
+        if 'line' in eval_ctx:
+            if eval_ctx['line'].bank_id.state == 'iban':
+                viban = self._validate_iban(cr, uid, piban, context=context)
+            else:
+                viban = piban
+        # At C level, the order is : BIC, Name, IBAN
+        # At B level, the order is : Name, IBAN, BIC
+        if order == 'B':
+            gen_args['initiating_party_country_code'] = viban[0:2]
+        elif order == 'C':
+            self.generate_party_agent(
+                cr, uid, parent_node, party_type, party_type_label,
+                order, party_name, viban, bic,
+                eval_ctx, gen_args, context=context)
+        party = etree.SubElement(parent_node, party_type)
+        party_nm = etree.SubElement(party, 'Nm')
+        party_nm.text = party_name
+        party_account = etree.SubElement(
+            parent_node, '%sAcct' % party_type)
+        party_account_id = etree.SubElement(party_account, 'Id')
+        if 'sepa_export' in eval_ctx:
+            if eval_ctx['sepa_export'].payment_order_ids[0].\
+                    mode.bank_id.state == 'iban':
+                party_account_iban = etree.SubElement(
+                    party_account_id, 'IBAN')
+                party_account_iban.text = viban
+            else:
+                party_account_iban = etree.SubElement(
+                    party_account_id, 'Othr')
+                party_account_iban.text = viban
+        if 'line' in eval_ctx:
+            if eval_ctx['line'].bank_id.state == 'iban':
+                party_account_iban = etree.SubElement(
+                    party_account_id, 'IBAN')
+                party_account_iban.text = viban
+            else:
+                party_account_iban = etree.SubElement(
+                    party_account_id, 'Othr')
+                party_account_othr_id = etree.SubElement(
+                    party_account_iban, 'Id')
+                party_account_othr_id.text = viban
+        if order == 'B':
+            self.generate_party_agent(
+                cr, uid, parent_node, party_type, party_type_label,
+                order, party_name, viban, bic,
+                eval_ctx, gen_args, context=context)
+        return True
+
     def create_sepa(self, cr, uid, ids, context=None):
         '''
         Creates the SEPA Credit Transfer file. That's the important code !
@@ -69,7 +141,7 @@ class BankingExportSepaWizard(orm.TransientModel):
             bic_xml_tag = 'BIC'
             name_maxsize = 70
             root_xml_tag = 'CstmrCdtTrfInitn'
-        elif pain_flavor == 'pain.001.003.03.ch.02':
+        elif pain_flavor == 'pain.001.001.03.ch.02':
             bic_xml_tag = 'BIC'
             name_maxsize = 70
             root_xml_tag = 'CstmrCdtTrfInitn'
@@ -80,11 +152,12 @@ class BankingExportSepaWizard(orm.TransientModel):
                     "Payment Type Codes supported for SEPA Credit Transfers "
                     "are 'pain.001.001.02', 'pain.001.001.03', "
                     "'pain.001.001.04', 'pain.001.001.05',"
-                    " 'pain.001.003.03' and 'pain.001.003.03.ch.02'.") %
+                    " 'pain.001.003.03' and 'pain.001.001.03.ch.02'.") %
                 pain_flavor)
 
-        if pain_flavor == 'pain.001.003.03.ch.02':
+        if pain_flavor == 'pain.001.001.03.ch.02':
             module = 'l10n_ch_sepa_credit_transfer'
+
         else:
             module = 'account_banking_sepa_credit_transfer'
         gen_args = {
@@ -98,10 +171,10 @@ class BankingExportSepaWizard(orm.TransientModel):
             'pain_xsd_file': '%s/data/%s.xsd' % (module, pain_flavor)
         }
 
-
         pain_ns = {
-            'xsi': 'http://www.w3.org/2001/XMLSchema-instance',
-            None: 'urn:iso:std:iso:20022:tech:xsd:%s' % pain_flavor,
+            'xs': 'http://www.w3.org/2001/XMLSchema-instance',
+            None: 'http://www.six-interbank-clearing.com/de/%s.xsd'
+                  % pain_flavor,
         }
 
         xml_root = etree.Element('Document', nsmap=pain_ns)
@@ -215,9 +288,8 @@ class BankingExportSepaWizard(orm.TransientModel):
                     cr, uid, credit_transfer_transaction_info_2_27,
                     line, gen_args, context=context)
 
-            if pain_flavor in pain_03_to_05:
-                nb_of_transactions_2_4.text = str(transactions_count_2_4)
-                control_sum_2_5.text = '%.2f' % amount_control_sum_2_5
+            nb_of_transactions_2_4.text = str(transactions_count_2_4)
+            control_sum_2_5.text = '%.2f' % amount_control_sum_2_5
 
         if pain_flavor in pain_03_to_05:
             nb_of_transactions_1_6.text = str(transactions_count_1_6)

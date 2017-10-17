@@ -28,6 +28,77 @@ from lxml import etree
 class BankingExportSepaWizard(orm.TransientModel):
     _inherit = 'banking.export.sdd.wizard'
 
+    def generate_party_block(
+            self, cr, uid, parent_node, party_type, order, name, iban, bic,
+            eval_ctx, gen_args, context=None):
+        '''Generate the piece of the XML file corresponding to Name+IBAN+BIC
+        This code is mutualized between TRF and DD'''
+        assert order in ('B', 'C'), "Order can be 'B' or 'C'"
+        if party_type == 'Cdtr':
+            party_type_label = 'Creditor'
+        elif party_type == 'Dbtr':
+            party_type_label = 'Debtor'
+        party_name = self._prepare_field(
+            cr, uid, '%s Name' % party_type_label, name, eval_ctx,
+            gen_args.get('name_maxsize'),
+            gen_args=gen_args, context=context)
+        piban = self._prepare_field(
+            cr, uid, '%s IBAN' % party_type_label, iban, eval_ctx,
+            gen_args=gen_args,
+            context=context)
+        if 'sepa_export' in eval_ctx:
+            if eval_ctx['sepa_export'].payment_order_ids[0].\
+                    mode.bank_id.state == 'iban':
+                viban = self._validate_iban(cr, uid, piban, context=context)
+            else:
+                viban = piban
+        if 'line' in eval_ctx:
+            if eval_ctx['line'].bank_id.state == 'iban':
+                viban = self._validate_iban(cr, uid, piban, context=context)
+            else:
+                viban = piban
+        # At C level, the order is : BIC, Name, IBAN
+        # At B level, the order is : Name, IBAN, BIC
+        if order == 'B':
+            gen_args['initiating_party_country_code'] = viban[0:2]
+        elif order == 'C':
+            self.generate_party_agent(
+                cr, uid, parent_node, party_type, party_type_label,
+                order, party_name, viban, bic,
+                eval_ctx, gen_args, context=context)
+        party = etree.SubElement(parent_node, party_type)
+        party_nm = etree.SubElement(party, 'Nm')
+        party_nm.text = party_name
+        party_account = etree.SubElement(
+            parent_node, '%sAcct' % party_type)
+        party_account_id = etree.SubElement(party_account, 'Id')
+        if 'sepa_export' in eval_ctx:
+            if eval_ctx['sepa_export'].payment_order_ids[0].\
+                    mode.bank_id.state == 'iban':
+                party_account_iban = etree.SubElement(
+                    party_account_id, 'IBAN')
+                party_account_iban.text = viban
+            else:
+                party_account_iban = etree.SubElement(
+                    party_account_id, 'Othr')
+                party_account_iban.text = viban
+        if 'line' in eval_ctx:
+            if eval_ctx['line'].bank_id.state == 'iban':
+                party_account_iban = etree.SubElement(
+                    party_account_id, 'IBAN')
+                party_account_iban.text = viban
+            else:
+                party_account_iban = etree.SubElement(
+                    party_account_id, 'Othr')
+                party_account_othr_id = etree.SubElement(
+                    party_account_iban, 'Id')
+                party_account_othr_id.text = viban
+        if order == 'B':
+            self.generate_party_agent(
+                cr, uid, parent_node, party_type, party_type_label,
+                order, party_name, viban, bic,
+                eval_ctx, gen_args, context=context)
+        return True
 
     def create_sepa(self, cr, uid, ids, context=None):
         '''
@@ -325,6 +396,3 @@ class BankingExportSepaWizard(orm.TransientModel):
         return self.finalize_sepa_file_creation(
             cr, uid, ids, xml_root, total_amount, transactions_count_1_6,
             gen_args, context=context)
-
-
-

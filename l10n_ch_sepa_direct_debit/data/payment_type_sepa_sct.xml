@@ -2,10 +2,6 @@
 <openerp>
 <data noupdate="0">
 
-
-<!-- TODO In the suitable_bank_types field, we should restrict to IBAN type and Rib+IBAN of l10n_fr_rib ? -->
-
-
 <record id="export_sdd_008_001_02" model="payment.mode.type">
     <field name="name">SEPA Direct Debit v02 CH (recommended)</field>
     <field name="code">pain.008.001.02.ch.01</field>

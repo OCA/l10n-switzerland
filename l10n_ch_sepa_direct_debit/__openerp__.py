@@ -20,9 +20,9 @@
 ##############################################################################
 
 {
-    "name": "Switzerland - SEPA Electronic Payment File",
-    "summary": "Generate pain.001 Credit Transfert Files for your payments",
-    "version": "1.0",
+    "name": "Switzerland - SEPA Direct Debit Electronic Payment File",
+    "summary": "Generate pain.008 Direct Debit Files for your payments",
+    "version": "7.0.1.0.0",
     "category": "Finance",
     "description": """
 Swiss electronic payment (SEPA)
@@ -43,7 +43,6 @@ It currently supports the "pain.008" norm for Direct Debit Initiation.
     "author": "Camptocamp,Odoo Community Association (OCA)",
     "depends": [
         "account",
-        "l10n_ch",
         "l10n_ch_base_bank",
         "base_iban",
         "account_payment",
