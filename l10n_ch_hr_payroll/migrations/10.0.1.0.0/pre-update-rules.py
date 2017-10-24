@@ -47,7 +47,8 @@ def migrate_category(cr, old_cat, new_cat):
 
         # Delete the old category
         query = ("DELETE FROM ir_model_data "
-                 "WHERE res_id=%s" % old_cat_id)
+                 "WHERE module='l10n_ch_hr_payroll' "
+                 "and name = '%s' and res_id=%s" % (old_cat, old_cat_id))
         cr.execute(query)
         query = ("DELETE FROM hr_salary_rule_category "
                  "WHERE id=%s" % old_cat_id)
