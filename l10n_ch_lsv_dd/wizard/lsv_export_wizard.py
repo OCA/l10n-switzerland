@@ -438,8 +438,8 @@ class LsvExportWizard(models.TransientModel):
         return ''
 
     def _get_ref(self, payment_line):
-        if export_utils.is_bvr_ref(payment_line.move_line_id.transaction_ref):
-            return payment_line.move_line_id.transaction_ref.replace(
+        if export_utils.is_bvr_ref(payment_line.move_line_id.ref):
+            return payment_line.move_line_id.ref.replace(
                 ' ', '').rjust(27, '0'), 'A'
         return '', 'B'  # If anyone uses IPI reference, get it here
 
