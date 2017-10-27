@@ -15,7 +15,7 @@
      'report/report.xml',
      'view/company_view.xml',
      'view/account_invoice.xml'
-],
+ ],
  'demo': [],
  'test': [],
  'installable': True,

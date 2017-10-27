@@ -44,7 +44,6 @@ class TestPaymentSlipLayout(test_common.TransactionCase):
         self.assertTrue(partner)
         account_model = self.env['account.account']
         account_debtor = account_model.search([('code', '=', '1100')])
-        account_sale = account_model.search([('code', '=', '3200')])
         if not account_debtor:
             account_debtor = account_model.create({
                 'code': 1100,
@@ -90,7 +89,6 @@ class TestPaymentSlipLayout(test_common.TransactionCase):
         })
 
         self.env['account.invoice.line'].create({
-            'account_id': account_sale.id,
             'product_id': False,
             'quantity': 1,
             'price_unit': 862.50,
