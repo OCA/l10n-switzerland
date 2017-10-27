@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# © 2012-2016 Camptocamp SA
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import _, api, exceptions, fields, models
+# Copyright 2017 Jean Respen
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from odoo import api, models
 
 class AccountInvoice(models.Model):
-    """Inherit account.invoice in order to add bvr
+    """Inherit account.invoice in order to add invoice and bvr
     printing functionnalites. BVR is a Swiss payment vector"""
 
     _inherit = "account.invoice"
@@ -16,4 +16,3 @@ class AccountInvoice(models.Model):
         })
         return self.env['report'].get_action(
             self, 'invoice_and_one_slip_per_page_from_invoice')
-
