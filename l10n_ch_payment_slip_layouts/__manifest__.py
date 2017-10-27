@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# Copyright 2017 Jean Respen and Nicolas Bessi
+# Copyright 2015 Camptocamp SA - Nicolas Bessi
+# Copyright 2017 Jean Respen
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {'name': 'Payment slip alternate layout(s)',
  'version': '10.0.1.0.0',

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2017 Jean Respen and Nicolas Bessi
+# Copyright 2015 Camptocamp SA - Nicolas Bessi
+# Copyright 2017 Jean Respen
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from . import payment_slip_from_invoice
