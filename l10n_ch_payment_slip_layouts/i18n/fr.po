@@ -1,21 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * l10n_ch_payment_slip_layouts
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-17 12:24+0000\n"
-"PO-Revision-Date: 2015-07-24 13:37+0000\n"
+"PO-Revision-Date: 2017-10-26 16:43+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #. module: l10n_ch_payment_slip_layouts
 #: model:ir.model,name:l10n_ch_payment_slip_layouts.model_res_company
@@ -30,12 +31,12 @@ msgstr "ID"
 #. module: l10n_ch_payment_slip_layouts
 #: field:res.company,bvr_background_on_merge:0
 msgid "Insert BVR Background with invoice ?"
-msgstr ""
+msgstr "Insérer un fond BVR dans la facture ?"
 
 #. module: l10n_ch_payment_slip_layouts
 #: model:ir.actions.report.xml,name:l10n_ch_payment_slip_layouts.invoice_and_one_slip_per_page_from_invoice
 msgid "Invoice with Payment Slip"
-msgstr ""
+msgstr "Facture avec BVR"
 
 #. module: l10n_ch_payment_slip_layouts
 #: model:ir.model,name:l10n_ch_payment_slip_layouts.model_report

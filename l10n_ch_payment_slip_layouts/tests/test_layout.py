@@ -120,8 +120,6 @@ class TestPaymentSlipLayout(test_common.TransactionCase):
         with mock_render_report():
             # registry is used in order to avoid decorator hell
             gen = self.registry['report']._compute_documents_list(
-                self.env.cr,
-                self.env.uid,
                 [self.invoice.id],
                 context={}
             )
@@ -133,8 +131,6 @@ class TestPaymentSlipLayout(test_common.TransactionCase):
         with mock_render_report():
             # registry is used in order to avoid decorator hell
             gen = self.registry['report']._compute_documents_list(
-                self.env.cr,
-                self.env.uid,
                 [self.invoice.id],
                 context={}
             )
@@ -144,8 +140,6 @@ class TestPaymentSlipLayout(test_common.TransactionCase):
         with mock_render_report():
             # registry is used in order to avoid decorator hell
             gen = self.registry['report']._compute_documents_list(
-                self.env.cr,
-                self.env.uid,
                 [self.invoice.id],
                 context={}
             )

@@ -30,6 +30,7 @@ Contributors
 ------------
 
 * Nicolas bessi <nicolas.bessi@camptocamp.com>
+* Jean Respen <jean@dootix.com>
 
 Maintainer
 ----------

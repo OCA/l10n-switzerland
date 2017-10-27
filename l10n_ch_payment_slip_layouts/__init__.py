@@ -21,3 +21,4 @@
 from . import report
 from . import payment_slip
 from . import company
+from . import models

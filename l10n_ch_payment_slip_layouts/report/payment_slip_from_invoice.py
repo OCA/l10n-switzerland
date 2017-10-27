@@ -30,25 +30,21 @@ class ExtendedReport(models.Model):
 
     _inherit = 'report'
 
-    def _compute_documents_list(self, cr, uid, invoice_ids,
+    def _compute_documents_list(self, invoice_ids,
                                 report_name=None, context=None):
-        slip_model = self.pool['l10n_ch.payment_slip']
-        invoice_model = self.pool['account.invoice']
-        for inv in invoice_model.browse(cr, uid, invoice_ids, context=context):
+        slip_model = self.env['l10n_ch.payment_slip']
+        invoice_model = self.env['account.invoice']
+        for inv in invoice_model.browse(invoice_ids):
             data, format = render_report(
-                cr,
-                uid,
+		self.env.cr,
+		self.env.uid,
                 [inv.id],
                 'account.report_invoice',
                 {},
-                context=context,
             )
             yield data
-            slips = slip_model.compute_pay_slips_from_invoices(
-                cr,
-                uid,
+            slips = slip_model._compute_pay_slips_from_invoices(
                 inv,
-                context=context
             )
             for slip in slips:
                 yield slip._draw_payment_slip(a4=True,
@@ -58,7 +54,7 @@ class ExtendedReport(models.Model):
 
     @api.v7
     def _generate_inv_and_one_slip_per_page_from_invoice_pdf(
-            self, cr, uid, ids, report_name=None, context=None):
+            self, ids, report_name=None, context=None):
         """Generate invoice with payment slip PDF(s) on separate page
         from report model.
         PDF are merged in memory or on
@@ -66,9 +62,9 @@ class ExtendedReport(models.Model):
 
         :return: the generated PDF content
         """
-        user_model = self.pool['res.users']
-        company = user_model.browse(cr, uid, uid, context=context).company_id
-        docs = self._compute_documents_list(cr, uid, ids,
+        user_model = self.env['res.users']
+        company = user_model.browse(self.env.uid).company_id
+        docs = self._compute_documents_list(ids,
                                             report_name=report_name,
                                             context=context)
         if company.merge_mode == 'in_memory':
@@ -76,23 +72,18 @@ class ExtendedReport(models.Model):
         return self.merge_pdf_on_disk(docs)
 
     @api.v7
-    def get_pdf(self, cr, uid, ids, report_name, html=None, data=None,
+    def get_pdf(self, ids, report_name, html=None, data=None,
                 context=None):
         if report_name == 'invoice_and_one_slip_per_page_from_invoice':
             return self._generate_inv_and_one_slip_per_page_from_invoice_pdf(
-                cr,
-                uid,
                 ids,
                 report_name=report_name,
                 context=context
             )
         else:
             return super(ExtendedReport, self).get_pdf(
-                cr,
-                uid,
                 ids,
                 report_name,
                 html=html,
                 data=data,
-                context=context
             )
