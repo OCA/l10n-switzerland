@@ -27,7 +27,7 @@ def make_pdf():
 @contextmanager
 def mock_render_report():
     render = ('odoo.addons.l10n_ch_payment_slip.report.ir_action.'
-              'ir_actions_report_xml_reportlab.render_report')
+              'IrActionsReportXMLReportlab.render_report')
     pdf_mock = MagicMock()
     pdf_mock.side_effect = [(make_pdf(), 'pdf')]
     with patch(render, pdf_mock):
