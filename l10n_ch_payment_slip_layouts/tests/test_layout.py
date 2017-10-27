@@ -10,7 +10,7 @@ import re
 from mock import patch, MagicMock
 from reportlab.pdfgen.canvas import Canvas
 
-import openerp.tests.common as test_common
+import odoo.tests.common as test_common
 
 
 def make_pdf():
@@ -26,7 +26,7 @@ def make_pdf():
 
 @contextmanager
 def mock_render_report():
-    render = ('openerp.addons.l10n_ch_payment_slip.report.ir_action.'
+    render = ('odoo.addons.l10n_ch_payment_slip.report.ir_action.'
               'ir_actions_report_xml_reportlab.render_report')
     pdf_mock = MagicMock()
     pdf_mock.side_effect = [(make_pdf(), 'pdf')]
