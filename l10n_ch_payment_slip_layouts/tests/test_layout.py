@@ -97,7 +97,7 @@ class TestPaymentSlipLayout(test_common.TransactionCase):
             'invoice_id': self.invoice.id,
             'name': 'product that cost 862.50 all tax included',
         })
-        invoice.action_invoice_open()
+        self.invoice.action_invoice_open()
         # We wait the invoice line cache to be refreshed
         attempt = 0
         while not self.invoice.move_id:
