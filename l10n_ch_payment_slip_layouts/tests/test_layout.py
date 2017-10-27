@@ -42,6 +42,16 @@ class TestPaymentSlipLayout(test_common.TransactionCase):
         self.assertTrue(company)
         partner = self.env.ref('base.main_partner')
         self.assertTrue(partner)
+	account_model = self.env['account.account']
+        account_debtor = account_model.search([('code', '=', '1100')])
+        if not account_debtor:
+            account_debtor = account_model.create({
+                'code': 1100,
+                'name': 'Debitors',
+                'user_type_id':
+                    self.env.ref('account.data_account_type_receivable').id,
+                'reconcile': True,
+            })
         bank = self.env['res.bank'].create(
             {
                 'name': 'BCV',
@@ -69,27 +79,24 @@ class TestPaymentSlipLayout(test_common.TransactionCase):
             }
         )
 
-        self.invoice = self.env['account.invoice'].create(
-            {
-                'partner_id': self.env.ref('base.res_partner_12').id,
-                'reference_type': 'none',
-                'name': 'A customer invoice',
-                'account_id': self.env.ref('account.a_recv').id,
-                'type': 'out_invoice',
-                'partner_bank_id': self.bank_account.id
-            }
-        )
+        self.invoice = self.env['account.invoice'].create({
+            'partner_id': self.env.ref('base.res_partner_12').id,
+            'reference_type': 'none',
+            'name': 'A customer invoice',
+            'account_id': account_debtor.id,
+            'type': 'out_invoice',
+            'partner_bank_id': self.bank_account.id
+        })
 
-        self.env['account.invoice.line'].create(
-            {
-                'product_id': False,
-                'quantity': 1,
-                'price_unit': 862.50,
-                'invoice_id': self.invoice.id,
-                'name': 'product that cost 862.50 all tax included',
-            }
-        )
-        self.invoice.signal_workflow('invoice_open')
+        self.env['account.invoice.line'].create({
+            'account_id': account_sale.id,
+            'product_id': False,
+            'quantity': 1,
+            'price_unit': 862.50,
+            'invoice_id': invoice.id,
+            'name': 'product that cost 862.50 all tax included',
+        })
+        invoice.action_invoice_open()
         # We wait the invoice line cache to be refreshed
         attempt = 0
         while not self.invoice.move_id:

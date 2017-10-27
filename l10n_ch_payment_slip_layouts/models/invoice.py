@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import api, models
 
+
 class AccountInvoice(models.Model):
     """Inherit account.invoice in order to add invoice and bvr
     printing functionnalites. BVR is a Swiss payment vector"""
