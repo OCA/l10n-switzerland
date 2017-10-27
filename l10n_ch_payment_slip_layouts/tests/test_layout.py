@@ -125,7 +125,7 @@ class TestPaymentSlipLayout(test_common.TransactionCase):
             )
             self.assertIsInstance(gen, types.GeneratorType)
             pdfs = [x for x in gen]
-            self.assertTrue(len(pdfs) == 2)
+            self.assertTrue(len(pdfs) == 1)
 
     def test_report_generator_merge(self):
         with mock_render_report():
