@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<openerp>
+  <data>
+
+   <record model="ir.ui.view" id="invoice_form_add_bvr_full">
+      <field name="name">account.invoice.form.bvr.full</field>
+      <field name="model">account.invoice</field>
+      <field name="type">form</field>
+      <field name="inherit_id" ref="account.invoice_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//button[@name='invoice_print'][1]" position="after">
+          <button type="object"
+            string="Invoice with Payment Slip"
+            name="print_bvr_with_slip"
+            attrs="{'invisible': ['|',('sent','=',True), ('state', '!=', 'open')]}"
+            class="oe_highlight"/>
+        </xpath>
+        <xpath expr="//button[@name='invoice_print'][2]" position="after">
+          <button type="object"
+            string="Invoice with Payment Slip"
+            name="print_bvr_with_slip"
+            attrs="{'invisible':['|',('sent','=',False), ('state', '!=', 'open')]}"/>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</openerp>
+
