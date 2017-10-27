@@ -63,8 +63,8 @@ class TestPaymentSlipLayout(test_common.TransactionCase):
             {
                 'name': 'BCV',
                 'ccp': '01-1234-1',
-                'bic': '234234',
-                'clearing': '234234',
+                'bic': '234234XXX',
+                'clearing': '234234XXX',
             }
         )
         self.bank_account = self.env['res.partner.bank'].create(
