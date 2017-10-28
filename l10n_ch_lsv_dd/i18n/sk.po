@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-24 03:05+0000\n"
+"POT-Creation-Date: 2017-09-02 08:20+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Slovak (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/sk/)\n"
@@ -54,7 +54,7 @@ msgstr ""
 #: selection:lsv.export.wizard,state:0 selection:post.dd.export.wizard,state:0
 #, python-format
 msgid "Create"
-msgstr ""
+msgstr "Vytvoriť"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:82
@@ -106,7 +106,7 @@ msgstr ""
 #: field:post.dd.export.wizard,state:0
 #, python-format
 msgid "State"
-msgstr ""
+msgstr "Stav"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:46

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-19 04:42+0000\n"
+"POT-Creation-Date: 2017-09-02 08:20+0000\n"
 "PO-Revision-Date: 2015-09-04 14:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-l10n-switzerland-7-0/language/sl/)\n"
@@ -91,7 +91,7 @@ msgstr ""
 #: field:post.dd.export.wizard,filename:0
 #, python-format
 msgid "Filename"
-msgstr ""
+msgstr "Naziv datoteke"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/model/bank.py:76 constraint:res.partner.bank:0
@@ -189,7 +189,7 @@ msgstr ""
 #: selection:lsv.export.wizard,state:0 selection:post.dd.export.wizard,state:0
 #, python-format
 msgid "Finish"
-msgstr ""
+msgstr "Dokončaj"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/model/bank.py:37
@@ -295,7 +295,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: view:lsv.export.wizard:0 view:post.dd.export.wizard:0
 msgid "Generate"
-msgstr ""
+msgstr "Ustvari"
 
 #. module: l10n_ch_lsv_dd
 #: model:ir.model,name:l10n_ch_lsv_dd.model_post_dd_export_wizard
@@ -323,7 +323,7 @@ msgstr ""
 #: field:post.dd.export.wizard,nb_transactions:0
 #, python-format
 msgid "Number of Transactions"
-msgstr ""
+msgstr "Število transakcij"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:488
@@ -481,7 +481,7 @@ msgstr ""
 #: view:banking.export.ch.dd:0 field:banking.export.ch.dd,payment_order_ids:0
 #, python-format
 msgid "Payment Orders"
-msgstr ""
+msgstr "Plačilni nalogi"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/model/bank.py:45
@@ -528,7 +528,7 @@ msgstr ""
 #: field:lsv.export.wizard,file:0 field:post.dd.export.wizard,file:0
 #, python-format
 msgid "File"
-msgstr ""
+msgstr "Datoteka"
 
 #. module: l10n_ch_lsv_dd
 #: model:ir.model,name:l10n_ch_lsv_dd.model_payment_order
