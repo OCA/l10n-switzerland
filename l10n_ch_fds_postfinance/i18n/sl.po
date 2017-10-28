@@ -296,7 +296,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.file,filename:0
 msgid "Filename"
-msgstr ""
+msgstr "Naziv datoteke"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.files.import.tobankstatments.wizard,msg_exist_file:0
@@ -308,7 +308,7 @@ msgstr ""
 #: selection:fds.key.generator.wizard,state:0
 #: selection:fds.key.import.wizard,state:0
 msgid "Generate"
-msgstr ""
+msgstr "Ustvari"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.authentication.keys,id:0

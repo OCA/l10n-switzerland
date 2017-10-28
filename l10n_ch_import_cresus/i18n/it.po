@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-19 04:50+0000\n"
-"PO-Revision-Date: 2017-08-21 07:21+0000\n"
+"POT-Creation-Date: 2017-09-25 12:34+0000\n"
+"PO-Revision-Date: 2017-10-16 11:28+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -86,7 +86,7 @@ msgstr ""
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,file:0
 msgid "File"
-msgstr ""
+msgstr "File"
 
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,id:0

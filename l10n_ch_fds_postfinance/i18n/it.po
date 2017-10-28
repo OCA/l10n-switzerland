@@ -296,7 +296,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.file,filename:0
 msgid "Filename"
-msgstr ""
+msgstr "Nome file"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.files.import.tobankstatments.wizard,msg_exist_file:0
@@ -308,7 +308,7 @@ msgstr ""
 #: selection:fds.key.generator.wizard,state:0
 #: selection:fds.key.import.wizard,state:0
 msgid "Generate"
-msgstr ""
+msgstr "Genera"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.authentication.keys,id:0
@@ -502,7 +502,7 @@ msgstr "Utente"
 #: view:fds.key.generator.wizard:l10n_ch_fds_postfinance.view_fds_key_generator_wizard_form
 #: view:fds.key.import.wizard:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
 msgid "Validate"
-msgstr ""
+msgstr "Conferma"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form

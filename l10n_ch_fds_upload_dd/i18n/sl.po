@@ -81,7 +81,7 @@ msgstr ""
 #. module: l10n_ch_fds_upload_dd
 #: field:fds.dd.upload.history,filename:0
 msgid "Filename"
-msgstr ""
+msgstr "Naziv datoteke"
 
 #. module: l10n_ch_fds_upload_dd
 #: field:fds.dd.upload.history,id:0
