@@ -94,6 +94,7 @@ addon | version | summary
 [l10n_ch_scan_bvr](l10n_ch_scan_bvr/) | 10.0.1.0.0 | Switzerland - Scan ESR/BVR to create invoices
 [l10n_ch_states](l10n_ch_states/) | 10.0.1.0.0 | Switzerland Country States
 [l10n_ch_zip](l10n_ch_zip/) | 10.0.1.0.1 | Provides all Swiss postal codes for auto-completion
+[l10n_ch_payment_slip_layouts](l10n_ch_payment_slip_layouts/) | 10.0.0.1.0 | Add new BVR/ESR payment slip layouts like invoice with slip on same document
 
 
 Unported addons
@@ -108,7 +109,6 @@ addon | version | summary
 [l10n_ch_import_winbiz](l10n_ch_import_winbiz/) | 9.0.1.0.0 (unported) | Accounting Import WinBIZ
 [l10n_ch_pain_direct_debit](l10n_ch_pain_direct_debit/) | 9.0.1.0.0 (unported) | Generate ISO 20022 direct debits
 [l10n_ch_payment_slip_account_statement_base_completion](l10n_ch_payment_slip_account_statement_base_completion/) | 1.0 (unported) | Switzerland - BVR/ESR Bank statement Completion
-[l10n_ch_payment_slip_layouts](l10n_ch_payment_slip_layouts/) | 8.0.0.1.0 (unported) | Add new BVR/ESR payment slip layouts like invoice with slip on same document
 
 [//]: # (end addons)
 
