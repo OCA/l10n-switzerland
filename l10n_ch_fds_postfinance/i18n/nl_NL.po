@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-25 02:50+0000\n"
-"PO-Revision-Date: 2017-08-25 02:50+0000\n"
+"POT-Creation-Date: 2017-09-02 08:53+0000\n"
+"PO-Revision-Date: 2017-09-02 08:53+0000\n"
 "Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -461,7 +461,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_key_import_wizard_user_name
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_account_name
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
@@ -591,7 +591,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_state
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.fds_postfinance_file_search
 msgid "State"
-msgstr ""
+msgstr "Provincie"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.actions.act_window,help:l10n_ch_fds_postfinance.action_fds_files

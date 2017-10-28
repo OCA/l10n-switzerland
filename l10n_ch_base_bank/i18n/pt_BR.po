@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-03 11:09+0000\n"
-"PO-Revision-Date: 2016-12-27 08:25+0000\n"
+"POT-Creation-Date: 2017-09-02 08:53+0000\n"
+"PO-Revision-Date: 2017-10-27 11:26+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-l10n-switzerland-9-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -57,9 +57,21 @@ msgid "Bank BVR/ESR adherent number"
 msgstr ""
 
 #. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/bank.py:241
+#, python-format
+msgid "Bank/CCP Undefined"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/bank.py:239
+#, python-format
+msgid "Bank/CCP {}"
+msgstr ""
+
+#. module: l10n_ch_base_bank
 #: model:ir.ui.view,arch_db:l10n_ch_base_bank.view_bank_search
 msgid "Banks"
-msgstr ""
+msgstr "Bancos"
 
 #. module: l10n_ch_base_bank
 #: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank_ccp
@@ -99,7 +111,8 @@ msgid "Invoice"
 msgstr "Fatura"
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:98
+#: code:addons/l10n_ch_base_bank/models/bank.py:111
+#: code:addons/l10n_ch_base_bank/models/bank.py:226
 #, python-format
 msgid "Please enter a correct postal number. (01-23456-1 or 12345)"
 msgstr ""
@@ -116,7 +129,7 @@ msgstr ""
 
 #. module: l10n_ch_base_bank
 #: sql_constraint:res.partner.bank:0
-msgid "The BVR adherent number must be unique !"
+msgid "The BVR adherent number/ccp pair must be unique !"
 msgstr ""
 
 #. module: l10n_ch_base_bank
@@ -127,7 +140,7 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:218
+#: code:addons/l10n_ch_base_bank/models/bank.py:213
 #, python-format
 msgid ""
 "Your bank BVR/ESR adherent number must contain only digits!\n"
