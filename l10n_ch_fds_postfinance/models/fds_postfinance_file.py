@@ -2,7 +2,7 @@
 # © 2015 Compassion CH (Nicolas Tran)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models, fields, api
+from odoo import registry, models, fields, api
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -71,7 +71,7 @@ class FdsPostfinanceFile(models.Model):
             :return None:
         '''
         valid_files = self.filtered(lambda f: f.state == 'draft')
-        valid_files._state_error_on()
+        valid_files.write({'state': 'error'})
 
     @api.multi
     def change2draft_button(self):
@@ -120,15 +120,18 @@ class FdsPostfinanceFile(models.Model):
                 _logger.info("[OK] import file '%s' to bank Statements",
                              (pf_file.filename))
             except:
-                pf_file._state_error_on()
-                _logger.warning("[FAIL] import file '%s' to bank Statements",
-                                (pf_file.filename))
+                with api.Environment.manage():
+                    with registry(
+                            self.env.cr.dbname).cursor() as new_cr:
+                        # Create a new environment with new cursor database
+                        new_env = api.Environment(new_cr, self.env.uid,
+                                                  self.env.context)
+                        # Write the error in the postfinance file
+                        pf_file.with_env(new_env).write({'state': 'error'})
+                        _logger.error(
+                            "[FAIL] import file '%s' to bank Statements",
+                            pf_file.with_env(new_env).filename,
+                            exc_info=True
+                        )
                 res = False
         return res
-
-    def _state_error_on(self):
-        ''' private function that change state to error
-
-            :returns: None
-        '''
-        self.write({'state': 'error'})

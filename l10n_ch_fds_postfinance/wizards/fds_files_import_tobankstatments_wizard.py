@@ -9,7 +9,7 @@ import shutil
 import tempfile
 import traceback
 
-from odoo import models, fields, api, _
+from odoo import registry, models, fields, api, _
 from odoo.exceptions import Warning as UserError
 
 _logger = logging.getLogger(__name__)
@@ -153,42 +153,52 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
                 - fds account
             :returns recordset: of download files (model fds.postfinance.file)
         '''
-        fds_files_ids = self.env['fds.postfinance.file']
-        for d in directories:
-            dir_name = d.name
+        with api.Environment.manage():
+            with registry(
+                    self.env.cr.dbname).cursor() as new_cr:
+                # Create a new environment with new cursor database
+                # We ensure postfinance files created are stored in database
+                new_env = api.Environment(new_cr, self.env.uid,
+                                          self.env.context)
+                fds_files_ids = new_env['fds.postfinance.file']
+                for d in directories:
+                    dir_name = d.name
 
-            with sftp.cd(dir_name):
-                list_name_files = sftp.listdir()
-            sftp.get_d(dir_name, tmp_directory)
-            _logger.info("[OK] download files in '%s' ", (dir_name))
+                    with sftp.cd(dir_name):
+                        list_name_files = sftp.listdir()
+                    sftp.get_d(dir_name, tmp_directory)
+                    _logger.info("[OK] download files in '%s' ", (dir_name))
 
-            # Look for files to exclude
-            excluded = d.excluded_files.split(';')
-            for nameFile in list_name_files:
-                file_ignore = [f for f in excluded if f and f in nameFile]
-                if file_ignore:
-                    self.msg_import_file_ignore += "; ".join(file_ignore)
-                    continue
+                    # Look for files to exclude
+                    excluded = d.excluded_files.split(';')
+                    for nameFile in list_name_files:
+                        file_ignore = [f for f in excluded if f and f in
+                                       nameFile]
+                        if file_ignore:
+                            self.msg_import_file_ignore += "; ".join(
+                                file_ignore)
+                            continue
 
-                # check if file exist already
-                if fds_files_ids.search([['filename', '=', nameFile]]):
-                    self.msg_exist_file += nameFile + "; "
-                    _logger.warning("[FAIL] file '%s' already exist",
-                                    (nameFile))
-                    continue
+                        # check if file exist already
+                        if fds_files_ids.search([['filename', '=', nameFile]]):
+                            self.msg_exist_file += nameFile + "; "
+                            _logger.warning("[FAIL] file '%s' already exist",
+                                            (nameFile))
+                            continue
 
-                # save in the model fds_postfinance_files
-                path = os.path.join(tmp_directory, nameFile)
-                with open(path, "rb") as f:
-                    file_data = f.read()
-                values = {
-                    'fds_account_id': fds_id.id,
-                    'data': base64.b64encode(file_data),
-                    'filename': nameFile,
-                    'directory_id': d.id}
-                fds_files_ids += fds_files_ids.create(values)
+                        # save in the model fds_postfinance_files
+                        path = os.path.join(tmp_directory, nameFile)
+                        with open(path, "rb") as f:
+                            file_data = f.read()
+                        values = {
+                            'fds_account_id': fds_id.id,
+                            'data': base64.b64encode(file_data),
+                            'filename': nameFile,
+                            'directory_id': d.id}
+                        fds_files_ids += fds_files_ids.create(values)
 
-        return fds_files_ids
+        self.env.invalidate_all()
+        return fds_files_ids.with_env(self.env)
 
     @api.multi
     def _import2bankStatements(self, fds_files_ids):
