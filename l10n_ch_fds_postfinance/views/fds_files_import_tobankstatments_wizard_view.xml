@@ -1,54 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-<data>
-    <!-- view of this wizard -->
-    <record model="ir.ui.view" id="view_fds_files_import_tobankstatments_wizard_form">
-        <field name="name">Download FDS files view</field>
-        <field name="model">fds.files.import.tobankstatments.wizard</field>
-        <field name="arch" type="xml">
-            <form>
-                <field name="state" invisible="True"/>
-                <group states="default">
-                    <p>Click on import to download files.</p>
-                </group>
-                <group states="done">
-                    <separator string="results" />
-                    <newline />
-                    <field name="msg_file_imported" />
-                    <field name="msg_import_file_fail" />
-                    <field name="msg_exist_file" />
-                </group>
-                <group states="error">
-                    <p>You don't have the permission.</p>
-                </group>
-                <group states="errorSFTP">
-                    <p>SFTP unable to connect.</p>
-                </group>
-                <footer>
-                    <button string="import" name="import_button" type="object" class="oe_highlight" icon="gtk-apply" states="default" />
-                    <button string="Close" special="cancel" icon="gtk-close" states="error,errorSFTP,done"/>
-                    <button string="Cancel" special="cancel" states="default" icon="gtk-cancel" />
-                </footer>
-            </form>
-        </field>
-    </record>
+    <data>
+        <!-- view of this wizard -->
+        <record model="ir.ui.view" id="view_fds_files_import_tobankstatments_wizard_form">
+            <field name="name">Download FDS Files</field>
+            <field name="model">fds.files.import.tobankstatments.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="state" invisible="True"/>
+                    <group states="default">
+                        <field name="fds_account_id"/>
+                        <p>Click on import to download files.</p>
+                    </group>
+                    <group states="done">
+                        <separator string="results" />
+                        <newline />
+                        <field name="msg_file_imported" />
+                        <field name="msg_import_file_ignore" />
+                        <field name="msg_import_file_fail" />
+                        <field name="msg_exist_file" />
+                    </group>
+                    <group states="error">
+                        <p>You don't have the permission.</p>
+                    </group>
+                    <group states="errorSFTP">
+                        <p>SFTP unable to connect.</p>
+                    </group>
+                    <footer>
+                        <button string="import" name="import_button" type="object" class="oe_highlight" states="default" />
+                        <button string="Close" special="cancel" states="error,errorSFTP,done"/>
+                        <button string="Cancel" special="cancel" states="default" />
+                    </footer>
+                </form>
+            </field>
+        </record>
     
-    <!-- More button Action in fds_postfinance_files -->
-    <record model="ir.actions.act_window" id="action_fds_files_import_tobankstatments_wizard">
-        <field name="name">Download FDS files</field>
-        <field name="res_model">fds.files.import.tobankstatments.wizard</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-    </record>
-    
-    <record model="ir.values" id="action_fds_files_import_tobankstatments_wizard_values">
-        <field name="model">fds.postfinance.account</field>
-        <field name="name">Download FDS files</field>
-        <field name="value" eval="'ir.actions.act_window,%d'%action_fds_files_import_tobankstatments_wizard" />
-        <field name="key">action</field>
-        <field name="object" eval="1" />
-    </record>
-    
-</data>
+        <!-- Actions for opening the wizard -->
+        <act_window id="action_fds_files_import_tobankstatments_wizard"
+                name="Download FDS files"
+                res_model="fds.files.import.tobankstatments.wizard"
+                src_model="fds.postfinance.account"
+                view_mode="form"
+                view_type="form"
+                target="new"
+        />
+
+        <record id="action_fds_import" model="ir.actions.act_window">
+            <field name="name">Import from FDS</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">fds.files.import.tobankstatments.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_fds_import" parent="account.account_account_menu" action="action_fds_import" sequence="8"/>
+
+    </data>
 </openerp>

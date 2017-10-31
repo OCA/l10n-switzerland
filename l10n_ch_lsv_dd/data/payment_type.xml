@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2014 Compassion (http://www.compassion.ch)
+  Copyright (C) 2017 brain-tec AG (http://www.braintec-group.com)
+  @author: Cyril Sester <cyril.sester@outlook.com>
+  The licence is in the file __openerp__.py
+-->
+<odoo>
+    <record id="export_lsv" model="account.payment.method">
+      <field name="name">LSV Direct Debit</field>
+      <field name="code">lsv</field>
+      <field name="payment_type">inbound</field>
+      <field name="bank_account_required">True</field>
+    </record>
+
+    <record id="export_post_dd" model="account.payment.method">
+      <field name="name">Postfinance Direct Debit</field>
+      <field name="code">postfinance.dd</field>
+      <field name="payment_type">inbound</field>
+      <field name="bank_account_required">True</field>
+    </record>
+
+    <record id="export_sepa_dd" model="account.payment.method">
+      <field name="name">SEPA Direct Debit</field>
+      <field name="code">sepa.ch.dd</field>
+      <field name="pain_version">pain.008.001.02.ch.03</field>
+      <field name="payment_type">inbound</field>
+      <field name="bank_account_required">True</field>
+    </record>
+</odoo>

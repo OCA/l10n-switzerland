@@ -1,0 +1,366 @@
+-
+  In order to test lsv and dd file generation, I will create a customer with
+  3 bank accounts (one for each debit mode) and go through the entire generation
+  process
+  
+  I create the partner
+-
+  !record {model: res.partner, id: customer, view: False}:
+    name: "LSV-DD test"
+
+-
+  I set the Initiating Party Identifier on the company. This is required for
+  the generation of the XML-DD. The current code was taken from the one given as an
+  example at the downloadable example at https://www.six-interbank-clearing.com/en/home/
+  standardization/iso-payments/customer-bank/implementation-guidelines.html#Swiss-direct-debits.
+-
+  !record {model: res.company, id: base.main_company, view: False}:
+    initiating_party_identifier: 'CH1312300000012345'
+
+-
+  I create one bank for LSV debit (as the clearing number is on the
+  bank object)
+-
+  !record {model: res.bank, id: bank_ubs, view: False}:
+    name: 'UBS AG'
+    code: 'ubs'
+    bic: 'UBSWCHZH86N'
+    clearing: '202'
+    street: 'Poststrasse 10'
+    zip: '8610'
+    city: 'Uster 1'
+-
+  I create one bank for DD (as the clearing number is on the
+  bank object)
+-
+  !record {model: res.bank, id: bank_post, view: False}:
+    name: 'Postfinance AG'
+    code: 'postfinance'
+    bic: 'POFICHBEXXX'
+    clearing: '9000'
+    street: 'Postfinance'
+    zip: '3030'
+    city: 'Bern'
+
+-
+  I create the partner bank account for LSV debit (account which will be debited)
+-
+  !record {model: res.partner.bank, id: partner_bank_ubs, view: False}:
+    acc_type: 'iban'
+    acc_number: 'CH31 8123 9000 0012 4568 9'
+    partner_id: customer
+    bank_id: bank_ubs
+-
+  I create the partner bank account for DD (account which will be debited)
+-
+  !record {model: res.partner.bank, id: partner_bank_post, view: False}:
+    acc_type: 'postal'
+    acc_number: '25-9779-8'
+    partner_id: customer
+    bank_id: bank_post
+-
+  I create the partner bank account for XML-DD (account which will be debited)
+-
+  !record {model: res.partner.bank, id: partner_bank_post_xml_dd, view: False}:
+    acc_type: 'postal'
+    acc_number: 'CH63 0900 0000 2500 9779 8'
+    partner_id: customer
+    bank_id: bank_post
+
+-
+  Then add a mandate on LSV bank account
+-
+  !record {model: account.banking.mandate, id: ubs_mandate, view: False}:
+    partner_bank_id: partner_bank_ubs
+    signature_date: !eval "'%s-01-01' %(datetime.now().year)"
+-
+  Then add a mandate on DD bank account
+-
+  !record {model: account.banking.mandate, id: post_mandate, view: False}:
+    partner_bank_id: partner_bank_post
+    signature_date: !eval "'%s-01-01' %(datetime.now().year)"
+-
+  Then add a mandate on DD bank account for XML-DD
+-
+  !record {model: account.banking.mandate, id: post_mandate_xml_dd, view: False}:
+    partner_bank_id: partner_bank_post_xml_dd
+    signature_date: !eval "'%s-01-01' %(datetime.now().year)"
+
+-
+  We need a company iban account with a lsv identifier (account which will be credited)
+-
+  !record {model: res.partner.bank, id: company_bank_ubs, view: False}:
+    acc_type: 'iban'
+    acc_number: 'CH93 0076 2011 6238 5295 7'
+    partner_id: base.main_partner
+    bank_id: bank_ubs
+    lsv_identifier: 'AAAAA'
+-
+  We need a company bvr account with a dd identifier (account which will be credited)
+-
+  !record {model: res.partner.bank, id: company_bank_post, view: False}:
+    acc_type: 'postal'
+    acc_number: '25-9778-2'
+    partner_id: base.main_partner
+    bank_id: bank_post
+    post_dd_identifier: '123457'
+-
+  We need a company bvr account with a dd identifier for the XML-DD (account which will be credited)
+-
+  !record {model: res.partner.bank, id: company_bank_post_xml_dd, view: False}:
+    acc_type: 'postal'
+    acc_number: 'CH10 0900 0000 2500 9778 2'
+    partner_id: base.main_partner
+    bank_id: bank_post
+    post_dd_identifier: '123457'
+
+-
+  We create a journal for LSV.
+-
+  !record {model: account.journal, id: lsv_account_journal, view: False}:
+    name: Bank LSV Journal
+    type: bank
+    bank_account_id: company_bank_ubs
+-
+  ...and link its debit method.
+-
+  !record {model: account.journal, id: lsv_account_journal, view: False}:
+    inbound_payment_method_ids:
+      - export_lsv
+-
+  And one for DD.
+-
+  !record {model: account.journal, id: dd_account_journal, view: False}:
+    name: Bank DD Journal
+    type: bank
+    bank_account_id: company_bank_post
+-
+  ...and link its debit method.
+-
+  !record {model: account.journal, id: dd_account_journal, view: False}:
+    inbound_payment_method_ids:
+      - export_post_dd
+-
+  And one for DD (the XML version)
+-
+  !record {model: account.journal, id: dd_account_journal_xml_dd, view: False}:
+    name: Bank XML-DD Journal
+    type: bank
+    bank_account_id: company_bank_post_xml_dd
+-
+  ...and link its debit method.
+-
+  !record {model: account.journal, id: dd_account_journal_xml_dd, view: False}:
+    inbound_payment_method_ids:
+      - export_sepa_dd
+
+-
+  We need a payment mode to create a direct debit order. We create one for LSV.
+-
+  !record {model: account.payment.mode, id: lsv_pay_mode, view: False}:
+    bank_account_link: fixed
+    fixed_journal_id: lsv_account_journal
+    name: 'LSV'
+    active: True
+    payment_method_id: export_lsv
+    payment_order_ok: True
+-
+  And one for DD.
+-
+  !record {model: account.payment.mode, id: dd_pay_mode, view: False}:
+    bank_account_link: fixed
+    fixed_journal_id: dd_account_journal
+    name: 'DD'
+    active: True
+    payment_method_id: export_post_dd
+    payment_order_ok: True
+-
+  And one for XML-DD.
+-
+  !record {model: account.payment.mode, id: dd_pay_mode_xml_dd, view: False}:
+    bank_account_link: fixed
+    fixed_journal_id: dd_account_journal_xml_dd
+    name: 'DD XML'
+    active: True
+    payment_method_id: export_sepa_dd
+    payment_order_ok: True
+
+-
+  I create an invoice to be debited with LSV
+-
+  !record {model: account.invoice, id: lsv_invoice, view: False}:
+    company_id: base.main_company
+    journal_id: !ref {model: account.journal, search: "[('type','=','bank')]"}
+    currency_id: base.CHF
+    account_id: !ref {model: account.account, search: "[('code','=','1100')]"}
+    type : out_invoice
+    partner_id: customer
+    date_invoice: !eval "'%s-01-02' %(datetime.now().year)"
+    partner_bank_id: company_bank_ubs
+    bvr_reference: '42'
+-
+  I create an invoice to be debited with DD
+-
+  !record {model: account.invoice, id: dd_invoice, view: False}:
+    company_id: base.main_company
+    journal_id: !ref {model: account.journal, search: "[('type','=','bank')]"}
+    currency_id: base.CHF
+    account_id: !ref {model: account.account, search: "[('code','=','1100')]"}
+    type : out_invoice
+    partner_id: customer
+    date_invoice: !eval "'%s-01-02' %(datetime.now().year)"
+    partner_bank_id: company_bank_post
+    bvr_reference: '111'
+-
+  I create an invoice to be debited with DD (the XML version)
+-
+  !record {model: account.invoice, id: dd_invoice_xml_dd, view: False}:
+    company_id: base.main_company
+    journal_id: !ref {model: account.journal, search: "[('type','=','bank')]"}
+    currency_id: base.CHF
+    account_id: !ref {model: account.account, search: "[('code','=','1100')]"}
+    type : out_invoice
+    partner_id: customer
+    date_invoice: !eval "'%s-01-02' %(datetime.now().year)"
+    partner_bank_id: company_bank_post_xml_dd
+    bvr_reference: '111'
+
+-
+  I add an invoice line to the invoice for LSV.
+-
+  !record {model: account.invoice.line, id: lsv_invoice_line, view: False}:
+    account_id: !ref {model: account.account, search: "[('code','=','3200')]"}
+    name: '[BASICCOMP] Basic Computer'
+    price_unit: 700.0
+    quantity: 10.0
+    product_id: product.product_product_57_product_template
+    invoice_id: lsv_invoice
+-
+  I add an invoice line to the invoice for DD.
+-
+  !record {model: account.invoice.line, id: dd_invoice_line, view: False}:
+    account_id: !ref {model: account.account, search: "[('code','=','3200')]"}
+    name: '[BASICCOMP] Basic Computer'
+    price_unit: 600.0
+    quantity: 10.0
+    product_id: product.product_product_57_product_template
+    invoice_id: dd_invoice
+-
+  I add an invoice line to the invoice for XML-DD.
+-
+  !record {model: account.invoice.line, id: dd_invoice_line_xml_dd, view: False}:
+    account_id: !ref {model: account.account, search: "[('code','=','3200')]"}
+    name: '[BASICCOMP] Basic Computer'
+    price_unit: 600.0
+    quantity: 10.0
+    product_id: product.product_product_57_product_template
+    invoice_id: dd_invoice_xml_dd
+
+-
+  I Validate invoice by clicking on Validate button
+-
+  !workflow {model: account.invoice, action: invoice_open, ref: lsv_invoice}
+-
+  I Validate invoice by clicking on Validate button
+-
+  !workflow {model: account.invoice, action: invoice_open, ref: dd_invoice}
+-
+  I Validate invoice by clicking on Validate button
+-
+  !workflow {model: account.invoice, action: invoice_open, ref: dd_invoice_xml_dd}
+
+-
+  I create my LSV debit order
+-
+  !record {model: account.payment.order, id: lsv_payment_order}:
+    date_prefered: due
+    company_partner_bank_id: company_bank_ubs
+    journal_id: lsv_account_journal
+    payment_type: inbound
+    payment_mode_id: lsv_pay_mode
+    state: draft
+-
+  I create my DD debit order
+-
+  !record {model: account.payment.order, id: dd_payment_order}:
+    date_prefered: due
+    company_partner_bank_id: company_bank_post
+    journal_id: dd_account_journal
+    payment_type: inbound
+    payment_mode_id: dd_pay_mode
+    state: draft
+-
+  I create my DD debit order (for the XML-DD version)
+-
+  !record {model: account.payment.order, id: dd_payment_order_xml_dd}:
+    date_prefered: due
+    company_partner_bank_id: company_bank_post_xml_dd
+    journal_id: dd_account_journal_xml_dd
+    payment_type: inbound
+    payment_mode_id: dd_pay_mode_xml_dd
+    state: draft
+
+-
+  I add a payment line to my LSV debit order
+-
+  !record {model: account.payment.line, id: lsv_pay_line}:
+    amount_currency: 7000
+    amount_company_currency: 7000
+    partner_bank_id: partner_bank_ubs
+    communication: " "
+    currency_id: base.CHF
+    move_line_id: !ref {model: account.move.line, search: "[('ref','=','42')]"}
+    order_id: lsv_payment_order
+    partner_id: customer
+    mandate_id: ubs_mandate
+    state: draft
+-
+  I add a payment line to my DD debit order
+-
+  !record {model: account.payment.line, id: dd_pay_line}:
+    amount_currency: 6000
+    amount_company_currency: 6000
+    partner_bank_id: partner_bank_post
+    communication: " "
+    currency_id: base.CHF
+    move_line_id: !ref {model: account.move.line, search: "[('ref','=','111')]"}
+    order_id: dd_payment_order
+    partner_id: customer
+    mandate_id: post_mandate
+    state: draft
+-
+  I add a payment line to my DD debit order (for the XML-DD version)
+-
+  !record {model: account.payment.line, id: dd_pay_line_xml_dd}:
+    amount_currency: 6000
+    amount_company_currency: 6000
+    partner_bank_id: partner_bank_post_xml_dd
+    communication: " "
+    currency_id: base.CHF
+    move_line_id: !ref {model: account.move.line, search: "[('ref','=','111')]"}
+    order_id: dd_payment_order_xml_dd
+    partner_id: customer
+    mandate_id: post_mandate_xml_dd
+    state: draft
+
+-
+  I confirm the debit orders
+-
+  !python {model: account.payment.order}: |
+    self.draft2open(cr, uid, ref("lsv_payment_order"))
+    self.draft2open(cr, uid, ref("dd_payment_order"))
+    self.draft2open(cr, uid, ref("dd_payment_order_xml_dd"))
+-
+  I confirm the banking mandates.
+-
+  !python {model: account.banking.mandate}: |
+    self.validate(cr, uid, ref("ubs_mandate"))
+    self.validate(cr, uid, ref("post_mandate"))
+    self.validate(cr, uid, ref("post_mandate_xml_dd"))
+-
+  I click on "make payment"
+-
+  !python {model: account.payment.order}: |
+    self.open2generated(cr, uid, [ref("lsv_payment_order")])
+    self.open2generated(cr, uid, [ref("dd_payment_order")])
+    self.open2generated(cr, uid, [ref("dd_payment_order_xml_dd")])

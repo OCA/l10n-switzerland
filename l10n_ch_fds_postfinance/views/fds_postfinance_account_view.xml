@@ -40,9 +40,9 @@
                     </group>
                     <notebook>
                         <page string="FDS Users">
-                            <button string="Clone key" name="copy_key_button" type="object" icon="gtk-execute" class="oe_right" />
-                            <button string="Import key" name="import_key_button" type="object" icon="gtk-execute" class="oe_right" />
-                            <button string="New key" name="newKey_button" type="object" icon="gtk-execute" class="oe_right" />
+                            <button string="Clone key" name="copy_key_button" type="object" class="oe_right" />
+                            <button string="Import key" name="import_key_button" type="object" class="oe_right" />
+                            <button string="New key" name="newKey_button" type="object" class="oe_right" />
                             <field name="authentication_key_ids">
                                 <tree string="FDS authentication keys" create="false">
                                     <field name="user_id" />
@@ -54,26 +54,25 @@
                         </page>
 
                         <page string="FDS Directories">
-                            <button string="Verify directories" name="verify_directories_button" type="object" icon="gtk-execute" class="oe_right" />
+                            <button string="Verify directories" name="verify_directories_button" type="object" class="oe_right" />
                             <field name="directory_ids">
                                 <tree string="FDS files directory" create="false" delete="false" editable="top" colors="blue:allow_download_file==True and allow_upload_file==True;red:allow_download_file==True;green:allow_upload_file==True;grey:still_on_server==False" default_order="still_on_server,name">
                                     <field name="name" />
                                     <field name="allow_download_file" attrs="{'invisible': [('still_on_server', '=', False)]}"/>
+                                    <field name="excluded_files"/>
                                     <field name="allow_upload_file" attrs="{'invisible': [('still_on_server', '=', False)]}"/>
                                     <field name="still_on_server" invisible="True"/>
-                                    <field name="journal_id" />
                                 </tree>
                             </field>
                         </page>
 
-                        <page string="Download History">
+                        <page string="Download History" name="upload">
                             <field name="fds_file_ids">
                                 <tree string="FDS PostFinance files" create="false" default_order="state,filename">
                                     <field name="create_date" />
                                     <field name="directory_id" />
                                     <field name="filename" />
                                     <field name="bank_statement_id"/>
-                                    <field name="journal_id" />
                                     <field name="state" />
                                 </tree>
                             </field>
@@ -103,84 +102,5 @@
         parent="account.account_account_menu"
         sequence="20"
         action="action_fds_postfinance_account" />
-
-
-        <!-- **********************************
-         *   View for FDS update Files    *
-         ********************************** --> 
-        <!-- personalize tree view for fds_file_ids -->
-        <record model="ir.ui.view" id="view_fds_file_ids_tree" >
-            <field name="name">fds.postfinance.files.tree</field>
-            <field name="model">fds.postfinance.account</field>
-            <field name="arch" type="xml">
-                <tree string="FDS Postfinance Account" create="false">
-                    <field name="name" />
-                    <field name="fds_file_ids" />
-                </tree>
-            </field>
-        </record>  
-
-        <!-- personalize form view for fds_postfinance_account -->
-        <record model="ir.ui.view" id="view_fds_file_ids_form" >
-            <field name="name">fds.postfinance.files.form</field>
-            <field name="model">fds.postfinance.account</field>
-            <field name="arch" type="xml">
-                <form string="FDS PostFinance files" create="false">
-                    <div class="oe_title">
-                        <label for="name" class="oe_edit_only"/>
-                        <h1>
-                            <field name="name" />
-                        </h1>
-                    </div>
-                    <separator string="FDS PostFinance files"/>
-                    <field name="fds_file_ids">
-                        <tree string="FDS PostFinance files" create="false" default_order="state,filename">
-                            <field name="directory_id" />
-                            <field name="filename" />
-                            <field name="journal_id" />
-                            <field name="create_date" />
-                            <field name="state" />
-                        </tree>
-                    </field>
-                </form>
-            </field>
-        </record>
-
-        <!-- view of fds_postfinance (tree,form) for fds_files -->
-        <record model="ir.actions.act_window" id="action_fds_files">
-            <field name="name">FDS PostFinance files</field>
-            <field name="res_model">fds.postfinance.account</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">
-            Select the FDS PostFinance that you want to connect.</p><p>
-            This view will allow to list the content of your FDS PostFinance directory
-            and import selected files to Bank Statements.
-            If your FDS PostFinance don't appear, start by setup an account.</p>
-            </field>
-        </record>
-
-        <!-- affect view tree and form for action_fds_file_ids -->
-        <record id="action_dir_view3" model="ir.actions.act_window.view">
-            <field eval="10" name="sequence"/>
-            <field name="view_mode">tree</field>
-            <field name="view_id" ref="view_fds_file_ids_tree"/>
-            <field name="act_window_id" ref="action_fds_files"/>
-        </record>
-
-        <record id="action_dir_view4" model="ir.actions.act_window.view">
-            <field eval="20" name="sequence"/>
-            <field name="view_mode">form</field>
-            <field name="view_id" ref="view_fds_file_ids_form"/>
-            <field name="act_window_id" ref="action_fds_files"/>
-        </record>
-
-        <!-- link to this view in "Accounting->Bank and Cash->FDS Postfinance" -->
-        <menuitem id="menu_fds_file_ids"
-        name="FDS PostFinance files"
-        parent="account.menu_finance_bank_and_cash"
-        sequence="20"
-        action="action_fds_files" />        
-
     </data>
 </openerp>

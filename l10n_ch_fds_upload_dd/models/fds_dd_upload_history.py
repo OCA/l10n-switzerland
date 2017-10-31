@@ -20,7 +20,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields
+from odoo import models, fields
 
 
 class FdsDdUploadHistory(models.Model):
@@ -34,9 +34,9 @@ class FdsDdUploadHistory(models.Model):
         ondelete='restrict',
         readonly=True,
     )
-    banking_export_id = fields.Many2one(
-        comodel_name='banking.export.ch.dd',
-        string='Direct debit export',
+    payment_order_id = fields.Many2one(
+        comodel_name='account.payment.order',
+        string='Payment order',
         ondelete='restrict',
         readonly=True,
     )

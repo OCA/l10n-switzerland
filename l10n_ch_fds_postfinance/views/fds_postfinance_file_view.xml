@@ -1,28 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <!-- view of fds_authentication_keys -->
+        <!-- views of fds_postfinance_file -->
+        <!-- Form view -->
         <record model="ir.ui.view" id="fds_postfinance_files_form">
             <field name="name">FDS PostFinance file form</field>
             <field name="model">fds.postfinance.file</field>
             <field name="arch" type="xml">
                 <form string="FDS PostFinance file">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                    </header>
                     <group>
                         <field name="fds_account_id" />
                         <field name="bank_statement_id" attrs="{'invisible':[('state', '!=', 'done')]}"/>
                         <field name="data" filename="filename" attrs="{'invisible':[('state', '=', 'done')]}"/>
                         <field name="filename" attrs="{'invisible':[('state', '!=', 'done')]}"/>
                         <field name="directory_id" />
-                        <field name="journal_id" />
                         <field name="state" />
                     </group>
                     <footer>
-                        <button string="Import to Bank Statement" name="import_button" type="object"  class="oe_highlight" icon="gtk-convert" states="draft"/>
-                        <button name="change2error_button" string="File Corrupt" type="object" icon="gtk-cancel" confirm="Are you sure?" states="draft"/>
-                        <button name="change2draft_button" string="Reset to draft" type="object" icon="gtk-undo" confirm="Are you sure?" states="error"/>
+                        <button string="Import to Bank Statement" name="import_button" type="object"  class="oe_highlight" states="draft"/>
+                        <button name="change2error_button" string="File Corrupt" type="object" confirm="Are you sure?" states="draft"/>
+                        <button name="change2draft_button" string="Reset to draft" type="object" confirm="Are you sure?" states="error"/>
                     </footer>
                 </form>
             </field>
         </record>
+
+        <!-- Tree view -->
+        <record model="ir.ui.view" id="fds_postfinance_file_tree" >
+            <field name="name">fds.postfinance.file.tree</field>
+            <field name="model">fds.postfinance.file</field>
+            <field name="arch" type="xml">
+                <tree colors="blue:state == 'draft';gray:state == 'cancel';red:state == 'error'" create="0" default_order="create_date desc">
+                    <field name="fds_account_id" />
+                    <field name="directory_id" />
+                    <field name="filename" />
+                    <field name="create_date" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Search view -->
+        <record id="fds_postfinance_file_search" model="ir.ui.view">
+            <field name="name">fds.postfinance.file.select</field>
+            <field name="model">fds.postfinance.file</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="filename"/>
+                    <field name="directory_id"/>
+                    <field name="state"/>
+                    <filter name="active" string="Active" domain="[('state','!=','cancel')]"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="State" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Actions -->
+        <record model="ir.actions.act_window" id="action_fds_files">
+            <field name="name">FDS PostFinance files</field>
+            <field name="res_model">fds.postfinance.file</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+            Select the FDS PostFinance that you want to connect.</p><p>
+            This view will allow to list the content of your FDS PostFinance directory
+            and import selected files to Bank Statements.
+            If your FDS PostFinance don't appear, start by setup an account.</p>
+            </field>
+            <field name="context">{'search_default_active':1}</field>
+        </record>
+        
+        <!-- File actions -->
+        <record id="import_files" model="ir.actions.server">
+            <field name="name">Import to Bank Statement</field>
+            <field name="model_id" ref="model_fds_postfinance_file"/>
+            <field name="state">code</field>
+            <field name="code">self.import_button(cr, uid, context.get('active_ids', []), context=context)</field>
+        </record>
+        
+        <record id="import_files_more_item" model="ir.values">
+            <field eval="'client_action_multi'" name="key2"/>
+            <field eval="'fds.postfinance.file'" name="model"/>
+            <field name="name">Import to Bank Statement</field>
+            <field eval="'ir.actions.server,%d'%import_files" name="value"/>
+        </record>
+        
+        <record id="file_corrupt" model="ir.actions.server">
+            <field name="name">File Corrupt</field>
+            <field name="model_id" ref="model_fds_postfinance_file"/>
+            <field name="state">code</field>
+            <field name="code">self.change2error_button(cr, uid, context.get('active_ids', []), context=context)</field>
+        </record>
+
+        <record id="file_corrupt_more_item" model="ir.values">
+            <field eval="'client_action_multi'" name="key2"/>
+            <field eval="'fds.postfinance.file'" name="model"/>
+            <field name="name">File Corrupt</field>
+            <field eval="'ir.actions.server,%d'%file_corrupt" name="value"/>
+        </record>
+        
+        <record id="file_cancel" model="ir.actions.server">
+            <field name="name">Cancel</field>
+            <field name="model_id" ref="model_fds_postfinance_file"/>
+            <field name="state">code</field>
+            <field name="code">self.change2cancel_button(cr, uid, context.get('active_ids', []), context=context)</field>
+        </record>
+
+        <record id="file_cancel_more_item" model="ir.values">
+            <field eval="'client_action_multi'" name="key2"/>
+            <field eval="'fds.postfinance.file'" name="model"/>
+            <field name="name">Cancel</field>
+            <field eval="'ir.actions.server,%d'%file_cancel" name="value"/>
+        </record>
+
+        <!-- link to this view in "Accounting->Bank and Cash->FDS Postfinance" -->
+        <menuitem id="menu_fds_file_ids"
+        name="FDS PostFinance files"
+        parent="account.account_account_menu"
+        sequence="9"
+        action="action_fds_files" /> 
     </data>
 </openerp>

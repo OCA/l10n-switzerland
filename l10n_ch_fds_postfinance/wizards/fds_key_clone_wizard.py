@@ -1,29 +1,11 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Swiss Postfinance File Delivery Services module for Odoo
-#    Copyright (C) 2015 Compassion CH
-#    @author: Nicolas Tran
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2015 Compassion CH (Nicolas Tran)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, fields, api, exceptions
+from odoo import models, fields, api, exceptions, _
 
 
-class fds_key_clone_wizard(models.TransientModel):
+class FdsKeyCloneWizard(models.TransientModel):
     ''' The goal is to copy one authentication key to another user.
 
         This wizard is called when we click on copy key on FDS authentication
@@ -97,7 +79,7 @@ class fds_key_clone_wizard(models.TransientModel):
             ['fds_account_id', '=', current_fds_id]])
 
         if has_userkey:
-            raise exceptions.Warning('Keys user already exist')
+            raise exceptions.Warning(_('User has already keys'))
 
         return has_userkey
 

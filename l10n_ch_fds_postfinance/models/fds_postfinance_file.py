@@ -1,26 +1,8 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Swiss Postfinance File Delivery Services module for Odoo
-#    Copyright (C) 2015 Compassion CH
-#    @author: Nicolas Tran
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2015 Compassion CH (Nicolas Tran)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, fields, api, exceptions, _
+from odoo import registry, models, fields, api
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -58,18 +40,11 @@ class FdsPostfinanceFile(models.Model):
         ondelete='restrict',
         readonly=True,
     )
-    journal_id = fields.Many2one(
-        comodel_name='account.journal',
-        related='directory_id.journal_id',
-        string='journal',
-        ondelete='restrict',
-        readonly=True,
-        help='default journal for this file'
-    )
     state = fields.Selection(
         selection=[('draft', 'Draft'),
                    ('done', 'Done'),
-                   ('error', 'Error')],
+                   ('error', 'Error'),
+                   ('cancel', 'Cancelled')],
         readonly=True,
         default='draft',
         help='state of file'
@@ -85,11 +60,8 @@ class FdsPostfinanceFile(models.Model):
 
             :return None:
         '''
-        self.ensure_one()
-
-        if not self.directory_id.journal_id:
-            raise exceptions.Warning(_('Add default journal in acount conf'))
-        self.import2bankStatements()
+        valid_files = self.filtered(lambda f: f.state == 'draft')
+        valid_files.import2bankStatements()
 
     @api.multi
     def change2error_button(self):
@@ -98,8 +70,8 @@ class FdsPostfinanceFile(models.Model):
 
             :return None:
         '''
-        self.ensure_one()
-        self._sate_error_on()
+        valid_files = self.filtered(lambda f: f.state == 'draft')
+        valid_files.write({'state': 'error'})
 
     @api.multi
     def change2draft_button(self):
@@ -108,7 +80,17 @@ class FdsPostfinanceFile(models.Model):
 
             :return None:
         '''
-        self.state = 'draft'
+        self.write({'state': 'draft'})
+
+    @api.multi
+    def change2cancel_button(self):
+        ''' Put file in cancel state.
+            Called by pressing 'cancel' button.
+
+            :return None:
+        '''
+        valid_files = self.filtered(lambda f: f.state in ('error', 'draft'))
+        valid_files.write({'state': 'cancel'})
 
     ##############################
     #          function          #
@@ -121,59 +103,35 @@ class FdsPostfinanceFile(models.Model):
                 - True if the convert was succeed
                 - False otherwise
         '''
-        self.ensure_one()
-
-        try:
-            values = {
-                'journal_id': self.directory_id.journal_id.id,
-                'data_file': self.data}
-            bs_imoprt_obj = self.env['account.bank.statement.import']
-            bank_wiz_imp = bs_imoprt_obj.create(values)
-            bank_wiz_imp.import_file()
-            self._state_done_on()
-            self._add_bankStatement_ref()
-            self._remove_binary_file()
-            _logger.info("[OK] import file '%s' to bank Statements",
-                         (self.filename))
-            return True
-        except:
-            _logger.warning("[FAIL] import file '%s' to bank Statements",
-                            (self.filename))
-            return False
-
-    @api.multi
-    def _add_bankStatement_ref(self):
-        ''' private function that add the reference to bank statement.
-
-            :returns None:
-        '''
-        bs = self.env['account.bank.statement'].search([
-            ['state', '=', 'draft'],
-            ['create_uid', '=', self.env.uid]])
-        self.write({'bank_statement_id': max(bs).id})
-
-    @api.multi
-    def _remove_binary_file(self):
-        ''' private function that remove the binary file.
-            the binary file is already convert to bank statment attachment.
-
-            :returns None:
-        '''
-        self.write({'data': None})
-
-    @api.multi
-    def _state_done_on(self):
-        ''' private function that change state to done
-
-            :returns: None
-        '''
-        self.ensure_one()
-        self.write({'state': 'done'})
-
-    def _sate_error_on(self):
-        ''' private function that change state to error
-
-            :returns: None
-        '''
-        self.ensure_one()
-        self.write({'state': 'error'})
+        res = True
+        for pf_file in self:
+            try:
+                values = {'data_file': pf_file.data}
+                bs_import_obj = self.env['account.bank.statement.import']
+                bank_wiz_imp = bs_import_obj.create(values)
+                import_result = bank_wiz_imp.import_file()
+                # Mark the file as imported, remove binary as it should be
+                # attached to the statement.
+                pf_file.write({
+                    'state': 'done',
+                    'data': None,
+                    'bank_statement_id':
+                    import_result['context']['statement_ids'][0]})
+                _logger.info("[OK] import file '%s' to bank Statements",
+                             (pf_file.filename))
+            except:
+                with api.Environment.manage():
+                    with registry(
+                            self.env.cr.dbname).cursor() as new_cr:
+                        # Create a new environment with new cursor database
+                        new_env = api.Environment(new_cr, self.env.uid,
+                                                  self.env.context)
+                        # Write the error in the postfinance file
+                        pf_file.with_env(new_env).write({'state': 'error'})
+                        _logger.error(
+                            "[FAIL] import file '%s' to bank Statements",
+                            pf_file.with_env(new_env).filename,
+                            exc_info=True
+                        )
+                res = False
+        return res
