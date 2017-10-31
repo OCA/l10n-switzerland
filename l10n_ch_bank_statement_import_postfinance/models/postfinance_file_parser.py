@@ -83,8 +83,7 @@ class XMLPFParser(models.AbstractModel):
         """
         self.tar_source = data_file
         self.data_file = self._get_content_from_stream()
-        if self.is_tar:
-            self.attachments = self._get_attachments_from_stream(data_file)
+        self.attachments = self._get_attachments_from_stream(data_file)
 
     def _get_content_from_stream(self):
         """Source file can be a raw or tar file. We try to guess the

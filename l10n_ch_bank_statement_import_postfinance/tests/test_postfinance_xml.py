@@ -69,7 +69,7 @@ class PFXMLParserTest(common.TransactionCase):
         self.assertIsNotNone(self.parser.attachments)
         self.parser.attachments = None
         self.parser._check_postfinance_attachments('BANG')
-        self.assertIsNone(self.parser.attachments)
+        self.assertEqual(self.parser.attachments, {})
 
     def test_parse(self):
         """Test file is correctly parsed"""
