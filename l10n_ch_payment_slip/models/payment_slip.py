@@ -888,6 +888,11 @@ class PaymentSlip(models.Model):
                                         default_font,
                                         bank_acc.get_account_number())
 
+            if print_settings.bvr_header_partner_address:
+                self._draw_address(canvas, print_settings,
+                                   (4.9 * inch, 9.0 * inch),
+                                   default_font, com_partner)
+
             self._draw_ref(canvas,
                            print_settings,
                            (4.9 * inch, 2.70 * inch),
