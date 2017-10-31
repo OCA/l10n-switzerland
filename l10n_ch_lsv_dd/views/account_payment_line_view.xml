@@ -5,18 +5,6 @@
 -->
 <openerp>
     <data>
-
-        <record id="account_payment_line_form_ext" model="ir.ui.view">
-            <field name="name">account.payment.line.form.ext</field>
-            <field name="model">account.payment.line</field>
-            <field name="inherit_id" ref="account_payment_order.account_payment_line_form" />
-            <field name="arch" type="xml">
-                <field name="bank_line_id" position="after">
-                    <field name="mandate_id"/>
-                </field>
-            </field>
-        </record>
-
         <record id="swiss_account_payment_line_form" model="ir.ui.view">
             <field name="name">swiss.pain.base.account.payment.line</field>
             <field name="model">account.payment.line</field>

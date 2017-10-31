@@ -5,9 +5,7 @@
   @author: Cyril Sester <cyril.sester@outlook.com>
   The licence is in the file __openerp__.py
 -->
-<openerp>
-  <data noupdate="1">
-
+<odoo>
     <record id="export_lsv" model="account.payment.method">
       <field name="name">LSV Direct Debit</field>
       <field name="code">lsv</field>
@@ -29,6 +27,4 @@
       <field name="payment_type">inbound</field>
       <field name="bank_account_required">True</field>
     </record>
-
-  </data>
-</openerp>
+</odoo>
