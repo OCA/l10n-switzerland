@@ -38,7 +38,7 @@
         'hr_attendance',
         'account'
     ],
-    'version': '9.0.1.3.0',
+    'version': '9.0.1.4.0',
     'auto_install': False,
     'demo': [],
     'website': 'http://open-net.ch',
