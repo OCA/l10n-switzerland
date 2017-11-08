@@ -50,6 +50,7 @@ It currently supports the "pain.001" norm for Credit Transfert Initiation.
     ],
     "data": [
         "wizard/wiz_pain_001_view.xml",
+        "account_payment.xml"
     ],
     "test": [
         "test/pain001_eu.yml",

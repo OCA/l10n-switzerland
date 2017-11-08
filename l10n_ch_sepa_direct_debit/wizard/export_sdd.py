@@ -122,7 +122,7 @@ class BankingExportSepaWizard(orm.TransientModel):
             name_maxsize = 140
             root_xml_tag = 'CstmrDrctDbtInitn'
         elif pain_flavor == 'pain.008.001.02.ch.01':
-            bic_xml_tag = 'BICFI'
+            bic_xml_tag = 'BIC'
             name_maxsize = 140
             root_xml_tag = 'CstmrDrctDbtInitn'
         else:
@@ -149,8 +149,9 @@ class BankingExportSepaWizard(orm.TransientModel):
         }
 
         pain_ns = {
-            'xsi': 'http://www.w3.org/2001/XMLSchema-instance',
-            None: 'urn:iso:std:iso:20022:tech:xsd:%s' % pain_flavor,
+            'xs': 'http://www.w3.org/2001/XMLSchema-instance',
+            None: 'http://www.six-interbank-clearing.com/de/%s.xsd'
+                  % pain_flavor,
         }
 
         xml_root = etree.Element('Document', nsmap=pain_ns)
@@ -240,7 +241,7 @@ class BankingExportSepaWizard(orm.TransientModel):
                     "sepa_export.payment_order_ids[0].reference + '-' + "
                     "sequence_type + '-' + requested_date.replace('-', '')  "
                     "+ '-' + priority",
-                    priority, scheme, sequence_type, requested_date, {
+                    False, scheme, sequence_type, requested_date, {
                         'sepa_export': sepa_export,
                         'sequence_type': sequence_type,
                         'priority': priority,
@@ -277,6 +278,12 @@ class BankingExportSepaWizard(orm.TransientModel):
                     payment_info_2_0, 'DrctDbtTxInf')
                 payment_identification_2_29 = etree.SubElement(
                     dd_transaction_info_2_28, 'PmtId')
+                if pain_flavor == 'pain.008.001.02.ch.01':
+                    instruction_identification = etree.SubElement(
+                        payment_identification_2_29, 'InstrId')
+                    instruction_identification.text = self._prepare_field(
+                        cr, uid, 'Intruction Identification', 'line.name',
+                        {'line': line}, 35, gen_args=gen_args, context=context)
                 end2end_identification_2_31 = etree.SubElement(
                     payment_identification_2_29, 'EndToEndId')
                 end2end_identification_2_31.text = self._prepare_field(
@@ -311,8 +318,8 @@ class BankingExportSepaWizard(orm.TransientModel):
                     {'line': line}, 10,
                     gen_args=gen_args, context=context)
                 if sequence_type == 'FRST' and (
-                            line.mandate_id.last_debit_date or
-                            not line.mandate_id.sepa_migrated):
+                    line.mandate_id.last_debit_date or not
+                        line.mandate_id.sepa_migrated):
                     previous_bank = self._get_previous_bank(
                         cr, uid, line, context=context)
                     if previous_bank or not line.mandate_id.sepa_migrated:

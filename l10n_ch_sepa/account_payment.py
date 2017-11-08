@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Yannick Vaucher
-#    Copyright 2011 Camptocamp SA
+#    SEPA Credit Transfer module for OpenERP
+#    Copyright (C) 2017 Camptocamp
+#    @author: Anar Baghirli <a.baghirli@mobilunity.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,6 +20,17 @@
 #
 ##############################################################################
 
-from . import l10n_ch
-from . import wizard
-from . import account_payment
+from openerp.osv import fields, osv
+
+
+class payment_line(osv.osv):
+
+    _inherit = 'payment.line'
+
+    _columns = {
+        'local_instrument': fields.selection([
+            ('CH01', 'CH01'),
+            ('CH02', 'CH02'),
+            ('CH03', 'CH03'), ],
+            'Local_instrument',),
+    }

@@ -87,7 +87,7 @@ original: <xs:schema targetNamespace="urn:iso:std:iso:20022:tech:xsd:pain.008.00
 	</xs:simpleType>
 	<xs:simpleType name="ActiveOrHistoricCurrencyCode-CH_EUR">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="EUR"/>
+			<xs:pattern value="[A-Z]{3,3}"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<!-- V01: unused

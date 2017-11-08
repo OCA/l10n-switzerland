@@ -28,6 +28,63 @@ from lxml import etree
 class BankingExportSepaWizard(orm.TransientModel):
     _inherit = 'banking.export.sepa.wizard'
 
+    def generate_party_agent(
+            self, cr, uid, parent_node, party_type, party_type_label,
+            order, party_name, iban, bic, eval_ctx, gen_args, context=None):
+        '''Generate the piece of the XML file corresponding to BIC
+        This code is mutualized between TRF and DD'''
+        assert order in ('B', 'C'), "Order can be 'B' or 'C'"
+        party_agent = etree.SubElement(parent_node, '%sAgt' % party_type)
+        party_agent_institution = etree.SubElement(
+            party_agent, 'FinInstnId')
+        if order == 'C' and eval_ctx['line'].local_instrument == 'CH03':
+            if not eval_ctx['line'].bank_id.bank.ccp:
+                raise orm.except_orm(
+                    _('Error:'),
+                    _("The bank account with IBAN '%s' of partner '%s' must "
+                      "have correct ccp for payment type pain 2.2 'CH03'")
+                    % (iban, party_name))
+            clearing_system_memb = etree.SubElement(
+                party_agent_institution, 'ClrSysMmbId')
+            clearing_system_id = etree.SubElement(
+                clearing_system_memb, 'ClrSysId')
+            clearing_system_id_code = etree.SubElement(
+                clearing_system_id, 'Cd')
+            clearing_system_id_code.text = "CHBCC"
+            clearing_member_id = etree.SubElement(
+                clearing_system_memb, "MmbId")
+            clearing_member_id.text = eval_ctx['line'].bank_id.bank.clearing
+        else:
+            try:
+                bic = self._prepare_field(
+                    cr, uid, '%s BIC' % party_type_label, bic, eval_ctx,
+                    gen_args=gen_args, context=context)
+
+                party_agent_bic = etree.SubElement(
+                    party_agent_institution, gen_args.get('bic_xml_tag'))
+                party_agent_bic.text = bic
+            except orm.except_orm:
+                if order == 'C':
+                    if iban[0:2] != gen_args['initiating_party_country_code']:
+                        raise orm.except_orm(
+                            _('Error:'),
+                            _("The bank account with IBAN '%s' of '%s' "
+                              "partner must have an associated BIC "
+                              "because it is a cross-border SEPA operation.")
+                            % (iban, party_name))
+                if order == 'B' or (
+                        order == 'C' and gen_args['payment_method'] == 'DD'):
+                    party_agent_other = etree.SubElement(
+                        party_agent_institution, 'Othr')
+                    party_agent_other_identification = etree.SubElement(
+                        party_agent_other, 'Id')
+                    party_agent_other_identification.text = 'NOTPROVIDED'
+                # for Credit Transfers, in the 'C' block,
+                # if BIC is not provided,
+                # we should not put the 'Creditor Agent' block at all,
+                # as per the guidelines of the EPC
+            return True
+
     def generate_party_block(
             self, cr, uid, parent_node, party_type, order, name, iban, bic,
             eval_ctx, gen_args, context=None):
@@ -62,10 +119,11 @@ class BankingExportSepaWizard(orm.TransientModel):
         if order == 'B':
             gen_args['initiating_party_country_code'] = viban[0:2]
         elif order == 'C':
-            self.generate_party_agent(
-                cr, uid, parent_node, party_type, party_type_label,
-                order, party_name, viban, bic,
-                eval_ctx, gen_args, context=context)
+            if not eval_ctx['line'].local_instrument in ["CH01", "CH02"]:
+                self.generate_party_agent(
+                    cr, uid, parent_node, party_type, party_type_label,
+                    order, party_name, viban, bic,
+                    eval_ctx, gen_args, context=context)
         party = etree.SubElement(parent_node, party_type)
         party_nm = etree.SubElement(party, 'Nm')
         party_nm.text = party_name
@@ -99,6 +157,66 @@ class BankingExportSepaWizard(orm.TransientModel):
                 order, party_name, viban, bic,
                 eval_ctx, gen_args, context=context)
         return True
+
+    def generate_start_payment_info_block(
+            self, cr, uid, parent_node, payment_info_ident,
+            priority, local_instrument, sequence_type, requested_date,
+            eval_ctx, gen_args, context=None):
+        payment_info_2_0 = etree.SubElement(parent_node, 'PmtInf')
+        payment_info_identification_2_1 = etree.SubElement(
+            payment_info_2_0, 'PmtInfId')
+        payment_info_identification_2_1.text = self._prepare_field(
+            cr, uid, 'Payment Information Identification',
+            payment_info_ident, eval_ctx, 35,
+            gen_args=gen_args, context=context)
+        payment_method_2_2 = etree.SubElement(payment_info_2_0, 'PmtMtd')
+        payment_method_2_2.text = gen_args['payment_method']
+        if gen_args.get('pain_flavor') != 'pain.001.001.02':
+            batch_booking_2_3 = etree.SubElement(payment_info_2_0, 'BtchBookg')
+            batch_booking_2_3.text = \
+                str(gen_args['sepa_export'].batch_booking).lower()
+        # The "SEPA Customer-to-bank
+        # Implementation guidelines" for SCT and SDD says that control sum
+        # and nb_of_transactions should be present
+        # at both "group header" level and "payment info" level
+            nb_of_transactions_2_4 = etree.SubElement(
+                payment_info_2_0, 'NbOfTxs')
+            control_sum_2_5 = etree.SubElement(payment_info_2_0, 'CtrlSum')
+        payment_type_info_2_6 = etree.SubElement(
+            payment_info_2_0, 'PmtTpInf')
+        if eval_ctx['sepa_export'].charge_bearer == "SLEV":
+            if local_instrument:
+                raise orm.except_orm(
+                    _('Error:'),
+                    _("SLEV is for SEPA payments, not for local."
+                      "one of lines in order have local instrument specified"))
+            if priority:
+                instruction_priority_2_7 = etree.SubElement(
+                    payment_type_info_2_6, 'InstrPrty')
+                instruction_priority_2_7.text = priority
+            service_level_2_8 = etree.SubElement(
+                payment_type_info_2_6, 'SvcLvl')
+            service_level_code_2_9 = etree.SubElement(service_level_2_8, 'Cd')
+            service_level_code_2_9.text = 'SEPA'
+        if local_instrument:
+            local_instrument_2_11 = etree.SubElement(
+                payment_type_info_2_6, 'LclInstrm')
+            local_instr_code_2_12 = etree.SubElement(
+                local_instrument_2_11, 'Prtry')
+            local_instr_code_2_12.text = local_instrument
+        if sequence_type:
+            sequence_type_2_14 = etree.SubElement(
+                payment_type_info_2_6, 'SeqTp')
+            sequence_type_2_14.text = sequence_type
+
+        if gen_args['payment_method'] == 'DD':
+            request_date_tag = 'ReqdColltnDt'
+        else:
+            request_date_tag = 'ReqdExctnDt'
+        requested_date_2_17 = etree.SubElement(
+            payment_info_2_0, request_date_tag)
+        requested_date_2_17.text = requested_date
+        return payment_info_2_0, nb_of_transactions_2_4, control_sum_2_5
 
     def create_sepa(self, cr, uid, ids, context=None):
         '''
@@ -202,13 +320,14 @@ class BankingExportSepaWizard(orm.TransientModel):
             total_amount = total_amount + payment_order.total
             for line in payment_order.line_ids:
                 priority = line.priority
+                local_instrument = line.local_instrument
                 if payment_order.date_prefered == 'due':
                     requested_date = line.ml_maturity_date or today
                 elif payment_order.date_prefered == 'fixed':
                     requested_date = payment_order.date_scheduled or today
                 else:
                     requested_date = today
-                key = (requested_date, priority)
+                key = (requested_date, priority, local_instrument)
                 if key in lines_per_group:
                     lines_per_group[key].append(line)
                 else:
@@ -219,14 +338,15 @@ class BankingExportSepaWizard(orm.TransientModel):
                         cr, uid, line.id,
                         {'date': requested_date}, context=context)
 
-        for (requested_date, priority), lines in lines_per_group.items():
+        for (requested_date, priority,
+             local_instrument), lines in lines_per_group.items():
             # B. Payment info
             payment_info_2_0, nb_of_transactions_2_4, control_sum_2_5 = \
                 self.generate_start_payment_info_block(
                     cr, uid, pain_root,
                     "sepa_export.payment_order_ids[0].reference + '-' "
                     "+ requested_date.replace('-', '')  + '-' + priority",
-                    priority, False, False, requested_date, {
+                    priority, local_instrument, False, requested_date, {
                         'sepa_export': sepa_export,
                         'priority': priority,
                         'requested_date': requested_date,
@@ -254,6 +374,12 @@ class BankingExportSepaWizard(orm.TransientModel):
                     payment_info_2_0, 'CdtTrfTxInf')
                 payment_identification_2_28 = etree.SubElement(
                     credit_transfer_transaction_info_2_27, 'PmtId')
+                if pain_flavor == 'pain.001.001.03.ch.02':
+                    instruction_identification_2_29 = etree.SubElement(
+                        payment_identification_2_28, 'InstrId')
+                    instruction_identification_2_29.text = self._prepare_field(
+                        cr, uid, 'Intruction Identification', 'line.name',
+                        {'line': line}, 35, gen_args=gen_args, context=context)
                 end2end_identification_2_30 = etree.SubElement(
                     payment_identification_2_28, 'EndToEndId')
                 end2end_identification_2_30.text = self._prepare_field(
