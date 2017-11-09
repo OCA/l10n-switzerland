@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-08 10:38+0000\n"
-"PO-Revision-Date: 2016-09-08 10:38+0000\n"
+"POT-Creation-Date: 2017-04-18 13:43+0000\n"
+"PO-Revision-Date: 2017-04-18 13:43+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Dutch (https://www.transifex.com/oca/teams/23907/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -53,17 +53,17 @@ msgstr ""
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_company_id
 msgid "Company"
-msgstr ""
+msgstr "Bedrijf"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.ui.view,arch_db:l10n_ch_import_cresus.view_tax_form
@@ -88,7 +88,7 @@ msgstr ""
 #. module: l10n_ch_import_cresus
 #: selection:account.cresus.import,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Concept"
 
 #. module: l10n_ch_import_cresus
 #: selection:account.cresus.import,state:0
@@ -108,7 +108,7 @@ msgstr ""
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.ui.view,arch_db:l10n_ch_import_cresus.cresus_move_line_importer_form
@@ -149,7 +149,7 @@ msgstr ""
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_journal_id
 msgid "Journal"
-msgstr ""
+msgstr "Dagboek"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import___last_update
@@ -159,12 +159,12 @@ msgstr "Laatst bijgewerkt op"
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: l10n_ch_import_cresus
 #: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:63

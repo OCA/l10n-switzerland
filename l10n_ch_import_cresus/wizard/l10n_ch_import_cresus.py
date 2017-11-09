@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 # Copyright 2015 Camptocamp SA
+# Copyright 2016 Open Net Sàrl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import base64
 import csv
 import tempfile
-from openerp import models, fields, api, exceptions
-from openerp.tools.translate import _
+from odoo import models, fields, api, exceptions
+from odoo.tools.translate import _
 from datetime import datetime
 
 
@@ -47,7 +48,7 @@ class AccountCresusImport(models.TransientModel):
         return move
 
     def prepare_line(self, name, debit_amount, credit_amount, account_code,
-                     cresus_tax_code, analytic_account_code):
+                     cresus_tax_code, analytic_account_code, tax_ids):
         account_obj = self.env['account.account']
         tax_obj = self.env['account.tax']
         analytic_account_obj = self.env['account.analytic.account']
@@ -63,16 +64,18 @@ class AccountCresusImport(models.TransientModel):
                 _("No account with code %s") % account_code)
         line['account_id'] = account.id
 
-        if not account.user_type_id.include_initial_balance:
-            if cresus_tax_code:
-                tax = tax_obj.search([
-                    ('tax_cresus_mapping', '=', cresus_tax_code),
-                    ('price_include', '=', True)], limit=1)
-                line['tax_line_id'] = tax.id
-            if analytic_account_code:
-                analytic_account = analytic_account_obj.search([
-                    ('code', '=', analytic_account_code)], limit=1)
-                line['analytic_account_id'] = analytic_account.id
+        if cresus_tax_code:
+            tax = tax_obj.search([
+                ('tax_cresus_mapping', '=', cresus_tax_code),
+                ('price_include', '=', True)], limit=1)
+            line['tax_line_id'] = tax.id
+        if analytic_account_code:
+            analytic_account = analytic_account_obj.search([
+                ('code', '=', analytic_account_code)], limit=1)
+            line['analytic_account_id'] = analytic_account.id
+
+        if tax_ids:
+            line['tax_ids'] = [(4, id, 0) for id in tax_ids]
         return line
 
     def _parse_csv(self):
@@ -106,9 +109,9 @@ class AccountCresusImport(models.TransientModel):
                     yield line
 
     def _parse_date(self, date_string):
-        """Parse a date coming from Cresus and put it in the format used by Odoo.
+        """Parse a date coming from Crésus and put it in the format used by Odoo.
 
-           Both 01.01.70 and 01.01.1970 have been sighted in Cresus' output.
+           Both 01.01.70 and 01.01.1970 have been sighted in Crésus' output.
 
            :param date_string: cresus data
            :returns: a date string
@@ -128,7 +131,7 @@ class AccountCresusImport(models.TransientModel):
     def _standardise_data(self, data):
         """ split accounting lines where needed
 
-            Cresus writes one csv line per move when there are just two lines
+            Crésus writes one csv line per move when there are just two lines
             (take some money from one account and put all of it in another),
             and uses ellipses in more complex cases. What matters is the pce
             label, which is the same on all lines of a move.
@@ -136,6 +139,7 @@ class AccountCresusImport(models.TransientModel):
         journal_id = self.journal_id.id
         previous_pce = None
         previous_date = None
+        previous_tax_id = None
         lines = []
         for self.index, line_cresus in enumerate(data, 1):
             if previous_pce is not None and previous_pce != line_cresus['pce']:
@@ -154,23 +158,34 @@ class AccountCresusImport(models.TransientModel):
             verso_amount = 0.0
             if recto_amount < 0:
                 recto_amount, verso_amount = 0.0, -recto_amount
+
+            tax_ids = [previous_tax_id] if previous_tax_id is not None else []
+            previous_tax_id = None
             if line_cresus['debit'] != '...':
-                lines.append(self.prepare_line(
+                line = self.prepare_line(
                     name=line_cresus['ref'],
                     debit_amount=recto_amount,
                     credit_amount=verso_amount,
                     account_code=line_cresus['debit'],
                     cresus_tax_code=line_cresus['typtvat'],
-                    analytic_account_code=line_cresus['analytic_account']))
+                    analytic_account_code=line_cresus['analytic_account'],
+                    tax_ids=tax_ids)
+                lines.append(line)
+                if 'tax_line_id' in line:
+                    previous_tax_id = line['tax_line_id']
 
             if line_cresus['credit'] != '...':
-                lines.append(self.prepare_line(
+                line = self.prepare_line(
                     name=line_cresus['ref'],
                     debit_amount=verso_amount,
                     credit_amount=recto_amount,
                     account_code=line_cresus['credit'],
                     cresus_tax_code=line_cresus['typtvat'],
-                    analytic_account_code=line_cresus['analytic_account']))
+                    analytic_account_code=line_cresus['analytic_account'],
+                    tax_ids=tax_ids)
+                lines.append(line)
+                if 'tax_line_id' in line:
+                    previous_tax_id = line['tax_line_id']
 
         yield self.prepare_move(
             lines,
@@ -180,10 +195,12 @@ class AccountCresusImport(models.TransientModel):
 
     @api.multi
     def _import_file(self):
-        move_obj = self.env['account.move']
+        self.index = 0
         data = self._parse_csv()
         data = self._standardise_data(data)
-        self.imported_move_ids = [move_obj.create(mv).id for mv in data]
+        for mv in data:
+            self.with_context(dont_create_taxes=True) \
+                .write({'imported_move_ids': [(0, False, mv)]})
 
     @api.multi
     def import_file(self):
@@ -194,7 +211,7 @@ class AccountCresusImport(models.TransientModel):
             self.write({
                 'state': 'error',
                 'report': 'Error (at row %s):\n%s' % (self.index, exc)})
-            return {'name': _('Accounting Cresus Import'),
+            return {'name': _('Accounting Crésus Import'),
                     'type': 'ir.actions.act_window',
                     'res_model': 'account.cresus.import',
                     'res_id': self.id,

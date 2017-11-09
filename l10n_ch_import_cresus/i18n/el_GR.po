@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-08 10:38+0000\n"
-"PO-Revision-Date: 2016-09-08 10:38+0000\n"
+"POT-Creation-Date: 2017-04-18 13:43+0000\n"
+"PO-Revision-Date: 2017-04-18 13:43+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Greek (Greece) (https://www.transifex.com/oca/teams/23907/el_GR/)\n"
 "MIME-Version: 1.0\n"
@@ -53,7 +53,7 @@ msgstr ""
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_company_id
 msgid "Company"
-msgstr ""
+msgstr "Εταιρεία"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_create_uid
@@ -176,7 +176,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_report
 #: model:ir.ui.view,arch_db:l10n_ch_import_cresus.cresus_move_line_importer_form
 msgid "Report"
-msgstr ""
+msgstr "Αναφορά"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_state
