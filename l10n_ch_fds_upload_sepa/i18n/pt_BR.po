@@ -5,13 +5,14 @@
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
 # danimaribeiro <danimaribeiro@gmail.com>, 2017
+# Armando Vulcano Junior <vulcano@uol.com.br>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-12 09:30+0000\n"
-"PO-Revision-Date: 2017-05-12 09:30+0000\n"
-"Last-Translator: danimaribeiro <danimaribeiro@gmail.com>, 2017\n"
+"POT-Creation-Date: 2017-10-31 15:45+0000\n"
+"PO-Revision-Date: 2017-10-31 15:45+0000\n"
+"Last-Translator: Armando Vulcano Junior <vulcano@uol.com.br>, 2017\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/23907/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,12 +28,12 @@ msgstr ""
 #. module: l10n_ch_fds_upload_sepa
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_payment_order_upload_sepa_wizard_filename
 msgid "Attachment Name"
-msgstr ""
+msgstr "Nome anexo"
 
 #. module: l10n_ch_fds_upload_sepa
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_payment_order_upload_sepa_wizard_attachment_id
 msgid "Attachment id"
-msgstr ""
+msgstr "Id do anexo"
 
 #. module: l10n_ch_fds_upload_sepa
 #: code:addons/l10n_ch_fds_upload_sepa/wizards/payment_order_upload_sepa_wizard.py:157
