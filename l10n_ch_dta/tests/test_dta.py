@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 Braintec AG - Kumar Aberer <kumar.aberer@braintec-group.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -87,55 +86,55 @@ class TestDTA(AccountingTestCase):
             'account_payment_mode.res_partner_12_iban', 41.0, 'I1643')
         for inv in [invoice1, invoice2, invoice3, invoice4, invoice5]:
             action = inv.create_account_payment_line()
-        self.assertEquals(action['res_model'], 'account.payment.order')
+        self.assertEqual(action['res_model'], 'account.payment.order')
         self.payment_order = self.payment_order_model.browse(action['res_id'])
-        self.assertEquals(
+        self.assertEqual(
             self.payment_order.payment_type, 'outbound')
-        self.assertEquals(
+        self.assertEqual(
             self.payment_order.payment_mode_id, self.payment_mode)
-        self.assertEquals(
+        self.assertEqual(
             self.payment_order.journal_id, self.bank_journal)
         pay_lines = self.payment_line_model.search([
             ('partner_id', '=', self.partner_agrolait.id),
             ('order_id', '=', self.payment_order.id)])
-        self.assertEquals(len(pay_lines), 3)
+        self.assertEqual(len(pay_lines), 3)
         agrolait_pay_line1 = pay_lines[0]
         accpre = self.env['decimal.precision'].precision_get('Account')
-        self.assertEquals(agrolait_pay_line1.currency_id.id, eur_currency_id)
-        self.assertEquals(
+        self.assertEqual(agrolait_pay_line1.currency_id.id, eur_currency_id)
+        self.assertEqual(
             agrolait_pay_line1.partner_bank_id, invoice1.partner_bank_id)
-        self.assertEquals(float_compare(
+        self.assertEqual(float_compare(
             agrolait_pay_line1.amount_currency, 42, precision_digits=accpre),
             0)
-        self.assertEquals(agrolait_pay_line1.communication_type, 'normal')
-        self.assertEquals(agrolait_pay_line1.communication, 'F1341')
+        self.assertEqual(agrolait_pay_line1.communication_type, 'normal')
+        self.assertEqual(agrolait_pay_line1.communication, 'F1341')
         self.payment_order.draft2open()
-        self.assertEquals(self.payment_order.state, 'open')
+        self.assertEqual(self.payment_order.state, 'open')
         bank_lines = self.bank_line_model.search([
             ('partner_id', '=', self.partner_agrolait.id)])
-        self.assertEquals(len(bank_lines), 1)
+        self.assertEqual(len(bank_lines), 1)
         agrolait_bank_line = bank_lines[0]
-        self.assertEquals(agrolait_bank_line.currency_id.id, eur_currency_id)
-        self.assertEquals(float_compare(
+        self.assertEqual(agrolait_bank_line.currency_id.id, eur_currency_id)
+        self.assertEqual(float_compare(
             agrolait_bank_line.amount_currency, 49.0, precision_digits=accpre),
             0)
-        self.assertEquals(agrolait_bank_line.communication_type, 'normal')
-        self.assertEquals(
+        self.assertEqual(agrolait_bank_line.communication_type, 'normal')
+        self.assertEqual(
             agrolait_bank_line.communication, 'F1341-F1342-A1301')
-        self.assertEquals(
+        self.assertEqual(
             agrolait_bank_line.partner_bank_id, invoice1.partner_bank_id)
 
         action = self.payment_order.open2generated()
-        self.assertEquals(self.payment_order.state, 'generated')
-        self.assertEquals(action['res_model'], 'ir.attachment')
+        self.assertEqual(self.payment_order.state, 'generated')
+        self.assertEqual(action['res_model'], 'ir.attachment')
         attachment = self.attachment_model.browse(action['res_id'])
-        self.assertEquals(attachment.datas_fname[-4:], '.txt')
+        self.assertEqual(attachment.datas_fname[-4:], '.txt')
         dta_file = attachment.datas.decode('base64')
-        self.assertEquals(dta_file[:2], '01')
+        self.assertEqual(dta_file[:2], '01')
         self.payment_order.generated2uploaded()
-        self.assertEquals(self.payment_order.state, 'uploaded')
+        self.assertEqual(self.payment_order.state, 'uploaded')
         for inv in [invoice1, invoice2, invoice3, invoice4, invoice5]:
-            self.assertEquals(inv.state, 'paid')
+            self.assertEqual(inv.state, 'paid')
         return
 
     def create_invoice(

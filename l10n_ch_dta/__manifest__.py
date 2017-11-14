@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 # Copyright 2009 Camptocamp SA
 # Copyright 2015 Agile Business Group
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {'name': 'Switzerland - Bank Payment File (DTA)',
  'summary': 'Electronic payment file for Swiss bank (DTA)',
