@@ -1,14 +1,18 @@
-# -*- coding: utf-8 -*-
-# © 2014-2016 Camptocamp SA
+# Copyright 2014-2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import time
 import re
 import odoo.tests.common as test_common
-from odoo.report import render_report
 
 
 class TestPaymentSlip(test_common.TransactionCase):
     _compile_get_ref = re.compile(r'[^0-9]')
+
+    def setUp(self):
+        super(TestPaymentSlip, self).setUp()
+        self.report1slip_from_inv = self.env.ref(
+            'l10n_ch_payment_slip.one_slip_per_page_from_invoice',
+        )
 
     def make_bank(self):
         company = self.env.ref('base.main_company')
@@ -131,14 +135,7 @@ class TestPaymentSlip(test_common.TransactionCase):
 
     def test_print_report(self):
         invoice = self.make_invoice()
-        data, format = render_report(
-            self.env.cr,
-            self.env.uid,
-            [invoice.id],
-            'l10n_ch_payment_slip.one_slip_per_page_from_invoice',
-            {},
-            context={'force_pdf': True},
-        )
+        data, format = self.report1slip_from_inv.render(invoice.id)
         self.assertTrue(data)
         self.assertEqual(format, 'pdf')
 
@@ -147,14 +144,8 @@ class TestPaymentSlip(test_common.TransactionCase):
         self.assertEqual(self.env.user.company_id.merge_mode, 'in_memory')
         invoice1 = self.make_invoice()
         invoice2 = self.make_invoice()
-        data, format = render_report(
-            self.env.cr,
-            self.env.uid,
-            [invoice1.id, invoice2.id],
-            'l10n_ch_payment_slip.one_slip_per_page_from_invoice',
-            {},
-            context={'force_pdf': True},
-        )
+        data, format = self.report1slip_from_inv.render(
+            [invoice1.id, invoice2.id])
         self.assertTrue(data)
         self.assertEqual(format, 'pdf')
 
@@ -162,14 +153,8 @@ class TestPaymentSlip(test_common.TransactionCase):
         self.env.user.company_id.merge_mode = 'on_disk'
         invoice1 = self.make_invoice()
         invoice2 = self.make_invoice()
-        data, format = render_report(
-            self.env.cr,
-            self.env.uid,
-            [invoice1.id, invoice2.id],
-            'l10n_ch_payment_slip.one_slip_per_page_from_invoice',
-            {},
-            context={'force_pdf': True},
-        )
+        data, format = self.report1slip_from_inv.render(
+            [invoice1.id, invoice2.id])
         self.assertTrue(data)
         self.assertEqual(format, 'pdf')
 
@@ -184,7 +169,7 @@ class TestPaymentSlip(test_common.TransactionCase):
         address_lines = slip._get_address_lines(com_partner)
         self.assertEqual(
             address_lines,
-            [u'93, Press Avenue', u'', u'73377 Le Bourget du Lac']
+            ['93, Press Avenue', '', '73377 Le Bourget du Lac']
         )
 
     def test_address_format_no_country(self):
@@ -199,7 +184,7 @@ class TestPaymentSlip(test_common.TransactionCase):
         address_lines = slip._get_address_lines(com_partner)
         self.assertEqual(
             address_lines,
-            [u'93, Press Avenue', u'', u'73377 Le Bourget du Lac']
+            ['93, Press Avenue', '', '73377 Le Bourget du Lac']
         )
 
     def test_address_format_special_format(self):
@@ -221,7 +206,7 @@ class TestPaymentSlip(test_common.TransactionCase):
         address_lines = slip._get_address_lines(com_partner)
         self.assertEqual(
             address_lines,
-            [u'93, Press Avenue', u'73377 Le Bourget du Lac']
+            ['93, Press Avenue', '73377 Le Bourget du Lac']
         )
 
     def test_address_length(self):

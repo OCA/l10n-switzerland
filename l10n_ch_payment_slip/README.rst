@@ -47,7 +47,7 @@ To import v11, use the wizard provided in bank statement.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/125/10.0
+   :target: https://runbot.odoo-community.org/runbot/125/11.0
 
 Bug Tracker
 ===========
