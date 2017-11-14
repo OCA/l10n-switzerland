@@ -20,13 +20,13 @@
         id="one_slip_per_page_from_invoice"
         model="account.invoice"
         string="Payment Slip"
-        report_type="reportlab-pdf"
+        report_type="reportlab_pdf"
         name="l10n_ch_payment_slip.one_slip_per_page_from_invoice"
         file="l10n_ch_payment_slip.one_slip_per_page"
         menu="False"
         />
 
-    <record id="one_slip_per_page_from_invoice" model="ir.actions.report.xml">
+    <record id="one_slip_per_page_from_invoice" model="ir.actions.report">
         <field name="paperformat_id" ref="l10n_ch_payment_slip.paperformat_paymentslip"/>
     </record>
   </data>
