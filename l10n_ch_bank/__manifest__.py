@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
-# © 2011-2014 Nicolas Bessi (Camptocamp SA)
-# © 2014 Olivier Jossen brain-tec AG
+# Copyright 2011-2015 Camptocamp SA
+# Copyright 2014 Olivier Jossen brain-tec AG
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     'name': 'Switzerland - Bank list',
-    'version': '10.0.1.0.1',
+    'version': '11.0.1.0.1',
     'author': "Camptocamp, brain-tec AG,Odoo Community Association (OCA)",
     'category': 'Localisation',
     'website': 'http://www.camptocamp.com',
@@ -21,5 +20,4 @@
     'demo': [],
     'auto_install': False,
     'installable': True,
-    'application': True,
 }
