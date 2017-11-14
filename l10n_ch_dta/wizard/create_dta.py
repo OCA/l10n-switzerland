@@ -12,16 +12,16 @@ from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT, mod10r
 
 from . import unicode2ascii
 
-TRANS = [(u'é', 'e'),
-         (u'è', 'e'),
-         (u'à', 'a'),
-         (u'ê', 'e'),
-         (u'î', 'i'),
-         (u'ï', 'i'),
-         (u'â', 'a'),
-         (u'ä', 'a'),
-         (u'ö', 'o'),
-         (u'ü', 'u')]
+TRANS = [('é', 'e'),
+         ('è', 'e'),
+         ('à', 'a'),
+         ('ê', 'e'),
+         ('î', 'i'),
+         ('ï', 'i'),
+         ('â', 'a'),
+         ('ä', 'a'),
+         ('ö', 'o'),
+         ('ü', 'u')]
 
 
 def _u2a(text):
