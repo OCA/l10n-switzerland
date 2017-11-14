@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# © 2012-2016 Camptocamp SA
+# Copyright 2012-2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import models, fields, api
 
@@ -33,7 +32,7 @@ class IrActionsReportXMLReportlab(models.Model):
             context = {}
         if context.get('force_pdf'):
             new_report = self._lookup_report(name)
-            if isinstance(new_report, (str, unicode)):
+            if isinstance(new_report, str):
                 return self.env['report'].get_pdf(
                     res_ids,
                     new_report,

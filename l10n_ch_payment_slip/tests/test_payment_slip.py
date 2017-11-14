@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# © 2014-2016 Camptocamp SA
+# Copyright 2014-2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import time
 import re
@@ -184,7 +183,7 @@ class TestPaymentSlip(test_common.TransactionCase):
         address_lines = slip._get_address_lines(com_partner)
         self.assertEqual(
             address_lines,
-            [u'93, Press Avenue', u'', u'73377 Le Bourget du Lac']
+            ['93, Press Avenue', '', '73377 Le Bourget du Lac']
         )
 
     def test_address_format_no_country(self):
@@ -199,7 +198,7 @@ class TestPaymentSlip(test_common.TransactionCase):
         address_lines = slip._get_address_lines(com_partner)
         self.assertEqual(
             address_lines,
-            [u'93, Press Avenue', u'', u'73377 Le Bourget du Lac']
+            ['93, Press Avenue', '', '73377 Le Bourget du Lac']
         )
 
     def test_address_format_special_format(self):
@@ -221,7 +220,7 @@ class TestPaymentSlip(test_common.TransactionCase):
         address_lines = slip._get_address_lines(com_partner)
         self.assertEqual(
             address_lines,
-            [u'93, Press Avenue', u'73377 Le Bourget du Lac']
+            ['93, Press Avenue', '73377 Le Bourget du Lac']
         )
 
     def test_address_length(self):
