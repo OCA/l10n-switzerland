@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# © 2012-2016 Camptocamp SA
+# Copyright 2012-2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import _, api, exceptions, fields, models
 
@@ -99,7 +98,7 @@ class AccountInvoice(models.Model):
         self.env.cr.execute('UPDATE account_move_line SET transaction_ref=%s'
                             '  WHERE id=%s', (ref, move_line.id))
         self._update_ref_on_account_analytic_line(ref, move_line.move_id.id)
-        self.env.invalidate_all()
+        self.env.cache.invalidate()
 
     @api.multi
     def invoice_validate(self):
@@ -136,8 +135,12 @@ class AccountInvoice(models.Model):
         self.write({
             'sent': True
         })
-        return self.env['report'].get_action(
-            self, 'l10n_ch_payment_slip.one_slip_per_page_from_invoice')
+        report_name = 'l10n_ch_payment_slip.one_slip_per_page_from_invoice'
+        docids = self
+        act_report = self.env['ir.actions.report'].search(
+            [('report_name', '=', report_name)], limit=1)
+
+        return act_report.report_action(docids)
 
     @api.multi
     def _check_bvr_generatable(self):

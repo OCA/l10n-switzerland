@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
-# © 2014-2016 Camptocamp SA
+# Copyright 2014-2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from __future__ import division
+
 import base64
-import StringIO
+import io
 import contextlib
 import re
 import textwrap
@@ -13,9 +12,8 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.units import inch
 from odoo import models, fields, api, _, exceptions
-from odoo.report import report_sxw
 from odoo.modules import get_module_resource
-from odoo.tools.misc import mod10r
+from odoo.tools.misc import mod10r, format_date
 
 FontMeta = namedtuple('FontMeta', ('name', 'size'))
 
@@ -27,7 +25,7 @@ class PaymentSlipSettings(object):
     """Slip report setting container"""
 
     def __init__(self, report_name, **kwargs):
-        for param, value in kwargs.iteritems():
+        for param, value in kwargs.items():
             setattr(self, param, value)
         self.report_name = report_name
         self.validate()
@@ -556,11 +554,7 @@ class PaymentSlip(models.Model):
         date_maturity = self.move_line_id.date_maturity
         message = _('Payment slip related to invoice %s '
                     'due on the %s')
-        rml_parser = report_sxw.rml_parse(self.env.cr,
-                                          self.env.uid,
-                                          'payment_slip',
-                                          context=self.env.context)
-        fmt_date = rml_parser.formatLang(date_maturity, date=True)
+        fmt_date = format_date(self.env, date_maturity)
         canvas.setFont(font.name, font.size)
         canvas.drawString(x, y,
                           message % (invoice.number, fmt_date))
@@ -818,7 +812,7 @@ class PaymentSlip(models.Model):
             canvas_size = (595.27, 841.89)
         else:
             canvas_size = (595.27, 286.81)
-        with contextlib.closing(StringIO.StringIO()) as buff:
+        with contextlib.closing(io.BytesIO()) as buff:
             canvas = Canvas(buff,
                             pagesize=canvas_size,
                             pageCompression=None)
