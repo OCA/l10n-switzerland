@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
-# © 2012 Nicolas Bessi (Camptocamp SA)
-# © 2015 Yannick Vaucher (Camptocamp SA)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2012 Nicolas Bessi (Camptocamp SA)
+# Copyright 2015 Yannick Vaucher (Camptocamp SA)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import models, api, _
 from odoo.tools import mod10r
 from odoo import exceptions
