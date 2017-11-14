@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2012-2017 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import re
@@ -181,14 +180,16 @@ class ResPartnerBank(models.Model, BankCommon):
         store=True
     )
 
-    @api.one
     @api.depends('acc_number')
     def _compute_acc_type(self):
-        if (self.acc_number and
-                self.is_swiss_postal_num(self.acc_number)):
-            self.acc_type = 'postal'
-            return
-        super(ResPartnerBank, self)._compute_acc_type()
+        todo = self.env['res.partner.bank']
+        for rec in self:
+            if (rec.acc_number and
+                    rec.is_swiss_postal_num(self.acc_number)):
+                rec.acc_type = 'postal'
+                continue
+            todo |= rec
+        super(ResPartnerBank, todo)._compute_acc_type()
 
     @api.multi
     def get_account_number(self):
