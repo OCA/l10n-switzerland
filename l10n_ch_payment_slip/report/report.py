@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
-# © 2014-2016 Camptocamp SA
+# Copyright 2014-2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import models, api
 import os
 import tempfile
-import StringIO
+import io
 import pyPdf
 
 
@@ -60,14 +59,14 @@ class Report(models.Model):
         streams = []
         writer = pyPdf.PdfFileWriter()
         for doc in docs:
-            current_buff = StringIO.StringIO()
+            current_buff = io.StringIO()
             streams.append(current_buff)
             current_buff.write(doc)
             current_buff.seek(0)
             reader = pyPdf.PdfFileReader(current_buff)
-            for page in xrange(reader.getNumPages()):
+            for page in range(reader.getNumPages()):
                 writer.addPage(reader.getPage(page))
-        buff = StringIO.StringIO()
+        buff = io.StringIO()
         try:
             # The writer close the reader file here
             writer.write(buff)
@@ -92,7 +91,7 @@ class Report(models.Model):
             current_buff.write(doc)
             current_buff.seek(0)
             reader = pyPdf.PdfFileReader(current_buff)
-            for page in xrange(reader.getNumPages()):
+            for page in range(reader.getNumPages()):
                 writer.addPage(reader.getPage(page))
         buff = tempfile.mkstemp(
             suffix='.pdf',

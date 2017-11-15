@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
-# © 2014-2016 Camptocamp SA
+# Copyright 2014-2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from __future__ import division
+
 import base64
-import StringIO
+import io
 import contextlib
 import re
 import textwrap
@@ -27,7 +26,7 @@ class PaymentSlipSettings(object):
     """Slip report setting container"""
 
     def __init__(self, report_name, **kwargs):
-        for param, value in kwargs.iteritems():
+        for param, value in kwargs.items():
             setattr(self, param, value)
         self.report_name = report_name
         self.validate()
@@ -818,7 +817,7 @@ class PaymentSlip(models.Model):
             canvas_size = (595.27, 841.89)
         else:
             canvas_size = (595.27, 286.81)
-        with contextlib.closing(StringIO.StringIO()) as buff:
+        with contextlib.closing(io.StringIO()) as buff:
             canvas = Canvas(buff,
                             pagesize=canvas_size,
                             pageCompression=None)
