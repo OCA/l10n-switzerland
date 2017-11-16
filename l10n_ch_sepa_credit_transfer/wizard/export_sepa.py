@@ -38,11 +38,12 @@ class BankingExportSepaWizard(orm.TransientModel):
         party_agent_institution = etree.SubElement(
             party_agent, 'FinInstnId')
         if order == 'C' and eval_ctx['line'].local_instrument == 'CH03':
-            if not eval_ctx['line'].bank_id.bank.ccp:
+            if not eval_ctx['line'].bank_id.bank.clearing:
                 raise orm.except_orm(
                     _('Error:'),
                     _("The bank account with IBAN '%s' of partner '%s' must "
-                      "have correct ccp for payment type pain 2.2 'CH03'")
+                      "have correct clearing for "
+                      "payment type pain 2.2 'CH03'")
                     % (iban, party_name))
             clearing_system_memb = etree.SubElement(
                 party_agent_institution, 'ClrSysMmbId')
