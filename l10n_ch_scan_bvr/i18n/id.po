@@ -139,7 +139,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_scan_bvr.field_scan_bvr_partner_id
 #: model:ir.ui.view,arch_db:l10n_ch_scan_bvr.scan_bvr_memory_form
 msgid "Partner"
-msgstr ""
+msgstr "Mitra"
 
 #. module: l10n_ch_scan_bvr
 #: model:ir.model.fields,field_description:l10n_ch_scan_bvr.field_scan_bvr_bank_account_id
