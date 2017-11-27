@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
-# © 2012 Nicolas Bessi (Camptocamp SA)
-# © 2015 Yannick Vaucher (Camptocamp SA)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2012 Nicolas Bessi (Camptocamp SA)
+# Copyright 2015 Yannick Vaucher (Camptocamp SA)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import models, api, _
 from odoo.tools import mod10r
 from odoo import exceptions
@@ -26,6 +25,10 @@ class AccountInvoice(models.Model):
                                 'not like', 'not ilike'):
                 domain.append(arg)
                 continue
+            # add filtered operator to query
+            query_op = ("SELECT id FROM account_invoice "
+                        "WHERE REPLACE(reference, ' ', '') %s %%s" %
+                        (operator,))
             if value:
                 value = value.replace(' ', '')
                 if not value:
@@ -39,9 +42,8 @@ class AccountInvoice(models.Model):
                     operator = operator[1:]
                 else:
                     value = '%%%s%%' % (value,)
-            query = ("SELECT id FROM account_invoice "
-                     "WHERE REPLACE(reference, ' ', '') %s %%s" %
-                     (operator,))
+            # avoid pylint check on no-sql-injection query_op is safe
+            query = query_op
             self.env.cr.execute(query, (value,))
             ids = [t[0] for t in self.env.cr.fetchall()]
             domain.append(('id', 'in', ids))
