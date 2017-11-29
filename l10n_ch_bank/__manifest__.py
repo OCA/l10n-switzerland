@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     'name': 'Switzerland - Bank list',
-    'version': '11.0.1.0.1',
+    'version': '11.0.1.0.2',
     'author': "Camptocamp, brain-tec AG,Odoo Community Association (OCA)",
     'category': 'Localisation',
     'website': 'http://www.camptocamp.com',
