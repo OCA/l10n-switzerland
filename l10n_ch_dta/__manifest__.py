@@ -17,7 +17,7 @@
           ],
  'demo': ["demo/dta_demo.xml"],
  'auto_install': False,
- 'installable': True,
+ 'installable': False,
  'post_init_hook': 'update_bank_journals',
  'images': []
  }
