@@ -2,9 +2,9 @@
 # Copyright 2015 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api, exceptions
-from openerp.tools.translate import _
-from openerp.addons.l10n_ch_import_winbiz.utils import importers
+from odoo import models, fields, api, exceptions
+from odoo.tools.translate import _
+from odoo.addons.l10n_ch_import_winbiz.utils import importers
 
 
 def prepare_move(lines, journal, date, ref):
@@ -59,6 +59,7 @@ class LineIntermediate(object):
             yield 'tax_ids', [(4, self.tax.id, 0)]
         if self.originator_tax:
             yield 'tax_line_id', self.originator_tax.id
+
 
 prepare_line = LineIntermediate
 
