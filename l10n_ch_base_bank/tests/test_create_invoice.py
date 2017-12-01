@@ -6,7 +6,7 @@ from odoo import exceptions
 
 class TestCreateInvoice(common.TransactionCase):
 
-    def test_emit_invoice_with_bvr_reference(self):
+    def test_emit_invoice_with_isr_reference(self):
         self.inv_values.update({
             'partner_id': self.partner.id,
             'type': 'out_invoice'
@@ -14,15 +14,15 @@ class TestCreateInvoice(common.TransactionCase):
         invoice = self.env['account.invoice'].new(self.inv_values)
         invoice._onchange_partner_id()
         self.assertEqual(invoice.partner_bank_id, self.bank_acc)
-        self.assertNotEqual(invoice.reference_type, 'bvr')
+        self.assertNotEqual(invoice.reference_type, 'isr')
 
         invoice.reference = '132000000000000000000000014'
 
         invoice.onchange_reference()
 
-        self.assertEqual(invoice.reference_type, 'bvr')
+        self.assertEqual(invoice.reference_type, 'isr')
 
-    def test_emit_invoice_with_bvr_reference_15_pos(self):
+    def test_emit_invoice_with_isr_reference_15_pos(self):
         self.inv_values.update({
             'partner_id': self.partner.id,
             'type': 'out_invoice'
@@ -30,17 +30,17 @@ class TestCreateInvoice(common.TransactionCase):
         invoice = self.env['account.invoice'].new(self.inv_values)
         invoice._onchange_partner_id()
         self.assertEqual(invoice.partner_bank_id, self.bank_acc)
-        self.assertNotEqual(invoice.reference_type, 'bvr')
+        self.assertNotEqual(invoice.reference_type, 'isr')
 
         invoice.reference = '132000000000004'
-        invoice.reference_type = 'bvr'  # set manually bvr reference type
+        invoice.reference_type = 'isr'  # set manually ISR reference type
 
         # and save
         self.env['account.invoice'].create(
             invoice._convert_to_write(invoice._cache)
         )
 
-    def test_emit_invoice_with_non_bvr_reference(self):
+    def test_emit_invoice_with_non_isr_reference(self):
         self.inv_values.update({
             'partner_id': self.partner.id,
             'type': 'out_invoice'
@@ -48,15 +48,15 @@ class TestCreateInvoice(common.TransactionCase):
         invoice = self.env['account.invoice'].new(self.inv_values)
         invoice._onchange_partner_id()
         self.assertEqual(invoice.partner_bank_id, self.bank_acc)
-        self.assertNotEqual(invoice.reference_type, 'bvr')
+        self.assertNotEqual(invoice.reference_type, 'isr')
 
-        invoice.reference = 'Not a BVR ref with 27 chars'
+        invoice.reference = 'Not a ISR ref with 27 chars'
 
         invoice.onchange_reference()
 
-        self.assertNotEqual(invoice.reference_type, 'bvr')
+        self.assertNotEqual(invoice.reference_type, 'isr')
 
-    def test_emit_invoice_with_missing_bvr_reference(self):
+    def test_emit_invoice_with_missing_isr_reference(self):
         self.inv_values.update({
             'partner_id': self.partner.id,
             'type': 'out_invoice',
@@ -68,14 +68,14 @@ class TestCreateInvoice(common.TransactionCase):
             invoice._onchange_partner_id()
 
             invoice.reference = False
-            invoice.reference_type = 'bvr'  # set manually bvr reference type
+            invoice.reference_type = 'isr'  # set manually ISR reference type
 
             # and save
             self.env['account.invoice'].create(
                 invoice._convert_to_write(invoice._cache)
             )
 
-    def test_emit_invoice_with_bvr_reference_missing_ccp(self):
+    def test_emit_invoice_with_isr_reference_missing_ccp(self):
         self.inv_values.update({
             'partner_id': self.partner.id,
             'type': 'out_invoice',
@@ -90,7 +90,7 @@ class TestCreateInvoice(common.TransactionCase):
             invoice.reference = '132000000000000000000000014'
 
             invoice.onchange_reference()
-            invoice.reference_type = 'bvr'
+            invoice.reference_type = 'isr'
             self.env['account.invoice'].create(
                 invoice._convert_to_write(invoice._cache)
             )
