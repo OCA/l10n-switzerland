@@ -11,7 +11,7 @@ from odoo.tools.misc import mod10r
 REF = re.compile(r'[^0-9]')
 
 
-class BvrImporterWizard(models.TransientModel):
+class V11ImporterWizard(models.TransientModel):
 
     _name = 'v11.import.wizard'
     _total_line_codes = ('999', '995')
@@ -234,7 +234,7 @@ class BvrImporterWizard(models.TransientModel):
                     "%Y-%m-%d_%H:%M:%S", time.gmtime()
                 ),
                 'datas': self.v11file,
-                'datas_fname': 'BVR %s.txt' % time.strftime(
+                'datas_fname': 'ISR %s.txt' % time.strftime(
                     "%Y-%m-%d_%H:%M:%S", time.gmtime()
                 ),
                 'res_model': 'account.bank.statement',

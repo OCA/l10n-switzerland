@@ -33,7 +33,7 @@ class TestPaymentSlip(test_common.TransactionCase):
                 'bank_id': bank.id,
                 'bank_bic': bank.bic,
                 'acc_number': '01-1234-1',
-                'bvr_adherent_num': '1234567',
+                'isr_adherent_num': '1234567',
                 'print_bank': True,
                 'print_account': True,
                 'print_partner': True,
@@ -192,7 +192,7 @@ class TestPaymentSlip(test_common.TransactionCase):
 
         ICP = self.env['ir.config_parameter']
         ICP.set_param(
-            'bvr.address.format',
+            'isr.address.format',
             "%(street)s\n%(zip)s %(city)s"
         )
         invoice = self.make_invoice()
@@ -237,10 +237,10 @@ class TestPaymentSlip(test_common.TransactionCase):
 
             self.assertEqual(res, result, "Wrong result for len %s" % text_len)
 
-    def test_print_bvr(self):
+    def test_print_isr(self):
         invoice = self.make_invoice()
-        bvr = invoice.print_bvr()
-        self.assertEqual(bvr['report_name'],
+        isr = invoice.print_isr()
+        self.assertEqual(isr['report_name'],
                          'l10n_ch_payment_slip.one_slip_per_page_from_invoice')
-        self.assertEqual(bvr['report_file'],
+        self.assertEqual(isr['report_file'],
                          'l10n_ch_payment_slip.one_slip_per_page')
