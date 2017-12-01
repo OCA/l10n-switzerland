@@ -5,9 +5,9 @@ from odoo import models, fields, api
 from odoo.exceptions import UserError
 
 
-class BvrBatchPrintWizard(models.TransientModel):
+class ISRBatchPrintWizard(models.TransientModel):
 
-    _name = 'bvr.batch.print.wizard'
+    _name = 'isr.batch.print.wizard'
 
     invoice_ids = fields.Many2many(comodel_name='account.invoice',
                                    string='Invoices')
@@ -15,7 +15,7 @@ class BvrBatchPrintWizard(models.TransientModel):
 
     @api.model
     def default_get(self, fields):
-        res = super(BvrBatchPrintWizard, self).default_get(fields)
+        res = super(ISRBatchPrintWizard, self).default_get(fields)
         active_ids = self.env.context.get('active_ids')
         if active_ids:
             invoices = self.env['account.invoice'].browse(active_ids)
@@ -28,13 +28,13 @@ class BvrBatchPrintWizard(models.TransientModel):
     @api.model
     def check_generatable(self, invoices):
         try:
-            invoices._check_bvr_generatable()
+            invoices._check_isr_generatable()
         except UserError as e:
             return e.name
 
     @api.multi
     def print_payment_slips(self):
         if self.invoice_ids:
-            return self.invoice_ids.print_bvr()
+            return self.invoice_ids.print_isr()
         else:
             return {'type': 'ir.actions.act_window_close'}

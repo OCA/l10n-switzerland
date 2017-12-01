@@ -4,58 +4,68 @@ from odoo import models, fields
 
 
 class ResCompany(models.Model):
-    """override company in order to add bvr vertical and
+    """override company in order to add ISR vertical and
     Horizontal print delta"""
     _inherit = "res.company"
 
-    bvr_delta_horz = fields.Float(
-        'BVR Horz. Delta (inch)',
-        help='horiz. delta in inch 1.2 will print the bvr 1.2 inch lefter, '
-        'negative value is possible'
+    isr_delta_horz = fields.Float(
+        'ISR Horz. Delta (inch)',
+        oldname='bvr_delta_horz',
+        help='horiz. delta in inch 1.2 will print the ISR 1.2 inch lefter,'
+             ' negative value is possible'
     )
 
-    bvr_delta_vert = fields.Float(
-        'BVR Vert. Delta (inch)',
-        help='vert. delta in inch 1.2 will print the bvr 1.2 inch lower, '
-             'negative value is possible'
+    isr_delta_vert = fields.Float(
+        'ISR Vert. Delta (inch)',
+        oldname='bvr_delta_vert',
+        help='vert. delta in inch 1.2 will print the ISR 1.2 inch lower,'
+             ' negative value is possible'
     )
 
-    bvr_scan_line_vert = fields.Float(
-        'BVR vert. position for scan line (inch)',
+    isr_scan_line_vert = fields.Float(
+        'ISR vert. position for scan line (inch)',
+        oldname='bvr_scan_line_vert',
         help='Vert. position in inch for scan line'
     )
 
-    bvr_scan_line_horz = fields.Float(
-        'BVR horiz. position for scan line(inch)',
+    isr_scan_line_horz = fields.Float(
+        'ISR horiz. position for scan line(inch)',
+        oldname='bvr_scan_line_horz',
         help='Horiz. position in inch for scan line'
     )
 
-    bvr_add_vert = fields.Float(
-        'BVR vert. position for address (inch)',
+    isr_add_vert = fields.Float(
+        'ISR vert. position for address (inch)',
+        oldname='bvr_add_vert',
         help='Vert. position in inch for address'
     )
 
-    bvr_add_horz = fields.Float(
-        'BVR horiz. position address (inch)',
+    isr_add_horz = fields.Float(
+        'ISR horiz. position address (inch)',
+        oldname='bvr_add_horz',
         help='Horiz. position in inch for address'
     )
 
-    bvr_scan_line_font_size = fields.Integer(
-        'BVR scan line font size (pt)'
+    isr_scan_line_font_size = fields.Integer(
+        'ISR scan line font size (pt)',
+        oldname='bvr_scan_line_font_size',
     )
 
-    bvr_scan_line_letter_spacing = fields.Float(
-        'BVR scan line letter spacing'
+    isr_scan_line_letter_spacing = fields.Float(
+        'ISR scan line letter spacing',
+        oldname='bvr_scan_line_letter_spacing',
     )
 
-    bvr_amount_line_horz = fields.Float(
-        'BVR horiz. position for amount line (inch)',
+    isr_amount_line_horz = fields.Float(
+        'ISR horiz. position for amount line (inch)',
+        oldname='bvr_amount_line_horz',
         help='Horiz. position in inch for amount line',
         default=0.00
     )
 
-    bvr_amount_line_vert = fields.Float(
-        'BVR vert. position for amount line (inch)',
+    isr_amount_line_vert = fields.Float(
+        'ISR vert. position for amount line (inch)',
+        oldname='bvr_amount_line_vert',
         help='Vert. position in inch for amount line',
         default=0.00,
     )
@@ -67,10 +77,14 @@ class ResCompany(models.Model):
         required=True,
         default="in_memory"
     )
-    bvr_background = fields.Boolean('Insert BVR background ?')
+    isr_background = fields.Boolean(
+        'Insert ISR background ?',
+        oldname='bvr_background',
+    )
 
-    bvr_header_partner_address = fields.Boolean(
+    isr_header_partner_address = fields.Boolean(
         'Header partner address',
+        oldname='bvr_header_partner_address',
         default=False,
         help='Enabling this will print partner address top-right on the '
              'page header',
