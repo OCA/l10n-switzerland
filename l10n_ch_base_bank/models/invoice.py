@@ -55,50 +55,50 @@ class AccountInvoice(models.Model):
     @api.model
     def _get_reference_type(self):
         selection = super(AccountInvoice, self)._get_reference_type()
-        selection.append(('bvr', _('BVR Reference')))
+        selection.append(('isr', _('ISR Reference')))
         return selection
 
     @api.onchange('reference')
     def onchange_reference(self):
-        """Identify if the reference entered is of type BVR
+        """Identify if the reference entered is of type ISR
         if it does, change reference_type"""
         if len(self.reference or '') == 27:
             try:
-                self._is_bvr_reference()
+                self._is_isr_reference()
             except exceptions.ValidationError:
                 return
-            self.reference_type = 'bvr'
+            self.reference_type = 'isr'
 
     @api.constrains('reference_type')
-    def _check_bank_type_for_type_bvr(self):
+    def _check_bank_type_for_type_isr(self):
         for invoice in self:
-            if invoice.reference_type == 'bvr':
+            if invoice.reference_type == 'isr':
                 bank_acc = invoice.partner_bank_id
                 if not (bank_acc.acc_type == 'postal' or
                         bank_acc.acc_type != 'postal' and
                         (bank_acc.ccp or bank_acc.bank_id.ccp)):
                     if invoice.type in ('in_invoice', 'in_refund'):
                         raise exceptions.ValidationError(
-                            _('BVR/ESR Reference type needs a postal account'
+                            _('ISR Reference type needs a postal account'
                               ' number on the customer.')
                         )
                     else:
                         raise exceptions.ValidationError(
-                            _('BVR/ESR Reference type needs a postal account'
+                            _('ISR Reference type needs a postal account'
                               ' number on your company')
                         )
         return True
 
     @api.multi
-    def _is_bvr_reference(self):
+    def _is_isr_reference(self):
         """
-        Function to validate a bvr reference like :
+        Function to validate a ISR reference like :
         0100054150009>132000000000000000000000014+ 1300132412>
         The validation is based on l10n_ch
         """
         if not self.reference:
             raise exceptions.ValidationError(
-                _('BVR/ESR Reference is required')
+                _('ISR Reference is required')
             )
         # In this case
         # <010001000060190> 052550152684006+ 43435>
@@ -110,15 +110,15 @@ class AccountInvoice(models.Model):
         #
         if mod10r(self.reference[:-1]) != self.reference:
             raise exceptions.ValidationError(
-                _('Invalid BVR/ESR Number (wrong checksum).')
+                _('Invalid ISR Number (wrong checksum).')
             )
 
     @api.constrains('reference')
-    def _check_bvr(self):
-        """ Do the check only for invoice with reference_type = 'bvr' """
+    def _check_isr(self):
+        """ Do the check only for invoice with reference_type = 'isr' """
         for invoice in self:
-            if invoice.reference_type == 'bvr':
-                invoice._is_bvr_reference()
+            if invoice.reference_type == 'isr':
+                invoice._is_isr_reference()
         return True
 
     @api.model
