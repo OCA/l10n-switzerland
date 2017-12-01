@@ -125,6 +125,7 @@ class PostFinanceImportTest(common.TransactionCase):
         })
         self.company_a = self.env.ref('base.main_company')
         currency = self.env.ref('base.CHF')
+        currency.active = True
         self.company_a.write(
             {'currency_id': currency.id}
         )
