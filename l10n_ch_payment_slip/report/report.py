@@ -8,7 +8,7 @@ import StringIO
 import pyPdf
 
 
-class BVRFromInvoice(models.AbstractModel):
+class ISRFromInvoice(models.AbstractModel):
     _name = 'report.one_slip_per_page_from_invoice'
 
 

@@ -2,25 +2,25 @@
 <openerp>
     <data>
        <record model="ir.ui.view" id="company_form_view">
-            <field name="name">res.company.form.inherit.bvr</field>
+            <field name="name">res.company.form.inherit.isr</field>
             <field name="model">res.company</field>
             <field name="inherit_id" ref="base.view_company_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//notebook" position="inside">
-                    <page string="BVR Data">
+                    <page string="ISR Data">
                         <group colspan="4">
-                            <field name="bvr_delta_horz"/>
-                            <field name="bvr_delta_vert"/>
-                            <field name="bvr_scan_line_horz"/>
-                            <field name="bvr_scan_line_vert"/>
-                            <field name="bvr_scan_line_font_size"/>
-                            <field name="bvr_scan_line_letter_spacing"/>
-                            <field name="bvr_add_horz"/>
-                            <field name="bvr_add_vert"/>
-                            <field name="bvr_amount_line_horz"/>
-                            <field name="bvr_amount_line_vert"/>
-                            <field name="bvr_background"/>
-                            <field name="bvr_header_partner_address"/>
+                            <field name="isr_delta_horz"/>
+                            <field name="isr_delta_vert"/>
+                            <field name="isr_scan_line_horz"/>
+                            <field name="isr_scan_line_vert"/>
+                            <field name="isr_scan_line_font_size"/>
+                            <field name="isr_scan_line_letter_spacing"/>
+                            <field name="isr_add_horz"/>
+                            <field name="isr_add_vert"/>
+                            <field name="isr_amount_line_horz"/>
+                            <field name="isr_amount_line_vert"/>
+                            <field name="isr_background"/>
+                            <field name="isr_header_partner_address"/>
                             <field name="merge_mode"/>
                         </group>
                     </page>
