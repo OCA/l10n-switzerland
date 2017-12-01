@@ -20,6 +20,30 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/invoice.py:56
+#, python-format
+msgid "ISR Reference"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/invoice.py:99
+#, python-format
+msgid "ISR Reference is required"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/invoice.py:80
+#, python-format
+msgid "ISR Reference type needs a postal account number on the customer."
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/invoice.py:85
+#, python-format
+msgid "ISR Reference type needs a postal account number on your company"
+msgstr ""
+
+#. module: l10n_ch_base_bank
 #: model:ir.model,name:l10n_ch_base_bank.model_res_bank
 msgid "Bank"
 msgstr "Banca"
@@ -110,7 +134,7 @@ msgstr "Riferimento interno"
 #: code:addons/l10n_ch_base_bank/models/invoice.py:113
 #, python-format
 msgid "Invalid ISR Number (wrong checksum)."
-msgstr ""
+msgstr "Numero PVR errato (checksum invalido)."
 
 #. module: l10n_ch_base_bank
 #: model:ir.model,name:l10n_ch_base_bank.model_account_invoice
@@ -143,14 +167,14 @@ msgstr ""
 
 #. module: l10n_ch_base_bank
 #: sql_constraint:res.partner.bank:0
-msgid "The ISR adherent number/ccp pair must be unique !"
-msgstr ""
+msgid "The ISR adherent number must be unique !"
+msgstr "Il numero di adesione PVR deve essere univoco"
 
 #. module: l10n_ch_base_bank
 #: model:ir.model.fields,help:l10n_ch_base_bank.field_res_partner_bank_isr_adherent_num
 msgid ""
-"Your Bank adherent number to be printed in references of your ISR. This is "
-"not a postal account number."
+"Your Bank adherent number to be printed in references of your ISR. This "
+"is not a postal account number."
 msgstr ""
 
 #. module: l10n_ch_base_bank
