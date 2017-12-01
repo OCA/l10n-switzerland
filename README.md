@@ -89,6 +89,7 @@ addon | version | summary
 [l10n_ch_hr_payroll](l10n_ch_hr_payroll/) | 10.0.1.0.0 | Switzerland Payroll Rules
 [l10n_ch_hr_payroll_report](l10n_ch_hr_payroll_report/) | 10.0.1.0.0 | Switzerland Payroll Reports
 [l10n_ch_import_cresus](l10n_ch_import_cresus/) | 10.0.1.0.0 | Allows to import Crésus .txt files containing journal entries into Odoo.
+[l10n_ch_import_winbiz](l10n_ch_import_winbiz/) | 10.0.1.0.0 | Accounting Import WinBIZ
 [l10n_ch_pain_base](l10n_ch_pain_base/) | 10.0.1.0.1 | ISO 20022 base module for Switzerland
 [l10n_ch_pain_credit_transfer](l10n_ch_pain_credit_transfer/) | 10.0.1.0.0 | Generate ISO 20022 credit transfert (SEPA and not SEPA)
 [l10n_ch_payment_slip](l10n_ch_payment_slip/) | 10.0.1.1.0 | Print ESR/BVR payment slip with your invoices
@@ -105,7 +106,6 @@ addon | version | summary
 [l10n_ch_fds_postfinance](l10n_ch_fds_postfinance/) | 8.0.1.0 (unported) | Download files and import bank statements from FDS
 [l10n_ch_fds_upload_dd](l10n_ch_fds_upload_dd/) | 8.0.1.0 (unported) | Upload Direct Debit files to FDS PostFinance
 [l10n_ch_fds_upload_sepa](l10n_ch_fds_upload_sepa/) | 8.0.1.0 (unported) | Upload SEPA files to FDS PostFinance
-[l10n_ch_import_winbiz](l10n_ch_import_winbiz/) | 9.0.1.0.0 (unported) | Accounting Import WinBIZ
 [l10n_ch_pain_direct_debit](l10n_ch_pain_direct_debit/) | 9.0.1.0.0 (unported) | Generate ISO 20022 direct debits
 [l10n_ch_payment_slip_account_statement_base_completion](l10n_ch_payment_slip_account_statement_base_completion/) | 1.0 (unported) | Switzerland - BVR/ESR Bank statement Completion
 [l10n_ch_payment_slip_layouts](l10n_ch_payment_slip_layouts/) | 8.0.0.1.0 (unported) | Add new BVR/ESR payment slip layouts like invoice with slip on same document
