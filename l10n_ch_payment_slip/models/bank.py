@@ -7,12 +7,12 @@ class ResPartnerBank(models.Model):
     """
     Inherit res.partner.bank class in order to add swiss specific fields
     such as:
-     - BVR data
-     - BVR print options for company accounts
+     - ISR data
+     - ISR print options for company accounts
      We leave it here in order
     """
     _inherit = "res.partner.bank"
 
-    print_bank = fields.Boolean('Print Bank on BVR')
-    print_account = fields.Boolean('Print Account Number on BVR')
-    print_partner = fields.Boolean('Print Partner Address on BVR')
+    print_bank = fields.Boolean('Print Bank on ISR')
+    print_account = fields.Boolean('Print Account Number on ISR')
+    print_partner = fields.Boolean('Print Partner Address on ISR')
