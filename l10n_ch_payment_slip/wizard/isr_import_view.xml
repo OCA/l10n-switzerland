@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
   <data>
-    <!-- Import BVR v11 Wizard -->
+    <!-- Import ISR v11 Wizard -->
     <record id="v11_import_view" model="ir.ui.view">
-      <field name="name">V11 (BVR/ESR) Import Wizard</field>
+      <field name="name">V11 (ISR) Import Wizard</field>
       <field name="model">v11.import.wizard</field>
       <field name="type">form</field>
       <field name="arch" type="xml">
-        <form string="V11 BVR/ESR Import">
+        <form string="V11 ISR Import">
           <group width="525" colspan="4">
             <field name="v11file"/>
             <newline/>
@@ -21,7 +21,7 @@
     </record>
 
     <record id="wizard_v11_import" model="ir.actions.act_window">
-      <field name="name">V11 (BVR/ESR) Import</field>
+      <field name="name">V11 (ISR) Import</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">v11.import.wizard</field>
       <field name="view_type">form</field>
