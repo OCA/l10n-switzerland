@@ -314,6 +314,7 @@ class TestBank(common.TransactionCase):
     def test_bank_ccp_no_partner(self):
         bank_acc = self.env['res.partner.bank'].create({
             'acc_number': '46-110-7',
+            'partner_id': False,
         })
         bank_acc.onchange_acc_number_set_swiss_bank()
 
