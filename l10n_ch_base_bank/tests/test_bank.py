@@ -219,7 +219,7 @@ class TestBank(common.TransactionCase):
                 self.env['res.partner.bank'].create({
                     'partner_id': self.partner.id,
                     'acc_number': '12312123',
-                    'bvr_adherent_num': 'Wrong bvr adherent number',
+                    'isr_adherent_num': 'Wrong ISR adherent number',
                 })
 
     def test_get_account_number(self):
@@ -227,7 +227,7 @@ class TestBank(common.TransactionCase):
         bank_acc = self.env['res.partner.bank'].create({
             'partner_id': self.partner.id,
             'acc_number': 'R 12312123',
-            'bvr_adherent_num': '1234567',
+            'isr_adherent_num': '1234567',
         })
         acc_num = bank_acc.get_account_number()
         self.assertEqual(acc_num, bank_acc.acc_number)
@@ -282,7 +282,7 @@ class TestBank(common.TransactionCase):
         result = self.env['res.bank'].name_search('Lausanne-Centre')
         self.assertEqual(result and result[0][0], self.bank.id)
 
-    def test_multiple_bvr_bank_account_for_same_partner(self):
+    def test_multiple_isr_bank_account_for_same_partner(self):
         bank_acc = self.env['res.partner.bank'].create({
             'partner_id': self.partner.id,
             'acc_number': '46-110-7',

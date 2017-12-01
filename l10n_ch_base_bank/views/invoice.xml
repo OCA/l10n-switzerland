@@ -2,7 +2,7 @@
 <openerp>
   <data>
 
-    <!-- Adapt Customer Invoices to support bvr structured communication -->
+    <!-- Adapt Customer Invoices to support ISR structured communication -->
     <record id="customer_invoice_bbacomm_form" model="ir.ui.view">
       <field name="name">account.invoice.form.inherit</field>
       <field name="model">account.invoice</field>

@@ -56,7 +56,7 @@
       <field name="inherit_id" ref="base.view_partner_bank_form"/>
       <field name="arch" type="xml">
         <field name="bank_id" position="after">
-          <!-- bvr_adherent_num added in l10n_ch_payment_slip -->
+          <!-- isr_adherent_num added in l10n_ch_payment_slip -->
           <field name="ccp"/>
         </field>
       </field>
