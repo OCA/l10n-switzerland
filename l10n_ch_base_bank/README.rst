@@ -7,7 +7,7 @@ Switzerland - Bank type
 =======================
 
 This addons will add different bank types required by specific swiss electronic
-payment like DTA and ESR. It allows to manage both Post and Bank systems.
+payment like DTA and ISR. It allows to manage both Post and Bank systems.
 
 It'll perform some validation when entring bank account number or ESR number
 in invoice and add some Swiss specific fields on bank.
@@ -24,7 +24,7 @@ Account type will be discovered authomatically.
 
 Entering a postal number of 9 or 6 digits will auto-complete the bank with PostFinance. (You might create it if you haven't installed `l10n_ch_bank`)
 
-* For bank account for BVR, select the bank and fill the CCP field in bank, optionally fill the account number with bank number.
+* For bank account for ISR, select the bank and fill the CCP field in bank, optionally fill the account number with bank number.
 
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas

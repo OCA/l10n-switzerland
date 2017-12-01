@@ -29,7 +29,7 @@ class TestSearchInvoice(common.TransactionCase):
         values = {
             'partner_id': self.partner.id,
             'type': 'out_invoice',
-            'reference_type': 'bvr',
+            'reference_type': 'isr',
             'reference': reference,
         }
         invoice = self.env['account.invoice'].create(values)
@@ -42,7 +42,7 @@ class TestSearchInvoice(common.TransactionCase):
         values = {
             'partner_id': self.partner.id,
             'type': 'out_invoice',
-            'reference_type': 'bvr',
+            'reference_type': 'isr',
             'reference': reference,
         }
         self.env['account.invoice'].create(values)
@@ -106,7 +106,7 @@ class TestSearchInvoice(common.TransactionCase):
         values = {
             'partner_id': self.partner.id,
             'type': 'out_invoice',
-            'reference_type': 'bvr',
+            'reference_type': 'isr',
             'reference': '27 29990 00000 00001 70400 25019',
         }
         invoice = self.env['account.invoice'].create(values)
@@ -119,7 +119,7 @@ class TestSearchInvoice(common.TransactionCase):
         values = {
             'partner_id': self.partner.id,
             'type': 'out_invoice',
-            'reference_type': 'bvr',
+            'reference_type': 'isr',
             'reference': '27 29990 00000 00001 70400 25019',
         }
         invoice = self.env['account.invoice'].create(values)
