@@ -11,12 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2017-12-01 03:54+0000\n"
 "PO-Revision-Date: 2017-12-01 03:54+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"Language-Team: Ukrainian (https://www.transifex.com/oca/teams/23907/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: uk\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. module: l10n_ch_hr_payroll_report
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll_report.report_payslip
@@ -37,7 +37,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_payslip_yearly_report_code
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll_report.report_payslip
 msgid "Code"
-msgstr "Code"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll_report
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_payslip_yearly_report_code_and_name
@@ -58,7 +58,7 @@ msgstr ""
 #. module: l10n_ch_hr_payroll_report
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_payslip_yearly_report_display_name
 msgid "Display Name"
-msgstr "Nom affiché"
+msgstr "Назва для відображення"
 
 #. module: l10n_ch_hr_payroll_report
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_payslip_line_report_display_details_columns
@@ -117,7 +117,7 @@ msgstr ""
 #. module: l10n_ch_hr_payroll_report
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_payslip_yearly_report___last_update
 msgid "Last Modified on"
-msgstr "Dernière modification le"
+msgstr "Остання модифікація"
 
 #. module: l10n_ch_hr_payroll_report
 #: selection:hr.payslip.yearly.report,month:0
