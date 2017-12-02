@@ -3,14 +3,14 @@
 # * l10n_ch_import_cresus
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-12 09:30+0000\n"
-"PO-Revision-Date: 2017-05-12 09:30+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2017-12-01 03:54+0000\n"
+"PO-Revision-Date: 2017-12-01 03:54+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Norwegian Bokmål (Norway) (https://www.transifex.com/oca/teams/23907/nb_NO/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -74,7 +74,7 @@ msgstr ""
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_display_name
 msgid "Display Name"
-msgstr "Visningsnavn"
+msgstr "Vis navn"
 
 #. module: l10n_ch_import_cresus
 #: selection:account.cresus.import,state:0
@@ -94,7 +94,7 @@ msgstr "Feil"
 #. module: l10n_ch_import_cresus
 #: model:ir.model,name:l10n_ch_import_cresus.model_account_cresus_import
 msgid "Export Accounting"
-msgstr "Eksporter regnskapsføring"
+msgstr ""
 
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_file

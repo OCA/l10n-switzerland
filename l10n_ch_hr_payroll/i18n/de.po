@@ -1,92 +1,120 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* l10n_ch_hr_payroll
-#
+# * l10n_ch_hr_payroll
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-06 14:08+0000\n"
-"PO-Revision-Date: 2017-06-06 14:08+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2017-12-01 03:54+0000\n"
+"PO-Revision-Date: 2017-12-01 03:54+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.LAA
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 msgid "AI"
-msgstr "UVG"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.LAA_C
 msgid "AI Company"
-msgstr "UVG Unternehmen"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.LAA_E
 msgid "AI Employee"
-msgstr "UVG Arbeitnehmer"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.PC_F_VD
+#: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 msgid "AS Families (VD)"
-msgstr "ZD Familien (VD)"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.PC_F_VD_C
 msgid "AS Families (VD) Company"
-msgstr "ZD Familien (VD) Unternehmen"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.PC_F_VD_E
 msgid "AS Families (VD) Employee"
-msgstr "ZD Familien (VD) Arbeitnehmer"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 msgid "Accounting"
-msgstr "Finanzen"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
-#: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
-msgid "AS Families (VD)"
-msgstr "ZD Familien (VD)"
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_fa_amount_additional
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_fa_amount_additional
+msgid "Additional allowance amount"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_fa_min_number_childs
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_fa_min_number_childs
+msgid "Additional allowance for the"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.FADMIN
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 msgid "Administrative Fees"
-msgstr "Verwaltungsgebühren"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,note:l10n_ch_hr_payroll.FADMIN
 msgid "Administrative Fees to the OAI"
-msgstr "Verwaltungsgebühren AHV"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payslip_line_python_amount
 msgid "Amount"
-msgstr "Betrag"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payslip_line_amount_base
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_salary_rule_amount_base
 msgid "Amount base"
-msgstr "Betragsbasis"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_fa_amount_child
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_fa_amount_child
+msgid "Amount per child (0-16)"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_fa_amount_student
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_fa_amount_student
+msgid "Amount per student (16+)"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.BASIC_CH
 msgid "Basic CH"
-msgstr "Basic CH"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 msgid "Cancel"
 msgstr "Abbrechen"
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
+msgid "Cantonal rules"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model,name:l10n_ch_hr_payroll.model_res_company
@@ -96,27 +124,27 @@ msgstr "Unternehmen"
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_lpp_contract_company_id
 msgid "Company"
-msgstr "Unternehmen"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_company_id
 msgid "Company id"
-msgstr "Company id"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_lpp_contract_contract_id
 msgid "Contract id's"
-msgstr "Contract id's"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_lpp_contract_name
 msgid "Contract name"
-msgstr "Vertragsname"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_cc
 msgid "Counterparty account"
-msgstr "Kontrahentenkonto"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_create_uid
@@ -133,12 +161,12 @@ msgstr "Erstellt am:"
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_laa_c
 msgid "Debts AI"
-msgstr "Schulden UVG"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_lpp_contract_dc_amount
 msgid "Deduction Amount"
-msgstr "Abzugsbetrag"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_display_name
@@ -149,53 +177,53 @@ msgstr "Anzeigename"
 #. module: l10n_ch_hr_payroll
 #: model:ir.model,name:l10n_ch_hr_payroll.model_hr_employee
 msgid "Employee"
-msgstr "Mitarbeiter"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model,name:l10n_ch_hr_payroll.model_hr_contract
 msgid "Employee Contract"
-msgstr "Arbeitsvertrag"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.ALFA
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 msgid "Family Allowances"
-msgstr "Familienzulagen"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule.category,name:l10n_ch_hr_payroll.hr_payroll_FALW
 msgid "Free allowance"
-msgstr "Freie Zulage"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule.category,name:l10n_ch_hr_payroll.hr_payroll_COSTS
 msgid "Full Company Contribution"
-msgstr "100% Arbeitgeberbeitrag"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_contract_wage_fulltime
 msgid "Full-time Wage"
-msgstr "Vollzeitlohn"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 msgid "General"
-msgstr "Allgemein"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.GROSS_CH
 msgid "Gross CH"
-msgstr "Gross CH"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_basic
 msgid "Gross Salary"
-msgstr "Bruttogehalt"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: selection:hr.contract,wage_type:0
 msgid "Hourly"
-msgstr "Stündlich"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_id
@@ -206,17 +234,17 @@ msgstr "ID"
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule.category,name:l10n_ch_hr_payroll.hr_payroll_INFO
 msgid "Information"
-msgstr "Information"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_lpp_d
 msgid "Institutions of Providence (OBP)"
-msgstr "Institutionen der Vorsehung (BVG)"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 msgid "LPP Contract"
-msgstr "LPP Contract"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config___last_update
@@ -240,152 +268,152 @@ msgstr "Zuletzt aktualisiert am"
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_lpp_max
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_lpp_max
 msgid "Maximum legal"
-msgstr "Maximaler gesetzlicher"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_ac_limit
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_ac_limit
 msgid "Maximum limit"
-msgstr "Höchstgrenze"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_lpp_min
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_lpp_min
 msgid "Minimum legal"
-msgstr "Mindestrecht"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: selection:hr.contract,wage_type:0
 msgid "Monthly"
-msgstr "Monatlich"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.NET_CH
 msgid "Net CH"
-msgstr "Net CH"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_net
 msgid "Net Salary"
-msgstr "Nettogehalt"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_employee_children_student
 msgid "Number of Children student"
-msgstr "Anzahl Kinder in Ausbildung"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payslip_non_working_days
 msgid "Number of non-working days (not payable)"
-msgstr "Anzahl der nicht arbeitenden Tage (nicht zahlbar)"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payslip_worked_hours
 msgid "Number of worked hours"
-msgstr "Anzahl der Arbeitsstunden"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payslip_working_days
 msgid "Number of working days"
-msgstr "Anzahl der Arbeitstage"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.AVS
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 msgid "OAI/II/IC"
-msgstr "AHV/IV/EO"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.AVS_C
 msgid "OAI/II/IC Company"
-msgstr "AHV/IV/EO Unternehmen"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.AVS_E
 msgid "OAI/II/IC Employee"
-msgstr "AHV/IV/EO Arbeitnehmer"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.LPP
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.hr_contract_form_l10n_ch_inherit
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 msgid "OBP"
-msgstr "BVG"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_contract_lpp_amount
 msgid "OBP Amount"
-msgstr "BVG-Betrag"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.LPP_C
 msgid "OBP Company"
-msgstr "BVG Unternehmen"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_contract_lpp_contract_id
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_lpp_contract_form
 msgid "OBP Contract"
-msgstr "Vertrag BVG "
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.LPP_E
 msgid "OBP Employee"
-msgstr "BVG Arbeitnehmer"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_contract_lpp_rate
 msgid "OBP Rate (%)"
-msgstr "OBP Rate (%)"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_lpp_contract_ids
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_lpp_contract_ids
 msgid "OBP contract ids"
-msgstr "OBP contract ids"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_contract_occupation_rate
 msgid "Occupation Rate (%)"
-msgstr "Berufsrate (%)"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,note:l10n_ch_hr_payroll.AVS
 msgid "Old Age Insurance, Invalidity Insurance, Income Compensation"
-msgstr "Alters- und Hinterbliebenenversicherung, Invaliditätsversicherung, Erwerbsersatzordnung"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_other_costs
 msgid "Other staff costs"
-msgstr "Sonstige Personalkosten"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 msgid "Parameters"
-msgstr "Parameter"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model,name:l10n_ch_hr_payroll.model_hr_payslip
 msgid "Pay Slip"
-msgstr "Vergütungsabrechnung"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.actions.act_window,name:l10n_ch_hr_payroll.action_view_hr_payroll_config
 #: model:ir.ui.menu,name:l10n_ch_hr_payroll.menu_hr_payroll_config
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 msgid "Payroll Configuration"
-msgstr "Abrechnungskonfiguration"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model,name:l10n_ch_hr_payroll.model_hr_payslip_line
 msgid "Payslip Line"
-msgstr "Vergütungsposition"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payslip_line_percentage
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_salary_rule_percentage
 msgid "Percentage"
-msgstr "Prozentsatz"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_ac_per_in_limit
@@ -401,178 +429,148 @@ msgstr "Prozentsatz"
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_lca_per
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_pc_f_vd_per
 msgid "Percentage (%)"
-msgstr "Prozent (%)"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_ac_per_off_limit
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_ac_per_off_limit
 msgid "Percentage (off limit) (%)"
-msgstr "Prozentsatz (off limit) (%)"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payslip_line_python_rate
 msgid "Rate (%)"
-msgstr "Anteil (%)"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.LCA
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 msgid "SDA"
-msgstr "KTG"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.LCA_C
 msgid "SDA Company"
-msgstr "KTG Unternehmen"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.LCA_E
 msgid "SDA Employee"
-msgstr "KTG Arbeitnehmer"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model,name:l10n_ch_hr_payroll.model_hr_salary_rule_category
 msgid "Salary Rule Category"
-msgstr "Lohnartenkategorie"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 msgid "Save"
-msgstr "Speichern"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,note:l10n_ch_hr_payroll.LCA
 msgid "Sickness Daily Allowance"
-msgstr "Krankentaggeldversicherung"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_avs_d
 msgid "Social Insurance (OAI/II/IC)"
-msgstr "Sozialversicherung (AHV/IV/EO)"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_avs_c
 msgid "Social charges (OAI/II/IC)"
-msgstr "Sozialabgaben (AHV/IV/EO)"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_lpp_c
 msgid "Social charges (OBP)"
-msgstr "Sozialabgaben (BVG)"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.IMP_SRC
 msgid "Source Tax"
-msgstr "Steuer an der Quelle"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_contract_imp_src
 msgid "Source Tax (%)"
-msgstr "Steuer an der Quelle (%)"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 msgid "Special Rules"
-msgstr "Sonderregeln"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_staff_ins
 msgid "Staff Insurance"
-msgstr "Personalversicherung"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 msgid "Standard Rules"
-msgstr "Standardregeln"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.TOTAL_DED
 msgid "Total Deduction"
-msgstr "Gesamtabzug"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.AC
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
 msgid "UI"
-msgstr "ALV"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.AC_C
 msgid "UI Company"
-msgstr "ALV Unternehmen"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.AC_C_SOL
 msgid "UI Company's Solidarity"
-msgstr "ALV Solidarität der Gesellschaft"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.AC_E
 msgid "UI Employee"
-msgstr "ALV Arbeitnehmer"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.AC_E_SOL
 msgid "UI Employee's Solidarity"
-msgstr "ALV Solidarität des Mitarbeiters"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:hr.salary.rule,name:l10n_ch_hr_payroll.AC_SOL
 msgid "UI SOL"
-msgstr "ALV Solidarität"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_contract_wage_type
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payslip_wage_type
 msgid "Wage Type"
-msgstr "Lohnart"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payslip_working_rate
 msgid "Working Rate (%)"
-msgstr "Arbeitszeit (%)"
-
-#. module: l10n_ch_hr_payroll
-#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_fa_amount_child
-#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_fa_amount_child
-msgid "Amount per child (0-16)"
-msgstr "Betrag pro Kind (0-16)"
-
-#. module: l10n_ch_hr_payroll
-#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_fa_amount_student
-#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_fa_amount_student
-msgid "Amount per student (16+)"
-msgstr "Betrag pro Schüler (16+)"
-
-#. module: l10n_ch_hr_payroll
-#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_fa_min_number_childs
-#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_fa_min_number_childs
-msgid "Additional allowance for the"
-msgstr "Zusätzliche Vergütung für die"
-
-#. module: l10n_ch_hr_payroll
-#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_fa_amount_additional
-#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_res_company_fa_amount_additional
-msgid "Additional allowance amount"
-msgstr "Höhe der Zulage"
-
-#. module: l10n_ch_hr_payroll
-#: model:ir.ui.view,arch_db:l10n_ch_hr_payroll.view_hr_payroll_config_form
-msgid "Cantonal Rules"
-msgstr "Kantonale Regeln"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model,name:l10n_ch_hr_payroll.model_hr_payroll_config
 msgid "hr.payroll.config"
-msgstr "hr.payroll.config"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model,name:l10n_ch_hr_payroll.model_hr_salary_rule
 msgid "hr.salary.rule"
-msgstr "hr.salary.rule"
+msgstr ""
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model,name:l10n_ch_hr_payroll.model_lpp_contract
 msgid "lpp.contract"
-msgstr "lpp.contract"
-
+msgstr ""

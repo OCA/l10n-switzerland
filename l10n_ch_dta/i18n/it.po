@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-03 03:39+0000\n"
-"PO-Revision-Date: 2017-03-03 03:39+0000\n"
+"POT-Creation-Date: 2017-12-01 03:54+0000\n"
+"PO-Revision-Date: 2017-12-01 03:54+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "MIME-Version: 1.0\n"
@@ -101,12 +101,12 @@ msgstr "Ultima modifica il"
 #. module: l10n_ch_dta
 #: model:ir.model.fields,field_description:l10n_ch_dta.field_create_dta_wizard_write_uid
 msgid "Last Updated by"
-msgstr "Last Updated by"
+msgstr "Ultimo aggiornamento di"
 
 #. module: l10n_ch_dta
 #: model:ir.model.fields,field_description:l10n_ch_dta.field_create_dta_wizard_write_date
 msgid "Last Updated on"
-msgstr "Last Updated on"
+msgstr "Ultimo aggiornamento il"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:377

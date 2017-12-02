@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# leemannd <denis.leemann@camptocamp.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-19 00:40+0000\n"
-"PO-Revision-Date: 2017-04-19 00:40+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2017-12-01 03:54+0000\n"
+"PO-Revision-Date: 2017-12-01 03:54+0000\n"
+"Last-Translator: leemannd <denis.leemann@camptocamp.com>, 2017\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -133,8 +134,8 @@ msgstr "Identifiant Suisse unique de la banque, utilisé dans le numéro IBAN"
 
 #. module: l10n_ch_base_bank
 #: sql_constraint:res.partner.bank:0
-msgid "The BVR adherent number must be unique !"
-msgstr "Le numéro d'adhérent BVR doit être unique"
+msgid "The BVR adherent number/ccp pair must be unique !"
+msgstr ""
 
 #. module: l10n_ch_base_bank
 #: model:ir.model.fields,help:l10n_ch_base_bank.field_res_partner_bank_bvr_adherent_num

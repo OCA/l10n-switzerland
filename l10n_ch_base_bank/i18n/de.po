@@ -3,14 +3,14 @@
 # * l10n_ch_base_bank
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
+# TT <toni.tanner@leegroup.ch>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-19 00:40+0000\n"
-"PO-Revision-Date: 2017-04-19 00:40+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2017-12-01 03:54+0000\n"
+"PO-Revision-Date: 2017-12-01 03:54+0000\n"
+"Last-Translator: TT <toni.tanner@leegroup.ch>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -132,8 +132,8 @@ msgstr ""
 
 #. module: l10n_ch_base_bank
 #: sql_constraint:res.partner.bank:0
-msgid "The BVR adherent number must be unique !"
-msgstr "Die zugehörige BVR Nummer muss eindeutig sein!"
+msgid "The BVR adherent number/ccp pair must be unique !"
+msgstr ""
 
 #. module: l10n_ch_base_bank
 #: model:ir.model.fields,help:l10n_ch_base_bank.field_res_partner_bank_bvr_adherent_num

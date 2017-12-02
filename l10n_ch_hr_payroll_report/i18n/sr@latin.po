@@ -1,0 +1,216 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * l10n_ch_hr_payroll_report
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-01 03:54+0000\n"
+"PO-Revision-Date: 2017-12-01 03:54+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Serbian (Latin) (https://www.transifex.com/oca/teams/23907/sr%40latin/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sr@latin\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.ui.view,arch_db:l10n_ch_hr_payroll_report.report_payslip
+msgid "Amount"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: selection:hr.payslip.yearly.report,month:0
+msgid "April"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: selection:hr.payslip.yearly.report,month:0
+msgid "August"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_payslip_yearly_report_code
+#: model:ir.ui.view,arch_db:l10n_ch_hr_payroll_report.report_payslip
+msgid "Code"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_payslip_yearly_report_code_and_name
+#: model:ir.ui.view,arch_db:l10n_ch_hr_payroll_report.view_report_hr_payslip_yearly_report_filter
+msgid "Code and name"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_payslip_yearly_report_currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: selection:hr.payslip.yearly.report,month:0
+msgid "December"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_payslip_yearly_report_display_name
+msgid "Display Name"
+msgstr "Ime za prikaz"
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_payslip_line_report_display_details_columns
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_salary_rule_report_display_details_columns
+msgid "Display details columns"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_payslip_yearly_report_employee_id
+#: model:ir.ui.view,arch_db:l10n_ch_hr_payroll_report.view_report_hr_payslip_yearly_report_filter
+msgid "Employee"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: selection:hr.payslip.yearly.report,month:0
+msgid "February"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.ui.view,arch_db:l10n_ch_hr_payroll_report.view_report_hr_payslip_yearly_report_filter
+msgid "Group By"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_payslip_yearly_report_id
+msgid "ID"
+msgstr "ID"
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_payslip_line_report_is_net_amount
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_salary_rule_report_is_net_amount
+msgid "Is net amount"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_payslip_line_report_is_total_rule
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_salary_rule_report_is_total_rule
+msgid "Is total rule"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: selection:hr.payslip.yearly.report,month:0
+msgid "January"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: selection:hr.payslip.yearly.report,month:0
+msgid "July"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: selection:hr.payslip.yearly.report,month:0
+msgid "June"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_payslip_yearly_report___last_update
+msgid "Last Modified on"
+msgstr "Zadnja izmjena"
+
+#. module: l10n_ch_hr_payroll_report
+#: selection:hr.payslip.yearly.report,month:0
+msgid "March"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: selection:hr.payslip.yearly.report,month:0
+msgid "May"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_payslip_yearly_report_month
+#: model:ir.ui.view,arch_db:l10n_ch_hr_payroll_report.view_report_hr_payslip_yearly_report_filter
+msgid "Month"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_payslip_yearly_report_name
+#: model:ir.ui.view,arch_db:l10n_ch_hr_payroll_report.report_payslip
+msgid "Name"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: selection:hr.payslip.yearly.report,month:0
+msgid "November"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: selection:hr.payslip.yearly.report,month:0
+msgid "October"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.ui.view,arch_db:l10n_ch_hr_payroll_report.report_payslip
+msgid "Pay Slip"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.actions.act_window,name:l10n_ch_hr_payroll_report.action_report_hr_payslip_yearly_report_tree
+#: model:ir.ui.menu,name:l10n_ch_hr_payroll_report.menu_action_report_hr_payslip_yearly_report_tree
+#: model:ir.ui.view,arch_db:l10n_ch_hr_payroll_report.view_report_hr_payslip_yearly_report_pivot
+msgid "Pay Slip Yearly Report"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.ui.view,arch_db:l10n_ch_hr_payroll_report.report_payslip
+msgid "Rate"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.ui.view,arch_db:l10n_ch_hr_payroll_report.hr_salary_rule_specific_form
+msgid "Report options"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.ui.menu,name:l10n_ch_hr_payroll_report.main_menu_hr_payroll_reports
+msgid "Reports"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.ui.view,arch_db:l10n_ch_hr_payroll_report.view_report_hr_payslip_yearly_report_filter
+msgid "Search"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: selection:hr.payslip.yearly.report,month:0
+msgid "September"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.ui.view,arch_db:l10n_ch_hr_payroll_report.report_payslip
+msgid "Today date:"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_payslip_yearly_report_total
+#: model:ir.ui.view,arch_db:l10n_ch_hr_payroll_report.report_payslip
+msgid "Total"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_payslip_yearly_report_year
+#: model:ir.ui.view,arch_db:l10n_ch_hr_payroll_report.view_report_hr_payslip_yearly_report_filter
+msgid "Year"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.model,name:l10n_ch_hr_payroll_report.model_hr_payslip_yearly_report
+msgid "hr.payslip.yearly.report"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll_report
+#: model:ir.model,name:l10n_ch_hr_payroll_report.model_hr_salary_rule
+msgid "hr.salary.rule"
+msgstr ""

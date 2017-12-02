@@ -3,14 +3,14 @@
 # * l10n_ch_import_cresus
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-12 09:30+0000\n"
-"PO-Revision-Date: 2017-05-12 09:30+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2017-12-01 03:54+0000\n"
+"PO-Revision-Date: 2017-12-01 03:54+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:l10n_ch_import_cresus.action_account_cresus_import
 #: model:ir.ui.menu,name:l10n_ch_import_cresus.menu_account_cresus_import
 msgid "Accounting Cresus Import"
-msgstr "Import Écritures Crésus"
+msgstr ""
 
 #. module: l10n_ch_import_cresus
 #: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:214
@@ -39,16 +39,12 @@ msgid ""
 "the error detail is:\n"
 "%r"
 msgstr ""
-"Le fichier ne peut être lu\n"
-"Veuillez choisir le bon séparateur\n"
-"le détail de l'erreur est:\n"
-"%r"
 
 #. module: l10n_ch_import_cresus
 #: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:127
 #, python-format
 msgid "Can't parse date '%s'"
-msgstr "Impossible de reconnaître la date “%s”"
+msgstr ""
 
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_company_id
@@ -83,7 +79,7 @@ msgstr "Nom affiché"
 #. module: l10n_ch_import_cresus
 #: selection:account.cresus.import,state:0
 msgid "Done"
-msgstr "Terminé"
+msgstr "Succès"
 
 #. module: l10n_ch_import_cresus
 #: selection:account.cresus.import,state:0
@@ -98,7 +94,7 @@ msgstr "Erreur"
 #. module: l10n_ch_import_cresus
 #: model:ir.model,name:l10n_ch_import_cresus.model_account_cresus_import
 msgid "Export Accounting"
-msgstr "Export Accounting"
+msgstr ""
 
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_file
@@ -122,23 +118,23 @@ msgstr ""
 #. module: l10n_ch_import_cresus
 #: model:ir.ui.view,arch_db:l10n_ch_import_cresus.cresus_move_line_importer_form
 msgid "Import file"
-msgstr "Importer le fichier"
+msgstr "Import Fichier"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.ui.view,arch_db:l10n_ch_import_cresus.cresus_move_line_importer_form
 msgid "Import help"
-msgstr "Aide import"
+msgstr "Import Aide"
 
 #. module: l10n_ch_import_cresus
 #: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:224
 #, python-format
 msgid "Imported Journal Entries"
-msgstr "Pièces comptables importées"
+msgstr "Pièces importées"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_imported_move_ids
 msgid "Imported moves"
-msgstr "mouvements importés"
+msgstr "Pièces importées"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.ui.view,arch_db:l10n_ch_import_cresus.cresus_move_line_importer_form
@@ -160,18 +156,18 @@ msgstr "Dernière modification le"
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_write_uid
 msgid "Last Updated by"
-msgstr "Mis à jour par"
+msgstr "Dernière mise à jour par"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_write_date
 msgid "Last Updated on"
-msgstr "Mis à jour le"
+msgstr "Dernière mise à jour le"
 
 #. module: l10n_ch_import_cresus
 #: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:64
 #, python-format
 msgid "No account with code %s"
-msgstr "Pas de compte dont le code serait %s"
+msgstr "Pas de compte avec le code %s"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_report
@@ -187,7 +183,7 @@ msgstr "État"
 #. module: l10n_ch_import_cresus
 #: model:ir.model,name:l10n_ch_import_cresus.model_account_tax
 msgid "Tax"
-msgstr "Taxe"
+msgstr ""
 
 #. module: l10n_ch_import_cresus
 #: model:ir.ui.view,arch_db:l10n_ch_import_cresus.cresus_move_line_importer_form

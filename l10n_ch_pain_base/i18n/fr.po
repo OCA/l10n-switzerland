@@ -3,13 +3,14 @@
 # * l10n_ch_pain_base
 # 
 # Translators:
+# leemannd <denis.leemann@camptocamp.com>, 2017
 # OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-22 00:56+0000\n"
-"PO-Revision-Date: 2017-06-22 00:56+0000\n"
+"POT-Creation-Date: 2017-12-01 03:54+0000\n"
+"PO-Revision-Date: 2017-12-01 03:54+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +32,7 @@ msgstr ""
 #. module: l10n_ch_pain_base
 #: model:ir.model,name:l10n_ch_pain_base.model_account_move_line
 msgid "Journal Item"
-msgstr "Elément de Journal"
+msgstr "Écriture comptable"
 
 #. module: l10n_ch_pain_base
 #: model:ir.model,name:l10n_ch_pain_base.model_account_payment_line
