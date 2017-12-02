@@ -3,15 +3,15 @@
 # * l10n_ch_zip
 # 
 # Translators:
-# Stefano <stefano.sforzi@agilebg.com>, 2015
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: l10n-switzerland (9.0)\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-16 01:38+0000\n"
-"PO-Revision-Date: 2016-03-14 15:17+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Italian (http://www.transifex.com/oca/OCA-l10n-switzerland-9-0/language/it/)\n"
+"POT-Creation-Date: 2017-12-01 21:23+0000\n"
+"PO-Revision-Date: 2017-12-01 21:23+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -21,7 +21,7 @@ msgstr ""
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_active
 msgid "Active"
-msgstr "Attivo"
+msgstr ""
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_lang2
@@ -82,14 +82,14 @@ msgstr ""
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_post_delivery_through
 msgid "Mail delivery by"
-msgstr "Posta invata da"
+msgstr ""
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_communitynumber_bfs
 msgid ""
 "Numbering used by the Federal Statistical Office for municipalities in "
 "Switzerland and the Principality of Liechtenstein"
-msgstr "Numerazione utilizzata dall'Ufficio Federale di Statistica per le municipalità Svizzere e del Principato del Liechtestein"
+msgstr ""
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_zip_type
@@ -104,7 +104,7 @@ msgstr ""
 #. module: l10n_ch_zip
 #: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_onrp
 msgid "Primary Key"
-msgstr "Chiave primaria"
+msgstr ""
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_onrp
