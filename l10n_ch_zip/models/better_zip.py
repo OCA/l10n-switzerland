@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2011-2017 Camptocamp SA
 # Copyright 2014 Olivier Jossen (brain-tec AG)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
