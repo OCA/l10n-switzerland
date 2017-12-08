@@ -36,7 +36,7 @@ class ResBetterZip(models.Model):
     )
     sort = fields.Boolean(
         string='Present in sort file',
-        help="Indicates if the postcode is included in the «sort file»"
+        help="Indicates if the postcode is included in the 'sort file'"
              "(MAT[CH]sort): 0 = not included, 1 = included. "
              "Delivery information with addresses (only postcode and "
              "streets) are published in the sort file.",
