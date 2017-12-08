@@ -582,12 +582,7 @@ class DTAFileGenerator(models.TransientModel):
         elec_context['partner_bank_country'] = b_country
 
         elec_context['partner_bank_code'] = pline.partner_bank_id.bank_bic
-        elec_context['reference'] = False
-        if hasattr(pline.move_line_id, 'transaction_ref'):
-            if pline.move_line_id.transaction_ref:
-                elec_context['reference'] = pline.move_line_id.transaction_ref
-        if not elec_context['reference']:
-            elec_context['reference'] = pline.move_line_id.ref
+        elec_context['reference'] = pline.communication or False
         # Add support for owner of the account if exists..
         p_name = pline.partner_id.name if pline.partner_id else ''
         elec_context['partner_name'] = p_name
@@ -669,7 +664,7 @@ class DTAFileGenerator(models.TransientModel):
         seq = 1
         amount_tot = 0
 
-        for pline in payment.payment_line_ids:
+        for pline in payment.bank_line_ids:
             elec_context = self._process_payment_lines(
                 data, pline,
                 elec_context, seq
