@@ -86,7 +86,7 @@ addon | version | summary
 [l10n_ch_bank](l10n_ch_bank/) | 9.0.1.0.1 | Banks names, addresses and BIC codes
 [l10n_ch_bank_statement_import_postfinance](l10n_ch_bank_statement_import_postfinance/) | 9.0.1.0.1 | Swiss bank statements import
 [l10n_ch_base_bank](l10n_ch_base_bank/) | 9.0.1.1.1 | Types and number validation for swiss electronic pmnt. DTA, ESR
-[l10n_ch_dta](l10n_ch_dta/) | 9.0.1.0.3 | Electronic payment file for Swiss bank (DTA)
+[l10n_ch_dta](l10n_ch_dta/) | 9.0.1.0.4 | Electronic payment file for Swiss bank (DTA)
 [l10n_ch_fds_postfinance](l10n_ch_fds_postfinance/) | 9.0.1.0.0 | Download files and import bank statements from FDS
 [l10n_ch_fds_upload_dd](l10n_ch_fds_upload_dd/) | 9.0.1.0.0 | Upload Direct Debit files to FDS PostFinance
 [l10n_ch_fds_upload_sepa](l10n_ch_fds_upload_sepa/) | 9.0.1.0.0 | Upload SEPA files to FDS PostFinance
