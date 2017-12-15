@@ -455,10 +455,8 @@ class PaymentSlip(models.Model):
             # NOTE: creating the country BEFORE assigning the format to it
             # is mandatory. If you create and assign the value at the same time
             # `address_format` won't be populated properly!
-            partner.country_id = self.env['res.country'].sudo().new()
-            partner.country_id.update({
-                'address_format': isr_address_format
-            })
+            partner.country_id = self.env['res.country'].new()
+            partner.country_id.address_format = isr_address_format
             address_lines = partner._display_address(
                 without_company=True).split("\n")
         return address_lines
