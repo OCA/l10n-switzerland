@@ -187,6 +187,21 @@ class TestPaymentSlip(test_common.TransactionCase):
             [u'93, Press Avenue', u'', u'73377 Le Bourget du Lac']
         )
 
+    def test_address_format_user_demo(self):
+        invoice = self.make_invoice()
+        self.assertTrue(invoice.move_id)
+        line = invoice.move_id.line_ids[0]
+        slip = self.env['l10n_ch.payment_slip'].search(
+            [('move_line_id', '=', line.id)]
+        )
+        com_partner = slip.get_comm_partner()
+        demo_user = self.env.ref('base.user_demo')
+        address_lines = slip.sudo(demo_user)._get_address_lines(com_partner)
+        self.assertEqual(
+            address_lines,
+            [u'93, Press Avenue', u'', u'73377 Le Bourget du Lac']
+        )
+
     def test_address_format_no_country(self):
         invoice = self.make_invoice()
         self.assertTrue(invoice.move_id)
