@@ -21,14 +21,14 @@ Usage
 =====
 
 On the payment order, you will see a new computed boolean field named
-*BVR* which shows if the payment order is BVR or not.
+*ISR* which shows if the payment order is BVR or not.
 
 This module doesn't modify the standard usage of the modules
 *account_payment_order* and *account_banking_sepa_credit_transfer*.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/125/9.0
+   :target: https://runbot.odoo-community.org/runbot/125/11.0
 
 Bug Tracker
 ===========
@@ -46,6 +46,7 @@ Contributors
 
 * Alexis de Lattre <alexis.delattre@akretion.com>
 * Denis Leemann <denis.leemann@camptocamp.com>
+* Mykhailo Panarin <m.panarin@mobilunity.com>
 
 Maintainer
 ----------
