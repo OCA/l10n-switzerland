@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # copyright 2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -20,4 +19,4 @@ class AccountPaymentMethod(models.Model):
         if painv == 'pain.001.001.03.ch.02':
             path = 'l10n_ch_pain_credit_transfer/data/%s.xsd' % painv
             return path
-        return super(AccountPaymentMethod, self).get_xsd_file_path()
+        return super().get_xsd_file_path()
