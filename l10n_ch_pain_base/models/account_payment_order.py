@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # copyright 2016 Akretion (www.akretion.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -13,9 +12,9 @@ class AccountPaymentOrder(models.Model):
     @api.multi
     def compute_sepa_final_hook(self, sepa):
         self.ensure_one()
-        sepa = super(AccountPaymentOrder, self).compute_sepa_final_hook(sepa)
+        sepa = super().compute_sepa_final_hook(sepa)
         pain_flavor = self.payment_mode_id.payment_method_id.pain_version
-        # BVR orders cannot be SEPA orders
+        # ISR orders cannot be SEPA orders
         if pain_flavor and '.ch.' in pain_flavor:
             sepa = False
         return sepa
@@ -23,7 +22,7 @@ class AccountPaymentOrder(models.Model):
     @api.multi
     def generate_pain_nsmap(self):
         self.ensure_one()
-        nsmap = super(AccountPaymentOrder, self).generate_pain_nsmap()
+        nsmap = super().generate_pain_nsmap()
         pain_flavor = self.payment_mode_id.payment_method_id.pain_version
         if pain_flavor in ['pain.001.001.03.ch.02', 'pain.008.001.02.ch.01']:
             nsmap[None] = 'http://www.six-interbank-clearing.com/de/'\
@@ -43,7 +42,7 @@ class AccountPaymentOrder(models.Model):
                 }
             return attrib
         else:
-            return super(AccountPaymentOrder, self).generate_pain_attrib()
+            return super().generate_pain_attrib()
 
     @api.model
     def generate_start_payment_info_block(
@@ -53,11 +52,11 @@ class AccountPaymentOrder(models.Model):
         if gen_args.get('pain_flavor') == 'pain.001.001.03.ch.02':
             gen_args['local_instrument_type'] = 'proprietary'
             gen_args['structured_remittance_issuer'] = False
-        return super(AccountPaymentOrder, self).\
-            generate_start_payment_info_block(
-                parent_node, payment_info_ident, priority, local_instrument,
-                category_purpose, sequence_type, requested_date, eval_ctx,
-                gen_args)
+        return super().generate_start_payment_info_block(
+            parent_node, payment_info_ident, priority, local_instrument,
+            category_purpose, sequence_type, requested_date, eval_ctx,
+            gen_args,
+        )
 
     @api.model
     def generate_party_agent(
@@ -67,25 +66,24 @@ class AccountPaymentOrder(models.Model):
                 gen_args.get('pain_flavor') == 'pain.001.001.03.ch.02' and
                 bank_line):
             if bank_line.local_instrument == 'CH01':
-                # Don't set the creditor agent on BVR/CH01 payments
+                # Don't set the creditor agent on ISR/CH01 payments
                 return True
             elif not partner_bank.bank_bic:
                 raise UserError(_(
-                    "For pain.001.001.03.ch.02, for non-BVR payments, "
+                    "For pain.001.001.03.ch.02, for non-ISR payments, "
                     "the BIC is required on the bank '%s' related to the "
                     "bank account '%s'") % (
                         partner_bank.bank_id.name,
                         partner_bank.acc_number))
-        return super(AccountPaymentOrder, self).generate_party_agent(
+        return super().generate_party_agent(
             parent_node, party_type, order, partner_bank, gen_args,
-            bank_line=bank_line)
+            bank_line=bank_line,
+        )
 
     @api.model
-    def generate_party_acc_number(
-            self, parent_node, party_type, order, partner_bank, gen_args,
-            bank_line=None):
-        if (
-                gen_args.get('pain_flavor') == 'pain.001.001.03.ch.02' and
+    def generate_party_acc_number(self, parent_node, party_type, order,
+                                  partner_bank, gen_args, bank_line=None):
+        if (gen_args.get('pain_flavor') == 'pain.001.001.03.ch.02' and
                 bank_line and
                 bank_line.local_instrument == 'CH01'):
             if not partner_bank.ccp:
@@ -102,6 +100,6 @@ class AccountPaymentOrder(models.Model):
             party_account_other_id.text = partner_bank.ccp
             return True
         else:
-            return super(AccountPaymentOrder, self).generate_party_acc_number(
+            return super().generate_party_acc_number(
                 parent_node, party_type, order, partner_bank, gen_args,
                 bank_line=bank_line)
