@@ -27,7 +27,7 @@ Provides the list of Swiss postal ZIPs for auto-completion.
 l10n_ch_payment_slip
 --------------------
 
-Adds ESR/BVR report on invoice. Every ESR/BVR element position can be configured independently by company.
+Adds ISR (PVR/BVR/ESR) report on invoice. Every ISR element position can be configured independently by company.
 Multiple payment terms on invoices are supported.
 
 It will also allow you to do the import of V11 bank statement files and do an automatic reconciliation.
@@ -59,7 +59,7 @@ Provides support of SEPA/PAIN electronic payment file.
 l10n_ch_scan_bvr
 ----------------
 
-Allows you to scan the ESR/BVR references and automatically create the proper supplier invoices
+Allows you to scan the ISR references and automatically create the proper supplier invoices
 
 l10n_ch_hr_payroll
 ------------------

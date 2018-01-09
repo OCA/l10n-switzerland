@@ -164,12 +164,13 @@ class ResPartnerBank(models.Model, BankCommon):
 
     """
     _inherit = 'res.partner.bank'
-    _compile_check_bvr_add_num = re.compile('[0-9]*$')
+    _compile_check_isr_add_num = re.compile('[0-9]*$')
 
-    bvr_adherent_num = fields.Char(
-        string='Bank BVR/ESR adherent number', size=11,
+    isr_adherent_num = fields.Char(
+        string='Bank ISR adherent number', size=11,
+        oldname='bvr_adherent_num',
         help="Your Bank adherent number to be printed "
-             "in references of your BVR/ESR. "
+             "in references of your ISR. "
              "This is not a postal account number."
         )
     acc_number = fields.Char(
@@ -201,17 +202,17 @@ class ResPartnerBank(models.Model, BankCommon):
         else:
             return self.acc_number
 
-    @api.constrains('bvr_adherent_num')
+    @api.constrains('isr_adherent_num')
     def _check_adherent_number(self):
         for p_bank in self:
-            if not p_bank.bvr_adherent_num:
+            if not p_bank.isr_adherent_num:
                 continue
-            valid = self._compile_check_bvr_add_num.match(
-                p_bank.bvr_adherent_num
+            valid = self._compile_check_isr_add_num.match(
+                p_bank.isr_adherent_num
             )
             if not valid:
                 raise exceptions.ValidationError(
-                    _('Your bank BVR/ESR adherent number must contain only '
+                    _('Your bank ISR adherent number must contain only '
                       'digits!\nPlease check your company bank account.')
                 )
         return True
@@ -232,7 +233,7 @@ class ResPartnerBank(models.Model, BankCommon):
     @api.multi
     def _get_acc_name(self):
         """ Return an account name for a bank account
-        to use with a ccp for BVR.
+        to use with a ccp for ISR.
         This method make sure to generate a unique name
         """
         part_name = self.partner_id.name
@@ -350,5 +351,5 @@ class ResPartnerBank(models.Model, BankCommon):
             if 'Bank/CCP' in self.acc_number:
                 self.acc_number = self._get_acc_name()
 
-    _sql_constraints = [('bvr_adherent_uniq', 'unique (bvr_adherent_num, ccp)',
-                         'The BVR adherent number/ccp pair must be unique !')]
+    _sql_constraints = [('isr_adherent_uniq', 'unique (isr_adherent_num, ccp)',
+                         'The ISR adherent number/ccp pair must be unique !')]
