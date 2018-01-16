@@ -3,14 +3,16 @@
 # * l10n_ch_bank
 # 
 # Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Stefano <stefano.sforzi@agilebg.com>, 2018
 msgid ""
 msgstr ""
-"Project-Id-Version: l10n-switzerland (9.0)\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-26 02:46+0000\n"
-"PO-Revision-Date: 2016-04-25 11:54+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: Italian (http://www.transifex.com/oca/OCA-l10n-switzerland-9-0/language/it/)\n"
+"POT-Creation-Date: 2017-12-16 06:26+0000\n"
+"PO-Revision-Date: 2017-12-16 06:26+0000\n"
+"Last-Translator: Stefano <stefano.sforzi@agilebg.com>, 2018\n"
+"Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -45,7 +47,7 @@ msgstr ""
 #. module: l10n_ch_bank
 #: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_group
 msgid "Group"
-msgstr ""
+msgstr "Gruppo"
 
 #. module: l10n_ch_bank
 #: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_headquarter
@@ -55,27 +57,27 @@ msgstr ""
 #. module: l10n_ch_bank
 #: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_lang
 msgid "Language"
-msgstr ""
+msgstr "Lingua"
 
 #. module: l10n_ch_bank
 #: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_postaccount
 msgid "Post account"
-msgstr ""
+msgstr "Conto postale"
 
 #. module: l10n_ch_bank
 #: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_postaladdress
 msgid "Postal address"
-msgstr ""
+msgstr "Indirizzo postale"
 
 #. module: l10n_ch_bank
 #: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_sic
 msgid "SIC"
-msgstr ""
+msgstr "SIC"
 
 #. module: l10n_ch_bank
 #: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_sicnr
 msgid "SIC-Nr"
-msgstr ""
+msgstr "SIC-Nr"
 
 #. module: l10n_ch_bank
 #: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_valid_from
@@ -85,4 +87,4 @@ msgstr "Valido da"
 #. module: l10n_ch_bank
 #: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_eurosic
 msgid "euroSIC"
-msgstr ""
+msgstr "euroSIC"
