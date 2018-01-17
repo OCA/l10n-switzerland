@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-16 06:26+0000\n"
-"PO-Revision-Date: 2017-12-16 06:26+0000\n"
+"POT-Creation-Date: 2018-01-16 07:11+0000\n"
+"PO-Revision-Date: 2018-01-16 07:11+0000\n"
 "Last-Translator: Yannick Vaucher <yannick.vaucher@camptocamp.com>, 2017\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -18,33 +18,6 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
-#. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/invoice.py:58
-#, python-format
-msgid "BVR Reference"
-msgstr "Référence BVR"
-
-#. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/invoice.py:101
-#, python-format
-msgid "BVR/ESR Reference is required"
-msgstr "La référence BVR est requise"
-
-#. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/invoice.py:82
-#, python-format
-msgid "BVR/ESR Reference type needs a postal account number on the customer."
-msgstr ""
-"Le type de référence BVR nécessite un numéro de compte postal sur le client."
-
-#. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/invoice.py:87
-#, python-format
-msgid "BVR/ESR Reference type needs a postal account number on your company"
-msgstr ""
-"Le type de référence BVR nécessite un numéro de compte postal sur votre "
-"compagnie."
 
 #. module: l10n_ch_base_bank
 #: model:ir.model,name:l10n_ch_base_bank.model_res_bank
@@ -57,18 +30,18 @@ msgid "Bank Accounts"
 msgstr "Comptes bancaires"
 
 #. module: l10n_ch_base_bank
-#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_partner_bank_bvr_adherent_num
-msgid "Bank BVR/ESR adherent number"
-msgstr "Numéro d'adhérent BVR"
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_partner_bank_isr_adherent_num
+msgid "Bank ISR adherent number"
+msgstr ""
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:242
+#: code:addons/l10n_ch_base_bank/models/bank.py:243
 #, python-format
 msgid "Bank/CCP Undefined"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:240
+#: code:addons/l10n_ch_base_bank/models/bank.py:241
 #, python-format
 msgid "Bank/CCP {}"
 msgstr ""
@@ -100,6 +73,30 @@ msgid "Code"
 msgstr "Code"
 
 #. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/invoice.py:58
+#, python-format
+msgid "ISR Reference"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/invoice.py:101
+#, python-format
+msgid "ISR Reference is required"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/invoice.py:82
+#, python-format
+msgid "ISR Reference type needs a postal account number on the customer."
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/invoice.py:87
+#, python-format
+msgid "ISR Reference type needs a postal account number on your company"
+msgstr ""
+
+#. module: l10n_ch_base_bank
 #: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank_code
 msgid "Internal reference"
 msgstr "Référence interne"
@@ -107,8 +104,8 @@ msgstr "Référence interne"
 #. module: l10n_ch_base_bank
 #: code:addons/l10n_ch_base_bank/models/invoice.py:113
 #, python-format
-msgid "Invalid BVR/ESR Number (wrong checksum)."
-msgstr "Numéro BVR invalide"
+msgid "Invalid ISR Number (wrong checksum)."
+msgstr ""
 
 #. module: l10n_ch_base_bank
 #: model:ir.model,name:l10n_ch_base_bank.model_account_invoice
@@ -117,7 +114,7 @@ msgstr "Facture"
 
 #. module: l10n_ch_base_bank
 #: code:addons/l10n_ch_base_bank/models/bank.py:110
-#: code:addons/l10n_ch_base_bank/models/bank.py:227
+#: code:addons/l10n_ch_base_bank/models/bank.py:228
 #, python-format
 msgid "Please enter a correct postal number. (01-23456-1 or 12345)"
 msgstr "Merci d'entrer un numéro postal correct (01-23456-1 ou 12345)."
@@ -134,24 +131,20 @@ msgstr "Identifiant Suisse unique de la banque, utilisé dans le numéro IBAN"
 
 #. module: l10n_ch_base_bank
 #: sql_constraint:res.partner.bank:0
-msgid "The BVR adherent number/ccp pair must be unique !"
+msgid "The ISR adherent number/ccp pair must be unique !"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_partner_bank_bvr_adherent_num
+#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_partner_bank_isr_adherent_num
 msgid ""
-"Your Bank adherent number to be printed in references of your BVR/ESR. This "
-"is not a postal account number."
+"Your Bank adherent number to be printed in references of your ISR. This is "
+"not a postal account number."
 msgstr ""
-"Votre numéro d'adhérent qui doit être imprimé dans la référence du BVR. Ce "
-"n'est pas un code postal."
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:214
+#: code:addons/l10n_ch_base_bank/models/bank.py:215
 #, python-format
 msgid ""
-"Your bank BVR/ESR adherent number must contain only digits!\n"
+"Your bank ISR adherent number must contain only digits!\n"
 "Please check your company bank account."
 msgstr ""
-"Votre numéro d'adhérent BVR/ESR de votre banque ne doit contenir que des chiffres!\n"
-"Veuillez vérifier le compte bancaire de votre société"
