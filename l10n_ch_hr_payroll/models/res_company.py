@@ -36,7 +36,7 @@ class ResCompany(models.Model):
     # UI(AC)
     ac_limit = fields.Float(
         string='Maximum limit',
-        default='10500',
+        default=12350,
         digits=dp.get_precision('Account'),
         required=False)
     ac_per_off_limit = fields.Float(
@@ -85,7 +85,7 @@ class ResCompany(models.Model):
     # OBP(LPP)
     lpp_min = fields.Float(
         string="Minimum legal",
-        default='2056.25',
+        default=1762.50,
         digits=dp.get_precision('Account'),
         required=False)
     lpp_max = fields.Float(

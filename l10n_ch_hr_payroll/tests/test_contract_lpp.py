@@ -113,7 +113,7 @@ class TestContractLPP(common.TransactionCase):
 
         # I create payroll config with company values
         self.configs = self.env['hr.payroll.config'].create({
-            'ac_limit': 10500,
+            'ac_limit': 12350,
             'ac_per_off_limit': 1.0,
             'ac_per_in_limit': 1.1,
             'avs_per': 5.125,
@@ -121,7 +121,7 @@ class TestContractLPP(common.TransactionCase):
             'fadmin_per': 0.25,
             'laa_per': 0.46,
             'lca_per': 0.52,
-            'lpp_min': 2056.25,
+            'lpp_min': 1762.50,
             'lpp_max': 7050.00,
             'fa_amount_child': 250,
             'fa_amount_student': 330,
