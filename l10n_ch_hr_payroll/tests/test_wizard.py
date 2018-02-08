@@ -87,7 +87,7 @@ class TestWizard(common.TransactionCase):
     def test_wizard(self):
         _logger.debug(' -- Test WIZARD -- ')
 
-        self.assertEqual(self.configs_default.ac_limit, 10500)
+        self.assertEqual(self.configs_default.ac_limit, 12350)
         self.assertEqual(self.configs_default.ac_per_off_limit, 1.0)
         self.assertEqual(self.configs_default.ac_per_in_limit, 1.1)
         self.assertEqual(self.configs_default.avs_per, 5.125)
@@ -95,7 +95,7 @@ class TestWizard(common.TransactionCase):
         self.assertEqual(self.configs_default.fadmin_per, 0)
         self.assertEqual(self.configs_default.laa_per, 0)
         self.assertEqual(self.configs_default.lca_per, 0)
-        self.assertEqual(self.configs_default.lpp_min, 2056.25)
+        self.assertEqual(self.configs_default.lpp_min, 1762.50)
         self.assertEqual(self.configs_default.lpp_max, 7050.00)
         self.assertEqual(self.configs_default.fa_amount_child, 0)
         self.assertEqual(self.configs_default.fa_amount_student, 0)
