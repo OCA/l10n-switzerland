@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Carlos Hormigo, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-12 09:30+0000\n"
-"PO-Revision-Date: 2017-05-12 09:30+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2017-12-09 06:38+0000\n"
+"PO-Revision-Date: 2017-12-09 06:38+0000\n"
+"Last-Translator: Carlos Hormigo, 2018\n"
 "Language-Team: Catalan (Spain) (https://www.transifex.com/oca/teams/23907/ca_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -111,7 +112,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_create_uid
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_authentication_keys_create_date
@@ -123,7 +124,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_create_date
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creat a"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_data
@@ -163,7 +164,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_display_name
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom visible"
 
 #. module: l10n_ch_fds_postfinance
 #: selection:fds.files.import.tobankstatments.wizard,state:0
@@ -424,7 +425,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory___last_update
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Darrera modificació en"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_authentication_keys_write_uid
@@ -436,7 +437,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_write_uid
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Darrera actualització per"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_authentication_keys_write_date
@@ -448,7 +449,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_write_date
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Darrera actualització el"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_key_clone_wizard_form
@@ -460,7 +461,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_key_import_wizard_user_name
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_account_name
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_postfinance_account_form

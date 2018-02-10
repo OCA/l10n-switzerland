@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Carlos Hormigo, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-31 15:46+0000\n"
-"PO-Revision-Date: 2017-10-31 15:46+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2017-12-09 06:38+0000\n"
+"PO-Revision-Date: 2017-12-09 06:38+0000\n"
+"Last-Translator: Carlos Hormigo, 2018\n"
 "Language-Team: Catalan (Spain) (https://www.transifex.com/oca/teams/23907/ca_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,14 +64,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_lsv_export_wizard_create_uid
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_post_dd_export_wizard_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: l10n_ch_lsv_dd
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_account_invoice_free_create_date
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_lsv_export_wizard_create_date
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_post_dd_export_wizard_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creat a"
 
 #. module: l10n_ch_lsv_dd
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_lsv_export_wizard_currency
@@ -101,7 +102,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_lsv_export_wizard_display_name
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_post_dd_export_wizard_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom visible"
 
 #. module: l10n_ch_lsv_dd
 #: selection:banking.export.ch.dd,state:0
@@ -328,7 +329,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_lsv_export_wizard___last_update
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_post_dd_export_wizard___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Darrera modificació en"
 
 #. module: l10n_ch_lsv_dd
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_account_invoice_free_write_uid
@@ -336,7 +337,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_lsv_export_wizard_write_uid
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_post_dd_export_wizard_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Darrera actualització per"
 
 #. module: l10n_ch_lsv_dd
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_account_invoice_free_write_date
@@ -344,7 +345,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_lsv_export_wizard_write_date
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_post_dd_export_wizard_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Darrera actualització el"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/export_utils.py:121
@@ -541,7 +542,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_banking_export_ch_dd_type
 msgid "Type"
-msgstr ""
+msgstr "Tipus"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:431
