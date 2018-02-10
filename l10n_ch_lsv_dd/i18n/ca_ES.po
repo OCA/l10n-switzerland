@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-11 14:20+0000\n"
-"PO-Revision-Date: 2016-11-22 16:25+0000\n"
+"PO-Revision-Date: 2018-02-02 14:11+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -72,14 +72,14 @@ msgstr ""
 #: field:lsv.export.wizard,create_uid:0
 #: field:post.dd.export.wizard,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: l10n_ch_lsv_dd
 #: field:account.invoice.free,create_date:0
 #: field:lsv.export.wizard,create_date:0
 #: field:post.dd.export.wizard,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat a"
 
 #. module: l10n_ch_lsv_dd
 #: field:lsv.export.wizard,currency:0 field:post.dd.export.wizard,currency:0
@@ -316,7 +316,7 @@ msgstr ""
 #: field:banking.export.ch.dd,write_uid:0 field:lsv.export.wizard,write_uid:0
 #: field:post.dd.export.wizard,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Darrera actualització per"
 
 #. module: l10n_ch_lsv_dd
 #: field:account.invoice.free,write_date:0
@@ -324,7 +324,7 @@ msgstr ""
 #: field:lsv.export.wizard,write_date:0
 #: field:post.dd.export.wizard,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Darrera actualització el"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/export_utils.py:84
@@ -501,7 +501,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: field:banking.export.ch.dd,type:0
 msgid "Type"
-msgstr ""
+msgstr "Tipus"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:384

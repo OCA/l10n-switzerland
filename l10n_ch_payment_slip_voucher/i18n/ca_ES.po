@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-11 14:20+0000\n"
-"PO-Revision-Date: 2017-04-25 10:41+0000\n"
+"PO-Revision-Date: 2018-02-02 14:11+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -30,12 +30,12 @@ msgstr "Cancel·la"
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat a"
 
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,currency_id:0
@@ -60,12 +60,12 @@ msgstr "Diari"
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Darrera actualització per"
 
 #. module: l10n_ch_payment_slip_voucher
 #: field:v11.import.wizard.voucher,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Darrera actualització el"
 
 #. module: l10n_ch_payment_slip_voucher
 #: code:addons/l10n_ch_payment_slip_voucher/wizard/bvr_import.py:115

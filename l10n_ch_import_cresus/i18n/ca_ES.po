@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-11 14:20+0000\n"
-"PO-Revision-Date: 2015-06-17 13:35+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2017-12-02 06:43+0000\n"
+"PO-Revision-Date: 2018-02-02 14:11+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,12 +55,12 @@ msgstr "Companyia"
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat a"
 
 #. module: l10n_ch_import_cresus
 #: view:account.tax:l10n_ch_import_cresus.view_tax_form
@@ -71,6 +71,11 @@ msgstr ""
 #: field:account.tax,tax_cresus_mapping:0
 msgid "Cresus tax name"
 msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: field:account.cresus.import,display_name:0
+msgid "Display Name"
+msgstr "Nom visible"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.model,name:l10n_ch_import_cresus.model_account_cresus_import
@@ -114,14 +119,19 @@ msgid "Journal"
 msgstr "Diari"
 
 #. module: l10n_ch_import_cresus
+#: field:account.cresus.import,__last_update:0
+msgid "Last Modified on"
+msgstr "Darrera modificació en"
+
+#. module: l10n_ch_import_cresus
 #: field:account.cresus.import,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Darrera actualització per"
 
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Darrera actualització el"
 
 #. module: l10n_ch_import_cresus
 #: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:177

@@ -80,12 +80,12 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat a"
 
 #. module: l10n_ch_scan_bvr
 #: field:res.partner,supplier_invoice_default_product:0
@@ -110,12 +110,12 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Darrera actualització per"
 
 #. module: l10n_ch_scan_bvr
 #: field:scan.bvr,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Darrera actualització el"
 
 #. module: l10n_ch_scan_bvr
 #: selection:scan.bvr,state:0

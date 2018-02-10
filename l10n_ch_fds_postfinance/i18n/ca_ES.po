@@ -120,7 +120,7 @@ msgstr ""
 #: field:fds.postfinance.directory,create_uid:0
 #: field:fds.postfinance.file,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.authentication.keys,create_date:0
@@ -132,7 +132,7 @@ msgstr ""
 #: field:fds.postfinance.directory,create_date:0
 #: field:fds.postfinance.file,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat a"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.file,data:0
@@ -365,7 +365,7 @@ msgstr ""
 #: field:fds.postfinance.directory,write_uid:0
 #: field:fds.postfinance.file,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Darrera actualització per"
 
 #. module: l10n_ch_fds_postfinance
 #: field:fds.authentication.keys,write_date:0
@@ -377,7 +377,7 @@ msgstr ""
 #: field:fds.postfinance.directory,write_date:0
 #: field:fds.postfinance.file,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Darrera actualització el"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.key.clone.wizard:l10n_ch_fds_postfinance.view_fds_key_clone_wizard_form
@@ -387,7 +387,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: field:fds.postfinance.account,name:0
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. module: l10n_ch_fds_postfinance
 #: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
