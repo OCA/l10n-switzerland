@@ -67,7 +67,7 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="condition_range_min">2047.4</field>
             <field name="condition_range_max">999999</field>
             <field name="name">OAI/II/IC Employee</field>
-            <field name="amount_percentage">-5.15</field>
+            <field name="amount_percentage">-5.125</field>
             <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
             <field name="quantity">1</field>
             <field name="sequence">111</field>
@@ -208,7 +208,7 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="appears_on_payslip">False</field>
             <field name="code">OBP</field>
             <field name="condition_select">range</field>
-            <field name="condition_range_min">2056.25</field>
+            <field name="condition_range_min">1762.50</field>
             <field name="condition_range_max">7050</field>
             <field name="name">OBP</field>
             <field name="note">Occupational Benefit Plan</field>
@@ -223,11 +223,11 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="appears_on_payslip">True</field>
             <field name="code">OBP_E</field>
             <field name="condition_select">python</field>
-            <field name="condition_range_min">2056.25</field>
+            <field name="condition_range_min">1762.50</field>
             <field name="condition_range_max">7050</field>
             <field name="name">OBP Employee</field>
             <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
-            <field name="amount_python_compute">minimum_legal = 2056.25 ; result = (categories.BASIC + categories.ALW - minimum_legal) * (((contract.lpp_rate)*-1)/100)</field>
+            <field name="amount_python_compute">minimum_legal = 1762.50 ; result = (categories.BASIC + categories.ALW - minimum_legal) * (((contract.lpp_rate)*-1)/100)</field>
             <field name="condition_python">result = contract.lpp_rate > 0</field>
             <field name="quantity">1</field>
             <field name="sequence">131</field>
@@ -239,11 +239,11 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="appears_on_payslip">False</field>
             <field name="code">OBP_C</field>
             <field name="condition_select">python</field>
-            <field name="condition_range_min">2056.25</field>
+            <field name="condition_range_min">1762.50</field>
             <field name="condition_range_max">7050</field>
             <field name="name">OBP Company</field>
             <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
-            <field name="amount_python_compute">minimum_legal = 2056.25 ; result = (categories.BASIC + categories.ALW - minimum_legal) * 2*(contract.lpp_rate/100)</field>
+            <field name="amount_python_compute">minimum_legal = 1762.50 ; result = (categories.BASIC + categories.ALW - minimum_legal) * 2*(contract.lpp_rate/100)</field>
             <field name="condition_python">result = contract.lpp_rate > 0</field>
             <field name="quantity">1</field>
             <field name="sequence">132</field>
@@ -255,7 +255,7 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="appears_on_payslip">True</field>
             <field name="code">OBP_F_E</field>
             <field name="condition_select">python</field>
-            <field name="condition_range_min">2056.25</field>
+            <field name="condition_range_min">1762.50</field>
             <field name="condition_range_max">7050</field>
             <field name="name">OBP Fixed amount Employee</field>
             <field name="amount_python_compute">result = -contract.lpp_amount</field>
@@ -270,7 +270,7 @@ Copyright (c) 2015 Open Net Sàrl and 2016 twanda AG
             <field name="appears_on_payslip">False</field>
             <field name="code">OBP_F_C</field>
             <field name="condition_select">python</field>
-            <field name="condition_range_min">2056.25</field>
+            <field name="condition_range_min">1762.50</field>
             <field name="condition_range_max">7050</field>
             <field name="name">OBP Fixed amount Company</field>
             <field name="amount_python_compute">result = 2*contract.lpp_amount</field>
