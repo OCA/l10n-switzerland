@@ -15,7 +15,9 @@
     # unfortunately it doesn't work with noupdate thus we use a post_init hook
     # 'init': ['data/res.bank.csv'],
     'post_init_hook': 'post_init',
-    'data': [],
+    'data': [
+        'views/res_bank.xml',
+    ],
     'images': [],
     'demo': [],
     'auto_install': False,
