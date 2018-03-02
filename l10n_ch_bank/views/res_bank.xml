@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_res_bank_form" model="ir.ui.view">
+            <field name="name">res.bank.form</field>
+            <field name="model">res.bank</field>
+            <field name="inherit_id" ref="base.view_res_bank_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="country_code" invisible="True" />
+                </xpath>
+
+                <xpath expr="//field[@name='city']" position="attributes">
+                    <attribute name="attrs">{'required': [('country_code', '=', 'CH')]}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='bic']" position="attributes">
+                    <attribute name="attrs">{'required': [('country_code', '=', 'CH')]}</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</openerp>
