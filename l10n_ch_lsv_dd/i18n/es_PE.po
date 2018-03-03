@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-31 15:46+0000\n"
-"PO-Revision-Date: 2017-10-31 15:46+0000\n"
+"POT-Creation-Date: 2018-03-02 09:19+0000\n"
+"PO-Revision-Date: 2018-03-02 09:19+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Spanish (Peru) (https://www.transifex.com/oca/teams/23907/es_PE/)\n"
 "MIME-Version: 1.0\n"
@@ -279,7 +279,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: model:ir.model,name:l10n_ch_lsv_dd.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Factura"
 
 #. module: l10n_ch_lsv_dd
 #: model:ir.model,name:l10n_ch_lsv_dd.model_account_move_line
