@@ -166,7 +166,7 @@ class TestPaymentSlip(test_common.TransactionCase):
             [('move_line_id', '=', line.id)]
         )
         com_partner = slip.get_comm_partner()
-        address_lines = slip._get_address_lines(com_partner)
+        address_lines = slip._get_address_lines(com_partner.id)
         self.assertEqual(
             address_lines,
             ['93, Press Avenue', '', '73377 Le Bourget du Lac']
@@ -181,7 +181,7 @@ class TestPaymentSlip(test_common.TransactionCase):
         )
         com_partner = slip.get_comm_partner()
         demo_user = self.env.ref('base.user_demo')
-        address_lines = slip.sudo(demo_user)._get_address_lines(com_partner)
+        address_lines = slip.sudo(demo_user)._get_address_lines(com_partner.id)
         self.assertEqual(
             address_lines,
             [u'93, Press Avenue', u'', u'73377 Le Bourget du Lac']
@@ -196,7 +196,7 @@ class TestPaymentSlip(test_common.TransactionCase):
         )
         com_partner = slip.get_comm_partner()
         com_partner.country_id = False
-        address_lines = slip._get_address_lines(com_partner)
+        address_lines = slip._get_address_lines(com_partner.id)
         self.assertEqual(
             address_lines,
             ['93, Press Avenue', '', '73377 Le Bourget du Lac']
@@ -218,7 +218,7 @@ class TestPaymentSlip(test_common.TransactionCase):
         )
         com_partner = slip.get_comm_partner()
         com_partner.country_id = False
-        address_lines = slip._get_address_lines(com_partner)
+        address_lines = slip._get_address_lines(com_partner.id)
         self.assertEqual(
             address_lines,
             ['93, Press Avenue', '73377 Le Bourget du Lac']
@@ -232,7 +232,7 @@ class TestPaymentSlip(test_common.TransactionCase):
             [('move_line_id', '=', line.id)]
         )
         com_partner = slip.get_comm_partner()
-        address_lines = slip._get_address_lines(com_partner)
+        address_lines = slip._get_address_lines(com_partner.id)
         f_size = 11
 
         len_tests = [

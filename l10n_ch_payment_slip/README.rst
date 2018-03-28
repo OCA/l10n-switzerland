@@ -84,6 +84,7 @@ Contributors
 * Paulius Sladkevičius <paulius@hbee.eu>
 * David Coninckx <dco@open-net.ch>
 * Akim Juillerat <akim.juillerat@camptocamp.com>
+* Simone Orsi <simone.orsi@camptocamp.com>
 
 Financial contributors
 ----------------------
