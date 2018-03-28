@@ -90,7 +90,6 @@ class PFXMLParserTest(common.TransactionCase):
             'file_ref': '20160414001203000300003',
             'amount': 50.0,
             'date': '2017-03-30',
-            'value_date': '2017-03-30',
             'ref': 'CLXPMZW000000004'
         }
         parsed_transaction = statement['transactions'][0]
