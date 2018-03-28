@@ -11,7 +11,7 @@ from reportlab.pdfgen.canvas import Canvas
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.units import inch
-from odoo import models, fields, api, _, exceptions
+from odoo import models, fields, api, _, exceptions, tools
 from odoo.modules import get_module_resource
 from odoo.tools.misc import mod10r, format_date
 
@@ -441,20 +441,26 @@ class PaymentSlip(models.Model):
                         size=size)
 
     @api.model
-    def _get_address_lines(self, com_partner):
+    @tools.ormcache_context('self._uid', 'com_partner_id', keys=('lang',))
+    def _get_address_lines(self, com_partner_id):
         config_param = self.env['ir.config_parameter'].sudo()
         isr_address_format = (
-            config_param.get_param('isr.address.format') or
-            ADDR_FORMAT)
+            config_param.get_param('isr.address.format') or ADDR_FORMAT)
+        # clone the partner to not affect real partner
+        com_partner = self.env['res.partner'].browse(com_partner_id)
+        partner = self.env['res.partner'].new(com_partner.copy_data()[0])
         # use onchange to define our own temporary address format
         with self.env.do_in_onchange():
             # assign a fake country in case partner has no country set
-            com_partner.country_id = self.env['res.country'].new(
-                {'address_format': isr_address_format}
-            )
-            address_lines = com_partner._display_address(
+            # NOTE: creating the country BEFORE assigning the format to it
+            # is mandatory. If you create and assign the value at the same time
+            # `address_format` won't be populated properly!
+            partner.country_id = self.env['res.country'].sudo().new()
+            partner.country_id.update({
+                'address_format': isr_address_format
+            })
+            address_lines = partner._display_address(
                 without_company=True).split("\n")
-        com_partner.invalidate_cache()
         return address_lines
 
     @api.model
@@ -509,7 +515,7 @@ class PaymentSlip(models.Model):
         :type com_partner: :py:class:`openerp.models.Model`
 
         """
-        address_lines = self._get_address_lines(com_partner)
+        address_lines = self._get_address_lines(com_partner.id)
 
         font_size, cutoff_length = self._get_address_font_size(
             font.size, address_lines, com_partner)
