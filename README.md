@@ -91,9 +91,10 @@ addon | version | summary
 [l10n_ch_hr_payroll_report](l10n_ch_hr_payroll_report/) | 10.0.1.0.0 | Switzerland Payroll Reports
 [l10n_ch_import_cresus](l10n_ch_import_cresus/) | 10.0.1.0.0 | Allows to import Crésus .txt files containing journal entries into Odoo.
 [l10n_ch_import_winbiz](l10n_ch_import_winbiz/) | 10.0.1.0.0 | Accounting Import WinBIZ
+[l10n_ch_lsv_dd](l10n_ch_lsv_dd/) | 10.0.1.0.0 | Create LSV and Direct Debit (postfinance) files
 [l10n_ch_pain_base](l10n_ch_pain_base/) | 10.0.1.0.2 | ISO 20022 base module for Switzerland
 [l10n_ch_pain_credit_transfer](l10n_ch_pain_credit_transfer/) | 10.0.1.0.0 | Generate ISO 20022 credit transfert (SEPA and not SEPA)
-[l10n_ch_payment_slip](l10n_ch_payment_slip/) | 10.0.1.1.2 | Print ESR/BVR payment slip with your invoices
+[l10n_ch_payment_slip](l10n_ch_payment_slip/) | 10.0.1.1.3 | Print ESR/BVR payment slip with your invoices
 [l10n_ch_scan_bvr](l10n_ch_scan_bvr/) | 10.0.1.0.2 | Switzerland - Scan ESR/BVR to create invoices
 [l10n_ch_states](l10n_ch_states/) | 10.0.1.0.0 | Switzerland Country States
 [l10n_ch_zip](l10n_ch_zip/) | 10.0.1.0.1 | Provides all Swiss postal codes for auto-completion
