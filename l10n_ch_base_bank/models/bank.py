@@ -98,6 +98,11 @@ class Bank(models.Model, BankCommon):
         size=11,
         help="CCP/CP-Konto of the bank"
     )
+    country_code = fields.Char(
+        string="Country code",
+        related="country.code",
+        readonly=True,
+    )
 
     @api.constrains('ccp')
     def _check_postal_num(self):

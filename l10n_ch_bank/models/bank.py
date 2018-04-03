@@ -39,8 +39,3 @@ class ResBank(models.Model):
     bank_postaladdress = fields.Char(string='Postal address', size=35)
     bank_areacode = fields.Char(string='Area code', size=5)
     bank_postaccount = fields.Char(string='Post account', size=35)
-    country_code = fields.Char(
-        string="Country code",
-        related="country.code",
-        readonly=True,
-    )
