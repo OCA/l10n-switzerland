@@ -1,0 +1,48 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * l10n_ch_pain_base
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-03 03:39+0000\n"
+"PO-Revision-Date: 2017-03-03 03:39+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: l10n_ch_pain_base
+#: code:addons/l10n_ch_pain_base/models/account_payment_order.py:72
+#, python-format
+msgid ""
+"For pain.001.001.03.ch.02, for non-BVR payments, the BIC is required on the "
+"bank '%s' related to the bank account '%s'"
+msgstr ""
+
+#. module: l10n_ch_pain_base
+#: model:ir.model,name:l10n_ch_pain_base.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: l10n_ch_pain_base
+#: model:ir.model,name:l10n_ch_pain_base.model_account_payment_line
+msgid "Payment Lines"
+msgstr ""
+
+#. module: l10n_ch_pain_base
+#: model:ir.model,name:l10n_ch_pain_base.model_account_payment_order
+msgid "Payment Order"
+msgstr "Ordine di Pagamento"
+
+#. module: l10n_ch_pain_base
+#: code:addons/l10n_ch_pain_base/models/account_payment_order.py:91
+#, python-format
+msgid "The field 'CCP/CP-Konto' is not set on the bank '%s'."
+msgstr ""
