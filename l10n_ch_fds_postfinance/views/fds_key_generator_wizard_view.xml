@@ -21,10 +21,10 @@
                 </group>
                 <footer>
                     <button string="Generate" name="generate_keys_button"  type="object" class="oe_highlight" states="default,generate" />
-                    <button string="Cancel" special="cancel" icon="gtk-cancel" states="default" />
-                    <button string="Validate" name="confirm_keys_button" type="object" icon="gtk-apply" states="generate" />
-                    <button string="Cancel" name="cancel_keys_button" type="object" icon="gtk-cancel" states="generate" />
-                    <button string="Close" class="oe_highlightoe_link" special="cancel" icon="gtk-close" states="done" />
+                    <button string="Cancel" special="cancel" states="default" />
+                    <button string="Validate" name="confirm_keys_button" type="object" states="generate" />
+                    <button string="Cancel" name="cancel_keys_button" type="object" states="generate" />
+                    <button string="Close" class="oe_highlightoe_link" special="cancel" states="done" />
                     <button string="Send to Postfinance" name="send_keys_button" type="object" icon="gtk-go-forward" states="done" />
                 </footer>
             </form>
