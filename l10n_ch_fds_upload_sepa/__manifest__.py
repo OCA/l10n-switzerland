@@ -30,7 +30,7 @@
     'depends': [
         'l10n_ch_fds_postfinance',
         'l10n_ch_pain_credit_transfer',
-        'l10n_ch_import_pain000',
+        'l10n_ch_import_pain002',
         'account_payment_order',
     ],
     'external_dependencies': {

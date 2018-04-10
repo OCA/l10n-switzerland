@@ -6,13 +6,13 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class FdsPostfinanceFilePain000(models.Model):
+class FdsPostfinanceFilePain002(models.Model):
     _inherit = 'fds.postfinance.file'
 
     @api.multi
     def import2bankStatements(self):
 
-        account_pain000 = self.env['account.pain000.parser']
+        account_pain000 = self.env['account.pain002.parser']
         pain_files = self.env[self._name]
 
         for pf_file in self:
@@ -57,5 +57,5 @@ class FdsPostfinanceFilePain000(models.Model):
                 _logger.error("[FAIL] import file '%s' as pain 000",
                               (pf_file.filename), exc_info=True)
 
-        return super(FdsPostfinanceFilePain000,
+        return super(FdsPostfinanceFilePain002,
                      self - pain_files).import2bankStatements()
