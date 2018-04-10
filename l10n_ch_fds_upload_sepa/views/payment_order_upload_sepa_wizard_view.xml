@@ -9,7 +9,7 @@
                     <button string="Upload to FDS"
                             name="upload_generate_file_button"
                             type="object"
-                            icon="gtk-network" states="upload" class="oe_highlight"/>
+                            states="upload" class="oe_highlight"/>
                 </header>
                 <field name="state" invisible="True"/>
                 <sheet>

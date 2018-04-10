@@ -22,7 +22,7 @@
 {
     'name': 'Swiss Postfinance FDS SEPA upload',
     'summary': "Upload SEPA files to FDS PostFinance",
-    'version': '9.0.1.0.0',
+    'version': '10.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'Compassion CH, Odoo Community Association (OCA)',
     'website': 'http://www.compassion.ch/',
@@ -30,6 +30,7 @@
     'depends': [
         'l10n_ch_fds_postfinance',
         'l10n_ch_pain_credit_transfer',
+        'l10n_ch_import_pain000',
         'account_payment_order',
     ],
     'external_dependencies': {
@@ -39,6 +40,7 @@
         'views/payment_order_upload_sepa_wizard_view.xml',
         'views/fds_postfinance_account_sepa_view.xml',
         'security/ir.model.access.csv',
+        'views/fds_postfinance_file_view.xml',
     ],
     'images': [],
     'demo': [],
