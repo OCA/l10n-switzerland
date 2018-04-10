@@ -9,8 +9,8 @@ import shutil
 import tempfile
 import traceback
 
-from openerp import models, fields, api, _
-from openerp.exceptions import Warning as UserError
+from odoo import registry, models, fields, api, _
+from odoo.exceptions import Warning as UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -165,9 +165,11 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
             # Look for files to exclude
             excluded = d.excluded_files.split(';')
             for nameFile in list_name_files:
-                file_ignore = [f for f in excluded if f and f in nameFile]
+                file_ignore = [f for f in excluded if f and f in
+                               nameFile]
                 if file_ignore:
-                    self.msg_import_file_ignore += "; ".join(file_ignore)
+                    self.msg_import_file_ignore += "; ".join(
+                        file_ignore)
                     continue
 
                 # check if file exist already
@@ -187,6 +189,8 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
                     'filename': nameFile,
                     'directory_id': d.id}
                 fds_files_ids += fds_files_ids.create(values)
+                # Commit the file created to avoid having to import again
+                self.env.cr.commit()  # pylint:disable=invalid-commit
 
         return fds_files_ids
 
@@ -197,11 +201,11 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
             :param recordset: of model fds_postfinance_file
             :returns None:
         '''
-        for fds_file in fds_files_ids:
-            if fds_file.import2bankStatements():
-                self.msg_file_imported += fds_file.filename + "; "
-            else:
-                self.msg_import_file_fail += fds_file.filename + "; "
+        fds_files_ids.import2bankStatements()
+        error = fds_files_ids.filtered(lambda r: r.state == 'error')
+        success = fds_files_ids - error
+        self.msg_file_imported += '; '.join(success.mapped('filename'))
+        self.msg_import_file_fail += '; '.join(error.mapped('filename'))
 
     @api.multi
     def _get_sftp_config(self):
