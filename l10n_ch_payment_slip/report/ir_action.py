@@ -4,10 +4,15 @@ import os
 import tempfile
 import io
 import logging
+from contextlib import closing
+import base64
 
 from odoo import models, fields, api
+from odoo.exceptions import AccessError
+
 
 _logger = logging.getLogger(__name__)
+
 
 try:
     import PyPDF2
@@ -23,7 +28,8 @@ class IrActionsReportReportlab(models.Model):
                                                    'Report renderer')])
 
     @api.multi
-    def _generate_one_slip_per_page_from_invoice_pdf(self, report_name=None):
+    def _generate_one_slip_per_page_from_invoice_pdf(self, report_name=None,
+                                                     save_in_attachment=None):
         """Generate payment slip PDF(s) from report model.
 
         If there are many pdf they are merged in memory or on
@@ -31,6 +37,8 @@ class IrActionsReportReportlab(models.Model):
 
         :return: the generated PDF content
         """
+        if not save_in_attachment:
+            save_in_attachment = {}
         user_model = self.env['res.users']
         slip_model = self.env['l10n_ch.payment_slip']
         invoice_model = self.env['account.invoice']
@@ -38,18 +46,102 @@ class IrActionsReportReportlab(models.Model):
         invoices = invoice_model.browse(self.ids)
 
         docs = slip_model._compute_pay_slips_from_invoices(invoices)
-        if len(docs) == 1:
-            return docs[0]._draw_payment_slip(a4=True,
-                                              b64=False,
-                                              report_name=report_name,
-                                              out_format='PDF')
+
+        pdfdocuments = []
+        temporary_files = []
+
+        for doc in docs:
+            pdfreport_fd, pdfreport_path = tempfile.mkstemp(
+                suffix='.pdf', prefix='report.tmp.')
+            temporary_files.append(pdfreport_path)
+
+            # Directly load the document if we already have it
+            if (
+                    save_in_attachment and
+                    save_in_attachment['loaded_documents'].get(
+                        doc.invoice_id.id)
+            ):
+                with closing(os.fdopen(pdfreport_fd, 'w')) as pdfreport:
+                    pdfreport.write(save_in_attachment['loaded_documents']
+                                    [doc.invoice_id.id])
+                pdfdocuments.append(pdfreport_path)
+                continue
+
+            with closing(os.fdopen(pdfreport_fd, 'w')) as pdfreport:
+                pdf = doc._draw_payment_slip(a4=True, b64=False,
+                                             out_format='PDF',
+                                             report_name=report_name)
+                pdfreport.write(pdf)
+
+            # Save the pdf in attachment if marked
+            if save_in_attachment and save_in_attachment.get(
+                    doc.invoice_id.id):
+                with open(pdfreport_path, 'rb') as pdfreport:
+                    attachment = {
+                        'name': save_in_attachment.get(doc.invoice_id.id),
+                        'datas': base64.encodebytes(pdfreport.read()),
+                        'datas_fname': save_in_attachment.get(
+                            doc.invoice_id.id),
+                        'res_model': save_in_attachment.get('model'),
+                        'res_id': doc.invoice_id.id,
+                    }
+                    try:
+                        self.env['ir.attachment'].create(attachment)
+                    except AccessError:
+                        _logger.info("Cannot save PDF report %r as attachment",
+                                     attachment['name'])
+                    else:
+                        _logger.info(
+                            'The PDF document %s is now saved in the database',
+                            attachment['name'])
+
+            pdfdocuments.append(pdfreport_path)
+
+        # Return the entire document
+        if len(pdfdocuments) == 1:
+            entire_report_path = pdfdocuments[0]
         else:
-            pdfs = (x._draw_payment_slip(a4=True, b64=False, out_format='PDF',
-                                         report_name=report_name)
-                    for x in docs)
             if company.merge_mode == 'in_memory':
-                return self.merge_pdf_in_memory(pdfs)
-            return self.merge_pdf_on_disk(pdfs)
+                content = self.merge_pdf_in_memory(pdfdocuments)
+                entire_report_path = False
+            else:
+                entire_report_path = self._merge_pdf(pdfdocuments)
+
+        if entire_report_path:
+            with open(entire_report_path, 'rb') as pdfdocument:
+                content = pdfdocument.read()
+            if entire_report_path not in temporary_files:
+                temporary_files.append(entire_report_path)
+
+        # Manual cleanup of the temporary files
+        for temporary_file in temporary_files:
+            try:
+                os.unlink(temporary_file)
+            except (OSError, IOError):
+                _logger.error(
+                    'Error when trying to remove file %s' % temporary_file)
+
+        return content
+
+    @api.multi
+    def get_pdf(self, docids, report_name, html=None, data=None):
+        if (report_name == 'l10n_ch_payment_slip.'
+                           'one_slip_per_page_from_invoice'):
+            report_model = self.env['ir.actions.report.xml']
+            context = self.env['res.users'].context_get()
+            report = report_model.with_context(context).search(
+                [('report_type', '=', 'reportlab-pdf'),
+                 ('report_name', '=', report_name)]
+            )
+            save_in_attachment = self._check_attachment_use(
+                docids, report)
+
+            reports = self.browse(docids)
+            return reports._generate_one_slip_per_page_from_invoice_pdf(
+                report_name=report_name, save_in_attachment=save_in_attachment
+            )
+        else:
+            return super().get_pdf(docids, report_name, html=html, data=data)
 
     @api.multi
     def render_reportlab_pdf(self, docids, data=None):
@@ -62,39 +154,27 @@ class IrActionsReportReportlab(models.Model):
             return pdf_content, 'pdf'
 
     def merge_pdf_in_memory(self, docs):
-        streams = []
-        merger = PyPDF2.PdfFileMerger()
+        writer = PyPDF2.PdfFileWriter()
         for doc in docs:
-            current_buff = io.BytesIO()
-            streams.append(current_buff)
-            current_buff.write(doc)
-            current_buff.seek(0)
-            merger.append(PyPDF2.PdfFileReader(current_buff))
+            pdfreport = os.fdopen(doc, 'rb')
+            reader = PyPDF2.PdfFileReader(pdfreport)
+            for page in range(reader.getNumPages()):
+                writer.addPage(reader.getPage(page))
         buff = io.BytesIO()
         try:
             # The writer close the reader file here
-            merger.write(buff)
+            writer.write(buff)
             return buff.getvalue()
         except IOError:
             raise
         finally:
             buff.close()
-            for stream in streams:
-                stream.close()
 
     def merge_pdf_on_disk(self, docs):
-        streams = []
         writer = PyPDF2.PdfFileWriter()
         for doc in docs:
-            current_buff = tempfile.mkstemp(
-                suffix='.pdf',
-                prefix='credit_control_slip')[0]
-            current_buff = os.fdopen(current_buff, 'w+b')
-            current_buff.seek(0)
-            streams.append(current_buff)
-            current_buff.write(doc)
-            current_buff.seek(0)
-            reader = PyPDF2.PdfFileReader(current_buff)
+            pdfreport = os.fdopen(doc, 'rb')
+            reader = PyPDF2.PdfFileReader(pdfreport)
             for page in range(reader.getNumPages()):
                 writer.addPage(reader.getPage(page))
         buff = tempfile.mkstemp(
@@ -111,5 +191,3 @@ class IrActionsReportReportlab(models.Model):
             raise
         finally:
             buff.close()
-            for stream in streams:
-                stream.close()
