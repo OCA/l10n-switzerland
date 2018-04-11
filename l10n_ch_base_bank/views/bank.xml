@@ -33,6 +33,18 @@
           <field name="ccp" attrs="{'invisible': [('bic', '=', 'POFICHBEXXX')]}"/>
         </field>
       </field>
+
+      <xpath expr="//field[@name='name']" position="after">
+        <field name="country_code" invisible="True" />
+      </xpath>
+
+      <xpath expr="//field[@name='city']" position="attributes">
+        <attribute name="attrs">{'required': [('country_code', '=', 'CH')]}</attribute>
+      </xpath>
+
+      <xpath expr="//field[@name='bic']" position="attributes">
+        <attribute name="attrs">{'required': [('country_code', '=', 'CH')]}</attribute>
+      </xpath>
     </record>
 
     <record model="ir.ui.view" id="add_custom_fields_on_bank_list">
