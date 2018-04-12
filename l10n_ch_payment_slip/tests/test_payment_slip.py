@@ -274,3 +274,53 @@ class TestPaymentSlip(test_common.TransactionCase):
                          'l10n_ch_payment_slip.one_slip_per_page_from_invoice')
         self.assertEqual(bvr['report_file'],
                          'l10n_ch_payment_slip.one_slip_per_page')
+
+    def test_reload_from_attachment(self):
+
+        def _find_invoice_attachment(self, invoice):
+            return self.env['ir.attachment'].search([
+                ('res_model', '=', invoice._name),
+                ('res_id', '=', invoice.id)
+            ])
+
+        invoice = self.make_invoice()
+        report_name = 'l10n_ch_payment_slip.one_slip_per_page_from_invoice'
+        report_payment_slip = self.env['report']._get_report_from_name(
+            report_name)
+        bvr_action = invoice.print_bvr()
+        # Print the report a first time
+        pdf = self.env['report'].with_context(bvr_action['context']).get_pdf(
+            invoice.ids, report_name)
+        # Ensure no attachment was stored
+        attachment = _find_invoice_attachment(self, invoice)
+        self.assertEqual(len(attachment), 0)
+        # Set the report to store and reload from attachment
+        report_payment_slip.write({
+            'attachment_use': True,
+            'attachment':
+                "('ESR'+(object.number or '').replace('/','')+'.pdf')"
+        })
+        # Print the report again
+        pdf1 = self.env['report'].with_context(bvr_action['context']).get_pdf(
+            invoice.ids, report_name)
+        # Ensure pdf is the same
+        self.assertEqual(pdf, pdf1)
+        # Ensure attachment was stored
+        attachment1 = _find_invoice_attachment(self, invoice)
+        self.assertEqual(len(attachment1), 1)
+        # Print the report another time
+        pdf2 = self.env['report'].with_context(bvr_action['context']).get_pdf(
+            invoice.ids, report_name)
+        # Ensure pdf and attachment are the same as before
+        attachment2 = _find_invoice_attachment(self, invoice)
+        self.assertEqual(len(attachment2), 1)
+        self.assertEqual(pdf1, pdf2)
+        self.assertEqual(attachment1, attachment2)
+        # Allow cancelling entries on the journal
+        invoice.journal_id.update_posted = True
+        # Cancel the invoice and set back to draft
+        invoice.action_invoice_cancel()
+        invoice.action_invoice_draft()
+        # Ensure attachment was unlinked
+        attachment = _find_invoice_attachment(self, invoice)
+        self.assertEqual(len(attachment), 0)
