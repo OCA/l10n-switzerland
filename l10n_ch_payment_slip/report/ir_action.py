@@ -123,16 +123,24 @@ class IrActionsReportReportlab(models.Model):
 
         return content
 
+    @api.model
+    def _get_report_from_name(self, report_name):
+        """Return also report of report_type reportlab-pdf and not only qweb
+        """
+        report = super()._get_report_from_name(report_name)
+        if not report:
+            report = report.search([
+                ('report_type', '=', 'reportlab-pdf'),
+                ('report_name', '=', report_name)],
+                limit=1
+            )
+        return report
+
     @api.multi
     def get_pdf(self, docids, report_name, html=None, data=None):
         if (report_name == 'l10n_ch_payment_slip.'
                            'one_slip_per_page_from_invoice'):
-            report_model = self.env['ir.actions.report.xml']
-            context = self.env['res.users'].context_get()
-            report = report_model.with_context(context).search(
-                [('report_type', '=', 'reportlab-pdf'),
-                 ('report_name', '=', report_name)]
-            )
+            report = self._get_report_from_name(report_name)
             save_in_attachment = self._check_attachment_use(
                 docids, report)
 
