@@ -169,3 +169,23 @@ class AccountInvoice(models.Model):
                 errors.append(invoice + '\n'.join(msg))
         if errors:
             raise exceptions.UserError('\n'.join(errors))
+
+    @api.multi
+    def action_invoice_draft(self):
+        res = super(AccountInvoice, self).action_invoice_draft()
+        # Delete former printed payment slip
+        try:
+            report_payment_slip = self.env['report']._get_report_from_name(
+                'l10n_ch_payment_slip.one_slip_per_page_from_invoice')
+        except IndexError:
+            report_payment_slip = False
+        if report_payment_slip and report_payment_slip.attachment:
+            for invoice in self:
+                with invoice.env.do_in_draft():
+                    invoice.number, invoice.state = invoice.move_name, 'open'
+                    attachment = self.env['report']._attachment_stored(
+                        invoice, report_payment_slip)[
+                        invoice.id]
+                if attachment:
+                    attachment.unlink()
+        return res
