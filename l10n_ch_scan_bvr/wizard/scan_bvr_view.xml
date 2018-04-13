@@ -22,7 +22,7 @@
             <field name="partner_id" attrs="{'required': [('state','=', 'need_extra_info')]}" colspan="2"/>
             <separator string="Partner Bank Account"  colspan="2" />
             <field name="bank_account_id" colspan="2" attrs="{'required': [('state','=', 'need_extra_info')]}"
-              domain="[('partner_id','=', partner_id)]"/>
+              domain="[('partner_id','parent_of', partner_id)]"/>
           </group>
           <footer>
             <button name="validate_bvr_string" string="Create" type="object" icon="fa-arrow-right" class="btn-primary" />

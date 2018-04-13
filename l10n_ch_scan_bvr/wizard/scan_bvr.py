@@ -149,8 +149,12 @@ class ScanBvr(models.TransientModel):
         self.write({'partner_id': data['partner_id']})
         # We check that this partner have a default product
         partner = self.env['res.partner'].browse(data['partner_id'])
-        if partner.supplier_invoice_default_product:
-            prod = partner.supplier_invoice_default_product
+        if data['bank_account']:
+            account_info = self.env['res.partner.bank'].browse(
+                data['bank_account'])
+        prod = partner.supplier_invoice_default_product or \
+            account_info.partner_id.supplier_invoice_default_product
+        if prod:
             my_vals = {
                 'product_id': prod.id,
                 'invoice_id': data['invoice_id'],
@@ -219,7 +223,7 @@ class ScanBvr(models.TransientModel):
 
         invoice_vals = {
             'name': today,
-            'partner_id': account_info.partner_id.id,
+            'partner_id': data['partner_id'] or account_info.partner_id.id,
             'account_id':
                 account_info.partner_id.property_account_payable_id.id,
             'date_due': date_due,
