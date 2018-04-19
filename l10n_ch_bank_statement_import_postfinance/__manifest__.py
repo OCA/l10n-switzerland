@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {'name': "Swiss bank statements import",
- 'version': '10.0.1.0.0',
+ 'version': '10.0.1.0.1',
  'author': "Compassion CH, Camptocamp, Odoo Community Association (OCA)",
  'category': 'Finance',
  'complexity': 'normal',
