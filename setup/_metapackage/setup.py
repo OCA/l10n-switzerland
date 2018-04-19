@@ -1,0 +1,22 @@
+import setuptools
+
+with open('VERSION.txt', 'r') as f:
+    version = f.read().strip()
+
+setuptools.setup(
+    name="odoo11-addons-oca-l10n-switzerland",
+    description="Meta package for oca-l10n-switzerland Odoo addons",
+    version=version,
+    install_requires=[
+        'odoo11-addon-l10n_ch_bank',
+        'odoo11-addon-l10n_ch_base_bank',
+        'odoo11-addon-l10n_ch_import_isr_v11',
+        'odoo11-addon-l10n_ch_pain_base',
+        'odoo11-addon-l10n_ch_states',
+        'odoo11-addon-l10n_ch_zip',
+    ],
+    classifiers=[
+        'Programming Language :: Python',
+        'Framework :: Odoo',
+    ]
+)
