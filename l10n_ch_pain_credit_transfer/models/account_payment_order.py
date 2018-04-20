@@ -19,13 +19,18 @@ class AccountPaymentOrder(models.Model):
             self, parent_node, payment_info_ident,
             priority, local_instrument, category_purpose, sequence_type,
             requested_date, eval_ctx, gen_args):
+        """ Replace the original Payment Identification (unique per file)
+            in order to discriminate the records by currency"""
+        payment_info_ident = (
+            "self.name + '-' "
+            "+ requested_date.replace('-', '') + '-' "
+            "+ priority + '-' "
+            "+ optional_args[0] + '-' "
+            "+ local_instrument + '-' "
+            "+ category_purpose"
+        )
         return super(AccountPaymentOrder,
                      self).generate_start_payment_info_block(
-            parent_node, "self.name + '-' "
-                         "+ requested_date.replace('-', '') + '-' "
-                         "+ priority + '-' "
-                         "+ optional_args[0] + '-' "
-                         "+ local_instrument + '-' "
-                         "+ category_purpose",
+            parent_node, payment_info_ident,
             priority, local_instrument, category_purpose, sequence_type,
             requested_date, eval_ctx, gen_args)
