@@ -191,7 +191,7 @@ class ResPartnerBank(models.Model, BankCommon):
         todo = self.env['res.partner.bank']
         for rec in self:
             if (rec.acc_number and
-                    rec.is_swiss_postal_num(self.acc_number)):
+                    rec.is_swiss_postal_num(rec.acc_number)):
                 rec.acc_type = 'postal'
                 continue
             todo |= rec
