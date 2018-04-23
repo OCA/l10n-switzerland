@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo11-addon-l10n_ch_base_bank',
         'odoo11-addon-l10n_ch_import_isr_v11',
         'odoo11-addon-l10n_ch_pain_base',
+        'odoo11-addon-l10n_ch_pain_credit_transfer',
         'odoo11-addon-l10n_ch_states',
         'odoo11-addon-l10n_ch_zip',
     ],
