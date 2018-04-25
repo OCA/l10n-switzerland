@@ -70,8 +70,8 @@ class WizardPain001(models.TransientModel):
         '''
         attachment_obj = self.pool.get('ir.attachment')
         vals = {
-            'name': 'pain001_%s' % time.strftime("%Y-%m-%d_%H:%M:%S",
-                                                 time.gmtime()),
+            'name': 'pain001_%s.xml' % time.strftime("%Y-%m-%d_%H:%M:%S",
+                                                     time.gmtime()),
             'datas': data['base64_data'],
             'datas_fname': 'pain001_%s.xml' % time.strftime(
                 "%Y-%m-%d_%H:%M:%S",
