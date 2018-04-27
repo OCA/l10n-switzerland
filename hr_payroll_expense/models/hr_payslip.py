@@ -16,11 +16,10 @@ class HrPayslip(models.Model):
     @api.multi
     def compute_sheet(self):
         for payslip in self:
-            _logger.info('ok compute')
 
             # Detach expenses from the pay slips
             expense_sheet = payslip.env['hr.expense.sheet']
-            employee_id = payslip.contract_id.employee_id.id
+            employee_id = payslip.employee_id.id
 
             # Look for expenses
             filters = [
@@ -31,7 +30,7 @@ class HrPayslip(models.Model):
             expenses = expense_sheet.search(filters)
             if expenses:
                 expenses.write({'slip_id': payslip.id})
-            _logger.info(expenses)    
+
             res = super(HrPayslip, payslip).compute_sheet()
         return res
 
