@@ -94,6 +94,7 @@ class MultiBvrWebKitParserCreditControl(
             report_type=report_type
         )
 
+
 report_sxw.report_sxw('report.invoice_bvr_webkit_multi_credit_control',
                       'credit.control.line',
                       'addons/l10n_ch_payment_slip/report/multi_bvr.mako',

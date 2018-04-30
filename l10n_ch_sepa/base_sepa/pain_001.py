@@ -87,8 +87,8 @@ class Pain001(MsgSEPA):
             raise orm.except_orm(_('ErrorCompanyBankBIC'),
                                  _('The selected company bank account has no '
                                    'BIC number'))
-        if (not cp_bank_acc.state == 'iban'
-                and not cp_bank_acc.get_account_number()):
+        if (not cp_bank_acc.state == 'iban' and
+                not cp_bank_acc.get_account_number()):
             raise orm.except_orm(
                 _('ErrorCompanyBankAccNumber'),
                 _('The selected company bank has no IBAN and no Account '
@@ -107,8 +107,8 @@ class Pain001(MsgSEPA):
                     _('ErrorCreditorBankBIC'),
                     _('Creditor bank account has no BIC number for invoice %s')
                     % (line.name,))
-            if (not crd_bank_acc.state == 'iban'
-                    and not crd_bank_acc.get_account_number()):
+            if (not crd_bank_acc.state == 'iban' and
+                    not crd_bank_acc.get_account_number()):
                 raise orm.except_orm(
                     _('ErrorCompanyBankAccNumber'),
                     _('The selected company bank has no IBAN and no Account '
@@ -155,5 +155,6 @@ class Pain001(MsgSEPA):
         self._is_xsd_valid()
 
         return self._xml_data
+
 
 MsgSEPAFactory.register_class('pain.001', Pain001)

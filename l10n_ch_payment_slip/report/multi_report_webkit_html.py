@@ -196,6 +196,7 @@ class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
         if invoice_id:
             self._check_invoice([invoice_id])
 
+
 report_sxw.report_sxw('report.invoice_bvr_webkit_multi',
                       'account.invoice',
                       'l10n_ch_payment_slip/report/multi_bvr.mako',
