@@ -76,14 +76,14 @@ class L10nCHReportWebkitHtmlMulti(report_sxw.rml_parse):
         move_line_obj = self.pool['account.move.line']
         account_obj = self.pool['account.account']
         invoice_obj = self.pool['account.invoice']
-        inv = invoice_obj.browse(cursor, uid, ids[0], context=context)
+        invoices = invoice_obj.browse(cursor, uid, ids, context=context)
         tier_account_ids = account_obj.search(
             cursor, uid,
             [('type', 'in', ['receivable', 'payable'])],
             context=context)
         move_line_ids = move_line_obj.search(
             cursor, uid,
-            [('move_id', '=', inv.move_id.id),
+            [('move_id', 'in', [inv.move_id.id for inv in invoices]),
              ('account_id', 'in', tier_account_ids)],
             context=context)
         return move_line_ids
