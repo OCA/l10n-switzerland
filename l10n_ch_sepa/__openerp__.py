@@ -22,25 +22,10 @@
 {
     "name": "Switzerland - SEPA Electronic Payment File",
     "summary": "Generate pain.001 Credit Transfert Files for your payments",
-    "version": "1.1",
+    "version": "7.0.1.1",
     "category": "Finance",
-    "description": """
-Swiss electronic payment (SEPA)
-===============================
-
-This addons allows you to generate SEPA electronic payment file for
-Switzerland.
-You'll found the wizard in payment order.
-
-This module designed for Swiss payment is also generic for euro payments
-as the Swiss standards are slightly different.
-It intends to be reusable to accept new definition of specific standards
-by country.
-
-It currently supports the "pain.001" norm for Credit Transfert Initiation.
-
-""",
     "author": "Camptocamp,Odoo Community Association (OCA)",
+    "license": "AGPL-3",
     "depends": [
         "account",
         "l10n_ch",
