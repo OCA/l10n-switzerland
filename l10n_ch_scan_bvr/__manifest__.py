@@ -6,7 +6,7 @@
 
 {
     "name": "Switzerland - Scan ESR/BVR to create invoices",
-    "version": "10.0.1.0.2",
+    "version": "10.0.1.0.3",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "category": "Generic Modules/Others",
     "website": "http://www.camptocamp.com",
