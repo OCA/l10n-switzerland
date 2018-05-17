@@ -6,7 +6,7 @@ from openupgradelib import openupgrade
 def reference_type_bvr_to_isr(cr):
     """Change BVR to ISR in reference_type field"""
     cr.execute("""
-        UPDATE account_invoice SET communication_type='isr'
+        UPDATE account_payment_line SET communication_type='isr'
         WHERE communication_type = 'bvr';
         """)
 
