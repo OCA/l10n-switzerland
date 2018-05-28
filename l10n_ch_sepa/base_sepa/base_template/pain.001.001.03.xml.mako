@@ -25,32 +25,39 @@
   in sub blocks and inheritages. Because, for now, only unamed
   blocks and def in mako can use a local for loop variable.
 </%doc>\
-% for line in order.line_ids:
-  <% sepa_context['line'] = line %>\
   <%block name="PmtInf">\
-    <%
-    line = sepa_context['line']
-    today = thetime.strftime("%Y-%m-%d")
-    %>
+        <%
+        today = thetime.strftime("%Y-%m-%d")
+        %>
       <PmtInf>
-        <PmtInfId>${line.name}</PmtInfId>
+        <PmtInfId>${order.reference}</PmtInfId>
         <PmtMtd>TRF</PmtMtd>
-        <BtchBookg>false</BtchBookg>
-        <ReqdExctnDt>${line.date > today and line.date or today}</ReqdExctnDt>
+        <BtchBookg>true</BtchBookg>
+        <ReqdExctnDt>${order.date_scheduled > today and order.date_scheduled or today}</ReqdExctnDt>
         <Dbtr>
           <Nm>${order.user_id.company_id.name}</Nm>\
           ${self.address(order.user_id.company_id.partner_id)}\
         </Dbtr>
         <DbtrAcct>\
           ${self.acc_id(order.mode.bank_id)}\
+         <Tp>
+            <Prtry>CWD</Prtry>
+         </Tp>\
+
         </DbtrAcct>
         <DbtrAgt>
           <FinInstnId>
             <BIC>${order.mode.bank_id.bank.bic or order.mode.bank_id.bank_bic}</BIC>
           </FinInstnId>
         </DbtrAgt>
+ % for line in order.line_ids:
+        <% sepa_context['line'] = line %>
+        <%
+        line = sepa_context['line']
+        %>
         <CdtTrfTxInf>
           <PmtId>
+            <InstrId>${line.name}</InstrId>
             <EndToEndId>${line.name}</EndToEndId>
           </PmtId>
           <%block name="PmtTpInf"/>
@@ -79,9 +86,9 @@
           </CdtrAcct>\
           <%block name="RmtInf"/>
         </CdtTrfTxInf>
+% endfor
       </PmtInf>\
   </%block>
-% endfor
 \
   </CstmrCdtTrfInitn>
 </Document>
