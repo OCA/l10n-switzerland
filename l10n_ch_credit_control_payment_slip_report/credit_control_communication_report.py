@@ -53,7 +53,7 @@ class ExtendedReport(models.Model):
                 return slips[0]._draw_payment_slip(a4=True, b64=False,
                                                    out_format='PDF')
             slips_list = [slip._draw_payment_slip(
-                a4=True, b64=False,out_format='PDF'
+                a4=True, b64=False, out_format='PDF'
             ) for slip in slips]
             if company.merge_mode == 'in_memory':
                 return self.merge_pdf_in_memory(slips_list)
