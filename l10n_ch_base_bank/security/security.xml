@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="group_isr_adherent_num_users" model="res.groups">
+        <field name="name">Show "ISR adherent number" field in Partner Banks</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+</odoo>
+

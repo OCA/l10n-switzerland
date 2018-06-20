@@ -63,12 +63,12 @@
     </record>
 
     <record model="ir.ui.view" id="add_ccp_on_res_partner_bank">
-      <field name="name">Add ccp on res partner bank</field>
+      <field name="name">Add isr adherent num and ccp on res partner bank</field>
       <field name="model">res.partner.bank</field>
       <field name="inherit_id" ref="base.view_partner_bank_form"/>
       <field name="arch" type="xml">
         <field name="bank_id" position="after">
-          <!-- isr_adherent_num added in l10n_ch_payment_slip -->
+          <field name="isr_adherent_num" groups="l10n_ch_base_bank.group_isr_adherent_num_users"/>
           <field name="ccp"/>
         </field>
       </field>
