@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Author: Nicolas Bessi Vincent Renaville
 # Copyright 2013 Camptocamp SA
 # Copyright 2015 Alex Comba - Agile Business Group
@@ -168,7 +167,7 @@ class ScanBvr(models.TransientModel):
                 invoice_line_vals, ['product_id'], specs)
             value = product_onchange_result.get('value', {})
 
-            for name, val in value.iteritems():
+            for name, val in value.items():
 
                 if isinstance(val, tuple):
                     value[name] = val[0]
@@ -229,7 +228,7 @@ class ScanBvr(models.TransientModel):
             'date_due': date_due,
             'date_invoice': today,
             'payment_term_id': payment_term_id,
-            'reference_type': 'bvr',
+            'reference_type': 'isr',
             'reference': data['bvr_struct']['reference'],
             'amount_total': data['bvr_struct']['amount'],
             'partner_bank_id': account_info.id,
@@ -319,8 +318,8 @@ class ScanBvr(models.TransientModel):
                 raise UserError(_('This kind of BVR is not supported '
                                   'at this time'))
             # We will test if the BVR has an Adherent Number if not we
-            # will make the search of the account base on
-            # his name non base on the BVR adherent number
+            # will make the search of the account based on
+            # his name instead of being based on the BVR adherent number
             if (bvr_struct['bvrnumber'] == '000000'):
                 bvr_struct['domain'] = 'name'
             else:
@@ -330,7 +329,7 @@ class ScanBvr(models.TransientModel):
     @api.multi
     def validate_bvr_string(self):
         self.ensure_one()
-        # BVR Standrard
+        # BVR Standard
         # 0100003949753>120000000000234478943216899+ 010001628>
         # BVR without BVr Reference
         # 0100000229509>000000013052001000111870316+ 010618955>
@@ -342,7 +341,7 @@ class ScanBvr(models.TransientModel):
         # <010001000165865> 951050156515104+ 43435>
         # <010001000060190> 052550152684006+ 43435>
         #
-        # Explode and check  the BVR Number and structurate it
+        # Explode and check the BVR Number and structurate it
         #
         data = {}
         data['bvr_struct'] = self._get_bvr_structurated(self.bvr_string)
@@ -354,12 +353,12 @@ class ScanBvr(models.TransientModel):
         else:
             domain = \
                 [('ccp', '=', data['bvr_struct']['beneficiaire']),
-                 ('bvr_adherent_num', '=', data['bvr_struct']['bvrnumber'])]
+                 ('isr_adherent_num', '=', data['bvr_struct']['bvrnumber'])]
         partner_bank = partner_bank_model.search(domain, limit=1)
         # We will need to know if we need to create invoice line
         if partner_bank:
             # We have found the account corresponding to the
-            # bvr_adhreent_number
+            # bvr_adherent_number
             # so we can directly create the account
             data['id'] = self.id
             data['partner_id'] = partner_bank.partner_id.id
@@ -373,9 +372,9 @@ class ScanBvr(models.TransientModel):
             data['journal_id'] = self.journal_id.id
             data['bank_account'] = self.bank_account_id.id
             # We will write the adherent BVR number if we have one
-            # for the futur invoice
+            # for the future invoice
             if data['bvr_struct']['domain'] == 'bvr_adherent_num':
-                self.bank_account_id.bvr_adherent_num = \
+                self.bank_account_id.isr_adherent_num = \
                     data['bvr_struct']['bvrnumber']
             action = self._create_direct_invoice(data)
             return action

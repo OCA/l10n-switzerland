@@ -61,6 +61,7 @@ Contributors
 * Nicola Malcontenti <nicola.malcontenti@agilebg.com>
 * Alex Comba <alex.comba@agilebg.com>
 * Álvaro Estébanez López <alvaro.estebanez@braintec-group.com>
+* Maxence Groine <mgroine@fiefmanage.ch>
 
 Funders
 -------

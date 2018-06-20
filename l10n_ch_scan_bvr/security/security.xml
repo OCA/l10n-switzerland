@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Add all users to group `group_isr_adherent_num_users` -->
+    <record id="base.group_user" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('l10n_ch_base_bank.group_isr_adherent_num_users'))]"/>
+    </record>
+
+</odoo>
+

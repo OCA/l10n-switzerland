@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Author: Nicolas Bessi
 # Copyright 2012 Camptocamp SA
 # Copyright 2015 Alex Comba - Agile Business Group

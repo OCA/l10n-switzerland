@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Author: Yannick Vaucher
 # Copyright 2014 Camptocamp SA
 # Copyright 2015 Alex Comba - Agile Business Group

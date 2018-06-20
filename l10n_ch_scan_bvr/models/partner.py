@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Author: Vincent Renaville
 # Copyright 2013 Camptocamp SA
 # Copyright 2015 Alex Comba - Agile Business Group
