@@ -25,7 +25,7 @@ class PaymentSlipSettings(object):
     """Slip report setting container"""
 
     def __init__(self, report_name, **kwargs):
-        for param, value in kwargs.items():
+        for param, value in list(kwargs.items()):
             setattr(self, param, value)
         self.report_name = report_name
         self.validate()

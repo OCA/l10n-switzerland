@@ -139,7 +139,6 @@ class AccountInvoice(models.Model):
         docids = self
         act_report = self.env['ir.actions.report'].search(
             [('report_name', '=', report_name)], limit=1)
-
         return act_report.report_action(docids)
 
     @api.multi
