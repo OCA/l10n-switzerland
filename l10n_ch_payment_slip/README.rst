@@ -22,7 +22,7 @@ by financial institute into a bank statement
 
 This module also adds transaction_ref field on entries in order to manage
 reconciliation in multi payment context (unique reference needed on
-account.move.line). Many ISR can now be printed from on invoice for each
+account.move.line). Many ISR can now be printed from one invoice for each
 payment terms.
 
 
