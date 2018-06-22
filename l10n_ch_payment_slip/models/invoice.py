@@ -23,8 +23,7 @@ class AccountMoveLine(models.Model):
 
 
 class AccountInvoice(models.Model):
-    """Inherit account.invoice in order to add ISR
-    printing functionnalites. ISR is a Swiss payment vector"""
+    """Add ISR (Swiss payment vector)."""
 
     _inherit = "account.invoice"
 
