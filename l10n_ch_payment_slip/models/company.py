@@ -4,8 +4,7 @@ from odoo import models, fields
 
 
 class ResCompany(models.Model):
-    """override company in order to add ISR vertical and
-    Horizontal print delta"""
+    """Add ISR vertical/horizontal print delta and functionalities."""
     _inherit = "res.company"
 
     isr_delta_horz = fields.Float(
