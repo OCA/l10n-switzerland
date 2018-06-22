@@ -14,7 +14,7 @@ class TestV11import(test_common.TransactionCase):
                                        'test1.v11')
         with open(v11_path) as v11_file:
             importer = self.env['v11.import.wizard'].create(
-                {'v11file': base64.encodestring(v11_file.read())}
+                {'v11file': base64.encodestring(v11_file.read().encode())}
             )
             v11_file.seek(0)
             lines = v11_file.readlines()
@@ -50,7 +50,7 @@ class TestV11import(test_common.TransactionCase):
                                        'test1.v11')
         with open(v11_path) as v11_file:
             importer = importer_model.create(
-                {'v11file': base64.encodestring(v11_file.read())}
+                {'v11file': base64.encodestring(v11_file.read().encode())}
             )
         importer.import_v11()
         statement.refresh()

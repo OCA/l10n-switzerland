@@ -214,7 +214,7 @@ class V11ImporterWizard(models.TransientModel):
         if not statement_id:
             raise ValueError('The id of current satement is not in statement')
         try:
-            lines = base64.decodestring(v11file).split("\r\n")
+            lines = base64.decodestring(v11file).decode().split("\r\n")
         except ValueError as decode_err:
             raise exceptions.UserError(
                 _('V11 file can not be decoded, '
