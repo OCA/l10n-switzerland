@@ -18,7 +18,8 @@ class IrActionsReportReportlab(models.Model):
     @api.multi
     def _generate_one_slip_per_page_from_invoice_pdf(self, report_name=None):
         """Generate payment slip PDF(s) from report model.
-        If there is many pdf they are merged in memory or on
+
+        If there are many pdf they are merged in memory or on
         file system based on company settings
 
         :return: the generated PDF content
