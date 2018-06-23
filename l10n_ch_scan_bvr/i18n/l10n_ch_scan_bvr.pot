@@ -1,22 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * l10n_ch_scan_bvr
+#	* l10n_ch_scan_bvr
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-26 03:47+0000\n"
-"PO-Revision-Date: 2016-11-26 03:47+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
-"Language-Team: Swedish (https://www.transifex.com/oca/teams/23907/sv/)\n"
-"Language: sv\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: l10n_ch_scan_bvr
 #: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:55
@@ -66,7 +61,7 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: model:ir.ui.view,arch_db:l10n_ch_scan_bvr.scan_bvr_memory_form
 msgid "Cancel"
-msgstr "Avbryt"
+msgstr ""
 
 #. module: l10n_ch_scan_bvr
 #: model:ir.ui.view,arch_db:l10n_ch_scan_bvr.scan_bvr_memory_form
@@ -76,12 +71,12 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: model:ir.model.fields,field_description:l10n_ch_scan_bvr.field_scan_bvr_create_uid
 msgid "Created by"
-msgstr "Skapad av"
+msgstr ""
 
 #. module: l10n_ch_scan_bvr
 #: model:ir.model.fields,field_description:l10n_ch_scan_bvr.field_scan_bvr_create_date
 msgid "Created on"
-msgstr "Skapad den"
+msgstr ""
 
 #. module: l10n_ch_scan_bvr
 #: model:ir.model.fields,field_description:l10n_ch_scan_bvr.field_res_partner_supplier_invoice_default_product
@@ -91,12 +86,12 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: model:ir.model.fields,field_description:l10n_ch_scan_bvr.field_scan_bvr_display_name
 msgid "Display Name"
-msgstr "Visa namn"
+msgstr ""
 
 #. module: l10n_ch_scan_bvr
 #: model:ir.model.fields,field_description:l10n_ch_scan_bvr.field_scan_bvr_id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: l10n_ch_scan_bvr
 #: model:ir.ui.view,arch_db:l10n_ch_scan_bvr.scan_bvr_memory_form
@@ -111,17 +106,17 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: model:ir.model.fields,field_description:l10n_ch_scan_bvr.field_scan_bvr___last_update
 msgid "Last Modified on"
-msgstr "Senast redigerad"
+msgstr ""
 
 #. module: l10n_ch_scan_bvr
 #: model:ir.model.fields,field_description:l10n_ch_scan_bvr.field_scan_bvr_write_uid
 msgid "Last Updated by"
-msgstr "Senast uppdaterad av"
+msgstr ""
 
 #. module: l10n_ch_scan_bvr
 #: model:ir.model.fields,field_description:l10n_ch_scan_bvr.field_scan_bvr_write_date
 msgid "Last Updated on"
-msgstr "Senast uppdaterad"
+msgstr ""
 
 #. module: l10n_ch_scan_bvr
 #: selection:scan.bvr,state:0
@@ -138,7 +133,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_scan_bvr.field_scan_bvr_partner_id
 #: model:ir.ui.view,arch_db:l10n_ch_scan_bvr.scan_bvr_memory_form
 msgid "Partner"
-msgstr "Företag"
+msgstr ""
 
 #. module: l10n_ch_scan_bvr
 #: model:ir.model.fields,field_description:l10n_ch_scan_bvr.field_scan_bvr_bank_account_id
@@ -160,7 +155,7 @@ msgstr ""
 #. module: l10n_ch_scan_bvr
 #: model:ir.model.fields,field_description:l10n_ch_scan_bvr.field_scan_bvr_state
 msgid "State"
-msgstr "Status"
+msgstr ""
 
 #. module: l10n_ch_scan_bvr
 #: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:183
@@ -176,12 +171,11 @@ msgstr ""
 
 #. module: l10n_ch_scan_bvr
 #: model:ir.model.fields,help:l10n_ch_scan_bvr.field_res_partner_supplier_invoice_default_product
-msgid ""
-"Used by the scan BVR wizard. If completed, it'll generate a line with the "
-"proper amount and this specified product"
+msgid "Used by the scan BVR wizard. If completed, it'll generate a line with the proper amount and this specified product"
 msgstr ""
 
 #. module: l10n_ch_scan_bvr
 #: selection:scan.bvr,state:0
 msgid "valid"
 msgstr ""
+
