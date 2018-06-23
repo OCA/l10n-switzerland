@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * l10n_ch_base_bank
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -10,11 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2016-11-26 03:47+0000\n"
 "PO-Revision-Date: 2016-03-14 15:17+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Greek (Greece) (http://www.transifex.com/oca/OCA-l10n-switzerland-9-0/language/el_GR/)\n"
+"Language-Team: Greek (Greece) (http://www.transifex.com/oca/OCA-l10n-"
+"switzerland-9-0/language/el_GR/)\n"
+"Language: el_GR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: el_GR\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_base_bank
@@ -57,6 +58,18 @@ msgid "Bank BVR/ESR adherent number"
 msgstr ""
 
 #. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/bank.py:246
+#, python-format
+msgid "Bank/CCP Undefined"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/bank.py:244
+#, python-format
+msgid "Bank/CCP {}"
+msgstr ""
+
+#. module: l10n_ch_base_bank
 #: model:ir.ui.view,arch_db:l10n_ch_base_bank.view_bank_search
 msgid "Banks"
 msgstr ""
@@ -83,6 +96,11 @@ msgid "Code"
 msgstr ""
 
 #. module: l10n_ch_base_bank
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank_country_code
+msgid "Country code"
+msgstr ""
+
+#. module: l10n_ch_base_bank
 #: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank_code
 msgid "Internal reference"
 msgstr ""
@@ -99,7 +117,8 @@ msgid "Invoice"
 msgstr "Τιμολόγιο"
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:95
+#: code:addons/l10n_ch_base_bank/models/bank.py:116
+#: code:addons/l10n_ch_base_bank/models/bank.py:231
 #, python-format
 msgid "Please enter a correct postal number. (01-23456-1 or 12345)"
 msgstr ""
@@ -116,7 +135,14 @@ msgstr ""
 
 #. module: l10n_ch_base_bank
 #: sql_constraint:res.partner.bank:0
-msgid "The BVR adherent number must be unique !"
+msgid "The BVR adherent number/ccp pair must be unique !"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank_country_code
+msgid ""
+"The ISO country code in two chars.\n"
+"You can use this field for quick search."
 msgstr ""
 
 #. module: l10n_ch_base_bank
@@ -124,4 +150,12 @@ msgstr ""
 msgid ""
 "Your Bank adherent number to be printed in references of your BVR/ESR. This "
 "is not a postal account number."
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/bank.py:218
+#, python-format
+msgid ""
+"Your bank BVR/ESR adherent number must contain only digits!\n"
+"Please check your company bank account."
 msgstr ""
