@@ -1,24 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * l10n_ch_fds_postfinance
+#	* l10n_ch_fds_postfinance
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
-# Rudolf Schnapka <rs@techno-flex.de>, 2017
-# Renzo Meister <info@jamotion.ch>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-12 09:30+0000\n"
-"PO-Revision-Date: 2017-05-12 09:30+0000\n"
-"Last-Translator: Renzo Meister <info@jamotion.ch>, 2017\n"
-"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
-"Language: de\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_account_user_id
@@ -28,7 +21,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.fds_postfinance_file_search
 msgid "Active"
-msgstr "Aktiv"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_allow_download_file
@@ -43,7 +36,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.fds_postfinance_files_form
 msgid "Are you sure?"
-msgstr "Sind Sie sicher?"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_account_authentication_key_ids
@@ -53,7 +46,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_bank_statement_id
 msgid "Bank Statement"
-msgstr "Kontoauszug"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.actions.server,name:l10n_ch_fds_postfinance.file_cancel
@@ -62,12 +55,12 @@ msgstr "Kontoauszug"
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_key_generator_wizard_form
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
 msgid "Cancel"
-msgstr "Löschen"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: selection:fds.postfinance.file,state:0
 msgid "Cancelled"
-msgstr "Storniert"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_files_import_tobankstatments_wizard_form
@@ -90,7 +83,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_key_generator_wizard_form
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
 msgid "Close"
-msgstr "Erledigt"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_key_clone_wizard_form
@@ -112,7 +105,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_create_uid
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_create_uid
 msgid "Created by"
-msgstr "Erstellt von"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_authentication_keys_create_date
@@ -124,12 +117,12 @@ msgstr "Erstellt von"
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_create_date
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_create_date
 msgid "Created on"
-msgstr "Erstellt am"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_data
 msgid "Data"
-msgstr "Daten"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: selection:fds.files.import.tobankstatments.wizard,state:0
@@ -137,12 +130,12 @@ msgstr "Daten"
 #: selection:fds.key.generator.wizard,state:0
 #: selection:fds.key.import.wizard,state:0
 msgid "Default"
-msgstr "Vorgabe"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_directory_id
 msgid "Directory"
-msgstr "Verzeichnis"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_name
@@ -164,7 +157,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_display_name
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_display_name
 msgid "Display Name"
-msgstr "Anzeigename"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: selection:fds.files.import.tobankstatments.wizard,state:0
@@ -173,7 +166,7 @@ msgstr "Anzeigename"
 #: selection:fds.key.import.wizard,state:0
 #: selection:fds.postfinance.file,state:0
 msgid "Done"
-msgstr "Erledigt"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.actions.act_window,name:l10n_ch_fds_postfinance.action_fds_files_import_tobankstatments_wizard
@@ -188,7 +181,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: selection:fds.postfinance.file,state:0
 msgid "Draft"
-msgstr "Entwurf"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,help:l10n_ch_fds_postfinance.field_fds_postfinance_account_postfinance_email
@@ -198,7 +191,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: selection:fds.postfinance.file,state:0
 msgid "Error"
-msgstr "Fehler"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: selection:fds.files.import.tobankstatments.wizard,state:0
@@ -282,11 +275,8 @@ msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.actions.act_window,help:l10n_ch_fds_postfinance.action_fds_postfinance_account
-msgid ""
-"FDS acts as a gateway in the IT security system between Swiss Post’s "
-"Intranet and external networks. It enables\n"
-"                files and applications to be exchanged among internal and "
-"external partners of Post CH Ltd."
+msgid "FDS acts as a gateway in the IT security system between Swiss Post’s Intranet and external networks. It enables\n"
+"                files and applications to be exchanged among internal and external partners of Post CH Ltd."
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
@@ -325,7 +315,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_filename
 msgid "Filename"
-msgstr "Dateiname"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_files_import_tobankstatments_wizard_msg_exist_file
@@ -342,12 +332,12 @@ msgstr ""
 #: selection:fds.key.import.wizard,state:0
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_key_generator_wizard_form
 msgid "Generate"
-msgstr "Erzeugen"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.fds_postfinance_file_search
 msgid "Group By..."
-msgstr "Gruppiert nach..."
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_authentication_keys_id
@@ -359,12 +349,12 @@ msgstr "Gruppiert nach..."
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_id
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
 msgid "Import"
-msgstr "Import"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.actions.act_window,name:l10n_ch_fds_postfinance.action_fds_import
@@ -427,7 +417,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory___last_update
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file___last_update
 msgid "Last Modified on"
-msgstr "Zuletzt geändert am"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_authentication_keys_write_uid
@@ -439,7 +429,7 @@ msgstr "Zuletzt geändert am"
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_write_uid
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_write_uid
 msgid "Last Updated by"
-msgstr "Zuletzt geändert durch"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_authentication_keys_write_date
@@ -451,7 +441,7 @@ msgstr "Zuletzt geändert durch"
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_write_date
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_write_date
 msgid "Last Updated on"
-msgstr "Zuletzt geändert am"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_key_clone_wizard_form
@@ -463,7 +453,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_key_import_wizard_user_name
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_account_name
 msgid "Name"
-msgstr "Name"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
@@ -473,16 +463,12 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_generator_wizard.py:124
 #, python-format
-msgid ""
-"Not implemented yet, download public key and send the email to postfinance "
-"manually."
+msgid "Not implemented yet, download public key and send the email to postfinance manually."
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,help:l10n_ch_fds_postfinance.field_fds_postfinance_account_user_id
-msgid ""
-"Owner must have the rights to register new key pairs for this account. Its e-"
-"mail address will be used to send the keys of new users to PostFinance"
+msgid "Owner must have the rights to register new key pairs for this account. Its e-mail address will be used to send the keys of new users to PostFinance"
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
@@ -544,7 +530,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.fds_postfinance_files_form
 msgid "Reset to draft"
-msgstr "Auf Entwurf setzen"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_account_hostname
@@ -574,9 +560,7 @@ msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,help:l10n_ch_fds_postfinance.field_fds_postfinance_directory_excluded_files
-msgid ""
-"Semicolon (;) separated patterns. If a filename matches one of the given "
-"patterns, the file won't be downloaded from the remote directory."
+msgid "Semicolon (;) separated patterns. If a filename matches one of the given patterns, the file won't be downloaded from the remote directory."
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
@@ -593,12 +577,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_state
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.fds_postfinance_file_search
 msgid "State"
-msgstr "Status"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.actions.act_window,help:l10n_ch_fds_postfinance.action_fds_files
-msgid ""
-"This view will allow to list the content of your FDS PostFinance directory\n"
+msgid "This view will allow to list the content of your FDS PostFinance directory\n"
 "            and import selected files to Bank Statements.\n"
 "            If your FDS PostFinance don't appear, start by setup an account."
 msgstr ""
@@ -606,7 +589,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_key_clone_wizard_des_user_id
 msgid "To:"
-msgstr "An:"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: code:addons/l10n_ch_fds_postfinance/models/fds_postfinance_account.py:118
@@ -624,7 +607,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_key_generator_wizard_user_id
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_key_import_wizard_user_id
 msgid "User"
-msgstr "Benutzer"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_clone_wizard.py:82
@@ -642,7 +625,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_key_generator_wizard_form
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
 msgid "Validate"
-msgstr "Prüfen"
+msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
@@ -835,3 +818,4 @@ msgstr ""
 #: model:ir.model.fields,help:l10n_ch_fds_postfinance.field_fds_key_import_wizard_user_name
 msgid "user previously selected"
 msgstr ""
+

@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * l10n_ch_fds_postfinance
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
@@ -11,11 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2017-05-12 09:30+0000\n"
 "PO-Revision-Date: 2017-05-12 09:30+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Spanish (Costa Rica) (https://www.transifex.com/oca/teams/23907/es_CR/)\n"
+"Language-Team: Spanish (Costa Rica) (https://www.transifex.com/oca/"
+"teams/23907/es_CR/)\n"
+"Language: es_CR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es_CR\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_fds_postfinance
@@ -74,8 +75,7 @@ msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.actions.act_window,help:l10n_ch_fds_postfinance.action_fds_postfinance_account
-msgid ""
-"Click to create a new PostFinance File Delivery Services (FDS) Account."
+msgid "Click to create a new PostFinance File Delivery Services (FDS) Account."
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
@@ -282,8 +282,10 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: model:ir.actions.act_window,help:l10n_ch_fds_postfinance.action_fds_postfinance_account
 msgid ""
-"FDS acts as a gateway in the IT security system between Swiss Post’s Intranet and external networks. It enables\n"
-"                files and applications to be exchanged among internal and external partners of Post CH Ltd."
+"FDS acts as a gateway in the IT security system between Swiss Post’s "
+"Intranet and external networks. It enables\n"
+"                files and applications to be exchanged among internal and "
+"external partners of Post CH Ltd."
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
@@ -478,8 +480,8 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,help:l10n_ch_fds_postfinance.field_fds_postfinance_account_user_id
 msgid ""
-"Owner must have the rights to register new key pairs for this account. Its "
-"e-mail address will be used to send the keys of new users to PostFinance"
+"Owner must have the rights to register new key pairs for this account. Its e-"
+"mail address will be used to send the keys of new users to PostFinance"
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
