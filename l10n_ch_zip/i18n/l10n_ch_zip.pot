@@ -1,32 +1,26 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * l10n_ch_zip
+#	* l10n_ch_zip
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: l10n-switzerland (9.0)\n"
+"Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-25 02:51+0000\n"
-"PO-Revision-Date: 2016-03-14 15:17+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Spanish (Venezuela) (http://www.transifex.com/oca/OCA-l10n-"
-"switzerland-9-0/language/es_VE/)\n"
-"Language: es_VE\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_active
 msgid "Active"
-msgstr "Activo"
+msgstr ""
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_lang2
-msgid ""
-"Additional language within a postcode.\n"
+msgid "Additional language within a postcode.\n"
 "One alternative language code may appear for each postcode.\n"
 "1 = German, 2 = French, 3 = Italian, 4 = Romansh."
 msgstr ""
@@ -53,25 +47,17 @@ msgstr ""
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_sort
-msgid ""
-"Indicates if the postcode is included in the «sort file»(MAT[CH]sort): 0 = "
-"not included, 1 = included. Delivery information with addresses (only "
-"postcode and streets) are published in the sort file."
+msgid "Indicates if the postcode is included in the «sort file»(MAT[CH]sort): 0 = not included, 1 = included. Delivery information with addresses (only postcode and streets) are published in the sort file."
 msgstr ""
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_post_delivery_through
-msgid ""
-"Indicates the post office (ONRP) that delivers most of the letters to the "
-"postcode addresses. This information can be used for bag addresses too."
+msgid "Indicates the post office (ONRP) that delivers most of the letters to the postcode addresses. This information can be used for bag addresses too."
 msgstr ""
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_lang
-msgid ""
-"Language (language majority) within a postcode area. 1 = German, 2 = French, "
-"3 = Italian, 4 = Romansh. For multi-lingual localities, the main language is "
-"indicated."
+msgid "Language (language majority) within a postcode area. 1 = German, 2 = French, 3 = Italian, 4 = Romansh. For multi-lingual localities, the main language is indicated."
 msgstr ""
 
 #. module: l10n_ch_zip
@@ -86,9 +72,7 @@ msgstr ""
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_communitynumber_bfs
-msgid ""
-"Numbering used by the Federal Statistical Office for municipalities in "
-"Switzerland and the Principality of Liechtenstein"
+msgid "Numbering used by the Federal Statistical Office for municipalities in Switzerland and the Principality of Liechtenstein"
 msgstr ""
 
 #. module: l10n_ch_zip
@@ -115,3 +99,4 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_valid_from
 msgid "Valid from"
 msgstr ""
+
