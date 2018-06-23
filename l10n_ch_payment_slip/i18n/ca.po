@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * l10n_ch_payment_slip
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -10,11 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2017-04-18 13:43+0000\n"
 "PO-Revision-Date: 2017-03-30 17:01+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Catalan (http://www.transifex.com/oca/OCA-l10n-switzerland-9-0/language/ca/)\n"
+"Language-Team: Catalan (http://www.transifex.com/oca/OCA-l10n-"
+"switzerland-9-0/language/ca/)\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: ca\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_payment_slip
@@ -249,7 +250,7 @@ msgid "Payment Slips Merge Mode"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:545
+#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:547
 #, python-format
 msgid "Payment slip related to invoice %s due on the %s"
 msgstr ""
@@ -433,7 +434,8 @@ msgstr ""
 #: code:addons/l10n_ch_payment_slip/models/payment_slip.py:348
 #, python-format
 msgid ""
-"Your bank BVR number should be of the form 0X-XXX-X! Please check your company information for the invoice:\n"
+"Your bank BVR number should be of the form 0X-XXX-X! Please check your "
+"company information for the invoice:\n"
 "%s"
 msgstr ""
 
@@ -472,6 +474,6 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_bvr_delta_vert
 msgid ""
-"vert. delta in inch 1.2 will print the bvr 1.2 inch lower, negative value is"
-" possible"
+"vert. delta in inch 1.2 will print the bvr 1.2 inch lower, negative value is "
+"possible"
 msgstr ""

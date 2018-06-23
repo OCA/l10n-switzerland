@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * l10n_ch_payment_slip
-# 
+#
 # Translators:
 # Guewen Baconnier <guewen.baconnier@camptocamp.com>, 2015
 msgid ""
@@ -11,11 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2017-05-03 00:41+0000\n"
 "PO-Revision-Date: 2017-05-05 21:20+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-9-0/language/fr/)\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-9-0/"
+"language/fr/)\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: l10n_ch_payment_slip
@@ -207,7 +208,9 @@ msgstr "Dernière mise à jour le"
 #. module: l10n_ch_payment_slip
 #: selection:res.company,merge_mode:0
 msgid "Merge Slips in Memory, faster but can exhaust memory"
-msgstr "Fusionne les rapports BVR en mémoire. Cela est plus rapide mais peut épuiser la mémoire"
+msgstr ""
+"Fusionne les rapports BVR en mémoire. Cela est plus rapide mais peut épuiser "
+"la mémoire"
 
 #. module: l10n_ch_payment_slip
 #: selection:res.company,merge_mode:0
@@ -413,7 +416,8 @@ msgstr "Fichier V11"
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:221
 #, python-format
 msgid "V11 file can not be decoded, it contains invalid caracter %s"
-msgstr "Le fichier V11 ne peut pas être décodé, il contient un caractère invalide %s."
+msgstr ""
+"Le fichier V11 ne peut pas être décodé, il contient un caractère invalide %s."
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_bvr_add_vert
@@ -434,9 +438,12 @@ msgstr "Décalage vertical de la scanline en pouces"
 #: code:addons/l10n_ch_payment_slip/models/payment_slip.py:348
 #, python-format
 msgid ""
-"Your bank BVR number should be of the form 0X-XXX-X! Please check your company information for the invoice:\n"
+"Your bank BVR number should be of the form 0X-XXX-X! Please check your "
+"company information for the invoice:\n"
 "%s"
-msgstr "Le CCP doit respecter le format suivant 0X-XXX-X pour la facture\n%s"
+msgstr ""
+"Le CCP doit respecter le format suivant 0X-XXX-X pour la facture\n"
+"%s"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_bvr_delta_horz
@@ -473,6 +480,6 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_bvr_delta_vert
 msgid ""
-"vert. delta in inch 1.2 will print the bvr 1.2 inch lower, negative value is"
-" possible"
+"vert. delta in inch 1.2 will print the bvr 1.2 inch lower, negative value is "
+"possible"
 msgstr "Décalage global vertical du BVR en pouces"

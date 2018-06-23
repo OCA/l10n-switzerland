@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * l10n_ch_payment_slip
-# 
+#
 # Translators:
 # Ermin Trevisan <trevi@twanda.com>, 2016
 # Philipp Hug <philipp@hug.cx>, 2016
@@ -12,11 +12,12 @@ msgstr ""
 "POT-Creation-Date: 2017-05-03 00:41+0000\n"
 "PO-Revision-Date: 2017-04-19 11:44+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-l10n-switzerland-9-0/language/de/)\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-l10n-switzerland-9-0/"
+"language/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_payment_slip
@@ -208,12 +209,16 @@ msgstr "Zuletzt aktualisiert am"
 #. module: l10n_ch_payment_slip
 #: selection:res.company,merge_mode:0
 msgid "Merge Slips in Memory, faster but can exhaust memory"
-msgstr "Führe Belege im Speicher zusammen. Das ist schneller, kann aber zu Hauptspeicherüberlastung führen."
+msgstr ""
+"Führe Belege im Speicher zusammen. Das ist schneller, kann aber zu "
+"Hauptspeicherüberlastung führen."
 
 #. module: l10n_ch_payment_slip
 #: selection:res.company,merge_mode:0
 msgid "Merge Slips on Disk, slower but safer"
-msgstr "Führe Belege auf der Speicherplatte zusammen, das ist langsamer, aber sicherer."
+msgstr ""
+"Führe Belege auf der Speicherplatte zusammen, das ist langsamer, aber "
+"sicherer."
 
 #. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/models/payment_slip.py:342
@@ -334,7 +339,8 @@ msgstr "Einzahlungsschein Bild"
 #: code:addons/l10n_ch_payment_slip/models/invoice.py:152
 #, python-format
 msgid "The bank account {} used in invoice has no BVR/ESR adherent number."
-msgstr "Das in der Rechnung verwendete Bankkonto {} hat keine ESR-konforme Nummer."
+msgstr ""
+"Das in der Rechnung verwendete Bankkonto {} hat keine ESR-konforme Nummer."
 
 #. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/models/invoice.py:156
@@ -342,7 +348,9 @@ msgstr "Das in der Rechnung verwendete Bankkonto {} hat keine ESR-konforme Numme
 msgid ""
 "The bank account {} used in invoice needs to be a postal account or have a "
 "bank CCP."
-msgstr "Das in der Rechnung verwendete Bankkonto {} muss ein Postkonto sein oder ein Bank-Postkonto."
+msgstr ""
+"Das in der Rechnung verwendete Bankkonto {} muss ein Postkonto sein oder ein "
+"Bank-Postkonto."
 
 #. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/models/invoice.py:146
@@ -414,7 +422,8 @@ msgstr "V11 File"
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:221
 #, python-format
 msgid "V11 file can not be decoded, it contains invalid caracter %s"
-msgstr "V11-Datei kann nicht decodiert werden, sie enthält ungültige Zeichen %s"
+msgstr ""
+"V11-Datei kann nicht decodiert werden, sie enthält ungültige Zeichen %s"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_bvr_add_vert
@@ -435,7 +444,8 @@ msgstr "Vert. Position in Inch für Scan-Zeile"
 #: code:addons/l10n_ch_payment_slip/models/payment_slip.py:348
 #, python-format
 msgid ""
-"Your bank BVR number should be of the form 0X-XXX-X! Please check your company information for the invoice:\n"
+"Your bank BVR number should be of the form 0X-XXX-X! Please check your "
+"company information for the invoice:\n"
 "%s"
 msgstr "%s"
 
@@ -444,7 +454,9 @@ msgstr "%s"
 msgid ""
 "horiz. delta in inch 1.2 will print the bvr 1.2 inch lefter, negative value "
 "is possible"
-msgstr "Horiz. Differenz z.B. 1.2 inch, druckt den ESR 1.2 Inch weiter links, ein negativer Wert ist möglich"
+msgstr ""
+"Horiz. Differenz z.B. 1.2 inch, druckt den ESR 1.2 Inch weiter links, ein "
+"negativer Wert ist möglich"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_ir_actions_report_xml
@@ -474,6 +486,8 @@ msgstr "v11.import.wizard"
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_bvr_delta_vert
 msgid ""
-"vert. delta in inch 1.2 will print the bvr 1.2 inch lower, negative value is"
-" possible"
-msgstr "Vertikale Differenz z.B. 1.2 Inch, druckt den ESR 1.2 Inch weiter unten, ein negativer Wert ist möglich"
+"vert. delta in inch 1.2 will print the bvr 1.2 inch lower, negative value is "
+"possible"
+msgstr ""
+"Vertikale Differenz z.B. 1.2 Inch, druckt den ESR 1.2 Inch weiter unten, ein "
+"negativer Wert ist möglich"
