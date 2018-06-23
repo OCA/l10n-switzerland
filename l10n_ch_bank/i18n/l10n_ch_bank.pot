@@ -1,27 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * l10n_ch_bank
+#	* l10n_ch_bank
 #
-# Translators:
-# TT <toni.tanner@leegroup.ch>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-04 03:30+0000\n"
-"PO-Revision-Date: 2017-02-04 03:30+0000\n"
-"Last-Translator: TT <toni.tanner@leegroup.ch>, 2017\n"
-"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
-"Language: de\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: l10n_ch_bank
 #: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_areacode
 msgid "Area code"
-msgstr "Vorwahl"
+msgstr ""
 
 #. module: l10n_ch_bank
 #: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_bcart
@@ -31,42 +26,42 @@ msgstr ""
 #. module: l10n_ch_bank
 #: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_clearing_new
 msgid "BCNr new"
-msgstr "Neue Bankleitzahl"
+msgstr ""
 
 #. module: l10n_ch_bank
 #: model:ir.model,name:l10n_ch_bank.model_res_bank
 msgid "Bank"
-msgstr "Bank"
+msgstr ""
 
 #. module: l10n_ch_bank
 #: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_branchid
 msgid "Branch-ID"
-msgstr "Zweig-ID"
+msgstr ""
 
 #. module: l10n_ch_bank
 #: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_group
 msgid "Group"
-msgstr "Gruppe"
+msgstr ""
 
 #. module: l10n_ch_bank
 #: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_headquarter
 msgid "Headquarter"
-msgstr "Hauptquartier"
+msgstr ""
 
 #. module: l10n_ch_bank
 #: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_lang
 msgid "Language"
-msgstr "Sprache"
+msgstr ""
 
 #. module: l10n_ch_bank
 #: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_postaccount
 msgid "Post account"
-msgstr "Postkonto"
+msgstr ""
 
 #. module: l10n_ch_bank
 #: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_postaladdress
 msgid "Postal address"
-msgstr "Adresse"
+msgstr ""
 
 #. module: l10n_ch_bank
 #: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_sic
@@ -81,9 +76,10 @@ msgstr ""
 #. module: l10n_ch_bank
 #: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_valid_from
 msgid "Valid from"
-msgstr "Gültiges Formular"
+msgstr ""
 
 #. module: l10n_ch_bank
 #: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_eurosic
 msgid "euroSIC"
 msgstr ""
+
