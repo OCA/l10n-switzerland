@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * l10n_ch_import_winbiz
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
 msgid ""
@@ -11,11 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2017-07-01 05:29+0000\n"
 "PO-Revision-Date: 2017-07-01 05:29+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
-"Language-Team: Norwegian Bokmål (Norway) (https://www.transifex.com/oca/teams/23907/nb_NO/)\n"
+"Language-Team: Norwegian Bokmål (Norway) (https://www.transifex.com/oca/"
+"teams/23907/nb_NO/)\n"
+"Language: nb_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: nb_NO\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_import_winbiz
@@ -199,8 +200,8 @@ msgstr ""
 #. module: l10n_ch_import_winbiz
 #: model:ir.ui.view,arch_db:l10n_ch_import_winbiz.winbiz_move_line_importer_form
 msgid ""
-"The taxes must exist. They will be matched with WinBIZ data based on amount,"
-" scope, and whether they are included in the price"
+"The taxes must exist. They will be matched with WinBIZ data based on amount, "
+"scope, and whether they are included in the price"
 msgstr ""
 
 #. module: l10n_ch_import_winbiz
