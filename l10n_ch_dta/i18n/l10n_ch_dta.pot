@@ -1,28 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * l10n_ch_dta
+#	* l10n_ch_dta
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-08 10:38+0000\n"
-"PO-Revision-Date: 2016-09-08 10:38+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
-"Language-Team: Catalan (https://www.transifex.com/oca/teams/23907/ca/)\n"
-"Language: ca\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:248
 #, python-format
-msgid ""
-"BVR reference number is not valid \n"
+msgid "BVR reference number is not valid \n"
 "for the line: %s. \n"
 " Reference is too long for this type of beneficiary."
 msgstr ""
@@ -30,8 +24,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:237
 #, python-format
-msgid ""
-"BVR reference number is not valid \n"
+msgid "BVR reference number is not valid \n"
 "for the line: %s. \n"
 "Mod10 check failed"
 msgstr ""
@@ -39,8 +32,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:230
 #, python-format
-msgid ""
-"BVR reference number is not valid \n"
+msgid "BVR reference number is not valid \n"
 "for the line: %s. \n"
 "Reference is too long."
 msgstr ""
@@ -59,12 +51,12 @@ msgstr ""
 #. module: l10n_ch_dta
 #: model:ir.model.fields,field_description:l10n_ch_dta.field_create_dta_wizard_create_uid
 msgid "Created by"
-msgstr "Creat per"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: model:ir.model.fields,field_description:l10n_ch_dta.field_create_dta_wizard_create_date
 msgid "Created on"
-msgstr "Creat el"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: model:account.payment.method,name:l10n_ch_dta.dta_payment_method
@@ -85,7 +77,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: model:ir.model.fields,field_description:l10n_ch_dta.field_create_dta_wizard_id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:96
@@ -101,18 +93,17 @@ msgstr ""
 #. module: l10n_ch_dta
 #: model:ir.model.fields,field_description:l10n_ch_dta.field_create_dta_wizard_write_uid
 msgid "Last Updated by"
-msgstr "Darrera Actualització per"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: model:ir.model.fields,field_description:l10n_ch_dta.field_create_dta_wizard_write_date
 msgid "Last Updated on"
-msgstr "Darrera Actualització el"
+msgstr ""
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:377
 #, python-format
-msgid ""
-"No IBAN defined \n"
+msgid "No IBAN defined \n"
 " for the bank account: %s\n"
 "on line: %s"
 msgstr ""
@@ -126,16 +117,14 @@ msgstr ""
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:600
 #, python-format
-msgid ""
-"No address defined \n"
+msgid "No address defined \n"
 " for the partner: %s on line"
 msgstr ""
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:608
 #, python-format
-msgid ""
-"No bank account defined\n"
+msgid "No bank account defined\n"
 " on line: %s"
 msgstr ""
 
@@ -148,8 +137,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:612
 #, python-format
-msgid ""
-"No bank defined for the bank account: %s\n"
+msgid "No bank defined for the bank account: %s\n"
 "on the partner: %s\n"
 " on line: %s"
 msgstr ""
@@ -157,8 +145,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:629
 #, python-format
-msgid ""
-"No bank name defined\n"
+msgid "No bank name defined\n"
 " for the bank account: %s\n"
 "on the partner: %s\n"
 " on line: %s"
@@ -189,8 +176,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:153
 #, python-format
-msgid ""
-"Wrong postal number format.\n"
+msgid "Wrong postal number format.\n"
 "It must be 12-123456-9 or 12345 format \n"
 "on line %s"
 msgstr ""
@@ -198,24 +184,21 @@ msgstr ""
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:260
 #, python-format
-msgid ""
-"You must provide a BVR number\n"
+msgid "You must provide a BVR number\n"
 "for the bank account: %son line: %s"
 msgstr ""
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:222
 #, python-format
-msgid ""
-"You must provide a BVR referencenumber \n"
+msgid "You must provide a BVR referencenumber \n"
 " for the line: %s"
 msgstr ""
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:285
 #, python-format
-msgid ""
-"You must provide a Clearing Number\n"
+msgid "You must provide a Clearing Number\n"
 "for the partner bank: %s\n"
 " on line %s"
 msgstr ""
@@ -229,8 +212,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:278
 #, python-format
-msgid ""
-"You must provide a bank number \n"
+msgid "You must provide a bank number \n"
 "for the partner bank: %s\n"
 " on line: %s"
 msgstr ""
@@ -238,8 +220,7 @@ msgstr ""
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:394
 #, python-format
-msgid ""
-"You must provide the bank city or the bic code for the partner bank:\n"
+msgid "You must provide the bank city or the bic code for the partner bank:\n"
 " %s\n"
 " on line: %s"
 msgstr ""
@@ -254,3 +235,4 @@ msgstr ""
 #: model:ir.model,name:l10n_ch_dta.model_create_dta_wizard
 msgid "create.dta.wizard"
 msgstr ""
+
