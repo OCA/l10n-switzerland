@@ -10,8 +10,8 @@ class ResCompany(models.Model):
     isr_delta_horz = fields.Float(
         'ISR Horz. Delta (inch)',
         oldname='bvr_delta_horz',
-        help='horiz. delta in inch 1.2 will print the ISR 1.2 inch lefter,'
-             ' negative value is possible'
+        help='horiz. delta in inch 1.2 will print the ISR 1.2 inch on the '
+             'left, negative value is possible'
     )
 
     isr_delta_vert = fields.Float(

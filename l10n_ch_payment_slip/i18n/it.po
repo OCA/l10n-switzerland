@@ -444,7 +444,7 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_isr_delta_horz
 msgid ""
-"horiz. delta in inch 1.2 will print the ISR 1.2 inch lefter, negative value "
+"horiz. delta in inch 1.2 will print the ISR 1.2 inch on the left, negative value "
 "is possible"
 msgstr ""
 
