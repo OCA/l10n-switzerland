@@ -19,7 +19,6 @@
      "views/bank.xml",
      "views/account_invoice.xml",
      "wizard/isr_batch_print.xml",
-     "wizard/isr_import_view.xml",
      "report/report_declaration.xml",
      "security/ir.model.access.csv"
  ],
