@@ -17,9 +17,6 @@ ISR is called:
 The ISR is grenerated as an image and is availabe in a fields
 of the `l10n_ch.payment_slip` Model.
 
-This module will also allow you to import v11 files provided
-by financial institute into a bank statement
-
 This module also adds transaction_ref field on entries in order to manage
 reconciliation in multi payment context (unique reference needed on
 account.move.line). Many ISR can now be printed from one invoice for each
