@@ -2,8 +2,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 
+from odoo.models import _
 from odoo.addons.web.controllers import main as report
-from odoo.http import request, route
+from odoo.http import content_disposition, request, route
 
 
 class ReportController(report.ReportController):
@@ -12,13 +13,18 @@ class ReportController(report.ReportController):
         if converter == "reportlab_pdf":
             report_slip = request.env.ref(
                 'l10n_ch_payment_slip.one_slip_per_page_from_invoice')
+            filename = _('ISR')
             if docids:
-                docids = [int(i) for i in docids.split(',')]
-            data, format = report_slip.render(docids)
+                invoice_id = [int(i) for i in docids.split(',')][0]
+                filename = ''.join([
+                    _('ISR'), '_',
+                    '{0:05d}'.format(invoice_id), '.pdf',
+                ])
+            data, format = report_slip.render(invoice_id)
             pdfhttpheaders = [
-                    ('Content-Type', 'application/pdf'),
-                    ('Content-Disposition', 'attachment'),
-                    ('Content-Length', len(data)),
+                ('Content-Type', 'application/pdf'),
+                ('Content-Disposition', content_disposition(filename)),
+                ('Content-Length', len(data)),
             ]
             return request.make_response(data, headers=pdfhttpheaders)
         return super(ReportController, self).report_routes(
