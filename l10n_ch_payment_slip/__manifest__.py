@@ -25,5 +25,10 @@
  'demo': [],
  'auto_install': False,
  'installable': True,
- 'images': []
+ 'images': [],
+ 'external_dependencies': {
+     'python': [
+         'PyPDF2',
+         ]
+ }
  }
