@@ -3,9 +3,16 @@
 import os
 import tempfile
 import io
-import PyPDF2
+import logging
 
 from odoo import models, fields, api
+
+_logger = logging.getLogger(__name__)
+
+try:
+    import PyPDF2
+except (ImportError, IOError) as err:
+    _logger.debug(err)
 
 
 class IrActionsReportReportlab(models.Model):
