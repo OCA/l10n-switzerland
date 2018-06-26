@@ -8,7 +8,7 @@ var framework = require('web.framework');
 
 ActionManager.include({
     ir_actions_report: function (action, options){
-        var report_url;
+        var report_url = '';
 
         if (action.report_type !== 'reportlab_pdf') {
             return this._super(action, options);
