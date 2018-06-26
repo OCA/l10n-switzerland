@@ -13,12 +13,15 @@ class ReportController(report.ReportController):
         if converter == "reportlab_pdf":
             report_slip = request.env.ref(
                 'l10n_ch_payment_slip.one_slip_per_page_from_invoice')
-            filename = _('ISR')
+            filename = ''
+            invoice_id = []
             if docids:
-                invoice_id = [int(i) for i in docids.split(',')][0]
+                invoice_id = [int(i) for i in docids.split(',')]
                 filename = ''.join([
-                    _('ISR'), '_',
-                    '{0:05d}'.format(invoice_id), '.pdf',
+                    _('ISR'),
+                    '_multiple_invoices' if len(invoice_id) > 1
+                    else '{0:05d}'.format(invoice_id[0]),
+                    '.pdf'
                 ])
             data, format = report_slip.render(invoice_id)
             pdfhttpheaders = [
