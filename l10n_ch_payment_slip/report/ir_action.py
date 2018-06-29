@@ -79,7 +79,7 @@ class IrActionsReportReportlab(models.Model):
                 with open(pdfreport_path, 'rb') as pdfreport:
                     attachment = {
                         'name': save_in_attachment.get(doc.invoice_id.id),
-                        'datas': base64.encodebytes(pdfreport.read()),
+                        'datas': base64.encodestring(pdfreport.read()),
                         'datas_fname': save_in_attachment.get(
                             doc.invoice_id.id),
                         'res_model': save_in_attachment.get('model'),
@@ -137,10 +137,10 @@ class IrActionsReportReportlab(models.Model):
         return report
 
     @api.multi
-    def get_pdf(self, docids, report_name, html=None, data=None):
-        if (report_name == 'l10n_ch_payment_slip.'
-                           'one_slip_per_page_from_invoice'):
-            report = self._get_report_from_name(report_name)
+    def render_qweb_pdf(self, res_ids=None, data=None):
+        if (self.name == 'l10n_ch_payment_slip.'
+                         'one_slip_per_page_from_invoice'):
+            report = self._get_report_from_name(self.name)
             save_in_attachment = self._check_attachment_use(
                 docids, report)
 
@@ -149,7 +149,7 @@ class IrActionsReportReportlab(models.Model):
                 report_name=report_name, save_in_attachment=save_in_attachment
             )
         else:
-            return super().get_pdf(docids, report_name, html=html, data=data)
+            return super().render_qweb_pdf(res_ids, data=data)
 
     @api.multi
     def render_reportlab_pdf(self, docids, data=None):
