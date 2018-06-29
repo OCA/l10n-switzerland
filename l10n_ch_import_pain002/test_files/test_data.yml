@@ -3,7 +3,7 @@
 #-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 -
   !record {model: res.partner, id: customer, view: False}:
-    name: "pain000 test"
+    name: "pain002 test"
 #-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # Create bank
 #-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -20,7 +20,7 @@
 -
   !record {model: res.partner.bank, id: company_bank_post, view: False}:
     acc_type: 'postal'
-    acc_number: '25-9778-2'
+    acc_number: '25-9778-3'
     partner_id: base.main_partner #YourCompany
     bank_id: bank_post
 #-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -59,14 +59,14 @@
     date_invoice: !eval "'%s-12-01' %(datetime.now().year)"
     partner_bank_id: company_bank_post
     payment_mode_id: dd_pay_mode
-    move_name: 'test invoice pain000'
+    move_name: 'test invoice pain002'
 #-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # Create invoice line
 #-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 -
   !record {model: account.invoice.line, id: dd_invoice_line, view: False}:
     account_id: !ref {model: account.account, search: "[('code','=','3200')]"}
-    name: 'test invoice line pain000'
+    name: 'test invoice line pain002'
     price_unit: 600.0
     quantity: 1.0
     product_id: !ref {model: product.product, search: "[('default_code','=','E-COM09')]"}

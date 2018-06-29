@@ -13,8 +13,8 @@
         'account_bank_statement_import_camt',
         'account_payment_line_cancel',
     ],
-    'test': [
-        'res/test_data.yml',
+    'demo': [
+        'test_files/test_data.yml',
     ],
     'installable': True,
 }
