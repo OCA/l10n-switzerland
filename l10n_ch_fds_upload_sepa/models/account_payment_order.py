@@ -27,5 +27,6 @@ class AccountPaymentOrder(models.Model):
                 'res_model': upload_obj._name,
                 'res_id': upload_wizard.id,
                 'flags': {'initial_mode': 'edit'},
+                'attachment_id': attachment_id
             })
         return action

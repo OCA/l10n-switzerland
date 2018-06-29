@@ -34,6 +34,8 @@ install:
   - pip install unicodecsv
   - pip install xlrd # Excel support
   - pip install wand # for Postfinance attachments
+  - pip install pycrypto # for Postfinance FDS
+  - pip install pysftp # for Postfinance FDS
   - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
