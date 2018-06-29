@@ -4,7 +4,7 @@ from odoo import models
 from lxml import etree
 
 
-class Pain000Parser(models.AbstractModel):
+class Pain002Parser(models.AbstractModel):
     _name = 'account.pain002.parser'
 
     def _parse_detail(self, result, node, ns):

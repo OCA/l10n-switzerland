@@ -28,6 +28,7 @@
                     <Rsn>
                         <Cd>AC01</Cd>
                     </Rsn>
+                    <AddtlInf>1080407;Payment rejected.</AddtlInf>
                 </StsRsnInf>
                 <OrgnlTxRef>
                     <IntrBkSttlmDt>2017-05-16</IntrBkSttlmDt>

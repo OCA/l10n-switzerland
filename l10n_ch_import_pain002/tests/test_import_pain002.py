@@ -3,10 +3,10 @@ from odoo.tests import TransactionCase
 from odoo.modules import get_module_resource
 
 
-class TestImportPain000(TransactionCase):
+class TestImportPain002(TransactionCase):
 
-    def import_file_pain000(self):
-        test_file_path = get_module_resource('l10n_ch_import_pain000',
+    def import_file_pain002(self):
+        test_file_path = get_module_resource('l10n_ch_import_pain002',
                                              'test_files',
                                              'pain002p-rejected.xml')
 
@@ -14,18 +14,18 @@ class TestImportPain000(TransactionCase):
         data = file_to_import.read()
         data = data.replace("\n", "")
 
-        self.account_pain000.parse(data)
+        self.account_pain002.parse(data)
 
     def setUp(self):
-        super(TestImportPain000, self).setUp()
+        super(TestImportPain002, self).setUp()
 
-        self.invoice_name = 'test invoice pain000'
-        self.invoice_line_name = 'test invoice line pain000'
+        self.invoice_name = 'test invoice pain002'
+        self.invoice_line_name = 'test invoice line pain002'
         self.order_name = '2017/1013'
         self.journal_name = '2017/1013'
         self.payment_line_name = 'Ltest'
 
-        self.account_pain000 = self.env['account.pain002.parser']
+        self.account_pain002 = self.env['account.pain002.parser']
 
         # Create payment order from the invoice
         invoice = self.env['account.invoice'].search(
@@ -111,7 +111,7 @@ class TestImportPain000(TransactionCase):
         self.assertTrue(payment_line)
 
     def test_account_move_deleted_after_import(self):
-        self.import_file_pain000()
+        self.import_file_pain002()
 
         payment_order = self.env['account.payment.order'].search(
             [('name', '=', self.order_name)])
@@ -121,7 +121,7 @@ class TestImportPain000(TransactionCase):
         self.assertFalse(account_move)
 
     def test_payment_line_deleted_after_import(self):
-        self.import_file_pain000()
+        self.import_file_pain002()
         payment_line = self.env['bank.payment.line'].search(
             [('name', '=', self.payment_line_name)])
 
