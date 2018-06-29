@@ -186,9 +186,9 @@ class AccountInvoice(models.Model):
             for invoice in self:
                 with invoice.env.do_in_draft():
                     invoice.number, invoice.state = invoice.move_name, 'open'
-                    attachment = ActionReport._attachment_stored(
-                        invoice, report_payment_slip)[
-                        invoice.id]
+                    attachment = self.env.ref(
+                        'l10n_ch_payment_slip.one_slip_per_page_from_invoice'
+                    ).retrieve_attachment(invoice)
                 if attachment:
                     attachment.unlink()
         return res

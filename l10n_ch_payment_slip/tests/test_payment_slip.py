@@ -272,9 +272,9 @@ class TestPaymentSlip(test_common.TransactionCase):
         report_name = 'l10n_ch_payment_slip.one_slip_per_page_from_invoice'
         report_payment_slip = self.env[
             'ir.actions.report']._get_report_from_name(report_name)
-        bvr_action = invoice.print_bvr()
+        bvr_action = invoice.print_isr()
         # Print the report a first time
-        pdf = self.env['report'].with_context(bvr_action['context']).get_pdf(
+        pdf = self.env['ir.actions.report'].with_context(bvr_action['context']).get_pdf(
             invoice.ids, report_name)
         # Ensure no attachment was stored
         attachment = _find_invoice_attachment(self, invoice)
