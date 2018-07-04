@@ -60,7 +60,7 @@ class XMLPFParser(models.AbstractModel):
         """Add file_reference to find attached image"""
         # add file_ref to link image to bank statement line
         self.add_value_from_node(
-            ns, node, './ns:Refs//ns:InstrId', transaction, 'file_ref')
+            ns, node, './ns:Refs//ns:Prtry/ns:Ref', transaction, 'file_ref')
         super(XMLPFParser, self).parse_transaction_details(
             ns, node, transaction)
 
@@ -162,7 +162,7 @@ class XMLPFParser(models.AbstractModel):
                 return attachments
             ns = tree.tag[1:tree.tag.index("}")]    # namespace
             transaction_nodes = tree.xpath(
-                '//ns:Stmt//ns:InstrId/text()',
+                '//ns:Stmt//ns:Prtry/ns:Ref/text()',
                 namespaces={'ns': ns})
             for transaction in transaction_nodes:
                 att_name = self.file_name + '-' + transaction[:23]
