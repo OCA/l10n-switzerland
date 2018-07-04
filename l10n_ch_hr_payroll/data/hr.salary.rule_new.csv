@@ -1,10 +1,24 @@
 id,Name,account_debit,account_credit,category_id/id,code,sequence,amount_select,amount_percentage_base,amount_percentage,amount_python_compute,appears_on_payslip,condition_select,condition_range,condition_range_min,condition_range_max,condition_python
 __export__.ALL_GROSS,Montant brut (total année),,,l10n_ch_hr_payroll.INFO,ALL_GROSS,101,code,,,"result = payslip.env['hr.payslip'].browse(payslip.id).get_total_of_rule_by_code('GROSS', GROSS)",0,none,,,,result = False
-__export__.ALLOC_FAM,Allocations familiales,2270,,hr_payroll.FALW,ALLOC_FAM,230,code,,,"first_child_amount = 250
+__export__.ALLOC_FAM,Allocations familiales,2270,,l10n_ch_hr_payroll.FALW,ALLOC_FAM,199,code,,,"first_child_amount = 250
 next_chid_amount = 370
 first_student_child_amount = 330
 next_student_child_amount = 450
-result = employee.children",,,,,,
+
+amount = 0
+
+# CHILD
+amount += min(2, employee.children)*first_child_amount
+if employee.children >= 3:
+    amount += (employee.children - 2)*next_chid_amount
+
+#CHILDREN STUDENT
+amount += min(2, employee.children_student)*first_student_child_amount
+if employee.children_student >= 3:
+    amount += (employee.children_student - 2)*next_student_child_amount
+
+
+result = amount",,python,,,,result = employee.children or employee.children_student
 __export__.AVS_E,Retenue AVS,2270,,hr_payroll.DED,AVS_E,110,percentage,categories.GROSS,-5.125,,1,none,,,,result = False
 __export__.AVS_C,Contribution AVS,2270,5700,hr_payroll.COMP,AVS_C,111,percentage,categories.GROSS,-5.125,,0,none,,,,result = False
 __export__.AVS_C_E,Correction retenue AVS,2270,,hr_payroll.DED,AVS_C_E,112,code,,,"total_avs_amount = payslip.env['hr.payslip'].browse(payslip.id).get_total_of_rule_by_code('AVS_E', AVS_E)
