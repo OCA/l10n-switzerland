@@ -21,5 +21,5 @@
         'views/hr_payroll_view.xml',
         'data/hr.salary.rule.xml',
     ],
-    'installable': True
+    'installable': False
 }
