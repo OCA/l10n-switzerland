@@ -62,7 +62,7 @@
           <RmtInf>
             <Strd>
               <CdtrRefInf>
-                <Ref>${line.communication}</Ref>
+                <Ref>${line.communication.replace(' ', '')}</Ref>
               </CdtrRefInf>
             </Strd>
           </RmtInf>
