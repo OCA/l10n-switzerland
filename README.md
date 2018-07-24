@@ -32,6 +32,8 @@ Multiple payment terms on invoices are supported.
 
 It will also allow you to do the import of V11 bank statement files and do an automatic reconciliation.
 
+(replaces core l10n_ch module for ISR)
+
 
 l10n_ch_base_bank
 -----------------
