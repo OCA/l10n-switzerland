@@ -27,7 +27,9 @@
                             name="print_bvr"
                             attrs="{'invisible':['|',('sent','=',False), ('state', '!=', 'open')]}"/>
                 </xpath>
-                <xpath expr="//button[@name='isr_print']" position="replace"/>
+                <xpath expr="//button[@name='bvr_print']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
                 <field name="tax_line_ids" position="before">
                     <group colspan="4">
                         <field name="bvr_reference" colspan="4"/>
