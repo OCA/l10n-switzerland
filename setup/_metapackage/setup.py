@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-l10n-switzerland Odoo addons",
     version=version,
     install_requires=[
+        'odoo11-addon-l10n_ch_account_tags',
         'odoo11-addon-l10n_ch_bank',
         'odoo11-addon-l10n_ch_base_bank',
         'odoo11-addon-l10n_ch_import_isr_v11',
