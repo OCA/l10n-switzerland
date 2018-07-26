@@ -58,15 +58,13 @@
    <%
    line=sepa_context['line']
    %>
-   % if line.bank_id.state == 'bvr':
-          <RmtInf>
-            <Strd>
-              <CdtrRefInf>
-                <Ref>${line.communication.replace(' ', '')}</Ref>
-              </CdtrRefInf>
-            </Strd>
-          </RmtInf>
-   % endif
+  <RmtInf>
+    <Strd>
+      <CdtrRefInf>
+        <Ref>${line.communication.replace(' ', '')}</Ref>
+      </CdtrRefInf>
+    </Strd>
+  </RmtInf>
 </%block>
 
 <%def name="acc_id(bank_acc)">
