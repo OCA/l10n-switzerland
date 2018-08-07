@@ -2,52 +2,55 @@
    :target: http://www.gnu.org/licenses/agpl
    :alt: License: AGPL-3
 
-===================================
-Swiss Payment slip known as ESR/BVR
-===================================
+======================================
+Swiss inpayment slip (ISR/PVR/BVR/ESR)
+======================================
 
 
-This addon allows you to print the ESR/BVR report Using Qweb report.
+This addon allows you to print the ISR report Using Qweb report.
 
-The ESR/BVR is grenerated as an image and is availabe in a fields
+ISR is called:
+- PVR in italian
+- BVR in french
+- ESR in german
+
+The ISR is grenerated as an image and is availabe in a fields
 of the `l10n_ch.payment_slip` Model.
-
-This module will also allow you to import v11 files provided
-by financial institute into a bank statement
 
 This module also adds transaction_ref field on entries in order to manage
 reconciliation in multi payment context (unique reference needed on
-account.move.line). Many BVR can now be printed from on invoice for each
+account.move.line). Many ISR can now be printed from one invoice for each
 payment terms.
 
 
 Configuration
 =============
 
-You can adjust the print out of ESR/BVR, which depend on each printer,
-for every company in the "BVR Data" tab.
+You can adjust the print out of ISR, which depend on each printer,
+In the General Settings - Invoicing. The settings are specific for every
+company.
 
 This is especialy useful when using pre-printed paper.
-Options also allow you to print the ESR/BVR in background when using
+Options also allow you to print the ISR in background when using
 white paper and printing customer address in the page header.
 
-By default address format on ESR/BVR is
+By default address format on ISR is
 `%(street)s\n%(street2)s\n%(zip)s %(city)s`
 This can be change by setting System parameter
-`bvr.address.format`
+`isr.address.format`
 
 
 Usage
 =====
 
-The ESR/BVR is created each time an invoice is validated.
+The ISR is created each time an invoice is validated.
 To modify it you have to cancel it and reconfirm the invoice.
 
 To import v11, use the wizard provided in bank statement.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/125/10.0
+   :target: https://runbot.odoo-community.org/runbot/125/11.0
 
 Bug Tracker
 ===========

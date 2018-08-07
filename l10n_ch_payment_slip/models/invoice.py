@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# © 2012-2016 Camptocamp SA
+# Copyright 2012-2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import _, api, exceptions, fields, models
 
@@ -24,8 +23,7 @@ class AccountMoveLine(models.Model):
 
 
 class AccountInvoice(models.Model):
-    """Inherit account.invoice in order to add bvr
-    printing functionnalites. BVR is a Swiss payment vector"""
+    """Add ISR (Swiss payment vector)."""
 
     _inherit = "account.invoice"
 
@@ -38,9 +36,10 @@ class AccountInvoice(models.Model):
         'Keep empty to use the default'
     )
 
-    bvr_reference = fields.Text(
-        string='BVR ref',
-        compute='_compute_full_bvr_name',
+    isr_reference = fields.Text(
+        string='ISR ref',
+        compute='_compute_full_isr_name',
+        oldname='bvr_reference',
         store=True,
     )
 
@@ -51,7 +50,7 @@ class AccountInvoice(models.Model):
     )
 
     @api.depends('slip_ids', 'state')
-    def _compute_full_bvr_name(self):
+    def _compute_full_isr_name(self):
         """Concatenate related slip references
 
         :return: reference comma separated
@@ -61,7 +60,7 @@ class AccountInvoice(models.Model):
             if (rec.state not in ('open', 'paid') or
                     not rec.slip_ids):
                 continue
-            rec.bvr_reference = ', '.join(x.reference
+            rec.isr_reference = ', '.join(x.reference
                                           for x in rec.slip_ids
                                           if x.reference)
 
@@ -91,7 +90,7 @@ class AccountInvoice(models.Model):
         return True
 
     @api.model
-    def _action_bvr_number_move_line(self, move_line, ref):
+    def _action_isr_number_move_line(self, move_line, ref):
         """Propagate reference on move lines and analytic lines"""
         if not ref:
             return
@@ -99,48 +98,51 @@ class AccountInvoice(models.Model):
         self.env.cr.execute('UPDATE account_move_line SET transaction_ref=%s'
                             '  WHERE id=%s', (ref, move_line.id))
         self._update_ref_on_account_analytic_line(ref, move_line.move_id.id)
-        self.env.invalidate_all()
+        self.env.cache.invalidate()
 
     @api.multi
     def invoice_validate(self):
-        """ Copy the BVR/ESR reference in the transaction_ref of move lines.
+        """ Copy the ISR reference in the transaction_ref of move lines.
 
-        For customers invoices: the BVR reference is computed using
-        ``get_bvr_ref()`` on the invoice or move lines.
+        For customers invoices: the ISR reference is computed using
+        ``get_isr_ref()`` on the invoice or move lines.
 
-        For suppliers invoices: the BVR reference is stored in the reference
+        For suppliers invoices: the ISR reference is stored in the reference
         field of the invoice.
 
         """
         pay_slip = self.env['l10n_ch.payment_slip']
         for inv in self:
             if inv.type in ('in_invoice', 'in_refund'):
-                if inv.reference_type == 'bvr' and inv._check_bvr():
+                if inv.reference_type == 'isr' and inv._check_isr():
                     ref = inv.reference
                 else:
                     ref = False
                 move_lines = inv.get_payment_move_line()
                 for move_line_id in move_lines:
-                    self._action_bvr_number_move_line(move_line_id,
+                    self._action_isr_number_move_line(move_line_id,
                                                       ref)
             else:
                 for pay_slip in pay_slip._compute_pay_slips_from_invoices(inv):
                     ref = pay_slip.reference
-                    self._action_bvr_number_move_line(pay_slip.move_line_id,
+                    self._action_isr_number_move_line(pay_slip.move_line_id,
                                                       ref)
         return super(AccountInvoice, self).invoice_validate()
 
     @api.multi
-    def print_bvr(self):
-        self._check_bvr_generatable()
+    def print_isr(self):
+        self._check_isr_generatable()
         self.write({
             'sent': True
         })
-        return self.env['report'].get_action(
-            self, 'l10n_ch_payment_slip.one_slip_per_page_from_invoice')
+        report_name = 'l10n_ch_payment_slip.one_slip_per_page_from_invoice'
+        docids = self
+        act_report = self.env['ir.actions.report'].search(
+            [('report_name', '=', report_name)], limit=1)
+        return act_report.report_action(docids)
 
     @api.multi
-    def _check_bvr_generatable(self):
+    def _check_isr_generatable(self):
         errors = []
         for inv in self:
             msg = []
@@ -150,10 +152,10 @@ class AccountInvoice(models.Model):
             if not bank_acc:
                 msg.append(_('- The invoice needs a partner bank account.'))
             else:
-                if not bank_acc.bvr_adherent_num:
+                if not bank_acc.isr_adherent_num:
                     msg.append(
-                        _('- The bank account {} used in invoice has no '
-                          'BVR/ESR adherent number.'
+                        _('- The bank account {} used in invoice has no'
+                          ' ISR adherent number.'
                           ).format(bank_acc.acc_number))
                 if not (bank_acc.acc_type == 'postal' or bank_acc.ccp):
                     msg.append(
@@ -169,3 +171,24 @@ class AccountInvoice(models.Model):
                 errors.append(invoice + '\n'.join(msg))
         if errors:
             raise exceptions.UserError('\n'.join(errors))
+
+    @api.multi
+    def action_invoice_draft(self):
+        res = super().action_invoice_draft()
+        # Delete former printed payment slip
+        ActionReport = self.env['ir.actions.report']
+        try:
+            report_payment_slip = ActionReport._get_report_from_name(
+                'l10n_ch_payment_slip.one_slip_per_page_from_invoice')
+        except IndexError:
+            report_payment_slip = False
+        if report_payment_slip and report_payment_slip.attachment:
+            for invoice in self:
+                with invoice.env.do_in_draft():
+                    invoice.number, invoice.state = invoice.move_name, 'open'
+                    attachment = self.env.ref(
+                        'l10n_ch_payment_slip.one_slip_per_page_from_invoice'
+                    ).retrieve_attachment(invoice)
+                if attachment:
+                    attachment.unlink()
+        return res
