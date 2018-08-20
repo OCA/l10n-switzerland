@@ -6,9 +6,11 @@ import io
 import logging
 from contextlib import closing
 import base64
+import time
 
 from odoo import models, fields, api
 from odoo.exceptions import AccessError
+from odoo.tools.safe_eval import safe_eval
 
 
 _logger = logging.getLogger(__name__)
@@ -58,6 +60,7 @@ class IrActionsReportReportlab(models.Model):
             # Directly load the document if we already have it
             if (
                     save_in_attachment and
+                    'loaded_documents' in save_in_attachment and
                     save_in_attachment['loaded_documents'].get(
                         doc.invoice_id.id)
             ):
@@ -67,7 +70,7 @@ class IrActionsReportReportlab(models.Model):
                 pdfdocuments.append(pdfreport_path)
                 continue
 
-            with closing(os.fdopen(pdfreport_fd, 'w')) as pdfreport:
+            with closing(os.fdopen(pdfreport_fd, 'wb')) as pdfreport:
                 pdf = doc._draw_payment_slip(a4=True, b64=False,
                                              out_format='PDF',
                                              report_name=report_name)
@@ -137,29 +140,39 @@ class IrActionsReportReportlab(models.Model):
         return report
 
     @api.multi
-    def render_qweb_pdf(self, res_ids=None, data=None):
-        if (self.name == 'l10n_ch_payment_slip.'
-                         'one_slip_per_page_from_invoice'):
-            report = self._get_report_from_name(self.name)
-            save_in_attachment = self._check_attachment_use(
-                docids, report)
+    def render_reportlab_pdf(self, res_ids=None, data=None):
+        if (self.report_name != 'l10n_ch_payment_slip.'
+                'one_slip_per_page_from_invoice') or not res_ids:
+            return
 
-            reports = self.browse(docids)
-            return reports._generate_one_slip_per_page_from_invoice_pdf(
-                report_name=report_name, save_in_attachment=save_in_attachment
-            )
-        else:
-            return super().render_qweb_pdf(res_ids, data=data)
+        save_in_attachment = {}
 
-    @api.multi
-    def render_reportlab_pdf(self, docids, data=None):
-        if (self.report_name == 'l10n_ch_payment_slip.'
-                'one_slip_per_page_from_invoice'):
-            reports = self.browse(docids)
-            pdf_content = reports._generate_one_slip_per_page_from_invoice_pdf(
-                report_name=self.report_name,
-            )
-            return pdf_content, 'pdf'
+        # Dispatch the records by ones having an attachment and ones
+        # requesting a call to reportlab. (copied from render_qweb_pdf)
+        Model = self.env[self.model]
+        records = Model.browse(res_ids)
+        if self.attachment:
+            for rec in records:
+                attachment_id = self.retrieve_attachment(rec)
+                if attachment_id:
+                    save_in_attachment['loaded_documents'][
+                        rec.id] = attachment_id
+                else:
+                    attachment_name = safe_eval(
+                        self.attachment, {'object': rec, 'time': time})
+                    save_in_attachment[rec.id] = attachment_name
+        if save_in_attachment:
+            save_in_attachment['model'] = self.model
+
+        reports = self.browse(res_ids)
+        # Unlike render_qweb_pdf we don't call _post_pdf in order to
+        # add the option of using temporaty files, this is done in the
+        # following call thus we already take care of creating attachments.
+        pdf_content = reports._generate_one_slip_per_page_from_invoice_pdf(
+            report_name=self.report_name,
+            save_in_attachment=save_in_attachment,
+        )
+        return pdf_content, 'pdf'
 
     def merge_pdf_in_memory(self, docs):
         writer = PyPDF2.PdfFileWriter()
