@@ -11,8 +11,9 @@
      'account',
      'account_invoicing',
      'l10n_ch_base_bank',
-     'base_transaction_id',  # OCA/bank-statement-reconcile
+     'base_transaction_id',  # OCA/account-reconcile
      'web',
+     'l10n_ch',
  ],
  'data': [
      "views/report_xml_templates.xml",
