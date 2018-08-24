@@ -442,8 +442,9 @@ class PaymentSlip(models.Model):
 
     @api.model
     def _get_address_lines(self, com_partner):
+        config_param = self.env['ir.config_parameter'].sudo()
         isr_address_format = (
-            self.env['ir.config_parameter'].get_param('isr.address.format') or
+            config_param.get_param('isr.address.format') or
             ADDR_FORMAT)
         # use onchange to define our own temporary address format
         with self.env.do_in_onchange():
