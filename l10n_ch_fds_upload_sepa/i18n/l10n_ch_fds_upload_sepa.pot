@@ -1,24 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * l10n_ch_fds_upload_sepa
+#	* l10n_ch_fds_upload_sepa
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
-# Imre Kristoffer Eilertsen <imreeil42@gmail.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-12 09:30+0000\n"
-"PO-Revision-Date: 2017-05-12 09:30+0000\n"
-"Last-Translator: Imre Kristoffer Eilertsen <imreeil42@gmail.com>, 2017\n"
-"Language-Team: Norwegian Bokmål (Norway) (https://www.transifex.com/oca/"
-"teams/23907/nb_NO/)\n"
-"Language: nb_NO\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: l10n_ch_fds_upload_sepa
 #: model:ir.ui.view,arch_db:l10n_ch_fds_upload_sepa.wizard_pain_001_view
@@ -45,13 +38,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_fds_sepa_upload_history_create_uid
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_payment_order_upload_sepa_wizard_create_uid
 msgid "Created by"
-msgstr "Laget av"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_fds_sepa_upload_history_create_date
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_payment_order_upload_sepa_wizard_create_date
 msgid "Created on"
-msgstr "Laget den"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_fds_sepa_upload_history_directory_id
@@ -62,7 +55,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_fds_sepa_upload_history_display_name
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_payment_order_upload_sepa_wizard_display_name
 msgid "Display Name"
-msgstr "Vis navn"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_payment_order_upload_sepa_wizard_fds_account_id
@@ -87,31 +80,31 @@ msgstr ""
 #. module: l10n_ch_fds_upload_sepa
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_payment_order_upload_sepa_wizard_file_data
 msgid "Generated File"
-msgstr "Generert fil"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_fds_sepa_upload_history_id
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_payment_order_upload_sepa_wizard_id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_fds_sepa_upload_history___last_update
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_payment_order_upload_sepa_wizard___last_update
 msgid "Last Modified on"
-msgstr "Sist endret den"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_fds_sepa_upload_history_write_uid
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_payment_order_upload_sepa_wizard_write_uid
 msgid "Last Updated by"
-msgstr "Sist oppdatert av"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_fds_sepa_upload_history_write_date
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_payment_order_upload_sepa_wizard_write_date
 msgid "Last Updated on"
-msgstr "Sist oppdatert den"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: selection:fds.sepa.upload.history,state:0
@@ -122,7 +115,7 @@ msgstr ""
 #: model:ir.model,name:l10n_ch_fds_upload_sepa.model_account_payment_order
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_payment_order_upload_sepa_wizard_payment_order_id
 msgid "Payment Order"
-msgstr "Betalingsordre"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_fds_postfinance_file_payment_order
@@ -153,9 +146,7 @@ msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: model:ir.model.fields,help:l10n_ch_fds_upload_sepa.field_payment_order_upload_sepa_wizard_fds_directory_id
-msgid ""
-"Select one upload directory. Be sure to have at least one directory "
-"configured with upload access rights."
+msgid "Select one upload directory. Be sure to have at least one directory configured with upload access rights."
 msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
@@ -167,7 +158,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_fds_sepa_upload_history_state
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_sepa.field_payment_order_upload_sepa_wizard_state
 msgid "State"
-msgstr "Stat"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_sepa
 #: model:ir.model,name:l10n_ch_fds_upload_sepa.model_payment_order_upload_sepa_wizard
@@ -219,3 +210,4 @@ msgstr ""
 #: selection:payment.order.upload.sepa.wizard,state:0
 msgid "upload"
 msgstr ""
+
