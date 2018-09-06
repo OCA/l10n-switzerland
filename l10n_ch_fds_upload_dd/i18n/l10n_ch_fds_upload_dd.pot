@@ -1,25 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * l10n_ch_fds_upload_dd
+#	* l10n_ch_fds_upload_dd
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
-# danimaribeiro <danimaribeiro@gmail.com>, 2017
-# Armando Vulcano Junior <vulcano@uol.com.br>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-31 15:45+0000\n"
-"PO-Revision-Date: 2017-10-31 15:45+0000\n"
-"Last-Translator: Armando Vulcano Junior <vulcano@uol.com.br>, 2017\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
-"teams/23907/pt_BR/)\n"
-"Language: pt_BR\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: \n"
 
 #. module: l10n_ch_fds_upload_dd
 #: model:ir.ui.view,arch_db:l10n_ch_fds_upload_dd.view_post_dd_export_wizard_form_inherited
@@ -29,24 +21,24 @@ msgstr ""
 #. module: l10n_ch_fds_upload_dd
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_filename
 msgid "Attachment Name"
-msgstr "Nome anexo"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_dd
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_attachment_id
 msgid "Attachment id"
-msgstr "Id do anexo"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_dd
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_create_uid
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_create_uid
 msgid "Created by"
-msgstr "Criado por"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_dd
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_create_date
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_create_date
 msgid "Created on"
-msgstr "Criado em"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_dd
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_postfinance_account_dd_upload_ids
@@ -56,7 +48,7 @@ msgstr ""
 #. module: l10n_ch_fds_upload_dd
 #: model:ir.ui.view,arch_db:l10n_ch_fds_upload_dd.view_fds_postfinance_account_lsv_dd_form_inherited
 msgid "Direct Debit Orders"
-msgstr "Débito direto autorizado"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_dd
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_directory_id
@@ -67,7 +59,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_display_name
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_display_name
 msgid "Display Name"
-msgstr "Nome para Mostrar"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_dd
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_fds_account_id
@@ -83,7 +75,7 @@ msgstr ""
 #. module: l10n_ch_fds_upload_dd
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_filename
 msgid "Filename"
-msgstr "Nome do arquivo"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_dd
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_file_data
@@ -94,25 +86,25 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_id
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_id
 msgid "ID"
-msgstr "Identificação"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_dd
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history___last_update
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard___last_update
 msgid "Last Modified on"
-msgstr "Última atualização em"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_dd
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_write_uid
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_write_uid
 msgid "Last Updated by"
-msgstr "Última atualização por"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_dd
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_write_date
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_write_date
 msgid "Last Updated on"
-msgstr "Última atualização em"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_dd
 #: selection:fds.dd.upload.history,state:0
@@ -123,7 +115,7 @@ msgstr ""
 #: model:ir.model,name:l10n_ch_fds_upload_dd.model_account_payment_order
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_payment_order_id
 msgid "Payment Order"
-msgstr "Ordem de Pagamento"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_dd
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_payment_order_id
@@ -142,16 +134,14 @@ msgstr ""
 
 #. module: l10n_ch_fds_upload_dd
 #: model:ir.model.fields,help:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_fds_directory_id
-msgid ""
-"Select one upload directory. Be sure to have at least one directory "
-"configured with upload access rights."
+msgid "Select one upload directory. Be sure to have at least one directory configured with upload access rights."
 msgstr ""
 
 #. module: l10n_ch_fds_upload_dd
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_fds_dd_upload_history_state
 #: model:ir.model.fields,field_description:l10n_ch_fds_upload_dd.field_payment_order_upload_dd_wizard_state
 msgid "State"
-msgstr "Estado"
+msgstr ""
 
 #. module: l10n_ch_fds_upload_dd
 #: model:ir.model,name:l10n_ch_fds_upload_dd.model_payment_order_upload_dd_wizard
@@ -198,3 +188,4 @@ msgstr ""
 #: selection:payment.order.upload.dd.wizard,state:0
 msgid "upload"
 msgstr ""
+
