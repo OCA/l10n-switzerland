@@ -140,8 +140,8 @@ class TestSCT_CH(AccountingTestCase):
 
         action = self.payment_order.open2generated()
         self.assertEquals(self.payment_order.state, 'generated')
-        self.assertEquals(action['res_model'], 'ir.attachment')
-        attachment = self.attachment_model.browse(action['res_id'])
+        attachment = self.attachment_model.browse(action.get('attachment_id',
+                                                             action['res_id']))
         self.assertEquals(attachment.datas_fname[-4:], '.xml')
         xml_file = attachment.datas.decode('base64')
         xml_root = etree.fromstring(xml_file)
@@ -223,8 +223,8 @@ class TestSCT_CH(AccountingTestCase):
 
         action = self.payment_order.open2generated()
         self.assertEquals(self.payment_order.state, 'generated')
-        self.assertEquals(action['res_model'], 'ir.attachment')
-        attachment = self.attachment_model.browse(action['res_id'])
+        attachment = self.attachment_model.browse(action.get('attachment_id',
+                                                             action['res_id']))
         self.assertEquals(attachment.datas_fname[-4:], '.xml')
         xml_file = attachment.datas.decode('base64')
         xml_root = etree.fromstring(xml_file)

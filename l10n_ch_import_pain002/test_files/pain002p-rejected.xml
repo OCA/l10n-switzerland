@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="http://www.six-interbank-clearing.com/de/pain.002.001.03.ch.02.xsd"
+          xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <CstmrPmtStsRpt>
+        <GrpHdr>
+            <MsgId>KOBE170515813733</MsgId>
+            <CreDtTm>2017-05-15T07:32:00.00Z</CreDtTm>
+            <InitgPty>
+                <Id>
+                    <OrgId>
+                        <BICOrBEI>POFICHBE</BICOrBEI>
+                    </OrgId>
+                </Id>
+            </InitgPty>
+        </GrpHdr>
+        <OrgnlGrpInfAndSts>
+            <OrgnlMsgId>2017/1013</OrgnlMsgId>
+            <OrgnlMsgNmId>pain.001</OrgnlMsgNmId>
+        </OrgnlGrpInfAndSts>
+        <OrgnlPmtInfAndSts>
+            <OrgnlPmtInfId>P000030</OrgnlPmtInfId>
+            <PmtInfSts>RJCT</PmtInfSts>
+            <TxInfAndSts>
+                <OrgnlInstrId>NOTPROVIDED</OrgnlInstrId>
+                <OrgnlEndToEndId>Ltest</OrgnlEndToEndId>
+                <TxSts>RJCT</TxSts>
+                <StsRsnInf>
+                    <Rsn>
+                        <Cd>AC01</Cd>
+                    </Rsn>
+                    <AddtlInf>1080407;Payment rejected.</AddtlInf>
+                </StsRsnInf>
+                <OrgnlTxRef>
+                    <IntrBkSttlmDt>2017-05-16</IntrBkSttlmDt>
+                    <ReqdExctnDt>2017-05-15</ReqdExctnDt>
+                </OrgnlTxRef>
+            </TxInfAndSts>
+        </OrgnlPmtInfAndSts>
+    </CstmrPmtStsRpt>
+</Document>

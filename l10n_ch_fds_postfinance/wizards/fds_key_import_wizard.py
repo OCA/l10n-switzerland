@@ -1,33 +1,15 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Swiss Postfinance File Delivery Services module for Odoo
-#    Copyright (C) 2015 Compassion CH
-#    @author: Nicolas Tran
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2015 Compassion CH (Nicolas Tran)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, fields, api, exceptions
+from odoo import models, fields, api, exceptions, _
 import logging
 import base64
 
 _logger = logging.getLogger(__name__)
 
 
-class fds_key_import_wizard(models.TransientModel):
+class FdsKeyImportWizard(models.TransientModel):
     ''' FDS Postfinance keys import wizard.
         The goal is to import existing key in the database.
 
@@ -79,12 +61,12 @@ class fds_key_import_wizard(models.TransientModel):
             return self._import_key('text')
         elif self.private_key_import_file or self.public_key_import_file:
             # miss 1 import file key
-            raise exceptions.Warning('Import key file missing')
+            raise exceptions.Warning(_('Import key file missing'))
         elif self.private_key_import_txt or self.public_key_import_txt:
             # miss 1 import text key
-            raise exceptions.Warning('Import key text missing')
+            raise exceptions.Warning(_('Import key text missing'))
         else:
-            raise exceptions.Warning('Import key not found')
+            raise exceptions.Warning(_('Import key not found'))
 
     ##############################
     #          function          #
@@ -109,7 +91,7 @@ class fds_key_import_wizard(models.TransientModel):
             ppk = self.private_key_import_txt
         else:
             _logger.error("Bad implementation in fds_key_import_wizard")
-            raise exceptions.Warning('Error code. Contact your admin')
+            raise exceptions.Warning(_('Error code. Contact your admin'))
 
         keys = auth_key_obj.import_pairkey(pub, ppk)
         # save values

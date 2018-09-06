@@ -1,33 +1,15 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Swiss Postfinance File Delivery Services module for Odoo
-#    Copyright (C) 2015 Compassion CH
-#    @author: Nicolas Tran
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2015 Compassion CH (Nicolas Tran)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, fields, api, exceptions, _
+from odoo import models, fields, api, exceptions, _
 import logging
 import base64
 
 _logger = logging.getLogger(__name__)
 
 
-class fds_key_generator_wizard(models.TransientModel):
+class FdsKeyGeneratorWizard(models.TransientModel):
     ''' FDS Postfinance keys generator wizard.
         The goal is to generate and save in the database a pair key using RSA
         with the private key crypted
@@ -164,7 +146,7 @@ class fds_key_generator_wizard(models.TransientModel):
             # recup selected fds_postfiance_account id
             active_ids = self.env.context.get('active_ids')
             if len(active_ids) != 1:
-                raise exceptions.Warning('Select only one FDS account')
+                raise exceptions.Warning(_('Select only one FDS account'))
 
             values = {
                 'user_id': self.user_id.id,
@@ -185,7 +167,7 @@ class fds_key_generator_wizard(models.TransientModel):
 
         else:
             _logger.error("Bad implementation in fds_key_generator_wizard")
-            raise exceptions.Warning('Error code. Contact your admin')
+            raise exceptions.Warning(_('Error code. Contact your admin'))
 
     @api.multi
     def userkey_exist(self):
@@ -202,7 +184,7 @@ class fds_key_generator_wizard(models.TransientModel):
             ['fds_account_id', '=', current_fds_id]])
 
         if userkey_exist and self.state == 'default':
-            raise exceptions.Warning('Keys user already exist')
+            raise exceptions.Warning(_('User keys already exist'))
 
         return userkey_exist
 
