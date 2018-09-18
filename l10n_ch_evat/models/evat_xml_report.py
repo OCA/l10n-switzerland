@@ -206,12 +206,10 @@ class EvatXmlReport(models.Model):
         for code in codes_to_extract:
             taxes |= codes_balances.get(code).taxes
         rates = set(taxes.mapped('amount'))
-        # TODO Ignore taxes with negative rate or throw error ?
-        turnovers_per_rate = {r: 0 for r in rates if r > 0}
+        turnovers_per_rate = {abs(r): 0 for r in rates}
         for tax in taxes:
-            if tax.amount > 0:
-                turnovers_per_rate[tax.amount] += self._get_balance_from_tax(
-                    tax)
+            turnovers_per_rate[abs(tax.amount)] += abs(
+                self._get_balance_from_tax(tax))
         return turnovers_per_rate
 
     @api.model
