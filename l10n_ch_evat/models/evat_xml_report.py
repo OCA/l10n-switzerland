@@ -9,7 +9,7 @@ from contextlib import closing
 from lxml import etree
 from lxml.builder import ElementMaker
 from collections import namedtuple
-from datetime import datetime
+import datetime
 from odoo import models, fields, _, api
 from odoo.modules import get_module_resource
 
@@ -79,9 +79,31 @@ class EvatXmlReport(models.Model):
 
     _name = 'evat.xml.report'
 
+    def _calc_year_quarter_from_date(self, date):
+        month = date.month
+        return date.year, (month - 1) // 3 + 1
+
+    def _default_date_from(self, date=None):
+        """Return default date from (first date of previous quarter)."""
+        if date is None:
+            date = datetime.datetime.today()
+        year, quarter = self._calc_year_quarter_from_date(date)
+        if quarter == 1:
+            return datetime.date(year - 1, 10, 1)
+        else:
+            return datetime.date(year, (quarter - 1) * 3 - 2, 1)
+
+    def _default_date_to(self, date=None):
+        """Return default date to (end date of previous quarter)."""
+        if date is None:
+            date = datetime.datetime.today()
+        year, quarter = self._calc_year_quarter_from_date(date)
+        quarter_first_date = datetime.date(year, (quarter - 1) * 3 + 1, 1)
+        return quarter_first_date - datetime.timedelta(days=1)
+
     name = fields.Char(required=True)
-    start_date = fields.Date()
-    end_date = fields.Date()
+    date_from = fields.Date(default=lambda e: e._default_date_from())
+    date_to = fields.Date(default=lambda e: e._default_date_to())
     generation_date = fields.Date(readonly=True)
     target_moves = fields.Selection(TARGET_MOVES_SELECTION, required=True)
     state = fields.Selection([('draft', 'Draft'), ('generated', 'Generated')],
@@ -99,8 +121,8 @@ class EvatXmlReport(models.Model):
     @api.multi
     def _extend_domain(self, domain):
         base_domain = [
-            ('date', '>=', self.start_date),
-            ('date', '<=', self.end_date),
+            ('date', '>=', self.date_from),
+            ('date', '<=', self.date_to),
         ]
         if self.target_moves == 'posted':
             base_domain.append(('move_id.state', '=', 'posted'))
@@ -238,9 +260,10 @@ class EvatXmlReport(models.Model):
         return {
             'uid': self._get_uid(),
             'organisationName': self.company_id.name,
-            'generationTime': datetime.now().strftime('%Y-%m-%dT%H:%M:%S'),
-            'reportingPeriodFrom': self.start_date,
-            'reportingPeriodTill': self.end_date,
+            'generationTime': datetime.datetime.now().strftime(
+                '%Y-%m-%dT%H:%M:%S'),
+            'reportingPeriodFrom': self.date_from,
+            'reportingPeriodTill': self.date_to,
             'typeOfSubmission': self.type_of_submission,
             'formOfReporting': '1',  # TODO Check with FCI if right
             'businessReferenceId': 'a',  # TODO Check with FCI
