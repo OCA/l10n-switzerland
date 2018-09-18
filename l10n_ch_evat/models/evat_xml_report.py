@@ -279,13 +279,15 @@ class EvatXmlReport(models.Model):
             'reportingPeriodTill': self.date_to,
             'typeOfSubmission': self.type_of_submission,
             'formOfReporting': '1',  # 2 not supported yet
-            'businessReferenceId': 'a',  # TODO Check with FCI
+            # TODO Validate use of sequence with FCI
+            'businessReferenceId': self.env['ir.sequence'].next_by_code(
+                'l10n_ch.evat.report'),
             'sendingApplication': self._get_sendingApplication(),
         }
 
     @api.multi
     def _get_uid(self):
-        # TODO do we want a check ?
+        # TODO FCI do we want a check ?
         uidOrganisationIdCategorie = 'CHE'
         # split VAT or MWST from and get only number
         uidOrganisationId = self.company_id.vat.split(' ')[0].split('CHE-')[-1]

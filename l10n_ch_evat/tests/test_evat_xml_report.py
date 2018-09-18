@@ -3,11 +3,13 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from datetime import datetime
 from odoo import fields
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase, SavepointCase
 
 
-class TestEvatXmlReport(TransactionCase):
-
+class TestProdEvatXmlReport(TransactionCase):
+    """
+    Temporary test to run on prod db
+    """
     def test_xml_generation(self):
         evat = self.env['evat.xml.report'].create({
             'name': 'Test 2018',
@@ -17,6 +19,22 @@ class TestEvatXmlReport(TransactionCase):
             'type_of_submission': '1',
         })
         evat.generate_xml_report()
+
+
+class TestEvatXmlReport(SavepointCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super(TestEvatXmlReport, cls).setUpClass()
+        chart_template = cls.env.ref('l10n_ch.l10nch_chart_template')
+        def_purchase_tax = cls.env.ref('l10n_ch.vat_77_purchase_incl')
+        def_sale_tax = cls.env.ref('l10n_ch.vat_77_incl')
+        # Install COA
+        cls.env['account.config.settings'].create({
+            'chart_template_id': chart_template.id,
+            'purchase_tax_id': def_purchase_tax.id,
+            'sale_tax_id': def_sale_tax.id,
+        }).execute()
 
     def test_default_dates(self):
         evat = self.env['evat.xml.report']

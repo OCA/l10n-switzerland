@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="seq_l10n_ch_evat" model="ir.sequence">
+        <field name="name">E-VAT Report Business Reference Id</field>
+        <field name="code">l10n_ch.evat.report</field>
+        <field name="prefix">EVAT-</field>
+        <field name="padding">5</field>
+    </record>
+</odoo>

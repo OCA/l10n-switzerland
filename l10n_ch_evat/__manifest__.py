@@ -17,4 +17,7 @@
         "security/ir.model.access.csv",
         "views/evat_xml_report.xml",
     ],
+    "demo": [
+        "demo/demo_account.xml",
+    ],
 }

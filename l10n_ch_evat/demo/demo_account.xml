@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_partner_evat" model="res.partner">
+        <field name="name">EVAT Company</field>
+        <field eval="1" name="customer"/>
+        <field eval="1" name="supplier"/>
+        <field name="is_company">1</field>
+        <field eval="1" name="active"/>
+        <field name="street">Bundesplatz 666</field>
+        <field model="res.country" name="country_id" search="[('code','ilike','ch')]"/>
+        <field name="zip">3000</field>
+        <field name="city">Bern</field>
+        <field name="email">evat@yourcompany.ch</field>
+        <field name="phone">+41 31 234 56 78</field>
+        <field name="website">www.evatcompany.ch</field>
+    </record>
+    <record id="res_company_evat" model="res.company">
+        <field name="currency_id" ref="base.CHF"/>
+        <field name="partner_id" ref="res_partner_evat"/>
+        <field name="name">EVAT Company</field>
+        <field name="vat">CHE-101.010.101 TVA</field>
+    </record>
+</odoo>
