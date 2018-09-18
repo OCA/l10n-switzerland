@@ -12,6 +12,7 @@ from collections import namedtuple
 import datetime
 from odoo import models, fields, _, api
 from odoo.modules import get_module_resource
+from odoo.exceptions import UserError
 
 
 _logger = logging.getLogger(__name__)
@@ -51,7 +52,7 @@ CODE_TAGS = {
 }
 
 
-ELEMENT_CODE_MAPPING = {
+ELEMENT_CODE_MAPPING = {  # TODO TO REMOVE
     'totalConsideration': '200',
     'suppliesToForeignCountries': '220',
     'suppliesAbroad': '221',
@@ -70,7 +71,6 @@ ELEMENT_CODE_MAPPING = {
     # 'subsidies': '900', not existing in Odoo
     # 'donations': '910', not existing in Odoo
 }
-
 
 Code = namedtuple('Code', ['tag', 'balance', 'taxes'])
 
@@ -105,7 +105,8 @@ class EvatXmlReport(models.Model):
     date_from = fields.Date(default=lambda e: e._default_date_from())
     date_to = fields.Date(default=lambda e: e._default_date_to())
     generation_date = fields.Date(readonly=True)
-    target_moves = fields.Selection(TARGET_MOVES_SELECTION, required=True)
+    target_moves = fields.Selection(TARGET_MOVES_SELECTION, required=True,
+                                    default='posted')
     state = fields.Selection([('draft', 'Draft'), ('generated', 'Generated')],
                              default='draft', required=True)
     # TODO translate labels (Caution legal)
@@ -223,6 +224,7 @@ class EvatXmlReport(models.Model):
 
     @api.multi
     def generate_xml_report(self):
+        self._check_form_of_reporting()
         _logger.info('Generating XML E-VAT Report')
         codes_balances = self._build_codes_balances_dict()
         xml_dict = {
@@ -253,6 +255,19 @@ class EvatXmlReport(models.Model):
         # TODO Refresh the form view ?
         return res
 
+    def _check_form_of_reporting(self):
+        """Check if generation is allowed"""
+        atcb = self.env['ir.module.module'].search([
+            ('name', '=', 'account_tax_cash_basis'),
+            ('state', 'in', ('installed', 'to upgrade'))
+        ])
+        # TODO Check if we shouldn't use tax_exigible in AML Domain to avoid
+        # blocking on this...
+        if atcb:
+            raise UserError(
+                _('e-VAT generation is not supported when module '
+                  'account_tax_cash_basis is installed.'))
+
     # generalInformation section
 
     @api.multi
@@ -265,7 +280,7 @@ class EvatXmlReport(models.Model):
             'reportingPeriodFrom': self.date_from,
             'reportingPeriodTill': self.date_to,
             'typeOfSubmission': self.type_of_submission,
-            'formOfReporting': '1',  # TODO Check with FCI if right
+            'formOfReporting': '1',  # 2 not supported yet
             'businessReferenceId': 'a',  # TODO Check with FCI
             'sendingApplication': self._get_sendingApplication(),
         }
@@ -334,7 +349,7 @@ class EvatXmlReport(models.Model):
     def _get_effectiveReportingMethod(self, codes_balances):
         return {
             'grossOrNet': 1,
-            'opted': '0',  # TODO Check with FCI
+            'opted': '0',  # TODO Check with FCI (205 not in odoo)
             'suppliesPerTaxRate': self._format_turnovers(
                 self._get_turnovers_per_rate(
                     codes_balances, ['301', '302', '311', '341', '342'])),
