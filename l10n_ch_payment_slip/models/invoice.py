@@ -136,9 +136,9 @@ class AccountInvoice(models.Model):
             'sent': True
         })
         report_name = 'l10n_ch_payment_slip.one_slip_per_page_from_invoice'
-        docids = self
-        act_report = self.env['ir.actions.report'].search(
-            [('report_name', '=', report_name)], limit=1)
+        docids = self.ids
+        act_report = self.env['ir.actions.report']._get_report_from_name(
+            report_name)
         return act_report.report_action(docids)
 
     @api.multi

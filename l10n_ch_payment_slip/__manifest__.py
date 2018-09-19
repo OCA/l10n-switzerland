@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {'name': 'Switzerland - ISR inpayment slip (PVR/BVR/ESR)',
  'summary': 'Print inpayment slip from your invoices',
- 'version': '10.0.1.1.1',
+ 'version': '11.0.1.0.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',

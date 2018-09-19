@@ -10,11 +10,11 @@ ActionManager.include({
     ir_actions_report: function (action, options){
         var report_url = '';
 
-        if (action.report_type !== 'reportlab_pdf') {
+        if (action.report_type !== 'reportlab-pdf') {
             return this._super(action, options);
         }
         framework.blockUI();
-        report_url = '/report/reportlab_pdf/'.concat(
+        report_url = '/report/reportlab-pdf/'.concat(
             action.report_name,'/',
             action.context.active_ids.join(',')
         );
