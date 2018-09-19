@@ -11,7 +11,7 @@ class ISRBatchPrintWizard(models.TransientModel):
 
     invoice_ids = fields.Many2many(comodel_name='account.invoice',
                                    string='Invoices')
-    error_message = fields.Text('Errors')
+    error_message = fields.Text('Errors', readonly=True)
 
     @api.model
     def default_get(self, fields):

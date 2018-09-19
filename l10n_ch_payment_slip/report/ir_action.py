@@ -26,7 +26,7 @@ class IrActionsReportReportlab(models.Model):
 
     _inherit = 'ir.actions.report'
 
-    report_type = fields.Selection(selection_add=[('reportlab_pdf',
+    report_type = fields.Selection(selection_add=[('reportlab-pdf',
                                                    'Report renderer')])
 
     @api.multi
@@ -132,7 +132,7 @@ class IrActionsReportReportlab(models.Model):
         """
         report = super()._get_report_from_name(report_name)
         if not report:
-            report = report.search([
+            report = self.search([
                 ('report_type', '=', 'reportlab-pdf'),
                 ('report_name', '=', report_name)],
                 limit=1
