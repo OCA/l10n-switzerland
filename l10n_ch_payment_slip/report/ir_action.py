@@ -108,7 +108,7 @@ class IrActionsReportReportlab(models.Model):
                 content = self.merge_pdf_in_memory(pdfdocuments)
                 entire_report_path = False
             else:
-                entire_report_path = self._merge_pdf(pdfdocuments)
+                entire_report_path = self.merge_pdf_on_disk(pdfdocuments)
 
         if entire_report_path:
             with open(entire_report_path, 'rb') as pdfdocument:
@@ -175,16 +175,13 @@ class IrActionsReportReportlab(models.Model):
         return pdf_content, 'pdf'
 
     def merge_pdf_in_memory(self, docs):
-        writer = PyPDF2.PdfFileWriter()
+        merger = PyPDF2.PdfFileMerger()
         for doc in docs:
-            pdfreport = os.fdopen(doc, 'rb')
-            reader = PyPDF2.PdfFileReader(pdfreport)
-            for page in range(reader.getNumPages()):
-                writer.addPage(reader.getPage(page))
+            merger.append(doc)
         buff = io.BytesIO()
         try:
             # The writer close the reader file here
-            writer.write(buff)
+            merger.write(buff)
             return buff.getvalue()
         except IOError:
             raise
@@ -192,22 +189,19 @@ class IrActionsReportReportlab(models.Model):
             buff.close()
 
     def merge_pdf_on_disk(self, docs):
-        writer = PyPDF2.PdfFileWriter()
+        merger = PyPDF2.PdfFileMerger()
         for doc in docs:
-            pdfreport = os.fdopen(doc, 'rb')
-            reader = PyPDF2.PdfFileReader(pdfreport)
-            for page in range(reader.getNumPages()):
-                writer.addPage(reader.getPage(page))
-        buff = tempfile.mkstemp(
+            merger.append(doc)
+        buff, buff_path = tempfile.mkstemp(
             suffix='.pdf',
-            prefix='credit_control_slip_merged')[0]
+            prefix='credit_control_slip_merged')
         try:
             buff = os.fdopen(buff, 'w+b')
             # The writer close the reader file here
             buff.seek(0)
-            writer.write(buff)
+            merger.write(buff)
             buff.seek(0)
-            return buff.read()
+            return buff_path
         except IOError:
             raise
         finally:
