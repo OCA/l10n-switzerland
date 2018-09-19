@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Open Net Sàrl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -12,7 +11,7 @@
         'hr_contract',
         'hr_attendance'
     ],
-    'version': '10.0.1.0.0',
+    'version': '11.0.1.0.0',
     'auto_install': False,
     'demo': [],
     'website': 'http://open-net.ch',

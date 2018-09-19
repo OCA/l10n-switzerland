@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2017 Open Net Sàrl
+# Copyright 2017 Open Net Sï¿½rl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import odoo.addons.decimal_precision as dp
