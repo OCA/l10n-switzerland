@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Open Net Sàrl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -66,10 +65,11 @@ class HrPayslip(models.Model):
 
     @api.multi
     def compute_sheet(self):
+        res = {}
         for payslip in self:
             payslip._onchange_working_non_working_days()
             payslip._onchange_employee_worked_hours()
-            res = super(HrPayslip, payslip).compute_sheet()
+            res[payslip.id] = super(HrPayslip, payslip).compute_sheet()
         return res
 
 

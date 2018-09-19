@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+
 # Copyright 2017 Open Net Sàrl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -11,7 +11,7 @@ _logger = logging.getLogger(__name__)
 class TestWizard(common.TransactionCase):
 
     def setUp(self):
-        super(TestWizard, self).setUp()
+        super().setUp()
 
         self.configs = self.env['hr.payroll.config']
         self.configs_default = self.configs.create({})

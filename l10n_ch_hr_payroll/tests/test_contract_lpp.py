@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+
 # Copyright 2017 Open Net Sàrl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -13,7 +13,7 @@ _logger = logging.getLogger(__name__)
 class TestContractLPP(common.TransactionCase):
 
     def setUp(self):
-        super(TestContractLPP, self).setUp()
+        super().setUp()
 
         # Some salary rules references
         self.basic_ch = self.ref('l10n_ch_hr_payroll.BASIC_CH')

@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
             <field name="credit_note" position="after">
                 <field name="working_days" attrs="{'invisible': [('wage_type', '!=', 'month')]}" />
-                <field digits="(3, 0)" attrs="{'invisible': [('wage_type', '!=', 'month')]}"  name="working_rate"/>
+                <field digits="[3, 0]" attrs="{'invisible': [('wage_type', '!=', 'month')]}"  name="working_rate"/>
                 <field name="non_working_days" attrs="{'invisible': [('wage_type', '!=', 'month')]}" />
                 <field name="worked_hours" attrs="{'invisible': [('wage_type', '!=', 'hour')]}" widget="float_time" />
                 <field name="wage_type" attrs="{'invisible': 1}" />
