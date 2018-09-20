@@ -136,6 +136,8 @@ class IrActionsReportReportlab(models.Model):
                                   res_ids=res_ids), 'pdf'
         return pdf_content, 'pdf'
 
+    # TODO consider https://github.com/OCA/reporting-engine/issues/241
+
     def merge_pdf_in_memory(self, docs):
         merger = PyPDF2.PdfFileMerger()
         for doc in docs:
