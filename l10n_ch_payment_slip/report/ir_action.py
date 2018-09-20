@@ -30,8 +30,7 @@ class IrActionsReportReportlab(models.Model):
                                                    'Report renderer')])
 
     @api.multi
-    def _generate_one_slip_per_page_from_invoice_pdf(self, report_name=None,
-                                                     save_in_attachment=None):
+    def _generate_one_slip_per_page_from_invoice_pdf(self, res_ids):
         """Generate payment slip PDF(s) from report model.
 
         If there are many pdf they are merged in memory or on
@@ -39,13 +38,11 @@ class IrActionsReportReportlab(models.Model):
 
         :return: the generated PDF content
         """
-        if not save_in_attachment:
-            save_in_attachment = {}
         user_model = self.env['res.users']
         slip_model = self.env['l10n_ch.payment_slip']
         invoice_model = self.env['account.invoice']
         company = user_model.browse(self.env.uid).company_id
-        invoices = invoice_model.browse(self.ids)
+        invoices = invoice_model.browse(res_ids)
 
         docs = slip_model._compute_pay_slips_from_invoices(invoices)
 
@@ -57,46 +54,11 @@ class IrActionsReportReportlab(models.Model):
                 suffix='.pdf', prefix='report.tmp.')
             temporary_files.append(pdfreport_path)
 
-            # Directly load the document if we already have it
-            if (
-                    save_in_attachment and
-                    'loaded_documents' in save_in_attachment and
-                    save_in_attachment['loaded_documents'].get(
-                        doc.invoice_id.id)
-            ):
-                with closing(os.fdopen(pdfreport_fd, 'w')) as pdfreport:
-                    pdfreport.write(save_in_attachment['loaded_documents']
-                                    [doc.invoice_id.id])
-                pdfdocuments.append(pdfreport_path)
-                continue
-
             with closing(os.fdopen(pdfreport_fd, 'wb')) as pdfreport:
                 pdf = doc._draw_payment_slip(a4=True, b64=False,
                                              out_format='PDF',
-                                             report_name=report_name)
+                                             report_name=self.report_name)
                 pdfreport.write(pdf)
-
-            # Save the pdf in attachment if marked
-            if save_in_attachment and save_in_attachment.get(
-                    doc.invoice_id.id):
-                with open(pdfreport_path, 'rb') as pdfreport:
-                    attachment = {
-                        'name': save_in_attachment.get(doc.invoice_id.id),
-                        'datas': base64.encodestring(pdfreport.read()),
-                        'datas_fname': save_in_attachment.get(
-                            doc.invoice_id.id),
-                        'res_model': save_in_attachment.get('model'),
-                        'res_id': doc.invoice_id.id,
-                    }
-                    try:
-                        self.env['ir.attachment'].create(attachment)
-                    except AccessError:
-                        _logger.info("Cannot save PDF report %r as attachment",
-                                     attachment['name'])
-                    else:
-                        _logger.info(
-                            'The PDF document %s is now saved in the database',
-                            attachment['name'])
 
             pdfdocuments.append(pdfreport_path)
 
@@ -151,27 +113,31 @@ class IrActionsReportReportlab(models.Model):
         # requesting a call to reportlab. (copied from render_qweb_pdf)
         Model = self.env[self.model]
         records = Model.browse(res_ids)
+        rl_records = Model
         if self.attachment:
             for rec in records:
                 attachment_id = self.retrieve_attachment(rec)
                 if attachment_id:
-                    save_in_attachment['loaded_documents'][
-                        rec.id] = attachment_id
-                else:
-                    attachment_name = safe_eval(
-                        self.attachment, {'object': rec, 'time': time})
-                    save_in_attachment[rec.id] = attachment_name
-        if save_in_attachment:
-            save_in_attachment['model'] = self.model
+                    save_in_attachment[rec.id] = attachment_id
+                if not self.attachment_use or not attachment_id:
+                    rl_records += rec
+        else:
+            rl_records = records
+        res_ids = rl_records.ids
 
-        reports = self.browse(res_ids)
-        # Unlike render_qweb_pdf we don't call _post_pdf in order to
-        # add the option of using temporaty files, this is done in the
-        # following call thus we already take care of creating attachments.
-        pdf_content = reports._generate_one_slip_per_page_from_invoice_pdf(
-            report_name=self.report_name,
-            save_in_attachment=save_in_attachment,
-        )
+        if save_in_attachment and not res_ids:
+            _logger.info('The PDF report has been generated from attachments.')
+            return self._post_pdf(save_in_attachment), 'pdf'
+
+        pdf_content = self._generate_one_slip_per_page_from_invoice_pdf(
+            res_ids)
+        if res_ids:
+            _logger.info(
+                'The PDF report has been generated for records %s.' % (
+                    str(res_ids))
+            )
+            return self._post_pdf(save_in_attachment, pdf_content=pdf_content,
+                                  res_ids=res_ids), 'pdf'
         return pdf_content, 'pdf'
 
     def merge_pdf_in_memory(self, docs):
