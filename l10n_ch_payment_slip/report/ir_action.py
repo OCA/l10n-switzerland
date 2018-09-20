@@ -5,12 +5,8 @@ import tempfile
 import io
 import logging
 from contextlib import closing
-import base64
-import time
 
 from odoo import models, fields, api
-from odoo.exceptions import AccessError
-from odoo.tools.safe_eval import safe_eval
 
 
 _logger = logging.getLogger(__name__)
