@@ -47,8 +47,8 @@ class HrSalaryRule(models.Model):
                                 getattr(rule.company_id, rule_from)
 
     @api.multi
-    def compute_rule(self, localdict):
-        res = super(HrSalaryRule, self).compute_rule(localdict)
+    def _compute_rule(self, localdict):
+        res = super(HrSalaryRule, self)._compute_rule(localdict)
 
         for rule in self:
             if rule.amount_percentage_base:
