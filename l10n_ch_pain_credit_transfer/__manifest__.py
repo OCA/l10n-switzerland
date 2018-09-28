@@ -14,5 +14,5 @@
         "l10n_ch_base_bank",
         "account_banking_sepa_credit_transfer",
     ],
-    'installable': True,
+    'installable': False,
 }
