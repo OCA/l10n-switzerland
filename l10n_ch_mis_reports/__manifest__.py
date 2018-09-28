@@ -20,4 +20,5 @@
         'data/mis_report.xml',
         'data/mis_report_kpi.xml',
     ],
+    'installable': False,
 }

@@ -19,4 +19,5 @@
     ],
     'images': [],
     'demo': [],
+    'installable': False,
 }
