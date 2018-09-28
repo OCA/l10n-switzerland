@@ -1,7 +1,7 @@
 ![Licence](https://img.shields.io/badge/licence-AGPL--3-blue.svg)
-[![Runbot Status](https://runbot.odoo-community.org/runbot/badge/flat/125/11.0.svg)](https://runbot.odoo-community.org/runbot/repo/github-com-oca-l10n-switzerland-125)
-[![Build Status](https://travis-ci.org/OCA/l10n-switzerland.svg?branch=11.0)](https://travis-ci.org/OCA/l10n-switzerland)
-[![Coverage Status](https://coveralls.io/repos/OCA/l10n-switzerland/badge.svg?branch=11.0)](https://coveralls.io/r/OCA/l10n-switzerland?branch=11.0)
+[![Runbot Status](https://runbot.odoo-community.org/runbot/badge/flat/125/12.0.svg)](https://runbot.odoo-community.org/runbot/repo/github-com-oca-l10n-switzerland-125)
+[![Build Status](https://travis-ci.org/OCA/l10n-switzerland.svg?branch=12.0)](https://travis-ci.org/OCA/l10n-switzerland)
+[![Coverage Status](https://coveralls.io/repos/OCA/l10n-switzerland/badge.svg?branch=12.0)](https://coveralls.io/r/OCA/l10n-switzerland?branch=12.0)
 
 
 Odoo/OpenERP Swiss Localization
@@ -81,4 +81,4 @@ Allows to import accounting from WinBIZ software (www.winbiz.ch) using Excel or 
 
 Translation Status
 ------------------
-[![Transifex Status](https://www.transifex.com/projects/p/OCA-l10n-switzerland-11-0/chart/image_png)](https://www.transifex.com/projects/p/OCA-l10n-switzerland-11-0)
+[![Transifex Status](https://www.transifex.com/projects/p/OCA-l10n-switzerland-12-0/chart/image_png)](https://www.transifex.com/projects/p/OCA-l10n-switzerland-12-0)
