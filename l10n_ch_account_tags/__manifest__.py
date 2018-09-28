@@ -16,4 +16,5 @@
         'data/account_account_tag.xml',
         'data/account_account_template.xml',
     ],
+    'installable': False,
 }
