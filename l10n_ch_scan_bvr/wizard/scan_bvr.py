@@ -353,8 +353,9 @@ class ScanBvr(models.TransientModel):
             domain = [('ccp', '=', data['bvr_struct']['beneficiaire'])]
         else:
             domain = \
-                [('ccp', '=', data['bvr_struct']['beneficiaire']),
-                 ('bvr_adherent_num', '=', data['bvr_struct']['bvrnumber'])]
+                [('ccp', '=', data['bvr_struct']['beneficiaire']), '|',
+                 ('bvr_adherent_num', '=', data['bvr_struct']['bvrnumber']),
+                 ('bvr_adherent_num', '=', False)]
         partner_bank = partner_bank_model.search(domain, limit=1)
         # We will need to know if we need to create invoice line
         if partner_bank:
