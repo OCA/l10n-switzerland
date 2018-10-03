@@ -33,7 +33,7 @@
     today = thetime.strftime("%Y-%m-%d")
     %>
       <PmtInf>
-        <PmtInfId>${line.name}</PmtInfId>
+        <PmtInfId>${line.partner_id.display_name[:10].replace(' ','').upper()+line.name}</PmtInfId>
         <PmtMtd>TRF</PmtMtd>
         <BtchBookg>false</BtchBookg>
         <ReqdExctnDt>${line.date > today and line.date or today}</ReqdExctnDt>
@@ -51,7 +51,7 @@
         </DbtrAgt>
         <CdtTrfTxInf>
           <PmtId>
-            <EndToEndId>${line.name}</EndToEndId>
+            <EndToEndId>${line.communication2 or line.name}</EndToEndId>
           </PmtId>
           <%block name="PmtTpInf"/>
           <Amt>
