@@ -90,7 +90,6 @@ class PFXMLParserTest(common.TransactionCase):
             'file_ref': '20160414001203000300003',
             'amount': 50.0,
             'date': '2017-03-30',
-            'value_date': '2017-03-30',
             'ref': 'CLXPMZW000000004'
         }
         parsed_transaction = statement['transactions'][0]
@@ -111,6 +110,12 @@ class PostFinanceImportTest(common.TransactionCase):
 
     def setUp(self):
         super(PostFinanceImportTest, self).setUp()
+        self.currency = self.env.ref('base.CHF')
+        self.currency.active = True
+        company_a = self.env.ref('base.main_company')
+        self.cr.execute('UPDATE res_company '
+                        'SET currency_id = %s '
+                        'WHERE id = %s', [self.currency.id, company_a.id])
         bank = self.env['res.partner.bank'].create({
             'acc_number': 'CH0309000000250090342',
             'partner_id': self.env.ref('base.main_partner').id,
@@ -123,11 +128,6 @@ class PostFinanceImportTest(common.TransactionCase):
             'type': 'bank',
             'bank_account_id': bank.id,
         })
-        self.company_a = self.env.ref('base.main_company')
-        currency = self.env.ref('base.CHF')
-        self.company_a.write(
-            {'currency_id': currency.id}
-        )
 
     def test_postfinance_xml_import(self):
         """Test if postfinance statement is correct"""
