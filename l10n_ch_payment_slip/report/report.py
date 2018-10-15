@@ -81,6 +81,7 @@ class Report(models.Model):
                             doc.invoice_id.id),
                         'res_model': save_in_attachment.get('model'),
                         'res_id': doc.invoice_id.id,
+                        'type': 'binary'
                     }
                     try:
                         self.env['ir.attachment'].create(attachment)
