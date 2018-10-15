@@ -9,7 +9,7 @@ odoo.define('l10n_ch_bank_statement_import_postfinance.reconciliation', function
 
     // Extend the class written in module account (bank statement view)
     reconciliation.bankStatementReconciliationLine.include({
-        decorateStatementLine: function(line){
+        decorateStatementLine: function (line) {
             this._super(line);
             line.i_popover = QWeb.render("bank_statement_reconciliation_line_image", {line: line});
         },
