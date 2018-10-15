@@ -33,6 +33,9 @@ class TestDTA(AccountingTestCase):
         self.invoice_model = self.env['account.invoice']
         self.invoice_line_model = self.env['account.invoice.line']
         company = self.env.ref('base.main_company')
+        eur_currency = self.env.ref('base.EUR')
+        eur_currency.active = True
+        company.currency_id = eur_currency.id
         self.partner_agrolait = self.env.ref('base.res_partner_2')
         self.partner_c2c = self.env.ref('base.res_partner_12')
         self.account_expense = self.account_model.search([(
@@ -66,8 +69,6 @@ class TestDTA(AccountingTestCase):
             'fixed_journal_id': self.bank_journal.id,
         })
 
-        eur_currency_id = self.env.ref('base.EUR').id
-        company.currency_id = eur_currency_id
         invoice1 = self.create_invoice(
             self.partner_agrolait.id,
             'account_payment_mode.res_partner_2_iban', 42.0, 'F1341')
