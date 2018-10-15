@@ -1,19 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* l10n_ch_states
-#
+# * l10n_ch_states
+# 
+# Translators:
+# Andreas Stauder <andreas.stauder@braintec-group.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-23 13:57+0000\n"
-"PO-Revision-Date: 2015-06-23 13:57+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2016-01-11 14:20+0000\n"
+"PO-Revision-Date: 2016-05-19 11:14+0000\n"
+"Last-Translator: Andreas Stauder <andreas.stauder@braintec-group.com>\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_AI
@@ -53,12 +56,12 @@ msgstr "Kantone"
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_FR
 msgid "Fribourg"
-msgstr "Fribourg"
+msgstr "Freiburg"
 
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_GE
 msgid "Geneva"
-msgstr "Genève"
+msgstr "Genf"
 
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_DE
@@ -93,7 +96,7 @@ msgstr "Luzern"
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_NE
 msgid "Neuchâtel"
-msgstr "Neuchâtel"
+msgstr "Neuenburg"
 
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_NW
@@ -138,7 +141,7 @@ msgstr "Thurgau"
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_TI
 msgid "Ticino"
-msgstr "Ticino"
+msgstr "Tessin"
 
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_UR
@@ -148,12 +151,12 @@ msgstr "Uri"
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_VS
 msgid "Valais"
-msgstr "Valais"
+msgstr "Wallis"
 
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_VD
 msgid "Vaud"
-msgstr "Vaud"
+msgstr "Waadt"
 
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_ZG
@@ -164,4 +167,3 @@ msgstr "Zug"
 #: model:res.country.state,name:l10n_ch_states.state_ZH
 msgid "Zurich"
 msgstr "Zürich"
-

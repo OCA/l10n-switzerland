@@ -1,0 +1,631 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * l10n_ch_fds_postfinance
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: l10n-switzerland (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-11 14:20+0000\n"
+"PO-Revision-Date: 2016-01-05 16:29+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Thai (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/th/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: th\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: l10n_ch_fds_postfinance
+#: model:ir.actions.act_window,help:l10n_ch_fds_postfinance.action_fds_postfinance_account
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Click to create a new PostFinance File Delivery Services (FDS) Account.</p><p>\n"
+"                FDS acts as a gateway in the IT security system between Swiss Post’s Intranet and external networks. It enables\n"
+"                files and applications to be exchanged among internal and external partners of Post CH Ltd.</p>\n"
+"            "
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: model:ir.actions.act_window,help:l10n_ch_fds_postfinance.action_fds_files
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"            Select the FDS PostFinance that you want to connect.</p><p>\n"
+"            This view will allow to list the content of your FDS PostFinance directory\n"
+"            and import selected files to Bank Statements.\n"
+"            If your FDS PostFinance don't appear, start by setup an account.</p>\n"
+"            "
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.postfinance.account,user_id:0
+msgid "Account Owner"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: code:addons/l10n_ch_fds_postfinance/models/fds_postfinance_file.py:91
+#, python-format
+msgid "Add default journal in acount conf"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.postfinance.directory,allow_download_file:0
+msgid "Allow download file?"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.postfinance.directory,allow_upload_file:0
+msgid "Allow upload file?"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.file:l10n_ch_fds_postfinance.fds_postfinance_files_form
+msgid "Are you sure?"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.postfinance.account,authentication_key_ids:0
+msgid "Authentication keys"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.postfinance.file,bank_statement_id:0
+msgid "Bank Statement"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.files.import.tobankstatments.wizard:l10n_ch_fds_postfinance.view_fds_files_import_tobankstatments_wizard_form
+#: view:fds.key.clone.wizard:l10n_ch_fds_postfinance.view_fds_key_clone_wizard_form
+#: view:fds.key.generator.wizard:l10n_ch_fds_postfinance.view_fds_key_generator_wizard_form
+#: view:fds.key.import.wizard:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
+msgid "Cancel"
+msgstr "ยกเลิก"
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.files.import.tobankstatments.wizard:l10n_ch_fds_postfinance.view_fds_files_import_tobankstatments_wizard_form
+msgid "Click on import to download files."
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
+msgid "Clone key"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.files.import.tobankstatments.wizard:l10n_ch_fds_postfinance.view_fds_files_import_tobankstatments_wizard_form
+#: view:fds.key.clone.wizard:l10n_ch_fds_postfinance.view_fds_key_clone_wizard_form
+#: view:fds.key.generator.wizard:l10n_ch_fds_postfinance.view_fds_key_generator_wizard_form
+#: view:fds.key.import.wizard:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
+msgid "Close"
+msgstr "ปิด"
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.key.clone.wizard:l10n_ch_fds_postfinance.view_fds_key_clone_wizard_form
+msgid "Copy"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.key.clone.wizard,src_user_key_id:0
+msgid "Copy authentication key:"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.authentication.keys,create_uid:0
+#: field:fds.files.import.tobankstatments.wizard,create_uid:0
+#: field:fds.key.clone.wizard,create_uid:0
+#: field:fds.key.generator.wizard,create_uid:0
+#: field:fds.key.import.wizard,create_uid:0
+#: field:fds.postfinance.account,create_uid:0
+#: field:fds.postfinance.directory,create_uid:0
+#: field:fds.postfinance.file,create_uid:0
+msgid "Created by"
+msgstr "สร้างโดย"
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.authentication.keys,create_date:0
+#: field:fds.files.import.tobankstatments.wizard,create_date:0
+#: field:fds.key.clone.wizard,create_date:0
+#: field:fds.key.generator.wizard,create_date:0
+#: field:fds.key.import.wizard,create_date:0
+#: field:fds.postfinance.account,create_date:0
+#: field:fds.postfinance.directory,create_date:0
+#: field:fds.postfinance.file,create_date:0
+msgid "Created on"
+msgstr "สร้างเมื่อ"
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.postfinance.file,data:0
+msgid "Data"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: selection:fds.files.import.tobankstatments.wizard,state:0
+#: selection:fds.key.clone.wizard,state:0
+#: selection:fds.key.generator.wizard,state:0
+#: selection:fds.key.import.wizard,state:0
+msgid "Default"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.postfinance.file,directory_id:0
+msgid "Directory"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.postfinance.directory,name:0
+msgid "Directory name"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.postfinance.directory,still_on_server:0
+msgid "Directory still on server?"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: selection:fds.files.import.tobankstatments.wizard,state:0
+#: selection:fds.key.clone.wizard,state:0
+#: selection:fds.key.generator.wizard,state:0
+#: selection:fds.key.import.wizard,state:0
+#: selection:fds.postfinance.file,state:0
+msgid "Done"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: model:ir.actions.act_window,name:l10n_ch_fds_postfinance.action_fds_files_import_tobankstatments_wizard
+msgid "Download FDS files"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
+msgid "Download History"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: selection:fds.postfinance.file,state:0
+msgid "Draft"
+msgstr "ฉบับร่าง"
+
+#. module: l10n_ch_fds_postfinance
+#: help:fds.postfinance.account,postfinance_email:0
+msgid "E-mail of FDS Postfinance"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: selection:fds.postfinance.file,state:0
+msgid "Error"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: selection:fds.files.import.tobankstatments.wizard,state:0
+msgid "Error Permission"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: selection:fds.files.import.tobankstatments.wizard,state:0
+msgid "Error SFTP"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
+msgid "FDS Directories"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.file:l10n_ch_fds_postfinance.fds_postfinance_files_form
+msgid "FDS PostFinance file"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_file_ids_form
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
+#: model:ir.actions.act_window,name:l10n_ch_fds_postfinance.action_fds_files
+#: model:ir.ui.menu,name:l10n_ch_fds_postfinance.menu_fds_file_ids
+msgid "FDS PostFinance files"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_file_ids_tree
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_tree
+#: model:ir.actions.act_window,name:l10n_ch_fds_postfinance.action_fds_postfinance_account
+#: model:ir.ui.menu,name:l10n_ch_fds_postfinance.menu_fds_postfinance_configuration
+msgid "FDS Postfinance Account"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.postfinance.account,fds_file_ids:0
+msgid "FDS Postfinance files"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.key.clone.wizard:l10n_ch_fds_postfinance.view_fds_key_clone_wizard_form
+#: view:fds.key.generator.wizard:l10n_ch_fds_postfinance.view_fds_key_generator_wizard_form
+msgid "FDS Postfinance generate authentication keys parameters"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.key.import.wizard:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
+msgid "FDS Postfinance import authentication keys parameters"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
+msgid "FDS Users"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.authentication.keys,fds_account_id:0
+#: field:fds.postfinance.directory,fds_account_id:0
+#: field:fds.postfinance.file,fds_account_id:0
+msgid "FDS account"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.authentication.keys:l10n_ch_fds_postfinance.fds_authentication_keys_form
+msgid "FDS authentication key"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.key.generator.wizard,fds_authentication_keys_id:0
+#: field:fds.key.import.wizard,fds_authentication_keys_id:0
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
+msgid "FDS authentication keys"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
+msgid "FDS files directory"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.postfinance.account,directory_ids:0
+msgid "FDS postfinance directories"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.file:l10n_ch_fds_postfinance.fds_postfinance_files_form
+msgid "File Corrupt"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.files.import.tobankstatments.wizard,msg_import_file_fail:0
+msgid "File import failures"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.postfinance.file,filename:0
+msgid "Filename"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.files.import.tobankstatments.wizard,msg_exist_file:0
+msgid "Files already existing"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.key.generator.wizard:l10n_ch_fds_postfinance.view_fds_key_generator_wizard_form
+#: selection:fds.key.generator.wizard,state:0
+#: selection:fds.key.import.wizard,state:0
+msgid "Generate"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.authentication.keys,id:0
+#: field:fds.files.import.tobankstatments.wizard,id:0
+#: field:fds.key.clone.wizard,id:0 field:fds.key.generator.wizard,id:0
+#: field:fds.key.import.wizard,id:0 field:fds.postfinance.account,id:0
+#: field:fds.postfinance.directory,id:0 field:fds.postfinance.file,id:0
+msgid "ID"
+msgstr "รหัส"
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.key.import.wizard:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
+msgid "Import"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
+msgid "Import key"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.file:l10n_ch_fds_postfinance.fds_postfinance_files_form
+msgid "Import to Bank Statement"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.files.import.tobankstatments.wizard,msg_file_imported:0
+msgid "Imported files"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.postfinance.directory,journal_id:0
+msgid "Journal"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.authentication.keys,key_active:0
+msgid "Key active"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: code:addons/l10n_ch_fds_postfinance/models/fds_postfinance_account.py:104
+#, python-format
+msgid "Key not active"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.authentication.keys,write_uid:0
+#: field:fds.files.import.tobankstatments.wizard,write_uid:0
+#: field:fds.key.clone.wizard,write_uid:0
+#: field:fds.key.generator.wizard,write_uid:0
+#: field:fds.key.import.wizard,write_uid:0
+#: field:fds.postfinance.account,write_uid:0
+#: field:fds.postfinance.directory,write_uid:0
+#: field:fds.postfinance.file,write_uid:0
+msgid "Last Updated by"
+msgstr "อัพเดทครั้งสุดท้ายโดย"
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.authentication.keys,write_date:0
+#: field:fds.files.import.tobankstatments.wizard,write_date:0
+#: field:fds.key.clone.wizard,write_date:0
+#: field:fds.key.generator.wizard,write_date:0
+#: field:fds.key.import.wizard,write_date:0
+#: field:fds.postfinance.account,write_date:0
+#: field:fds.postfinance.directory,write_date:0
+#: field:fds.postfinance.file,write_date:0
+msgid "Last Updated on"
+msgstr "อัพเดทครั้งสุดท้ายเมื่อ"
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.key.clone.wizard:l10n_ch_fds_postfinance.view_fds_key_clone_wizard_form
+msgid "Make another copy"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.postfinance.account,name:0
+msgid "Name"
+msgstr "ชื่อ"
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
+msgid "New key"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_generator_wizard.py:142
+#, python-format
+msgid ""
+"Not implemented yet, download public key and send the email to postfinance "
+"manually."
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: help:fds.postfinance.account,user_id:0
+msgid ""
+"Owner must have the rights to register new key pairs for this account. Its "
+"e-mail address will be used to send the keys of new users to PostFinance"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.postfinance.account,postfinance_email:0
+msgid "Postfinance email"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.key.import.wizard,private_key_import_file:0
+#: field:fds.key.import.wizard,private_key_import_txt:0
+msgid "Private key"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.authentication.keys,private_key_crypted:0
+msgid "Private key crypted"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.authentication.keys,ppk_filename:0
+msgid "Private key filename"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.authentication.keys,public_key:0
+#: field:fds.key.import.wizard,public_key_import_file:0
+#: field:fds.key.import.wizard,public_key_import_txt:0
+msgid "Public key"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.authentication.keys,pub_filename:0
+msgid "Public key filename"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.file:l10n_ch_fds_postfinance.fds_postfinance_files_form
+msgid "Reset to draft"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.postfinance.account,hostname:0
+msgid "SFTP Hostname"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.postfinance.account,username:0
+msgid "SFTP Username"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.files.import.tobankstatments.wizard:l10n_ch_fds_postfinance.view_fds_files_import_tobankstatments_wizard_form
+msgid "SFTP unable to connect."
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.key.generator.wizard:l10n_ch_fds_postfinance.view_fds_key_generator_wizard_form
+#: view:fds.key.import.wizard:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
+msgid "Send to Postfinance"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.files.import.tobankstatments.wizard,state:0
+#: field:fds.key.clone.wizard,state:0 field:fds.key.generator.wizard,state:0
+#: field:fds.key.import.wizard,state:0 field:fds.postfinance.file,state:0
+msgid "State"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.key.clone.wizard,des_user_id:0
+msgid "To:"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: code:addons/l10n_ch_fds_postfinance/models/fds_postfinance_account.py:124
+#, python-format
+msgid "Unable to connect to the sftp"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
+msgid "Upload History"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: field:fds.authentication.keys,user_id:0
+#: field:fds.key.generator.wizard,user_id:0
+#: field:fds.key.import.wizard,user_id:0
+msgid "User"
+msgstr "ผู้ใช้"
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.key.generator.wizard:l10n_ch_fds_postfinance.view_fds_key_generator_wizard_form
+#: view:fds.key.import.wizard:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
+msgid "Validate"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.postfinance.account:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
+msgid "Verify directories"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: code:addons/l10n_ch_fds_postfinance/models/fds_postfinance_account.py:101
+#, python-format
+msgid "You don't have key"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.files.import.tobankstatments.wizard:l10n_ch_fds_postfinance.view_fds_files_import_tobankstatments_wizard_form
+msgid "You don't have the permission."
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: help:fds.files.import.tobankstatments.wizard,state:0
+#: help:fds.key.clone.wizard,state:0 help:fds.key.generator.wizard,state:0
+#: help:fds.key.import.wizard,state:0
+msgid "[Info] keep state of the wizard"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: help:fds.postfinance.directory,still_on_server:0
+msgid "[info] if the directory still exist on the FDS sftp"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: help:fds.key.generator.wizard,fds_authentication_keys_id:0
+#: help:fds.key.import.wizard,fds_authentication_keys_id:0
+msgid "[info] keep one recored of the model fds_authentication_key"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: help:fds.key.clone.wizard,des_user_id:0
+#: help:fds.key.generator.wizard,user_id:0
+#: help:fds.key.import.wizard,user_id:0
+msgid "assign the key to the user selected"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: help:fds.postfinance.directory,allow_download_file:0
+msgid "check it to allow download files from this FDS directory"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: help:fds.postfinance.directory,allow_upload_file:0
+msgid "check it to allow upload files to this FDS directory"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.key.clone.wizard:l10n_ch_fds_postfinance.view_fds_key_clone_wizard_form
+msgid "copy successful"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: help:fds.key.import.wizard,private_key_import_txt:0
+msgid "copy/paste your private key"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: help:fds.key.import.wizard,public_key_import_txt:0
+msgid "copy/paste your public key"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: help:fds.postfinance.directory,journal_id:0
+msgid "default journal needed to import to bank statements"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: help:fds.postfinance.account,fds_file_ids:0
+msgid "downloaded files from sftp"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.files.import.tobankstatments.wizard:l10n_ch_fds_postfinance.view_fds_files_import_tobankstatments_wizard_form
+msgid "import"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.key.import.wizard:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
+msgid "import file"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.key.import.wizard:l10n_ch_fds_postfinance.view_fds_key_import_wizard_form
+msgid "manual import"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: help:fds.postfinance.file,fds_account_id:0
+msgid "related FDS account"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: view:fds.files.import.tobankstatments.wizard:l10n_ch_fds_postfinance.view_fds_files_import_tobankstatments_wizard_form
+msgid "results"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: help:fds.key.import.wizard,private_key_import_file:0
+msgid "select one file that contain your private key"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: help:fds.key.import.wizard,public_key_import_file:0
+msgid "select one file that contain your public key"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: help:fds.key.clone.wizard,src_user_key_id:0
+msgid "select one key"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: help:fds.postfinance.file,state:0
+msgid "state of file"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: help:fds.postfinance.file,data:0
+msgid "the downloaded file data"
+msgstr ""

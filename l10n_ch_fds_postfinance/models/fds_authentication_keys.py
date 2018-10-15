@@ -26,7 +26,7 @@ from Crypto.PublicKey import RSA
 from Crypto import Random
 
 
-class fds_authentication_keys(models.Model):
+class FdsAuthenticationKeys(models.Model):
     ''' this class generate RSA key pair with the private key crypted and
         store the key in the database
     '''

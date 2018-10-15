@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-30 22:30+0000\n"
-"PO-Revision-Date: 2015-10-27 10:46+0000\n"
+"POT-Creation-Date: 2016-01-11 14:20+0000\n"
+"PO-Revision-Date: 2016-12-27 16:50+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -30,12 +30,12 @@ msgstr ""
 #. module: l10n_ch_hr_payroll
 #: model:ir.model,name:l10n_ch_hr_payroll.model_hr_contract
 msgid "Contract"
-msgstr ""
+msgstr "Contrat"
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model,name:l10n_ch_hr_payroll.model_hr_employee
 msgid "Employee"
-msgstr ""
+msgstr "Employé"
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model,name:l10n_ch_hr_payroll.model_hr_expense_expense
@@ -51,7 +51,7 @@ msgstr ""
 #. module: l10n_ch_hr_payroll
 #: field:hr.contract,holiday_rate:0
 msgid "Holiday Rate"
-msgstr ""
+msgstr "Taux de congé"
 
 #. module: l10n_ch_hr_payroll
 #: field:hr.contract,hourly_rate:0
@@ -66,7 +66,7 @@ msgstr "Facture"
 #. module: l10n_ch_hr_payroll
 #: field:hr.payslip,invoices:0
 msgid "Invoices"
-msgstr ""
+msgstr "Factures"
 
 #. module: l10n_ch_hr_payroll
 #: view:hr.payslip:l10n_ch_hr_payroll.hr_payroll_form_l10n_ch_inherit
@@ -78,17 +78,17 @@ msgstr "Écritures comptables"
 #. module: l10n_ch_hr_payroll
 #: field:hr.contract,lpp_amount:0
 msgid "LPP Amount"
-msgstr ""
+msgstr "Montant LPP"
 
 #. module: l10n_ch_hr_payroll
 #: field:hr.contract,lpp_rate:0
 msgid "LPP Rate"
-msgstr ""
+msgstr "Taux LPP"
 
 #. module: l10n_ch_hr_payroll
 #: field:hr.employee,children_student:0
 msgid "Number of Children student"
-msgstr ""
+msgstr "Nombre d'enfants aux études"
 
 #. module: l10n_ch_hr_payroll
 #: model:ir.model,name:l10n_ch_hr_payroll.model_hr_payslip

@@ -1,0 +1,194 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * l10n_ch_import_cresus
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: l10n-switzerland (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-25 12:34+0000\n"
+"PO-Revision-Date: 2017-09-23 16:22+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Dutch (Netherlands) (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/nl_NL/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: nl_NL\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: l10n_ch_import_cresus
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:64
+#, python-format
+msgid ""
+"\n"
+"                 In order to import your 'Cresus Salaires' .txt                  file you must complete the following requirements : </br>\n"
+"                * The accounts, analytical accounts used in the Cresus                 file must be previously created into Odoo  </br>\n"
+"                * The date of the entry will determine the period used                 in Odoo, so please ensure the period is created already. </br>\n"
+"                * If the Cresus file uses VAT codes (i.e: IPI),                 please make sure you have indicated this code in the                 related Odoo tax (new field).                 Warning, the Odoo tax must be 'tax included'.                 If the tax does not exist you have to create it. </br>\n"
+"                * All PL accounts must have a deferral method = 'none'                (meaning: no balance brought forward in the new fiscal year)                and all\n"
+"                 Balance sheet account must have a deferral                 method = 'balance'. </br>"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:114
+#, python-format
+msgid "%s. -- Field: %s -- rows %s to %s"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: model:ir.ui.menu,name:l10n_ch_import_cresus.menu_account_cresus_import
+msgid "Accounting Cresus Import"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:155
+#, python-format
+msgid "CSV file is malformed"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: field:account.cresus.import,company_id:0
+msgid "Company"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: field:account.cresus.import,create_uid:0
+msgid "Created by"
+msgstr "Aangemaakt door"
+
+#. module: l10n_ch_import_cresus
+#: field:account.cresus.import,create_date:0
+msgid "Created on"
+msgstr "Aangemaakt op"
+
+#. module: l10n_ch_import_cresus
+#: view:account.tax:l10n_ch_import_cresus.view_tax_form
+msgid "Cresus"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: field:account.tax,tax_cresus_mapping:0
+msgid "Cresus tax name"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: field:account.cresus.import,display_name:0
+msgid "Display Name"
+msgstr "Weergavenaam"
+
+#. module: l10n_ch_import_cresus
+#: model:ir.model,name:l10n_ch_import_cresus.model_account_cresus_import
+msgid "Export Accounting"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: field:account.cresus.import,file:0
+msgid "File"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: field:account.cresus.import,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: l10n_ch_import_cresus
+#: model:ir.actions.act_window,name:l10n_ch_import_cresus.action_account_cresus_import
+msgid "Import Move lines"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: view:account.cresus.import:l10n_ch_import_cresus.cresus_move_line_importer_form
+msgid "Import file"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: view:account.cresus.import:l10n_ch_import_cresus.cresus_move_line_importer_form
+#: field:account.cresus.import,help_html:0
+msgid "Import help"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: field:account.cresus.import,imported_move_ids:0
+msgid "Imported moves"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: field:account.cresus.import,journal_id:0
+msgid "Journal"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: field:account.cresus.import,__last_update:0
+msgid "Last Modified on"
+msgstr "Laatst gewijzigd op"
+
+#. module: l10n_ch_import_cresus
+#: field:account.cresus.import,write_uid:0
+msgid "Last Updated by"
+msgstr "Laatst bijgewerkt door"
+
+#. module: l10n_ch_import_cresus
+#: field:account.cresus.import,write_date:0
+msgid "Last Updated on"
+msgstr "Laatst bijgewerkt op"
+
+#. module: l10n_ch_import_cresus
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:177
+#, python-format
+msgid "Lines imported"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: view:account.cresus.import:l10n_ch_import_cresus.cresus_move_line_importer_form
+msgid "Move / Move lines importer"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: field:account.cresus.import,period_id:0
+msgid "Period"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:156
+#, python-format
+msgid ""
+"Please choose the correct separator \n"
+"the error detail is : \n"
+" %s"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: view:account.tax:l10n_ch_import_cresus.view_tax_form
+msgid "Refunds"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: view:account.cresus.import:l10n_ch_import_cresus.cresus_move_line_importer_form
+#: field:account.cresus.import,report:0
+msgid "Report"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: field:account.cresus.import,state:0
+msgid "State"
+msgstr "Provincie"
+
+#. module: l10n_ch_import_cresus
+#: model:ir.model,name:l10n_ch_import_cresus.model_account_tax
+msgid "Tax"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: code:addons/l10n_ch_import_cresus/wizard/l10n_ch_import_cresus.py:318
+#, python-format
+msgid ""
+"Unexpected exception.\n"
+" %s \n"
+" %s"
+msgstr ""
+
+#. module: l10n_ch_import_cresus
+#: view:account.cresus.import:l10n_ch_import_cresus.cresus_move_line_importer_form
+msgid "View imported Moves"
+msgstr ""

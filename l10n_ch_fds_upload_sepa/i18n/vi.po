@@ -1,0 +1,192 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * l10n_ch_fds_upload_sepa
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: l10n-switzerland (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-11 14:20+0000\n"
+"PO-Revision-Date: 2016-01-05 16:29+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Vietnamese (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/vi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: l10n_ch_fds_upload_sepa
+#: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
+msgid "Back"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
+msgid "Cancel"
+msgstr "Hủy bỏ"
+
+#. module: l10n_ch_fds_upload_sepa
+#: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
+msgid "Close"
+msgstr "Ðóng"
+
+#. module: l10n_ch_fds_upload_sepa
+#: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
+msgid "Confirm"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: field:fds.sepa.upload.history,create_uid:0
+msgid "Created by"
+msgstr "Được tạo bởi"
+
+#. module: l10n_ch_fds_upload_sepa
+#: field:fds.sepa.upload.history,create_date:0
+msgid "Created on"
+msgstr "Được tạo vào"
+
+#. module: l10n_ch_fds_upload_sepa
+#: selection:wizard.pain001,state:0
+msgid "Default"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: field:fds.sepa.upload.history,directory_id:0
+msgid "Directory"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: field:fds.sepa.upload.history,fds_account_id:0
+#: field:wizard.pain001,fds_account_id:0
+msgid "FDS account"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: field:wizard.pain001,fds_directory_id:0
+msgid "FDS directory"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: field:wizard.pain001,attachment_id:0
+msgid "File attachment"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: field:fds.sepa.upload.history,filename:0
+msgid "Filename"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
+msgid "Generate File"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: field:fds.sepa.upload.history,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: l10n_ch_fds_upload_sepa
+#: field:fds.sepa.upload.history,write_uid:0
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: l10n_ch_fds_upload_sepa
+#: field:fds.sepa.upload.history,write_date:0
+msgid "Last Updated on"
+msgstr "Cập nhật lần cuối vào"
+
+#. module: l10n_ch_fds_upload_sepa
+#: selection:fds.sepa.upload.history,state:0
+msgid "Not Uploaded"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: field:fds.sepa.upload.history,payment_order_id:0
+#: field:wizard.pain001,payment_order_id:0
+msgid "Payment order"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: help:fds.sepa.upload.history,directory_id:0
+msgid "Remote directory where the file was uploaded"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: help:fds.sepa.upload.history,filename:0
+msgid "Remote name of the uploaded file"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: view:fds.postfinance.account:l10n_ch_fds_upload_sepa.view_fds_postfinance_account_sepa_form_inherited
+msgid "SEPA"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
+msgid "SEPA Payment File"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: help:wizard.pain001,fds_directory_id:0
+msgid ""
+"Select one upload directory. Be sure to have at least one directory "
+"configured with upload access rights."
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: field:fds.postfinance.account,sepa_upload_ids:0
+msgid "Sepa upload ids"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: field:fds.sepa.upload.history,state:0 field:wizard.pain001,state:0
+msgid "State"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: view:fds.postfinance.account:l10n_ch_fds_upload_sepa.view_fds_postfinance_account_sepa_form_inherited
+msgid "Upload History"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: help:fds.sepa.upload.history,state:0
+msgid "Upload state of the file"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
+msgid "Upload successful"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
+msgid "Upload to FDS"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: selection:fds.sepa.upload.history,state:0
+msgid "Uploaded"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: selection:wizard.pain001,state:0
+msgid "confirm"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: selection:wizard.pain001,state:0
+msgid "finish"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: view:wizard.pain001:l10n_ch_fds_upload_sepa.wizard_pain_001_view_inherited
+msgid "pain.001 file creation"
+msgstr ""
+
+#. module: l10n_ch_fds_upload_sepa
+#: selection:wizard.pain001,state:0
+msgid "upload"
+msgstr ""

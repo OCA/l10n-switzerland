@@ -1,0 +1,115 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * l10n_ch_payment_slip_voucher
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: l10n-switzerland (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-11 14:20+0000\n"
+"PO-Revision-Date: 2016-12-27 08:26+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Korean (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/ko/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: ko\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: l10n_ch_payment_slip_voucher
+#: help:v11.import.wizard.voucher,validate_vouchers:0
+msgid "Activate this to automatically validate every created voucher"
+msgstr ""
+
+#. module: l10n_ch_payment_slip_voucher
+#: view:v11.import.wizard.voucher:l10n_ch_payment_slip_voucher.v11_import_view
+msgid "Cancel"
+msgstr "취소"
+
+#. module: l10n_ch_payment_slip_voucher
+#: field:v11.import.wizard.voucher,create_uid:0
+msgid "Created by"
+msgstr "작성자"
+
+#. module: l10n_ch_payment_slip_voucher
+#: field:v11.import.wizard.voucher,create_date:0
+msgid "Created on"
+msgstr "작성일"
+
+#. module: l10n_ch_payment_slip_voucher
+#: field:v11.import.wizard.voucher,currency_id:0
+msgid "Currency"
+msgstr ""
+
+#. module: l10n_ch_payment_slip_voucher
+#: field:v11.import.wizard.voucher,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: l10n_ch_payment_slip_voucher
+#: view:v11.import.wizard.voucher:l10n_ch_payment_slip_voucher.v11_import_view
+msgid "Import"
+msgstr ""
+
+#. module: l10n_ch_payment_slip_voucher
+#: field:v11.import.wizard.voucher,journal_id:0
+msgid "Journal"
+msgstr ""
+
+#. module: l10n_ch_payment_slip_voucher
+#: field:v11.import.wizard.voucher,write_uid:0
+msgid "Last Updated by"
+msgstr "최근 갱신한 사람"
+
+#. module: l10n_ch_payment_slip_voucher
+#: field:v11.import.wizard.voucher,write_date:0
+msgid "Last Updated on"
+msgstr "최근 갱신 날짜"
+
+#. module: l10n_ch_payment_slip_voucher
+#: code:addons/l10n_ch_payment_slip_voucher/wizard/bvr_import.py:115
+#, python-format
+msgid "Please select a file first!"
+msgstr ""
+
+#. module: l10n_ch_payment_slip_voucher
+#: field:v11.import.wizard.voucher,total_amount:0
+msgid "Total amount of V11"
+msgstr ""
+
+#. module: l10n_ch_payment_slip_voucher
+#: field:v11.import.wizard.voucher,total_cost:0
+msgid "Total cost of V11"
+msgstr ""
+
+#. module: l10n_ch_payment_slip_voucher
+#: model:ir.ui.menu,name:l10n_ch_payment_slip_voucher.menu_action_wizard_v11_import
+msgid "V11 (BVR/ESR) Import"
+msgstr ""
+
+#. module: l10n_ch_payment_slip_voucher
+#: model:ir.actions.act_window,name:l10n_ch_payment_slip_voucher.wizard_v11_import
+msgid "V11 (BVR/ESR) Import into vouchers"
+msgstr ""
+
+#. module: l10n_ch_payment_slip_voucher
+#: field:v11.import.wizard.voucher,v11file:0
+msgid "V11 File"
+msgstr ""
+
+#. module: l10n_ch_payment_slip_voucher
+#: code:addons/l10n_ch_payment_slip_voucher/wizard/bvr_import.py:121
+#, python-format
+msgid "V11 file can not be decoded, it contains invalid caracter %s"
+msgstr ""
+
+#. module: l10n_ch_payment_slip_voucher
+#: field:v11.import.wizard.voucher,validate_vouchers:0
+msgid "Validate vouchers"
+msgstr ""
+
+#. module: l10n_ch_payment_slip_voucher
+#: view:v11.import.wizard.voucher:l10n_ch_payment_slip_voucher.v11_import_view
+msgid "or"
+msgstr "또는"

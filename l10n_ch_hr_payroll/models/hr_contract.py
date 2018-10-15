@@ -85,25 +85,28 @@ order by inv.id,invl.id""" % self.employee_id.user_id.id
                 factor = moves[move_id]['exp_yes'] / moves[move_id]['tot']
             else:
                 factor = 0
-            query = """select sum(l3.debit)
-from account_move_line l1, account_move_line l2, account_move_line l3,
-account_account a
-where l1.move_id=%d
-and (
-(l1.reconcile_id=l2.reconcile_id and l2.reconcile_id != 0)
-  or
-(l1.reconcile_partial_id=l2.reconcile_partial_id
- and l2.reconcile_partial_id != 0))
-and l3.move_id=l2.move_id
-and (l3.reconcile_id=0 or l3.reconcile_id is null)
-and (l3.reconcile_partial_id=0 or l3.reconcile_partial_id is null)
-and l3.account_id=a.id
-and (l3.slip_id=0 or l3.slip_id is null)
-and a.type='liquidity'""" % move_id
-            self._cr.execute(query)
-            row = self._cr.fetchone()
-            self.reimbursement += (row[0] or 0) * factor
-            self.commission += (row[0] or 0) * (1.0 - factor)
+            if move_id:
+                query = """select sum(l3.debit)
+                    from account_move_line l1, account_move_line l2,
+                    account_move_line l3,
+                    account_account a
+                    where l1.move_id=%d
+                    and (
+                    (l1.reconcile_id=l2.reconcile_id and l2.reconcile_id != 0)
+                      or
+                    (l1.reconcile_partial_id=l2.reconcile_partial_id
+                     and l2.reconcile_partial_id != 0))
+                    and l3.move_id=l2.move_id
+                    and (l3.reconcile_id=0 or l3.reconcile_id is null)
+                    and (l3.reconcile_partial_id=0
+                         or l3.reconcile_partial_id is null)
+                    and l3.account_id=a.id
+                    and (l3.slip_id=0 or l3.slip_id is null)
+                    and a.type='liquidity'""" % move_id
+                self._cr.execute(query)
+                row = self._cr.fetchone()
+                self.reimbursement += (row[0] or 0) * factor
+                self.commission += (row[0] or 0) * (1.0 - factor)
 
     lpp_rate = fields.Float(string='LPP Rate',
                             digits=dp.get_precision('Payroll Rate'))

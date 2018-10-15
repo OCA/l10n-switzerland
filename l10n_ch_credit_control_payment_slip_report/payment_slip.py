@@ -32,13 +32,14 @@ class payment_slip(models.Model):
         :return: total amount of payment slip
         :rtype: float
         """
-        amount = super(payment_slip, self)._compute_amount_hook()
         context = self.env.context
         if context.get('__slip_credit_control_line_id'):
             cr_line_obj = self.env['credit.control.line']
             credit_line_id = context['__slip_credit_control_line_id']
             credit_line = cr_line_obj.browse(credit_line_id)
-            amount += credit_line.dunning_fees_amount
+            amount = credit_line.balance_due + credit_line.dunning_fees_amount
+        else:
+            amount = super(payment_slip, self)._compute_amount_hook()
         return amount
 
     # extend 'depends'

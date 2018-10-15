@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-30 22:30+0000\n"
-"PO-Revision-Date: 2015-10-29 18:10+0000\n"
+"POT-Creation-Date: 2017-08-19 04:50+0000\n"
+"PO-Revision-Date: 2017-08-19 04:50+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (Switzerland) (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/fr_CH/)\n"
 "MIME-Version: 1.0\n"
@@ -52,6 +52,11 @@ msgid "Debtor’s account number and address do not match."
 msgstr "Le compte postal du débiteur ne concorde pas avec l'adresse du débiteur."
 
 #. module: l10n_ch_account_statement_base_import
+#: field:account.bank.statement.line,file_name:0
+msgid "File name"
+msgstr ""
+
+#. module: l10n_ch_account_statement_base_import
 #: model:ir.model,name:l10n_ch_account_statement_base_import.model_account_bank_statement_import
 msgid "Import Bank Statement"
 msgstr "Importer Relevé"
@@ -63,7 +68,7 @@ msgid "Insufficient cover funds."
 msgstr "Pas de couverture."
 
 #. module: l10n_ch_account_statement_base_import
-#: code:addons/l10n_ch_account_statement_base_import/models/account_bank_statement_import.py:127
+#: code:addons/l10n_ch_account_statement_base_import/models/account_bank_statement_import.py:128
 #, python-format
 msgid "Nothing to import"
 msgstr "Rien à importer"
@@ -113,7 +118,7 @@ msgid "Unable to parse amount for line %s"
 msgstr "Impossible de trouver le montant de la ligne %s"
 
 #. module: l10n_ch_account_statement_base_import
-#: code:addons/l10n_ch_account_statement_base_import/models/account_bank_statement_import.py:51
+#: code:addons/l10n_ch_account_statement_base_import/models/account_bank_statement_import.py:52
 #, python-format
 msgid "View file"
 msgstr "Voir attaché"

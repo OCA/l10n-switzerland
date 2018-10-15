@@ -30,7 +30,7 @@ class AccountBankStatementLine(models.Model):
         string='Related files',
         readonly=True
     )
-    file_name = fields.Char(compute='_get_attachment')
+    file_name = fields.Char(compute='_compute_file_name')
 
     @api.model
     def get_statement_line_for_reconciliation(self, st_line):
@@ -45,12 +45,13 @@ class AccountBankStatementLine(models.Model):
                 'data-target', '#img' + str(related_file.id)]
         return data
 
-    @api.one
-    def _get_attachment(self):
-        if self.related_files:
-            self.file_name = _('View file')
-        else:
-            self.file_name = ''
+    @api.multi
+    def _compute_file_name(self):
+        for line in self:
+            if line.related_files:
+                line.file_name = _('View file')
+            else:
+                line.file_name = ''
 
     @api.multi
     def download_attachment(self):
@@ -72,7 +73,7 @@ class AccountBankStatementLine(models.Model):
         return True
 
 
-class account_bank_statement_import(models.TransientModel):
+class AccountBankStatementImport(models.TransientModel):
 
     _inherit = 'account.bank.statement.import'
 
@@ -127,7 +128,7 @@ class account_bank_statement_import(models.TransientModel):
                     raise exceptions.Warning(_('Nothing to import'))
                 return currency_code, account_number, statements
         else:
-            return super(account_bank_statement_import, self)._parse_file(
+            return super(AccountBankStatementImport, self)._parse_file(
                 data_file)
 
     @api.model
@@ -154,7 +155,7 @@ class account_bank_statement_import(models.TransientModel):
         attachments = list(stmt_vals.pop('attachments', list()))
 
         statement_id, notifs = super(
-            account_bank_statement_import,
+            AccountBankStatementImport,
             self
         )._create_bank_statement(
             stmt_vals
@@ -181,3 +182,17 @@ class account_bank_statement_import(models.TransientModel):
                 att = self.env['ir.attachment'].create(att_data)
 
         return statement_id, notifs
+
+    @api.model
+    def _find_bank_account_id(self, account_number):
+        """ Override to find Postfinance account Given IBAN number """
+        bank_account_id = super(AccountBankStatementImport, self).\
+            _find_bank_account_id(account_number)
+        if not bank_account_id and account_number and len(
+                account_number) == 21:
+            pf_formated_acc_number = account_number[9:].lstrip('0')
+            bank_account = self.env['res.partner.bank'].search(
+                [('sanitized_acc_number', '=', pf_formated_acc_number)],
+                limit=1)
+            bank_account_id = bank_account.id
+        return bank_account_id

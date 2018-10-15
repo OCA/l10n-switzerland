@@ -1,0 +1,7 @@
+unidecode
+unicodecsv
+# Excel support
+xlrd
+pycrypto
+pysftp
+wand

@@ -1,4 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
-access_fds_sepa_upload_history,access_fds_sepa_upload_history,model_fds_sepa_upload_history,account.group_account_user,1,0,0,0
+access_fds_sepa_upload_history,access_fds_sepa_upload_history,model_fds_sepa_upload_history,account.group_account_user,1,1,1,0
 full_access_fds_sepa_upload_history,full_access_fds_sepa_upload_history,model_fds_sepa_upload_history,base.group_system,1,1,1,1

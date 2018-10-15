@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-17 12:24+0000\n"
+"POT-Creation-Date: 2016-01-11 14:20+0000\n"
 "PO-Revision-Date: 2015-06-17 13:34+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/it/)\n"
@@ -26,7 +26,7 @@ msgstr ""
 #. module: l10n_ch_sepa
 #: view:wizard.pain001:l10n_ch_sepa.wizard_pain_001_view
 msgid "Close"
-msgstr ""
+msgstr "Chiudi"
 
 #. module: l10n_ch_sepa
 #: model:ir.actions.act_window,name:l10n_ch_sepa.action_create_pain_001
@@ -48,7 +48,7 @@ msgstr "Created on"
 #: code:addons/l10n_ch_sepa/base_sepa/msg_sepa.py:55
 #, python-format
 msgid "Error"
-msgstr ""
+msgstr "Errore"
 
 #. module: l10n_ch_sepa
 #: code:addons/l10n_ch_sepa/base_sepa/pain_001.py:85

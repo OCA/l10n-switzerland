@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-06 09:18+0000\n"
+"POT-Creation-Date: 2016-01-11 14:20+0000\n"
 "PO-Revision-Date: 2016-01-05 16:29+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/fr/)\n"
@@ -30,7 +30,7 @@ msgstr "Fermer"
 #. module: l10n_ch_fds_upload_dd
 #: view:post.dd.export.wizard:l10n_ch_fds_upload_dd.view_post_dd_export_wizard_form_inherited
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmer"
 
 #. module: l10n_ch_fds_upload_dd
 #: field:fds.dd.upload.history,create_uid:0
@@ -50,7 +50,7 @@ msgstr ""
 #. module: l10n_ch_fds_upload_dd
 #: view:fds.postfinance.account:l10n_ch_fds_upload_dd.view_fds_postfinance_account_lsv_dd_form_inherited
 msgid "Direct Debit Orders"
-msgstr ""
+msgstr "Ordres de prélèvement"
 
 #. module: l10n_ch_fds_upload_dd
 #: field:fds.dd.upload.history,banking_export_id:0
@@ -60,7 +60,7 @@ msgstr ""
 #. module: l10n_ch_fds_upload_dd
 #: field:fds.dd.upload.history,directory_id:0
 msgid "Directory"
-msgstr ""
+msgstr "Catégorie"
 
 #. module: l10n_ch_fds_upload_dd
 #: model:ir.model,name:l10n_ch_fds_upload_dd.model_post_dd_export_wizard
@@ -81,7 +81,7 @@ msgstr ""
 #. module: l10n_ch_fds_upload_dd
 #: field:fds.dd.upload.history,filename:0
 msgid "Filename"
-msgstr ""
+msgstr "Nom du fichier"
 
 #. module: l10n_ch_fds_upload_dd
 #: field:fds.dd.upload.history,id:0

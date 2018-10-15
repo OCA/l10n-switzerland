@@ -31,7 +31,7 @@ import os
 _logger = logging.getLogger(__name__)
 
 
-class fds_inherit_post_dd_export_upload_wizard(models.TransientModel):
+class FdsInheritPostDdExportUploadWizard(models.TransientModel):
     ''' This addon allows you to upload the Direct Debit generated file to
         your FDS Postfinance.
 
@@ -218,7 +218,7 @@ class fds_inherit_post_dd_export_upload_wizard(models.TransientModel):
             'filename': self.filename,
             'directory_id': self.fds_directory_id.id,
             'state': 'uploaded'}
-        historical_dd_obj = self.env['fds.postfinance.historical.dd']
+        historical_dd_obj = self.env['fds.dd.upload.history']
         historical_dd_obj.create(values)
 
     @api.multi

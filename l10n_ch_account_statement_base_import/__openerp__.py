@@ -20,16 +20,16 @@
 ##############################################################################
 
 {'name': "Swiss bank statements import",
- 'version': '8.0.1.0',
- 'author': "Compassion CH, Camptocamp,Odoo Community Association (OCA)",
+ 'version': '8.0.1.0.1',
+ 'author': "Compassion CH, Camptocamp, Odoo Community Association (OCA)",
  'category': 'Finance',
  'complexity': 'normal',
  'depends': [
      'account',
-     'account_bank_statement_import',
+     'account_bank_statement_import_camt',
  ],
  'external_dependencies': {
-     'python': ['xlrd'],
+     'python': ['xlrd', 'wand'],
  },
  'website': 'http://www.compassion.ch/',
  'data': [

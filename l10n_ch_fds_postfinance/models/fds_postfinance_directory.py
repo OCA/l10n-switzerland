@@ -59,3 +59,9 @@ class FdsPostfinanceDirectory(models.Model):
         readonly=True,
         help='[info] if the directory still exist on the FDS sftp'
     )
+    excluded_files = fields.Char(
+        default='',
+        help="Semicolon (;) separated patterns. If a filename matches one of "
+        "the given patterns, the file won't be downloaded from the remote "
+        "directory."
+    )

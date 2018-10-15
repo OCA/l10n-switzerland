@@ -1,0 +1,112 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * l10n_ch_hr_payroll
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: l10n-switzerland (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-11 14:20+0000\n"
+"PO-Revision-Date: 2016-12-27 08:25+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Finnish (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/fi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: fi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: l10n_ch_hr_payroll
+#: view:hr.contract:l10n_ch_hr_payroll.hr_contract_form_l10n_ch_inherit
+msgid "Commissions / Rate"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll
+#: field:hr.contract,comm_rate:0
+msgid "Commissions Rate"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model,name:l10n_ch_hr_payroll.model_hr_contract
+msgid "Contract"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model,name:l10n_ch_hr_payroll.model_hr_employee
+msgid "Employee"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model,name:l10n_ch_hr_payroll.model_hr_expense_expense
+msgid "Expense"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll
+#: view:hr.payslip:l10n_ch_hr_payroll.hr_payroll_form_l10n_ch_inherit
+#: field:hr.payslip,expenses:0
+msgid "Expenses"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll
+#: field:hr.contract,holiday_rate:0
+msgid "Holiday Rate"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll
+#: field:hr.contract,hourly_rate:0
+msgid "Hourly Rate"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model,name:l10n_ch_hr_payroll.model_account_invoice
+msgid "Invoice"
+msgstr "Lasku"
+
+#. module: l10n_ch_hr_payroll
+#: field:hr.payslip,invoices:0
+msgid "Invoices"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll
+#: view:hr.payslip:l10n_ch_hr_payroll.hr_payroll_form_l10n_ch_inherit
+#: field:hr.payslip,move_lines:0
+#: model:ir.model,name:l10n_ch_hr_payroll.model_account_move_line
+msgid "Journal Items"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll
+#: field:hr.contract,lpp_amount:0
+msgid "LPP Amount"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll
+#: field:hr.contract,lpp_rate:0
+msgid "LPP Rate"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll
+#: field:hr.employee,children_student:0
+msgid "Number of Children student"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll
+#: model:ir.model,name:l10n_ch_hr_payroll.model_hr_payslip
+msgid "Pay Slip"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll
+#: field:account.invoice,slip_id:0 field:account.move.line,slip_id:0
+#: field:hr.expense.expense,slip_id:0
+msgid "Pay slip"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll
+#: view:hr.payslip:l10n_ch_hr_payroll.hr_payroll_form_l10n_ch_inherit
+msgid "Salary elements"
+msgstr ""
+
+#. module: l10n_ch_hr_payroll
+#: field:hr.contract,worked_hours:0
+msgid "Worked Hours"
+msgstr ""

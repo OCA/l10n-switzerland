@@ -30,7 +30,7 @@ import pysftp
 _logger = logging.getLogger(__name__)
 
 
-class fds_postfinance_account(models.Model):
+class FdsPostfinanceAccount(models.Model):
     ''' the FDS PostFinance configuration that allow to connect to the
         PostFinance server
     '''
@@ -41,7 +41,7 @@ class fds_postfinance_account(models.Model):
     )
     hostname = fields.Char(
         string='SFTP Hostname',
-        default='fds.post.ch',
+        default='fdsbc.post.ch',
         required=True,
     )
     postfinance_email = fields.Char(

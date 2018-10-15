@@ -37,7 +37,7 @@ class TestPaymentSlip(test_common.TransactionCase):
             {
                 'name': 'BCV',
                 'ccp': '01-1234-1',
-                'bic': '234234',
+                'bic': '23452345',
                 'clearing': '234234',
             }
         )

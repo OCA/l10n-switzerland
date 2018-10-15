@@ -19,11 +19,11 @@
 #
 ##############################################################################
 from openerp.tests import common
-from ..parser.postfinance_file_parser import XMLPFParser
-from ..parser.g11_file_parser import G11Parser
-from ..parser.raiffeisen_file_parser import RaffeisenCSVParser
-from ..parser.ubs_file_parser import UBSCSVParser
-from ..parser.v11_file_parser import V11Parser
+from ..parsers.postfinance_file_parser import XMLPFParser
+from ..parsers.g11_file_parser import G11Parser
+from ..parsers.raiffeisen_file_parser import RaffeisenCSVParser
+from ..parsers.ubs_file_parser import UBSCSVParser
+from ..parsers.v11_file_parser import V11Parser
 
 
 class BaseSwissImporterTest(common.TransactionCase):
