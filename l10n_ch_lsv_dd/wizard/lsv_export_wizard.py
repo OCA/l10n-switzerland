@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Swiss localization Direct Debit module for OpenERP
@@ -28,7 +29,7 @@ from . import export_utils
 from openerp import models, fields, api, _, exceptions
 
 import logging
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 
 # Mapping between Latin-1 to ascii characters, used for LSV.
@@ -160,19 +161,21 @@ class LsvExportWizard(models.TransientModel):
                     properties.get('ben_iban')
                 )
 
-            order_by = ''
-            if payment_order.date_prefered == 'due':
-                order_by = 'account_move_line.date_maturity ASC, '
-            order_by += 'account_payment_line.partner_bank_id'
-
             # A direct db query is used because order parameter in model.search
             # doesn't support function fields
-            self.env.cr.execute("""
-                SELECT account_payment_line.id
-                FROM account_payment_line, account_move_line
-                WHERE account_payment_line.move_line_id = account_move_line.id
-                AND account_payment_line.order_id = %s
-                ORDER BY """ + order_by, (payment_order.id,))
+            sql_query = "SELECT apl.id "\
+                "FROM account_payment_line apl, account_move_line aml "\
+                "WHERE apl.move_line_id = aml.id "\
+                "AND apl.order_id = %s "\
+                "ORDER BY "
+
+            if payment_order.date_prefered == 'due':
+                sql_query += "aml.date_maturity ASC, "
+            sql_query += "apl.partner_bank_id"
+
+            params = (payment_order.id,)
+
+            self.env.cr.execute(sql_query, params)
             sorted_line_ids = [row[0] for row in self.env.cr.fetchall()]
             payment_lines = payment_line_obj.browse(sorted_line_ids)
 

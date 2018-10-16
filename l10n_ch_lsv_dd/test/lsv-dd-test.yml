@@ -95,6 +95,7 @@
     partner_id: base.main_partner
     bank_id: bank_ubs
     lsv_identifier: 'AAAAA'
+    currency_id: 'base.CHF'
 -
   We need a company bvr account with a dd identifier (account which will be credited)
 -
@@ -104,6 +105,7 @@
     partner_id: base.main_partner
     bank_id: bank_post
     post_dd_identifier: '123457'
+    currency_id: 'base.CHF'
 -
   We need a company bvr account with a dd identifier for the XML-DD (account which will be credited)
 -
@@ -113,6 +115,7 @@
     partner_id: base.main_partner
     bank_id: bank_post
     post_dd_identifier: '123457'
+    currency_id: 'base.CHF'
 
 -
   We create a journal for LSV.
@@ -192,7 +195,6 @@
     company_id: base.main_company
     journal_id: !ref {model: account.journal, search: "[('type','=','bank')]"}
     currency_id: base.CHF
-    account_id: !ref {model: account.account, search: "[('code','=','1100')]"}
     type : out_invoice
     partner_id: customer
     date_invoice: !eval "'%s-01-02' %(datetime.now().year)"
@@ -205,7 +207,6 @@
     company_id: base.main_company
     journal_id: !ref {model: account.journal, search: "[('type','=','bank')]"}
     currency_id: base.CHF
-    account_id: !ref {model: account.account, search: "[('code','=','1100')]"}
     type : out_invoice
     partner_id: customer
     date_invoice: !eval "'%s-01-02' %(datetime.now().year)"
@@ -218,7 +219,6 @@
     company_id: base.main_company
     journal_id: !ref {model: account.journal, search: "[('type','=','bank')]"}
     currency_id: base.CHF
-    account_id: !ref {model: account.account, search: "[('code','=','1100')]"}
     type : out_invoice
     partner_id: customer
     date_invoice: !eval "'%s-01-02' %(datetime.now().year)"
@@ -229,7 +229,7 @@
   I add an invoice line to the invoice for LSV.
 -
   !record {model: account.invoice.line, id: lsv_invoice_line, view: False}:
-    account_id: !ref {model: account.account, search: "[('code','=','3200')]"}
+    account_id: !ref {model: account.account, search: "[('internal_type','=','receivable')]"}
     name: '[BASICCOMP] Basic Computer'
     price_unit: 700.0
     quantity: 10.0
@@ -239,7 +239,7 @@
   I add an invoice line to the invoice for DD.
 -
   !record {model: account.invoice.line, id: dd_invoice_line, view: False}:
-    account_id: !ref {model: account.account, search: "[('code','=','3200')]"}
+    account_id: !ref {model: account.account, search: "[('internal_type','=','receivable')]"}
     name: '[BASICCOMP] Basic Computer'
     price_unit: 600.0
     quantity: 10.0
@@ -249,7 +249,7 @@
   I add an invoice line to the invoice for XML-DD.
 -
   !record {model: account.invoice.line, id: dd_invoice_line_xml_dd, view: False}:
-    account_id: !ref {model: account.account, search: "[('code','=','3200')]"}
+    account_id: !ref {model: account.account, search: "[('internal_type','=','receivable')]"}
     name: '[BASICCOMP] Basic Computer'
     price_unit: 600.0
     quantity: 10.0
