@@ -2,11 +2,13 @@
 # © 2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp.addons.account.tests.account_test_classes\
-    import AccountingTestCase
-from openerp.tools import float_compare
-import time
 from lxml import etree
+import time
+
+from openerp.tools import float_compare
+
+from openerp.addons.account.tests.account_test_classes \
+    import AccountingTestCase
 
 ch_iban = 'CH15 3881 5158 3845 3843 7'
 
@@ -38,6 +40,14 @@ class TestSCT_CH(AccountingTestCase):
             'user_type_id',
             '=',
             self.env.ref('account.data_account_type_payable').id)], limit=1)
+        self.chf_currency = self.env.ref('base.CHF')
+        self.eur_currency = self.env.ref('base.EUR')
+        self.chf_currency.active = True
+        self.eur_currency.active = True
+        self.cr.execute('UPDATE res_company '
+                        'SET currency_id = %s '
+                        'WHERE id = %s',
+                        [self.chf_currency.id, self.main_company.id])
         # Create a swiss bank
         ch_bank1 = self.env['res.bank'].create({
             'name': 'Alternative Bank Schweiz AG',
@@ -70,9 +80,6 @@ class TestSCT_CH(AccountingTestCase):
             })
         self.payment_mode.payment_method_id.pain_version =\
             'pain.001.001.03.ch.02'
-        self.chf_currency = self.env.ref('base.CHF')
-        self.eur_currency = self.env.ref('base.EUR')
-        self.main_company.currency_id = self.chf_currency.id
         ch_bank2 = self.env['res.bank'].create({
             'name': 'Banque Cantonale Vaudoise',
             'bic': 'BCVLCH2LXXX',
