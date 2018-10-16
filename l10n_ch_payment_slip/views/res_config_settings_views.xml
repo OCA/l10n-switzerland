@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.payment_slip</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@data-key='account_invoicing']" position="inside">
+              <h2>ISR</h2>
+              <div class="row mt16 o_settings_container" id="isr">
+                <div class="col-xs-12 col-md-6 o_setting_box">
+
+                  <div class="o_setting_left_pane"/>
+                  <div class="o_setting_right_pane">
+                    <div class="content-group">
+                      <div class="row mt16">
+                        <label for="isr_delta_horz" class="col-md-5 o_light_label"/>
+                        <field name="isr_delta_horz"/>
+                      </div>
+                      <div class="row mt16">
+                        <label for="isr_delta_vert" class="col-md-5 o_light_label"/>
+                        <field name="isr_delta_vert"/>
+                      </div>
+                      <div class="row mt16">
+                        <label for="isr_scan_line_vert" class="col-md-5 o_light_label"/>
+                        <field name="isr_scan_line_vert"/>
+                      </div>
+                      <div class="row mt16">
+                        <label for="isr_scan_line_horz" class="col-md-5 o_light_label"/>
+                        <field name="isr_scan_line_horz"/>
+                      </div>
+                      <div class="row mt16">
+                        <label for="isr_add_vert" class="col-md-5 o_light_label"/>
+                        <field name="isr_add_vert"/>
+                      </div>
+                      <div class="row mt16">
+                        <label for="isr_add_horz" class="col-md-5 o_light_label"/>
+                        <field name="isr_add_horz"/>
+                      </div>
+
+                      <div class="row mt16">
+                        <label for="isr_scan_line_font_size" class="col-md-5 o_light_label"/>
+                        <field name="isr_scan_line_font_size"/>
+                      </div>
+                      <div class="row mt16">
+                        <label for="isr_scan_line_letter_spacing" class="col-md-5 o_light_label"/>
+                        <field name="isr_scan_line_letter_spacing"/>
+                      </div>
+                      <div class="row mt16">
+                        <label for="isr_amount_line_horz" class="col-md-5 o_light_label"/>
+                        <field name="isr_amount_line_horz"/>
+                      </div>
+                      <div class="row mt16">
+                        <label for="isr_amount_line_vert" class="col-md-5 o_light_label"/>
+                        <field name="isr_amount_line_vert"/>
+                      </div>
+                      <div class="row mt16">
+                        <label for="merge_mode" class="col-md-5 o_light_label"/>
+                        <field name="merge_mode"/>
+                      </div>
+                      <div class="row mt16">
+                        <label for="isr_background" class="col-md-5 o_light_label"/>
+                        <field name="isr_background"/>
+                      </div>
+                      <div class="row mt16">
+                        <label for="isr_header_partner_address" class="col-md-5 o_light_label"/>
+                        <field name="isr_header_partner_address"/>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              </xpath>
+            </field>
+          </record>
+
+        </odoo>

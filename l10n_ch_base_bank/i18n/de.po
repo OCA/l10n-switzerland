@@ -19,6 +19,30 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/invoice.py:58
+#, python-format
+msgid "ISR Reference"
+msgstr "ESR Referenznummer"
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/invoice.py:101
+#, python-format
+msgid "ISR Reference is required"
+msgstr "ESR Referenznummer ist erforderlich"
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/invoice.py:82
+#, python-format
+msgid "ISR Reference type needs a postal account number on the customer."
+msgstr "ESR Referenznummer benötigt eine Postkonto Nummer beim Kunden."
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/invoice.py:87
+#, python-format
+msgid "ISR Reference type needs a postal account number on your company"
+msgstr "ESR Referenznummer benötigt eine Postkonto Nummer bei der Firma."
+
+#. module: l10n_ch_base_bank
 #: model:ir.model,name:l10n_ch_base_bank.model_res_bank
 msgid "Bank"
 msgstr "Bank"
@@ -31,7 +55,7 @@ msgstr ""
 #. module: l10n_ch_base_bank
 #: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_partner_bank_isr_adherent_num
 msgid "Bank ISR adherent number"
-msgstr ""
+msgstr "Die zur Bank zugehörige ESR Nummer"
 
 #. module: l10n_ch_base_bank
 #: code:addons/l10n_ch_base_bank/models/bank.py:248
@@ -109,7 +133,7 @@ msgstr ""
 #: code:addons/l10n_ch_base_bank/models/invoice.py:113
 #, python-format
 msgid "Invalid ISR Number (wrong checksum)."
-msgstr ""
+msgstr "Ungültige ESR Nummer (Falsche Prüfziffer)."
 
 #. module: l10n_ch_base_bank
 #: model:ir.model,name:l10n_ch_base_bank.model_account_invoice
@@ -142,15 +166,17 @@ msgstr ""
 
 #. module: l10n_ch_base_bank
 #: sql_constraint:res.partner.bank:0
-msgid "The ISR adherent number/ccp pair must be unique !"
-msgstr ""
+msgid "The ISR adherent number must be unique !"
+msgstr "Die zugehörige ESR Nummer muss eindeutig sein!"
 
 #. module: l10n_ch_base_bank
 #: model:ir.model.fields,help:l10n_ch_base_bank.field_res_partner_bank_isr_adherent_num
 msgid ""
-"Your Bank adherent number to be printed in references of your ISR. This is "
-"not a postal account number."
+"Your Bank adherent number to be printed in references of your ISR. This "
+"is not a postal account number."
 msgstr ""
+"Die Banknummer, welche als Referenz zur ESR Nummer gedruckt wird. Dies "
+"ist nicht die Postkontonummer."
 
 #. module: l10n_ch_base_bank
 #: code:addons/l10n_ch_base_bank/models/bank.py:220
@@ -159,3 +185,5 @@ msgid ""
 "Your bank ISR adherent number must contain only digits!\n"
 "Please check your company bank account."
 msgstr ""
+"Ihre zur Bank zugehörige ESR Nummer darf nur Ziffern enthalten.\n"
+"Bitte überprüfen Sie die Bankkontoeinstellungen der Firma"

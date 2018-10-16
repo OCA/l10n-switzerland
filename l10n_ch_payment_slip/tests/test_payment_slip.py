@@ -1,14 +1,27 @@
-# -*- coding: utf-8 -*-
-# © 2014-2016 Camptocamp SA
+# Copyright 2014-2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import time
 import re
+import io
+import logging
 import odoo.tests.common as test_common
-from odoo.report import render_report
+
+_logger = logging.getLogger(__name__)
+
+try:
+    import PyPDF2
+except (ImportError, IOError) as err:
+    _logger.debug(err)
 
 
 class TestPaymentSlip(test_common.TransactionCase):
     _compile_get_ref = re.compile(r'[^0-9]')
+
+    def setUp(self):
+        super(TestPaymentSlip, self).setUp()
+        self.report1slip_from_inv = self.env.ref(
+            'l10n_ch_payment_slip.one_slip_per_page_from_invoice',
+        )
 
     def make_bank(self):
         company = self.env.ref('base.main_company')
@@ -29,7 +42,7 @@ class TestPaymentSlip(test_common.TransactionCase):
                 'bank_id': bank.id,
                 'bank_bic': bank.bic,
                 'acc_number': '01-1234-1',
-                'bvr_adherent_num': '1234567',
+                'isr_adherent_num': '1234567',
                 'print_bank': True,
                 'print_account': True,
                 'print_partner': True,
@@ -131,14 +144,7 @@ class TestPaymentSlip(test_common.TransactionCase):
 
     def test_print_report(self):
         invoice = self.make_invoice()
-        data, format = render_report(
-            self.env.cr,
-            self.env.uid,
-            [invoice.id],
-            'l10n_ch_payment_slip.one_slip_per_page_from_invoice',
-            {},
-            context={'force_pdf': True},
-        )
+        data, format = self.report1slip_from_inv.render(invoice.id)
         self.assertTrue(data)
         self.assertEqual(format, 'pdf')
 
@@ -147,14 +153,8 @@ class TestPaymentSlip(test_common.TransactionCase):
         self.assertEqual(self.env.user.company_id.merge_mode, 'in_memory')
         invoice1 = self.make_invoice()
         invoice2 = self.make_invoice()
-        data, format = render_report(
-            self.env.cr,
-            self.env.uid,
-            [invoice1.id, invoice2.id],
-            'l10n_ch_payment_slip.one_slip_per_page_from_invoice',
-            {},
-            context={'force_pdf': True},
-        )
+        data, format = self.report1slip_from_inv.render(
+            [invoice1.id, invoice2.id])
         self.assertTrue(data)
         self.assertEqual(format, 'pdf')
 
@@ -162,14 +162,8 @@ class TestPaymentSlip(test_common.TransactionCase):
         self.env.user.company_id.merge_mode = 'on_disk'
         invoice1 = self.make_invoice()
         invoice2 = self.make_invoice()
-        data, format = render_report(
-            self.env.cr,
-            self.env.uid,
-            [invoice1.id, invoice2.id],
-            'l10n_ch_payment_slip.one_slip_per_page_from_invoice',
-            {},
-            context={'force_pdf': True},
-        )
+        data, format = self.report1slip_from_inv.render(
+            [invoice1.id, invoice2.id])
         self.assertTrue(data)
         self.assertEqual(format, 'pdf')
 
@@ -181,7 +175,22 @@ class TestPaymentSlip(test_common.TransactionCase):
             [('move_line_id', '=', line.id)]
         )
         com_partner = slip.get_comm_partner()
-        address_lines = slip._get_address_lines(com_partner)
+        address_lines = slip._get_address_lines(com_partner.id)
+        self.assertEqual(
+            address_lines,
+            ['93, Press Avenue', '', '73377 Le Bourget du Lac']
+        )
+
+    def test_address_format_user_demo(self):
+        invoice = self.make_invoice()
+        self.assertTrue(invoice.move_id)
+        line = invoice.move_id.line_ids[0]
+        slip = self.env['l10n_ch.payment_slip'].search(
+            [('move_line_id', '=', line.id)]
+        )
+        com_partner = slip.get_comm_partner()
+        demo_user = self.env.ref('base.user_demo')
+        address_lines = slip.sudo(demo_user)._get_address_lines(com_partner.id)
         self.assertEqual(
             address_lines,
             [u'93, Press Avenue', u'', u'73377 Le Bourget du Lac']
@@ -196,10 +205,10 @@ class TestPaymentSlip(test_common.TransactionCase):
         )
         com_partner = slip.get_comm_partner()
         com_partner.country_id = False
-        address_lines = slip._get_address_lines(com_partner)
+        address_lines = slip._get_address_lines(com_partner.id)
         self.assertEqual(
             address_lines,
-            [u'93, Press Avenue', u'', u'73377 Le Bourget du Lac']
+            ['93, Press Avenue', '', '73377 Le Bourget du Lac']
         )
 
     def test_address_format_special_format(self):
@@ -207,7 +216,7 @@ class TestPaymentSlip(test_common.TransactionCase):
 
         ICP = self.env['ir.config_parameter']
         ICP.set_param(
-            'bvr.address.format',
+            'isr.address.format',
             "%(street)s\n%(zip)s %(city)s"
         )
         invoice = self.make_invoice()
@@ -218,10 +227,10 @@ class TestPaymentSlip(test_common.TransactionCase):
         )
         com_partner = slip.get_comm_partner()
         com_partner.country_id = False
-        address_lines = slip._get_address_lines(com_partner)
+        address_lines = slip._get_address_lines(com_partner.id)
         self.assertEqual(
             address_lines,
-            [u'93, Press Avenue', u'73377 Le Bourget du Lac']
+            ['93, Press Avenue', '73377 Le Bourget du Lac']
         )
 
     def test_address_length(self):
@@ -232,7 +241,7 @@ class TestPaymentSlip(test_common.TransactionCase):
             [('move_line_id', '=', line.id)]
         )
         com_partner = slip.get_comm_partner()
-        address_lines = slip._get_address_lines(com_partner)
+        address_lines = slip._get_address_lines(com_partner.id)
         f_size = 11
 
         len_tests = [
@@ -252,10 +261,99 @@ class TestPaymentSlip(test_common.TransactionCase):
 
             self.assertEqual(res, result, "Wrong result for len %s" % text_len)
 
-    def test_print_bvr(self):
+    def test_print_isr(self):
         invoice = self.make_invoice()
-        bvr = invoice.print_bvr()
-        self.assertEqual(bvr['report_name'],
+        isr = invoice.print_isr()
+        self.assertEqual(isr['report_name'],
                          'l10n_ch_payment_slip.one_slip_per_page_from_invoice')
-        self.assertEqual(bvr['report_file'],
+        self.assertEqual(isr['report_file'],
                          'l10n_ch_payment_slip.one_slip_per_page')
+
+    def test_reload_from_attachment(self):
+
+        def _find_invoice_attachment(self, invoice):
+            return self.env['ir.attachment'].search([
+                ('res_model', '=', invoice._name),
+                ('res_id', '=', invoice.id)
+            ])
+
+        ActionReport = self.env['ir.actions.report']
+        invoice = self.make_invoice()
+        report_name = 'l10n_ch_payment_slip.one_slip_per_page_from_invoice'
+        report_payment_slip = ActionReport._get_report_from_name(report_name)
+        bvr_action = invoice.print_isr()
+        # Print the report a first time
+        act_report = report_payment_slip.with_context(bvr_action['context'])
+        pdf = act_report.render_reportlab_pdf(res_ids=invoice.ids)
+        # Ensure no attachment was stored
+        attachment = _find_invoice_attachment(self, invoice)
+        self.assertEqual(len(attachment), 0)
+        # Set the report to store and reload from attachment
+        report_payment_slip.write({
+            'attachment_use': True,
+            'attachment':
+                "('ESR'+(object.number or '').replace('/','')+'.pdf')"
+        })
+        # Print the report again
+        pdf1 = act_report.render_reportlab_pdf(res_ids=invoice.ids)
+        # Ensure pdf is the same
+        self.assertEqual(pdf, pdf1)
+        # Ensure attachment was stored
+        attachment1 = _find_invoice_attachment(self, invoice)
+        self.assertEqual(len(attachment1), 1)
+        # Print the report another time
+        pdf2 = act_report.render_reportlab_pdf(res_ids=invoice.ids)
+        # Ensure pdf and attachment are the same as before
+        attachment2 = _find_invoice_attachment(self, invoice)
+        self.assertEqual(len(attachment2), 1)
+        # We can't assert pdf1==pdf2, as pdf2 is not postprocessed the same way
+        # since it's the only report to be reloaded from an attachment and
+        # odoo returns directly the content of the attachment instead of
+        # merging as it does when generating only one report which is not
+        # saved in an attachment. Therefore we mimic what happens in
+        # https://github.com/odoo/odoo/blob/11.0/odoo/addons/base/ir/ir_actions_report.py#L548  # noqa
+        # to ensure pdf1 is the same as pdf2
+        self.assertEqual(pdf1, self._mimic_post_pdf_final_build(pdf2))
+        self.assertEqual(attachment1, attachment2)
+        # Allow cancelling entries on the journal
+        invoice.journal_id.update_posted = True
+        # Cancel the invoice and set back to draft
+        invoice.action_invoice_cancel()
+        invoice.action_invoice_draft()
+        # Ensure attachment was unlinked
+        attachment = _find_invoice_attachment(self, invoice)
+        self.assertEqual(len(attachment), 0)
+
+    def _mimic_post_pdf_final_build(self, pdf_tuple):
+        """Adaptation of _post_pdf to manually check results are the same
+
+        Copied from odoo with only what's needed left herein.
+        """
+
+        def close_streams(streams):
+            for stream in streams:
+                try:
+                    stream.close()
+                except Exception:
+                    pass
+
+        pdf_content, extension = pdf_tuple
+
+        streams = []
+        if pdf_content:
+            pdf_content_stream = io.BytesIO(pdf_content)
+            streams.append(pdf_content_stream)
+
+        # Build the final pdf.
+        writer = PyPDF2.PdfFileWriter()
+        for stream in streams:
+            reader = PyPDF2.PdfFileReader(stream)
+            writer.appendPagesFromReader(reader)
+        result_stream = io.BytesIO()
+        streams.append(result_stream)
+        writer.write(result_stream)
+        result = result_stream.getvalue()
+
+        # We have to close the streams after PdfFileWriter's call to write()
+        close_streams(streams)
+        return result, extension
