@@ -15,6 +15,7 @@ setuptools.setup(
         'odoo11-addon-l10n_ch_mis_reports',
         'odoo11-addon-l10n_ch_pain_base',
         'odoo11-addon-l10n_ch_pain_credit_transfer',
+        'odoo11-addon-l10n_ch_payment_slip',
         'odoo11-addon-l10n_ch_states',
         'odoo11-addon-l10n_ch_zip',
     ],
