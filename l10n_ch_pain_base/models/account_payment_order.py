@@ -105,3 +105,7 @@ class AccountPaymentOrder(models.Model):
             return super(AccountPaymentOrder, self).generate_party_acc_number(
                 parent_node, party_type, order, partner_bank, gen_args,
                 bank_line=bank_line)
+
+    @api.model
+    def generate_fininst_postal_address(self, parent_node, bank):
+        return
