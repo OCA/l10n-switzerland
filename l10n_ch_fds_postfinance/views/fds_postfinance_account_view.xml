@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- ***************************
+         *   View for FDS account  *
+         *************************** -->   
+        <!-- personalize tree view for fds_postfinance_account -->
+        <record model="ir.ui.view" id="view_fds_postfinance_account_tree" >
+            <field name="name">fds.postfinance.account.tree</field>
+            <field name="model">fds.postfinance.account</field>
+            <field name="arch" type="xml">
+                <tree string="FDS Postfinance Account">
+                    <field name="name" />
+                    <field name="hostname" />
+                    <field name="username" />
+                    <field name="postfinance_email" />
+                    <field name="user_id" />
+                    <field name="authentication_key_ids" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- personalize form view for fds_postfinance_account -->
+        <record model="ir.ui.view" id="view_fds_postfinance_account_form" >
+            <field name="name">fds.postfinance.account.form</field>
+            <field name="model">fds.postfinance.account</field>
+            <field name="arch" type="xml">
+                <form string="FDS Postfinance Account">
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="hostname" />
+                        <field name="username" />
+                        <field name="postfinance_email" />
+                        <field name="user_id" />
+                    </group>
+                    <notebook>
+                        <page string="FDS Users">
+                            <button string="Clone key" name="copy_key_button" type="object" class="oe_right" />
+                            <button string="Import key" name="import_key_button" type="object" class="oe_right" />
+                            <button string="New key" name="newKey_button" type="object" class="oe_right" />
+                            <field name="authentication_key_ids">
+                                <tree string="FDS authentication keys" create="false">
+                                    <field name="user_id" />
+                                    <field name="public_key" filename="pub_filename" />
+                                    <field name="pub_filename" invisible="True"/>
+                                    <field name="key_active" />
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="FDS Directories">
+                            <button string="Verify directories" name="verify_directories_button" type="object" class="oe_right" />
+                            <field name="directory_ids">
+                                <tree string="FDS files directory" create="false" delete="false" editable="top" colors="blue:allow_download_file==True and allow_upload_file==True;red:allow_download_file==True;green:allow_upload_file==True;grey:still_on_server==False" default_order="still_on_server,name">
+                                    <field name="name" />
+                                    <field name="allow_download_file" attrs="{'invisible': [('still_on_server', '=', False)]}"/>
+                                    <field name="excluded_files"/>
+                                    <field name="allow_upload_file" attrs="{'invisible': [('still_on_server', '=', False)]}"/>
+                                    <field name="still_on_server" invisible="True"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Download History" name="upload">
+                            <field name="fds_file_ids">
+                                <tree string="FDS PostFinance files" create="false" default_order="state,filename">
+                                    <field name="create_date" />
+                                    <field name="directory_id" />
+                                    <field name="filename" />
+                                    <field name="bank_statement_id"/>
+                                    <field name="state" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Upload History"/>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <!-- view of fds_postfinance_account (tree,form) -->
+        <record model="ir.actions.act_window" id="action_fds_postfinance_account">
+            <field name="name">FDS Postfinance Account</field>
+            <field name="res_model">fds.postfinance.account</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to create a new PostFinance File Delivery Services (FDS) Account.</p><p>
+                FDS acts as a gateway in the IT security system between Swiss Post’s Intranet and external networks. It enables
+                files and applications to be exchanged among internal and external partners of Post CH Ltd.</p>
+            </field>
+        </record>
+
+        <!-- link to this view in "Accounting->Accounts->FDS Postfinance Account" -->
+        <menuitem id="menu_fds_postfinance_configuration"
+        name="FDS Postfinance Account"
+        parent="account.account_account_menu"
+        sequence="20"
+        action="action_fds_postfinance_account" />
+    </data>
+</openerp>
