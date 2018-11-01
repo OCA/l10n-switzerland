@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-<data>
+<odoo>
     <!-- view of this wizard -->
     <record model="ir.ui.view" id="view_fds_key_generator_wizard_form">
         <field name="name">FDS key generator wizard view</field>
@@ -50,5 +49,4 @@
         <field name="object" eval="1" />
     </record>
     -->
-</data>
-</openerp>
+</odoo>

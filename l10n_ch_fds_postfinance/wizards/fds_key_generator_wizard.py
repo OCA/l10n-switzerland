@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2015 Compassion CH (Nicolas Tran)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -37,13 +36,13 @@ class FdsKeyGeneratorWizard(models.TransientModel):
         help='user previously selected'
     )
     public_key = fields.Binary(
-        string='Public key',
+        # string='Public key',
         related='fds_authentication_keys_id.public_key',
         readonly=True,
         help='public key generated'
     )
     private_key_crypted = fields.Binary(
-        string='Private key crypted',
+        # string='Private key crypted',
         related='fds_authentication_keys_id.private_key_crypted',
         readonly=True,
         help='private key crypted generated'

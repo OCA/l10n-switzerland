@@ -11,7 +11,7 @@ import base64
 ch_iban = 'CH15 3881 5158 3845 3843 7'
 
 
-class TestSCT_CH(AccountingTestCase):
+class TestSCTCH(AccountingTestCase):
 
     def setUp(self):
         super().setUp()

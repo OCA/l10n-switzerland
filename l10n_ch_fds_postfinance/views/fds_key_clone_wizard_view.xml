@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-<data>
+<odoo>
     <!-- view of this wizard -->
     <record model="ir.ui.view" id="view_fds_key_clone_wizard_form">
         <field name="name">FDS key clone wizard view</field>
@@ -25,5 +24,4 @@
             </form>
         </field>
     </record>
-</data>
-</openerp>
+</odoo>

@@ -33,7 +33,7 @@
         <field name="name">fds.postfinance.file.tree</field>
         <field name="model">fds.postfinance.file</field>
         <field name="arch" type="xml">
-            <tree colors="blue:state == 'draft';gray:state == 'cancel';red:state == 'error'" create="0" default_order="create_date desc">
+            <tree decoration-primary="state == 'draft'" decoration-muted="state == 'cancel'" decoration-danger="state == 'error'" create="0" default_order="create_date desc">
                 <field name="fds_account_id" />
                 <field name="directory_id" />
                 <field name="filename" />
