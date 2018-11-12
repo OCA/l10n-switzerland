@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 03:54+0000\n"
-"PO-Revision-Date: 2018-09-22 13:24+0000\n"
+"PO-Revision-Date: 2018-11-13 08:24+0000\n"
 "Last-Translator: Lucas Huber <lucas.huber@org-it.ch>\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "Language: de\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.1.1\n"
+"X-Generator: Weblate 3.2.2\n"
 
 #. module: l10n_ch_hr_payroll_report
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll_report.report_payslip
@@ -45,7 +45,7 @@ msgstr "Code"
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_payslip_yearly_report_code_and_name
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll_report.view_report_hr_payslip_yearly_report_filter
 msgid "Code and name"
-msgstr ""
+msgstr "Code und Name"
 
 #. module: l10n_ch_hr_payroll_report
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll_report.field_hr_payslip_yearly_report_currency_id
@@ -173,7 +173,7 @@ msgstr "Rate"
 #. module: l10n_ch_hr_payroll_report
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll_report.hr_salary_rule_specific_form
 msgid "Report options"
-msgstr ""
+msgstr "Bericht Optionen"
 
 #. module: l10n_ch_hr_payroll_report
 #: model:ir.ui.menu,name:l10n_ch_hr_payroll_report.main_menu_hr_payroll_reports
@@ -183,7 +183,7 @@ msgstr "Berichte"
 #. module: l10n_ch_hr_payroll_report
 #: model:ir.ui.view,arch_db:l10n_ch_hr_payroll_report.view_report_hr_payslip_yearly_report_filter
 msgid "Search"
-msgstr ""
+msgstr "Suche"
 
 #. module: l10n_ch_hr_payroll_report
 #: selection:hr.payslip.yearly.report,month:0
