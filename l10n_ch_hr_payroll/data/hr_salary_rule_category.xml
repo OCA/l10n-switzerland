@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="INFO" model="hr.salary.rule.category">
+        <field name="name">Information</field>
+        <field name="code">INFO</field>
+    </record>
+    <record id="FALW" model="hr.salary.rule.category">
+        <field name="name">Allocation (sans déduction)</field>
+        <field name="code">FALW</field>
+    </record>
+</odoo>

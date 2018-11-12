@@ -1,0 +1,106 @@
+id,Name,account_debit,account_credit,category_id/id,code,sequence,amount_select,amount_percentage_base,amount_percentage,amount_python_compute,appears_on_payslip,condition_select,condition_range,condition_range_min,condition_range_max,condition_python
+__export__.ALL_GROSS,Montant brut (total année),,,l10n_ch_hr_payroll.INFO,ALL_GROSS,101,code,,,"result = payslip.env['hr.payslip'].browse(payslip.id).get_total_of_rule_by_code('GROSS', GROSS)",0,none,,,,result = False
+__export__.ALLOC_FAM,Allocations familiales,2270,,l10n_ch_hr_payroll.FALW,ALLOC_FAM,199,code,,,"first_child_amount = 250
+next_chid_amount = 370
+first_student_child_amount = 330
+next_student_child_amount = 450
+
+amount = 0
+
+# CHILD
+amount += min(2, employee.children)*first_child_amount
+if employee.children >= 3:
+    amount += (employee.children - 2)*next_chid_amount
+
+#CHILDREN STUDENT
+amount += min(2, employee.children_student)*first_student_child_amount
+if employee.children_student >= 3:
+    amount += (employee.children_student - 2)*next_student_child_amount
+
+
+result = amount",,python,,,,result = employee.children or employee.children_student
+__export__.AVS_E,Retenue AVS,2270,,hr_payroll.DED,AVS_E,110,percentage,categories.GROSS,-5.125,,1,none,,,,result = False
+__export__.AVS_C,Contribution AVS,2270,5700,hr_payroll.COMP,AVS_C,111,percentage,categories.GROSS,-5.125,,0,none,,,,result = False
+__export__.AVS_C_E,Correction retenue AVS,2270,,hr_payroll.DED,AVS_C_E,112,code,,,"total_avs_amount = payslip.env['hr.payslip'].browse(payslip.id).get_total_of_rule_by_code('AVS_E', AVS_E)
+result = - (round(total_avs_amount, 2) + round(ALL_GROSS*0.05125,2))",0,python,,,,result = payslip.is_correction_final_payslip
+__export__.AVS_C_C,Correction contribution AVS,2270,5700,hr_payroll.COMP,AVS_C_C,113,code,,,"total_avs_amount = payslip.env['hr.payslip'].browse(payslip.id).get_total_of_rule_by_code('AVS_C', AVS_C)
+result = - (round(total_avs_amount, 2) + round(ALL_GROSS*0.05125,2))",0,python,,,,result = payslip.is_correction_final_payslip
+__export__.AC_E,Retenue AC,2270,,hr_payroll.DED,AC_E,120,percentage,"min(categories.GROSS, 12350)",-1.1,,1,none,,,,result = False
+__export__.AC_S_E,Retenue AC (solidarité),2270,,hr_payroll.DED,AC_S_E,121,percentage,categories.GROSS-12350,-0.5,,1,range,categories.GROSS,12350.01,9999999999999,result = False
+__export__.AC_C,Contribution AC,2270,5700,hr_payroll.COMP,AC_C,122,percentage,"min(categories.GROSS, 12350)",-1.1,,0,none,,,,result = False
+__export__.AC_S_C,Contribution AC (solidarité),2270,5700,hr_payroll.COMP,AC_S_C,123,percentage,categories.GROSS-12350,-0.5,,0,range,categories.GROSS,12350.01,9999999999999,result = False
+__export__.AC_C_E,Correction retenue AC,2270,,hr_payroll.DED,AC_C_E,124,code,,,"total_ac_amount = payslip.env['hr.payslip'].browse(payslip.id).get_total_of_rule_by_code('AC_E', AC_E)
+Result = - (round(total_ac_amount, 2) + round(min(148200,ALL_GROSS)*0.011,2))",1,python,,,,result = payslip.is_correction_final_payslip
+__export__.AC_S_C_E,Correction retenue AC (Solidarité),2270,,hr_payroll.DED,AC_S_C_E,125,code,,,"total_ac_sol_amount = 0
+ac_sol_e = 0
+if rules.AC_S_E: 
+    ac_sol_e = AC_S_E
+total_ac_sol_amount = payslip.env['hr.payslip'].browse(payslip.id).get_total_of_rule_by_code('AC_S_E', ac_sol_e)
+if ALL_GROSS > 148200:
+    result = - (round(total_ac_sol_amount, 2) + round((ALL_GROSS-148200)*0.005,2))
+else:
+    Result = 0",1,python,,,,result = payslip.is_correction_final_payslip
+__export__.AC_C_C,Correction contribution AC,2270,5700,hr_payroll.COMP,AC_C_C,126,code,,,"total_ac_amount = payslip.env['hr.payslip'].browse(payslip.id).get_total_of_rule_by_code('AC_C', AC_C)
+Result = - (round(total_ac_amount, 2) + round(min(148200,ALL_GROSS)*0.011,2))",0,python,,,,result = payslip.is_correction_final_payslip
+__export__.AC_S_C_C,Correction contribution AC (Solidarité),2270,5700,hr_payroll.COMP,AC_S_C_C,127,code,,,"total_ac_sol_amount = 0
+ac_sol_c = 0
+if rules.AC_S_C: 
+    ac_sol_c = AC_S_C
+total_ac_sol_amount = payslip.env['hr.payslip'].browse(payslip.id).get_total_of_rule_by_code('AC_S_C', ac_sol_c)
+if ALL_GROSS > 148200:
+    result = - (round(total_ac_sol_amount, 2) + round((ALL_GROSS-148200)*0.005,2))
+else:
+    Result = 0",0,python,,,,result = payslip.is_correction_final_payslip
+__export__.LPP_E,Retenue LPP,2270,,hr_payroll.DED,LPP_E,150,code,,,"if contract.lpp_amount:
+    result = -contract.lpp_amount
+else:
+    minimum_legal = 2056.25
+    maximum_range = 7050.00
+    maximum_lpp = maximum_range - minimum_legal
+    lpp_rate = contract.lpp_rate
+    coord_min = 293.75
+
+    if categories.GROSS > maximum_range:
+        result_rate = -lpp_rate
+        result = maximum_lpp
+    else:
+        result_rate = -contract.lpp_rate
+        result = max((categories.GROSS - minimum_legal),coord_min)",1,python,,,,result = contract.lpp_rate or contract.lpp_amount
+__export__.LPP_C,Contribution LPP,2270,5700,hr_payroll.COMP,LPP_C,151,code,,,"if contract.lpp_amount:
+    result = -contract.lpp_amount
+else:
+    minimum_legal = 2056.25
+    maximum_range = 7050.00
+    maximum_lpp = maximum_range - minimum_legal
+    lpp_rate = contract.lpp_rate
+    coord_min = 293.75
+
+    if categories.GROSS > maximum_range:
+        result_rate = -lpp_rate
+        result = maximum_lpp
+    else:
+        result_rate = -contract.lpp_rate
+        result = max((categories.GROSS - minimum_legal),coord_min)",0,python,,,,result = contract.lpp_rate or contract.lpp_amount
+__export__.ANNP_E,Retenue Accidents non professionnels,2270,,hr_payroll.DED,ANNP_E,130,percentage,categories.GROSS,-0.4525,,1,none,,,,result = False
+__export__.ANNP_C,Contribution Accidents non professionnels,2270,5700,hr_payroll.COMP,ANNP_C,131,percentage,categories.GROSS,-0.4525,,0,none,,,,result = False
+__export__.PCFAM_E,Retenue PC Famille,2270,,hr_payroll.DED,PCFAM_E,140,percentage,categories.GROSS,-0.06,,1,none,,,,result = False
+__export__.PCFAM_C,Contribution PC Famille,2270,5700,hr_payroll.COMP,PCFAM_C,141,percentage,categories.GROSS,-0.06,,0,none,,,,result = False
+__export__.AMAT_E,Retenue AMAT,2270,,hr_payroll.DED,AMAT_E,170,percentage,categories.GROSS,-0.041,,1,none,,,,result = False
+__export__.AMAT_C,Contribution AMAT,2270,5700,hr_payroll.COMP,AMAT_C,171,percentage,categories.GROSS,-0.041,,0,none,,,,result = False
+__export__.LCA_E,Retenue indemnités journalières,2270,,hr_payroll.DED,LCA_E,160,percentage,categories.GROSS,-0.52,,1,none,,,,result = False
+__export__.LCA_C,Contribution indemnités journalières,2270,5700,hr_payroll.COMP,LCA_C,161,percentage,categories.GROSS,-0.52,,0,none,,,,result = False
+__export__.IMP_SRC,Retenue impôt à la source,2270,,hr_payroll.DED,IMP_SRC,170,code,,,"rates = payslip.env['hr.imp.src'].search([
+    ('canton', '=', employee.address_home_id.state_id.code),
+    ('imp_src_barem', '=', contract.imp_src_barem),
+    ('range_from', '<=', categories.GROSS),
+    ('range_to', '>', categories.GROSS),
+    ('is_eccle', '=', contract.is_eccle)
+])
+if rates:
+    result_rate = -rates[0].rate
+    result = categories.GROSS
+else:
+    Result = 0",1,none,,,,result = False
+__export__.COTFAM,Contribution allocations familiales,2270,5700,hr_payroll.COMP,COTFAM,201,percentage,categories.GROSS,2.275,,0,none,,,,result = False
+__export__.LAA,Contribution assurance accidents professionnels,2270,5700,hr_payroll.COMP,LAA,210,percentage,categories.GROSS,0.058,,0,none,,,,result = False
+__export__.FADMIN,Frais administratifs,5700,2270,hr_payroll.COMP,FADMIN,220,percentage,categories.GROSS,0.25,,0,none,,,,result = False
