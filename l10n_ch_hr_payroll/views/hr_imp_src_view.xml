@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="hr_imp_src_rate_form_view">
+        <field name="name">hr_imp_src_rate_form_view</field>
+        <field name="model">hr.imp.src</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Taux d'impôt à la source">
+                <group>
+                    <field name="imp_src_barem"/>
+                    <field name="rate"/>
+                    <field name="range_from"/>
+                    <field name="range_to"/>
+                    <field name="is_eccle"/>
+                    <field name="canton"/>
+                </group>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="hr_imp_src_rate_tree_view">
+        <field name="name">hr_imp_src_rate_tree_view</field>
+        <field name="model">hr.imp.src</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Taux d'impôt à la source">
+                <field name="imp_src_barem"/>
+                <field name="rate"/>
+                <field name="range_from"/>
+                <field name="range_to"/>
+                <field name="is_eccle"/>
+                <field name="canton"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="hr_imp_src_import_form_view">
+        <field name="name">hr_imp_src_import_form_view</field>
+        <field name="model">hr.imp.src.import</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Imporation taux d'impôt à la source">
+                <group>
+                    <field name="rate_file"/>
+                </group>
+                <footer>
+                    <button string="Importer" name="import_rates" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_imp_src" model="ir.actions.act_window">
+        <field name="name">Taux d'impôt à la source</field>
+        <field name="res_model">hr.imp.src</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree, form</field>
+        <field name="domain">[]</field>
+    </record>
+     <record id="action_imp_src_import" model="ir.actions.act_window">
+        <field name="name">Imporation taux d'impôt à la source</field>
+        <field name="res_model">hr.imp.src.import</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="hr_imp_src_import_form_view"/>
+        <field name="target">new</field>
+    </record>
+    <menuitem id="menu_imp_src_import" name="Imporation taux d'impôt à la source" action="action_imp_src_import" parent="hr_payroll.menu_hr_payroll_configuration"/>
+    <menuitem id="menu_imp_src" name="Taux d'impôt à la source" action="action_imp_src" parent="hr_payroll.menu_hr_payroll_configuration"/>
+
+</odoo>
