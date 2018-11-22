@@ -6,92 +6,94 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2018-11-23 21:11+0000\n"
+"Last-Translator: chrispi-ch <chris@okc.ch>\n"
 "Language-Team: none\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.2.2\n"
 
 #. module: l10n_ch_import_isr_v11
 #: model:ir.ui.view,arch_db:l10n_ch_import_isr_v11.v11_import_view
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 #. module: l10n_ch_import_isr_v11
 #: model:ir.model.fields,field_description:l10n_ch_import_isr_v11.field_v11_import_wizard_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Erstellt von"
 
 #. module: l10n_ch_import_isr_v11
 #: model:ir.model.fields,field_description:l10n_ch_import_isr_v11.field_v11_import_wizard_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Erstellt am"
 
 #. module: l10n_ch_import_isr_v11
 #: model:ir.model.fields,field_description:l10n_ch_import_isr_v11.field_v11_import_wizard_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Anzeigename"
 
 #. module: l10n_ch_import_isr_v11
 #: model:ir.model.fields,field_description:l10n_ch_import_isr_v11.field_v11_import_wizard_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: l10n_ch_import_isr_v11
 #: model:ir.ui.view,arch_db:l10n_ch_import_isr_v11.v11_import_view
 msgid "Import"
-msgstr ""
+msgstr "Importieren"
 
 #. module: l10n_ch_import_isr_v11
 #: model:ir.ui.view,arch_db:l10n_ch_import_isr_v11.view_bank_statement_form
 msgid "Import v11"
-msgstr ""
+msgstr "Importieren als v11"
 
 #. module: l10n_ch_import_isr_v11
 #: code:addons/l10n_ch_import_isr_v11/wizard/isr_import.py:193
 #, python-format
 msgid "Inv. no %s"
-msgstr ""
+msgstr "Rechnung Nr. %s"
 
 #. module: l10n_ch_import_isr_v11
 #: model:ir.model.fields,field_description:l10n_ch_import_isr_v11.field_v11_import_wizard___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zuletzt geändert am"
 
 #. module: l10n_ch_import_isr_v11
 #: model:ir.model.fields,field_description:l10n_ch_import_isr_v11.field_v11_import_wizard_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zuletzt aktualisiert von"
 
 #. module: l10n_ch_import_isr_v11
 #: model:ir.model.fields,field_description:l10n_ch_import_isr_v11.field_v11_import_wizard_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zuletzt aktualisiert am"
 
 #. module: l10n_ch_import_isr_v11
 #: model:ir.model.fields,field_description:l10n_ch_import_isr_v11.field_v11_import_wizard_v11file_name
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #. module: l10n_ch_import_isr_v11
 #: code:addons/l10n_ch_import_isr_v11/wizard/isr_import.py:143
 #, python-format
 msgid "Number of records differ from the computed one"
-msgstr ""
+msgstr "Anzahl Einträge weichen von der Berechnung ab"
 
 #. module: l10n_ch_import_isr_v11
 #: code:addons/l10n_ch_import_isr_v11/wizard/isr_import.py:209
 #, python-format
 msgid "Please select a file first!"
-msgstr ""
+msgstr "Bitte wählen Sie zuerst eine Datei aus!"
 
 #. module: l10n_ch_import_isr_v11
 #: code:addons/l10n_ch_import_isr_v11/wizard/isr_import.py:139
 #, python-format
 msgid "Record found after total record"
-msgstr ""
+msgstr "Eintrag nach dem Totaleintrag gefunden"
 
 #. module: l10n_ch_import_isr_v11
 #: code:addons/l10n_ch_import_isr_v11/wizard/isr_import.py:108
