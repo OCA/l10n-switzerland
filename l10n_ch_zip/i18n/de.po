@@ -9,19 +9,20 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-11 12:02+0000\n"
-"PO-Revision-Date: 2017-12-11 12:02+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2018-11-24 20:11+0000\n"
+"Last-Translator: chrispi-ch <chris@okc.ch>\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.2.2\n"
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_active
 msgid "Active"
-msgstr ""
+msgstr "Aktiv"
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_lang2
@@ -30,26 +31,29 @@ msgid ""
 "One alternative language code may appear for each postcode.\n"
 "1 = German, 2 = French, 3 = Italian, 4 = Romansh."
 msgstr ""
+"Weitere Sprache innerhalb einer PLZ.\n"
+"Pro PLZ kann ein abweichender Sprachcode angegeben werden.\n"
+"1 = Deutsch, 2 = Französisch, 3 = Italienisch, 4 = Rätoromanisch."
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_additional_digit
 msgid "Additional poscode digits"
-msgstr ""
+msgstr "Postleitzahl-Zusatzziffer"
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_lang2
 msgid "Alternative language code"
-msgstr ""
+msgstr "Abweichender Sprachcode"
 
 #. module: l10n_ch_zip
 #: model:ir.model,name:l10n_ch_zip.model_res_better_zip
 msgid "City/locations completion object"
-msgstr ""
+msgstr "Ortsbezeichnung"
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_communitynumber_bfs
 msgid "FSO municipality number (BFSNR)"
-msgstr ""
+msgstr "BFS Gemeindenummer (BFS-Nr.)"
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_sort
@@ -58,6 +62,9 @@ msgid ""
 "not included, 1 = included. Delivery information with addresses (only "
 "postcode and streets) are published in the sort file."
 msgstr ""
+"Gibt an, ob die Postleitzahl in der «Sortierdatei» enthalten ist: 0 = nicht "
+"enthalten, 1 = enthalten. Zustellinformationen mit Adressen (nur "
+"Postleitzahl und Straßen) werden in der Sortierdatei veröffentlicht."
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_post_delivery_through
@@ -65,6 +72,9 @@ msgid ""
 "Indicates the post office (ONRP) that delivers most of the letters to the "
 "postcode addresses. This information can be used for bag addresses too."
 msgstr ""
+"Verweist auf Betriebsstelle (ONRP), die überwiegend die Briefe bei der "
+"Adressier-PLZ zustellt. Diese Information kann allenfalls für "
+"Sackanschriften benützt werden."
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_lang
@@ -73,16 +83,19 @@ msgid ""
 "3 = Italian, 4 = Romansh. For multi-lingual localities, the main language is "
 "indicated."
 msgstr ""
+"Sprache (Sprachmehrheit) im Gebiet einer PLZ: 1 = Deutsch, 2 = Französisch, "
+"3 = Italienisch, 4 = Rätoromanisch. Bei mehrsprachigen Ortschaften wird die "
+"Hauptsprache angegeben."
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_lang
 msgid "Language code"
-msgstr ""
+msgstr "Sprachcode"
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_post_delivery_through
 msgid "Mail delivery by"
-msgstr ""
+msgstr "Zustellstelle"
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_communitynumber_bfs
@@ -90,28 +103,30 @@ msgid ""
 "Numbering used by the Federal Statistical Office for municipalities in "
 "Switzerland and the Principality of Liechtenstein"
 msgstr ""
+"Vom Bundesamt für Statistik verwendete Nummerierung für die politischen "
+"Gemeinden der Schweiz und des Fürstentums Liechtenstein"
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_zip_type
 msgid "Postcode type"
-msgstr ""
+msgstr "Postleitzahl-Typ"
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_sort
 msgid "Present in sort file"
-msgstr ""
+msgstr "In der Sortierdatei enthalten"
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_onrp
 msgid "Primary Key"
-msgstr ""
+msgstr "Primärschlüssel"
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_onrp
 msgid "Swiss Post classification no. (ONRP)"
-msgstr ""
+msgstr "Ordnungsnummer Post (ONRP)"
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_valid_from
 msgid "Valid from"
-msgstr "Gültiges Formular"
+msgstr "Gültig ab"
