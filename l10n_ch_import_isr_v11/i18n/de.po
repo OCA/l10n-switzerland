@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2018-11-23 21:11+0000\n"
+"PO-Revision-Date: 2018-11-24 22:12+0000\n"
 "Last-Translator: chrispi-ch <chris@okc.ch>\n"
 "Language-Team: none\n"
 "Language: de\n"
@@ -49,7 +49,7 @@ msgstr "Importieren"
 #. module: l10n_ch_import_isr_v11
 #: model:ir.ui.view,arch_db:l10n_ch_import_isr_v11.view_bank_statement_form
 msgid "Import v11"
-msgstr "Importieren als v11"
+msgstr "Importiere V11"
 
 #. module: l10n_ch_import_isr_v11
 #: code:addons/l10n_ch_import_isr_v11/wizard/isr_import.py:193
@@ -81,7 +81,7 @@ msgstr "Name"
 #: code:addons/l10n_ch_import_isr_v11/wizard/isr_import.py:143
 #, python-format
 msgid "Number of records differ from the computed one"
-msgstr "Anzahl Einträge weichen von der Berechnung ab"
+msgstr "Die Anzahl der Datensätze unterscheidet sich von der berechneten Anzahl"
 
 #. module: l10n_ch_import_isr_v11
 #: code:addons/l10n_ch_import_isr_v11/wizard/isr_import.py:209
@@ -99,74 +99,77 @@ msgstr "Eintrag nach dem Totaleintrag gefunden"
 #: code:addons/l10n_ch_import_isr_v11/wizard/isr_import.py:108
 #, python-format
 msgid "Recursive mod10 is invalid for reference: %s"
-msgstr ""
+msgstr "Die Referfenznummer ist ungültig (geprüft mittels rekursivem mod10): %s"
 
 #. module: l10n_ch_import_isr_v11
 #: code:addons/l10n_ch_import_isr_v11/wizard/isr_import.py:187
 #, python-format
 msgid "Too many receivable/payable lines for reference %s"
-msgstr ""
+msgstr "Zu viele Forderungs-/Verbindlichkeitenzeilen für die Referenznummer: %s"
 
 #. module: l10n_ch_import_isr_v11
 #: code:addons/l10n_ch_import_isr_v11/wizard/isr_import.py:134
 #, python-format
 msgid "Too many total record found!"
-msgstr ""
+msgstr "Zu viele Totalzeilen gefunden!"
 
 #. module: l10n_ch_import_isr_v11
 #: code:addons/l10n_ch_import_isr_v11/wizard/isr_import.py:49
 #, python-format
 msgid "Total amount differ from the computed amount"
-msgstr ""
+msgstr "Der Gesamtbetrag weicht vom berechneten Betrag ab"
 
 #. module: l10n_ch_import_isr_v11
 #: model:ir.model.fields,field_description:l10n_ch_import_isr_v11.field_v11_import_wizard_total_amount
 msgid "Total amount of V11"
-msgstr ""
+msgstr "Gesamtbetrag des V11 Datensatzes"
 
 #. module: l10n_ch_import_isr_v11
 #: code:addons/l10n_ch_import_isr_v11/wizard/isr_import.py:81
 #, python-format
 msgid "Total cost differ from the computed amount"
-msgstr ""
+msgstr "Die Gesamtkosten weichen von den berechneten Kosten ab"
 
 #. module: l10n_ch_import_isr_v11
 #: model:ir.model.fields,field_description:l10n_ch_import_isr_v11.field_v11_import_wizard_total_cost
 msgid "Total cost of V11"
-msgstr ""
+msgstr "Gesamtkosten des V11 Datensatzes"
 
 #. module: l10n_ch_import_isr_v11
 #: model:ir.actions.act_window,name:l10n_ch_import_isr_v11.wizard_v11_import
 msgid "V11 (ISR) Import"
-msgstr ""
+msgstr "V11 (ESR) Import"
 
 #. module: l10n_ch_import_isr_v11
 #: model:ir.model.fields,field_description:l10n_ch_import_isr_v11.field_v11_import_wizard_v11file
 msgid "V11 File"
-msgstr ""
+msgstr "V11 Datei"
 
 #. module: l10n_ch_import_isr_v11
 #: model:ir.ui.view,arch_db:l10n_ch_import_isr_v11.v11_import_view
 msgid "V11 ISR Import"
-msgstr ""
+msgstr "V11 ESR Import"
 
 #. module: l10n_ch_import_isr_v11
 #: code:addons/l10n_ch_import_isr_v11/wizard/isr_import.py:217
 #, python-format
 msgid "V11 file can not be decoded,it contains invalid character {}"
 msgstr ""
+"Die V11 Datei kann nicht eingelesen werden, sie beinhaltet ungültige Zeichen "
+"{}"
 
 #. module: l10n_ch_import_isr_v11
 #: model:ir.ui.view,arch_db:l10n_ch_import_isr_v11.v11_import_view
 msgid "or"
-msgstr ""
+msgstr "oder"
 
 #. module: l10n_ch_import_isr_v11
 #: model:ir.ui.view,arch_db:l10n_ch_import_isr_v11.v11_import_view
 msgid "v11 file"
-msgstr ""
+msgstr "V11 Datei"
 
 #. module: l10n_ch_import_isr_v11
 #: model:ir.model,name:l10n_ch_import_isr_v11.model_v11_import_wizard
+#, fuzzy
 msgid "v11.import.wizard"
-msgstr ""
+msgstr "v11.import.wizard"
