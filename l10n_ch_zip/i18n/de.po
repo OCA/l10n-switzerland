@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-11 12:02+0000\n"
-"PO-Revision-Date: 2018-11-22 20:34+0000\n"
+"PO-Revision-Date: 2018-11-24 20:11+0000\n"
 "Last-Translator: chrispi-ch <chris@okc.ch>\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "Language: de\n"
@@ -31,24 +31,24 @@ msgid ""
 "One alternative language code may appear for each postcode.\n"
 "1 = German, 2 = French, 3 = Italian, 4 = Romansh."
 msgstr ""
-"Zusätzliche Sprachen innerhalb einer Postleitzahl.\n"
-"Ein alternativer Sprachcode kann für jede Postleitzahl angegeben werden.\n"
-"1 = Deutsch, 2 = Französisch, 3 = Italienisch, 4 = Romanisch."
+"Weitere Sprache innerhalb einer PLZ.\n"
+"Pro PLZ kann ein abweichender Sprachcode angegeben werden.\n"
+"1 = Deutsch, 2 = Französisch, 3 = Italienisch, 4 = Rätoromanisch."
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_additional_digit
 msgid "Additional poscode digits"
-msgstr "Zusätzliche Stellen der Postleitzahl"
+msgstr "Postleitzahl-Zusatzziffer"
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_lang2
 msgid "Alternative language code"
-msgstr "Alternativer Sprachcode"
+msgstr "Abweichender Sprachcode"
 
 #. module: l10n_ch_zip
 #: model:ir.model,name:l10n_ch_zip.model_res_better_zip
 msgid "City/locations completion object"
-msgstr "Ort"
+msgstr "Ortsbezeichnung"
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_communitynumber_bfs
@@ -62,6 +62,9 @@ msgid ""
 "not included, 1 = included. Delivery information with addresses (only "
 "postcode and streets) are published in the sort file."
 msgstr ""
+"Gibt an, ob die Postleitzahl in der «Sortierdatei» enthalten ist: 0 = nicht "
+"enthalten, 1 = enthalten. Zustellinformationen mit Adressen (nur "
+"Postleitzahl und Straßen) werden in der Sortierdatei veröffentlicht."
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_post_delivery_through
@@ -69,6 +72,9 @@ msgid ""
 "Indicates the post office (ONRP) that delivers most of the letters to the "
 "postcode addresses. This information can be used for bag addresses too."
 msgstr ""
+"Verweist auf Betriebsstelle (ONRP), die überwiegend die Briefe bei der "
+"Adressier-PLZ zustellt. Diese Information kann allenfalls für "
+"Sackanschriften benützt werden."
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_lang
@@ -77,6 +83,9 @@ msgid ""
 "3 = Italian, 4 = Romansh. For multi-lingual localities, the main language is "
 "indicated."
 msgstr ""
+"Sprache (Sprachmehrheit) im Gebiet einer PLZ: 1 = Deutsch, 2 = Französisch, "
+"3 = Italienisch, 4 = Rätoromanisch. Bei mehrsprachigen Ortschaften wird die "
+"Hauptsprache angegeben."
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_lang
@@ -86,7 +95,7 @@ msgstr "Sprachcode"
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_post_delivery_through
 msgid "Mail delivery by"
-msgstr ""
+msgstr "Zustellstelle"
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_communitynumber_bfs
@@ -94,18 +103,18 @@ msgid ""
 "Numbering used by the Federal Statistical Office for municipalities in "
 "Switzerland and the Principality of Liechtenstein"
 msgstr ""
-"Nummerierung des Bundesamtes für Statistik (BFS) für Gemeinden in der "
-"Schweiz und im Fürstentum Liechtenstein"
+"Vom Bundesamt für Statistik verwendete Nummerierung für die politischen "
+"Gemeinden der Schweiz und des Fürstentums Liechtenstein"
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_zip_type
 msgid "Postcode type"
-msgstr "Postleitzahltyp"
+msgstr "Postleitzahl-Typ"
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_better_zip_sort
 msgid "Present in sort file"
-msgstr ""
+msgstr "In der Sortierdatei enthalten"
 
 #. module: l10n_ch_zip
 #: model:ir.model.fields,help:l10n_ch_zip.field_res_better_zip_onrp
