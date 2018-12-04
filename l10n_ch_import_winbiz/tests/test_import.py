@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 # © 2016 Bettens Louis (Open Net Sarl)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo.tests import common
 from odoo.modules import get_resource_path
 import logging
-from StringIO import StringIO
+from io import BytesIO
 import base64
 import difflib
 import tempfile
@@ -102,8 +101,8 @@ class TestImport(common.TransactionCase):
             res = get_resource_path('l10n_ch_import_winbiz', 'tests', filename)
             return res
 
-        with open(get_path(input_file)) as src:
-            buf = StringIO()
+        with open(get_path(input_file), 'rb') as src:
+            buf = BytesIO()
             base64.encode(src, buf)
             contents = buf.getvalue()
             buf.close()
@@ -118,33 +117,34 @@ class TestImport(common.TransactionCase):
         res.assert_balanced()
 
         gold = open(get_path('golden-output.txt'))
-        temp = tempfile.NamedTemporaryFile(prefix='odoo-l10n_ch_import_winbiz')
+        temp = tempfile.NamedTemporaryFile(
+            prefix='odoo-l10n_ch_import_winbiz', mode='w+')
 
         # Get a predictable representation that can be compared across runs
         def p(u):
-            temp.write(u.encode('utf-8'))
+            temp.write(u)
             temp.write('\n')
 
         first = True
         for mv in res:
             if not first:
-                p(u"")
+                p("")
             first = False
-            p(u"move ‘%s’" % mv.ref)
-            p(u"  (dated %s)" % mv.date)
-            p(u"  (in journal %s)" % mv.journal_id.code)
-            p(u"  with lines:")
+            p("move ‘%s’" % mv.ref)
+            p("  (dated %s)" % mv.date)
+            p("  (in journal %s)" % mv.journal_id.code)
+            p("  with lines:")
             for ln in mv.line_ids:
-                p(u"    line “%s”" % ln.name)
+                p("    line “%s”" % ln.name)
                 if ln.debit:
-                    p(u"      debit = %s" % ln.debit)
+                    p("      debit = %s" % round(ln.debit, 2))
                 if ln.credit:
-                    p(u"      credit = %s" % ln.credit)
-                p(u"      account is ‘%s’" % ln.account_id.code)
+                    p("      credit = %s" % round(ln.credit, 2))
+                p("      account is ‘%s’" % ln.account_id.code)
                 if ln.tax_line_id:
-                    p(u"      originator tax is ‘%s’" % ln.tax_line_id.name)
+                    p("      originator tax is ‘%s’" % ln.tax_line_id.name)
                 if ln.tax_ids:
-                    p(u"      taxes = (‘%s’)" % u"’, ‘".join(
+                    p("      taxes = (‘%s’)" % "’, ‘".join(
                         ln.tax_ids.mapped('name')))
         temp.seek(0)
         diff = list(difflib.unified_diff(gold.readlines(), temp.readlines(),
@@ -152,7 +152,7 @@ class TestImport(common.TransactionCase):
         if len(diff) > 2:
             for i in diff:
                 _logger.error(i.rstrip())
-            self.fail("actual output doesn't match exptected output")
+            self.fail("actual output doesn't match expected output")
 
     def test_import_xls(self):
         self._test_import('input.xls', 'xls')

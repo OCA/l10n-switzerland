@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 Open Net Sàrl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -19,9 +18,7 @@ except ImportError:
     _logger.debug('Can not `from xlrd import open_workbook, xldate_as_tuple`.')
 
 
-class BaseImporter:
-    __metaclass__ = ABCMeta
-
+class BaseImporter(metaclass=ABCMeta):
     def parse_input(self, content):
         """Parse the data as received from the web form and split it into rows.
 
@@ -36,7 +33,7 @@ class BaseImporter:
                 base64.decode(src, decoded)
                 decoded.seek(0)
                 res = self._parse_input_decoded(decoded)
-        res.sort(key=lambda e: int(e[u'numéro']))
+        res.sort(key=lambda e: int(e['numéro']))
         return res
 
     @abstractmethod
@@ -65,7 +62,7 @@ class XLSImporter(BaseImporter):
         sheet = self.wb.sheet_by_index(0)
         vals = (lambda n: [c.value for c in sheet.row(n)])
         head = vals(0)
-        return [dict(zip(head, vals(i))) for i in xrange(1, sheet.nrows)]
+        return [dict(list(zip(head, vals(i)))) for i in range(1, sheet.nrows)]
 
     def parse_date(self, date):
         """Parse a date coming from Excel.
@@ -73,11 +70,13 @@ class XLSImporter(BaseImporter):
            :param date: cell value
            :returns: datetime.date
         """
-        if isinstance(date, basestring):
+        if isinstance(date, str):
             d, m, y = date.split('-')
             d = int(d)
             mapping = Locale('en').months['format']['abbreviated']
-            mapping = dict(zip(mapping.values(), mapping.keys()))
+            mapping = dict(
+                list(zip(list(mapping.values()), list(mapping.keys())))
+            )
             m = mapping[m]
             y = 2000 + int(y)
             return datetime.datetime(y, m, d)
@@ -87,8 +86,8 @@ class XLSImporter(BaseImporter):
 
 class XMLImporter(BaseImporter):
     def _parse_input_decoded(self, decoded):
-        tree = ET.parse(decoded.name)
-        rows = tree.getroot()
+        content = decoded.read()
+        rows = ET.fromstring(content)
         if len(rows[0].attrib):
             return [row.attrib for row in rows]
         else:

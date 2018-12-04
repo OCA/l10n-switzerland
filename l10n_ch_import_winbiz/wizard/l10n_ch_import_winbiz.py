@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -121,20 +120,20 @@ class AccountWinbizImport(models.TransientModel):
         previous_tax = None
         lines = []
         for self.index, winbiz_item in enumerate(data, 1):
-            if previous_pce not in (None, winbiz_item[u'pièce']):
+            if previous_pce not in (None, winbiz_item['pièce']):
                 yield my_prepare_move(lines, previous_journal, previous_date,
                                       ref=previous_pce)
                 lines = []
                 incomplete = None
-            previous_pce = winbiz_item[u'pièce']
-            previous_date = importer.parse_date(winbiz_item[u'date'])
+            previous_pce = winbiz_item['pièce']
+            previous_date = importer.parse_date(winbiz_item['date'])
             journal = journal_obj.search(
-                [('winbiz_mapping', '=', winbiz_item[u'journal'])],
+                [('winbiz_mapping', '=', winbiz_item['journal'])],
                 limit=1)
             if not journal:
                 raise exceptions.MissingError(
-                    _(u"No journal ‘%s’")
-                    % winbiz_item[u'journal'])
+                    _("No journal ‘%s’")
+                    % winbiz_item['journal'])
             previous_journal = journal
 
             # tvatyp:  0 no vat was applied (internal transfers for example)
@@ -172,15 +171,15 @@ class AccountWinbizImport(models.TransientModel):
                 originator_tax = None
             previous_tax = tax
 
-            amount = float(winbiz_item[u'montant'])
+            amount = float(winbiz_item['montant'])
             recto_line = verso_line = None
-            if winbiz_item[u'cpt_débit'] != 'Multiple':
-                account = find_account(winbiz_item[u'cpt_débit'])
+            if winbiz_item['cpt_débit'] != 'Multiple':
+                account = find_account(winbiz_item['cpt_débit'])
                 if incomplete is not None and incomplete.account == account:
                     incomplete.amount -= amount
                 else:
                     recto_line = prepare_line(
-                        name=winbiz_item[u'libellé'].strip(),
+                        name=winbiz_item['libellé'].strip(),
                         amount=(-amount),
                         account=account,
                         originator_tax=originator_tax)
@@ -188,13 +187,13 @@ class AccountWinbizImport(models.TransientModel):
                         recto_line.tax = tax
                     lines.append(recto_line)
 
-            if winbiz_item[u'cpt_crédit'] != 'Multiple':
-                account = find_account(winbiz_item[u'cpt_crédit'])
+            if winbiz_item['cpt_crédit'] != 'Multiple':
+                account = find_account(winbiz_item['cpt_crédit'])
                 if incomplete is not None and incomplete.account == account:
                     incomplete.amount += amount
                 else:
                     verso_line = prepare_line(
-                        name=winbiz_item[u'libellé'].strip(),
+                        name=winbiz_item['libellé'].strip(),
                         amount=amount,
                         account=account,
                         originator_tax=originator_tax)
@@ -202,10 +201,10 @@ class AccountWinbizImport(models.TransientModel):
                         verso_line.tax = tax
                     lines.append(verso_line)
 
-            if winbiz_item[u'cpt_débit'] == 'Multiple':
+            if winbiz_item['cpt_débit'] == 'Multiple':
                 assert incomplete is None
                 incomplete = verso_line
-            if winbiz_item[u'cpt_crédit'] == 'Multiple':
+            if winbiz_item['cpt_crédit'] == 'Multiple':
                 assert incomplete is None
                 incomplete = recto_line
 
