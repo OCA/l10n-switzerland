@@ -53,7 +53,7 @@ payment terms.
 
 
 """,
- 'version': '8.0.2.1.1',
+ 'version': '8.0.2.1.2',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
