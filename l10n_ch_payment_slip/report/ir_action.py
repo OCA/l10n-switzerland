@@ -18,17 +18,17 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm
+from openerp import models
 from openerp.addons.base.ir.ir_actions import ir_actions_report_xml as root
 
 
-class ir_actions_report_xml_reportlab(orm.Model):
+class IrActionsReportXmlReportlab(models.Model):
 
     _inherit = 'ir.actions.report.xml'
 
     def __init__(self, cr, uid):
         """Old school hack to extend selection fields"""
-        super(ir_actions_report_xml_reportlab, self).__init__(cr, uid)
+        super(IrActionsReportXmlReportlab, self).__init__(cr, uid)
         if not any(x for x in root._columns['report_type'].selection
                    if x[0] == 'reportlab-pdf'):
             root._columns['report_type'].selection.append(
@@ -42,7 +42,7 @@ class ir_actions_report_xml_reportlab(orm.Model):
         if report and report['report_type'] == 'reportlab-pdf':
             return report['report_name']
         else:
-            return super(ir_actions_report_xml_reportlab, self)._lookup_report(
+            return super(IrActionsReportXmlReportlab, self)._lookup_report(
                 cr,
                 name
             )
@@ -65,7 +65,7 @@ class ir_actions_report_xml_reportlab(orm.Model):
                     data=data,
                     context=context
                 ), 'pdf'
-        return super(ir_actions_report_xml_reportlab, self).render_report(
+        return super(IrActionsReportXmlReportlab, self).render_report(
             cr,
             uid,
             res_ids,
