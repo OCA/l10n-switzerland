@@ -69,6 +69,10 @@
               </CdtrRefInf>
             </Strd>
           </RmtInf>
+   % else:
+          <RmtInf>
+            <Ustrd>${invoice.supplier_invoice_number}</Ustrd>
+          </RmtInf>
    % endif
 </%block>
 
