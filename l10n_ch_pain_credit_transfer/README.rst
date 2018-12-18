@@ -46,6 +46,7 @@ Contributors
 
 * Alexis de Lattre <alexis.delattre@akretion.com>
 * Denis Leemann <denis.leemann@camptocamp.com>
+* Julien Coux <julien.coux@camptocamp.com>
 * Mykhailo Panarin <m.panarin@mobilunity.com>
 
 Maintainer
