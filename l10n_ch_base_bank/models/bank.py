@@ -239,11 +239,16 @@ class ResPartnerBank(models.Model, BankCommon):
     def _get_acc_name(self):
         """ Return an account name for a bank account
         to use with a ccp for ISR.
-        This method make sure to generate a unique name
+        This method makes sure to generate a unique name
         """
+
         part_name = self.partner_id.name
+        if not part_name and self.env.context.get('default_partner_id'):
+            partner_id = self.env.context.get('default_partner_id')
+            part_name = self.env['res.partner'].browse(partner_id)[0].name
+
         if part_name:
-            acc_name = _("Bank/CCP {}").format(self.partner_id.name)
+            acc_name = _("Bank/CCP {}").format(part_name)
         else:
             acc_name = _("Bank/CCP Undefined")
 
