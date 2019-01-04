@@ -52,9 +52,12 @@ class ExtendedReport(models.Model):
             if len(slips) == 1:
                 return slips[0]._draw_payment_slip(a4=True, b64=False,
                                                    out_format='PDF')
+            slips_list = [slip._draw_payment_slip(
+                a4=True, b64=False, out_format='PDF'
+            ) for slip in slips]
             if company.merge_mode == 'in_memory':
-                return self.merge_pdf_in_memory(slips)
-            return self.merge_pdf_on_disk(slips)
+                return self.merge_pdf_in_memory(slips_list)
+            return self.merge_pdf_on_disk(slips_list)
         else:
             return super(ExtendedReport, self).get_pdf(
                 cr, uid, ids, report_name,
