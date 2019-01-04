@@ -18,3 +18,8 @@ msgstr ""
 msgid "Payment Methods"
 msgstr ""
 
+#. module: l10n_ch_pain_credit_transfer
+#: model:ir.model,name:l10n_ch_pain_credit_transfer.model_account_payment_order
+msgid "Payment Order"
+msgstr ""
+
