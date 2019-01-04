@@ -23,3 +23,9 @@ msgstr ""
 #: model:ir.model,name:l10n_ch_pain_credit_transfer.model_account_payment_method
 msgid "Payment Methods"
 msgstr "Betalingsmetoder"
+
+#. module: l10n_ch_pain_credit_transfer
+#: model:ir.model,name:l10n_ch_pain_credit_transfer.model_account_payment_order
+#, fuzzy
+msgid "Payment Order"
+msgstr "Betalingsmetoder"
