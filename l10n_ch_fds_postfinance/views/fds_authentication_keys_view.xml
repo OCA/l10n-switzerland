@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- view of fds_authentication_keys -->
+        <record model="ir.ui.view" id="fds_authentication_keys_form">
+            <field name="name">FDS authentication keys form</field>
+            <field name="model">fds.authentication.keys</field>
+            <field name="arch" type="xml">
+                <form string="FDS authentication key">
+                    <group>
+                        <field name="user_id"/>
+                        <field name="fds_account_id"/>
+                        <field name="public_key" filename="pub_filename"/>
+                        <field name="pub_filename" invisible="True"/>
+                        <field name="private_key_crypted" filename="ppk_filename"/>
+                        <field name="ppk_filename" invisible="True"/>
+                        <field name="key_active"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>
