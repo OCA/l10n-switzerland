@@ -316,13 +316,11 @@ result = (per*(categories.BASIC + categories.ALW))/100
         <field name="amount_python_compute">
 minimum_legal = employee.company_id.lpp_min
 maximum_range = employee.company_id.lpp_max
-amount = contract.wage_fulltime * 12
+amount = contract.wage_fulltime * (contract.occupation_rate / 100)
+amount = amount * (payslip.working_rate / 100)
 if contract.lpp_rate != 0:
     if contract.lpp_contract_id:
-        amount = amount - contract.lpp_contract_id.dc_amount
-    amount = amount / 12
-    amount = amount * (contract.occupation_rate / 100)
-    amount = amount * (payslip.working_rate / 100)
+        amount = amount - contract.lpp_contract_id.dc_amount/12
     if amount &gt; maximum_range:
         result = -(maximum_range)*((contract.lpp_rate)/100)
     elif amount &lt; minimum_legal and not contract.lpp_contract_id:
@@ -349,13 +347,11 @@ else:
         <field name="amount_python_compute">
 minimum_legal = employee.company_id.lpp_min
 maximum_range = employee.company_id.lpp_max
-amount = contract.wage_fulltime * 12
+amount = contract.wage_fulltime * (contract.occupation_rate / 100)
+amount = amount * (payslip.working_rate / 100)
 if contract.lpp_rate != 0:
     if contract.lpp_contract_id:
-        amount = amount - contract.lpp_contract_id.dc_amount
-    amount = amount / 12
-    amount = amount * (contract.occupation_rate / 100)
-    amount = amount * (payslip.working_rate / 100)
+        amount = amount - contract.lpp_contract_id.dc_amount/12
     if amount &gt; maximum_range:
         result = -(maximum_range)*((contract.lpp_rate)/100)
     elif amount &lt; minimum_legal and not contract.lpp_contract_id:
@@ -433,6 +429,34 @@ else:
         </field>
         <field name="category_id" ref="hr_payroll.BASIC"/>
     </record>
+    <record id="PAY_13" model="hr.salary.rule">
+        <field name="appears_on_payslip">True</field>
+        <field name="code">PAY_13</field>
+        <field name="condition_select">none</field>
+        <field name="name">Pay 13th salary provisonned</field>
+        <field name="sequence">51</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+if payslip.pay_13_salary:
+    result = TOTAL_PROVISION_13 + PROVISION_13
+else:
+    result = 0</field>
+        <field name="category_id" ref="hr_payroll.ALW"/>
+    </record>
+    <record id="CLEAR_PROVISION_13" model="hr.salary.rule">
+        <field name="appears_on_payslip">False</field>
+        <field name="code">CLEAR_PROVISION_13</field>
+        <field name="condition_select">none</field>
+        <field name="name">Clear provision 13 when paid</field>
+        <field name="sequence">210</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+if payslip.pay_13_salary:
+    result = TOTAL_PROVISION_13 + PROVISION_13
+else:
+    result = 0</field>
+        <field name="category_id" ref="hr_payroll.COMP"/>
+    </record>
     <record id="GROSS_CH" model="hr.salary.rule">
         <field name="amount_select">code</field>
         <field name="appears_on_payslip">True</field>
@@ -467,6 +491,51 @@ else:
         <field name="amount_python_compute">result = categories.DED</field>
         <field name="quantity">1</field>
         <field name="sequence">195</field>
+        <field name="category_id" ref="hr_payroll_INFO"/>
+    </record>
+    <record id="TOTAL_DED" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">True</field>
+        <field name="code">TOTAL_DED</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">Total Deduction</field>
+        <field name="amount_python_compute">result = categories.DED</field>
+        <field name="quantity">1</field>
+        <field name="sequence">195</field>
+        <field name="category_id" ref="hr_payroll_INFO"/>
+    </record>
+    <record id="PROVISION_13" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">False</field>
+        <field name="code">PROVISION_13</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">Provision for the 13th salary</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+if payslip.wage_type == 'hour':
+    result = contract.wage*payslip.worked_hours*(employee.company_id.yearlySalaries-12)/12
+else:
+    result = contract.wage*payslip.working_rate/100*(employee.company_id.yearlySalaries-12)/12
+        </field>
+        <field name="quantity">1</field>
+        <field name="sequence">50</field>
+        <field name="category_id" ref="hr_payroll_INFO"/>
+    </record>
+    <record id="TOTAL_PROVISION_13" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">False</field>
+        <field name="code">TOTAL_PROVISION_13</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">Total Provision for the 13th salary</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = payslip.amount_13_salary
+        </field>
+        <field name="quantity">1</field>
+        <field name="sequence">40</field>
         <field name="category_id" ref="hr_payroll_INFO"/>
     </record>
 </odoo>

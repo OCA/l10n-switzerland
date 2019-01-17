@@ -117,3 +117,8 @@ class ResCompany(models.Model):
         default='0',
         digits=dp.get_precision('Account'),
         required=False)
+
+    yearlySalaries = fields.Integer(
+        string='Number of salaries per year',
+        default=12,
+        required=False)
