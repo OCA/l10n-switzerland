@@ -24,6 +24,11 @@
                                 domain="[
                                 ('user_type_id', '=', %(account.data_account_type_expenses)d),
                                 ('code', 'like', '5___')]"/>
+                            <field name="yearlySalaries"/>
+                            <field name="provision13"
+                                domain="[
+                                ('user_type_id', '=', %(account.data_account_type_payable)d),
+                                ('code', 'like', '22__')]"/>
                         </group>
                         <div class="oe_title">
                             <h1>Standard Rules</h1>

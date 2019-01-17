@@ -10,17 +10,22 @@
                 <field name="wage_type" widget="selection"/>
                 <field name="wage_fulltime" attrs="{'invisible': [('wage_type', '!=', 'month')]}" />
                 <field name="occupation_rate" attrs="{'invisible': [('wage_type', '!=', 'month')]}"/>
+                <field name="provision_13_salary"/>
             </field>
             <field name="struct_id" position="after">
                 <field name="imp_src"/>
             </field>
             <xpath expr="//group[@name='duration_group']" position="after">
-                <group string="OBP">
+                <group string="OBP" groups="hr_payroll.group_hr_payroll_user">
                     <field name="lpp_contract_id" options="{'no_create': True, 'no_open': True}"/>
                     <field name="lpp_rate"/>
                     <field name="lpp_amount"/>
                 </group>
             </xpath>
+            <xpath expr="//group[@name='salary_and_advantages']" position="attributes" >
+                 <attribute name="groups">hr_payroll.group_hr_payroll_user</attribute>
+            </xpath>
+
         </field>
     </record>
 </odoo>

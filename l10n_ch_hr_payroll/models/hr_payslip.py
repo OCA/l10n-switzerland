@@ -25,6 +25,14 @@ class HrPayslip(models.Model):
 
     wage_type = fields.Selection(related='contract_id.wage_type')
 
+    pay_13_salary = fields.Boolean(
+        string='Pay the 13th salary this month',
+        help="Pay the provisionned 13th salary")
+
+    amount_13_salary = fields.Float(
+        string='13th salary to add',
+        digits=dp.get_precision('Account'))
+
     @api.multi
     def _compute_worked_hours(self):
         for payslip in self:
@@ -47,6 +55,15 @@ class HrPayslip(models.Model):
                 sum_wo_sec = sum_all_hours - sum_secunds
 
                 payslip.worked_hours = sum_wo_sec
+
+    @api.onchange('employee_id', 'pay_13_salary', 'contract_id')
+    def _compute_13_salary(self):
+        for payslip in self:
+            if payslip.pay_13_salary:
+                payslip.amount_13_salary = payslip.contract_id.provision_13_salary
+            else:
+                payslip.amount_13_salary = 0
+
 
     @api.onchange('employee_id', 'date_from', 'date_to')
     def _onchange_employee_worked_hours(self):
