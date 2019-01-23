@@ -12,8 +12,8 @@ class AccountPaymentOrder(models.Model):
     def finalize_sepa_file_creation(self, xml_root, gen_args):
         allpmtid = xml_root.findall('.//PmtId')
         for pmt in allpmtid:
-            if not pmt.find('InstrId'):
-                value = pmt.find('EndToEndId').text
+            if not pmt.xpath('./InstrId'):
+                value = pmt.xpath('./EndToEndId')[0].text
                 # Create a node, it's a copy of EndToEndId. Required for ZKB
                 instruction_identification = etree.Element(
                     'InstrId')
