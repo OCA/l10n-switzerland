@@ -22,7 +22,7 @@
 {
     "name": "Switzerland - SEPA Electronic Payment File",
     "summary": "Generate pain.001 Credit Transfert Files for your payments",
-    "version": "8.0.1.0.0",
+    "version": "8.0.1.0.1",
     "category": "Finance",
     "description": """
 Swiss electronic payment (SEPA)
