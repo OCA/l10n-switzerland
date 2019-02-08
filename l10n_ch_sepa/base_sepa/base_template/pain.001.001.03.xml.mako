@@ -51,6 +51,7 @@
         </DbtrAgt>
         <CdtTrfTxInf>
           <PmtId>
+            <InstrId>${line.name}</InstrId>
             <EndToEndId>${line.name}</EndToEndId>
           </PmtId>
           <%block name="PmtTpInf"/>
