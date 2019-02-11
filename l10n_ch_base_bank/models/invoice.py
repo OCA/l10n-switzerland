@@ -1,7 +1,6 @@
-# Copyright 2012 Nicolas Bessi (Camptocamp SA)
-# Copyright 2015 Yannick Vaucher (Camptocamp SA)
+# Copyright 2012-2019 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import models, api, _
+from odoo import models, api, fields, _
 from odoo.tools import mod10r
 from odoo import exceptions
 
@@ -9,6 +8,9 @@ from odoo import exceptions
 class AccountInvoice(models.Model):
 
     _inherit = "account.invoice"
+
+    reference_type = fields.Selection(
+        selection_add=[('isr', 'ISR Reference')])
 
     def _search(self, args, offset=0, limit=None, order=None, count=False,
                 access_rights_uid=None):
@@ -48,15 +50,9 @@ class AccountInvoice(models.Model):
             ids = [t[0] for t in self.env.cr.fetchall()]
             domain.append(('id', 'in', ids))
 
-        return super(AccountInvoice, self)._search(
+        return super()._search(
             domain, offset=offset, limit=limit, order=order, count=count,
             access_rights_uid=access_rights_uid)
-
-    @api.model
-    def _get_reference_type(self):
-        selection = super(AccountInvoice, self)._get_reference_type()
-        selection.append(('isr', _('ISR Reference')))
-        return selection
 
     @api.onchange('reference')
     def onchange_reference(self):

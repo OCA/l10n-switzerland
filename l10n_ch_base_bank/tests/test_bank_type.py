@@ -1,4 +1,4 @@
-# Copyright 2015 Yannick Vaucher (Camptocamp SA)
+# Copyright 2012-2019 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo.tests import common
 

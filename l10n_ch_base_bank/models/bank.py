@@ -216,6 +216,12 @@ class ResPartnerBank(models.Model, BankCommon):
          'The ISR adherent number/ccp pair must be unique !'),
     ]
 
+    @api.model
+    def _get_supported_account_types(self):
+        rslt = super(ResPartnerBank, self)._get_supported_account_types()
+        rslt.append(('postal', _('Postal')))
+        return rslt
+
     @api.depends('acc_number')
     def _compute_acc_type(self):
         todo = self.env['res.partner.bank']

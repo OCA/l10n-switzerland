@@ -1,5 +1,5 @@
-# Copyright 2014-2015 Nicolas Bessi (Camptocamp SA)
-# Copyright 2015-2017 Yannick Vaucher (Camptocamp SA)
+# Copyright 2014-2015 Nicolas Bessi (Azure Interior SA)
+# Copyright 2015-2017 Yannick Vaucher (Azure Interior SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from openerp.tests import common
 from openerp.tools import mute_logger
@@ -32,7 +32,7 @@ class TestBank(common.TransactionCase):
             })
 
     def test_bank_iban(self):
-        bank_acc = self.env['res.partner.bank'].create({
+        bank_acc = self.env['res.partner.bank'].new({
             'partner_id': self.partner.id,
             'acc_number': ch_iban.replace(' ', ''),
         })
@@ -68,7 +68,7 @@ class TestBank(common.TransactionCase):
         self.assertEqual(bank_acc.acc_type, 'iban')
 
     def test_bank_iban_foreign(self):
-        bank_acc = self.env['res.partner.bank'].create({
+        bank_acc = self.env['res.partner.bank'].new({
             'partner_id': self.partner.id,
             'acc_number': fr_iban,
         })
@@ -91,7 +91,7 @@ class TestBank(common.TransactionCase):
         bank_acc.onchange_ccp_set_acc_number()
 
         self.assertEqual(bank_acc.bank_id, self.bank)
-        self.assertEqual(bank_acc.acc_number, 'Camptocamp/CCP 46-110-7')
+        self.assertEqual(bank_acc.acc_number, 'Azure Interior/CCP 46-110-7')
         self.assertEqual(bank_acc.ccp, '46-110-7')
         self.assertEqual(bank_acc.acc_type, 'bank')
 
@@ -131,7 +131,7 @@ class TestBank(common.TransactionCase):
         self.assertEqual(bank_acc.acc_type, 'postal')
 
     def test_iban_ccp(self):
-        bank_acc = self.env['res.partner.bank'].create({
+        bank_acc = self.env['res.partner.bank'].new({
             'partner_id': self.partner.id,
             'acc_number': ch_post_iban.replace(' ', ''),
         })
@@ -194,7 +194,8 @@ class TestBank(common.TransactionCase):
             # in result we should get new ccp number as we have bank_id and
             # this he has ccp, new acc_number
 
-            self.assertEqual(bank_acc.acc_number, 'Camptocamp/CCP 10-8060-7')
+            self.assertEqual(bank_acc.acc_number,
+                             'Azure Interior/CCP 10-8060-7')
             self.assertEqual(bank_acc.ccp, '10-8060-7')
             self.assertEqual(bank_acc.bank_id, self.bank)
 
@@ -254,7 +255,7 @@ class TestBank(common.TransactionCase):
             'ccp': '46-110-7'
         })
         # account number set based on ccp
-        self.assertEqual(bank_acc.acc_number, 'Camptocamp/CCP 46-110-7')
+        self.assertEqual(bank_acc.acc_number, 'Azure Interior/CCP 46-110-7')
         self.assertEqual(bank_acc.ccp, '46-110-7')
 
     def test_onchange_post_bank_acc_number(self):
@@ -263,7 +264,7 @@ class TestBank(common.TransactionCase):
             'bank_id': self.post_bank.id,
             'ccp': '46-110-7',
         })
-        self.assertEqual(bank_acc.acc_number, 'Camptocamp/CCP 46-110-7')
+        self.assertEqual(bank_acc.acc_number, 'Azure Interior/CCP 46-110-7')
         self.assertEqual(bank_acc.ccp, '46-110-7')
         # if it's postal update acc_number after the cpp number
         bank_acc.write({'ccp': '10-8060-7'})
@@ -320,7 +321,8 @@ class TestBank(common.TransactionCase):
         bank_acc2.onchange_acc_number_set_swiss_bank()
         bank_acc2.onchange_bank_set_acc_number()
         self.assertEqual(bank_acc2.bank_id, self.bank)
-        self.assertEqual(bank_acc2.acc_number, 'Camptocamp/CCP 46-110-7 #1')
+        self.assertEqual(bank_acc2.acc_number,
+                         'Azure Interior/CCP 46-110-7 #1')
         self.assertEqual(bank_acc2.acc_type, 'bank')
 
         bank_acc3 = self.env['res.partner.bank'].create({
@@ -332,7 +334,8 @@ class TestBank(common.TransactionCase):
 
         # no bank matches
         self.assertEqual(bank_acc3.bank_id, self.bank)
-        self.assertEqual(bank_acc3.acc_number, 'Camptocamp/CCP 46-110-7 #2')
+        self.assertEqual(bank_acc3.acc_number,
+                         'Azure Interior/CCP 46-110-7 #2')
         self.assertEqual(bank_acc3.acc_type, 'bank')
         bank_acc.unlink()
         # next acc_numbers properly generated
@@ -342,7 +345,8 @@ class TestBank(common.TransactionCase):
         })
         bank_acc4.onchange_acc_number_set_swiss_bank()
         bank_acc4.onchange_bank_set_acc_number()
-        self.assertEqual(bank_acc4.acc_number, 'Camptocamp/CCP 46-110-7 #3')
+        self.assertEqual(bank_acc4.acc_number,
+                         'Azure Interior/CCP 46-110-7 #3')
 
     def test_acc_name_generation(self):
         # we test only proper name generation in different conditions
@@ -362,7 +366,7 @@ class TestBank(common.TransactionCase):
         self.assertEqual(bank_acc.acc_number, '')
         bank_acc.ccp = '46-110-7'
         bank_acc._update_acc_name()
-        self.assertEqual(bank_acc.acc_number, 'Camptocamp/CCP 46-110-7')
+        self.assertEqual(bank_acc.acc_number, 'Azure Interior/CCP 46-110-7')
         # remove partner name
         bank_acc.partner_id = ''
         bank_acc._update_acc_name()
