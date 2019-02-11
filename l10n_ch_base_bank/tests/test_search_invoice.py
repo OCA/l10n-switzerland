@@ -1,59 +1,68 @@
-# Copyright 2017 Camptocamp SA
+    # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from odoo.tests import common
+from odoo.tests.common import Form
 
 
-class TestSearchInvoice(common.TransactionCase):
+class TestSearchInvoice(common.SavepointCase):
 
-    def setUp(self):
-        super(TestSearchInvoice, self).setUp()
-        self.company = self.env.ref('base.main_company')
-        bank = self.env['res.bank'].create({
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.company = cls.env.ref('base.main_company')
+        bank = cls.env['res.bank'].create({
             'name': 'BCV',
             'bic': 'BIC23423',
             'clearing': '234234',
             'ccp': '01-1234-1',
         })
-        bank_account = self.env['res.partner.bank'].create({
-            'partner_id': self.company.partner_id.id,
+        cls.env['res.partner.bank'].create({
+            'partner_id': cls.company.partner_id.id,
             'bank_id': bank.id,
-            'acc_number': 'Bank/CCP 01-1234-1',
+            # 'acc_number': 'Bank/CCP 01-1234-1',
+            # else not recognized as a postal account number:
+            'acc_number': '01-1234-1',
         })
-        self.company.partner_id.bank_ids = bank_account
-        self.partner = self.env['res.partner'].create(
+        cls.partner = cls.env['res.partner'].create(
             {'name': 'Test'}
         )
-        self.bank_journal = self.env['account.journal'].create({
-            'company_id': self.company.id,
+        cls.bank_journal = cls.env['account.journal'].create({
+            'company_id': cls.company.id,
             'type': 'bank',
             'code': 'BNK42',
             'bank_id': bank.id,
-            'bank_acc_number': '01-1234-1',
+            'bank_acc_number': '10-8060-7',
         })
 
+    def new_form(self):
+        inv = Form(
+            self.env['account.invoice'],
+            view='account.invoice_form'
+        )
+        inv.partner_id = self.partner
+        inv.journal_id = self.bank_journal
+        inv.type = 'out_invoice'
+        inv.reference_type = 'isr'
+        return inv
+
     def assert_find_ref(self, reference, operator, value):
-        values = {
-            'partner_id': self.partner.id,
-            'type': 'out_invoice',
-            'reference_type': 'isr',
-            'reference': reference,
-        }
-        invoice = self.env['account.invoice'].create(values)
+        inv_form = self.new_form()
+        inv_form.reference = reference
+
+        invoice = inv_form.save()
+
         found = self.env['account.invoice'].search(
             [('reference', operator, value)],
         )
         self.assertEqual(invoice, found)
 
     def assert_not_find_ref(self, reference, operator, value):
-        values = {
-            'partner_id': self.partner.id,
-            'type': 'out_invoice',
-            'reference_type': 'isr',
-            'reference': reference,
-            'journal_id': self.bank_journal.id,
-        }
-        self.env['account.invoice'].create(values)
+        inv_form = self.new_form()
+        inv_form.reference = reference
+        inv_form.save()
+
         found = self.env['account.invoice'].search(
             [('reference', operator, value)],
         )
@@ -111,30 +120,21 @@ class TestSearchInvoice(common.TransactionCase):
         )
 
     def test_search_other_field(self):
-        values = {
-            'partner_id': self.partner.id,
-            'type': 'out_invoice',
-            'reference_type': 'isr',
-            'reference': '27 29990 00000 00001 70400 25019',
-        }
-        invoice = self.env['account.invoice'].create(values)
+        inv_form = self.new_form()
+        inv_form.reference = '27 29990 00000 00001 70400 25019'
+        invoice = inv_form.save()
+
         found = self.env['account.invoice'].search(
             [('partner_id', '=', self.partner.id)],
         )
         self.assertEqual(invoice, found)
 
     def test_search_unary_operator(self):
-        values = {
-            'partner_id': self.partner.id,
-            'type': 'out_invoice',
-            'reference_type': 'isr',
-            'reference': '27 29990 00000 00001 70400 25019',
-        }
-        invoice = self.env['account.invoice'].create(values)
+        inv_form = self.new_form()
+        inv_form.reference = '27 29990 00000 00001 70400 25019'
+        invoice = inv_form.save()
+
         found = self.env['account.invoice'].search(
-            ['|',
-             ('partner_id', '=', False),
-             ('reference', 'like', '2999000000'),
-             ],
+            [('reference', 'like', '2999000000')],
         )
         self.assertEqual(invoice, found)
