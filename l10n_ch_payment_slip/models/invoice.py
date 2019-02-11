@@ -174,6 +174,7 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def action_invoice_draft(self):
+        # TODO need refactoring
         res = super().action_invoice_draft()
         # Delete former printed payment slip
         ActionReport = self.env['ir.actions.report']

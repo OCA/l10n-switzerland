@@ -1,214 +1,196 @@
-# Copyright 2014-2015 Nicolas Bessi (Camptocamp SA)
+# Copyright 2014-2015 Nicolas Bessi (Azure Interior SA)
 # Copyright 2015-2017 Yannick Vaucher (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from openerp.tests import common
-from openerp.tools import mute_logger
-from openerp import exceptions
+from odoo.tests import common
+from odoo.tools import mute_logger
+from odoo import exceptions
+from odoo.tests.common import Form
 
 ch_iban = 'CH15 3881 5158 3845 3843 7'
 ch_post_iban = 'CH09 0900 0000 1000 8060 7'
-fr_iban = 'FR8387234133870990794002530'
+fr_iban = 'FR83 8723 4133 8709 9079 4002 530'
 
 
-class TestBank(common.TransactionCase):
+class TestBank(common.SavepointCase):
 
-    def setUp(self):
-        super(TestBank, self).setUp()
-        self.partner = self.env.ref('base.res_partner_12')
-        self.bank = self.env['res.bank'].create({
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.partner = cls.env.ref('base.res_partner_12')
+        cls.bank = cls.env['res.bank'].create({
             'name': 'Alternative Bank Schweiz AG',
             'bic': 'ALSWCH21XXX',
             'clearing': '38815',
             'ccp': '46-110-7',
         })
-        self.post_bank = self.env['res.bank'].search(
+        cls.post_bank = cls.env['res.bank'].search(
             [('bic', '=', 'POFICHBEXXX')])
-        if not self.post_bank:
-            self.post_bank = self.env['res.bank'].create({
+        if not cls.post_bank:
+            cls.post_bank = cls.env['res.bank'].create({
                 'name': 'PostFinance AG',
                 'bic': 'POFICHBEXXX',
                 'clearing': '9000',
                 'ccp': '10-8060-7',
             })
 
-    def test_bank_iban(self):
-        bank_acc = self.env['res.partner.bank'].create({
-            'partner_id': self.partner.id,
-            'acc_number': ch_iban.replace(' ', ''),
-        })
-        bank_acc.onchange_acc_number_set_swiss_bank()
+    def new_form(self):
+        form = Form(
+            self.env['res.partner.bank'],
+            view='l10n_ch_base_bank.add_ccp_on_res_partner_bank'
+        )
+        form.partner_id = self.partner
+        return form
 
-        self.assertEqual(bank_acc.bank_id, self.bank)
-        self.assertEqual(bank_acc.acc_number, ch_iban.replace(' ', ''))
-        self.assertEqual(bank_acc.ccp, '46-110-7')
-        self.assertEqual(bank_acc.acc_type, 'iban')
+    def new_empty_form(self):
+        # in some cases we need form without partner
+        form = Form(
+            self.env['res.partner.bank'],
+            view='l10n_ch_base_bank.add_ccp_on_res_partner_bank'
+        )
+        return form
+
+    def test_bank_iban(self):
+
+        bank_acc = self.new_form()
+        bank_acc.acc_number = ch_iban.replace(' ', '')
+        account = bank_acc.save()
+
+        self.assertEqual(account.bank_id, self.bank)
+        self.assertEqual(account.acc_number, ch_iban)
+        self.assertEqual(account.ccp, '46-110-7')
+        self.assertEqual(account.acc_type, 'iban')
 
     def test_bank_iban_with_spaces(self):
-        bank_acc = self.env['res.partner.bank'].create({
-            'partner_id': self.partner.id,
-            'acc_number': ch_iban,
-        })
-        bank_acc.onchange_acc_number_set_swiss_bank()
+        bank_acc = self.new_form()
+        bank_acc.acc_number = ch_iban
+        account = bank_acc.save()
 
-        self.assertEqual(bank_acc.bank_id, self.bank)
-        self.assertEqual(bank_acc.acc_number, ch_iban)
-        self.assertEqual(bank_acc.ccp, '46-110-7')
-        self.assertEqual(bank_acc.acc_type, 'iban')
+        self.assertEqual(account.bank_id, self.bank)
+        self.assertEqual(account.acc_number, ch_iban)
+        self.assertEqual(account.ccp, '46-110-7')
+        self.assertEqual(account.acc_type, 'iban')
 
     def test_bank_iban_lower_case(self):
-        bank_acc = self.env['res.partner.bank'].create({
-            'partner_id': self.partner.id,
-            'acc_number': ch_iban.lower(),
-        })
-        bank_acc.onchange_acc_number_set_swiss_bank()
+        bank_acc = self.new_form()
+        bank_acc.acc_number = ch_iban.lower()
+        account = bank_acc.save()
 
-        self.assertEqual(bank_acc.bank_id, self.bank)
-        self.assertEqual(bank_acc.acc_number, ch_iban.lower())
-        self.assertEqual(bank_acc.ccp, '46-110-7')
-        self.assertEqual(bank_acc.acc_type, 'iban')
+        self.assertEqual(account.bank_id, self.bank)
+        self.assertEqual(account.acc_number, ch_iban.lower())
+        self.assertEqual(account.ccp, '46-110-7')
+        self.assertEqual(account.acc_type, 'iban')
 
     def test_bank_iban_foreign(self):
-        bank_acc = self.env['res.partner.bank'].create({
-            'partner_id': self.partner.id,
-            'acc_number': fr_iban,
-        })
-        bank_acc.onchange_acc_number_set_swiss_bank()
+        bank_acc = self.new_form()
+        bank_acc.acc_number = fr_iban
+        account = bank_acc.save()
 
-        self.assertFalse(bank_acc.bank_id)
-        self.assertEqual(bank_acc.acc_number, fr_iban)
-        self.assertFalse(bank_acc.ccp)
-        self.assertEqual(bank_acc.acc_type, 'iban')
+        self.assertFalse(account.bank_id)
+        self.assertEqual(account.acc_number, fr_iban)
+        self.assertFalse(account.ccp)
+        self.assertEqual(account.acc_type, 'iban')
 
     def test_bank_ccp(self):
         # test UI onchange methods
-        bank_acc = self.env['res.partner.bank'].new({
-            'partner_id': self.partner.id,
-            'acc_number': '46-110-7',
-        })
+        bank_acc = self.new_form()
+        bank_acc.acc_number = '46-110-7'
+        account = bank_acc.save()
 
-        bank_acc.onchange_acc_number_set_swiss_bank()
-        # ccp also changed
-        bank_acc.onchange_ccp_set_acc_number()
-
-        self.assertEqual(bank_acc.bank_id, self.bank)
-        self.assertEqual(bank_acc.acc_number, 'Camptocamp/CCP 46-110-7')
-        self.assertEqual(bank_acc.ccp, '46-110-7')
-        self.assertEqual(bank_acc.acc_type, 'bank')
+        self.assertEqual(account.bank_id, self.bank)
+        self.assertEqual(account.acc_number, 'Azure Interior/CCP 46-110-7')
+        self.assertEqual(account.ccp, '46-110-7')
+        self.assertEqual(account.acc_type, 'bank')
 
     def test_bank_ccp_no_found(self):
-        bank_acc = self.env['res.partner.bank'].create({
-            'partner_id': self.partner.id,
-            'acc_number': '10-8060-7',
-        })
-        bank_acc.onchange_acc_number_set_swiss_bank()
+        bank_acc = self.new_form()
+        bank_acc.acc_number = '10-8060-7'
+        account = bank_acc.save()
 
-        self.assertEqual(bank_acc.bank_id, self.post_bank)
+        self.assertEqual(account.bank_id, self.post_bank)
         # if acc_number given by user don't update it
-        self.assertEqual(bank_acc.acc_number, '10-8060-7')
-        self.assertEqual(bank_acc.ccp, '10-8060-7')
-        self.assertEqual(bank_acc.acc_type, 'postal')
+        self.assertEqual(account.acc_number, '10-8060-7')
+        self.assertEqual(account.ccp, '10-8060-7')
+        self.assertEqual(account.acc_type, 'postal')
 
         bank_acc.bank_id = self.post_bank
-        bank_acc.onchange_bank_set_acc_number()
-        bank_acc.onchange_ccp_set_acc_number()
+        bank_acc.save()
 
-        self.assertEqual(bank_acc.bank_id, self.post_bank)
+        self.assertEqual(account.bank_id, self.post_bank)
         # copied ccp to acc_number
-        self.assertEqual(bank_acc.acc_number, '10-8060-7')
-        self.assertEqual(bank_acc.ccp, '10-8060-7')
-        self.assertEqual(bank_acc.acc_type, 'postal')
+        self.assertEqual(account.acc_number, '10-8060-7')
+        self.assertEqual(account.ccp, '10-8060-7')
+        self.assertEqual(account.acc_type, 'postal')
 
     def test_ccp(self):
-        bank_acc = self.env['res.partner.bank'].create({
-            'partner_id': self.partner.id,
-            'acc_number': '10-8060-7',
-        })
-        bank_acc.onchange_acc_number_set_swiss_bank()
+        bank_acc = self.new_form()
+        bank_acc.acc_number = '10-8060-7'
+        account = bank_acc.save()
 
-        self.assertEqual(bank_acc.bank_id, self.post_bank)
-        self.assertEqual(bank_acc.acc_number, '10-8060-7')
-        self.assertEqual(bank_acc.ccp, '10-8060-7')
-        self.assertEqual(bank_acc.acc_type, 'postal')
+        self.assertEqual(account.bank_id, self.post_bank)
+        self.assertEqual(account.acc_number, '10-8060-7')
+        self.assertEqual(account.ccp, '10-8060-7')
+        self.assertEqual(account.acc_type, 'postal')
 
     def test_iban_ccp(self):
-        bank_acc = self.env['res.partner.bank'].create({
-            'partner_id': self.partner.id,
-            'acc_number': ch_post_iban.replace(' ', ''),
-        })
-        bank_acc.onchange_acc_number_set_swiss_bank()
+        bank_acc = self.new_form()
+        bank_acc.acc_number = ch_post_iban
+        account = bank_acc.save()
 
-        self.assertEqual(bank_acc.bank_id, self.post_bank)
-        self.assertEqual(bank_acc.acc_number, ch_post_iban.replace(' ', ''))
-        self.assertEqual(bank_acc.ccp, '10-8060-7')
-        self.assertEqual(bank_acc.acc_type, 'iban')
-
-    def test_iban_ccp_with_spaces(self):
-        bank_acc = self.env['res.partner.bank'].create({
-            'partner_id': self.partner.id,
-            'acc_number': ch_post_iban,
-        })
-        bank_acc.onchange_acc_number_set_swiss_bank()
-
-        self.assertEqual(bank_acc.bank_id, self.post_bank)
-        self.assertEqual(bank_acc.acc_number, ch_post_iban)
-        self.assertEqual(bank_acc.ccp, '10-8060-7')
-        self.assertEqual(bank_acc.acc_type, 'iban')
+        self.assertEqual(account.bank_id, self.post_bank)
+        self.assertEqual(account.acc_number, ch_post_iban)
+        self.assertEqual(account.ccp, '10-8060-7')
+        self.assertEqual(account.acc_type, 'iban')
 
     def test_other_bank(self):
         self.bank.ccp = False
-        bank_acc = self.env['res.partner.bank'].create({
-            'partner_id': self.partner.id,
-            'bank_id': self.bank.id,
-            'acc_number': 'R 12312123',
-        })
-        bank_acc.onchange_acc_number_set_swiss_bank()
+        bank_acc = self.new_form()
+        # the sequence is important
+        bank_acc.bank_id = self.bank
+        bank_acc.acc_number = 'R 12312123'
+        account = bank_acc.save()
 
-        self.assertEqual(bank_acc.bank_id, self.bank)
-        self.assertEqual(bank_acc.acc_number, 'R 12312123')
-        self.assertEqual(bank_acc.ccp, False)
-        self.assertEqual(bank_acc.acc_type, 'bank')
+        self.assertEqual(account.bank_id, self.bank)
+        self.assertEqual(account.acc_number, 'R 12312123')
+        self.assertEqual(account.ccp, False)
+        self.assertEqual(account.acc_type, 'bank')
 
     def test_set_ccp(self):
-        bank_acc = self.env['res.partner.bank'].new({
-            'partner_id': self.partner.id,
-            'acc_number': None,
-            'ccp': '10-8060-7',
-        })
-        bank_acc.onchange_ccp_set_acc_number()
+        bank_acc = self.new_form()
+        bank_acc.acc_number = None
+        bank_acc.acc_number = '10-8060-7'
+        account = bank_acc.save()
 
-        self.assertEqual(bank_acc.acc_number, '10-8060-7')
-        self.assertEqual(bank_acc.bank_id, self.post_bank)
+        self.assertEqual(account.acc_number, '10-8060-7')
+        self.assertEqual(account.bank_id, self.post_bank)
 
     def test_set_ccp_bank(self):
-        # we crate bank account
+        # we create bank account
         # action runs in UI before creation
-        with self.env.do_in_onchange():
+        bank_acc = self.new_form()
+        bank_acc.acc_number = None
+        bank_acc.ccp = '10-8060-7'
+        bank_acc.bank_id = self.bank
+        account = bank_acc.save()
 
-            bank_acc = self.env['res.partner.bank'].new({
-                'partner_id': self.partner.id,
-                'acc_number': None,
-                'bank_id': self.bank.id,
-                'ccp': '10-8060-7'
-            })
-            bank_acc.onchange_ccp_set_acc_number()
-            # in result we should get new ccp number as we have bank_id and
-            # this he has ccp, new acc_number
+        # in result we should get new ccp number as we have bank_id and
+        # this he has ccp, new acc_number
 
-            self.assertEqual(bank_acc.acc_number, 'Camptocamp/CCP 10-8060-7')
-            self.assertEqual(bank_acc.ccp, '10-8060-7')
-            self.assertEqual(bank_acc.bank_id, self.bank)
+        self.assertEqual(account.acc_number,
+                         'Azure Interior/CCP 10-8060-7')
+        self.assertEqual(account.ccp, '10-8060-7')
+        self.assertEqual(account.bank_id, self.bank)
 
     def test_set_onchange_ccp_post(self):
         # fond bank based on ccp set acc_number
         # action runs in UI before creation
-        bank_acc = self.env['res.partner.bank'].new({
-            'partner_id': self.partner.id,
-            'ccp': '10-8060-7'
-        })
-        bank_acc.onchange_ccp_set_acc_number()
-        self.assertEqual(bank_acc.acc_number, '10-8060-7')
-        self.assertEqual(bank_acc.ccp, '10-8060-7')
-        self.assertEqual(bank_acc.bank_id, self.post_bank)
+        bank_acc = self.new_form()
+        bank_acc.ccp = '10-8060-7'
+        account = bank_acc.save()
+
+        self.assertEqual(account.acc_number, '10-8060-7')
+        self.assertEqual(account.ccp, '10-8060-7')
+        self.assertEqual(account.bank_id, self.post_bank)
 
     def test_constraint_ccp(self):
         with self.assertRaises(exceptions.ValidationError):
@@ -234,59 +216,39 @@ class TestBank(common.TransactionCase):
                     'isr_adherent_num': 'Wrong ISR adherent number',
                 })
 
-    def test_get_account_number(self):
-        """ get_account_number return ccp if defined or acc_number """
-        bank_acc = self.env['res.partner.bank'].create({
-            'partner_id': self.partner.id,
-            'acc_number': 'R 12312123',
-            'isr_adherent_num': '1234567',
-        })
-        acc_num = bank_acc.get_account_number()
-        self.assertEqual(acc_num, bank_acc.acc_number)
-        bank_acc.ccp = '10-725-4'
-        acc_num = bank_acc.get_account_number()
-        self.assertEqual(acc_num, bank_acc.ccp)
-
     def test_create_bank_default_acc_number(self):
-        bank_acc = self.env['res.partner.bank'].create({
-            'partner_id': self.partner.id,
-            'bank_id': self.bank.id,
-            'ccp': '46-110-7'
-        })
+        bank_acc = self.new_form()
+        bank_acc.bank_id = self.bank
+        bank_acc.ccp = '46-110-7'
+        account = bank_acc.save()
+
         # account number set based on ccp
-        self.assertEqual(bank_acc.acc_number, 'Camptocamp/CCP 46-110-7')
-        self.assertEqual(bank_acc.ccp, '46-110-7')
+        self.assertEqual(account.acc_number, 'Azure Interior/CCP 46-110-7')
+        self.assertEqual(account.ccp, '46-110-7')
 
     def test_onchange_post_bank_acc_number(self):
-        bank_acc = self.env['res.partner.bank'].create({
-            'partner_id': self.partner.id,
-            'bank_id': self.post_bank.id,
-            'ccp': '46-110-7',
-        })
-        self.assertEqual(bank_acc.acc_number, 'Camptocamp/CCP 46-110-7')
-        self.assertEqual(bank_acc.ccp, '46-110-7')
-        # if it's postal update acc_number after the cpp number
-        bank_acc.write({'ccp': '10-8060-7'})
-        bank_acc.onchange_ccp_set_acc_number()
-        self.assertEqual(bank_acc.acc_number, '10-8060-7')
+        bank_acc = self.new_empty_form()
+        bank_acc.bank_id = self.post_bank
+        bank_acc.ccp = '10-8060-7'
+
         self.assertEqual(bank_acc.ccp, '10-8060-7')
+        self.assertEqual(bank_acc.acc_number, '10-8060-7')
+
+        # if it's postal update acc_number after the cpp number
+        bank_acc.ccp = '46-110-7'
+        self.assertEqual(bank_acc.acc_number, 'CCP 46-110-7')
+
+        bank_acc.partner_id = self.partner
+        self.assertEqual(bank_acc.acc_number, 'Azure Interior/CCP 46-110-7')
+        self.assertEqual(bank_acc.ccp, '46-110-7')
 
     def test_onchange_post_bank_ccp_in_acc_number(self):
-        bank_acc = self.env['res.partner.bank'].create({
-            'partner_id': self.partner.id,
-            'bank_id': self.post_bank.id,
-            'acc_number': '46-110-7',
-            'ccp': None,
-        })
+        bank_acc = self.new_form()
+        bank_acc.acc_number = '46-110-7'
+        bank_acc.bank_id = self.post_bank
+
+        self.assertEqual(bank_acc.ccp, '46-110-7')
         self.assertEqual(bank_acc.acc_number, '46-110-7')
-        # on creation we don't compute ccp number
-        self.assertFalse(bank_acc.ccp,)
-        bank_acc.acc_number = '10-8060-7'
-        bank_acc.onchange_acc_number_set_swiss_bank()
-        bank_acc.onchange_bank_set_acc_number()
-        # numbers recomputed
-        self.assertEqual(bank_acc.acc_number, '10-8060-7')
-        self.assertEqual(bank_acc.ccp, '10-8060-7')
 
     def test_name_search(self):
         self.bank.bic = 'BIC12345'
@@ -303,75 +265,72 @@ class TestBank(common.TransactionCase):
         self.assertEqual(result and result[0][0], self.bank.id)
 
     def test_multiple_ccp_number_for_same_partner(self):
-        bank_acc = self.env['res.partner.bank'].create({
-            'partner_id': self.partner.id,
-            'acc_number': '46-110-7',
-        })
-        # each time this onchange triggered in UI it setup proper bank
-        # and acc_number
-        bank_acc.onchange_acc_number_set_swiss_bank()
-        bank_acc.onchange_bank_set_acc_number()
+        bank_acc = self.new_form()
+        bank_acc.acc_number = '46-110-7'
+        bank_acc.save()
+        bank_acc_2 = self.new_form()
+        bank_acc_2.acc_number = '46-110-7'
+        account2 = bank_acc_2.save()
 
-        bank_acc2 = self.env['res.partner.bank'].create({
-            'partner_id': self.partner.id,
-            'acc_number': '46-110-7',
-        })
+        self.assertEqual(account2.bank_id, self.bank)
+        self.assertEqual(account2.acc_number,
+                         'Azure Interior/CCP 46-110-7 #1')
+        self.assertEqual(account2.acc_type, 'bank')
 
-        bank_acc2.onchange_acc_number_set_swiss_bank()
-        bank_acc2.onchange_bank_set_acc_number()
-        self.assertEqual(bank_acc2.bank_id, self.bank)
-        self.assertEqual(bank_acc2.acc_number, 'Camptocamp/CCP 46-110-7 #1')
-        self.assertEqual(bank_acc2.acc_type, 'bank')
-
-        bank_acc3 = self.env['res.partner.bank'].create({
-            'partner_id': self.partner.id,
-            'acc_number': '46-110-7',
-        })
-        bank_acc3.onchange_acc_number_set_swiss_bank()
-        bank_acc3.onchange_bank_set_acc_number()
+        bank_acc_3 = self.new_form()
+        bank_acc_3.acc_number = '46-110-7'
+        account3 = bank_acc_3.save()
 
         # no bank matches
-        self.assertEqual(bank_acc3.bank_id, self.bank)
-        self.assertEqual(bank_acc3.acc_number, 'Camptocamp/CCP 46-110-7 #2')
-        self.assertEqual(bank_acc3.acc_type, 'bank')
-        bank_acc.unlink()
+        self.assertEqual(account3.bank_id, self.bank)
+        self.assertEqual(account3.acc_number,
+                         'Azure Interior/CCP 46-110-7 #2')
+        self.assertEqual(account3.acc_type, 'bank')
+        account3.unlink()
         # next acc_numbers properly generated
-        bank_acc4 = self.env['res.partner.bank'].create({
-            'partner_id': self.partner.id,
-            'acc_number': '46-110-7',
-        })
-        bank_acc4.onchange_acc_number_set_swiss_bank()
-        bank_acc4.onchange_bank_set_acc_number()
-        self.assertEqual(bank_acc4.acc_number, 'Camptocamp/CCP 46-110-7 #3')
+
+        bank_acc_4 = self.new_form()
+        bank_acc_4.acc_number = '46-110-7'
+        account4 = bank_acc_4.save()
+
+        account4.onchange_acc_number_set_swiss_bank()
+        account4.onchange_bank_set_acc_number()
+        self.assertEqual(account4.acc_number,
+                         'Azure Interior/CCP 46-110-7 #3')
 
     def test_acc_name_generation(self):
+        # this test runs directly with object and onchange methods as Form
+        # class has constrains to flash required field as partner_id is
+        # once is set we can only replace on other partner but in view form
+        # we can make such actions
+
         # we test only proper name generation in different conditions
-        bank_acc = self.env['res.partner.bank'].new({
+        account = self.env['res.partner.bank'].new({
             'acc_number': '46-110-7',
             'partner_id': False,
         })
         # acc_number is ok in first
-        self.assertEqual(bank_acc.acc_number, '46-110-7')
+        self.assertEqual(account.acc_number, '46-110-7')
         # but if some onchange trigger recompilation of name we flash any name
         # only it's not iban type
-        bank_acc._update_acc_name()
-        self.assertEqual(bank_acc.acc_number, '')
+        account._update_acc_name()
+        self.assertEqual(account.acc_number, '')
         # still no name
-        bank_acc.partner_id = self.partner
-        bank_acc._update_acc_name()
-        self.assertEqual(bank_acc.acc_number, '')
-        bank_acc.ccp = '46-110-7'
-        bank_acc._update_acc_name()
-        self.assertEqual(bank_acc.acc_number, 'Camptocamp/CCP 46-110-7')
+        account.partner_id = self.partner
+        account._update_acc_name()
+        self.assertEqual(account.acc_number, '')
+        account.ccp = '46-110-7'
+        account._update_acc_name()
+        self.assertEqual(account.acc_number, 'Azure Interior/CCP 46-110-7')
         # remove partner name
-        bank_acc.partner_id = ''
-        bank_acc._update_acc_name()
-        self.assertEqual(bank_acc.acc_number, 'CCP 46-110-7')
+        account.partner_id = ''
+        account._update_acc_name()
+        self.assertEqual(account.acc_number, 'CCP 46-110-7')
         # no changes for bank changes
-        bank_acc.bank_id = self.bank
-        bank_acc._update_acc_name()
-        self.assertEqual(bank_acc.acc_number, 'CCP 46-110-7')
+        account.bank_id = self.bank
+        account._update_acc_name()
+        self.assertEqual(account.acc_number, 'CCP 46-110-7')
         # everything cleanup
-        bank_acc.ccp = ''
-        bank_acc._update_acc_name()
-        self.assertEqual(bank_acc.acc_number, '')
+        account.ccp = ''
+        account._update_acc_name()
+        self.assertEqual(account.acc_number, '')
