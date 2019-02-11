@@ -9,8 +9,7 @@ class AccountMoveLine(models.Model):
 
     @api.multi
     def _prepare_payment_line_vals(self, payment_order):
-        vals = super(AccountMoveLine, self)._prepare_payment_line_vals(
-            payment_order)
+        vals = super()._prepare_payment_line_vals(payment_order)
         if self.invoice_id and self.invoice_id.reference_type == 'isr':
             vals['local_instrument'] = 'CH01'
             if vals['communication']:
