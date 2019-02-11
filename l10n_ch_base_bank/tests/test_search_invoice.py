@@ -7,7 +7,7 @@ from odoo.tests import common
 class TestSearchInvoice(common.TransactionCase):
 
     def setUp(self):
-        super(TestSearchInvoice, self).setUp()
+        super().setUp()
         self.company = self.env.ref('base.main_company')
         bank = self.env['res.bank'].create({
             'name': 'BCV',

@@ -1,5 +1,4 @@
-# Copyright 2014-2015 Nicolas Bessi (Camptocamp SA)
-# Copyright 2015-2017 Yannick Vaucher (Camptocamp SA)
+# Copyright 2012-2019 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from openerp.tests import common
 from openerp.tools import mute_logger
