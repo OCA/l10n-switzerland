@@ -12,7 +12,6 @@ class AccountPaymentLine(models.Model):
     communication_type = fields.Selection(selection_add=[('isr', 'ISR')])
 
     def invoice_reference_type2communication_type(self):
-        res = super(AccountPaymentLine, self).\
-            invoice_reference_type2communication_type()
+        res = super().invoice_reference_type2communication_type()
         res['isr'] = 'isr'
         return res
