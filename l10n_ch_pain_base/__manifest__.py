@@ -5,7 +5,7 @@
 {
     "name": "Switzerland - ISO 20022",
     "summary": "ISO 20022 base module for Switzerland",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "category": "Finance",
     "author": "Akretion,Camptocamp,Odoo Community Association (OCA)",
     "license": "AGPL-3",
@@ -17,5 +17,5 @@
         'views/account_payment_line.xml',
         'views/bank_payment_line.xml',
     ],
-    'installable': False,
+    'installable': True,
 }
