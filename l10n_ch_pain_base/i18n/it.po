@@ -19,6 +19,16 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_pain_base
+#: selection:account.payment.line,local_instrument:0
+msgid "CH01 (ISR)"
+msgstr ""
+
+#. module: l10n_ch_pain_base
+#: model:ir.model.fields,field_description:l10n_ch_pain_base.field_account_payment_line__communication_type
+msgid "Communication Type"
+msgstr ""
+
+#. module: l10n_ch_pain_base
 #: code:addons/l10n_ch_pain_base/models/account_payment_order.py:72
 #, python-format
 msgid ""
@@ -27,8 +37,33 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_pain_base
+#: selection:account.payment.line,communication_type:0
+msgid "Free"
+msgstr ""
+
+#. module: l10n_ch_pain_base
+#: selection:account.payment.line,communication_type:0
+msgid "ISO"
+msgstr ""
+
+#. module: l10n_ch_pain_base
+#: selection:account.payment.line,communication_type:0
+msgid "ISR"
+msgstr ""
+
+#. module: l10n_ch_pain_base
+#: selection:account.payment.line,local_instrument:0
+msgid "Instant Transfer"
+msgstr ""
+
+#. module: l10n_ch_pain_base
 #: model:ir.model,name:l10n_ch_pain_base.model_account_move_line
 msgid "Journal Item"
+msgstr ""
+
+#. module: l10n_ch_pain_base
+#: model:ir.model.fields,field_description:l10n_ch_pain_base.field_account_payment_line__local_instrument
+msgid "Local Instrument"
 msgstr ""
 
 #. module: l10n_ch_pain_base
