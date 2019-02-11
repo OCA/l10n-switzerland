@@ -8,6 +8,7 @@ from odoo.exceptions import UserError
 class ISRBatchPrintWizard(models.TransientModel):
 
     _name = 'isr.batch.print.wizard'
+    _description = 'Printing Wizard for payment slip'
 
     invoice_ids = fields.Many2many(comodel_name='account.invoice',
                                    string='Invoices')

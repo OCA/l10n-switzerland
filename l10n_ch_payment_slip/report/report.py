@@ -5,3 +5,4 @@ from odoo import models
 
 class ISRFromInvoice(models.AbstractModel):
     _name = 'report.one_slip_per_page_from_invoice'
+    _description = 'ISR Invoice report'
