@@ -72,7 +72,6 @@ class TestSCTCH(AccountingTestCase):
             'pain.001.001.03.ch.02'
         self.chf_currency = self.env.ref('base.CHF')
         self.eur_currency = self.env.ref('base.EUR')
-        self.main_company.currency_id = self.chf_currency.id
         ch_bank2 = self.env['res.bank'].create({
             'name': 'Banque Cantonale Vaudoise',
             'bic': 'BCVLCH2LXXX',
@@ -90,11 +89,11 @@ class TestSCTCH(AccountingTestCase):
     def test_sct_ch_payment_type1(self):
         invoice1 = self.create_invoice(
             self.partner_agrolait.id,
-            self.agrolait_partner_bank.id, self.chf_currency, 42.0,
+            self.agrolait_partner_bank.id, self.eur_currency, 42.0,
             'isr', '132000000000000000000000014')
         invoice2 = self.create_invoice(
             self.partner_agrolait.id,
-            self.agrolait_partner_bank.id, self.chf_currency, 12.0,
+            self.agrolait_partner_bank.id, self.eur_currency, 12.0,
             'isr', '132000000000004')
         for inv in [invoice1, invoice2]:
             action = inv.create_account_payment_line()
@@ -112,7 +111,7 @@ class TestSCTCH(AccountingTestCase):
         self.assertEquals(len(pay_lines), 2)
         agrolait_pay_line1 = pay_lines[0]
         accpre = self.env['decimal.precision'].precision_get('Account')
-        self.assertEquals(agrolait_pay_line1.currency_id, self.chf_currency)
+        self.assertEquals(agrolait_pay_line1.currency_id, self.eur_currency)
         self.assertEquals(
             agrolait_pay_line1.partner_bank_id, invoice1.partner_bank_id)
         self.assertEquals(float_compare(
@@ -129,7 +128,7 @@ class TestSCTCH(AccountingTestCase):
             ('partner_id', '=', self.partner_agrolait.id)])
         self.assertEquals(len(bank_lines), 2)
         for bank_line in bank_lines:
-            self.assertEquals(bank_line.currency_id, self.chf_currency)
+            self.assertEquals(bank_line.currency_id, self.eur_currency)
             self.assertEquals(bank_line.communication_type, 'isr')
             self.assertEquals(
                 bank_line.communication in [
@@ -272,6 +271,7 @@ class TestSCTCH(AccountingTestCase):
             'payment_mode_id': self.payment_mode.id,
             'partner_bank_id': partner_bank_id,
             })
+
         self.invoice_line_model.create({
             'invoice_id': invoice.id,
             'price_unit': price_unit,
@@ -279,6 +279,5 @@ class TestSCTCH(AccountingTestCase):
             'name': 'Great service',
             'account_id': self.account_expense.id,
             })
-        invoice.invoice_validate()
-        invoice.action_move_create()
+        invoice.action_invoice_open()
         return invoice
