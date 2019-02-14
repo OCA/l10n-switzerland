@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2015 Compassion CH (Nicolas Tran)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -87,8 +86,8 @@ class FdsKeyImportWizard(models.TransientModel):
             pub = base64.b64decode(self.public_key_import_file)
             ppk = base64.b64decode(self.private_key_import_file)
         elif type == 'text':
-            pub = self.public_key_import_txt
-            ppk = self.private_key_import_txt
+            pub = self.public_key_import_txt.encode()
+            ppk = self.private_key_import_txt.encode()
         else:
             _logger.error("Bad implementation in fds_key_import_wizard")
             raise exceptions.Warning(_('Error code. Contact your admin'))

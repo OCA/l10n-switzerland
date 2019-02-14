@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2015 Compassion CH (Nicolas Tran)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -83,7 +82,9 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
         self.ensure_one()
         if not SFTP_OK:
             raise UserError(_("Please install pysftp to use this feature."))
+
         (fds_id, hostname, username, key, key_pass) = self._get_sftp_config()
+        
         if not key:
             self.state = 'error'
             return self._do_populate_tasks()

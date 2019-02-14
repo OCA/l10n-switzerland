@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2015 Compassion CH (Nicolas Tran)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -16,13 +15,13 @@ class FdsKeyCloneWizard(models.TransientModel):
     src_user_key_id = fields.Many2one(
         comodel_name='fds.authentication.keys',
         string='Copy authentication key:',
-        required=True,
+        required=False,
         help='select one key'
     )
     des_user_id = fields.Many2one(
         comodel_name='res.users',
         string='To:',
-        required=True,
+        required=False,
         help='assign the key to the user selected'
     )
     state = fields.Selection(
