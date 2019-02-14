@@ -186,16 +186,17 @@ class ResPartnerBank(models.Model, BankCommon):
         store=True
     )
 
-    @api.depends('acc_number')
-    def _compute_acc_type(self):
-        todo = self.env['res.partner.bank']
-        for rec in self:
-            if (rec.acc_number and
-                    rec.is_swiss_postal_num(rec.acc_number)):
-                rec.acc_type = 'postal'
-                continue
-            todo |= rec
-        super(ResPartnerBank, todo)._compute_acc_type()
+    @api.model
+    def _get_supported_account_types(self):
+        types = super()._get_supported_account_types()
+        types.append(('postal', _('Postal')))
+        return types
+
+    @api.model
+    def retrieve_acc_type(self, acc_number):
+        if acc_number and self.is_swiss_postal_num(acc_number):
+            return 'postal'
+        return super().retrieve_acc_type(acc_number)
 
     @api.multi
     def get_account_number(self):
