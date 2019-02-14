@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2015 Compassion CH (Nicolas Tran)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -41,7 +40,7 @@ class FdsAuthenticationKeys(models.Model):
         readonly=True,
     )
     private_key_crypted = fields.Binary(
-        string='Private key crypted',
+        # string='Private key crypted',
         readonly=True,
     )
     pub_filename = fields.Char(

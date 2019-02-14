@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-<data>
+<odoo>
     <!-- view of this wizard -->
     <record model="ir.ui.view" id="view_fds_key_clone_wizard_form">
         <field name="name">FDS key clone wizard view</field>
@@ -10,8 +9,8 @@
                 <field name="state" invisible="True"/>
                 <separator string="FDS Postfinance generate authentication keys parameters" />
                 <group states="default">
-                    <field name="src_user_key_id" options="{'create': false, 'create_edit': false}"/>
-                    <field name="des_user_id" options="{'create': false, 'create_edit': false}"/>
+                    <field name="src_user_key_id" options="{'create': false, 'create_edit': false}" required="1"/>
+                    <field name="des_user_id" options="{'create': false, 'create_edit': false}" required="1"/>
                 </group>
                 <group states="done">
                     <p>copy successful</p>
@@ -25,5 +24,4 @@
             </form>
         </field>
     </record>
-</data>
-</openerp>
+</odoo>
