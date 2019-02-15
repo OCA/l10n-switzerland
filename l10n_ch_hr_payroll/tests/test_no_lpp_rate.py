@@ -13,7 +13,7 @@ _logger = logging.getLogger(__name__)
 class TestNoLPP(common.TransactionCase):
 
     def setUp(self):
-        super(TestNoLPP, self).setUp()
+        super().setUp()
 
         # Some salary rules references
         self.basic_ch = self.ref('l10n_ch_hr_payroll.BASIC_CH')
