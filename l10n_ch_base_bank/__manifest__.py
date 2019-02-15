@@ -8,7 +8,9 @@
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
  'license': 'AGPL-3',
- 'depends': ['account_payment_partner', 'base_iban'],
+ 'depends': [
+     'account_payment_order',
+     'base_iban'],
  'data': [
      'views/bank.xml',
      'views/invoice.xml',
@@ -16,6 +18,6 @@
  'demo': [],
  'test': [],
  'auto_install': False,
- 'installable': False,
+ 'installable': True,
  'images': []
  }
