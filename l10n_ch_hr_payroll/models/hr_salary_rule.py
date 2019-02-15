@@ -30,7 +30,7 @@ class HrSalaryRule(models.Model):
         }
 
         for rule in self:
-            for rule_from, rules_to in list_fields_per.items():
+            for rule_from, rules_to in list(list_fields_per.items()):
                 for rule_to in rules_to:
                     data_id = self.env['ir.model.data'].search([
                         ('module', '=', 'l10n_ch_hr_payroll'),
@@ -48,7 +48,7 @@ class HrSalaryRule(models.Model):
 
     @api.multi
     def _compute_rule(self, localdict):
-        res = super(HrSalaryRule, self)._compute_rule(localdict)
+        res = super()._compute_rule(localdict)
 
         for rule in self:
             if rule.amount_percentage_base:
