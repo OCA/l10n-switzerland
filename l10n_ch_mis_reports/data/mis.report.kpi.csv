@@ -1,0 +1,49 @@
+id,report_id/id,sequence,name,description,expression,type,accumulation_method,budgetable,compare_method,auto_expand_accounts,style_id/id
+mis_report_kpi_0043,l10n_ch_mis_reports.mis_report_bs,24,CH_250,"Autres dettes à long terme","-bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_250').id)]",num,sum,False,pct,False,
+mis_report_kpi_0042,l10n_ch_mis_reports.mis_report_bs,23,CH_240,"Dettes à long terme rémunérées","-bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_240').id)]",num,sum,False,pct,False,
+mis_report_kpi_0041,l10n_ch_mis_reports.mis_report_bs,22,CH_24,"DETTES A LONG TERME",CH_240 +CH_250 +CH_260,num,sum,False,pct,False,l10n_ch_mis_reports.level2
+mis_report_kpi_0040,l10n_ch_mis_reports.mis_report_bs,21,CH_230,"Passifs de régularisation (transitoires) et provisions à court terme","-bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_230').id)]",num,sum,False,pct,False,
+mis_report_kpi_0047,l10n_ch_mis_reports.mis_report_bs,28,CH_290,"Réserves / bénéfices et pertes reportés","-bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_290').id)]",num,sum,False,pct,False,
+mis_report_kpi_0046,l10n_ch_mis_reports.mis_report_bs,27,CH_280,"Capital social ou capital de fondation","-bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_280').id)]",num,sum,False,pct,False,
+mis_report_kpi_0009,l10n_ch_mis_reports.mis_report_pl,15,CH_EBIT,"Résultat d'exploitation avant intérêts et impôts (EBIT)",CH_EBITDA +CH_68,num,sum,False,pct,False,l10n_ch_mis_reports.level2
+mis_report_kpi_0008,l10n_ch_mis_reports.mis_report_pl,13,CH_68,"- Amortissements sur immobilisations corporelles","-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_68').id)]",num,sum,True,pct,False,
+mis_report_kpi_0007,l10n_ch_mis_reports.mis_report_pl,12,CH_EBITDA,"Résultat d'exploitation avant intérêts, impôts et amortissements (EBITDA)",CH_3 +CH_4 +CH_5 +CH_60,num,sum,False,pct,False,l10n_ch_mis_reports.level2
+mis_report_kpi_0006,l10n_ch_mis_reports.mis_report_pl,10,CH_60,"- Autres charges d‘exploitation","-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_60').id)]",num,sum,True,pct,False,
+mis_report_kpi_0005,l10n_ch_mis_reports.mis_report_pl,8,CH_5,"- Charges de personnel","-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_5').id)]",num,sum,True,pct,False,
+mis_report_kpi_0004,l10n_ch_mis_reports.mis_report_pl,7,CH_4,"- Charges de marchandises et de matériel","-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_4').id)]",num,sum,True,pct,False,
+mis_report_kpi_0003,l10n_ch_mis_reports.mis_report_pl,5,CH_3,"Produits nets des ventes et prestations de service",CH_30 +CH_39,num,sum,False,pct,False,l10n_ch_mis_reports.level2
+mis_report_kpi_0002,l10n_ch_mis_reports.mis_report_pl,3,CH_39,"+/- Variation des stocks","-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_39').id)]",num,sum,True,pct,False,
+mis_report_kpi_0001,l10n_ch_mis_reports.mis_report_pl,2,CH_30,"Chiffre d'affaires","-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_30').id)]",num,sum,True,pct,False,
+mis_report_kpi_0021,l10n_ch_mis_reports.mis_report_bs,2,CH_10,"ACTIF CIRCULANT",CH_100 +CH_106 +CH_110 +CH_114 +CH_120 +CH_130,num,sum,False,pct,False,l10n_ch_mis_reports.level2
+mis_report_kpi_0020,l10n_ch_mis_reports.mis_report_bs,1,CH_1,"ACTIF",CH_10 +CH_14,num,sum,False,pct,False,l10n_ch_mis_reports.level1
+mis_report_kpi_0023,l10n_ch_mis_reports.mis_report_bs,4,CH_106,"Actifs à court terme cotés en bourse","bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_106').id)]",num,sum,False,pct,False,
+mis_report_kpi_0022,l10n_ch_mis_reports.mis_report_bs,3,CH_100,"Trésorerie","bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_100').id)]",num,sum,False,pct,False,
+mis_report_kpi_0025,l10n_ch_mis_reports.mis_report_bs,6,CH_114,"Autres créances à court terme","bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_114').id)]",num,sum,False,pct,False,
+mis_report_kpi_0024,l10n_ch_mis_reports.mis_report_bs,5,CH_110,"Créances résultant de livraisons et prestations","bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_110').id)]",num,sum,False,pct,False,
+mis_report_kpi_0027,l10n_ch_mis_reports.mis_report_bs,8,CH_130,"Actifs de régularisation (transitoires)","bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_130').id)]",num,sum,False,pct,False,
+mis_report_kpi_0026,l10n_ch_mis_reports.mis_report_bs,7,CH_120,"Stocks et prestations non facturées","bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_120').id)]",num,sum,False,pct,False,
+mis_report_kpi_0029,l10n_ch_mis_reports.mis_report_bs,10,CH_140,"Immobilisations financières","bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_140').id)]",num,sum,False,pct,False,
+mis_report_kpi_0028,l10n_ch_mis_reports.mis_report_bs,9,CH_14,"ACTIF IMMOBILISE",CH_140 +CH_148 +CH_150 +CH_160 + CH_170 +CH_180,num,sum,False,pct,False,l10n_ch_mis_reports.level2
+mis_report_kpi_0045,l10n_ch_mis_reports.mis_report_bs,26,CH_28,"CAPITAUX PROPRES",CH_280 +CH_290 +CH_297,num,sum,False,pct,False,l10n_ch_mis_reports.level2
+mis_report_kpi_0044,l10n_ch_mis_reports.mis_report_bs,25,CH_260,"Provisions à long termes et provisions légales","-bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_260').id)]",num,sum,False,pct,False,
+mis_report_kpi_0048,l10n_ch_mis_reports.mis_report_bs,29,CH_297,"Résultat de l'exercice","-bale[][('account_id.user_type_id.include_initial_balance', '=', False)] -balu[][('account_id.user_type_id.include_initial_balance', '=', False)] - bale[('user_type_id', '=', ref('account.data_unaffected_earnings').id)] - balu[('user_type_id', '=', ref('account.data_unaffected_earnings').id)]",num,sum,False,pct,False,
+mis_report_kpi_0018,l10n_ch_mis_reports.mis_report_pl,24,CH_R,"RESULTAT DE L'EXERCICE",CH_RAI +CH_89,num,sum,False,pct,False,l10n_ch_mis_reports.level1
+mis_report_kpi_0019,l10n_ch_mis_reports.mis_report_pl,25,CH_RGP,"% Résultat / Chiffre d'affaires",CH_R / CH_30,pct,avg,False,diff,False,l10n_ch_mis_reports.level5
+mis_report_kpi_0014,l10n_ch_mis_reports.mis_report_pl,20,CH_80,"+/- Résultat hors-exploitation","-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_80').id)]",num,sum,True,pct,False,
+mis_report_kpi_0015,l10n_ch_mis_reports.mis_report_pl,21,CH_85,"+/- Résultat extraordinaires","-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_85').id)]",num,sum,True,pct,False,
+mis_report_kpi_0016,l10n_ch_mis_reports.mis_report_pl,22,CH_RAI,"Résultat de l'exercice avant impôts",CH_EBT +CH_7 +CH_80 +CH_85,num,sum,False,pct,False,l10n_ch_mis_reports.level2
+mis_report_kpi_0017,l10n_ch_mis_reports.mis_report_pl,23,CH_89,"- Impôts directs","-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_89').id)]",num,sum,True,pct,False,
+mis_report_kpi_0010,l10n_ch_mis_reports.mis_report_pl,16,CH_REBIT,"% EBIT / Chiffre d'affaires",CH_EBIT /CH_3,pct,avg,False,diff,False,l10n_ch_mis_reports.level5
+mis_report_kpi_0011,l10n_ch_mis_reports.mis_report_pl,17,CH_69,"+/- Résultat financier","-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_69').id)]",num,sum,True,pct,False,
+mis_report_kpi_0012,l10n_ch_mis_reports.mis_report_pl,18,CH_EBT,"Résultat d'exploitation avant impôts",CH_EBIT +CH_69,num,sum,False,pct,False,l10n_ch_mis_reports.level2
+mis_report_kpi_0013,l10n_ch_mis_reports.mis_report_pl,19,CH_7,"+/- Résultat des activités annexes d'exploitation","-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_7').id)]",num,sum,True,pct,False,
+mis_report_kpi_0036,l10n_ch_mis_reports.mis_report_bs,17,CH_20,"DETTES A COURT TERME",CH_200 +CH_210 +CH_220 +CH_230,num,sum,False,pct,False,l10n_ch_mis_reports.level2
+mis_report_kpi_0037,l10n_ch_mis_reports.mis_report_bs,18,CH_200,"Dettes à court terme résultant d’achats et de prestations de services","-bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_200').id)]",num,sum,False,pct,False,
+mis_report_kpi_0034,l10n_ch_mis_reports.mis_report_bs,15,CH_180,"Capital non versé : capital social - capital de fondation","bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_180').id)]",num,sum,False,pct,False,
+mis_report_kpi_0035,l10n_ch_mis_reports.mis_report_bs,16,CH_2,"PASSIF",CH_20 +CH_24 +CH_28,num,sum,False,pct,False,l10n_ch_mis_reports.level1
+mis_report_kpi_0032,l10n_ch_mis_reports.mis_report_bs,13,CH_160,"Immobilisations corporelles immeubles","bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_160').id)]",num,sum,False,pct,False,
+mis_report_kpi_0033,l10n_ch_mis_reports.mis_report_bs,14,CH_170,"Immobilisations incorporelles","bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_170').id)]",num,sum,False,pct,False,
+mis_report_kpi_0030,l10n_ch_mis_reports.mis_report_bs,11,CH_148,"Participations","bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_148').id)]",num,sum,False,pct,False,
+mis_report_kpi_0031,l10n_ch_mis_reports.mis_report_bs,12,CH_150,"Immobilisations corporelles meubles","bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_150').id)]",num,sum,False,pct,False,
+mis_report_kpi_0038,l10n_ch_mis_reports.mis_report_bs,19,CH_210,"Dettes à court terme rémunérés","-bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_210').id)]",num,sum,False,pct,False,
+mis_report_kpi_0039,l10n_ch_mis_reports.mis_report_bs,20,CH_220,"Autres dettes à court terme","-bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_220').id)]",num,sum,False,pct,False,
