@@ -21,7 +21,7 @@
 {
     'name': 'Swiss Postfinance File Delivery Services',
     'summary': 'Download files and import bank statements from FDS',
-    'version': '12.0.1.0',
+    'version': '12.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'Compassion CH, Odoo Community Association (OCA)',
     'website': 'http://www.compassion.ch/',
