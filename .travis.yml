@@ -31,6 +31,8 @@ env:
 install:
   - pip install -q unidecode
   - pip install unicodecsv
+  - pip install pysftp
+  - pip install pycryptodome
   - pip install xlrd # Excel support
   - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
