@@ -1,4 +1,4 @@
-# Copyright 2012-2017 Camptocamp SA
+# Copyright 2012-2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import os
 import tempfile
@@ -19,6 +19,18 @@ except (ImportError, IOError) as err:
 
 
 class IrActionsReportReportlab(models.Model):
+
+    """
+    Reportlab was chosen to generate the pdf for precision issue with printers.
+    We have multiple parameters to align the payment slip and it's elements
+    vertically and horizontally. Print-out might be altered by software
+    configuration or printer setup if not printer hardware itself.
+    With Qweb it was way to hard to align correctly the payment slip and the
+    Swiss post specs would make your payment slip rejected if you don't fix in
+    a tiny error margin.
+    Expected to be replaced by QRCode version for which the readers will
+    be more efficient.
+    """
 
     _inherit = 'ir.actions.report'
 
@@ -135,8 +147,6 @@ class IrActionsReportReportlab(models.Model):
             return self._post_pdf(save_in_attachment, pdf_content=pdf_content,
                                   res_ids=res_ids), 'pdf'
         return pdf_content, 'pdf'
-
-    # TODO consider https://github.com/OCA/reporting-engine/issues/241
 
     def merge_pdf_in_memory(self, docs):
         merger = PyPDF2.PdfFileMerger()

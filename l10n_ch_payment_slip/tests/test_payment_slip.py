@@ -2,24 +2,20 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import time
 import re
-import io
 import logging
-import odoo.tests.common as test_common
+from odoo.tests import common
 
 _logger = logging.getLogger(__name__)
 
-try:
-    import PyPDF2
-except (ImportError, IOError) as err:
-    _logger.debug(err)
 
-
-class TestPaymentSlip(test_common.TransactionCase):
+class TestPaymentSlip(common.SavepointCase):
     _compile_get_ref = re.compile(r'[^0-9]')
 
-    def setUp(self):
-        super(TestPaymentSlip, self).setUp()
-        self.report1slip_from_inv = self.env.ref(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.report1slip_from_inv = cls.env.ref(
             'l10n_ch_payment_slip.one_slip_per_page_from_invoice',
         )
 
@@ -178,7 +174,7 @@ class TestPaymentSlip(test_common.TransactionCase):
         address_lines = slip._get_address_lines(com_partner.id)
         self.assertEqual(
             address_lines,
-            ['93, Press Avenue', '', '73377 Le Bourget du Lac']
+            ['3404  Edgewood Road', '', '72401 Jonesboro']
         )
 
     def test_address_format_user_demo(self):
@@ -193,7 +189,7 @@ class TestPaymentSlip(test_common.TransactionCase):
         address_lines = slip.sudo(demo_user)._get_address_lines(com_partner.id)
         self.assertEqual(
             address_lines,
-            [u'93, Press Avenue', u'', u'73377 Le Bourget du Lac']
+            ['3404  Edgewood Road', '', '72401 Jonesboro']
         )
 
     def test_address_format_no_country(self):
@@ -208,7 +204,7 @@ class TestPaymentSlip(test_common.TransactionCase):
         address_lines = slip._get_address_lines(com_partner.id)
         self.assertEqual(
             address_lines,
-            ['93, Press Avenue', '', '73377 Le Bourget du Lac']
+            ['3404  Edgewood Road', '', '72401 Jonesboro']
         )
 
     def test_address_format_special_format(self):
@@ -230,7 +226,7 @@ class TestPaymentSlip(test_common.TransactionCase):
         address_lines = slip._get_address_lines(com_partner.id)
         self.assertEqual(
             address_lines,
-            ['93, Press Avenue', '73377 Le Bourget du Lac']
+            ['3404  Edgewood Road', '72401 Jonesboro']
         )
 
     def test_address_length(self):
@@ -306,14 +302,7 @@ class TestPaymentSlip(test_common.TransactionCase):
         # Ensure pdf and attachment are the same as before
         attachment2 = _find_invoice_attachment(self, invoice)
         self.assertEqual(len(attachment2), 1)
-        # We can't assert pdf1==pdf2, as pdf2 is not postprocessed the same way
-        # since it's the only report to be reloaded from an attachment and
-        # odoo returns directly the content of the attachment instead of
-        # merging as it does when generating only one report which is not
-        # saved in an attachment. Therefore we mimic what happens in
-        # https://github.com/odoo/odoo/blob/11.0/odoo/addons/base/ir/ir_actions_report.py#L548  # noqa
-        # to ensure pdf1 is the same as pdf2
-        self.assertEqual(pdf1, self._mimic_post_pdf_final_build(pdf2))
+        self.assertEqual(pdf1, pdf2)
         self.assertEqual(attachment1, attachment2)
         # Allow cancelling entries on the journal
         invoice.journal_id.update_posted = True
@@ -323,37 +312,3 @@ class TestPaymentSlip(test_common.TransactionCase):
         # Ensure attachment was unlinked
         attachment = _find_invoice_attachment(self, invoice)
         self.assertEqual(len(attachment), 0)
-
-    def _mimic_post_pdf_final_build(self, pdf_tuple):
-        """Adaptation of _post_pdf to manually check results are the same
-
-        Copied from odoo with only what's needed left herein.
-        """
-
-        def close_streams(streams):
-            for stream in streams:
-                try:
-                    stream.close()
-                except Exception:
-                    pass
-
-        pdf_content, extension = pdf_tuple
-
-        streams = []
-        if pdf_content:
-            pdf_content_stream = io.BytesIO(pdf_content)
-            streams.append(pdf_content_stream)
-
-        # Build the final pdf.
-        writer = PyPDF2.PdfFileWriter()
-        for stream in streams:
-            reader = PyPDF2.PdfFileReader(stream)
-            writer.appendPagesFromReader(reader)
-        result_stream = io.BytesIO()
-        streams.append(result_stream)
-        writer.write(result_stream)
-        result = result_stream.getvalue()
-
-        # We have to close the streams after PdfFileWriter's call to write()
-        close_streams(streams)
-        return result, extension

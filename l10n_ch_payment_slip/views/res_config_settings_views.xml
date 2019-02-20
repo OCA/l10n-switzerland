@@ -6,7 +6,7 @@
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="account.res_config_settings_view_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//div[@data-key='account_invoicing']" position="inside">
+          <xpath expr="//div[@id='invoicing_settings']" position="after">
               <h2>ISR</h2>
               <div class="row mt16 o_settings_container" id="isr">
                 <div class="col-xs-12 col-md-6 o_setting_box">
