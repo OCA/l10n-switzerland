@@ -5,7 +5,7 @@
     'name': 'Switzerland Account Tags',
     'category': 'Localisation',
     'summary': '',
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.0',
     'author': 'Camptocamp SA, Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/l10n-switzerland',
     'license': 'AGPL-3',
@@ -13,8 +13,7 @@
         'l10n_ch',
     ],
     'data': [
-        'data/account_account_tag.xml',
-        'data/account_account_template.xml',
+        'data/account.account.tag.csv',
+        'data/account.account.template.csv',
     ],
-    'installable': False,
 }
