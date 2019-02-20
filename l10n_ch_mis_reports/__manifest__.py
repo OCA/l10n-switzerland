@@ -5,7 +5,7 @@
 {
     'name': 'Switzerland - MIS reports',
     'summary': 'Specific MIS reports for switzerland localization',
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.0',
     'author': "Camptocamp,Odoo Community Association (OCA)",
     'category': 'Localization',
     'website': 'https://github.com/OCA/l10n-switzerland',
@@ -13,12 +13,12 @@
     'depends': [
         'l10n_ch',
         'mis_builder',
+        'mis_builder_budget',
         'l10n_ch_account_tags',
     ],
     'data': [
-        'data/mis_report_style.xml',
-        'data/mis_report.xml',
-        'data/mis_report_kpi.xml',
+        'data/mis.report.style.csv',
+        'data/mis.report.csv',
+        'data/mis.report.kpi.csv',
     ],
-    'installable': False,
 }
