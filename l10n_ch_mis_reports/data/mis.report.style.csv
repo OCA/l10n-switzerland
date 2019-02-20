@@ -1,0 +1,6 @@
+id,background_color,background_color_inherit,color_inherit,divider_inherit,dp_inherit,divider,font_size,font_size_inherit,font_weight,font_weight_inherit,hide_empty,hide_empty_inherit,indent_level,indent_level_inherit,prefix,prefix_inherit,dp,name,suffix,suffix_inherit,color
+level1,#875A7B,False,False,True,True,1,large,False,,True,False,True,0,True,,True,0,l10n_fr N1,,True,#FFFFFF
+level2,#875A7B,False,False,True,True,1,,True,,True,False,True,0,True,,True,0,l10n_fr N2,,True,#FFFFFF
+level3,#875A7B,False,False,True,True,1,,True,,False,False,True,0,True,,True,0,l10n_fr N3,,True,#FFFFFF
+level4,#875A7B,False,False,True,True,1,,True,,False,False,True,0,True,,True,0,l10n_fr N4,,True,#FFFFFF
+level5,#FFFFFF,False,True,True,True,1,small,False,,False,False,True,0,True,,True,0,l10n_fr N5,,True,#FFFFFF
