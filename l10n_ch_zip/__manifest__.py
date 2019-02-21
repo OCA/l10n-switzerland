@@ -1,9 +1,9 @@
-# Copyright 2011-2017 Camptocamp SA
+# Copyright 2011-2019 Camptocamp SA
 # Copyright 2014 Olivier Jossen (brain-tec AG)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     'name': 'Switzerland - Postal codes (ZIP) list',
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.0',
     'author': '''
         Camptocamp,
         brain-tec AG,
@@ -23,9 +23,5 @@
     # unfortunately it doesn't work with noupdate thus we use a post_init hook
     # 'init': ['data/res.better.zip.csv'],
     'post_init_hook': 'post_init',
-    'images': [],
-    'demo': [],
-    'auto_install': False,
-    'installable': False,
     'application': True,
 }
