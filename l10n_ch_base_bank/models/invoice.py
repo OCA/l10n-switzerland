@@ -121,6 +121,21 @@ class AccountInvoice(models.Model):
                 invoice._is_isr_reference()
         return True
 
+    def write(self, vals):
+        """Override to update partner_bank_id before constraints if needed and
+        to be consistent with create
+        """
+        if not self.partner_bank_id or not vals.get('partner_bank_id'):
+            type_defined = vals.get('type') or self.type
+            if type_defined == 'out_invoice':
+                partner = self.env.user.company_id.partner_id
+                journal = vals.get('journal_id') or self.journal_id.id
+                ref_type = vals.get('reference_type') or self.reference_type
+                vals['partner_bank_id'] = self._get_bank_id(
+                    partner, journal, ref_type,
+                )
+        return super().write(vals)
+
     @api.model
     def create(self, vals):
         """We override create in order to have customer invoices
@@ -128,8 +143,21 @@ class AccountInvoice(models.Model):
         not systemtically call"""
         type_defined = vals.get('type') or self.env.context.get('type', False)
         if type_defined == 'out_invoice' and not vals.get('partner_bank_id'):
-            user = self.env.user
-            bank_ids = user.company_id.partner_id.bank_ids
-            if bank_ids:
-                vals['partner_bank_id'] = bank_ids[0].id
+            partner = self.env.user.company_id.partner_id
+            vals['partner_bank_id'] = self._get_bank_id(
+                partner, vals.get('journal_id'), vals.get('reference_type'),
+            )
         return super(AccountInvoice, self).create(vals)
+
+    def _get_bank_id(self, partner, journal_id, ref_type):
+        if journal_id:
+            return self.env['account.journal'].browse(journal_id). \
+                bank_account_id.id
+        if ref_type == 'isr':
+            bank_ids = partner.bank_ids.filtered(
+                lambda s: s.acc_type == 'postal'
+            )
+        else:
+            bank_ids = partner.bank_ids
+        if bank_ids:
+            return bank_ids[0].id
