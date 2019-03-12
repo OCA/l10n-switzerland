@@ -13,6 +13,7 @@ class TestBankType(common.TransactionCase):
             'clearing': '234234',
         })
         bank_account = self.env['res.partner.bank'].create({
+
             'partner_id': self.partner.id,
             'bank_id': bank.id,
             'acc_number': 'Bank/CCP 01-1234-1',
