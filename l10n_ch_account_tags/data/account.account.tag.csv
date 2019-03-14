@@ -1,0 +1,34 @@
+id,name,applicability,color
+account_tag_ch_60,Autres charges d‘exploitation (CH_60),accounts,4
+account_tag_ch_280,Capital social ou capital de fondation (CH_280),accounts,4
+account_tag_ch_68,Amortissements sur immobilisations corporelles (CH_68),accounts,4
+account_tag_ch_69,Résultat financier (CH_69),accounts,4
+account_tag_ch_180,Capital non versé : capital social - capital de fondation (CH_180),accounts,4
+account_tag_ch_148,Participations (CH_148),accounts,4
+account_tag_ch_220,Autres dettes à court terme (CH_220),accounts,4
+account_tag_ch_160,Immobilisations corporelles immeubles CH_160),accounts,4
+account_tag_ch_140,Immobilisations financières (CH_140),accounts,4
+account_tag_ch_89,Impôts directs (CH_89),accounts,4
+account_tag_ch_150,Immobilisations corporelles meubles (CH_150),accounts,4
+account_tag_ch_130,Actifs de régularisation (transitoires) (CH_130),accounts,4
+account_tag_ch_80,Résultat hors-exploitation (CH_80),accounts,4
+account_tag_ch_210,Dettes à court terme rémunérés (CH_210),accounts,4
+account_tag_ch_114,Autres créances à court terme (CH_114),accounts,4
+account_tag_ch_85,Résultat extraordinaires (CH_85),accounts,4
+account_tag_ch_110,Créances résultant de livraisons et prestations (CH_110),accounts,4
+account_tag_ch_297,Résultat de l'exercice (CH_297),accounts,4
+account_tag_ch_290,Réserves / bénéfices et pertes reportés (CH_290),accounts,4
+account_tag_ch_170,Immobilisations incorporelles (CH_170),accounts,4
+account_tag_ch_230,Passifs de régularisation (transitoires) et provisions à court terme (CH_230),accounts,4
+account_tag_ch_7,Résultat des activités annexes d'exploitation (CH_7),accounts,4
+account_tag_ch_5,Charges de personnel (CH_5),accounts,4
+account_tag_ch_4,Charges de marchandises et de matériel (CH_4),accounts,4
+account_tag_ch_200,Dettes à court terme résultant d’achats et de prestations de services (CH_200),accounts,4
+account_tag_ch_260,Provisions à long termes et provisions légales (CH_260),accounts,4
+account_tag_ch_120,Stocks et prestations non facturées (CH_120),accounts,4
+account_tag_ch_100,Trésorerie (CH_100),accounts,4
+account_tag_ch_106,Actifs à court terme cotés en bourse (CH_106),accounts,4
+account_tag_ch_240,Dettes à long terme rémunérées (CH_240),accounts,4
+account_tag_ch_39,Variation des stocks (CH_39),accounts,4
+account_tag_ch_250,Autres dettes à long terme (CH_250),accounts,4
+account_tag_ch_30,Chiffre d'affaires (CH_30),accounts,4
