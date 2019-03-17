@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* l10n_ch_account_tags
+# 	* l10n_ch_account_tags
 #
 msgid ""
 msgstr ""
@@ -56,7 +56,7 @@ msgstr ""
 
 #. module: l10n_ch_account_tags
 #: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_180
-msgid "Capital non versé : capital social - capital de fondation\" (CH_180)"
+msgid "Capital non versé : capital social - capital de fondation (CH_180)"
 msgstr ""
 
 #. module: l10n_ch_account_tags
@@ -91,7 +91,9 @@ msgstr ""
 
 #. module: l10n_ch_account_tags
 #: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_200
-msgid "Dettes à court terme résultant d’achats et de prestations de services (CH_200)"
+msgid ""
+"Dettes à court terme résultant d’achats et de prestations de services "
+"(CH_200)"
 msgstr ""
 
 #. module: l10n_ch_account_tags
@@ -131,7 +133,8 @@ msgstr ""
 
 #. module: l10n_ch_account_tags
 #: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_230
-msgid "Passifs de régularisation (transitoires) et provisions à court terme (CH_230)"
+msgid ""
+"Passifs de régularisation (transitoires) et provisions à court terme (CH_230)"
 msgstr ""
 
 #. module: l10n_ch_account_tags
@@ -181,5 +184,5 @@ msgstr ""
 
 #. module: l10n_ch_account_tags
 #: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_39
-msgid "Variation des stocks (CH_39))"
+msgid "Variation des stocks (CH_39)"
 msgstr ""
