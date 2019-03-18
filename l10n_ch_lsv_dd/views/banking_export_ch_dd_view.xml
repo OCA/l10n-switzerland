@@ -68,10 +68,4 @@
       src_model="account.payment.order"
       view_type="form"
       view_mode="tree,form" />
-
-    <act_window id="action_account_invoice_free"
-      multi="True"
-      key2="client_action_multi" name="Free Invoices"
-      res_model="account.invoice.confirm" src_model="account.invoice"
-      view_mode="form" target="new" view_type="form" />
 </odoo>
