@@ -34,3 +34,12 @@ class AccountPaymentOrder(models.Model):
             parent_node, payment_info_ident,
             priority, local_instrument, category_purpose, sequence_type,
             requested_date, eval_ctx, gen_args)
+
+    @api.model
+    def _has_detailed_address(self, gen_args):
+        """
+        Swiss PAIN flavors don't support address details nodes
+        """
+        if 'ch' in gen_args.get('pain_flavor'):
+            return False
+        return super(AccountPaymentOrder, self)._has_detailed_address(gen_args)
