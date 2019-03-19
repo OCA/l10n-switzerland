@@ -105,3 +105,47 @@ class AccountPaymentOrder(models.Model):
             return super(AccountPaymentOrder, self).generate_party_acc_number(
                 parent_node, party_type, order, partner_bank, gen_args,
                 bank_line=bank_line)
+
+    @api.model
+    def generate_party_block(
+            self, parent_node, party_type, order, partner_bank, gen_args,
+            bank_line=None):
+        res = super(AccountPaymentOrder, self).generate_party_block(
+            parent_node, party_type, order, partner_bank, gen_args, bank_line
+        )
+
+        # Convert address to unstructured mode for SEPA compliance
+        for addr in parent_node.xpath('.//PstlAdr'):
+            loc = []
+            zip_node = addr.xpath('.//PstCd')
+            if zip_node:
+                loc.append(zip_node[0].text)
+            city_node = addr.xpath('.//TwnNm')
+            if city_node:
+                loc.append(city_node[0].text)
+
+            strt = []
+            strt_node = addr.xpath('.//StrtNm')
+            if strt_node:
+                strt.append(strt_node[0].text)
+            bldg_node = addr.xpath('.//BldgNb')
+            if bldg_node:
+                strt.append(bldg_node[0].text)
+
+            addr_line = [node.text for node in addr.xpath('.//AdrLine')]
+            if strt:
+                addr_line[:0] = [' '.join(strt)]
+
+            if not(loc or strt):
+                continue
+
+            for node in addr.xpath('./*[not(self::Ctry)]'):
+                node.getparent().remove(node)
+
+            addr_line_1 = etree.SubElement(addr, 'AdrLine')
+            addr_line_1.text = ', '.join(addr_line)
+
+            addr_line_2 = etree.SubElement(addr, 'AdrLine')
+            addr_line_2.text = ' '.join(loc)
+
+        return res and True
