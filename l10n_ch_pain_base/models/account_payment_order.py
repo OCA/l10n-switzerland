@@ -103,3 +103,25 @@ class AccountPaymentOrder(models.Model):
             return super().generate_party_acc_number(
                 parent_node, party_type, order, partner_bank, gen_args,
                 bank_line=bank_line)
+
+    @api.model
+    def generate_address_block(
+            self, parent_node, partner, gen_args):
+        """Generate the piece of the XML corresponding to PstlAdr"""
+        if partner.country_id:
+            postal_address = etree.SubElement(parent_node, 'PstlAdr')
+
+            country = etree.SubElement(postal_address, 'Ctry')
+            country.text = self._prepare_field(
+                'Country', 'partner.country_id.code',
+                {'partner': partner}, 2, gen_args=gen_args)
+
+            adrline1 = etree.SubElement(postal_address, 'AdrLine')
+            adrline1.text = ', '.join(
+                filter(None, [partner.street, partner.street2])
+            )
+
+            adrline2 = etree.SubElement(postal_address, 'AdrLine')
+            adrline2.text = ' '.join([partner.zip, partner.city])
+
+        return True
