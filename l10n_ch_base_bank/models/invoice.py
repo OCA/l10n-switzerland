@@ -125,16 +125,13 @@ class AccountInvoice(models.Model):
         """Override to update partner_bank_id before constraints if needed and
         to be consistent with create
         """
-        if not self.partner_bank_id or not vals.get('partner_bank_id'):
-            type_defined = vals.get('type') or self.type
-            if type_defined == 'out_invoice':
-                partner = self.env.user.company_id.partner_id
-                journal = vals.get('journal_id') or self.journal_id.id
-                ref_type = vals.get('reference_type') or self.reference_type
-                vals['partner_bank_id'] = self._get_bank_id(
-                    partner, journal, ref_type,
-                )
-        return super().write(vals)
+        res = super().write(vals)
+        for rec in self:
+            if not rec.partner_bank_id and rec.type == 'out_invoice':
+                banks = rec.partner_banks_to_show()
+                if banks:
+                    rec.write({'partner_bank_id': banks[0].id})
+        return res
 
     @api.model
     def create(self, vals):
