@@ -131,13 +131,10 @@ class AccountInvoice(models.Model):
         if not self.partner_bank_id or not vals.get('partner_bank_id'):
             type_defined = vals.get('type') or self.type
             if type_defined == 'out_invoice':
-                partner = self.env.user.company_id.partner_id
-                journal = vals.get('journal_id') or self.journal_id.id
-                ref_type = vals.get('reference_type') or self.reference_type
-                vals['partner_bank_id'] = self._get_bank_id(
-                    partner, journal, ref_type,
-                )
-        return super().write(vals)
+                banks = self.partner_banks_to_show()
+                if banks:
+                    vals['partner_bank_id'] = banks[0].id
+        return super(AccountInvoice, self).write(vals)
 
     @api.model
     def create(self, vals):

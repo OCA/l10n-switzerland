@@ -304,7 +304,7 @@ class ResPartnerBank(models.Model, BankCommon):
                 partner.name,
                 vals['ccp']
             )
-        return super().create(vals)
+        return super(ResPartnerBank, self).create(vals)
 
     @api.multi
     def _get_ch_bank_from_iban(self):
