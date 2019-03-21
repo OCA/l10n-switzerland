@@ -389,7 +389,7 @@ class PaymentSlip(models.Model):
                                        self.font_absolute_path()))
 
     @api.model
-    def _get_samll_text_font(self):
+    def _get_small_text_font(self):
         """Register a :py:class:`reportlab.pdfbase.ttfonts.TTFont`
         for recept reference
         :return: a :py:class:`FontMeta` with font name and size
@@ -808,7 +808,7 @@ class PaymentSlip(models.Model):
         print_settings = self._get_settings(report_name)
         self._register_fonts()
         default_font = self._get_text_font()
-        small_font = self._get_samll_text_font()
+        small_font = self._get_small_text_font()
         amount_font = self._get_amount_font()
         invoice = self.move_line_id.invoice_id
         scan_font = self._get_scan_line_text_font(company)
