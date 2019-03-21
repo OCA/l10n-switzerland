@@ -29,13 +29,13 @@ msgid "Bank ISR adherent number"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:248
+#: code:addons/l10n_ch_base_bank/models/bank.py:253
 #, python-format
 msgid "Bank/CCP Undefined"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:246
+#: code:addons/l10n_ch_base_bank/models/bank.py:251
 #, python-format
 msgid "Bank/CCP {}"
 msgstr ""
