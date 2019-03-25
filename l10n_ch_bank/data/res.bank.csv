@@ -1,4 +1,4 @@
-id,code,ccp,bank_clearing_new,bank_headquarter,street,bank_group,city,zip,clearing,bank_areacode,bank_bcart,bank_eurosic,bank_sicnr,bic,bank_branchid,bank_sic,phone,active,bank_lang,bank_postaladdress,name,country,bank_valid_from
+id,code,l10n_ch_postal,bank_clearing_new,bank_headquarter,street,bank_group,city,zip,clearing,bank_areacode,bank_bcart,bank_eurosic,bank_sicnr,bic,bank_branchid,bank_sic,phone,active,bank_lang,bank_postaladdress,name,country,bank_valid_from
 l10n_ch_bank.bank_243_0001,UBS CH,80-2-2,,230,Avenue de Chailly 1,2,Lausanne 12,1000,243,,3,2,230,,1,1,021 654 94 11,True,2,Case postale,UBS Switzerland AG,Switzerland,
 l10n_ch_bank.bank_243_0008,UBS CH,80-2-2,,230,Avenue d'Ouchy 61,2,Lausanne 6,1000,243,,3,2,230,,8,1,021 614 92 11,True,2,Case postale,UBS Switzerland AG,Switzerland,
 l10n_ch_bank.bank_767_0003,BCV,10-725-4,,767,Chauderon,7,Lausanne 9,1000,767,,3,2,767,BCVLCH2LXXX,3,1,021 212 12 12,True,2,Case postale 77,Banque Cantonale Vaudoise,Switzerland,
