@@ -1,9 +1,9 @@
 # Copyright 2014-2015 Nicolas Bessi (Camptocamp SA)
 # Copyright 2015-2017 Yannick Vaucher (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from openerp.tests import common
-from openerp.tools import mute_logger
-from openerp import exceptions
+from odoo.tests import common
+from odoo.tools import mute_logger
+from odoo import exceptions
 
 ch_iban = 'CH15 3881 5158 3845 3843 7'
 ch_post_iban = 'CH09 0900 0000 1000 8060 7'
