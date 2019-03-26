@@ -140,28 +140,28 @@ class TestPaymentSlip(common.SavepointCase):
 
     def test_print_report(self):
         invoice = self.make_invoice()
-        data, format = self.report1slip_from_inv.render(invoice.id)
+        data, format_report = self.report1slip_from_inv.render(invoice.id)
         self.assertTrue(data)
-        self.assertEqual(format, 'pdf')
+        self.assertEqual(format_report, 'pdf')
 
     def test_print_multi_report_merge_in_memory(self):
         # default value as in memory
         self.assertEqual(self.env.user.company_id.merge_mode, 'in_memory')
         invoice1 = self.make_invoice()
         invoice2 = self.make_invoice()
-        data, format = self.report1slip_from_inv.render(
+        data, format_report = self.report1slip_from_inv.render(
             [invoice1.id, invoice2.id])
         self.assertTrue(data)
-        self.assertEqual(format, 'pdf')
+        self.assertEqual(format_report, 'pdf')
 
     def test_print_multi_report_merge_on_disk(self):
         self.env.user.company_id.merge_mode = 'on_disk'
         invoice1 = self.make_invoice()
         invoice2 = self.make_invoice()
-        data, format = self.report1slip_from_inv.render(
+        data, format_report = self.report1slip_from_inv.render(
             [invoice1.id, invoice2.id])
         self.assertTrue(data)
-        self.assertEqual(format, 'pdf')
+        self.assertEqual(format_report, 'pdf')
 
     def test_address_format(self):
         invoice = self.make_invoice()

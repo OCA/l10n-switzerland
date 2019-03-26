@@ -221,9 +221,9 @@ class ResPartnerBank(models.Model, BankCommon):
 
     @api.model
     def _get_supported_account_types(self):
-        rslt = super(ResPartnerBank, self)._get_supported_account_types()
-        rslt.append(('postal', _('Postal')))
-        return rslt
+        result = super(ResPartnerBank, self)._get_supported_account_types()
+        result.append(('postal', _('Postal')))
+        return result
 
     @api.depends('acc_number')
     def _compute_acc_type(self):

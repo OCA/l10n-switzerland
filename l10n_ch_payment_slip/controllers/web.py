@@ -23,7 +23,7 @@ class ReportController(report.ReportController):
                     else '{0:05d}'.format(invoice_id[0]),
                     '.pdf'
                 ])
-            data, format = report_slip.render(invoice_id)
+            data, format_report = report_slip.render(invoice_id)
             pdfhttpheaders = [
                 ('Content-Type', 'application/pdf'),
                 ('Content-Disposition', content_disposition(filename)),
