@@ -11,7 +11,7 @@ import base64
 ch_iban = 'CH15 3881 5158 3845 3843 7'
 
 
-class TestSCT_CH(AccountingTestCase):
+class TestSCTCH(AccountingTestCase):
 
     def setUp(self):
         super().setUp()
@@ -259,7 +259,7 @@ class TestSCT_CH(AccountingTestCase):
 
     def create_invoice(
             self, partner_id, partner_bank_id, currency, price_unit,
-            ref_type, ref, type='in_invoice'):
+            ref_type, ref, inv_type='in_invoice'):
         invoice = self.invoice_model.create({
             'partner_id': partner_id,
             'reference_type': ref_type,
@@ -267,7 +267,7 @@ class TestSCT_CH(AccountingTestCase):
             'currency_id': currency.id,
             'name': 'test',
             'account_id': self.account_payable.id,
-            'type': type,
+            'type': inv_type,
             'date_invoice': time.strftime('%Y-%m-%d'),
             'payment_mode_id': self.payment_mode.id,
             'partner_bank_id': partner_bank_id,
