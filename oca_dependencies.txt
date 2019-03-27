@@ -4,3 +4,4 @@ bank-payment
 partner-contact
 account-reconcile
 mis-builder
+l10n-switzerland git@github.com:i-vyshnevska/l10n-switzerland.git 12.0-mig-l10n_ch_payment_slip
