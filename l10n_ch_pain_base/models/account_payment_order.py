@@ -116,12 +116,14 @@ class AccountPaymentOrder(models.Model):
                 'Country', 'partner.country_id.code',
                 {'partner': partner}, 2, gen_args=gen_args)
 
-            adrline1 = etree.SubElement(postal_address, 'AdrLine')
-            adrline1.text = ', '.join(
-                filter(None, [partner.street, partner.street2])
-            )
+            if partner.street or partner.street2:
+                adrline1 = etree.SubElement(postal_address, 'AdrLine')
+                adrline1.text = ', '.join(
+                    filter(None, [partner.street, partner.street2])
+                )
 
-            adrline2 = etree.SubElement(postal_address, 'AdrLine')
-            adrline2.text = ' '.join([partner.zip, partner.city])
+                if partner.zip and partner.city:
+                    adrline2 = etree.SubElement(postal_address, 'AdrLine')
+                    adrline2.text = ' '.join([partner.zip, partner.city])
 
         return True
