@@ -1,0 +1,5 @@
+* Nicolas Bessi (Camptocamp)
+* Olivier Jossen (Brain Tec)
+* Guewen Baconnier (Camptocamp)
+* Mathias Neef (copadoMEDIA)
+* Yannick Vaucher (Camptocamp)
