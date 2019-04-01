@@ -6,7 +6,7 @@
         <field name="sequence">24</field>
         <field name="name">CH_250</field>
         <field name="description">Autres dettes à long terme</field>
-        <field name="expression">-bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_250').id)]</field>
+        <field name="expression">-bale[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_250').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">False</field>
@@ -19,7 +19,7 @@
         <field name="sequence">23</field>
         <field name="name">CH_240</field>
         <field name="description">Dettes à long terme rémunérées</field>
-        <field name="expression">-bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_240').id)]</field>
+        <field name="expression">-bale[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_240').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">False</field>
@@ -45,7 +45,7 @@
         <field name="sequence">21</field>
         <field name="name">CH_230</field>
         <field name="description">Passifs de régularisation (transitoires) et provisions à court terme</field>
-        <field name="expression">-bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_230').id)]</field>
+        <field name="expression">-bale[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_230').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">False</field>
@@ -58,7 +58,7 @@
         <field name="sequence">28</field>
         <field name="name">CH_290</field>
         <field name="description">Réserves / bénéfices et pertes reportés</field>
-        <field name="expression">-bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_290').id)]</field>
+        <field name="expression">-bale[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_290').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">False</field>
@@ -71,7 +71,7 @@
         <field name="sequence">27</field>
         <field name="name">CH_280</field>
         <field name="description">Capital social ou capital de fondation</field>
-        <field name="expression">-bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_280').id)]</field>
+        <field name="expression">-bale[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_280').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">False</field>
@@ -97,7 +97,7 @@
         <field name="sequence">13</field>
         <field name="name">CH_68</field>
         <field name="description">- Amortissements sur immobilisations corporelles</field>
-        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_68').id)]</field>
+        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_68').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">True</field>
@@ -123,7 +123,7 @@
         <field name="sequence">10</field>
         <field name="name">CH_60</field>
         <field name="description">- Autres charges d‘exploitation</field>
-        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_60').id)]</field>
+        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_60').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">True</field>
@@ -136,7 +136,7 @@
         <field name="sequence">8</field>
         <field name="name">CH_5</field>
         <field name="description">- Charges de personnel</field>
-        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_5').id)]</field>
+        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_5').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">True</field>
@@ -149,7 +149,7 @@
         <field name="sequence">7</field>
         <field name="name">CH_4</field>
         <field name="description">- Charges de marchandises et de matériel</field>
-        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_4').id)]</field>
+        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_4').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">True</field>
@@ -175,7 +175,7 @@
         <field name="sequence">3</field>
         <field name="name">CH_39</field>
         <field name="description">+/- Variation des stocks</field>
-        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_39').id)]</field>
+        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_39').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">True</field>
@@ -188,7 +188,7 @@
         <field name="sequence">2</field>
         <field name="name">CH_30</field>
         <field name="description">Chiffre d'affaires</field>
-        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_30').id)]</field>
+        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_30').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">True</field>
@@ -227,7 +227,7 @@
         <field name="sequence">4</field>
         <field name="name">CH_106</field>
         <field name="description">Actifs à court terme cotés en bourse</field>
-        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_106').id)]</field>
+        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_106').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">False</field>
@@ -240,7 +240,7 @@
         <field name="sequence">3</field>
         <field name="name">CH_100</field>
         <field name="description">Trésorerie </field>
-        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_100').id)]</field>
+        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_100').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">False</field>
@@ -253,7 +253,7 @@
         <field name="sequence">6</field>
         <field name="name">CH_114</field>
         <field name="description">Autres créances à court terme</field>
-        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_114').id)]</field>
+        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_114').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">False</field>
@@ -266,7 +266,7 @@
         <field name="sequence">5</field>
         <field name="name">CH_110</field>
         <field name="description">Créances résultant de livraisons et prestations</field>
-        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_110').id)]</field>
+        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_110').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">False</field>
@@ -279,7 +279,7 @@
         <field name="sequence">8</field>
         <field name="name">CH_130</field>
         <field name="description">Actifs de régularisation (transitoires)</field>
-        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_130').id)]</field>
+        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_130').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">False</field>
@@ -292,7 +292,7 @@
         <field name="sequence">7</field>
         <field name="name">CH_120</field>
         <field name="description">Stocks et prestations non facturées</field>
-        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_120').id)]</field>
+        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_120').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">False</field>
@@ -305,7 +305,7 @@
         <field name="sequence">10</field>
         <field name="name">CH_140</field>
         <field name="description">Immobilisations financières</field>
-        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_140').id)]</field>
+        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_140').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">False</field>
@@ -344,7 +344,7 @@
         <field name="sequence">25</field>
         <field name="name">CH_260</field>
         <field name="description">Provisions à long termes et provisions légales</field>
-        <field name="expression">-bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_260').id)]</field>
+        <field name="expression">-bale[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_260').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">False</field>
@@ -396,7 +396,7 @@
         <field name="sequence">20</field>
         <field name="name">CH_80</field>
         <field name="description">+/- Résultat hors-exploitation</field>
-        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_80').id)]</field>
+        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_80').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">True</field>
@@ -409,7 +409,7 @@
         <field name="sequence">21</field>
         <field name="name">CH_85</field>
         <field name="description">+/- Résultat extraordinaires</field>
-        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_85').id)]</field>
+        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_85').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">True</field>
@@ -435,7 +435,7 @@
         <field name="sequence">23</field>
         <field name="name">CH_89</field>
         <field name="description">- Impôts directs</field>
-        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_89').id)]</field>
+        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_89').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">True</field>
@@ -461,7 +461,7 @@
         <field name="sequence">17</field>
         <field name="name">CH_69</field>
         <field name="description">+/- Résultat financier</field>
-        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_69').id)]</field>
+        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_69').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">True</field>
@@ -487,7 +487,7 @@
         <field name="sequence">19</field>
         <field name="name">CH_7</field>
         <field name="description">+/- Résultat des activités annexes d'exploitation</field>
-        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_7').id)]</field>
+        <field name="expression">-balp[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_7').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">True</field>
@@ -513,7 +513,7 @@
         <field name="sequence">18</field>
         <field name="name">CH_200</field>
         <field name="description">Dettes à court terme résultant d’achats et de prestations de services</field>
-        <field name="expression">-bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_200').id)]</field>
+        <field name="expression">-bale[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_200').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">False</field>
@@ -526,7 +526,7 @@
         <field name="sequence">15</field>
         <field name="name">CH_180</field>
         <field name="description">Capital non versé : capital social - capital de fondation</field>
-        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_180').id)]</field>
+        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_180').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">False</field>
@@ -552,7 +552,7 @@
         <field name="sequence">13</field>
         <field name="name">CH_160</field>
         <field name="description">Immobilisations corporelles immeubles</field>
-        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_160').id)]</field>
+        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_160').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">False</field>
@@ -565,7 +565,7 @@
         <field name="sequence">14</field>
         <field name="name">CH_170</field>
         <field name="description">Immobilisations incorporelles</field>
-        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_170').id)]</field>
+        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_170').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">False</field>
@@ -578,7 +578,7 @@
         <field name="sequence">11</field>
         <field name="name">CH_148</field>
         <field name="description">Participations</field>
-        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_148').id)]</field>
+        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_148').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">False</field>
@@ -591,7 +591,7 @@
         <field name="sequence">12</field>
         <field name="name">CH_150</field>
         <field name="description">Immobilisations corporelles meubles</field>
-        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_150').id)]</field>
+        <field name="expression">bale[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_150').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">False</field>
@@ -604,7 +604,7 @@
         <field name="sequence">19</field>
         <field name="name">CH_210</field>
         <field name="description">Dettes à court terme rémunérés</field>
-        <field name="expression">-bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_210').id)]</field>
+        <field name="expression">-bale[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_210').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">False</field>
@@ -617,7 +617,7 @@
         <field name="sequence">20</field>
         <field name="name">CH_220</field>
         <field name="description">Autres dettes à court terme</field>
-        <field name="expression">-bale[][('account_id.tag_ids', '=', ref('l10n_ch.account_tag_ch_220').id)]</field>
+        <field name="expression">-bale[][('account_id.tag_ids', '=', ref('l10n_ch_account_tags.account_tag_ch_220').id)]</field>
         <field name="type">num</field>
         <field name="accumulation_method">sum</field>
         <field name="budgetable">False</field>
