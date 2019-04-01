@@ -10,6 +10,8 @@ setuptools.setup(
     install_requires=[
         'odoo12-addon-l10n_ch_account_tags',
         'odoo12-addon-l10n_ch_mis_reports',
+        'odoo12-addon-l10n_ch_states',
+        'odoo12-addon-l10n_ch_zip',
     ],
     classifiers=[
         'Programming Language :: Python',
