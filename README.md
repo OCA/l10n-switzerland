@@ -96,7 +96,7 @@ addon | version | summary
 [l10n_ch_import_pain002](l10n_ch_import_pain002/) | 10.0.1.0.0 | Import pain002
 [l10n_ch_import_winbiz](l10n_ch_import_winbiz/) | 10.0.1.0.0 | Accounting Import WinBIZ
 [l10n_ch_lsv_dd](l10n_ch_lsv_dd/) | 10.0.1.0.0 | Create LSV and Direct Debit (postfinance) files
-[l10n_ch_pain_base](l10n_ch_pain_base/) | 10.0.1.0.3 | ISO 20022 base module for Switzerland
+[l10n_ch_pain_base](l10n_ch_pain_base/) | 10.0.1.0.4 | ISO 20022 base module for Switzerland
 [l10n_ch_pain_credit_transfer](l10n_ch_pain_credit_transfer/) | 10.0.1.0.0 | Generate ISO 20022 credit transfert (SEPA and not SEPA)
 [l10n_ch_payment_slip](l10n_ch_payment_slip/) | 10.0.1.1.4 | Print ESR/BVR payment slip with your invoices
 [l10n_ch_scan_bvr](l10n_ch_scan_bvr/) | 10.0.1.0.3 | Switzerland - Scan ESR/BVR to create invoices
