@@ -171,11 +171,6 @@ msgid "Finish"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: model:ir.actions.act_window,name:l10n_ch_lsv_dd.action_account_invoice_free
-msgid "Free Invoices"
-msgstr ""
-
-#. module: l10n_ch_lsv_dd
 #: model:ir.ui.view,arch_db:l10n_ch_lsv_dd.view_banking_export_ch_dd_form
 msgid "General Information"
 msgstr ""
