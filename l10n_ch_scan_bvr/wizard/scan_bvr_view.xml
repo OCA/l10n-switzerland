@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="scan_bvr_memory_form" model="ir.ui.view">
+        <field name="name">scan.bvr.memory.form</field>
+        <field name="model">scan.bvr</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="SCAN BVR">
+                <header>
+                    <field name="state" readonly="1" widget="statusbar"/>
+                </header>
+                <group col="2" colspan="2">
+                    <separator colspan="2" string="Bvr Scanning Result"/>
+                    <field colspan="2" name="bvr_string" required="1"/>
+                    <separator colspan="2" string="Invoice Journal"/>
+                    <field colspan="2" domain="[('type', '=', 'purchase')]" name="journal_id" required="1"/>
+                </group>
+                <group attrs="{'invisible': [('state','!=', 'need_extra_info')]}" col="2" colspan="2">
+                    <newline/>
+                    <separator colspan="2" string="Partner"/>
+                    <field attrs="{'required': [('state','=', 'need_extra_info')]}" colspan="2" name="partner_id"/>
+                    <separator colspan="2" string="Partner Bank Account"/>
+                    <field attrs="{'required': [('state','=', 'need_extra_info')]}" colspan="2" domain="[('partner_id','parent_of', partner_id)]" name="bank_account_id"/>
+                </group>
+                <footer>
+                    <button class="btn-primary" icon="fa-arrow-right" name="validate_bvr_string" string="Create" type="object"/>
+                    <button class="btn-default" icon="fa-times-circle" special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_scan_bvr" model="ir.actions.act_window">
+        <field name="name">Scan BVR</field>
+        <field name="res_model">scan.bvr</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="scan_bvr_memory_form"/>
+        <field name="target">new</field>
+    </record>
+    <menuitem action="action_scan_bvr" id="menu_scan_bvr" parent="account.menu_finance_payables"/>
+</odoo>
