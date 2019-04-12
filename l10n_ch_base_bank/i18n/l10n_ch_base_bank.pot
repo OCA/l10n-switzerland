@@ -118,6 +118,11 @@ msgid "PostFinance"
 msgstr ""
 
 #. module: l10n_ch_base_bank
+#: model:res.groups,name:l10n_ch_base_bank.group_isr_adherent_num_users
+msgid "Show \"ISR adherent number\" field in Partner Banks"
+msgstr ""
+
+#. module: l10n_ch_base_bank
 #: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank_clearing
 msgid "Swiss unique bank identifier also used in IBAN number"
 msgstr ""
