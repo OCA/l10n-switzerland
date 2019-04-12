@@ -74,6 +74,9 @@ class XMLPFParser(models.AbstractModel):
                 '//ns:Bal[1]/ns:Amt/@Ccy', namespaces={'ns': ns})
             if currency_node and len(currency_node) == 1:
                 result['currency'] = currency_node[0]
+        if not result.get('date'):
+            self.add_value_from_node(
+                ns, node, '//ns:Stmt/ns:CreDtTm', result, 'date')
         return result
 
     def _check_postfinance_attachments(self, data_file):

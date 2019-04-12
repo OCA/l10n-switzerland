@@ -32,7 +32,12 @@ class TestDTA(AccountingTestCase):
         self.attachment_model = self.env['ir.attachment']
         self.invoice_model = self.env['account.invoice']
         self.invoice_line_model = self.env['account.invoice.line']
+        self.eur_currency = self.env.ref('base.EUR')
+        self.eur_currency.active = True
         company = self.env.ref('base.main_company')
+        self.cr.execute('UPDATE res_company '
+                        'SET currency_id = %s '
+                        'WHERE id = %s', [self.eur_currency.id, company.id])
         self.partner_agrolait = self.env.ref('base.res_partner_2')
         self.partner_c2c = self.env.ref('base.res_partner_12')
         self.account_expense = self.account_model.search([(
@@ -66,8 +71,6 @@ class TestDTA(AccountingTestCase):
             'fixed_journal_id': self.bank_journal.id,
         })
 
-        eur_currency_id = self.env.ref('base.EUR').id
-        company.currency_id = eur_currency_id
         invoice1 = self.create_invoice(
             self.partner_agrolait.id,
             'account_payment_mode.res_partner_2_iban', 42.0, 'F1341')
@@ -100,7 +103,8 @@ class TestDTA(AccountingTestCase):
         self.assertEquals(len(pay_lines), 3)
         agrolait_pay_line1 = pay_lines[0]
         accpre = self.env['decimal.precision'].precision_get('Account')
-        self.assertEquals(agrolait_pay_line1.currency_id.id, eur_currency_id)
+        self.assertEquals(
+            agrolait_pay_line1.currency_id.id, self.eur_currency.id)
         self.assertEquals(
             agrolait_pay_line1.partner_bank_id, invoice1.partner_bank_id)
         self.assertEquals(float_compare(
@@ -114,7 +118,8 @@ class TestDTA(AccountingTestCase):
             ('partner_id', '=', self.partner_agrolait.id)])
         self.assertEquals(len(bank_lines), 1)
         agrolait_bank_line = bank_lines[0]
-        self.assertEquals(agrolait_bank_line.currency_id.id, eur_currency_id)
+        self.assertEquals(
+            agrolait_bank_line.currency_id.id, self.eur_currency.id)
         self.assertEquals(float_compare(
             agrolait_bank_line.amount_currency, 49.0, precision_digits=accpre),
             0)
