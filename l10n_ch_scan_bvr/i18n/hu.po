@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * l10n_ch_scan_bvr
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
@@ -12,38 +12,38 @@ msgstr ""
 "PO-Revision-Date: 2017-12-01 03:54+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Hungarian (https://www.transifex.com/oca/teams/23907/hu/)\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_scan_bvr
-#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:55
-#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:84
-#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:113
-#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:130
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:54
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:83
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:112
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:129
 #, python-format
 msgid "BVR CheckSum Error in first part"
 msgstr ""
 
 #. module: l10n_ch_scan_bvr
-#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:67
-#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:96
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:66
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:95
 #, python-format
 msgid "BVR CheckSum Error in fourth part"
 msgstr ""
 
 #. module: l10n_ch_scan_bvr
-#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:59
-#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:88
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:58
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:87
 #, python-format
 msgid "BVR CheckSum Error in second part"
 msgstr ""
 
 #. module: l10n_ch_scan_bvr
-#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:63
-#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:92
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:62
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:91
 #, python-format
 msgid "BVR CheckSum Error in third part"
 msgstr ""
@@ -67,6 +67,11 @@ msgstr ""
 #: model:ir.ui.view,arch_db:l10n_ch_scan_bvr.scan_bvr_memory_form
 msgid "Cancel"
 msgstr "Mégsem"
+
+#. module: l10n_ch_scan_bvr
+#: model:ir.model,name:l10n_ch_scan_bvr.model_res_partner
+msgid "Contact"
+msgstr ""
 
 #. module: l10n_ch_scan_bvr
 #: model:ir.ui.view,arch_db:l10n_ch_scan_bvr.scan_bvr_memory_form
@@ -135,7 +140,6 @@ msgid "New"
 msgstr ""
 
 #. module: l10n_ch_scan_bvr
-#: model:ir.model,name:l10n_ch_scan_bvr.model_res_partner
 #: model:ir.model.fields,field_description:l10n_ch_scan_bvr.field_scan_bvr_partner_id
 #: model:ir.ui.view,arch_db:l10n_ch_scan_bvr.scan_bvr_memory_form
 msgid "Partner"
@@ -164,19 +168,19 @@ msgid "State"
 msgstr ""
 
 #. module: l10n_ch_scan_bvr
-#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:183
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:186
 #, python-format
 msgid "The default product in this partner has wrong taxes configuration"
 msgstr ""
 
 #. module: l10n_ch_scan_bvr
-#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:315
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:318
 #, python-format
 msgid "This kind of BVR is not supported at this time"
 msgstr ""
 
 #. module: l10n_ch_scan_bvr
-#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:202
+#: code:addons/l10n_ch_scan_bvr/wizard/scan_bvr.py:205
 #, python-format
 msgid "Unknown or deactivated currency: %s"
 msgstr ""
