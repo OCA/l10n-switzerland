@@ -20,8 +20,8 @@ msgstr ""
 "2);\n"
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:340
-#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:373
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:341
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:376
 #, python-format
 msgid "Amount for line with ref %s is negative (%f given)"
 msgstr ""
@@ -32,7 +32,7 @@ msgid "Bank Accounts"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:159
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:160
 #, python-format
 msgid "Ben IBAN is not a correct CH or LI IBAN (%s given)"
 msgstr ""
@@ -51,8 +51,8 @@ msgid "Cancel"
 msgstr "Atcelt"
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:78
-#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:118
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:79
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:119
 #: selection:lsv.export.wizard,state:0 selection:post.dd.export.wizard,state:0
 #, python-format
 msgid "Create"
@@ -80,7 +80,7 @@ msgid "Currency"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/models/bank.py:110
+#: code:addons/l10n_ch_lsv_dd/models/bank.py:111
 #, python-format
 msgid "DD identifier should contain only ASCII caracters."
 msgstr ""
@@ -154,8 +154,8 @@ msgid "Filename"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:78
-#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:118
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:79
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:119
 #: selection:lsv.export.wizard,state:0 selection:post.dd.export.wizard,state:0
 #, python-format
 msgid "Finish"
@@ -189,15 +189,15 @@ msgid "Generated Direct Debit Files"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:178
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:299
-#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:209
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:179
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:300
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:212
 #, python-format
 msgid "Generated File"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:241
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:242
 #, python-format
 msgid "Generated debit_record with size %d is not valid (len should be 700)"
 msgstr ""
@@ -216,25 +216,25 @@ msgid "Generated file"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:198
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:199
 #, python-format
 msgid "Generated head record with size %d is not valid (len should be 700)"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:275
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:278
 #, python-format
 msgid "Generated line for ref %s with size %d is not valid (len should be 588)"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:296
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:299
 #, python-format
 msgid "Generated total line is not valid (%d instead of 43)"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:266
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:267
 #, python-format
 msgid "Generated total line is not valid (%d instead of 700)"
 msgstr ""
@@ -245,7 +245,7 @@ msgid "Generation Date"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:399
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:400
 #, python-format
 msgid "Given BV account number is to long ! (%s)"
 msgstr ""
@@ -259,19 +259,19 @@ msgid "ID"
 msgstr "ID"
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/export_utils.py:97
+#: code:addons/l10n_ch_lsv_dd/wizard/export_utils.py:98
 #, python-format
 msgid "Incorrect treatment date: %s for line with ref %s"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/models/bank.py:69
+#: code:addons/l10n_ch_lsv_dd/models/bank.py:70
 #, python-format
 msgid "Invalid LSV Identifier."
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/models/bank.py:80
+#: code:addons/l10n_ch_lsv_dd/models/bank.py:81
 #, python-format
 msgid "Invalid Postfiance DDIdentifier."
 msgstr ""
@@ -312,7 +312,7 @@ msgid "LSV file"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/models/bank.py:93
+#: code:addons/l10n_ch_lsv_dd/models/bank.py:94
 #, python-format
 msgid "LSV identifier should contain only ASCII caracters."
 msgstr ""
@@ -347,14 +347,14 @@ msgid "Last Updated on"
 msgstr "Pēdējās izmaiņas"
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/export_utils.py:121
+#: code:addons/l10n_ch_lsv_dd/wizard/export_utils.py:122
 #, python-format
 msgid ""
 "Line with ref %s has %s currency and generated file %s (should be the same)"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:262
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:265
 #, python-format
 msgid ""
 "Line with ref %s has ESR ref, but no valid ESR party number exists for ben "
@@ -362,20 +362,20 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:131
-#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:182
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:132
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:185
 #, python-format
 msgid "Line with ref %s has no associated valid mandate"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:227
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:230
 #, python-format
 msgid "Line with ref %s has not a correct CH or LI IBAN(%s given)"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:334
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:335
 #, python-format
 msgid ""
 "Max authorized amount is CHF 10'000'000.00 or EUR 5'000'000.00 (%s %.2f "
@@ -383,26 +383,26 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:467
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:470
 #, python-format
 msgid "Missing LSV identifier for account %s"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:417
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:418
 #, python-format
 msgid "Missing Postfinance direct debit identifier for account %s"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:412
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:415
 #, python-format
 msgid "Missing address for bank account %s"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:374
-#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:392
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:375
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:395
 #, python-format
 msgid "Missing owner name for bank account %s"
 msgstr ""
@@ -414,14 +414,14 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/models/invoice.py:48
+#: code:addons/l10n_ch_lsv_dd/models/invoice.py:49
 #, python-format
 msgid "No payment line found !"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:94
-#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:134
+#: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:95
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:135
 #, python-format
 msgid "No payment order selected"
 msgstr ""
@@ -470,16 +470,22 @@ msgid "Postfinance Direct Debit options"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
+#: code:addons/l10n_ch_lsv_dd/wizard/export_utils.py:90
+#, python-format
+msgid "Preferred type not implemented"
+msgstr ""
+
+#. module: l10n_ch_lsv_dd
 #: selection:account.payment.method,lsv_treatment_type:0
-#: code:addons/l10n_ch_lsv_dd/models/account_payment_method.py:27
-#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:86
+#: code:addons/l10n_ch_lsv_dd/models/account_payment_method.py:28
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:87
 #: selection:lsv.export.wizard,treatment_type:0
 #, python-format
 msgid "Production"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/models/account_payment_order.py:46
+#: code:addons/l10n_ch_lsv_dd/models/account_payment_order.py:47
 #, python-format
 msgid "Related invoices"
 msgstr ""
@@ -502,7 +508,7 @@ msgid "State"
 msgstr ""
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:367
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:370
 #, python-format
 msgid ""
 "Stop kidding... max authorized amount is CHF 99 999 999.99 (%.2f %s given "
@@ -511,8 +517,8 @@ msgstr ""
 
 #. module: l10n_ch_lsv_dd
 #: selection:account.payment.method,lsv_treatment_type:0
-#: code:addons/l10n_ch_lsv_dd/models/account_payment_method.py:28
-#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:86
+#: code:addons/l10n_ch_lsv_dd/models/account_payment_method.py:29
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:87
 #: selection:lsv.export.wizard,treatment_type:0
 #, python-format
 msgid "Test"
@@ -544,7 +550,7 @@ msgid "Type"
 msgstr "Tips"
 
 #. module: l10n_ch_lsv_dd
-#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:431
+#: code:addons/l10n_ch_lsv_dd/wizard/lsv_export_wizard.py:434
 #, python-format
 msgid "Unable to determine clearing number for account %s"
 msgstr ""
