@@ -122,12 +122,4 @@ class AccountInvoice(models.Model):
         if not res:
             if self.journal_id:
                 return self.journal_id.bank_account_id
-            if self.reference_type == 'isr':
-                bank_ids = self.partner_id.bank_ids.filtered(
-                    lambda s: s.acc_type == 'postal'
-                )
-            else:
-                bank_ids = self.partner.bank_ids
-            if bank_ids:
-                res = bank_ids[0]
         return res
