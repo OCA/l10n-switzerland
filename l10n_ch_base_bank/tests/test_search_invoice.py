@@ -18,7 +18,7 @@ class TestSearchInvoice(common.TransactionCase):
         bank_account = self.env['res.partner.bank'].create({
             'partner_id': self.company.partner_id.id,
             'bank_id': bank.id,
-            'acc_number': 'Bank/CCP 01-1234-1',
+            'acc_number': '01-1234-1',
         })
         self.company.partner_id.bank_ids = bank_account
         self.partner = self.env['res.partner'].create(
@@ -29,7 +29,7 @@ class TestSearchInvoice(common.TransactionCase):
             'type': 'bank',
             'code': 'BNK42',
             'bank_id': bank.id,
-            'bank_acc_number': '01-1234-1',
+            'bank_acc_number': '10-8060-7',
         })
 
     def assert_find_ref(self, reference, operator, value):
@@ -37,6 +37,7 @@ class TestSearchInvoice(common.TransactionCase):
             'partner_id': self.partner.id,
             'type': 'out_invoice',
             'reference_type': 'isr',
+            'journal_id': self.bank_journal.id,
             'reference': reference,
         }
         invoice = self.env['account.invoice'].create(values)
@@ -50,8 +51,8 @@ class TestSearchInvoice(common.TransactionCase):
             'partner_id': self.partner.id,
             'type': 'out_invoice',
             'reference_type': 'isr',
-            'reference': reference,
             'journal_id': self.bank_journal.id,
+            'reference': reference,
         }
         self.env['account.invoice'].create(values)
         found = self.env['account.invoice'].search(
@@ -116,6 +117,7 @@ class TestSearchInvoice(common.TransactionCase):
             'type': 'out_invoice',
             'reference_type': 'isr',
             'reference': '27 29990 00000 00001 70400 25019',
+            'journal_id': self.bank_journal.id,
         }
         invoice = self.env['account.invoice'].create(values)
         found = self.env['account.invoice'].search(
@@ -129,6 +131,7 @@ class TestSearchInvoice(common.TransactionCase):
             'type': 'out_invoice',
             'reference_type': 'isr',
             'reference': '27 29990 00000 00001 70400 25019',
+            'journal_id': self.bank_journal.id,
         }
         invoice = self.env['account.invoice'].create(values)
         found = self.env['account.invoice'].search(
