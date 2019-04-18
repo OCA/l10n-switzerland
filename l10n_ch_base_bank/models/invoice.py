@@ -1,6 +1,6 @@
 # Copyright 2012-2019 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import models, api, fields, _
+from odoo import models, api, _
 from odoo.tools import mod10r
 from odoo import exceptions
 
