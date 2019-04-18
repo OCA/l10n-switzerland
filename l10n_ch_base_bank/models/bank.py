@@ -378,9 +378,11 @@ class ResPartnerBank(models.Model, BankCommon):
 
     @api.onchange('ccp')
     def onchange_ccp_set_acc_number(self):
-        # If ccp changes and it's a postal bank update acc_number to ccp
-        # we don't want make acc_number as computed to have possibility set it
-        # manually and also avoid to shadow other logic on acc_number if exist
+        """
+        If ccp changes and it's a postal bank update acc_number to ccp
+        we don't want make acc_number as computed to have possibility set it
+        manually and also avoid to shadow other logic on acc_number if exist
+        """
         if self.acc_type == 'iban':
             return
 
