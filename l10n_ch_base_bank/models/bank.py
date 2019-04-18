@@ -8,6 +8,9 @@ from odoo import exceptions
 
 from odoo.addons.base_iban.models.res_partner_bank import normalize_iban
 
+# bic for all switzerland's post offices is defined
+CH_POST_BIC = 'POFICHBEXXX'
+
 
 class BankCommon(object):
 
@@ -120,7 +123,7 @@ class Bank(models.Model, BankCommon):
 
     @api.multi
     def is_swiss_post(self):
-        return self.bic == 'POFICHBEXXX'
+        return self.bic == CH_POST_BIC
 
     @api.multi
     def name_get(self):
@@ -211,7 +214,12 @@ class ResPartnerBank(models.Model, BankCommon):
         store=True
     )
 
-    @api.one
+    @api.model
+    def _get_supported_account_types(self):
+        rslt = super(ResPartnerBank, self)._get_supported_account_types()
+        rslt.append(('postal', _('Postal')))
+        return rslt
+
     @api.depends('acc_number')
     def _compute_acc_type(self):
         if (self.acc_number and
@@ -342,7 +350,7 @@ class ResPartnerBank(models.Model, BankCommon):
             bank = (
                 self.env['res.bank'].search([('ccp', '=', ccp)], limit=1) or
                 bank or
-                self.env['res.bank'].search([('bic', '=', 'POFICHBEXXX')],
+                self.env['res.bank'].search([('bic', '=', CH_POST_BIC)],
                                             limit=1))
         elif self.acc_type == 'iban':
             if not bank:
@@ -362,10 +370,9 @@ class ResPartnerBank(models.Model, BankCommon):
 
     @api.onchange('ccp')
     def onchange_ccp_set_acc_number(self):
-        """If ccp changes and it's a postal bank update acc_number to ccp
-        we don't want make acc_number as computed to have possibility set it
-        manually and also avoid to shadow other logic on acc_number if exist
-       """
+        # If ccp changes and it's a postal bank update acc_number to ccp
+        # we don't want make acc_number as computed to have possibility set it
+        # manually and also avoid to shadow other logic on acc_number if exist
         if self.acc_type == 'iban':
             return
 
@@ -388,7 +395,7 @@ class ResPartnerBank(models.Model, BankCommon):
         if ccp and self.is_swiss_postal_num(ccp) and not self.bank_id.id:
             bank = (self.env['res.bank'].search([('ccp', '=', ccp)], limit=1)
                     or
-                    self.env['res.bank'].search([('bic', '=', 'POFICHBEXXX')],
+                    self.env['res.bank'].search([('bic', '=', CH_POST_BIC)],
                                                 limit=1))
             if not bank.is_swiss_post():
                 self._update_acc_name()
@@ -398,7 +405,7 @@ class ResPartnerBank(models.Model, BankCommon):
 
     @api.onchange('bank_id')
     def onchange_bank_set_acc_number(self):
-        """ Track bank change to update acc_name if needed"""
+        # Track bank change to update acc_name if needed
         if not self.bank_id or self.acc_type == 'iban':
             return
         if self.bank_id.is_swiss_post():
@@ -408,14 +415,10 @@ class ResPartnerBank(models.Model, BankCommon):
 
     @api.onchange('partner_id')
     def onchange_partner_set_acc_number(self):
-        """
-        when acc_number was computed automatically we call regeneration
-        as partner name is part of acc_number
-        """
+        # When acc_number was computed automatically we call regeneration
+        # as partner name is part of acc_number
         if self.acc_type == 'bank' and self.ccp:
             self._update_acc_name()
-            if 'Bank/CCP' in self.acc_number:
-                self.acc_number = self._get_acc_name()
 
     _sql_constraints = [('bvr_adherent_uniq', 'unique (bvr_adherent_num, ccp)',
                          'The BVR adherent number/ccp pair must be unique !')]
