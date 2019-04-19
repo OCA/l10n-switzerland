@@ -15,7 +15,7 @@ class TestCreateInvoice(common.SavepointCase):
         cls.partner = cls.env.ref('base.res_partner_12')
         bank = cls.env['res.bank'].create({
             'name': 'BCV',
-            'bic': 'BIC23423',
+            'bic': 'BBRUBEBB',
             'clearing': '234234',
         })
         # define company bank account

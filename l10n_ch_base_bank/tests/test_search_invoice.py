@@ -3,8 +3,10 @@
 
 from odoo.tests import common
 from odoo.tests.common import Form
+from odoo.tests import tagged
 
 
+@tagged('post_install', '-at_install')
 class TestSearchInvoice(common.SavepointCase):
 
     @classmethod
@@ -14,7 +16,7 @@ class TestSearchInvoice(common.SavepointCase):
         cls.company = cls.env.ref('base.main_company')
         bank = cls.env['res.bank'].create({
             'name': 'BCV',
-            'bic': 'BIC23423',
+            'bic': 'BBRUBEBB',
             'clearing': '234234',
             'ccp': '01-1234-1',
         })
