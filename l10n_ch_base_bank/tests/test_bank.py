@@ -5,12 +5,14 @@ from odoo.tests import common
 from odoo.tools import mute_logger
 from odoo import exceptions
 from odoo.tests.common import Form
+from odoo.tests import tagged
 
 ch_iban = 'CH15 3881 5158 3845 3843 7'
 ch_post_iban = 'CH09 0900 0000 1000 8060 7'
 fr_iban = 'FR83 8723 4133 8709 9079 4002 530'
 
 
+@tagged('post_install', '-at_install')
 class TestBank(common.SavepointCase):
 
     @classmethod
@@ -251,8 +253,8 @@ class TestBank(common.SavepointCase):
         self.assertEqual(bank_acc.acc_number, '46-110-7')
 
     def test_name_search(self):
-        self.bank.bic = 'BIC12345'
-        result = self.env['res.bank'].name_search('BIC12345')
+        self.bank.bic = 'BBAVBEBB'
+        result = self.env['res.bank'].name_search('BBAVBEBB')
         self.assertEqual(result and result[0][0], self.bank.id)
         self.bank.code = 'CODE123'
         result = self.env['res.bank'].name_search('CODE123')
