@@ -10,16 +10,6 @@ class AccountPaymentOrder(models.Model):
     _inherit = 'account.payment.order'
 
     @api.multi
-    def compute_sepa_final_hook(self, sepa):
-        self.ensure_one()
-        sepa = super().compute_sepa_final_hook(sepa)
-        pain_flavor = self.payment_mode_id.payment_method_id.pain_version
-        # ISR orders cannot be SEPA orders
-        if pain_flavor and '.ch.' in pain_flavor:
-            sepa = False
-        return sepa
-
-    @api.multi
     def generate_pain_nsmap(self):
         self.ensure_one()
         nsmap = super().generate_pain_nsmap()
