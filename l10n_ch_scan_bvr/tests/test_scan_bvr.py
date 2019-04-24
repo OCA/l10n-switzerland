@@ -64,7 +64,7 @@ class TestScanBvr(common.TransactionCase):
         })
         try:
             wizard.validate_bvr_string()
-        except:
+        except Exception:
             pass
         else:
             raise 'Missing error message for wrong BVR line'
