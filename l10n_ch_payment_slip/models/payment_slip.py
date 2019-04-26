@@ -54,6 +54,7 @@ class PaymentSlip(models.Model):
     _compile_check_isr = re.compile(r'[0-9][0-9]-[0-9]{3,6}-[0-9]')
 
     _name = 'l10n_ch.payment_slip'
+    _description = 'Payment Slip'
     _rec_name = 'reference'
 
     reference = fields.Char('ISR Ref.',

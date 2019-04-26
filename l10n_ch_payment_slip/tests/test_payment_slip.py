@@ -28,7 +28,7 @@ class TestPaymentSlip(common.SavepointCase):
             {
                 'name': 'BCV',
                 'ccp': '01-1234-1',
-                'bic': '23452345',
+                'bic': 'BBRUBEBB',
                 'clearing': '234234',
             }
         )
