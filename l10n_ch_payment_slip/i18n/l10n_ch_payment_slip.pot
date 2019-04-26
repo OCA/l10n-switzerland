@@ -152,6 +152,11 @@ msgid "ISR Horz. Delta (inch)"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
+#: model:ir.model,name:l10n_ch_payment_slip.model_report_one_slip_per_page_from_invoice
+msgid "ISR Invoice report"
+msgstr ""
+
+#. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip__reference
 msgid "ISR Ref."
 msgstr ""
@@ -277,7 +282,7 @@ msgid "Merge Slips on Disk, slower but safer"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:340
+#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:341
 #, python-format
 msgid "No invoice related to move line %s"
 msgstr ""
@@ -300,6 +305,7 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: model:ir.actions.act_window,name:l10n_ch_payment_slip.action_slip_all
 #: model:ir.actions.report,name:l10n_ch_payment_slip.one_slip_per_page_from_invoice
+#: model:ir.model,name:l10n_ch_payment_slip.model_l10n_ch_payment_slip
 #: model_terms:ir.ui.view,arch_db:l10n_ch_payment_slip.pay_slip_form
 #: model_terms:ir.ui.view,arch_db:l10n_ch_payment_slip.pay_slip_lsit
 msgid "Payment Slip"
@@ -317,13 +323,13 @@ msgid "Payment Slips Merge Mode"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:560
+#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:561
 #, python-format
 msgid "Payment slip related to invoice %s due on the %s"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:225
+#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:226
 #, python-format
 msgid "Please enter a correct postal number like: 01-23456-1"
 msgstr ""
@@ -354,6 +360,11 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: model_terms:ir.ui.view,arch_db:l10n_ch_payment_slip.isr_batch_print_view
 msgid "Print payment slips"
+msgstr ""
+
+#. module: l10n_ch_payment_slip
+#: model:ir.model,name:l10n_ch_payment_slip.model_isr_batch_print_wizard
+msgid "Printing Wizard for payment slip"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
@@ -461,7 +472,7 @@ msgid "XLSX"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:346
+#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:347
 #, python-format
 msgid "Your bank ISR number should be of the form 0X-XXX-X! Please check your company information for the invoice:\n"
 "%s"
@@ -471,21 +482,6 @@ msgstr ""
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company__isr_delta_horz
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings__isr_delta_horz
 msgid "horiz. delta in inch 1.2 will print the ISR 1.2 inch on the left, negative value is possible"
-msgstr ""
-
-#. module: l10n_ch_payment_slip
-#: model:ir.model,name:l10n_ch_payment_slip.model_isr_batch_print_wizard
-msgid "isr.batch.print.wizard"
-msgstr ""
-
-#. module: l10n_ch_payment_slip
-#: model:ir.model,name:l10n_ch_payment_slip.model_l10n_ch_payment_slip
-msgid "l10n_ch.payment_slip"
-msgstr ""
-
-#. module: l10n_ch_payment_slip
-#: model:ir.model,name:l10n_ch_payment_slip.model_report_one_slip_per_page_from_invoice
-msgid "report.one_slip_per_page_from_invoice"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
