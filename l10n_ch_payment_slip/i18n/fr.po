@@ -9,20 +9,21 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-02 00:43+0000\n"
-"PO-Revision-Date: 2017-06-02 00:43+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2019-04-29 09:02+0000\n"
+"Last-Translator: Valaeys Stéphane <svalaeys@fiefmanage.ch>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.5.1\n"
 
 #. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/models/invoice.py:157
 #, python-format
 msgid "- The bank account {} used in invoice has no ISR adherent number."
-msgstr ""
+msgstr "- Le compte bancaire {} de la facture n'a pas de numéro d'adhérent BVR."
 
 #. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/models/invoice.py:162
@@ -31,18 +32,20 @@ msgid ""
 "- The bank account {} used in invoice needs to be a postal account or have a "
 "bank CCP."
 msgstr ""
+"- Le compte bancaire {} de la facture doit être un compte postal ou avoir un "
+"CCP bancaire."
 
 #. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/models/invoice.py:150
 #, python-format
 msgid "- The invoice must be confirmed."
-msgstr ""
+msgstr "- La facture doit être confirmée."
 
 #. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/models/invoice.py:153
 #, python-format
 msgid "- The invoice needs a partner bank account."
-msgstr ""
+msgstr "- La facture doit référencer un numéro de compte bancaire."
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_res_partner_bank
@@ -83,18 +86,19 @@ msgstr "Nom affiché"
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings_isr_header_partner_address
 msgid "Enabling this will print partner address top-right on the page header"
 msgstr ""
+"L'activation de cette option permettra l'impression de l'adresse du "
+"partenaire dans la tone supérieure droite de la page"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard_error_message
 msgid "Errors"
-msgstr ""
+msgstr "Erreurs"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_isr_header_partner_address
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings_isr_header_partner_address
-#, fuzzy
 msgid "Header partner address"
-msgstr "Imprimer l'adresse sur le BVR"
+msgstr "Imprimer l'adresse du partenaire sur le BVR"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_isr_add_horz
@@ -106,7 +110,7 @@ msgstr "Décalage horizontal de l'addresse en pouces"
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_isr_amount_line_horz
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings_isr_amount_line_horz
 msgid "Horiz. position in inch for amount line"
-msgstr ""
+msgstr "Position horizontal en pouces pour la ligne de montant"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_isr_scan_line_horz
@@ -126,17 +130,17 @@ msgstr "ID"
 #: model:ir.ui.view,arch_db:l10n_ch_payment_slip.res_config_settings_view_form
 #, python-format
 msgid "ISR"
-msgstr ""
+msgstr "BVR"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.actions.act_window,name:l10n_ch_payment_slip.wizard_isr_batch_print
 msgid "ISR Batch Print"
-msgstr ""
+msgstr "Imprimer les BVRs par lots"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.ui.view,arch_db:l10n_ch_payment_slip.isr_batch_print_view
 msgid "ISR Batch Print Wizard"
-msgstr ""
+msgstr "Assistant pour l'impression de BVRs par lots"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_isr_delta_horz
@@ -165,7 +169,7 @@ msgstr "Décalage horizontal de l'adresse en pouces"
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_isr_amount_line_horz
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings_isr_amount_line_horz
 msgid "ISR horiz. position for amount line (inch)"
-msgstr ""
+msgstr "Position horizontale de la ligne de montant du BVR (en pouces)"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_isr_scan_line_horz
@@ -210,7 +214,7 @@ msgstr "Décalage vertical de l'adresse en pouces"
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_isr_amount_line_vert
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings_isr_amount_line_vert
 msgid "ISR vert. position for amount line (inch)"
-msgstr ""
+msgstr "Position verticale de la ligne de montant du BVR (en pouces)"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_isr_scan_line_vert
@@ -222,7 +226,7 @@ msgstr "Décalage vertical de la scanline en pouces"
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_isr_background
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings_isr_background
 msgid "Insert ISR background ?"
-msgstr "Insérer l'arrière-plan dans le BVR"
+msgstr "Insérer l'arrière-plan dans le BVR ?"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_account_invoice
@@ -231,9 +235,8 @@ msgstr "Facture"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard_invoice_ids
-#, fuzzy
 msgid "Invoices"
-msgstr "Facture"
+msgstr "Factures"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_account_move_line
@@ -325,9 +328,8 @@ msgstr "Imprimer la banque sur le BVR"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.ui.view,arch_db:l10n_ch_payment_slip.invoice_form_add_isr_ref
-#, fuzzy
 msgid "Print CH ISR"
-msgstr "Imprimer la banque sur le BVR"
+msgstr "Imprimer BVR"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_partner_bank_print_partner
@@ -336,9 +338,8 @@ msgstr "Imprimer l'adresse sur le BVR"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.ui.view,arch_db:l10n_ch_payment_slip.isr_batch_print_view
-#, fuzzy
 msgid "Print payment slips"
-msgstr "BVR"
+msgstr "Imprimer BVRs"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_invoice_id
@@ -358,17 +359,17 @@ msgstr "BVR lié"
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_scan_line
 msgid "Scan Line"
-msgstr ""
+msgstr "Scanner la ligne"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_a4_pdf
 msgid "Slip A4 PDF"
-msgstr ""
+msgstr "BVR format A4 PDF"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_slip_image
 msgid "Slip Image"
-msgstr ""
+msgstr "Image BVR"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.ui.view,arch_db:l10n_ch_payment_slip.isr_batch_print_view
@@ -376,18 +377,19 @@ msgid ""
 "The payment slip can't be generated for some invoices you selected. Please "
 "review according to the following messages."
 msgstr ""
+"Le BVR ne peut pas être généré pour certaines des factures que vous avez "
+"sélectionnées. Veuillez prendre connaissance des messages suivants."
 
 #. module: l10n_ch_payment_slip
 #: model:ir.ui.view,arch_db:l10n_ch_payment_slip.isr_batch_print_view
 msgid ""
 "These invoices were successfully checked for the payment slip to be printed."
-msgstr ""
+msgstr "Ces factures ont été validées pour l'impression BVR."
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_amount_total
-#, fuzzy
 msgid "Total amount of ISR"
-msgstr "Montant total du fichier v11"
+msgstr "Montant total du BVR"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_isr_add_vert
@@ -399,7 +401,7 @@ msgstr "Décalage vertical de l'adresse en pouces"
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_isr_amount_line_vert
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings_isr_amount_line_vert
 msgid "Vert. position in inch for amount line"
-msgstr ""
+msgstr "Position verticale en pouces de la ligne de montant"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_isr_scan_line_vert
@@ -429,27 +431,27 @@ msgstr "Décalage global horizontal du BVR en pouces"
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_ir_actions_report
 msgid "ir.actions.report"
-msgstr ""
+msgstr "ir.actions.report"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_isr_batch_print_wizard
 msgid "isr.batch.print.wizard"
-msgstr ""
+msgstr "isr.batch.print.wizard"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_l10n_ch_payment_slip
 msgid "l10n_ch.payment_slip"
-msgstr ""
+msgstr "l10n_ch.payment_slip"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_report_one_slip_per_page_from_invoice
 msgid "report.one_slip_per_page_from_invoice"
-msgstr ""
+msgstr "report.one_slip_per_page_from_invoice"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_res_config_settings
 msgid "res.config.settings"
-msgstr ""
+msgstr "res.config.settings"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_isr_delta_vert
