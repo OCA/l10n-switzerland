@@ -108,6 +108,9 @@ class PFXMLParserTest(common.TransactionCase):
 
 class PostFinanceImportTest(common.TransactionCase):
 
+    at_install = False
+    post_install = True
+
     def setUp(self):
         super(PostFinanceImportTest, self).setUp()
         bank = self.env['res.partner.bank'].create({
