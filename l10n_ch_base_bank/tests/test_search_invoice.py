@@ -37,6 +37,7 @@ class TestSearchInvoice(common.TransactionCase):
             'partner_id': self.partner.id,
             'type': 'out_invoice',
             'reference_type': 'isr',
+            'journal_id': self.bank_journal.id,
             'reference': reference,
         }
         invoice = self.env['account.invoice'].create(values)
@@ -50,8 +51,8 @@ class TestSearchInvoice(common.TransactionCase):
             'partner_id': self.partner.id,
             'type': 'out_invoice',
             'reference_type': 'isr',
-            'reference': reference,
             'journal_id': self.bank_journal.id,
+            'reference': reference,
         }
         self.env['account.invoice'].create(values)
         found = self.env['account.invoice'].search(
@@ -116,6 +117,7 @@ class TestSearchInvoice(common.TransactionCase):
             'type': 'out_invoice',
             'reference_type': 'isr',
             'reference': '27 29990 00000 00001 70400 25019',
+            'journal_id': self.bank_journal.id,
         }
         invoice = self.env['account.invoice'].create(values)
         found = self.env['account.invoice'].search(
@@ -129,6 +131,7 @@ class TestSearchInvoice(common.TransactionCase):
             'type': 'out_invoice',
             'reference_type': 'isr',
             'reference': '27 29990 00000 00001 70400 25019',
+            'journal_id': self.bank_journal.id,
         }
         invoice = self.env['account.invoice'].create(values)
         found = self.env['account.invoice'].search(
