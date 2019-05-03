@@ -48,14 +48,14 @@ def _u2a(text):
 def tr(string_in):
     try:
         string_in = string_in.decode('utf-8')
-    except:
+    except Exception:
         # If exception => then just take the string as is
         pass
     for k in TRANS:
         string_in = string_in.replace(k[0], k[1])
     try:
         res = string_in.encode('ascii', 'replace')
-    except:
+    except Exception:
         res = string_in
     return res
 
@@ -116,7 +116,7 @@ class Record(object):
                 pass
             try:
                 res = res + c_ljust(value, field[1])
-            except:
+            except Exception:
                 pass
         return res
 
