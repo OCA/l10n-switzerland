@@ -222,11 +222,14 @@ class ResPartnerBank(models.Model, BankCommon):
 
     @api.depends('acc_number')
     def _compute_acc_type(self):
-        if (self.acc_number and
-                self.is_swiss_postal_num(self.acc_number)):
-            self.acc_type = 'postal'
-            return
-        super(ResPartnerBank, self)._compute_acc_type()
+        banks = self.env['res.partner.bank']
+        for bank in self:
+            if (bank.acc_number and
+                    bank.is_swiss_postal_num(bank.acc_number)):
+                bank.acc_type = 'postal'
+            else:
+                banks += bank
+        super(ResPartnerBank, banks)._compute_acc_type()
 
     @api.multi
     def get_account_number(self):
