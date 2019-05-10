@@ -27,15 +27,15 @@ from tempfile import mkstemp
 import openerp
 from odoo import models, fields, api, exceptions, _
 
+_logger = logging.getLogger(__name__)
+
 try:
     import pysftp
 except ImportError:
-    raise ImportError(
+    _logger.warning(
         'This module needs pysftp to connect to the FDS. '
         'Please install pysftp on your system. (sudo pip install pysftp)'
     )
-
-_logger = logging.getLogger(__name__)
 
 
 class PaymentOrderUploadDD(models.TransientModel):
