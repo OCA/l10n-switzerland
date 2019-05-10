@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+    <!-- abstract or shared templates -->
+
+    <t t-extend="bank_statement_reconciliation">
+        <t t-jquery="button.js_automatic_reconciliation" t-operation="after">
+            <button class="btn btn-default js_esr_reconciliation pull-right" title="Let odoo try to reconcile entries for the user using esr refs">Automatic ESR reconciliation</button>
+        </t>
+    </t>
+</templates>
