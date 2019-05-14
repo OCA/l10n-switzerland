@@ -4,7 +4,8 @@
 from odoo.tests import common
 from odoo import exceptions
 
-
+@common.at_install(False)
+@common.post_install(True)
 class TestCreateInvoice(common.TransactionCase):
 
     def test_emit_invoice_with_bvr_reference(self):
