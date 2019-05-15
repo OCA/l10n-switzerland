@@ -4,6 +4,7 @@
 from odoo.tests import common
 from odoo import exceptions
 
+
 @common.at_install(False)
 @common.post_install(True)
 class TestCreateInvoice(common.TransactionCase):
@@ -11,11 +12,11 @@ class TestCreateInvoice(common.TransactionCase):
     def test_emit_invoice_with_bvr_reference(self):
         self.inv_values.update({
             'partner_id': self.partner.id,
-            'type': 'out_invoice'
+            'type': 'out_invoice',
+            'company_id': self.company.id
         })
         invoice = self.env['account.invoice'].new(self.inv_values)
         invoice._onchange_partner_id()
-        self.assertEqual(invoice.partner_bank_id, self.bank_acc)
         self.assertNotEqual(invoice.reference_type, 'bvr')
 
         invoice.reference = '132000000000000000000000014'
@@ -31,7 +32,6 @@ class TestCreateInvoice(common.TransactionCase):
         })
         invoice = self.env['account.invoice'].new(self.inv_values)
         invoice._onchange_partner_id()
-        self.assertEqual(invoice.partner_bank_id, self.bank_acc)
         self.assertNotEqual(invoice.reference_type, 'bvr')
 
         invoice.reference = '132000000000004'
@@ -49,7 +49,6 @@ class TestCreateInvoice(common.TransactionCase):
         })
         invoice = self.env['account.invoice'].new(self.inv_values)
         invoice._onchange_partner_id()
-        self.assertEqual(invoice.partner_bank_id, self.bank_acc)
         self.assertNotEqual(invoice.reference_type, 'bvr')
 
         invoice.reference = 'Not a BVR ref with 27 chars'
@@ -71,7 +70,6 @@ class TestCreateInvoice(common.TransactionCase):
 
             invoice.reference = False
             invoice.reference_type = 'bvr'  # set manually bvr reference type
-
             # and save
             self.env['account.invoice'].create(
                 invoice._convert_to_write(invoice._cache)
@@ -101,6 +99,7 @@ class TestCreateInvoice(common.TransactionCase):
         super(TestCreateInvoice, self).setUp()
         self.company = self.env.ref('base.main_company')
         self.partner = self.env.ref('base.res_partner_12')
+
         bank = self.env['res.bank'].create({
             'name': 'BCV',
             'bic': 'BIC23423',
@@ -112,14 +111,14 @@ class TestCreateInvoice(common.TransactionCase):
             'type': 'bank',
             'code': 'BNK42',
             'bank_id': bank.id,
-            'bank_acc_number': '01-1234-1',
+            'bank_acc_number': '01-5678-1',
         })
         self.bank_acc = self.bank_journal.bank_account_id
         self.payment_mode = self.env['account.payment.mode'].create({
             'name': 'Inbound Credit transfer CH',
-            'company_id': self.company.id,
             'bank_account_link': 'fixed',
             'fixed_journal_id': self.bank_journal.id,
+            'show_bank_account_from_journal': True,
             'payment_method_id':
             self.env.ref('account.account_payment_method_manual_in').id,
         })
