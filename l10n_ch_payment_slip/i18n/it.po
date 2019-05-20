@@ -45,12 +45,19 @@ msgid "- The invoice needs a partner bank account."
 msgstr ""
 
 #. module: l10n_ch_payment_slip
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_invoice__partner_bank_id
+#, fuzzy
+#| msgid "Bank Accounts"
+msgid "Bank Account"
+msgstr "Conti bancari"
+
+#. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_res_partner_bank
 msgid "Bank Accounts"
 msgstr "Conti bancari"
 
 #. module: l10n_ch_payment_slip
-#: model:ir.ui.view,arch_db:l10n_ch_payment_slip.isr_batch_print_view
+#: model_terms:ir.ui.view,arch_db:l10n_ch_payment_slip.isr_batch_print_view
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -60,69 +67,79 @@ msgid "Companies"
 msgstr "Società"
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard_create_uid
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_create_uid
+#: model:ir.model,name:l10n_ch_payment_slip.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: l10n_ch_payment_slip
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard__create_uid
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip__create_uid
 msgid "Created by"
 msgstr "Created by"
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard_create_date
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_create_date
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard__create_date
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip__create_date
 msgid "Created on"
 msgstr "Created on"
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard_display_name
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_display_name
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_report_one_slip_per_page_from_invoice_display_name
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard__display_name
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip__display_name
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_report_one_slip_per_page_from_invoice__display_name
 msgid "Display Name"
 msgstr "Nome da visualizzare"
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_isr_header_partner_address
-#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings_isr_header_partner_address
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company__isr_header_partner_address
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings__isr_header_partner_address
 msgid "Enabling this will print partner address top-right on the page header"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard_error_message
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard__error_message
 msgid "Errors"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_isr_header_partner_address
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings_isr_header_partner_address
+#: selection:ir.actions.report,report_type:0
+msgid "HTML"
+msgstr ""
+
+#. module: l10n_ch_payment_slip
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company__isr_header_partner_address
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings__isr_header_partner_address
 msgid "Header partner address"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_isr_add_horz
-#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings_isr_add_horz
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company__isr_add_horz
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings__isr_add_horz
 msgid "Horiz. position in inch for address"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_isr_amount_line_horz
-#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings_isr_amount_line_horz
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company__isr_amount_line_horz
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings__isr_amount_line_horz
 msgid "Horiz. position in inch for amount line"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_isr_scan_line_horz
-#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings_isr_scan_line_horz
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company__isr_scan_line_horz
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings__isr_scan_line_horz
 msgid "Horiz. position in inch for scan line"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard_id
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_id
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_report_one_slip_per_page_from_invoice_id
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard__id
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip__id
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_report_one_slip_per_page_from_invoice__id
 msgid "ID"
 msgstr "ID"
 
 #. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/controllers/web.py:21
-#: model:ir.ui.view,arch_db:l10n_ch_payment_slip.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:l10n_ch_payment_slip.res_config_settings_view_form
 #, python-format
 msgid "ISR"
 msgstr ""
@@ -133,52 +150,57 @@ msgid "ISR Batch Print"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.ui.view,arch_db:l10n_ch_payment_slip.isr_batch_print_view
+#: model_terms:ir.ui.view,arch_db:l10n_ch_payment_slip.isr_batch_print_view
 msgid "ISR Batch Print Wizard"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_isr_delta_horz
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings_isr_delta_horz
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company__isr_delta_horz
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings__isr_delta_horz
 msgid "ISR Horz. Delta (inch)"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_reference
+#: model:ir.model,name:l10n_ch_payment_slip.model_report_one_slip_per_page_from_invoice
+msgid "ISR Invoice report"
+msgstr ""
+
+#. module: l10n_ch_payment_slip
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip__reference
 msgid "ISR Ref."
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_isr_delta_vert
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings_isr_delta_vert
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company__isr_delta_vert
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings__isr_delta_vert
 msgid "ISR Vert. Delta (inch)"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_isr_add_horz
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings_isr_add_horz
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company__isr_add_horz
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings__isr_add_horz
 msgid "ISR horiz. position address (inch)"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_isr_amount_line_horz
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings_isr_amount_line_horz
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company__isr_amount_line_horz
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings__isr_amount_line_horz
 msgid "ISR horiz. position for amount line (inch)"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_isr_scan_line_horz
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings_isr_scan_line_horz
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company__isr_scan_line_horz
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings__isr_scan_line_horz
 msgid "ISR horiz. position for scan line(inch)"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.ui.view,arch_db:l10n_ch_payment_slip.l10n_ch_view_res_partner_bank_from_invoice_slip
+#: model_terms:ir.ui.view,arch_db:l10n_ch_payment_slip.l10n_ch_view_res_partner_bank_from_invoice_slip
 msgid "ISR options"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_invoice_isr_reference
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_invoice__isr_reference
 msgid "ISR ref"
 msgstr "PVR ref"
 
@@ -188,48 +210,49 @@ msgid "ISR reference must be unique"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_isr_scan_line_font_size
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings_isr_scan_line_font_size
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company__isr_scan_line_font_size
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings__isr_scan_line_font_size
 msgid "ISR scan line font size (pt)"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_isr_scan_line_letter_spacing
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings_isr_scan_line_letter_spacing
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company__isr_scan_line_letter_spacing
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings__isr_scan_line_letter_spacing
 msgid "ISR scan line letter spacing"
 msgstr "PVR scan line distanza lettere"
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_isr_add_vert
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings_isr_add_vert
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company__isr_add_vert
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings__isr_add_vert
 msgid "ISR vert. position for address (inch)"
 msgstr "PVR posizione verticale indirizzo (inch)"
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_isr_amount_line_vert
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings_isr_amount_line_vert
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company__isr_amount_line_vert
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings__isr_amount_line_vert
 msgid "ISR vert. position for amount line (inch)"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_isr_scan_line_vert
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings_isr_scan_line_vert
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company__isr_scan_line_vert
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings__isr_scan_line_vert
 msgid "ISR vert. position for scan line (inch)"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_isr_background
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings_isr_background
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company__isr_background
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings__isr_background
 msgid "Insert ISR background ?"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_account_invoice
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_move_line__invoice_id
 msgid "Invoice"
 msgstr "Fattura"
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard_invoice_ids
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard__invoice_ids
 #, fuzzy
 msgid "Invoices"
 msgstr "Fattura"
@@ -240,21 +263,21 @@ msgid "Journal Item"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard___last_update
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip___last_update
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_report_one_slip_per_page_from_invoice___last_update
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard____last_update
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip____last_update
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_report_one_slip_per_page_from_invoice____last_update
 msgid "Last Modified on"
 msgstr "Ultima modifica il"
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard_write_uid
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_write_uid
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard__write_uid
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip__write_uid
 msgid "Last Updated by"
 msgstr "Ultimo aggiornamento di"
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard_write_date
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_write_date
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard__write_date
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip__write_date
 msgid "Last Updated on"
 msgstr "Ultimo aggiornamento il"
 
@@ -269,140 +292,211 @@ msgid "Merge Slips on Disk, slower but safer"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:340
+#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:341
 #, python-format
 msgid "No invoice related to move line %s"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.ui.view,arch_db:l10n_ch_payment_slip.invoice_form_add_isr_ref
+#: model_terms:ir.ui.view,arch_db:l10n_ch_payment_slip.invoice_form_add_isr_ref
 msgid "Open Payment Slips"
+msgstr ""
+
+#. module: l10n_ch_payment_slip
+#: selection:ir.actions.report,report_type:0
+msgid "PDF"
+msgstr ""
+
+#. module: l10n_ch_payment_slip
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_invoice__reference
+msgid "Payment Ref."
 msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: model:ir.actions.act_window,name:l10n_ch_payment_slip.action_slip_all
 #: model:ir.actions.report,name:l10n_ch_payment_slip.one_slip_per_page_from_invoice
-#: model:ir.ui.view,arch_db:l10n_ch_payment_slip.pay_slip_form
-#: model:ir.ui.view,arch_db:l10n_ch_payment_slip.pay_slip_lsit
+#: model:ir.model,name:l10n_ch_payment_slip.model_l10n_ch_payment_slip
+#: model_terms:ir.ui.view,arch_db:l10n_ch_payment_slip.pay_slip_form
+#: model_terms:ir.ui.view,arch_db:l10n_ch_payment_slip.pay_slip_lsit
 msgid "Payment Slip"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_move_line_payment_slip_ids
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_move_line__payment_slip_ids
 msgid "Payment Slips"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company_merge_mode
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings_merge_mode
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company__merge_mode
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings__merge_mode
 msgid "Payment Slips Merge Mode"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:560
+#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:561
 #, python-format
 msgid "Payment slip related to invoice %s due on the %s"
 msgstr "Polizza di versamento fattura n. %s scandenza il %s"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:225
+#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:226
 #, python-format
 msgid "Please enter a correct postal number like: 01-23456-1"
 msgstr "Inserire un codice di conto postale corretto es. 01-23456-1"
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_partner_bank_print_account
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_setup_bank_manual_config__print_account
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_partner_bank__print_account
 msgid "Print Account Number on ISR"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_partner_bank_print_bank
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_setup_bank_manual_config__print_bank
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_partner_bank__print_bank
 msgid "Print Bank on ISR"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.ui.view,arch_db:l10n_ch_payment_slip.invoice_form_add_isr_ref
+#: model_terms:ir.ui.view,arch_db:l10n_ch_payment_slip.invoice_form_add_isr_ref
 msgid "Print CH ISR"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_partner_bank_print_partner
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_setup_bank_manual_config__print_partner
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_partner_bank__print_partner
 msgid "Print Partner Address on ISR"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.ui.view,arch_db:l10n_ch_payment_slip.isr_batch_print_view
+#: model_terms:ir.ui.view,arch_db:l10n_ch_payment_slip.isr_batch_print_view
 msgid "Print payment slips"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_invoice_id
+#: model:ir.model,name:l10n_ch_payment_slip.model_isr_batch_print_wizard
+msgid "Printing Wizard for payment slip"
+msgstr ""
+
+#. module: l10n_ch_payment_slip
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip__invoice_id
 msgid "Related invoice"
 msgstr "Fattura relativa"
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_move_line_id
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip__move_line_id
 msgid "Related move"
 msgstr "Registrazione relativa"
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_invoice_slip_ids
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_invoice__slip_ids
 msgid "Related slip"
 msgstr "Polizza relativa"
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_scan_line
+#: model:ir.model,name:l10n_ch_payment_slip.model_ir_actions_report
+#, fuzzy
+#| msgid "Report"
+msgid "Report Action"
+msgstr "Report"
+
+#. module: l10n_ch_payment_slip
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_ir_actions_report__report_type
+#, fuzzy
+#| msgid "Report"
+msgid "Report Type"
+msgstr "Report"
+
+#. module: l10n_ch_payment_slip
+#: selection:ir.actions.report,report_type:0
+msgid "Report renderer"
+msgstr ""
+
+#. module: l10n_ch_payment_slip
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip__scan_line
 msgid "Scan Line"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_a4_pdf
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip__a4_pdf
 msgid "Slip A4 PDF"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_slip_image
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip__slip_image
 msgid "Slip Image"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.ui.view,arch_db:l10n_ch_payment_slip.isr_batch_print_view
+#: selection:ir.actions.report,report_type:0
+msgid "Text"
+msgstr ""
+
+#. module: l10n_ch_payment_slip
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_account_invoice__partner_bank_id
+msgid ""
+"The partner bank account to pay\n"
+"Keep empty to use the default"
+msgstr ""
+
+#. module: l10n_ch_payment_slip
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_account_invoice__reference
+msgid ""
+"The payment communication that will be automatically populated once the "
+"invoice validation. You can also write a free communication."
+msgstr ""
+
+#. module: l10n_ch_payment_slip
+#: model_terms:ir.ui.view,arch_db:l10n_ch_payment_slip.isr_batch_print_view
 msgid ""
 "The payment slip can't be generated for some invoices you selected. Please "
 "review according to the following messages."
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.ui.view,arch_db:l10n_ch_payment_slip.isr_batch_print_view
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_ir_actions_report__report_type
+msgid ""
+"The type of the report that will be rendered, each one having its own "
+"rendering method. HTML means the report will be opened directly in your "
+"browser PDF means the report will be rendered using Wkhtmltopdf and "
+"downloaded by the user."
+msgstr ""
+
+#. module: l10n_ch_payment_slip
+#: model_terms:ir.ui.view,arch_db:l10n_ch_payment_slip.isr_batch_print_view
 msgid ""
 "These invoices were successfully checked for the payment slip to be printed."
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_amount_total
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip__amount_total
 msgid "Total amount of ISR"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_isr_add_vert
-#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings_isr_add_vert
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company__isr_add_vert
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings__isr_add_vert
 msgid "Vert. position in inch for address"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_isr_amount_line_vert
-#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings_isr_amount_line_vert
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company__isr_amount_line_vert
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings__isr_amount_line_vert
 msgid "Vert. position in inch for amount line"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_isr_scan_line_vert
-#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings_isr_scan_line_vert
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company__isr_scan_line_vert
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings__isr_scan_line_vert
 msgid "Vert. position in inch for scan line"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:346
+#: selection:ir.actions.report,report_type:0
+msgid "XLSX"
+msgstr ""
+
+#. module: l10n_ch_payment_slip
+#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:347
 #, python-format
 msgid ""
 "Your bank ISR number should be of the form 0X-XXX-X! Please check your "
@@ -414,41 +508,16 @@ msgstr ""
 "%s"
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_isr_delta_horz
-#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings_isr_delta_horz
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company__isr_delta_horz
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings__isr_delta_horz
 msgid ""
 "horiz. delta in inch 1.2 will print the ISR 1.2 inch on the left, negative "
 "value is possible"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model,name:l10n_ch_payment_slip.model_ir_actions_report
-msgid "ir.actions.report"
-msgstr ""
-
-#. module: l10n_ch_payment_slip
-#: model:ir.model,name:l10n_ch_payment_slip.model_isr_batch_print_wizard
-msgid "isr.batch.print.wizard"
-msgstr ""
-
-#. module: l10n_ch_payment_slip
-#: model:ir.model,name:l10n_ch_payment_slip.model_l10n_ch_payment_slip
-msgid "l10n_ch.payment_slip"
-msgstr ""
-
-#. module: l10n_ch_payment_slip
-#: model:ir.model,name:l10n_ch_payment_slip.model_report_one_slip_per_page_from_invoice
-msgid "report.one_slip_per_page_from_invoice"
-msgstr ""
-
-#. module: l10n_ch_payment_slip
-#: model:ir.model,name:l10n_ch_payment_slip.model_res_config_settings
-msgid "res.config.settings"
-msgstr ""
-
-#. module: l10n_ch_payment_slip
-#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company_isr_delta_vert
-#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings_isr_delta_vert
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company__isr_delta_vert
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings__isr_delta_vert
 msgid ""
 "vert. delta in inch 1.2 will print the ISR 1.2 inch lower, negative value is "
 "possible"
@@ -465,9 +534,6 @@ msgstr ""
 
 #~ msgid "Please select a file first!"
 #~ msgstr "Bisogna prima selezionare un file"
-
-#~ msgid "Report"
-#~ msgstr "Report"
 
 #~ msgid "Too many receivable/payable lines for reference %s"
 #~ msgstr "Troppi incassi / pagamenti riferiti a %s"
