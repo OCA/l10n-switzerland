@@ -19,6 +19,41 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: l10n_ch_pain_credit_transfer
+#: model:ir.model.fields,field_description:l10n_ch_pain_credit_transfer.field_account_payment_method__pain_version
+msgid "PAIN Version"
+msgstr ""
+
+#. module: l10n_ch_pain_credit_transfer
 #: model:ir.model,name:l10n_ch_pain_credit_transfer.model_account_payment_method
 msgid "Payment Methods"
 msgstr "Moyens de Paiement"
+
+#. module: l10n_ch_pain_credit_transfer
+#: selection:account.payment.method,pain_version:0
+msgid "pain.001.001.02"
+msgstr ""
+
+#. module: l10n_ch_pain_credit_transfer
+#: selection:account.payment.method,pain_version:0
+msgid "pain.001.001.03 (recommended for credit transfer)"
+msgstr ""
+
+#. module: l10n_ch_pain_credit_transfer
+#: selection:account.payment.method,pain_version:0
+msgid "pain.001.001.03.ch.02 (credit transfer in Switzerland)"
+msgstr ""
+
+#. module: l10n_ch_pain_credit_transfer
+#: selection:account.payment.method,pain_version:0
+msgid "pain.001.001.04"
+msgstr ""
+
+#. module: l10n_ch_pain_credit_transfer
+#: selection:account.payment.method,pain_version:0
+msgid "pain.001.001.05"
+msgstr ""
+
+#. module: l10n_ch_pain_credit_transfer
+#: selection:account.payment.method,pain_version:0
+msgid "pain.001.003.03 (credit transfer in Germany)"
+msgstr ""
