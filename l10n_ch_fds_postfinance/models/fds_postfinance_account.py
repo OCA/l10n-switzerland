@@ -16,7 +16,7 @@ try:
     SFTP_OK = True
 except ImportError:
     SFTP_OK = False
-    _logger.error(
+    _logger.debug(
         'This module needs pysftp to connect to the FDS. '
         'Please install pysftp on your system. (sudo pip install pysftp)'
     )

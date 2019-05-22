@@ -31,8 +31,8 @@ try:
     from wand.image import Image
     wand = True
 except ImportError:
-    _logger.warning('Please install Wand (sudo pip wand) for Postfinance '
-                    'bank statement import supporting tiff attachments.')
+    _logger.debug('Please install Wand (sudo pip wand) for Postfinance '
+                  'bank statement import supporting tiff attachments.')
     wand = None
 
 
