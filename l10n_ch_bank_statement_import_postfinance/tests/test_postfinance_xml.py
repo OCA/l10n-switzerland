@@ -106,6 +106,8 @@ class PFXMLParserTest(common.TransactionCase):
         )
 
 
+@common.at_install(False)
+@common.post_install(True)
 class PostFinanceImportTest(common.TransactionCase):
 
     def setUp(self):
@@ -148,7 +150,7 @@ class PostFinanceImportTest(common.TransactionCase):
         # Read common infos of first line
         self.assertEqual(st_line.date, "2017-03-31")
         self.assertEqual(st_line.amount, 500.0)
-        self.assertEqual(st_line.name, "VIREMENT BENEFICE")
+        self.assertEqual(st_line.name, "20170330000800954491047000000112")
 
         # Test image is in reconcile view
         lines_with_attach = statements.mapped('line_ids').filtered(
