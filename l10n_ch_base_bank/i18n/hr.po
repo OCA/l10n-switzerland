@@ -26,19 +26,19 @@ msgid "BVR Reference"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/invoice.py:99
+#: code:addons/l10n_ch_base_bank/models/invoice.py:104
 #, python-format
 msgid "BVR/ESR Reference is required"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/invoice.py:80
+#: code:addons/l10n_ch_base_bank/models/invoice.py:85
 #, python-format
 msgid "BVR/ESR Reference type needs a postal account number on the customer."
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/invoice.py:85
+#: code:addons/l10n_ch_base_bank/models/invoice.py:90
 #, python-format
 msgid "BVR/ESR Reference type needs a postal account number on your company"
 msgstr ""
@@ -107,7 +107,7 @@ msgid "Internal reference"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/invoice.py:111
+#: code:addons/l10n_ch_base_bank/models/invoice.py:116
 #, python-format
 msgid "Invalid BVR/ESR Number (wrong checksum)."
 msgstr ""
