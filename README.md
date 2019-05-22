@@ -88,7 +88,7 @@ addon | version | summary
 [l10n_ch_base_bank](l10n_ch_base_bank/) | 10.0.1.1.1 | Types and number validation for swiss electronic pmnt. DTA, ESR
 [l10n_ch_dta](l10n_ch_dta/) | 10.0.1.0.2 | Electronic payment file for Swiss bank (DTA)
 [l10n_ch_fds_postfinance](l10n_ch_fds_postfinance/) | 10.0.1.0.0 | Download files and import bank statements from FDS
-[l10n_ch_fds_upload_dd](l10n_ch_fds_upload_dd/) | 10.0.1.0.0 | Upload Direct Debit files to FDS PostFinance
+[l10n_ch_fds_upload_dd](l10n_ch_fds_upload_dd/) | 10.0.1.0.1 | Upload Direct Debit files to FDS PostFinance
 [l10n_ch_fds_upload_sepa](l10n_ch_fds_upload_sepa/) | 10.0.1.0.0 | Upload SEPA files to FDS PostFinance
 [l10n_ch_hr_payroll](l10n_ch_hr_payroll/) | 10.0.1.0.0 | Switzerland Payroll Rules
 [l10n_ch_hr_payroll_report](l10n_ch_hr_payroll_report/) | 10.0.1.0.0 | Switzerland Payroll Reports
