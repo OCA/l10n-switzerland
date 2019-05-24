@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dxpp="http://www.sap.com/DXPPTypes" targetNamespace="http://www.sap.com/DXPPTypes" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ShipmentProcessingState">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="ReadyForProcessing"/>
+				<xs:enumeration value="BeingProcessed"/>
+				<xs:enumeration value="Processed"/>
+				<xs:enumeration value="TerminatedByUser"/>
+				<xs:enumeration value="NotProcessable"/>
+				<xs:enumeration value="NotRecognizable"/>
+				<xs:enumeration value="PartiallyProcessed"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Authorization">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="UserName" type="xs:string"/>
+				<xs:element name="Password" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Content">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:base64Binary">
+					<xs:attribute name="encoding" type="xs:string" use="optional"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ShipmentPriority">
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:minInclusive value="1"/>
+				<xs:maxInclusive value="9"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ShipmentID" type="xs:string"/>
+	<xs:element name="ShipmentState">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="ReadyForSending"/>
+				<xs:enumeration value="Submitted"/>
+				<xs:enumeration value="ArrivedAtDestination"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Mandant">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ExternalID" type="xs:string"/>
+				<xs:element name="ExternalIDType">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="APPSYSNAME"/>
+							<xs:enumeration value="BC"/>
+							<xs:enumeration value="BCN"/>
+							<xs:enumeration value="BIC"/>
+							<xs:enumeration value="BLZ"/>
+							<xs:enumeration value="BPID"/>
+							<xs:enumeration value="DN"/>
+							<xs:enumeration value="EAN"/>
+							<xs:enumeration value="FTPLUSID"/>
+							<xs:enumeration value="IBAN"/>
+							<xs:enumeration value="MACID"/>
+							<xs:enumeration value="MIME"/>
+							<xs:enumeration value="PATHNAME"/>
+							<xs:enumeration value="PID"/>
+							<xs:enumeration value="SMSNUMBER"/>
+							<xs:enumeration value="STATIONID"/>
+							<xs:enumeration value="UNKNOWN"/>
+							<xs:enumeration value="USERNAME"/>
+							<xs:enumeration value="X400ADDRESS"/>
+							<xs:enumeration value="XISENDERID"/>
+							<xs:enumeration value="XIRECEIVERID"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PingMsg">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dxpp:ClientData" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PingMsgReply">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="State" type="xs:string"/>
+				<xs:element name="Timestamp" type="xs:dateTime"/>
+				<xs:element name="Version" type="xs:string"/>
+				<xs:element ref="dxpp:ClientData" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ClientData" type="xs:string"/>
+	<xs:element name="FaultMsg">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ErrorCode">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="4"/>
+							<xs:pattern value="[0-9]{4}"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ErrorMessage" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DocumentIdentifier" type="dxpp:DocumentIdentifierType"/>
+	<xs:complexType name="DocumentIdentifierType">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string" minOccurs="0"/>
+			<xs:element name="Type" type="xs:string" minOccurs="0"/>
+			<xs:element name="Format" type="xs:string" minOccurs="0"/>
+			<xs:element name="Version" type="xs:string" minOccurs="0"/>
+			<xs:element name="Extension" type="xs:string" minOccurs="0"/>
+			<xs:element name="Category" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SignatureIdentifierType">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string" minOccurs="0"/>
+			<xs:element name="Type" type="xs:string" minOccurs="0"/>
+			<xs:element name="Extension" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AdditionalInfoType">
+		<xs:sequence>
+			<xs:element name="Key" type="xs:string"/>
+			<xs:element name="Value" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DateRangeType">
+		<xs:sequence>
+			<xs:element name="FromDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="ToDate" type="xs:date" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ShipmentPriorityType">
+		<xs:restriction base="xs:unsignedInt">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="SignatureIdentifier" type="dxpp:SignatureIdentifierType"/>
+	<xs:complexType name="DocumentType">
+		<xs:sequence>
+			<xs:element name="Content">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:base64Binary">
+							<xs:attribute name="encoding" type="xs:string" use="optional"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="type" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string"/>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="format" type="xs:string" use="optional"/>
+		<xs:attribute name="version" type="xs:string" use="optional"/>
+		<xs:attribute name="filename" type="xs:string" use="optional"/>
+		<xs:attribute name="state" use="optional">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="NotVerified"/>
+					<xs:enumeration value="Verified"/>
+					<xs:enumeration value="VerifiedWithError"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="signatureFormat" use="optional">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="NONE"/>
+					<xs:enumeration value="PKCS7"/>
+					<xs:enumeration value="PDFINTERN"/>
+					<xs:enumeration value="HEADTRAILSIG"/>
+					<xs:enumeration value="XMLDSIG"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="creationTime" type="xs:dateTime" use="required"/>
+		<xs:attribute name="shipmentID" type="xs:string" use="optional"/>
+	</xs:complexType>
+</xs:schema>

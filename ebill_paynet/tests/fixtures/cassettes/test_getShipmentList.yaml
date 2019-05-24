@@ -1,0 +1,49 @@
+interactions:
+- request:
+    body: '<?xml version=''1.0'' encoding=''utf-8''?>
+
+      <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Body><ns0:ShipmentListMsg
+      xmlns:ns0="http://www.sap.com/DXPPShipmentExchange" fromEntry="1" maxEntries="100"><ns1:Authorization
+      xmlns:ns1="http://www.sap.com/DXPPTypes"><ns1:UserName>Campt.System.TEST.7318</ns1:UserName><ns1:Password>CamptSystem&amp;19</ns1:Password></ns1:Authorization></ns0:ShipmentListMsg></soap-env:Body></soap-env:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '472'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '"urn:#getShipmentList"'
+      User-Agent:
+      - Zeep/3.3.1 (www.python-zeep.org)
+    method: POST
+    uri: https://dws-test.paynet.ch/DWS/DWS
+  response:
+    body:
+      string: <env:Envelope xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><dsx:ShipmentListMsgReply
+        entriesFound="0" xmlns:dsx="http://www.sap.com/DXPPShipmentExchange"></dsx:ShipmentListMsgReply></env:Body></env:Envelope>
+    headers:
+      Connection:
+      - close
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Date:
+      - Tue, 04 Jun 2019 09:08:19 GMT
+      Server:
+      - Apache
+      Set-Cookie:
+      - JSESSIONID=47EE555F50C53CE8111DAEB074345902;HttpOnly;Secure
+      Vary:
+      - Accept-Encoding,User-Agent
+      content-length:
+      - '384'
+    status:
+      code: 200
+      message: OK
+version: 1
