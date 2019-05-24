@@ -1,0 +1,50 @@
+interactions:
+- request:
+    body: '<?xml version=''1.0'' encoding=''utf-8''?>
+
+      <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Body><ns0:ShipmentContentMsg
+      xmlns:ns0="http://www.sap.com/DXPPShipmentExchange"><ns1:Authorization xmlns:ns1="http://www.sap.com/DXPPTypes"><ns1:UserName>Campt.System.TEST.7318</ns1:UserName><ns1:Password>CamptSystem&amp;19</ns1:Password></ns1:Authorization><ns2:ShipmentID
+      xmlns:ns2="http://www.sap.com/DXPPTypes">SC-00000000000020357011</ns2:ShipmentID></ns0:ShipmentContentMsg></soap-env:Body></soap-env:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '544'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '"urn:#getShipmentContent"'
+      User-Agent:
+      - Zeep/3.4.0 (www.python-zeep.org)
+    method: POST
+    uri: https://dws-test.paynet.ch/DWS/DWS
+  response:
+    body:
+      string: <env:Envelope xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><dsx:ShipmentContentMsgReply
+        xmlns:dsx="http://www.sap.com/DXPPShipmentExchange"><dxpp:Content xmlns:dxpp="http://www.sap.com/DXPPTypes">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iSVNPLTg4NTktMSI/Pgo8WE1MLUZTQ00tQ09OVFJMLTIwMDNBPgogIDxJTlRFUkNIQU5HRT4KICAgIDxJQy1TRU5ERVI+CiAgICAgIDxQaWQ+NDEwMTAxMDY3OTkzMDM3MzQ8L1BpZD4KICAgIDwvSUMtU0VOREVSPgogICAgPElDLVJFQ0VJVkVSPgogICAgICA8UGlkPjQxMDEwNzI2NzcyODUyNDgyPC9QaWQ+CiAgICA8L0lDLVJFQ0VJVkVSPgogICAgPElDLVJlZj4yNDYwMDAwNTgyODE8L0lDLVJlZj4KICA8L0lOVEVSQ0hBTkdFPgogIDxDT05UUkwgQWN0aW9uLUNvZGU9Ik5PSyI+CiAgICA8SUMtU0VOREVSPgogICAgICA8UGlkPjQxMDEwNzI2NzcyODUyNDgyPC9QaWQ+CiAgICA8L0lDLVNFTkRFUj4KICAgIDxJQy1SRUNFSVZFUj4KICAgICAgPFBpZD40MTAxMDEwNjc5OTMwMzczNDwvUGlkPgogICAgPC9JQy1SRUNFSVZFUj4KICAgIDxJQy1SZWY+U0EwMDAwMDAwMDAwMDM8L0lDLVJlZj4KICAgIDxFUlJPUi1JTkZPPgogICAgICA8RXJyb3ItQ29kZSBHZW5lcmF0b3I9IlBhcnNlciI+MDUwPC9FcnJvci1Db2RlPgogICAgICA8RXJyb3ItVGV4dD5GZWhsZXIgYmVpbSBwYXJzZW4gZGVyIFhNTCBNZWxkdW5nPC9FcnJvci1UZXh0PgogICAgICA8UE9TSVRJT04+CiAgICAgICAgPFBhdGg+RXJyb3I6IExpbmU9WzE0Ml0sIENvbHVtbj1bMjddLCBNZXNzYWdlPVtEYXRhdHlwZSBlcnJvcjogVHlwZTpJbnZhbGlkRGF0YXR5cGVWYWx1ZUV4Y2VwdGlvbiwgTWVzc2FnZTpWYWx1ZSAnCiAgICAgIAogICAgJyB3aXRoIGxlbmd0aCAnMTInIGlzIGxlc3MgdGhhbiBtaW5pbXVtIGxlbmd0aCBmYWNldCBvZiAnMTAwJyAuXTwvUGF0aD4KICAgICAgPC9QT1NJVElPTj4KICAgIDwvRVJST1ItSU5GTz4KICA8L0NPTlRSTD4KPC9YTUwtRlNDTS1DT05UUkwtMjAwM0E+Cg==</dxpp:Content><dxpp:ShipmentPriority
+        xmlns:dxpp="http://www.sap.com/DXPPTypes">5</dxpp:ShipmentPriority></dsx:ShipmentContentMsgReply></env:Body></env:Envelope>
+    headers:
+      Connection:
+      - close
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Date:
+      - Tue, 02 Jul 2019 08:35:03 GMT
+      Server:
+      - Apache
+      Set-Cookie:
+      - JSESSIONID=DC90F21E1A3543168B5AA475FA1219F5;HttpOnly;Secure
+      Vary:
+      - Accept-Encoding,User-Agent
+      content-length:
+      - '1754'
+    status:
+      code: 200
+      message: OK
+version: 1

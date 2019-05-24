@@ -4,3 +4,4 @@ bank-payment
 partner-contact
 account-reconcile
 mis-builder
+account-invoicing https://github.com/tdu/account-invoicing ebill_base

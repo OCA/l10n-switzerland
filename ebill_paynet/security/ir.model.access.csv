@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_paynet_service_user,access_paynet_service_user,model_paynet_service,base.group_user,1,0,0,0
+access_paynet_service_manager,access_paynet_service_manager,model_paynet_service,account.group_account_manager,1,1,1,1
+access_paynet_invoice_message_user,access_paynet_invoice_message_user,model_paynet_invoice_message,base.group_user,1,0,0,0
+access_paynet_invoice_message_manager,access_paynet_invoice_message_manager,model_paynet_invoice_message,account.group_account_manager,1,1,1,1
