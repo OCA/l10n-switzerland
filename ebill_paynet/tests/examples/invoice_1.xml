@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XML-FSCM-INVOICE-2013A>
+    <INTERCHANGE>
+        <IC-SENDER>
+            <Pid>52110726772852593</Pid>
+        </IC-SENDER>
+        <IC-RECEIVER>
+            <Pid>41010106799303734</Pid>
+        </IC-RECEIVER>
+        <IC-Ref>$IC_REF</IC-Ref>
+    </INTERCHANGE>
+    <INVOICE Type="EFD">
+        <HEADER>
+            <FUNCTION-FLAGS>
+                <Confirmation-Flag />
+            </FUNCTION-FLAGS>
+            <MESSAGE-REFERENCE>
+                <REFERENCE-DATE>
+                    <Reference-No>INV_TEST_01</Reference-No>
+                    <Date>20190607</Date>
+                </REFERENCE-DATE>
+            </MESSAGE-REFERENCE>
+            <PRINT-DATE>
+                <Date>20190607</Date>
+            </PRINT-DATE>
+            <REFERENCE>
+                <INVOICE-REFERENCE>
+                    <REFERENCE-DATE>
+                        <Reference-No>INV_TEST_01</Reference-No>
+                        <Date>20190607</Date>
+                    </REFERENCE-DATE>
+                </INVOICE-REFERENCE>
+            </REFERENCE>
+            <BILLER>
+                <Tax-No>CHE-012.345.678</Tax-No>
+                <PARTY-ID>
+                    <Pid>52110726772852593</Pid>
+                </PARTY-ID>
+                <NAME-ADDRESS Format="COM">
+                    <NAME>
+                        <Line-35>Camptocamp SA</Line-35>
+                    </NAME>
+                    <STREET>
+                        <Line-35>StreetOne</Line-35>
+                    </STREET>
+                    <City>TestCity</City>
+                    <Zip>8888</Zip>
+                    <Country>CH</Country>
+                </NAME-ADDRESS>
+                <BANK-INFO>
+                    <Acct-No>300300300</Acct-No>
+                    <Acct-Name>AccountHolderName</Acct-Name>
+                    <BankId Type="BCNr-int" Country="CH">001996</BankId>
+                </BANK-INFO>
+            </BILLER>
+            <PAYER>
+                <PARTY-ID>
+                    <Pid>41010198248040391</Pid>
+                </PARTY-ID>
+                <NAME-ADDRESS Format="PRV">
+                    <NAME>
+                        <Line-35>Test RAD Customer XML</Line-35>
+                    </NAME>
+                    <STREET>
+                        <Line-35>Teststrasse 100</Line-35>
+                    </STREET>
+                    <City>Fribourg</City>
+                    <State>RR</State>
+                    <Zip>1700</Zip>
+                    <Country>CH</Country>
+                </NAME-ADDRESS>
+            </PAYER>
+        </HEADER>
+        <LINE-ITEM />
+        <SUMMARY>
+            <INVOICE-AMOUNT>
+                <Amount Currency="CHF">529.88</Amount>
+            </INVOICE-AMOUNT>
+            <VAT-AMOUNT>
+                <Amount Currency="CHF">37.88</Amount>
+            </VAT-AMOUNT>
+            <EXTENDED-AMOUNT Type="79">
+                <Amount Currency="CHF">492.0</Amount>
+            </EXTENDED-AMOUNT>
+            <TAX>
+                <TAX-BASIS>
+                    <Amount Currency="CHF">492.0</Amount>
+                </TAX-BASIS>
+                <Rate Category="S">7.7</Rate>
+                <Amount Currency="CHF">37.88</Amount>
+            </TAX>
+            <PAYMENT-TERMS>
+                <BASIC Payment-Type="ESR" Terms-Type="5">
+                    <TERMS>
+                        <Date>20190607</Date>
+                    </TERMS>
+                </BASIC>
+            </PAYMENT-TERMS>
+            <Back-Pack-Container Encode="Base64">
+    </Back-Pack-Container>
+        </SUMMARY>
+    </INVOICE>
+</XML-FSCM-INVOICE-2013A>
