@@ -59,6 +59,8 @@ repos:
           - "prettier@1.19.1"
           - "@prettier/plugin-xml@0.7.2"
         files: \.(css|htm|html|js|json|jsx|less|md|scss|toml|ts|xml|yaml|yml)$
+        # For ebill_paynet don't format the message template files
+        exclude: /messages/.*\.xml$|/components/wsdl/.*\.xml$|/tests/examples/.*\.xml$
   - repo: https://github.com/pre-commit/mirrors-eslint
     rev: v6.8.0
     hooks:

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mit XMLSpy v2009 sp1 (http://www.altova.com) von M. Kaiser (SAP (Schweiz) AG) bearbeitet -->
+<wsd:definitions xmlns:wsd="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:dsx="http://www.sap.com/DXPPShipmentExchange" xmlns:dws="http://www.sap.com/DWS" xmlns:dxpp="http://www.sap.com/DXPPTypes" xmlns:ns2="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns3="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="DWS" targetNamespace="http://www.sap.com/DWS">
+	<wsd:types>
+		<xs:schema targetNamespace="http://www.sap.com/DWS" xmlns:dsx="http://www.sap.com/DXPPShipmentExchange" elementFormDefault="qualified" attributeFormDefault="unqualified">
+			<xs:import namespace="http://www.sap.com/DXPPShipmentExchange" schemaLocation="DXPPShipmentExchangePayNet.xsd"/>
+		</xs:schema>
+	</wsd:types>
+	<wsd:message name="ShipmentDeliveryMsg">
+		<wsd:part name="shipmentDelivery" element="dsx:ShipmentDeliveryMsg"/>
+	</wsd:message>
+	<wsd:message name="ShipmentDeliveryMsgReply">
+		<wsd:part name="shipmentDeliveryReply" element="dsx:ShipmentDeliveryMsgReply"/>
+	</wsd:message>
+	<wsd:message name="ShipmentListMsg">
+		<wsd:part name="shipmentList" element="dsx:ShipmentListMsg"/>
+	</wsd:message>
+	<wsd:message name="ShipmentListMsgReply">
+		<wsd:part name="shipmentListReply" element="dsx:ShipmentListMsgReply"/>
+	</wsd:message>
+	<wsd:message name="ShipmentContentMsg">
+		<wsd:part name="shipmentContent" element="dsx:ShipmentContentMsg"/>
+	</wsd:message>
+	<wsd:message name="ShipmentContentMsgReply">
+		<wsd:part name="shipmentContentReply" element="dsx:ShipmentContentMsgReply"/>
+	</wsd:message>
+	<wsd:message name="ShipmentConfirmationMsg">
+		<wsd:part name="shipmentConfirmation" element="dsx:ShipmentConfirmationMsg"/>
+	</wsd:message>
+	<wsd:message name="SetShipmentStateMsg">
+		<wsd:part name="shipmentStateMsg" element="dsx:SetShipmentStateMsg"/>
+	</wsd:message>
+	<wsd:message name="SetShipmentStateMsgReply">
+		<wsd:part name="shipmentStateMsgReply" element="dsx:SetShipmentStateMsgReply"/>
+	</wsd:message>
+	<wsd:message name="faultMsg">
+		<wsd:part name="FaultMsg" element="dxpp:FaultMsg"/>
+	</wsd:message>
+	<wsd:message name="PingMsg">
+		<wsd:part name="pingMsg" element="dxpp:PingMsg"/>
+	</wsd:message>
+	<wsd:message name="PingMsgReply">
+		<wsd:part name="pingMsgReply" element="dxpp:PingMsgReply"/>
+	</wsd:message>
+	<wsd:portType name="DWSPort">
+		<wsd:operation name="getShipmentList">
+			<wsd:input message="dws:ShipmentListMsg"/>
+			<wsd:output message="dws:ShipmentListMsgReply"/>
+		</wsd:operation>
+		<wsd:operation name="confirmShipmentReceipt">
+			<wsd:input message="dws:ShipmentConfirmationMsg"/>
+		</wsd:operation>
+		<wsd:operation name="getShipmentContent">
+			<wsd:input message="dws:ShipmentContentMsg"/>
+			<wsd:output message="dws:ShipmentContentMsgReply"/>
+		</wsd:operation>
+		<wsd:operation name="takeShipment">
+			<wsd:input message="dws:ShipmentDeliveryMsg"/>
+			<wsd:output message="dws:ShipmentDeliveryMsgReply"/>
+		</wsd:operation>
+		<wsd:operation name="ping">
+			<wsd:input message="dws:PingMsg"/>
+			<wsd:output message="dws:PingMsgReply"/>
+			<wsd:fault name="FaultName" message="dws:faultMsg"/>
+		</wsd:operation>
+	</wsd:portType>
+	<wsd:binding name="DWSBinding" type="dws:DWSPort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsd:operation name="getShipmentList">
+			<soap:operation soapAction="urn:#getShipmentList" style="document"/>
+			<wsd:input>
+				<soap:body use="literal" namespace="http://www.sap.com/DWS"/>
+			</wsd:input>
+			<wsd:output>
+				<soap:body use="literal" namespace="http://www.sap.com/DWS"/>
+			</wsd:output>
+		</wsd:operation>
+		<wsd:operation name="confirmShipmentReceipt">
+			<soap:operation soapAction="urn:#confirmShipmentReceipt" style="document"/>
+			<wsd:input>
+				<soap:body use="literal" namespace="http://www.sap.com/DWS"/>
+			</wsd:input>
+		</wsd:operation>
+		<wsd:operation name="getShipmentContent">
+			<soap:operation soapAction="urn:#getShipmentContent" style="document"/>
+			<wsd:input>
+				<soap:body use="literal" namespace="http://www.sap.com/DWS"/>
+			</wsd:input>
+			<wsd:output>
+				<soap:body use="literal" namespace="http://www.sap.com/DWS"/>
+			</wsd:output>
+		</wsd:operation>
+		<wsd:operation name="takeShipment">
+			<soap:operation soapAction="urn:#takeShipment" style="document"/>
+			<wsd:input>
+				<soap:body use="literal" namespace="http://www.sap.com/DWS"/>
+			</wsd:input>
+			<wsd:output>
+				<soap:body use="literal" namespace="http://www.sap.com/DWS"/>
+			</wsd:output>
+		</wsd:operation>
+		<wsd:operation name="ping">
+			<soap:operation soapAction="urn:#ping" style="document"/>
+			<wsd:input>
+				<soap:body use="literal" namespace="http://www.sap.com/DWS"/>
+			</wsd:input>
+			<wsd:output>
+				<soap:body use="literal" namespace="http://www.sap.com/DWS"/>
+			</wsd:output>
+			<wsd:fault name="FaultName">
+				<soap:fault name="faultMsg" use="literal" namespace="http://www.sap.com/DWS"/>
+			</wsd:fault>
+		</wsd:operation>
+	</wsd:binding>
+	<wsd:service name="DWS">
+		<wsd:port name="DWSPort" binding="dws:DWSBinding">
+			<soap:address location="https://dws-test.paynet.ch/DWS/DWS"/>
+		</wsd:port>
+	</wsd:service>
+</wsd:definitions>

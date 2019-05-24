@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="paynet_invoice_message_form_view">
+        <field name="name">paynet.invoice.message.form</field>
+        <field name="model">paynet.invoice.message</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+        </header>
+                <sheet>
+                    <button type="object" name="send_to_paynet">Resend</button>
+                    <group>
+                        <field name="service_id" />
+                        <field name="invoice_id" />
+                        <field name="state" />
+                        <field name="ic_ref" />
+                        <field name="response" />
+                        <field name="shipment_id" />
+                        <field name="payload" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="paynet_invoice_message_tree_view">
+        <field name="name">paynet.invoice.message.tree</field>
+        <field name="model">paynet.invoice.message</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="invoice_id" />
+                <field name="state" />
+                <field name="shipment_id" />
+            </tree>
+        </field>
+    </record>
+</odoo>
