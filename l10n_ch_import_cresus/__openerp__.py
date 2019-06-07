@@ -33,4 +33,5 @@
         'menu.xml',
     ],
     'installable': True,
+    'license': 'AGPL-3',
 }
