@@ -39,5 +39,6 @@ To do so, use the wizard provided under Accounting -> Customers.
  'test': [],
  'auto_install': False,
  'installable': True,
- 'images': []
+ 'images': [],
+ 'license': 'AGPL-3',
  }
