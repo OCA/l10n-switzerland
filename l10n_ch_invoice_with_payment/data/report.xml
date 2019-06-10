@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+        id="report_invoice_with_payment_slip"
+        string="Invoice with payment slip"
+        model="account.invoice"
+        report_type="qweb-pdf"
+        menu="True"
+        name="l10n_ch_invoice_with_payment.report_invoice_with_paymentslip"
+    />
+</odoo>
