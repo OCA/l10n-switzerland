@@ -95,14 +95,14 @@ class PaymentSlip(models.Model):
 
     @api.model
     def _can_generate(self, move_line):
-        '''Predicate to determine if payment slip should be generated or not.
+        """Predicate to determine if payment slip should be generated or not.
 
         :param move_line: move line reocord
         :type move_line: :py:class:`openerp.models.Model` record
 
         :return: True if we can generate a payment slip
         :rtype: bool
-        '''
+        """
         invoice = move_line.invoice_id
         if not invoice:
             return False
