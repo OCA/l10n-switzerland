@@ -31,6 +31,7 @@ To do so, use the wizard provided under Accounting -> Customers.
  'author': 'Agile Business Group',
  'category': 'Localization',
  'website': 'http://www.agilebg.com',
+ 'license': 'AGPL-3',
  'depends': ['l10n_ch_payment_slip'],
  'data': [
      "wizard/bvr_import_view.xml",
