@@ -40,7 +40,8 @@ class AccountBankStatementLine(models.Model):
         # Try to get ESR match
         if self.name:
             sql_query = self._get_common_sql_query_ignore_partner() + \
-                " AND aml.transaction_ref = %(ref)s ORDER BY \
+                " AND aml.transaction_ref = %(ref)s" \
+                " AND aml.transaction_ref is not null ORDER BY \
                 date_maturity asc, aml.id asc"
             self.env.cr.execute(sql_query, params)
             match_recs = self.env.cr.dictfetchall()
