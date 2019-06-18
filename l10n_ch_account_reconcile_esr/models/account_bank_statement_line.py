@@ -36,13 +36,15 @@ class AccountBankStatementLine(models.Model):
             ),
             'partner_id': self.partner_id.id,
             'ref': self.name,
+            'amount': self.amount
         }
         # Try to get ESR match
         if self.name:
             sql_query = self._get_common_sql_query_ignore_partner() + \
                 " AND aml.transaction_ref = %(ref)s" \
-                " AND aml.transaction_ref is not null ORDER BY \
-                date_maturity asc, aml.id asc"
+                " AND aml.transaction_ref is not null" \
+                " AND aml.amount_residual = %(amount)s ORDER BY" \
+                " date_maturity asc, aml.id asc"
             self.env.cr.execute(sql_query, params)
             match_recs = self.env.cr.dictfetchall()
             if len(match_recs) > 1:
@@ -61,8 +63,7 @@ class AccountBankStatementLine(models.Model):
             if aml.account_id.internal_type == 'liquidity':
                 payment_aml_rec = (payment_aml_rec | aml)
             else:
-                amount = aml.currency_id \
-                    and aml.amount_residual_currency or aml.amount_residual
+                amount = self.amount
                 counterpart_aml_dicts.append({
                     'name': aml.name if aml.name != '/' else aml.move_id.name,
                     'debit': amount < 0 and -amount or 0,
