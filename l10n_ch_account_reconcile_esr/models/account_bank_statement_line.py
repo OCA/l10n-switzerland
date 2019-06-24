@@ -26,8 +26,9 @@ class AccountBankStatementLine(models.Model):
         """
         self.ensure_one()
         match_recs = self.env['account.move.line']
-
+        company_currency = self.journal_id.company_id.currency_id
         # customized: dropped unneeded params
+        precision = company_currency.decimal_places
         params = {
             'company_id': self.env.user.company_id.id,
             'account_payable_receivable': (
@@ -36,14 +37,17 @@ class AccountBankStatementLine(models.Model):
             ),
             'partner_id': self.partner_id.id,
             'ref': self.name,
-            'amount': self.amount
+            'amount': self.amount,
+            'precision': precision
         }
         # Try to get ESR match
         if self.name:
             sql_query = self._get_common_sql_query_ignore_partner() + \
                 " AND aml.transaction_ref = %(ref)s" \
                 " AND aml.transaction_ref is not null" \
-                " AND aml.amount_residual = %(amount)s ORDER BY" \
+                " AND round(aml.amount_residual,%(precision)s)" \
+                " = round(%(amount)s,%(precision)s) " \
+                " ORDER BY" \
                 " date_maturity asc, aml.id asc"
             self.env.cr.execute(sql_query, params)
             match_recs = self.env.cr.dictfetchall()
