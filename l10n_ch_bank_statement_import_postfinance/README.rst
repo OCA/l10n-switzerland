@@ -12,7 +12,7 @@ It currently supports the following file formats :
 
 * XML format from Postfinance S.A.
 
-Warning : this module requires the python library 'xlrd' and 'wand'.
+Warning : this module requires the python library 'xlrd'.
 
 Installation
 ============
