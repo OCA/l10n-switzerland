@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates id="template" xml:space="preserve">
+  <t t-extend="bank_statement_reconciliation_line">
+    
+    <t t-jquery="span.line_info_button" t-operation="after">
+        <t t-if="line.img_src">
+            <span class="line_info_button fa fa-picture-o" t-att-data-content="line.i_popover"></span>
+        </t>
+    </t>
+  </t>
+  
+   <t t-name="bank_statement_reconciliation_line_image">
+        <img t-att="line.img_src" class="img-responsive" width="500px" />
+    </t>
+</templates>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_bank_statement_form_l10n_ch" model="ir.ui.view">
+        <field name="name">account_statement_l10n_ch.view_form</field>
+        <field name="model">account.bank.statement</field>
+        <field name="inherit_id" ref="account.view_bank_statement_form" />
+        <field eval="16" name="priority"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//sheet/notebook/page/field[@name='line_ids']/tree">
+                    <field name="related_file" invisible="1"/>
+                    <button name="click_icon" icon="fa-picture-o" type="object" attrs="{'invisible': [('related_file', '=', False)]}"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record id="statement_line_form_postfinance" model="ir.ui.view">
+        <field name="name">l10n_ch_bank_statement_line.view_form</field>
+        <field name="model">account.bank.statement.line</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="account.view_bank_statement_line_form" />
+        <field name="arch" type="xml">
+            <group col="4" position="after">
+                <style>
+                    .im-attach {
+                        text-align: center !important;
+                        width: 100% !important;
+                    }
+                    .im-attach img {
+                        max-width: 50% !important;
+                        max-height: 100% !important;
+                    }
+                </style>
+                <field name="datas" widget="image" class="im-attach" readonly="1" attrs="{'invisible': [('datas','=',False)]}"/>
+            </group>
+        </field>
+    </record>
+
+    <!-- Define a view on ir.attachment to see the attached picture -->
+    <record id="attachement_form_postfinance879" model="ir.ui.view">
+        <field name="name">l10n_ch_bank_attachment.view_form</field>
+        <field name="model">ir.attachment</field>
+        <field eval="20" name="priority"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <style>
+                    .im-attach {
+                        width: 100% !important;
+                    }
+                    .im-attach img {
+                        max-width: 100% !important;
+                        max-height: 100% !important;
+                    }
+                </style>
+                <field name="datas" widget="image" class="im-attach" readonly="1"/>
+            </form>
+        </field>
+    </record>
+</odoo>
