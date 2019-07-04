@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {'name': "Swiss bank statements import",
- 'version': '10.0.1.0.2',
+ 'version': '10.0.1.0.4',
  'author': "Compassion CH, Camptocamp, Odoo Community Association (OCA)",
  'category': 'Finance',
  'complexity': 'normal',
@@ -11,7 +11,7 @@
      'account_bank_statement_import_camt_oca',
  ],
  'external_dependencies': {
-     'python': ['xlrd', 'wand'],
+     'python': ['xlrd'],
  },
  'website': 'http://www.compassion.ch/',
  'data': [
