@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-# Copyright 2014-2017 Compassion CH
+# Copyright 2015 Nicolas Bessi Camptocamp SA
+# Copyright 2017-2019 Compassion CH
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {'name': "Swiss bank statements import",
- 'version': '10.0.1.0.4',
+ 'version': '11.0.0.0.0',
  'author': "Compassion CH, Camptocamp, Odoo Community Association (OCA)",
  'category': 'Finance',
  'complexity': 'normal',
