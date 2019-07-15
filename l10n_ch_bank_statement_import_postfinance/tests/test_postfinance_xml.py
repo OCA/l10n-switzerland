@@ -1,25 +1,7 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Nicolas Bessi
-#    Author: Emanuel Cino
-#    Copyright 2015 Camptocamp SA
-#    Copyright 2017 Compassion CH
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# Copyright 2015 Nicolas Bessi Camptocamp SA
+# Copyright 2017-2019 Compassion CH
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import base64
 import re
 from odoo.modules import get_module_resource
@@ -32,7 +14,7 @@ def get_file_content(filename):
         'test_files',
         filename
     )
-    with open(filepath) as data_file:
+    with open(filepath, 'rb') as data_file:
         return data_file.read()
 
 
@@ -47,7 +29,7 @@ class PFXMLParserTest(common.TransactionCase):
         """Test that tar file is uncompressed correctly"""
         self.parser._check_postfinance_attachments(self.data_file)
         self.assertTrue(
-            re.search(r'\<BkToCstmrStmt', self.parser.data_file)
+            re.search(r'\<BkToCstmrStmt', self.parser.data_file.decode())
         )
 
     def test_parser_can_open_non_tar(self):
@@ -67,9 +49,6 @@ class PFXMLParserTest(common.TransactionCase):
         """Test attachments detection"""
         self.parser._check_postfinance_attachments(self.data_file)
         self.assertIsNotNone(self.parser.attachments)
-        self.parser.attachments = None
-        self.parser._check_postfinance_attachments('BANG')
-        self.assertIsNone(self.parser.attachments)
 
     def test_parse(self):
         """Test file is correctly parsed"""
