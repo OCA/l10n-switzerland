@@ -1,28 +1,16 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Nicolas Bessi, David Wulliamoz, Emanuel Cino
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# Copyright 2015 Nicolas Bessi Camptocamp SA
+# Copyright 2017-2019 Compassion CH
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
 import logging
 from PIL import Image
 from os.path import splitext
 from tarfile import TarFile, TarError
-from io import StringIO
 from lxml import etree
-from io import BytesIO
+from xml.etree import ElementTree
+from io import BytesIO, StringIO
+from base64 import b64encode
 
 from odoo import models
 
@@ -88,16 +76,24 @@ class XMLPFParser(models.AbstractModel):
         """
         # https://hg.python.org/cpython/file/6969bac411fa/Lib/tarfile.py#l2605
         self.is_tar = False
-        pf_file = StringIO(self.tar_source)
-        pf_file.seek(0)
+        if isinstance(self.tar_source, str):
+            try:
+                # If raw string
+                ElementTree.fromstring(self.tar_source)
+                return self.tar_source
+            except ElementTree.ParseError:
+                pf_file = StringIO(self.tar_source)
+        else:
+            pf_file = BytesIO(self.tar_source)
         try:
-            tar_file = TarFile.open(fileobj=pf_file, mode="r:gz")
-            xmls = [tar_content
-                    for tar_content in tar_file.getnames()
-                    if tar_content.endswith('.xml')]
-            self.is_tar = True
-            self.file_name = splitext(xmls[0])[0]
-            return tar_file.extractfile(xmls[0]).read()
+            pf_file.seek(0)
+            with TarFile.open(fileobj=pf_file, mode="r:gz") as tar_file:
+                xmls = [tar_content
+                        for tar_content in tar_file.getnames()
+                        if tar_content.endswith('.xml')]
+                self.is_tar = True
+                self.file_name = splitext(xmls[0])[0]
+                return tar_file.extractfile(xmls[0]).read()
         except TarError:
             return self.tar_source
 
@@ -115,17 +111,14 @@ class XMLPFParser(models.AbstractModel):
         :return: Return a dict containing all attachments ready
         to be saved in Odoo.
         """
-        pf_file = StringIO(data_file)
+        pf_file = BytesIO(data_file)
         pf_file.seek(0)
         try:
             attachments = {}
             tar_file = TarFile.open(fileobj=pf_file, mode="r:gz")
             accepted_formats = ['.png', '.jpeg', '.jpg', '.tiff']
             for file_name in tar_file.getnames():
-                accepted = reduce(lambda x, y: x or y, [
-                    file_name.endswith(format) for format in accepted_formats
-                ])
-                if accepted:
+                if True in [file_name.endswith(f) for f in accepted_formats]:
                     key = splitext(file_name)[0]
                     img_data = tar_file.extractfile(file_name).read()
                     if file_name.endswith('.tiff'):
@@ -136,7 +129,7 @@ class XMLPFParser(models.AbstractModel):
                         with BytesIO() as png_image:
                             image.save(png_image, format='PNG')
                             img_data = png_image.getvalue()
-                    attachments[key] = img_data.encode('base64')
+                    attachments[key] = b64encode(img_data)
             return attachments
         except TarError:
             return {}
@@ -146,7 +139,7 @@ class XMLPFParser(models.AbstractModel):
         :return: a list of attachment tuple (name, content)
         :rtype: list
         """
-        attachments = [('Statement File', self.tar_source.encode('base64'))]
+        attachments = [('Statement File', b64encode(self.tar_source))]
         if self.is_tar:
             # Extract XML tree
             try:
