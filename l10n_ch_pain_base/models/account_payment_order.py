@@ -40,7 +40,7 @@ class AccountPaymentOrder(models.Model):
                 "{http://www.w3.org/2001/XMLSchema-instance}schemaLocation":
                 "http://www.six-interbank-clearing.com/de/"
                 "%s.xsd  %s.xsd" % (pain_flavor, pain_flavor)
-                }
+            }
             return attrib
         else:
             return super(AccountPaymentOrder, self).generate_pain_attrib()
@@ -72,9 +72,10 @@ class AccountPaymentOrder(models.Model):
                 raise UserError(_(
                     "For pain.001.001.03.ch.02, for non-BVR payments, "
                     "the BIC is required on the bank '%s' related to the "
-                    "bank account '%s'") % (
+                    "bank account '%s', payment line '%s'") % (
                         partner_bank.bank_id.name,
-                        partner_bank.acc_number))
+                        partner_bank.acc_number,
+                        bank_line.name))
         return super(AccountPaymentOrder, self).generate_party_agent(
             parent_node, party_type, order, partner_bank, gen_args,
             bank_line=bank_line)
