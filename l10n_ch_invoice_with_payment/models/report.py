@@ -12,9 +12,9 @@ class IrActionsReport(models.Model):
         if (self.report_name != 'l10n_ch_invoice_with_payment.'
                 'report_invoice_with_paymentslip' or not res_ids):
             return super().render_qweb_pdf(res_ids, data)
-
         inv_report = self._get_report_from_name('account.report_invoice')
-        invoice_pdf, _ = inv_report.render_qweb_pdf(res_ids, data)
+        invoice_pdf, _ = inv_report.with_context(
+            self.env.context).render_qweb_pdf(res_ids, data)
         invoice_pdf_io = io.BytesIO(invoice_pdf)
 
         slip_report = self._get_report_from_name(
