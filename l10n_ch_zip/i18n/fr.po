@@ -10,14 +10,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-11 12:02+0000\n"
-"PO-Revision-Date: 2017-12-11 12:02+0000\n"
-"Last-Translator: Yannick Vaucher <yannick.vaucher@camptocamp.com>, 2017\n"
+"PO-Revision-Date: 2019-08-14 09:44+0000\n"
+"Last-Translator: Valaeys Stéphane <svalaeys@fiefmanage.ch>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.7.1\n"
 
 #. module: l10n_ch_zip
 #: model:res.city,name:l10n_ch_zip.ch_city_aadorf
@@ -4830,7 +4831,7 @@ msgstr ""
 #. module: l10n_ch_zip
 #: model:ir.model,name:l10n_ch_zip.model_res_city_zip
 msgid "City/locations completion object"
-msgstr ""
+msgstr "Objet facilitant la saisie Ville/Localisation"
 
 #. module: l10n_ch_zip
 #: model:res.city,name:l10n_ch_zip.ch_city_clarens
@@ -7125,7 +7126,7 @@ msgstr ""
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_city_zip__communitynumber_bfs
 msgid "FSO municipality number (BFSNR)"
-msgstr ""
+msgstr "Numéro FSO de la municipalité (BFSNR)"
 
 #. module: l10n_ch_zip
 #: model:res.city,name:l10n_ch_zip.ch_city_fahrni_b_thun
@@ -13703,7 +13704,7 @@ msgstr ""
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_city_zip__post_delivery_through
 msgid "Mail delivery by"
-msgstr ""
+msgstr "Livraison du courrier par"
 
 #. module: l10n_ch_zip
 #: model:res.city,name:l10n_ch_zip.ch_city_mairengo
@@ -17465,7 +17466,7 @@ msgstr ""
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_city_zip__zip_type
 msgid "Postcode type"
-msgstr ""
+msgstr "Type de numéro postal"
 
 #. module: l10n_ch_zip
 #: model:res.city,name:l10n_ch_zip.ch_city_praden
@@ -17580,7 +17581,7 @@ msgstr ""
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_city_zip__sort
 msgid "Present in sort file"
-msgstr ""
+msgstr "Présent dans le fichier de tri"
 
 #. module: l10n_ch_zip
 #: model:res.city,name:l10n_ch_zip.ch_city_presinge
@@ -21640,7 +21641,7 @@ msgstr ""
 #. module: l10n_ch_zip
 #: model:ir.model.fields,field_description:l10n_ch_zip.field_res_city_zip__onrp
 msgid "Swiss Post classification no. (ONRP)"
-msgstr ""
+msgstr "No. de classification de la Poste suisse (ONRP)"
 
 #. module: l10n_ch_zip
 #: model:res.city,name:l10n_ch_zip.ch_city_syens
