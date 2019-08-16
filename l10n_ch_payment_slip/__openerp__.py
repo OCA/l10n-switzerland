@@ -22,7 +22,7 @@
 
 {'name': 'Switzerland - Payment Slip (BVR/ESR)',
  'summary': 'Print ESR/BVR payment slip with your invoices',
- 'version': '8.0.2.1.2',
+ 'version': '8.0.3.0.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Localization',
  'website': 'http://www.camptocamp.com',
