@@ -21,7 +21,7 @@
 from openerp import models, api
 
 
-class payment_line(models.Model):
+class PaymentLine(models.Model):
     _inherit = 'payment.line'
 
     @api.model
@@ -34,4 +34,4 @@ class payment_line(models.Model):
         move_line = account_move_line_obj.browse(vals['move_line_id'])
         if move_line.transaction_ref:
             vals['communication'] = move_line.transaction_ref
-        return super(payment_line, self).create(vals)
+        return super(PaymentLine, self).create(vals)
