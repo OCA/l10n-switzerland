@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="AC" model="hr.salary.rule">
+        <field name="amount_select">fix</field>
+        <field name="appears_on_payslip">False</field>
+        <field name="code">5020</field>
+        <field name="condition_select">none</field>
+        <field name="name">UI</field>
+        <field name="quantity">1</field>
+        <field name="sequence">120</field>
+        <field name="category_id" ref="hr_payroll.DED"/>
+    </record>
+    <record id="AC_C" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">False</field>
+        <field name="code">5020_C</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">UI Company</field>
+        <field name="amount_python_compute">
+per_in_limit = employee.company_id.ac_per_in_limit / 100
+result = ((categories.BASIC + categories.ALW)*per_in_limit)
+        </field>
+        <field name="amount_percentage_base">min(categories.BASIC + categories.ALW, employee.company_id.ac_limit)</field>
+        <field name="quantity">1</field>
+        <field name="condition_range">categories.BASIC + categories.ALW</field>
+        <field name="sequence">121</field>
+        <field name="category_id" ref="hr_payroll.COMP"/>
+        <field name="parent_rule_id" ref="AC"/>
+    </record>
+    <record id="AC_E" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">True</field>
+        <field name="code">5020_E</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">UI Employee</field>
+        <field name="amount_python_compute">
+per_in_limit = employee.company_id.ac_per_in_limit / 100
+result = ((categories.BASIC + categories.ALW)*per_in_limit)
+        </field>
+        <field name="amount_percentage_base">min(categories.BASIC + categories.ALW, employee.company_id.ac_limit)</field>
+        <field name="quantity">1</field>
+        <field name="condition_range">categories.BASIC + categories.ALW</field>
+        <field name="sequence">121</field>
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="parent_rule_id" ref="AC"/>
+    </record>
+    <record id="AC_SOL" model="hr.salary.rule">
+        <field name="amount_select">fix</field>
+        <field name="appears_on_payslip">False</field>
+        <field name="code">5030</field>
+        <field name="condition_python">
+result = (categories.BASIC + categories.ALW) &gt; employee.company_id.ac_limit and (categories.BASIC + categories.ALW) - employee.company_id.ac_limit &gt; 0
+        </field>
+        <field name="name">UI SOL</field>
+        <field name="quantity">1</field>
+        <field name="sequence">122</field>
+        <field name="category_id" ref="hr_payroll.DED"/>
+    </record>
+    <record id="AC_C_SOL" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">False</field>
+        <field name="code">5030_C</field>
+        <field name="condition_range_max">999999</field>
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = (categories.BASIC + categories.ALW) &gt; employee.company_id.ac_limit and (categories.BASIC + categories.ALW) - employee.company_id.ac_limit &gt; 0
+        </field>
+        <field name="name">UI Company's Solidarity</field>
+        <field name="amount_python_compute"> 
+limit = employee.company_id.ac_limit
+per_off_limit = employee.company_id.ac_per_off_limit / 100
+result = (((categories.BASIC + categories.ALW) - limit)*per_off_limit)
+        </field>
+        <field name="amount_percentage_base">(categories.BASIC + categories.ALW) - employee.company_id.ac_limit</field>
+        <field name="quantity">1</field>
+        <field name="condition_range">categories.BASIC + categories.ALW</field>
+        <field name="sequence">123</field>
+        <field name="category_id" ref="hr_payroll.COMP"/>
+        <field name="parent_rule_id" ref="AC_SOL"/>
+    </record>
+    <record id="AC_E_SOL" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">True</field>
+        <field name="code">5030_E</field>
+        <field name="condition_range_max">999999</field>
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = (categories.BASIC + categories.ALW) &gt; employee.company_id.ac_limit and (categories.BASIC + categories.ALW) - employee.company_id.ac_limit &gt; 0
+        </field>
+        <field name="name">UI Employee's Solidarity</field>
+        <field name="amount_python_compute"> 
+limit = employee.company_id.ac_limit
+per_off_limit = employee.company_id.ac_per_off_limit / 100
+result = (((categories.BASIC + categories.ALW) - limit)*per_off_limit)
+        </field>
+        <field name="amount_percentage_base">(categories.BASIC + categories.ALW) - employee.company_id.ac_limit</field>
+        <field name="quantity">1</field>
+        <field name="condition_range">categories.BASIC + categories.ALW</field>
+        <field name="sequence">123</field>
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="parent_rule_id" ref="AC_SOL"/>
+    </record>
+    <record id="ALFA" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">True</field>
+        <field name="code">3030</field>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = contract.employee_id.children + contract.employee_id.children_student &gt; 0</field>
+        <field name="name">Family Allowances</field>
+        <field name="amount_python_compute">
+result = 0
+result += contract.employee_id.children * employee.company_id.fa_amount_child
+result += contract.employee_id.children_student * employee.company_id.fa_amount_student
+min_number_childs = employee.company_id.fa_min_number_childs - 1
+if contract.employee_id.children + contract.employee_id.children_student &gt; min_number_childs:
+    child_supp = contract.employee_id.children + contract.employee_id.children_student - min_number_childs
+    result += child_supp * employee.company_id.fa_amount_additional</field>
+        <field name="quantity">1</field>
+        <field name="condition_range">categories.BASIC + categories.ALW</field>
+        <field name="sequence">50</field>
+        <field name="category_id" ref="hr_payroll_FALW"/>
+    </record>
+    <record id="AVS" model="hr.salary.rule">
+        <field name="amount_select">fix</field>
+        <field name="appears_on_payslip">False</field>
+        <field name="code">5010</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">OAI/II/IC</field>
+        <field name="note">Old Age Insurance, Invalidity Insurance, Income Compensation</field>
+        <field name="quantity">1</field>
+        <field name="sequence">110</field>
+        <field name="category_id" ref="hr_payroll.DED"/>
+    </record>
+    <record id="AVS_C" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">False</field>
+        <field name="code">5010_C</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">OAI/II/IC Company</field>
+        <field name="amount_python_compute">
+per = employee.company_id.avs_per
+result = (per*(categories.BASIC + categories.ALW))/100
+        </field>
+        <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+        <field name="quantity">1</field>
+        <field name="sequence">111</field>
+        <field name="category_id" ref="hr_payroll.COMP"/>
+        <field name="parent_rule_id" ref="AVS"/>
+    </record>
+    <record id="AVS_E" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">True</field>
+        <field name="code">5010_E</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">OAI/II/IC Employee</field>
+        <field name="amount_python_compute">
+per = employee.company_id.avs_per
+result = (per*(categories.BASIC + categories.ALW))/100
+        </field>
+        <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+        <field name="quantity">1</field>
+        <field name="sequence">111</field>
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="parent_rule_id" ref="AVS"/>
+    </record>
+    <record id="FADMIN" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">False</field>
+        <field name="code">6030</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">Administrative Fees</field>
+        <field name="note">Administrative Fees to the OAI</field>
+         <field name="amount_python_compute">
+per = employee.company_id.fadmin_per
+result = (per*(categories.BASIC + categories.ALW))/100
+        </field>
+        <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+        <field name="quantity">1</field>
+        <field name="sequence">210</field>
+        <field name="category_id" ref="hr_payroll_COSTS"/>
+    </record>
+    <record id="IMP_SRC" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">True</field>
+        <field name="code">5060</field>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = contract.imp_src &gt; 0</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">Source Tax</field>
+        <field name="amount_python_compute">
+per = contract.imp_src
+result = -(per*(categories.BASIC + categories.ALW + categories.FALW))/100
+        </field>
+        <field name="amount_percentage_base">categories.BASIC + categories.ALW + categories.FALW</field>
+        <field name="quantity">1</field>
+        <field name="sequence">160</field>
+        <field name="category_id" ref="hr_payroll.DED"/>
+    </record>
+    <record id="LAA" model="hr.salary.rule">
+        <field name="amount_select">fix</field>
+        <field name="appears_on_payslip">False</field>
+        <field name="code">5041</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">AI</field>
+        <field name="quantity">1</field>
+        <field name="sequence">140</field>
+        <field name="category_id" ref="hr_payroll.DED"/>
+    </record>
+    <record id="LAA_C" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">False</field>
+        <field name="code">5041_C</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">AI Company</field>
+        <field name="amount_python_compute">
+per = employee.company_id.laa_per
+result = (per*(categories.BASIC + categories.ALW))/100
+        </field>
+        <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+        <field name="quantity">1</field>
+        <field name="sequence">141</field>
+        <field name="category_id" ref="hr_payroll.COMP"/>
+        <field name="parent_rule_id" ref="LAA"/>
+    </record>
+    <record id="LAA_E" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">True</field>
+        <field name="code">5041_E</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">AI Employee</field>
+        <field name="amount_python_compute">
+per = employee.company_id.laa_per
+result = (per*(categories.BASIC + categories.ALW))/100
+        </field>
+        <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+        <field name="quantity">1</field>
+        <field name="sequence">141</field>
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="parent_rule_id" ref="LAA"/>
+    </record>
+    <record id="LCA" model="hr.salary.rule">
+        <field name="amount_select">fix</field>
+        <field name="appears_on_payslip">False</field>
+        <field name="code">5042</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">SDA</field>
+        <field name="note">Sickness Daily Allowance</field>
+        <field name="quantity">1</field>
+        <field name="sequence">150</field>
+        <field name="category_id" ref="hr_payroll.DED"/>
+    </record>
+    <record id="LCA_C" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">False</field>
+        <field name="code">5042_C</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">SDA Company</field>
+        <field name="amount_python_compute">
+per = employee.company_id.lca_per
+result = (per*(categories.BASIC + categories.ALW))/100
+        </field>
+        <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+        <field name="quantity">1</field>
+        <field name="sequence">151</field>
+        <field name="category_id" ref="hr_payroll.COMP"/>
+        <field name="parent_rule_id" ref="LCA"/>
+    </record>
+    <record id="LCA_E" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">True</field>
+        <field name="code">5042_E</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">SDA Employee</field>
+        <field name="amount_python_compute">
+per = employee.company_id.lca_per
+result = (per*(categories.BASIC + categories.ALW))/100
+        </field>
+        <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+        <field name="quantity">1</field>
+        <field name="sequence">151</field>
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="parent_rule_id" ref="LCA"/>
+    </record>
+    <record id="LPP" model="hr.salary.rule">
+        <field name="amount_select">fix</field>
+        <field name="appears_on_payslip">False</field>
+        <field name="code">5050</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">OBP</field>
+        <field name="amount_python_compute"></field>
+        <field name="quantity">1</field>
+        <field name="condition_range">categories.BASIC + categories.ALW</field>
+        <field name="sequence">130</field>
+        <field name="category_id" ref="hr_payroll.DED"/>
+    </record>
+    <record id="LPP_C" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">False</field>
+        <field name="code">5050_C</field>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = (contract.lpp_rate or contract.lpp_amount) &gt; 0</field>
+        <field name="name">OBP Company</field>
+        <field name="amount_python_compute">
+minimum_legal = employee.company_id.lpp_min
+maximum_range = employee.company_id.lpp_max
+amount = contract.wage_fulltime * 12
+if contract.lpp_rate != 0:
+    if contract.lpp_contract_id:
+        amount = amount - contract.lpp_contract_id.dc_amount
+    amount = amount / 12
+    amount = amount * (contract.occupation_rate / 100)
+    amount = amount * (payslip.working_rate / 100)
+    if amount &gt; maximum_range:
+        result = -(maximum_range)*((contract.lpp_rate)/100)
+    elif amount &lt; minimum_legal and not contract.lpp_contract_id:
+        result = -(minimum_legal)*((contract.lpp_rate)/100)
+    else:
+        result = -(amount)*((contract.lpp_rate)/100)
+else:
+    result = -contract.lpp_amount</field>
+        <field name="amount_percentage_base">
+            -contract.lpp_amount or ((((contract.wage_fulltime*12) - (contract.lpp_contract_id.dc_amount or 0))/12)*(contract.occupation_rate/100)*(payslip.working_rate/100))
+        </field>
+        <field name="quantity">1</field>
+        <field name="sequence">132</field>
+        <field name="category_id" ref="hr_payroll.COMP"/>
+        <field name="parent_rule_id" ref="LPP"/>
+    </record>
+    <record id="LPP_E" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">True</field>
+        <field name="code">5050_E</field>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = (contract.lpp_rate or contract.lpp_amount) &gt; 0</field>
+        <field name="name">OBP Employee</field>
+        <field name="amount_python_compute">
+minimum_legal = employee.company_id.lpp_min
+maximum_range = employee.company_id.lpp_max
+amount = contract.wage_fulltime * 12
+if contract.lpp_rate != 0:
+    if contract.lpp_contract_id:
+        amount = amount - contract.lpp_contract_id.dc_amount
+    amount = amount / 12
+    amount = amount * (contract.occupation_rate / 100)
+    amount = amount * (payslip.working_rate / 100)
+    if amount &gt; maximum_range:
+        result = -(maximum_range)*((contract.lpp_rate)/100)
+    elif amount &lt; minimum_legal and not contract.lpp_contract_id:
+        result = -(minimum_legal)*((contract.lpp_rate)/100)
+    else:
+        result = -(amount)*((contract.lpp_rate)/100)
+else:
+    result = -contract.lpp_amount</field>
+        <field name="amount_percentage_base">
+            -contract.lpp_amount or ((((contract.wage_fulltime*12) - (contract.lpp_contract_id.dc_amount or 0))/12)*(contract.occupation_rate/100)*(payslip.working_rate/100))
+        </field>
+        <field name="quantity">1</field>
+        <field name="sequence">131</field>
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="parent_rule_id" ref="LPP"/>
+    </record>
+    <record id="PC_F_VD" model="hr.salary.rule">
+        <field name="amount_select">fix</field>
+        <field name="appears_on_payslip">False</field>
+        <field name="code">5063_VD</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">AS Families (VD)</field>
+        <field name="quantity">1</field>
+        <field name="sequence">165</field>
+        <field name="category_id" ref="hr_payroll.DED"/>
+    </record>
+    <record id="PC_F_VD_C" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">False</field>
+        <field name="code">5063_VD_C</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">AS Families (VD) Company</field>
+        <field name="amount_python_compute">
+per = employee.company_id.pc_f_vd_per
+result = (per*(categories.BASIC + categories.ALW))/100
+        </field>
+        <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+        <field name="quantity">1</field>
+        <field name="sequence">166</field>
+        <field name="category_id" ref="hr_payroll.COMP"/>
+        <field name="parent_rule_id" ref="PC_F_VD"/>
+    </record>
+    <record id="PC_F_VD_E" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">True</field>
+        <field name="code">5063_VD_E</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">AS Families (VD) Employee</field>
+        <field name="amount_python_compute">
+per = employee.company_id.pc_f_vd_per
+result = (per*(categories.BASIC + categories.ALW))/100
+        </field>
+        <field name="amount_percentage_base">categories.BASIC + categories.ALW</field>
+        <field name="quantity">1</field>
+        <field name="sequence">166</field>
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="parent_rule_id" ref="PC_F_VD"/>
+    </record>
+    <record id="BASIC_CH" model="hr.salary.rule">
+        <field name="appears_on_payslip">True</field>
+        <field name="code">1000</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">Basic CH</field>
+        <field name="sequence" eval="1"/>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+if payslip.wage_type == 'hour':
+    result = contract.wage*payslip.worked_hours
+else:
+    result = contract.wage*payslip.working_rate/100
+        </field>
+        <field name="category_id" ref="hr_payroll.BASIC"/>
+    </record>
+    <record id="GROSS_CH" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">True</field>
+        <field name="code">5000</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">Gross CH</field>
+        <field name="amount_python_compute">result = categories.BASIC + categories.ALW + categories.FALW</field>
+        <field name="quantity">1</field>
+        <field name="sequence">100</field>
+        <field name="category_id" ref="hr_payroll.GROSS"/>
+    </record>
+    <record id="NET_CH" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">True</field>
+        <field name="code">6500</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">Net CH</field>
+        <field name="amount_python_compute">result = categories.BASIC + categories.ALW + categories.DED + categories.FALW</field>
+        <field name="quantity">1</field>
+        <field name="sequence">200</field>
+        <field name="category_id" ref="hr_payroll.NET"/>
+    </record>
+    <record id="TOTAL_DED" model="hr.salary.rule">
+        <field name="amount_select">code</field>
+        <field name="appears_on_payslip">True</field>
+        <field name="code">TOTAL_DED</field>
+        <field name="condition_select">none</field>
+        <field name="condition_range_max">999999</field>
+        <field name="name">Total Deduction</field>
+        <field name="amount_python_compute">result = categories.DED</field>
+        <field name="quantity">1</field>
+        <field name="sequence">195</field>
+        <field name="category_id" ref="hr_payroll_INFO"/>
+    </record>
+</odoo>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="hr_contract_form_l10n_ch_inherit">
+        <field name="name">hr.contract.form.inherit_ch_01</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="priority" eval="20"/>
+        <field name="arch" type="xml">
+            <field name="wage" position="before">
+                <field name="wage_type" widget="selection"/>
+                <field name="wage_fulltime" attrs="{'invisible': [('wage_type', '!=', 'month')]}" />
+                <field name="occupation_rate" attrs="{'invisible': [('wage_type', '!=', 'month')]}"/>
+            </field>
+            <field name="struct_id" position="after">
+                <field name="imp_src"/>
+            </field>
+            <xpath expr="//group[@name='duration_group']" position="after">
+                <group string="OBP">
+                    <field name="lpp_contract_id" options="{'no_create': True, 'no_open': True}"/>
+                    <field name="lpp_rate"/>
+                    <field name="lpp_amount"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

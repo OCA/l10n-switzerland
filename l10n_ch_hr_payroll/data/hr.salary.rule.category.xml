@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_payroll_FALW" model="hr.salary.rule.category">
+        <field name="name">Free allowance</field>
+        <field name="code">FALW</field>
+    </record>
+    <record id="hr_payroll_COSTS" model="hr.salary.rule.category">
+        <field name="name">Full Company Contribution</field>
+        <field name="code">COSTS</field>
+        <field name="parent_id" ref="hr_payroll.ALW"/>
+    </record>
+    <record id="hr_payroll_INFO" model="hr.salary.rule.category">
+        <field name="name">Information</field>
+        <field name="code">INFO</field>
+    </record>
+</odoo>
