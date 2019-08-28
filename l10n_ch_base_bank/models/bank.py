@@ -14,8 +14,7 @@ CH_POST_BIC = 'POFICHBEXXX'
 class BankCommon(object):
 
     def is_swiss_postal_num(self, number):
-        return (self._check_9_pos_postal_num(number) or
-                self._check_5_pos_postal_num(number))
+        return self._check_9_pos_postal_num(number)
 
     def _check_9_pos_postal_num(self, number):
         """
@@ -37,22 +36,6 @@ class BankCommon(object):
         checksum = nums[2]
         expected_checksum = mod10r(prefix + num)[-1]
         return expected_checksum == checksum
-
-    def _check_5_pos_postal_num(self, number):
-        """
-        Predicate that checks if a postal number
-        is in format xxxxx is correct,
-        return true if it matches the pattern
-        and if check sum mod10 is ok
-
-        :param number: postal number to validate
-        :returns: True if is it a 5 len postal account
-        :rtype: bool
-        """
-        pattern = r'^[0-9]{1,5}$'
-        if not re.search(pattern, number):
-            return False
-        return True
 
     def _convert_iban_to_ccp(self, iban):
         """
@@ -116,7 +99,7 @@ class Bank(models.Model, BankCommon):
             if not self.is_swiss_postal_num(bank.ccp):
                 raise exceptions.ValidationError(
                     _('Please enter a correct postal number. '
-                      '(01-23456-1 or 12345)')
+                      '(e.g. 01-23456-1)')
                 )
         return True
 
@@ -270,7 +253,7 @@ class ResPartnerBank(models.Model, BankCommon):
             if not self.is_swiss_postal_num(bank.ccp):
                 raise exceptions.ValidationError(
                     _('Please enter a correct postal number. '
-                      '(01-23456-1 or 12345)')
+                      '(e.g. 01-23456-1)')
                 )
         return True
 
