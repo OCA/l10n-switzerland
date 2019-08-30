@@ -265,16 +265,6 @@ class ResPartnerBank(models.Model):
         self.bank_id = bank
         self.l10n_ch_postal = postal
 
-    @api.multi
-    def get_account_number(self):
-        """Retrieve the correct bank number to used based on
-        account type
-        """
-        if self.l10n_ch_postal:
-            return self.l10n_ch_postal
-        else:
-            return self.acc_number
-
     @api.constrains(
         'l10n_ch_isr_subscription_chf',
         'l10n_ch_isr_subscription_eur'
@@ -356,7 +346,6 @@ class ResPartnerBank(models.Model):
         clearing = self.sanitized_acc_number[4:9]
         return clearing and self.env['res.bank'].search(
             [('clearing', '=', clearing)], limit=1)
-
 
     @api.onchange('l10n_ch_postal')
     def onchange_l10n_ch_postal_set_acc_number(self):
