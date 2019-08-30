@@ -30,7 +30,6 @@
         <field name="bic" position="after">
           <field name="code"/>
           <field name="clearing"/>
-          <field name="ccp" attrs="{'invisible': [('bic', '=', 'POFICHBEXXX')]}"/>
         </field>
 
         <xpath expr="//field[@name='name']" position="after">
@@ -55,21 +54,20 @@
         <field name="bic" position="after">
           <field name="code"/>
           <field name="clearing"/>
-          <field name="ccp"/>
           <field name="street"/>
           <field name="city"/>
         </field>
       </field>
     </record>
 
-    <record model="ir.ui.view" id="add_ccp_on_res_partner_bank">
-      <field name="name">Add ccp on res partner bank</field>
+    <record model="ir.ui.view" id="add_postal_on_res_partner_bank">
+      <field name="name">Add postal on res partner bank</field>
       <field name="model">res.partner.bank</field>
       <field name="inherit_id" ref="base.view_partner_bank_form"/>
       <field name="arch" type="xml">
         <field name="bank_id" position="after">
-          <!-- isr_adherent_num added in l10n_ch_payment_slip -->
-          <field name="ccp"/>
+          <!-- l10n_ch_isr_subscription_number added in l10n_ch_payment_slip -->
+          <field name="l10n_ch_postal"/>
         </field>
       </field>
     </record>
