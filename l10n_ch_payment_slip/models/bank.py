@@ -13,6 +13,16 @@ class ResPartnerBank(models.Model):
     """
     _inherit = "res.partner.bank"
 
+    l10n_ch_isrb_id_number = fields.Char(
+        'ISR-B Internal ID',
+        help=(
+            'ISR-B Customer ID number for ISR. Used only when generating ISR'
+            ' reference through a bank. This will prefix your references.'
+            ' It is not necessary for standard ISR from Postfinance.'
+            ' e.g. 999999'
+        )
+    )
+
     print_bank = fields.Boolean('Print Bank on ISR')
     print_account = fields.Boolean('Print Account Number on ISR')
     print_partner = fields.Boolean('Print Partner Address on ISR')

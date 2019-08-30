@@ -27,7 +27,6 @@ class TestPaymentSlip(common.SavepointCase):
         bank = self.env['res.bank'].create(
             {
                 'name': 'BCV',
-                'ccp': '01-1234-1',
                 'bic': 'BBRUBEBB',
                 'clearing': '234234',
             }
@@ -37,15 +36,15 @@ class TestPaymentSlip(common.SavepointCase):
                 'partner_id': partner.id,
                 'bank_id': bank.id,
                 'bank_bic': bank.bic,
-                'acc_number': '01-1234-1',
-                'isr_adherent_num': '1234567',
+                'acc_number': 'ISR account',
+                'l10n_ch_isr_subscription_chf': '01-1234-1',
+                'l10n_ch_isrb_id_number': '123456',
                 'print_bank': True,
                 'print_account': True,
                 'print_partner': True,
+                'sequence': 1,
             }
         )
-        bank_account.onchange_acc_number_set_swiss_bank()
-        self.assertEqual(bank_account.ccp, '01-1234-1')
         return bank_account
 
     def make_invoice(self):
@@ -73,7 +72,6 @@ class TestPaymentSlip(common.SavepointCase):
 
         invoice = self.env['account.invoice'].create({
             'partner_id': self.env.ref('base.res_partner_12').id,
-            'reference_type': 'none',
             'name': 'A customer invoice',
             'account_id': account_debtor.id,
             'type': 'out_invoice',
