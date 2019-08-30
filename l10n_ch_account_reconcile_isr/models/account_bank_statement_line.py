@@ -11,17 +11,17 @@ class AccountBankStatementLine(models.Model):
 
     @api.multi
     def auto_reconcile(self):
-        # If we don't have esr_reconcile we want the default odoo way
-        if not self.env.context.get('esr_reconcile'):
-            return super(AccountBankStatementLine, self).auto_reconcile()
-        # otherwise use esr reconcile
+        # If we don't have isr_reconcile we want the default odoo way
+        if not self.env.context.get('isr_reconcile'):
+            return super(AccountBankStatementLine, self). auto_reconcile()
+        # otherwise use isr reconcile
         else:
-            return self.auto_reconcile_esr()
+            return self.auto_reconcile_isr()
 
     @api.multi
-    def auto_reconcile_esr(self):
+    def auto_reconcile_isr(self):
         """ Reconcile the Bank statement line and acount move line
-        based on only the esr
+        based on only the isr
 
         """
         self.ensure_one()
@@ -40,7 +40,7 @@ class AccountBankStatementLine(models.Model):
             'amount': self.amount,
             'precision': precision
         }
-        # Try to get ESR match
+        # Try to get ISR match
         if self.name:
             sql_query = self._get_common_sql_query_ignore_partner() + \
                 " AND aml.transaction_ref = %(ref)s" \
