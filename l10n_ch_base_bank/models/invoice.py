@@ -74,7 +74,7 @@ class AccountInvoice(models.Model):
                         bank_acc.acc_type != 'postal' and
                         (bank_acc.ccp or bank_acc.bank_id.ccp)):
                     raise exceptions.ValidationError(
-                        _("Bank account shouldn't be empty, for IRS reference "
+                        _("Bank account shouldn't be empty, for ISR reference "
                           "type, you can set it manually or set appropriate"
                           " payment mode.")
                     )
