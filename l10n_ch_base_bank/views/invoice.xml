@@ -9,24 +9,10 @@
       <field name="inherit_id" ref="account.invoice_form"/>
       <field name="arch" type="xml">
         <field name="date_due" position="after">
-          <field name="reference_type" nolabel="1"/>
           <field name="reference" nolabel="1"/>
         </field>
       </field>
     </record>
-
-    <!-- Display reference_type on supplier invoices form -->
-    <record id="invoice_supplier_form" model="ir.ui.view">
-      <field name="name">supplier.account.invoice.form</field>
-      <field name="model">account.invoice</field>
-      <field name="inherit_id" ref="account.invoice_supplier_form"/>
-      <field name="arch" type="xml">
-          <field name="reference" position="before">
-            <field name="reference_type"/>
-        </field>
-      </field>
-    </record>
-
 
   </data>
 </odoo>

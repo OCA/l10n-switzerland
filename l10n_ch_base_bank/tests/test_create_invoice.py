@@ -27,16 +27,10 @@ class TestCreateInvoice(common.SavepointCase):
             'bank_acc_number': '01-1234-1',
         })
         cls.bank_acc = cls.bank_journal.bank_account_id
-        cls.payment_mode = cls.env['account.payment.mode'].create({
-            'name': 'Inbound Credit transfer CH',
-            'company_id': cls.company.id,
-            'bank_account_link': 'fixed',
-            'fixed_journal_id': cls.bank_journal.id,
-            'show_bank_account_from_journal': True,
-            'payment_method_id':
-                cls.env.ref('account.account_payment_method_manual_in').id,
+        cls.bank_acc.write({
+            'l10n_ch_isr_subscription_chf': '01-162-8',
+            'sequence': 1,
         })
-        cls.partner.customer_payment_mode_id = cls.payment_mode.id
         fields_list = [
             'company_id',
             'user_id',
@@ -57,23 +51,22 @@ class TestCreateInvoice(common.SavepointCase):
     def test_emit_invoice_with_isr_reference(self):
         inv_form = self.new_form()
         invoice = inv_form.save()
-        self.assertEqual(invoice.partner_banks_to_show(), self.bank_acc)
-        self.assertNotEqual(invoice.reference_type, 'isr')
-        inv_form.reference_type = 'isr'
-        invoice.reference = '132000000000000000000000014'
+        self.assertFalse(invoice._is_isr_reference())
+
+        inv_form.reference = '132000000000000000000000014'
         inv_form.save()
-        self.assertEqual(invoice.reference_type, 'isr')
+        self.assertTrue(invoice._is_isr_reference())
 
     def test_emit_invoice_with_isr_reference_15_pos(self):
         inv_form = self.new_form()
         invoice = inv_form.save()
 
-        self.assertEqual(invoice.partner_banks_to_show(), self.bank_acc)
-        self.assertNotEqual(invoice.reference_type, 'isr')
+        self.assertFalse(invoice._is_isr_reference())
 
         invoice.reference = '132000000000004'
-        # set manually ISR reference type
-        invoice.write({'reference_type': 'isr'})
+        # We consider such reference to be unstructured
+        # and we shouldn't generate such references
+        self.assertFalse(invoice._is_isr_reference())
 
         # and save
         inv_form.save()
@@ -82,11 +75,10 @@ class TestCreateInvoice(common.SavepointCase):
         inv_form = self.new_form()
         invoice = inv_form.save()
 
-        self.assertEqual(invoice.partner_banks_to_show(), self.bank_acc)
-        self.assertNotEqual(invoice.reference_type, 'isr')
+        self.assertFalse(invoice._is_isr_reference())
 
         invoice.reference = 'Not a ISR ref with 27 chars'
-        self.assertNotEqual(invoice.reference_type, 'isr')
+        self.assertFalse(invoice._is_isr_reference())
 
     def test_emit_invoice_with_missing_isr_reference(self):
         inv_form = self.new_form()
@@ -94,22 +86,38 @@ class TestCreateInvoice(common.SavepointCase):
         inv_form.account_id = self.env['account.account'].browse(1)
         inv_form.save()
 
-        with self.assertRaises(exceptions.ValidationError):
-            inv_form.reference = False
-            inv_form.reference_type = 'isr'  # set manually ISR reference type
-            # and save
-            inv_form.save()
+        inv_form.reference = False
+        # and save
+        invoice = inv_form.save()
 
-    def test_emit_invoice_with_isr_reference_missing_ccp(self):
+        self.assertFalse(invoice._is_isr_reference())
+
+    def test_emit_invoice_with_isr_reference_missing_subscr_num(self):
         inv_form = self.new_form()
-        inv_form.type = 'out_invoice'
-        # set dummy account to be replaced by onchange
-        inv_form.account_id = self.env['account.account'].browse(1)
+        invoice = inv_form.save()
         inv_form.save()
-
-        self.bank_acc.acc_number = 'not a CCP'
-
+        self.assertFalse(invoice._is_isr_reference())
+        inv_form.partner_bank_id = False
         with self.assertRaises(exceptions.ValidationError):
             inv_form.reference = '132000000000000000000000014'
-            inv_form.reference_type = 'isr'
+            inv_form.save()
+
+    def test_emit_invoice_with_isr_reference_missing_subscr_num(self):
+        inv_form = self.new_form()
+        invoice = inv_form.save()
+        inv_form.save()
+        self.assertFalse(invoice._is_isr_reference())
+        self.bank_acc.l10n_ch_isr_subscription_chf = False
+        with self.assertRaises(exceptions.ValidationError):
+            inv_form.reference = '132000000000000000000000014'
+            inv_form.save()
+
+    def test_emit_invoice_with_isr_reference_subscr_num_wrong_currency(self):
+        inv_form = self.new_form()
+        invoice = inv_form.save()
+        inv_form.save()
+        self.assertFalse(invoice._is_isr_reference())
+        invoice.currency_id = self.env.ref('base.EUR')
+        with self.assertRaises(exceptions.ValidationError):
+            inv_form.reference = '132000000000000000000000014'
             inv_form.save()
