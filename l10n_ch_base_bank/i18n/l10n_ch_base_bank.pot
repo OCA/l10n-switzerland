@@ -38,7 +38,7 @@ msgstr ""
 #. module: l10n_ch_base_bank
 #: code:addons/l10n_ch_base_bank/models/invoice.py:77
 #, python-format
-msgid "Bank account shouldn't be empty, for IRS reference type, you can set it manually or set appropriate payment mode."
+msgid "Bank account shouldn't be empty, for ISR reference type, you can set it manually or set appropriate payment mode."
 msgstr ""
 
 #. module: l10n_ch_base_bank
