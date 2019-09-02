@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, api
+from odoo import api, models
 from odoo.exceptions import UserError
 
 
@@ -13,16 +12,14 @@ class AccountBankStatementLine(models.Model):
     def auto_reconcile(self):
         # If we don't have isr_reconcile we want the default odoo way
         if not self.env.context.get('isr_reconcile'):
-            return super(AccountBankStatementLine, self). auto_reconcile()
+            return super().auto_reconcile()
         # otherwise use isr reconcile
-        else:
-            return self.auto_reconcile_isr()
+        return self.auto_reconcile_isr()
 
     @api.multi
     def auto_reconcile_isr(self):
         """ Reconcile the Bank statement line and acount move line
         based on only the isr
-
         """
         self.ensure_one()
         match_recs = self.env['account.move.line']
