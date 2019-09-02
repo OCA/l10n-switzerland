@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-l10n-switzerland Odoo addons",
     version=version,
     install_requires=[
+        'odoo10-addon-l10n_ch_account_reconcile_isr',
         'odoo10-addon-l10n_ch_bank',
         'odoo10-addon-l10n_ch_bank_statement_import_postfinance',
         'odoo10-addon-l10n_ch_base_bank',
