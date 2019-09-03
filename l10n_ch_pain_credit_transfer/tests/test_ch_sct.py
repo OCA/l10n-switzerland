@@ -43,13 +43,12 @@ class TestSCTCH(AccountingTestCase):
             'name': 'Alternative Bank Schweiz AG',
             'bic': 'ALSWCH21XXX',
             'clearing': '38815',
-            'ccp': '46-110-7',
         })
         # create a ch bank account for my company
         self.cp_partner_bank = self.partner_bank_model.create({
             'acc_number': ch_iban,
             'partner_id': self.env.ref('base.main_partner').id,
-            })
+        })
         self.cp_partner_bank.onchange_acc_number_set_swiss_bank()
         # create journal
         self.bank_journal = Journal.create({
@@ -58,7 +57,7 @@ class TestSCTCH(AccountingTestCase):
             'code': 'BNKFB',
             'bank_account_id': self.cp_partner_bank.id,
             'bank_id': ch_bank1.id,
-            })
+        })
         # create a payment mode
         pay_method_id = self.env.ref(
             'account_banking_sepa_credit_transfer.sepa_credit_transfer').id
@@ -67,7 +66,7 @@ class TestSCTCH(AccountingTestCase):
             'bank_account_link': 'fixed',
             'fixed_journal_id': self.bank_journal.id,
             'payment_method_id': pay_method_id,
-            })
+        })
         self.payment_mode.payment_method_id.pain_version =\
             'pain.001.001.03.ch.02'
         self.chf_currency = self.env.ref('base.CHF')
@@ -76,25 +75,24 @@ class TestSCTCH(AccountingTestCase):
             'name': 'Banque Cantonale Vaudoise',
             'bic': 'BCVLCH2LXXX',
             'clearing': '767',
-            'ccp': '01-1234-1',
         })
         # Create a bank account with clearing 767
         self.agrolait_partner_bank = self.partner_bank_model.create({
             'acc_number': 'CH9100767000S00023455',
             'partner_id': self.partner_agrolait.id,
             'bank_id': ch_bank2.id,
-            'ccp': '01-1234-1',
-            })
+            'l10n_ch_postal': '01-1234-1',
+        })
 
     def test_sct_ch_payment_type1(self):
         invoice1 = self.create_invoice(
             self.partner_agrolait.id,
             self.agrolait_partner_bank.id, self.eur_currency, 42.0,
-            'isr', '132000000000000000000000014')
+            '132000000000000000000000014')
         invoice2 = self.create_invoice(
             self.partner_agrolait.id,
             self.agrolait_partner_bank.id, self.eur_currency, 12.0,
-            'isr', '132000000000004')
+            '132000000000000000000000022')
         for inv in [invoice1, invoice2]:
             action = inv.create_account_payment_line()
         self.assertEquals(action['res_model'], 'account.payment.order')
@@ -130,10 +128,10 @@ class TestSCTCH(AccountingTestCase):
         for bank_line in bank_lines:
             self.assertEquals(bank_line.currency_id, self.eur_currency)
             self.assertEquals(bank_line.communication_type, 'isr')
-            self.assertEquals(
+            self.assertTrue(
                 bank_line.communication in [
                     '132000000000000000000000014',
-                    '132000000000004'], True)
+                    '132000000000000000000000022'])
             self.assertEquals(
                 bank_line.partner_bank_id, invoice1.partner_bank_id)
 
@@ -177,11 +175,11 @@ class TestSCTCH(AccountingTestCase):
         invoice1 = self.create_invoice(
             self.partner_agrolait.id,
             self.agrolait_partner_bank.id, self.eur_currency, 4042.0,
-            'none', 'Inv1242')
+            'Inv1242')
         invoice2 = self.create_invoice(
             self.partner_agrolait.id,
             self.agrolait_partner_bank.id, self.eur_currency, 1012.55,
-            'none', 'Inv1248')
+            'Inv1248')
         for inv in [invoice1, invoice2]:
             action = inv.create_account_payment_line()
         self.assertEquals(action['res_model'], 'account.payment.order')
@@ -258,10 +256,9 @@ class TestSCTCH(AccountingTestCase):
 
     def create_invoice(
             self, partner_id, partner_bank_id, currency, price_unit,
-            ref_type, ref, inv_type='in_invoice'):
+            ref, inv_type='in_invoice'):
         invoice = self.invoice_model.create({
             'partner_id': partner_id,
-            'reference_type': ref_type,
             'reference': ref,
             'currency_id': currency.id,
             'name': 'test',
@@ -270,7 +267,7 @@ class TestSCTCH(AccountingTestCase):
             'date_invoice': time.strftime('%Y-%m-%d'),
             'payment_mode_id': self.payment_mode.id,
             'partner_bank_id': partner_bank_id,
-            })
+        })
 
         self.invoice_line_model.create({
             'invoice_id': invoice.id,
@@ -278,6 +275,6 @@ class TestSCTCH(AccountingTestCase):
             'quantity': 1,
             'name': 'Great service',
             'account_id': self.account_expense.id,
-            })
+        })
         invoice.action_invoice_open()
         return invoice
