@@ -10,8 +10,9 @@ class AccountMoveLine(models.Model):
     @api.multi
     def _prepare_payment_line_vals(self, payment_order):
         vals = super()._prepare_payment_line_vals(payment_order)
-        if self.invoice_id and self.invoice_id.reference_type == 'isr':
+        if self.invoice_id and self.invoice_id._is_isr_reference():
             vals['local_instrument'] = 'CH01'
+            vals['communication_type'] = 'isr'
             if vals['communication']:
                 vals['communication'] = vals['communication'].replace(' ', '')
         return vals
