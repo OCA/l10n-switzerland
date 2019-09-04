@@ -13,7 +13,7 @@ class AccountBankStatementLine(models.Model):
     def auto_reconcile(self):
         # If we don't have isr_reconcile we want the default odoo way
         if not self.env.context.get('isr_reconcile'):
-            return super(AccountBankStatementLine, self). auto_reconcile()
+            return super(AccountBankStatementLine, self).auto_reconcile()
         # otherwise use isr reconcile
         else:
             return self.auto_reconcile_isr()
