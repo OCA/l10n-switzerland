@@ -8,7 +8,6 @@ class TestBankType(common.SavepointCase):
     def test_is_bank_account_with_post(self):
         bank = self.env['res.bank'].create({
             'name': 'BCV',
-            'ccp': '01-1234-1',
             'bic': 'BCVLCH2LXXX',
             'clearing': '234234',
         })
@@ -16,7 +15,7 @@ class TestBankType(common.SavepointCase):
 
             'partner_id': self.partner.id,
             'bank_id': bank.id,
-            'acc_number': 'Bank/CCP 01-1234-1',
+            'acc_number': 'Bank/Postal Nr 01-1234-1',
         })
         self.assertEqual(bank_account.acc_type, 'bank')
 

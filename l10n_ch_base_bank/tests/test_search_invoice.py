@@ -18,14 +18,13 @@ class TestSearchInvoice(common.SavepointCase):
             'name': 'BCV',
             'bic': 'BBRUBEBB',
             'clearing': '234234',
-            'ccp': '01-1234-1',
         })
         cls.env['res.partner.bank'].create({
             'partner_id': cls.company.partner_id.id,
             'bank_id': bank.id,
-            # 'acc_number': 'Bank/CCP 01-1234-1',
-            # else not recognized as a postal account number:
-            'acc_number': '01-1234-1',
+            'acc_number': 'ISR',
+            'l10n_ch_isr_subscription_chf': '01-162-8',
+            'sequence': 1,
         })
         cls.partner = cls.env['res.partner'].create(
             {'name': 'Test'}
@@ -46,7 +45,6 @@ class TestSearchInvoice(common.SavepointCase):
         inv.partner_id = self.partner
         inv.journal_id = self.bank_journal
         inv.type = 'out_invoice'
-        inv.reference_type = 'isr'
         return inv
 
     def assert_find_ref(self, reference, operator, value):

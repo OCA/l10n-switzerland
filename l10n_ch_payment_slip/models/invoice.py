@@ -2,6 +2,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import _, api, exceptions, fields, models
 
+from odoo.addons.l10n_ch_base_bank.models.bank import pretty_l10n_ch_postal
+
 
 class AccountMoveLine(models.Model):
 
@@ -20,6 +22,65 @@ class AccountMoveLine(models.Model):
     invoice_id = fields.Many2one(
         'account.invoice', oldname="invoice", index=True
     )
+
+
+class FutureAccountInvoice(models.Model):
+
+    """Rewrite field l10n_ch_isr_subscription to get the right field"""
+    _inherit = 'account.invoice'  # pylint:disable=R7980
+
+    l10n_ch_isr_subscription = fields.Char(
+        compute='_compute_l10n_ch_isr_subscription',
+        help=(
+            "ISR subscription number identifying your company or your bank "
+            " to generate ISR."
+        ),
+    )
+    l10n_ch_isr_subscription_formatted = fields.Char(
+        compute='_compute_l10n_ch_isr_subscription',
+        help=(
+            "ISR subscription number your company or your bank, formated"
+            " with '-' and without the padding zeros, to generate ISR"
+            " report."
+        ),
+    )
+
+    @api.depends(
+        'partner_bank_id.l10n_ch_isr_subscription_eur',
+        'partner_bank_id.l10n_ch_isr_subscription_chf')
+    def _compute_l10n_ch_isr_subscription(self):
+        """ Computes the ISR subscription identifying your company or the bank
+        that allows to generate ISR. And formats it accordingly
+
+        """
+
+        def _format_isr_subscription_scanline(isr_subscription):
+            # format the isr for scanline
+            isr_subscription = isr_subscription.replace('-', '')
+            return (isr_subscription[:2]
+                    + isr_subscription[2:-1].rjust(6, '0')
+                    + isr_subscription[-1:])
+
+        for record in self:
+            isr_subs = False
+            isr_subs_formatted = False
+            if record.partner_bank_id:
+                bank_acc = record.partner_bank_id
+                if record.currency_id.name == 'EUR':
+                    isr_subscription = bank_acc.l10n_ch_isr_subscription_eur
+                elif record.currency_id.name == 'CHF':
+                    isr_subscription = bank_acc.l10n_ch_isr_subscription_chf
+                # else we don't format if in another currency as EUR or CHF
+
+                if isr_subscription:
+                    isr_subs = _format_isr_subscription_scanline(
+                        isr_subscription
+                    )
+                    isr_subs_formatted = pretty_l10n_ch_postal(
+                        isr_subscription
+                    )
+            record.l10n_ch_isr_subscription = isr_subs
+            record.l10n_ch_isr_subscription_formatted = isr_subs_formatted
 
 
 class AccountInvoice(models.Model):
@@ -114,7 +175,7 @@ class AccountInvoice(models.Model):
         pay_slip = self.env['l10n_ch.payment_slip']
         for inv in self:
             if inv.type in ('in_invoice', 'in_refund'):
-                if inv.reference_type == 'isr' and inv._check_isr():
+                if inv._is_isr_reference():
                     ref = inv.reference
                 else:
                     ref = False
@@ -152,15 +213,10 @@ class AccountInvoice(models.Model):
             if not bank_acc:
                 msg.append(_('- The invoice needs a partner bank account.'))
             else:
-                if not bank_acc.isr_adherent_num:
+                if not inv.l10n_ch_isr_subscription:
                     msg.append(
                         _('- The bank account {} used in invoice has no'
-                          ' ISR adherent number.'
-                          ).format(bank_acc.acc_number))
-                if not (bank_acc.acc_type == 'postal' or bank_acc.ccp):
-                    msg.append(
-                        _('- The bank account {} used in invoice needs to'
-                          ' be a postal account or have a bank CCP.'
+                          ' ISR subscription number.'
                           ).format(bank_acc.acc_number))
             if msg:
                 if inv.number:

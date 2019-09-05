@@ -45,13 +45,13 @@ class PaymentSlip(models.Model):
     Now payment slip is genrated each time a customer invoice is validated
     If you need to alter a payment slip you will have to cancel
     and revalidate the related invoice
+
     """
     _fill_color = (0, 0, 0)
     _default_font_size = 11
     _default_scan_font_size = 11
     _default_amount_font_size = 16
     _compile_get_ref = re.compile(r'[^0-9]')
-    _compile_check_isr = re.compile(r'[0-9][0-9]-[0-9]{3,6}-[0-9]')
 
     _name = 'l10n_ch.payment_slip'
     _description = 'Payment Slip'
@@ -105,14 +105,9 @@ class PaymentSlip(models.Model):
         invoice = move_line.invoice_id
         if not invoice:
             return False
-        return (invoice.partner_bank_id and
-                invoice.partner_bank_id.isr_adherent_num and
-                (
-                    invoice.partner_bank_id.acc_type == 'postal' or
-                    invoice.partner_bank_id.ccp
-                ))
+        return invoice.partner_bank_id and invoice.l10n_ch_isr_subscription
 
-    def _get_adherent_number(self):
+    def _get_isr_subscription_number(self):
         """Fetch the current slip bank adherent number.
 
         :return: adherent number
@@ -120,10 +115,12 @@ class PaymentSlip(models.Model):
         """
         self.ensure_one()
         move_line = self.move_line_id
-        ad_number = ''
-        if move_line.invoice_id.partner_bank_id.isr_adherent_num:
-            ad_number = move_line.invoice_id.partner_bank_id.isr_adherent_num
-        return ad_number
+        return move_line.invoice_id.l10n_ch_isr_subscription or ''
+
+    def _get_isrb_id_number(self):
+        self.ensure_one()
+        partner_bank = self.move_line_id.invoice_id.partner_bank_id
+        return partner_bank.l10n_ch_isrb_id_number or ''
 
     def _compute_amount_hook(self):
         """Hook to return the total amount of payment slip
@@ -166,12 +163,12 @@ class PaymentSlip(models.Model):
             # We should not use technical id but will keep it for
             # historical reason
             move_number = str(move_line.id)
-            ad_number = rec._get_adherent_number()
+            id_number = rec._get_isrb_id_number()
             if move_line.invoice_id.number:
                 compound = move_line.invoice_id.number + str(move_line.id)
                 move_number = rec._compile_get_ref.sub('', compound)
             reference = mod10r(
-                ad_number + move_number.rjust(26 - len(ad_number), '0')
+                id_number + move_number.rjust(26 - len(id_number), '0')
             )
             rec.reference = rec._space(reference)
 
@@ -213,24 +210,13 @@ class PaymentSlip(models.Model):
             return []
         justified_amount = '01%s' % ('%.2f' % self.amount_total).replace(
             '.', '').rjust(10, '0')
-        line += [char for char in mod10r(justified_amount)]
+        line.extend(mod10r(justified_amount))
         line.append('>')
-        line += [char for char in self.reference.replace(" ", "")]
+        line.extend(self.reference.replace(" ", ""))
         line.append('+')
         line.append(' ')
-        partner_bank = self.move_line_id.invoice_id.partner_bank_id
-        bank = partner_bank.get_account_number()
-        account_components = bank.split('-')
-        if len(account_components) != 3:
-            raise exceptions.UserError(
-                _('Please enter a correct postal number like: '
-                  '01-23456-1'))
-        bank_identifier = "%s%s%s" % (
-            account_components[0],
-            account_components[1].rjust(6, '0'),
-            account_components[2]
-        )
-        line += [car for car in bank_identifier]
+        invoice = self.move_line_id.invoice_id
+        line.extend(invoice.l10n_ch_isr_subscription)
         line.append('>')
         return line
 
@@ -240,12 +226,42 @@ class PaymentSlip(models.Model):
                  'move_line_id.debit',
                  'move_line_id.credit')
     def _compute_scan_line(self):
-        """Compute the payment slip scan line to be used
-        by scanners
+        # pylint: disable=anomalous-backslash-in-string
+        """Compute the payment slip scan line to be used by scanners
+
+        A scan line can have the 2 following formats:
+
+        ISR (Postfinance)
+
+        0100003949753> 120000000000234478943216899+ 010001628
+        |/\________/|  \________________________/|  \_______/
+        1     2     3           4                5      6
+
+        (1) 01 | header constant
+        (2) 0000394975 | amount 3949.75
+        (3) 4 | control digit for amount
+        (5) 12000000000023447894321689 | reference
+        (6) 9: control digit for identification number and reference
+        (7) 010001628: subscription number
+
+        ISR-B (Indirect through bank)
+
+        0100000494004> 150001123456789012345678901+ 010234567
+        |/\________/|  \____/\__________________/|  \_______/
+        1     2     3     4           5          6      7
+
+        (1) 01 | header constant
+        (2) 0000049400 | amount 494.00
+        (3) 4 | control digit for amount
+        (4) 150001 | id number of the customer (size may vary)
+        (5) 12345678901234567890 | reference
+        (6) 1: control digit for identification number and reference
+        (7) 010234567: subscription number
 
         :return: scan line
         :rtype: str
         """
+        # pylint: enable=anomalous-backslash-in-string
         for rec in self:
             scan_line_list = rec._compute_scan_line_list()
             rec.scan_line = ''.join(scan_line_list)
@@ -340,13 +356,6 @@ class PaymentSlip(models.Model):
                 raise exceptions.ValidationError(
                     _('No invoice related to move line %s'
                       ) % rec.move_line_id.ref
-                )
-            if not rec._compile_check_isr.match(
-                    invoice.partner_bank_id.get_account_number() or ''):
-                raise exceptions.ValidationError(
-                    _('Your bank ISR number should be of the form 0X-XXX-X! '
-                      'Please check your company '
-                      'information for the invoice:\n%s') % (invoice.name)
                 )
 
     @api.model
@@ -813,7 +822,8 @@ class PaymentSlip(models.Model):
         amount_font = self._get_amount_font()
         invoice = self.move_line_id.invoice_id
         scan_font = self._get_scan_line_text_font(company)
-        bank_acc = self.move_line_id.invoice_id.partner_bank_id
+        isr_subs_number = invoice.l10n_ch_isr_subscription_formatted
+        bank_acc = invoice.partner_bank_id
         if a4:
             canvas_size = (595.27, 841.89)
         else:
@@ -832,14 +842,14 @@ class PaymentSlip(models.Model):
                                             default_font)
             if invoice.partner_bank_id.print_partner:
                 if (invoice.partner_bank_id.print_account or
-                        invoice.partner_bank_id.isr_adherent_num):
+                        invoice.l10n_ch_isr_subscription):
                     initial_position = (0.05 * inch, 3.30 * inch)
                 else:
                     initial_position = (0.05 * inch, 3.75 * inch)
                 self._draw_address(canvas, print_settings, initial_position,
                                    default_font, company.partner_id)
                 if (invoice.partner_bank_id.print_account or
-                        invoice.partner_bank_id.isr_adherent_num):
+                        invoice.l10n_ch_isr_subscription):
                     initial_position = (2.45 * inch, 3.30 * inch)
                 else:
                     initial_position = (2.45 * inch, 3.75 * inch)
@@ -881,12 +891,12 @@ class PaymentSlip(models.Model):
                                         print_settings,
                                         (1 * inch, 2.35 * inch),
                                         default_font,
-                                        bank_acc.get_account_number())
+                                        isr_subs_number)
                 self._draw_bank_account(canvas,
                                         print_settings,
                                         (3.4 * inch, 2.35 * inch),
                                         default_font,
-                                        bank_acc.get_account_number())
+                                        isr_subs_number)
 
             if print_settings.isr_header_partner_address:
                 self._draw_address(canvas, print_settings,
