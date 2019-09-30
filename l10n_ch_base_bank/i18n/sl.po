@@ -26,21 +26,9 @@ msgid "BVR Reference"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/invoice.py:104
+#: code:addons/l10n_ch_base_bank/models/invoice.py:94
 #, python-format
 msgid "BVR/ESR Reference is required"
-msgstr ""
-
-#. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/invoice.py:85
-#, python-format
-msgid "BVR/ESR Reference type needs a postal account number on the customer."
-msgstr ""
-
-#. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/invoice.py:90
-#, python-format
-msgid "BVR/ESR Reference type needs a postal account number on your company"
 msgstr ""
 
 #. module: l10n_ch_base_bank
@@ -59,20 +47,22 @@ msgid "Bank BVR/ESR adherent number"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:246
+#: code:addons/l10n_ch_base_bank/models/invoice.py:79
 #, python-format
-msgid "Bank/CCP Undefined"
-msgstr ""
-
-#. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:244
-#, python-format
-msgid "Bank/CCP {}"
+msgid ""
+"Bank account shouldn't be empty, for BVR reference type, you can set it "
+"manually or set appropriate payment mode."
 msgstr ""
 
 #. module: l10n_ch_base_bank
 #: model:ir.ui.view,arch_db:l10n_ch_base_bank.view_bank_search
 msgid "Banks"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/bank.py:287
+#, python-format
+msgid "CCP {}"
 msgstr ""
 
 #. module: l10n_ch_base_bank
@@ -107,7 +97,7 @@ msgid "Internal reference"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/invoice.py:116
+#: code:addons/l10n_ch_base_bank/models/invoice.py:106
 #, python-format
 msgid "Invalid BVR/ESR Number (wrong checksum)."
 msgstr ""
@@ -118,8 +108,8 @@ msgid "Invoice"
 msgstr "Račun"
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:116
-#: code:addons/l10n_ch_base_bank/models/bank.py:231
+#: code:addons/l10n_ch_base_bank/models/bank.py:119
+#: code:addons/l10n_ch_base_bank/models/bank.py:267
 #, python-format
 msgid "Please enter a correct postal number. (01-23456-1 or 12345)"
 msgstr ""
@@ -127,6 +117,12 @@ msgstr ""
 #. module: l10n_ch_base_bank
 #: model:ir.ui.view,arch_db:l10n_ch_base_bank.view_bank_search
 msgid "PostFinance"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/bank.py:220
+#, python-format
+msgid "Postal"
 msgstr ""
 
 #. module: l10n_ch_base_bank
@@ -154,9 +150,15 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:218
+#: code:addons/l10n_ch_base_bank/models/bank.py:254
 #, python-format
 msgid ""
 "Your bank BVR/ESR adherent number must contain only digits!\n"
 "Please check your company bank account."
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/bank.py:285
+#, python-format
+msgid "{}/CCP {}"
 msgstr ""
