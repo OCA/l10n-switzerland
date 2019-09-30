@@ -40,13 +40,6 @@ Adds the support of postal account and bank postal account norm.
 The partner bank form allows you to input Swiss bank account and postal account in a correct manner.
 
 
-l10n_ch_dta
------------
-
-Provides support of DTA payment file protocol to generate electronic payment file.
-This feature will be deprecated around the end of 2016.
-
-
 l10n_ch_pain_credit_transfert
 -----------------------------
 
