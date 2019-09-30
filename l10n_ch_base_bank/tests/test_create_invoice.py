@@ -13,14 +13,15 @@ class TestCreateInvoice(common.TransactionCase):
         self.inv_values.update({
             'partner_id': self.partner.id,
             'type': 'out_invoice',
+            'journal_id': self.bank_journal.id,
             'company_id': self.company.id
         })
-        invoice = self.env['account.invoice'].new(self.inv_values)
+        invoice = self.env['account.invoice'].create(self.inv_values)
         invoice._onchange_partner_id()
+        self.assertEqual(invoice.partner_banks_to_show(), self.bank_acc)
         self.assertNotEqual(invoice.reference_type, 'bvr')
 
         invoice.reference = '132000000000000000000000014'
-
         invoice.onchange_reference()
 
         self.assertEqual(invoice.reference_type, 'bvr')
@@ -28,27 +29,30 @@ class TestCreateInvoice(common.TransactionCase):
     def test_emit_invoice_with_bvr_reference_15_pos(self):
         self.inv_values.update({
             'partner_id': self.partner.id,
-            'type': 'out_invoice'
+            'type': 'out_invoice',
+            'journal_id': self.bank_journal.id,
         })
-        invoice = self.env['account.invoice'].new(self.inv_values)
+        invoice = self.env['account.invoice'].create(self.inv_values)
         invoice._onchange_partner_id()
+        self.assertEqual(invoice.partner_banks_to_show(), self.bank_acc)
         self.assertNotEqual(invoice.reference_type, 'bvr')
 
         invoice.reference = '132000000000004'
         invoice.reference_type = 'bvr'  # set manually bvr reference type
 
         # and save
-        self.env['account.invoice'].create(
-            invoice._convert_to_write(invoice._cache)
-        )
+        vals = invoice._convert_to_write(invoice._cache)
+        self.env['account.invoice'].create(vals)
 
     def test_emit_invoice_with_non_bvr_reference(self):
         self.inv_values.update({
             'partner_id': self.partner.id,
-            'type': 'out_invoice'
+            'type': 'out_invoice',
+            'journal_id': self.bank_journal.id,
         })
-        invoice = self.env['account.invoice'].new(self.inv_values)
+        invoice = self.env['account.invoice'].create(self.inv_values)
         invoice._onchange_partner_id()
+        self.assertEqual(invoice.partner_banks_to_show(), self.bank_acc)
         self.assertNotEqual(invoice.reference_type, 'bvr')
 
         invoice.reference = 'Not a BVR ref with 27 chars'
@@ -62,8 +66,9 @@ class TestCreateInvoice(common.TransactionCase):
             'partner_id': self.partner.id,
             'type': 'out_invoice',
             'account_id': 1,  # set dummy account to be replaced by onchange
+            'journal_id': self.bank_journal.id,
         })
-        invoice = self.env['account.invoice'].new(self.inv_values)
+        invoice = self.env['account.invoice'].create(self.inv_values)
 
         with self.assertRaises(exceptions.ValidationError):
             invoice._onchange_partner_id()
@@ -80,8 +85,9 @@ class TestCreateInvoice(common.TransactionCase):
             'partner_id': self.partner.id,
             'type': 'out_invoice',
             'account_id': 1,  # set dummy account to be replaced by onchange
+            'journal_id': self.bank_journal.id,
         })
-        invoice = self.env['account.invoice'].new(self.inv_values)
+        invoice = self.env['account.invoice'].create(self.inv_values)
         self.bank_acc.acc_number = 'not a CCP'
 
         with self.assertRaises(exceptions.ValidationError):

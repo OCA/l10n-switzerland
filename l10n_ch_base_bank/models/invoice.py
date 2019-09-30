@@ -72,24 +72,14 @@ class AccountInvoice(models.Model):
         for invoice in self:
             if invoice.reference_type == 'bvr':
                 bank_acc = invoice.partner_banks_to_show()
-                if not bank_acc:
-                    user = self.env.user
-                    bank_ids = user.company_id.partner_id.bank_ids
-                    if bank_ids:
-                        bank_acc = bank_ids[0]
                 if not (bank_acc.acc_type == 'postal' or
                         bank_acc.acc_type != 'postal' and
                         (bank_acc.ccp or bank_acc.bank_id.ccp)):
-                    if invoice.type in ('in_invoice', 'in_refund'):
-                        raise exceptions.ValidationError(
-                            _('BVR/ESR Reference type needs a postal account'
-                              ' number on the customer.')
-                        )
-                    else:
-                        raise exceptions.ValidationError(
-                            _('BVR/ESR Reference type needs a postal account'
-                              ' number on your company')
-                        )
+                    raise exceptions.ValidationError(
+                        _("Bank account shouldn't be empty, for BVR reference "
+                          "type, you can set it manually or set appropriate"
+                          " payment mode.")
+                    )
         return True
 
     @api.multi
@@ -123,3 +113,15 @@ class AccountInvoice(models.Model):
             if invoice.reference_type == 'bvr':
                 invoice._is_bvr_reference()
         return True
+
+    def partner_banks_to_show(self):
+        """
+        Extend method from account_payment_partner to add specific
+        logic for switzerland bank payments if base method does not give
+        a result
+        """
+        res = super(AccountInvoice, self).partner_banks_to_show()
+        if not res:
+            if self.journal_id:
+                return self.journal_id.bank_account_id
+        return res

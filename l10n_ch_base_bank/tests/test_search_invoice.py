@@ -25,11 +25,19 @@ class TestSearchInvoice(common.TransactionCase):
         self.partner = self.env['res.partner'].create(
             {'name': 'Test'}
         )
+        self.bank_journal = self.env['account.journal'].create({
+            'company_id': self.company.id,
+            'type': 'bank',
+            'code': 'BNK42',
+            'bank_id': bank.id,
+            'bank_acc_number': '01-1234-1',
+        })
 
     def assert_find_ref(self, reference, operator, value):
         values = {
             'partner_id': self.partner.id,
             'type': 'out_invoice',
+            'journal_id': self.bank_journal.id,
             'reference_type': 'bvr',
             'reference': reference,
         }
@@ -43,6 +51,7 @@ class TestSearchInvoice(common.TransactionCase):
         values = {
             'partner_id': self.partner.id,
             'type': 'out_invoice',
+            'journal_id': self.bank_journal.id,
             'reference_type': 'bvr',
             'reference': reference,
         }
@@ -109,6 +118,7 @@ class TestSearchInvoice(common.TransactionCase):
             'type': 'out_invoice',
             'reference_type': 'bvr',
             'reference': '27 29990 00000 00001 70400 25019',
+            'journal_id': self.bank_journal.id,
         }
         invoice = self.env['account.invoice'].create(values)
         found = self.env['account.invoice'].search(
@@ -122,6 +132,7 @@ class TestSearchInvoice(common.TransactionCase):
             'type': 'out_invoice',
             'reference_type': 'bvr',
             'reference': '27 29990 00000 00001 70400 25019',
+            'journal_id': self.bank_journal.id,
         }
         invoice = self.env['account.invoice'].create(values)
         found = self.env['account.invoice'].search(
