@@ -86,7 +86,7 @@ addon | version | summary
 [l10n_ch_account_reconcile_isr](l10n_ch_account_reconcile_isr/) | 10.0.1.0.1 | Adds a second automatic reconciliation button, which is based on the isr
 [l10n_ch_bank](l10n_ch_bank/) | 10.0.1.0.1 | Banks names, addresses and BIC codes
 [l10n_ch_bank_statement_import_postfinance](l10n_ch_bank_statement_import_postfinance/) | 10.0.1.0.4 | Swiss bank statements import
-[l10n_ch_base_bank](l10n_ch_base_bank/) | 10.0.1.1.1 | Types and number validation for swiss electronic pmnt. DTA, ESR
+[l10n_ch_base_bank](l10n_ch_base_bank/) | 10.0.1.2.0 | Types and number validation for swiss electronic pmnt. DTA, ESR
 [l10n_ch_dta](l10n_ch_dta/) | 10.0.1.0.2 | Electronic payment file for Swiss bank (DTA)
 [l10n_ch_fds_postfinance](l10n_ch_fds_postfinance/) | 10.0.1.0.0 | Download files and import bank statements from FDS
 [l10n_ch_fds_upload_dd](l10n_ch_fds_upload_dd/) | 10.0.1.0.1 | Upload Direct Debit files to FDS PostFinance
