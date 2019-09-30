@@ -5,7 +5,7 @@ from odoo import exceptions
 from odoo.tests.common import Form
 
 
-class TestCreateInvoice(common.SavepointCase):
+class TestCreateMove(common.SavepointCase):
 
     @classmethod
     def setUpClass(cls):
@@ -37,87 +37,85 @@ class TestCreateInvoice(common.SavepointCase):
             'currency_id',
             'journal_id',
         ]
-        cls.inv_values = cls.env['account.invoice'].default_get(fields_list)
+        cls.inv_values = cls.env['account.move'].default_get(fields_list)
 
     def new_form(self):
-        inv = Form(
-            self.env['account.invoice'],
-            view='account.invoice_form'
-        )
+        inv = Form(self.env['account.move'].with_context(default_type='out_invoice'))
+        # Form(
+        #     self.env['account.move'],
+        #     view='account.view_move_form'
+        # )
         inv.partner_id = self.partner
         inv.journal_id = self.bank_journal
         return inv
 
-    def test_emit_invoice_with_isr_reference(self):
+    def test_emit_move_with_isr_ref(self):
         inv_form = self.new_form()
-        invoice = inv_form.save()
-        self.assertFalse(invoice._is_isr_reference())
+        move = inv_form.save()
+        self.assertFalse(move._is_isr_ref())
 
-        inv_form.reference = '132000000000000000000000014'
+        inv_form.ref = '132000000000000000000000014'
         inv_form.save()
-        self.assertTrue(invoice._is_isr_reference())
+        self.assertTrue(move._is_isr_ref())
 
-    def test_emit_invoice_with_isr_reference_15_pos(self):
+    def test_emit_move_with_isr_ref_15_pos(self):
         inv_form = self.new_form()
-        invoice = inv_form.save()
+        move = inv_form.save()
 
-        self.assertFalse(invoice._is_isr_reference())
+        self.assertFalse(move._is_isr_ref())
 
-        invoice.reference = '132000000000004'
-        # We consider such reference to be unstructured
-        # and we shouldn't generate such references
-        self.assertFalse(invoice._is_isr_reference())
+        move.ref = '132000000000004'
+        # We consider such ref to be unstructured
+        # and we shouldn't generate such refs
+        self.assertFalse(move._is_isr_ref())
 
         # and save
         inv_form.save()
 
-    def test_emit_invoice_with_non_isr_reference(self):
+    def test_emit_move_with_non_isr_ref(self):
         inv_form = self.new_form()
-        invoice = inv_form.save()
+        move = inv_form.save()
 
-        self.assertFalse(invoice._is_isr_reference())
+        self.assertFalse(move._is_isr_ref())
 
-        invoice.reference = 'Not a ISR ref with 27 chars'
-        self.assertFalse(invoice._is_isr_reference())
+        move.ref = 'Not a ISR ref with 27 chars'
+        self.assertFalse(move._is_isr_ref())
 
-    def test_emit_invoice_with_missing_isr_reference(self):
+    def test_emit_move_with_missing_isr_ref(self):
         inv_form = self.new_form()
-        # set dummy account to be replaced by onchange
-        inv_form.account_id = self.env['account.account'].browse(1)
         inv_form.save()
-
-        inv_form.reference = False
+        inv_form.ref = False
         # and save
-        invoice = inv_form.save()
+        move = inv_form.save()
 
-        self.assertFalse(invoice._is_isr_reference())
+        self.assertFalse(move._is_isr_ref())
 
-    def test_emit_invoice_with_isr_reference_missing_subscr_num(self):
+    def test_emit_move_with_isr_ref_missing_subscr_num(self):
         inv_form = self.new_form()
-        invoice = inv_form.save()
+        move = inv_form.save()
         inv_form.save()
-        self.assertFalse(invoice._is_isr_reference())
-        inv_form.partner_bank_id = False
+        self.assertFalse(move._is_isr_ref())
+        inv_form.invoice_partner_bank_id = False
         with self.assertRaises(exceptions.ValidationError):
-            inv_form.reference = '132000000000000000000000014'
+            inv_form.ref = '132000000000000000000000014'
             inv_form.save()
 
-    def test_emit_invoice_with_isr_reference_missing_subscr_num(self):
+    def test_emit_move_with_isr_ref_missing_subscr_num(self):
         inv_form = self.new_form()
-        invoice = inv_form.save()
+        move = inv_form.save()
         inv_form.save()
-        self.assertFalse(invoice._is_isr_reference())
+        self.assertFalse(move._is_isr_ref())
         self.bank_acc.l10n_ch_isr_subscription_chf = False
         with self.assertRaises(exceptions.ValidationError):
-            inv_form.reference = '132000000000000000000000014'
+            inv_form.ref = '132000000000000000000000014'
             inv_form.save()
 
-    def test_emit_invoice_with_isr_reference_subscr_num_wrong_currency(self):
+    def test_emit_move_with_isr_ref_subscr_num_wrong_currency(self):
         inv_form = self.new_form()
-        invoice = inv_form.save()
+        move = inv_form.save()
         inv_form.save()
-        self.assertFalse(invoice._is_isr_reference())
-        invoice.currency_id = self.env.ref('base.EUR')
+        self.assertFalse(move._is_isr_ref())
+        move.currency_id = self.env.ref('base.EUR')
         with self.assertRaises(exceptions.ValidationError):
-            inv_form.reference = '132000000000000000000000014'
+            inv_form.ref = '132000000000000000000000014'
             inv_form.save()

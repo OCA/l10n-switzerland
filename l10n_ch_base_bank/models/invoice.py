@@ -7,9 +7,9 @@ from odoo.tools import mod10r
 from odoo import exceptions
 
 
-class AccountInvoice(models.Model):
+class AccountMove(models.Model):
 
-    _inherit = "account.invoice"
+    _inherit = "account.move"
 
     def _search(self, args, offset=0, limit=None, order=None, count=False,
                 access_rights_uid=None):
@@ -19,7 +19,7 @@ class AccountInvoice(models.Model):
                 domain.append(arg)
                 continue
             field, operator, value = arg
-            if field != 'reference':
+            if field != 'ref':
                 domain.append(arg)
                 continue
             if operator not in ('like', 'ilike', '=like', '=ilike',
@@ -40,8 +40,8 @@ class AccountInvoice(models.Model):
                 else:
                     value = '%%%s%%' % (value,)
             # add filtered operator to query
-            query_op = ("SELECT id FROM account_invoice "
-                        "WHERE REPLACE(reference, ' ', '') %s %%s" %
+            query_op = ("SELECT id FROM account_move "
+                        "WHERE REPLACE(ref, ' ', '') %s %%s" %
                         (operator,))
             # avoid pylint check on no-sql-injection query_op is safe
             query = query_op
@@ -53,33 +53,33 @@ class AccountInvoice(models.Model):
             domain, offset=offset, limit=limit, order=order, count=count,
             access_rights_uid=access_rights_uid)
 
-    @api.constrains('reference')
+    @api.constrains('ref')
     def _check_bank_type_for_type_isr(self):
-        for invoice in self:
-            if invoice.type == 'out_invoice' and invoice._is_isr_reference():
+        for move in self:
+            if move.type == 'out_invoice' and move._is_isr_ref():
                 if hasattr(super(), 'partner_banks_to_show'):
-                    bank_acc = invoice.partner_banks_to_show()
+                    bank_acc = move.partner_banks_to_show()
                 else:
-                    bank_acc = invoice.partner_bank_id
+                    bank_acc = move.invoice_partner_bank_id
                 if not bank_acc:
                     raise exceptions.ValidationError(
-                        _("Bank account shouldn't be empty, for ISR reference"
+                        _("Bank account shouldn't be empty, for ISR ref"
                           " type, you can set it manually or set appropriate"
                           " payment mode.")
                     )
                 if (bank_acc.acc_type != 'qr-iban'
-                        and (invoice.currency_id.name == 'CHF'
+                        and (move.currency_id.name == 'CHF'
                              and not bank_acc.l10n_ch_isr_subscription_chf)
-                        or (invoice.currency_id.name == 'EUR'
+                        or (move.currency_id.name == 'EUR'
                             and not bank_acc.l10n_ch_isr_subscription_eur)):
                     raise exceptions.ValidationError(
                         _("Bank account must contain a subscription number for"
-                          " ISR reference type.")
+                          " ISR ref type.")
                     )
         return True
 
-    def _is_isr_reference(self):
-        """Check if the communication is a valid ISR reference
+    def _is_isr_ref(self):
+        """Check if the communication is a valid ISR ref
 
         e.g.
         210000000003139471430009017
@@ -88,10 +88,10 @@ class AccountInvoice(models.Model):
         This is used to determine SEPA local instrument
 
         """
-        if not self.reference:
+        if not self.ref:
             return False
-        if re.match(r'^(\d{27}|\d{2}( \d{5}){5})$', self.reference):
-            ref = self.reference.replace(' ', '')
+        if re.match(r'^(\d{27}|\d{2}( \d{5}){5})$', self.ref):
+            ref = self.ref.replace(' ', '')
             return ref == mod10r(ref[:-1])
         return False
 
