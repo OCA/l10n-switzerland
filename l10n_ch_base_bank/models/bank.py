@@ -81,7 +81,6 @@ class Bank(models.Model):
     def is_swiss_post(self):
         return self.bic == CH_POST_BIC
 
-    @api.multi
     def name_get(self):
         """Format displayed name"""
         res = []
@@ -121,94 +120,6 @@ class Bank(models.Model):
             reverse=True
         )
         return self.browse(to_ret_ids).name_get()
-
-
-class FutureResPartnerBank(models.Model):
-    """This class contains features present in Odoo 13 in l10n_ch"""
-    _inherit = 'res.partner.bank'  # pylint:disable=R7980
-
-    l10n_ch_postal = fields.Char(oldname='ccp')
-
-    # fields to configure ISR payment slip generation
-    # (will be in standard in 13.0)
-    l10n_ch_isr_subscription_chf = fields.Char(
-        string='CHF ISR subscription number',
-        help=(
-            'The subscription number provided by the bank or Postfinance,'
-            ' used to generate ISR in CHF. eg. 01-162-8'
-        ),
-        oldname="isr_adherent_num"
-    )
-    l10n_ch_isr_subscription_eur = fields.Char(
-        string='EUR ISR subscription number',
-        help=(
-            "The subscription number provided by the bank or Postfinance,"
-            " used to generate ISR in EUR. eg. 03-162-5"
-        )
-    )
-
-    @api.model
-    def _get_supported_account_types(self):
-        result = super()._get_supported_account_types()
-        result.append(('postal', _('Postal')))
-        return result
-
-    @api.model
-    def retrieve_acc_type(self, acc_number):
-        """ Overridden method enabling the recognition of swiss postal bank
-        account numbers.
-        """
-        try:
-            validate_l10n_ch_postal(acc_number)
-            return 'postal'
-        except ValidationError:
-            return super().retrieve_acc_type(acc_number)
-
-    @api.model
-    def _retrieve_l10n_ch_postal(self, iban):
-        """Reads a swiss postal account number from a an IBAN and returns it as
-        a string. Returns None if no valid postal account number was found, or
-        the given iban was not from Swiss Postfinance.
-
-        CH09 0900 0000 1000 8060 7 -> 10-8060-7
-        """
-        # We can deduce postal account number only if
-        # the financial institution is PostFinance
-        if _is_l10n_ch_postfinance_iban(iban):
-            # the IBAN corresponds to a swiss account
-            try:
-                validate_l10n_ch_postal(iban[-9:])
-                return pretty_l10n_ch_postal(iban[-9:])
-            except ValidationError:
-                pass
-        return None
-
-    @api.model
-    def create(self, vals):
-        if vals.get('l10n_ch_postal'):
-            try:
-                validate_l10n_ch_postal(vals['l10n_ch_postal'])
-                vals['l10n_ch_postal'] = pretty_l10n_ch_postal(
-                    vals['l10n_ch_postal']
-                )
-            except ValidationError:
-                pass
-        return super().create(vals)
-
-    def write(self, vals):
-        if vals.get('l10n_ch_postal'):
-            try:
-                validate_l10n_ch_postal(vals['l10n_ch_postal'])
-                vals['l10n_ch_postal'] = pretty_l10n_ch_postal(
-                    vals['l10n_ch_postal']
-                )
-            except ValidationError:
-                pass
-        return super().write(vals)
-
-    def _onchange_set_l10n_ch_postal(self):
-        """OVERWRITE of onchange that copies bad things into l10n_ch_postal"""
-        pass
 
 
 class ResPartnerBank(models.Model):
@@ -285,7 +196,6 @@ class ResPartnerBank(models.Model):
                 validate_l10n_ch_postal(self.l10n_ch_postal)
         return True
 
-    @api.multi
     def _update_acc_name(self):
         """Check if number generated from postal number, if yes replace it on
         new """
@@ -338,7 +248,6 @@ class ResPartnerBank(models.Model):
             )
         return super().create(vals)
 
-    @api.multi
     def _get_ch_bank_from_iban(self):
         """Extract clearing number from CH iban to find the bank"""
         if self.acc_type != 'iban' and self.acc_number[:2] != 'CH':
