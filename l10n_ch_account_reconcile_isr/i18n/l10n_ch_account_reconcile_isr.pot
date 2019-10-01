@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: l10n_ch_account_reconcile_isr
+#: model:ir.model,name:l10n_ch_account_reconcile_isr.model_account_bank_statement
+msgid "Bank Statement"
+msgstr ""
+
+#. module: l10n_ch_account_reconcile_isr
 #: model:ir.model,name:l10n_ch_account_reconcile_isr.model_account_bank_statement_line
 msgid "Bank Statement Line"
 msgstr ""
