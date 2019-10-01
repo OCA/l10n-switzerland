@@ -17,6 +17,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_account_reconcile_isr
+#: model:ir.model,name:l10n_ch_account_reconcile_isr.model_account_bank_statement
+#, fuzzy
+#| msgid "Bank Statement Line"
+msgid "Bank Statement"
+msgstr "Kontoauszugzeile"
+
+#. module: l10n_ch_account_reconcile_isr
 #: model:ir.model,name:l10n_ch_account_reconcile_isr.model_account_bank_statement_line
 msgid "Bank Statement Line"
 msgstr "Kontoauszugzeile"
