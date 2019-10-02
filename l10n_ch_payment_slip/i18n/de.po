@@ -20,31 +20,22 @@ msgstr ""
 "X-Generator: Weblate 3.2.2\n"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/invoice.py:157
-#, python-format
-msgid "- The bank account {} used in invoice has no ISR adherent number."
+#: code:addons/l10n_ch_payment_slip/models/invoice.py:218
+#, fuzzy, python-format
+#| msgid "- The bank account {} used in invoice has no ISR adherent number."
+msgid "- The bank account {} used in invoice has no ISR subscription number."
 msgstr ""
 "- Das in der Rechnung verwendete Zahlungskonto {} hat keine ESR "
 "Teilnehmernummer."
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/invoice.py:162
-#, python-format
-msgid ""
-"- The bank account {} used in invoice needs to be a postal account or have a "
-"bank CCP."
-msgstr ""
-"- Das in der Rechnung verwendete Zahlungskonto {} muss ein Postkonto sein "
-"oder ein Postkonto der Bank eingetragen haben."
-
-#. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/invoice.py:150
+#: code:addons/l10n_ch_payment_slip/models/invoice.py:211
 #, python-format
 msgid "- The invoice must be confirmed."
 msgstr "- Die Rechnung muss bestätigt werden."
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/invoice.py:153
+#: code:addons/l10n_ch_payment_slip/models/invoice.py:214
 #, python-format
 msgid "- The invoice needs a partner bank account."
 msgstr ""
@@ -231,6 +222,20 @@ msgid "ISR scan line letter spacing"
 msgstr "ESR Codierzeile Zeichenabstand"
 
 #. module: l10n_ch_payment_slip
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_account_invoice__l10n_ch_isr_subscription
+msgid ""
+"ISR subscription number identifying your company or your bank  to generate "
+"ISR."
+msgstr ""
+
+#. module: l10n_ch_payment_slip
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_account_invoice__l10n_ch_isr_subscription_formatted
+msgid ""
+"ISR subscription number your company or your bank, formated with '-' and "
+"without the padding zeros, to generate ISR report."
+msgstr ""
+
+#. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company__isr_add_vert
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings__isr_add_vert
 msgid "ISR vert. position for address (inch)"
@@ -247,6 +252,21 @@ msgstr "ESR vert. Position der Betragszeile (in Zoll)"
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings__isr_scan_line_vert
 msgid "ISR vert. position for scan line (inch)"
 msgstr "ESR vert. Position der Codierzeile (in Zoll)"
+
+#. module: l10n_ch_payment_slip
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_account_setup_bank_manual_config__l10n_ch_isrb_id_number
+#: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_partner_bank__l10n_ch_isrb_id_number
+msgid ""
+"ISR-B Customer ID number for ISR. Used only when generating ISR reference "
+"through a bank. This will prefix your references. It is not necessary for "
+"standard ISR from Postfinance. e.g. 999999"
+msgstr ""
+
+#. module: l10n_ch_payment_slip
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_setup_bank_manual_config__l10n_ch_isrb_id_number
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_partner_bank__l10n_ch_isrb_id_number
+msgid "ISR-B Internal ID"
+msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company__isr_background
@@ -269,6 +289,16 @@ msgstr "Rechnungen"
 #: model:ir.model,name:l10n_ch_payment_slip.model_account_move_line
 msgid "Journal Item"
 msgstr "Journaleintrag"
+
+#. module: l10n_ch_payment_slip
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_invoice__l10n_ch_isr_subscription
+msgid "L10N Ch Isr Subscription"
+msgstr ""
+
+#. module: l10n_ch_payment_slip
+#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_invoice__l10n_ch_isr_subscription_formatted
+msgid "L10N Ch Isr Subscription Formatted"
+msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard____last_update
@@ -304,7 +334,7 @@ msgstr ""
 "aber sicherer"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:341
+#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:357
 #, python-format
 msgid "No invoice related to move line %s"
 msgstr "Keine Rechnung bezieht sich auf Buchungszeile %s"
@@ -347,16 +377,10 @@ msgid "Payment Slips Merge Mode"
 msgstr "Methode zum Zusammenführen der Einzahlungssscheine"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:561
+#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:570
 #, python-format
 msgid "Payment slip related to invoice %s due on the %s"
 msgstr "Einzahlungsschein zur Rechnung %s fällig am %s"
-
-#. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:226
-#, python-format
-msgid "Please enter a correct postal number like: 01-23456-1"
-msgstr "Bitte fügen Sie eine korrekte Postkonto-Nummer ein (z.B. 01-23456-1)"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_setup_bank_manual_config__print_account
@@ -516,18 +540,6 @@ msgid "XLSX"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:347
-#, python-format
-msgid ""
-"Your bank ISR number should be of the form 0X-XXX-X! Please check your "
-"company information for the invoice:\n"
-"%s"
-msgstr ""
-"Die ESR Teilnehmernummer Ihrer Bank sollte in der Form 0X-XXX-X vorliegen. "
-"Bitte überprüfen Sie Ihre Unternehmenseinstellungen für die Rechnung:\n"
-"%s"
-
-#. module: l10n_ch_payment_slip
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_company__isr_delta_horz
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings__isr_delta_horz
 msgid ""
@@ -546,6 +558,27 @@ msgid ""
 msgstr ""
 "ESR vert. verschieben. Ein Wert von z.B. 1.2 Zoll sorgt dafür, dass der ESR "
 "1.2 Zoll weiter unten gedruckt wird. Ein negativer Wert ist möglich"
+
+#~ msgid ""
+#~ "- The bank account {} used in invoice needs to be a postal account or "
+#~ "have a bank CCP."
+#~ msgstr ""
+#~ "- Das in der Rechnung verwendete Zahlungskonto {} muss ein Postkonto sein "
+#~ "oder ein Postkonto der Bank eingetragen haben."
+
+#~ msgid "Please enter a correct postal number like: 01-23456-1"
+#~ msgstr ""
+#~ "Bitte fügen Sie eine korrekte Postkonto-Nummer ein (z.B. 01-23456-1)"
+
+#~ msgid ""
+#~ "Your bank ISR number should be of the form 0X-XXX-X! Please check your "
+#~ "company information for the invoice:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Die ESR Teilnehmernummer Ihrer Bank sollte in der Form 0X-XXX-X "
+#~ "vorliegen. Bitte überprüfen Sie Ihre Unternehmenseinstellungen für die "
+#~ "Rechnung:\n"
+#~ "%s"
 
 #, fuzzy
 #~ msgid "ir.actions.report"
