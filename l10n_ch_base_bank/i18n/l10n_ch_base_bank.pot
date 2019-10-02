@@ -14,12 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: l10n_ch_base_bank
-#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_account_setup_bank_manual_config__acc_number
-#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_partner_bank__acc_number
-msgid "Account/IBAN Number"
-msgstr ""
-
-#. module: l10n_ch_base_bank
 #: model:ir.model,name:l10n_ch_base_bank.model_res_bank
 msgid "Bank"
 msgstr ""
@@ -30,13 +24,13 @@ msgid "Bank Accounts"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_account_setup_bank_manual_config__isr_adherent_num
-#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_partner_bank__isr_adherent_num
-msgid "Bank ISR adherent number"
+#: code:addons/l10n_ch_base_bank/models/invoice.py:76
+#, python-format
+msgid "Bank account must contain a subscription number for ISR reference type."
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/invoice.py:77
+#: code:addons/l10n_ch_base_bank/models/invoice.py:66
 #, python-format
 msgid "Bank account shouldn't be empty, for ISR reference type, you can set it manually or set appropriate payment mode."
 msgstr ""
@@ -47,21 +41,9 @@ msgid "Banks"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:292
-#, python-format
-msgid "CCP {}"
-msgstr ""
-
-#. module: l10n_ch_base_bank
-#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_account_setup_bank_manual_config__ccp
-#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank__ccp
-#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_partner_bank__ccp
-msgid "CCP/CP-Konto"
-msgstr ""
-
-#. module: l10n_ch_base_bank
-#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank__ccp
-msgid "CCP/CP-Konto of the bank"
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_account_setup_bank_manual_config__l10n_ch_isr_subscription_chf
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_partner_bank__l10n_ch_isr_subscription_chf
+msgid "CHF ISR subscription number"
 msgstr ""
 
 #. module: l10n_ch_base_bank
@@ -90,19 +72,15 @@ msgid "Country code"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: selection:account.invoice,reference_type:0
-msgid "Free Reference"
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_account_setup_bank_manual_config__l10n_ch_isr_subscription_eur
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_partner_bank__l10n_ch_isr_subscription_eur
+msgid "EUR ISR subscription number"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: selection:account.invoice,reference_type:0
-msgid "ISR Reference"
-msgstr ""
-
-#. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/invoice.py:92
-#, python-format
-msgid "ISR Reference is required"
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_account_setup_bank_manual_config__l10n_ch_postal
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_partner_bank__l10n_ch_postal
+msgid "ISR reference"
 msgstr ""
 
 #. module: l10n_ch_base_bank
@@ -111,26 +89,8 @@ msgid "Internal reference"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/invoice.py:104
-#, python-format
-msgid "Invalid ISR Number (wrong checksum)."
-msgstr ""
-
-#. module: l10n_ch_base_bank
 #: model:ir.model,name:l10n_ch_base_bank.model_account_invoice
 msgid "Invoice"
-msgstr ""
-
-#. module: l10n_ch_base_bank
-#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_account_invoice__reference_type
-msgid "Payment Reference"
-msgstr ""
-
-#. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:118
-#: code:addons/l10n_ch_base_bank/models/bank.py:272
-#, python-format
-msgid "Please enter a correct postal number. (01-23456-1 or 12345)"
 msgstr ""
 
 #. module: l10n_ch_base_bank
@@ -139,14 +99,15 @@ msgid "PostFinance"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:225
+#: code:addons/l10n_ch_base_bank/models/bank.py:153
 #, python-format
 msgid "Postal"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: selection:account.invoice,reference_type:0
-msgid "Structured Reference"
+#: code:addons/l10n_ch_base_bank/models/bank.py:308
+#, python-format
+msgid "Postal number {}"
 msgstr ""
 
 #. module: l10n_ch_base_bank
@@ -161,26 +122,44 @@ msgid "The ISO country code in two chars. \n"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: sql_constraint:res.partner.bank:0
-msgid "The ISR adherent number/ccp pair must be unique !"
+#: model:ir.model.fields,help:l10n_ch_base_bank.field_account_setup_bank_manual_config__l10n_ch_postal
+#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_partner_bank__l10n_ch_postal
+msgid "The ISR number of the company within the bank"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: model:ir.model.fields,help:l10n_ch_base_bank.field_account_setup_bank_manual_config__isr_adherent_num
-#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_partner_bank__isr_adherent_num
-msgid "Your Bank adherent number to be printed in references of your ISR. This is not a postal account number."
-msgstr ""
-
-#. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:259
+#: code:addons/l10n_ch_base_bank/models/bank.py:33
 #, python-format
-msgid "Your bank ISR adherent number must contain only digits!\n"
-"Please check your company bank account."
+msgid "The postal account number is not valid."
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:290
+#: code:addons/l10n_ch_base_bank/models/bank.py:28
 #, python-format
-msgid "{}/CCP {}"
+msgid "The postal does not match 9 digits position."
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,help:l10n_ch_base_bank.field_account_setup_bank_manual_config__l10n_ch_isr_subscription_chf
+#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_partner_bank__l10n_ch_isr_subscription_chf
+msgid "The subscription number provided by the bank or Postfinance, used to generate ISR in CHF. eg. 01-162-8"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,help:l10n_ch_base_bank.field_account_setup_bank_manual_config__l10n_ch_isr_subscription_eur
+#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_partner_bank__l10n_ch_isr_subscription_eur
+msgid "The subscription number provided by the bank or Postfinance, used to generate ISR in EUR. eg. 03-162-5"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/bank.py:20
+#, python-format
+msgid "There is no postal account number."
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/bank.py:303
+#, python-format
+msgid "{}/Postal number {}"
 msgstr ""
 
