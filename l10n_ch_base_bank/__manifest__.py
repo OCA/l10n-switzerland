@@ -14,7 +14,6 @@
  ],
  'data': [
      'views/bank.xml',
-     'views/invoice.xml',
  ],
  'auto_install': False,
  'installable': True,
