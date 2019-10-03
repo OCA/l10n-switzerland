@@ -323,7 +323,7 @@ msgid "Merge Slips on Disk, slower but safer"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:357
+#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:393
 #, python-format
 msgid "No invoice related to move line %s"
 msgstr ""
@@ -364,7 +364,7 @@ msgid "Payment Slips Merge Mode"
 msgstr ""
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:570
+#: code:addons/l10n_ch_payment_slip/models/payment_slip.py:606
 #, python-format
 msgid "Payment slip related to invoice %s due on the %s"
 msgstr "Polizza di versamento fattura n. %s scandenza il %s"
