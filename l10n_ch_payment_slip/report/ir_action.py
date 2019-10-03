@@ -151,7 +151,7 @@ class IrActionsReportReportlab(models.Model):
     def merge_pdf_in_memory(self, docs):
         merger = PyPDF2.PdfFileMerger()
         for doc in docs:
-            merger.append(doc)
+            merger.append(doc, import_bookmarks=False)
         buff = io.BytesIO()
         try:
             # The writer close the reader file here
@@ -165,7 +165,7 @@ class IrActionsReportReportlab(models.Model):
     def merge_pdf_on_disk(self, docs):
         merger = PyPDF2.PdfFileMerger()
         for doc in docs:
-            merger.append(doc)
+            merger.append(doc, import_bookmarks=False)
         buff, buff_path = tempfile.mkstemp(
             suffix='.pdf',
             prefix='credit_control_slip_merged')
