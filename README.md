@@ -86,7 +86,7 @@ addon | version | summary
 [l10n_ch_bank](l10n_ch_bank/) | 9.0.1.0.1 | Banks names, addresses and BIC codes
 [l10n_ch_bank_statement_import_postfinance](l10n_ch_bank_statement_import_postfinance/) | 9.0.1.0.1 | Swiss bank statements import
 [l10n_ch_base_bank](l10n_ch_base_bank/) | 9.0.1.1.1 | Types and number validation for swiss electronic pmnt. DTA, ESR
-[l10n_ch_dta](l10n_ch_dta/) | 9.0.1.0.4 | Electronic payment file for Swiss bank (DTA)
+[l10n_ch_dta](l10n_ch_dta/) | 9.0.1.0.5 | Electronic payment file for Swiss bank (DTA)
 [l10n_ch_fds_postfinance](l10n_ch_fds_postfinance/) | 9.0.1.0.0 | Download files and import bank statements from FDS
 [l10n_ch_fds_upload_dd](l10n_ch_fds_upload_dd/) | 9.0.1.0.1 | Upload Direct Debit files to FDS PostFinance
 [l10n_ch_fds_upload_sepa](l10n_ch_fds_upload_sepa/) | 9.0.1.0.0 | Upload SEPA files to FDS PostFinance
@@ -94,7 +94,7 @@ addon | version | summary
 [l10n_ch_import_cresus](l10n_ch_import_cresus/) | 9.0.1.0.0 | Allows to import Crésus .txt files containing journal entries into Odoo.
 [l10n_ch_import_winbiz](l10n_ch_import_winbiz/) | 9.0.1.0.1 | Accounting Import WinBIZ
 [l10n_ch_lsv_dd](l10n_ch_lsv_dd/) | 9.0.1.0.0 | Create LSV and Direct Debit (postfinance) files
-[l10n_ch_pain_base](l10n_ch_pain_base/) | 9.0.1.0.2 | ISO 20022 base module for Switzerland
+[l10n_ch_pain_base](l10n_ch_pain_base/) | 9.0.1.0.3 | ISO 20022 base module for Switzerland
 [l10n_ch_pain_credit_transfer](l10n_ch_pain_credit_transfer/) | 9.0.1.0.0 | Generate ISO 20022 credit transfert (SEPA and not SEPA)
 [l10n_ch_payment_slip](l10n_ch_payment_slip/) | 9.0.2.2.1 | Print ESR/BVR payment slip with your invoices
 [l10n_ch_scan_bvr](l10n_ch_scan_bvr/) | 9.0.1.0.0 | Switzerland - Scan ESR/BVR to create invoices
