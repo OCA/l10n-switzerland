@@ -20,10 +20,13 @@ msgstr ""
 
 #. module: l10n_ch_pain_base
 #: code:addons/l10n_ch_pain_base/models/account_payment_order.py:72
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "For pain.001.001.03.ch.02, for non-BVR payments, the BIC is required on "
+#| "the bank '%s' related to the bank account '%s'"
 msgid ""
 "For pain.001.001.03.ch.02, for non-BVR payments, the BIC is required on the "
-"bank '%s' related to the bank account '%s'"
+"bank '%s' related to the bank account '%s', payment line '%s'"
 msgstr ""
 "Für pain.001.001.03.ch.02, für nicht-ESR Zahlungen, muss die BIC auf der "
 "Bank '%s' zum Bankkonto '%s' hinterlegt sein"
@@ -44,7 +47,7 @@ msgid "Payment Order"
 msgstr "Zahlungsauftrag"
 
 #. module: l10n_ch_pain_base
-#: code:addons/l10n_ch_pain_base/models/account_payment_order.py:91
+#: code:addons/l10n_ch_pain_base/models/account_payment_order.py:92
 #, python-format
 msgid "The field 'CCP/CP-Konto' is not set on the bank account '%s'."
 msgstr ""

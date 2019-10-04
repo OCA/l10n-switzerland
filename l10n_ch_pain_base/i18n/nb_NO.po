@@ -24,7 +24,7 @@ msgstr ""
 #, python-format
 msgid ""
 "For pain.001.001.03.ch.02, for non-BVR payments, the BIC is required on the "
-"bank '%s' related to the bank account '%s'"
+"bank '%s' related to the bank account '%s', payment line '%s'"
 msgstr ""
 
 #. module: l10n_ch_pain_base
@@ -43,7 +43,7 @@ msgid "Payment Order"
 msgstr "Betalingsordre"
 
 #. module: l10n_ch_pain_base
-#: code:addons/l10n_ch_pain_base/models/account_payment_order.py:91
+#: code:addons/l10n_ch_pain_base/models/account_payment_order.py:92
 #, python-format
 msgid "The field 'CCP/CP-Konto' is not set on the bank account '%s'."
 msgstr ""
