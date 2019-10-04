@@ -171,7 +171,10 @@ class PostalRecord(Record):
                 _('Error'),
                 _('Wrong postal number format.\n'
                   'It must be 12-123456-9 or 12345 format \n'
-                  'on line %s' % (self.pline.name))
+                  'on line %s for partner %s') % (
+                      self.pline.name,
+                      self.pline.partner_id.name
+                )
             )
 
 
