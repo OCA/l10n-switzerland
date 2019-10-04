@@ -20,7 +20,7 @@ msgstr ""
 "2);\n"
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:273
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:276
 #, python-format
 msgid ""
 "BVR reference number is not valid \n"
@@ -29,7 +29,7 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:261
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:264
 #, python-format
 msgid ""
 "BVR reference number is not valid \n"
@@ -38,7 +38,7 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:253
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:256
 #, python-format
 msgid ""
 "BVR reference number is not valid \n"
@@ -84,25 +84,25 @@ msgstr ""
 
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:171
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:243
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:252
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:260
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:272
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:285
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:304
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:312
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:404
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:422
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:560
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:566
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:571
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:580
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:601
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:634
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:644
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:649
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:667
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:730
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:246
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:255
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:263
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:275
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:288
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:307
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:315
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:407
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:425
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:563
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:569
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:574
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:583
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:604
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:637
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:647
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:652
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:670
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:733
 #, python-format
 msgid "Error"
 msgstr ""
@@ -134,7 +134,7 @@ msgid "Last Updated on"
 msgstr "Pēdējās izmaiņas"
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:405
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:408
 #, python-format
 msgid ""
 "No IBAN defined \n"
@@ -143,13 +143,13 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:602
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:605
 #, python-format
 msgid "No IBAN for the company bank account."
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:635
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:638
 #, python-format
 msgid ""
 "No address defined \n"
@@ -157,7 +157,7 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:645
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:648
 #, python-format
 msgid ""
 "No bank account defined\n"
@@ -165,13 +165,13 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:567
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:570
 #, python-format
 msgid "No bank account for the company."
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:650
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:653
 #, python-format
 msgid ""
 "No bank defined for the bank account: %s\n"
@@ -180,7 +180,7 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:668
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:671
 #, python-format
 msgid ""
 "No bank name defined\n"
@@ -190,7 +190,7 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:561
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:564
 #, python-format
 msgid "No payment mode"
 msgstr ""
@@ -206,22 +206,22 @@ msgid "Payment Order"
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:731
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:734
 #, python-format
 msgid "The Bank type %s of the bank account: %s is not supported"
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:174
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:172
 #, python-format
 msgid ""
 "Wrong postal number format.\n"
 "It must be 12-123456-9 or 12345 format \n"
-"on line %s"
+"on line %s for partner %s"
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:286
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:289
 #, python-format
 msgid ""
 "You must provide a BVR number\n"
@@ -229,7 +229,7 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:244
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:247
 #, python-format
 msgid ""
 "You must provide a BVR referencenumber \n"
@@ -237,7 +237,7 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:313
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:316
 #, python-format
 msgid ""
 "You must provide a Clearing Number\n"
@@ -246,13 +246,13 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:581
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:584
 #, python-format
 msgid "You must provide a Clearing Number for the bank %s."
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:305
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:308
 #, python-format
 msgid ""
 "You must provide a bank number \n"
@@ -261,7 +261,7 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:423
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:426
 #, python-format
 msgid ""
 "You must provide the bank city or the bic code for the partner bank:\n"
@@ -270,7 +270,7 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_dta
-#: code:addons/l10n_ch_dta/wizard/create_dta.py:572
+#: code:addons/l10n_ch_dta/wizard/create_dta.py:575
 #, python-format
 msgid "You must set a bank for the bank account with number %s"
 msgstr ""
