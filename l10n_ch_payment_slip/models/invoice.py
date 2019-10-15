@@ -139,16 +139,9 @@ class AccountInvoice(models.Model):
         )
 
     @api.model
-    def _update_ref_on_account_analytic_line(self, ref, move_id):
+    def _update_ref_on_account_analytic_line(self, ref, move):
         """Propagate reference on analytic line"""
-        self.env.cr.execute(
-            'UPDATE account_analytic_line SET ref=%s'
-            '   FROM account_move_line '
-            ' WHERE account_move_line.move_id = %s '
-            '   AND account_analytic_line.move_id = account_move_line.id',
-            (ref, move_id)
-        )
-        return True
+        return move.mapped('line_ids.analytic_line_ids').write({'ref': ref})
 
     @api.model
     def _action_isr_number_move_line(self, move_line, ref):
@@ -156,10 +149,8 @@ class AccountInvoice(models.Model):
         if not ref:
             return
         ref = ref.replace(' ', '')  # remove formatting
-        self.env.cr.execute('UPDATE account_move_line SET transaction_ref=%s'
-                            '  WHERE id=%s', (ref, move_line.id))
-        self._update_ref_on_account_analytic_line(ref, move_line.move_id.id)
-        self.env.cache.invalidate()
+        move_line.move_id.write({'ref': ref})
+        self._update_ref_on_account_analytic_line(ref, move_line.move_id)
 
     @api.multi
     def invoice_validate(self):
@@ -172,6 +163,7 @@ class AccountInvoice(models.Model):
         field of the invoice.
 
         """
+        res = super(AccountInvoice, self).invoice_validate()
         pay_slip = self.env['l10n_ch.payment_slip']
         for inv in self:
             if inv.type in ('in_invoice', 'in_refund'):
@@ -188,7 +180,7 @@ class AccountInvoice(models.Model):
                     ref = pay_slip.reference
                     self._action_isr_number_move_line(pay_slip.move_line_id,
                                                       ref)
-        return super(AccountInvoice, self).invoice_validate()
+        return res
 
     @api.multi
     def print_isr(self):
