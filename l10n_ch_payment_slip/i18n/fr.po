@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-02 00:43+0000\n"
-"PO-Revision-Date: 2019-08-14 09:44+0000\n"
+"PO-Revision-Date: 2019-10-22 11:32+0000\n"
 "Last-Translator: Valaeys Stéphane <svalaeys@fiefmanage.ch>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
@@ -17,16 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.7.1\n"
+"X-Generator: Weblate 3.8\n"
 
 #. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/models/invoice.py:218
-#, fuzzy, python-format
-#| msgid "- The bank account {} used in invoice has no ISR adherent number."
+#, python-format
 msgid "- The bank account {} used in invoice has no ISR subscription number."
 msgstr ""
-"- Le compte bancaire {} utilisé dans la facture n'a pas de numéro d'adhérent "
-"BVR."
+"- Le compte bancaire {} utilisé dans la facture n'a pas de numéro de "
+"participant BVR."
 
 #. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/models/invoice.py:211
@@ -161,7 +160,7 @@ msgstr "Décalage horizontal global en pouces"
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_report_one_slip_per_page_from_invoice
 msgid "ISR Invoice report"
-msgstr ""
+msgstr "Rapport  de facture BVR"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip__reference
@@ -338,7 +337,7 @@ msgstr "Aucune facture liée à la ligne %s"
 #. module: l10n_ch_payment_slip
 #: model_terms:ir.ui.view,arch_db:l10n_ch_payment_slip.invoice_form_add_isr_ref
 msgid "Open Payment Slips"
-msgstr "BVR ouverts"
+msgstr "Afficher les BVRs"
 
 #. module: l10n_ch_payment_slip
 #: selection:ir.actions.report,report_type:0
