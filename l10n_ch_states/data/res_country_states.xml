@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="state_AG" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Argovia</field>
+      <field name="code">AG</field>
+    </record>
+    <record id="state_AR" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Appenzell Outher Rhodes</field>
+      <field name="code">AR</field>
+    </record>
+    <record id="state_AI" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Appenzell Inner Rhodes</field>
+      <field name="code">AI</field>
+    </record>
+    <record id="state_BL" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Basel-Country</field>
+      <field name="code">BL</field>
+    </record>
+    <record id="state_BS" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Basel-City</field>
+      <field name="code">BS</field>
+    </record>
+    <record id="state_BE" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Bern</field>
+      <field name="code">BE</field>
+    </record>
+    <record id="state_DE" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Germany</field>
+      <field name="code">DE</field>
+    </record>
+    <record id="state_FL" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Principality of Liechtenstein</field>
+      <field name="code">FL</field>
+    </record>
+    <record id="state_FR" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Fribourg</field>
+      <field name="code">FR</field>
+    </record>
+    <record id="state_GE" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Geneva</field>
+      <field name="code">GE</field>
+    </record>
+    <record id="state_GL" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Glarus</field>
+      <field name="code">GL</field>
+    </record>
+    <record id="state_GR" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Grisons</field>
+      <field name="code">GR</field>
+    </record>
+    <record id="state_IT" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Italy</field>
+      <field name="code">IT</field>
+    </record>
+    <record id="state_JU" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Jura</field>
+      <field name="code">JU</field>
+    </record>
+    <record id="state_LU" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Luzern</field>
+      <field name="code">LU</field>
+    </record>
+    <record id="state_NE" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Neuchâtel</field>
+      <field name="code">NE</field>
+    </record>
+    <record id="state_NW" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Nidwald</field>
+      <field name="code">NW</field>
+    </record>
+    <record id="state_OW" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Obwald</field>
+      <field name="code">OW</field>
+    </record>
+    <record id="state_SH" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Schaffhausen</field>
+      <field name="code">SH</field>
+    </record>
+    <record id="state_SZ" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Schwyz</field>
+      <field name="code">SZ</field>
+    </record>
+    <record id="state_SO" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Solothurn</field>
+      <field name="code">SO</field>
+    </record>
+    <record id="state_SG" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">St. Gallen</field>
+      <field name="code">SG</field>
+    </record>
+    <record id="state_TG" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Thurgovia</field>
+      <field name="code">TG</field>
+    </record>
+    <record id="state_TI" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Ticino</field>
+      <field name="code">TI</field>
+    </record>
+    <record id="state_UR" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Uri</field>
+      <field name="code">UR</field>
+    </record>
+    <record id="state_VS" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Valais</field>
+      <field name="code">VS</field>
+    </record>
+    <record id="state_VD" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Vaud</field>
+      <field name="code">VD</field>
+    </record>
+    <record id="state_ZG" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Zug</field>
+      <field name="code">ZG</field>
+    </record>
+    <record id="state_ZH" model="res.country.state">
+      <field model="res.country" name="country_id" search="[('code','=','CH')]" />
+      <field name="name">Zurich</field>
+      <field name="code">ZH</field>
+    </record>
+</odoo>
