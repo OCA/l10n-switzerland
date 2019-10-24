@@ -71,21 +71,21 @@ class FdsKeyImportWizard(models.TransientModel):
     #          function          #
     ##############################
     @api.multi
-    def _import_key(self, type):
+    def _import_key(self, key_type):
         """ private function that convert the keys depending on type,
             crypte and save in the database using inherit function (_savekeys).
 
-            :param str type: type of the import "file" or "text"
+            :param str key_type: type of the import "file" or "text"
             :returns action: configuration for the next wizard's view
         """
         self.ensure_one()
 
         # convert keys
         auth_key_obj = self.env['fds.authentication.keys']
-        if type == 'file':
+        if key_type == 'file':
             pub = base64.b64decode(self.public_key_import_file)
             ppk = base64.b64decode(self.private_key_import_file)
-        elif type == 'text':
+        elif key_type == 'text':
             pub = self.public_key_import_txt
             ppk = self.private_key_import_txt
         else:
