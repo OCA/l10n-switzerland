@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2015 Compassion CH (Nicolas Tran)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -10,13 +9,13 @@ _logger = logging.getLogger(__name__)
 
 
 class FdsKeyGeneratorWizard(models.TransientModel):
-    ''' FDS Postfinance keys generator wizard.
+    """ FDS Postfinance keys generator wizard.
         The goal is to generate and save in the database a pair key using RSA
         with the private key crypted
 
         This wizard is called when we click on "generate FDS authentication
         keys" for one FDS.
-    '''
+    """
     _name = 'fds.key.generator.wizard'
 
     user_id = fields.Many2one(
@@ -37,13 +36,13 @@ class FdsKeyGeneratorWizard(models.TransientModel):
         help='user previously selected'
     )
     public_key = fields.Binary(
-        string='Public key',
+        # string='Public key',
         related='fds_authentication_keys_id.public_key',
         readonly=True,
         help='public key generated'
     )
     private_key_crypted = fields.Binary(
-        string='Private key crypted',
+        # string='Private key crypted',
         related='fds_authentication_keys_id.private_key_crypted',
         readonly=True,
         help='private key crypted generated'
@@ -74,11 +73,11 @@ class FdsKeyGeneratorWizard(models.TransientModel):
     ##################################
     @api.multi
     def generate_keys_button(self):
-        ''' Generate public and private crypted key then save in the database.
+        """ Generate public and private crypted key then save in the database.
             Called by pressing generate button.
 
             :returns action: configuration for the next wizard's view
-        '''
+        """
         self.ensure_one()
 
         userkey = self.userkey_exist()
@@ -90,32 +89,32 @@ class FdsKeyGeneratorWizard(models.TransientModel):
 
     @api.multi
     def confirm_keys_button(self):
-        ''' Confirm the generated keys.
+        """ Confirm the generated keys.
             Called by pressing confirm button.
 
             :returns action: configuration for the next wizard's view
-        '''
+        """
         self.ensure_one()
         self._state_done_on()
         return self._do_populate_tasks()
 
     @api.multi
     def cancel_keys_button(self):
-        ''' Remove public and private key saved in the database.
+        """ Remove public and private key saved in the database.
             Called by pressing cancel button.
 
             :returns action: close the wizard's view
-        '''
+        """
         self.ensure_one()
         self.fds_authentication_keys_id.unlink()
         return self._close_wizard()
 
     @api.multi
     def send_keys_button(self):
-        ''' Send the public key to the FDS Postfinance by mail which will allow
+        """ Send the public key to the FDS Postfinance by mail which will allow
             the selected user to connect to the SFTP using his private key.
             Called by pressing send button.
-        '''
+        """
         self.ensure_one()
         ############################
         # [TODO]
@@ -128,16 +127,16 @@ class FdsKeyGeneratorWizard(models.TransientModel):
     #          function          #
     ##############################
     @api.multi
-    def savekeys(self, publicKey, private_key_crypted):
-        ''' Save in the database the public and private creyted key
+    def savekeys(self, public_key, private_key_crypted):
+        """ Save in the database the public and private creyted key
 
-            :param str publicKey: generate by RSA
+            :param str public_key: generate by RSA
             :param str private_key_crypted: generate and crypted by RSA
             :returns action:  None
             :raises Warning:
                 - if the state of the wizard do not exist
                 - if more than one FDS account selected
-        '''
+        """
         self.ensure_one()
 
         # depending on state
@@ -147,11 +146,16 @@ class FdsKeyGeneratorWizard(models.TransientModel):
             active_ids = self.env.context.get('active_ids')
             if len(active_ids) != 1:
                 raise exceptions.Warning(_('Select only one FDS account'))
-
+            
+            if isinstance(public_key, str):
+                public_key = public_key.encode('ascii')
+            if isinstance(private_key_crypted, str):
+                private_key_crypted = private_key_crypted.encode('ascii')
+            
             values = {
                 'user_id': self.user_id.id,
                 'fds_account_id': active_ids[0],
-                'public_key': base64.b64encode(publicKey),
+                'public_key': base64.b64encode(public_key),
                 'private_key_crypted': base64.b64encode(private_key_crypted),
                 'pub_filename': self._generate_filename('PublicKey', 'pub'),
                 'ppk_filename': self._generate_filename('PrivateKey', 'ppk')
@@ -162,7 +166,7 @@ class FdsKeyGeneratorWizard(models.TransientModel):
 
         elif self.state == 'generate':
             self.fds_authentication_keys_id.write({
-                'public_key': base64.b64encode(publicKey),
+                'public_key': base64.b64encode(public_key),
                 'private_key_crypted':  base64.b64encode(private_key_crypted)})
 
         else:
@@ -171,11 +175,11 @@ class FdsKeyGeneratorWizard(models.TransientModel):
 
     @api.multi
     def userkey_exist(self):
-        ''' check if the authentication key already exist for the selected user
+        """ check if the authentication key already exist for the selected user
 
             :returns record: record of the model fds.authentication.keys
             :raises Warning: if user has already a key
-        '''
+        """
         self.ensure_one()
 
         current_fds_id = self.env.context.get('active_id')
@@ -190,12 +194,12 @@ class FdsKeyGeneratorWizard(models.TransientModel):
 
     @api.multi
     def _generate_filename(self, prefix='Unknow name key', suffix='nothing'):
-        ''' private function that generate the name of the key file.
+        """ private function that generate the name of the key file.
 
             :param str prefix: prefix of the name ("PrivateKey" or "PublicKey")
             :param str suffix: suffix of the name ("pub" or "ppk")
             :returns str: filename
-        '''
+        """
         self.ensure_one()
         fds_account = self.env[self.env.context.get('active_model')]
         fds_name = fds_account.browse(self.env.context.get('active_ids')).name
@@ -205,26 +209,26 @@ class FdsKeyGeneratorWizard(models.TransientModel):
 
     @api.multi
     def _state_generate_on(self):
-        ''' private function that change stat to generate
+        """ private function that change stat to generate
 
             :returns: None
-        '''
+        """
         self.state = 'generate'
 
     @api.multi
     def _state_done_on(self):
-        ''' private function that change state to done
+        """ private function that change state to done
 
             :returns: None
-        '''
+        """
         self.state = 'done'
 
     @api.multi
     def _do_populate_tasks(self):
-        ''' private function that continue with the same wizard.
+        """ private function that continue with the same wizard.
 
             :returns action: configuration for the next wizard's view
-        '''
+        """
         return {
             'type': 'ir.actions.act_window',
             'view_type': 'form',
@@ -236,8 +240,8 @@ class FdsKeyGeneratorWizard(models.TransientModel):
 
     @api.multi
     def _close_wizard(self):
-        ''' private function that put action wizard to close
+        """ private function that put action wizard to close
 
             :returns action: close the wizard's view
-        '''
+        """
         return {'type': 'ir.actions.act_window_close'}
