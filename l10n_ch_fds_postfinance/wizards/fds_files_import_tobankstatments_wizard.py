@@ -96,7 +96,7 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
             (tmp_key, tmp_d) = self._create_tmp_file(key.private_key_crypted)
 
             # get name of directory where download
-            dir = fds_id.directory_ids.filtered('allow_download_file')
+            directory = fds_id.directory_ids.filtered('allow_download_file')
 
             # connect sftp
             with pysftp.Connection(
@@ -105,7 +105,7 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
                     private_key=tmp_key.name,
                     private_key_pass=key_pass) as sftp:
 
-                fds_files_ids = self._download_file(sftp, dir, tmp_d, fds_id)
+                fds_files_ids = self._download_file(sftp, directory, tmp_d, fds_id)
 
             # import to bank statements
             self._import2bankStatements(fds_files_ids)
