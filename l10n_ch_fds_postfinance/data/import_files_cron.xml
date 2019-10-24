@@ -5,17 +5,15 @@
     The licence is in the file __openerp__.py
 -->
 
-<openerp>
-    <data noupdate="1">
-        <record id="fds_import_cron" model="ir.cron">
-            <field name="name">Import FDS Files</field>
-            <field name="interval_number">1</field>
-            <field name="interval_type">days</field>
-            <field name="numbercall">-1</field>
-            <field name="function">import_files_cron</field>
-            <field name="model">fds.postfinance.account</field>
-            <field name="args" eval="()"/>
-            <field name="active" eval="False"/>
-        </record>
-    </data>
-</openerp>
+<odoo>
+    <record id="fds_import_cron" model="ir.cron">
+        <field name="name">Import FDS Files</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="state">code</field>
+        <field name="code">model.import_files_cron()</field>
+        <field name="model_id" ref="model_fds_postfinance_account"/>
+        <field name="active" eval="False"/>
+    </record>
+</odoo>

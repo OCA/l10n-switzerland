@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2015 Compassion CH (Nicolas Tran)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -9,9 +8,9 @@ _logger = logging.getLogger(__name__)
 
 
 class FdsPostfinanceFile(models.Model):
-    ''' Model of the information and files downloaded on FDS PostFinance
+    """ Model of the information and files downloaded on FDS PostFinance
         (Keep files in the database)
-    '''
+    """
     _name = 'fds.postfinance.file'
 
     fds_account_id = fields.Many2one(
@@ -56,40 +55,40 @@ class FdsPostfinanceFile(models.Model):
     ##################################
     @api.multi
     def import_button(self):
-        ''' convert the file to record of model bankStatment.
+        """ convert the file to record of model bankStatment.
             Called by pressing import button.
 
             :return None:
-        '''
+        """
         valid_files = self.filtered(lambda f: f.state == 'draft')
         valid_files.import2bankStatements()
 
     @api.multi
     def change2error_button(self):
-        ''' change the state of the file to error because the file is corrupt.
+        """ change the state of the file to error because the file is corrupt.
             Called by pressing 'corrupt file?' button.
 
             :return None:
-        '''
+        """
         valid_files = self.filtered(lambda f: f.state == 'draft')
         valid_files.write({'state': 'error'})
 
     @api.multi
     def change2draft_button(self):
-        ''' undo the file is corrupt to state draft.
+        """ undo the file is corrupt to state draft.
             Called by pressing 'cancel corrupt file' button.
 
             :return None:
-        '''
+        """
         self.write({'state': 'draft'})
 
     @api.multi
     def change2cancel_button(self):
-        ''' Put file in cancel state.
+        """ Put file in cancel state.
             Called by pressing 'cancel' button.
 
             :return None:
-        '''
+        """
         valid_files = self.filtered(lambda f: f.state in ('error', 'draft'))
         valid_files.write({'state': 'cancel'})
 
@@ -98,12 +97,12 @@ class FdsPostfinanceFile(models.Model):
     ##############################
     @api.multi
     def import2bankStatements(self):
-        ''' convert the file to a record of model bankStatment.
+        """ convert the file to a record of model bankStatment.
 
             :returns bool:
                 - True if the convert was succeed
                 - False otherwise
-        '''
+        """
         res = True
         for pf_file in self:
             try:
@@ -124,12 +123,12 @@ class FdsPostfinanceFile(models.Model):
                              (pf_file.filename))
             except Exception as e:
                 self.env.cr.rollback()
-                self.env.invalidate_all()
+                self.invalidate_cache()
                 # Write the error in the postfinance file
                 if pf_file.state != 'error':
                     pf_file.write({
                         'state': 'error',
-                        'error_message': e.message or e.args and e.args[0]
+                        'error_message': e.name or e.args and e.args[0]
                     })
                     # Here we must commit the error message otherwise it
                     # can be unset by a next file producing an error

@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# © 2015 Compassion CH (Nicolas Tran)
+# # © 2015 Compassion CH (Nicolas Tran)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import models, fields, api, exceptions, _
@@ -16,7 +15,7 @@ try:
     SFTP_OK = True
 except ImportError:
     SFTP_OK = False
-    _logger.debug(
+    _logger.error(
         'This module needs pysftp to connect to the FDS. '
         'Please install pysftp on your system. (sudo pip install pysftp)'
     )
@@ -105,8 +104,8 @@ class FdsPostfinanceAccount(models.Model):
 
             # connect sftp
             with pysftp.Connection(
-                    self.hostname, username=self.username,
-                    private_key=tmp_key.name, private_key_pass=key_pass
+                self.hostname, username=self.username,
+                private_key=tmp_key.name, private_key_pass=key_pass
             ) as sftp:
                 directories = sftp.listdir()
 
@@ -129,10 +128,10 @@ class FdsPostfinanceAccount(models.Model):
 
     @api.multi
     def copy_key_button(self):
-        ''' copy an authentication key to another user.
+        """ copy an authentication key to another user.
 
             :returns action: popup fds key clone wizard
-        '''
+        """
         action = {
             'type': 'ir.actions.act_window',
             'view_type': 'form',
@@ -144,10 +143,10 @@ class FdsPostfinanceAccount(models.Model):
 
     @api.multi
     def newKey_button(self):
-        ''' generate a new authentication key to a user.
+        """ generate a new authentication key to a user.
 
             :returns action: popup fds key generator wizard
-        '''
+        """
         action = {
             'type': 'ir.actions.act_window',
             'view_type': 'form',
@@ -159,10 +158,10 @@ class FdsPostfinanceAccount(models.Model):
 
     @api.multi
     def import_key_button(self):
-        ''' import an authentication key to a user.
+        """ import an authentication key to a user.
 
             :returns action: popup fds key import wizard
-        '''
+        """
         action = {
             'type': 'ir.actions.act_window',
             'view_type': 'form',
@@ -191,13 +190,13 @@ class FdsPostfinanceAccount(models.Model):
     ##############################
     @api.multi
     def _create_tmp_file(self, data, tmp_directory=None):
-        ''' private function that write data to a tmp file and if no tmp
+        """ private function that write data to a tmp file and if no tmp
             directory use, create one.
 
             :param str data: data in base64 format
             :param str tmp_directory: path of the directory
             :returns (obj file, str directory): obj of type tempfile
-        '''
+        """
         self.ensure_one()
         try:
             if not tmp_directory:
@@ -212,10 +211,10 @@ class FdsPostfinanceAccount(models.Model):
 
     @api.multi
     def _save_directories(self, directories):
-        ''' private function that save the name of directory in db
+        """ private function that save the name of directory in db
 
             :returns None:
-        '''
+        """
         dir_exist = self.directory_ids.mapped('name')
 
         # add new directory
