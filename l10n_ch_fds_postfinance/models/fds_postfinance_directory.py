@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2015 Compassion CH (Nicolas Tran)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -6,8 +5,8 @@ from odoo import models, fields
 
 
 class FdsPostfinanceDirectory(models.Model):
-    ''' Keep directory name of each FDS folder in the database
-    '''
+    """ Keep directory name of each FDS folder in the database
+    """
     _name = 'fds.postfinance.directory'
 
     name = fields.Char(

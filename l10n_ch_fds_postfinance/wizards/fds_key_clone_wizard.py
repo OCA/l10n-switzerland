@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2015 Compassion CH (Nicolas Tran)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -6,11 +5,11 @@ from odoo import models, fields, api, exceptions, _
 
 
 class FdsKeyCloneWizard(models.TransientModel):
-    ''' The goal is to copy one authentication key to another user.
+    """ The goal is to copy one authentication key to another user.
 
         This wizard is called when we click on copy key on FDS authentication
         keys configuration.
-    '''
+    """
     _name = 'fds.key.clone.wizard'
 
     src_user_key_id = fields.Many2one(
@@ -38,11 +37,11 @@ class FdsKeyCloneWizard(models.TransientModel):
     ##################################
     @api.multi
     def copy_button(self):
-        ''' copy an authentication key to another user.
+        """ copy an authentication key to another user.
             Called by pressing copy button.
 
             :returns action: configuration for the next wizard's view
-        '''
+        """
         self.ensure_one()
         self._has_userkey(self.des_user_id)
         self.src_user_key_id.clone_key_to(self.des_user_id)
@@ -52,11 +51,11 @@ class FdsKeyCloneWizard(models.TransientModel):
 
     @api.multi
     def back_button(self):
-        ''' go back to copy view.
+        """ go back to copy view.
             Called by pressing "Make another copy" button.
 
             :returns action: configuration for the next wizard's view
-        '''
+        """
         self.ensure_one()
         self._state_default_on()
         return self._do_populate_tasks()
@@ -66,11 +65,11 @@ class FdsKeyCloneWizard(models.TransientModel):
     ##############################
     @api.multi
     def _has_userkey(self, user):
-        ''' check if the authentication key already exist for the selected user
+        """ check if the authentication key already exist for the selected user
 
             :returns record: record of the model fds.authentication.keys
             :raises Warning: if user has already a key
-        '''
+        """
         self.ensure_one()
 
         current_fds_id = self.env.context.get('active_id')
@@ -85,26 +84,26 @@ class FdsKeyCloneWizard(models.TransientModel):
 
     @api.multi
     def _state_default_on(self):
-        ''' private function that change state to default
+        """ private function that change state to default
 
             :returns: None
-        '''
+        """
         self.state = 'default'
 
     @api.multi
     def _state_done_on(self):
-        ''' private function that change state to done
+        """ private function that change state to done
 
             :returns: None
-        '''
+        """
         self.state = 'done'
 
     @api.multi
     def _do_populate_tasks(self):
-        ''' private function that continue with the same wizard.
+        """ private function that continue with the same wizard.
 
             :returns action: configuration for the next wizard's view
-        '''
+        """
         return {
             'type': 'ir.actions.act_window',
             'view_type': 'form',

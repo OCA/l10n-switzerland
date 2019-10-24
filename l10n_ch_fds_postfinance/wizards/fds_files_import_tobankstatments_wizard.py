@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2015 Compassion CH (Nicolas Tran)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -19,17 +18,17 @@ try:
     SFTP_OK = True
 except ImportError:
     SFTP_OK = False
-    _logger.debug(
+    _logger.error(
         'This module needs pysftp to connect to the FDS. '
         'Please install pysftp on your system. (sudo pip install pysftp)'
     )
 
 
 class FdsFilesImportToBankStatementsWizard(models.TransientModel):
-    ''' This wizard checks and downloads files in FDS Postfinance server
+    """ This wizard checks and downloads files in FDS Postfinance server
         that were not already downloaded on the database.
         This wizard is called when we choose the update_fds for one FDS.
-    '''
+    """
     _name = 'fds.files.import.tobankstatments.wizard'
 
     fds_account_id = fields.Many2one(
@@ -73,13 +72,13 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
     ##################################
     @api.multi
     def import_button(self):
-        ''' download the file from the sftp where the directories
+        """ download the file from the sftp where the directories
             were selected in the FDS configuration, and if possible import
             to bank Statments.
             Called by pressing import button.
 
             :returns action: configuration for the next wizard's view
-        '''
+        """
         self.ensure_one()
         if not SFTP_OK:
             raise UserError(_("Please install pysftp to use this feature."))
@@ -113,7 +112,7 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
             self.state = 'done'
         except Exception:
             self.env.cr.rollback()
-            self.env.invalidate_all()
+            self.env.clear()
             self.state = 'errorSFTP'
             _logger.error(traceback.print_exc())
         finally:
@@ -143,7 +142,7 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
 
     @api.multi
     def _download_file(self, sftp, directories, tmp_directory, fds_id):
-        ''' private function that downloads files from the sftp server where
+        """ private function that downloads files from the sftp server where
             the directories were selected in the configuration of FDS.
 
             :param (obj, (str, str), str, record:
@@ -152,7 +151,7 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
                 - tmp directory name
                 - fds account
             :returns recordset: of download files (model fds.postfinance.file)
-        '''
+        """
         fds_files_ids = self.env['fds.postfinance.file']
         for d in directories:
             dir_name = d.name
@@ -196,11 +195,11 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
 
     @api.multi
     def _import2bankStatements(self, fds_files_ids):
-        ''' private function that import the files to bank statments
+        """ private function that import the files to bank statments
 
             :param recordset: of model fds_postfinance_file
             :returns None:
-        '''
+        """
         fds_files_ids.import2bankStatements()
         error = fds_files_ids.filtered(lambda r: r.state == 'error')
         success = fds_files_ids - error
@@ -209,7 +208,7 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
 
     @api.multi
     def _get_sftp_config(self):
-        ''' private function that get the sftp configuration need for
+        """ private function that get the sftp configuration need for
             connection with the server.
 
             :returns (record, str, str, str, str):
@@ -218,7 +217,7 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
             :returns action: if no key found, return error wizard's view
             :raises Warning:
                 - if many FDS account selected
-        '''
+        """
         # check key of active user
         fds_authentication_key_obj = self.env['fds.authentication.keys']
         key = fds_authentication_key_obj.search([
@@ -234,13 +233,13 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
 
     @api.multi
     def _create_tmp_file(self, data, tmp_directory=None):
-        ''' private function that write data to a tmp file and if no tmp
+        """ private function that write data to a tmp file and if no tmp
             directory use, create one.
 
             :param str data: data in base64 format
             :param str tmp_directory: path of the directory
             :returns (obj file, str directory): obj of type tempfile
-        '''
+        """
         self.ensure_one()
         try:
             if not tmp_directory:
@@ -255,10 +254,10 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
 
     @api.multi
     def _changeMessage(self):
-        ''' private function that change message to none if no message
+        """ private function that change message to none if no message
 
             :returns None:
-        '''
+        """
         if self.msg_exist_file == '':
             self.msg_exist_file = 'none'
         if self.msg_file_imported == '':
@@ -268,10 +267,10 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
 
     @api.multi
     def _do_populate_tasks(self):
-        ''' private function that continue with the same wizard.
+        """ private function that continue with the same wizard.
 
             :returns action: configuration for the next wizard's view
-        '''
+        """
         self.ensure_one()
         action = {
             'type': 'ir.actions.act_window',
@@ -285,9 +284,9 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
 
     @api.multi
     def _close_wizard(self):
-        ''' private function that put action wizard to close.
+        """ private function that put action wizard to close.
 
             :returns action: close the wizard's view
-        '''
+        """
         self.ensure_one()
         return {'type': 'ir.actions.act_window_close'}

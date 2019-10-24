@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Swiss Postfinance File Delivery Services module for Odoo
@@ -22,14 +21,14 @@
 {
     'name': 'Swiss Postfinance File Delivery Services',
     'summary': 'Download files and import bank statements from FDS',
-    'version': '10.0.1.0.0',
+    'version': '11.0.1.0.2',
     'license': 'AGPL-3',
     'author': 'Compassion CH, Odoo Community Association (OCA)',
     'website': 'http://www.compassion.ch/',
     'category': 'Finance',
     'depends': ['account'],
     'external_dependencies': {
-        'python': ['pysftp', 'Crypto']
+       'python': ['pysftp', 'Crypto']
     },
     'data': [
         'data/import_files_cron.xml',
