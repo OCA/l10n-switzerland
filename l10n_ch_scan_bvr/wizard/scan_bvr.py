@@ -349,14 +349,19 @@ class ScanBvr(models.TransientModel):
         partner_bank_model = self.env['res.partner.bank']
         partner_bank = False
         # We will now search the account linked with this BVR
-        if data['bvr_struct']['domain'] == 'name':
-            domain = [('ccp', '=', data['bvr_struct']['beneficiaire'])]
-        else:
-            domain = \
-                [('ccp', '=', data['bvr_struct']['beneficiaire']), '|',
-                 ('bvr_adherent_num', '=', data['bvr_struct']['bvrnumber']),
-                 ('bvr_adherent_num', '=', False)]
-        partner_bank = partner_bank_model.search(domain, limit=1)
+        domain = [('ccp', '=', data['bvr_struct']['beneficiaire'])]
+        partner_banks_count = partner_bank_model.search_count(domain)
+        if partner_banks_count > 1:
+            #We have found many banks with same ccp
+            if data['bvr_struct']['domain'] != 'name':
+                #We have a bvr number and search for ccp/bvrnumber pair
+                domain = \
+                    [('ccp', '=', data['bvr_struct']['beneficiaire']),
+                     ('bvr_adherent_num', '=', data['bvr_struct']['bvrnumber'])]
+            partner_bank = partner_bank_model.search(domain, limit=1)
+        elif partner_banks_count == 1:
+            #We have found one bank we this ccp, take it
+            partner_bank = partner_bank_model.search(domain)
         # We will need to know if we need to create invoice line
         if partner_bank:
             # We have found the account corresponding to the
