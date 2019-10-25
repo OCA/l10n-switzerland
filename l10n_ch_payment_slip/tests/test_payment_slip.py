@@ -101,11 +101,10 @@ class TestPaymentSlip(common.SavepointCase):
         """Test that confirming an invoice generate slips correctly"""
         invoice = self.make_invoice()
         self.assertTrue(invoice.move_id)
-        for line in invoice.move_id.line_ids:
-            if line.account_id.user_type_id.type in ('payable', 'receivable'):
-                self.assertTrue(line.transaction_ref)
-            else:
-                self.assertFalse(line.transaction_ref)
+        self.assertTrue(invoice.move_id.ref)
+        self.assertEqual(
+            invoice.isr_reference.replace(' ', ''), invoice.move_id.ref
+        )
         for line in invoice.move_id.line_ids:
             slip = self.env['l10n_ch.payment_slip'].search(
                 [('move_line_id', '=', line.id)]
