@@ -60,17 +60,5 @@
       </field>
     </record>
 
-    <record model="ir.ui.view" id="add_postal_on_res_partner_bank">
-      <field name="name">Add postal on res partner bank</field>
-      <field name="model">res.partner.bank</field>
-      <field name="inherit_id" ref="base.view_partner_bank_form"/>
-      <field name="arch" type="xml">
-        <field name="bank_id" position="after">
-          <!-- l10n_ch_isr_subscription_number added in l10n_ch_payment_slip -->
-          <field name="l10n_ch_postal"/>
-        </field>
-      </field>
-    </record>
-
   </data>
 </odoo>
