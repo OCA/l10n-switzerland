@@ -8,68 +8,57 @@ LSV and Postfinance Direct Debit file generator
 
 Features:
 ---------
-    * LSV file generation
-    * Postfinance Direct Debit file generation
-    * Invoice freeing. You can "free" an invoice that is in a direct debit \
-      order. This is because you have sometimes to generate 2 direct debit \
-      order for the same invoice (i.e. if debit fails the first time).
 
-Installation
-============
-
-To install this module, you need to:
-
-* do this ...
+* LSV file generation
+* Postfinance Direct Debit file generation
+* Invoice freeing. You can "free" an invoice that is in a direct debit \
+  order. This is because you have sometimes to generate 2 direct debit \
+  order for the same invoice (i.e. if debit fails the first time).
 
 Configuration
 =============
 
 For LSV file generation, don't forget :
-    * To set your LSV identifier in your beneficiary bank account.
-    * To set your BVR identifier in your beneficiary bank account if you want \
-      to use BVR references.
-    * To setup a payment mode with payment type "LSV Direct Debit"
-    * That each partner which is concerned by LSV has to have a valid bank \
-      account with a valid mandate..
+
+* To set your LSV identifier in your beneficiary bank account.
+* To set your BVR identifier in your beneficiary bank account if you want \
+  to use BVR references.
+* To setup a payment mode with payment type "LSV Direct Debit"
+* That each partner which is concerned by LSV has to have a valid bank \
+  account with a valid mandate..
 
 For postfinance DD file generation, don't forget :
-    * To set your Postfinance DD identifier in your beneficiary BVR account.
-    * To setup a payment mode with payment type "Postfinance Direct Debit"
-    * That each partner which is concerned by Postfinance DD has to have a \
-      valid BV account with a valid mandate.
+
+* To set your Postfinance DD identifier in your beneficiary BVR account.
+* To setup a payment mode with payment type "Postfinance Direct Debit"
+* That each partner which is concerned by Postfinance DD has to have a \
+  valid BV account with a valid mandate.
 
 Usage
 =====
 
-    * Create some invoices for partners with well configured bank accounts.
-    * Create a Direct Debit order with a payment mode having LSV/DD payment \
-      type.
-    * Make sure that due dates are in the valid range if you chose "Due date" \
-      as preferred execution date.
-    * Press "Confirm payments"
-    * Press "Make payments". This will launch the LSV/DD file generation \
-    wizard.
-    * Download the generated file and press "Validate". If you need to \
-      download the file again, you can access the generated file with the \
-      "Generated Direct Debit Files" menu.
+* Create some invoices for partners with well configured bank accounts.
+* Create a Direct Debit order with a payment mode having LSV/DD payment \
+  type.
+* Make sure that due dates are in the valid range if you chose "Due date" \
+  as preferred execution date.
+* Press "Confirm payments"
+* Press "Make payments". This will launch the LSV/DD file generation \
+  wizard.
+* Download the generated file and press "Validate". If you need to \
+  download the file again, you can access the generated file with the \
+  "Generated Direct Debit Files" menu.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/125/8.0
 
-.. repo_id is available in https://github.com/OCA/maintainer-tools/blob/master/tools/repos_with_ids.txt
-.. branch is "8.0" for example
-
-For further information, please visit:
-
-* https://www.odoo.com/forum/help-1
-
 Known issues / Roadmap
 ======================
 
 Currently, only BVR reference usage is implemented (using l10n_ch_payment_slip
- module) for LSV refernece. IPI usage is not implemented yet, this way an
- error occurs if no BVR ref are set in invoices.
+module) for LSV refernece. IPI usage is not implemented yet, this way an
+error occurs if no BVR ref are set in invoices.
 
 Bug Tracker
 ===========
