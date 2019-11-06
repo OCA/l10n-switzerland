@@ -22,7 +22,7 @@ class AccountBankStatementLine(models.Model):
                      self).get_statement_line_for_reconciliation_widget()
         if self.related_file.datas:
             related_file = self.related_file
-            image = "data:png;base64," + str(related_file.datas)
+            image = "data:png;base64," + related_file.datas.decode("utf-8")
             data['img_src'] = ['src', image]
             data['modal_id'] = ['id', 'img' + str(related_file.id)]
             data['data_target'] = [
