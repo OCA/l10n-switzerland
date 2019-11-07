@@ -129,7 +129,7 @@ class PaymentSlip(models.Model):
         :return: total amount of payment slip
         :rtype: float
         """
-        return self.move_line_id.debit
+        return self.move_line_id.amount_residual
 
     @api.depends('move_line_id',
                  'move_line_id.debit',
