@@ -146,12 +146,11 @@ class FdsKeyGeneratorWizard(models.TransientModel):
             active_ids = self.env.context.get('active_ids')
             if len(active_ids) != 1:
                 raise exceptions.Warning(_('Select only one FDS account'))
-            
             if isinstance(public_key, str):
                 public_key = public_key.encode('ascii')
             if isinstance(private_key_crypted, str):
                 private_key_crypted = private_key_crypted.encode('ascii')
-            
+
             values = {
                 'user_id': self.user_id.id,
                 'fds_account_id': active_ids[0],
