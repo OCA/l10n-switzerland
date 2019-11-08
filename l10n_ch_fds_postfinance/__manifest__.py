@@ -28,7 +28,7 @@
     'category': 'Finance',
     'depends': ['account'],
     'external_dependencies': {
-       'python': ['pysftp', 'Crypto']
+        'python': ['pysftp', 'Crypto']
     },
     'data': [
         'data/import_files_cron.xml',
