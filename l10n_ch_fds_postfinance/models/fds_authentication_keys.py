@@ -13,7 +13,7 @@ try:
 except ImportError:
     logger.debug(
         'This module needs Crypto to generate SSH keys. '
-        'Please install pycrypto on your system. (sudo pip install pycrypto)'
+        'Please install pycryptodome on your system. (sudo pip install pycryptodome)'
     )
 
 
@@ -63,7 +63,7 @@ class FdsAuthenticationKeys(models.Model):
 
             :returns str: the pass key that allow to decrypt the private key
         """
-        password = config.get('ssh_pwd')
+        password = config.get('ssh_pwd', 'invalid')
         return password
 
     @api.multi
@@ -81,11 +81,11 @@ class FdsAuthenticationKeys(models.Model):
 
     @api.multi
     def import_pairkey(self, public_key, private_key):
-        """ import and crypte private key.
+        """ import and crypt private key.
 
             :returns (str, str): public key and private key crypted
         """
-        import_key = RSA.importKey(private_key)
+        import_key = RSA.importKey(private_key, self.config())
         private_key_crypted = import_key.exportKey("PEM", self.config())
 
         return public_key, private_key_crypted

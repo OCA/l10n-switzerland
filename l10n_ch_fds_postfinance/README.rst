@@ -38,7 +38,7 @@ ssh_pwd = your_password
 external dependencies:
 ----------------------
 * python module: pysftp
-* python module: pycrypto
+* python module: pycryptodome
 
 Configuration
 =============
