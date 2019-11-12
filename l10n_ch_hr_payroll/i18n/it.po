@@ -86,7 +86,7 @@ msgstr ""
 #. module: l10n_ch_hr_payroll
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payslip_line_amount_base
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_salary_rule_amount_base
-msgid "Amount base"
+msgid "Amount Base"
 msgstr ""
 
 #. module: l10n_ch_hr_payroll
@@ -122,13 +122,9 @@ msgid "Companies"
 msgstr "Società"
 
 #. module: l10n_ch_hr_payroll
+#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_company_id
 #: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_lpp_contract_company_id
 msgid "Company"
-msgstr ""
-
-#. module: l10n_ch_hr_payroll
-#: model:ir.model.fields,field_description:l10n_ch_hr_payroll.field_hr_payroll_config_company_id
-msgid "Company id"
 msgstr ""
 
 #. module: l10n_ch_hr_payroll
