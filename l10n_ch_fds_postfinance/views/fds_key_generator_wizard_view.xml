@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- view of this wizard -->
+    <record model="ir.ui.view" id="view_fds_key_generator_wizard_form">
+        <field name="name">FDS key generator wizard view</field>
+        <field name="model">fds.key.generator.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="state" invisible="True"/>
+                <separator string="FDS Postfinance generate authentication keys parameters" />
+                <group states="default">
+                    <field name="user_id" />
+                </group>
+                <group states="generate,done">
+                    <field name="user_name" />
+                    <field name="public_key" filename="pub_filename" />
+                    <field name="pub_filename" invisible="True"/>
+                    <field name="private_key_crypted" filename="ppk_filename" />
+                    <field name="ppk_filename" invisible="True"/>
+                </group>
+                <footer>
+                    <button string="Generate" name="generate_keys_button"  type="object" class="oe_highlight" states="default,generate" />
+                    <button string="Cancel" special="cancel" states="default" />
+                    <button string="Validate" name="confirm_keys_button" type="object" states="generate" />
+                    <button string="Cancel" name="cancel_keys_button" type="object" states="generate" />
+                    <button string="Close" class="oe_highlightoe_link" special="cancel" states="done" />
+                    <button string="Send to Postfinance" name="send_keys_button" type="object" states="done" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
