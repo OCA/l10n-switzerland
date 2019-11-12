@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo11-addon-l10n_ch_fds_postfinance',
         'odoo11-addon-l10n_ch_hr_payroll',
         'odoo11-addon-l10n_ch_import_isr_v11',
+        'odoo11-addon-l10n_ch_invoice_with_payment',
         'odoo11-addon-l10n_ch_mis_reports',
         'odoo11-addon-l10n_ch_pain_base',
         'odoo11-addon-l10n_ch_pain_credit_transfer',
