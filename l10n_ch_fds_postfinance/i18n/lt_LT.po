@@ -53,6 +53,7 @@ msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.actions.server,name:l10n_ch_fds_postfinance.file_cancel
+#: model:ir.actions.server,name:l10n_ch_fds_postfinance.file_cancel_more_item
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_files_import_tobankstatments_wizard_form
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_key_clone_wizard_form
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_key_generator_wizard_form
@@ -197,6 +198,11 @@ msgid "Error"
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
+#: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_error_message
+msgid "Error Message"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
 #: selection:fds.files.import.tobankstatments.wizard,state:0
 msgid "Error Permission"
 msgstr ""
@@ -207,20 +213,15 @@ msgid "Error SFTP"
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
-#: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_generator_wizard.py:170
-#: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_import_wizard.py:94
+#: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_generator_wizard.py:173
+#: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_import_wizard.py:93
 #, python-format
 msgid "Error code. Contact your admin"
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
-#: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_error_message
-msgid "Error message"
-msgstr ""
-
-#. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_excluded_files
-msgid "Excluded files"
+msgid "Excluded Files"
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
@@ -241,7 +242,6 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: model:ir.actions.act_window,name:l10n_ch_fds_postfinance.action_fds_files
 #: model:ir.ui.menu,name:l10n_ch_fds_postfinance.menu_fds_file_ids
-#: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
 msgid "FDS PostFinance files"
 msgstr ""
 
@@ -249,7 +249,6 @@ msgstr ""
 #: model:ir.actions.act_window,name:l10n_ch_fds_postfinance.action_fds_postfinance_account
 #: model:ir.ui.menu,name:l10n_ch_fds_postfinance.menu_fds_postfinance_configuration
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
-#: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_postfinance_account_tree
 msgid "FDS Postfinance Account"
 msgstr ""
 
@@ -286,7 +285,7 @@ msgstr ""
 msgid ""
 "FDS acts as a gateway in the IT security system between Swiss Post’s "
 "Intranet and external networks. It enables\n"
-"                files and applications to be exchanged among internal and "
+"            files and applications to be exchanged among internal and "
 "external partners of Post CH Ltd."
 msgstr ""
 
@@ -298,13 +297,7 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_key_generator_wizard_fds_authentication_keys_id
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_key_import_wizard_fds_authentication_keys_id
-#: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
 msgid "FDS authentication keys"
-msgstr ""
-
-#. module: l10n_ch_fds_postfinance
-#: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
-msgid "FDS files directory"
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
@@ -314,6 +307,7 @@ msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.actions.server,name:l10n_ch_fds_postfinance.file_corrupt
+#: model:ir.actions.server,name:l10n_ch_fds_postfinance.file_corrupt_more_item
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.fds_postfinance_files_form
 msgid "File Corrupt"
 msgstr ""
@@ -368,6 +362,13 @@ msgid "Import"
 msgstr "Importuoti"
 
 #. module: l10n_ch_fds_postfinance
+#: model:ir.actions.server,name:l10n_ch_fds_postfinance.fds_import_cron_ir_actions_server
+#: model:ir.cron,cron_name:l10n_ch_fds_postfinance.fds_import_cron
+#: model:ir.cron,name:l10n_ch_fds_postfinance.fds_import_cron
+msgid "Import FDS Files"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
 #: model:ir.actions.act_window,name:l10n_ch_fds_postfinance.action_fds_import
 #: model:ir.ui.menu,name:l10n_ch_fds_postfinance.menu_fds_import
 msgid "Import from FDS"
@@ -379,25 +380,26 @@ msgid "Import key"
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
-#: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_import_wizard.py:64
+#: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_import_wizard.py:63
 #, python-format
 msgid "Import key file missing"
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
-#: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_import_wizard.py:69
+#: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_import_wizard.py:68
 #, python-format
 msgid "Import key not found"
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
-#: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_import_wizard.py:67
+#: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_import_wizard.py:66
 #, python-format
 msgid "Import key text missing"
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.actions.server,name:l10n_ch_fds_postfinance.import_files
+#: model:ir.actions.server,name:l10n_ch_fds_postfinance.import_files_more_item
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.fds_postfinance_files_form
 msgid "Import to Bank Statement"
 msgstr ""
@@ -409,11 +411,11 @@ msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_authentication_keys_key_active
-msgid "Key active"
+msgid "Key Active"
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
-#: code:addons/l10n_ch_fds_postfinance/models/fds_postfinance_account.py:99
+#: code:addons/l10n_ch_fds_postfinance/models/fds_postfinance_account.py:98
 #, python-format
 msgid "Key not active"
 msgstr ""
@@ -472,7 +474,7 @@ msgid "New key"
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
-#: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_generator_wizard.py:124
+#: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_generator_wizard.py:123
 #, python-format
 msgid ""
 "Not implemented yet, download public key and send the email to postfinance "
@@ -487,15 +489,22 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
-#: code:addons/l10n_ch_fds_postfinance/models/fds_postfinance_account.py:90
-#: code:addons/l10n_ch_fds_postfinance/wizards/fds_files_import_tobankstatments_wizard.py:85
+#: code:addons/l10n_ch_fds_postfinance/models/fds_postfinance_account.py:89
+#: code:addons/l10n_ch_fds_postfinance/wizards/fds_files_import_tobankstatments_wizard.py:84
 #, python-format
 msgid "Please install pysftp to use this feature."
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_account_postfinance_email
-msgid "Postfinance email"
+msgid "Postfinance Email"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
+#: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_authentication_keys_private_key_crypted
+#: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_key_generator_wizard_private_key_crypted
+#: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_key_import_wizard_private_key_crypted
+msgid "Private Key Crypted"
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
@@ -511,13 +520,6 @@ msgid "Private key Filename"
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
-#: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_authentication_keys_private_key_crypted
-#: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_key_generator_wizard_private_key_crypted
-#: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_key_import_wizard_private_key_crypted
-msgid "Private key crypted"
-msgstr ""
-
-#. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_authentication_keys_ppk_filename
 msgid "Private key filename"
 msgstr ""
@@ -526,6 +528,10 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_authentication_keys_public_key
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_key_generator_wizard_public_key
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_key_import_wizard_public_key
+msgid "Public Key"
+msgstr ""
+
+#. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_key_import_wizard_public_key_import_file
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_key_import_wizard_public_key_import_txt
 msgid "Public key"
@@ -563,7 +569,7 @@ msgid "SFTP unable to connect."
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
-#: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_generator_wizard.py:149
+#: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_generator_wizard.py:148
 #, python-format
 msgid "Select only one FDS account"
 msgstr ""
@@ -610,7 +616,7 @@ msgid "To:"
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
-#: code:addons/l10n_ch_fds_postfinance/models/fds_postfinance_account.py:118
+#: code:addons/l10n_ch_fds_postfinance/models/fds_postfinance_account.py:117
 #, python-format
 msgid "Unable to connect to the sftp"
 msgstr ""
@@ -628,13 +634,13 @@ msgid "User"
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
-#: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_clone_wizard.py:82
+#: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_clone_wizard.py:81
 #, python-format
 msgid "User has already keys"
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
-#: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_generator_wizard.py:187
+#: code:addons/l10n_ch_fds_postfinance/wizards/fds_key_generator_wizard.py:190
 #, python-format
 msgid "User keys already exist"
 msgstr ""
@@ -651,7 +657,7 @@ msgid "Verify directories"
 msgstr ""
 
 #. module: l10n_ch_fds_postfinance
-#: code:addons/l10n_ch_fds_postfinance/models/fds_postfinance_account.py:96
+#: code:addons/l10n_ch_fds_postfinance/models/fds_postfinance_account.py:95
 #, python-format
 msgid "You don't have key"
 msgstr ""
