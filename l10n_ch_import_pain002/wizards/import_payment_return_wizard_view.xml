@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  © 2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+
+<odoo>
+
+    <record id="import_payment_return_line_form" model="ir.ui.view">
+        <field name="name">import_payment_return_line.form</field>
+        <field name="model">import.payment.return.wizard</field>
+        <field name="arch"  type="xml">
+            <form string="Import Payment Return Lines Form">
+                <p>This wizard will import payment return lines for the selected invoices:</p><group>
+                    <field name="file"/>
+                </group>
+                <button name="import_payment_return_file" string="Import" type="object" class="oe_highlight"/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_import_payment_return_line_form" model="ir.actions.act_window">
+        <field name="name">Import Payment Return Line Form Action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">import.payment.return.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="import_payment_return_line_form"/>
+    </record>
+
+    <menuitem
+        name="Import Payment Return Lines"
+        action='action_import_payment_return_line_form'
+        id='import_payment_return_line_menu'
+        parent='account_payment_order.payment_root'/>
+
+</odoo>
