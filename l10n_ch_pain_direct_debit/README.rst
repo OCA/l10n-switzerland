@@ -6,7 +6,7 @@
 Switzerland - ISO 20022 direct debit
 ====================================
 
-This module adds support for *pain.008.001.02.ch.01* which is used for ISO 20022 direct debits in Switzerland.
+This module adds support for *pain.008.001.02.ch.03* which is used for ISO 20022 direct debits in Switzerland.
 
 It implements the guidelines for `ISO 20022 direct debits <http://www.six-interbank-clearing.com/dam/downloads/en/standardization/iso/swiss-recommendations/implementation-guidelines-swiss-dd.pdf>`_ published by SIX Interbank Clearing.
 
@@ -15,7 +15,7 @@ Configuration
 
 In the menu *Accounting > Configuration > Management > Payment Methods*,
 select the payment method that has the code *sepa_direct_debit* and
-set the *PAIN Version* to *pain.008.001.02.ch.01 (direct debit in Switzerland)*.
+set the *PAIN Version* to *pain.008.001.02.ch.03 (direct debit in Switzerland)*.
 
 
 Usage
