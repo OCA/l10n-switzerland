@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Swiss Postfinance File Delivery Services module for Odoo
@@ -22,14 +21,14 @@
 {
     'name': 'Swiss Postfinance FDS Direct Debit Upload',
     'summary': 'Upload Direct Debit files to FDS PostFinance',
-    'version': '10.0.1.0.1',
+    'version': '11.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'Compassion CH, Odoo Community Association (OCA)',
     'website': 'http://www.compassion.ch/',
     'category': 'Finance',
     'depends': [
         'l10n_ch_fds_postfinance',
-        'l10n_ch_lsv_dd',
+        'l10n_ch_pain_direct_debit',
     ],
     'external_dependencies': {
         'python': ['pysftp']
