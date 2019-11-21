@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Swiss Postfinance File Delivery Services module for Odoo
