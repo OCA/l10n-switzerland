@@ -118,7 +118,7 @@ class TestSCTCH(AccountingTestCase):
             self.partner_agrolait.id,
             self.agrolait_partner_bank.id,
             self.eur_currency,
-            12.0,
+            13.0,
             "132000000000000000000000022",
         )
         for inv in [invoice1, invoice2]:
