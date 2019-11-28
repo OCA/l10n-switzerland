@@ -23,8 +23,8 @@ from odoo import models, fields
 
 
 class FdsPostfinanceAccountDD(models.Model):
-    ''' Add direct debit upload history to the model fds.postfinance.account
-    '''
+    """ Add direct debit upload history to the model fds.postfinance.account
+    """
     _inherit = 'fds.postfinance.account'
 
     dd_upload_ids = fields.One2many(

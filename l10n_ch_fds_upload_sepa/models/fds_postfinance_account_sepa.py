@@ -5,8 +5,8 @@ from odoo import models, fields
 
 
 class FdsPostfinanceAccountSepa(models.Model):
-    ''' Add SEPA upload history to the model fds.postfinance.account
-    '''
+    """ Add SEPA upload history to the model fds.postfinance.account
+    """
     _inherit = 'fds.postfinance.account'
 
     sepa_upload_ids = fields.One2many(

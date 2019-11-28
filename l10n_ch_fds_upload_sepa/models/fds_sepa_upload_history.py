@@ -5,8 +5,8 @@ from odoo import models, fields
 
 
 class FdsSepaUploadHistory(models.Model):
-    ''' History of SEPA FDS uploads
-    '''
+    """ History of SEPA FDS uploads
+    """
     _name = 'fds.sepa.upload.history'
 
     fds_account_id = fields.Many2one(

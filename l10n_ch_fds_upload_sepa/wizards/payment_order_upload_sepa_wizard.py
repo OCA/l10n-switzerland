@@ -62,14 +62,14 @@ class PaymenOrderUploadSepaWizard(models.TransientModel):
     ##################################
     @api.multi
     def upload_generate_file_button(self):
-        ''' upload pain_001 file to the FDS Postfinance by sftp
+        """ upload pain_001 file to the FDS Postfinance by sftp
 
             :returns action: configuration for the next wizard's view
             :raises Warning:
                 - If no fds account and directory selected
                 - if current user do not have key
                 - if unable to connect to sftp
-        '''
+        """
         self.ensure_one()
         if not SFTP_OK:
             raise exceptions.Warning(
@@ -139,12 +139,12 @@ class PaymenOrderUploadSepaWizard(models.TransientModel):
 
     @api.multi
     def _get_sftp_key(self):
-        ''' private function that get the SFTP key needed for connection
+        """ private function that get the SFTP key needed for connection
             with the server.
 
             :returns (str key, str key_pass):
             :riases Warning: if no key found
-        '''
+        """
         fds_authentication_key_obj = self.env['fds.authentication.keys']
         key = fds_authentication_key_obj.search([
             ['user_id', '=', self.env.user.id],
@@ -161,10 +161,10 @@ class PaymenOrderUploadSepaWizard(models.TransientModel):
 
     @api.multi
     def _add2historical(self):
-        ''' private function that add the upload file to historic
+        """ private function that add the upload file to historic
 
             :returns: None
-        '''
+        """
         self.ensure_one()
         values = {
             'payment_order_id': self.payment_order_id.id,

@@ -23,8 +23,8 @@ from odoo import models, fields
 
 
 class FdsDdUploadHistory(models.Model):
-    ''' History of direct debit uploads to FDS
-    '''
+    """ History of direct debit uploads to FDS
+    """
     _name = 'fds.dd.upload.history'
 
     fds_account_id = fields.Many2one(

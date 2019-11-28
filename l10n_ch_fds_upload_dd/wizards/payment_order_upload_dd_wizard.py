@@ -81,14 +81,14 @@ class PaymentOrderUploadDD(models.TransientModel):
     ##################################
     @api.multi
     def send_export_button(self):
-        ''' Upload pain_001 file to the FDS Postfinance by SFTP
+        """ Upload pain_001 file to the FDS Postfinance by SFTP
 
             :returns action: configuration for wizard's next view
             :raises Warning:
                 - If no FDS account and directory selected
                 - If current user do not have key
                 - If connection to SFTP fails
-        '''
+        """
         self.ensure_one()
 
         # check key of active user
@@ -164,10 +164,10 @@ class PaymentOrderUploadDD(models.TransientModel):
 
     @api.multi
     def _add2historical(self):
-        ''' private function that add the upload file to historic
+        """ private function that add the upload file to historic
 
             :returns: None
-        '''
+        """
         self.ensure_one()
         values = {
             'payment_order_id': self.payment_order_id.id,

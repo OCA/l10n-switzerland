@@ -28,9 +28,7 @@
     'category': 'Finance',
     'depends': [
         'l10n_ch_fds_postfinance',
-        'l10n_ch_pain_credit_transfer',
-        'l10n_ch_import_pain002',
-        'account_payment_order',
+        'l10n_ch_payment_return_sepa'
     ],
     'external_dependencies': {
         'python': ['pysftp']
