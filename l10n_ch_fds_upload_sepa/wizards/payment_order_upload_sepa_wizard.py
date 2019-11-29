@@ -37,7 +37,9 @@ class PaymenOrderUploadSepaWizard(models.TransientModel):
     fds_directory_id = fields.Many2one(
         'fds.postfinance.directory', 'FDS Directory',
         help='Select one upload directory. Be sure to have at least one '
-             'directory configured with upload access rights.'
+             'directory configured with upload access rights.',
+        default=lambda self: self._get_default_file_type()
+
     )
     attachment_id = fields.Many2one(
         'ir.attachment', required=True, ondelete='cascade'
@@ -119,6 +121,16 @@ class PaymenOrderUploadSepaWizard(models.TransientModel):
     ##############################
     #          function          #
     ##############################
+    @api.model
+    def _get_default_file_type(self):
+        # if multiple fds_file_type --> prod + test --> we select test
+        fds_file_type = self.env['fds.postfinance.directory'].search([
+            ('file_type', '=', 'pain.001.001.03.ch.02')],
+            order='name desc',
+            limit=1
+        )
+        return fds_file_type
+
     def _get_default_account(self):
         """ Select one account if only one exists. """
         fds_accounts = self.env['fds.postfinance.account'].search([])

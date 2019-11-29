@@ -41,3 +41,8 @@ class FdsPostfinanceDirectory(models.Model):
         "the given patterns, the file won't be downloaded from the remote "
         "directory."
     )
+    file_type = fields.Selection(
+        [],
+        help="Install sub-modules to support various file types provided by "
+             "Postfinance."
+    )

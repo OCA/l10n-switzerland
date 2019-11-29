@@ -17,7 +17,8 @@
                     <group states="upload">
                         <field name="fds_account_id" widget="selection" edit="False" required="1"/>
                         <field name="fds_directory_id"
-                               domain="[('allow_upload_file', '=', True), ('fds_account_id','=',fds_account_id)]"
+                               domain="[('allow_upload_file', '=', True), ('fds_account_id','=',fds_account_id),
+                               ('file_type', '=', 'pain.008.001.02.ch.03')]"
                                options="{'create': false, 'create_edit': false}" required="1"/>
                     </group>
 

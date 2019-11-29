@@ -1,6 +1,6 @@
 ##############################################################################
 #
-#    Swiss Postfinance File Delivery Services module for Odoo
+#    Swiss Postfinance Import Bank Statement module for Odoo
 #    Copyright (C) 2014 Compassion CH
 #    @author: Nicolas Tran
 #
@@ -18,8 +18,24 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-from . import fds_postfinance_account_dd
-from . import fds_dd_upload_history
-from . import account_payment_order
-from . import fds_postfinance_directory
+{
+    'name': 'FDS Import bank statement',
+    'version': '11.0.1.0.0',
+    'license': 'AGPL-3',
+    'author': 'Compassion CH, Odoo Community Association (OCA)',
+    'website': 'http://www.compassion.ch/',
+    'category': 'Finance',
+    'depends': [
+        'l10n_ch_fds_postfinance',
+        'l10n_ch_bank_statement_import_postfinance',
+    ],
+    'data': [
+        'views/fds_postfinance_account_view.xml',
+        'views/fds_postfinance_file_view.xml',
+    ],
+    'images': [],
+    'demo': [],
+    'test': [],
+    'installable': True,
+    'auto_install': True,
+}

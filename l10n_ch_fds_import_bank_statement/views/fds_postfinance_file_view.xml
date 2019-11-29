@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- views of fds_postfinance_file -->
+    <!-- Form view -->
+    <record model="ir.ui.view" id="fds_postfinance_files_form">
+        <field name="model">fds.postfinance.file</field>
+        <field name="inherit_id" ref="l10n_ch_fds_postfinance.fds_postfinance_files_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='data']" position="before">
+                <field name="bank_statement_id" attrs="{'invisible':[('state', '!=', 'done')]}"/>
+            </xpath>
+
+            <xpath expr="//button[@name='change2error_button']" position="before">
+                <field name="file_type" invisible="1"/>
+                <button string="Import to Bank Statement"
+                        name="import_button"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('file_type', '!=', 'camt.054'), ('state', '=', 'draft')]}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

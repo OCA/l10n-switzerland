@@ -12,7 +12,6 @@
                 </header>
                 <group>
                     <field name="fds_account_id" />
-                    <field name="bank_statement_id" attrs="{'invisible':[('state', '!=', 'done')]}"/>
                     <field name="data" filename="filename"/>
                     <field name="filename" invisible="1"/>
                     <field name="directory_id" />
@@ -20,7 +19,6 @@
                     <field name="error_message" states="error"/>
                 </group>
                 <footer>
-                    <button string="Import to Bank Statement" name="import_button" type="object"  class="oe_highlight" states="draft"/>
                     <button name="change2error_button" string="File Corrupt" type="object" states="draft"/>
                     <button name="change2draft_button" string="Reset to draft" type="object" states="error"/>
                 </footer>
