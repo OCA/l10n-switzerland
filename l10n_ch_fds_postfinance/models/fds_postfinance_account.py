@@ -179,7 +179,7 @@ class FdsPostfinanceAccount(models.Model):
         """
         accounts = self.search([])
         for account in accounts:
-            self.env['fds.files.import.tobankstatments.wizard'].create({
+            self.env['fds.files.import.from.fds.wizard'].create({
                 'fds_account_id': account.id,
                 'state': 'default'
             }).import_button()

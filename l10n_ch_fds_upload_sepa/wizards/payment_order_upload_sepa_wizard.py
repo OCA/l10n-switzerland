@@ -39,7 +39,6 @@ class PaymenOrderUploadSepaWizard(models.TransientModel):
         help='Select one upload directory. Be sure to have at least one '
              'directory configured with upload access rights.',
         default=lambda self: self._get_default_file_type()
-
     )
     attachment_id = fields.Many2one(
         'ir.attachment', required=True, ondelete='cascade'

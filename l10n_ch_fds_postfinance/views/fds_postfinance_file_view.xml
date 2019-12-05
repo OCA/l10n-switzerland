@@ -14,13 +14,16 @@
                     <field name="fds_account_id" />
                     <field name="data" filename="filename"/>
                     <field name="filename" invisible="1"/>
+                    <field name="file_type"/>
                     <field name="directory_id" />
                     <field name="state" />
-                    <field name="error_message" states="error"/>
+                    <field name="error_message"
+                           attrs="{'invisible': [('error_message', '=', False)]}"
+                    />
                 </group>
                 <footer>
                     <button name="change2error_button" string="File Corrupt" type="object" states="draft"/>
-                    <button name="change2draft_button" string="Reset to draft" type="object" states="error"/>
+                    <button name="change2draft_button" string="Reset to draft" type="object" states="error,done"/>
                 </footer>
             </form>
         </field>
@@ -31,12 +34,18 @@
         <field name="name">fds.postfinance.file.tree</field>
         <field name="model">fds.postfinance.file</field>
         <field name="arch" type="xml">
-            <tree decoration-primary="state == 'draft'" decoration-muted="state == 'cancel'" decoration-danger="state == 'error'" create="0" default_order="create_date desc">
+            <tree name="postfinance_file_tree_view"
+                  decoration-primary="state == 'draft'"
+                  decoration-muted="state == 'cancel'"
+                  decoration-danger="state == 'error'"
+                  create="0"
+                  default_order="create_date desc">
                 <field name="fds_account_id" />
-                <field name="directory_id" />
-                <field name="filename" />
-                <field name="create_date" />
-                <field name="state" />
+                <field name="create_date"/>
+                <field name="filename"/>
+                <field name="file_type"/>
+                <field name="directory_id"/>
+                <field name="state"/>
             </tree>
         </field>
     </record>
@@ -48,6 +57,7 @@
         <field name="arch" type="xml">
             <search>
                 <field name="filename"/>
+                <field name="file_type"/>
                 <field name="directory_id"/>
                 <field name="state"/>
                 <filter name="active" string="Active" domain="[('state','!=','cancel')]"/>

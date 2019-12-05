@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- personalize form view for fds_postfinance_account -->
-    <record model="ir.ui.view" id="view_fds_postfinance_account_form" >
+    <record model="ir.ui.view" id="view_fds_postfinance_account_form_bank_statement">
         <field name="model">fds.postfinance.account</field>
         <field name="inherit_id" ref="l10n_ch_fds_postfinance.view_fds_postfinance_account_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='filename']" position="after">
-                <field name="bank_statement_id"/>
+            <xpath expr="//page[@name='download']" position="inside">
+                <separator string="Camt 054"/>
+                <field name="camt_file_ids">
+                    <tree name="postfinance_file_tree_view"
+                          decoration-primary="state == 'draft'"
+                          decoration-muted="state == 'cancel'"
+                          decoration-danger="state == 'error'"
+                          create="0"
+                          default_order="create_date desc">
+                        <field name="fds_account_id"/>
+                        <field name="create_date"/>
+                        <field name="filename"/>
+                        <field name="bank_statement_id"/>
+                        <field name="directory_id"/>
+                        <field name="file_type"/>
+                        <field name="state"/>
+                    </tree>
+                </field>
             </xpath>
         </field>
     </record>

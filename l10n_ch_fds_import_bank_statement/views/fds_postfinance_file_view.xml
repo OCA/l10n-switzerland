@@ -13,10 +13,10 @@
             <xpath expr="//button[@name='change2error_button']" position="before">
                 <field name="file_type" invisible="1"/>
                 <button string="Import to Bank Statement"
-                        name="import_button"
+                        name="import_to_bank_statement_button"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': [('file_type', '!=', 'camt.054'), ('state', '=', 'draft')]}"
+                        attrs="{'invisible': ['|', ('state', '!=', 'draft'), '&amp;', ('file_type', '!=', False), ('file_type', '!=', 'camt.054')]}"
                 />
             </xpath>
         </field>

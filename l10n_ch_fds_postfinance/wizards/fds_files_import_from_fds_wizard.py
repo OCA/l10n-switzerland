@@ -24,12 +24,12 @@ except ImportError:
     )
 
 
-class FdsFilesImportToBankStatementsWizard(models.TransientModel):
+class FdsFilesImportFromFDSWizard(models.TransientModel):
     """ This wizard checks and downloads files in FDS Postfinance server
         that were not already downloaded on the database.
         This wizard is called when we choose the update_fds for one FDS.
     """
-    _name = 'fds.files.import.tobankstatments.wizard'
+    _name = 'fds.files.import.from.fds.wizard'
 
     fds_account_id = fields.Many2one(
         'fds.postfinance.account',
@@ -105,12 +105,15 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
                     private_key=tmp_key.name,
                     private_key_pass=key_pass) as sftp:
 
-                fds_files_ids = self._download_file(sftp, directory, tmp_d, fds_id)
+                fds_files_ids = self._download_file(sftp, directory, tmp_d,
+                                                    fds_id)
 
-            # import to bank statements
-            self._import2bankStatements(fds_files_ids)
+            # process the files (done by the childrens of this module)
+            for file in fds_files_ids:
+                self.process_files(file)
+
             self.state = 'done'
-        except Exception:
+        except Exception as e:
             self.env.cr.rollback()
             self.env.clear()
             self.state = 'errorSFTP'
@@ -131,6 +134,10 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
     ##############################
     #          function          #
     ##############################
+    def process_files(self, fds_files_ids):
+        # the process of the files if done by the chidrens
+        pass
+
     def _get_fds_account(self):
         # get selected fds_postfinance_account id
         account_obj = self.env['fds.postfinance.account']
@@ -182,29 +189,23 @@ class FdsFilesImportToBankStatementsWizard(models.TransientModel):
                 path = os.path.join(tmp_directory, nameFile)
                 with open(path, "rb") as f:
                     file_data = f.read()
+
+                file_type = False
+                if nameFile.startswith('camt.054'):
+                    file_type = 'camt.054'
+                elif nameFile.startswith('pain.002'):
+                    file_type = 'pain.002.001.03.ch.02'
                 values = {
                     'fds_account_id': fds_id.id,
                     'data': base64.b64encode(file_data),
                     'filename': nameFile,
+                    'file_type': file_type,
                     'directory_id': d.id}
                 fds_files_ids += fds_files_ids.create(values)
                 # Commit the file created to avoid having to import again
                 self.env.cr.commit()  # pylint:disable=invalid-commit
 
         return fds_files_ids
-
-    @api.multi
-    def _import2bankStatements(self, fds_files_ids):
-        """ private function that import the files to bank statments
-
-            :param recordset: of model fds_postfinance_file
-            :returns None:
-        """
-        fds_files_ids.import2bankStatements()
-        error = fds_files_ids.filtered(lambda r: r.state == 'error')
-        success = fds_files_ids - error
-        self.msg_file_imported += '; '.join(success.mapped('filename'))
-        self.msg_import_file_fail += '; '.join(error.mapped('filename'))
 
     @api.multi
     def _get_sftp_config(self):

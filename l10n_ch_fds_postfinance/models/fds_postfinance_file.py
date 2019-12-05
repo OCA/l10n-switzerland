@@ -1,8 +1,9 @@
 # © 2015 Compassion CH (Nicolas Tran)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models, fields, api
 import logging
+
+from odoo import models, fields, api
 
 _logger = logging.getLogger(__name__)
 
@@ -33,7 +34,11 @@ class FdsPostfinanceFile(models.Model):
         ondelete='restrict',
         readonly=True,
     )
-    file_type = fields.Selection(related='directory_id.file_type')
+    file_type = fields.Selection(
+        [],
+        help="Install sub-modules to support various file types provided by "
+             "Postfinance."
+    )
     state = fields.Selection(
         selection=[('draft', 'Draft'),
                    ('done', 'Done'),

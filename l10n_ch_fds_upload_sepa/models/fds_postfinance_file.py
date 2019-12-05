@@ -21,8 +21,13 @@ class FdsPostfinanceFile(models.Model):
         readonly=True,
     )
 
+    file_type = fields.Selection(selection_add=[
+        ('pain.001.001.03.ch.02',
+         'pain.001.001.03.ch.02 (payment order)')
+    ])
+
     @api.multi
-    def import2bankStatements(self):
+    def import_to_bank_statements(self):
         account_pain002 = self.env['account.pain002.parser']
         pain_files = self.env[self._name]
 
@@ -69,4 +74,4 @@ class FdsPostfinanceFile(models.Model):
                               (pf_file.filename), exc_info=True)
 
         return super(FdsPostfinanceFile,
-                     self - pain_files).import2bankStatements()
+                     self - pain_files).import_to_bank_statements()

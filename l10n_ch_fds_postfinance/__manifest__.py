@@ -33,7 +33,7 @@
     'data': [
         'data/import_files_cron.xml',
         'views/fds_authentication_keys_view.xml',
-        'views/fds_files_import_tobankstatments_wizard_view.xml',
+        'views/fds_files_import_from_fds_wizard_view.xml',
         'views/fds_key_clone_wizard_view.xml',
         'views/fds_key_generator_wizard_view.xml',
         'views/fds_key_import_wizard_view.xml',
