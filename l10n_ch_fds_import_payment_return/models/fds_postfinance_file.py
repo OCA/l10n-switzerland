@@ -53,7 +53,15 @@ class FdsPostfinanceFile(models.Model):
                 'error_message': False
             })
             _logger.info("[OK] import file '%s'", self.filename)
-        except (NoTransactionsError, FileAlreadyImported) as e:
+        except NoTransactionsError as e:
+            _logger.info(e.name, self.filename)
+            self.write({
+                'state': 'done',
+                'payment_order': self.env['account.payment.order']
+                .search([('name', '=', e.object[0]['order_name'])]).id,
+                'error_message': e.name
+            })
+        except FileAlreadyImported as e:
             _logger.info(e.name, self.filename)
             references = [x['reference'] for x in e.object[0]['transactions']]
             payment_return = self.env['payment.return']\

@@ -60,6 +60,7 @@
                                 <field name="allow_download_file" attrs="{'invisible': [('still_on_server', '=', False)]}"/>
                                 <field name="excluded_files"/>
                                 <field name="allow_upload_file" attrs="{'invisible': [('still_on_server', '=', False)]}"/>
+                                 <field name="file_type"/>
                                 <field name="still_on_server" invisible="True"/>
                             </tree>
                         </field>

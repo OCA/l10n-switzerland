@@ -37,22 +37,22 @@ class FdsFilesImportFromFDSWizard(models.TransientModel):
         required=True,
         default=lambda self: self._get_fds_account()
     )
-    msg_file_imported = fields.Char(
+    msg_file_imported = fields.Text(
         'Imported files',
         readonly=True,
         default=''
     )
-    msg_import_file_fail = fields.Char(
+    msg_import_file_fail = fields.Text(
         'File import failures',
         readonly=True,
         default=''
     )
-    msg_exist_file = fields.Char(
+    msg_exist_file = fields.Text(
         'Files already existing',
         readonly=True,
         default=''
     )
-    msg_import_file_ignore = fields.Char(
+    msg_import_file_ignore = fields.Text(
         'Files ignored',
         readonly=True,
         default=''
@@ -166,7 +166,7 @@ class FdsFilesImportFromFDSWizard(models.TransientModel):
             with sftp.cd(dir_name):
                 list_name_files = sftp.listdir()
             sftp.get_d(dir_name, tmp_directory)
-            _logger.info("[OK] download files in '%s' ", (dir_name))
+            _logger.info("[OK] download files in '%s' ", dir_name)
 
             # Look for files to exclude
             excluded = d.excluded_files.split(';')
@@ -174,15 +174,13 @@ class FdsFilesImportFromFDSWizard(models.TransientModel):
                 file_ignore = [f for f in excluded if f and f in
                                nameFile]
                 if file_ignore:
-                    self.msg_import_file_ignore += "; ".join(
-                        file_ignore)
+                    self.msg_import_file_ignore += "; ".join(file_ignore)
                     continue
 
                 # check if file exist already
                 if fds_files_ids.search([['filename', '=', nameFile]]):
                     self.msg_exist_file += nameFile + "; "
-                    _logger.warning("[FAIL] file '%s' already exist",
-                                    (nameFile))
+                    _logger.warning("[FAIL] file '%s' already exist", nameFile)
                     continue
 
                 # save in the model fds_postfinance_files
@@ -230,7 +228,7 @@ class FdsFilesImportFromFDSWizard(models.TransientModel):
         username = self.fds_account_id.username
         key_pass = fds_authentication_key_obj.config()
 
-        return (self.fds_account_id, hostname, username, key, key_pass)
+        return self.fds_account_id, hostname, username, key, key_pass
 
     @api.multi
     def _create_tmp_file(self, data, tmp_directory=None):
@@ -249,7 +247,7 @@ class FdsFilesImportFromFDSWizard(models.TransientModel):
             tmp_file = tempfile.NamedTemporaryFile(dir=tmp_directory)
             tmp_file.write(base64.b64decode(data))
             tmp_file.flush()
-            return (tmp_file, tmp_directory)
+            return tmp_file, tmp_directory
         except Exception as e:
             _logger.error("Bad handling tmp in fds_inherit_sepa_wizard: %s", e)
 

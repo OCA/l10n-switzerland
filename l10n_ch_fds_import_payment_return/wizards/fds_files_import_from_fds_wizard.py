@@ -30,9 +30,9 @@ class FdsFilesImportFromFDSWizard(models.TransientModel):
         """
         try:
             file.import_to_payment_return()
-            error = file.filtered(lambda r: r.state == 'error')
-            success = file - error
-            self.msg_file_imported += '; '.join(success.mapped('filename'))
-            self.msg_import_file_fail += '; '.join(error.mapped('filename'))
+            if file.state == 'error':
+                self.msg_import_file_fail += file['filename'] + '\n'
+            else:
+                self.msg_file_imported += file['filename'] + '\n'
         except UserError:
             return super().process_files(file)
