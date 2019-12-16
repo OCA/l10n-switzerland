@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo11-addon-l10n_ch_account_tags',
         'odoo11-addon-l10n_ch_bank',
+        'odoo11-addon-l10n_ch_bank_statement_import_postfinance',
         'odoo11-addon-l10n_ch_base_bank',
         'odoo11-addon-l10n_ch_fds_postfinance',
         'odoo11-addon-l10n_ch_hr_payroll',
