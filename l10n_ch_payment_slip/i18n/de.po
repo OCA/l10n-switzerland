@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Weblate 3.2.2\n"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/invoice.py:210
+#: code:addons/l10n_ch_payment_slip/models/invoice.py:212
 #, fuzzy, python-format
 #| msgid "- The bank account {} used in invoice has no ISR adherent number."
 msgid "- The bank account {} used in invoice has no ISR subscription number."
@@ -29,13 +29,13 @@ msgstr ""
 "Teilnehmernummer."
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/invoice.py:203
+#: code:addons/l10n_ch_payment_slip/models/invoice.py:205
 #, python-format
 msgid "- The invoice must be confirmed."
 msgstr "- Die Rechnung muss bestätigt werden."
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/invoice.py:206
+#: code:addons/l10n_ch_payment_slip/models/invoice.py:208
 #, python-format
 msgid "- The invoice needs a partner bank account."
 msgstr ""
