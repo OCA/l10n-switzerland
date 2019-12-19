@@ -70,7 +70,9 @@ class FutureAccountInvoice(models.Model):
                     isr_subscription = bank_acc.l10n_ch_isr_subscription_eur
                 elif record.currency_id.name == 'CHF':
                     isr_subscription = bank_acc.l10n_ch_isr_subscription_chf
-                # else we don't format if in another currency as EUR or CHF
+                else:
+                    # we don't format if in another currency as EUR or CHF
+                    isr_subscription = False
 
                 if isr_subscription:
                     isr_subs = _format_isr_subscription_scanline(
