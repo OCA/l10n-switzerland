@@ -64,7 +64,10 @@ class FutureAccountInvoice(models.Model):
         for record in self:
             isr_subs = False
             isr_subs_formatted = False
-            if record.partner_bank_id:
+            if (
+                record.partner_bank_id and
+                record.currency_id.name in ['EUR', 'CHF']
+            ):
                 bank_acc = record.partner_bank_id
                 if record.currency_id.name == 'EUR':
                     isr_subscription = bank_acc.l10n_ch_isr_subscription_eur
