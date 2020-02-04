@@ -40,6 +40,15 @@ msgid "- The invoice needs a partner bank account."
 msgstr "- La facture doit faire référence à un de vos comptes bancaires."
 
 #. module: l10n_ch_payment_slip
+#. openerp-web
+#: code:addons/l10n_ch_payment_slip/static/src/js/qwebactionmanager.js:33
+#, python-format
+msgid ""
+"A popup window with your report was blocked. You may need to change your "
+"browser settings to allow popup windows for this page."
+msgstr ""
+
+#. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_invoice__partner_bank_id
 #, fuzzy
 #| msgid "Bank Accounts"
@@ -525,6 +534,13 @@ msgstr "Décalage vert. en pouce pour la ligne de montant"
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings__isr_scan_line_vert
 msgid "Vert. position in inch for scan line"
 msgstr "Décalage vertical de la scanline en pouces"
+
+#. module: l10n_ch_payment_slip
+#. openerp-web
+#: code:addons/l10n_ch_payment_slip/static/src/js/qwebactionmanager.js:36
+#, python-format
+msgid "Warning"
+msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: selection:ir.actions.report,report_type:0

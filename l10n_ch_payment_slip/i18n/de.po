@@ -42,6 +42,15 @@ msgstr ""
 "- Die Rechnung muss ein Zahlungskonto des Geschäftspartners definiert haben."
 
 #. module: l10n_ch_payment_slip
+#. openerp-web
+#: code:addons/l10n_ch_payment_slip/static/src/js/qwebactionmanager.js:33
+#, python-format
+msgid ""
+"A popup window with your report was blocked. You may need to change your "
+"browser settings to allow popup windows for this page."
+msgstr ""
+
+#. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_invoice__partner_bank_id
 #, fuzzy
 #| msgid "Bank Accounts"
@@ -533,6 +542,13 @@ msgstr "Vert. Position der Betragszeile (in Zoll)"
 #: model:ir.model.fields,help:l10n_ch_payment_slip.field_res_config_settings__isr_scan_line_vert
 msgid "Vert. position in inch for scan line"
 msgstr "Vert. Position der Codierzeile (in Zoll)"
+
+#. module: l10n_ch_payment_slip
+#. openerp-web
+#: code:addons/l10n_ch_payment_slip/static/src/js/qwebactionmanager.js:36
+#, python-format
+msgid "Warning"
+msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: selection:ir.actions.report,report_type:0
