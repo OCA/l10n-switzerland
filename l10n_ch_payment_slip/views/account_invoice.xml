@@ -12,7 +12,7 @@
       <field name="name">account.invoice.form.isr.ref</field>
       <field name="model">account.invoice</field>
       <field name="type">form</field>
-      <field name="inherit_id" ref="account.invoice_form"/>
+      <field name="inherit_id" ref="l10n_ch.isr_invoice_form"/>
       <field name="arch" type="xml">
         <xpath expr="//button[@name='isr_print']" position="attributes">
           <attribute name="invisible">1</attribute>
