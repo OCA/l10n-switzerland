@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: l10n_ch_pain_base
-#: code:addons/l10n_ch_pain_base/models/account_payment_order.py:72
+#: code:addons/l10n_ch_pain_base/models/account_payment_order.py:82
 #, python-format
 msgid "For pain.001.001.03.ch.02, for non-ISR payments, the BIC is required on the bank '%s' related to the bank account '%s'"
 msgstr ""
@@ -35,7 +35,7 @@ msgid "Payment Order"
 msgstr ""
 
 #. module: l10n_ch_pain_base
-#: code:addons/l10n_ch_pain_base/models/account_payment_order.py:90
+#: code:addons/l10n_ch_pain_base/models/account_payment_order.py:100
 #, python-format
 msgid "The field 'CCP/CP-Konto' is not set on the bank account '%s'."
 msgstr ""
