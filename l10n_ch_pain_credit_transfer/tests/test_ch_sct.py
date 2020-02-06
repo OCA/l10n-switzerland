@@ -79,6 +79,10 @@ class TestSCTCH(AccountingTestCase):
             'clearing': '767',
             'ccp': '01-1234-1',
         })
+        it_bank = self.env['res.bank'].create({
+            'name': 'Banca Popolare di Bergamo SpA',
+            'bic': 'BEPOIT21XXX',
+        })
         # Create a bank account with clearing 767
         self.agrolait_partner_bank = self.partner_bank_model.create({
             'acc_number': 'CH9100767000S00023455',
@@ -86,6 +90,11 @@ class TestSCTCH(AccountingTestCase):
             'bank_id': ch_bank2.id,
             'ccp': '01-1234-1',
             })
+        self.agrolait_partner_bank_sepa = self.partner_bank_model.create({
+            'acc_number': 'IT60X0542811101000000123456',
+            'partner_id': self.partner_agrolait.id,
+            'bank_id': it_bank.id
+        })
 
     def test_sct_ch_payment_type1(self):
         invoice1 = self.create_invoice(
@@ -242,6 +251,48 @@ class TestSCTCH(AccountingTestCase):
         sepa_xpath = xml_root.xpath(
             '//p:PmtInf/p:PmtTpInf/p:SvcLvl/p:Cd', namespaces=namespaces)
         self.assertEquals(len(sepa_xpath), 0)
+        local_instrument_xpath = xml_root.xpath(
+            '//p:PmtInf/p:PmtTpInf/p:LclInstrm/p:Prtry', namespaces=namespaces)
+        self.assertEquals(len(local_instrument_xpath), 0)
+
+        debtor_acc_xpath = xml_root.xpath(
+            '//p:PmtInf/p:DbtrAcct/p:Id/p:IBAN', namespaces=namespaces)
+        self.assertEquals(
+            debtor_acc_xpath[0].text,
+            self.payment_order.company_partner_bank_id.sanitized_acc_number)
+        self.payment_order.generated2uploaded()
+        self.assertEquals(self.payment_order.state, 'uploaded')
+        for inv in [invoice1, invoice2]:
+            self.assertEquals(inv.state, 'paid')
+        return
+
+    def test_sct_ch_payment_type5(self):
+        invoice1 = self.create_invoice(
+            self.partner_agrolait.id,
+            self.agrolait_partner_bank_sepa.id, self.eur_currency, 1234.56,
+            'none', 'Inv5555')
+        invoice2 = self.create_invoice(
+            self.partner_agrolait.id,
+            self.agrolait_partner_bank_sepa.id, self.eur_currency, 9012.52,
+            'none', 'Inv6666')
+        for inv in [invoice1, invoice2]:
+            action = inv.create_account_payment_line()
+
+        self.payment_order = self.payment_order_model.browse(action['res_id'])
+        self.payment_order.draft2open()
+        action = self.payment_order.open2generated()
+        self.assertEquals(self.payment_order.state, 'generated')
+        attachment = self.attachment_model.browse(action['res_id'])
+        xml_file = base64.b64decode(attachment.datas)
+        xml_root = etree.fromstring(xml_file)
+        namespaces = xml_root.nsmap
+        namespaces['p'] = xml_root.nsmap[None]
+        namespaces.pop(None)
+
+        sepa_xpath = xml_root.xpath(
+            '//p:PmtInf/p:PmtTpInf/p:SvcLvl/p:Cd', namespaces=namespaces)
+        self.assertEquals(len(sepa_xpath), 1)
+
         local_instrument_xpath = xml_root.xpath(
             '//p:PmtInf/p:PmtTpInf/p:LclInstrm/p:Prtry', namespaces=namespaces)
         self.assertEquals(len(local_instrument_xpath), 0)

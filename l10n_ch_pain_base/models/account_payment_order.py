@@ -14,9 +14,19 @@ class AccountPaymentOrder(models.Model):
         self.ensure_one()
         sepa = super().compute_sepa_final_hook(sepa)
         pain_flavor = self.payment_mode_id.payment_method_id.pain_version
-        # ISR orders cannot be SEPA orders
+
         if pain_flavor and '.ch.' in pain_flavor:
-            sepa = False
+            # If all payments are made to Swiss IBANs, it's a domestic order
+            acc_numbers = self.payment_line_ids.mapped(
+                'partner_bank_id.acc_number')
+            acc_numbers = list(set([x[0:2] for x in acc_numbers]))
+            if acc_numbers == ['CH']:
+                return False
+
+            # ISR orders cannot be SEPA orders
+            instrs = self.payment_line_ids.mapped('local_instrument')
+            if 'CH01' in instrs:
+                return False
         return sepa
 
     @api.multi
