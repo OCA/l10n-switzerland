@@ -343,7 +343,7 @@ class ResPartnerBank(models.Model):
         """Extract clearing number from CH iban to find the bank"""
         if self.acc_type != 'iban' and self.acc_number[:2] != 'CH':
             return False
-        clearing = self.sanitized_acc_number[4:9]
+        clearing = self.sanitized_acc_number[4:9].lstrip('0')
         return clearing and self.env['res.bank'].search(
             [('clearing', '=', clearing)], limit=1)
 
