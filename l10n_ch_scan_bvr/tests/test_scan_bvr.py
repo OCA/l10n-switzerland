@@ -52,7 +52,23 @@ class TestScanBvr(common.TransactionCase):
             'acc_number': 'CH9100767000S00023455',
             'partner_id': self.ref('base.res_partner_2'),
         })
+        partner1bank2 = PartnerBank.create({
+            'bank_id': bank1.id,
+            'acc_number': 'Partner 2 01-40155-2',
+            'partner_id': self.ref('base.res_partner_2'),
+            'ccp': '01-40155-2',
+            'bvr_adherent_num': '703192'
+        })
+        partner2bank1 = PartnerBank.create({
+            'bank_id': bank1.id,
+            'acc_number': 'Partner 3 01-40155-2',
+            'partner_id': self.ref('base.res_partner_3'),
+            'ccp': '01-40155-2',
+            'bvr_adherent_num': '685234'
+        })
         self.partner1bank1 = PartnerBank.browse(partner1bank1.id)
+        self.partner1bank2 = PartnerBank.browse(partner1bank2.id)
+        self.partner2bank1 = PartnerBank.browse(partner2bank1.id)
         self.purchase_journal_id = \
             self.ref('l10n_ch_scan_bvr.expenses_journal')
 
@@ -96,4 +112,23 @@ class TestScanBvr(common.TransactionCase):
         self.assertTrue(act['res_id'])
 
         new_invoice = self.env['account.invoice'].browse(act['res_id'])
+        self.assertAlmostEqual(3949.75, new_invoice.amount_total, places=2)
+
+    def test_02_scan_2_banks(self):
+        """ Check scan line when two bank accounts with same ccp
+        and different bvr adherent numbers
+        0100003949753>703192500010549027000209403+ 010401552>
+        """
+        bvr_string1 = '0100003949753>703192500010549027000209403+ 010401552>'
+        wizard = self.ScanBVR.create({
+            'bvr_string': bvr_string1,
+            'journal_id': self.purchase_journal_id,
+        })
+        chf = self.env.ref('base.CHF')
+        chf.active = True
+        act = wizard.validate_bvr_string()
+        self.assertTrue(act['res_id'])
+        new_invoice = self.env['account.invoice'].browse(act['res_id'])
+        self.assertTrue(
+            new_invoice.partner_id.id == self.ref('base.res_partner_2'))
         self.assertAlmostEqual(3949.75, new_invoice.amount_total, places=2)
