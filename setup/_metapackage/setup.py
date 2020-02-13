@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo12-addon-l10n_ch_account_tags',
+        'odoo12-addon-l10n_ch_bank',
         'odoo12-addon-l10n_ch_base_bank',
         'odoo12-addon-l10n_ch_invoice_with_payment',
         'odoo12-addon-l10n_ch_mis_reports',
