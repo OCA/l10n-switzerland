@@ -9,13 +9,7 @@
     "category": "Finance",
     "author": "Akretion,Camptocamp,Odoo Community Association (OCA)",
     "license": "AGPL-3",
-    "depends": [
-        "account_banking_pain_base",
-        "l10n_ch_base_bank",
-    ],
-    "data": [
-        'views/account_payment_line.xml',
-        'views/bank_payment_line.xml',
-    ],
-    'installable': True,
+    "depends": ["account_banking_pain_base", "l10n_ch_base_bank"],
+    "data": ["views/account_payment_line.xml", "views/bank_payment_line.xml"],
+    "installable": True,
 }
