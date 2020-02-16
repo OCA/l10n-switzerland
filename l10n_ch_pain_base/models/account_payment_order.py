@@ -10,7 +10,6 @@ from odoo.exceptions import UserError
 class AccountPaymentOrder(models.Model):
     _inherit = "account.payment.order"
 
-    @api.multi
     def compute_sepa_final_hook(self, sepa):
         self.ensure_one()
         sepa = super().compute_sepa_final_hook(sepa)
@@ -20,7 +19,6 @@ class AccountPaymentOrder(models.Model):
             sepa = False
         return sepa
 
-    @api.multi
     def generate_pain_nsmap(self):
         self.ensure_one()
         nsmap = super().generate_pain_nsmap()
@@ -32,14 +30,16 @@ class AccountPaymentOrder(models.Model):
 
         return nsmap
 
-    @api.multi
     def generate_pain_attrib(self):
         self.ensure_one()
         pain_flavor = self.payment_mode_id.payment_method_id.pain_version
         if pain_flavor in ["pain.001.001.03.ch.02", "pain.008.001.02.ch.01"]:
+            a_value = "http://www.six-interbank-clearing.com/de/" "%s.xsd  %s.xsd" % (
+                pain_flavor,
+                pain_flavor,
+            )
             attrib = {
-                "{http://www.w3.org/2001/XMLSchema-instance}schemaLocation": "http://www.six-interbank-clearing.com/de/"
-                "%s.xsd  %s.xsd" % (pain_flavor, pain_flavor)
+                "{http://www.w3.org/2001/XMLSchema-instance}schemaLocation": a_value
             }
             return attrib
         else:
