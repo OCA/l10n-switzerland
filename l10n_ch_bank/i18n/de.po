@@ -19,17 +19,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_bank
-#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_areacode
+#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank__bank_areacode
 msgid "Area code"
 msgstr "Vorwahl"
 
 #. module: l10n_ch_bank
-#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_bcart
+#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank__bank_bcart
 msgid "BC-Art"
 msgstr ""
 
 #. module: l10n_ch_bank
-#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_clearing_new
+#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank__bank_clearing_new
 msgid "BCNr new"
 msgstr "Neue Bankleitzahl"
 
@@ -39,51 +39,51 @@ msgid "Bank"
 msgstr "Bank"
 
 #. module: l10n_ch_bank
-#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_branchid
+#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank__bank_branchid
 msgid "Branch-ID"
 msgstr "Zweig-ID"
 
 #. module: l10n_ch_bank
-#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_group
+#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank__bank_group
 msgid "Group"
 msgstr "Gruppe"
 
 #. module: l10n_ch_bank
-#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_headquarter
+#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank__bank_headquarter
 msgid "Headquarter"
 msgstr "Hauptquartier"
 
 #. module: l10n_ch_bank
-#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_lang
+#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank__bank_lang
 msgid "Language"
 msgstr "Sprache"
 
 #. module: l10n_ch_bank
-#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_postaccount
+#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank__bank_postaccount
 msgid "Post account"
 msgstr "Postkonto"
 
 #. module: l10n_ch_bank
-#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_postaladdress
+#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank__bank_postaladdress
 msgid "Postal address"
 msgstr "Adresse"
 
 #. module: l10n_ch_bank
-#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_sic
+#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank__bank_sic
 msgid "SIC"
 msgstr ""
 
 #. module: l10n_ch_bank
-#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_sicnr
+#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank__bank_sicnr
 msgid "SIC-Nr"
 msgstr ""
 
 #. module: l10n_ch_bank
-#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_valid_from
+#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank__bank_valid_from
 msgid "Valid from"
 msgstr "Gültiges Formular"
 
 #. module: l10n_ch_bank
-#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank_bank_eurosic
+#: model:ir.model.fields,field_description:l10n_ch_bank.field_res_bank__bank_eurosic
 msgid "euroSIC"
 msgstr ""
