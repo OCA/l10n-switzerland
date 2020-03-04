@@ -22,6 +22,7 @@
 from odoo import models, api, _
 from lxml import etree
 from odoo.tools import float_round
+from odoo import fields
 
 ACCEPTED_PAIN_FLAVOURS = (
     'pain.008.001.02.ch.03',
@@ -178,7 +179,7 @@ class AccountPaymentOrder(models.Model):
             # <PmtInf>/<PmtTpInf>/  <ReqdColltnDt>
             requested_date_node = etree.SubElement(payment_info,
                                                    'ReqdColltnDt')
-            requested_date_node.text = requested_date
+            requested_date_node.text = fields.Date.to_string(requested_date)
 
         else:
             payment_info, nb_of_transactions, control_sum = \
@@ -415,7 +416,7 @@ class AccountPaymentOrder(models.Model):
                 self.generate_start_payment_info_block(
                     root,
                     "self.name + '-' "
-                    "+ requested_date.replace('-', '')  + '-' + priority + "
+                    "+ str(requested_date) + '-' + priority + "
                     "'-' + local_instrument",
                     prio, local_inst, False, False, req_date, {
                         'self': self,
