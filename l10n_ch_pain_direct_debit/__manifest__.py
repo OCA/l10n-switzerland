@@ -4,7 +4,7 @@
 {
     "name": "Switzerland - PAIN Direct Debit",
     "summary": "Generate ISO 20022 direct debits",
-    "version": "11.0.1.0.1",
+    "version": "12.0.1.0.0",
     "category": "Finance",
     "author": "Akretion,Camptocamp,Compassion,Odoo Community Association(OCA)",
     'website': 'http://www.compassion.ch,http://www.braintec-group.com',
@@ -23,7 +23,7 @@
         'views/bank_payment_line_view.xml'
     ],
     'demo': [
-        'demo/dd_demo.yml'
+        'demo/dd_demo.xml'
     ],
     'pre_init_hook': 'pre_init_hook',
     'auto_install': False,
