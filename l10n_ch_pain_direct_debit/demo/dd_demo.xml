@@ -4,21 +4,11 @@
         <field name="initiating_party_identifier">CH1312300000012345</field>
     </record>
 
-    <record id="bank_post" model="res.bank">
-        <field name="name">Postfinance AG</field>
-        <field name="code">postfinance</field>
-        <field name="bic">POFICHBEXXX</field>
-        <field name="clearing">9000</field>
-        <field name="street">Postfinance</field>
-        <field name="zip">3030</field>
-        <field name="city">Bern</field>
-    </record>
-
     <record id="partner_bank_post_xml_dd" model="res.partner.bank">
         <field name="acc_type">postal</field>
         <field name="acc_number">CH63 0900 0000 2500 9779 8</field>
         <field name="partner_id" ref="base.res_partner_2"/>
-        <field name="bank_id" ref="bank_post"/>
+        <field name="bank_id" ref="l10n_ch_base_bank.bank_post"/>
     </record>
 
     <record id="post_mandate_xml_dd" model="account.banking.mandate">
@@ -33,7 +23,7 @@
         <field name="acc_type">postal</field>
         <field name="acc_number">CH10 0900 0000 2500 9778 2</field>
         <field name="partner_id" ref="base.main_company"/>
-        <field name="bank_id" ref="bank_post"/>
+        <field name="bank_id" ref="l10n_ch_base_bank.bank_post"/>
 <!--        <field name="company_id" ref="base.main_company"/>-->
     </record>
 
