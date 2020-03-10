@@ -28,14 +28,7 @@ class TestBank(common.SavepointCase):
             'bic': 'ALSWCH21XXX',
             'clearing': '38815',
         })
-        cls.post_bank = cls.env['res.bank'].search(
-            [('bic', '=', 'POFICHBEXXX')])
-        if not cls.post_bank:
-            cls.post_bank = cls.env['res.bank'].create({
-                'name': 'PostFinance AG',
-                'bic': 'POFICHBEXXX',
-                'clearing': '09000',
-            })
+        cls.post_bank = cls.env.ref('l10n_ch_base_bank.bank_post')
 
     def new_form(self):
         form = Form(
@@ -158,7 +151,6 @@ class TestBank(common.SavepointCase):
 
     def test_iban_postal(self):
         bank_acc = self.new_form()
-        bank_acc.bank_id = self.post_bank
         bank_acc.acc_number = CH_POSTFINANCE_IBAN.replace(' ', '')
         account = bank_acc.save()
 
@@ -169,7 +161,6 @@ class TestBank(common.SavepointCase):
 
     def test_iban_postal_with_spaces(self):
         bank_acc = self.new_form()
-        bank_acc.bank_id = self.post_bank
         bank_acc.acc_number = CH_POSTFINANCE_IBAN
         account = bank_acc.save()
 
@@ -180,7 +171,6 @@ class TestBank(common.SavepointCase):
 
     def test_iban_postal_lower_case(self):
         bank_acc = self.new_form()
-        bank_acc.bank_id = self.post_bank
         bank_acc.acc_number = CH_POSTFINANCE_IBAN.lower()
         account = bank_acc.save()
 

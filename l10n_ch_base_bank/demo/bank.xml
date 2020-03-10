@@ -1,0 +1,11 @@
+<odoo>
+    <record id="bank_post" model="res.bank">
+        <field name="name">Postfinance AG</field>
+        <field name="code">postfinance</field>
+        <field name="bic">POFICHBEXXX</field>
+        <field name="clearing">9000</field>
+        <field name="street">Postfinance</field>
+        <field name="zip">3030</field>
+        <field name="city">Bern</field>
+    </record>
+</odoo>

@@ -15,6 +15,9 @@
  'data': [
      'views/bank.xml',
  ],
+ 'demo': [
+     'demo/bank.xml',
+ ],
  'auto_install': False,
  'installable': True,
  }
