@@ -1,9 +1,9 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015 Nicolas Bessi Camptocamp SA
 # Copyright 2017-2019 Compassion CH
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import base64
 import re
+import datetime
 from odoo.modules import get_module_resource
 from odoo.tests import common
 
@@ -123,18 +123,18 @@ class PostFinanceImportTest(common.TransactionCase):
         self.assertEqual(9, len(statements.line_ids))
         self.assertTrue(statements.journal_id)
         self.assertEqual(4, len(statements.mapped('line_ids.related_file')))
-        st_line = statements.line_ids[0]
+        st_line = statements.line_ids.sorted('id')[0]
         # Read common infos of first line
-        self.assertEqual(st_line.date, "2017-03-31")
-        self.assertEqual(st_line.amount, 500.0)
-        self.assertEqual(st_line.name, "VIREMENT BENEFICE")
+        self.assertEqual(st_line.date, datetime.date(2017, 3, 30))
+        self.assertEqual(st_line.amount, 50.0)
+        self.assertEqual(st_line.name, '20160414001203000300003')
 
         # Test image is in reconcile view
         lines_with_attach = statements.mapped('line_ids').filtered(
             'related_file')
         img_data_key = ['img_src', 'modal_id', 'data_target']
         for line in lines_with_attach:
-            data = line.get_statement_line_for_reconciliation_widget()
+            data = self.env['account.reconciliation.widget']._get_statement_line(line)
             for key in img_data_key:
                 self.assertIn(key, data.keys())
 

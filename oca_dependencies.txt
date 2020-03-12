@@ -4,3 +4,4 @@ bank-payment
 partner-contact
 account-reconcile
 mis-builder
+bank-statement-import

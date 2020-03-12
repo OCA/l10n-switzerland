@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015 Nicolas Bessi Camptocamp SA
 # Copyright 2017-2019 Compassion CH
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -15,19 +14,6 @@ class AccountBankStatementLine(models.Model):
     )
     datas = fields.Binary(related='related_file.datas')
     file_ref = fields.Char()
-
-    @api.multi
-    def get_statement_line_for_reconciliation_widget(self):
-        data = super(AccountBankStatementLine,
-                     self).get_statement_line_for_reconciliation_widget()
-        if self.related_file.datas:
-            related_file = self.related_file
-            image = "data:png;base64," + related_file.datas.decode("utf-8")
-            data['img_src'] = ['src', image]
-            data['modal_id'] = ['id', 'img' + str(related_file.id)]
-            data['data_target'] = [
-                'data-target', '#img' + str(related_file.id)]
-        return data
 
     @api.multi
     def click_icon(self):

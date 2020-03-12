@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015 Nicolas Bessi Camptocamp SA
 # Copyright 2017-2019 Compassion CH
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
