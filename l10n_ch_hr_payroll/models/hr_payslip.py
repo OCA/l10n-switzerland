@@ -30,7 +30,7 @@ class HrPayslip(models.Model):
         for payslip in self:
             if payslip.contract_id.wage_type == 'hour':
                 dt = fields.Datetime
-                date_to = dt.from_string(payslip.date_to)
+                date_to = fields.Date.to_date(payslip.date_to)
                 date_to = dt.to_string(date_to + timedelta(days=1))
 
                 all_time_records = self.env['hr.attendance'].search([

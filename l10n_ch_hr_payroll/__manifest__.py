@@ -11,7 +11,7 @@
         'hr_contract',
         'hr_attendance'
     ],
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.0',
     'auto_install': False,
     'demo': [],
     'website': 'http://open-net.ch',
