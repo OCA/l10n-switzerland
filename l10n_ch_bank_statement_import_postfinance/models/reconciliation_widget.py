@@ -13,9 +13,5 @@ class AccountReconciliation(models.AbstractModel):
         if st_line.related_file.datas:
             related_file = st_line.related_file
             image = "data:image/png;base64," + related_file.datas.decode("utf-8")
-            data.update({
-                'img_src': ('src', image),
-                'modal_id': ('id', 'img' + str(related_file.id)),
-                'data_target': ('data-target', '#img' + str(related_file.id))
-            })
+            data['img_src'] = ('src', image)
         return data

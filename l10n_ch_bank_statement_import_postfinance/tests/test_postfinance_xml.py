@@ -132,11 +132,9 @@ class PostFinanceImportTest(common.TransactionCase):
         # Test image is in reconcile view
         lines_with_attach = statements.mapped('line_ids').filtered(
             'related_file')
-        img_data_key = ['img_src', 'modal_id', 'data_target']
         for line in lines_with_attach:
             data = self.env['account.reconciliation.widget']._get_statement_line(line)
-            for key in img_data_key:
-                self.assertIn(key, data.keys())
+            self.assertIn('img_src', data.keys())
 
         # Test click icon returns an action
         self.assertIsInstance(lines_with_attach[0].click_icon(), dict)

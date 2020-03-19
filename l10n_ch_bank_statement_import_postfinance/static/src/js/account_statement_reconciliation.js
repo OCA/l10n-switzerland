@@ -10,9 +10,13 @@ odoo.define('l10n_ch_bank_statement_import_postfinance.reconciliation', function
     // Extend the class written in module account (bank statement view)
     reconciliation.LineRenderer.include({
         start: function(){
-            $('<span class="line_info_button fa fa-picture-o"/>')
-                .appendTo(this.$('thead .cell_info_popover'))
-                .attr("data-content", qweb.render('bank_statement_reconciliation_line_image', {'state': this._initialState}));
+            if (this._initialState.st_line.img_src) {
+                $('<span class="line_info_button fa fa-picture-o"/>')
+                    .appendTo(this.$('thead .cell_info_popover'))
+                    .attr("data-content", qweb.render('bank_statement_reconciliation_line_image', {
+                        'state': this._initialState
+                    }));
+            }
             return this._super();
         },
     });
