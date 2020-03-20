@@ -19,6 +19,10 @@ class FdsPostfinanceFile(models.Model):
         ondelete='restrict',
         readonly=True,
     )
+    file_type = fields.Selection(selection_add=[
+        ('pain.002.001.03.ch.02',
+         'pain.002.001.03.ch.02 (payment return)')
+    ])
 
     @api.multi
     def import_to_payment_return_button(self):

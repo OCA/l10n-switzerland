@@ -7,17 +7,6 @@ from odoo import models, fields, api
 
 _logger = logging.getLogger(__name__)
 
-try:
-    import pysftp
-
-    SFTP_OK = True
-except ImportError:
-    SFTP_OK = False
-    _logger.error(
-        'This module needs pysftp to connect to the FDS. '
-        'Please install pysftp on your system. (sudo pip install pysftp)'
-    )
-
 
 class FdsPostfinanceAccount(models.Model):
     """" the FDS PostFinance configuration that allow to connect to the
