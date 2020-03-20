@@ -3,7 +3,7 @@ import re
 from lxml import etree
 
 from odoo import models
-from odoo.addons.account_payment_return_import_sepa_pain.wizard.pain_parser \
+from odoo.addons.account_payment_return_import_iso20022.wizard.pain_parser \
     import PainParser
 
 
@@ -12,28 +12,10 @@ class Pain002Parser(models.AbstractModel, PainParser):
 
     def parse_transaction(self, ns, node, transaction):
         """Parse transaction (entry) node."""
+        super().parse_transaction(ns, node, transaction)
         self.add_value_from_node(
-            ns, node, './ns:OrgnlEndToEndId', transaction,
-            'reference'
+            ns, node, './ns:TxSts', transaction, 'concept'
         )
-        self.add_value_from_node(
-            ns, node, './ns:TxSts', transaction,
-            'status'
-        )
-        self.add_value_from_node(
-            ns, node, './ns:StsRsnInf/ns:Rsn/ns:Cd', transaction,
-            'reason_code'
-        )
-        self.add_value_from_node(
-            ns, node, './ns:StsRsnInf/ns:AddtlInf', transaction,
-            'reason'
-        )
-        details_node = node.xpath(
-            './ns:OrgnlTxRef', namespaces={'ns': ns})
-        if details_node:
-            self.parse_transaction_details(ns, details_node[0], transaction)
-        transaction['raw_import_data'] = etree.tostring(node)
-
         transaction['amount'] = self.env['bank.payment.line']\
             .search([('name', '=', transaction['reference'])]).amount_currency
         return transaction
