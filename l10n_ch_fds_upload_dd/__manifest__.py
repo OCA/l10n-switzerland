@@ -21,7 +21,7 @@
 {
     'name': 'Swiss Postfinance FDS Direct Debit Upload',
     'summary': 'Upload Direct Debit files to FDS PostFinance',
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'Compassion CH, Odoo Community Association (OCA)',
     'website': 'http://www.compassion.ch/',
