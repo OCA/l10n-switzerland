@@ -1,0 +1,505 @@
+#-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+# Create in invoices
+#-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+-
+  !record {model: account.invoice, id: ct_invoice_1, view: False}:
+    partner_id: base.res_partner_12
+    user_id: base.user_demo
+    reference_type: none
+    payment_term_id: account.account_payment_term
+    type: in_invoice
+    date_invoice: !eval time.strftime('%Y-%m')+'-08'
+    payment_mode_id: l10n_ch_pain_credit_transfer.payment_mode_outbound_sepa_ct_ch
+    partner_bank_id: l10n_ch_pain_credit_transfer.company_bank_post_xml_ct
+    invoice_line_ids:
+        -   account_id: l10n_ch_pain_credit_transfer.account_account_expenses
+            name: 'Some contact lenses'
+            price_unit: 600.00
+            quantity: 1.0
+
+-
+  !record {model: account.invoice, id: ct_invoice_2, view: False}:
+    partner_id: base.res_partner_12
+    user_id: base.user_demo
+    reference_type: none
+    payment_term_id: account.account_payment_term
+    type: in_invoice
+    date_invoice: !eval time.strftime('%Y-%m')+'-08'
+    payment_mode_id: l10n_ch_pain_credit_transfer.payment_mode_outbound_sepa_ct_ch
+    partner_bank_id: l10n_ch_pain_credit_transfer.company_bank_post_xml_ct
+    invoice_line_ids:
+        -   account_id: l10n_ch_pain_credit_transfer.account_account_expenses
+            name: 'Some contact lenses'
+            price_unit: 300.00
+            quantity: 1.0
+
+-
+  !record {model: account.invoice, id: ct_invoice_3, view: False}:
+    partner_id: base.res_partner_12
+    user_id: base.user_demo
+    reference_type: none
+    payment_term_id: account.account_payment_term
+    type: in_invoice
+    date_invoice: !eval time.strftime('%Y-%m')+'-08'
+    payment_mode_id: l10n_ch_pain_credit_transfer.payment_mode_outbound_sepa_ct_ch
+    partner_bank_id: l10n_ch_pain_credit_transfer.company_bank_post_xml_ct
+    invoice_line_ids:
+        -   account_id: l10n_ch_pain_credit_transfer.account_account_expenses
+            name: 'Some contact lenses'
+            price_unit: 200.00
+            quantity: 1.0
+
+-
+  !record {model: account.invoice, id: ct_invoice_4, view: False}:
+    partner_id: base.res_partner_12
+    user_id: base.user_demo
+    reference_type: none
+    payment_term_id: account.account_payment_term
+    type: in_invoice
+    date_invoice: !eval time.strftime('%Y-%m')+'-08'
+    payment_mode_id: l10n_ch_pain_credit_transfer.payment_mode_outbound_sepa_ct_ch
+    partner_bank_id: l10n_ch_pain_credit_transfer.company_bank_post_xml_ct
+    invoice_line_ids:
+        -   account_id: l10n_ch_pain_credit_transfer.account_account_expenses
+            name: 'Some contact lenses'
+            price_unit: 400.00
+            quantity: 2.0
+
+-
+  !record {model: account.invoice, id: ct_invoice_5, view: False}:
+    partner_id: base.res_partner_12
+    user_id: base.user_demo
+    reference_type: none
+    payment_term_id: account.account_payment_term
+    type: in_invoice
+    date_invoice: !eval time.strftime('%Y-%m')+'-08'
+    payment_mode_id: l10n_ch_pain_credit_transfer.payment_mode_outbound_sepa_ct_ch
+    partner_bank_id: l10n_ch_pain_credit_transfer.company_bank_post_xml_ct
+    invoice_line_ids:
+        -   account_id: l10n_ch_pain_credit_transfer.account_account_expenses
+            name: 'Some contact lenses'
+            price_unit: 250.00
+            quantity: 3.0
+
+-
+  !record {model: account.invoice, id: ct_invoice_6, view: False}:
+    partner_id: base.res_partner_12
+    user_id: base.user_demo
+    reference_type: none
+    payment_term_id: account.account_payment_term
+    type: in_invoice
+    date_invoice: !eval time.strftime('%Y-%m')+'-08'
+    payment_mode_id: l10n_ch_pain_credit_transfer.payment_mode_outbound_sepa_ct_ch
+    partner_bank_id: l10n_ch_pain_credit_transfer.company_bank_post_xml_ct
+    invoice_line_ids:
+        -   account_id: l10n_ch_pain_credit_transfer.account_account_expenses
+            name: 'Some contact lenses'
+            price_unit: 200.00
+            quantity: 5.0
+
+-
+  !record {model: account.invoice, id: ct_invoice_7, view: False}:
+    partner_id: base.res_partner_12
+    user_id: base.user_demo
+    reference_type: none
+    payment_term_id: account.account_payment_term
+    type: in_invoice
+    date_invoice: !eval time.strftime('%Y-%m')+'-08'
+    payment_mode_id: l10n_ch_pain_credit_transfer.payment_mode_outbound_sepa_ct_ch
+    partner_bank_id: l10n_ch_pain_credit_transfer.company_bank_post_xml_ct
+    invoice_line_ids:
+        -   account_id: l10n_ch_pain_credit_transfer.account_account_expenses
+            name: 'Some contact lenses'
+            price_unit: 145.00
+            quantity: 6.0
+
+-
+  !record {model: account.invoice, id: ct_invoice_8, view: False}:
+    partner_id: base.res_partner_12
+    user_id: base.user_demo
+    reference_type: none
+    payment_term_id: account.account_payment_term
+    type: in_invoice
+    date_invoice: !eval time.strftime('%Y-%m')+'-08'
+    payment_mode_id: l10n_ch_pain_credit_transfer.payment_mode_outbound_sepa_ct_ch
+    partner_bank_id: l10n_ch_pain_credit_transfer.company_bank_post_xml_ct
+    invoice_line_ids:
+        -   account_id: l10n_ch_pain_credit_transfer.account_account_expenses
+            name: 'Some contact lenses'
+            price_unit: 100.00
+            quantity: 30.0
+
+-
+  !record {model: account.invoice, id: ct_invoice_9, view: False}:
+    partner_id: base.res_partner_12
+    user_id: base.user_demo
+    reference_type: none
+    payment_term_id: account.account_payment_term
+    type: in_invoice
+    date_invoice: !eval time.strftime('%Y-%m')+'-08'
+    payment_mode_id: l10n_ch_pain_credit_transfer.payment_mode_outbound_sepa_ct_ch
+    partner_bank_id: l10n_ch_pain_credit_transfer.company_bank_post_xml_ct
+    invoice_line_ids:
+        -   account_id: l10n_ch_pain_credit_transfer.account_account_expenses
+            name: 'Some contact lenses'
+            price_unit: 20.00
+            quantity: 3.0
+
+-
+  !record {model: account.invoice, id: ct_invoice_10, view: False}:
+    partner_id: base.res_partner_12
+    user_id: base.user_demo
+    reference_type: none
+    payment_term_id: account.account_payment_term
+    type: in_invoice
+    date_invoice: !eval time.strftime('%Y-%m')+'-08'
+    payment_mode_id: l10n_ch_pain_credit_transfer.payment_mode_outbound_sepa_ct_ch
+    partner_bank_id: l10n_ch_pain_credit_transfer.company_bank_post_xml_ct
+    invoice_line_ids:
+        -   account_id: l10n_ch_pain_credit_transfer.account_account_expenses
+            name: 'Some contact lenses'
+            price_unit: 123.00
+            quantity: 3.0
+
+-
+  !python {model: account.invoice, id: ct_invoice_1}: |
+    if self.state == 'draft':
+      self.action_invoice_open()
+
+-
+  !python {model: account.invoice, id: ct_invoice_1}: |
+    if self.state == 'open':
+      self.create_account_payment_line()
+
+-
+  !python {model: account.invoice, id: ct_invoice_2}: |
+    if self.state == 'draft':
+      self.action_invoice_open()
+
+-
+  !python {model: account.invoice, id: ct_invoice_2}: |
+    if self.state == 'open':
+      self.create_account_payment_line()
+
+-
+  !python {model: account.invoice, id: ct_invoice_3}: |
+    if self.state == 'draft':
+      self.action_invoice_open()
+
+-
+  !python {model: account.invoice, id: ct_invoice_3}: |
+    if self.state == 'open':
+      self.create_account_payment_line()
+
+-
+  !python {model: account.invoice, id: ct_invoice_4}: |
+    if self.state == 'draft':
+      self.action_invoice_open()
+
+-
+  !python {model: account.invoice, id: ct_invoice_4}: |
+    if self.state == 'open':
+      self.create_account_payment_line()
+
+-
+  !python {model: account.invoice, id: ct_invoice_5}: |
+    if self.state == 'draft':
+      self.action_invoice_open()
+
+-
+  !python {model: account.invoice, id: ct_invoice_5}: |
+    if self.state == 'open':
+      self.create_account_payment_line()
+
+-
+  !python {model: account.invoice, id: ct_invoice_6}: |
+    if self.state == 'draft':
+      self.action_invoice_open()
+
+-
+  !python {model: account.invoice, id: ct_invoice_6}: |
+    if self.state == 'open':
+      self.create_account_payment_line()
+
+-
+  !python {model: account.invoice, id: ct_invoice_7}: |
+    if self.state == 'draft':
+      self.action_invoice_open()
+
+-
+  !python {model: account.invoice, id: ct_invoice_7}: |
+    if self.state == 'open':
+      self.create_account_payment_line()
+
+-
+  !python {model: account.invoice, id: ct_invoice_8}: |
+    if self.state == 'draft':
+      self.action_invoice_open()
+
+-
+  !python {model: account.invoice, id: ct_invoice_8}: |
+    if self.state == 'open':
+      self.create_account_payment_line()
+
+-
+  !python {model: account.invoice, id: ct_invoice_9}: |
+    if self.state == 'draft':
+      self.action_invoice_open()
+
+-
+  !python {model: account.invoice, id: ct_invoice_9}: |
+    if self.state == 'open':
+      self.create_account_payment_line()
+
+-
+  !python {model: account.invoice, id: ct_invoice_10}: |
+    if self.state == 'draft':
+      self.action_invoice_open()
+
+-
+  !python {model: account.invoice, id: ct_invoice_10}: |
+    if self.state == 'open':
+      self.create_account_payment_line()
+
+#-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+# Create out invoices
+#-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+-
+  !record {model: account.invoice, id: dd_invoice_1, view: False}:
+    partner_id: base.res_partner_2
+    type : out_invoice
+    currency_id: base.CHF
+    date_invoice: !eval time.strftime('%Y-%m')+'-08'
+    payment_mode_id: l10n_ch_pain_direct_debit.dd_pay_mode_xml_dd
+    mandate_id: l10n_ch_pain_direct_debit.post_mandate_xml_dd
+    invoice_line_ids:
+        -   account_id: l10n_ch_pain_credit_transfer.account_account_expenses
+            name: 'Some contact lenses'
+            price_unit: 600.00
+            quantity: 1.0
+
+-
+  !record {model: account.invoice, id: dd_invoice_2, view: False}:
+    partner_id: base.res_partner_2
+    type: out_invoice
+    currency_id: base.CHF
+    date_invoice: !eval time.strftime('%Y-%m')+'-08'
+    payment_mode_id: l10n_ch_pain_direct_debit.dd_pay_mode_xml_dd
+    mandate_id: l10n_ch_pain_direct_debit.post_mandate_xml_dd
+    invoice_line_ids:
+        -   account_id: l10n_ch_pain_credit_transfer.account_account_expenses
+            name: 'Some contact lenses'
+            price_unit: 300.00
+            quantity: 1.0
+
+-
+  !record {model: account.invoice, id: dd_invoice_3, view: False}:
+    partner_id: base.res_partner_2
+    type: out_invoice
+    currency_id: base.CHF
+    date_invoice: !eval time.strftime('%Y-%m')+'-08'
+    payment_mode_id: l10n_ch_pain_direct_debit.dd_pay_mode_xml_dd
+    mandate_id: l10n_ch_pain_direct_debit.post_mandate_xml_dd
+    invoice_line_ids:
+        -   account_id: l10n_ch_pain_credit_transfer.account_account_expenses
+            name: 'Some contact lenses'
+            price_unit: 200.00
+            quantity: 1.0
+
+-
+  !record {model: account.invoice, id: dd_invoice_4, view: False}:
+    partner_id: base.res_partner_2
+    type: out_invoice
+    currency_id: base.CHF
+    date_invoice: !eval time.strftime('%Y-%m')+'-08'
+    payment_mode_id: l10n_ch_pain_direct_debit.dd_pay_mode_xml_dd
+    mandate_id: l10n_ch_pain_direct_debit.post_mandate_xml_dd
+    invoice_line_ids:
+        -   account_id: l10n_ch_pain_credit_transfer.account_account_expenses
+            name: 'Some contact lenses'
+            price_unit: 400.00
+            quantity: 2.0
+
+-
+  !record {model: account.invoice, id: dd_invoice_5, view: False}:
+    partner_id: base.res_partner_2
+    type: out_invoice
+    currency_id: base.CHF
+    date_invoice: !eval time.strftime('%Y-%m')+'-08'
+    payment_mode_id: l10n_ch_pain_direct_debit.dd_pay_mode_xml_dd
+    mandate_id: l10n_ch_pain_direct_debit.post_mandate_xml_dd
+    invoice_line_ids:
+        -   account_id: l10n_ch_pain_credit_transfer.account_account_expenses
+            name: 'Some contact lenses'
+            price_unit: 250.00
+            quantity: 3.0
+
+-
+  !record {model: account.invoice, id: dd_invoice_6, view: False}:
+    partner_id: base.res_partner_2
+    type: out_invoice
+    currency_id: base.CHF
+    date_invoice: !eval time.strftime('%Y-%m')+'-08'
+    payment_mode_id: l10n_ch_pain_direct_debit.dd_pay_mode_xml_dd
+    mandate_id: l10n_ch_pain_direct_debit.post_mandate_xml_dd
+    invoice_line_ids:
+        -   account_id: l10n_ch_pain_credit_transfer.account_account_expenses
+            name: 'Some contact lenses'
+            price_unit: 120.00
+            quantity: 2.0
+
+-
+  !record {model: account.invoice, id: dd_invoice_7, view: False}:
+    partner_id: base.res_partner_2
+    type: out_invoice
+    currency_id: base.CHF
+    date_invoice: !eval time.strftime('%Y-%m')+'-08'
+    payment_mode_id: l10n_ch_pain_direct_debit.dd_pay_mode_xml_dd
+    mandate_id: l10n_ch_pain_direct_debit.post_mandate_xml_dd
+    invoice_line_ids:
+        -   account_id: l10n_ch_pain_credit_transfer.account_account_expenses
+            name: 'Some contact lenses'
+            price_unit: 2000.00
+            quantity: 1.0
+
+-
+  !record {model: account.invoice, id: dd_invoice_8, view: False}:
+    partner_id: base.res_partner_2
+    type: out_invoice
+    currency_id: base.CHF
+    date_invoice: !eval time.strftime('%Y-%m')+'-08'
+    payment_mode_id: l10n_ch_pain_direct_debit.dd_pay_mode_xml_dd
+    mandate_id: l10n_ch_pain_direct_debit.post_mandate_xml_dd
+    invoice_line_ids:
+        -   account_id: l10n_ch_pain_credit_transfer.account_account_expenses
+            name: 'Some contact lenses'
+            price_unit: 198.00
+            quantity: 2.0
+
+-
+  !record {model: account.invoice, id: dd_invoice_9, view: False}:
+    partner_id: base.res_partner_2
+    type: out_invoice
+    currency_id: base.CHF
+    date_invoice: !eval time.strftime('%Y-%m')+'-08'
+    payment_mode_id: l10n_ch_pain_direct_debit.dd_pay_mode_xml_dd
+    mandate_id: l10n_ch_pain_direct_debit.post_mandate_xml_dd
+    invoice_line_ids:
+        -   account_id: l10n_ch_pain_credit_transfer.account_account_expenses
+            name: 'Some contact lenses'
+            price_unit: 193.00
+            quantity: 5.0
+
+-
+  !record {model: account.invoice, id: dd_invoice_10, view: False}:
+    partner_id: base.res_partner_2
+    type: out_invoice
+    currency_id: base.CHF
+    date_invoice: !eval time.strftime('%Y-%m')+'-08'
+    payment_mode_id: l10n_ch_pain_direct_debit.dd_pay_mode_xml_dd
+    mandate_id: l10n_ch_pain_direct_debit.post_mandate_xml_dd
+    invoice_line_ids:
+        -   account_id: l10n_ch_pain_credit_transfer.account_account_expenses
+            name: 'Some contact lenses'
+            price_unit: 200.00
+            quantity: 3.2
+
+-
+  !python {model: account.invoice, id: dd_invoice_1}: |
+    if self.state == 'draft':
+      self.action_invoice_open()
+
+-
+  !python {model: account.invoice, id: dd_invoice_1}: |
+    if self.state == 'open':
+      self.create_account_payment_line()
+
+-
+  !python {model: account.invoice, id: dd_invoice_2}: |
+    if self.state == 'draft':
+      self.action_invoice_open()
+
+-
+  !python {model: account.invoice, id: dd_invoice_2}: |
+    if self.state == 'open':
+      self.create_account_payment_line()
+
+-
+  !python {model: account.invoice, id: dd_invoice_3}: |
+    if self.state == 'draft':
+      self.action_invoice_open()
+
+-
+  !python {model: account.invoice, id: dd_invoice_3}: |
+    if self.state == 'open':
+      self.create_account_payment_line()
+
+-
+  !python {model: account.invoice, id: dd_invoice_4}: |
+    if self.state == 'draft':
+      self.action_invoice_open()
+
+-
+  !python {model: account.invoice, id: dd_invoice_4}: |
+    if self.state == 'open':
+      self.create_account_payment_line()
+
+-
+  !python {model: account.invoice, id: dd_invoice_5}: |
+    if self.state == 'draft':
+      self.action_invoice_open()
+
+-
+  !python {model: account.invoice, id: dd_invoice_5}: |
+    if self.state == 'open':
+      self.create_account_payment_line()
+
+-
+  !python {model: account.invoice, id: dd_invoice_6}: |
+    if self.state == 'draft':
+      self.action_invoice_open()
+
+-
+  !python {model: account.invoice, id: dd_invoice_6}: |
+    if self.state == 'open':
+      self.create_account_payment_line()
+
+-
+  !python {model: account.invoice, id: dd_invoice_7}: |
+    if self.state == 'draft':
+      self.action_invoice_open()
+
+-
+  !python {model: account.invoice, id: dd_invoice_7}: |
+    if self.state == 'open':
+      self.create_account_payment_line()
+
+-
+  !python {model: account.invoice, id: dd_invoice_8}: |
+    if self.state == 'draft':
+      self.action_invoice_open()
+
+-
+  !python {model: account.invoice, id: dd_invoice_8}: |
+    if self.state == 'open':
+      self.create_account_payment_line()
+
+-
+  !python {model: account.invoice, id: dd_invoice_9}: |
+    if self.state == 'draft':
+      self.action_invoice_open()
+
+-
+  !python {model: account.invoice, id: dd_invoice_9}: |
+    if self.state == 'open':
+      self.create_account_payment_line()
+
+-
+  !python {model: account.invoice, id: dd_invoice_10}: |
+    if self.state == 'draft':
+      self.action_invoice_open()
+
+-
+  !python {model: account.invoice, id: dd_invoice_10}: |
+    if self.state == 'open':
+      self.create_account_payment_line()
