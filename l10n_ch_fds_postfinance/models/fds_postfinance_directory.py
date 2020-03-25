@@ -46,4 +46,3 @@ class FdsPostfinanceDirectory(models.Model):
         help="Install sub-modules to support various file types provided by "
              "Postfinance."
     )
-

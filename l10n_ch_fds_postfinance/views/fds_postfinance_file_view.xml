@@ -62,7 +62,7 @@
                 <field name="state"/>
                 <filter name="active" string="Active" domain="[('state','!=','cancel')]"/>
                 <group expand="0" string="Group By...">
-                    <filter string="State" domain="[]" context="{'group_by':'state'}"/>
+                    <filter name="state" string="State" domain="[]" context="{'group_by':'state'}"/>
                 </group>
             </search>
         </field>

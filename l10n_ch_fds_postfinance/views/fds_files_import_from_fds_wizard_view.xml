@@ -23,7 +23,7 @@
                     <p>You don't have the permission.</p>
                 </group>
                 <group states="errorSFTP">
-                    <p>SFTP unable to connect.</p>
+                    <p>Error happened while importing files. See the console for error logs.</p>
                 </group>
                 <footer>
                     <button string="import" name="import_button" type="object" class="oe_highlight" states="default" />

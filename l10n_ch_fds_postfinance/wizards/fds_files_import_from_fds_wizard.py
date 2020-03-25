@@ -113,11 +113,11 @@ class FdsFilesImportFromFDSWizard(models.TransientModel):
                 self.process_files(file)
 
             self.state = 'done'
-        except Exception as e:
+        except:
             self.env.cr.rollback()
             self.env.clear()
             self.state = 'errorSFTP'
-            _logger.error(traceback.print_exc())
+            _logger.error('Error while importing Postfinance files', exc_info=True)
         finally:
             try:
                 tmp_key.close()
