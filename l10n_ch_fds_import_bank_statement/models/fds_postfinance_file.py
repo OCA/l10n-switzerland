@@ -17,6 +17,9 @@ class FdsPostfinanceFile(models.Model):
         ondelete='restrict',
         readonly=True,
     )
+    file_type = fields.Selection(selection_add=[
+        ('camt.054', 'CAMT 054 Postfinance Statement')
+    ])
 
     @api.multi
     def import_to_bank_statement_button(self):
