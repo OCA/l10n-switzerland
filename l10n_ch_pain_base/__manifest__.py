@@ -16,6 +16,7 @@
     "data": [
         'views/account_payment_line.xml',
         'views/bank_payment_line.xml',
+        'views/account_payment_method_view.xml'
     ],
     'installable': True,
 }
