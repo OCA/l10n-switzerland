@@ -46,15 +46,15 @@ class AccountPaymentOrder(models.Model):
 
     @api.model
     def generate_start_payment_info_block(
-            self, parent_node, payment_info_ident,
-            priority, local_instrument, category_purpose, sequence_type,
-            requested_date, eval_ctx, gen_args):
+        self, parent_node, payment_info_ident,
+        priority, local_instrument, category_purpose, sequence_type,
+        requested_date, sepa, eval_ctx, gen_args):
         if gen_args.get('pain_flavor') == 'pain.001.001.03.ch.02':
             gen_args['local_instrument_type'] = 'proprietary'
             gen_args['structured_remittance_issuer'] = False
         return super().generate_start_payment_info_block(
             parent_node, payment_info_ident, priority, local_instrument,
-            category_purpose, sequence_type, requested_date, eval_ctx,
+            category_purpose, sequence_type, requested_date, sepa, eval_ctx,
             gen_args,
         )
 
