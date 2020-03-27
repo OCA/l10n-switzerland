@@ -34,21 +34,16 @@ class AccountPaymentOrder(models.Model):
 
     @api.multi
     def show_invoices(self):
-        move_ids = [pay_line.move_line_id.move_id.id
-                    for pay_order in self
-                    for pay_line in pay_order.payment_line_ids]
-
-        action = {
+        return {
             'name': _('Related invoices'),
             'type': 'ir.actions.act_window',
             'view_type': 'form',
             'view_mode': 'tree,form',
-            'domain': [('move_id', 'in', move_ids)],
+            'domain': [('move_id', 'in', self.mapped(
+                'payment_line_ids.move_line_id.move_id').ids)],
             'res_model': 'account.invoice',
             'target': 'current',
         }
-
-        return action
 
     @api.multi
     def generate_payment_file(self):
