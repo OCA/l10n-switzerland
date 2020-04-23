@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from odoo.tests import TransactionCase
 from odoo.modules import get_module_resource
 
