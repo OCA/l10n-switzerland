@@ -1,11 +1,6 @@
 # Copyright 2020 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import re
-
-from odoo import api, fields, models, _
-from odoo.tools.misc import mod10r
-
-import werkzeug.urls
+from odoo import models
 
 
 def _is_l10n_ch_qr_iban(account_ref):
