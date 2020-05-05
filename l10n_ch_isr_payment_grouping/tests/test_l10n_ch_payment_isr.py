@@ -1,9 +1,10 @@
+# Copyright 2020 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+import time
+
 from odoo import tools
 from odoo.modules.module import get_resource_path
-from odoo.exceptions import ValidationError
-from odoo.tests import common, tagged
-
-import time
+from odoo.tests import Form, common, tagged
 
 ISR1 = "703192500010549027000209403"
 ISR2 = "120000000000234478943216899"
@@ -29,48 +30,18 @@ class PaymentISR(common.TransactionCase):
         self, supplier, ref, currency_to_use="base.CHF", inv_date=None
     ):
         """ Generates a test invoice """
-        product = self.env.ref("product.product_product_4")
-        invoice = (
-            self.env["account.invoice"]
-            .with_context(default_type="out_invoice")
-            .create(
-                {
-                    "type": "in_invoice",
-                    "reference": ref,
-                    "partner_id": supplier.id,
-                    "currency_id": self.env.ref(currency_to_use).id,
-                    "date_invoice": inv_date or time.strftime("%Y") + "-12-22",
-                    "invoice_line_ids": [
-                        (
-                            0,
-                            0,
-                            {
-                                "name": product.name,
-                                "product_id": product.id,
-                                "account_id": self.env["account.account"]
-                                .search(
-                                    [
-                                        (
-                                            "user_type_id",
-                                            "=",
-                                            self.env.ref(
-                                                "account.data_account_type_revenue"
-                                            ).id,
-                                        )
-                                    ],
-                                    limit=1,
-                                )
-                                .id,
-                                "quantity": 1,
-                                "price_unit": 42,
-                            },
-                        )
-                    ],
-                }
-            )
-        )
-        invoice.action_invoice_open()
+        f = Form(self.env["account.move"].with_context(default_type="in_invoice"))
+        f.partner_id = supplier
+        f.invoice_payment_ref = ref
+        f.currency_id = self.env.ref(currency_to_use)
+        f.invoice_date = inv_date or time.strftime("%Y") + "-12-22"
+        with f.invoice_line_ids.new() as line:
+            line.product_id = self.env.ref("product.product_product_4")
+            line.quantity = 1
+            line.price_unit = 42
 
+        invoice = f.save()
+        invoice.post()
         return invoice
 
     def create_bank_account(self, number, partner, bank=None):
@@ -111,6 +82,17 @@ class PaymentISR(common.TransactionCase):
             "CH61 0839 0107 6280 0100 0", self.supplier_iban, abs_bank
         )
 
+    def _filter_vals_to_test(self, vals):
+        return [
+            (
+                v["communication"],
+                v["partner_id"],
+                len(v["invoice_ids"][0][2]),
+                v["amount"],
+            )
+            for v in sorted(vals, key=lambda i: (i["communication"], i["partner_id"]))
+        ]
+
     def test_payment_isr_grouping(self):
         """Create multiple invoices to test grouping by partner and ISR
 
@@ -118,118 +100,70 @@ class PaymentISR(common.TransactionCase):
         invoices = (
             self.create_supplier_invoice(self.supplier_isrb1, ISR1)
             | self.create_supplier_invoice(self.supplier_isrb1, ISR2)
-            # using same vendor reference is not supporter in v12
-            # | self.create_supplier_invoice(self.supplier_isrb1, ISR2, inv_date=time.strftime('%Y') + '-12-23')
+            | self.create_supplier_invoice(
+                self.supplier_isrb1, ISR2, inv_date=time.strftime("%Y") + "-12-23"
+            )
             | self.create_supplier_invoice(self.supplier_isrb2, ISR2)
             | self.create_supplier_invoice(self.supplier_iban, "1234")
             | self.create_supplier_invoice(self.supplier_iban, "5678")
         )
         # create an invoice where ref is set instead of invoice_payment_ref
-        # only valable for v13
-        # inv_ref = self.create_supplier_invoice(self.supplier_isrb1, False)
-        # inv_ref.reference = ISR2
-        # invoices |= inv_ref
+        inv_ref = self.create_supplier_invoice(self.supplier_isrb1, False)
+        inv_ref.ref = ISR2
+        invoices |= inv_ref
         inv_no_ref = self.create_supplier_invoice(self.supplier_iban, False)
         invoices |= inv_no_ref
-        # create an invoice where ref is set instead of invoice_payment_ref
-        PaymentRegister = self.env["account.register.payments"]
-        ctx = {"active_model": "account.invoice", "active_ids": invoices.ids}
-        register = PaymentRegister.with_context(ctx).create(
-            {
-                "payment_date": time.strftime("%Y") + "-12-28",
-                "journal_id": self.bank_journal_chf.id,
-                "payment_method_id": self.payment_method_manual_in.id,
-                "group_invoices": True,
-            }
-        )
+        PaymentRegister = self.env["account.payment.register"]
+        ctx = {"active_model": "account.move", "active_ids": invoices.ids}
+        register = PaymentRegister.with_context(ctx).create({"group_payment": True})
 
         vals = register.get_payments_vals()
         self.assertEqual(len(vals), 4)
         expected_vals = [
             # ref, partner, invoice count, amount
             # 3 invoices #2, #3 and inv_ref grouped in one payment with a single ref
-            # due to unsuported duplicate ref results differs from v13
-            # (ISR2, self.supplier_isrb1.id, 3, 126.0),
-            (ISR2, self.supplier_isrb1.id, 1, 42.0),
+            (ISR2, self.supplier_isrb1.id, 3, 126.0),
             # different partner, different payment
             (ISR2, self.supplier_isrb2.id, 1, 42.0),
+            # not ISR, standard grouping
+            ("1234 5678 {}".format(inv_no_ref.name), self.supplier_iban.id, 3, 126.0,),
             # different ISR reference, different payment
             (ISR1, self.supplier_isrb1.id, 1, 42.0),
-            # not ISR, standard grouping
-            (
-                "{} 5678 1234".format(inv_no_ref.move_name),
-                self.supplier_iban.id,
-                3,
-                126.0,
-            ),
         ]
-        self.assertEqual(
-            [
-                (
-                    v["communication"],
-                    v["partner_id"],
-                    len(v["invoice_ids"][0][2]),
-                    v["amount"],
-                )
-                for v in sorted(
-                    vals, key=lambda i: (i["communication"], i["partner_id"])
-                )
-            ],
-            expected_vals,
-        )
+        to_test_vals = self._filter_vals_to_test(vals)
+        self.assertEqual(to_test_vals, expected_vals)
 
     def test_payment_isr_grouping_single_supplier(self):
         """Test grouping of ISR on a single supplier
 
-        No grouping on ISR should apply
+        No grouping of different ISR should apply
 
         """
         invoices = (
             self.create_supplier_invoice(self.supplier_isrb1, ISR1)
             | self.create_supplier_invoice(self.supplier_isrb1, ISR2)
-            # using same vendor reference is not supporter in v12
-            # | self.create_supplier_invoice(self.supplier_isrb1, ISR2, inv_date=time.strftime('%Y') + '-12-23')
+            | self.create_supplier_invoice(
+                self.supplier_isrb1, ISR2, inv_date=time.strftime("%Y") + "-12-23"
+            )
         )
-        # create an invoice where ref is set instead of invoice_payment_ref
-        PaymentRegister = self.env["account.register.payments"]
-        ctx = {"active_model": "account.invoice", "active_ids": invoices.ids}
-        register = PaymentRegister.with_context(ctx).create(
-            {
-                "payment_date": time.strftime("%Y") + "-12-28",
-                "journal_id": self.bank_journal_chf.id,
-                "payment_method_id": self.payment_method_manual_in.id,
-                "group_invoices": True,
-            }
-        )
+        PaymentRegister = self.env["account.payment.register"]
+        ctx = {"active_model": "account.move", "active_ids": invoices.ids}
+        register = PaymentRegister.with_context(ctx).create({"group_payment": True})
 
         vals = register.get_payments_vals()
         self.assertEqual(len(vals), 2)
         expected_vals = [
             # ref, partner, invoice count, amount
-            # 3 invoices #2, #3 and inv_ref grouped in one payment with a single ref
-            # due to unsuported duplicate ref results differs from v13
-            # (ISR2, self.supplier_isrb1.id, 3, 126.0),
-            (ISR2, self.supplier_isrb1.id, 1, 42.0),
-            # different ISR reference, different payment
+            # 2 invoices with same ISR are grouped
+            (ISR2, self.supplier_isrb1.id, 2, 84.0),
+            # the invoice with a different ISR makes a different payment
             (ISR1, self.supplier_isrb1.id, 1, 42.0),
         ]
-        self.assertEqual(
-            [
-                (
-                    v["communication"],
-                    v["partner_id"],
-                    len(v["invoice_ids"][0][2]),
-                    v["amount"],
-                )
-                for v in sorted(
-                    vals, key=lambda i: (i["communication"], i["partner_id"])
-                )
-            ],
-            expected_vals,
-        )
+        to_test_vals = self._filter_vals_to_test(vals)
+        self.assertEqual(to_test_vals, expected_vals)
 
     def test_payment_isr_single_supplier(self):
-        """Test grouping of ISR on a single supplier
+        """Test no grouping of ISR on a single supplier
 
         No grouping on ISR should apply
 
@@ -237,46 +171,25 @@ class PaymentISR(common.TransactionCase):
         invoices = (
             self.create_supplier_invoice(self.supplier_isrb1, ISR1)
             | self.create_supplier_invoice(self.supplier_isrb1, ISR2)
-            # using same vendor reference is not supporter in v12
-            # | self.create_supplier_invoice(self.supplier_isrb1, ISR2, inv_date=time.strftime('%Y') + '-12-23')
+            | self.create_supplier_invoice(
+                self.supplier_isrb1, ISR2, inv_date=time.strftime("%Y") + "-12-23"
+            )
         )
-        # create an invoice where ref is set instead of invoice_payment_ref
-        PaymentRegister = self.env["account.register.payments"]
-        ctx = {"active_model": "account.invoice", "active_ids": invoices.ids}
-        register = PaymentRegister.with_context(ctx).create(
-            {
-                "payment_date": time.strftime("%Y") + "-12-28",
-                "journal_id": self.bank_journal_chf.id,
-                "payment_method_id": self.payment_method_manual_in.id,
-                "group_invoices": True,
-            }
-        )
+        PaymentRegister = self.env["account.payment.register"]
+        ctx = {"active_model": "account.move", "active_ids": invoices.ids}
+        register = PaymentRegister.with_context(ctx).create({"group_payment": False})
 
         vals = register.get_payments_vals()
-        self.assertEqual(len(vals), 2)
+        self.assertEqual(len(vals), 3)
         expected_vals = [
+            # no grouping expected
             # ref, partner, invoice count, amount
-            # 3 invoices #2, #3 and inv_ref grouped in one payment with a single ref
-            # due to unsuported duplicate ref results differs from v13
-            # (ISR2, self.supplier_isrb1.id, 3, 126.0),
             (ISR2, self.supplier_isrb1.id, 1, 42.0),
-            # different ISR reference, different payment
+            (ISR2, self.supplier_isrb1.id, 1, 42.0),
             (ISR1, self.supplier_isrb1.id, 1, 42.0),
         ]
-        self.assertEqual(
-            [
-                (
-                    v["communication"],
-                    v["partner_id"],
-                    len(v["invoice_ids"][0][2]),
-                    v["amount"],
-                )
-                for v in sorted(
-                    vals, key=lambda i: (i["communication"], i["partner_id"])
-                )
-            ],
-            expected_vals,
-        )
+        to_test_vals = self._filter_vals_to_test(vals)
+        self.assertEqual(to_test_vals, expected_vals)
 
     def test_payment_non_isr_grouping_single_supplier(self):
         """Test grouping of non ISR on a single partner
@@ -287,79 +200,43 @@ class PaymentISR(common.TransactionCase):
         invoices = self.create_supplier_invoice(
             self.supplier_iban, "INV1"
         ) | self.create_supplier_invoice(self.supplier_iban, "INV2")
-        # create an invoice where ref is set instead of invoice_payment_ref
-        PaymentRegister = self.env["account.register.payments"]
-        ctx = {"active_model": "account.invoice", "active_ids": invoices.ids}
-        register = PaymentRegister.with_context(ctx).create(
-            {
-                "payment_date": time.strftime("%Y") + "-12-28",
-                "journal_id": self.bank_journal_chf.id,
-                "payment_method_id": self.payment_method_manual_in.id,
-                "group_invoices": True,
-            }
-        )
+        PaymentRegister = self.env["account.payment.register"]
+        ctx = {"active_model": "account.move", "active_ids": invoices.ids}
+        register = PaymentRegister.with_context(ctx).create({"group_payment": True})
 
         vals = register.get_payments_vals()
         self.assertEqual(len(vals), 1)
+
         expected_vals = [
-            # ref, partner, invoice count, amount
             # 2 invoices grouped in one payment
+            # ref, partner, invoice count, amount
             ("INV1 INV2", self.supplier_iban.id, 2, 84.0)
         ]
-        self.assertEqual(
-            [
-                (
-                    v["communication"],
-                    v["partner_id"],
-                    len(v["invoice_ids"][0][2]),
-                    v["amount"],
-                )
-                for v in sorted(
-                    vals, key=lambda i: (i["communication"], i["partner_id"])
-                )
-            ],
-            expected_vals,
-        )
+        to_test_vals = self._filter_vals_to_test(vals)
+        self.assertEqual(to_test_vals, expected_vals)
 
     def test_payment_non_isr_single_supplier(self):
         """Test no grouping of non ISR on a single partner
 
-        Automatic grouping on free ref applies
+        No grouping on free ref applies
 
         """
+        # This differs from v12 where an automatic grouping is done anyway
+        # v13 respects the choice of the user
         invoices = self.create_supplier_invoice(
             self.supplier_iban, "INV1"
         ) | self.create_supplier_invoice(self.supplier_iban, "INV2")
-        # create an invoice where ref is set instead of invoice_payment_ref
-        PaymentRegister = self.env["account.register.payments"]
-        ctx = {"active_model": "account.invoice", "active_ids": invoices.ids}
-        register = PaymentRegister.with_context(ctx).create(
-            {
-                "payment_date": time.strftime("%Y") + "-12-28",
-                "journal_id": self.bank_journal_chf.id,
-                "payment_method_id": self.payment_method_manual_in.id,
-                "group_invoices": False,
-            }
-        )
+        PaymentRegister = self.env["account.payment.register"]
+        ctx = {"active_model": "account.move", "active_ids": invoices.ids}
+        register = PaymentRegister.with_context(ctx).create({"group_payment": False})
 
         vals = register.get_payments_vals()
-        self.assertEqual(len(vals), 1)
+        self.assertEqual(len(vals), 2)
         expected_vals = [
+            # no grouping expected
             # ref, partner, invoice count, amount
-            # 2 invoices grouped
-            ("INV2", self.supplier_iban.id, 2, 84.0),
+            ("INV1", self.supplier_iban.id, 1, 42.0),
+            ("INV2", self.supplier_iban.id, 1, 42.0),
         ]
-        self.assertEqual(
-            [
-                (
-                    v["communication"],
-                    v["partner_id"],
-                    len(v["invoice_ids"][0][2]),
-                    v["amount"],
-                )
-                for v in sorted(
-                    vals, key=lambda i: (i["communication"], i["partner_id"])
-                )
-            ],
-            expected_vals,
-        )
+        to_test_vals = self._filter_vals_to_test(vals)
+        self.assertEqual(to_test_vals, expected_vals)
