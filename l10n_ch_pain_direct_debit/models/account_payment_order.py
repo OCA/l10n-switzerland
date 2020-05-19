@@ -117,7 +117,7 @@ class AccountPaymentOrder(models.Model):
     def generate_start_payment_info_block(
         self, parent_node, payment_info_ident,
         priority, local_instrument, category_purpose, sequence_type,
-        requested_date, sepa, eval_ctx, gen_args):
+            requested_date, sepa, eval_ctx, gen_args):
         """ This is overridden because pain.008.001.03.ch.01 uses a different
             XML structure. The code is basically the same that can be found
             on the module account_banking_pain_base's method
@@ -168,6 +168,8 @@ class AccountPaymentOrder(models.Model):
                 else:
                     prtry_value = 'CHTA'
                     local_instrument = 'LSV+'
+                    for line in self.bank_line_ids:
+                        line.local_instrument = local_instrument
                 service_level_value.text = prtry_value
                 local_instr_value.text = local_instrument
 
@@ -221,6 +223,9 @@ class AccountPaymentOrder(models.Model):
                 etree.SubElement(party_agent_clearing, 'MmbId')
             party_agent_clearing_identification.text = \
                 partner_bank.bank_id.clearing.zfill(5)
+            ccp_other = etree.SubElement(party_agent_institution, 'Othr')
+            ccp_other_id = etree.SubElement(ccp_other, 'Id')
+            ccp_other_id.text = self.company_partner_bank_id.l10n_ch_postal
             res = True
         else:
             res = super(AccountPaymentOrder, self).generate_party_agent(
@@ -366,6 +371,34 @@ class AccountPaymentOrder(models.Model):
 
         return True
 
+    @api.model
+    def generate_remittance_info_block(self, parent_node, line, gen_args):
+        if line.local_instrument == "LSV+":
+            remittance_info = etree.SubElement(
+                parent_node, 'RmtInf')
+            remittance_info_unstructured = etree.SubElement(
+                remittance_info, 'Ustrd')
+            remittance_info_unstructured.text = self._prepare_field(
+                'Remittance Unstructured Information',
+                'line.communication', {'line': line}, 140,
+                gen_args=gen_args)
+            remittance_info_structured = etree.SubElement(
+                remittance_info, 'Strd')
+            creditor_ref_information = etree.SubElement(
+                remittance_info_structured, 'CdtrRefInf')
+            creditor_ref_info_type = etree.SubElement(
+                creditor_ref_information, 'Tp')
+            creditor_ref_info_type_or = etree.SubElement(
+                creditor_ref_info_type, 'CdOrPrtry')
+            creditor_ref_info_type_code = etree.SubElement(
+                creditor_ref_info_type_or, 'Prtry')
+            creditor_ref_info_type_code.text = 'ESR'
+            creditor_reference = etree.SubElement(
+                creditor_ref_information, 'Ref')
+            creditor_reference.text = line.payment_line_ids[0].communication
+        else:
+            super().generate_remittance_info_block(parent_node, line, gen_args)
+
     @api.multi
     def generate_xml_ch_dd_file(self):
         self.ensure_one()
@@ -402,9 +435,9 @@ class AccountPaymentOrder(models.Model):
             key = (line.date, line.priority, line.local_instrument)
             lines_per_group.setdefault(key, []).append(line)
 
+        index = 0
         for (req_date, prio, local_inst), lines in \
                 list(lines_per_group.items()):
-
             # Creates the tags <PmtInf>/  [<PmtInfId>, <PmtMtd>,
             # <PmtTpInf>, <ReqdColltnDt>]
             payment_info, nb_of_transactions_b, control_sum_b = \
@@ -413,12 +446,12 @@ class AccountPaymentOrder(models.Model):
                     "self.name + '-' "
                     "+ str(requested_date) + '-' + priority + "
                     "'-' + local_instrument",
-                    prio, local_inst, False, False, req_date, {
+                    prio, local_inst, False, False, req_date, False, eval_ctx={
                         'self': self,
                         'priority': prio,
                         'requested_date': req_date,
                         'local_instrument': local_inst or 'NOinstr',
-                    }, gen_args)
+                    }, gen_args=gen_args)
 
             # Creates the tags <PmtInf>/  [<Cdtr>, <CdtrAcct>, <CdtrAgt>]
             self.generate_party_block(payment_info, 'Cdtr', 'B',
@@ -427,15 +460,27 @@ class AccountPaymentOrder(models.Model):
             # <PmtInf>/  <CdtrSchmeId>
             creditor_scheme_identification = \
                 etree.SubElement(payment_info, 'CdtrSchmeId')
+
+            if not local_inst:
+                local_inst = lines[index].local_instrument
+
+            scheme_name_proprietary = ""
+            if local_inst == "DDCOR1":
+                scheme_name_proprietary = "CHDD"
+            elif local_inst == "LSV+":
+                scheme_name_proprietary = "CHLS"
+
             self.generate_creditor_scheme_identification(
                 creditor_scheme_identification,
                 'self.payment_mode_id.initiating_party_identifier or '
                 'self.company_id.initiating_party_identifier',
-                'SEPA Creditor Identifier', {'self': self}, 'CHDD', gen_args)
+                'SEPA Creditor Identifier', {'self': self},
+                scheme_name_proprietary, gen_args)
 
             # <PmtInf>/  <DrctDbtTxInf>
             self.generate_dd_transaction_information(
                 payment_info, self.company_partner_bank_id, lines, gen_args)
+            index = index + 1
 
         # It sets the number of transactions, <NbOfTxs>
         nb_of_transactions_a.text = str(len(self.bank_line_ids))
