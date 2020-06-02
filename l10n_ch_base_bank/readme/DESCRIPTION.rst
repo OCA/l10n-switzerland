@@ -1,7 +1,12 @@
-This addons will add different bank types required by specific Swiss electronic
-payment like DTA and ISR. It allows to manage both Post and Bank systems.
+This addon extend the features of l10n_ch.
 
-It'll perform some validation when entering or filling bank account number or ESR number
-in invoice and add some Swiss specific fields on bank.
+Most of the former features have been moved in l10n_ch module.
 
-This module is required if you want to use electronic payment in Switzerland.
+
+Features:
+
+Improve UX with onchanges:
+
+- automatically set bank based on clearing part of IBAN
+- allow direct entry of l10n_ch_postal which will fill acc_number
+- search invoices by ISR, with or without spaces
