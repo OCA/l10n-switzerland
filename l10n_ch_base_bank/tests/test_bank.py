@@ -31,7 +31,7 @@ class TestBank(common.SavepointCase):
         cls.post_bank = cls.env["res.bank"].search([("bic", "=", "POFICHBEXXX")])
         if not cls.post_bank:
             cls.post_bank = cls.env["res.bank"].create(
-                {"name": "PostFinance AG", "bic": "POFICHBEXXX", "clearing": "09000"}
+                {"name": "PostFinance AG", "bic": "POFICHBEXXX", "clearing": "9000"}
             )
 
     def new_form(self):
