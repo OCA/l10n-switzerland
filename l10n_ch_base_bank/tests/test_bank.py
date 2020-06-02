@@ -94,8 +94,7 @@ class TestBank(common.SavepointCase):
 
         self.assertEqual(account.bank_id, self.bank)
         self.assertEqual(
-            account.acc_number,
-            "Azure Interior/Postal number {}".format(CH_SUBSCRIPTION),
+            account.acc_number, "ISR {} Azure Interior".format(CH_SUBSCRIPTION),
         )
         self.assertEqual(account.l10n_ch_postal, CH_SUBSCRIPTION)
         self.assertEqual(account.acc_type, "bank")
@@ -108,10 +107,10 @@ class TestBank(common.SavepointCase):
         self.assertFalse(account.bank_id)
         # if acc_number given by user don't update it
         self.assertEqual(
-            account.acc_number, "Azure Interior/Postal number {}".format(CH_POSTAL)
+            account.acc_number, CH_POSTAL,
         )
         self.assertEqual(account.l10n_ch_postal, CH_POSTAL)
-        self.assertEqual(account.acc_type, "bank")
+        self.assertEqual(account.acc_type, "postal")
 
         bank_acc.bank_id = self.post_bank
         bank_acc.save()
@@ -133,17 +132,16 @@ class TestBank(common.SavepointCase):
         self.assertEqual(account.acc_type, "postal")
 
     def test_postal_without_bank(self):
-        # We don't know it is a postal account
+        """It doesn't start with 01 or 03
+        it is a postal account"""
         bank_acc = self.new_form()
         bank_acc.acc_number = CH_POSTAL
         account = bank_acc.save()
 
         self.assertFalse(account.bank_id)
-        self.assertEqual(
-            account.acc_number, "Azure Interior/Postal number {}".format(CH_POSTAL)
-        )
+        self.assertEqual(account.acc_number, CH_POSTAL)
         self.assertEqual(account.l10n_ch_postal, CH_POSTAL)
-        self.assertEqual(account.acc_type, "bank")
+        self.assertEqual(account.acc_type, "postal")
 
     def test_iban_postal(self):
         bank_acc = self.new_form()
@@ -192,7 +190,7 @@ class TestBank(common.SavepointCase):
         # we create bank account
         # action runs in UI before creation
         bank_acc = self.new_form()
-        bank_acc.acc_number = None
+        # bank_acc.acc_number = None
         bank_acc.l10n_ch_postal = CH_POSTAL
         bank_acc.bank_id = self.bank
         account = bank_acc.save()
@@ -200,9 +198,7 @@ class TestBank(common.SavepointCase):
         # in result we should get new ccp number as we have bank_id and
         # this he has ccp, new acc_number
 
-        self.assertEqual(
-            account.acc_number, "Azure Interior/Postal number {}".format(CH_POSTAL)
-        )
+        self.assertEqual(account.acc_number, CH_POSTAL)
         self.assertEqual(account.l10n_ch_postal, CH_POSTAL)
         self.assertEqual(account.bank_id, self.bank)
 
@@ -253,39 +249,49 @@ class TestBank(common.SavepointCase):
 
         # account number set based on ccp
         self.assertEqual(
-            account.acc_number,
-            "Azure Interior/Postal number {}".format(CH_SUBSCRIPTION),
+            account.acc_number, "ISR {} Azure Interior".format(CH_SUBSCRIPTION),
         )
         self.assertEqual(account.l10n_ch_postal, CH_SUBSCRIPTION)
 
     def test_onchange_post_bank_acc_number(self):
+        """Check postal is copied to acc_number"""
         bank_acc = self.new_empty_form()
         bank_acc.bank_id = self.post_bank
         bank_acc.l10n_ch_postal = CH_POSTAL
 
+        # if it's postal, copy the value in acc_number
         self.assertEqual(bank_acc.l10n_ch_postal, CH_POSTAL)
         self.assertEqual(bank_acc.acc_number, CH_POSTAL)
 
-        # if it's postal update acc_number after the cpp number
+        # if it's ISR subscription, copy ISR + value in acc_number
         bank_acc.l10n_ch_postal = CH_SUBSCRIPTION
         self.assertEqual(
-            bank_acc.acc_number, "Postal number {}".format(CH_SUBSCRIPTION)
+            bank_acc.acc_number, "ISR {}".format(CH_SUBSCRIPTION),
         )
 
+        # if it's ISR subscription, copy ISR + value in acc_number
+        # In this case we have the partner set
         bank_acc.partner_id = self.partner
         self.assertEqual(
-            bank_acc.acc_number,
-            "Azure Interior/Postal number {}".format(CH_SUBSCRIPTION),
+            bank_acc.acc_number, "ISR {} Azure Interior".format(CH_SUBSCRIPTION),
         )
         self.assertEqual(bank_acc.l10n_ch_postal, CH_SUBSCRIPTION)
 
-    def test_onchange_post_bank_ccp_in_acc_number(self):
+    def test_onchange_post_bank_isr_in_acc_number(self):
+        """On entering ISR in acc_number
+
+        Check acc_number is rewritten
+        and ISR subscription number is copied in l10n_ch_postal
+
+        """
         bank_acc = self.new_form()
         bank_acc.acc_number = CH_SUBSCRIPTION
         bank_acc.bank_id = self.post_bank
 
         self.assertEqual(bank_acc.l10n_ch_postal, CH_SUBSCRIPTION)
-        self.assertEqual(bank_acc.acc_number, CH_SUBSCRIPTION)
+        self.assertEqual(
+            bank_acc.acc_number, "ISR {} Azure Interior".format(CH_SUBSCRIPTION),
+        )
 
     def test_name_search(self):
         self.bank.bic = "BBAVBEBB"
@@ -311,8 +317,7 @@ class TestBank(common.SavepointCase):
 
         self.assertFalse(account2.bank_id)
         self.assertEqual(
-            account2.acc_number,
-            "Azure Interior/Postal number {} #1".format(CH_SUBSCRIPTION),
+            account2.acc_number, "ISR {} Azure Interior #1".format(CH_SUBSCRIPTION),
         )
         self.assertEqual(account2.acc_type, "bank")
 
@@ -323,22 +328,19 @@ class TestBank(common.SavepointCase):
         # no bank matches
         self.assertFalse(account3.bank_id)
         self.assertEqual(
-            account3.acc_number,
-            "Azure Interior/Postal number {} #2".format(CH_SUBSCRIPTION),
+            account3.acc_number, "ISR {} Azure Interior #2".format(CH_SUBSCRIPTION),
         )
         self.assertEqual(account3.acc_type, "bank")
         account3.unlink()
         # next acc_numbers properly generated
 
+        # after deletion reuse same number
         bank_acc_4 = self.new_form()
         bank_acc_4.acc_number = CH_SUBSCRIPTION
         account4 = bank_acc_4.save()
 
-        account4.onchange_acc_number_set_swiss_bank()
-        account4.onchange_bank_set_acc_number()
         self.assertEqual(
-            account4.acc_number,
-            "Azure Interior/Postal number {} #2".format(CH_SUBSCRIPTION),
+            account4.acc_number, "ISR {} Azure Interior #2".format(CH_SUBSCRIPTION),
         )
 
     def test_acc_name_generation(self):
@@ -355,27 +357,26 @@ class TestBank(common.SavepointCase):
         self.assertEqual(account.acc_number, CH_SUBSCRIPTION)
         # but if some onchange trigger recompilation of name we flash any name
         # only it's not iban type
-        account._update_acc_name()
-        self.assertEqual(account.acc_number, "")
+        account._update_acc_number()
+        self.assertFalse(account.acc_number)
         # still no name
         account.partner_id = self.partner
-        account._update_acc_name()
-        self.assertEqual(account.acc_number, "")
+        account._update_acc_number()
+        self.assertFalse(account.acc_number)
         account.l10n_ch_postal = CH_SUBSCRIPTION
-        account._update_acc_name()
+        account._update_acc_number()
         self.assertEqual(
-            account.acc_number,
-            "Azure Interior/Postal number {}".format(CH_SUBSCRIPTION),
+            account.acc_number, "ISR {} Azure Interior".format(CH_SUBSCRIPTION),
         )
         # remove partner name
         account.partner_id = ""
-        account._update_acc_name()
-        self.assertEqual(account.acc_number, "Postal number {}".format(CH_SUBSCRIPTION))
+        account._update_acc_number()
+        self.assertEqual(account.acc_number, "ISR {}".format(CH_SUBSCRIPTION))
         # no changes for bank changes
         account.bank_id = self.bank
-        account._update_acc_name()
-        self.assertEqual(account.acc_number, "Postal number {}".format(CH_SUBSCRIPTION))
+        account._update_acc_number()
+        self.assertEqual(account.acc_number, "ISR {}".format(CH_SUBSCRIPTION))
         # everything cleanup
         account.l10n_ch_postal = ""
-        account._update_acc_name()
+        account._update_acc_number()
         self.assertEqual(account.acc_number, "")
