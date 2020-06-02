@@ -2,9 +2,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo.tests import common
 
+CH_POSTAL = "10-8060-7"
+CH_SUBSCRIPTION = "01-162-8"
+
 
 class TestBankType(common.SavepointCase):
-    def test_is_bank_account_with_post(self):
+    def test_is_bank_account_with_isr_issuer(self):
         bank = self.env["res.bank"].create(
             {"name": "BCV", "bic": "BCVLCH2LXXX", "clearing": "234234"}
         )
@@ -12,7 +15,8 @@ class TestBankType(common.SavepointCase):
             {
                 "partner_id": self.partner.id,
                 "bank_id": bank.id,
-                "acc_number": "Bank/Postal Nr 01-1234-1",
+                "acc_number": "ISR 01-1234-1",
+                "l10n_ch_postal": CH_SUBSCRIPTION,
             }
         )
         self.assertEqual(bank_account.acc_type, "bank")
@@ -25,7 +29,8 @@ class TestBankType(common.SavepointCase):
             {
                 "partner_id": self.partner.id,
                 "bank_id": bank.id,
-                "acc_number": "01-1234-1",
+                "acc_number": CH_POSTAL,
+                "l10n_ch_postal": CH_POSTAL,
             }
         )
         self.assertEqual(bank_account.acc_type, "postal")
