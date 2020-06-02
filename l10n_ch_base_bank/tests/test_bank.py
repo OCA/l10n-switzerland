@@ -35,19 +35,13 @@ class TestBank(common.SavepointCase):
             )
 
     def new_form(self):
-        form = Form(
-            self.env["res.partner.bank"],
-            view="l10n_ch_base_bank.add_postal_on_res_partner_bank",
-        )
+        form = Form(self.env["res.partner.bank"], view="l10n_ch.isr_partner_bank_form",)
         form.partner_id = self.partner
         return form
 
     def new_empty_form(self):
         # in some cases we need form without partner
-        form = Form(
-            self.env["res.partner.bank"],
-            view="l10n_ch_base_bank.add_postal_on_res_partner_bank",
-        )
+        form = Form(self.env["res.partner.bank"], view="l10n_ch.isr_partner_bank_form",)
         return form
 
     def test_bank_iban(self):
