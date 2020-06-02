@@ -86,7 +86,6 @@ class TestBank(common.SavepointCase):
         self.assertEqual(account.acc_type, "iban")
 
     def test_bank_postal(self):
-        # test UI onchange methods
         bank_acc = self.new_form()
         bank_acc.acc_number = CH_SUBSCRIPTION
         bank_acc.bank_id = self.bank
