@@ -86,7 +86,7 @@ class TestCreateMove(common.SavepointCase):
         move = inv_form.save()
         inv_form.save()
         self.assertFalse(move._is_isr_ref())
-        inv_form.invoice_partner_bank_id = False
+        inv_form.invoice_partner_bank_id = self.env['res.partner.bank']
         with self.assertRaises(exceptions.ValidationError):
             inv_form.ref = "132000000000000000000000014"
             inv_form.save()
