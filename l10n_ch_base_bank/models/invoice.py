@@ -1,9 +1,6 @@
 # Copyright 2012-2019 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import re
-
 from odoo import _, api, exceptions, models
-from odoo.tools import mod10r
 
 
 class AccountMove(models.Model):
@@ -73,8 +70,10 @@ class AccountMove(models.Model):
 
     @api.constrains("ref")
     def _check_bank_type_for_type_isr(self):
+        """Compatibility with module `account_payment_partner`"""
         for move in self:
-            if move.type == "out_invoice" and move._is_isr_ref():
+            ref = move.ref 
+            if move.type == "out_invoice" and move._is_isr_ref(ref):
                 if hasattr(super(), "partner_banks_to_show"):
                     bank_acc = move.partner_banks_to_show()
                 else:
@@ -105,23 +104,6 @@ class AccountMove(models.Model):
                         )
                     )
         return True
-
-    def _is_isr_ref(self):
-        """Check if the communication is a valid ISR ref
-
-        e.g.
-        210000000003139471430009017
-        21 00000 00003 13947 14300 09017
-
-        This is used to determine SEPA local instrument
-
-        """
-        if not self.ref:
-            return False
-        if re.match(r"^(\d{27}|\d{2}( \d{5}){5})$", self.ref):
-            ref = self.ref.replace(" ", "")
-            return ref == mod10r(ref[:-1])
-        return False
 
     def partner_banks_to_show(self):
         """
