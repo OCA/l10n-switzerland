@@ -6,7 +6,6 @@ import logging
 import os
 import shutil
 import tempfile
-import traceback
 
 from odoo import models, fields, api, _
 from odoo.exceptions import Warning as UserError
