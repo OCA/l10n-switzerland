@@ -39,7 +39,7 @@ class PaynetInvoiceMessage(models.Model):
         readonly=True,
     )
     invoice_id = fields.Many2one(
-        comodel_name="account.invoice", ondelete="restrict"
+        comodel_name="account.move", ondelete="restrict"
     )
     attachment_id = fields.Many2one('ir.attachment', 'PDF')
     state = fields.Selection(
@@ -65,7 +65,6 @@ class PaynetInvoiceMessage(models.Model):
     def _get_ic_ref(self):
         return 'SA%012d' % self.id
 
-    @api.multi
     def send_to_paynet(self):
         for message in self:
             message.payload = message._generate_payload()
@@ -83,7 +82,6 @@ class PaynetInvoiceMessage(models.Model):
             date_string = datetime.now()
         return date_string.strftime('%Y%m%d')
 
-    @api.multi
     def _generate_payload(self):
         self.ensure_one()
         assert self.state == 'draft'
@@ -104,13 +102,21 @@ class PaynetInvoiceMessage(models.Model):
             'biller': self.invoice_id.company_id,
             'customer': self.invoice_id.partner_id,
             'pdf_data': self.attachment_id.datas.decode('ascii'),
-            'bank': self.invoice_id.partner_bank_id,
+            'bank': self.invoice_id.invoice_partner_bank_id,
             'ic_ref': self.ic_ref,
             'payment_type': payment_type,
             'document_type': DOCUMENT_TYPE[self.invoice_id.type],
             'format_date': self.format_date,
             'ebill_account_number': self.ebill_account_number,
         }
+        amount_by_group = []
+        # Get the percentage of the tax from the name of the group
+        # Could be improve by searching in the account_tax linked to the group
+        for taxgroup in  self.invoice_id.amount_by_group:
+            rate = taxgroup[0].split()[-1:][0][:-1]
+            amount_by_group.append((rate or "0", taxgroup[1], taxgroup[2],))
+        params["amount_by_group"] = amount_by_group
+
         if self.service_id.service_type == 'b2b':
             payload = template_2003.render(params)
         else:

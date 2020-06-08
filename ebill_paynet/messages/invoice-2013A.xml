@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <XML-FSCM-INVOICE-2013A>
   <INTERCHANGE>
     <IC-SENDER>
@@ -16,7 +16,7 @@
       </FUNCTION-FLAGS>
       <MESSAGE-REFERENCE>
         <REFERENCE-DATE>
-          <Reference-No>{{ invoice.number }}</Reference-No>
+          <Reference-No>{{ invoice.name }}</Reference-No>
           <Date>{{ format_date() }}</Date>
         </REFERENCE-DATE>
       </MESSAGE-REFERENCE>
@@ -26,7 +26,7 @@
       <REFERENCE>
         <INVOICE-REFERENCE>
           <REFERENCE-DATE>
-            <Reference-No>{{ invoice.number }}</Reference-No>
+            <Reference-No>{{ invoice.name }}</Reference-No>
             <Date>{{ format_date(invoice.date_invoice) }}</Date>
           </REFERENCE-DATE>
         </INVOICE-REFERENCE>
@@ -95,18 +95,18 @@
       <EXTENDED-AMOUNT Type="79">
         <Amount Currency="CHF">{{ invoice.amount_untaxed }}</Amount>
       </EXTENDED-AMOUNT>
-      {% if invoice.tax_line_ids %}
-      {% for taxline in invoice.tax_line_ids %}
+      {% if amount_by_group %}
+      {% for taxgroup in amount_by_group %}
       <TAX>
         <TAX-BASIS>
-          <Amount Currency="CHF">{{ taxline.base }}</Amount>
+          <Amount Currency="CHF">{{ taxgroup[2] }}</Amount>
         </TAX-BASIS>
-      {%- if taxline.base %}
-      <Rate Category="S">{{ taxline.tax_id.amount }}</Rate>
+      {%- if taxgroup[0] %}
+      <Rate Category="S">{{ taxgroup[0] }}</Rate>
       {%- else %}
       <Rate Category="E">0</Rate>
       {%- endif %}
-      <Amount Currency="CHF">{{ taxline.amount }}</Amount>
+      <Amount Currency="CHF">{{ taxgroup[1] }}</Amount>
     </TAX>
     {% endfor %}
     {%- else %}

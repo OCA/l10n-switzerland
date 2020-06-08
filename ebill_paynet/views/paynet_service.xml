@@ -81,7 +81,7 @@
 
   <record model="ir.ui.menu" id="paynet_service_config_menu">
     <field name="name">Paynet Service</field>
-    <field name="parent_id" ref="payment.root_payment_menu"/>
+    <field name="parent_id" ref="account.root_payment_menu"/>
     <field name="action" ref="paynet_service_act_window"/>
     <field name="sequence" eval="16"/> 
   </record>

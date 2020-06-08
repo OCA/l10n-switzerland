@@ -26,7 +26,6 @@ class EbillPaymentContract(models.Model):
                 record.transmit_method_id == transmit_method
             )
 
-    @api.multi
     @api.constrains('transmit_method_id', 'paynet_account_number')
     def _check_paynet_account_number(self):
         for contract in self:
@@ -37,7 +36,6 @@ class EbillPaymentContract(models.Model):
                     _("The Paynet ID is required for a Paynet contract.")
                 )
 
-    @api.multi
     @api.constrains('transmit_method_id', 'paynet_service_id')
     def _check_paynet_service_id(self):
         for contract in self:

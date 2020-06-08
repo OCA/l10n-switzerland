@@ -23,7 +23,7 @@ class TestEbillPaynet(SingleTransactionCase):
         )
         cls.dws = PayNetDWS(cls.paynet.url, True)
         cls.customer = cls.env['res.partner'].create(
-            {'name': 'Customer One', 'customer': True}
+            {'name': 'Customer One', 'customer_rank': 1}
         )
         cls.contract = cls.env['ebill.payment.contract'].create(
             {
@@ -44,7 +44,7 @@ class TestEbillPaynet(SingleTransactionCase):
             limit=1,
         )
         cls.at_receivable = cls.env["account.account.type"].create(
-            {"name": "Test receivable account", "type": "receivable"}
+                {"name": "Test receivable account", "type": "receivable", "internal_group": "asset"}
         )
         cls.a_receivable = cls.env["account.account"].create(
             {
@@ -57,10 +57,10 @@ class TestEbillPaynet(SingleTransactionCase):
         cls.product = cls.env['product.template'].create(
             {'name': 'Product One', 'list_price': 100.00}
         )
-        cls.invoice_1 = cls.env['account.invoice'].create(
+        cls.invoice_1 = cls.env['account.move'].create(
             {
                 'partner_id': cls.customer.id,
-                'account_id': cls.account.id,
+                # 'account_id': cls.account.id,
                 'type': 'out_invoice',
                 'transmit_method_id': cls.env.ref(
                     'ebill_paynet.paynet_transmit_method'

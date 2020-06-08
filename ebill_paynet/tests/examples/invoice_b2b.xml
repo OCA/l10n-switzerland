@@ -158,6 +158,7 @@
         <Amount Currency="CHF">529.88</Amount>
       </INVOICE-AMOUNT>
       <VAT-AMOUNT Print-Status="25">
+        <!-- Should it not be the amount to be taxed ? -->
         <Amount Currency="CHF">37.88</Amount>
       </VAT-AMOUNT>
       <TAX>

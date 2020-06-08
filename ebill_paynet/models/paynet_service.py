@@ -5,15 +5,17 @@ import logging
 import os
 
 from lxml import etree
-from odoo import api, fields, models
-from ..components.api import PayNetDWS
-from odoo.exceptions import UserError
 from zeep.exceptions import Fault
 
-SYSTEM_PROD_URL = 'https://dws.paynet.ch/DWS/DWS'
-SYSTEM_TEST_URL = 'https://dws-test.paynet.ch/DWS/DWS'
+from odoo import api, fields, models
+from odoo.exceptions import UserError
 
-PENDING_STATES = ['ReadyForSending', 'Submitted']
+from ..components.api import PayNetDWS
+
+SYSTEM_PROD_URL = "https://dws.paynet.ch/DWS/DWS"
+SYSTEM_TEST_URL = "https://dws-test.paynet.ch/DWS/DWS"
+
+PENDING_STATES = ["ReadyForSending", "Submitted"]
 # The state for already acknowledge ones ArrivedAtDestination
 
 _logger = logging.getLogger(__name__)
@@ -24,48 +26,45 @@ class PaynetService(models.Model):
     _description = "Paynet service configuration"
 
     name = fields.Char()
-    url = fields.Char(compute='_compute_url', store=True)
-    username = fields.Char(compute='_compute_auth_from_env')
-    password = fields.Char(compute='_compute_auth_from_env')
+    url = fields.Char(compute="_compute_url", store=True)
+    username = fields.Char(compute="_compute_auth_from_env")
+    password = fields.Char(compute="_compute_auth_from_env")
     client_pid = fields.Char(string="Paynet ID", size=17, required=True)
-    use_test_service = fields.Boolean(
-        string="Testing", help="Target the test service"
-    )
+    use_test_service = fields.Boolean(string="Testing", help="Target the test service")
     service_type = fields.Selection(
-        selection=[('b2b', 'B2B'), ('b2c', 'B2C')],
-        string='Service type',
-        default='b2b',
-        help='Specify the type of XML exchange with the service.',
+        selection=[("b2b", "B2B"), ("b2c", "B2C")],
+        string="Service type",
+        default="b2b",
+        help="Specify the type of XML exchange with the service.",
     )
     partner_bank_id = fields.Many2one(
-        comodel_name="res.partner.bank",
-        string="Bank account",
+        comodel_name="res.partner.bank", string="Bank account",
     )
     invoice_message_ids = fields.One2many(
-        comodel_name='paynet.invoice.message',
-        inverse_name='service_id',
-        string='Invoice Messages',
+        comodel_name="paynet.invoice.message",
+        inverse_name="service_id",
+        string="Invoice Messages",
         readonly=True,
     )
     ebill_payment_contract_ids = fields.One2many(
-        comodel_name='ebill.payment.contract',
-        inverse_name='paynet_service_id',
-        string='Contracts',
+        comodel_name="ebill.payment.contract",
+        inverse_name="paynet_service_id",
+        string="Contracts",
         readonly=True,
     )
     active = fields.Boolean(default=True)
 
-    @api.depends('use_test_service')
+    @api.depends("use_test_service")
     def _compute_auth_from_env(self):
         for record in self:
             if not record.use_test_service:
-                prefix = 'PAYNET'
+                prefix = "PAYNET"
             else:
-                prefix = 'PAYNET_TEST'
-            record.username = os.getenv(prefix + '_USERID')
-            record.password = os.getenv(prefix + '_PASSWORD')
+                prefix = "PAYNET_TEST"
+            record.username = os.getenv(prefix + "_USERID")
+            record.password = os.getenv(prefix + "_PASSWORD")
 
-    @api.depends('use_test_service')
+    @api.depends("use_test_service")
     def _compute_url(self):
         for record in self:
             if record.use_test_service:
@@ -73,7 +72,6 @@ class PaynetService(models.Model):
             else:
                 record.url = SYSTEM_PROD_URL
 
-    @api.multi
     def take_shipment(self, content):
         """Send a shipment via DWS to the Paynet System
 
@@ -81,7 +79,7 @@ class PaynetService(models.Model):
         """
         self.ensure_one()
         dws = PayNetDWS(self.url, self.use_test_service)
-        content = content.encode('utf-8')
+        content = content.encode("utf-8")
         res = dws.service.takeShipment(
             Authorization=dws.authorization(self.username, self.password),
             # ProcessingDate  : Preferred processing date,
@@ -91,7 +89,6 @@ class PaynetService(models.Model):
         )
         return res
 
-    @api.multi
     def get_shipment_list(self):
         """Get a list of shipments present on the DWS."""
         self.ensure_one()
@@ -109,7 +106,6 @@ class PaynetService(models.Model):
         )
         return res
 
-    @api.multi
     def get_shipment_content(self, shipment_id):
         """ """
         self.ensure_one()
@@ -128,44 +124,39 @@ class PaynetService(models.Model):
     @api.model
     def handle_received_shipment(self, res, shipment_id):
         """ """
-        content = res['Content']
-        if not content['encoding']:
+        content = res["Content"]
+        if not content["encoding"]:
             # XML-FSCM-CONTRL do not have an encoding
             # TODO Could check the INTERCHANGE ids to check the system
-            xml_string = content['_value_1']
+            xml_string = content["_value_1"]
             root = etree.fromstring(xml_string)
-            if root.tag == 'XML-FSCM-CONTRL-2003A':
+            if root.tag == "XML-FSCM-CONTRL-2003A":
                 control = root[1]
-                status = control.attrib.get('Action-Code')
-                ic_ref = control.xpath('//CONTRL/IC-Ref/text()')[0]
-                state = 'done' if status == 'OK' else 'error'
-            elif root.tag == 'XML-FSCM-CONFIRMATION-2003A':
+                status = control.attrib.get("Action-Code")
+                ic_ref = control.xpath("//CONTRL/IC-Ref/text()")[0]
+                state = "done" if status == "OK" else "error"
+            elif root.tag == "XML-FSCM-CONFIRMATION-2003A":
                 conf_status = root[1]
-                ic_ref = conf_status.xpath('//ORIGINAL-MESSAGE/IC-Ref/text()')[
-                    0
-                ]
-                status = conf_status.xpath('//MESSAGE-STATUS/@Status-Code')[0]
-                state = 'done' if status == 'OK' else 'error'
-            elif root.tag == 'XML-FSCM-REJECTION-2003A':
+                ic_ref = conf_status.xpath("//ORIGINAL-MESSAGE/IC-Ref/text()")[0]
+                status = conf_status.xpath("//MESSAGE-STATUS/@Status-Code")[0]
+                state = "done" if status == "OK" else "error"
+            elif root.tag == "XML-FSCM-REJECTION-2003A":
                 # Not tested, need to be simulated on the portal
                 # Only possible for b2c contract
-                state = 'rejected'
+                state = "rejected"
             # Updating message concerned by the response
-            message = self.env['paynet.invoice.message'].search(
-                [('ic_ref', '=', ic_ref)]
+            message = self.env["paynet.invoice.message"].search(
+                [("ic_ref", "=", ic_ref)]
             )
             if not message:
                 _logger.error(
-                    'IC_Ref {} not found for shipment {}'.format(
-                        ic_ref, shipment_id
-                    )
+                    "IC_Ref {} not found for shipment {}".format(ic_ref, shipment_id)
                 )
                 return False
             message.state = state
             message.response = etree.tostring(root)
         return True
 
-    @api.multi
     def confirm_shipment(self, shipment_id):
         """Confirm a shipment reception to the DWS."""
         self.ensure_one()
@@ -180,45 +171,40 @@ class PaynetService(models.Model):
             )
         return res.status_code == 200
 
-    @api.multi
     def ping_service(self):
         """Ping the DWS service this works without autentication."""
         dws = PayNetDWS(self.url, self.use_test_service)
-        return dws.service.ping(ClientData='hello')
+        return dws.service.ping(ClientData="hello")
 
-    @api.multi
     def check_shipments(self):
         """Check for shipments on the service and download them."""
         self.ensure_one()
         res = self.get_shipment_list()
         _logger.info(
-            'Paynet get_shipment_list found {} shipments'.format(
-                res['entriesFound']
-            )
+            "Paynet get_shipment_list found {} shipments".format(res["entriesFound"])
         )
-        for shipment in res['Shipment']:
-            shipment_id = shipment['ShipmentID']
-            _logger.info('Get new shipment {}'.format(shipment_id))
+        for shipment in res["Shipment"]:
+            shipment_id = shipment["ShipmentID"]
+            _logger.info("Get new shipment {}".format(shipment_id))
             res = self.get_shipment_content(shipment_id)
             if self.handle_received_shipment(res, shipment_id):
                 self.confirm_shipment(shipment_id)
 
-    @api.multi
     def test_ping(self):
-        """Test the service from the UI"""
+        """Test the service from the UI."""
         self.ensure_one()
-        msg = ['Test connection to service : {}'.format(self.url)]
+        msg = ["Test connection to service : {}".format(self.url)]
         res = self.ping_service()
-        if 'ClientData' in res:
-            msg.append(' - Success pinging service')
+        if "ClientData" in res:
+            msg.append(" - Success pinging service")
         else:
-            msg.append(' - Failed pinging service')
+            msg.append(" - Failed pinging service")
         res = self.get_shipment_list()
-        if 'Shipment' in res:
-            msg.append(' - Success fetching shipment list')
+        if "Shipment" in res:
+            msg.append(" - Success fetching shipment list")
         else:
-            msg.append(' - Failed fetching shipment list')
-        raise UserError('\n'.join(msg))
+            msg.append(" - Failed fetching shipment list")
+        raise UserError("\n".join(msg))
 
     @api.model
     def cron_poll_shipment(self):
