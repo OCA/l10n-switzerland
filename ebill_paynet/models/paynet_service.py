@@ -14,6 +14,7 @@ SYSTEM_PROD_URL = 'https://dws.paynet.ch/DWS/DWS'
 SYSTEM_TEST_URL = 'https://dws-test.paynet.ch/DWS/DWS'
 
 PENDING_STATES = ['ReadyForSending', 'Submitted']
+# The state for already acknowledge ones ArrivedAtDestination
 
 _logger = logging.getLogger(__name__)
 
@@ -35,6 +36,10 @@ class PaynetService(models.Model):
         string='Service type',
         default='b2b',
         help='Specify the type of XML exchange with the service.',
+    )
+    partner_bank_id = fields.Many2one(
+        comodel_name="res.partner.bank",
+        string="Bank account",
     )
     invoice_message_ids = fields.One2many(
         comodel_name='paynet.invoice.message',

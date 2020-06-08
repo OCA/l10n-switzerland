@@ -31,6 +31,7 @@
           <group>
             <field name="username"/>
             <field name="password"/>
+            <field name="partner_bank_id" options="{'no_create': True}"/>
           </group>
           </group>
           <notebook>

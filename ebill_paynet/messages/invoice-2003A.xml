@@ -66,6 +66,7 @@
           <Country>{{ biller.country_id.code or 'CH' }}</Country>
         </NAME-ADDRESS>
         <BANK-INFO>
+          <!-- <Acct-No>{{ bank.sanitized_acc_number[:-1] }}</Acct-No> -->
           <Acct-No>{{ bank.sanitized_acc_number }}</Acct-No>
           <BankId Type="BCNr-int" Country="CH">{{ bank.bank_id.clearing }}</BankId>
         </BANK-INFO>
