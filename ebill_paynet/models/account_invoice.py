@@ -13,6 +13,15 @@ class AccountInvoice(models.Model):
 
     _inherit = 'account.invoice'
 
+    @api.onchange('transmit_method_id', 'partner_id')
+    def _onchange_transmit_method_id(self):
+        if self.type not in ('out_invoice', 'out_refund'):
+            return
+        paynet_method = self.env.ref('ebill_paynet.paynet_transmit_method')
+        if self.transmit_method_id == paynet_method:
+            # TODO Get the bank account linked to paynet from the contract of the customer
+            self.partner_bank_id = self.env['res.partner.bank'].browse(6)
+
     @api.multi
     def action_invoice_open(self):
         """Send the invoice to paynet if needed."""
