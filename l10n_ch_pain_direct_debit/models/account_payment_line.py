@@ -8,4 +8,4 @@ class AccountPaymentLine(models.Model):
     _inherit = 'account.payment.line'
 
     local_instrument = fields.Selection(
-        selection_add=[('LSV+', 'LSV+')])
+        selection_add=[('LSV+', 'LSV+'), ('DDCOR1', 'DDCOR1')])
