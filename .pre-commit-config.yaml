@@ -21,6 +21,7 @@ repos:
     rev: "1.19.1"
     hooks:
       - id: prettier
+        exclude: /tests/fixtures/cassettes/.*\.yaml$
   # TODO Avoid awebdeveloper/pre-commit-prettier if possible
   # HACK https://github.com/prettier/prettier/issues/7407
   - repo: https://github.com/awebdeveloper/pre-commit-prettier
@@ -33,7 +34,7 @@ repos:
           - "@prettier/plugin-xml@0.7.2"
         files: \.xml$
         # For ebill_paynet don't format the message template files
-        exclude: /messages/.*\.xml$
+        exclude: /messages/.*\.xml$|/components/wsdl/.*\.xml$|/tests/examples/.*\.xml$
   - repo: https://github.com/pre-commit/mirrors-eslint
     rev: v6.8.0
     hooks:

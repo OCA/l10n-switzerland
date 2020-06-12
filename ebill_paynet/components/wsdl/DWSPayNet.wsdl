@@ -41,7 +41,7 @@
 	</wsd:message>
 	<wsd:message name="PingMsgReply">
 		<wsd:part name="pingMsgReply" element="dxpp:PingMsgReply"/>
-	</wsd:message>	
+	</wsd:message>
 	<wsd:portType name="DWSPort">
 		<wsd:operation name="getShipmentList">
 			<wsd:input message="dws:ShipmentListMsg"/>

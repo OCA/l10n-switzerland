@@ -1,7 +1,7 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models, _
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -10,23 +10,19 @@ class EbillPaymentContract(models.Model):
 
     paynet_account_number = fields.Char(string="Paynet ID", size=20)
     is_paynet_contract = fields.Boolean(
-        compute='_compute_is_paynet_contract', store=False
+        compute="_compute_is_paynet_contract", store=False
     )
     paynet_service_id = fields.Many2one(
-        comodel_name="paynet.service",
-        string="Paynet Service",
-        ondelete="restrict",
+        comodel_name="paynet.service", string="Paynet Service", ondelete="restrict",
     )
 
-    @api.depends('transmit_method_id')
+    @api.depends("transmit_method_id")
     def _compute_is_paynet_contract(self):
-        transmit_method = self.env.ref('ebill_paynet.paynet_transmit_method')
+        transmit_method = self.env.ref("ebill_paynet.paynet_transmit_method")
         for record in self:
-            record.is_paynet_contract = (
-                record.transmit_method_id == transmit_method
-            )
+            record.is_paynet_contract = record.transmit_method_id == transmit_method
 
-    @api.constrains('transmit_method_id', 'paynet_account_number')
+    @api.constrains("transmit_method_id", "paynet_account_number")
     def _check_paynet_account_number(self):
         for contract in self:
             if not contract.is_paynet_contract:
@@ -36,7 +32,7 @@ class EbillPaymentContract(models.Model):
                     _("The Paynet ID is required for a Paynet contract.")
                 )
 
-    @api.constrains('transmit_method_id', 'paynet_service_id')
+    @api.constrains("transmit_method_id", "paynet_service_id")
     def _check_paynet_service_id(self):
         for contract in self:
             if contract.is_paynet_contract and not contract.paynet_service_id:
