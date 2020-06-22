@@ -71,3 +71,11 @@ class AccountMoveLine(models.Model):
                 for mandate in bank.mandate_ids:
                     if mandate.state == 'valid':
                         return bank.id
+
+    @api.multi
+    def _prepare_payment_line_vals(self, payment_order):
+        vals = super()._prepare_payment_line_vals(payment_order)
+        # LSV files need ISR reference in the communication field.
+        if payment_order.payment_method_id.pain_version == "pain.008.001.02.ch.03":
+            vals['communication'] = self.move_id.ref.replace(' ', '')
+        return vals
