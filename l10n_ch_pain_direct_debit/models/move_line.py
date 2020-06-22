@@ -78,4 +78,16 @@ class AccountMoveLine(models.Model):
         # LSV files need ISR reference in the communication field.
         if payment_order.payment_method_id.pain_version == "pain.008.001.02.ch.03":
             vals['communication'] = self.move_id.ref.replace(' ', '')
+        if payment_order.payment_type == "inbound":
+            if payment_order.company_partner_bank_id.bank_id.clearing == "9000":
+                # Force correct values for Postfinance
+                vals.update({
+                    "local_instrument": "DDCOR1",
+                    "communication_type": "normal"
+                })
+            else:
+                # No other types than LSV+ in Switzerland
+                vals.update({
+                    "local_instrument": "LSV+",
+                })
         return vals

@@ -164,10 +164,8 @@ class AccountPaymentOrder(models.Model):
                 if self.company_partner_bank_id.acc_type == 'postal' or \
                    self.company_partner_bank_id.bank_id.bic == 'POFICHBEXXX':
                     prtry_value = 'CHDD'
-                    local_instrument = 'DDCOR1'
                 else:
                     prtry_value = 'CHTA'
-                    local_instrument = 'LSV+'
                     for line in self.bank_line_ids:
                         line.local_instrument = local_instrument
                 service_level_value.text = prtry_value
