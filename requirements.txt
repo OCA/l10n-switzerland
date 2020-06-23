@@ -1,0 +1,6 @@
+
+# optional requirements for l10n_ch_qr_bill_scan
+pyzbar==0.1.8
+numpy==1.16.2
+pdf2image==1.13.1
+opencv-python==4.2.0.34
