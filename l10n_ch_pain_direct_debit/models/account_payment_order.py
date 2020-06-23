@@ -223,7 +223,11 @@ class AccountPaymentOrder(models.Model):
                 partner_bank.bank_id.clearing.zfill(5)
             ccp_other = etree.SubElement(party_agent_institution, 'Othr')
             ccp_other_id = etree.SubElement(ccp_other, 'Id')
-            ccp_other_id.text = self.company_partner_bank_id.l10n_ch_postal
+            ref_subparts = self.company_partner_bank_id.l10n_ch_postal.split('-')
+            ccp_other_id.text = (
+                ref_subparts[0] + ref_subparts[1].rjust(6, '0') + ref_subparts[2]
+            )
+
             res = True
         else:
             res = super(AccountPaymentOrder, self).generate_party_agent(
