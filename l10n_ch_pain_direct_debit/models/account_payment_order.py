@@ -354,7 +354,7 @@ class AccountPaymentOrder(models.Model):
                 etree.SubElement(ori_debtor_agent_institution_clearing,
                                  'MmbId')
             ori_debtor_agent_institution_clearing_identification.text = \
-                partner_bank.bank_id.clearing.zfill(5)
+                line.partner_bank_id.bank_id.clearing.zfill(5)
 
             # .../  <Dbtr>
             self.generate_party_block(
