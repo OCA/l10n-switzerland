@@ -3,6 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
+import cv2
+import numpy as np
 from PIL import Image
 from os.path import splitext
 from tarfile import TarFile, TarError
@@ -121,13 +123,18 @@ class XMLPFParser(models.AbstractModel):
                     key = splitext(file_name)[0]
                     img_data = tar_file.extractfile(file_name).read()
                     if file_name.endswith('.tiff'):
-                        # Convert string containing data to tiff image
-                        image = Image.open(BytesIO(img_data))
+                        try:
+                            # Convert string containing data to tiff image
+                            image = Image.open(BytesIO(img_data))
 
-                        # Convert to png for viewing the image in Odoo
-                        with BytesIO() as png_image:
-                            image.save(png_image, format='PNG')
-                            img_data = png_image.getvalue()
+                            # Convert to png for viewing the image in Odoo
+                            with BytesIO() as png_image:
+                                image.save(png_image, format='PNG')
+                                img_data = png_image.getvalue()
+                        except OSError:
+                            np_array = np.fromstring(img_data, np.uint8)
+                            tiff_image = cv2.imdecode(np_array, cv2.IMREAD_COLOR)
+                            img_data = cv2.imencode('.jpg', tiff_image)[1].tostring()
                     attachments[key] = b64encode(img_data)
             return attachments
         except TarError:
