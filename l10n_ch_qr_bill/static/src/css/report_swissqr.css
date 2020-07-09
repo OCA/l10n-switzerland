@@ -93,6 +93,7 @@
 
 .page.l10n_ch_qr .swissqr_text .content {
 	font-size: 10pt;
+	white-space: nowrap;
 }
 
 .page.l10n_ch_qr .main_title {

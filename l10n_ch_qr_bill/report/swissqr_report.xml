@@ -29,8 +29,7 @@
                 <!-- add class to body tag -->
                 <!--<script>document.body.className += " l10n_ch_qr";</script>-->
                 <div class="page l10n_ch_qr">
-
-                    <t t-set="formated_amount" t-value="'{:,.2f}'.format(o.residual).replace(',','\xa0')"/>
+                    <t t-set="formated_amount" t-value="'{:,.2f}'.format(o.residual).replace(',',' ')"/>
 
                     <div class="swissqr_title">
                         <h1>QR-bill for invoice <t t-esc="o.number"/></h1>
