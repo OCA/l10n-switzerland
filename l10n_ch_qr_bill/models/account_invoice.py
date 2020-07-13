@@ -163,7 +163,7 @@ class AccountInvoice(models.Model):
             acc_number,                 # IBAN
                                         # Creditor
             'K',                        # - Address Type
-            creditor.name[:71],         # - Name
+            creditor.name[:70],         # - Name
             creditor_addr_1,            # - Address Line 1
             creditor_addr_2,            # - Address Line 2
             '',                         # - Postal Code (not used in type K)
@@ -181,7 +181,7 @@ class AccountInvoice(models.Model):
             self.currency_id.name,      # Currency
                                         # Ultimate Debtor
             'K',                        # - Address Type
-            debtor.name[:71],           # - Name
+            debtor.name[:70],           # - Name
             debtor_addr_1,              # - Address Line 1
             debtor_addr_2,              # - Address Line 2
             '',                         # - Postal Code (not used in type K)
