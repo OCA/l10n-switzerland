@@ -23,56 +23,56 @@ msgid "'QR-bill-%s' % object.name"
 msgstr "'QR-facture-%s' % object.name"
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "QR-bill for invoice"
 msgstr "QR-facture"
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.isr_invoice_form
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.qrr_invoice_form
 msgid "Print QR-bill"
 msgstr "Imprimer QR-facture"
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Acceptance point</span>"
 msgstr "<span class=\"title\">Point de dépôt</span>"
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Account / Payable to</span><br/>"
 msgstr "<span class=\"title\">Compte / Payable à</span><br/>"
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Additional information</span><br/>"
 msgstr "<span class=\"title\">Information supplémentaires</span><br/>"
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Amount</span><br/>"
 msgstr "<span class=\"title\">Montant</span><br/>"
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Currency</span><br/>"
 msgstr "<span class=\"title\">Monnaie</span><br/>"
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Payable by</span><br/>"
 msgstr "<span class=\"title\">Payable par</span><br/>"
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Reference</span><br/>"
 msgstr "<span class=\"title\">Référence</span><br/>"
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span>Payment Part</span>"
 msgstr "<span>Section paiement</span>"
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span>Receipt</span>"
 msgstr "<span>Récépissé</span>"
