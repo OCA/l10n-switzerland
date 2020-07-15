@@ -83,6 +83,8 @@
 	color: black;
 	line-height: 1;
 	padding-top: 1em;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .page.l10n_ch_qr .title {
@@ -111,7 +113,6 @@
 	position: absolute;
 	left: 70mm;
     /* (5 + 46 + 5) * 1.25 */
-	max-width: 90mm;
 }
 
 .page.l10n_ch_qr .procedure_zone {
@@ -120,10 +121,12 @@
 
 .page.l10n_ch_qr .receipt_indication_zone {
 	top: 10mm;
+	max-width: 70mm;
 }
 
 .page.l10n_ch_qr .indication_zone {
 	top: 10mm;
+	max-width: 100mm;
 }
 
 .page.l10n_ch_qr .receipt_amount_zone {
