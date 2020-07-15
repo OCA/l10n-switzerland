@@ -23,52 +23,52 @@ msgid "'QR-bill-%s' % object.name"
 msgstr ""
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Acceptance point</span>"
 msgstr "<span class=\"title\">Punto di accettazione</span>"
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Account / Payable to</span><br/>"
 msgstr "<span class=\"title\">Conto / Pagabile a</span><br/>"
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Additional information</span><br/>"
 msgstr "<span class=\"title\">Informationi supplementari</span><br/>"
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Amount</span><br/>"
 msgstr "<span class=\"title\">Importo</span><br/>"
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Currency</span><br/>"
 msgstr "<span class=\"title\">Valuta</span><br/>"
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Payable by</span><br/>"
 msgstr "<span class=\"title\">Pagabile da</span><br/>"
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Reference</span><br/>"
 msgstr "<span class=\"title\">Riferimento</span><br/>"
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span>Payment Part</span>"
 msgstr "<span>Sezione pagamento</span>"
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span>Receipt</span>"
 msgstr "<span>Ricevuta</span>"
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.res_config_settings_view_form
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.res_config_settings_view_form
 msgid ""
 "Append the QR Code ISR at the end of customer invoices for Swiss customers"
 msgstr ""
@@ -83,7 +83,7 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch_qr_bill.qrr_invoice_form
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.qrr_invoice_form
 msgid "Print QR-bill"
 msgstr ""
 
@@ -98,6 +98,6 @@ msgid "QR-bill"
 msgstr ""
 
 #. module: l10n_ch_qr_bill
-#: model_terms:ir.ui.view,arch_db:l10n_ch.l10n_ch_swissqr_template
+#: model:ir.ui.view,arch_db:l10n_ch.l10n_ch_swissqr_template
 msgid "QR-bill for invoice"
 msgstr ""
