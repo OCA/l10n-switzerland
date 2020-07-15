@@ -134,7 +134,7 @@ class AccountInvoice(models.Model):
             )
 
         creditor = self.company_id.partner_id
-        debtor = self.partner_id
+        debtor = self.commercial_partner_id
 
         creditor_addr_1, creditor_addr_2 = self._get_partner_address_lines(
             creditor
