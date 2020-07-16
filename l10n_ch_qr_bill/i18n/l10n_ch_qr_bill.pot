@@ -1,66 +1,62 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* l10n_ch_qr_bill
+#	* l10n_ch_qr_bill
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-28 09:52+0000\n"
-"PO-Revision-Date: 2020-06-17 10:00+0000\n"
-"Last-Translator: yannick.vaucher@camptocamp.com\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-"X-Generator: Poedit 2.2.1\n"
 
 #. module: l10n_ch_qr_bill
 #: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Acceptance point</span>"
-msgstr "<span class=\"title\">Annahmestelle</span>"
+msgstr ""
 
 #. module: l10n_ch_qr_bill
 #: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Account / Payable to</span><br/>"
-msgstr "<span class=\"title\">Konto / Zahlbar an</span><br/>"
+msgstr ""
 
 #. module: l10n_ch_qr_bill
 #: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Additional information</span><br/>"
-msgstr "<span class=\"title\">Zusätzliche Informationen</span><br/>"
+msgstr ""
 
 #. module: l10n_ch_qr_bill
 #: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Amount</span><br/>"
-msgstr "<span class=\"title\">Betrag</span><br/>"
+msgstr ""
 
 #. module: l10n_ch_qr_bill
 #: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Currency</span><br/>"
-msgstr "<span class=\"title\">Währung</span><br/>"
+msgstr ""
 
 #. module: l10n_ch_qr_bill
 #: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Payable by</span><br/>"
-msgstr "<span class=\"title\">Zahlbar durch</span><br/>"
+msgstr ""
 
 #. module: l10n_ch_qr_bill
 #: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Reference</span><br/>"
-msgstr "<span class=\"title\">Referenz</span><br/>"
+msgstr ""
 
 #. module: l10n_ch_qr_bill
 #: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span>Payment Part</span>"
-msgstr "<span>Zahlteil</span>"
+msgstr ""
 
 #. module: l10n_ch_qr_bill
 #: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span>Receipt</span>"
-msgstr "<span>Empfangsschein</span>"
+msgstr ""
 
 #. module: l10n_ch_qr_bill
 #: model:ir.model,name:l10n_ch_qr_bill.model_res_partner_bank
@@ -69,18 +65,13 @@ msgstr ""
 
 #. module: l10n_ch_qr_bill
 #: model:ir.model.fields,help:l10n_ch_qr_bill.field_account_invoice_l10n_ch_qrr_sent
-msgid ""
-"Boolean value telling whether or not the QRR corresponding to this invoice "
-"has already been printed or sent by mail."
+msgid "Boolean value telling whether or not the QRR corresponding to this invoice has already been printed or sent by mail."
 msgstr ""
 
 #. module: l10n_ch_qr_bill
 #: code:addons/l10n_ch_qr_bill/models/account_invoice.py:262
 #, python-format
-msgid ""
-"Cannot generate the QR-bill. Please check you have configured the address of "
-"your company and debtor. If you are using a QR-IBAN, also check the "
-"invoice's payment reference is a QR reference."
+msgid "Cannot generate the QR-bill. Please check you have configured the address of your company and debtor. If you are using a QR-IBAN, also check the invoice's payment reference is a QR reference."
 msgstr ""
 
 #. module: l10n_ch_qr_bill
@@ -125,9 +116,7 @@ msgstr ""
 
 #. module: l10n_ch_qr_bill
 #: model:ir.model.fields,help:l10n_ch_qr_bill.field_account_invoice_l10n_ch_qrr_spaced
-msgid ""
-"Reference QRR split in blocks of 5 characters (right-justified),to generate "
-"QR-bill report."
+msgid "Reference QRR split in blocks of 5 characters (right-justified),to generate QR-bill report."
 msgstr ""
 
 #. module: l10n_ch_qr_bill
@@ -157,5 +146,3 @@ msgstr ""
 msgid "The reference QRR associated with this invoice"
 msgstr ""
 
-#~ msgid "'QR-bill-%s' % object.name"
-#~ msgstr "'QR-Rechnung-%s' % object.name"
