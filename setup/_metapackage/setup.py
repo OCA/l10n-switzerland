@@ -25,6 +25,7 @@ setuptools.setup(
         'odoo10-addon-l10n_ch_pain_base',
         'odoo10-addon-l10n_ch_pain_credit_transfer',
         'odoo10-addon-l10n_ch_payment_slip',
+        'odoo10-addon-l10n_ch_qr_bill',
         'odoo10-addon-l10n_ch_scan_bvr',
         'odoo10-addon-l10n_ch_states',
         'odoo10-addon-l10n_ch_zip',
