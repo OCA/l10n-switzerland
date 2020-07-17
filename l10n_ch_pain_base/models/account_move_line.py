@@ -9,7 +9,7 @@ class AccountMoveLine(models.Model):
 
     def _prepare_payment_line_vals(self, payment_order):
         vals = super()._prepare_payment_line_vals(payment_order)
-        if self.move_id and self.move_id._is_isr_ref():
+        if self.partner_bank_id._is_isr_issuer() and self.move_id._has_isr_ref():
             vals["local_instrument"] = "CH01"
             vals["communication_type"] = "isr"
             if vals["communication"]:
