@@ -217,9 +217,11 @@ class AccountInvoice(models.Model):
         """ Checks whether the given reference is a QR-reference, i.e. it is
         made of 27 digits, the 27th being a mod10r check on the 26 previous ones.
         """
+        if not reference:
+            return False
+        reference = reference.replace(" ", "")
         return (
-            reference
-            and len(reference) == 27
+            len(reference) == 27
             and re.match(r'\d+$', reference)
             and reference == mod10r(reference[:-1])
         )
