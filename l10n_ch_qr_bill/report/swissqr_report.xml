@@ -13,7 +13,7 @@
             menu="False"/>
 
         <record id="l10n_ch_qr_report" model="ir.actions.report.xml">
-            <field name="print_report_name">'QR-bill-%s' % object.number</field>
+            <field name="print_report_name">'QR-bill-%s.pdf' % object.number</field>
             <field name="paperformat_id" ref="l10n_ch_qr_bill.paperformat_euro_no_margin"/>
         </record>
 
