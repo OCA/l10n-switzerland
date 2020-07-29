@@ -6,7 +6,7 @@
 {
     'name': 'Switzerland - QR-bill',
     'summary': 'Print QR-bill for your invoices [Backport from Odoo l10n_ch]',
-    'version': '10.0.1.1.0',
+    'version': '10.0.1.1.1',
     'author': "Camptocamp,Odoo Community Association (OCA)",
     'category': 'Localization',
     'website': 'https://github.com/OCA/l10n-switzerland',
