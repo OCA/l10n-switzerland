@@ -110,6 +110,8 @@ class FdsFilesImportFromFDSWizard(models.TransientModel):
             # process the files (done by the childrens of this module)
             for file in fds_files_ids:
                 self.process_files(file)
+                # We save the file if correctly processed
+                self.env.cr.commit()
 
             self.state = 'done'
         except:

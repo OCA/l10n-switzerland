@@ -1,11 +1,17 @@
 # © 2015 Compassion CH (Nicolas Tran)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 import logging
 from odoo.exceptions import Warning as UserError
 
 _logger = logging.getLogger(__name__)
+
+
+class NoStatementsError(UserError):
+    def __init__(self, message):
+        self.name = message
+        self.message = message
 
 
 class FdsPostfinanceFile(models.Model):
@@ -52,6 +58,12 @@ class FdsPostfinanceFile(models.Model):
             })
             _logger.info("[OK] import file '%s' to bank Statements",
                          self.filename)
+        except NoStatementsError as e:
+            _logger.info(e.name, self.filename)
+            self.write({
+                'state': 'done',
+                'error_message': e.name or e.args and e.args[0]
+            })
         except UserError as e:
             # wrong parser used, raise the error to the parent so it's not
             # catch by the following except Exception

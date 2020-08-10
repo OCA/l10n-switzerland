@@ -58,6 +58,10 @@ class FdsPostfinanceFile(models.Model):
                                  pf_file.filename)
 
                     pain_files += pf_file
+            except ValueError:
+                # wrong parser used, we ignore this line since it will need
+                # to be parsed later on
+                continue
             except Exception as e:
                 self.env.cr.rollback()
                 self.env.clear()
@@ -71,7 +75,7 @@ class FdsPostfinanceFile(models.Model):
                     # pylint: disable=invalid-commit
                     self.env.cr.commit()
                 _logger.error("[FAIL] import file '%s' as pain 000",
-                              (pf_file.filename), exc_info=True)
+                              pf_file.filename, exc_info=True)
 
         return super(FdsPostfinanceFile,
                      self - pain_files).import_to_bank_statements()
