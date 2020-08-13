@@ -68,12 +68,11 @@ class AccountMove(models.Model):
             access_rights_uid=access_rights_uid,
         )
 
-    @api.constrains("ref")
+    @api.constrains("ref", "invoice_payment_ref")
     def _check_bank_type_for_type_isr(self):
         """Compatibility with module `account_payment_partner`"""
         for move in self:
-            ref = move.ref 
-            if move.type == "out_invoice" and move._is_isr_ref(ref):
+            if move.type == "out_invoice" and move._has_isr_ref():
                 if hasattr(super(), "partner_banks_to_show"):
                     bank_acc = move.partner_banks_to_show()
                 else:
