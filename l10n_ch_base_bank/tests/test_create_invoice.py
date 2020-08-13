@@ -43,22 +43,22 @@ class TestCreateMove(common.SavepointCase):
     def test_emit_move_with_isr_ref(self):
         inv_form = self.new_form()
         move = inv_form.save()
-        self.assertFalse(move._is_isr_ref())
+        self.assertFalse(move._has_isr_ref())
 
         inv_form.ref = "132000000000000000000000014"
         inv_form.save()
-        self.assertTrue(move._is_isr_ref())
+        self.assertTrue(move._has_isr_ref())
 
     def test_emit_move_with_isr_ref_15_pos(self):
         inv_form = self.new_form()
         move = inv_form.save()
 
-        self.assertFalse(move._is_isr_ref())
+        self.assertFalse(move._has_isr_ref())
 
         move.ref = "132000000000004"
         # We consider such ref to be unstructured
         # and we shouldn't generate such refs
-        self.assertFalse(move._is_isr_ref())
+        self.assertFalse(move._has_isr_ref())
 
         # and save
         inv_form.save()
@@ -67,10 +67,10 @@ class TestCreateMove(common.SavepointCase):
         inv_form = self.new_form()
         move = inv_form.save()
 
-        self.assertFalse(move._is_isr_ref())
+        self.assertFalse(move._has_isr_ref())
 
         move.ref = "Not a ISR ref with 27 chars"
-        self.assertFalse(move._is_isr_ref())
+        self.assertFalse(move._has_isr_ref())
 
     def test_emit_move_with_missing_isr_ref(self):
         inv_form = self.new_form()
@@ -79,14 +79,14 @@ class TestCreateMove(common.SavepointCase):
         # and save
         move = inv_form.save()
 
-        self.assertFalse(move._is_isr_ref())
+        self.assertFalse(move._has_isr_ref())
 
     def test_emit_move_with_isr_ref_missing_subscr_num(self):
         inv_form = self.new_form()
         move = inv_form.save()
         inv_form.save()
-        self.assertFalse(move._is_isr_ref())
-        inv_form.invoice_partner_bank_id = self.env['res.partner.bank']
+        self.assertFalse(move._has_isr_ref())
+        inv_form.invoice_partner_bank_id = self.env["res.partner.bank"]
         with self.assertRaises(exceptions.ValidationError):
             inv_form.ref = "132000000000000000000000014"
             inv_form.save()
@@ -95,7 +95,7 @@ class TestCreateMove(common.SavepointCase):
         inv_form = self.new_form()
         move = inv_form.save()
         inv_form.save()
-        self.assertFalse(move._is_isr_ref())
+        self.assertFalse(move._has_isr_ref())
         move.currency_id = self.env.ref("base.EUR")
         with self.assertRaises(exceptions.ValidationError):
             inv_form.ref = "132000000000000000000000014"
