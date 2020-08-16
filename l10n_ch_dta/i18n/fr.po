@@ -226,10 +226,6 @@ msgstr "Le type de banque %s sur le compte bancaire %s n'est pas supporté"
 #. module: l10n_ch_dta
 #: code:addons/l10n_ch_dta/wizard/create_dta.py:172
 #, fuzzy, python-format
-#| msgid ""
-#| "Wrong postal number format.\n"
-#| "It must be 12-123456-9 or 12345 format \n"
-#| "on line %s"
 msgid ""
 "Wrong postal number format.\n"
 "It must be 12-123456-9 or 12345 format \n"
