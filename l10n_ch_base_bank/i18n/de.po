@@ -62,7 +62,6 @@ msgstr ""
 #. module: l10n_ch_base_bank
 #: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank__city
 #, fuzzy
-#| msgid "CCP/CP-Konto of the bank"
 msgid "City of the bank"
 msgstr "Postkonto der Bank"
 
@@ -91,7 +90,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_ch_base_bank.field_account_setup_bank_manual_config__l10n_ch_postal
 #: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_partner_bank__l10n_ch_postal
 #, fuzzy
-#| msgid "Internal reference"
 msgid "ISR reference"
 msgstr "Interne Referenz"
 
