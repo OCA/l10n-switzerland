@@ -51,7 +51,6 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_invoice__partner_bank_id
 #, fuzzy
-#| msgid "Bank Accounts"
 msgid "Bank Account"
 msgstr "Comptes bancaires"
 
@@ -356,7 +355,6 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_invoice__reference
 #, fuzzy
-#| msgid "Payment Slip"
 msgid "Payment Ref."
 msgstr "BVR"
 
@@ -438,14 +436,12 @@ msgstr "BVR lié"
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_ir_actions_report
 #, fuzzy
-#| msgid "Report"
 msgid "Report Action"
 msgstr "Rapport"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_ir_actions_report__report_type
 #, fuzzy
-#| msgid "Report"
 msgid "Report Type"
 msgstr "Rapport"
 

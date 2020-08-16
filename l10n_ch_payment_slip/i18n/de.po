@@ -22,7 +22,6 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/models/invoice.py:212
 #, fuzzy, python-format
-#| msgid "- The bank account {} used in invoice has no ISR adherent number."
 msgid "- The bank account {} used in invoice has no ISR subscription number."
 msgstr ""
 "- Das in der Rechnung verwendete Zahlungskonto {} hat keine ESR "
@@ -53,7 +52,6 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_invoice__partner_bank_id
 #, fuzzy
-#| msgid "Bank Accounts"
 msgid "Bank Account"
 msgstr "Bankkonten"
 
@@ -361,7 +359,6 @@ msgstr ""
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_invoice__reference
 #, fuzzy
-#| msgid "Payment Slip"
 msgid "Payment Ref."
 msgstr "Einzahlungsschein"
 
@@ -422,7 +419,6 @@ msgstr "Einzahlungsscheine drucken"
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_isr_batch_print_wizard
 #, fuzzy
-#| msgid "Print payment slips"
 msgid "Printing Wizard for payment slip"
 msgstr "Einzahlungsscheine drucken"
 
@@ -444,14 +440,12 @@ msgstr "Zugehöriger Einzahlungsschein"
 #. module: l10n_ch_payment_slip
 #: model:ir.model,name:l10n_ch_payment_slip.model_ir_actions_report
 #, fuzzy
-#| msgid "Report"
 msgid "Report Action"
 msgstr "Bericht"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_ir_actions_report__report_type
 #, fuzzy
-#| msgid "Report"
 msgid "Report Type"
 msgstr "Bericht"
 
