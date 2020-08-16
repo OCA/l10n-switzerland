@@ -82,6 +82,5 @@ msgstr "Zahlungsauftrag"
 #. module: l10n_ch_pain_base
 #: code:addons/l10n_ch_pain_base/models/account_payment_order.py:90
 #, fuzzy, python-format
-#| msgid "The field 'CCP/CP-Konto' is not set on the bank account '%s'."
 msgid "The field 'Postal account' is not set on the bank account '%s'."
 msgstr "Das Feld 'Postkonto' ist beim Bankkonto '%s' nicht gesetzt."
