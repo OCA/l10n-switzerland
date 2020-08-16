@@ -62,7 +62,6 @@ msgstr "Bankverzeichnis"
 #. module: l10n_ch_base_bank
 #: code:addons/l10n_ch_base_bank/models/bank.py:287
 #, fuzzy, python-format
-#| msgid "Bank/CCP {}"
 msgid "CCP {}"
 msgstr "Bank/CCP {}"
 
@@ -167,7 +166,6 @@ msgstr ""
 #. module: l10n_ch_base_bank
 #: code:addons/l10n_ch_base_bank/models/bank.py:285
 #, fuzzy, python-format
-#| msgid "Bank/CCP {}"
 msgid "{}/CCP {}"
 msgstr "Bank/CCP {}"
 
