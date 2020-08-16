@@ -50,7 +50,6 @@ msgstr "Banken"
 #. module: l10n_ch_base_bank
 #: code:addons/l10n_ch_base_bank/models/bank.py:292
 #, fuzzy, python-format
-#| msgid "Bank/CCP {}"
 msgid "CCP {}"
 msgstr "Bank/Postkonto {}"
 
@@ -130,7 +129,6 @@ msgstr ""
 #. module: l10n_ch_base_bank
 #: model:res.groups,name:l10n_ch_base_bank.group_isr_adherent_num_users
 #, fuzzy
-#| msgid "The ISR adherent number must be unique !"
 msgid "Show \"ISR adherent number\" field in Partner Banks"
 msgstr "Die zugehörige ESR-Nummer muss eindeutig sein!"
 
@@ -151,7 +149,6 @@ msgstr ""
 #. module: l10n_ch_base_bank
 #: sql_constraint:res.partner.bank:0
 #, fuzzy
-#| msgid "The ISR adherent number must be unique !"
 msgid "The ISR adherent number/ccp pair must be unique !"
 msgstr "Die zugehörige ESR-Nummer muss eindeutig sein!"
 
@@ -177,7 +174,6 @@ msgstr ""
 #. module: l10n_ch_base_bank
 #: code:addons/l10n_ch_base_bank/models/bank.py:290
 #, fuzzy, python-format
-#| msgid "Bank/CCP {}"
 msgid "{}/CCP {}"
 msgstr "Bank/Postkonto {}"
 

@@ -128,7 +128,6 @@ msgstr ""
 #. module: l10n_ch_base_bank
 #: model:res.groups,name:l10n_ch_base_bank.group_isr_adherent_num_users
 #, fuzzy
-#| msgid "The ISR adherent number must be unique !"
 msgid "Show \"ISR adherent number\" field in Partner Banks"
 msgstr "Il numero di adesione PVR deve essere univoco"
 
@@ -147,7 +146,6 @@ msgstr ""
 #. module: l10n_ch_base_bank
 #: sql_constraint:res.partner.bank:0
 #, fuzzy
-#| msgid "The ISR adherent number must be unique !"
 msgid "The ISR adherent number/ccp pair must be unique !"
 msgstr "Il numero di adesione PVR deve essere univoco"
 
