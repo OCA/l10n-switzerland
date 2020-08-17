@@ -2,7 +2,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
-import os
 
 from lxml import etree
 from zeep.exceptions import Fault
@@ -27,8 +26,8 @@ class PaynetService(models.Model):
 
     name = fields.Char()
     url = fields.Char(compute="_compute_url", store=True)
-    username = fields.Char(compute="_compute_auth_from_env")
-    password = fields.Char(compute="_compute_auth_from_env")
+    username = fields.Char()
+    password = fields.Char()
     client_pid = fields.Char(string="Paynet ID", size=17, required=True)
     use_test_service = fields.Boolean(string="Testing", help="Target the test service")
     service_type = fields.Selection(
@@ -53,16 +52,6 @@ class PaynetService(models.Model):
         readonly=True,
     )
     active = fields.Boolean(default=True)
-
-    @api.depends("use_test_service")
-    def _compute_auth_from_env(self):
-        for record in self:
-            if not record.use_test_service:
-                prefix = "PAYNET"
-            else:
-                prefix = "PAYNET_TEST"
-            record.username = os.getenv(prefix + "_USERID")
-            record.password = os.getenv(prefix + "_PASSWORD")
 
     @api.depends("use_test_service")
     def _compute_url(self):
