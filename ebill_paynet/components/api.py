@@ -12,7 +12,7 @@ from odoo.modules.module import get_resource_path
 
 WSDL_DOC = os.path.join(os.path.dirname(__file__), "wsdl", "DWSPayNet.wsdl")
 SSL_PROD_CERTIFICATE = get_resource_path(
-    "eill_paynet", "certificats", "prod_services_chain.pem"
+    "ebill_paynet", "certificats", "prod_services_chain.pem"
 )
 SSL_TEST_CERTIFICATE = get_resource_path(
     "ebill_paynet", "certificats", "test_services_chain.pem"

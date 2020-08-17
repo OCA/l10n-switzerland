@@ -125,6 +125,7 @@ class PaynetService(models.Model):
     def handle_received_shipment(self, res, shipment_id):
         """ """
         content = res["Content"]
+        # TODO: if it contains encoding should return False so not confirmed
         if not content["encoding"]:
             # XML-FSCM-CONTRL do not have an encoding
             # TODO Could check the INTERCHANGE ids to check the system
@@ -155,6 +156,7 @@ class PaynetService(models.Model):
                 return False
             message.state = state
             message.response = etree.tostring(root)
+            message.update_invoice_status()
         return True
 
     def confirm_shipment(self, shipment_id):

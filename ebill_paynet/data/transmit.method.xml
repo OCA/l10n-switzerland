@@ -4,6 +4,8 @@
         <field name="name">Paynet</field>
         <field name="code">paynet</field>
         <field name="customer_ok">True</field>
-        <field name="supplier_ok">False</field>
+        <!-- There is a bug on transmit_method module, needs to be set -->
+        <!-- to True so it is available for customer -->
+        <field name="supplier_ok">True</field>
     </record>
 </odoo>
