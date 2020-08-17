@@ -33,7 +33,7 @@ class TestTransactionID(AccountingTestCase):
         )
         self.invoice1 = self.create_invoice('base.CHF')
 
-    def create_invoice(self, currency_to_use='base.CHF'):
+    def create_invoice(self, currency_xmlid='base.CHF'):
         """ Generates a test invoice """
 
         product = self.env.ref("product.product_product_4")
@@ -48,7 +48,7 @@ class TestTransactionID(AccountingTestCase):
                 {
                     'type': 'out_invoice',
                     'partner_id': self.customer.id,
-                    'currency_id': self.env.ref(currency_to_use).id,
+                    'currency_id': self.env.ref(currency_xmlid).id,
                     'date': time.strftime('%Y') + '-12-22',
                     'invoice_line_ids': [
                         (
