@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="dws_reject_invoice">
+        <div>
+            <p>The Paynet system rejected the ebill that was send.</p>
+            <!-- <p><t t-esc="job_id" /></p> -->
+        </div>
+    </template>
+</odoo>

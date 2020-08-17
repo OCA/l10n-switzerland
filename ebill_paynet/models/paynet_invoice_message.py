@@ -120,3 +120,11 @@ class PaynetInvoiceMessage(models.Model):
         else:
             payload = template_2013.render(params)
         return payload
+
+    def update_invoice_status(self):
+        """Update the export status in the chatter."""
+        for message in self:
+            if message.state == "done":
+                message.invoice_id.log_invoice_accepted_by_system()
+            elif message.state in ["reject", "error"]:
+                message.invoice_id.log_invoice_refused_by_system()

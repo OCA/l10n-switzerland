@@ -2,7 +2,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
-import os
 
 from lxml import etree
 from zeep.exceptions import Fault
@@ -27,8 +26,8 @@ class PaynetService(models.Model):
 
     name = fields.Char()
     url = fields.Char(compute="_compute_url", store=True)
-    username = fields.Char(compute="_compute_auth_from_env")
-    password = fields.Char(compute="_compute_auth_from_env")
+    username = fields.Char()
+    password = fields.Char()
     client_pid = fields.Char(string="Paynet ID", size=17, required=True)
     use_test_service = fields.Boolean(string="Testing", help="Target the test service")
     service_type = fields.Selection(
@@ -53,16 +52,6 @@ class PaynetService(models.Model):
         readonly=True,
     )
     active = fields.Boolean(default=True)
-
-    @api.depends("use_test_service")
-    def _compute_auth_from_env(self):
-        for record in self:
-            if not record.use_test_service:
-                prefix = "PAYNET"
-            else:
-                prefix = "PAYNET_TEST"
-            record.username = os.getenv(prefix + "_USERID")
-            record.password = os.getenv(prefix + "_PASSWORD")
 
     @api.depends("use_test_service")
     def _compute_url(self):
@@ -125,6 +114,7 @@ class PaynetService(models.Model):
     def handle_received_shipment(self, res, shipment_id):
         """ """
         content = res["Content"]
+        # TODO: if it contains encoding should return False so not confirmed
         if not content["encoding"]:
             # XML-FSCM-CONTRL do not have an encoding
             # TODO Could check the INTERCHANGE ids to check the system
@@ -155,6 +145,7 @@ class PaynetService(models.Model):
                 return False
             message.state = state
             message.response = etree.tostring(root)
+            message.update_invoice_status()
         return True
 
     def confirm_shipment(self, shipment_id):
