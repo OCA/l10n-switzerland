@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-28 09:52+0000\n"
-"PO-Revision-Date: 2020-06-17 10:00+0000\n"
-"Last-Translator: yannick.vaucher@camptocamp.com\n"
+"PO-Revision-Date: 2020-08-18 10:59+0000\n"
+"Last-Translator: Yannick Vaucher <yannick.vaucher@camptocamp.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
-"X-Generator: Poedit 2.2.1\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: l10n_ch_qr_bill
 #: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
@@ -30,7 +30,7 @@ msgstr "<span class=\"title\">Compte / Payable à</span><br/>"
 #. module: l10n_ch_qr_bill
 #: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "<span class=\"title\">Additional information</span><br/>"
-msgstr "<span class=\"title\">Information supplémentaires</span><br/>"
+msgstr "<span class=\"title\">Informations supplémentaires</span><br/>"
 
 #. module: l10n_ch_qr_bill
 #: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
@@ -65,7 +65,7 @@ msgstr "<span>Récépissé</span>"
 #. module: l10n_ch_qr_bill
 #: model:ir.model,name:l10n_ch_qr_bill.model_res_partner_bank
 msgid "Bank Accounts"
-msgstr ""
+msgstr "Comptes bancaires"
 
 #. module: l10n_ch_qr_bill
 #: model:ir.model.fields,help:l10n_ch_qr_bill.field_account_invoice_l10n_ch_qrr_sent
@@ -73,6 +73,8 @@ msgid ""
 "Boolean value telling whether or not the QRR corresponding to this invoice "
 "has already been printed or sent by mail."
 msgstr ""
+"Valeur booléenne définissant si le QRR correspondant à cette facture à déjà "
+"été imprimé ou envoyé par e-mail."
 
 #. module: l10n_ch_qr_bill
 #: code:addons/l10n_ch_qr_bill/models/account_invoice.py:262
@@ -82,6 +84,10 @@ msgid ""
 "your company and debtor. If you are using a QR-IBAN, also check the "
 "invoice's payment reference is a QR reference."
 msgstr ""
+"Impossible de générer la QR-facture. Veuillez vérifier que les adresses sont "
+"bien configurées sur votre compagnie et sur le débiteur. Si vous utiliser un "
+"QR-IBAN, vérifiez aussi que la référence de payement est bien une référence "
+"QR."
 
 #. module: l10n_ch_qr_bill
 #: model:ir.model.fields,field_description:l10n_ch_qr_bill.field_account_invoice_l10n_ch_currency_name
@@ -91,7 +97,7 @@ msgstr ""
 #. module: l10n_ch_qr_bill
 #: model:ir.model,name:l10n_ch_qr_bill.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Facture"
 
 #. module: l10n_ch_qr_bill
 #: model:ir.model.fields,field_description:l10n_ch_qr_bill.field_account_invoice_l10n_ch_qrr
