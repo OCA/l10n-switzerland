@@ -22,11 +22,27 @@
             </form>
         </field>
     </record>
+    <record model="ir.ui.view" id="paynet_invoice_message_search_view">
+        <field name="name">paynet.invoice.message.search</field>
+        <field name="model">paynet.invoice.message</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter
+                    name="in_error"
+                    string="In Error"
+                    domain="[('state', '=', 'error')]"
+                />
+                <field name="state" />
+                <field name="invoice_id" />
+                <field name="shipment_id" />
+            </search>
+        </field>
+    </record>
     <record model="ir.ui.view" id="paynet_invoice_message_tree_view">
         <field name="name">paynet.invoice.message.tree</field>
         <field name="model">paynet.invoice.message</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree create="false">
                 <field name="invoice_id" />
                 <field name="state" />
                 <field name="shipment_id" />
