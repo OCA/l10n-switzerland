@@ -10,5 +10,9 @@
     "website": "https://github.com/OCA/l10n-switzerland",
     "license": "AGPL-3",
     "depends": ["l10n_ch"],
-    "data": ["data/account.account.tag.csv", "data/account.account.template.csv"],
+    "data": [
+        "data/new/account.account.tag.csv",
+        "data/new/account.account.template.csv",
+        "data/update/account.account.template.csv",
+    ],
 }
