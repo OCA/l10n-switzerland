@@ -38,6 +38,7 @@ class AccountInvoice(models.Model):
         if not message:
             raise UserError(_("Error generating Paynet message"))
         message.send_to_paynet()
+        self.invoice_exported = True
         return "Paynet invoice generated and in state {}".format(message.state)
 
     # TODO: Should go in base_ebill_payment_contract
@@ -92,6 +93,7 @@ class AccountInvoice(models.Model):
             feedback="It worked on a later try",
         )
         self.message_post(body=_("Invoice accepted by the Paynet system"))
+        self.invoice_export_confirmed = True
 
     def log_invoice_refused_by_system(self):
         """ """
