@@ -9,6 +9,8 @@ from zeep.exceptions import Fault
 from odoo import api, fields, models
 from odoo.exceptions import UserError
 
+from odoo.addons.queue_job.job import job
+
 from ..components.api import PayNetDWS
 
 SYSTEM_PROD_URL = "https://dws.paynet.ch/DWS/DWS"
@@ -134,7 +136,10 @@ class PaynetService(models.Model):
                 # Not tested, need to be simulated on the portal
                 # Only possible for b2c contract
                 state = "rejected"
+            else:
+                return False
             # Updating message concerned by the response
+            # TODO improve me
             message = self.env["paynet.invoice.message"].search(
                 [("ic_ref", "=", ic_ref)]
             )
@@ -168,18 +173,28 @@ class PaynetService(models.Model):
         return dws.service.ping(ClientData="hello")
 
     def check_shipments(self):
-        """Check for shipments on the service and download them."""
+        """Check for shipments on the service and create jobs to download them."""
         self.ensure_one()
         res = self.get_shipment_list()
-        _logger.info(
-            "Paynet get_shipment_list found {} shipments".format(res["entriesFound"])
-        )
         for shipment in res["Shipment"]:
             shipment_id = shipment["ShipmentID"]
-            _logger.info("Get new shipment {}".format(shipment_id))
-            res = self.get_shipment_content(shipment_id)
-            if self.handle_received_shipment(res, shipment_id):
-                self.confirm_shipment(shipment_id)
+            description = "Paynet - Download shipment {}".format(shipment_id)
+            self.with_delay(description=description).download_shipment(shipment_id)
+        return "{} shipments found for {} service.".format(
+            res["entriesFound"], self.name
+        )
+
+    @job(default_channel="root.invoice_export")
+    def download_shipment(self, shipment_id):
+        """Download a shipment, parse it and if successful, acknowledge it."""
+        # TODO: Should test if shipment has already been downloaded
+        #      Maybe have a shipment model ?
+        res = self.get_shipment_content(shipment_id)
+        if self.handle_received_shipment(res, shipment_id):
+            self.confirm_shipment(shipment_id)
+            return "Shimpment {} downloaded and acknowledged.".format(shipment_id)
+        else:
+            return "Shipment {} can not be parsed \n {}".format(shipment_id, res)
 
     def test_ping(self):
         """Test the service from the UI."""

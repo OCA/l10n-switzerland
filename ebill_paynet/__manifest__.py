@@ -11,9 +11,10 @@
     "website": "https://github.com/OCA/l10n-switzerland",
     "depends": [
         "account",
+        "account_invoice_export",
         "base_ebill_payment_contract",
         "l10n_ch_base_bank",
-        "account_invoice_export",
+        "queue_job",
     ],
     "external_dependencies": {"python": ["zeep"]},
     "data": [
