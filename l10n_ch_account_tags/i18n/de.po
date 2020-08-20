@@ -15,11 +15,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #. module: l10n_ch_account_tags
-#: model:account.account.template,name:l10n_ch_account_tags.1_transfer_account_id
-msgid "1090"
-msgstr ""
-
-#. module: l10n_ch_account_tags
 #: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_130
 msgid "Actifs de régularisation (transitoires) (CH_130)"
 msgstr ""
@@ -175,6 +170,11 @@ msgstr ""
 #. module: l10n_ch_account_tags
 #: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_120
 msgid "Stocks et prestations non facturées (CH_120)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.template,name:l10n_ch_account_tags.1_transfer_account_id
+msgid "Transfer"
 msgstr ""
 
 #. module: l10n_ch_account_tags
