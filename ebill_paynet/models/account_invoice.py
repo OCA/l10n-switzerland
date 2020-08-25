@@ -14,16 +14,14 @@ class AccountInvoice(models.Model):
 
     _inherit = "account.move"
 
-    @api.onchange("transmit_method_id", "partner_id")
-    def _onchange_transmit_method_id(self):
+    @api.onchange("partner_id", "company_id")
+    def _transmit_method_partner_change(self):
+        super()._transmit_method_partner_change()
         if self.type not in ("out_invoice", "out_refund"):
             return
         paynet_method = self.env.ref("ebill_paynet.paynet_transmit_method")
         if self.transmit_method_id == paynet_method:
-            # It is not called when selecting the customer ?
-            contract = self.get_active_contract(
-                self.partner_id, self.transmit_method_id
-            )
+            contract = self.partner_id.get_active_contract(self.transmit_method_id)
             if contract:
                 self.invoice_partner_bank_id = (
                     contract.paynet_service_id.partner_bank_id
@@ -41,25 +39,10 @@ class AccountInvoice(models.Model):
         self.invoice_exported = True
         return "Paynet invoice generated and in state {}".format(message.state)
 
-    # TODO: Should go in base_ebill_payment_contract
-    @api.model
-    def get_active_contract(self, partner, transmit_method):
-        # FIXME: Search on non stored field
-        contract = self.env["ebill.payment.contract"].search(
-            [("is_valid", "=", True), ("partner_id", "=", partner.id)], limit=1,
-        )
-        if not contract:
-            _logger.error(
-                "Paynet contract for {} not found for {}".format(
-                    partner.name, transmit_method.name
-                )
-            )
-        return contract
-
     def create_paynet_message(self):
         """Generate the paynet message for an invoice."""
         self.ensure_one()
-        contract = self.get_active_contract(self.partner_id, self.transmit_method_id)
+        contract = self.partner_id.get_active_contract(self.transmit_method_id)
         if not contract:
             return
         r = self.env["ir.actions.report"]._get_report_from_name(
@@ -115,6 +98,3 @@ class AccountInvoice(models.Model):
         #         values.get("error_type")
         #     )
         # activity.note += "<div class='mt16'><p>{}</p></div>".format(error_log)
-
-    def _is_isr_ref(self, ref):
-        return False

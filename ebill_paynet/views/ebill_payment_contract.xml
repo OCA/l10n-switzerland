@@ -8,17 +8,19 @@
             ref="base_ebill_payment_contract.ebill_payment_contract_form_view"
         />
         <field name="arch" type="xml">
-            <field name="partner_id" position="after">
-                <field
-                    name="paynet_account_number"
-                    attrs="{'invisible': [('is_paynet_contract', '=', False)]}"
-                />
-                <field
-                    name="paynet_service_id"
-                    attrs="{'invisible': [('is_paynet_contract', '=', False)]}"
-                />
-                <field name="is_paynet_contract" invisible="1" />
-            </field>
+            <group name="main" position="after">
+                <group name="paynet" position="after">
+                    <field
+                        name="paynet_account_number"
+                        attrs="{'invisible': [('is_paynet_contract', '=', False)]}"
+                    />
+                    <field
+                        name="paynet_service_id"
+                        attrs="{'invisible': [('is_paynet_contract', '=', False)]}"
+                    />
+                    <field name="is_paynet_contract" invisible="1" />
+                </group>
+            </group>
         </field>
     </record>
 </odoo>

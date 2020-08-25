@@ -84,10 +84,6 @@ class PaynetInvoiceMessage(models.Model):
         self.ensure_one()
         assert self.state == "draft"
         self.ic_ref = self._get_ic_ref()
-        if "isr_reference" in self.invoice_id._fields:
-            invoice_esr = self.invoice_id.isr_reference
-        else:
-            invoice_esr = ""
         # ESR fixed amount, ESP variable amount, NPY no payment
         if self.invoice_id.type == "out_invoice":
             payment_type = "ESR"
@@ -96,7 +92,6 @@ class PaynetInvoiceMessage(models.Model):
         params = {
             "client_pid": self.service_id.client_pid,
             "invoice": self.invoice_id,
-            "invoice_esr": invoice_esr,
             "biller": self.invoice_id.company_id,
             "customer": self.invoice_id.partner_id,
             "pdf_data": self.attachment_id.datas.decode("ascii"),
