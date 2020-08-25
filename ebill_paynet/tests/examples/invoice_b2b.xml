@@ -36,7 +36,7 @@
         </INVOICE-REFERENCE>
         <ORDER>
           <REFERENCE-DATE>
-            <Reference-No>SO000321</Reference-No>
+            <Reference-No>CustomerRef</Reference-No>
           </REFERENCE-DATE>
         </ORDER>
         <!-- <DELIVERY-NOTE> -->
@@ -136,7 +136,7 @@
       </ITEM-DESCRIPTION>
       <ITEM-REFERENCE Type="ON">
         <REFERENCE-DATE>
-          <Reference-No>SO000321</Reference-No>
+          <Reference-No>CustomerRef</Reference-No>
           <Line-No></Line-No>
         </REFERENCE-DATE>
       </ITEM-REFERENCE>
