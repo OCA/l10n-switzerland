@@ -26,7 +26,7 @@ class PaynetService(models.Model):
     _name = "paynet.service"
     _description = "Paynet service configuration"
 
-    name = fields.Char()
+    name = fields.Char(required=True)
     url = fields.Char(compute="_compute_url", store=True)
     username = fields.Char()
     password = fields.Char()
@@ -39,7 +39,7 @@ class PaynetService(models.Model):
         help="Specify the type of XML exchange with the service.",
     )
     partner_bank_id = fields.Many2one(
-        comodel_name="res.partner.bank", string="Bank account",
+        comodel_name="res.partner.bank", string="Bank account", ondelete="restrict"
     )
     invoice_message_ids = fields.One2many(
         comodel_name="paynet.invoice.message",

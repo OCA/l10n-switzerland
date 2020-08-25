@@ -16,6 +16,7 @@ class TestEbillPaynet(SingleTransactionCase):
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.paynet = cls.env["paynet.service"].create(
             {
+                "name": "Paynet Test Service",
                 "use_test_service": True,
                 "client_pid": os.getenv("PAYNET_ID", "123456789"),
                 "service_type": "b2b",

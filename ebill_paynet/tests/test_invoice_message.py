@@ -49,6 +49,7 @@ class TestInvoiceMessage(SingleTransactionCase, XmlTestMixin):
         cls.terms = cls.env.ref("account.account_payment_term_15days")
         cls.paynet = cls.env["paynet.service"].create(
             {
+                "name": "Paynet Test Service",
                 "use_test_service": True,
                 "client_pid": os.getenv("PAYNET_ID", "52110726772852593"),
                 "service_type": "b2c",
