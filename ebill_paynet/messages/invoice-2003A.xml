@@ -36,7 +36,7 @@
         </INVOICE-REFERENCE>
         <ORDER>
           <REFERENCE-DATE>
-            <Reference-No>{{ invoice.invoice_origin }}</Reference-No>
+            <Reference-No>{{ invoice.ref or ''}}</Reference-No>
           </REFERENCE-DATE>
         </ORDER>
       </REFERENCE>
@@ -45,8 +45,8 @@
         {%- if invoice.company_id.vat %}
         <Tax-No>{{ invoice.company_id.vat }}</Tax-No>
         {%- endif %}
-        {%- if invoice_esr %}
-            <Doc-Reference Type="ESR-NEU">{{ invoice_esr }}</Doc-Reference>
+        {%- if invoice.invoice_payment_ref %}
+            <Doc-Reference Type="ESR-NEU">{{ invoice.invoice_payment_ref }}</Doc-Reference>
         {%- endif %}
         <PARTY-ID>
           <Pid>{{ client_pid }}</Pid>
@@ -54,6 +54,9 @@
         <NAME-ADDRESS Format="COM">
           <NAME>
             <Line-35>{{ biller.name }}</Line-35>
+            {%- if biller.partner_id.company_name_suffix1 %}
+            <Line-35>{{ biller.partner_id.company_name_suffix1 }}</Line-35>
+            {% endif %}
           </NAME>
           <STREET>
             <Line-35>{{ biller.street or ''}}</Line-35>
@@ -66,7 +69,7 @@
           <Country>{{ biller.country_id.code or 'CH' }}</Country>
         </NAME-ADDRESS>
         <BANK-INFO>
-          <Acct-No>{{ bank.sanitized_acc_number }}</Acct-No>
+          <Acct-No>{{ bank.l10n_ch_postal if bank.is_isr_issuer() else bank.sanitized_acc_number }}</Acct-No>
           <BankId Type="BCNr-int" Country="CH">{{ bank.bank_id.clearing }}</BankId>
         </BANK-INFO>
       </BILLER>
@@ -118,7 +121,7 @@
       </ITEM-DESCRIPTION>
       <ITEM-REFERENCE Type="ON">
         <REFERENCE-DATE>
-          <Reference-No>{{ line.move_id.invoice_origin }}</Reference-No>
+          <Reference-No>{{ line.move_id.ref or ''}}</Reference-No>
           <Line-No></Line-No>
         </REFERENCE-DATE>
       </ITEM-REFERENCE>

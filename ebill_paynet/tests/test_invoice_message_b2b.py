@@ -112,7 +112,7 @@ class TestInvoiceMessage(SingleTransactionCase, XmlTestMixin):
                 "partner_id": cls.customer.id,
                 # 'account_id': cls.account.id,
                 "invoice_partner_bank_id": cls.partner_bank.id,
-                "invoice_origin": "SO000321",
+                "ref": "CustomerRef",
                 "invoice_payment_term_id": cls.terms.id,
                 "type": "out_invoice",
                 "transmit_method_id": cls.env.ref(
@@ -126,7 +126,7 @@ class TestInvoiceMessage(SingleTransactionCase, XmlTestMixin):
                             "account_id": cls.account.id,
                             "product_id": cls.product.product_variant_ids[:1].id,
                             "name": "Product 1",
-                            # 'origin': 'SO000321',
+                            # 'origin': 'CustomerRef',
                             "quantity": 4.0,
                             "price_unit": 123.00,
                             "tax_ids": [(4, cls.tax7.id, 0)],

@@ -17,6 +17,7 @@ SYSTEM_PROD_URL = "https://dws.paynet.ch/DWS/DWS"
 SYSTEM_TEST_URL = "https://dws-test.paynet.ch/DWS/DWS"
 
 PENDING_STATES = ["ReadyForSending", "Submitted"]
+ALL_STATES = PENDING_STATES + ["ArrivedAtDestination"]
 # The state for already acknowledge ones ArrivedAtDestination
 
 _logger = logging.getLogger(__name__)
@@ -95,6 +96,7 @@ class PaynetService(models.Model):
             # FromShipmentPriority:
             # ToShipmentPriority:
         )
+
         return res
 
     def get_shipment_content(self, shipment_id):
@@ -176,6 +178,8 @@ class PaynetService(models.Model):
         """Check for shipments on the service and create jobs to download them."""
         self.ensure_one()
         res = self.get_shipment_list()
+        _logger.info("Paynet ({}) shipment list result : {}".format(self.name, res))
+
         for shipment in res["Shipment"]:
             shipment_id = shipment["ShipmentID"]
             description = "Paynet - Download shipment {}".format(shipment_id)
