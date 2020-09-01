@@ -4,12 +4,26 @@
 [![Coverage Status](https://coveralls.io/repos/OCA/l10n-switzerland/badge.svg?branch=13.0)](https://coveralls.io/r/OCA/l10n-switzerland?branch=13.0)
 
 
-Odoo/OpenERP Swiss Localization
-===============================
+Odoo Swiss Localization :switzerland:
+=====================================
 
 This repository hosts official Swiss localization provided by the OCA.
 
-It extends Odoo/OpenERP to add needed functionalities to use Odoo/OpenERP in Switzerland.
+It extends Odoo to add needed functionalities to use Odoo in Switzerland.
+
+
+:new: ebill_paynet
+------------------
+
+Send eBills, digital invoices, through the e-billing platform paynet (www.ebill.ch) to your customers.
+
+
+:new: l10n_ch_qr_bill_scan
+--------------------------
+
+To use a scanner on the QR-bills' QR code (www.qr-bill.ch) and create the proper supplier invoices
+
+State: in review
 
 
 l10n_ch_bank
@@ -24,27 +38,13 @@ l10n_ch_zip
 Provides the list of Swiss postal ZIPs for auto-completion.
 
 
-l10n_ch_payment_slip
---------------------
-
-Adds ISR (PVR/BVR/ESR) report on invoice. Every ISR element position can be configured independently by company.
-Multiple payment terms on invoices are supported.
-
-It will also allow you to do the import of V11 bank statement files and do an automatic reconciliation.
-
-
 l10n_ch_base_bank
 -----------------
 
 Adds the support of postal account and bank postal account norm.
 The partner bank form allows you to input Swiss bank account and postal account in a correct manner.
 
-
-l10n_ch_dta
------------
-
-Provides support of DTA payment file protocol to generate electronic payment file.
-This feature will be deprecated around the end of 2016.
+:bulb: Since v13 this module becomes highly optional, most of its feature have be push into Odoo core
 
 
 l10n_ch_pain_credit_transfert
@@ -52,14 +52,6 @@ l10n_ch_pain_credit_transfert
 
 Provides support of SEPA/PAIN electronic payment file.
 
-
-(replaces former l10n_ch_sepa module)
-
-
-l10n_ch_scan_bvr
-----------------
-
-Allows you to scan the ISR references and automatically create the proper supplier invoices
 
 l10n_ch_hr_payroll
 ------------------
@@ -72,11 +64,22 @@ l10n_ch_import_cresus
 
 This module add the ability to import CSV file from Crésus software (www.cresus.ch)
 
-l10n_cd_import_winbiz
+l10n_ch_import_winbiz
 ---------------------
 
 Allows to import accounting from WinBIZ software (www.winbiz.ch) using Excel or XML format.
 
+
+l10n_ch_payment_slip
+--------------------
+
+:ghost: DEPRECATED :ghost:
+
+ISR are now deprecated by the QR-Bill while still valid till 2022 it is wise to consider using QR-bills instead
+The QR-bills are available in Odoo core.
+
+Adds ISR (PVR/BVR/ESR) report on invoice. Every ISR element position can be configured independently by company.
+Multiple payment terms on invoices are supported.
 
 
 Translation Status
