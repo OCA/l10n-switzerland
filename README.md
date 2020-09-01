@@ -17,13 +17,14 @@ It extends Odoo to add needed functionalities to use Odoo in Switzerland.
 
 Send eBills, digital invoices, through the e-billing platform paynet (www.ebill.ch) to your customers.
 
+PR in review state: https://github.com/OCA/l10n-switzerland/pull/551
 
 :new: l10n_ch_qr_bill_scan
 --------------------------
 
 To use a scanner on the QR-bills' QR code (www.qr-bill.ch) and create the proper supplier invoices
 
-State: in review
+PR in review state: https://github.com/OCA/l10n-switzerland/pull/553
 
 
 l10n_ch_bank
