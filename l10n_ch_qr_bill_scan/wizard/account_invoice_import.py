@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2020 Camptocamp
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
@@ -44,10 +45,10 @@ class AccountInvoiceImport(models.TransientModel):
         string="Country", comodel_name="res.country", readonly=True
     )
 
-    def get_parsed_invoice(self):
+    def _get_parsed_invoice(self):
         if self.invoice_scan:
             return self.parse_qrbill(self.invoice_scan)
-        return super().get_parsed_invoice()
+        return super(AccountInvoiceImport, self)._get_parsed_invoice()
 
     @api.model
     def _get_qr_address(self, address_lines):
@@ -151,10 +152,11 @@ class AccountInvoiceImport(models.TransientModel):
 
             qr_list = self._read_swiss_qr_code(pdf_img)
             if qr_list:
-                logger.debug("Swiss QR-Code decoded from PDF file %s" % qr_list[0])
-                return self.parse_qrbill(qr_list[0].data.decode())
+                decoded = qr_list[0].data.decode()
+                logger.debug("Swiss QR-Code decoded from PDF file %s" % decoded)
+                return self.parse_qrbill(decoded)
             logger.debug("No Swiss QR-Code found in PDF file")
-        return super().parse_pdf_invoice(file_data)
+        return super(AccountInvoiceImport, self).parse_pdf_invoice(file_data)
 
     def _hook_no_partner_found(self, partner_dict):
         """Switch wizard to partner creation.
