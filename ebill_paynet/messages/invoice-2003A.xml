@@ -69,7 +69,7 @@
           <Country>{{ biller.country_id.code or 'CH' }}</Country>
         </NAME-ADDRESS>
         <BANK-INFO>
-          <Acct-No>{{ bank.l10n_ch_postal if bank.is_isr_issuer() else bank.sanitized_acc_number }}</Acct-No>
+          <Acct-No>{{ bank.l10n_ch_postal if bank.is_isr_issuer() and bank.l10n_ch_postal else bank.sanitized_acc_number }}</Acct-No>
           <BankId Type="BCNr-int" Country="CH">{{ bank.bank_id.clearing }}</BankId>
         </BANK-INFO>
       </BILLER>
