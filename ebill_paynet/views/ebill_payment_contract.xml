@@ -11,11 +11,15 @@
             <group name="main" position="after">
                 <group name="paynet" position="after">
                     <field
+                        name="paynet_service_id"
+                        attrs="{'invisible': [('is_paynet_contract', '=', False)]}"
+                    />
+                    <field
                         name="paynet_account_number"
                         attrs="{'invisible': [('is_paynet_contract', '=', False)]}"
                     />
                     <field
-                        name="paynet_service_id"
+                        name="payment_type" 
                         attrs="{'invisible': [('is_paynet_contract', '=', False)]}"
                     />
                     <field name="is_paynet_contract" invisible="1" />

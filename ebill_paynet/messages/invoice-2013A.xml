@@ -119,7 +119,7 @@
     </TAX>
     {% endif -%}
     <PAYMENT-TERMS>
-      <BASIC Payment-Type="{{ payment_type }}" Terms-Type="5">
+      <BASIC Payment-Type="{{ payment_type|upper }}" Terms-Type="5">
         <TERMS>
           <Date>{{ format_date(invoice.date_due or invoice.date_invoice) }}</Date>
         </TERMS>

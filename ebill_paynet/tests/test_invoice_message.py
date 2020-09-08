@@ -134,7 +134,7 @@ class TestInvoiceMessage(SingleTransactionCase, XmlTestMixin):
 
     def test_icref_generation(self):
         """ """
-        message = self.invoice_1.create_paynet_message()
+        message = self.invoice_1.create_paynet_message("esr")
         message.ic_ref = message._get_ic_ref()
         self.assertEqual(message.ic_ref, "SA%012d" % message.id)
 
@@ -145,7 +145,7 @@ class TestInvoiceMessage(SingleTransactionCase, XmlTestMixin):
         # TODO set a due date different to create date
         # self.invoice_1.date_due = '2019-07-01'
         self.invoice_1.state = "posted"
-        message = self.invoice_1.create_paynet_message()
+        message = self.invoice_1.create_paynet_message("esr")
         message.payload = message._generate_payload()
         # Remove the PDF file data from the XML to ease testing
         lines = message.payload.splitlines()
