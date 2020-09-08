@@ -63,6 +63,7 @@
       </REFERENCE>
       <BILLER>
         <Tax-No>CHE-012.345.678</Tax-No>
+        <Doc-Reference Type="QRR">1234567890</Doc-Reference>
         <PARTY-ID>
           <Pid>52110726772852593</Pid>
         </PARTY-ID>
@@ -78,8 +79,8 @@
           <Country>CH</Country>
         </NAME-ADDRESS>
         <BANK-INFO>
-          <Acct-No>300300300</Acct-No>
-          <BankId Type="BCNr-int" Country="CH">777</BankId>
+          <Acct-No>CH2130808001234567827</Acct-No>
+          <BankId Type="IID" Country="CH">30808</BankId>
         </BANK-INFO>
       </BILLER>
       <PAYER>
@@ -169,7 +170,7 @@
         <Amount Currency="CHF">37.88</Amount>
       </TAX>
       <PAYMENT-TERMS>
-        <BASIC Payment-Type="ESR" Terms-Type="5">
+        <BASIC Payment-Type="QR" Terms-Type="5">
           <TERMS>
             <Date>20190621</Date>
           </TERMS>

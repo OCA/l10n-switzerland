@@ -14,6 +14,7 @@
         "account_invoice_export",
         "base_ebill_payment_contract",
         "l10n_ch_base_bank",
+        "l10n_ch_qr",
         "queue_job",
     ],
     "external_dependencies": {"python": ["zeep"]},

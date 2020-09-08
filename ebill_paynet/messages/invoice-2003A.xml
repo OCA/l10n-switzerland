@@ -46,7 +46,7 @@
         <Tax-No>{{ invoice.company_id.vat }}</Tax-No>
         {%- endif %}
         {%- if invoice.invoice_payment_ref %}
-            <Doc-Reference Type="ESR-NEU">{{ invoice.invoice_payment_ref }}</Doc-Reference>
+        <Doc-Reference Type="{{ 'QRR' if payment_type == 'qr' else 'ESR-NEU' }}">{{ invoice.invoice_payment_ref }}</Doc-Reference>
         {%- endif %}
         <PARTY-ID>
           <Pid>{{ client_pid }}</Pid>
@@ -69,8 +69,13 @@
           <Country>{{ biller.country_id.code or 'CH' }}</Country>
         </NAME-ADDRESS>
         <BANK-INFO>
-          <Acct-No>{{ bank.l10n_ch_postal if bank.is_isr_issuer() else bank.sanitized_acc_number }}</Acct-No>
+          {%- if payment_type in ['esr', 'esp'] %}
+          <Acct-No>{{ bank.l10n_ch_postal if bank.is_isr_issuer() and bank.l10n_ch_postal else bank.sanitized_acc_number }}</Acct-No>
           <BankId Type="BCNr-int" Country="CH">{{ bank.bank_id.clearing }}</BankId>
+          {%- elif payment_type == 'qr' %}
+          <Acct-No>{{ qr_account }}</Acct-No>
+          <BankId Type="IID" Country="CH">{{ qr_account[4:9] if qr_account else ''}}</BankId>
+          {%- endif %}
         </BANK-INFO>
       </BILLER>
       <PAYER>
@@ -162,7 +167,7 @@
     </TAX>
     {% endif -%}
     <PAYMENT-TERMS>
-      <BASIC Payment-Type="{{ payment_type }}" Terms-Type="5">
+      <BASIC Payment-Type="{{ payment_type|upper }}" Terms-Type="5">
         <TERMS>
           <Date>{{ format_date(invoice.date_due or invoice.date_invoice) }}</Date>
         </TERMS>
