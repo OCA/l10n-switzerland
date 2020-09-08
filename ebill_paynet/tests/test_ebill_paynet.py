@@ -116,7 +116,7 @@ class TestEbillPaynet(SingleTransactionCase):
 
         This one is CONTRL NOK
         """
-        message = self.invoice_1.create_paynet_message()
+        message = self.invoice_1.create_paynet_message("qr")
         message.ic_ref = "SA000000000003"
         res = self.paynet.get_shipment_content("SC-00000000000020357011")
         self.paynet.handle_received_shipment(res, "SC-00000000000020357011")

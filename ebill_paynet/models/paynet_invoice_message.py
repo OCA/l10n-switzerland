@@ -9,6 +9,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from zeep.exceptions import Fault
 
 from odoo import fields, models
+from odoo.addons.base.models.res_bank import sanitize_account_number
 from odoo.modules.module import get_module_root
 
 from ..components.api import PayNetDWS
@@ -59,6 +60,11 @@ class PaynetInvoiceMessage(models.Model):
     payload = fields.Text("Payload sent")
     response = fields.Text("Response recieved")
     shipment_id = fields.Char(size=24, help="Shipment Id on Paynet service")
+    payment_type = fields.Selection(
+        selection=[("qr", "QR"), ("esr", "ESR"), ("esp", "ESP"), ("npy", "NPY")],
+        default="qr",
+        readonly=True,
+    )
 
     def _get_ic_ref(self):
         return "SA%012d" % self.id
@@ -84,11 +90,14 @@ class PaynetInvoiceMessage(models.Model):
         self.ensure_one()
         assert self.state == "draft"
         self.ic_ref = self._get_ic_ref()
-        # ESR fixed amount, ESP variable amount, NPY no payment
-        if self.invoice_id.type == "out_invoice":
-            payment_type = "ESR"
-        else:
-            payment_type = "NPY"
+        qr_account = ""
+        if self.payment_type == "qr":
+            qr_account = (
+                self.invoice_id.invoice_partner_bank_id.l10n_ch_qr_iban or
+                self.invoice_id.invoice_partner_bank_id.acc_number
+            )
+            qr_account = sanitize_account_number(qr_account)
+
         params = {
             "client_pid": self.service_id.client_pid,
             "invoice": self.invoice_id,
@@ -96,8 +105,9 @@ class PaynetInvoiceMessage(models.Model):
             "customer": self.invoice_id.partner_id,
             "pdf_data": self.attachment_id.datas.decode("ascii"),
             "bank": self.invoice_id.invoice_partner_bank_id,
+            "qr_account": qr_account,
             "ic_ref": self.ic_ref,
-            "payment_type": payment_type,
+            "payment_type": self.payment_type,
             "document_type": DOCUMENT_TYPE[self.invoice_id.type],
             "format_date": self.format_date,
             "ebill_account_number": self.ebill_account_number,

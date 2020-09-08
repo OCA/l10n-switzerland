@@ -46,6 +46,7 @@ class TestInvoiceMessage(SingleTransactionCase, XmlTestMixin):
                 "acc_number": "300.300.300",
                 "acc_holder_name": "AccountHolderName",
                 "partner_id": cls.company.partner_id.id,
+                "l10n_ch_qr_iban": "CH21 3080 8001 2345 6782 7",
             }
         )
         cls.terms = cls.env.ref("account.account_payment_term_15days")
@@ -118,6 +119,7 @@ class TestInvoiceMessage(SingleTransactionCase, XmlTestMixin):
                 "transmit_method_id": cls.env.ref(
                     "ebill_paynet.paynet_transmit_method"
                 ).id,
+                "invoice_payment_ref": "1234567890",
                 "invoice_line_ids": [
                     (
                         0,
@@ -143,7 +145,7 @@ class TestInvoiceMessage(SingleTransactionCase, XmlTestMixin):
         # TODO set a due date different to create date
         # self.invoice_1.date_due = '2019-07-01'
         self.invoice_1.state = "posted"
-        message = self.invoice_1.create_paynet_message()
+        message = self.invoice_1.create_paynet_message("qr")
         message.payload = message._generate_payload()
         # Remove the PDF file data from the XML to ease testing
         lines = message.payload.splitlines()
