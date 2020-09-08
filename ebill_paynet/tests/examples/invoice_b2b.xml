@@ -80,7 +80,7 @@
         </NAME-ADDRESS>
         <BANK-INFO>
           <Acct-No>CH2130808001234567827</Acct-No>
-          <BankId Type="BCNr-int" Country="CH">777</BankId>
+          <BankId Type="IID" Country="CH">30808</BankId>
         </BANK-INFO>
       </BILLER>
       <PAYER>
