@@ -16,6 +16,7 @@
         "l10n_ch_base_bank",
         "l10n_ch_qr",
         "queue_job",
+        "sale",
     ],
     "external_dependencies": {"python": ["zeep"]},
     "data": [
