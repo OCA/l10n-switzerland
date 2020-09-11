@@ -145,10 +145,12 @@
         <Amount Currency="CHF">{{ line.price_total }}</Amount>
       </ITEM-AMOUNT>
       {% for tax in line.tax_ids %}
+      {%- if loop.index == 1 %}
       <TAX>
         <Rate>{{ tax.amount}}</Rate>
         <Amount Currency="CHF">{{ tax._compute_amount(line.price_subtotal, line.price_unit)|round(2) }}</Amount>
       </TAX>
+      {%- endif %}
       {% else %}
       <TAX>
         <Rate>0</Rate>
