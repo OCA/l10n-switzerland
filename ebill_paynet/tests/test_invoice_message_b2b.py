@@ -78,6 +78,7 @@ class TestInvoiceMessage(SingleTransactionCase, XmlTestMixin):
                 "paynet_account_number": "41010198248040391",
                 "state": "open",
                 "paynet_service_id": cls.paynet.id,
+                "payment_type": "qr",
             }
         )
         cls.account = cls.env["account.account"].search(
@@ -105,47 +106,37 @@ class TestInvoiceMessage(SingleTransactionCase, XmlTestMixin):
                 "reconcile": True,
             }
         )
-        cls.product = cls.env["product.template"].create(
+        cls.product = cls.env["product.product"].create(
             {"name": "Product One", "list_price": 100.00, "default_code": "370003021"}
         )
-        cls.invoice_1 = cls.env["account.move"].create(
+        cls.sale = cls.env["sale.order"].create(
             {
+                "name": "Order123",
                 "partner_id": cls.customer.id,
-                # 'account_id': cls.account.id,
-                "invoice_partner_bank_id": cls.partner_bank.id,
-                "ref": "CustomerRef",
-                "invoice_payment_term_id": cls.terms.id,
-                "type": "out_invoice",
-                "transmit_method_id": cls.env.ref(
-                    "ebill_paynet.paynet_transmit_method"
-                ).id,
-                "invoice_payment_ref": "1234567890",
-                "invoice_line_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "account_id": cls.account.id,
-                            "product_id": cls.product.product_variant_ids[:1].id,
-                            "name": "Product 1",
-                            # 'origin': 'CustomerRef',
-                            "quantity": 4.0,
-                            "price_unit": 123.00,
-                            "tax_ids": [(4, cls.tax7.id, 0)],
-                        },
-                    )
-                ],
+                "client_order_ref": "CustomerRef",
+                "order_line": [(0, 0, {
+                    "product_id": cls.product.id,
+                    "name": cls.product.name,
+                    "product_uom_qty": 4.0,
+                    "price_unit": 123.0,
+                    "tax_id": [(4, cls.tax7.id, 0)],
+                })],
             }
         )
+        cls.sale.action_confirm()
+        cls.sale.date_order = "2019-06-01"
+        cls.invoice = cls.sale._create_invoices()
+        cls.invoice.invoice_payment_ref = "1234567890"
+        cls.invoice.invoice_partner_bank_id = cls.partner_bank.id
 
     def test_invoice(self):
         """ Check XML payload genetated for an invoice."""
-        self.invoice_1.name = "INV_TEST_01"
+        self.invoice.name = "INV_TEST_01"
         # self.invoice_1.action_invoice_sent()
         # TODO set a due date different to create date
         # self.invoice_1.date_due = '2019-07-01'
-        self.invoice_1.state = "posted"
-        message = self.invoice_1.create_paynet_message("qr")
+        self.invoice.state = "posted"
+        message = self.invoice.create_paynet_message()
         message.payload = message._generate_payload()
         # Remove the PDF file data from the XML to ease testing
         lines = message.payload.splitlines()
