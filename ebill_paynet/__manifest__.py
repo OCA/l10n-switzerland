@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Ebill Paynet",
+    "name": "eBill Paynet",
     "summary": """
         Paynet platform bridge implementation""",
     "version": "13.0.1.0.0",

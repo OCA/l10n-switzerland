@@ -2,8 +2,7 @@
 <odoo>
     <template id="dws_reject_invoice">
         <div>
-            <p>The Paynet system rejected the ebill that was send.</p>
-            <!-- <p><t t-esc="job_id" /></p> -->
+            <p>The Paynet system rejected the eBill that was send.</p>
         </div>
     </template>
 </odoo>

@@ -6,5 +6,5 @@ To Do
 Improvements
 
 * On the contract view the list of messages for that contract could be visible.
-
-When an error is returned by the service it should be clearer where it is located in the payload send.
+* When an error is returned by the service it should be clearer where it is located in the payload send.
+* In the chatter add a link to the job when it fails
