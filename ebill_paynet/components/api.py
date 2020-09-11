@@ -2,11 +2,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 import os
+import zeep
 
 from lxml import html
 from requests import Session
-from zeep import Client, Settings
-from zeep.transports import Transport
 
 from odoo.modules.module import get_resource_path
 
@@ -23,14 +22,14 @@ class PayNetDWS:
     """PayNet DWS web services."""
 
     def __init__(self, url, test_service):
-        settings = Settings(xml_huge_tree=True)
+        settings = zeep.Settings(xml_huge_tree=True)
         session = Session()
         if test_service:
             session.verify = SSL_TEST_CERTIFICATE
         else:
             session.verify = SSL_PROD_CERTIFICATE
-        transport = Transport(session=session)
-        self.client = Client(WSDL_DOC, transport=transport, settings=settings)
+        transport = zeep.transports.Transport(session=session)
+        self.client = zeep.Client(WSDL_DOC, transport=transport, settings=settings)
         if url:
             self.service = self.client.create_service(
                 "{http://www.sap.com/DWS}DWSBinding", url

@@ -9,6 +9,6 @@ In Odoo to enable the sending of invoices for a specific customer through Paynet
 
 ## Configure the contracts
 
-The contracts specific to ebilling are located in `Accounting - Customers - Ebill Payment Contract`
+The contracts specific to e-billing are located in `Accounting - Customers - eBill Payment Contract`
 Although the Paynet system allows for automatic exchange of contract registration and status changes, this automation is not yet implemented.
 To be active a contract needs to be in the state `Open` and it's start/end dates to be valid.
