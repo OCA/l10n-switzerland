@@ -39,15 +39,15 @@ class AccountInvoice(models.Model):
         self.invoice_exported = True
         return "Paynet invoice generated and in state {}".format(message.state)
 
-    def create_paynet_message(self, payment_type):
+    def create_paynet_message(self):
         """Generate the paynet message for an invoice."""
         self.ensure_one()
         contract = self.partner_id.get_active_contract(self.transmit_method_id)
         if not contract:
             return
-        if payment_type == "qr":
+        if contract.payment_type == "qr":
             report_name = "l10n_ch.qr_report_main"
-        elif payment_type == "esr":
+        elif contract.payment_type == "esr":
             report_name = "l10n_ch.isr_report_main"
         else:
             report_name = "account.report_invoice"
@@ -60,7 +60,7 @@ class AccountInvoice(models.Model):
                 "service_id": contract.paynet_service_id.id,
                 "invoice_id": self.id,
                 "ebill_account_number": contract.paynet_account_number,
-                "payment_type": payment_type
+                "payment_type": contract.payment_type
             }
         )
         attachment = self.env["ir.attachment"].create(

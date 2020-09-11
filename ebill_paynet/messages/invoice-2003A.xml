@@ -34,11 +34,14 @@
             <Date Format="CCYYMMDD">{{ format_date(invoice.date_invoice) }}</Date>
           </REFERENCE-DATE>
         </INVOICE-REFERENCE>
+        {% for order in invoice.invoice_line_ids.sale_line_ids.mapped('order_id') %}
         <ORDER>
           <REFERENCE-DATE>
-            <Reference-No>{{ invoice.ref or ''}}</Reference-No>
+            <Reference-No>{{ order.name }}</Reference-No>
+            <Date Format="CCYYMMDD">{{ format_date(order.date_order) }}</Date>
           </REFERENCE-DATE>
         </ORDER>
+        {% endfor %}
       </REFERENCE>
       <BILLER>
         {#- Doc says vat number or business identitfiaction number #}
@@ -124,16 +127,33 @@
         <Item-Type-Code>1011</Item-Type-Code>
         <Line-35>{{ line.product_id.name }}</Line-35>
       </ITEM-DESCRIPTION>
+      {% for order in invoice.invoice_line_ids.sale_line_ids.mapped('order_id') %}
+      {%- if order.client_order_ref %}
       <ITEM-REFERENCE Type="ON">
-        <REFERENCE-DATE>
-          <Reference-No>{{ line.move_id.ref or ''}}</Reference-No>
-          <Line-No></Line-No>
-        </REFERENCE-DATE>
+          <REFERENCE-DATE>
+            <Reference-No>{{ order.client_order_ref }}</Reference-No>
+            <Date Format="CCYYMMDD">{{ format_date(order.date_order) }}</Date>
+          </REFERENCE-DATE>
       </ITEM-REFERENCE>
+      {%- endif %}
+      {% endfor %}
       <Quantity Type="47" Units="PCE">{{ line.quantity }}</Quantity>
+      <Price Type="YYY">{{ line.price_subtotal}}</Price>
+      <Price Type="AAA">{{ line.price_subtotal}}</Price>
+      <Price Type="XXX">{{ line.price_total}}</Price>
       <ITEM-AMOUNT Type="66">
         <Amount Currency="CHF">{{ line.price_total }}</Amount>
       </ITEM-AMOUNT>
+      {% for tax in line.tax_ids %}
+      <TAX>
+        <Rate>{{ tax.amount}}</Rate>
+        <Amount Currency="CHF">{{ tax._compute_amount(line.price_subtotal, line.price_unit)|round(2) }}</Amount>
+      </TAX>
+      {% else %}
+      <TAX>
+        <Rate>0</Rate>
+      </TAX>
+      {% endfor %}
     </LINE-ITEM>
     {% endfor %}
     <SUMMARY>
