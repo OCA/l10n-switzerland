@@ -1,17 +1,20 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 import time
-
-from odoo.addons.account.tests.account_test_classes import AccountingTestCase
+from openerp.tests.common import HttpCase
 
 CH_IBAN = 'CH15 3881 5158 3845 3843 7'
 QR_IBAN = 'CH21 3080 8001 2345 6782 7'
 
 
-class TestSwissQR(AccountingTestCase):
+class TestSwissQR(HttpCase):
 
     def setUp(self):
         super(TestSwissQR, self).setUp()
+        domain = [('company_id', '=', self.env.ref('base.main_company').id)]
+        if not self.env['account.account'].search_count(domain):
+            self.skipTest("No Chart of account found")
+
         # Activate SwissQR in Swiss invoices
         self.env['ir.config_parameter'].create(
             {'key': 'l10n_ch.print_qrcode', 'value': '1'}
@@ -41,9 +44,9 @@ class TestSwissQR(AccountingTestCase):
         """ Generates a test invoice """
 
         product = self.env.ref("product.product_product_4")
-        acc_type = self.env.ref('account.data_account_type_current_assets')
+        acc_type = self.env.ref('account.data_account_type_bank')
         account = self.env['account.account'].search(
-            [('user_type_id', '=', acc_type.id)], limit=1
+            [('user_type', '=', acc_type.id)], limit=1
         )
         invoice = (
             self.env['account.invoice']
@@ -53,8 +56,9 @@ class TestSwissQR(AccountingTestCase):
                     'type': 'out_invoice',
                     'partner_id': self.customer.id,
                     'currency_id': self.env.ref(currency_to_use).id,
-                    'date': time.strftime('%Y') + '-12-22',
-                    'invoice_line_ids': [
+                    'account_id': account.id,
+                    'date_invoice': time.strftime('%Y') + '-12-22',
+                    'invoice_line': [
                         (
                             0,
                             0,
@@ -78,6 +82,7 @@ class TestSwissQR(AccountingTestCase):
             {
                 'acc_number': number,
                 'partner_id': self.env.user.company_id.partner_id.id,
+                'state': 'iban'
             }
         )
 
@@ -86,7 +91,7 @@ class TestSwissQR(AccountingTestCase):
 
         """
         self.assertFalse(
-            invoice.can_generate_qr_bill(),
+            invoice.validate_swiss_code_arguments(),
             'No Swiss QR should be generated for this invoice',
         )
 
@@ -95,7 +100,7 @@ class TestSwissQR(AccountingTestCase):
 
         """
         self.assertTrue(
-            invoice.can_generate_qr_bill(), 'A Swiss QR can be generated'
+            invoice.validate_swiss_code_arguments(), 'A Swiss QR can be generated'
         )
         if ref_type == 'QRR':
             self.assertTrue(invoice.name)
@@ -104,6 +109,8 @@ class TestSwissQR(AccountingTestCase):
         else:
             struct_ref = ''
             unstr_msg = invoice.name or ''
+        acc_number = invoice.partner_bank_id.acc_number
+        iban = invoice.partner_bank_id._sanitize_account_number(acc_number)
         unstr_msg = (unstr_msg or invoice.number).replace('/', '%2F')
         payload = (
             "SPC%0A"
@@ -130,7 +137,7 @@ class TestSwissQR(AccountingTestCase):
             "{unstr_msg}%0A"
             "EPD%0A"
         ).format(
-            iban=invoice.partner_bank_id.sanitized_acc_number,
+            iban=iban,
             ref_type=ref_type,
             struct_ref=struct_ref,
             unstr_msg=unstr_msg,
@@ -155,13 +162,12 @@ class TestSwissQR(AccountingTestCase):
         iban_account = self.create_account(CH_IBAN)
         self.invoice1.partner_bank_id = iban_account
         self.invoice1.action_invoice_open()
-
         self.swissqr_generated(self.invoice1, ref_type="NON")
 
     def test_swissQR_qriban(self):
         # Now use a proper QR-IBAN, we are good to print a QR Bill
         qriban_account = self.create_account(QR_IBAN)
-        self.assertTrue(qriban_account.acc_type, 'qr-iban')
+        self.assertTrue(qriban_account._is_qr_iban())
         self.invoice1.partner_bank_id = qriban_account
         self.invoice1.action_invoice_open()
         self.swissqr_generated(self.invoice1, ref_type="QRR")

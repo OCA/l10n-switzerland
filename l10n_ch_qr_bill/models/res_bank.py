@@ -4,11 +4,16 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 import re
 
-from odoo import models
+from openerp import models
 
 
 class ResPartnerBank(models.Model):
     _inherit = 'res.partner.bank'
+
+    def _sanitize_account_number(self, acc_number):
+        if acc_number:
+            return re.sub(r'\W+', '', acc_number).upper()
+        return False
 
     def _is_qr_iban(self):
         """ Tells whether or not this bank account has a QR-IBAN account number.
@@ -20,12 +25,10 @@ class ResPartnerBank(models.Model):
             return False
 
         self.ensure_one()
-
-        iid_start_index = 4
-        iid_end_index = 8
-        iid = self.sanitized_acc_number[iid_start_index : iid_end_index + 1]
+        sanitized_acc_number = self._sanitize_account_number(self.acc_number)
+        iid = sanitized_acc_number[4:9]
         return (
-            self.acc_type == 'iban'
-            and re.match(r'\d+', iid)
-            and 30000 <= int(iid) <= 31999
+                self.state == 'iban' and
+                re.match(r'\d+', iid)
+                and 30000 <= int(iid) <= 31999
         )  # Those values for iid are reserved for QR-IBANs only

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<openerp>
     <data>
 
         <report
@@ -13,12 +13,11 @@
             menu="False"/>
 
         <record id="l10n_ch_qr_report" model="ir.actions.report.xml">
-            <field name="print_report_name">'QR-bill-%s.pdf' % object.number</field>
             <field name="paperformat_id" ref="l10n_ch_qr_bill.paperformat_euro_no_margin"/>
         </record>
 
-        <template id="assets_common_qr" inherit_id="report.assets_common">
-            <xpath expr="." position="inside">
+        <template id="assets_common_qr" inherit_id="report.minimal_layout">
+            <xpath expr="//head" position="inside">
                 <link type="text/css" rel="stylesheet" href="/l10n_ch_qr_bill/static/src/css/report_swissqr.css"/>
             </xpath>
         </template>
@@ -29,7 +28,7 @@
                 <!-- add class to body tag -->
                 <!--<script>document.body.className += " l10n_ch_qr";</script>-->
                 <div class="page l10n_ch_qr">
-                    <t t-set="formated_amount" t-value="'{:,.2f}'.format(o.residual).replace(',',' ')"/>
+                    <t t-set="formated_amount" t-value="'{:,.2f}'.format(o.amount_total).replace(',',' ')"/>
 
                     <div class="swissqr_title">
                         <h1>QR-bill for invoice <t t-esc="o.number"/></h1>
@@ -131,7 +130,7 @@
                                 <div class="swissqr_text">
                                     <span class="title">Payable by</span><br/>
                                     <span class="content" t-field="o.commercial_partner_id.name"/><br/>
-                                    <span class="content" t-field="o.commercial_partner_id.street"> </span>
+                                    <span class="content" t-field="o.commercial_partner_id.street"/>
                                     <span class="content" t-field="o.commercial_partner_id.street2"/><br/>
                                     <span class="content" t-field="o.commercial_partner_id.country_id.code"/>
                                     <span class="content" t-field="o.commercial_partner_id.zip"/>
@@ -166,4 +165,4 @@
             </t>
         </template>
     </data>
-</odoo>
+</openerp>

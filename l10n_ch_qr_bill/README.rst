@@ -16,12 +16,6 @@ You will be able to generate the QR-bill once configured with the button Print Q
 
 It supports both QRR references and no structured references.
 
-Creditor References are not implemented yet.
-
-.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
-   :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/125/10.0
-
 
 Bug Tracker
 ===========

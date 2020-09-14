@@ -5,7 +5,7 @@
 
 from werkzeug import exceptions
 
-from odoo.http import Controller, route, request
+from openerp.http import Controller, route, request
 
 
 class ReportController(Controller):

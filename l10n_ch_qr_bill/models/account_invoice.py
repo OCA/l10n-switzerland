@@ -7,9 +7,9 @@ import re
 
 import werkzeug.urls
 
-from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError, UserError
-from odoo.tools.misc import mod10r
+from openerp import _, api, fields, models
+from openerp.exceptions import ValidationError, Warning as UserError
+from openerp.tools.misc import mod10r
 
 
 class AccountInvoice(models.Model):
@@ -39,7 +39,7 @@ class AccountInvoice(models.Model):
         default=False,
         help=(
             "Boolean value telling whether or not the QRR corresponding to"
-            " this invoice has already been printed or sent by mail.",
+            " this invoice has already been printed or sent by mail."
         ),
     )
 
@@ -50,7 +50,6 @@ class AccountInvoice(models.Model):
 
     def _get_qrr_prefix(self):
         """Hook to add a customized prefix"""
-        self.ensure_one()
         return ''
 
     @api.depends('number', 'name')
@@ -115,7 +114,7 @@ class AccountInvoice(models.Model):
     @api.multi
     def build_swiss_code_url(self):
 
-        self.ensure_one()
+        assert len(self) == 1
 
         if self.has_qrr():
             structured_communication = self.l10n_ch_qrr
@@ -152,8 +151,9 @@ class AccountInvoice(models.Model):
             reference_type = 'QRR'
             reference = structured_communication
 
-        amount = '{:.2f}'.format(self.residual)
-        acc_number = self.partner_bank_id.sanitized_acc_number
+        amount = '{:.2f}'.format(self.amount_total)
+        acc_number = self.partner_bank_id._sanitize_account_number(
+            self.partner_bank_id.acc_number)
 
         # fmt: off
         qr_code_vals = [
@@ -246,18 +246,13 @@ class AccountInvoice(models.Model):
             )
         )
 
-    def can_generate_qr_bill(self):
-        """ Returns True if the invoice can be used to generate a QR-bill.
-        """
-        self.ensure_one()
-        return self.validate_swiss_code_arguments()
-
-    def print_ch_qr_bill(self):
+    @api.multi
+    def print_ch_qr_bill(self, *args):
         """ Triggered by the 'Print QR-bill' button.
         """
-        self.ensure_one()
+        assert len(self) == 1
 
-        if not self.can_generate_qr_bill():
+        if not self.validate_swiss_code_arguments():
             raise UserError(
                 _(
                     "Cannot generate the QR-bill. Please check you have configured the"
@@ -286,7 +281,7 @@ class AccountInvoice(models.Model):
         return True
 
     def action_invoice_open(self):
-        res = super(AccountInvoice, self).action_invoice_open()
+        res = super(AccountInvoice, self).signal_workflow('invoice_open')
         for rec in self:
             # Define reference once number has been generated
             if rec.type == "out_invoice":
