@@ -6,6 +6,7 @@ import logging
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.tools.pdf import merge_pdf
 
 _logger = logging.getLogger(__name__)
 
@@ -45,16 +46,22 @@ class AccountInvoice(models.Model):
         contract = self.partner_id.get_active_contract(self.transmit_method_id)
         if not contract:
             return
+        # Generate PDf to be send
+        pdf_data = []
+        report_names = ["account.report_invoice"]
         if contract.payment_type == "qr":
-            report_name = "l10n_ch.qr_report_main"
+            report_names.append("l10n_ch.qr_report_main")
         elif contract.payment_type == "esr":
-            report_name = "l10n_ch.isr_report_main"
-        else:
-            report_name = "account.report_invoice"
-        r = self.env["ir.actions.report"]._get_report_from_name(
-            report_name
-        )
-        pdf, _ = r.render([self.id])
+            report_names.append("l10n_ch.isr_report_main")
+        for report_name in report_names:
+            r = self.env["ir.actions.report"]._get_report_from_name(
+                report_name
+            )
+            # Add the force_report_rendering or pdf merge will fail in tests
+            pdf_content, _ = r.with_context(force_report_rendering=True).render([self.id])
+            pdf_data.append(pdf_content)
+        pdf = merge_pdf(pdf_data)
+
         message = self.env["paynet.invoice.message"].create(
             {
                 "service_id": contract.paynet_service_id.id,
