@@ -1,23 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * l10n_ch_credit_control_payment_slip_report
+#	* l10n_ch_credit_control_payment_slip_report
 #
-# Translators:
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: l10n-switzerland (8.0)\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-23 17:28+0000\n"
-"PO-Revision-Date: 2015-06-17 13:35+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Italian (http://www.transifex.com/oca/OCA-l10n-"
-"switzerland-8-0/language/it/)\n"
-"Language: it\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: l10n_ch_credit_control_payment_slip_report
 #: model:ir.actions.report.xml,name:l10n_ch_credit_control_payment_slip_report.credit_control_summary_with_slip
@@ -37,7 +31,7 @@ msgstr ""
 #. module: l10n_ch_credit_control_payment_slip_report
 #: model:ir.model.fields,field_description:l10n_ch_credit_control_payment_slip_report.field_report_slip_from_credit_control_id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: l10n_ch_credit_control_payment_slip_report
 #: model:ir.model.fields,field_description:l10n_ch_credit_control_payment_slip_report.field_report_slip_from_credit_control___last_update
@@ -68,9 +62,10 @@ msgstr ""
 #. module: l10n_ch_credit_control_payment_slip_report
 #: model:ir.model,name:l10n_ch_credit_control_payment_slip_report.model_report
 msgid "Report"
-msgstr "Report"
+msgstr ""
 
 #. module: l10n_ch_credit_control_payment_slip_report
 #: model:ir.model,name:l10n_ch_credit_control_payment_slip_report.model_l10n_ch_payment_slip
 msgid "l10n_ch.payment_slip"
 msgstr ""
+
