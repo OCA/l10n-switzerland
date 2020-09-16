@@ -73,11 +73,11 @@
         </NAME-ADDRESS>
         <BANK-INFO>
           {%- if payment_type in ['esr', 'esp'] %}
-          <Acct-No>{{ bank.l10n_ch_postal if bank.is_isr_issuer() and bank.l10n_ch_postal else bank.sanitized_acc_number }}</Acct-No>
+          <Acct-No>{{ bank_account }}</Acct-No>
           <BankId Type="BCNr-int" Country="CH">{{ bank.bank_id.clearing }}</BankId>
           {%- elif payment_type == 'qr' %}
-          <Acct-No>{{ qr_account }}</Acct-No>
-          <BankId Type="IID" Country="CH">{{ qr_account[4:9] if qr_account else ''}}</BankId>
+          <Acct-No>{{ bank_account }}</Acct-No>
+          <BankId Type="IID" Country="CH">{{ bank_account[4:9] if bank_account else ''}}</BankId>
           {%- endif %}
         </BANK-INFO>
       </BILLER>
