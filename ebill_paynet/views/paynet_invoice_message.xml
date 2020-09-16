@@ -17,6 +17,7 @@
                         <field name="response" />
                         <field name="shipment_id" />
                         <field name="payload" />
+                        <field name="attachment_id" />
                     </group>
                 </sheet>
             </form>

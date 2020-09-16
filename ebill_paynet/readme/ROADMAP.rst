@@ -1,6 +1,7 @@
 To Do
 
-* The B2C invoice generated id only a draft and not tested, yet.
+* The B2C invoice generated is only a draft and not tested, yet.
+* Invoice in currency other than CHF will not be generated correctly.
 * Implementation of the automatic registration of contracts, is not impemented and probably not supported by the DWS
 
 Improvements
