@@ -87,6 +87,7 @@ addon | version | summary
 [l10n_ch_bank](l10n_ch_bank/) | 10.0.1.0.1 | Banks names, addresses and BIC codes
 [l10n_ch_bank_statement_import_postfinance](l10n_ch_bank_statement_import_postfinance/) | 10.0.1.0.4 | Swiss bank statements import
 [l10n_ch_base_bank](l10n_ch_base_bank/) | 10.0.1.2.0 | Types and number validation for swiss electronic pmnt. DTA, ESR
+[l10n_ch_credit_control_payment_slip_report](l10n_ch_credit_control_payment_slip_report/) | 10.0.1.0.0 | Print ISR slip related to credit control
 [l10n_ch_dta](l10n_ch_dta/) | 10.0.1.0.2 | Electronic payment file for Swiss bank (DTA)
 [l10n_ch_fds_postfinance](l10n_ch_fds_postfinance/) | 10.0.1.0.0 | Download files and import bank statements from FDS
 [l10n_ch_fds_upload_dd](l10n_ch_fds_upload_dd/) | 10.0.1.0.1 | Upload Direct Debit files to FDS PostFinance
@@ -110,7 +111,6 @@ Unported addons
 ---------------
 addon | version | summary
 --- | --- | ---
-[l10n_ch_credit_control_payment_slip_report](l10n_ch_credit_control_payment_slip_report/) | 8.0.1.3.0 (unported) | Print BVR/ESR slip related to credit control
 [l10n_ch_pain_direct_debit](l10n_ch_pain_direct_debit/) | 9.0.1.0.0 (unported) | Generate ISO 20022 direct debits
 [l10n_ch_payment_slip_account_statement_base_completion](l10n_ch_payment_slip_account_statement_base_completion/) | 1.0 (unported) | Switzerland - BVR/ESR Bank statement Completion
 [l10n_ch_payment_slip_layouts](l10n_ch_payment_slip_layouts/) | 8.0.0.1.0 (unported) | Add new BVR/ESR payment slip layouts like invoice with slip on same document
