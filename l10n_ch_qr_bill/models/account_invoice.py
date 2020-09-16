@@ -10,6 +10,7 @@ import werkzeug.urls
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError, UserError
 from odoo.tools.misc import mod10r
+from odoo.addons.base.res.res_bank import sanitize_account_number
 
 
 class AccountInvoice(models.Model):
@@ -112,11 +113,7 @@ class AccountInvoice(models.Model):
                 spaced_qrr = _space_qrr(record.l10n_ch_qrr)
             record.l10n_ch_qrr_spaced = spaced_qrr
 
-    @api.multi
-    def build_swiss_code_url(self):
-
-        self.ensure_one()
-
+    def _get_communications(self):
         if self.has_qrr():
             structured_communication = self.l10n_ch_qrr
             free_communication = ''
@@ -125,21 +122,13 @@ class AccountInvoice(models.Model):
             free_communication = self.name
         free_communication = free_communication or self.number
 
-        comment = ""
+        additional_info = ""
         if free_communication:
-            comment = (
+            additional_info = (
                 (free_communication[:137] + '...')
                 if len(free_communication) > 140
                 else free_communication
             )
-
-        creditor = self.company_id.partner_id
-        debtor = self.commercial_partner_id
-
-        creditor_addr_1, creditor_addr_2 = self._get_partner_address_lines(
-            creditor
-        )
-        debtor_addr_1, debtor_addr_2 = self._get_partner_address_lines(debtor)
 
         # Compute reference type (empty by default, only mandatory for QR-IBAN,
         # and must then be 27 characters-long, with mod10r check digit as the 27th one,
@@ -151,9 +140,28 @@ class AccountInvoice(models.Model):
             # without a QR-reference here
             reference_type = 'QRR'
             reference = structured_communication
+        return reference_type, reference, additional_info
+
+    def _prepare_swiss_code_url_vals(self):
+
+        reference_type, reference, additional_info = self._get_communications()
+
+        creditor = self.company_id.partner_id
+        debtor = self.commercial_partner_id
+
+        creditor_addr_1, creditor_addr_2 = self._get_partner_address_lines(
+            creditor
+        )
+        debtor_addr_1, debtor_addr_2 = self._get_partner_address_lines(debtor)
 
         amount = '{:.2f}'.format(self.residual)
         acc_number = self.partner_bank_id.sanitized_acc_number
+
+        # If there is a QR IBAN we use it for the barcode instead of the
+        # account number
+        qr_iban = self.partner_bank_id.l10n_ch_qr_iban
+        if qr_iban:
+            acc_number = sanitize_account_number(qr_iban)
 
         # fmt: off
         qr_code_vals = [
@@ -189,11 +197,19 @@ class AccountInvoice(models.Model):
             debtor.country_id.code,     # - Country
             reference_type,             # Reference Type
             reference,                  # Reference
-            comment,                    # Unstructured Message
+            additional_info,            # Unstructured Message
             'EPD',                      # Mandatory trailer part
             '',                         # Bill information
         ]
         # fmt: on
+        return qr_code_vals
+
+    @api.multi
+    def build_swiss_code_url(self):
+
+        self.ensure_one()
+
+        qr_code_vals = self._prepare_swiss_code_url_vals()
 
         # use quiet to remove blank around the QR and make it easier to place it
         return '/report/qrcode/?value=%s&width=%s&height=%s&bar_border=0' % (
