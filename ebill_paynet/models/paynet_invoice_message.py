@@ -90,13 +90,19 @@ class PaynetInvoiceMessage(models.Model):
         self.ensure_one()
         assert self.state == "draft"
         self.ic_ref = self._get_ic_ref()
-        qr_account = ""
+        bank_account = ""
         if self.payment_type == "qr":
-            qr_account = (
+            bank_account = sanitize_account_number(
                 self.invoice_id.invoice_partner_bank_id.l10n_ch_qr_iban or
                 self.invoice_id.invoice_partner_bank_id.acc_number
             )
-            qr_account = sanitize_account_number(qr_account)
+        else:
+            bank_account = self.invoice_id.invoice_partner_bank_id.l10n_ch_isr_subscription_chf
+            if bank_account:
+                account_parts = bank_account.split('-')
+                bank_account = account_parts[0] + account_parts[1].rjust(6, '0') + account_parts[2]
+            else:
+                bank_account = ""
 
         params = {
             "client_pid": self.service_id.client_pid,
@@ -105,7 +111,7 @@ class PaynetInvoiceMessage(models.Model):
             "customer": self.invoice_id.partner_id,
             "pdf_data": self.attachment_id.datas.decode("ascii"),
             "bank": self.invoice_id.invoice_partner_bank_id,
-            "qr_account": qr_account,
+            "bank_account": bank_account,
             "ic_ref": self.ic_ref,
             "payment_type": self.payment_type,
             "document_type": DOCUMENT_TYPE[self.invoice_id.type],
