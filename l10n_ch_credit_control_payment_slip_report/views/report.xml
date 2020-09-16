@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <report
+      id="slip_from_credit_control"
+      model="credit.control.line"
+      string="Contol Lines with Payment Slip"
+      report_type="qweb-pdf"
+      name="slip_from_credit_control"
+    />
+
+  <report
+      id="credit_control_summary_with_slip"
+      model="credit.control.communication"
+      string="Contol Communication with Payment Slip"
+      report_type="qweb-pdf"
+      name="slip_from_credit_control_communication"
+    />
+</odoo>

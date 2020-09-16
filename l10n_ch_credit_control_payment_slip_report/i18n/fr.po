@@ -51,8 +51,8 @@ msgstr "Bulletin de versement"
 
 #. module: l10n_ch_credit_control_payment_slip_report
 #: view:credit.control.printer:l10n_ch_credit_control_payment_slip_report.credit_line_printer_form
-msgid "Print BVR (Will not mark lines)"
-msgstr "Imprimer le BVR (ne marque pas les lignes)"
+msgid "Print ISR (Will not mark lines)"
+msgstr "Imprimer le ISR (ne marque pas les lignes)"
 
 #. module: l10n_ch_credit_control_payment_slip_report
 #: model:ir.model,name:l10n_ch_credit_control_payment_slip_report.model_report

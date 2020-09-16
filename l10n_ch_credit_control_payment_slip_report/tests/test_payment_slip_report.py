@@ -1,28 +1,18 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Nicolas Bessi
-#    Copyright 2014 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-import time
-import openerp.tests.common as test_common
+from odoo.tests.common import SavepointCase
 
 
-class TestPaymentSlipReport(test_common.TransactionCase):
+class TestPaymentSlipReport(SavepointCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super(TestPaymentSlipReport, cls).setUpClass()
+        cls.account = cls.env['account.account'].create({
+            'code': "1111",
+            'name': "Test",
+            'user_type_id': cls.env.ref('account.data_account_type_receivable').id,
+            'reconcile': True,
+        })
 
     def make_bank(self):
         company = self.env.ref('base.main_company')
@@ -33,17 +23,17 @@ class TestPaymentSlipReport(test_common.TransactionCase):
             {
                 'name': 'BCV',
                 'ccp': '01-1234-1',
-                'bic': '234234',
-                'clearing': '234234',
+                'bic': '23423412',
+                'clearing': '23423412',
             }
         )
         bank_account = self.env['res.partner.bank'].create(
             {
                 'partner_id': partner.id,
                 'owner_name': partner.name,
-                'street':  partner.street,
+                'street': partner.street,
                 'city': partner.city,
-                'zip':  partner.zip,
+                'zip': partner.zip,
                 'state': 'bvr',
                 'bank': bank.id,
                 'bank_name': bank.name,
@@ -64,7 +54,7 @@ class TestPaymentSlipReport(test_common.TransactionCase):
                 'partner_id': self.env.ref('base.res_partner_12').id,
                 'reference_type': 'none',
                 'name': 'A customer invoice',
-                'account_id': self.env.ref('account.a_recv').id,
+                'account_id': self.account.id,
                 'type': 'out_invoice',
                 'partner_bank_id': bank_account.id,
             }
@@ -77,16 +67,10 @@ class TestPaymentSlipReport(test_common.TransactionCase):
                 'price_unit': 862.50,
                 'invoice_id': invoice.id,
                 'name': 'product that cost 862.50 all tax included',
+                'account_id': self.account.id,
             }
         )
-        invoice.signal_workflow('invoice_open')
-        attempt = 0
-        while not invoice.move_id:
-            invoice.refresh()
-            time.sleep(0.1)
-            attempt += 1
-            if attempt > 20:
-                break
+        invoice.action_invoice_open()
         self.assertTrue(invoice.move_id)
         self.assertEqual(invoice.amount_total, 862.50)
         return invoice
@@ -94,10 +78,7 @@ class TestPaymentSlipReport(test_common.TransactionCase):
     def test_amount_with_fees(self):
         """Test that dunning fees are included in payment slip's amount"""
         invoice = self.make_invoice()
-        move_line = self.env['account.move.line'].search(
-            [('invoice', '=', invoice.id),
-             ('account_id.type', 'in', ('payable', 'receivable'))],
-        )
+        move_line = invoice.move_id.line_ids[0]
         self.assertTrue(len(move_line), 1)
 
         lvl = self.env.ref('account_credit_control.3_time_1')
@@ -106,27 +87,31 @@ class TestPaymentSlipReport(test_common.TransactionCase):
              'date_due': '2000-01-01',
              'partner_id': self.env.ref('base.res_partner_12').id,
              'channel': 'email',
-             'date':  '2000-01-01',
+             'date': '2000-01-01',
              'balance_due': 100.00,
              'amount_due': 100.00,
              'policy_level_id': lvl.id,
              'state': 'to_be_sent'}
         )
-        slip_obj = self.env['l10n_ch.payment_slip'].with_context(
-            __slip_credit_control_line_id=credit_line.id
-        )
-        slip = slip_obj.search([('move_line_id', '=', move_line.id)])
+        slip = self.env['l10n_ch.payment_slip'].with_context(
+            slip_credit_control_line_id=credit_line.id
+        ).create({
+            'invoice_id': invoice.id,
+            'move_line_id': move_line.id
+        })
         self.assertEqual(slip.amount_total, 862.50)
         credit_line.dunning_fees_amount = 30000
-        self.assertEqual(slip.amount_total, 30862.50)
+
+        self.env.context = dict(
+            self.env.context,
+            slip_credit_control_line_id=credit_line.id
+        )
+        self.assertEqual(slip._compute_amount_hook(), 30862.50)
 
     def test_printing(self):
         """Test that we can print the report"""
         invoice = self.make_invoice()
-        move_line = self.env['account.move.line'].search(
-            [('invoice', '=', invoice.id),
-             ('account_id.type', 'in', ('payable', 'receivable'))],
-        )
+        move_line = invoice.move_id.line_ids[0]
         self.assertTrue(len(move_line), 1)
 
         lvl = self.env.ref('account_credit_control.3_time_1')
@@ -135,7 +120,7 @@ class TestPaymentSlipReport(test_common.TransactionCase):
              'date_due': '2000-01-01',
              'partner_id': self.env.ref('base.res_partner_12').id,
              'channel': 'email',
-             'date':  '2000-01-01',
+             'date': '2000-01-01',
              'balance_due': 100.00,
              'amount_due': 100.00,
              'policy_level_id': lvl.id,
