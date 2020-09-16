@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo10-addon-l10n_ch_bank',
         'odoo10-addon-l10n_ch_bank_statement_import_postfinance',
         'odoo10-addon-l10n_ch_base_bank',
+        'odoo10-addon-l10n_ch_credit_control_payment_slip_report',
         'odoo10-addon-l10n_ch_dta',
         'odoo10-addon-l10n_ch_fds_postfinance',
         'odoo10-addon-l10n_ch_fds_upload_dd',
