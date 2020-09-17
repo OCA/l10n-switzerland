@@ -8,9 +8,35 @@ import re
 import werkzeug.urls
 
 from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError, UserError
+from odoo.exceptions import ValidationError
 from odoo.tools.misc import mod10r
 from odoo.addons.base.res.res_bank import sanitize_account_number
+
+MSG_INCOMPLETE_PARTNER_ADDR = _(
+    "- Partner address is incomplete, it must contain name, street, zip, city"
+    " and country. Country must be Switzerland"
+)
+
+MSG_INCOMPLETE_COMPANY_ADDR = _(
+    "- Company address is incomplete, it must contain name, street, zip, city"
+    " and country. Country must be Switzerland"
+)
+
+MSG_NO_BANK_ACCOUNT = _(
+    "- Invoice's 'Bank Account' is empty. You need to create or select a valid"
+    " IBAN or QR-IBAN account"
+)
+
+MSG_BAD_QRR = _(
+    "- With a QR-IBAN a valid QRR must be used."
+)
+
+ERROR_MESSAGES = {
+    "incomplete_partner_address": MSG_INCOMPLETE_PARTNER_ADDR,
+    "incomplete_company_address": MSG_INCOMPLETE_COMPANY_ADDR,
+    "no_bank_account": MSG_NO_BANK_ACCOUNT,
+    "bad_qrr": MSG_BAD_QRR,
+}
 
 
 class AccountInvoice(models.Model):
@@ -252,17 +278,21 @@ class AccountInvoice(models.Model):
                 and (partner.street or partner.street2)
             )
 
-        return (
-            _partner_fields_set(self.partner_id)
-            and _partner_fields_set(self.partner_bank_id.partner_id)
-            and (
-                not reference_to_check
-                or not self.partner_bank_id._is_qr_iban()
-                or self._is_qrr(reference_to_check)
-            )
-        )
+        self.errors = []
+        if not _partner_fields_set(self.partner_id):
+            self.errors.append("incomplete_partner_address")
+        if not self.partner_bank_id:
+            self.errors.append("no_bank_account")
+        elif not _partner_fields_set(self.partner_bank_id.partner_id):
+            self.errors.append("incomplete_company_address")
+        if (reference_to_check
+                and self.partner_bank_id._is_qr_iban()
+                and not self._is_qrr(reference_to_check)):
+            self.errors.append("bad_qrr")
 
-    def can_generate_qr_bill(self):
+        return not self.errors
+
+    def can_generate_qr_bill(self, returned_errors=None):
         """ Returns True if the invoice can be used to generate a QR-bill.
         """
         self.ensure_one()
@@ -274,12 +304,11 @@ class AccountInvoice(models.Model):
         self.ensure_one()
 
         if not self.can_generate_qr_bill():
-            raise UserError(
-                _(
-                    "Cannot generate the QR-bill. Please check you have configured the"
-                    " address of your company and debtor. If you are using a QR-IBAN,"
-                    " also check the invoice's payment reference is a QR reference."
-                )
+            msg_error_list = "\n".join(ERROR_MESSAGES[e] for e in self.errors)
+            raise ValidationError(
+                _("You cannot generate the QR-bill.\n"
+                  "Here is what is blocking:\n"
+                  "{}").format(msg_error_list)
             )
 
         self.l10n_ch_qrr_sent = True
