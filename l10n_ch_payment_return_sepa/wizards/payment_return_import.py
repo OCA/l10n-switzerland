@@ -77,6 +77,7 @@ class PaymentReturnImport(models.TransientModel):
             payment_return, new_notifications = self._create_payment_return(
                 payret_vals)
             if payment_return:
+                payment_return.action_confirm()
                 payment_returns += payment_return
             notifications.extend(new_notifications)
             order_name = payret_vals['order_name']
