@@ -19,6 +19,12 @@ class FdsPostfinanceFile(models.Model):
         ondelete='restrict',
         readonly=True,
     )
+    payment_order = fields.Many2one(
+        'account.payment.order',
+        string='Payment order',
+        ondelete='restrict',
+        readonly=True,
+    )
     file_type = fields.Selection(selection_add=[
         ('pain.002.001.03.ch.02',
          'pain.002.001.03.ch.02 (payment return)')
@@ -45,24 +51,22 @@ class FdsPostfinanceFile(models.Model):
             pr_import_obj = self.env['payment.return.import']
             pr_wiz_imp = pr_import_obj.create(values)
             import_result = pr_wiz_imp.import_file()
+            payment_return = self.env["payment.return"].browse(import_result['res_id'])
             # Mark the file as imported, remove binary as it should be
             # attached to the statement.
             self.write({
                 'state': 'done',
-                'payment_return_id':
-                    import_result['res_id'],
-                'payment_order': self.env['account.payment.order']
-                .search([('name', '=',
-                          import_result['context']['order_name'])]).id,
+                'payment_return_id': payment_return.id,
+                'payment_order': payment_return.payment_order_id.id,
                 'error_message': False
             })
+            # Automatically confirm payment returns
+            payment_return.action_confirm()
             _logger.info("[OK] import file '%s'", self.filename)
         except NoTransactionsError as e:
             _logger.info(e.name, self.filename)
             self.write({
                 'state': 'done',
-                'payment_order': self.env['account.payment.order']
-                .search([('name', '=', e.object[0]['order_name'])]).id,
                 'error_message': e.name
             })
         except FileAlreadyImported as e:
@@ -72,8 +76,6 @@ class FdsPostfinanceFile(models.Model):
                 .search([('line_ids.reference', 'in', references)])
             self.write({
                 'state': 'done',
-                'payment_order': self.env['account.payment.order']
-                .search([('name', '=', e.object[0]['order_name'])]).id,
                 'payment_return_id': payment_return.id,
                 'error_message': e.name
             })

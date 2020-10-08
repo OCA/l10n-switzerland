@@ -14,13 +14,6 @@ class FdsPostfinanceFile(models.Model):
     """
     _inherit = 'fds.postfinance.file'
 
-    payment_order = fields.Many2one(
-        'account.payment.order',
-        string='Payment order',
-        ondelete='restrict',
-        readonly=True,
-    )
-
     file_type = fields.Selection(selection_add=[
         ('pain.001.001.03.ch.02',
          'pain.001.001.03.ch.02 (payment order)')
@@ -38,8 +31,7 @@ class FdsPostfinanceFile(models.Model):
                 result = account_pain002.parse(decoded_file)
 
                 # Link the payment order to the file import.
-                pf_file.payment_order = self.env['account.payment.order'] \
-                    .search([('name', '=', result['order_name'])])
+                pf_file.payment_order = result['payment_order_id']
                 if result['transactions']:
                     # Attach the file to the payment order.
                     self.env['ir.attachment'].create({
@@ -47,7 +39,8 @@ class FdsPostfinanceFile(models.Model):
                         'res_model': 'account.payment.order',
                         'datas': pf_file.data,
                         'name': pf_file.filename,
-                        'res_id': pf_file.payment_order.id})
+                        'res_id': pf_file.payment_order.id
+                    })
 
                     pf_file.write({
                         'state': 'done',
