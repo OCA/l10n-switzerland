@@ -76,25 +76,26 @@ class Pain002Parser(models.AbstractModel, PainParser):
                                      './ns:OrgnlGrpInfAndSts/ns:OrgnlMsgId',
                                      payment_return, 'order_name')
 
-            payment_order = self.env['account.payment.order'] \
-                .search([('name', '=', payment_return['order_name'])])
+            payment_order = self.env['account.payment.order'].search([
+                ('name', '=', payment_return.pop('order_name'))])
+            payment_return["payment_order_id"] = payment_order.id
             if 'account_number' not in payment_return:
                 payment_return['account_number'] = payment_order \
                     .company_partner_bank_id.acc_number
 
-            if payment_order.payment_mode_id.offsetting_account \
-                    == 'transfer_account':
+            order_mode = payment_order.payment_mode_id
+            if order_mode.offsetting_account == 'transfer_account':
+                journal_obj = self.env["account.journal"]
                 if payment_order.payment_type == 'inbound':
-                    payment_return['journal_id'] = self.env[
-                        'account.journal'] \
-                        .search([('default_credit_account_id.id', '=',
-                                  payment_order.payment_mode_id
-                                  .transfer_account_id.id)]).id
+                    payment_return['journal_id'] = journal_obj.search([
+                        ('default_credit_account_id', '=',
+                         order_mode.transfer_account_id.id)
+                    ], limit=1).id
                 elif payment_order.payment_type == 'outbound':
-                    payment_return['journal_id'] = self.env['account.journal']\
-                        .search([('default_debit_account_id.id', '=',
-                                  payment_order.payment_mode_id
-                                  .transfer_account_id.id)]).id
+                    payment_return['journal_id'] = journal_obj.search([
+                        ('default_debit_account_id', '=',
+                         order_mode.transfer_account_id.id)
+                    ], limit=1).id
             else:
                 payment_return['journal_id'] = payment_order.journal_id.id
 
