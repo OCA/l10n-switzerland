@@ -28,7 +28,7 @@ class PaynetService(models.Model):
     _description = "Paynet service configuration"
 
     name = fields.Char(required=True)
-    url = fields.Char(compute="_compute_url", store=True)
+    url = fields.Char(compute="_compute_url")
     username = fields.Char()
     password = fields.Char()
     client_pid = fields.Char(string="Paynet ID", size=17, required=True)
