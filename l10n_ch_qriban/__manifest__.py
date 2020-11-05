@@ -5,7 +5,7 @@
     "author": "Odoo S.A, Camptocamp, Odoo Community Association (OCA)",
     "category": "Localization",
     "license": "LGPL-3",
-    "depends": ["l10n_ch"],
+    "depends": ["l10n_ch", "l10n_ch_fix_isr_reference"],
     "data": [
         "views/res_bank_views.xml",
         "views/swissqr_report.xml",
