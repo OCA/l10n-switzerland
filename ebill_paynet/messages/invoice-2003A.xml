@@ -62,9 +62,9 @@
             {% endif %}
           </NAME>
           <STREET>
-            <Line-35>{{ biller.street or ''}}</Line-35>
+            <Line-35>{{ (biller.street or '')|truncate(35, True, "") }}</Line-35>
             {%- if biller.street2 %}
-            <Line-35>{{ biller.street2 }}</Line-35>
+            <Line-35>{{ biller.street2|truncate(5, True, "") }}</Line-35>
             {% endif %}
           </STREET>
           <City>{{ biller.city or ''}}</City>
@@ -90,9 +90,9 @@
             <Line-35>{{ customer.name }}</Line-35>
           </NAME>
           <STREET>
-            <Line-35>{{ customer.street }}</Line-35>
+            <Line-35>{{ customer.street|truncate(35, True, "")  }}</Line-35>
             {%- if customer.street2 %}
-            <Line-35>{{ customer.street2 or '' }}</Line-35>
+            <Line-35>{{ customer.street2 or ''|truncate(35, True, "")  }}</Line-35>
             {%- endif %}
           </STREET>
           <City>{{ customer.city }}</City>
@@ -106,9 +106,9 @@
             <Line-35>{{ customer.name }}</Line-35>
           </NAME>
           <STREET>
-            <Line-35>{{ customer.street }}</Line-35>
+            <Line-35>{{ customer.street|truncate(35, True, "")   }}</Line-35>
             {%- if customer.street2 %}
-            <Line-35>{{ customer.street2 or '' }}</Line-35>
+            <Line-35>{{ customer.street2|truncate(35, True, "") }}</Line-35>
             {%- endif %}
           </STREET>
           <City>{{ customer.city }}</City>
@@ -125,7 +125,10 @@
       </ITEM-ID>
       <ITEM-DESCRIPTION>
         <Item-Type-Code>1011</Item-Type-Code>
-        <Line-35>{{ line.product_id.name }}</Line-35>
+        <Line-35>{{ line.product_id.name[:35] }}</Line-35>
+        {%- if line.product_id.name|length > 35 %}
+        <Line-35>{{ line.product_id.name[35:]|truncate(34, True) }}</Line-35>
+        {%- endif %}
       </ITEM-DESCRIPTION>
       {% for order in invoice.invoice_line_ids.sale_line_ids.mapped('order_id') %}
       {%- if order.client_order_ref %}
@@ -138,11 +141,11 @@
       {%- endif %}
       {% endfor %}
       <Quantity Type="47" Units="PCE">{{ line.quantity }}</Quantity>
-      <Price Type="YYY">{{ line.price_subtotal}}</Price>
-      <Price Type="AAA">{{ line.price_subtotal}}</Price>
-      <Price Type="XXX">{{ line.price_total}}</Price>
+      <Price Type="YYY">{{ line.price_subtotal|round(2) }}</Price>
+      <Price Type="AAA">{{ line.price_subtotal|round(2) }}</Price>
+      <Price Type="XXX">{{ line.price_total|round(2) }}</Price>
       <ITEM-AMOUNT Type="66">
-        <Amount Currency="CHF">{{ line.price_total }}</Amount>
+        <Amount Currency="CHF">{{ line.price_total|round(2) }}</Amount>
       </ITEM-AMOUNT>
       {% for tax in line.tax_ids %}
       {%- if loop.index == 1 %}
@@ -160,10 +163,10 @@
     {% endfor %}
     <SUMMARY>
       <INVOICE-AMOUNT Print-Status="25">
-        <Amount Currency="CHF">{{ invoice.amount_total }}</Amount>
+        <Amount Currency="CHF">{{ invoice.amount_total|round(2) }}</Amount>
       </INVOICE-AMOUNT>
       <VAT-AMOUNT Print-Status="25">
-        <Amount Currency="CHF">{{ invoice.amount_tax }}</Amount>
+        <Amount Currency="CHF">{{ invoice.amount_tax|round(2) }}</Amount>
       </VAT-AMOUNT>
       {% if amount_by_group %}
       {% for taxgroup in amount_by_group %}
@@ -182,7 +185,7 @@
     {%- else %}
     <TAX>
       <TAX-BASIS>
-        <Amount Currency="CHF">{{ invoice.amount_untaxed }}</Amount>
+        <Amount Currency="CHF">{{ invoice.amount_untaxed|round(2) }}</Amount>
       </TAX-BASIS>
       <Rate Category="E">0</Rate>
       <Amount Currency="CHF">0</Amount>
