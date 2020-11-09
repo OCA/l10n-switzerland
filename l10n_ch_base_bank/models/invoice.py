@@ -67,7 +67,7 @@ class AccountInvoice(models.Model):
                           " type, you can set it manually or set appropriate"
                           " payment mode.")
                     )
-                if (bank_acc.acc_type != 'qr-iban'
+                if (not bank_acc._is_qr_iban()
                         and (invoice.currency_id.name == 'CHF'
                              and not bank_acc.l10n_ch_isr_subscription_chf)
                         or (invoice.currency_id.name == 'EUR'
