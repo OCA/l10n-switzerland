@@ -109,18 +109,42 @@ class TestInvoiceMessage(SingleTransactionCase, XmlTestMixin):
         cls.product = cls.env["product.product"].create(
             {"name": "Product One", "list_price": 100.00, "default_code": "370003021"}
         )
+        cls.product_long_name = cls.env["product.product"].create(
+            {
+                "name": "Product With a Very Long Name That Need To Be Truncated",
+                "list_price": 0.00,
+                "default_code": "370003022",
+            }
+        )
         cls.sale = cls.env["sale.order"].create(
             {
                 "name": "Order123",
                 "partner_id": cls.customer.id,
                 "client_order_ref": "CustomerRef",
-                "order_line": [(0, 0, {
-                    "product_id": cls.product.id,
-                    "name": cls.product.name,
-                    "product_uom_qty": 4.0,
-                    "price_unit": 123.0,
-                    "tax_id": [(4, cls.tax7.id, 0)],
-                })],
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": cls.product.id,
+                            "name": cls.product.name,
+                            "product_uom_qty": 4.0,
+                            "price_unit": 123.0,
+                            "tax_id": [(4, cls.tax7.id, 0)],
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": cls.product_long_name.id,
+                            "name": cls.product_long_name.name,
+                            "product_uom_qty": 1.0,
+                            "price_unit": 0.0,
+                            "tax_id": [(4, cls.tax7.id, 0)],
+                        },
+                    ),
+                ],
             }
         )
         cls.sale.action_confirm()
