@@ -19,7 +19,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.addons.account_bank_statement_import_camt.camt import CamtParser
+from openerp.addons.account_bank_statement_import_camt.models.parser import CamtParser
 
 
 class PFCamtParser(CamtParser):
