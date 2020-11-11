@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * l10n_ch_base_bank
-# 
+#
 # Translators:
 # Thomas A. Jaeger, 2015
 # Renzo Meister, 2015
@@ -12,11 +12,12 @@ msgstr ""
 "POT-Creation-Date: 2017-08-19 04:50+0000\n"
 "PO-Revision-Date: 2015-11-03 09:58+0000\n"
 "Last-Translator: Renzo Meister\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/de/)\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/"
+"language/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_base_bank
@@ -126,7 +127,9 @@ msgstr "Die ESR Teilnehmernummer muss eindeutig sein!"
 msgid ""
 "You can not enter a CCP/CP-Konto both on the bank and on an account of type "
 "BV/ES, BVR/ESR"
-msgstr "Ein Postcheckkonto kann nur entweder auf der Bank oder dem ES/ESR Konto hinterlegt werden"
+msgstr ""
+"Ein Postcheckkonto kann nur entweder auf der Bank oder dem ES/ESR Konto "
+"hinterlegt werden"
 
 #. module: l10n_ch_base_bank
 #: help:res.partner.bank,bvr_adherent_num:0

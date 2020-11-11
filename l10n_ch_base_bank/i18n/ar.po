@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * l10n_ch_base_bank
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -10,12 +10,14 @@ msgstr ""
 "POT-Creation-Date: 2016-01-11 14:20+0000\n"
 "PO-Revision-Date: 2015-06-17 13:35+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Arabic (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/ar/)\n"
+"Language-Team: Arabic (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/"
+"language/ar/)\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: ar\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #. module: l10n_ch_base_bank
 #: model:res.partner.bank.type,format_layout:l10n_ch_base_bank.bv
@@ -98,7 +100,7 @@ msgstr "فاتورة"
 
 #. module: l10n_ch_base_bank
 #: code:addons/l10n_ch_base_bank/bank.py:113
-#: code:addons/l10n_ch_base_bank/bank.py:220
+#: code:addons/l10n_ch_base_bank/bank.py:225
 #, python-format
 msgid "Please enter a correct postal number. (01-23456-1 or 12345)"
 msgstr ""
@@ -119,7 +121,7 @@ msgid "The BVR adherent number must be unique !"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/bank.py:246
+#: code:addons/l10n_ch_base_bank/bank.py:251
 #, python-format
 msgid ""
 "You can not enter a CCP/CP-Konto both on the bank and on an account of type "
