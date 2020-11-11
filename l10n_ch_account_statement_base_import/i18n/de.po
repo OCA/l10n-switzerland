@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * l10n_ch_account_statement_base_import
-# 
+#
 # Translators:
 # Thomas A. Jaeger, 2015
 # Renzo Meister, 2015
@@ -12,11 +12,12 @@ msgstr ""
 "POT-Creation-Date: 2017-08-19 04:50+0000\n"
 "PO-Revision-Date: 2017-08-19 04:52+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/de/)\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/"
+"language/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_account_statement_base_import
@@ -108,10 +109,13 @@ msgstr "Zugehörige Files"
 #: code:addons/l10n_ch_account_statement_base_import/parsers/base_parser.py:67
 #, python-format
 msgid ""
-"The following problem occurred during {ftype} import. The file might not be valid.\n"
+"The following problem occurred during {ftype} import. The file might not be "
+"valid.\n"
 "\n"
 " {msg}"
-msgstr "Fehler beim {ftype} Import: Das File ist nicht gültig.\n{msg}"
+msgstr ""
+"Fehler beim {ftype} Import: Das File ist nicht gültig.\n"
+"{msg}"
 
 #. module: l10n_ch_account_statement_base_import
 #: code:addons/l10n_ch_account_statement_base_import/parsers/raiffeisen_file_parser.py:126
