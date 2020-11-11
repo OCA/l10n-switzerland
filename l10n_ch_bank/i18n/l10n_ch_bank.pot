@@ -1,22 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * l10n_ch_bank
+#	* l10n_ch_bank
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: l10n-switzerland (8.0)\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-19 04:50+0000\n"
-"PO-Revision-Date: 2015-06-17 13:35+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Catalan (http://www.transifex.com/oca/OCA-l10n-"
-"switzerland-8-0/language/ca/)\n"
-"Language: ca\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: l10n_ch_bank
 #: field:res.bank,bank_areacode:0
@@ -61,7 +56,7 @@ msgstr ""
 #. module: l10n_ch_bank
 #: field:res.bank,bank_lang:0
 msgid "Language"
-msgstr "Idioma"
+msgstr ""
 
 #. module: l10n_ch_bank
 #: field:res.bank,bank_postaccount:0
@@ -103,3 +98,4 @@ msgstr ""
 #: field:res.bank,bank_eurosic:0
 msgid "euroSIC"
 msgstr ""
+
