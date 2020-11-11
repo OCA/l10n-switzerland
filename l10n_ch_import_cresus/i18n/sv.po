@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * l10n_ch_import_cresus
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -10,11 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2017-08-19 04:50+0000\n"
 "PO-Revision-Date: 2017-08-21 07:26+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Swedish (http://www.transifex.com/oca/OCA-l10n-switzerland-8-0/language/sv/)\n"
+"Language-Team: Swedish (http://www.transifex.com/oca/OCA-l10n-"
+"switzerland-8-0/language/sv/)\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_ch_import_cresus
@@ -22,12 +23,24 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"                 In order to import your 'Cresus Salaires' .txt                  file you must complete the following requirements : </br>\n"
-"                * The accounts, analytical accounts used in the Cresus                 file must be previously created into Odoo  </br>\n"
-"                * The date of the entry will determine the period used                 in Odoo, so please ensure the period is created already. </br>\n"
-"                * If the Cresus file uses VAT codes (i.e: IPI),                 please make sure you have indicated this code in the                 related Odoo tax (new field).                 Warning, the Odoo tax must be 'tax included'.                 If the tax does not exist you have to create it. </br>\n"
-"                * All PL accounts must have a deferral method = 'none'                (meaning: no balance brought forward in the new fiscal year)                and all\n"
-"                 Balance sheet account must have a deferral                 method = 'balance'. </br>"
+"                 In order to import your 'Cresus Salaires' ."
+"txt                  file you must complete the following requirements : </"
+"br>\n"
+"                * The accounts, analytical accounts used in the "
+"Cresus                 file must be previously created into Odoo  </br>\n"
+"                * The date of the entry will determine the period "
+"used                 in Odoo, so please ensure the period is created "
+"already. </br>\n"
+"                * If the Cresus file uses VAT codes (i.e: "
+"IPI),                 please make sure you have indicated this code in "
+"the                 related Odoo tax (new field).                 Warning, "
+"the Odoo tax must be 'tax included'.                 If the tax does not "
+"exist you have to create it. </br>\n"
+"                * All PL accounts must have a deferral method = "
+"'none'                (meaning: no balance brought forward in the new fiscal "
+"year)                and all\n"
+"                 Balance sheet account must have a deferral                 "
+"method = 'balance'. </br>"
 msgstr ""
 
 #. module: l10n_ch_import_cresus
