@@ -70,7 +70,7 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
-[l10n_ch_account_statement_base_import](l10n_ch_account_statement_base_import/) | 8.0.1.0.1 | Swiss bank statements import
+[l10n_ch_account_statement_base_import](l10n_ch_account_statement_base_import/) | 8.0.1.0.2 | Swiss bank statements import
 [l10n_ch_bank](l10n_ch_bank/) | 8.0.9.0.0 | Banks names, addresses and BIC codes
 [l10n_ch_base_bank](l10n_ch_base_bank/) | 8.0.1.2.0 | Types and number validation for swiss electronic pmnt. DTA, ESR
 [l10n_ch_credit_control_payment_slip_report](l10n_ch_credit_control_payment_slip_report/) | 8.0.1.3.0 | Print BVR/ESR slip related to credit control
