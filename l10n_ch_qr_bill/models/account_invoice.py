@@ -8,8 +8,35 @@ import re
 import werkzeug.urls
 
 from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError, UserError
+from odoo.exceptions import ValidationError
 from odoo.tools.misc import mod10r
+from odoo.addons.base.res.res_bank import sanitize_account_number
+
+MSG_INCOMPLETE_PARTNER_ADDR = _(
+    "- Partner address is incomplete, it must contain name, street, zip, city"
+    " and country. Country must be Switzerland"
+)
+
+MSG_INCOMPLETE_COMPANY_ADDR = _(
+    "- Company address is incomplete, it must contain name, street, zip, city"
+    " and country. Country must be Switzerland"
+)
+
+MSG_NO_BANK_ACCOUNT = _(
+    "- Invoice's 'Bank Account' is empty. You need to create or select a valid"
+    " IBAN or QR-IBAN account"
+)
+
+MSG_BAD_QRR = _(
+    "- With a QR-IBAN a valid QRR must be used."
+)
+
+ERROR_MESSAGES = {
+    "incomplete_partner_address": MSG_INCOMPLETE_PARTNER_ADDR,
+    "incomplete_company_address": MSG_INCOMPLETE_COMPANY_ADDR,
+    "no_bank_account": MSG_NO_BANK_ACCOUNT,
+    "bad_qrr": MSG_BAD_QRR,
+}
 
 
 class AccountInvoice(models.Model):
@@ -112,11 +139,7 @@ class AccountInvoice(models.Model):
                 spaced_qrr = _space_qrr(record.l10n_ch_qrr)
             record.l10n_ch_qrr_spaced = spaced_qrr
 
-    @api.multi
-    def build_swiss_code_url(self):
-
-        self.ensure_one()
-
+    def _get_communications(self):
         if self.has_qrr():
             structured_communication = self.l10n_ch_qrr
             free_communication = ''
@@ -125,21 +148,13 @@ class AccountInvoice(models.Model):
             free_communication = self.name
         free_communication = free_communication or self.number
 
-        comment = ""
+        additional_info = ""
         if free_communication:
-            comment = (
+            additional_info = (
                 (free_communication[:137] + '...')
                 if len(free_communication) > 140
                 else free_communication
             )
-
-        creditor = self.company_id.partner_id
-        debtor = self.commercial_partner_id
-
-        creditor_addr_1, creditor_addr_2 = self._get_partner_address_lines(
-            creditor
-        )
-        debtor_addr_1, debtor_addr_2 = self._get_partner_address_lines(debtor)
 
         # Compute reference type (empty by default, only mandatory for QR-IBAN,
         # and must then be 27 characters-long, with mod10r check digit as the 27th one,
@@ -151,9 +166,28 @@ class AccountInvoice(models.Model):
             # without a QR-reference here
             reference_type = 'QRR'
             reference = structured_communication
+        return reference_type, reference, additional_info
+
+    def _prepare_swiss_code_url_vals(self):
+
+        reference_type, reference, additional_info = self._get_communications()
+
+        creditor = self.company_id.partner_id
+        debtor = self.commercial_partner_id
+
+        creditor_addr_1, creditor_addr_2 = self._get_partner_address_lines(
+            creditor
+        )
+        debtor_addr_1, debtor_addr_2 = self._get_partner_address_lines(debtor)
 
         amount = '{:.2f}'.format(self.residual)
         acc_number = self.partner_bank_id.sanitized_acc_number
+
+        # If there is a QR IBAN we use it for the barcode instead of the
+        # account number
+        qr_iban = self.partner_bank_id.l10n_ch_qr_iban
+        if qr_iban:
+            acc_number = sanitize_account_number(qr_iban)
 
         # fmt: off
         qr_code_vals = [
@@ -189,11 +223,19 @@ class AccountInvoice(models.Model):
             debtor.country_id.code,     # - Country
             reference_type,             # Reference Type
             reference,                  # Reference
-            comment,                    # Unstructured Message
+            additional_info,            # Unstructured Message
             'EPD',                      # Mandatory trailer part
             '',                         # Bill information
         ]
         # fmt: on
+        return qr_code_vals
+
+    @api.multi
+    def build_swiss_code_url(self):
+
+        self.ensure_one()
+
+        qr_code_vals = self._prepare_swiss_code_url_vals()
 
         # use quiet to remove blank around the QR and make it easier to place it
         return '/report/qrcode/?value=%s&width=%s&height=%s&bar_border=0' % (
@@ -236,17 +278,21 @@ class AccountInvoice(models.Model):
                 and (partner.street or partner.street2)
             )
 
-        return (
-            _partner_fields_set(self.partner_id)
-            and _partner_fields_set(self.partner_bank_id.partner_id)
-            and (
-                not reference_to_check
-                or not self.partner_bank_id._is_qr_iban()
-                or self._is_qrr(reference_to_check)
-            )
-        )
+        self.errors = []
+        if not _partner_fields_set(self.partner_id):
+            self.errors.append("incomplete_partner_address")
+        if not self.partner_bank_id:
+            self.errors.append("no_bank_account")
+        elif not _partner_fields_set(self.partner_bank_id.partner_id):
+            self.errors.append("incomplete_company_address")
+        if (reference_to_check
+                and self.partner_bank_id._is_qr_iban()
+                and not self._is_qrr(reference_to_check)):
+            self.errors.append("bad_qrr")
 
-    def can_generate_qr_bill(self):
+        return not self.errors
+
+    def can_generate_qr_bill(self, returned_errors=None):
         """ Returns True if the invoice can be used to generate a QR-bill.
         """
         self.ensure_one()
@@ -258,12 +304,11 @@ class AccountInvoice(models.Model):
         self.ensure_one()
 
         if not self.can_generate_qr_bill():
-            raise UserError(
-                _(
-                    "Cannot generate the QR-bill. Please check you have configured the"
-                    " address of your company and debtor. If you are using a QR-IBAN,"
-                    " also check the invoice's payment reference is a QR reference."
-                )
+            msg_error_list = "\n".join(ERROR_MESSAGES[e] for e in self.errors)
+            raise ValidationError(
+                _("You cannot generate the QR-bill.\n"
+                  "Here is what is blocking:\n"
+                  "{}").format(msg_error_list)
             )
 
         self.l10n_ch_qrr_sent = True

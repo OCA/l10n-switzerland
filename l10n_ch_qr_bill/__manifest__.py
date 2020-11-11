@@ -15,6 +15,7 @@
     'data': [
         'data/paperformat.xml',
         'views/account_invoice_view.xml',
+        'views/res_bank.xml',
         'report/swissqr_report.xml',
     ],
     'auto_install': False,

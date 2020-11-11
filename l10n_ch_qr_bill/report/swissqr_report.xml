@@ -45,7 +45,8 @@
                             <div id="receipt_indication_zone" class="swissqr_column_left receipt_indication_zone">
                                 <div class="swissqr_text">
                                   <span class="title">Account / Payable to</span><br/>
-                                  <span class="content" t-field="o.partner_bank_id.acc_number"/><br/>
+                                  <span class="content" t-field="o.partner_bank_id.acc_number" t-if="not o.partner_bank_id.l10n_ch_qr_iban"/>
+                                  <span class="content" t-field="o.partner_bank_id.l10n_ch_qr_iban" t-if="o.partner_bank_id.l10n_ch_qr_iban"/><br/>
                                   <span class="content" t-field="o.company_id.name"/><br/>
                                   <span class="content" t-field="o.company_id.street"/><br/>
                                   <span class="content" t-field="o.company_id.country_id.code"/>
@@ -102,7 +103,8 @@
                             <div id="indications_zone" class="swissqr_column_right indication_zone">
                                 <div class="swissqr_text">
                                     <span class="title">Account / Payable to</span><br/>
-                                    <span class="content" t-field="o.partner_bank_id.acc_number"/><br/>
+                                    <span class="content" t-field="o.partner_bank_id.acc_number" t-if="not o.partner_bank_id.l10n_ch_qr_iban"/>
+                                    <span class="content" t-field="o.partner_bank_id.l10n_ch_qr_iban" t-if="o.partner_bank_id.l10n_ch_qr_iban"/><br/>
                                     <span class="content" t-field="o.company_id.name"/><br/>
                                     <span class="content" t-field="o.company_id.street"/><br/>
                                     <span class="content" t-field="o.company_id.country_id.code"/>
