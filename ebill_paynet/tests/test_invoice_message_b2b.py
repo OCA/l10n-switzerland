@@ -65,11 +65,22 @@ class TestInvoiceMessage(SingleTransactionCase, XmlTestMixin):
             {
                 "name": "Test RAD Customer XML",
                 "customer_rank": 1,
+                "is_company": True,
                 "street": "Teststrasse 100",
                 "city": "Fribourg",
                 "zip": "1700",
                 "country_id": cls.country.id,
                 "state_id": cls.state.id,
+            }
+        )
+        cls.customer_delivery = cls.env["res.partner"].create(
+            {
+                "name": "The Shed in the yard",
+                "street": "Teststrasse 102",
+                "city": "Fribourg",
+                "zip": "1700",
+                "parent_id": cls.customer.id,
+                "type": "delivery",
             }
         )
         cls.contract = cls.env["ebill.payment.contract"].create(
@@ -120,6 +131,7 @@ class TestInvoiceMessage(SingleTransactionCase, XmlTestMixin):
             {
                 "name": "Order123",
                 "partner_id": cls.customer.id,
+                "partner_shipping_id": cls.customer_delivery.id,
                 "client_order_ref": "CustomerRef",
                 "order_line": [
                     (
