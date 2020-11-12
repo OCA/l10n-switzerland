@@ -87,6 +87,9 @@
         </PARTY-ID>
         <NAME-ADDRESS Format="COM">
           <NAME>
+            {%- if customer.name != customer.commercial_company_name and customer.commercial_company_name %}
+            <Line-35>{{ customer.commercial_company_name|truncate(35, True, '') }}</Line-35>
+            {%- endif %}
             <Line-35>{{ customer.name }}</Line-35>
           </NAME>
           <STREET>
@@ -100,22 +103,27 @@
           <Country>{{ customer.country_id.code or 'CH' }}</Country>
         </NAME-ADDRESS>
       </PAYER>
+      {%- if delivery %}
       <DELIVERY-PARTY>
         <NAME-ADDRESS Format="COM">
           <NAME>
-            <Line-35>{{ customer.name }}</Line-35>
+            {%- if delivery.name != delivery.commercial_company_name and delivery.commercial_company_name %}
+            <Line-35>{{ delivery.commercial_company_name|truncate(35, True, '') }}</Line-35>
+            {%- endif %}
+            <Line-35>{{ delivery.name or ''|truncate(35, True, "") }}</Line-35>
           </NAME>
           <STREET>
-            <Line-35>{{ customer.street|truncate(35, True, "")   }}</Line-35>
-            {%- if customer.street2 %}
-            <Line-35>{{ customer.street2|truncate(35, True, "") }}</Line-35>
+            <Line-35>{{ delivery.street|truncate(35, True, "")   }}</Line-35>
+            {%- if delivery.street2 %}
+            <Line-35>{{ delivery.street2|truncate(35, True, "") }}</Line-35>
             {%- endif %}
           </STREET>
-          <City>{{ customer.city }}</City>
-          <Zip>{{ customer.zip }}</Zip>
-          <Country>{{ customer.country_id.code or 'CH' }}</Country>
+          <City>{{ delivery.city or '' }}</City>
+          <Zip>{{ delivery.zip or '' }}</Zip>
+          <Country>{{ delivery.country_id.code or 'CH' }}</Country>
         </NAME-ADDRESS>
       </DELIVERY-PARTY>
+      {%- endif %}
     </HEADER>
     {% for line in invoice.invoice_line_ids %}
     <LINE-ITEM Line-Number="{{ loop.index }}">

@@ -9,8 +9,9 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from zeep.exceptions import Fault
 
 from odoo import fields, models
-from odoo.addons.base.models.res_bank import sanitize_account_number
 from odoo.modules.module import get_module_root
+
+from odoo.addons.base.models.res_bank import sanitize_account_number
 
 from ..components.api import PayNetDWS
 
@@ -93,14 +94,18 @@ class PaynetInvoiceMessage(models.Model):
         bank_account = ""
         if self.payment_type == "qr":
             bank_account = sanitize_account_number(
-                self.invoice_id.invoice_partner_bank_id.l10n_ch_qr_iban or
-                self.invoice_id.invoice_partner_bank_id.acc_number
+                self.invoice_id.invoice_partner_bank_id.l10n_ch_qr_iban
+                or self.invoice_id.invoice_partner_bank_id.acc_number
             )
         else:
-            bank_account = self.invoice_id.invoice_partner_bank_id.l10n_ch_isr_subscription_chf
+            bank_account = (
+                self.invoice_id.invoice_partner_bank_id.l10n_ch_isr_subscription_chf
+            )
             if bank_account:
-                account_parts = bank_account.split('-')
-                bank_account = account_parts[0] + account_parts[1].rjust(6, '0') + account_parts[2]
+                account_parts = bank_account.split("-")
+                bank_account = (
+                    account_parts[0] + account_parts[1].rjust(6, "0") + account_parts[2]
+                )
             else:
                 bank_account = ""
 
@@ -109,6 +114,7 @@ class PaynetInvoiceMessage(models.Model):
             "invoice": self.invoice_id,
             "biller": self.invoice_id.company_id,
             "customer": self.invoice_id.partner_id,
+            "delivery": self.invoice_id.partner_shipping_id,
             "pdf_data": self.attachment_id.datas.decode("ascii"),
             "bank": self.invoice_id.invoice_partner_bank_id,
             "bank_account": bank_account,
