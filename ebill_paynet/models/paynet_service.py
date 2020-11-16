@@ -109,9 +109,8 @@ class PaynetService(models.Model):
                 ShipmentID=shipment_id,
             )
         except Fault as e:
-            dws.handle_fault(e)
-            # or raise ?
-            return
+            error = dws.handle_fault(e)
+            raise UserError(error)
         return res
 
     @api.model
