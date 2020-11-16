@@ -110,8 +110,7 @@ class PaynetService(models.Model):
             )
         except Fault as e:
             dws.handle_fault(e)
-            # or raise ?
-            return
+            raise
         return res
 
     @api.model

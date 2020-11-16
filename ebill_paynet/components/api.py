@@ -1,6 +1,7 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
+import logging
 import os
 import zeep
 
@@ -8,6 +9,8 @@ from lxml import html
 from requests import Session
 
 from odoo.modules.module import get_resource_path
+
+_logger = logging.getLogger(__name__)
 
 WSDL_DOC = os.path.join(os.path.dirname(__file__), "wsdl", "DWSPayNet.wsdl")
 SSL_PROD_CERTIFICATE = get_resource_path(
@@ -51,4 +54,5 @@ class PayNetDWS:
             fault.actor,
             html.tostring(fault.detail),
         )
+        _logger.info("Paynet DWS fault : {}".format(msg))
         return msg
