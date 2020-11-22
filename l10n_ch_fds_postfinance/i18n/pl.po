@@ -411,7 +411,6 @@ msgstr ""
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_authentication_keys_key_active
 #, fuzzy
-#| msgid "Active"
 msgid "Key Active"
 msgstr "Aktywny"
 

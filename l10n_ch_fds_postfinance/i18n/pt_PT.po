@@ -367,7 +367,6 @@ msgstr "Importar"
 #: model:ir.cron,cron_name:l10n_ch_fds_postfinance.fds_import_cron
 #: model:ir.cron,name:l10n_ch_fds_postfinance.fds_import_cron
 #, fuzzy
-#| msgid "Imported files"
 msgid "Import FDS Files"
 msgstr "Ficheiros importados"
 
@@ -415,7 +414,6 @@ msgstr "Ficheiros importados"
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_authentication_keys_key_active
 #, fuzzy
-#| msgid "Active"
 msgid "Key Active"
 msgstr "Ativo"
 
