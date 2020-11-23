@@ -54,11 +54,11 @@ class AccountInvoice(models.Model):
         elif contract.payment_type == "esr":
             report_names.append("l10n_ch.isr_report_main")
         for report_name in report_names:
-            r = self.env["ir.actions.report"]._get_report_from_name(
-                report_name
-            )
+            r = self.env["ir.actions.report"]._get_report_from_name(report_name)
             # Add the force_report_rendering or pdf merge will fail in tests
-            pdf_content, _ = r.with_context(force_report_rendering=True).render([self.id])
+            pdf_content, _ = r.with_context(force_report_rendering=True).render(
+                [self.id]
+            )
             pdf_data.append(pdf_content)
         pdf = merge_pdf(pdf_data)
 
@@ -67,7 +67,7 @@ class AccountInvoice(models.Model):
                 "service_id": contract.paynet_service_id.id,
                 "invoice_id": self.id,
                 "ebill_account_number": contract.paynet_account_number,
-                "payment_type": contract.payment_type
+                "payment_type": contract.payment_type,
             }
         )
         attachment = self.env["ir.attachment"].create(
@@ -82,6 +82,15 @@ class AccountInvoice(models.Model):
         )
         message.attachment_id = attachment.id
         return message
+
+    def paynet_invoice_line_ids(self):
+        """Filter invoice line to be included in XML message.
+
+        Invoicing line that are UX based (notes, sections) are removed.
+
+        """
+        self.ensure_one()
+        return self.invoice_line_ids.filtered(lambda r: not r.display_type)
 
     def log_invoice_accepted_by_system(self):
         """ """
