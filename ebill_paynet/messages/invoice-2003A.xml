@@ -35,12 +35,14 @@
           </REFERENCE-DATE>
         </INVOICE-REFERENCE>
         {% for order in invoice_line.sale_line_ids.mapped('order_id') %}
+        {%- if order.client_order_ref %}
         <ORDER>
           <REFERENCE-DATE>
-            <Reference-No>{{ order.name }}</Reference-No>
+            <Reference-No>{{ order.client_order_ref }}</Reference-No>
             <Date Format="CCYYMMDD">{{ format_date(order.date_order) }}</Date>
           </REFERENCE-DATE>
         </ORDER>
+        {%- endif %}
         {% endfor %}
       </REFERENCE>
       <BILLER>
