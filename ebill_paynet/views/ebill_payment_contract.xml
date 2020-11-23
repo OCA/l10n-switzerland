@@ -19,7 +19,7 @@
                         attrs="{'invisible': [('is_paynet_contract', '=', False)]}"
                     />
                     <field
-                        name="payment_type" 
+                        name="payment_type"
                         attrs="{'invisible': [('is_paynet_contract', '=', False)]}"
                     />
                     <field name="is_paynet_contract" invisible="1" />
