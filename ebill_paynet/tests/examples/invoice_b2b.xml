@@ -35,9 +35,8 @@
           </REFERENCE-DATE>
         </INVOICE-REFERENCE>
         <ORDER>
-          <!-- TODO add linked sale order in test -->
           <REFERENCE-DATE>
-            <Reference-No>Order123</Reference-No>
+            <Reference-No>CustomerRef</Reference-No>
             <Date Format="CCYYMMDD">20190601</Date>
           </REFERENCE-DATE>
         </ORDER>
