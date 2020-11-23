@@ -3,8 +3,8 @@
 
 import logging
 import os
-import zeep
 
+import zeep
 from lxml import html
 from requests import Session
 

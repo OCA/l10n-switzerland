@@ -161,7 +161,29 @@ class TestInvoiceMessage(SingleTransactionCase, XmlTestMixin):
         )
         cls.sale.action_confirm()
         cls.sale.date_order = "2019-06-01"
+        # Generate the invoice from the sale order
         cls.invoice = cls.sale._create_invoices()
+        # And add some more lines on the invoice
+        # One UX line and one not linked to a product
+        cls.invoice.update(
+            {
+                "line_ids": [
+                    (0, 0, {"name": "A little note", "display_type": "line_note"}),
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "Phone support",
+                            "quantity": 4.0,
+                            # Set zero, avoiding error with accounting ?!
+                            "price_unit": 0,
+                            "account_id": cls.at_receivable.id,
+                            # "tax_id": [(4, cls.tax7.id, 0)],
+                        },
+                    ),
+                ],
+            }
+        )
         cls.invoice.invoice_payment_ref = "1234567890"
         cls.invoice.invoice_partner_bank_id = cls.partner_bank.id
 
