@@ -34,7 +34,7 @@
             <Date Format="CCYYMMDD">{{ format_date(invoice.date_invoice) }}</Date>
           </REFERENCE-DATE>
         </INVOICE-REFERENCE>
-        {% for order in invoice.invoice_line_ids.sale_line_ids.mapped('order_id') %}
+        {% for order in invoice_line.sale_line_ids.mapped('order_id') %}
         <ORDER>
           <REFERENCE-DATE>
             <Reference-No>{{ order.name }}</Reference-No>
@@ -93,13 +93,13 @@
             <Line-35>{{ customer.name }}</Line-35>
           </NAME>
           <STREET>
-            <Line-35>{{ customer.street|truncate(35, True, "")  }}</Line-35>
+            <Line-35>{{ customer.street or ""|truncate(35, True, "")  }}</Line-35>
             {%- if customer.street2 %}
-            <Line-35>{{ customer.street2 or ''|truncate(35, True, "")  }}</Line-35>
+            <Line-35>{{ customer.street2 or ""|truncate(35, True, "")  }}</Line-35>
             {%- endif %}
           </STREET>
-          <City>{{ customer.city }}</City>
-          <Zip>{{ customer.zip }}</Zip>
+          <City>{{ customer.city or ""}}</City>
+          <Zip>{{ customer.zip or ""}}</Zip>
           <Country>{{ customer.country_id.code or 'CH' }}</Country>
         </NAME-ADDRESS>
       </PAYER>
@@ -110,10 +110,10 @@
             {%- if delivery.name != delivery.commercial_company_name and delivery.commercial_company_name %}
             <Line-35>{{ delivery.commercial_company_name|truncate(35, True, '') }}</Line-35>
             {%- endif %}
-            <Line-35>{{ delivery.name or ''|truncate(35, True, "") }}</Line-35>
+            <Line-35>{{ delivery.name or ""|truncate(35, True, "") }}</Line-35>
           </NAME>
           <STREET>
-            <Line-35>{{ delivery.street|truncate(35, True, "")   }}</Line-35>
+            <Line-35>{{ delivery.street or ""|truncate(35, True, "")   }}</Line-35>
             {%- if delivery.street2 %}
             <Line-35>{{ delivery.street2|truncate(35, True, "") }}</Line-35>
             {%- endif %}
@@ -125,20 +125,22 @@
       </DELIVERY-PARTY>
       {%- endif %}
     </HEADER>
-    {% for line in invoice.invoice_line_ids %}
+    {% for line in invoice_line %}
     <LINE-ITEM Line-Number="{{ loop.index }}">
+      {%- if line.product_id %}
       <ITEM-ID>
         <Item-Id Type="VN">{{ line.product_id.default_code or ''}}</Item-Id>
         <Item-Id Type="SA">{{ line.product_id.default_code or ''}}</Item-Id>
       </ITEM-ID>
+      {%- endif %}
       <ITEM-DESCRIPTION>
         <Item-Type-Code>1011</Item-Type-Code>
-        <Line-35>{{ line.product_id.name[:35] }}</Line-35>
-        {%- if line.product_id.name|length > 35 %}
-        <Line-35>{{ line.product_id.name[35:]|truncate(34, True) }}</Line-35>
+        <Line-35>{{ (line.product_id.name or line.name or "")[:35] }}</Line-35>
+        {%- if (line.product_id.name or line.name or "")|length > 35 %}
+        <Line-35>{{ (line.product_id.name or line.name)[35:]|truncate(34, True) }}</Line-35>
         {%- endif %}
       </ITEM-DESCRIPTION>
-      {% for order in invoice.invoice_line_ids.sale_line_ids.mapped('order_id') %}
+      {% for order in invoice_line.sale_line_ids.mapped('order_id') %}
       {%- if order.client_order_ref %}
       <ITEM-REFERENCE Type="ON">
           <REFERENCE-DATE>
