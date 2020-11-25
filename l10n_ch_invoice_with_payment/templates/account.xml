@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 Camptocamp SA
+	 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+	<template id="empty_layout">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+        <t t-raw="0"/>
+    </template>
+
+
+    <template id="report_invoice_document_inherit" inherit_id="account.report_invoice_document">
+    	<!-- Remove call to external layout by using empty layout above -->
+    	<xpath expr="//t[@t-call='web.external_layout']" position="attributes">
+            <attribute name="t-call">l10n_ch_invoice_with_payment.empty_layout</attribute>
+        </xpath>
+    </template>
+
+
+        <!-- ISR payment slip-->
+    <template id="l10n_ch_isr_report_template_no_layout" inherit_id="l10n_ch.l10n_ch_isr_report_template" primary="True">
+        <!-- Remove call to external layout by using empty layout above -->
+        <xpath expr="//t[@t-call='web.external_layout']" position="attributes">
+            <attribute name="t-call">l10n_ch_invoice_with_payment.empty_layout</attribute>
+        </xpath>
+        <!-- Remove the h1 title "ISR for invoice" -->
+        <xpath expr="//div[@id='content_outside_isr']" position="replace" />
+    </template>
+
+
+    <!--- QR Payment slip -->
+    <template id="l10n_ch_qr_report_template_no_layout" inherit_id="l10n_ch.l10n_ch_swissqr_template" primary="True">
+        <xpath expr="//t[@t-call='web.external_layout']" position="attributes">
+            <attribute name="t-call">l10n_ch_invoice_with_payment.empty_layout</attribute>
+        </xpath>
+        <!-- Remove the title "QR-bill for invoice" -->
+        <xpath expr="//div[@class='swissqr_title']" position="replace" />
+    </template>
+
+
+
+    <!-- INVOICE + ISR -->
+
+    <template id="assets_common" name="l10n_ch_isr_report" inherit_id="web.report_assets_common">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" type="text/scss" href="/l10n_ch_invoice_with_payment/static/src/scss/report_isr.scss"/>
+            </xpath>
+    </template>
+
+	<template id="invoice_isr_report_main">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="invoice">
+				<t t-set="o" t-value="invoice"/>
+				<t t-call="web.external_layout">
+                    <t t-call="l10n_ch_invoice_with_payment.report_invoice_document_inherit" />
+					<t t-call="l10n_ch_invoice_with_payment.l10n_ch_isr_report_template_no_layout"/>
+				</t>
+			</t>
+		</t>
+	</template>
+
+
+    <!-- INVOICE + QR -->
+
+    <template id="assets_common_qr" inherit_id="web.report_assets_common">
+            <xpath expr="." position="inside">
+                <link type="text/scss" rel="stylesheet" href="/l10n_ch_invoice_with_payment/static/src/scss/report_swissqr.scss"/>
+            </xpath>
+    </template>
+
+	<template id="invoice_qr_report_main">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="invoice">
+				<t t-set="o" t-value="invoice"/>
+				<t t-call="web.external_layout">
+					<t t-call="l10n_ch_invoice_with_payment.report_invoice_document_inherit" />
+					<t t-call="l10n_ch_invoice_with_payment.l10n_ch_qr_report_template_no_layout"/>
+				</t>
+			</t>
+		</t>
+	</template>
+
+
+    <!-- INVOICE + QR + ISR -->
+    <template id="invoice_qr_isr_report_main">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="invoice">
+                <t t-set="o" t-value="invoice"/>
+                <t t-call="web.external_layout">
+                    <t t-call="l10n_ch_invoice_with_payment.report_invoice_document_inherit" />
+                    <t t-call="l10n_ch_invoice_with_payment.l10n_ch_isr_report_template_no_layout"/>
+                    <t t-call="l10n_ch_invoice_with_payment.l10n_ch_qr_report_template_no_layout"/>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
