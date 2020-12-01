@@ -17,7 +17,7 @@
         <xpath expr="//div[contains(@t-attf-class,'footer')]" position="replace" />
     </template>
 
-    <template id="report_invoice_document_inherit" inherit_id="account.report_invoice_document">
+    <template id="report_invoice_document_inherit" inherit_id="account.report_invoice_document" primary="True">
     	<!-- Remove call to external layout by using empty layout above -->
     	<xpath expr="//t[@t-call='web.external_layout']" position="attributes">
             <attribute name="t-call">l10n_ch_invoice_with_payment.empty_layout</attribute>
@@ -29,7 +29,7 @@
     <template id="l10n_ch_isr_report_template_no_layout" inherit_id="l10n_ch.l10n_ch_isr_report_template" primary="True">
         <!-- Remove call to external layout by using empty layout above -->
         <xpath expr="//t[@t-call='web.external_layout']" position="attributes">
-            <attribute name="t-call">l10n_ch_invoice_with_payment.external_layout_no_footer</attribute>
+            <attribute name="t-call">l10n_ch_invoice_with_payment.empty_layout</attribute>
         </xpath>
         <!-- Remove the h1 title "ISR for invoice" -->
         <xpath expr="//div[@id='content_outside_isr']" position="replace" />
@@ -52,11 +52,11 @@
 
     <!-- INVOICE + ISR -->
 
-<!--     <template id="assets_common_invoice_isr" name="l10n_ch_isr_report" inherit_id="web.report_assets_common">
+    <template id="assets_common_invoice_isr" name="l10n_ch_isr_report" inherit_id="web.report_assets_common">
             <xpath expr="." position="inside">
                 <link rel="stylesheet" type="text/scss" href="/l10n_ch_invoice_with_payment/static/src/scss/report_isr.scss"/>
             </xpath>
-    </template> -->
+    </template> 
 
 	<template id="invoice_isr_report_main">
 		<t t-call="web.html_container">
@@ -66,7 +66,9 @@
                     <t t-call="l10n_ch_invoice_with_payment.report_invoice_document_inherit" />
                 </t>
                 <div class="article">
-					<t t-call="l10n_ch_invoice_with_payment.l10n_ch_isr_report_template_no_layout"/>
+                    <div class="page" style="page-break-before:always;">
+					   <t t-call="l10n_ch_invoice_with_payment.l10n_ch_isr_report_template_no_layout"/>
+                    </div>
                 </div>
 			</t>
 		</t>
@@ -74,12 +76,12 @@
 
 
     <!-- INVOICE + QR -->
-<!-- 
+
     <template id="assets_common_invoice_qr" inherit_id="web.report_assets_common">
             <xpath expr="." position="inside">
                 <link type="text/scss" rel="stylesheet" href="/l10n_ch_invoice_with_payment/static/src/scss/report_swissqr.scss"/>
             </xpath>
-    </template> -->
+    </template>
 
 	<template id="invoice_qr_report_main">
 		<t t-call="web.html_container">
@@ -87,8 +89,10 @@
 				<t t-set="o" t-value="invoice"/>
 				<t t-call="web.external_layout">
 					<t t-call="l10n_ch_invoice_with_payment.report_invoice_document_inherit" />
+                </t>
+                <div class="article">
 					<t t-call="l10n_ch_invoice_with_payment.l10n_ch_qr_report_template_no_layout"/>
-				</t>
+				</div>
 			</t>
 		</t>
 	</template>
@@ -101,9 +105,13 @@
                 <t t-set="o" t-value="invoice"/>
                 <t t-call="web.external_layout">
                     <t t-call="l10n_ch_invoice_with_payment.report_invoice_document_inherit" />
-                    <t t-call="l10n_ch_invoice_with_payment.l10n_ch_isr_report_template_no_layout"/>
-                    <t t-call="l10n_ch_invoice_with_payment.l10n_ch_qr_report_template_no_layout"/>
                 </t>
+                <div class="article">
+                    <t t-call="l10n_ch_invoice_with_payment.l10n_ch_isr_report_template_no_layout"/>
+                </div>
+                <div class="article">
+                    <t t-call="l10n_ch_invoice_with_payment.l10n_ch_qr_report_template_no_layout"/>
+                </div>
             </t>
         </t>
     </template>
