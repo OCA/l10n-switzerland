@@ -34,7 +34,7 @@
             <Date Format="CCYYMMDD">{{ format_date(invoice.date_invoice) }}</Date>
           </REFERENCE-DATE>
         </INVOICE-REFERENCE>
-        {% for order in invoice_line.sale_line_ids.mapped('order_id') %}
+        {% for order in invoice_lines.sale_line_ids.mapped('order_id') %}
         {%- if order.client_order_ref %}
         <ORDER>
           <REFERENCE-DATE>
@@ -92,12 +92,12 @@
             {%- if customer.name != customer.commercial_company_name and customer.commercial_company_name %}
             <Line-35>{{ customer.commercial_company_name|truncate(35, True, '') }}</Line-35>
             {%- endif %}
-            <Line-35>{{ customer.name }}</Line-35>
+            <Line-35>{{ (customer.name or "")|truncate(35, True, "") }}</Line-35>
           </NAME>
           <STREET>
-            <Line-35>{{ customer.street or ""|truncate(35, True, "")  }}</Line-35>
+            <Line-35>{{ (customer.street or "")|truncate(35, True, "") }}</Line-35>
             {%- if customer.street2 %}
-            <Line-35>{{ customer.street2 or ""|truncate(35, True, "")  }}</Line-35>
+            <Line-35>{{ customer.street2|truncate(35, True, "") }}</Line-35>
             {%- endif %}
           </STREET>
           <City>{{ customer.city or ""}}</City>
@@ -112,10 +112,10 @@
             {%- if delivery.name != delivery.commercial_company_name and delivery.commercial_company_name %}
             <Line-35>{{ delivery.commercial_company_name|truncate(35, True, '') }}</Line-35>
             {%- endif %}
-            <Line-35>{{ delivery.name or ""|truncate(35, True, "") }}</Line-35>
+            <Line-35>{{ (delivery.name or "")|truncate(35, True, "") }}</Line-35>
           </NAME>
           <STREET>
-            <Line-35>{{ delivery.street or ""|truncate(35, True, "")   }}</Line-35>
+            <Line-35>{{ (delivery.street or "")|truncate(35, True, "")   }}</Line-35>
             {%- if delivery.street2 %}
             <Line-35>{{ delivery.street2|truncate(35, True, "") }}</Line-35>
             {%- endif %}
@@ -127,7 +127,7 @@
       </DELIVERY-PARTY>
       {%- endif %}
     </HEADER>
-    {% for line in invoice_line %}
+    {% for line in invoice_lines %}
     <LINE-ITEM Line-Number="{{ loop.index }}">
       {%- if line.product_id %}
       <ITEM-ID>
@@ -142,7 +142,7 @@
         <Line-35>{{ (line.product_id.name or line.name)[35:]|truncate(34, True) }}</Line-35>
         {%- endif %}
       </ITEM-DESCRIPTION>
-      {% for order in invoice_line.sale_line_ids.mapped('order_id') %}
+      {% for order in invoice_lines.sale_line_ids.mapped('order_id') %}
       {%- if order.client_order_ref %}
       <ITEM-REFERENCE Type="ON">
           <REFERENCE-DATE>
@@ -157,13 +157,13 @@
       <Price Type="AAA">{{ line.price_subtotal|round(2) }}</Price>
       <Price Type="XXX">{{ line.price_total|round(2) }}</Price>
       <ITEM-AMOUNT Type="66">
-        <Amount Currency="CHF">{{ line.price_total|round(2) }}</Amount>
+        <Amount Currency="{{ invoice.currency_id.name }}">{{ line.price_total|round(2) }}</Amount>
       </ITEM-AMOUNT>
       {% for tax in line.tax_ids %}
       {%- if loop.index == 1 %}
       <TAX>
         <Rate>{{ tax.amount}}</Rate>
-        <Amount Currency="CHF">{{ tax._compute_amount(line.price_subtotal, line.price_unit)|round(2) }}</Amount>
+        <Amount Currency="{{ invoice.currency_id.name }}">{{ tax._compute_amount(line.price_subtotal, line.price_unit)|round(2) }}</Amount>
       </TAX>
       {%- endif %}
       {% else %}
@@ -175,32 +175,32 @@
     {% endfor %}
     <SUMMARY>
       <INVOICE-AMOUNT Print-Status="25">
-        <Amount Currency="CHF">{{ invoice.amount_total|round(2) }}</Amount>
+        <Amount Currency="{{ invoice.currency_id.name }}">{{ invoice.amount_total|round(2) }}</Amount>
       </INVOICE-AMOUNT>
       <VAT-AMOUNT Print-Status="25">
-        <Amount Currency="CHF">{{ invoice.amount_tax|round(2) }}</Amount>
+        <Amount Currency="{{ invoice.currency_id.name }}">{{ invoice.amount_tax|round(2) }}</Amount>
       </VAT-AMOUNT>
       {% if amount_by_group %}
       {% for taxgroup in amount_by_group %}
       <TAX>
         <TAX-BASIS>
-          <Amount Currency="CHF">{{ taxgroup[2] }}</Amount>
+          <Amount Currency="{{ invoice.currency_id.name }}">{{ taxgroup[2] }}</Amount>
         </TAX-BASIS>
       {%- if taxgroup[0] %}
       <Rate Category="S">{{ taxgroup[0] }}</Rate>
       {%- else %}
       <Rate Category="E">0</Rate>
       {%- endif %}
-      <Amount Currency="CHF">{{ taxgroup[1] }}</Amount>
+      <Amount Currency="{{ invoice.currency_id.name }}">{{ taxgroup[1] }}</Amount>
     </TAX>
     {% endfor %}
     {%- else %}
     <TAX>
       <TAX-BASIS>
-        <Amount Currency="CHF">{{ invoice.amount_untaxed|round(2) }}</Amount>
+        <Amount Currency="{{ invoice.currency_id.name }}">{{ invoice.amount_untaxed|round(2) }}</Amount>
       </TAX-BASIS>
       <Rate Category="E">0</Rate>
-      <Amount Currency="CHF">0</Amount>
+      <Amount Currency="{{ invoice.currency_id.name }}">0</Amount>
     </TAX>
     {% endif -%}
     <PAYMENT-TERMS>
