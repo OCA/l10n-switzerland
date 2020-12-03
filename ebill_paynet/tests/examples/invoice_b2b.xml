@@ -94,6 +94,7 @@
           </NAME>
           <STREET>
             <Line-35>Teststrasse 100</Line-35>
+            <Line-35>This is a very long street name tha</Line-35>
           </STREET>
           <City>Fribourg</City>
           <Zip>1700</Zip>
