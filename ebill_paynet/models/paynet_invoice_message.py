@@ -112,7 +112,7 @@ class PaynetInvoiceMessage(models.Model):
         params = {
             "client_pid": self.service_id.client_pid,
             "invoice": self.invoice_id,
-            "invoice_line": self.invoice_id.paynet_invoice_line_ids(),
+            "invoice_lines": self.invoice_id.paynet_invoice_line_ids(),
             "biller": self.invoice_id.company_id,
             "customer": self.invoice_id.partner_id,
             "delivery": self.invoice_id.partner_shipping_id,

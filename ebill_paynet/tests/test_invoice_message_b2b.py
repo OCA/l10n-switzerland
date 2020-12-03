@@ -67,6 +67,7 @@ class TestInvoiceMessage(SingleTransactionCase, XmlTestMixin):
                 "customer_rank": 1,
                 "is_company": True,
                 "street": "Teststrasse 100",
+                "street2": "This is a very long street name that should be snapped",
                 "city": "Fribourg",
                 "zip": "1700",
                 "country_id": cls.country.id,
