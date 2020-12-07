@@ -206,7 +206,7 @@
     <PAYMENT-TERMS>
       <BASIC Payment-Type="{{ payment_type|upper }}" Terms-Type="5">
         <TERMS>
-          <Date>{{ format_date(invoice.date_due or invoice.date_invoice) }}</Date>
+          <Date>{{ date_due }}</Date>
         </TERMS>
       </BASIC>
     </PAYMENT-TERMS>
