@@ -185,16 +185,14 @@ class TestInvoiceMessage(SingleTransactionCase, XmlTestMixin):
                 ],
             }
         )
+        cls.invoice.action_post()
         cls.invoice.invoice_payment_ref = "1234567890"
         cls.invoice.invoice_partner_bank_id = cls.partner_bank.id
 
     def test_invoice(self):
         """ Check XML payload genetated for an invoice."""
         self.invoice.name = "INV_TEST_01"
-        # self.invoice_1.action_invoice_sent()
-        # TODO set a due date different to create date
-        # self.invoice_1.date_due = '2019-07-01'
-        self.invoice.state = "posted"
+        self.invoice.invoice_date_due = '2019-07-01'
         message = self.invoice.create_paynet_message()
         message.payload = message._generate_payload()
         # Remove the PDF file data from the XML to ease testing

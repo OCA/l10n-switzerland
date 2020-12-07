@@ -87,9 +87,7 @@ class PaynetInvoiceMessage(models.Model):
             date_string = datetime.now()
         return date_string.strftime("%Y%m%d")
 
-    def _generate_payload(self):
-        self.ensure_one()
-        assert self.state == "draft"
+    def _get_payload_params(self):
         self.ic_ref = self._get_ic_ref()
         bank_account = ""
         if self.payment_type == "qr":
@@ -132,6 +130,23 @@ class PaynetInvoiceMessage(models.Model):
             rate = taxgroup[0].split()[-1:][0][:-1]
             amount_by_group.append((rate or "0", taxgroup[1], taxgroup[2],))
         params["amount_by_group"] = amount_by_group
+        # Get the invoice due date
+        date_due = None
+        if self.invoice_id.invoice_payment_term_id:
+            terms = self.invoice_id.invoice_payment_term_id.compute(self.invoice_id.amount_total)
+            if terms:
+                # Returns all payment and their date like [('2020-12-07', 430.37), ...]
+                # Get the last payment date in the format "202021207"
+                date_due = terms[-1][0].replace("-", "")
+        if not date_due:
+            date_due = self.format_date(self.invoice_id.invoice_date_due or self.invoice_id.invoice_date)
+        params["date_due"] = date_due
+        return params
+
+    def _generate_payload(self):
+        self.ensure_one()
+        assert self.state == "draft"
+        params = self._get_payload_params()
 
         if self.service_id.service_type == "b2b":
             payload = template_2003.render(params)
