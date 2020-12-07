@@ -429,3 +429,19 @@ class ResPartnerBank(models.Model, BankCommon):
         # as partner name is part of acc_number
         if self.acc_type == 'bank' and self.ccp:
             self._update_acc_name()
+
+    def _is_qr_iban(self):
+        """ Tells whether or not this bank account has a QR-IBAN account number.
+        QR-IBANs are specific identifiers used in Switzerland as references in
+        QR-codes. They are formed like regular IBANs, but are actually something
+        different.
+        NB: reseved IDs for qriban: 30000 <= qriban_id <= 31999
+        """
+        self.ensure_one()
+
+        iid_start_index = 4
+        iid_end_index = 8
+        iid = self.sanitized_acc_number[iid_start_index: iid_end_index + 1]
+        return (self.acc_type == 'iban'
+                and re.match('\d+', iid)
+                and 30000 <= int(iid) <= 31999)

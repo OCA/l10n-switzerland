@@ -8,7 +8,7 @@
  'category': 'Localization',
  'website': 'https://github.com/OCA/l10n-switzerland',
  'license': 'AGPL-3',
- 'depends': ['account_payment_partner', 'base_iban'],
+ 'depends': ['account_payment_partner', 'base_iban', 'l10n_ch_base_bank'],
  'data': [
      'security/security.xml',
      'views/bank.xml',
