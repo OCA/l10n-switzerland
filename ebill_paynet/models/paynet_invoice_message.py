@@ -18,15 +18,9 @@ from ..components.api import PayNetDWS
 MODULE_PATH = get_module_root(os.path.dirname(__file__))
 INVOICE_TEMPLATE_2013 = "invoice-2013A.xml"
 INVOICE_TEMPLATE_2003 = "invoice-2003A.xml"
-TEMPLATE_DIR = MODULE_PATH + "/messages"
+TEMPLATE_DIR = [MODULE_PATH + "/messages"]
 
 DOCUMENT_TYPE = {"out_invoice": "EFD", "out_refund": "EGS"}
-
-jinja_env = Environment(
-    loader=FileSystemLoader(TEMPLATE_DIR), autoescape=select_autoescape(["xml"]),
-)
-template_2013 = jinja_env.get_template(INVOICE_TEMPLATE_2013)
-template_2003 = jinja_env.get_template(INVOICE_TEMPLATE_2003)
 
 
 class PaynetInvoiceMessage(models.Model):
@@ -122,6 +116,8 @@ class PaynetInvoiceMessage(models.Model):
             "document_type": DOCUMENT_TYPE[self.invoice_id.type],
             "format_date": self.format_date,
             "ebill_account_number": self.ebill_account_number,
+            "discount_template": "",
+            "discount": {},
         }
         amount_by_group = []
         # Get the percentage of the tax from the name of the group
@@ -133,26 +129,40 @@ class PaynetInvoiceMessage(models.Model):
         # Get the invoice due date
         date_due = None
         if self.invoice_id.invoice_payment_term_id:
-            terms = self.invoice_id.invoice_payment_term_id.compute(self.invoice_id.amount_total)
+            terms = self.invoice_id.invoice_payment_term_id.compute(
+                self.invoice_id.amount_total
+            )
             if terms:
                 # Returns all payment and their date like [('2020-12-07', 430.37), ...]
                 # Get the last payment date in the format "202021207"
                 date_due = terms[-1][0].replace("-", "")
         if not date_due:
-            date_due = self.format_date(self.invoice_id.invoice_date_due or self.invoice_id.invoice_date)
+            date_due = self.format_date(
+                self.invoice_id.invoice_date_due or self.invoice_id.invoice_date
+            )
         params["date_due"] = date_due
         return params
+
+    def _get_jinja_env(self, template_dir):
+        jinja_env = Environment(
+            loader=FileSystemLoader(template_dir),
+            autoescape=select_autoescape(["xml"]),
+        )
+        return jinja_env
+
+    def _get_template(self, jinja_env):
+        if self.service_id.service_type == "b2b":
+            return jinja_env.get_template(INVOICE_TEMPLATE_2003)
+        else:
+            return jinja_env.get_template(INVOICE_TEMPLATE_2013)
 
     def _generate_payload(self):
         self.ensure_one()
         assert self.state == "draft"
         params = self._get_payload_params()
-
-        if self.service_id.service_type == "b2b":
-            payload = template_2003.render(params)
-        else:
-            payload = template_2013.render(params)
-        return payload
+        jinja_env = self._get_jinja_env(TEMPLATE_DIR)
+        jinja_template = self._get_template(jinja_env)
+        return jinja_template.render(params)
 
     def update_invoice_status(self):
         """Update the export status in the chatter."""
