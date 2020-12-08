@@ -2,17 +2,15 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 import os
-
 from os.path import dirname, join
 
 from vcr import VCR
+from xmlunittest import XmlTestMixin
 
 from odoo.tests.common import SavepointCase
-from xmlunittest import XmlTestMixin
 
 
 class CommonCase(SavepointCase, XmlTestMixin):
-
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -186,7 +184,6 @@ class CommonCase(SavepointCase, XmlTestMixin):
         cls.invoice.invoice_payment_ref = "1234567890"
         cls.invoice.invoice_partner_bank_id = cls.partner_bank.id
 
-
     @staticmethod
     def compare_xml_line_by_line(content, expected):
         """This a quick way to check the diff line by line to ease debugging"""
@@ -198,6 +195,7 @@ class CommonCase(SavepointCase, XmlTestMixin):
                 return "Diff at {}/{} || Expected {}  || Generated {}".format(
                     i, number_of_lines, expected_line[i], generated_line[i],
                 )
+
 
 def get_recorder(base_path=None, **kw):
     base_path = base_path or dirname(__file__)
@@ -211,5 +209,6 @@ def get_recorder(base_path=None, **kw):
     )
     defaults.update(kw)
     return VCR(**defaults)
+
 
 recorder = get_recorder()

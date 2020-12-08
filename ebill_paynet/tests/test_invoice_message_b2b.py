@@ -20,7 +20,7 @@ class TestInvoiceMessage(CommonCase):
     def test_invoice(self):
         """ Check XML payload genetated for an invoice."""
         self.invoice.name = "INV_TEST_01"
-        self.invoice.invoice_date_due = '2019-07-01'
+        self.invoice.invoice_date_due = "2019-07-01"
         message = self.invoice.create_paynet_message()
         message.payload = message._generate_payload()
         # Remove the PDF file data from the XML to ease testing

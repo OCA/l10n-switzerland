@@ -8,9 +8,6 @@
     "license": "AGPL-3",
     "author": "Camptocamp SA,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/l10n-switzerland",
-    "depends": [
-        "account_financial_discount",
-        "ebill_paynet",
-    ],
+    "depends": ["account_financial_discount", "ebill_paynet"],
     "auto_install": True,
 }

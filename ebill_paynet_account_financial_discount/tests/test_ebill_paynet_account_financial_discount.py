@@ -1,8 +1,9 @@
 # Copyright 2020 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from freezegun import freeze_time
 from string import Template
+
+from freezegun import freeze_time
 
 from odoo.tools import file_open
 
@@ -15,19 +16,19 @@ class TestEbillPaynetAccountFinancialDiscount(CommonCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.payment_term = cls.env['account.payment.term'].create(
+        cls.payment_term = cls.env["account.payment.term"].create(
             {
-                'name': 'Skonto',
-                'days_discount': 10,
-                'percent_discount': 2.0,
-                'line_ids': [
+                "name": "Skonto",
+                "days_discount": 10,
+                "percent_discount": 2.0,
+                "line_ids": [
                     (
                         0,
                         0,
                         {
-                            'value': 'balance',
-                            'days': 60,
-                            'option': 'day_after_invoice_date',
+                            "value": "balance",
+                            "days": 60,
+                            "option": "day_after_invoice_date",
                         },
                     )
                 ],
@@ -37,7 +38,7 @@ class TestEbillPaynetAccountFinancialDiscount(CommonCase):
     def test_invoice(self):
         """ Check XML payload genetated for an invoice."""
         self.invoice.name = "INV_TEST_01"
-        self.invoice.invoice_date_due = '2019-07-01'
+        self.invoice.invoice_date_due = "2019-07-01"
         self.invoice.invoice_payment_term_id = self.payment_term
         message = self.invoice.create_paynet_message()
         message.payload = message._generate_payload()
@@ -51,7 +52,9 @@ class TestEbillPaynetAccountFinancialDiscount(CommonCase):
         self.assertXmlDocument(payload)
         # Prepare the XML file that is expected
         expected_tmpl = Template(
-            file_open("ebill_paynet_account_financial_discount/tests/examples/invoice_b2b.xml").read()
+            file_open(
+                "ebill_paynet_account_financial_discount/tests/examples/invoice_b2b.xml"
+            ).read()
         )
         expected = expected_tmpl.substitute(IC_REF=message.ic_ref).encode("utf8")
         # Remove the comments in the expected xml

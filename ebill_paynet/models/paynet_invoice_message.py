@@ -129,19 +129,24 @@ class PaynetInvoiceMessage(models.Model):
         # Get the invoice due date
         date_due = None
         if self.invoice_id.invoice_payment_term_id:
-            terms = self.invoice_id.invoice_payment_term_id.compute(self.invoice_id.amount_total)
+            terms = self.invoice_id.invoice_payment_term_id.compute(
+                self.invoice_id.amount_total
+            )
             if terms:
                 # Returns all payment and their date like [('2020-12-07', 430.37), ...]
                 # Get the last payment date in the format "202021207"
                 date_due = terms[-1][0].replace("-", "")
         if not date_due:
-            date_due = self.format_date(self.invoice_id.invoice_date_due or self.invoice_id.invoice_date)
+            date_due = self.format_date(
+                self.invoice_id.invoice_date_due or self.invoice_id.invoice_date
+            )
         params["date_due"] = date_due
         return params
 
     def _get_jinja_env(self, template_dir):
         jinja_env = Environment(
-            loader=FileSystemLoader(template_dir), autoescape=select_autoescape(["xml"]),
+            loader=FileSystemLoader(template_dir),
+            autoescape=select_autoescape(["xml"]),
         )
         return jinja_env
 

@@ -13,13 +13,14 @@ class EbillPaymentContract(models.Model):
         compute="_compute_is_paynet_contract", store=False
     )
     paynet_service_id = fields.Many2one(
-        comodel_name="paynet.service", string="Paynet Service", ondelete="restrict",
+        comodel_name="paynet.service", string="Paynet Service", ondelete="restrict"
     )
     payment_type = fields.Selection(
         selection=[("qr", "QR"), ("esr", "ESR")],
         string="Payment method",
         default="qr",
-        help="Payment type to use for the invoices sent, PDF will be generated and attached accordingly.",
+        help="Payment type to use for the invoices sent,"
+        " PDF will be generated and attached accordingly.",
     )
 
     @api.depends("transmit_method_id")

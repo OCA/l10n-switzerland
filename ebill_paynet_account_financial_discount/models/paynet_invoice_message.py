@@ -22,10 +22,11 @@ class PaynetInvoiceMessage(models.Model):
         params = super()._get_payload_params()
         params["discount_template"] = DISCOUNT_TEMPLATE
         discount = {}
-        if self.invoice_id.invoice_payment_term_id and self.invoice_id.invoice_payment_term_id.percent_discount:
+        if self.invoice_id.invoice_payment_term_id.percent_discount:
+            terms = self.invoice_id.invoice_payment_term_id
             discount = {
-                "percentage": self.invoice_id.invoice_payment_term_id.percent_discount,
-                "days": self.invoice_id.invoice_payment_term_id.days_discount
+                "percentage": terms.percent_discount,
+                "days": terms.days_discount,
             }
         params["discount"] = discount
         return params
