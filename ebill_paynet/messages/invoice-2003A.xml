@@ -209,6 +209,7 @@
           <Date>{{ date_due }}</Date>
         </TERMS>
       </BASIC>
+      {% include discount_template ignore missing %}
     </PAYMENT-TERMS>
     <Back-Pack-Container Encode="Base64">
       {{- pdf_data | safe -}}
