@@ -1,0 +1,8 @@
+{%- if discount %}
+<DISCOUNT Terms-Type="22">
+  <Discount-Percentage>{{ discount.percentage|round(2) }}</Discount-Percentage>
+  <TERMS>
+    <Payment-Period Type="CD" On-Or-After="3" Reference-Day="5">{{ discount.days }}</Payment-Period>
+  </TERMS>
+</DISCOUNT>
+{%- endif %}
