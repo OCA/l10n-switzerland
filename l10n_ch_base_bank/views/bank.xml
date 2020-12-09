@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="view_bank_search" model="ir.ui.view">
+            <field name="name">res.bank.search</field>
+            <field name="model">res.bank</field>
+            <field name="arch" type="xml">
+                <search string="Banks">
+                    <filter
+                        name="Postfinance"
+                        string="PostFinance"
+                        domain="[('bic', '=', 'POFICHBEXXX')]"
+                        help="PostFinance"
+                    />
+                    <field name="name" />
+                    <field name="code" />
+                    <field name="street" />
+                    <field name="city" />
+                </search>
+            </field>
+        </record>
+        <!-- 'POFICHBEXXX' corresponds to Postfinance bic -->
+        <record model="ir.ui.view" id="add_custom_fields_on_bank">
+            <field name="name">add custom fields on bank</field>
+            <field name="model">res.bank</field>
+            <field name="inherit_id" ref="base.view_res_bank_form" />
+            <field name="arch" type="xml">
+                <field name="bic" position="after">
+                    <field name="code" />
+                    <field name="clearing" />
+                </field>
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="country_code" invisible="True" />
+                </xpath>
+                <xpath expr="//field[@name='city']" position="attributes">
+                    <attribute
+                        name="attrs"
+                    >{'required': [('country_code', '=', 'CH')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='bic']" position="attributes">
+                    <attribute
+                        name="attrs"
+                    >{'required': [('country_code', '=', 'CH')]}</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="add_custom_fields_on_bank_list">
+            <field name="name">add custom fields on bank list</field>
+            <field name="model">res.bank</field>
+            <field name="inherit_id" ref="base.view_res_bank_tree" />
+            <field name="arch" type="xml">
+                <field name="bic" position="after">
+                    <field name="code" />
+                    <field name="clearing" />
+                    <field name="street" />
+                    <field name="city" />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
