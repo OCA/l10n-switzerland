@@ -148,6 +148,8 @@ class PaynetInvoiceMessage(models.Model):
             loader=FileSystemLoader(template_dir),
             autoescape=select_autoescape(["xml"]),
         )
+        # Force the truncate filter to be exact
+        jinja_env.policies["truncate.leeway"] = 0
         return jinja_env
 
     def _get_template(self, jinja_env):
