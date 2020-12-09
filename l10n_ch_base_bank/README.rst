@@ -14,24 +14,29 @@ Switzerland - Bank type
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fl10n--switzerland-lightgray.png?logo=github
-    :target: https://github.com/OCA/l10n-switzerland/tree/12.0/l10n_ch_base_bank
+    :target: https://github.com/OCA/l10n-switzerland/tree/13.0/l10n_ch_base_bank
     :alt: OCA/l10n-switzerland
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/l10n-switzerland-12-0/l10n-switzerland-12-0-l10n_ch_base_bank
+    :target: https://translation.odoo-community.org/projects/l10n-switzerland-13-0/l10n-switzerland-13-0-l10n_ch_base_bank
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-    :target: https://runbot.odoo-community.org/runbot/125/12.0
+    :target: https://runbot.odoo-community.org/runbot/125/13.0
     :alt: Try me on Runbot
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
-This addons will add different bank types required by specific Swiss electronic
-payment like DTA and ISR. It allows to manage both Post and Bank systems.
+This addon extend the features of l10n_ch.
 
-It'll perform some validation when entering or filling bank account number or ESR number
-in invoice and add some Swiss specific fields on bank.
+Most of the former features have been moved in l10n_ch module.
 
-This module is required if you want to use electronic payment in Switzerland.
+
+Features:
+
+Improve UX with onchanges:
+
+- automatically set bank based on clearing part of IBAN
+- allow direct entry of l10n_ch_postal which will fill acc_number
+- search invoices by ISR, with or without spaces
 
 **Table of contents**
 
@@ -41,14 +46,22 @@ This module is required if you want to use electronic payment in Switzerland.
 Usage
 =====
 
-Account type will be discovered automatically.
+In partner bank account the type will be discovered automatically.
 
 * For IBAN accounts fill account number with IBAN.
-* For Postal account fill account number with postal account number in IBAN, 9 digits format (e.g. 01-23456-1).
+  * if the IBAN is an IBAN from PostFinance it will fill the Postal account number
+* For Postal accounts:
+  * fill the account number with a postal account number 9 digits format (e.g. 10-8060-7).
+  * or fill the "Swiss postal account" with a postal account number 9 digits format (e.g. 10-8060-7).
 
 Entering a postal number of 9 digits will auto-complete the bank with PostFinance. (You might create it if you haven't installed `l10n_ch_bank`)
 
-* For bank account for ISR, select the bank and fill the CCP field in bank, optionally fill the account number with bank number.
+* For ISR subscription numbers (postal account starting with 01 or 03):
+  * fill the account number with a postal account number 9 digits format (e.g. 01-23456-1).
+  * or fill the "Swiss postal account" with a postal account number 9 digits format (e.g. 01-23456-1).
+
+It will automatically change the content of account number by adding "ISR" and the partner name to avoid
+duplicates with partner using the same ISR subscription number owned by a bank (ISR-B).
 
 Bug Tracker
 ===========
@@ -56,7 +69,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/l10n-switzerland/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/l10n-switzerland/issues/new?body=module:%20l10n_ch_base_bank%0Aversion:%2012.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/l10n-switzerland/issues/new?body=module:%20l10n_ch_base_bank%0Aversion:%2013.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -103,6 +116,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/l10n-switzerland <https://github.com/OCA/l10n-switzerland/tree/12.0/l10n_ch_base_bank>`_ project on GitHub.
+This module is part of the `OCA/l10n-switzerland <https://github.com/OCA/l10n-switzerland/tree/13.0/l10n_ch_base_bank>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
