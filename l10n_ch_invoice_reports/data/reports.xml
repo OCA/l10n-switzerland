@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="0">
+    <report
+        id="account_move_isr_report"
+        model="account.move"
+        report_type="qweb-pdf"
+        string="Invoice with ISR"
+        name="l10n_ch_invoice_reports.invoice_isr_report_main"
+        file="l10n_ch_invoice_reports.invoice_isr_report_main"
+        attachment_use="False"
+        attachment=""
+        menu="True"
+        print_report_name="'Invoice-ISR-%s' % object.name"
+    />
+    <report
+        id="account_move_qr_report"
+        model="account.move"
+        report_type="qweb-pdf"
+        string="Invoice with QR"
+        name="l10n_ch_invoice_reports.invoice_qr_report_main"
+        file="l10n_ch_invoice_reports.invoice_qr_report_main"
+        attachment_use="False"
+        attachment=""
+        menu="True"
+        print_report_name="'Invoice-QR-%s' % object.name"
+    />
+    <report
+        id="account_move_qr_isr_report"
+        model="account.move"
+        report_type="qweb-pdf"
+        string="Invoice with QR and ISR"
+        name="l10n_ch_invoice_reports.invoice_qr_isr_report_main"
+        file="l10n_ch_invoice_reports.invoice_qr_isr_report_main"
+        attachment_use="False"
+        attachment=""
+        menu="True"
+        print_report_name="'Invoice-QR-ISR-%s' % object.name"
+    />
+</odoo>
