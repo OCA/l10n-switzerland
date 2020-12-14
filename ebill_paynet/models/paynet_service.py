@@ -104,7 +104,7 @@ class PaynetService(models.Model):
         self.ensure_one()
         dws = PayNetDWS(self.url, self.use_test_service)
         try:
-            res = dws.client.service.getShipmentContent(
+            res = dws.service.getShipmentContent(
                 Authorization=dws.authorization(self.username, self.password),
                 ShipmentID=shipment_id,
             )
@@ -162,7 +162,7 @@ class PaynetService(models.Model):
             # The DWS returns an empty response for the confirmation
             # And due to that Zeep raises an exception while trying to parse
             # This is why we want the raw Request response
-            res = dws.client.service.confirmShipmentReceipt(
+            res = dws.service.confirmShipmentReceipt(
                 Authorization=dws.authorization(self.username, self.password),
                 ShipmentID=shipment_id,
             )
