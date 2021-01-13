@@ -3,7 +3,7 @@
 {
     "name": "Switzerland - Invoice Reports with payment option",
     "summary": "Extend invoice to add ISR/QR payment slip",
-    "version": "13.0.1.0.0",
+    "version": "13.0.1.1.0",
     "author": "Camptocamp,Odoo Community Association (OCA)",
     "category": "Localization",
     "website": "https://github.com/OCA/l10n-switzerland",
