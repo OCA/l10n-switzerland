@@ -24,6 +24,12 @@ class ResPartnerBank(models.Model):
         )
     )
 
+    @api.constrains('l10n_ch_qr_iban')
+    def _check_ch_li_l10n_ch_qr_iban(self):
+        """Validate QR-IBAN"""
+        for record in self:
+            self._validate_qr_iban(record.l10n_ch_qr_iban)
+
     def _check_qr_iban_range(self, iban):
         if not iban or len(iban) < 9:
             return False
@@ -35,6 +41,9 @@ class ResPartnerBank(models.Model):
                 and 30000 <= int(iid) <= 31999)
 
     def _validate_qr_iban(self, qr_iban):
+        if qr_iban and not qr_iban.startswith(('CH', 'LI')):
+            raise ValidationError(_(
+                "Not a valid Switzerland or Liechtenstein QR-IBAN."))
         # Check first if it's a valid IBAN.
         validate_iban(qr_iban)
         # We sanitize first so that _check_qr_iban_range()
@@ -69,6 +78,9 @@ class ResPartnerBank(models.Model):
         """
         return (
             self.acc_type == "iban"
-            and self._check_qr_iban_range(self.sanitized_acc_number)
-            or self.l10n_ch_qr_iban
+            and self.l10n_ch_qr_iban
+            or (
+                self._check_qr_iban_range(self.sanitized_acc_number) and
+                self.sanitized_acc_number.startswith(('CH', 'LI'))
+            )
         )
