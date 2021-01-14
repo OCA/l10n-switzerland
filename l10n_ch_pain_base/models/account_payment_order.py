@@ -127,3 +127,25 @@ class AccountPaymentOrder(models.Model):
                     adrline2.text = ' '.join([partner.zip, partner.city])
 
         return True
+
+    @api.model
+    def generate_remittance_info_block(self, parent_node, line, gen_args):
+        if line.communication_type == "qrr":
+            remittance_info = etree.SubElement(
+                parent_node, 'RmtInf')
+            remittance_info_structured = etree.SubElement(
+                remittance_info, 'Strd')
+            creditor_ref_information = etree.SubElement(
+                remittance_info_structured, 'CdtrRefInf')
+            creditor_ref_info_type = etree.SubElement(
+                creditor_ref_information, 'Tp')
+            creditor_ref_info_type_or = etree.SubElement(
+                creditor_ref_info_type, 'CdOrPrtry')
+            creditor_ref_info_type_code = etree.SubElement(
+                creditor_ref_info_type_or, 'Prtry')
+            creditor_ref_info_type_code.text = 'QRR'
+            creditor_reference = etree.SubElement(
+                creditor_ref_information, 'Ref')
+            creditor_reference.text = line.payment_line_ids[0].communication
+        else:
+            super().generate_remittance_info_block(parent_node, line, gen_args)
