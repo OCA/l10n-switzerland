@@ -40,6 +40,8 @@ reconciliation in multi payment context (unique reference needed on
 account.move.line). Many ISR can now be printed from one invoice for each
 payment terms.
 
+As of today it is recommended to install module `l10n_ch_fix_isr_reference`
+
 **Table of contents**
 
 .. contents::
