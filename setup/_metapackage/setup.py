@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo13-addon-l10n_ch_account_tags',
         'odoo13-addon-l10n_ch_base_bank',
         'odoo13-addon-l10n_ch_isr_payment_grouping',
+        'odoo13-addon-l10n_ch_isrb',
         'odoo13-addon-l10n_ch_states',
     ],
     classifiers=[
