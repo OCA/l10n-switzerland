@@ -59,9 +59,6 @@
         <NAME-ADDRESS Format="COM">
           <NAME>
             <Line-35>{{ biller.name }}</Line-35>
-            {%- if biller.partner_id.company_name_suffix1 %}
-            <Line-35>{{ biller.partner_id.company_name_suffix1 }}</Line-35>
-            {% endif %}
           </NAME>
           <STREET>
             <Line-35>{{ (biller.street or '')|truncate(35, True, "") }}</Line-35>
