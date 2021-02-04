@@ -151,8 +151,9 @@ class AccountInvoiceImport(models.TransientModel):
 
             qr_list = self._read_swiss_qr_code(pdf_img)
             if qr_list:
-                logger.debug("Swiss QR-Code decoded from PDF file %s" % qr_list[0])
-                return self.parse_qrbill(qr_list[0].data.decode())
+                decoded_data = qr_list[0].data.decode()
+                logger.debug("Swiss QR-Code decoded from PDF file %s" % decoded_data)
+                return self.parse_qrbill(decoded_data)
             logger.debug("No Swiss QR-Code found in PDF file")
         return super().parse_pdf_invoice(file_data)
 
