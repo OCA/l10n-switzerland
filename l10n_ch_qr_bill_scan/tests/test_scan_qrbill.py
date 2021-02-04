@@ -62,6 +62,7 @@ class TestScanQRBill(common.SavepointCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.env.user.company_id.invoice_import_create_bank_account = True
+        cls.env.ref('base.CHF').active = True
         cls.supplier = cls.env["res.partner"].create(
             {
                 "name": "Camptocamp",
