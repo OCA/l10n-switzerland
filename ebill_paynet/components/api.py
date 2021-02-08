@@ -4,9 +4,9 @@
 import logging
 import os
 
+import requests
 import zeep
 from lxml import html
-from requests import Session
 
 from odoo.modules.module import get_resource_path
 
@@ -26,7 +26,7 @@ class PayNetDWS:
 
     def __init__(self, url, test_service):
         settings = zeep.Settings(xml_huge_tree=True)
-        session = Session()
+        session = requests.Session()
         if test_service:
             session.verify = SSL_TEST_CERTIFICATE
         else:

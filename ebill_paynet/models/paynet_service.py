@@ -3,8 +3,8 @@
 
 import logging
 
+import zeep
 from lxml import etree
-from zeep.exceptions import Fault
 
 from odoo import api, fields, models
 from odoo.exceptions import UserError
@@ -108,7 +108,7 @@ class PaynetService(models.Model):
                 Authorization=dws.authorization(self.username, self.password),
                 ShipmentID=shipment_id,
             )
-        except Fault as e:
+        except zeep.exceptions.Fault as e:
             error = dws.handle_fault(e)
             raise UserError(error)
         return res
