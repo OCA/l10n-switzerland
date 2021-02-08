@@ -6,7 +6,6 @@ from datetime import datetime
 
 # Needs Jinja 2.10
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-from zeep.exceptions import Fault
 
 from odoo import fields, models
 from odoo.modules.module import get_module_root
@@ -14,6 +13,9 @@ from odoo.modules.module import get_module_root
 from odoo.addons.base.models.res_bank import sanitize_account_number
 
 from ..components.api import PayNetDWS
+
+import zeep  # isort:skip
+
 
 MODULE_PATH = get_module_root(os.path.dirname(__file__))
 INVOICE_TEMPLATE_2013 = "invoice-2013A.xml"
@@ -71,7 +73,7 @@ class PaynetInvoiceMessage(models.Model):
                 shipment_id = message.service_id.take_shipment(message.payload)
                 message.shipment_id = shipment_id
                 message.state = "sent"
-            except Fault as e:
+            except zeep.exceptions.Fault as e:
                 message.response = PayNetDWS.handle_fault(e)
                 message.state = "error"
 
