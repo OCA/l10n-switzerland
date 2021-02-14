@@ -43,15 +43,13 @@
                 <group name="main">
                     <field name="invoice_scan" states="import,update-from-invoice" />
                 </group>
-                <div name="help-or" states="import">
-                    <p>
-                        <b>OR</b>
-                    </p>
-                </div>
                 <div name="help-import-partner-select" states="select-partner">
                     <p
                     >Partner was not found or is not set as a supplier. Please create or select the partner before continuing</p>
                 </div>
+            </xpath>
+            <xpath expr="//div[@name='help-import']" position="attributes">
+                <attribute name="invisible">1</attribute>
             </xpath>
             <field name="partner_id" position="attributes">
                 <attribute
