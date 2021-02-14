@@ -62,7 +62,7 @@ class TestScanQRBill(common.SavepointCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.env.user.company_id.invoice_import_create_bank_account = True
-        cls.env.ref('base.CHF').active = True
+        cls.env.ref("base.CHF").active = True
         cls.supplier = cls.env["res.partner"].create(
             {
                 "name": "Camptocamp",
@@ -101,7 +101,7 @@ class TestScanQRBill(common.SavepointCase):
         return wiz
 
     def import_invoice_file(self, file_path, file_name):
-        """ Import scanned data from a vendor bill
+        """Import scanned data from a vendor bill
 
         And return the created invoice
         """
@@ -119,7 +119,7 @@ class TestScanQRBill(common.SavepointCase):
         return wiz
 
     def import_invoice_scan(self, invoice_scan):
-        """ Import scanned data from a vendor bill
+        """Import scanned data from a vendor bill
 
         And return the created invoice
         """
