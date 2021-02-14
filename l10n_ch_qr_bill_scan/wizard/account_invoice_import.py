@@ -12,10 +12,10 @@ from ..tools import QR
 logger = logging.getLogger(__name__)
 
 try:
-    from pyzbar.pyzbar import decode, ZBarSymbol
-    import pdf2image
     import cv2
     import numpy as np
+    import pdf2image
+    from pyzbar.pyzbar import ZBarSymbol, decode
 except ImportError:
     # Necessary libraries to decode QR from pdf are
     # not installed
@@ -33,7 +33,8 @@ class AccountInvoiceImport(models.TransientModel):
     invoice_file = fields.Binary(string="PDF, PNG or XML Invoice", required=False)
 
     state = fields.Selection(
-        selection_add=[("select-partner", "Select partner")], default="import",
+        selection_add=[("select-partner", "Select partner")],
+        default="import",
     )
 
     partner_name = fields.Char("Name", readonly=True)
@@ -158,8 +159,7 @@ class AccountInvoiceImport(models.TransientModel):
         return super().parse_pdf_invoice(file_data)
 
     def _hook_no_partner_found(self, partner_dict):
-        """Switch wizard to partner creation.
-        """
+        """Switch wizard to partner creation."""
         country = self.env["res.country"].search(
             [("code", "=", partner_dict["country_code"])], limit=1
         )
