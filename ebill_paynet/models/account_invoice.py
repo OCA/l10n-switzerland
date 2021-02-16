@@ -4,6 +4,7 @@
 import base64
 import logging
 
+import odoo
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools.pdf import merge_pdf
@@ -55,12 +56,13 @@ class AccountInvoice(models.Model):
             report_names.append("l10n_ch.isr_report_main")
         for report_name in report_names:
             r = self.env["ir.actions.report"]._get_report_from_name(report_name)
-            # Add the force_report_rendering or pdf merge will fail in tests
-            pdf_content, _ = r.with_context(force_report_rendering=True).render(
-                [self.id]
-            )
+            pdf_content, _ = r.render([self.id])
             pdf_data.append(pdf_content)
-        pdf = merge_pdf(pdf_data)
+        if not odoo.tools.config["test_enable"]:
+            pdf = merge_pdf(pdf_data)
+        else:
+            # When test are run, pdf are not generated, so use an empty pdf
+            pdf = b""
 
         message = self.env["paynet.invoice.message"].create(
             {
