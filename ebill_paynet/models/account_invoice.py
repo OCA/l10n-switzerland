@@ -94,6 +94,18 @@ class AccountInvoice(models.Model):
         self.ensure_one()
         return self.invoice_line_ids.filtered(lambda r: not r.display_type)
 
+    def get_paynet_other_reference(self):
+        """Allows glue module to insert <OTHER-REFERENCE> in paynet <HEADER>
+
+        Add to the list ref, object strucutred like this:
+
+            {'type': other reference allowed types,
+             'no': the content of <Reference-No> desired
+            }
+        """
+        self.ensure_one()
+        return []
+
     def log_invoice_accepted_by_system(self):
         """ """
         self.activity_feedback(
