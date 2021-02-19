@@ -35,15 +35,24 @@
           </REFERENCE-DATE>
         </INVOICE-REFERENCE>
         {% for order in invoice_lines.sale_line_ids.mapped('order_id') %}
-        {%- if order.client_order_ref %}
+        {%- if order.paynet_client_order_ref %}
         <ORDER>
           <REFERENCE-DATE>
-            <Reference-No>{{ order.client_order_ref }}</Reference-No>
+            <Reference-No>{{ order.paynet_client_order_ref }}</Reference-No>
             <Date Format="CCYYMMDD">{{ format_date(order.date_order) }}</Date>
           </REFERENCE-DATE>
         </ORDER>
         {%- endif %}
         {% endfor %}
+
+        {% for ref in invoice.get_paynet_other_reference() %}
+        <OTHER-REFERENCE Type="{{ ref.type }}">
+          <REFERENCE-DATE>
+            <Reference-No>{{ ref.no|truncate(35, True, "")  }}</Reference-No>
+          </REFERENCE-DATE>
+        </OTHER-REFERENCE>
+        {% endfor %}
+
       </REFERENCE>
       <BILLER>
         {#- Doc says vat number or business identitfiaction number #}
@@ -140,10 +149,10 @@
         {%- endif %}
       </ITEM-DESCRIPTION>
       {% for order in invoice_lines.sale_line_ids.mapped('order_id') %}
-      {%- if order.client_order_ref %}
+      {%- if order.paynet_client_order_ref %}
       <ITEM-REFERENCE Type="ON">
           <REFERENCE-DATE>
-            <Reference-No>{{ order.client_order_ref }}</Reference-No>
+            <Reference-No>{{ order.paynet_client_order_ref }}</Reference-No>
             <Date Format="CCYYMMDD">{{ format_date(order.date_order) }}</Date>
           </REFERENCE-DATE>
       </ITEM-REFERENCE>
