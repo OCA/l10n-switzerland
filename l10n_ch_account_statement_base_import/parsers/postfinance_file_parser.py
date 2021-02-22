@@ -27,8 +27,8 @@ import logging
 
 from openerp import fields
 
-from .camt import PFCamtParser
-from .base_parser import BaseSwissParser
+from openerp.addons.l10n_ch_account_statement_base_import.parsers.camt import PFCamtParser
+from openerp.addons.l10n_ch_account_statement_base_import.parsers.base_parser import BaseSwissParser
 
 _logger = logging.getLogger(__name__)
 
