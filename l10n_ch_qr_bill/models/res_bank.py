@@ -28,7 +28,7 @@ class ResPartnerBank(models.Model):
         sanitized_acc_number = self._sanitize_account_number(self.acc_number)
         iid = sanitized_acc_number[4:9]
         return (
-                self.state == 'iban' and
-                re.match(r'\d+', iid)
-                and 30000 <= int(iid) <= 31999
+            self.state == 'iban' and
+            re.match(r'\d+', iid)
+            and 30000 <= int(iid) <= 31999
         )  # Those values for iid are reserved for QR-IBANs only
