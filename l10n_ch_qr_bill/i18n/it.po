@@ -132,7 +132,7 @@ msgid "L10n ch qrr spaced"
 msgstr ""
 
 #. module: l10n_ch_qr_bill
-#: code:addons/l10n_ch_qr_bill/models/res_bank.py:45
+#: code:addons/l10n_ch_qr_bill/models/res_bank.py:48
 #, python-format
 msgid "Not a valid Switzerland or Liechtenstein QR-IBAN."
 msgstr ""
@@ -156,9 +156,15 @@ msgid "QR-IBAN"
 msgstr ""
 
 #. module: l10n_ch_qr_bill
-#: code:addons/l10n_ch_qr_bill/models/res_bank.py:54
+#: code:addons/l10n_ch_qr_bill/models/res_bank.py:57
 #, python-format
 msgid "QR-IBAN '%s' is invalid."
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: code:addons/l10n_ch_qr_bill/models/res_bank.py:46
+#, python-format
+msgid "QR-IBAN is empty."
 msgstr ""
 
 #. module: l10n_ch_qr_bill
