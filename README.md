@@ -86,6 +86,7 @@ addon | version | summary
 [l10n_ch_payment_slip_base_transaction_id](l10n_ch_payment_slip_base_transaction_id/) | 8.0.1.0.0 | Switzerland - BVR/ESR Transaction ID Compatibility
 [l10n_ch_payment_slip_layouts](l10n_ch_payment_slip_layouts/) | 8.0.0.1.0 | Add new BVR/ESR payment slip layouts like invoice with slip on same document
 [l10n_ch_payment_slip_voucher](l10n_ch_payment_slip_voucher/) | 8.0.1.0.0 | Import Payment Slip (BVR/ESR) into vouchers
+[l10n_ch_qr_bill](l10n_ch_qr_bill/) | 8.0.1.0.0 | Print QR-bill for your invoices [Backport from Odoo 10.0]
 [l10n_ch_scan_bvr](l10n_ch_scan_bvr/) | 8.0.1.1.0 | Switzerland - Scan ESR/BVR to create invoices
 [l10n_ch_sepa](l10n_ch_sepa/) | 8.0.1.0.1 | Generate pain.001 Credit Transfert Files for your payments
 [l10n_ch_states](l10n_ch_states/) | 8.0.1.0.0 | Switzerland Country States
