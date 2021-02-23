@@ -24,6 +24,7 @@ setuptools.setup(
         'odoo8-addon-l10n_ch_payment_slip_base_transaction_id',
         'odoo8-addon-l10n_ch_payment_slip_layouts',
         'odoo8-addon-l10n_ch_payment_slip_voucher',
+        'odoo8-addon-l10n_ch_qr_bill',
         'odoo8-addon-l10n_ch_scan_bvr',
         'odoo8-addon-l10n_ch_sepa',
         'odoo8-addon-l10n_ch_states',
