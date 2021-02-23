@@ -28,7 +28,8 @@ class ResPartnerBank(models.Model):
     def _check_ch_li_l10n_ch_qr_iban(self):
         """Validate QR-IBAN"""
         for record in self:
-            self._validate_qr_iban(record.l10n_ch_qr_iban)
+            if record.l10n_ch_qr_iban:
+                self._validate_qr_iban(record.l10n_ch_qr_iban)
 
     def _check_qr_iban_range(self, iban):
         if not iban or len(iban) < 9:
@@ -41,7 +42,9 @@ class ResPartnerBank(models.Model):
                 and 30000 <= int(iid) <= 31999)
 
     def _validate_qr_iban(self, qr_iban):
-        if qr_iban and not qr_iban.startswith(('CH', 'LI')):
+        if not qr_iban:
+            raise ValidationError(_("QR-IBAN is empty."))
+        if not qr_iban.startswith(('CH', 'LI')):
             raise ValidationError(_(
                 "Not a valid Switzerland or Liechtenstein QR-IBAN."))
         # Check first if it's a valid IBAN.
