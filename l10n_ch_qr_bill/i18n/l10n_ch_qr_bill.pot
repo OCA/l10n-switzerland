@@ -1,0 +1,155 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* l10n_ch_qr_bill
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-23 15:15+0000\n"
+"PO-Revision-Date: 2020-09-23 15:15+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_ch_qr_bill
+#: view:website:l10n_ch_qr_bill.l10n_ch_swissqr_template
+msgid "Acceptance point"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: view:website:l10n_ch_qr_bill.l10n_ch_swissqr_template
+msgid "Account / Payable to"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: view:website:l10n_ch_qr_bill.l10n_ch_swissqr_template
+msgid "Additional information"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: view:website:l10n_ch_qr_bill.l10n_ch_swissqr_template
+msgid "Amount"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.model,name:l10n_ch_qr_bill.model_res_partner_bank
+msgid "Bank Accounts"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: help:account.invoice,l10n_ch_qrr_sent:0
+msgid "Boolean value telling whether or not the QRR corresponding to this invoice has already been printed or sent by mail."
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: code:addons/l10n_ch_qr_bill/models/account_invoice.py:257
+#, python-format
+msgid "Cannot generate the QR-bill. Please check you have configured the address of your company and debtor. If you are using a QR-IBAN, also check the invoice's payment reference is a QR reference."
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: view:website:l10n_ch_qr_bill.l10n_ch_swissqr_template
+msgid "Currency"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: field:account.invoice,l10n_ch_currency_name:0
+msgid "Currency Name"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.model,name:l10n_ch_qr_bill.model_account_invoice
+msgid "Invoice"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: field:account.invoice,l10n_ch_qrr:0
+msgid "L10n ch qrr"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: field:account.invoice,l10n_ch_qrr_sent:0
+msgid "L10n ch qrr sent"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: field:account.invoice,l10n_ch_qrr_spaced:0
+msgid "L10n ch qrr spaced"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: view:website:l10n_ch_qr_bill.l10n_ch_swissqr_template
+msgid "Payable by"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: view:website:l10n_ch_qr_bill.l10n_ch_swissqr_template
+msgid "Payment Part"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: view:account.invoice:l10n_ch_qr_bill.qrr_invoice_form
+msgid "Print QR-bill"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.actions.report.xml,name:l10n_ch_qr_bill.l10n_ch_qr_report
+msgid "QR-bill"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: view:website:l10n_ch_qr_bill.l10n_ch_swissqr_template
+msgid "QR-bill for invoice"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: view:website:l10n_ch_qr_bill.l10n_ch_swissqr_template
+msgid "Receipt"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: view:website:l10n_ch_qr_bill.l10n_ch_swissqr_template
+msgid "Reference"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: help:account.invoice,l10n_ch_qrr_spaced:0
+msgid "Reference QRR split in blocks of 5 characters (right-justified),to generate QR-bill report."
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.model,name:l10n_ch_qr_bill.model_report
+msgid "Report"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: code:addons/l10n_ch_qr_bill/models/account_invoice.py:49
+#, python-format
+msgid "Swiss Reference QRR"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: help:account.invoice,l10n_ch_currency_name:0
+msgid "The name of this invoice's currency"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: code:addons/l10n_ch_qr_bill/models/account_invoice.py:279
+#, python-format
+msgid "The payment reference is not a valid QR Reference."
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: help:account.invoice,l10n_ch_qrr:0
+msgid "The reference QRR associated with this invoice"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: view:account.invoice:l10n_ch_qr_bill.qrr_invoice_form
+msgid "{'readonly': [('state', 'not in', ['draft', 'open'])]}"
+msgstr ""
+

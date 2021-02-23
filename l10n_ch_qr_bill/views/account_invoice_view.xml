@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="qrr_invoice_form">
+            <field name="name">l10n_ch.account.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//sheet[@string='Invoice']" position="before">
+                    <field name="l10n_ch_qrr_sent" invisible="1"/>
+                    <field name="l10n_ch_currency_name" invisible="1" readonly="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_bank_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', 'not in', ['draft', 'open'])]}</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='invoice_proforma2']" position="before">
+                    <button
+                        name="print_ch_qr_bill"
+                        string="Print QR-bill"
+                        type="object"
+                        attrs="{'invisible':['|', ('state', '!=', 'open'),
+                                             '|', ('l10n_ch_qrr_sent', '=', True),
+                                             ('l10n_ch_currency_name', 'not in', ['EUR', 'CHF'])]}"
+                        groups="base.group_user"
+                        class="oe_highlight"
+                        />
+                    <button
+                        name="print_ch_qr_bill"
+                        string="Print QR-bill"
+                        type="object"
+                        attrs="{'invisible':['|', ('state', '!=', 'open'),
+                                             '|', ('l10n_ch_qrr_sent', '=', False),
+                                             ('l10n_ch_currency_name', 'not in', ['EUR', 'CHF'])]}"
+                        groups="base.group_user"
+                        />
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
