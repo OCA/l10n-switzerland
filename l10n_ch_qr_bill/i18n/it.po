@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* l10n_ch_qr_bill
+# 	* l10n_ch_qr_bill
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2020-09-24 07:11+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -42,14 +43,24 @@ msgstr "Conti Bancari"
 
 #. module: l10n_ch_qr_bill
 #: help:account.invoice,l10n_ch_qrr_sent:0
-msgid "Boolean value telling whether or not the QRR corresponding to this invoice has already been printed or sent by mail."
-msgstr "Il flag indica se il QRR di questa fattura è già stato stampato o inviato per mail."
+msgid ""
+"Boolean value telling whether or not the QRR corresponding to this invoice "
+"has already been printed or sent by mail."
+msgstr ""
+"Il flag indica se il QRR di questa fattura è già stato stampato o inviato "
+"per mail."
 
 #. module: l10n_ch_qr_bill
 #: code:addons/l10n_ch_qr_bill/models/account_invoice.py:257
 #, python-format
-msgid "Cannot generate the QR-bill. Please check you have configured the address of your company and debtor. If you are using a QR-IBAN, also check the invoice's payment reference is a QR reference."
-msgstr "Non è possibile creare una QR-Bill. Controllare che siano configurati gli indirizzi della company e del cliente. Se state usando un QR-IBAN, controllare anche che il tipo di riferimento di pagamento sia QRR."
+msgid ""
+"Cannot generate the QR-bill. Please check you have configured the address of "
+"your company and debtor. If you are using a QR-IBAN, also check the "
+"invoice's payment reference is a QR reference."
+msgstr ""
+"Non è possibile creare una QR-Bill. Controllare che siano configurati gli "
+"indirizzi della company e del cliente. Se state usando un QR-IBAN, "
+"controllare anche che il tipo di riferimento di pagamento sia QRR."
 
 #. module: l10n_ch_qr_bill
 #: view:website:l10n_ch_qr_bill.l10n_ch_swissqr_template
@@ -118,8 +129,12 @@ msgstr "Riferimento"
 
 #. module: l10n_ch_qr_bill
 #: help:account.invoice,l10n_ch_qrr_spaced:0
-msgid "Reference QRR split in blocks of 5 characters (right-justified),to generate QR-bill report."
-msgstr "Reference QRR split in blocks of 5 characters (right-justified),to generate QR-bill report."
+msgid ""
+"Reference QRR split in blocks of 5 characters (right-justified),to generate "
+"QR-bill report."
+msgstr ""
+"Reference QRR split in blocks of 5 characters (right-justified),to generate "
+"QR-bill report."
 
 #. module: l10n_ch_qr_bill
 #: model:ir.model,name:l10n_ch_qr_bill.model_report
@@ -152,4 +167,3 @@ msgstr "The reference QRR associated with this invoice"
 #: view:account.invoice:l10n_ch_qr_bill.qrr_invoice_form
 msgid "{'readonly': [('state', 'not in', ['draft', 'open'])]}"
 msgstr "{'readonly': [('state', 'not in', ['draft', 'open'])]}"
-
