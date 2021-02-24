@@ -82,15 +82,6 @@ class TestCreateMove(SavepointCase):
 
         self.assertFalse(move._has_isr_ref())
 
-    def test_emit_move_with_isr_ref_missing_subscr_num(self):
-        inv_form = self.new_form()
-        move = inv_form.save()
-        self.assertFalse(move._has_isr_ref())
-        inv_form.partner_bank_id = self.env["res.partner.bank"]
-        with self.assertRaises(exceptions.ValidationError):
-            inv_form.ref = "132000000000000000000000014"
-            inv_form.save()
-
     def test_emit_move_with_isr_ref_subscr_num_wrong_currency(self):
         inv_form = self.new_form()
         move = inv_form.save()
