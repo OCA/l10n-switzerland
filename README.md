@@ -101,7 +101,7 @@ addon | version | summary
 [l10n_ch_pain_base](l10n_ch_pain_base/) | 10.0.1.0.4 | ISO 20022 base module for Switzerland
 [l10n_ch_pain_credit_transfer](l10n_ch_pain_credit_transfer/) | 10.0.1.0.0 | Generate ISO 20022 credit transfert (SEPA and not SEPA)
 [l10n_ch_payment_slip](l10n_ch_payment_slip/) | 10.0.1.1.6 | Print ESR/BVR payment slip with your invoices
-[l10n_ch_qr_bill](l10n_ch_qr_bill/) | 10.0.1.2.1 | Print QR-bill for your invoices [Backport from Odoo l10n_ch]
+[l10n_ch_qr_bill](l10n_ch_qr_bill/) | 10.0.1.2.2 | Print QR-bill for your invoices [Backport from Odoo l10n_ch]
 [l10n_ch_qr_bill_transaction_id](l10n_ch_qr_bill_transaction_id/) | 10.0.1.0.0 | Glue module with base_transaction_id
 [l10n_ch_scan_bvr](l10n_ch_scan_bvr/) | 10.0.1.0.4 | Switzerland - Scan ESR/BVR to create invoices
 [l10n_ch_states](l10n_ch_states/) | 10.0.1.0.0 | Switzerland Country States
