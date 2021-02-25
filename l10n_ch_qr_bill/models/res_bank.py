@@ -81,9 +81,9 @@ class ResPartnerBank(models.Model):
         """
         return (
             self.acc_type == "iban"
-            and self.l10n_ch_qr_iban
-            or (
+            and (
                 self._check_qr_iban_range(self.sanitized_acc_number) and
                 self.sanitized_acc_number.startswith(('CH', 'LI'))
             )
+            or self.l10n_ch_qr_iban
         )
