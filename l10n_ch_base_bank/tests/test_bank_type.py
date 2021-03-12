@@ -31,6 +31,13 @@ class TestBankType(common.SavepointCase):
             'acc_number': '01-1234-1',
         })
         self.assertEqual(bank_account.acc_type, 'postal')
+        bank_account = self.env['res.partner.bank'].create({
+            'partner_id': self.partner2.id,
+            'acc_number': "{}/Postal number 01-1234-1".format(
+                self.partner2.name
+            )
+        })
+        self.assertEqual(bank_account.acc_type, 'postal')
 
     @classmethod
     def setUpClass(cls):
@@ -38,3 +45,4 @@ class TestBankType(common.SavepointCase):
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.company = cls.env.ref('base.main_company')
         cls.partner = cls.env.ref('base.main_partner')
+        cls.partner2 = cls.env.ref('base.partner_admin')

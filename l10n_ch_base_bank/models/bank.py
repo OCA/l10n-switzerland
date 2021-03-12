@@ -18,6 +18,16 @@ def validate_l10n_ch_postal(postal_acc_number):
     """
     if not postal_acc_number:
         raise ValidationError(_("There is no postal account number."))
+
+    # Account number was changed in _update_acc_name to have a structure like
+    # parner / acc_number. The goal is to avoid duplicated bank accounts
+    # https://github.com/OCA/l10n-switzerland/blob/a6f79e04d9d2e8c19f5592b5fe97
+    # 4be19c5f721f/l10n_ch_base_bank/models/bank.py#L289
+    # But with this change, the type of the account is not recognized as postal
+    # anymore. So we consider valid if  has substring /Postal number.
+    if "/Postal number" in postal_acc_number:
+        return
+
     if re.match('^[0-9]{2}-[0-9]{1,6}-[0-9]$', postal_acc_number):
         ref_subparts = postal_acc_number.split('-')
         postal_acc_number = (
