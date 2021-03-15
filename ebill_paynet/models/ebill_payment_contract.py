@@ -16,7 +16,7 @@ class EbillPaymentContract(models.Model):
         comodel_name="paynet.service", string="Paynet Service", ondelete="restrict"
     )
     payment_type = fields.Selection(
-        selection=[("qr", "QR"), ("esr", "ESR")],
+        selection=[("qr", "QR"), ("isr", "ISR")],
         string="Payment method",
         default="qr",
         help="Payment type to use for the invoices sent,"

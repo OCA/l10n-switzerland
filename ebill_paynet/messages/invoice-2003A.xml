@@ -80,7 +80,7 @@
           <Country>{{ biller.country_id.code or 'CH' }}</Country>
         </NAME-ADDRESS>
         <BANK-INFO>
-          {%- if payment_type in ['esr', 'esp'] %}
+          {%- if payment_type in ['isr', 'esp'] %}
           <Acct-No>{{ bank_account }}</Acct-No>
           <BankId Type="BCNr-int" Country="CH">{{ bank.bank_id.clearing }}</BankId>
           {%- elif payment_type == 'qr' %}
@@ -210,7 +210,7 @@
     </TAX>
     {% endif -%}
     <PAYMENT-TERMS>
-      <BASIC Payment-Type="{{ payment_type|upper }}" Terms-Type="5">
+      <BASIC Payment-Type="{{ 'ESR' if payment_type == 'isr' else payment_type|upper }}" Terms-Type="5">
         <TERMS>
           <Date>{{ date_due }}</Date>
         </TERMS>

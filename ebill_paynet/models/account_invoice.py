@@ -52,7 +52,7 @@ class AccountInvoice(models.Model):
         report_names = ["account.report_invoice"]
         if contract.payment_type == "qr":
             report_names.append("l10n_ch.qr_report_main")
-        elif contract.payment_type == "esr":
+        elif contract.payment_type == "isr":
             report_names.append("l10n_ch.isr_report_main")
         for report_name in report_names:
             r = self.env["ir.actions.report"]._get_report_from_name(report_name)
