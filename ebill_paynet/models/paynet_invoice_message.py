@@ -52,13 +52,13 @@ class PaynetInvoiceMessage(models.Model):
         string="IC Ref", size=14, help="Document interchange reference"
     )
     # Set with invoice_id.number but also with returned data from server ?
-    ref = fields.Char("Reference N°", size=35)
+    ref = fields.Char("Reference No.", size=35)
     ebill_account_number = fields.Char("Paynet Id", size=20)
     payload = fields.Text("Payload sent")
     response = fields.Text("Response recieved")
     shipment_id = fields.Char(size=24, help="Shipment Id on Paynet service")
     payment_type = fields.Selection(
-        selection=[("qr", "QR"), ("esr", "ESR"), ("esp", "ESP"), ("npy", "NPY")],
+        selection=[("qr", "QR"), ("isr", "ISR"), ("esp", "ESP"), ("npy", "NPY")],
         default="qr",
         readonly=True,
     )
