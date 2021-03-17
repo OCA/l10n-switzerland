@@ -40,27 +40,12 @@
             <Date Format="CCYYMMDD">20190601</Date>
           </REFERENCE-DATE>
         </ORDER>
-        <!-- <DELIVERY-NOTE> -->
-        <!--   <REFERENCE-DATE> -->
-        <!--     <Reference-No>93078415</Reference-No> -->
-        <!--     <Date Format="CCYYMMDD">20190620</Date> -->
-        <!--   </REFERENCE-DATE> -->
-        <!-- </DELIVERY-NOTE> -->
-        <!-- <OTHER-REFERENCE Type="SS"> -->
-        <!--   <REFERENCE-DATE> -->
-        <!--     <Reference-No>Brigitta Harati</Reference-No> -->
-        <!--   </REFERENCE-DATE> -->
-        <!-- </OTHER-REFERENCE> -->
-        <!-- <OTHER-REFERENCE Type="CR"> -->
-        <!--   <REFERENCE-DATE> -->
-        <!--     <Reference-No>Camile STECHMANN</Reference-No> -->
-        <!--   </REFERENCE-DATE> -->
-        <!-- </OTHER-REFERENCE> -->
-        <!-- <OTHER-REFERENCE Type="IT"> -->
-        <!--   <REFERENCE-DATE> -->
-        <!--     <Reference-No>432840</Reference-No> -->
-        <!--   </REFERENCE-DATE> -->
-        <!-- </OTHER-REFERENCE> -->
+        <DELIVERY-NOTE>
+          <REFERENCE-DATE>
+            <Reference-No>track_me_if_you_can</Reference-No>
+            <!-- <Date Format="CCYYMMDD">20190620</Date> -->
+          </REFERENCE-DATE>
+        </DELIVERY-NOTE>
       </REFERENCE>
       <BILLER>
         <Tax-No>CHE-012.345.678</Tax-No>

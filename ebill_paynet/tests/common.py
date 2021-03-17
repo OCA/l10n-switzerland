@@ -157,6 +157,9 @@ class CommonCase(SavepointCase, XmlTestMixin):
         )
         cls.sale.action_confirm()
         cls.sale.date_order = "2019-06-01"
+        # Set a delivery tracking number
+        cls.pickings = cls.sale.order_line.move_ids.mapped("picking_id")
+        cls.pickings[0].carrier_tracking_ref = "track_me_if_you_can"
         # Generate the invoice from the sale order
         cls.invoice = cls.sale._create_invoices()
         # And add some more lines on the invoice
