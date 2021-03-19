@@ -25,10 +25,11 @@ class TestSearchmove(common.SavepointCase):
             }
         )
         cls.partner = cls.env["res.partner"].create({"name": "Test"})
-        cls.bank_journal = cls.env["account.journal"].create(
+        cls.journal = cls.env["account.journal"].create(
             {
+                "name": "Test Journal",
                 "company_id": cls.company.id,
-                "type": "bank",
+                "type": "sale",
                 "code": "BNK42",
                 "bank_id": bank.id,
                 "bank_acc_number": "10-8060-7",
@@ -42,7 +43,7 @@ class TestSearchmove(common.SavepointCase):
         #     view='account.view_move_form'
         # )
         inv.partner_id = self.partner
-        inv.journal_id = self.bank_journal
+        inv.journal_id = self.journal
         return inv
 
     def assert_find_ref(self, ref, operator, value):

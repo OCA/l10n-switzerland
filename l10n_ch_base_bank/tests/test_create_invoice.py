@@ -18,11 +18,20 @@ class TestCreateMove(common.SavepointCase):
         # define company bank account
         cls.bank_journal = cls.env["account.journal"].create(
             {
+                "name": "Test Bank Journal",
                 "company_id": cls.company.id,
                 "type": "bank",
                 "code": "BNK42",
                 "bank_id": bank.id,
                 "bank_acc_number": "01-1234-1",
+            }
+        )
+        cls.sale_journal = cls.env["account.journal"].create(
+            {
+                "name": "Test Sale Journal",
+                "company_id": cls.company.id,
+                "type": "sale",
+                "code": "SALE123",
             }
         )
         cls.bank_acc = cls.bank_journal.bank_account_id
@@ -37,7 +46,8 @@ class TestCreateMove(common.SavepointCase):
         #     view='account.view_move_form'
         # )
         inv.partner_id = self.partner
-        inv.journal_id = self.bank_journal
+        inv.journal_id = self.sale_journal
+        inv.invoice_partner_bank_id = self.bank_acc
         return inv
 
     def test_emit_move_with_isr_ref(self):
