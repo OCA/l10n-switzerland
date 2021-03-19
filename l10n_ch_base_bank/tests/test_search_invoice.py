@@ -12,6 +12,7 @@ class TestSearchmove(common.SavepointCase):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.company = cls.env.ref("base.main_company")
+        cls.partner = cls.env.ref("base.res_partner_12")
         bank = cls.env["res.bank"].create(
             {"name": "BCV", "bic": "BBRUBEBB", "clearing": "234234"}
         )
@@ -24,12 +25,12 @@ class TestSearchmove(common.SavepointCase):
                 "sequence": 1,
             }
         )
-        cls.partner = cls.env["res.partner"].create({"name": "Test"})
-        cls.bank_journal = cls.env["account.journal"].create(
+        cls.journal = cls.env["account.journal"].create(
             {
+                "name": "Test Journal",
                 "company_id": cls.company.id,
-                "type": "bank",
-                "code": "BNK42",
+                "type": "sale",
+                "code": "SALE123",
                 "bank_id": bank.id,
                 "bank_acc_number": "10-8060-7",
             }
@@ -42,7 +43,7 @@ class TestSearchmove(common.SavepointCase):
         #     view='account.view_move_form'
         # )
         inv.partner_id = self.partner
-        inv.journal_id = self.bank_journal
+        inv.journal_id = self.journal
         return inv
 
     def assert_find_ref(self, ref, operator, value):
