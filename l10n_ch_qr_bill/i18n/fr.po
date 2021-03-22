@@ -202,7 +202,7 @@ msgid "The name of this invoice's currency"
 msgstr ""
 
 #. module: l10n_ch_qr_bill
-#: code:addons/l10n_ch_qr_bill/models/account_invoice.py:331
+#: code:addons/l10n_ch_qr_bill/models/account_invoice.py:332
 #, python-format
 msgid "The payment reference is not a valid QR Reference."
 msgstr ""
@@ -213,7 +213,7 @@ msgid "The reference QRR associated with this invoice"
 msgstr ""
 
 #. module: l10n_ch_qr_bill
-#: code:addons/l10n_ch_qr_bill/models/account_invoice.py:311
+#: code:addons/l10n_ch_qr_bill/models/account_invoice.py:312
 #, python-format
 msgid ""
 "You cannot generate the QR-bill.\n"
