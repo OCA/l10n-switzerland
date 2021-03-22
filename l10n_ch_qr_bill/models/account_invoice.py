@@ -140,7 +140,8 @@ class AccountInvoice(models.Model):
             record.l10n_ch_qrr_spaced = spaced_qrr
 
     def _get_communications(self):
-        if self.has_qrr():
+        is_qrr = self.partner_bank_id._is_qr_iban()
+        if is_qrr:
             structured_communication = self.l10n_ch_qrr
             free_communication = ''
         else:
@@ -161,7 +162,7 @@ class AccountInvoice(models.Model):
         # just like ISR number for invoices)
         reference_type = 'NON'
         reference = ''
-        if self.has_qrr():
+        if is_qrr:
             # _check_for_qr_code_errors ensures we can't have a QR-IBAN
             # without a QR-reference here
             reference_type = 'QRR'
