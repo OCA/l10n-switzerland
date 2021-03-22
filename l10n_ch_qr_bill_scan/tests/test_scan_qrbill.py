@@ -2,13 +2,24 @@
 # Copyright 2020 Camptocamp (http://www.camptocamp.com/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import base64
+import unittest
 
-from odoo import tools
-from odoo.exceptions import UserError
-from odoo.modules.module import get_resource_path
-from odoo.tests import common
+from openerp import tools
+from openerp.exceptions import Warning as UserError
+from openerp.modules.module import get_module_resource
+from openerp.tests import common
 
 from ..tools import QR
+
+try:
+    from pyzbar.pyzbar import decode, ZBarSymbol
+    import pdf2image
+    import cv2
+    import numpy as np
+
+    requirements = True
+except ImportError:
+    requirements = False
 
 # QR Reference
 QRR = "210000000003139471430009017"
@@ -18,7 +29,6 @@ CF = "RF18539007547034"
 
 CH_IBAN = "CH15 3881 5158 3845 3843 7"
 QR_IBAN = "CH21 3080 8001 2345 6782 7"
-
 
 SCAN_DATA = [
     "SPC",
@@ -63,6 +73,42 @@ class TestScanQRBill(common.SavepointCase):
     def setUpClass(cls):
         super(TestScanQRBill, cls).setUpClass()
         cls.env.user.company_id.invoice_import_create_bank_account = True
+
+        cls.env['account.journal'].create({
+            'type': 'purchase',
+            'name': 'purchase journal',
+            'code': 'PJ',
+            'company_id': cls.env.user.company_id.id
+        })
+
+        cls.expense_account = cls.env["account.account"].create(
+            {
+                "code": "612AII",
+                "name": "expense account invoice import",
+                "user_type": cls.env.ref("account.data_account_type_expense").id,
+            }
+        )
+        cls.payable_account = cls.env["account.account"].create(
+            {
+                "code": "PAY",
+                "name": "payable account",
+                "user_type": cls.env.ref("account.data_account_type_payable").id,
+            }
+        )
+        cls.receivable_account = cls.env["account.account"].create(
+            {
+                "code": "REC",
+                "name": "receivable account",
+                "user_type": cls.env.ref("account.data_account_type_receivable").id,
+            }
+        )
+        invoice_import = cls.env["account.invoice.import.config"].create(
+            {
+                "name": "Camptocamp - one line no product",
+                "invoice_line_method": "1line_no_product",
+                "account_id": cls.expense_account.id,
+            }
+        )
         cls.supplier = cls.env["res.partner"].create(
             {
                 "name": "Camptocamp",
@@ -72,24 +118,21 @@ class TestScanQRBill(common.SavepointCase):
                 "city": "Lausanne",
                 "country_id": cls.env.ref("base.ch").id,
                 "supplier": True,
+                "invoice_import_id": invoice_import.id,
+                "property_account_receivable": cls.receivable_account.id,
+                "property_account_payable": cls.payable_account.id,
             }
         )
-
-        cls.expense_account = cls.env["account.account"].create(
-            {
-                "code": "612AII",
-                "name": "expense account invoice import",
-                "user_type_id": cls.env.ref("account.data_account_type_expenses").id,
-            }
-        )
-        cls.env["account.invoice.import.config"].create(
-            {
-                "name": "Camptocamp - one line no product",
-                "partner_id": cls.supplier.id,
-                "invoice_line_method": "1line_no_product",
-                "account_id": cls.expense_account.id,
-            }
-        )
+        cls.env['res.partner.bank'].create({
+            'acc_number': CH_IBAN,
+            'partner_id': cls.supplier.id,
+            'state': 'iban',
+        })
+        cls.env['res.partner.bank'].create({
+            'acc_number': QR_IBAN,
+            'partner_id': cls.supplier.id,
+            'state': 'iban',
+        })
 
     def wiz_import_invoice_file(self, file_path, file_name):
         """ Import a file of a vendor bill """
@@ -139,7 +182,7 @@ class TestScanQRBill(common.SavepointCase):
         self.assertFalse(invoice.reference)
         self.assertEqual(invoice.state, "draft")
         iban = invoice.partner_bank_id.acc_number
-        self.assertEqual(iban, CH_IBAN.replace(' ', ''))
+        self.assertEqual(iban.replace(' ', ''), CH_IBAN.replace(' ', ''))
         self.assertEqual(invoice.amount_total, 1949.75)
 
     def test_scan_QR_QRR(self):
@@ -152,7 +195,7 @@ class TestScanQRBill(common.SavepointCase):
         self.assertEqual(invoice.reference, QRR)
         self.assertEqual(invoice.state, "draft")
         iban = invoice.partner_bank_id.acc_number
-        self.assertEqual(iban, QR_IBAN.replace(" ",""))
+        self.assertEqual(iban.replace(" ", ""), QR_IBAN.replace(" ", ""))
         self.assertEqual(invoice.amount_total, 1949.75)
 
     def test_scan_QR_CF(self):
@@ -164,7 +207,7 @@ class TestScanQRBill(common.SavepointCase):
         self.assertEqual(invoice.reference, CF)
         self.assertEqual(invoice.state, "draft")
         iban = invoice.partner_bank_id.acc_number
-        self.assertEqual(iban, CH_IBAN.replace(' ', ''))
+        self.assertEqual(iban.replace(' ', ''), CH_IBAN.replace(' ', ''))
         self.assertEqual(invoice.amount_total, 1949.75)
 
     def test_scan_QR_new_partner(self):
@@ -200,7 +243,7 @@ class TestScanQRBill(common.SavepointCase):
         self.assertFalse(invoice.reference)
         self.assertEqual(invoice.state, "draft")
         iban = invoice.partner_bank_id.acc_number
-        self.assertEqual(iban, CH_IBAN.replace(' ', ''))
+        self.assertEqual(iban.replace(' ', ''), CH_IBAN.replace(' ', ''))
         self.assertEqual(invoice.amount_total, 1949.75)
 
     def test_scan_QR_missing_lines(self):
@@ -231,8 +274,16 @@ class TestScanQRBill(common.SavepointCase):
         with self.assertRaises(UserError):
             self.import_invoice_scan(scan_data)
 
+    @unittest.skipIf(not requirements, 'missing requirements for import from pdf')
     def test_import_QR_pdf(self):
-        partner = self.env["res.partner"].create(
+        invoice_import = self.env["account.invoice.import.config"].create(
+            {
+                "name": "Camptocamp - one line no product",
+                "invoice_line_method": "1line_no_product",
+                "account_id": self.expense_account.id,
+            }
+        )
+        self.env["res.partner"].create(
             {
                 "name": "My Company",  # this was generated from Odoo
                 "street": "addr 1",
@@ -241,18 +292,13 @@ class TestScanQRBill(common.SavepointCase):
                 "city": "Marin",
                 "country_id": self.env.ref("base.ch").id,
                 "supplier": True,
-            }
-        )
-        self.env["account.invoice.import.config"].create(
-            {
-                "name": "Camptocamp - one line no product",
-                "partner_id": partner.id,
-                "invoice_line_method": "1line_no_product",
-                "account_id": self.expense_account.id,
+                "invoice_import_id": invoice_import.id,
+                "property_account_receivable": self.receivable_account.id,
+                "property_account_payable": self.payable_account.id,
             }
         )
 
-        invoice_fp = get_resource_path(
+        invoice_fp = get_module_resource(
             "l10n_ch_qr_bill_scan", "tests", "data", "qr-bill.pdf"
         )
         invoice = self.import_invoice_file(invoice_fp, "qr-bill.pdf")

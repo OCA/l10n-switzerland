@@ -4,9 +4,9 @@
 
 import logging
 
-from odoo import _, api, fields, models
-from odoo.exceptions import UserError
-from odoo.modules.module import get_resource_path
+from openerp import _, api, fields, models
+from openerp.exceptions import Warning as UserError
+from openerp.modules.module import get_module_resource
 
 from ..tools import QR
 
@@ -95,23 +95,21 @@ class AccountInvoiceImport(models.TransientModel):
             ),
             "amount_total": amount,
             "currency": {"iso": qr_data[QR.CURRENCY]},
-            "invoice_number": qr_data[QR.REF],
+            "reference": qr_data[QR.REF],
             "description": qr_data[QR.MSG],
         }
         # From the specs it's unclear if the return line is mandatory on EPD
         if len(qr_data) > QR.BILL_INFO:
             parsed_inv.update(self._parse_billing_info(qr_data[QR.BILL_INFO]))
-        # pre_process_parsed_inv() will be called again a second time,
-        # but it's OK
-        pp_parsed_inv = self.pre_process_parsed_inv(parsed_inv)
-        return pp_parsed_inv
+        updated_parsed_inv = self.update_clean_parsed_inv(parsed_inv)
+        return updated_parsed_inv
 
     @api.model
     def _read_swiss_qr_code(self, bill_img):
         # find the QR code using the Swiss Cross and crop around it to help
         # pyzbar to read it
         ch_cross_img = cv2.imread(
-            get_resource_path("l10n_ch_qr_bill_scan", "data", "CH-Cross_7mm.png")
+            get_module_resource("l10n_ch_qr_bill_scan", "data", "CH-Cross_7mm.png")
         )
         ch_cross_img = cv2.resize(ch_cross_img, (55, 55))
         res = cv2.matchTemplate(ch_cross_img, bill_img, cv2.TM_CCOEFF_NORMED)
@@ -121,7 +119,7 @@ class AccountInvoiceImport(models.TransientModel):
             return False
         logger.debug("QR-Code swiss cross found")
         patch_img = cv2.imread(
-            get_resource_path("l10n_ch_qr_bill_scan", "data", "QR-patch.png")
+            get_module_resource("l10n_ch_qr_bill_scan", "data", "QR-patch.png")
         )
         y = locations[0][0]
         x = locations[1][0]
@@ -134,7 +132,7 @@ class AccountInvoiceImport(models.TransientModel):
             # As we found the swiss cross we assume there is a QR code to read
             # try to patch the QR by replacing the swiss cross
             patch_img = cv2.imread(
-                get_resource_path("l10n_ch_qr_bill_scan", "data", "QR-patch.png")
+                get_module_resource("l10n_ch_qr_bill_scan", "data", "QR-patch.png")
             )
             bill_img[y : y + patch_img.shape[0], x : x + patch_img.shape[1]] = patch_img
             cropped_img = bill_img[y - 175 : y + 175 + 55, x - 175 : x + 175 + 55]
@@ -179,3 +177,39 @@ class AccountInvoiceImport(models.TransientModel):
         action["res_id"] = self.id
         self.write(wiz_vals)
         return action
+
+    @api.model
+    def _prepare_create_invoice_vals(self, parsed_inv):
+        if self.invoice_scan:
+            bdio = self.env['business.document.import']
+            rpo = self.env['res.partner']
+            iban = parsed_inv.get('iban')
+            if iban:
+                partner = bdio._match_partner(
+                    parsed_inv['partner'],
+                    parsed_inv['chatter_msg']
+                )
+                partner = partner.commercial_partner_id
+                partner = rpo.browse(partner.id)
+                partner_bank = bdio._match_partner_bank(
+                    partner=partner,
+                    iban=iban,
+                    bic=False,
+                    chatter_msg=parsed_inv['chatter_msg'],
+                    create_if_not_found=False
+                )
+                if not partner_bank:
+                    raise UserError(
+                        _("No Bank Account with IBAN '%s' for '%s'") % (
+                            iban, partner.name)
+                    )
+
+        reference = parsed_inv.get('reference', False)
+        ret = super(AccountInvoiceImport, self)._prepare_create_invoice_vals(
+            parsed_inv)
+        if self.invoice_scan and reference:
+            ret.update({
+                'reference': reference,
+                'reference_type': 'none',
+            })
+        return ret
