@@ -44,7 +44,6 @@
         </ORDER>
         {%- endif %}
         {% endfor %}
-
         {% for picking in invoice_lines.sale_line_ids.move_ids.mapped('picking_id') %}
         {%- if picking.carrier_tracking_ref and picking.state != 'cancel' %}
         <DELIVERY-NOTE>
@@ -57,8 +56,6 @@
         </DELIVERY-NOTE>
         {%- endif %}
         {% endfor %}
-
-
         {% for ref in invoice.get_paynet_other_reference() %}
         <OTHER-REFERENCE Type="{{ ref.type }}">
           <REFERENCE-DATE>
@@ -66,7 +63,6 @@
           </REFERENCE-DATE>
         </OTHER-REFERENCE>
         {% endfor %}
-
       </REFERENCE>
       <BILLER>
         {#- Doc says vat number or business identitfiaction number #}
