@@ -42,7 +42,7 @@ class AccountInvoice(models.Model):
             # add filtered operator to query
             query_op = ("SELECT id FROM account_invoice "
                         "WHERE REPLACE(reference, ' ', '') %s %%s" %
-                        (operator,))
+                        ({'=like': 'like', '=ilike': 'ilike'}.get(operator, operator),))
             # avoid pylint check on no-sql-injection query_op is safe
             query = query_op
             self.env.cr.execute(query, (value,))
