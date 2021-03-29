@@ -52,7 +52,7 @@ msgstr ""
 "été imprimé ou envoyé par e-mail."
 
 #. module: l10n_ch_qr_bill
-#: code:addons/l10n_ch_qr_bill/models/account_invoice.py:257
+#: code:addons/l10n_ch_qr_bill/models/account_invoice.py:256
 #, python-format
 msgid ""
 "Cannot generate the QR-bill. Please check you have configured the address of "
@@ -78,11 +78,6 @@ msgstr "Devise"
 #: model:ir.model,name:l10n_ch_qr_bill.model_account_invoice
 msgid "Invoice"
 msgstr "Facture"
-
-#. module: l10n_ch_qr_bill
-#: field:account.invoice,l10n_ch_qrr:0
-msgid "L10n ch qrr"
-msgstr ""
 
 #. module: l10n_ch_qr_bill
 #: field:account.invoice,l10n_ch_qrr_sent:0
@@ -120,6 +115,11 @@ msgid "QR-bill for invoice"
 msgstr "QR-facture"
 
 #. module: l10n_ch_qr_bill
+#: field:account.invoice,l10n_ch_qrr:0
+msgid "QRR ref"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
 #: view:website:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "Receipt"
 msgstr "Récépissé"
@@ -142,7 +142,7 @@ msgid "Report"
 msgstr ""
 
 #. module: l10n_ch_qr_bill
-#: code:addons/l10n_ch_qr_bill/models/account_invoice.py:49
+#: code:addons/l10n_ch_qr_bill/models/account_invoice.py:51
 #, python-format
 msgid "Swiss Reference QRR"
 msgstr ""
@@ -153,7 +153,7 @@ msgid "The name of this invoice's currency"
 msgstr ""
 
 #. module: l10n_ch_qr_bill
-#: code:addons/l10n_ch_qr_bill/models/account_invoice.py:279
+#: code:addons/l10n_ch_qr_bill/models/account_invoice.py:278
 #, python-format
 msgid "The payment reference is not a valid QR Reference."
 msgstr ""
