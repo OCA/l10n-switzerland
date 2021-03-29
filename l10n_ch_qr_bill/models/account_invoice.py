@@ -17,7 +17,9 @@ class AccountInvoice(models.Model):
 
     l10n_ch_qrr = fields.Char(
         compute='_compute_l10n_ch_qrr',
+        string='QRR ref',
         store=True,
+        readonly=True,
         help='The reference QRR associated with this invoice',
     )
 
@@ -52,7 +54,7 @@ class AccountInvoice(models.Model):
         """Hook to add a customized prefix"""
         return ''
 
-    @api.depends('number', 'name')
+    @api.depends('number')
     def _compute_l10n_ch_qrr(self):
         r""" Compute a QRR reference
 
@@ -78,9 +80,7 @@ class AccountInvoice(models.Model):
 
         """
         for record in self:
-            if record.has_qrr():
-                record.l10n_ch_qrr = record.name
-            elif record.number:
+            if record.number and record.reference_type == 'QRR':
                 prefix = record._get_qrr_prefix()
                 invoice_ref = re.sub(r'[^\d]', '', record.number)
                 # keep only the last digits if it exceed boundaries
@@ -226,7 +226,6 @@ class AccountInvoice(models.Model):
 
     def validate_swiss_code_arguments(self):
         # TODO do checks separately
-        reference_to_check = self.name
 
         def _partner_fields_set(partner):
             return (
@@ -240,9 +239,9 @@ class AccountInvoice(models.Model):
             _partner_fields_set(self.partner_id)
             and _partner_fields_set(self.partner_bank_id.partner_id)
             and (
-                not reference_to_check
+                not self.l10n_ch_qrr
                 or not self.partner_bank_id._is_qr_iban()
-                or self._is_qrr(reference_to_check)
+                or self.has_qrr()
             )
         )
 
@@ -270,7 +269,7 @@ class AccountInvoice(models.Model):
         """Check if this invoice has a valid QRR reference (for Switzerland)
 
         """
-        return self._is_qrr(self.name)
+        return self._is_qrr(self.l10n_ch_qrr)
 
     def _validate_qrr(self):
         partner_bank = self.partner_bank_id
@@ -279,13 +278,3 @@ class AccountInvoice(models.Model):
                 _("""The payment reference is not a valid QR Reference.""")
             )
         return True
-
-    def action_invoice_open(self):
-        res = super(AccountInvoice, self).signal_workflow('invoice_open')
-        for rec in self:
-            # Define reference once number has been generated
-            if rec.type == "out_invoice":
-                if not rec.name and rec.partner_bank_id._is_qr_iban():
-                    rec.name = rec.l10n_ch_qrr
-            rec._validate_qrr()
-        return res

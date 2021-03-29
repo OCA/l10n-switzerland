@@ -153,7 +153,7 @@ class TestSwissQR(HttpCase):
         # Let us test the generation of a SwissQR for an invoice, first by showing an
         # QR is included in the invoice is only generated when Odoo has all the data
         # it needs.
-        self.invoice1.action_invoice_open()
+        self.invoice1.invoice_validate()
         self.swissqr_not_generated(self.invoice1)
 
     def test_swissQR_iban(self):
@@ -161,7 +161,7 @@ class TestSwissQR(HttpCase):
         # Here we don't use a structured reference
         iban_account = self.create_account(CH_IBAN)
         self.invoice1.partner_bank_id = iban_account
-        self.invoice1.action_invoice_open()
+        self.invoice1.invoice_validate()
         self.swissqr_generated(self.invoice1, ref_type="NON")
 
     def test_swissQR_qriban(self):
@@ -169,5 +169,5 @@ class TestSwissQR(HttpCase):
         qriban_account = self.create_account(QR_IBAN)
         self.assertTrue(qriban_account._is_qr_iban())
         self.invoice1.partner_bank_id = qriban_account
-        self.invoice1.action_invoice_open()
+        self.invoice1.invoice_validate()
         self.swissqr_generated(self.invoice1, ref_type="QRR")
