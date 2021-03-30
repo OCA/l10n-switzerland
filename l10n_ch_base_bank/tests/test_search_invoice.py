@@ -12,6 +12,7 @@ class TestSearchmove(common.SavepointCase):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.company = cls.env.ref("base.main_company")
+        cls.partner = cls.env.ref("base.res_partner_12")
         bank = cls.env["res.bank"].create(
             {"name": "BCV", "bic": "BBRUBEBB", "clearing": "234234"}
         )
@@ -24,13 +25,12 @@ class TestSearchmove(common.SavepointCase):
                 "sequence": 1,
             }
         )
-        cls.partner = cls.env["res.partner"].create({"name": "Test"})
         cls.journal = cls.env["account.journal"].create(
             {
                 "name": "Test Journal",
                 "company_id": cls.company.id,
                 "type": "sale",
-                "code": "BNK42",
+                "code": "SALE123",
                 "bank_id": bank.id,
                 "bank_acc_number": "10-8060-7",
             }
