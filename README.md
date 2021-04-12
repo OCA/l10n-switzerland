@@ -15,7 +15,16 @@ This repository hosts official Swiss localization provided by the OCA.
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | summary
+--- | --- | ---
+[l10n_ch_account_tags](l10n_ch_account_tags/) | 13.0.1.0.1 | Switzerland Account Tags
+[l10n_ch_base_bank](l10n_ch_base_bank/) | 13.0.1.0.0 | Types and number validation for swiss electronic pmnt. DTA, ESR
+[l10n_ch_invoice_reports](l10n_ch_invoice_reports/) | 13.0.1.1.1 | Extend invoice to add ISR/QR payment slip
+[l10n_ch_isr_payment_grouping](l10n_ch_isr_payment_grouping/) | 13.0.1.0.0 | Extend account to ungroup ISR
+[l10n_ch_isrb](l10n_ch_isrb/) | 13.0.1.0.0 | Switzerland - ISR with Bank
+[l10n_ch_states](l10n_ch_states/) | 13.0.1.0.0 | Switzerland Country States
 
 [//]: # (end addons)
 
