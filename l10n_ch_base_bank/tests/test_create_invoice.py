@@ -14,20 +14,25 @@ class TestCreateMove(SavepointCase):
         bank = cls.env["res.bank"].create(
             {"name": "BCV", "bic": "BBRUBEBB", "clearing": "234234"}
         )
-        # define company bank account
-        cls.bank_journal = cls.env["account.journal"].create(
+        cls.env["res.partner.bank"].create(
             {
+                "partner_id": cls.company.partner_id.id,
+                "bank_id": bank.id,
+                "acc_number": "ISR",
+                "l10n_ch_isr_subscription_chf": "01-162-8",
+                "sequence": 1,
+            }
+        )
+        cls.journal = cls.env["account.journal"].create(
+            {
+                "name": "Test Sale Journal",
                 "company_id": cls.company.id,
-                "type": "bank",
-                "code": "BNK42",
+                "type": "sale",
+                "code": "SALE123",
                 "bank_id": bank.id,
                 "bank_acc_number": "01-1234-1",
             }
         )
-        cls.bank_acc = cls.bank_journal.bank_account_id
-        cls.bank_acc.write({"l10n_ch_isr_subscription_chf": "01-162-8", "sequence": 1})
-        fields_list = ["company_id", "user_id", "currency_id", "journal_id"]
-        cls.inv_values = cls.env["account.move"].default_get(fields_list)
 
     def new_form(self):
         inv = Form(
@@ -38,7 +43,7 @@ class TestCreateMove(SavepointCase):
         #     view='account.view_move_form'
         # )
         inv.partner_id = self.partner
-        inv.journal_id = self.bank_journal
+        inv.journal_id = self.journal
         return inv
 
     def test_emit_move_with_isr_ref(self):
