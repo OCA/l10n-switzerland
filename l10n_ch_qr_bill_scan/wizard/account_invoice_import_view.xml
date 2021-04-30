@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
-  Copyright 2020 Camptocamp (http://www.camptocamp.com/)
+  Copyright 2021 Camptocamp (http://www.camptocamp.com/)
   @author: Yannick Vaucher <yannick.vaucher@camptocamp.com>
   License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 -->
@@ -54,7 +54,13 @@
             <field name="partner_id" position="attributes">
                 <attribute
                     name="context"
-                >{'default_name': partner_name, 'default_street': partner_street, 'default_zip': partner_zip, 'default_city': partner_city, 'default_country_id': partner_country_id}</attribute>
+                >{'default_name': partner_name,
+                'default_street': partner_street,
+                'default_zip': partner_zip,
+                'default_city': partner_city,
+                'default_country_id': partner_country_id,
+                'default_supplier': True,
+                'default_customer': False}</attribute>
                 <attribute
                     name="states"
                 >config,update,update-from-invoice,select-partner</attribute>

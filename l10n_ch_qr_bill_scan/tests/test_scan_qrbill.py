@@ -1,4 +1,4 @@
-# Copyright 2020 Camptocamp (http://www.camptocamp.com/)
+# Copyright 2021 Camptocamp (http://www.camptocamp.com/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import base64
 
@@ -71,10 +71,9 @@ class TestScanQRBill(common.SavepointCase):
                 "zip": "1015",
                 "city": "Lausanne",
                 "country_id": cls.env.ref("base.ch").id,
+                "supplier": True,
             }
         )
-        cls.supplier.supplier_rank = 1
-
         cls.expense_account = cls.env["account.account"].create(
             {
                 "code": "612AII",
@@ -107,8 +106,8 @@ class TestScanQRBill(common.SavepointCase):
         """
         wiz = self.wiz_import_invoice_file(file_path, file_name)
         res = wiz.import_invoice()
-        if res.get("res_model") == "account.move":
-            invoice = self.env["account.move"].browse(res["res_id"])
+        if res.get("res_model") == "account.invoice":
+            invoice = self.env["account.invoice"].browse(res["res_id"])
             return invoice
         return None
 
@@ -125,8 +124,8 @@ class TestScanQRBill(common.SavepointCase):
         """
         wiz = self.wiz_import_invoice_scan(invoice_scan)
         res = wiz.import_invoice()
-        if res.get("res_model") == "account.move":
-            invoice = self.env["account.move"].browse(res["res_id"])
+        if res.get("res_model") == "account.invoice":
+            invoice = self.env["account.invoice"].browse(res["res_id"])
             return invoice
         return None
 
@@ -136,9 +135,9 @@ class TestScanQRBill(common.SavepointCase):
         invoice = self.import_invoice_scan(scan_data)
 
         self.assertEqual(invoice.partner_id, self.supplier)
-        self.assertFalse(invoice.invoice_payment_ref)
+        self.assertFalse(invoice.reference)
         self.assertEqual(invoice.state, "draft")
-        iban = invoice.invoice_partner_bank_id.acc_number
+        iban = invoice.partner_bank_id.acc_number
         self.assertEqual(iban, CH_IBAN)
         self.assertEqual(invoice.amount_total, 1949.75)
 
@@ -149,9 +148,9 @@ class TestScanQRBill(common.SavepointCase):
         invoice = self.import_invoice_scan(scan_data)
 
         self.assertEqual(invoice.partner_id, self.supplier)
-        self.assertEqual(invoice.invoice_payment_ref, QRR)
+        self.assertEqual(invoice.reference, QRR)
         self.assertEqual(invoice.state, "draft")
-        iban = invoice.invoice_partner_bank_id.acc_number
+        iban = invoice.partner_bank_id.acc_number
         self.assertEqual(iban, QR_IBAN)
         self.assertEqual(invoice.amount_total, 1949.75)
 
@@ -161,9 +160,9 @@ class TestScanQRBill(common.SavepointCase):
         invoice = self.import_invoice_scan(scan_data)
 
         self.assertEqual(invoice.partner_id, self.supplier)
-        self.assertEqual(invoice.invoice_payment_ref, CF)
+        self.assertEqual(invoice.reference, CF)
         self.assertEqual(invoice.state, "draft")
-        iban = invoice.invoice_partner_bank_id.acc_number
+        iban = invoice.partner_bank_id.acc_number
         self.assertEqual(iban, CH_IBAN)
         self.assertEqual(invoice.amount_total, 1949.75)
 
@@ -181,11 +180,12 @@ class TestScanQRBill(common.SavepointCase):
         self.assertEqual(wiz.partner_city, "Lausanne")
         self.assertEqual(wiz.partner_country_id, self.env.ref("base.ch"))
 
-    def test_scan_QR_swico(self):
-        self.assertTrue(False)
+    # TODO
+    # def test_scan_QR_swico(self):
+    #     self.assertTrue(False)
 
-    def test_scan_QR_wrong_swico(self):
-        self.assertTrue(False)
+    # def test_scan_QR_wrong_swico(self):
+    #     self.assertTrue(False)
 
     def test_scan_QR_extra_first_lines(self):
         scan_data = ["", ""] + SCAN_DATA[:]
@@ -193,9 +193,9 @@ class TestScanQRBill(common.SavepointCase):
 
         invoice = self.import_invoice_scan(scan_data)
         self.assertEqual(invoice.partner_id, self.supplier)
-        self.assertFalse(invoice.invoice_payment_ref)
+        self.assertFalse(invoice.reference)
         self.assertEqual(invoice.state, "draft")
-        iban = invoice.invoice_partner_bank_id.acc_number
+        iban = invoice.partner_bank_id.acc_number
         self.assertEqual(iban, CH_IBAN)
         self.assertEqual(invoice.amount_total, 1949.75)
 
@@ -238,7 +238,7 @@ class TestScanQRBill(common.SavepointCase):
                 "country_id": self.env.ref("base.ch").id,
             }
         )
-        partner.supplier_rank = 1
+        partner.supplier = True
         self.env["account.invoice.import.config"].create(
             {
                 "name": "Camptocamp - one line no product",
@@ -253,5 +253,5 @@ class TestScanQRBill(common.SavepointCase):
         )
         invoice = self.import_invoice_file(invoice_fp, "qr-bill.pdf")
         self.assertTrue(invoice)
-        self.assertEqual(invoice.invoice_payment_ref, "000000000000000000202000058")
+        self.assertEqual(invoice.reference, "000000000000000000202000058")
         self.assertEqual(invoice.amount_total, 1.0)

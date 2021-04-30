@@ -4,3 +4,5 @@ bank-payment
 partner-contact
 account-reconcile
 mis-builder
+edi
+l10n-switzerland https://github.com/yvaucher/l10n-switzerland 12.0-bp-l10n_ch_qriban

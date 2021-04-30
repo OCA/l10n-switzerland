@@ -1,4 +1,4 @@
-# Copyright 2020 Camptocamp
+# Copyright 2021 Camptocamp
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import api, models
 
@@ -12,4 +12,6 @@ class BusinessDocumentImport(models.AbstractModel):
         self, partner_dict, chatter_msg, domain, partner_type_label
     ):
         # TODO search by iban
-        return False
+        return super(BusinessDocumentImport, self)._hook_match_partner(
+            self, partner_dict, chatter_msg, domain, partner_type_label
+        )
