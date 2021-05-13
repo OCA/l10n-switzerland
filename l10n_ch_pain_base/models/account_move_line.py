@@ -9,7 +9,11 @@ class AccountMoveLine(models.Model):
 
     def _prepare_payment_line_vals(self, payment_order):
         vals = super()._prepare_payment_line_vals(payment_order)
-        if self.move_id.partner_bank_id and self.move_id._has_isr_ref():
+        if (
+            self.move_id
+            and self.move_id.partner_bank_id
+            and self.move_id._has_isr_ref()
+        ):
             if self.move_id.partner_bank_id._is_qr_iban():
                 vals["communication_type"] = "qrr"
                 vals["communication"] = self.move_id.payment_reference
