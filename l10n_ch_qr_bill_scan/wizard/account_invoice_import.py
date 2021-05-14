@@ -117,8 +117,8 @@ class AccountInvoiceImport(models.TransientModel):
         res = cv2.matchTemplate(ch_cross_img, bill_img, cv2.TM_CCOEFF_NORMED)
         locations = np.where(res >= 0.8)
 
-        if not locations:
-            return False
+        if not locations or locations[0].size == 0:
+            raise UserError(_("QR-Code is not readable."))
         logger.debug("QR-Code swiss cross found")
         patch_img = cv2.imread(
             get_resource_path("l10n_ch_qr_bill_scan", "data", "QR-patch.png")
