@@ -185,7 +185,12 @@ class TestScanQRBill(common.SavepointCase):
         self.assertTrue(False)
 
     def test_scan_QR_wrong_swico(self):
-        self.assertTrue(False)
+        # not readable QR-Code
+        invoice_fp = get_resource_path(
+            "l10n_ch_qr_bill_scan", "tests", "data", "qr-bill-wrong-swico.pdf"
+        )
+        with self.assertRaises(UserError):
+            self.import_invoice_file(invoice_fp, "qr-bill-wrong-swico.pdf")
 
     def test_scan_QR_extra_first_lines(self):
         scan_data = ["", ""] + SCAN_DATA[:]
