@@ -5,7 +5,7 @@
 {
     "name": "Switzerland - ISO 20022",
     "summary": "ISO 20022 base module for Switzerland",
-    "version": "12.0.2.1.0",
+    "version": "14.0.1.0.0",
     "category": "Finance",
     "author": "Akretion,Camptocamp,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/l10n-switzerland",
