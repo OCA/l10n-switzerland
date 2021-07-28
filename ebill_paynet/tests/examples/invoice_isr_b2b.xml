@@ -205,6 +205,9 @@
         <!-- Should it not be the amount to be taxed ? -->
         <Amount Currency="CHF">37.88</Amount>
       </VAT-AMOUNT>
+      <EXTENDED-AMOUNT Type="79">
+        <Amount Currency="CHF">492.0</Amount>
+      </EXTENDED-AMOUNT>
       <TAX>
         <TAX-BASIS>
           <Amount Currency="CHF">492.0</Amount>

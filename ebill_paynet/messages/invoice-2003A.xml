@@ -196,6 +196,9 @@
       <VAT-AMOUNT Print-Status="25">
         <Amount Currency="{{ invoice.currency_id.name }}">{{ invoice.amount_tax|round(2) }}</Amount>
       </VAT-AMOUNT>
+      <EXTENDED-AMOUNT Type="79">
+        <Amount Currency="{{ invoice.currency_id.name }}">{{ invoice.amount_untaxed|round(2) }}</Amount>
+      </EXTENDED-AMOUNT>
       {% if amount_by_group %}
       {% for taxgroup in amount_by_group %}
       <TAX>
