@@ -17,9 +17,9 @@ TODO: add repo description.
 
 Available addons
 ----------------
-addon | version | summary
---- | --- | ---
-[l10n_ch_base_bank](l10n_ch_base_bank/) | 14.0.1.0.0 | Types and number validation for swiss electronic pmnt. DTA, ESR
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[l10n_ch_base_bank](l10n_ch_base_bank/) | 14.0.1.0.0 |  | Types and number validation for swiss electronic pmnt. DTA, ESR
 
 [//]: # (end addons)
 
