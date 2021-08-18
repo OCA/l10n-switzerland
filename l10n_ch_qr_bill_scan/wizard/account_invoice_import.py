@@ -117,8 +117,16 @@ class AccountInvoiceImport(models.TransientModel):
         res = cv2.matchTemplate(ch_cross_img, bill_img, cv2.TM_CCOEFF_NORMED)
         locations = np.where(res >= 0.8)
 
-        if not locations:
+        try:
+            # IndexError: index 0 is out of bounds for axis 0 with size 0
+            # is raised if size of the array is 0
+            if not locations[0].size or not locations[1].size:
+                return False
+        except IndexError:
+            # IndexError: list index out of range
+            # locations is empty list
             return False
+
         logger.debug("QR-Code swiss cross found")
         patch_img = cv2.imread(
             get_resource_path("l10n_ch_qr_bill_scan", "data", "QR-patch.png")
