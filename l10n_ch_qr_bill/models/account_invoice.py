@@ -269,9 +269,13 @@ class AccountInvoice(models.Model):
             and reference == mod10r(reference[:-1])
         )
 
+
+    def _get_reference_to_check(self):
+        return self.reference
+
     def validate_swiss_code_arguments(self):
         # TODO do checks separately
-        reference_to_check = self.name
+        reference_to_check = self._get_reference_to_check()
 
         def _partner_fields_set(partner):
             return (

@@ -55,3 +55,7 @@ class AccountInvoice(models.Model):
         res = super(AccountInvoice, self).action_move_create()
         self._post_propagate_qrr()
         return res
+
+
+    def _get_reference_to_check(self):
+        return self.transaction_id
