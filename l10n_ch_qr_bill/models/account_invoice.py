@@ -345,3 +345,7 @@ class AccountInvoice(models.Model):
                     rec.name = rec.l10n_ch_qrr
             rec._validate_qrr()
         return res
+
+
+    def _get_reference_to_check(self):
+        return self.transaction_id
