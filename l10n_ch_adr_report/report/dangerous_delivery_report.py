@@ -55,7 +55,7 @@ class DangerousDeliverCHADR(models.AbstractModel):
                 moves = pick.move_lines.filtered(lambda l: l.state == "done")
             else:
                 moves = pick.move_lines
-            dangerous_moves = moves.filtered(lambda self: self.product_id.is_dangerous)
+            dangerous_moves = self._filter_dangerous_move(moves)
             grouped_moves = groupby(
                 sorted(dangerous_moves, key=lambda l: l.product_id),
                 lambda r: r.product_id,
@@ -68,6 +68,10 @@ class DangerousDeliverCHADR(models.AbstractModel):
         )
         vals["total_section"]["warn"] = self._is_limit_exceeded(vals["total_section"])
         return vals
+
+    def _filter_dangerous_move(self, moves):
+        """Filter the moves to use for the report."""
+        return moves.filtered(lambda move: move.product_id.is_dangerous)
 
     def _compute_points_per_product(self, vals):
         index = {}.fromkeys(["1", "2", "3", "4", "5"], 0.0)
