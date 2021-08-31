@@ -14,7 +14,27 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: l10n_ch_fix_isr_reference
+#: model:ir.model.fields,help:l10n_ch_fix_isr_reference.field_account_invoice__l10n_ch_isr_subscription
+msgid "ISR subscription number identifying your company or your bank  to generate ISR."
+msgstr ""
+
+#. module: l10n_ch_fix_isr_reference
+#: model:ir.model.fields,help:l10n_ch_fix_isr_reference.field_account_invoice__l10n_ch_isr_subscription_formatted
+msgid "ISR subscription number your company or your bank, formated with '-' and without the padding zeros, to generate ISR report."
+msgstr ""
+
+#. module: l10n_ch_fix_isr_reference
 #: model:ir.model,name:l10n_ch_fix_isr_reference.model_account_invoice
 msgid "Invoice"
+msgstr ""
+
+#. module: l10n_ch_fix_isr_reference
+#: model:ir.model.fields,field_description:l10n_ch_fix_isr_reference.field_account_invoice__l10n_ch_isr_subscription
+msgid "L10N Ch Isr Subscription"
+msgstr ""
+
+#. module: l10n_ch_fix_isr_reference
+#: model:ir.model.fields,field_description:l10n_ch_fix_isr_reference.field_account_invoice__l10n_ch_isr_subscription_formatted
+msgid "L10N Ch Isr Subscription Formatted"
 msgstr ""
 
