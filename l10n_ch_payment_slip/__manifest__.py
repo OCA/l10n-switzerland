@@ -10,6 +10,7 @@
  'depends': [
      'account',
      'l10n_ch_base_bank',
+     'l10n_ch_fix_isr_reference',
      'web',
      'l10n_ch',
  ],

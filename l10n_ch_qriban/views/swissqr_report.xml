@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="l10n_ch_swissqr_qriban_template" inherit_id="l10n_ch.l10n_ch_swissqr_template">
+        <xpath expr="//div[hasclass('swissqr_receipt')]/div[@id='title_zone']/span[@t-field='o.partner_bank_id.acc_number']" position="replace">
+            <span class="swissqr_text content" t-field="o.partner_bank_id.acc_number" t-if="not o.partner_bank_id.l10n_ch_qr_iban"/>
+            <span class="swissqr_text content" t-field="o.partner_bank_id.l10n_ch_qr_iban" t-if="o.partner_bank_id.l10n_ch_qr_iban"/><br/>
+        </xpath>
+
+        <xpath expr="//div[@id='indications_zone']/span[@t-field='o.partner_bank_id.acc_number']" position="replace">
+            <span class="swissqr_text content" t-field="o.partner_bank_id.acc_number" t-if="not o.partner_bank_id.l10n_ch_qr_iban"/>
+            <span class="swissqr_text content" t-field="o.partner_bank_id.l10n_ch_qr_iban" t-if="o.partner_bank_id.l10n_ch_qr_iban"/><br/>
+        </xpath>
+    </template>
+</odoo>

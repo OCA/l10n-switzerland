@@ -11,6 +11,7 @@
     'license': 'AGPL-3',
     'depends': [
         'l10n_ch',
+        'l10n_ch_base_bank',
     ],
     'data': [
     ],
