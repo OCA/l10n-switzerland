@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Weblate 3.2.2\n"
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/invoice.py:212
+#: code:addons/l10n_ch_payment_slip/models/invoice.py:149
 #, fuzzy, python-format
 msgid "- The bank account {} used in invoice has no ISR subscription number."
 msgstr ""
@@ -28,13 +28,13 @@ msgstr ""
 "Teilnehmernummer."
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/invoice.py:205
+#: code:addons/l10n_ch_payment_slip/models/invoice.py:142
 #, python-format
 msgid "- The invoice must be confirmed."
 msgstr "- Die Rechnung muss bestätigt werden."
 
 #. module: l10n_ch_payment_slip
-#: code:addons/l10n_ch_payment_slip/models/invoice.py:208
+#: code:addons/l10n_ch_payment_slip/models/invoice.py:145
 #, python-format
 msgid "- The invoice needs a partner bank account."
 msgstr ""
@@ -229,20 +229,6 @@ msgid "ISR scan line letter spacing"
 msgstr "ESR Codierzeile Zeichenabstand"
 
 #. module: l10n_ch_payment_slip
-#: model:ir.model.fields,help:l10n_ch_payment_slip.field_account_invoice__l10n_ch_isr_subscription
-msgid ""
-"ISR subscription number identifying your company or your bank  to generate "
-"ISR."
-msgstr ""
-
-#. module: l10n_ch_payment_slip
-#: model:ir.model.fields,help:l10n_ch_payment_slip.field_account_invoice__l10n_ch_isr_subscription_formatted
-msgid ""
-"ISR subscription number your company or your bank, formated with '-' and "
-"without the padding zeros, to generate ISR report."
-msgstr ""
-
-#. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_company__isr_add_vert
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_config_settings__isr_add_vert
 msgid "ISR vert. position for address (inch)"
@@ -296,16 +282,6 @@ msgstr "Rechnungen"
 #: model:ir.model,name:l10n_ch_payment_slip.model_account_move_line
 msgid "Journal Item"
 msgstr "Journaleintrag"
-
-#. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_invoice__l10n_ch_isr_subscription
-msgid "L10N Ch Isr Subscription"
-msgstr ""
-
-#. module: l10n_ch_payment_slip
-#: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_account_invoice__l10n_ch_isr_subscription_formatted
-msgid "L10N Ch Isr Subscription Formatted"
-msgstr ""
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_isr_batch_print_wizard____last_update
