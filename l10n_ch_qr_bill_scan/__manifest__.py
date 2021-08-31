@@ -10,7 +10,11 @@
     "category": "Localization",
     "website": "https://github.com/OCA/l10n-switzerland",
     "license": "AGPL-3",
-    "depends": ["l10n_ch", "account_invoice_import"],
+    "depends": [
+        "l10n_ch",
+        "account_invoice_import",
+        "l10n_ch_qr_bill",
+    ],
     "data": ["wizard/account_invoice_import_view.xml"],
     "auto_install": False,
     "installable": True,
