@@ -136,7 +136,7 @@
       <Price Type="AAA">492.0</Price>
       <Price Type="XXX">529.88</Price>
       <ITEM-AMOUNT Type="66">
-        <Amount Currency="CHF">529.88</Amount>
+        <Amount Currency="CHF">492.0</Amount>
       </ITEM-AMOUNT>
       <TAX>
         <Rate>7.7</Rate>
