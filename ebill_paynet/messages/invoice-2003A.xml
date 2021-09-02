@@ -173,7 +173,7 @@
       <Price Type="AAA">{{ line.price_subtotal|round(2) }}</Price>
       <Price Type="XXX">{{ line.price_total|round(2) }}</Price>
       <ITEM-AMOUNT Type="66">
-        <Amount Currency="{{ invoice.currency_id.name }}">{{ line.price_total|round(2) }}</Amount>
+        <Amount Currency="{{ invoice.currency_id.name }}">{{ line.price_subtotal|round(2) }}</Amount>
       </ITEM-AMOUNT>
       {% for tax in line.tax_ids %}
       {%- if loop.index == 1 %}
