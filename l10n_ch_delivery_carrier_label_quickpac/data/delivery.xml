@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="quickpac_delivery_carrier" model="delivery.carrier">
+        <field name="name">Quickpac delivery charges</field>
+        <field name="fixed_price">0.0</field>
+        <field name="code">QP</field>
+        <field name="free_over" eval="True"/>
+        <field name="amount">1000</field>
+        <field name="sequence">1</field>
+        <field name="delivery_type">quickpac</field>
+        <field name="product_id"
+               ref="l10n_ch_delivery_carrier_label_quickpac.product_quickpac_service"/>
+    </record>
+
+</odoo>
