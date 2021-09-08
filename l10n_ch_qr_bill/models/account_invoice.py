@@ -323,7 +323,7 @@ class AccountInvoice(models.Model):
         """Check if this invoice has a valid QRR reference (for Switzerland)
 
         """
-        return self._is_qrr(self.name)
+        return self._is_qrr(self.reference)
 
     def _validate_qrr(self):
         partner_bank = self.partner_bank_id
