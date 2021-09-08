@@ -87,7 +87,7 @@ class AccountInvoiceImport(models.TransientModel):
         try:
             amount = float(qr_data[QR.AMOUNT])
         except ValueError:
-            raise UserError(_("The {} "))
+            raise UserError(_("Amount cannot be properly read from scan data"))
         parsed_inv = {
             "iban": qr_data[QR.IBAN],
             "partner": self._get_qr_address(
