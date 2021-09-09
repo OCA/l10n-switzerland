@@ -24,6 +24,16 @@ class TestCreateMove(SavepointCase):
                 "bank_acc_number": "01-1234-1",
             }
         )
+
+        # [FIX] account: forbid making refunds on incompatible journals
+        cls.sale_journal = cls.env["account.journal"].create(
+            {
+                "name": "Customer Invoices 1",
+                "company_id": cls.company.id,
+                "type": "sale",
+                "code": "INV",
+            }
+        )
         cls.bank_acc = cls.bank_journal.bank_account_id
         cls.bank_acc.write({"l10n_ch_isr_subscription_chf": "01-162-8", "sequence": 1})
         fields_list = ["company_id", "user_id", "currency_id", "journal_id"]
@@ -41,9 +51,19 @@ class TestCreateMove(SavepointCase):
         inv.journal_id = self.bank_journal
         return inv
 
+    def new_sale_form(self):
+        inv = Form(
+            self.env["account.move"].with_context(default_move_type="out_invoice")
+        )
+
+        inv.partner_id = self.partner
+        inv.journal_id = self.sale_journal
+        return inv
+
     def test_emit_move_with_isr_ref(self):
-        inv_form = self.new_form()
+        inv_form = self.new_sale_form()
         move = inv_form.save()
+        inv_form.currency_id = self.env.ref("base.CHF")
         self.assertFalse(move._has_isr_ref())
 
         inv_form.ref = "132000000000000000000000014"
@@ -51,7 +71,7 @@ class TestCreateMove(SavepointCase):
         self.assertTrue(move._has_isr_ref())
 
     def test_emit_move_with_isr_ref_15_pos(self):
-        inv_form = self.new_form()
+        inv_form = self.new_sale_form()
         move = inv_form.save()
 
         self.assertFalse(move._has_isr_ref())
@@ -65,7 +85,7 @@ class TestCreateMove(SavepointCase):
         inv_form.save()
 
     def test_emit_move_with_non_isr_ref(self):
-        inv_form = self.new_form()
+        inv_form = self.new_sale_form()
         move = inv_form.save()
 
         self.assertFalse(move._has_isr_ref())
@@ -74,16 +94,15 @@ class TestCreateMove(SavepointCase):
         self.assertFalse(move._has_isr_ref())
 
     def test_emit_move_with_missing_isr_ref(self):
-        inv_form = self.new_form()
+        inv_form = self.new_sale_form()
         inv_form.save()
         inv_form.ref = False
         # and save
         move = inv_form.save()
-
         self.assertFalse(move._has_isr_ref())
 
     def test_emit_move_with_isr_ref_missing_subscr_num(self):
-        inv_form = self.new_form()
+        inv_form = self.new_sale_form()
         move = inv_form.save()
         self.assertFalse(move._has_isr_ref())
         inv_form.partner_bank_id = self.env["res.partner.bank"]
@@ -92,7 +111,7 @@ class TestCreateMove(SavepointCase):
             inv_form.save()
 
     def test_emit_move_with_isr_ref_subscr_num_wrong_currency(self):
-        inv_form = self.new_form()
+        inv_form = self.new_sale_form()
         move = inv_form.save()
         self.assertFalse(move._has_isr_ref())
         move.currency_id = self.env.ref("base.EUR")
