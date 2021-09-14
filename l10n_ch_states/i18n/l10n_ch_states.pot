@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -55,6 +55,11 @@ msgid "Country state"
 msgstr ""
 
 #. module: l10n_ch_states
+#: model:ir.model.fields,field_description:l10n_ch_states.field_res_country_state__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_FR
 msgid "Fribourg"
 msgstr ""
@@ -80,6 +85,11 @@ msgid "Grisons"
 msgstr ""
 
 #. module: l10n_ch_states
+#: model:ir.model.fields,field_description:l10n_ch_states.field_res_country_state__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_IT
 msgid "Italy"
 msgstr ""
@@ -87,6 +97,11 @@ msgstr ""
 #. module: l10n_ch_states
 #: model:res.country.state,name:l10n_ch_states.state_JU
 msgid "Jura"
+msgstr ""
+
+#. module: l10n_ch_states
+#: model:ir.model.fields,field_description:l10n_ch_states.field_res_country_state____last_update
+msgid "Last Modified on"
 msgstr ""
 
 #. module: l10n_ch_states
