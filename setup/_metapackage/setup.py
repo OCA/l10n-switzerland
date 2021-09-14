@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo14-addon-l10n_ch_base_bank',
+        'odoo14-addon-l10n_ch_states',
     ],
     classifiers=[
         'Programming Language :: Python',
