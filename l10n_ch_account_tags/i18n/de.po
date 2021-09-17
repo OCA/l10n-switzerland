@@ -1,0 +1,188 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_ch_account_tags
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_130
+msgid "Actifs de régularisation (transitoires) (CH_130)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_106
+msgid "Actifs à court terme cotés en bourse (CH_106)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_68
+msgid "Amortissements sur immobilisations corporelles (CH_68)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_60
+msgid "Autres charges d‘exploitation (CH_60)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_114
+msgid "Autres créances à court terme (CH_114)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_220
+msgid "Autres dettes à court terme (CH_220)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_250
+msgid "Autres dettes à long terme (CH_250)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_180
+msgid "Capital non versé : capital social - capital de fondation (CH_180)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_280
+msgid "Capital social ou capital de fondation (CH_280)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_4
+msgid "Charges de marchandises et de matériel (CH_4)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_5
+msgid "Charges de personnel (CH_5)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_30
+msgid "Chiffre d'affaires (CH_30)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_110
+msgid "Créances résultant de livraisons et prestations (CH_110)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_210
+msgid "Dettes à court terme rémunérés (CH_210)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_200
+msgid ""
+"Dettes à court terme résultant d’achats et de prestations de services "
+"(CH_200)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_240
+msgid "Dettes à long terme rémunérées (CH_240)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_160
+msgid "Immobilisations corporelles immeubles CH_160)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_150
+msgid "Immobilisations corporelles meubles (CH_150)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_140
+msgid "Immobilisations financières (CH_140)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_170
+msgid "Immobilisations incorporelles (CH_170)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_89
+msgid "Impôts directs (CH_89)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_148
+msgid "Participations (CH_148)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_230
+msgid ""
+"Passifs de régularisation (transitoires) et provisions à court terme (CH_230)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_260
+msgid "Provisions à long termes et provisions légales (CH_260)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_290
+msgid "Réserves / bénéfices et pertes reportés (CH_290)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_297
+msgid "Résultat de l'exercice (CH_297)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_7
+msgid "Résultat des activités annexes d'exploitation (CH_7)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_85
+msgid "Résultat extraordinaires (CH_85)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_69
+msgid "Résultat financier (CH_69)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_80
+msgid "Résultat hors-exploitation (CH_80)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_120
+msgid "Stocks et prestations non facturées (CH_120)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.template,name:l10n_ch_account_tags.1_transfer_account_id
+msgid "Transfer"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_100
+msgid "Trésorerie (CH_100)"
+msgstr ""
+
+#. module: l10n_ch_account_tags
+#: model:account.account.tag,name:l10n_ch_account_tags.account_tag_ch_39
+msgid "Variation des stocks (CH_39)"
+msgstr ""
