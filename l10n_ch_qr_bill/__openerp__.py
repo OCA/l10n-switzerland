@@ -11,7 +11,7 @@
     'category': 'Localization',
     'website': 'https://github.com/OCA/l10n-switzerland',
     'license': 'LGPL-3',
-    'depends': ['report', 'account', 'base_iban'],
+    'depends': ['report', 'account', 'base_iban', 'email_template'],
     'data': [
         'data/paperformat.xml',
         'views/account_invoice_view.xml',
