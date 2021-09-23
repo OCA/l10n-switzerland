@@ -8,6 +8,6 @@
     "license": "AGPL-3",
     "category": "Tools",
     "depends": ["server_environment", "ebill_paynet"],
-    "website": "https://www.camptocamp.com",
+    "website": "https://github.com/OCA/l10n-switzerland",
     "installable": True,
 }
