@@ -9,7 +9,8 @@ from openerp.osv import osv
 class email_template(osv.osv):
     _inherit = 'email.template'
 
-    def generate_email_batch(self, cr, uid, template_id, res_ids, context=None, fields=None):
+    def generate_email_batch(self, cr, uid, template_id, res_ids, context=None,
+                             fields=None):
         """ Method overridden in order to add an attachment containing the QRR
         to the draft message when opening the 'send by mail' wizard on an invoice.
         This attachment generation will only occur if all the required data are
@@ -35,9 +36,11 @@ class email_template(osv.osv):
                 if inv_record.has_qrr():
                     # We add an attachment containing the QR-bill
                     qr_report_name = 'QR-bill-' + inv_print_name + '.pdf'
-                    qr_pdf = self.ref('l10n_ch_qr_report').render_report(
-                        cr, uid, [res_id], qr_report_name, False)
-                    qr_pdf = base64.b64encode(qr_pdf)
+                    report = inv_record.env.ref('l10n_ch_qr_bill.l10n_ch_qr_report')
+                    qr_pdf = report.render_report(
+                        [res_id], report.report_name, False
+                    )
+                    qr_pdf = base64.b64encode(qr_pdf[0])
                     new_attachments.append((qr_report_name, qr_pdf))
 
                 attachments_list = rslt[res_id].get('attachments', False)
