@@ -45,9 +45,12 @@ class TestSwissQR(HttpCase):
 
         product = self.env.ref("product.product_product_4")
         acc_type = self.env.ref('account.data_account_type_bank')
-        account = self.env['account.account'].search(
-            [('user_type', '=', acc_type.id)], limit=1
-        )
+        account = self.env['account.account'].create({
+            'name': 'Test account for QR-bill',
+            'code': 'TESTQR',
+            'type': 'other',
+            'user_type': acc_type.id
+            })
         invoice = (
             self.env['account.invoice']
             .with_context(default_type='out_invoice')
@@ -103,9 +106,8 @@ class TestSwissQR(HttpCase):
             invoice.validate_swiss_code_arguments(), 'A Swiss QR can be generated'
         )
         if ref_type == 'QRR':
-            self.assertTrue(invoice.name)
-            struct_ref = invoice.name
-            unstr_msg = ''
+            struct_ref = invoice.l10n_ch_qrr
+            unstr_msg = invoice.number
         else:
             struct_ref = ''
             unstr_msg = invoice.name or ''
@@ -162,6 +164,7 @@ class TestSwissQR(HttpCase):
         iban_account = self.create_account(CH_IBAN)
         self.invoice1.partner_bank_id = iban_account
         self.invoice1.invoice_validate()
+        self.invoice1.action_move_create()
         self.swissqr_generated(self.invoice1, ref_type="NON")
 
     def test_swissQR_qriban(self):
@@ -169,5 +172,7 @@ class TestSwissQR(HttpCase):
         qriban_account = self.create_account(QR_IBAN)
         self.assertTrue(qriban_account._is_qr_iban())
         self.invoice1.partner_bank_id = qriban_account
+        self.invoice1.reference_type = 'QRR'
         self.invoice1.invoice_validate()
+        self.invoice1.action_move_create()
         self.swissqr_generated(self.invoice1, ref_type="QRR")
