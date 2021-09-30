@@ -30,7 +30,9 @@ class TestGenISRReference(common.SavepointCase):
         )
 
     def new_form(self):
-        inv = Form(self.env["account.move"].with_context(default_type="out_invoice"))
+        inv = Form(
+            self.env["account.move"].with_context(default_move_type="out_invoice")
+        )
         inv.partner_id = self.partner
         inv.currency_id = self.env.ref("base.CHF")
         with inv.invoice_line_ids.new() as line:
@@ -41,7 +43,7 @@ class TestGenISRReference(common.SavepointCase):
     def test_isr_b(self):
         self.bank_acc.l10n_ch_isrb_id_number = "123456"
         inv_form = self.new_form()
-        inv_form.invoice_partner_bank_id = self.bank_acc
+        inv_form.partner_bank_id = self.bank_acc
         invoice = inv_form.save()
 
         invoice.name = "INV/01234567890"
@@ -54,7 +56,7 @@ class TestGenISRReference(common.SavepointCase):
     def test_isr_b_small_customer_id(self):
         self.bank_acc.l10n_ch_isrb_id_number = "123"
         inv_form = self.new_form()
-        inv_form.invoice_partner_bank_id = self.bank_acc
+        inv_form.partner_bank_id = self.bank_acc
         invoice = inv_form.save()
 
         invoice.name = "INV/01234567890"
@@ -67,7 +69,7 @@ class TestGenISRReference(common.SavepointCase):
     def test_isr_b_long_reference(self):
         self.bank_acc.l10n_ch_isrb_id_number = "666666"
         inv_form = self.new_form()
-        inv_form.invoice_partner_bank_id = self.bank_acc
+        inv_form.partner_bank_id = self.bank_acc
         invoice = inv_form.save()
 
         invoice.name = "INV/123456789012345678901234567890"
