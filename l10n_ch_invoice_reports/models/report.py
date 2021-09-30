@@ -37,24 +37,25 @@ class IrActionsReport(models.Model):
             for stream in streams:
                 stream.close()
 
-    def render_qweb_pdf(self, res_ids=None, data=None):
+    def _render_qweb_pdf(self, res_ids=None, data=None):
         reports = [
             "l10n_ch_invoice_reports.invoice_isr_report_main",
             "l10n_ch_invoice_reports.invoice_qr_report_main",
             "l10n_ch_invoice_reports.invoice_qr_isr_report_main",
         ]
         if self.report_name not in reports or not res_ids:
-            return super().render_qweb_pdf(res_ids, data)
+            return super()._render_qweb_pdf(res_ids, data)
+
         inv_report = self._get_report_from_name("account.report_invoice")
-        invoice_pdf, _ = inv_report.render_qweb_pdf(res_ids, data)
+        invoice_pdf, _ = inv_report._render_qweb_pdf(res_ids, data)
         invoice_pdf_io = io.BytesIO(invoice_pdf)
 
         isr_report = self._get_report_from_name("l10n_ch.isr_report_main")
-        isr_pdf, _ = isr_report.render_qweb_pdf(res_ids, data)
+        isr_pdf, _ = isr_report._render_qweb_pdf(res_ids, data)
         isr_pdf_io = io.BytesIO(isr_pdf)
 
         qr_report = self._get_report_from_name("l10n_ch.qr_report_main")
-        qr_pdf, _ = qr_report.render_qweb_pdf(res_ids, data)
+        qr_pdf, _ = qr_report._render_qweb_pdf(res_ids, data)
         qr_pdf_io = io.BytesIO(qr_pdf)
 
         pdf = False
