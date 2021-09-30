@@ -3,34 +3,34 @@
 
 import base64
 
-from openerp.osv import osv
+from openerp import api, models
 
 
-class email_template(osv.osv):
+class EmailTemplate(models.Model):
     _inherit = 'email.template'
 
-    def generate_email_batch(self, cr, uid, template_id, res_ids, context=None,
-                             fields=None):
+    @api.model
+    def generate_email_batch(self, template_id, res_ids, fields=None):
         """ Method overridden in order to add an attachment containing the QRR
         to the draft message when opening the 'send by mail' wizard on an invoice.
         This attachment generation will only occur if all the required data are
         present on the invoice. Otherwise, no attachment will be created, and
         the mail will only contain the invoice (as defined in the mother method).
         """
-        rslt = super(email_template, self).generate_email_batch(
-            cr, uid, template_id, res_ids, context=context, fields=fields)
+        rslt = super(EmailTemplate, self).generate_email_batch(
+            template_id, res_ids, fields=fields)
 
         res_ids_to_templates = self.get_email_template_batch(
-            cr, uid, template_id=template_id, res_ids=res_ids, context=context)
+            template_id=template_id, res_ids=res_ids)
         for res_id in res_ids:
             template = res_ids_to_templates[res_id]
             related_model = template.model
 
             if related_model == 'account.invoice':
                 report_name = template.report_name
-                inv_record = self.pool.get(related_model).browse(cr, uid, res_id)
+                inv_record = self.pool.get(related_model).browse(res_id)
                 inv_print_name = self.render_template(
-                    cr, uid, report_name, related_model, res_id, context=context)
+                    report_name, related_model, res_id)
                 new_attachments = []
 
                 if inv_record.has_qrr():
