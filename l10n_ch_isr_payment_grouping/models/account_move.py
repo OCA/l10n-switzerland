@@ -32,10 +32,10 @@ class AccountMove(models.Model):
         that can issue ISR and that the reference is an ISR reference number"""
         # We consider a structured ref can only be in `reference` whereas in v13
         # it can be in 2 different fields
-        ref = self.invoice_payment_ref or self.ref
+        ref = self.payment_reference or self.ref
         if (
             ref
-            and self.invoice_partner_bank_id.is_isr_issuer()
+            and self.partner_bank_id.is_isr_issuer()
             and re.match(r"^(\d{2,27}|\d{2}( \d{5}){5})$", ref)
         ):
             ref = ref.replace(" ", "")

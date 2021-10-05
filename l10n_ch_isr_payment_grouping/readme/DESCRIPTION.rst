@@ -1,4 +1,4 @@
-Definintion of a specific grouping rule for ISR payments
+Definition of a specific grouping rule for ISR payments
 
 This module is recommended if you use SEPA pain files.
 

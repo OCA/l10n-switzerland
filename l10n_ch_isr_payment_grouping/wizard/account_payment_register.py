@@ -1,44 +1,33 @@
 # Copyright 2020 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import models
+from odoo import api, models
 
 
 class PaymentRegister(models.TransientModel):
-    """Backport from v13 of extend of account.payment.register"""
-
     _inherit = "account.payment.register"
 
-    def _prepare_communication(self, invoices):
+    @api.model
+    def _get_batch_communication(self, batch_result):
         """Return a single ISR reference
-
         to avoid duplicate of the same number when multiple payments are done
         on the same reference. As those payments are grouped by reference,
         we want a unique reference in communication.
-
         """
         # Only the first invoice needs to be tested as the grouping ensure
         # invoice with same ISR are in the same group.
-        if invoices[0]._is_isr_supplier_invoice():
-            return invoices[0].invoice_payment_ref or invoices[0].ref
+        invoice = batch_result["lines"][0].move_id
+        if invoice._is_isr_supplier_invoice():
+            return invoice.payment_reference or invoice.ref
         else:
-            return super()._prepare_communication(invoices)
+            return super()._get_batch_communication(batch_result)
 
-    def _get_payment_group_key(self, inv):
-        """Define group key to group invoices in payments.
-        In case of ISR reference number on the supplier invoice
-        the group rule must separate the invoices by payment refs.
-
-        As such reference is structured. This is required to export payments
-        to bank in batch.
-        """
-        if inv._is_isr_supplier_invoice():
-
-            ref = inv.invoice_payment_ref or inv.ref
-            return (
-                inv.commercial_partner_id,
-                inv.currency_id,
-                inv.invoice_partner_bank_id,
-                ref,
+    def _get_line_batch_key(self, line):
+        move = line.move_id
+        result = super()._get_line_batch_key(line)
+        if move._is_isr_supplier_invoice():
+            result.update(
+                {
+                    "payment_reference": move.payment_reference or line.ref,
+                }
             )
-        else:
-            return super()._get_payment_group_key(inv)
+        return result
