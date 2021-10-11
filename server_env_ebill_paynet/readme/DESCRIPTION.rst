@@ -1,6 +1,3 @@
-Server environment for Ebill Paynet
-===================================
-
 This module is based on the `server_environment` module to use files for
 configuration. So we can have a different configuration for each
 environment (dev, test, integration, prod).  This module define the config
