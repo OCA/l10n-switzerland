@@ -19,14 +19,14 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[ebill_paynet](ebill_paynet/) | 13.0.1.0.0 |  | Paynet platform bridge implementation
+[ebill_paynet](ebill_paynet/) | 13.0.1.0.1 |  | Paynet platform bridge implementation
 [l10n_ch_account_tags](l10n_ch_account_tags/) | 13.0.1.0.1 |  | Switzerland Account Tags
 [l10n_ch_base_bank](l10n_ch_base_bank/) | 13.0.1.0.0 |  | Types and number validation for swiss electronic pmnt. DTA, ESR
 [l10n_ch_invoice_reports](l10n_ch_invoice_reports/) | 13.0.1.1.1 |  | Extend invoice to add ISR/QR payment slip
 [l10n_ch_isr_payment_grouping](l10n_ch_isr_payment_grouping/) | 13.0.1.0.0 |  | Extend account to ungroup ISR
 [l10n_ch_isrb](l10n_ch_isrb/) | 13.0.1.0.0 |  | Switzerland - ISR with Bank
 [l10n_ch_states](l10n_ch_states/) | 13.0.1.0.0 |  | Switzerland Country States
-[server_env_ebill_paynet](server_env_ebill_paynet/) | 13.0.1.0.0 |  | Server environment for Ebill Paynet
+[server_env_ebill_paynet](server_env_ebill_paynet/) | 13.0.1.0.1 |  | Server environment for Ebill Paynet
 
 [//]: # (end addons)
 
