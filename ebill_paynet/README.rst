@@ -14,13 +14,13 @@ eBill Paynet
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fl10n--switzerland-lightgray.png?logo=github
-    :target: https://github.com/OCA/l10n-switzerland/tree/13.0/ebill_paynet
+    :target: https://github.com/OCA/l10n-switzerland/tree/14.0/ebill_paynet
     :alt: OCA/l10n-switzerland
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/l10n-switzerland-13-0/l10n-switzerland-13-0-ebill_paynet
+    :target: https://translation.odoo-community.org/projects/l10n-switzerland-14-0/l10n-switzerland-14-0-ebill_paynet
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-    :target: https://runbot.odoo-community.org/runbot/125/13.0
+    :target: https://runbot.odoo-community.org/runbot/125/14.0
     :alt: Try me on Runbot
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
@@ -44,18 +44,18 @@ Configuration
 =============
 
 Create a service
-~~~~~~~~~~~~~~~~
+================
 
 To create a service you need to be registred with SIXT Paynet service. Then the configuration of the service can be done in `Accounting - Configuration - Payments - Paynet Service`
 
 Configure the customers
-~~~~~~~~~~~~~~~~~~~~~~~
+=======================
 
 A customer that wants to receive his invoices through Paynet will also need to register with the service.
 In Odoo to enable the sending of invoices for a specific customer through Paynet, the transmit method must be set accordingly for that customer. This is done on the customer form in the tab `Sales & Purchases` section `Sales`.
 
 Configure the contracts
-~~~~~~~~~~~~~~~~~~~~~~~
+=======================
 
 The contracts specific to e-billing are located in `Accounting - Customers - eBill Payment Contract`
 Although the Paynet system allows for automatic exchange of contract registration and status changes, this automation is not yet implemented.
@@ -66,29 +66,29 @@ Usage
 
 To use this module, you need to:
 
-- Configure the service, customers and contracts as described in the CONFIGURATION section.
-- Create an invoice for a customer with an open Paynet contract.
-- Validate the invoice, and it will be send to the service.
+#. Configure the service, customers and contracts as described in the CONFIGURATION section.
+#. Create an invoice for a customer with an open Paynet contract.
+#. Validate the invoice, and it will be send to the service.
 
 Known issues / Roadmap
 ======================
 
 To Do
-~~~~~
+=====
 
 * The B2C invoice generated is only a draft and not tested, yet.
 * Invoice in currency other than CHF will not be generated correctly.
 * Implementation of the automatic registration of contracts, is not implemented and probably not supported by the DWS
 
 Improvements
-~~~~~~~~~~~~
+============
 
 * On the contract view the list of messages for that contract could be visible.
 * When an error is returned by the service it should be clearer where it is located in the payload send.
 * In the chatter add a link to the job when it fails
 
 Refactoring
-~~~~~~~~~~~
+===========
 
 The dependence on `delivery` module could be extracted in a glue module.
 For v14 or v15 consider refactoring on top of EDI framework
@@ -99,7 +99,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/l10n-switzerland/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/l10n-switzerland/issues/new?body=module:%20ebill_paynet%0Aversion:%2013.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/l10n-switzerland/issues/new?body=module:%20ebill_paynet%0Aversion:%2014.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -115,6 +115,13 @@ Contributors
 ~~~~~~~~~~~~
 
 * Thierry Ducrest <thierry.ducrest@camptocamp.com>
+* `Trobz <https://trobz.com>`_:
+  * Dung Tran <dungtd@trobz.com>
+
+Other credits
+~~~~~~~~~~~~~
+
+The migration of this module from 13.0 to 14.0 as financially supported by Camptocamp
 
 Maintainers
 ~~~~~~~~~~~
@@ -129,6 +136,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/l10n-switzerland <https://github.com/OCA/l10n-switzerland/tree/13.0/ebill_paynet>`_ project on GitHub.
+This module is part of the `OCA/l10n-switzerland <https://github.com/OCA/l10n-switzerland/tree/14.0/ebill_paynet>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

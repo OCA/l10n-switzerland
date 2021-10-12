@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE XML-FSCM-INVOICE-2003A SYSTEM "XML-FSCM-INVOICE-2003A.DTD">
 <XML-FSCM-INVOICE-2003A>
   <INTERCHANGE>
@@ -13,7 +13,7 @@
   <INVOICE Type="EFD">
     <HEADER>
       <FUNCTION-FLAGS>
-        <Confirmation-Flag/>
+        <Confirmation-Flag />
       </FUNCTION-FLAGS>
       <MESSAGE-REFERENCE>
         <REFERENCE-DATE>

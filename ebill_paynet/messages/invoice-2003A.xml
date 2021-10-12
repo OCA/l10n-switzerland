@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE XML-FSCM-INVOICE-2003A SYSTEM "XML-FSCM-INVOICE-2003A.DTD">
 <XML-FSCM-INVOICE-2003A>
   <INTERCHANGE>
@@ -13,7 +13,7 @@
   <INVOICE Type="{{ document_type }}">
     <HEADER>
       <FUNCTION-FLAGS>
-        <Confirmation-Flag/>
+        <Confirmation-Flag />
       </FUNCTION-FLAGS>
       <MESSAGE-REFERENCE>
         <REFERENCE-DATE>
@@ -69,8 +69,8 @@
         {%- if invoice.company_id.vat %}
         <Tax-No>{{ invoice.company_id.vat }}</Tax-No>
         {%- endif %}
-        {%- if invoice.invoice_payment_ref %}
-        <Doc-Reference Type="{{ 'QRR' if payment_type == 'qr' else 'ESR-NEU' }}">{{ invoice.invoice_payment_ref }}</Doc-Reference>
+        {%- if invoice.payment_reference %}
+        <Doc-Reference Type="{{ 'QRR' if payment_type == 'qr' else 'ESR-NEU' }}">{{ invoice.payment_reference }}</Doc-Reference>
         {%- endif %}
         <PARTY-ID>
           <Pid>{{ client_pid }}</Pid>

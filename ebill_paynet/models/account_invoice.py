@@ -19,7 +19,7 @@ class AccountInvoice(models.Model):
     @api.onchange("partner_id", "company_id")
     def _transmit_method_partner_change(self):
         super()._transmit_method_partner_change()
-        if self.type not in ("out_invoice", "out_refund"):
+        if self.move_type not in ("out_invoice", "out_refund"):
             return
         paynet_method = self.env.ref("ebill_paynet.paynet_transmit_method")
         if self.transmit_method_id == paynet_method:
@@ -56,7 +56,7 @@ class AccountInvoice(models.Model):
             report_names.append("l10n_ch.isr_report_main")
         for report_name in report_names:
             r = self.env["ir.actions.report"]._get_report_from_name(report_name)
-            pdf_content, _ = r.render([self.id])
+            pdf_content, _ = r._render([self.id])
             pdf_data.append(pdf_content)
         if not odoo.tools.config["test_enable"]:
             pdf = merge_pdf(pdf_data)
@@ -123,7 +123,7 @@ class AccountInvoice(models.Model):
         )
         values = {}
         if not activity:
-            message = self.env.ref("ebill_paynet.dws_reject_invoice").render(
+            message = self.env.ref("ebill_paynet.dws_reject_invoice")._render(
                 values=values
             )
             activity = self.activity_schedule(

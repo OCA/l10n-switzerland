@@ -14,6 +14,22 @@ class TestEbillPaynet(SingleTransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+
+        # Invoice and account should be the same company
+        cls.env.user.company_id = cls.env.ref("l10n_ch.demo_company_ch").id
+
+        cls.bank = cls.env.ref("base.res_bank_1")
+        cls.bank.clearing = 777
+        cls.partner_bank = cls.env["res.partner.bank"].create(
+            {
+                "bank_id": cls.bank.id,
+                "acc_number": "300.300.300",
+                "acc_holder_name": "AccountHolderName",
+                "partner_id": cls.env.user.partner_id.id,
+                "l10n_ch_qr_iban": "CH21 3080 8001 2345 6782 7",
+            }
+        )
+
         cls.paynet = cls.env["paynet.service"].create(
             {
                 "name": "Paynet Test Service",
@@ -66,7 +82,7 @@ class TestEbillPaynet(SingleTransactionCase):
             {
                 "partner_id": cls.customer.id,
                 # 'account_id': cls.account.id,
-                "type": "out_invoice",
+                "move_type": "out_invoice",
                 "transmit_method_id": cls.env.ref(
                     "ebill_paynet.paynet_transmit_method"
                 ).id,
@@ -94,11 +110,9 @@ class TestEbillPaynet(SingleTransactionCase):
     @recorder.use_cassette
     def test_takeShipment(self):
         """Check sending a file to the service."""
-        ch = self.env.ref("base.ch")
-        attachment = self.env["ir.attachment"].search(
-            [["res_model", "=", "res.country"], ["res_id", "=", ch.id]]
+        attachment = self.env["ir.attachment"].create(
+            {"datas": "bWlncmF0aW9uIHRlc3Q=", "name": "SampleDoc.doc"}
         )
-        attachment = self.env.ref("mail.msg_discus4_attach1")
         shipment_id = self.paynet.take_shipment(attachment[0].datas.decode())
         self.assertTrue(shipment_id.startswith("SC"))
         # The shipment is not found on the server ?
@@ -116,6 +130,7 @@ class TestEbillPaynet(SingleTransactionCase):
 
         This one is CONTRL NOK
         """
+        self.invoice_1.partner_bank_id = self.partner_bank.id
         message = self.invoice_1.create_paynet_message()
         message.ic_ref = "SA000000000003"
         res = self.paynet.get_shipment_content("SC-00000000000020357011")

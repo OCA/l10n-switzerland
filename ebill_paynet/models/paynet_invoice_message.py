@@ -88,13 +88,11 @@ class PaynetInvoiceMessage(models.Model):
         bank_account = ""
         if self.payment_type == "qr":
             bank_account = sanitize_account_number(
-                self.invoice_id.invoice_partner_bank_id.l10n_ch_qr_iban
-                or self.invoice_id.invoice_partner_bank_id.acc_number
+                self.invoice_id.partner_bank_id.l10n_ch_qr_iban
+                or self.invoice_id.partner_bank_id.acc_number
             )
         else:
-            bank_account = (
-                self.invoice_id.invoice_partner_bank_id.l10n_ch_isr_subscription_chf
-            )
+            bank_account = self.invoice_id.partner_bank_id.l10n_ch_isr_subscription_chf
             if bank_account:
                 account_parts = bank_account.split("-")
                 bank_account = (
@@ -111,11 +109,11 @@ class PaynetInvoiceMessage(models.Model):
             "customer": self.invoice_id.partner_id,
             "delivery": self.invoice_id.partner_shipping_id,
             "pdf_data": self.attachment_id.datas.decode("ascii"),
-            "bank": self.invoice_id.invoice_partner_bank_id,
+            "bank": self.invoice_id.partner_bank_id,
             "bank_account": bank_account,
             "ic_ref": self.ic_ref,
             "payment_type": self.payment_type,
-            "document_type": DOCUMENT_TYPE[self.invoice_id.type],
+            "document_type": DOCUMENT_TYPE[self.invoice_id.move_type],
             "format_date": self.format_date,
             "ebill_account_number": self.ebill_account_number,
             "discount_template": "",
@@ -126,7 +124,13 @@ class PaynetInvoiceMessage(models.Model):
         # Could be improve by searching in the account_tax linked to the group
         for taxgroup in self.invoice_id.amount_by_group:
             rate = taxgroup[0].split()[-1:][0][:-1]
-            amount_by_group.append((rate or "0", taxgroup[1], taxgroup[2],))
+            amount_by_group.append(
+                (
+                    rate or "0",
+                    taxgroup[1],
+                    taxgroup[2],
+                )
+            )
         params["amount_by_group"] = amount_by_group
         # Get the invoice due date
         date_due = None

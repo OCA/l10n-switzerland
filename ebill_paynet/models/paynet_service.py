@@ -9,8 +9,6 @@ from lxml import etree
 from odoo import api, fields, models
 from odoo.exceptions import UserError
 
-from odoo.addons.queue_job.job import job
-
 from ..components.api import PayNetDWS
 
 SYSTEM_PROD_URL = "https://dws.paynet.ch/DWS/DWS"
@@ -182,12 +180,13 @@ class PaynetService(models.Model):
         for shipment in res["Shipment"]:
             shipment_id = shipment["ShipmentID"]
             description = "Paynet - Download shipment {}".format(shipment_id)
-            self.with_delay(description=description).download_shipment(shipment_id)
+            self.with_delay(
+                description=description, channel="root.invoice_export"
+            ).download_shipment(shipment_id)
         return "{} shipments found for {} service.".format(
             res["entriesFound"], self.name
         )
 
-    @job(default_channel="root.invoice_export")
     def download_shipment(self, shipment_id):
         """Download a shipment, parse it and if successful, acknowledge it."""
         # TODO: Should test if shipment has already been downloaded
