@@ -3,7 +3,7 @@
 
 {
     "name": "Server environment for Ebill Paynet",
-    "version": "13.0.1.0.1",
+    "version": "14.0.1.0.0",
     "author": "Camptocamp,Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "category": "Tools",
