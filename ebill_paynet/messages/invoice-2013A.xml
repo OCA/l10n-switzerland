@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XML-FSCM-INVOICE-2013A>
+  <INTERCHANGE>
+    <IC-SENDER>
+      <Pid>{{ client_pid }}</Pid>
+    </IC-SENDER>
+    <IC-RECEIVER>
+      <Pid>41010106799303734</Pid>
+    </IC-RECEIVER>
+    <IC-Ref>{{ ic_ref }}</IC-Ref>
+  </INTERCHANGE>
+  <INVOICE Type="{{ document_type }}">
+    <HEADER>
+      <FUNCTION-FLAGS>
+        <Confirmation-Flag />
+      </FUNCTION-FLAGS>
+      <MESSAGE-REFERENCE>
+        <REFERENCE-DATE>
+          <Reference-No>{{ invoice.name }}</Reference-No>
+          <Date>{{ format_date() }}</Date>
+        </REFERENCE-DATE>
+      </MESSAGE-REFERENCE>
+      <PRINT-DATE>
+        <Date>{{ format_date(invoice.date_invoice) }}</Date>
+      </PRINT-DATE>
+      <REFERENCE>
+        <INVOICE-REFERENCE>
+          <REFERENCE-DATE>
+            <Reference-No>{{ invoice.name }}</Reference-No>
+            <Date>{{ format_date(invoice.date_invoice) }}</Date>
+          </REFERENCE-DATE>
+        </INVOICE-REFERENCE>
+      </REFERENCE>
+      <BILLER>
+        {#- Doc says vat number or business identitfiaction number #}
+        {%- if invoice.company_id.vat %}
+        <Tax-No>{{ invoice.company_id.vat }}</Tax-No>
+        {%- endif %}
+        {%- if invoice_esr %}
+            <Doc-Reference Type="ESR-NEU">{{ invoice_esr }}</Doc-Reference>
+        {%- endif %}
+        <PARTY-ID>
+          <Pid>{{ client_pid }}</Pid>
+        </PARTY-ID>
+        <NAME-ADDRESS Format="COM">
+          <NAME>
+            <Line-35>{{ biller.name }}</Line-35>
+          </NAME>
+          <STREET>
+            <Line-35>{{ biller.street or ''}}</Line-35>
+            {%- if biller.street2 %}
+            <Line-35>{{ biller.street2 }}</Line-35>
+            {% endif %}
+          </STREET>
+          <City>{{ biller.city or ''}}</City>
+          <Zip>{{ biller.zip or '' }}</Zip>
+          <Country>{{ biller.country_id.code or 'CH' }}</Country>
+        </NAME-ADDRESS>
+        <BANK-INFO>
+          <Acct-No>{{ bank.sanitized_acc_number }}</Acct-No>
+          <Acct-Name>{{ bank.acc_holder_name }}</Acct-Name>
+          {# Is this the default for e-banking customers ? -#}
+          <BankId Type="BCNr-int" Country="CH">001996</BankId>
+        </BANK-INFO>
+      </BILLER>
+      <PAYER>
+        <PARTY-ID>
+          <Pid>{{ ebill_account_number }}</Pid>
+        </PARTY-ID>
+        <NAME-ADDRESS Format="PRV">
+          <NAME>
+            <Line-35>{{ customer.name }}</Line-35>
+          </NAME>
+          <STREET>
+            <Line-35>{{ customer.street }}</Line-35>
+            {%- if customer.street2 %}
+            <Line-35>{{ customer.street2 or '' }}</Line-35>
+            {%- endif %}
+          </STREET>
+          <City>{{ customer.city }}</City>
+          <State>{{ customer.state_id.code }}</State>
+          <Zip>{{ customer.zip }}</Zip>
+          <Country>{{ customer.country_id.code or 'CH' }}</Country>
+        </NAME-ADDRESS>
+      </PAYER>
+    </HEADER>
+    <LINE-ITEM />
+    <SUMMARY>
+      <INVOICE-AMOUNT>
+        <Amount Currency="CHF">{{ invoice.amount_total }}</Amount>
+      </INVOICE-AMOUNT>
+      <VAT-AMOUNT>
+        <Amount Currency="CHF">{{ invoice.amount_tax }}</Amount>
+      </VAT-AMOUNT>
+      <EXTENDED-AMOUNT Type="79">
+        <Amount Currency="CHF">{{ invoice.amount_untaxed }}</Amount>
+      </EXTENDED-AMOUNT>
+      {% if amount_by_group %}
+      {% for taxgroup in amount_by_group %}
+      <TAX>
+        <TAX-BASIS>
+          <Amount Currency="CHF">{{ taxgroup[2] }}</Amount>
+        </TAX-BASIS>
+      {%- if taxgroup[0] %}
+      <Rate Category="S">{{ taxgroup[0] }}</Rate>
+      {%- else %}
+      <Rate Category="E">0</Rate>
+      {%- endif %}
+      <Amount Currency="CHF">{{ taxgroup[1] }}</Amount>
+    </TAX>
+    {% endfor %}
+    {%- else %}
+    <TAX>
+      <TAX-BASIS>
+        <Amount Currency="CHF">{{ invoice.amount_untaxed }}</Amount>
+      </TAX-BASIS>
+      <Rate Category="E">0</Rate>
+      <Amount Currency="CHF">0</Amount>
+    </TAX>
+    {% endif -%}
+    <PAYMENT-TERMS>
+      <BASIC Payment-Type="{{ payment_type|upper }}" Terms-Type="5">
+        <TERMS>
+          <Date>{{ format_date(invoice.date_due or invoice.date_invoice) }}</Date>
+        </TERMS>
+      </BASIC>
+    </PAYMENT-TERMS>
+    <Back-Pack-Container Encode="Base64">
+      {{ pdf_data }}
+    </Back-Pack-Container>
+  </SUMMARY>
+</INVOICE>
+</XML-FSCM-INVOICE-2013A>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="message_from_service" model="ir.actions.act_window">
+        <field name="name">Paynet Messages</field>
+        <field name="res_model">paynet.invoice.message</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="domain">[('service_id', '=', active_id)]</field>
+        <field name="context">{'default_service_id': active_id}</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="contract_for_service" model="ir.actions.act_window">
+        <field name="name">Paynet Contracts</field>
+        <field name="res_model">ebill.payment.contract</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="domain">[('paynet_service_id', '=', active_id)]</field>
+        <field name="context">{'default_paynet_service_id': active_id}</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.ui.view" id="paynet_service_form_view">
+        <field name="name">paynet.service.form</field>
+        <field name="model">paynet.service</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        type="object"
+                        name="test_ping"
+                        string="Test connection"
+                        class="oe_highlight"
+                    />
+                    <button
+                        type="object"
+                        name="check_shipments"
+                        string="Check for shipments"
+                        class="oe_highlight"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="%(contract_for_service)d"
+                            type="action"
+                            class="oe_stat_button"
+                            icon="fa-handshake-o"
+                        >
+                          Contracts
+                    </button>
+                        <button
+                            name="%(message_from_service)d"
+                            type="action"
+                            class="oe_stat_button"
+                            icon="fa-envelope-o"
+                        >
+                          Messages
+                    </button>
+                        <button
+                            name="toggle_active"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-archive"
+                        >
+                            <field
+                                name="active"
+                                widget="boolean_button"
+                                options="{&quot;terminology&quot;: &quot;disabled&quot;}"
+                            />
+                        </button>
+                    </div>
+                    <label for="name" class="oe_edit_only" />
+                    <h2>
+                        <field name="name" class="oe_inline" />
+                    </h2>
+                    <group>
+                        <group>
+                            <field name="url" />
+                            <field name="service_type" />
+                            <field name="use_test_service" />
+                            <field name="client_pid" />
+                        </group>
+                        <group>
+                            <field name="username" />
+                            <field name="password" />
+                            <field
+                                name="partner_bank_id"
+                                options="{'no_create': True}"
+                            />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="paynet_service_search_view">
+        <field name="name">paynet.service.search</field>
+        <field name="model">paynet.service</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <filter
+                    name="all_service"
+                    string="All"
+                    domain="['|', ('active', '=', True), ('active', '=', False)]"
+                />
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="paynet_service_tree_view">
+        <field name="name">paynet.service.tree</field>
+        <field name="model">paynet.service</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="use_test_service" />
+                <field name="url" />
+                <field name="client_pid" />
+                <field name="active" invisible="1" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="paynet_service_act_window">
+        <field name="name">Paynet Service</field>
+        <field name="res_model">paynet.service</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{'search_default_all_service': 1}</field>
+    </record>
+    <record model="ir.ui.menu" id="paynet_service_config_menu">
+        <field name="name">Paynet Service</field>
+        <field name="parent_id" ref="account.root_payment_menu" />
+        <field name="action" ref="paynet_service_act_window" />
+        <field name="sequence" eval="16" />
+    </record>
+</odoo>

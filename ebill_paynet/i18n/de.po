@@ -1,0 +1,379 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ebill_paynet
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-15 13:39+0000\n"
+"PO-Revision-Date: 2021-03-15 13:39+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ebill_paynet
+#: code:addons/ebill_paynet/models/ebill_payment_contract.py:0
+#, python-format
+msgid "A Paynet service is required for a Paynet contract."
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__active
+msgid "Active"
+msgstr ""
+
+#. module: ebill_paynet
+#: model_terms:ir.ui.view,arch_db:ebill_paynet.paynet_service_search_view
+msgid "All"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields.selection,name:ebill_paynet.selection__paynet_service__service_type__b2b
+msgid "B2B"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields.selection,name:ebill_paynet.selection__paynet_service__service_type__b2c
+msgid "B2C"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__partner_bank_id
+msgid "Bank account"
+msgstr ""
+
+#. module: ebill_paynet
+#: model_terms:ir.ui.view,arch_db:ebill_paynet.paynet_service_form_view
+msgid "Check for shipments"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__ebill_payment_contract_ids
+#: model_terms:ir.ui.view,arch_db:ebill_paynet.paynet_service_form_view
+msgid "Contracts"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message__create_uid
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message__create_date
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message__display_name
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,help:ebill_paynet.field_paynet_invoice_message__ic_ref
+msgid "Document interchange reference"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields.selection,name:ebill_paynet.selection__paynet_invoice_message__state__done
+msgid "Done"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields.selection,name:ebill_paynet.selection__paynet_invoice_message__state__draft
+msgid "Draft"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields.selection,name:ebill_paynet.selection__paynet_invoice_message__payment_type__esp
+msgid "ESP"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields.selection,name:ebill_paynet.selection__paynet_invoice_message__state__error
+msgid "Error"
+msgstr ""
+
+#. module: ebill_paynet
+#: code:addons/ebill_paynet/models/account_invoice.py:0
+#, python-format
+msgid "Error generating Paynet message"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message__ic_ref
+msgid "IC Ref"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message__id
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__id
+msgid "ID"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields.selection,name:ebill_paynet.selection__ebill_payment_contract__payment_type__isr
+#: model:ir.model.fields.selection,name:ebill_paynet.selection__paynet_invoice_message__payment_type__isr
+msgid "ISR"
+msgstr "ESR"
+
+#. module: ebill_paynet
+#: model_terms:ir.ui.view,arch_db:ebill_paynet.paynet_invoice_message_search_view
+msgid "In Error"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message__invoice_id
+msgid "Invoice"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__invoice_message_ids
+msgid "Invoice Messages"
+msgstr ""
+
+#. module: ebill_paynet
+#: code:addons/ebill_paynet/models/account_invoice.py:0
+#, python-format
+msgid "Invoice accepted by the Paynet system"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_ebill_payment_contract__is_paynet_contract
+msgid "Is Paynet Contract"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model,name:ebill_paynet.model_account_move
+msgid "Journal Entries"
+msgstr "Buchungssätze"
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message____last_update
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message__write_uid
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message__write_date
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: ebill_paynet
+#: model_terms:ir.ui.view,arch_db:ebill_paynet.paynet_service_form_view
+msgid "Messages"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields.selection,name:ebill_paynet.selection__paynet_invoice_message__payment_type__npy
+msgid "NPY"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__name
+msgid "Name"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message__attachment_id
+msgid "PDF"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__password
+msgid "Password"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message__payload
+msgid "Payload sent"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message__payment_type
+msgid "Payment Type"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_ebill_payment_contract__payment_type
+msgid "Payment method"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,help:ebill_paynet.field_ebill_payment_contract__payment_type
+msgid ""
+"Payment type to use for the invoices sent, PDF will be generated and "
+"attached accordingly."
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.actions.server,name:ebill_paynet.cron_paynet_get_shipment_ir_actions_server
+#: model:ir.cron,cron_name:ebill_paynet.cron_paynet_get_shipment
+#: model:ir.cron,name:ebill_paynet.cron_paynet_get_shipment
+msgid "Paynet - Poll for shipments"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_sale_order__paynet_client_order_ref
+msgid "Paynet Client Order Ref"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.actions.act_window,name:ebill_paynet.contract_for_service
+msgid "Paynet Contracts"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_ebill_payment_contract__paynet_account_number
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__client_pid
+msgid "Paynet ID"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message__ebill_account_number
+msgid "Paynet Id"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.actions.act_window,name:ebill_paynet.message_from_service
+msgid "Paynet Messages"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.actions.act_window,name:ebill_paynet.paynet_service_act_window
+#: model:ir.model.fields,field_description:ebill_paynet.field_ebill_payment_contract__paynet_service_id
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message__service_id
+#: model:ir.ui.menu,name:ebill_paynet.paynet_service_config_menu
+msgid "Paynet Service"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:mail.activity.type,name:ebill_paynet.mail_activity_dws_error
+msgid "Paynet System Error"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model,name:ebill_paynet.model_paynet_service
+msgid "Paynet service configuration"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model,name:ebill_paynet.model_paynet_invoice_message
+msgid "Paynet shipment send to service"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields.selection,name:ebill_paynet.selection__ebill_payment_contract__payment_type__qr
+#: model:ir.model.fields.selection,name:ebill_paynet.selection__paynet_invoice_message__payment_type__qr
+msgid "QR"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message__ref
+msgid "Reference No."
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields.selection,name:ebill_paynet.selection__paynet_invoice_message__state__reject
+msgid "Reject"
+msgstr ""
+
+#. module: ebill_paynet
+#: model_terms:ir.ui.view,arch_db:ebill_paynet.paynet_invoice_message_form_view
+msgid "Resend"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message__response
+msgid "Response recieved"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model,name:ebill_paynet.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields.selection,name:ebill_paynet.selection__paynet_invoice_message__state__sent
+msgid "Sent"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__service_type
+msgid "Service type"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message__shipment_id
+msgid "Shipment"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,help:ebill_paynet.field_paynet_invoice_message__shipment_id
+msgid "Shipment Id on Paynet service"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,help:ebill_paynet.field_paynet_service__service_type
+msgid "Specify the type of XML exchange with the service."
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message__state
+msgid "State"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,help:ebill_paynet.field_paynet_service__use_test_service
+msgid "Target the test service"
+msgstr ""
+
+#. module: ebill_paynet
+#: model_terms:ir.ui.view,arch_db:ebill_paynet.paynet_service_form_view
+msgid "Test connection"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__use_test_service
+msgid "Testing"
+msgstr ""
+
+#. module: ebill_paynet
+#: code:addons/ebill_paynet/models/ebill_payment_contract.py:0
+#, python-format
+msgid "The Paynet ID is required for a Paynet contract."
+msgstr ""
+
+#. module: ebill_paynet
+#: model_terms:ir.ui.view,arch_db:ebill_paynet.dws_reject_invoice
+msgid "The Paynet system rejected the eBill that was send."
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__url
+msgid "Url"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__username
+msgid "Username"
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model,name:ebill_paynet.model_ebill_payment_contract
+msgid "eBill Payment Contract"
+msgstr ""

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE XML-FSCM-INVOICE-2003A SYSTEM "XML-FSCM-INVOICE-2003A.DTD">
+<XML-FSCM-INVOICE-2003A>
+  <INTERCHANGE>
+    <IC-SENDER>
+      <Pid>52110726772852593</Pid>
+    </IC-SENDER>
+    <IC-RECEIVER>
+      <Pid>41010106799303734</Pid>
+    </IC-RECEIVER>
+    <IC-Ref>$IC_REF</IC-Ref>
+  </INTERCHANGE>
+  <INVOICE Type="EFD">
+    <HEADER>
+      <FUNCTION-FLAGS>
+        <Confirmation-Flag />
+      </FUNCTION-FLAGS>
+      <MESSAGE-REFERENCE>
+        <REFERENCE-DATE>
+          <Reference-No>INV_TEST_01</Reference-No>
+          <Date Format="CCYYMMDD">20190621</Date>
+        </REFERENCE-DATE>
+      </MESSAGE-REFERENCE>
+      <PRINT-DATE>
+        <Date Format="CCYYMMDD">20190621</Date>
+      </PRINT-DATE>
+      <DELIVERY-DATE>
+        <Date Format="CCYYMMDD">20190621</Date>
+      </DELIVERY-DATE>
+      <REFERENCE>
+        <INVOICE-REFERENCE>
+          <REFERENCE-DATE>
+            <Reference-No>INV_TEST_01</Reference-No>
+            <Date Format="CCYYMMDD">20190621</Date>
+          </REFERENCE-DATE>
+        </INVOICE-REFERENCE>
+        <ORDER>
+          <REFERENCE-DATE>
+            <Reference-No>CustomerRef</Reference-No>
+            <Date Format="CCYYMMDD">20190601</Date>
+          </REFERENCE-DATE>
+        </ORDER>
+        <DELIVERY-NOTE>
+          <REFERENCE-DATE>
+            <Reference-No>track_me_if_you_can</Reference-No>
+            <!-- <Date Format="CCYYMMDD">20190620</Date> -->
+          </REFERENCE-DATE>
+        </DELIVERY-NOTE>
+      </REFERENCE>
+      <BILLER>
+        <Tax-No>CHE-012.345.678</Tax-No>
+        <Doc-Reference Type="ESR-NEU">1234567890</Doc-Reference>
+        <PARTY-ID>
+          <Pid>52110726772852593</Pid>
+        </PARTY-ID>
+        <NAME-ADDRESS Format="COM">
+          <NAME>
+            <Line-35>Camptocamp SA</Line-35>
+          </NAME>
+          <STREET>
+            <Line-35>StreetOne</Line-35>
+          </STREET>
+          <City>Lausanne</City>
+          <Zip>1015</Zip>
+          <Country>CH</Country>
+        </NAME-ADDRESS>
+        <BANK-INFO>
+          <Acct-No></Acct-No>
+          <BankId Type="BCNr-int" Country="CH">777</BankId>
+        </BANK-INFO>
+      </BILLER>
+      <PAYER>
+        <PARTY-ID>
+          <Pid>41010198248040391</Pid>
+        </PARTY-ID>
+        <NAME-ADDRESS Format="COM">
+          <NAME>
+            <Line-35>Test RAD Customer XML</Line-35>
+          </NAME>
+          <STREET>
+            <Line-35>Teststrasse 100</Line-35>
+            <Line-35>This is a very long street name tha</Line-35>
+          </STREET>
+          <City>Fribourg</City>
+          <Zip>1700</Zip>
+          <Country>CH</Country>
+        </NAME-ADDRESS>
+      </PAYER>
+      <DELIVERY-PARTY>
+        <NAME-ADDRESS Format="COM">
+          <NAME>
+            <Line-35>Test RAD Customer XML</Line-35>
+            <Line-35>The Shed in the yard</Line-35>
+          </NAME>
+          <STREET>
+            <Line-35>Teststrasse 102</Line-35>
+          </STREET>
+          <City>Fribourg</City>
+          <Zip>1700</Zip>
+          <Country>CH</Country>
+        </NAME-ADDRESS>
+      </DELIVERY-PARTY>
+      <!-- <ALLOWANCE-OR-CHARGE Type="C"> -->
+      <!--   <Service-Code Type="FC"/> -->
+      <!--   <SERVICE-TEXT> -->
+      <!--     <Line-35>Porto + Verpackung</Line-35> -->
+      <!--   </SERVICE-TEXT> -->
+      <!--   <ALC-AMOUNT Print-Status="25"> -->
+      <!--     <Amount Currency="CHF">9.70</Amount> -->
+      <!--   </ALC-AMOUNT> -->
+      <!--   <TAX> -->
+      <!--     <Rate Category="S">7.70</Rate> -->
+      <!--     <Amount Currency="CHF">0.75</Amount> -->
+      <!--   </TAX> -->
+      <!-- </ALLOWANCE-OR-CHARGE> -->
+    </HEADER>
+    <LINE-ITEM Line-Number="1">
+      <ITEM-ID>
+        <Item-Id Type="VN">370003021</Item-Id>
+        <Item-Id Type="SA">370003021</Item-Id>
+      </ITEM-ID>
+      <ITEM-DESCRIPTION>
+        <Item-Type-Code>1011</Item-Type-Code>
+        <Line-35>Product One</Line-35>
+      </ITEM-DESCRIPTION>
+      <ITEM-REFERENCE Type="ON">
+      <!-- TODO add linked sale order in test -->
+        <REFERENCE-DATE>
+          <Reference-No>CustomerRef</Reference-No>
+          <Date Format="CCYYMMDD">20190601</Date>
+          <!-- <Line-No>1</Line-No> -->
+        </REFERENCE-DATE>
+      </ITEM-REFERENCE>
+      <Quantity Type="47" Units="PCE">4.0</Quantity>
+      <Price Type="YYY">492.0</Price>
+      <Price Type="AAA">492.0</Price>
+      <Price Type="XXX">529.88</Price>
+      <ITEM-AMOUNT Type="66">
+        <Amount Currency="CHF">492.0</Amount>
+      </ITEM-AMOUNT>
+      <TAX>
+        <Rate>7.7</Rate>
+        <Amount Currency="CHF">37.88</Amount>
+      </TAX>
+    </LINE-ITEM>
+    <LINE-ITEM Line-Number="2">
+      <ITEM-ID>
+        <Item-Id Type="VN">370003022</Item-Id>
+        <Item-Id Type="SA">370003022</Item-Id>
+      </ITEM-ID>
+      <ITEM-DESCRIPTION>
+        <Item-Type-Code>1011</Item-Type-Code>
+        <Line-35>Product With a Very Long Name That </Line-35>
+        <Line-35>Need To Be Truncated</Line-35>
+      </ITEM-DESCRIPTION>
+      <ITEM-REFERENCE Type="ON">
+      <!-- TODO add linked sale order in test -->
+        <REFERENCE-DATE>
+          <Reference-No>CustomerRef</Reference-No>
+          <Date Format="CCYYMMDD">20190601</Date>
+          <!-- <Line-No>1</Line-No> -->
+        </REFERENCE-DATE>
+      </ITEM-REFERENCE>
+      <Quantity Type="47" Units="PCE">1.0</Quantity>
+      <Price Type="YYY">0.0</Price>
+      <Price Type="AAA">0.0</Price>
+      <Price Type="XXX">0.0</Price>
+      <ITEM-AMOUNT Type="66">
+        <Amount Currency="CHF">0.0</Amount>
+      </ITEM-AMOUNT>
+      <TAX>
+        <Rate>7.7</Rate>
+        <Amount Currency="CHF">0.0</Amount>
+      </TAX>
+    </LINE-ITEM>
+    <LINE-ITEM Line-Number="3">
+      <ITEM-DESCRIPTION>
+        <Item-Type-Code>1011</Item-Type-Code>
+        <Line-35>Phone support</Line-35>
+      </ITEM-DESCRIPTION>
+      <ITEM-REFERENCE Type="ON">
+      <!-- TODO add linked sale order in test -->
+        <REFERENCE-DATE>
+          <Reference-No>CustomerRef</Reference-No>
+          <Date Format="CCYYMMDD">20190601</Date>
+          <!-- <Line-No>1</Line-No> -->
+        </REFERENCE-DATE>
+      </ITEM-REFERENCE>
+      <Quantity Type="47" Units="PCE">4.0</Quantity>
+      <Price Type="YYY">0.0</Price>
+      <Price Type="AAA">0.0</Price>
+      <Price Type="XXX">0.0</Price>
+      <ITEM-AMOUNT Type="66">
+        <Amount Currency="CHF">0.0</Amount>
+      </ITEM-AMOUNT>
+      <TAX>
+        <Rate>0</Rate>
+      </TAX>
+    </LINE-ITEM>
+    <SUMMARY>
+      <INVOICE-AMOUNT Print-Status="25">
+        <Amount Currency="CHF">529.88</Amount>
+      </INVOICE-AMOUNT>
+      <VAT-AMOUNT Print-Status="25">
+        <!-- Should it not be the amount to be taxed ? -->
+        <Amount Currency="CHF">37.88</Amount>
+      </VAT-AMOUNT>
+      <EXTENDED-AMOUNT Type="79">
+        <Amount Currency="CHF">492.0</Amount>
+      </EXTENDED-AMOUNT>
+      <TAX>
+        <TAX-BASIS>
+          <Amount Currency="CHF">492.0</Amount>
+        </TAX-BASIS>
+        <Rate Category="S">7.7</Rate>
+        <Amount Currency="CHF">37.88</Amount>
+      </TAX>
+      <PAYMENT-TERMS>
+        <BASIC Payment-Type="ESR" Terms-Type="5">
+          <TERMS>
+            <Date>20190701</Date>
+          </TERMS>
+        </BASIC>
+      </PAYMENT-TERMS>
+    </SUMMARY>
+  </INVOICE>
+</XML-FSCM-INVOICE-2003A>

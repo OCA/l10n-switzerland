@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:dxpp="http://www.sap.com/DXPPTypes" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dsx="http://www.sap.com/DXPPShipmentExchange" targetNamespace="http://www.sap.com/DXPPShipmentExchange" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.sap.com/DXPPTypes" schemaLocation="DXPPTypesPayNet.xsd"/>
+	<xs:element name="ShipmentDeliveryMsg">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dxpp:Authorization" minOccurs="0"/>
+				<xs:element ref="dxpp:Mandant" minOccurs="0"/>
+				<xs:element name="ProcessingDate" type="xs:dateTime" minOccurs="0"/>
+				<xs:element ref="dxpp:ShipmentPriority" minOccurs="0"/>
+				<xs:element ref="dxpp:Content"/>
+				<xs:element name="Monitoring" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="dsx:MessageID"/>
+							<xs:element ref="dsx:MonitorCaseReference"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ShipmentDeliveryMsgReply">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dxpp:ShipmentID"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ShipmentListMsg">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dxpp:Authorization" minOccurs="0"/>
+				<xs:element name="FromDate" type="xs:dateTime" minOccurs="0"/>
+				<xs:element name="ToDate" type="xs:dateTime" minOccurs="0"/>
+				<xs:element ref="dxpp:DocumentIdentifier" minOccurs="0"/>
+				<xs:element name="ShipmentStates" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="dxpp:ShipmentState" maxOccurs="3"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="FromShipmentPriority" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:int">
+							<xs:minInclusive value="1"/>
+							<xs:maxInclusive value="9"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ToShipmentPriority" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:int">
+							<xs:minInclusive value="1"/>
+							<xs:maxInclusive value="9"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="fromEntry" type="xs:unsignedInt" use="optional" default="1"/>
+			<xs:attribute name="maxEntries" type="xs:unsignedInt" use="optional" default="100"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ShipmentListMsgReply">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Shipment" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="dxpp:ShipmentID"/>
+							<xs:element ref="dxpp:DocumentIdentifier"/>
+							<xs:element ref="dxpp:SignatureIdentifier" minOccurs="0"/>
+							<xs:element name="CreationDate" type="xs:dateTime"/>
+							<xs:element ref="dxpp:ShipmentState"/>
+							<xs:element name="SenderID" type="xs:string"/>
+							<xs:element name="ReceiverID" type="xs:string"/>
+							<xs:element name="ContentSize" type="xs:int"/>
+							<xs:element ref="dxpp:ShipmentPriority"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="entriesFound" type="xs:unsignedInt" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ShipmentContentMsg">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dxpp:Authorization" minOccurs="0"/>
+				<xs:element ref="dxpp:ShipmentID"/>
+			</xs:sequence>
+			<xs:attribute name="getAdditionalInfo" type="xs:boolean" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ShipmentContentMsgReply">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dxpp:Content"/>
+				<xs:element ref="dxpp:ShipmentPriority"/>
+				<xs:element ref="dsx:AdditionalInfo" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ShipmentConfirmationMsg">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dxpp:Authorization" minOccurs="0"/>
+				<xs:element ref="dxpp:ShipmentID"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MessageID" type="xs:string"/>
+	<xs:element name="MonitorCaseReference" type="xs:string"/>
+	<xs:element name="GetDocumentStateListMsg">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dxpp:Authorization" minOccurs="0"/>
+				<xs:element ref="dxpp:Mandant" minOccurs="0"/>
+				<xs:element name="FromDate" type="xs:dateTime" minOccurs="0"/>
+				<xs:element name="ToDate" type="xs:dateTime" minOccurs="0"/>
+				<xs:element ref="dxpp:ShipmentID" minOccurs="0"/>
+				<xs:element ref="dxpp:DocumentIdentifier" minOccurs="0"/>
+				<xs:element name="ShipmentStates" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="dxpp:ShipmentProcessingState" maxOccurs="7"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="maxShipments" type="xs:unsignedInt" use="optional"/>
+			<xs:attribute name="fromShipment" type="xs:unsignedInt" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetDocumentStateListMsgReply">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Shipment" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="IncomingDocument" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="OutgoingDocument" minOccurs="0" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="DocumentReference" type="xs:string"/>
+												</xs:sequence>
+												<xs:attribute name="ID" type="xs:string" use="required"/>
+												<xs:attribute name="state" type="xs:string" use="required"/>
+												<xs:attribute name="creationDate" type="xs:dateTime" use="required"/>
+												<xs:attribute name="isOK" type="xs:boolean" use="required"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="ID" type="xs:string" use="required"/>
+									<xs:attribute name="state" type="xs:string" use="required"/>
+									<xs:attribute name="creationDate" type="xs:dateTime" use="required"/>
+									<xs:attribute name="isOK" type="xs:boolean" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="ID" type="xs:string" use="required"/>
+						<xs:attribute name="state" type="xs:string" use="required"/>
+						<xs:attribute name="creationDate" type="xs:dateTime" use="required"/>
+						<xs:attribute name="isOK" type="xs:boolean" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="shipmentsFound" type="xs:integer"/>
+			<xs:attribute name="fromShipment" type="xs:integer"/>
+			<xs:attribute name="toShipment" type="xs:integer"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SetShipmentStateMsg">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dxpp:Authorization" minOccurs="0"/>
+				<xs:element ref="dxpp:ShipmentID"/>
+				<xs:element name="NewState">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="ReadyForSending"/>
+							<xs:enumeration value="ArrivedAtDestination"/>
+							<xs:enumeration value="NotProcessable"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SetShipmentStateMsgReply">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dxpp:ShipmentID"/>
+				<xs:element name="NewState">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="ReadyForSending"/>
+							<xs:enumeration value="ArrivedAtDestination"/>
+							<xs:enumeration value="NotProcessable"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetDocumentSetDescriptionMsg">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dxpp:Authorization" minOccurs="0"/>
+				<xs:element ref="dxpp:ShipmentID"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetDocumentSetDescriptionMsgReply">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dsx:eDocument" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="eDocument">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Reference" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:simpleContent>
+							<xs:extension base="xs:string">
+								<xs:attribute name="type" type="xs:string" use="required"/>
+							</xs:extension>
+						</xs:simpleContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element ref="dxpp:Content"/>
+			</xs:sequence>
+			<xs:attribute name="type" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string"/>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="format" type="xs:string" use="optional"/>
+			<xs:attribute name="version" type="xs:string" use="optional"/>
+			<xs:attribute name="filename" type="xs:string" use="optional"/>
+			<xs:attribute name="state" use="optional">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="NotVerified"/>
+						<xs:enumeration value="Verified"/>
+						<xs:enumeration value="VerifiedWithError"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="signatureFormat" use="optional">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="NONE"/>
+						<xs:enumeration value="PKCS7"/>
+						<xs:enumeration value="PDFINTERN"/>
+						<xs:enumeration value="HEADTRAILSIG"/>
+						<xs:enumeration value="XMLDSIG"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AdditionalInfo" type="dxpp:AdditionalInfoType"/>
+</xs:schema>
