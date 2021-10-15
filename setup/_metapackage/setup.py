@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo14-addon-l10n_ch_account_tags',
         'odoo14-addon-l10n_ch_base_bank',
         'odoo14-addon-l10n_ch_invoice_reports',
+        'odoo14-addon-l10n_ch_isrb',
         'odoo14-addon-l10n_ch_states',
     ],
     classifiers=[
