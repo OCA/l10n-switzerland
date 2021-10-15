@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-l10n-switzerland Odoo addons",
     version=version,
     install_requires=[
+        'odoo14-addon-ebill_paynet',
         'odoo14-addon-l10n_ch_account_tags',
         'odoo14-addon-l10n_ch_base_bank',
         'odoo14-addon-l10n_ch_invoice_reports',
