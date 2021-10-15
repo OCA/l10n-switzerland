@@ -21,6 +21,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [l10n_ch_account_tags](l10n_ch_account_tags/) | 14.0.1.0.0 |  | Switzerland Account Tags
 [l10n_ch_base_bank](l10n_ch_base_bank/) | 14.0.1.0.1 |  | Types and number validation for swiss electronic pmnt. DTA, ESR
+[l10n_ch_invoice_reports](l10n_ch_invoice_reports/) | 14.0.1.0.0 |  | Extend invoice to add ISR/QR payment slip
 [l10n_ch_states](l10n_ch_states/) | 14.0.1.0.0 |  | Switzerland Country States
 
 [//]: # (end addons)
