@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo14-addon-ebill_paynet',
+        'odoo14-addon-ebill_paynet_customer_free_ref',
         'odoo14-addon-l10n_ch_account_tags',
         'odoo14-addon-l10n_ch_base_bank',
         'odoo14-addon-l10n_ch_invoice_reports',
