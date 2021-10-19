@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="action_report_dg_l10n_ch" model="ir.actions.report">
+        <field name="name">Swiss Dangerous Goods Report</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_ch_adr_report.report_dg_l10n_ch</field>
+        <field name="report_file">l10n_ch_adr_report.report_dg_l10n_ch</field>
+    </record>
+
+    <template id="report_dg_swiss_partner_block">
+        <table class="table table-condensed dg_header">
+            <thead>
+                <tr>
+                    <th class="uppercase dg-green" colspan="4">Transportation paper</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Date</td>
+                    <td>
+                        <t t-if="o.state == 'done'">
+                            <p t-esc="o.date_done.strftime('%Y-%m-%d')" />
+                        </t>
+                        <t t-if="o.state != 'done'">
+                            <p t-esc="o.scheduled_date.strftime('%Y-%m-%d')" />
+                        </t>
+                    </td>
+                    <td>Delivery note no.</td>
+                    <td><p t-field="o.origin" /></td>
+                </tr>
+                <tr>
+                    <td class="uppercase emphatic">Sender address</td>
+                    <td />
+                    <td class="uppercase emphatic">Recipient address</td>
+                    <td />
+                </tr>
+                <tr>
+                    <td>Company name</td>
+                    <td><span t-field="o.company_id.name" /></td>
+                    <td>Company name</td>
+                    <td><span t-field="o.partner_id.commercial_partner_id.name" /></td>
+                </tr>
+                <tr>
+                    <td>Contact person</td>
+                    <td><span t-field="o.user_id.name" /></td>
+                    <td>Contact person</td>
+                    <td><span t-field="o.partner_id.name" /></td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td>
+                        <div t-field="o.company_id.street" />
+                        <div t-field="o.company_id.street2" />
+                        <div t-field="o.company_id.city" />
+                        <div t-field="o.company_id.state_id" />
+                        <div t-field="o.company_id.country_id" />
+                    </td>
+                    <td>Address</td>
+                    <td>
+                        <div t-field="o.partner_id.street" />
+                        <div t-field="o.partner_id.street2" />
+                        <div t-field="o.partner_id.city" />
+                        <div t-field="o.partner_id.state_id" />
+                        <div t-field="o.partner_id.country_id" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Postcode / town</td>
+                    <td><span t-field="o.company_id.zip" /></td>
+                    <td>Postcode / town</td>
+                    <td><span t-field="o.partner_id.zip" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </template>
+
+    <template id="report_dg_swiss_product_block">
+        <br />
+        <table class="table table-condensed text-center">
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Container / packaging</th>
+                    <th>Content / Pack.</th>
+                    <th colspan="2">Article (order according to 5.4.1.1.1 ADR)</th>
+                    <th colspan="5">Calculation 1000 points rule, ADR 1.1.3.6.3</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="font-weight-bold">
+                    <td class="text-right" colspan="5">Transport category (BK)</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <t t-foreach="DG_data['dg_lines']" t-as="line">
+                        <tr>
+                            <td><span t-esc="line['qty_amount']" /></td>
+                            <td><span
+                                    t-field="line['product'].adr_packing_instruction_ids"
+                                /></td>
+                            <td><span t-field="line['product'].weight" /></td>
+                            <td t-att-style="'font-size: 12px'"><span
+                                    t-esc="line['class']"
+                                /></td>
+                            <td><span
+                                    t-field="line['product'].adr_transport_category"
+                                /></td>
+                            <td>
+                                <t t-if="line['column_index'] == '1'">
+                                    <span t-esc="line['dangerous_amount']" />
+                                </t>
+                            </td>
+                            <td>
+                                <t t-if="line['column_index'] == '2'">
+                                    <span t-esc="line['dangerous_amount']" />
+                                </t>
+                            </td>
+                            <td>
+                                <t t-if="line['column_index'] == '3'">
+                                    <span t-esc="line['dangerous_amount']" />
+                                </t>
+                            </td>
+                            <td>
+                                <t t-if="line['column_index'] == '4'">
+                                    <span t-esc="line['dangerous_amount']" />
+                                </t>
+                            </td>
+                            <td>
+                                <t t-if="line['column_index'] == '5'">
+                                    <span t-esc="line['dangerous_amount']" />
+                                </t>
+                            </td>
+                        </tr>
+                    </t>
+                </tr>
+
+                <t t-set="units" t-value="DG_data['total_section']['total_units']" />
+                <t t-set="factor" t-value="DG_data['total_section']['factor']" />
+                <t
+                    t-set="mass_points"
+                    t-value="DG_data['total_section']['mass_points']"
+                />
+                <tr>
+                    <td
+                        class="text-left font-weight-bold"
+                        colspan="5"
+                    >Total of transported units</td>
+                    <td><span t-esc="units['1']" /></td>
+                    <td><span t-esc="units['2']" /></td>
+                    <td><span t-esc="units['3']" /></td>
+                    <td><span t-esc="units['4']" /></td>
+                    <td><span t-esc="units['5']" /></td>
+                </tr>
+                <tr>
+                    <td class="text-left font-weight-bold" colspan="5">Factor</td>
+                    <td><span t-esc="factor['1']" /></td>
+                    <td><span t-esc="factor['2']" /></td>
+                    <td><span t-esc="factor['3']" /></td>
+                    <td><span t-esc="factor['4']" /></td>
+                    <td><span t-esc="factor['5']" /></td>
+                </tr>
+                <tr class="font-weight-bold">
+                    <td
+                        class="text-left"
+                        colspan="5"
+                    >Points per transportation category</td>
+                    <td><span t-esc="mass_points['1']" /></td>
+                    <td><span t-esc="mass_points['2']" /></td>
+                    <td><span t-esc="mass_points['3']" /></td>
+                    <td><span t-esc="mass_points['4']" /></td>
+                    <td><span t-esc="mass_points['5']" /></td>
+                </tr>
+                <tr class="font-weight-bold">
+                    <td colspan="5" />
+                    <td colspan="2">Total Points</td>
+                    <t t-if="DG_data['total_section']['warn']">
+                        <td class="dg-red" colspan="3">
+                            <span t-esc="DG_data['total_section']['total_points']" />
+                        </td>
+                    </t>
+                    <t t-else="">
+                        <td class="dg-green" colspan="3">
+                            <span t-esc="DG_data['total_section']['total_points']" />
+                        </td>
+                    </t>
+                </tr>
+            </tbody>
+        </table>
+    </template>
+
+    <template id="report_dg_swiss_footer">
+        <table class="table-clean" style="width:100%;">
+            <tbody>
+                <tr>
+                    <td>Received listed goods in good physical condition
+                        <t t-if="DG_data['total_section']['warn']">
+                            <div
+                                class="fa fa-warning"
+                                style="color:red; background-color: transparent; padding: 0px;"
+                            />
+                        </t>
+                    </td>
+                    <td class="text-left">Date
+                        <t t-if="o.state == 'done'">
+                            <p t-esc="o.date_done.strftime('%Y-%m-%d')" />
+                        </t>
+                        <t t-if="o.state != 'done'">
+                            <p t-esc="o.scheduled_date.strftime('%Y-%m-%d')" />
+                        </t>
+                    </td>
+                    <td style="width:300px;" class="text-left">Signature:</td>
+                </tr>
+            </tbody>
+        </table>
+    </template>
+
+
+    <template id="report_dg_ch_document">
+        <t t-call="web.external_layout">
+            <div class="dg-report">
+                <t t-call="l10n_ch_adr_report.report_dg_swiss_partner_block" />
+                <t t-call="l10n_ch_adr_report.report_dg_swiss_product_block" />
+                <t t-call="l10n_ch_adr_report.report_dg_swiss_footer" />
+            </div>
+        </t>
+    </template>
+
+    <template id="report_dg_l10n_ch">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t
+                    t-call="l10n_ch_adr_report.report_dg_ch_document"
+                    t-lang="o.partner_id.lang"
+                />
+            </t>
+        </t>
+    </template>
+
+</odoo>
