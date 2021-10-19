@@ -1,0 +1,39 @@
+.dg-report {
+    .dg_header {
+        table-layout: fixed;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid grey !important;
+        padding: 0.25rem;
+        min-width: 50px;
+    }
+    table {
+        margin-bottom: 0px;
+    }
+    .table-clean {
+        border: none !important;
+        td {
+            border-collapse: collapse;
+            border: none !important;
+        }
+    }
+    .uppercase {
+        text-transform: uppercase;
+    }
+    .dg-green {
+        text-align: center;
+        background-color: #32e038;
+        color: white;
+    }
+    .dg-red {
+        background-color: #ff0000;
+    }
+    .emphatic {
+        font-weight: bold;
+    }
+    .text-right {
+        text-align: right;
+    }
+}
