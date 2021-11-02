@@ -42,7 +42,7 @@
         </ORDER>
         <DELIVERY-NOTE>
           <REFERENCE-DATE>
-            <Reference-No>track_me_if_you_can</Reference-No>
+            <Reference-No>Picking Name</Reference-No>
             <!-- <Date Format="CCYYMMDD">20190620</Date> -->
           </REFERENCE-DATE>
         </DELIVERY-NOTE>
