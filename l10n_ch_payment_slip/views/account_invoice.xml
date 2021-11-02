@@ -14,11 +14,15 @@
       <field name="type">form</field>
       <field name="inherit_id" ref="l10n_ch.isr_invoice_form"/>
       <field name="arch" type="xml">
-        <xpath expr="//button[@name='isr_print']" position="attributes">
+        <button id="l10n_ch_btn_isr_print_highlight" position="attributes">
           <attribute name="invisible">1</attribute>
           <attribute name="attrs"/>
-        </xpath>
-        <xpath expr="//button[@name='action_invoice_sent']" position="after">
+        </button>
+        <button id="btn_isr_print_normal" position="attributes">
+          <attribute name="invisible">1</attribute>
+          <attribute name="attrs"/>
+        </button>
+        <xpath expr="//button[@id='account_invoice_payment_btn']" position="before">
           <button type="object"
                   string="Print CH ISR"
                   name="print_isr"
