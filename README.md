@@ -19,8 +19,8 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[ebill_paynet](ebill_paynet/) | 14.0.1.0.0 |  | Paynet platform bridge implementation
-[ebill_paynet_customer_free_ref](ebill_paynet_customer_free_ref/) | 14.0.1.0.0 |  | Glue module: ebill_paynet and sale_order_customer_free_ref
+[ebill_paynet](ebill_paynet/) | 14.0.1.0.1 |  | Paynet platform bridge implementation
+[ebill_paynet_customer_free_ref](ebill_paynet_customer_free_ref/) | 14.0.1.0.1 |  | Glue module: ebill_paynet and sale_order_customer_free_ref
 [l10n_ch_account_tags](l10n_ch_account_tags/) | 14.0.1.0.0 |  | Switzerland Account Tags
 [l10n_ch_base_bank](l10n_ch_base_bank/) | 14.0.1.0.1 |  | Types and number validation for swiss electronic pmnt. DTA, ESR
 [l10n_ch_invoice_reports](l10n_ch_invoice_reports/) | 14.0.1.0.0 |  | Extend invoice to add ISR/QR payment slip
