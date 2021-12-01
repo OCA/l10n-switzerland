@@ -75,7 +75,7 @@ class DeliveryCarrier(models.Model):
         option_template_obj = self.env['delivery.carrier.template.option']
 
         for carrier in self:
-            allowed = option_template_obj.browse()
+            forbidden = option_template_obj.browse()
             domain = []
             if carrier.delivery_type != 'quickpac':
                 domain.append(('partner_id', '=', False))
@@ -86,9 +86,6 @@ class DeliveryCarrier(models.Model):
                     'label_layout',
                     'output_format',
                     'resolution',
-                    'basic',
-                    'additional',
-                    'delivery',
                 ]
                 selected_single_options = [
                     opt.tmpl_option_id.quickpac_type
@@ -102,17 +99,17 @@ class DeliveryCarrier(models.Model):
                             ('quickpac_type', 'in', single_option_types),
                             (
                                 'quickpac_type',
-                                'not in',
+                                'in',
                                 selected_single_options,
                             ),
                         ]
                     )
-                    allowed |= services
+                    forbidden |= services
                 partner = self.env.ref(
                     'l10n_ch_delivery_carrier_label_quickpac.partner_quickpac'
                 )
                 domain.append(('partner_id', '=', partner.id)),
-                domain.append(('id', 'in', allowed.ids))
+                domain.append(('id', 'not in', forbidden.ids))
 
             carrier.allowed_tmpl_options_ids = option_template_obj.search(
                 domain
