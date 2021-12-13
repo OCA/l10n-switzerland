@@ -9,7 +9,6 @@ class ResCompany(models.Model):
     quickpac_username = fields.Char('Username')
     quickpac_password = fields.Char('Password')
     quickpac_franking_license = fields.Char("Franking License")
-    quickpac_sending_id = fields.Char("Sending ID")
     quickpac_label_layout = fields.Many2one(
         'delivery.carrier.template.option',
         'Default label layout',
