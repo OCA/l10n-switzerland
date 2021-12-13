@@ -20,7 +20,6 @@ recorder = VCR(
 USERNAME = "XXXXX"
 PASSWORD = "XXXXX"
 FRANKING_LICENSE = "XXXXXX"
-SENDING_ID = "1234567890"
 
 
 class TestQuickpac(common.SavepointCase):
@@ -66,7 +65,6 @@ class TestQuickpac(common.SavepointCase):
                 "quickpac_username": USERNAME,
                 "quickpac_password": PASSWORD,
                 "quickpac_franking_license": FRANKING_LICENSE,
-                "quickpac_sending_id": SENDING_ID,
                 "quickpac_label_layout": label_layout.id,
                 "quickpac_output_format": output_format.id,
                 "quickpac_resolution": image_resolution.id,

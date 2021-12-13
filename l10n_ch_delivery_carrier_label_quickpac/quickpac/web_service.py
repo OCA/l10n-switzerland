@@ -360,7 +360,10 @@ class QuickpacWebService(object):
         :param picking: a picking record
         :return: Notification
         """
-        communication = Communication(item=picking.partner_id.email)
+        communication = Communication(
+            email=picking.partner_id.email,
+            mobile=picking.partner_id.mobile
+        )
         notification = Notification(
             communication=communication,
             service="441",
@@ -432,7 +435,7 @@ class QuickpacWebService(object):
         """
         items = self._prepare_items(picking, packages)
         sending = LabelDataProviderSending(
-            sending_id=company.quickpac_sending_id, item=items
+            item=items
         )
         provider = LabelDataProvider(sending=sending)
         data = LabelData(provider=provider)
