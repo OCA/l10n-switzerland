@@ -68,69 +68,13 @@ class ResPartnerBank(models.Model):
 
     # fmt: off
     # Overwrite of official odoo code
-    @api.model
-    def build_swiss_code_url(
+    def build_swiss_code_vals(
             self, amount, currency_name, not_used_anymore_1, debtor_partner,
             not_used_anymore_2, structured_communication, free_communication
     ):
-        comment = ""
-        if free_communication:
-            comment = (free_communication[:137] + '...') if len(free_communication) > 140 else free_communication
-
-        creditor_addr_1, creditor_addr_2 = self._get_partner_address_lines(self.partner_id)
-        debtor_addr_1, debtor_addr_2 = self._get_partner_address_lines(debtor_partner)
-
-        # Compute reference type (empty by default, only mandatory for QR-IBAN,
-        # and must then be 27 characters-long, with mod10r check digit as the 27th one,
-        # just like ISR number for invoices)
-        reference_type = 'NON'
-        reference = ''
-        if self._is_qr_iban():
-            # _check_for_qr_code_errors ensures we can't have a QR-IBAN
-            # without a QR-reference here
-            reference_type = 'QRR'
-            reference = structured_communication
-
-        # If there is a QR IBAN we use it for the barcode instead of the account number
-        acc_number = self.sanitized_acc_number
+        vals = super().build_swiss_code_vals(amount, currency_name, not_used_anymore_1, debtor_partner, not_used_anymore_2, structured_communication, free_communication)
         if self.l10n_ch_qr_iban:
             acc_number = sanitize_account_number(self.l10n_ch_qr_iban)
-
-        qr_code_vals = [
-            'SPC',                                                # QR Type
-            '0200',                                               # Version
-            '1',                                                  # Coding Type
-            acc_number,                                           # IBAN
-            'K',                                                  # Creditor Address Type
-            (self.acc_holder_name or self.partner_id.name)[:71],  # Creditor Name
-            creditor_addr_1,                                      # Creditor Address Line 1
-            creditor_addr_2,                                      # Creditor Address Line 2
-            '',                                                   # Creditor Postal Code (empty, since we're using combined addres elements)
-            '',                                                   # Creditor Town (empty, since we're using combined addres elements)
-            self.partner_id.country_id.code,                      # Creditor Country
-            '',                                                   # Ultimate Creditor Address Type
-            '',                                                   # Name
-            '',                                                   # Ultimate Creditor Address Line 1
-            '',                                                   # Ultimate Creditor Address Line 2
-            '',                                                   # Ultimate Creditor Postal Code
-            '',                                                   # Ultimate Creditor Town
-            '',                                                   # Ultimate Creditor Country
-            '{:.2f}'.format(amount),                              # Amount
-            currency_name,                                        # Currency
-            'K',                                                  # Ultimate Debtor Address Type
-            debtor_partner.name[:71],                             # Ultimate Debtor Name
-            debtor_addr_1,                                        # Ultimate Debtor Address Line 1
-            debtor_addr_2,                                        # Ultimate Debtor Address Line 2
-            '',                                                   # Ultimate Debtor Postal Code (not to be provided for address type K)
-            '',                                                   # Ultimate Debtor Postal City (not to be provided for address type K)
-            debtor_partner.country_id.code,                       # Ultimate Debtor Postal Country
-            reference_type,                                       # Reference Type
-            reference,                                            # Reference
-            comment,                                              # Unstructured Message
-            'EPD',                                                # Mandatory trailer part
-        ]
-
-        return '/report/barcode/?type=%s&value=%s&width=%s&height=%s&humanreadable=1' % (
-            'QR_quiet', werkzeug.urls.url_quote_plus('\n'.join(qr_code_vals)), 256, 256
-        )
+            vals = vals[:3]+[acc_number]+vals[4:]
+        return vals
     # fmt: on
