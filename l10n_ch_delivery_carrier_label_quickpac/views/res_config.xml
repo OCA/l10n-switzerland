@@ -77,15 +77,6 @@
                   </div>
                 </div>
               </div>
-              <div class="o_setting_right_pane">
-                <label for="sending_id"/>
-                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
-                <div class="content-group">
-                  <div class="mt16">
-                    <field name="sending_id" class="o_light_label"/>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
           <h2>Default configs</h2>
