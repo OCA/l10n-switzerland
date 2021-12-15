@@ -360,7 +360,10 @@ class QuickpacWebService(object):
         :param picking: a picking record
         :return: Notification
         """
-        communication = Communication(email=picking.partner_id.email,mobile=picking.partner_id.mobile)
+        communication = Communication(
+            email=picking.partner_id.email,
+            mobile=picking.partner_id.mobile
+        )
         notification = Notification(
             communication=communication,
             service="441",
