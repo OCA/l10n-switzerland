@@ -10,10 +10,11 @@ class AccountPaymentLine(models.Model):
 
     local_instrument = fields.Selection(
         selection_add=[('CH01', 'CH01 (BVR)')])
-    communication_type = fields.Selection(selection_add=[('bvr', 'BVR')])
+    communication_type = fields.Selection(
+        selection_add=[('bvr', 'BVR'), ("qrr", "QRR")])
 
     def invoice_reference_type2communication_type(self):
         res = super(AccountPaymentLine, self).\
             invoice_reference_type2communication_type()
-        res['bvr'] = 'bvr'
+        res.update({'bvr': 'bvr', 'qrr': 'qrr'})
         return res
