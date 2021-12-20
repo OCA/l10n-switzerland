@@ -40,8 +40,12 @@ msgstr ""
 
 #. module: l10n_ch_invoice_reports
 #: model:ir.actions.report,name:l10n_ch_invoice_reports.account_move_isr_report
-#: model:ir.actions.report,name:l10n_ch_invoice_reports.account_move_qr_report
 msgid "Invoice with ISR"
+msgstr ""
+
+#. module: l10n_ch_invoice_reports
+#: model:ir.actions.report,name:l10n_ch_invoice_reports.account_move_qr_report
+msgid "Invoice with QR"
 msgstr ""
 
 #. module: l10n_ch_invoice_reports

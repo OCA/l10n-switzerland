@@ -13,10 +13,12 @@
         <field name="print_report_name">'Invoice-ISR-%s' % object.name</field>
         <field name="attachment_use" eval="False" />
         <field name="attachment" />
+        <field name="binding_model_id" ref="account.model_account_move" />
+        <field name="binding_type">report</field>
     </record>
 
     <record id="account_move_qr_report" model="ir.actions.report">
-        <field name="name">Invoice with ISR</field>
+        <field name="name">Invoice with QR</field>
         <field name="model">account.move</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">l10n_ch_invoice_reports.invoice_qr_report_main</field>
@@ -24,6 +26,8 @@
         <field name="print_report_name">'Invoice-QR-%s' % object.name</field>
         <field name="attachment_use" eval="False" />
         <field name="attachment" />
+        <field name="binding_model_id" ref="account.model_account_move" />
+        <field name="binding_type">report</field>
     </record>
 
     <record id="account_move_qr_isr_report" model="ir.actions.report">
@@ -39,5 +43,7 @@
         <field name="print_report_name">'Invoice-QR-ISR-%s' % object.name</field>
         <field name="attachment_use" eval="False" />
         <field name="attachment" />
+        <field name="binding_model_id" ref="account.model_account_move" />
+        <field name="binding_type">report</field>
     </record>
 </odoo>
