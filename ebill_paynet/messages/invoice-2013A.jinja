@@ -106,7 +106,7 @@
       {%- else %}
       <Rate Category="E">0</Rate>
       {%- endif %}
-      <Amount Currency="CHF">{{ taxgroup[1] }}</Amount>
+      <Amount Currency="CHF">{{ taxgroup[1]|round(2) }}</Amount>
     </TAX>
     {% endfor %}
     {%- else %}
