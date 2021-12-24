@@ -2,13 +2,20 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import base64
 
-from odoo import api, models
+from odoo import models
 
 from ..quickpac.web_service import QuickpacWebService
 
 
 class StockPicking(models.Model):
     _inherit = "stock.picking"
+
+    def onchange_carrier_id(self):
+        result = super().onchange_carrier_id()
+        web_service = QuickpacWebService(self.env.user.company_id)
+        zipcode = self.partner_id.zip
+        web_service.is_deliverable_zipcode(zipcode)
+        return result
 
     def _generate_quickpac_label(self, webservice_class=None, package_ids=None):
         """Generate labels and write tracking numbers received"""
@@ -18,9 +25,15 @@ class StockPicking(models.Model):
         company = user.company_id
 
         if package_ids:
+            # TODO: send_shipping does not provide package_ids when calling
+            # this method, should we remove this or change UI to trigger this?
             packages = self.env["stock.quant.package"].browse(package_ids)
         else:
-            packages = self._get_packages_from_picking()
+            # TODO: _get_packages_from_picking is same with delivery_postlogistics
+            # module. If there is business case that needs this, we should move
+            # the method back to base_delivery_carrier_label module.
+            # packages = self._get_packages_from_picking()
+            packages = self.package_ids
 
         if webservice_class:
             web_service = webservice_class(company)
@@ -51,12 +64,3 @@ class StockPicking(models.Model):
             info["package_id"] = package.id
             labels.append(info)
         return labels
-
-    @api.multi
-    def generate_shipping_labels(self):
-        """ Add label generation for Quickpac"""
-        self.ensure_one()
-        delivery_type = self.carrier_id.delivery_type
-        if delivery_type == "quickpac":
-            return self._generate_quickpac_label()
-        return super().generate_shipping_labels()

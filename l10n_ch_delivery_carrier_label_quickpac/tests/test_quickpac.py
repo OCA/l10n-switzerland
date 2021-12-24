@@ -4,6 +4,7 @@ from os.path import dirname, join
 
 from vcr import VCR
 
+from odoo.exceptions import UserError
 from odoo.tests import common
 
 recorder = VCR(
@@ -121,13 +122,17 @@ class TestQuickpac(common.SavepointCase):
         )
         cls.env.user.lang = "en_US"
         # creating the default package requires to have move lines
+        # in addition, Check Availbility is enabled when picking state is "confirmed",
         # thus the picking must be confirmed
-        cls.picking.action_assign()
         cls.picking.action_confirm()
-        cls.picking._set_a_default_package()
+        # send_to_shipper calls _set_a_default_package already
 
     def test_store_label(self):
-        """ Test the whole label workflow"""
+        """Test the whole label workflow"""
+        self.picking._set_a_default_package()
+        self.assertEqual(self.picking.state, "assigned")
+        package = self.picking.package_ids[0]
+        self.assertFalse(package.parcel_tracking)
         with recorder.use_cassette("test_store_label") as cassette:  # noqa: F841
             res = self.picking._generate_quickpac_label()
             ref = "440010370000000023"
@@ -136,8 +141,56 @@ class TestQuickpac(common.SavepointCase):
             self.assertEqual(res[0]["file"][:30], b"JVBERi0xLjQKJdP0zOEKMSAwIG9iag")
             self.assertEqual(res[0]["tracking_number"], ref)
 
+    def test_all_possible_values(self):
+        recipient = self.picking.partner_id
+        recipient.parent_id = self.valid_recipient
+        vals = {
+            "name": self.valid_recipient.name + " Test",
+            "country_id": self.env.ref("base.ch").id,
+            "street2": "Street 2",
+            "phone": "0123456789",
+            "mobile": "0987654321",
+        }
+        self.valid_recipient.write(vals)
+        OptionTmpl = self.env["delivery.carrier.template.option"]
+        service_opt_tmpl = OptionTmpl.create({"code": "ZAW3213"})
+        Option = self.env["delivery.carrier.option"]
+        qp_xmlid = "l10n_ch_delivery_carrier_label_quickpac.partner_quickpac"
+        service_opt = Option.create(
+            {
+                "code": "ZAW3213",
+                "partner_id": self.env.ref(qp_xmlid).id,
+                "quickpac_type": "basic",
+                "tmpl_option_id": service_opt_tmpl.id,
+            }
+        )
+        self.picking.option_ids |= service_opt
+        self.assertEqual(self.picking.state, "assigned")
+        self.assertFalse(self.picking.package_ids)
+        with recorder.use_cassette("test_store_label") as cassette:  # noqa: F841
+            self.picking.send_to_shipper()
+        ref = "440010370000000023"
+        url = self.carrier.get_tracking_link(self.picking)
+        package = self.picking.package_ids[0]
+        self.assertEqual(package.parcel_tracking, ref)
+        self.assertEqual(url, "https://quickpac.ch/en/tracking/" + ref)
+
+    def test_use_tracking_num(self):
+        self.picking.company_id.quickpac_tracking_format = "picking_num"
+        with recorder.use_cassette("test_store_label") as cassette:  # noqa: F841
+            self.picking.send_to_shipper()
+        self.carrier.quickpac_get_tracking_link(self.picking)
+
     def test_valid_zipcode(self):
-        """Test that zipcode is correct when changing for an invalid partner"""
+        """Test that zipcode is correct when changing for an valid partner"""
         with recorder.use_cassette("test_valid_zipcode") as cassette:  # noqa: F841
             self.picking.partner_id = self.valid_recipient
             self.picking.onchange_carrier_id()
+            self.assertEqual(cassette.play_count, 1)
+
+    def test_invalid_zipcode(self):
+        """Test that zipcode is incorrect when changing for an invalid partner"""
+        self.picking.partner_id = self.invalid_recipient
+        with recorder.use_cassette("test_invalid_zipcode") as cassette:  # noqa: F841
+            self.assertRaises(UserError, self.picking.onchange_carrier_id)
+            self.assertEqual(cassette.play_count, 1)

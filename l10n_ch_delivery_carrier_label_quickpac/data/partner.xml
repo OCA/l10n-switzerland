@@ -3,12 +3,10 @@
     <record id="partner_quickpac" model="res.partner">
         <field name="name">Quickpac</field>
         <field
-            name="image"
+            name="image_1920"
             type="base64"
             file="l10n_ch_delivery_carrier_label_quickpac/static/img/quickpac-logo.jpg"
         />
-        <field name="customer" eval="False" />
-        <field name="supplier" eval="False" />
         <field name="email">webservice@quickpac.ch</field>
     </record>
 </odoo>

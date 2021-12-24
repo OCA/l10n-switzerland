@@ -3,8 +3,6 @@
 from odoo.exceptions import UserError
 from odoo.tests import common
 
-SINGLE_OPTION_TYPES = ["label_layout", "output_format", "resolution"]
-
 
 class TestDelivery(common.SavepointCase):
     @classmethod
@@ -69,6 +67,8 @@ class TestDelivery(common.SavepointCase):
             }
         )
         self.assertEqual(len(self.carrier.available_option_ids), 3)
+        self.assertEqual(len(self.carrier.allowed_tmpl_options_ids), 22)
+        self.assertEqual(len(mandatory_option.allowed_tmpl_options_ids), 22)
         sale_order = self.env["sale.order"].create(
             {
                 "partner_id": self.env.ref("base.res_partner_1").id,

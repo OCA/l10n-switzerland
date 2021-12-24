@@ -299,11 +299,12 @@ class QuickpacWebService(object):
         if partner.country_id.code:
             recipient.country = partner.country_id.code.upper()
         if partner.street2:
-            recipient.addressSuffix = sanitize_string(partner.street2)
+            recipient.address_suffix = sanitize_string(partner.street2)
 
-        if partner.parent_id and partner.parent_id.name != partner_name:
-            recipient.name2 = sanitize_string(partner.parent_id.name)
-            recipient.personallyAddressed = False
+        parent_id = partner.parent_id
+        if parent_id and parent_id.name != partner_name:
+            recipient.name2 = sanitize_string(parent_id.name)
+            recipient.personally_addressed = False
 
         # Phone and / or mobile should only be displayed if instruction to
         # Notify delivery by telephone is set
@@ -311,11 +312,11 @@ class QuickpacWebService(object):
             option for option in picking.option_ids if option.code == "ZAW3213"
         ]
         if is_phone_required:
-            phone = picking.delivery_phone or partner.phone
+            phone = partner.phone or parent_id and parent_id.phone
             if phone:
                 recipient.phone = phone
 
-            mobile = picking.delivery_mobile or partner.mobile
+            mobile = partner.mobile or parent_id and parent_id.mobile
             if mobile:
                 recipient.mobile = mobile
 

@@ -21,7 +21,7 @@ interactions:
     uri: https://api.quickpac.ch/Barcode/GenerateLabel
   response:
     body:
-      string: '{"Envelope":{"LabelDefinition":{"ColorPrintRequired":false,"PrintAddresses":3,"ImageFileType":"PDF","ImageResolution":600,"PrintPreview":true,"LabelLayout":null},"Data":{"Provider":{"Sending":{"SendingID":"1234567890","Item":[{"IdentCode":"440010370000000023","Label":"JVBERi0xLjQKJdP0zOEKMSAwIG9iago","ItemID":"WHOUT00039+PACK0000015","Errors":[],"Warnings":[]}]}}}}}'
+      string: '{"Envelope":{"LabelDefinition":{"ColorPrintRequired":false,"PrintAddresses":3,"ImageFileType":"PDF","ImageResolution":600,"PrintPreview":true,"LabelLayout":null},"Data":{"Provider":{"Sending":{"SendingID":"1234567890","Item":[{"IdentCode":"440010370000000023","Label":"JVBERi0xLjQKJdP0zOEKMSAwIG9iago=","ItemID":"WHOUT00039+PACK0000015","Errors":[],"Warnings":[]}]}}}}}'
     headers:
       Content-Length:
       - '231685'

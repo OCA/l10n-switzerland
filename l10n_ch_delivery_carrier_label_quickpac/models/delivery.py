@@ -13,6 +13,7 @@ QUICKPAC_TYPES = [
     ("additional", "Additional Service"),
     ("delivery", "Delivery Instructions"),
 ]
+SINGLE_OPTION_TYPES = ["label_layout", "output_format", "resolution"]
 
 
 class DeliveryCarrierTemplateOption(models.Model):
@@ -55,7 +56,10 @@ class DeliveryCarrier(models.Model):
 
     _inherit = "delivery.carrier"
 
-    delivery_type = fields.Selection(selection_add=[("quickpac", "Quickpac")])
+    delivery_type = fields.Selection(
+        selection_add=[("quickpac", "Quickpac")],
+        ondelete={"quickpac": "set default"},
+    )
     allowed_tmpl_options_ids = fields.Many2many(
         "delivery.carrier.template.option",
         compute="_compute_allowed_options_ids",
@@ -82,39 +86,41 @@ class DeliveryCarrier(models.Model):
             else:
                 # Allows to set multiple optional single option in order to
                 # let the user select them
-                single_option_types = [
-                    "label_layout",
-                    "output_format",
-                    "resolution",
-                ]
                 selected_single_options = [
                     opt.tmpl_option_id.quickpac_type
                     for opt in carrier.available_option_ids
-                    if opt.quickpac_type in single_option_types and opt.mandatory
+                    if opt.quickpac_type in SINGLE_OPTION_TYPES and opt.mandatory
                 ]
-                if selected_single_options != single_option_types:
+                if selected_single_options != SINGLE_OPTION_TYPES:
                     services = option_template_obj.search(
                         [
-                            ("quickpac_type", "in", single_option_types),
-                            (
-                                "quickpac_type",
-                                "in",
-                                selected_single_options,
-                            ),
+                            ("quickpac_type", "in", SINGLE_OPTION_TYPES),
+                            ("quickpac_type", "in", selected_single_options),
                         ]
                     )
                     forbidden |= services
-                partner = self.env.ref(
-                    "l10n_ch_delivery_carrier_label_quickpac.partner_quickpac"
-                )
-                domain.append(("partner_id", "=", partner.id)),
+                qp_xmlid = "l10n_ch_delivery_carrier_label_quickpac.partner_quickpac"
+                domain.append(("partner_id", "=", self.env.ref(qp_xmlid).id)),
                 domain.append(("id", "not in", forbidden.ids))
 
             carrier.allowed_tmpl_options_ids = option_template_obj.search(domain)
 
-    @api.multi
     def quickpac_send_shipping(self, pickings):
-        return [{"exact_price": False, "tracking_number": False}]
+        """
+        This will generate the labels for all the packages of the picking.
+        """
+        res = []
+        for pick in pickings:
+            labels = pick._generate_quickpac_label()
+            res.append(
+                {
+                    "labels": labels,
+                    "exact_price": False,
+                    "tracking_number": labels[0]["tracking_number"],
+                }
+            )
+
+        return res
 
     @api.model
     def quickpac_get_tracking_link(self, picking):
@@ -124,6 +130,5 @@ class DeliveryCarrier(models.Model):
             number=picking.carrier_tracking_ref,
         )
 
-    @api.multi
     def quickpac_cancel_shipment(self, pickings):
         raise NotImplementedError()
