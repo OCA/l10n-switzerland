@@ -2,8 +2,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from os.path import dirname, join
 
-from odoo.tests import common
 from vcr import VCR
+
+from odoo.tests import common
 
 recorder = VCR(
     record_mode="once",
@@ -40,15 +41,9 @@ class TestQuickpac(common.SavepointCase):
         OptionTmpl = cls.env["delivery.carrier.template.option"]
 
         service_opt_tmpl = OptionTmpl.create({"code": "PRI"})
-        label_layout = OptionTmpl.create(
-            {"code": "A6", "partner_id": partner_id}
-        )
-        output_format = OptionTmpl.create(
-            {"code": "PDF", "partner_id": partner_id}
-        )
-        image_resolution = OptionTmpl.create(
-            {"code": "600", "partner_id": partner_id}
-        )
+        label_layout = OptionTmpl.create({"code": "A6", "partner_id": partner_id})
+        output_format = OptionTmpl.create({"code": "PDF", "partner_id": partner_id})
+        image_resolution = OptionTmpl.create({"code": "600", "partner_id": partner_id})
 
         Option = cls.env["delivery.carrier.option"]
         service_opt = Option.create(
@@ -133,23 +128,16 @@ class TestQuickpac(common.SavepointCase):
 
     def test_store_label(self):
         """ Test the whole label workflow"""
-        with recorder.use_cassette(
-            "test_store_label"
-        ) as cassette:  # noqa: F841
+        with recorder.use_cassette("test_store_label") as cassette:  # noqa: F841
             res = self.picking._generate_quickpac_label()
             ref = "440010370000000023"
             self.assertEqual(res[0]["file_type"], "pdf")
             self.assertEqual(res[0]["name"], "{}.pdf".format(ref))
-            self.assertEqual(
-                res[0]["file"][:30], b"JVBERi0xLjQKJdP0zOEKMSAwIG9iag"
-            )
+            self.assertEqual(res[0]["file"][:30], b"JVBERi0xLjQKJdP0zOEKMSAwIG9iag")
             self.assertEqual(res[0]["tracking_number"], ref)
 
     def test_valid_zipcode(self):
-        """ Test that zipcode is correct when changing for an invalid partner
-        """
-        with recorder.use_cassette(
-            "test_valid_zipcode"
-        ) as cassette:  # noqa: F841
+        """Test that zipcode is correct when changing for an invalid partner"""
+        with recorder.use_cassette("test_valid_zipcode") as cassette:  # noqa: F841
             self.picking.partner_id = self.valid_recipient
             self.picking.onchange_carrier_id()

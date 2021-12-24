@@ -10,9 +10,9 @@ _logger = logging.getLogger(__name__)
 
 
 class QuickpacConfigSettings(models.TransientModel):
-    _name = 'res.config.settings'
-    _inherit = ['res.config.settings', 'abstract.config.settings']
+    _name = "res.config.settings"
+    _inherit = ["res.config.settings", "abstract.config.settings"]
 
     # AbstractConfigSettings attribute
-    _prefix = 'quickpac_'
+    _prefix = "quickpac_"
     _companyObject = ResCompany

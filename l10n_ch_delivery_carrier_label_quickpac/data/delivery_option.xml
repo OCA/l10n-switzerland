@@ -1,44 +1,63 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
 
     <record id="quickpac_layout_option_a6" model="delivery.carrier.option">
         <field name="by_default">True</field>
-        <field name="tmpl_option_id"
-               ref="l10n_ch_delivery_carrier_label_quickpac.quickpac_layout_template_option_a6"/>
-        <field name="carrier_id"
-               ref="l10n_ch_delivery_carrier_label_quickpac.quickpac_delivery_carrier"/>
+        <field
+            name="tmpl_option_id"
+            ref="l10n_ch_delivery_carrier_label_quickpac.quickpac_layout_template_option_a6"
+        />
+        <field
+            name="carrier_id"
+            ref="l10n_ch_delivery_carrier_label_quickpac.quickpac_delivery_carrier"
+        />
     </record>
-    <record id="quickpac_output_format_option_pdf"
-            model="delivery.carrier.option">
+    <record id="quickpac_output_format_option_pdf" model="delivery.carrier.option">
         <field name="by_default">True</field>
-        <field name="tmpl_option_id"
-               ref="l10n_ch_delivery_carrier_label_quickpac.quickpac_output_format_template_option_pdf"/>
-        <field name="carrier_id"
-               ref="l10n_ch_delivery_carrier_label_quickpac.quickpac_delivery_carrier"/>
+        <field
+            name="tmpl_option_id"
+            ref="l10n_ch_delivery_carrier_label_quickpac.quickpac_output_format_template_option_pdf"
+        />
+        <field
+            name="carrier_id"
+            ref="l10n_ch_delivery_carrier_label_quickpac.quickpac_delivery_carrier"
+        />
     </record>
-    <record id="quickpac_output_resolution_option_300ppp"
-            model="delivery.carrier.option">
+    <record
+        id="quickpac_output_resolution_option_300ppp"
+        model="delivery.carrier.option"
+    >
         <field name="by_default">True</field>
-        <field name="tmpl_option_id"
-               ref="l10n_ch_delivery_carrier_label_quickpac.quickpac_output_resolution_template_option_300ppp"/>
-        <field name="carrier_id"
-               ref="l10n_ch_delivery_carrier_label_quickpac.quickpac_delivery_carrier"/>
+        <field
+            name="tmpl_option_id"
+            ref="l10n_ch_delivery_carrier_label_quickpac.quickpac_output_resolution_template_option_300ppp"
+        />
+        <field
+            name="carrier_id"
+            ref="l10n_ch_delivery_carrier_label_quickpac.quickpac_delivery_carrier"
+        />
     </record>
-    <record id="quickpac_output_service_option_eco"
-            model="delivery.carrier.option">
+    <record id="quickpac_output_service_option_eco" model="delivery.carrier.option">
         <field name="by_default">True</field>
-        <field name="tmpl_option_id"
-               ref="l10n_ch_delivery_carrier_label_quickpac.quickpac_output_service_template_option_eco"/>
-        <field name="carrier_id"
-               ref="l10n_ch_delivery_carrier_label_quickpac.quickpac_delivery_carrier"/>
+        <field
+            name="tmpl_option_id"
+            ref="l10n_ch_delivery_carrier_label_quickpac.quickpac_output_service_template_option_eco"
+        />
+        <field
+            name="carrier_id"
+            ref="l10n_ch_delivery_carrier_label_quickpac.quickpac_delivery_carrier"
+        />
     </record>
-    <record id="quickpac_output_service_option_same"
-            model="delivery.carrier.option">
+    <record id="quickpac_output_service_option_same" model="delivery.carrier.option">
         <field name="by_default">True</field>
-        <field name="tmpl_option_id"
-               ref="l10n_ch_delivery_carrier_label_quickpac.quickpac_output_service_template_option_same"/>
-        <field name="carrier_id"
-               ref="l10n_ch_delivery_carrier_label_quickpac.quickpac_delivery_carrier"/>
+        <field
+            name="tmpl_option_id"
+            ref="l10n_ch_delivery_carrier_label_quickpac.quickpac_output_service_template_option_same"
+        />
+        <field
+            name="carrier_id"
+            ref="l10n_ch_delivery_carrier_label_quickpac.quickpac_delivery_carrier"
+        />
     </record>
 
 </odoo>

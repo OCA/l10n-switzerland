@@ -1,32 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2021 Camptocamp SA
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
   <record id="view_quickpac_config_settings" model="ir.ui.view">
     <field name="name">quickpac settings</field>
     <field name="model">res.config.settings</field>
-    <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+    <field name="inherit_id" ref="base.res_config_settings_view_form" />
     <field name="arch" type="xml">
       <xpath expr="//div[hasclass('settings')]" position="inside">
-        <div class="app_settings_block" data-string="Quickpac" string="Quickpac" data-key="quickpac">
+        <div
+                    class="app_settings_block"
+                    data-string="Quickpac"
+                    string="Quickpac"
+                    data-key="quickpac"
+                >
           <h2>Post digital commerce API Authentication</h2>
           <div class="row mt16 o_settings_container" id="quickpac_authentication">
             <div class="col-xs-12 col-md-6 o_setting_box" id="credentials">
               <div class="o_setting_right_pane">
-                <label for="username"/>
-                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
+                <label for="username" />
+                <span
+                                    class="fa fa-lg fa-building-o"
+                                    title="Values set here are company-specific."
+                                    groups="base.group_multi_company"
+                                />
                 <div class="content-group">
                   <div class="mt16">
-                    <field name="username" class="o_light_label"/>
+                    <field name="username" class="o_light_label" />
                   </div>
                 </div>
               </div>
               <div class="o_setting_right_pane">
-                <label for="password"/>
-                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
+                <label for="password" />
+                <span
+                                    class="fa fa-lg fa-building-o"
+                                    title="Values set here are company-specific."
+                                    groups="base.group_multi_company"
+                                />
                 <div class="content-group">
                   <div class="mt16">
-                    <field name="password" class="o_light_label"/>
+                    <field name="password" class="o_light_label" />
                   </div>
                 </div>
               </div>
@@ -53,13 +66,17 @@
             <div class="col-xs-12 col-md-6 o_setting_box" id="sender_post_office">
               <div class="o_setting_right_pane">
                 <span>Post office</span>
-                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
+                <span
+                                    class="fa fa-lg fa-building-o"
+                                    title="Values set here are company-specific."
+                                    groups="base.group_multi_company"
+                                />
                 <div class="text-muted">
                   Post office which will receive the shipped goods
                 </div>
                 <div class="content-group">
                   <div class="mt16">
-                    <field name="office" class="o_light_label"/>
+                    <field name="office" class="o_light_label" />
                   </div>
                 </div>
               </div>
@@ -69,11 +86,15 @@
           <div class="row mt16 o_settings_container" id="quickpac_licenses">
             <div class="col-xs-12 col-md-6 o_setting_box" id="licenses">
               <div class="o_setting_right_pane">
-                <label for="franking_license"/>
-                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
+                <label for="franking_license" />
+                <span
+                                    class="fa fa-lg fa-building-o"
+                                    title="Values set here are company-specific."
+                                    groups="base.group_multi_company"
+                                />
                 <div class="content-group">
                   <div class="mt16">
-                    <field name="franking_license" class="o_light_label"/>
+                    <field name="franking_license" class="o_light_label" />
                   </div>
                 </div>
               </div>
@@ -83,33 +104,45 @@
           <div class="row mt16 o_settings_container" id="quickpac_default_configs">
             <div class="col-xs-12 col-md-6 o_setting_box" id="label_layout">
               <div class="o_setting_right_pane">
-                <label for="label_layout"/>
-                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
+                <label for="label_layout" />
+                <span
+                                    class="fa fa-lg fa-building-o"
+                                    title="Values set here are company-specific."
+                                    groups="base.group_multi_company"
+                                />
                 <div class="content-group">
                   <div class="mt16">
-                    <field name="label_layout" class="o_light_label"/>
+                    <field name="label_layout" class="o_light_label" />
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-xs-12 col-md-6 o_setting_box" id="output_format">
               <div class="o_setting_right_pane">
-                <label for="output_format"/>
-                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
+                <label for="output_format" />
+                <span
+                                    class="fa fa-lg fa-building-o"
+                                    title="Values set here are company-specific."
+                                    groups="base.group_multi_company"
+                                />
                 <div class="content-group">
                   <div class="mt16">
-                    <field name="output_format" class="o_light_label"/>
+                    <field name="output_format" class="o_light_label" />
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-xs-12 col-md-6 o_setting_box" id="resolution">
               <div class="o_setting_right_pane">
-                <label for="resolution"/>
-                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
+                <label for="resolution" />
+                <span
+                                    class="fa fa-lg fa-building-o"
+                                    title="Values set here are company-specific."
+                                    groups="base.group_multi_company"
+                                />
                 <div class="content-group">
                   <div class="mt16">
-                    <field name="resolution" class="o_light_label"/>
+                    <field name="resolution" class="o_light_label" />
                   </div>
                 </div>
               </div>
@@ -119,20 +152,28 @@
           <div class="row mt16 o_settings_container" id="quickpac_tracking_numbers">
             <div class="col-xs-12 col-md-12 o_setting_box" id="tracking_format">
               <div class="o_setting_right_pane">
-                <label for="tracking_url"/>
-                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
+                <label for="tracking_url" />
+                <span
+                                    class="fa fa-lg fa-building-o"
+                                    title="Values set here are company-specific."
+                                    groups="base.group_multi_company"
+                                />
                 <div class="content-group">
                   <div class="mt16">
-                    <field name="tracking_url" class="o_light_label"/>
+                    <field name="tracking_url" class="o_light_label" />
                   </div>
                 </div>
               </div>
               <div class="o_setting_right_pane">
-                <label for="tracking_format"/>
-                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
+                <label for="tracking_format" />
+                <span
+                                    class="fa fa-lg fa-building-o"
+                                    title="Values set here are company-specific."
+                                    groups="base.group_multi_company"
+                                />
                 <div class="content-group">
                   <div class="mt16">
-                    <field name="tracking_format" class="o_light_label"/>
+                    <field name="tracking_format" class="o_light_label" />
                   </div>
                 </div>
               </div>

@@ -1,187 +1,231 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
 
     <!-- Label layouts -->
-    <record id="quickpac_layout_template_option_a7"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_layout_template_option_a7"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">Format A7</field>
         <field name="code">A7</field>
         <field name="quickpac_type">label_layout</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
 
-    <record id="quickpac_layout_template_option_a6"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_layout_template_option_a6"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">Format A6</field>
         <field name="code">A6</field>
         <field name="quickpac_type">label_layout</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
 
-    <record id="quickpac_layout_template_option_a5"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_layout_template_option_a5"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">Format A5</field>
         <field name="code">A5</field>
         <field name="quickpac_type">label_layout</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
 
-    <record id="quickpac_layout_template_option_fe"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_layout_template_option_fe"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">Format FE</field>
         <field name="code">FE</field>
         <field name="quickpac_type">label_layout</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
 
 
     <!-- Output formats -->
-    <record id="quickpac_output_format_template_option_eps"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_output_format_template_option_eps"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">EPS</field>
         <field name="code">EPS</field>
         <field name="quickpac_type">output_format</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
 
-    <record id="quickpac_output_format_template_option_gif"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_output_format_template_option_gif"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">GIF</field>
         <field name="code">GIF</field>
         <field name="quickpac_type">output_format</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
 
-    <record id="quickpac_output_format_template_option_jpg"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_output_format_template_option_jpg"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">JPG</field>
         <field name="code">JPG</field>
         <field name="quickpac_type">output_format</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
 
-    <record id="quickpac_output_format_template_option_png"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_output_format_template_option_png"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">PNG</field>
         <field name="code">PNG</field>
         <field name="quickpac_type">output_format</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
 
-    <record id="quickpac_output_format_template_option_pdf"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_output_format_template_option_pdf"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">PDF</field>
         <field name="code">PDF</field>
         <field name="quickpac_type">output_format</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
 
-    <record id="quickpac_output_format_template_option_spdf"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_output_format_template_option_spdf"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">sPDF</field>
         <field name="code">sPDF</field>
         <field name="quickpac_type">output_format</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
 
-    <record id="quickpac_output_format_template_option_zpl2"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_output_format_template_option_zpl2"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">ZPL2</field>
         <field name="code">ZPL2</field>
         <field name="quickpac_type">output_format</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
 
 
     <!-- resolutions -->
-    <record id="quickpac_output_resolution_template_option_200ppp"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_output_resolution_template_option_200ppp"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">200 ppp</field>
         <field name="code">200</field>
         <field name="quickpac_type">resolution</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
 
-    <record id="quickpac_output_resolution_template_option_300ppp"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_output_resolution_template_option_300ppp"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">300 ppp</field>
         <field name="code">300</field>
         <field name="quickpac_type">resolution</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
 
-    <record id="quickpac_output_resolution_template_option_600ppp"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_output_resolution_template_option_600ppp"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">600 ppp</field>
         <field name="code">600</field>
         <field name="quickpac_type">resolution</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
 
     <!-- Services -->
-    <record id="quickpac_output_service_template_option_eco"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_output_service_template_option_eco"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">ECO</field>
         <field name="description">Economy</field>
         <field name="code">1000</field>
         <field name="quickpac_type">basic</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
-    <record id="quickpac_output_service_template_option_prio"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_output_service_template_option_prio"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">PRIO</field>
         <field name="description">Priority</field>
         <field name="code">2000</field>
         <field name="quickpac_type">basic</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
-    <record id="quickpac_output_service_template_option_prioplus"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_output_service_template_option_prioplus"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">PRIO+</field>
         <field name="description">Priority +</field>
         <field name="code">3000</field>
         <field name="quickpac_type">basic</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
-    <record id="quickpac_output_service_template_option_same"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_output_service_template_option_same"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">SAME</field>
         <field name="description">Same Day</field>
         <field name="code">4000</field>
         <field name="quickpac_type">basic</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
-    <record id="quickpac_output_service_template_option_sig"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_output_service_template_option_sig"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">SIG</field>
         <field name="description">Signature</field>
         <field name="code">0010</field>
         <field name="quickpac_type">additional</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
-    <record id="quickpac_output_service_template_option_vorm"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_output_service_template_option_vorm"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">VORM</field>
         <field name="description">Morning Delivery</field>
         <field name="code">0020</field>
         <field name="quickpac_type">additional</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
-    <record id="quickpac_output_service_template_option_abend"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_output_service_template_option_abend"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">ABEND</field>
         <field name="description">Evening Delivery</field>
         <field name="code">0040</field>
         <field name="quickpac_type">additional</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
-    <record id="quickpac_output_service_template_option_sa"
-            model="delivery.carrier.template.option">
+    <record
+        id="quickpac_output_service_template_option_sa"
+        model="delivery.carrier.template.option"
+    >
         <field name="name">SA</field>
         <field name="description">Saturday Delivery</field>
         <field name="code">0080</field>
         <field name="quickpac_type">additional</field>
-        <field name="partner_id" ref="partner_quickpac"/>
+        <field name="partner_id" ref="partner_quickpac" />
     </record>
 
 </odoo>

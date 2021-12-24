@@ -4,36 +4,36 @@ from odoo import fields, models
 
 
 class ResCompany(models.Model):
-    _inherit = 'res.company'
+    _inherit = "res.company"
 
-    quickpac_username = fields.Char('Username')
-    quickpac_password = fields.Char('Password')
+    quickpac_username = fields.Char("Username")
+    quickpac_password = fields.Char("Password")
     quickpac_franking_license = fields.Char("Franking License")
     quickpac_label_layout = fields.Many2one(
-        'delivery.carrier.template.option',
-        'Default label layout',
-        domain=[('quickpac_type', '=', 'label_layout')],
+        "delivery.carrier.template.option",
+        "Default label layout",
+        domain=[("quickpac_type", "=", "label_layout")],
     )
     quickpac_output_format = fields.Many2one(
-        'delivery.carrier.template.option',
-        'Default output format',
-        domain=[('quickpac_type', '=', 'output_format')],
+        "delivery.carrier.template.option",
+        "Default output format",
+        domain=[("quickpac_type", "=", "output_format")],
     )
     quickpac_resolution = fields.Many2one(
-        'delivery.carrier.template.option',
-        'Default resolution',
-        domain=[('quickpac_type', '=', 'resolution')],
+        "delivery.carrier.template.option",
+        "Default resolution",
+        domain=[("quickpac_type", "=", "resolution")],
     )
     quickpac_tracking_format = fields.Selection(
         [
-            ('quickpac', "Use default quickpac tracking numbers"),
-            ('picking_num', 'Use picking number with pack counter'),
+            ("quickpac", "Use default quickpac tracking numbers"),
+            ("picking_num", "Use picking number with pack counter"),
         ],
         "Tracking number format",
-        default='quickpac',
+        default="quickpac",
     )
     quickpac_logo = fields.Binary(
-        string='Company Logo on Post labels',
+        string="Company Logo on Post labels",
         help="Optional company logo to show on label.\n"
         "If using an image / logo, please note the following:\n"
         "– Image width: 47 mm\n"
@@ -47,7 +47,7 @@ class ResCompany(models.Model):
         " the ZPL2 format.",
     )
     quickpac_office = fields.Char(
-        string='Domicile Post office',
+        string="Domicile Post office",
         help="Post office which will receive the shipped goods",
     )
     quickpac_tracking_url = fields.Char(
