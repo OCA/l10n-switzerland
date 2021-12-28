@@ -16,6 +16,10 @@ class AccountInvoice(models.Model):
 
     _inherit = "account.move"
 
+    def _get_rounded_amount(self, amount):
+        decimal = self.currency_id.decimal_places or 2
+        return round(amount, decimal)
+
     @api.onchange("partner_id", "company_id")
     def _transmit_method_partner_change(self):
         super()._transmit_method_partner_change()

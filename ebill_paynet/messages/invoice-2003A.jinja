@@ -169,17 +169,17 @@
       {%- endif %}
       {% endfor %}
       <Quantity Type="47" Units="PCE">{{ line.quantity }}</Quantity>
-      <Price Type="YYY">{{ line.price_subtotal|round(2) }}</Price>
-      <Price Type="AAA">{{ line.price_subtotal|round(2) }}</Price>
-      <Price Type="XXX">{{ line.price_total|round(2) }}</Price>
+      <Price Type="YYY">{{ invoice._get_rounded_amount(line.price_subtotal) }}</Price>
+      <Price Type="AAA">{{ invoice._get_rounded_amount(line.price_subtotal) }}</Price>
+      <Price Type="XXX">{{ invoice._get_rounded_amount(line.price_total) }}</Price>
       <ITEM-AMOUNT Type="66">
-        <Amount Currency="{{ invoice.currency_id.name }}">{{ line.price_subtotal|round(2) }}</Amount>
+        <Amount Currency="{{ invoice.currency_id.name }}">{{ invoice._get_rounded_amount(line.price_subtotal) }}</Amount>
       </ITEM-AMOUNT>
       {% for tax in line.tax_ids %}
       {%- if loop.index == 1 %}
       <TAX>
         <Rate>{{ tax.amount}}</Rate>
-        <Amount Currency="{{ invoice.currency_id.name }}">{{ tax._compute_amount(line.price_subtotal, line.price_unit)|round(2) }}</Amount>
+        <Amount Currency="{{ invoice.currency_id.name }}">{{ invoice._get_rounded_amount(tax._compute_amount(line.price_subtotal, line.price_unit)) }}</Amount>
       </TAX>
       {%- endif %}
       {% else %}
@@ -191,13 +191,13 @@
     {% endfor %}
     <SUMMARY>
       <INVOICE-AMOUNT Print-Status="25">
-        <Amount Currency="{{ invoice.currency_id.name }}">{{ invoice.amount_total|round(2) }}</Amount>
+        <Amount Currency="{{ invoice.currency_id.name }}">{{ invoice._get_rounded_amount(invoice.amount_total) }}</Amount>
       </INVOICE-AMOUNT>
       <VAT-AMOUNT Print-Status="25">
-        <Amount Currency="{{ invoice.currency_id.name }}">{{ invoice.amount_tax|round(2) }}</Amount>
+        <Amount Currency="{{ invoice.currency_id.name }}">{{ invoice._get_rounded_amount(invoice.amount_tax) }}</Amount>
       </VAT-AMOUNT>
       <EXTENDED-AMOUNT Type="79">
-        <Amount Currency="{{ invoice.currency_id.name }}">{{ invoice.amount_untaxed|round(2) }}</Amount>
+        <Amount Currency="{{ invoice.currency_id.name }}">{{ invoice._get_rounded_amount(invoice.amount_untaxed) }}</Amount>
       </EXTENDED-AMOUNT>
       {% if amount_by_group %}
       {% for taxgroup in amount_by_group %}
@@ -210,13 +210,13 @@
       {%- else %}
       <Rate Category="E">0</Rate>
       {%- endif %}
-      <Amount Currency="{{ invoice.currency_id.name }}">{{ taxgroup[1]|round(2) }}</Amount>
+      <Amount Currency="{{ invoice.currency_id.name }}">{{ invoice._get_rounded_amount(taxgroup[1])}}</Amount>
     </TAX>
     {% endfor %}
     {%- else %}
     <TAX>
       <TAX-BASIS>
-        <Amount Currency="{{ invoice.currency_id.name }}">{{ invoice.amount_untaxed|round(2) }}</Amount>
+        <Amount Currency="{{ invoice.currency_id.name }}">{{ invoice._get_rounded_amount(invoice.amount_untaxed) }}</Amount>
       </TAX-BASIS>
       <Rate Category="E">0</Rate>
       <Amount Currency="{{ invoice.currency_id.name }}">0</Amount>
