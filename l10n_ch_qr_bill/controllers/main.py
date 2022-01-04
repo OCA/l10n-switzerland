@@ -24,9 +24,9 @@ class ReportController(Controller):
         This adds `bar_border` capability.
 
         Samples:
-            <img t-att-src="'/report/qrcode/%s' % o.name"/>
-            <img t-att-src="'/report/qrcode/?value=%s&amp;width=%s&amp;height=%s' %
-                (o.name, 200, 200)"/>
+        <img t-att-src="'/report/qrcode/%s' % o.name"/>
+        <img t-att-src="'/report/qrcode/?value=%s&amp;width=%s&amp;height=%s'
+        % (o.name, 200, 200)"/>
 
         :param bar_border: Size of blank border, use 0 to remove border.
         """

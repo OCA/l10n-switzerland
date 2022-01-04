@@ -36,7 +36,7 @@ class ResPartnerBank(models.Model):
             return False
         iid_start_index = 4
         iid_end_index = 8
-        iid = iban[iid_start_index : iid_end_index + 1]
+        iid = iban[iid_start_index:iid_end_index + 1]
         # Those iid between 30000 and 31999 are reserved for QR-IBANs only
         return (re.match(r'\d+', iid)
                 and 30000 <= int(iid) <= 31999)
@@ -73,10 +73,10 @@ class ResPartnerBank(models.Model):
         return super(ResPartnerBank, self).write(vals)
 
     def _is_qr_iban(self):
-        """ Tells whether or not this bank account has a QR-IBAN account number.
-        QR-IBANs are specific identifiers used in Switzerland as references in
-        QR-codes. They are formed like regular IBANs, but are actually something
-        different.
+        """ Tells whether or not this bank account has a QR-IBAN account
+        number. QR-IBANs are specific identifiers used in Switzerland as
+        references in QR-codes. They are formed like regular IBANs, but
+        are actually something different.
 
         """
         return (
