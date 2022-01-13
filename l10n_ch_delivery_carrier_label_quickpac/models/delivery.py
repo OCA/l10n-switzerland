@@ -72,14 +72,13 @@ class DeliveryCarrier(models.Model):
         We do this to ensure the user first select a basic service. And
         then he adds additional services.
         """
+        result = super(DeliveryCarrier, self)._compute_allowed_options_ids()
         option_template_obj = self.env['delivery.carrier.template.option']
 
         for carrier in self:
             forbidden = option_template_obj.browse()
             domain = []
-            if carrier.delivery_type != 'quickpac':
-                domain.append(('partner_id', '=', False))
-            else:
+            if carrier.delivery_type == 'quickpac':
                 # Allows to set multiple optional single option in order to
                 # let the user select them
                 single_option_types = [
@@ -114,6 +113,7 @@ class DeliveryCarrier(models.Model):
             carrier.allowed_tmpl_options_ids = option_template_obj.search(
                 domain
             )
+        return result
 
     @api.multi
     def quickpac_send_shipping(self, pickings):
