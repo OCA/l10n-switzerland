@@ -24,14 +24,17 @@ SSL_TEST_CERTIFICATE = get_resource_path(
 class PayNetDWS:
     """PayNet DWS web services."""
 
-    def __init__(self, url, test_service):
+    def __init__(self, url, test_service, operation_timeout=None):
         settings = zeep.Settings(xml_huge_tree=True)
         session = requests.Session()
         if test_service:
             session.verify = SSL_TEST_CERTIFICATE
         else:
             session.verify = SSL_PROD_CERTIFICATE
-        transport = zeep.transports.Transport(session=session)
+        transport = zeep.transports.Transport(
+            session=session,
+            operation_timeout=operation_timeout,
+        )
         self.client = zeep.Client(WSDL_DOC, transport=transport, settings=settings)
         if url:
             self.service = self.client.create_service(
