@@ -305,11 +305,11 @@ class QuickpacWebService(object):
         if partner.country_id.code:
             recipient.country = partner.country_id.code.upper()
         if partner.street2:
-            recipient.addressSuffix = sanitize_string(partner.street2)
+            recipient.address_suffix = sanitize_string(partner.street2)
 
         if partner.parent_id and partner.parent_id.name != partner_name:
             recipient.name2 = sanitize_string(partner.parent_id.name)
-            recipient.personallyAddressed = False
+            recipient.personally_addressed = False
 
         # Phone and / or mobile should only be displayed if instruction to
         # Notify delivery by telephone is set
