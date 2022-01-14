@@ -14,7 +14,7 @@ class TestCreateMove(SavepointCase):
         bank = cls.env["res.bank"].create(
             {"name": "BCV", "bic": "BBRUBEBB", "clearing": "234234"}
         )
-        cls.env["res.partner.bank"].create(
+        cls.bank_account = cls.env["res.partner.bank"].create(
             {
                 "partner_id": cls.company.partner_id.id,
                 "bank_id": bank.id,
@@ -29,12 +29,12 @@ class TestCreateMove(SavepointCase):
                 "company_id": cls.company.id,
                 "type": "sale",
                 "code": "SALE123",
-                "bank_id": bank.id,
-                "bank_acc_number": "01-1234-1",
             }
         )
 
-    def new_form(self):
+    def new_form(self, with_bank_account=True):
+        if with_bank_account:
+            self.journal.bank_account_id = self.bank_account
         inv = Form(
             self.env["account.move"].with_context(default_move_type="out_invoice")
         )
@@ -88,7 +88,7 @@ class TestCreateMove(SavepointCase):
         self.assertFalse(move._has_isr_ref())
 
     def test_emit_move_with_isr_ref_missing_subscr_num(self):
-        inv_form = self.new_form()
+        inv_form = self.new_form(with_bank_account=False)
         move = inv_form.save()
         self.assertFalse(move._has_isr_ref())
         inv_form.partner_bank_id = self.env["res.partner.bank"]
