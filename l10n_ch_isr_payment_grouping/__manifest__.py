@@ -11,5 +11,5 @@
     "depends": ["account", "l10n_ch"],
     "data": [],
     "auto_install": False,
-    "installable": True,
+    "installable": False,
 }

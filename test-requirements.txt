@@ -4,3 +4,6 @@ zeep==3.4.0
 freezegun==0.3.12
 vcrpy==2.0.1
 xmlunittest==0.5.0
+odoo14-addon-account_payment_partner @git+https://github.com/OCA/bank-payment@refs/pull/890/head#subdirectory=setup/account_payment_partner
+odoo14-addon-l10n_ch_base_bank @git+https://github.com/OCA/l10n-switzerland@refs/pull/640/head#subdirectory=setup/l10n_ch_base_bank
+odoo14-addon-l10n_ch_isr_payment_grouping @git+https://github.com/OCA/l10n-switzerland@refs/pull/640/head#subdirectory=setup/l10n_ch_isr_payment_grouping
