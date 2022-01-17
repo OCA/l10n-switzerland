@@ -59,10 +59,7 @@ class TestSCTCH(AccountingTestCase):
         )
         # create a ch bank account for my company
         self.cp_partner_bank = self.partner_bank_model.create(
-            {
-                "acc_number": ch_iban,
-                "partner_id": self.env.ref("base.main_partner").id,
-            }
+            {"acc_number": ch_iban, "partner_id": self.env.ref("base.main_partner").id}
         )
         self.cp_partner_bank._onchange_acc_number_set_swiss_bank()
         # create journal
@@ -87,9 +84,7 @@ class TestSCTCH(AccountingTestCase):
                 "payment_method_id": pay_method_id,
             }
         )
-        self.payment_mode.payment_method_id.pain_version = (
-            "pain.001.001.03.ch.02"
-        )
+        self.payment_mode.payment_method_id.pain_version = "pain.001.001.03.ch.02"
         self.chf_currency = self.env.ref("base.CHF")
         self.eur_currency = self.env.ref("base.EUR")
         ch_bank2 = self.env["res.bank"].create(
@@ -129,9 +124,7 @@ class TestSCTCH(AccountingTestCase):
         self.assertEquals(action["res_model"], "account.payment.order")
         self.payment_order = self.payment_order_model.browse(action["res_id"])
         self.assertEquals(self.payment_order.payment_type, "outbound")
-        self.assertEquals(
-            self.payment_order.payment_mode_id, self.payment_mode
-        )
+        self.assertEquals(self.payment_order.payment_mode_id, self.payment_mode)
         self.assertEquals(self.payment_order.journal_id, self.bank_journal)
         pay_lines = self.payment_line_model.search(
             [
@@ -168,10 +161,7 @@ class TestSCTCH(AccountingTestCase):
             self.assertEquals(bank_line.communication_type, "isr")
             self.assertTrue(
                 bank_line.communication
-                in [
-                    "132000000000000000000000014",
-                    "132000000000000000000000022",
-                ]
+                in ["132000000000000000000000014", "132000000000000000000000022"]
             )
             self.assertEquals(
                 bank_line.partner_bank_id, invoice1.invoice_partner_bank_id
@@ -188,13 +178,10 @@ class TestSCTCH(AccountingTestCase):
         namespaces = xml_root.nsmap
         namespaces["p"] = xml_root.nsmap[None]
         namespaces.pop(None)
-        pay_method_xpath = xml_root.xpath(
-            "//p:PmtInf/p:PmtMtd", namespaces=namespaces
-        )
+        pay_method_xpath = xml_root.xpath("//p:PmtInf/p:PmtMtd", namespaces=namespaces)
         self.assertEquals(
             namespaces["p"],
-            "http://www.six-interbank-clearing.com/de/"
-            "pain.001.001.03.ch.02.xsd",
+            "http://www.six-interbank-clearing.com/de/" "pain.001.001.03.ch.02.xsd",
         )
         self.assertEquals(pay_method_xpath[0].text, "TRF")
         sepa_xpath = xml_root.xpath(
@@ -239,9 +226,7 @@ class TestSCTCH(AccountingTestCase):
         self.assertEquals(action["res_model"], "account.payment.order")
         self.payment_order = self.payment_order_model.browse(action["res_id"])
         self.assertEquals(self.payment_order.payment_type, "outbound")
-        self.assertEquals(
-            self.payment_order.payment_mode_id, self.payment_mode
-        )
+        self.assertEquals(self.payment_order.payment_mode_id, self.payment_mode)
         self.assertEquals(self.payment_order.journal_id, self.bank_journal)
         pay_lines = self.payment_line_model.search(
             [
@@ -258,9 +243,7 @@ class TestSCTCH(AccountingTestCase):
         )
         self.assertEquals(
             float_compare(
-                agrolait_pay_line1.amount_currency,
-                4042.0,
-                precision_digits=accpre,
+                agrolait_pay_line1.amount_currency, 4042.0, precision_digits=accpre,
             ),
             0,
         )
@@ -290,13 +273,10 @@ class TestSCTCH(AccountingTestCase):
         namespaces = xml_root.nsmap
         namespaces["p"] = xml_root.nsmap[None]
         namespaces.pop(None)
-        pay_method_xpath = xml_root.xpath(
-            "//p:PmtInf/p:PmtMtd", namespaces=namespaces
-        )
+        pay_method_xpath = xml_root.xpath("//p:PmtInf/p:PmtMtd", namespaces=namespaces)
         self.assertEquals(
             namespaces["p"],
-            "http://www.six-interbank-clearing.com/de/"
-            "pain.001.001.03.ch.02.xsd",
+            "http://www.six-interbank-clearing.com/de/" "pain.001.001.03.ch.02.xsd",
         )
         self.assertEquals(pay_method_xpath[0].text, "TRF")
         sepa_xpath = xml_root.xpath(
@@ -339,12 +319,18 @@ class TestSCTCH(AccountingTestCase):
                 "name": "/",
                 "payment_mode_id": self.payment_mode.id,
                 "invoice_partner_bank_id": partner_bank_id,
-                "invoice_line_ids": [(0, 0, {
-                    "price_unit": price_unit,
-                    "quantity": 1,
-                    "name": "Great service",
-                    "account_id": self.account_expense.id,
-                })],
+                "invoice_line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "price_unit": price_unit,
+                            "quantity": 1,
+                            "name": "Great service",
+                            "account_id": self.account_expense.id,
+                        },
+                    )
+                ],
             }
         )
         invoice.action_post()
