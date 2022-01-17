@@ -7,7 +7,6 @@ from odoo import api, models
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
-    @api.multi
     def _prepare_payment_line_vals(self, payment_order):
         vals = super()._prepare_payment_line_vals(payment_order)
         if (
