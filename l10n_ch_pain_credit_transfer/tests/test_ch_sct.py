@@ -1,8 +1,7 @@
-# © 2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# (c) 2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import base64
-import time
 
 from lxml import etree
 
@@ -25,8 +24,7 @@ class TestSCTCH(AccountingTestCase):
         self.bank_line_model = self.env["bank.payment.line"]
         self.partner_bank_model = self.env["res.partner.bank"]
         self.attachment_model = self.env["ir.attachment"]
-        self.invoice_model = self.env["account.invoice"]
-        self.invoice_line_model = self.env["account.invoice.line"]
+        self.account_move_model = self.env["account.move"]
 
         self.main_company = self.env.ref("base.main_company")
         self.partner_agrolait = self.env.ref("base.res_partner_2")
@@ -66,7 +64,7 @@ class TestSCTCH(AccountingTestCase):
                 "partner_id": self.env.ref("base.main_partner").id,
             }
         )
-        self.cp_partner_bank.onchange_acc_number_set_swiss_bank()
+        self.cp_partner_bank._onchange_acc_number_set_swiss_bank()
         # create journal
         self.bank_journal = Journal.create(
             {
@@ -146,7 +144,7 @@ class TestSCTCH(AccountingTestCase):
         accpre = self.env["decimal.precision"].precision_get("Account")
         self.assertEquals(agrolait_pay_line1.currency_id, self.eur_currency)
         self.assertEquals(
-            agrolait_pay_line1.partner_bank_id, invoice1.partner_bank_id
+            agrolait_pay_line1.partner_bank_id, invoice1.invoice_partner_bank_id
         )
         self.assertEquals(
             float_compare(
@@ -176,14 +174,14 @@ class TestSCTCH(AccountingTestCase):
                 ]
             )
             self.assertEquals(
-                bank_line.partner_bank_id, invoice1.partner_bank_id
+                bank_line.partner_bank_id, invoice1.invoice_partner_bank_id
             )
 
         action = self.payment_order.open2generated()
         self.assertEquals(self.payment_order.state, "generated")
         self.assertEquals(action["res_model"], "ir.attachment")
         attachment = self.attachment_model.browse(action["res_id"])
-        self.assertEquals(attachment.datas_fname[-4:], ".xml")
+        self.assertEquals(attachment.name[-4:], ".xml")
         xml_file = base64.b64decode(attachment.datas)
         xml_root = etree.fromstring(xml_file)
         # print "xml_file=", etree.tostring(xml_root, pretty_print=True)
@@ -218,7 +216,7 @@ class TestSCTCH(AccountingTestCase):
         self.payment_order.generated2uploaded()
         self.assertEquals(self.payment_order.state, "uploaded")
         for inv in [invoice1, invoice2]:
-            self.assertEquals(inv.state, "paid")
+            self.assertEquals(inv.state, "posted")
         return
 
     def test_sct_ch_payment_type3(self):
@@ -256,7 +254,7 @@ class TestSCTCH(AccountingTestCase):
         accpre = self.env["decimal.precision"].precision_get("Account")
         self.assertEquals(agrolait_pay_line1.currency_id, self.eur_currency)
         self.assertEquals(
-            agrolait_pay_line1.partner_bank_id, invoice1.partner_bank_id
+            agrolait_pay_line1.partner_bank_id, invoice1.invoice_partner_bank_id
         )
         self.assertEquals(
             float_compare(
@@ -279,13 +277,13 @@ class TestSCTCH(AccountingTestCase):
         self.assertEquals(bank_line.currency_id, self.eur_currency)
         self.assertEquals(bank_line.communication_type, "normal")
         self.assertEquals(bank_line.communication, "Inv1242-Inv1248")
-        self.assertEquals(bank_line.partner_bank_id, invoice1.partner_bank_id)
+        self.assertEquals(bank_line.partner_bank_id, invoice1.invoice_partner_bank_id)
 
         action = self.payment_order.open2generated()
         self.assertEquals(self.payment_order.state, "generated")
         self.assertEquals(action["res_model"], "ir.attachment")
         attachment = self.attachment_model.browse(action["res_id"])
-        self.assertEquals(attachment.datas_fname[-4:], ".xml")
+        self.assertEquals(attachment.name[-4:], ".xml")
         xml_file = base64.b64decode(attachment.datas)
         xml_root = etree.fromstring(xml_file)
         # print "xml_file=", etree.tostring(xml_root, pretty_print=True)
@@ -320,7 +318,7 @@ class TestSCTCH(AccountingTestCase):
         self.payment_order.generated2uploaded()
         self.assertEquals(self.payment_order.state, "uploaded")
         for inv in [invoice1, invoice2]:
-            self.assertEquals(inv.state, "paid")
+            self.assertEquals(inv.state, "posted")
         return
 
     def create_invoice(
@@ -332,28 +330,22 @@ class TestSCTCH(AccountingTestCase):
         ref,
         inv_type="in_invoice",
     ):
-        invoice = self.invoice_model.create(
+        invoice = self.account_move_model.create(
             {
                 "partner_id": partner_id,
-                "reference": ref,
+                "ref": ref,
                 "currency_id": currency.id,
-                "name": "test",
-                "account_id": self.account_payable.id,
                 "type": inv_type,
-                "date_invoice": time.strftime("%Y-%m-%d"),
+                "name": "/",
                 "payment_mode_id": self.payment_mode.id,
-                "partner_bank_id": partner_bank_id,
+                "invoice_partner_bank_id": partner_bank_id,
+                "invoice_line_ids": [(0, 0, {
+                    "price_unit": price_unit,
+                    "quantity": 1,
+                    "name": "Great service",
+                    "account_id": self.account_expense.id,
+                })],
             }
         )
-
-        self.invoice_line_model.create(
-            {
-                "invoice_id": invoice.id,
-                "price_unit": price_unit,
-                "quantity": 1,
-                "name": "Great service",
-                "account_id": self.account_expense.id,
-            }
-        )
-        invoice.action_invoice_open()
+        invoice.action_post()
         return invoice
