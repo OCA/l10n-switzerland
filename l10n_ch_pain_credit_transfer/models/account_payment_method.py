@@ -16,7 +16,6 @@ class AccountPaymentMethod(models.Model):
         ]
     )
 
-    @api.multi
     def get_xsd_file_path(self):
         self.ensure_one()
         painv = self.pain_version
