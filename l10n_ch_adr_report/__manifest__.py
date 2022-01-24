@@ -10,7 +10,7 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["l10n_eu_product_adr", "stock", "delivery"],
+    "depends": ["l10n_eu_product_adr_dangerous_goods", "stock", "delivery"],
     "data": [
         "report/DG_ch_delivery_report.xml",
         "views/assets.xml",
