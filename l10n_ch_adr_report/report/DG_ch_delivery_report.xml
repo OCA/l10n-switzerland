@@ -102,15 +102,20 @@
                         <tr>
                             <td><span t-esc="line['qty_amount']" /></td>
                             <td><span
-                                    t-field="line['product'].adr_packing_instruction_ids"
+                                    t-field="line['product'].packaging_type_id"
                                 /></td>
-                            <td><span t-field="line['product'].weight" /></td>
+                            <td><span t-field="line['product'].content_package" /></td>
                             <td t-att-style="'font-size: 12px'"><span
                                     t-esc="line['class']"
                                 /></td>
                             <td><span
                                     t-field="line['product'].adr_transport_category"
                                 /></td>
+                            <td>
+                                <t t-if="line['column_index'] == '0'">
+                                    <span t-esc="line['dangerous_amount']" />
+                                </t>
+                            </td>
                             <td>
                                 <t t-if="line['column_index'] == '1'">
                                     <span t-esc="line['dangerous_amount']" />
@@ -131,11 +136,6 @@
                                     <span t-esc="line['dangerous_amount']" />
                                 </t>
                             </td>
-                            <td>
-                                <t t-if="line['column_index'] == '5'">
-                                    <span t-esc="line['dangerous_amount']" />
-                                </t>
-                            </td>
                         </tr>
                     </t>
                 </tr>
@@ -151,30 +151,30 @@
                         class="text-left font-weight-bold"
                         colspan="5"
                     >Total of transported units</td>
+                    <td><span t-esc="units['0']" /></td>
                     <td><span t-esc="units['1']" /></td>
                     <td><span t-esc="units['2']" /></td>
                     <td><span t-esc="units['3']" /></td>
                     <td><span t-esc="units['4']" /></td>
-                    <td><span t-esc="units['5']" /></td>
                 </tr>
                 <tr>
                     <td class="text-left font-weight-bold" colspan="5">Factor</td>
+                    <td><span t-esc="factor['0']" /></td>
                     <td><span t-esc="factor['1']" /></td>
                     <td><span t-esc="factor['2']" /></td>
                     <td><span t-esc="factor['3']" /></td>
                     <td><span t-esc="factor['4']" /></td>
-                    <td><span t-esc="factor['5']" /></td>
                 </tr>
                 <tr class="font-weight-bold">
                     <td
                         class="text-left"
                         colspan="5"
                     >Points per transportation category</td>
+                    <td><span t-esc="mass_points['0']" /></td>
                     <td><span t-esc="mass_points['1']" /></td>
                     <td><span t-esc="mass_points['2']" /></td>
                     <td><span t-esc="mass_points['3']" /></td>
                     <td><span t-esc="mass_points['4']" /></td>
-                    <td><span t-esc="mass_points['5']" /></td>
                 </tr>
                 <tr class="font-weight-bold">
                     <td colspan="5" />
