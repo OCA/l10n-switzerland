@@ -37,9 +37,9 @@ class DangerousDeliverCHADR(models.AbstractModel):
                 'dangerous_amount': 1000.0
             }],
         'total_section':{
-            'total_units': {'1': 0, '2': 0, '3': 1000.0, '4': 0, '5': 0},
-            'factor': {'1': 0.0, '2': 50.0, '3': 3.0, '4': 1.0, '5': 0.0},
-            'mass_points': {'1': 0.0, '2': 0.0, '3': 3000.0, '4': 0.0, '5': 0.0},
+            'total_units': {'0': 0, '1': 0, '2': 1000.0, '3': 0, '4': 0},
+            'factor': {'0': 0.0, '1': 50.0, '2': 3.0, '3': 1.0, '4': 0.0},
+            'mass_points': {'0': 0.0, '1': 0.0, '2': 3000.0, '3': 0.0, '4': 0.0},
             'total_points': 3000.0,
             'warn': True
             }
@@ -74,7 +74,7 @@ class DangerousDeliverCHADR(models.AbstractModel):
         return moves.filtered(lambda move: move.product_id.is_dangerous)
 
     def _compute_points_per_product(self, vals):
-        index = {}.fromkeys(["1", "2", "3", "4", "5"], 0.0)
+        index = {}.fromkeys(["0", "1", "2", "3", "4"], 0.0)
         total_vals = {
             "total_units": index.copy(),
             "factor": index.copy(),
@@ -106,11 +106,11 @@ class DangerousDeliverCHADR(models.AbstractModel):
         return False
 
     def _init_total_vals(self, vals):
-        vals["factor"]["1"] = 0.0
-        vals["factor"]["2"] = 50.0
-        vals["factor"]["3"] = 3.0
-        vals["factor"]["4"] = 1.0
-        vals["factor"]["5"] = 0.0
+        vals["factor"]["0"] = 0.0
+        vals["factor"]["1"] = 50.0
+        vals["factor"]["2"] = 3.0
+        vals["factor"]["3"] = 1.0
+        vals["factor"]["4"] = 0.0
 
     def _get_DG_move_line_vals(self, moves):
         # unit measurement on stock is not considered
@@ -122,17 +122,23 @@ class DangerousDeliverCHADR(models.AbstractModel):
                     qty += rec.quantity_done
                 else:
                     qty += rec.product_uom_qty
+            full_class_name = product.adr_report_class_display_name + (
+                ", {}, {}, {}, {}".format(
+                    qty,
+                    product.packaging_type_id.name,
+                    qty * product.content_package,
+                    product.dg_unit.name,
+                )
+            )
             result.append(
                 {
                     "product": product,
-                    "class": product.adr_goods_id.name,
-                    "packaging_type": product.adr_packing_instruction_ids.mapped(
-                        "code"
-                    ),
+                    "class": full_class_name,
+                    "packaging_type": product.packaging_type_id,
                     "qty_amount": qty,
-                    "product_weight": product.weight,
+                    "product_weight": product.content_package,
                     "column_index": str(product.adr_transport_category),
-                    "dangerous_amount": qty * product.weight,
+                    "dangerous_amount": qty * product.content_package,
                 }
             )
 
