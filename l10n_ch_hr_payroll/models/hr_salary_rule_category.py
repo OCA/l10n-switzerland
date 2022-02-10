@@ -6,6 +6,6 @@ from odoo import fields, models
 
 class HrSalaryRuleCategory(models.Model):
 
-    _inherit = 'hr.salary.rule.category'
+    _inherit = "hr.salary.rule.category"
     name = fields.Char(translate=True)
     note = fields.Char(translate=True)

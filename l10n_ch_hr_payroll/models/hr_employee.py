@@ -5,7 +5,7 @@ from odoo import fields, models
 
 
 class HrEmployee(models.Model):
-    _inherit = 'hr.employee'
+    _inherit = "hr.employee"
 
-    children = fields.Integer('Number of Children at school')
-    children_student = fields.Integer('Number of Children student')
+    children = fields.Integer("Number of Children at school")
+    children_student = fields.Integer("Number of Children student")
