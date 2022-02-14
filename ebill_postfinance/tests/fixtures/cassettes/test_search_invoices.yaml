@@ -1,0 +1,564 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Zeep/3.2.0 (www.python-zeep.org)
+    method: GET
+    uri: https://ebill-ki.postfinance.ch/B2BService/B2BService.svc?xsd=xsd0
+  response:
+    body:
+      string: <?xml version="1.0" encoding="utf-8"?><xs:schema elementFormDefault="qualified"
+        targetNamespace="http://ch.swisspost.ebill.b2bservice" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:tns="http://ch.swisspost.ebill.b2bservice"><xs:import schemaLocation="https://ebill-ki.postfinance.ch/B2BService/B2BService.svc?xsd=xsd2"
+        namespace="http://swisspost_ch.ebs.ebill.b2bservice"/><xs:import schemaLocation="https://ebill-ki.postfinance.ch/B2BService/B2BService.svc?xsd=xsd4"
+        namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/><xs:element
+        name="GetInvoiceListBiller"><xs:complexType><xs:sequence><xs:element minOccurs="1"
+        name="BillerID" nillable="true" type="xs:string"/><xs:element minOccurs="1"
+        name="ArchiveData" type="xs:boolean"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="GetInvoiceListBillerResponse"><xs:complexType><xs:sequence><xs:element
+        minOccurs="0" name="GetInvoiceListBillerResult" nillable="true" type="q1:ArrayOfInvoiceReport"
+        xmlns:q1="http://swisspost_ch.ebs.ebill.b2bservice"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="GetInvoiceBiller"><xs:complexType><xs:sequence><xs:element minOccurs="1"
+        name="BillerID" nillable="true" type="xs:string"/><xs:element minOccurs="1"
+        name="TransactionID" nillable="true" type="xs:string"/><xs:element minOccurs="1"
+        name="BillDetail" type="xs:boolean"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="GetInvoiceBillerResponse"><xs:complexType><xs:sequence><xs:element minOccurs="0"
+        name="GetInvoiceBillerResult" nillable="true" type="q2:ArrayOfDownloadFile"
+        xmlns:q2="http://swisspost_ch.ebs.ebill.b2bservice"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="GetProcessProtocolList"><xs:complexType><xs:sequence><xs:element minOccurs="1"
+        name="BillerID" nillable="true" type="xs:string"/><xs:element minOccurs="1"
+        name="ArchiveData" type="xs:boolean"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="GetProcessProtocolListResponse"><xs:complexType><xs:sequence><xs:element
+        minOccurs="0" name="GetProcessProtocolListResult" nillable="true" type="q3:ArrayOfProtocolReport"
+        xmlns:q3="http://swisspost_ch.ebs.ebill.b2bservice"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="GetProcessProtocol"><xs:complexType><xs:sequence><xs:element minOccurs="1"
+        name="BillerID" nillable="true" type="xs:string"/><xs:element minOccurs="1"
+        name="CreateDate" type="xs:dateTime"/><xs:element minOccurs="1" name="ArchiveData"
+        type="xs:boolean"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="GetProcessProtocolResponse"><xs:complexType><xs:sequence><xs:element
+        minOccurs="0" name="GetProcessProtocolResult" nillable="true" type="q4:ArrayOfDownloadFile"
+        xmlns:q4="http://swisspost_ch.ebs.ebill.b2bservice"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="GetRegistrationProtocolList"><xs:complexType><xs:sequence><xs:element
+        minOccurs="1" name="BillerID" nillable="true" type="xs:string"/><xs:element
+        minOccurs="1" name="ArchiveData" type="xs:boolean"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="GetRegistrationProtocolListResponse"><xs:complexType><xs:sequence><xs:element
+        minOccurs="0" name="GetRegistrationProtocolListResult" nillable="true" type="q5:ArrayOfProtocolReport"
+        xmlns:q5="http://swisspost_ch.ebs.ebill.b2bservice"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="GetRegistrationProtocol"><xs:complexType><xs:sequence><xs:element minOccurs="1"
+        name="BillerID" nillable="true" type="xs:string"/><xs:element minOccurs="1"
+        name="CreateDate" type="xs:dateTime"/><xs:element minOccurs="1" name="ArchiveData"
+        type="xs:boolean"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="GetRegistrationProtocolResponse"><xs:complexType><xs:sequence><xs:element
+        minOccurs="0" name="GetRegistrationProtocolResult" nillable="true" type="q6:ArrayOfDownloadFile"
+        xmlns:q6="http://swisspost_ch.ebs.ebill.b2bservice"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="UploadFilesReport"><xs:complexType><xs:sequence><xs:element minOccurs="1"
+        name="invoices" nillable="true" type="q7:ArrayOfInvoice" xmlns:q7="http://swisspost_ch.ebs.ebill.b2bservice"/><xs:element
+        minOccurs="1" name="BillerID" nillable="true" type="xs:string"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="UploadFilesReportResponse"><xs:complexType><xs:sequence><xs:element
+        minOccurs="0" name="UploadFilesReportResult" nillable="true" type="q8:ArrayOfProcessedInvoice"
+        xmlns:q8="http://swisspost_ch.ebs.ebill.b2bservice"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="SearchInvoices"><xs:complexType><xs:sequence><xs:element minOccurs="1"
+        name="Parameter" nillable="true" type="q9:SearchInvoiceParameter" xmlns:q9="http://swisspost_ch.ebs.ebill.b2bservice"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="SearchInvoicesResponse"><xs:complexType><xs:sequence><xs:element minOccurs="0"
+        name="SearchInvoicesResult" nillable="true" type="q10:SearchInvoicesResponse"
+        xmlns:q10="http://swisspost_ch.ebs.ebill.b2bservice"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="GetEBillRecipientSubscriptionStatus"><xs:complexType><xs:sequence><xs:element
+        minOccurs="1" name="BillerID" nillable="true" type="xs:string"/><xs:element
+        minOccurs="1" name="RecipientID" nillable="true" type="xs:string"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="GetEBillRecipientSubscriptionStatusResponse"><xs:complexType><xs:sequence><xs:element
+        minOccurs="0" name="GetEBillRecipientSubscriptionStatusResult" nillable="true"
+        type="q11:ArrayOfEBillRecipientSubscriptionStatus" xmlns:q11="http://swisspost_ch.ebs.ebill.b2bservice"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="GetEBillRecipientSubscriptionStatusBulk"><xs:complexType><xs:sequence><xs:element
+        minOccurs="1" name="BillerID" nillable="true" type="xs:string"/><xs:element
+        minOccurs="1" name="RecipientID" nillable="true" type="q12:ArrayOfstring"
+        xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="GetEBillRecipientSubscriptionStatusBulkResponse"><xs:complexType><xs:sequence><xs:element
+        minOccurs="0" name="GetEBillRecipientSubscriptionStatusBulkResult" nillable="true"
+        type="q13:EBillRecipientSubscriptionStatusBulk" xmlns:q13="http://swisspost_ch.ebs.ebill.b2bservice"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="InitiateEBillRecipientSubscription"><xs:complexType><xs:sequence><xs:element
+        minOccurs="1" name="BillerID" nillable="true" type="xs:string"/><xs:element
+        minOccurs="1" name="SubscriptionInitiationEmailAddress" nillable="true" type="xs:string"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="InitiateEBillRecipientSubscriptionResponse"><xs:complexType><xs:sequence><xs:element
+        minOccurs="0" name="InitiateEBillRecipientSubscriptionResult" nillable="true"
+        type="q14:EBillRecipientSubscriptionInitiation" xmlns:q14="http://swisspost_ch.ebs.ebill.b2bservice"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="ConfirmEBillRecipientSubscription"><xs:complexType><xs:sequence><xs:element
+        minOccurs="1" name="BillerID" nillable="true" type="xs:string"/><xs:element
+        minOccurs="1" name="SubscriptionInitiationToken" nillable="true" type="xs:string"/><xs:element
+        minOccurs="1" name="SubscriptionInitiationActivationCode" nillable="true"
+        type="xs:string"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="ConfirmEBillRecipientSubscriptionResponse"><xs:complexType><xs:sequence><xs:element
+        minOccurs="0" name="ConfirmEBillRecipientSubscriptionResult" nillable="true"
+        type="q15:EBillRecipientSubscriptionConfirmation" xmlns:q15="http://swisspost_ch.ebs.ebill.b2bservice"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="GetInvoicePayer"><xs:complexType><xs:sequence><xs:element minOccurs="1"
+        name="eBillAccountID" nillable="true" type="xs:string"/><xs:element minOccurs="1"
+        name="BillerID" nillable="true" type="xs:string"/><xs:element minOccurs="1"
+        name="TransactionID" nillable="true" type="xs:string"/><xs:element minOccurs="1"
+        name="FileType" nillable="true" type="xs:string"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="GetInvoicePayerResponse"><xs:complexType><xs:sequence><xs:element minOccurs="0"
+        name="GetInvoicePayerResult" nillable="true" type="q16:DownloadFile" xmlns:q16="http://swisspost_ch.ebs.ebill.b2bservice"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="GetInvoiceListPayer"><xs:complexType><xs:sequence><xs:element minOccurs="1"
+        name="eBillAccountID" nillable="true" type="xs:string"/><xs:element minOccurs="1"
+        name="ArchiveData" type="xs:boolean"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="GetInvoiceListPayerResponse"><xs:complexType><xs:sequence><xs:element
+        minOccurs="0" name="GetInvoiceListPayerResult" nillable="true" type="q17:ArrayOfInvoiceReport"
+        xmlns:q17="http://swisspost_ch.ebs.ebill.b2bservice"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="ExecutePing"><xs:complexType><xs:sequence><xs:element minOccurs="1"
+        name="BillerID" nillable="true" type="xs:string"/><xs:element minOccurs="1"
+        name="eBillAccountID" nillable="true" type="xs:string"/><xs:element minOccurs="0"
+        name="ErrorTest" nillable="true" type="xs:boolean"/><xs:element minOccurs="0"
+        name="ExceptionTest" nillable="true" type="xs:boolean"/></xs:sequence></xs:complexType></xs:element><xs:element
+        name="ExecutePingResponse"><xs:complexType><xs:sequence><xs:element minOccurs="0"
+        name="ExecutePingResult" nillable="true" type="xs:string"/></xs:sequence></xs:complexType></xs:element></xs:schema>
+    headers:
+      Connection:
+      - close
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Date:
+      - Fri, 13 May 2022 05:57:53 GMT
+      Referrer-Policy:
+      - no-referrer-when-downgrade
+      Server:
+      - Apache (proxied)
+      Set-Cookie:
+      - ittrksessid=b8278c09.5dede5af62f48;HttpOnly;Secure; path=/; domain=.postfinance.ch;
+        SameSite=None; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-RP-UNIQUE_ID:
+      - Yn3zYS25lnOenWMr5onEaAAABwg
+      X-Xss-Protection:
+      - 1; mode=block
+      content-length:
+      - '9632'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - ittrksessid=b8278c09.5dede5af62f48
+      User-Agent:
+      - Zeep/3.2.0 (www.python-zeep.org)
+    method: GET
+    uri: https://ebill-ki.postfinance.ch/B2BService/B2BService.svc?xsd=xsd2
+  response:
+    body:
+      string: <?xml version="1.0" encoding="utf-8"?><xs:schema elementFormDefault="qualified"
+        targetNamespace="http://swisspost_ch.ebs.ebill.b2bservice" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:tns="http://swisspost_ch.ebs.ebill.b2bservice"><xs:import schemaLocation="https://ebill-ki.postfinance.ch/B2BService/B2BService.svc?xsd=xsd3"
+        namespace="http://schemas.datacontract.org/2004/07/eBill.B2BServiceLib.Logic"/><xs:complexType
+        name="ArrayOfInvoiceReport"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded"
+        name="InvoiceReport" nillable="true" type="tns:InvoiceReport"/></xs:sequence></xs:complexType><xs:element
+        name="ArrayOfInvoiceReport" nillable="true" type="tns:ArrayOfInvoiceReport"/><xs:complexType
+        name="InvoiceReport"><xs:sequence><xs:element minOccurs="0" name="BillerID"
+        nillable="true" type="xs:string"/><xs:element minOccurs="0" name="TransactionID"
+        nillable="true" type="xs:string"/><xs:element minOccurs="0" name="DeliveryDate"
+        type="xs:dateTime"/><xs:element minOccurs="0" name="FileType" nillable="true"
+        type="xs:string"/></xs:sequence></xs:complexType><xs:element name="InvoiceReport"
+        nillable="true" type="tns:InvoiceReport"/><xs:complexType name="ArrayOfDownloadFile"><xs:sequence><xs:element
+        minOccurs="0" maxOccurs="unbounded" name="DownloadFile" nillable="true" type="tns:DownloadFile"/></xs:sequence></xs:complexType><xs:element
+        name="ArrayOfDownloadFile" nillable="true" type="tns:ArrayOfDownloadFile"/><xs:complexType
+        name="DownloadFile"><xs:sequence><xs:element minOccurs="0" name="Data" nillable="true"
+        type="xs:base64Binary"/><xs:element minOccurs="0" name="Filename" nillable="true"
+        type="xs:string"/></xs:sequence></xs:complexType><xs:element name="DownloadFile"
+        nillable="true" type="tns:DownloadFile"/><xs:complexType name="ArrayOfProtocolReport"><xs:sequence><xs:element
+        minOccurs="0" maxOccurs="unbounded" name="ProtocolReport" nillable="true"
+        type="tns:ProtocolReport"/></xs:sequence></xs:complexType><xs:element name="ArrayOfProtocolReport"
+        nillable="true" type="tns:ArrayOfProtocolReport"/><xs:complexType name="ProtocolReport"><xs:sequence><xs:element
+        minOccurs="0" name="CreateDate" type="xs:dateTime"/><xs:element minOccurs="0"
+        name="FileType" nillable="true" type="xs:string"/></xs:sequence></xs:complexType><xs:element
+        name="ProtocolReport" nillable="true" type="tns:ProtocolReport"/><xs:complexType
+        name="ArrayOfInvoice"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded"
+        name="Invoice" nillable="true" type="tns:Invoice"/></xs:sequence></xs:complexType><xs:element
+        name="ArrayOfInvoice" nillable="true" type="tns:ArrayOfInvoice"/><xs:complexType
+        name="Invoice"><xs:sequence><xs:element minOccurs="0" name="FileType" nillable="true"
+        type="xs:string"/><xs:element minOccurs="0" name="TransactionID" nillable="true"
+        type="xs:string"/><xs:element minOccurs="0" name="Data" nillable="true" type="xs:base64Binary"/></xs:sequence></xs:complexType><xs:element
+        name="Invoice" nillable="true" type="tns:Invoice"/><xs:complexType name="ArrayOfProcessedInvoice"><xs:sequence><xs:element
+        minOccurs="0" maxOccurs="unbounded" name="ProcessedInvoice" nillable="true"
+        type="tns:ProcessedInvoice"/></xs:sequence></xs:complexType><xs:element name="ArrayOfProcessedInvoice"
+        nillable="true" type="tns:ArrayOfProcessedInvoice"/><xs:complexType name="ProcessedInvoice"><xs:sequence><xs:element
+        minOccurs="0" name="FileType" nillable="true" type="xs:string"/><xs:element
+        minOccurs="0" name="SubmitDate" type="xs:dateTime"/><xs:element minOccurs="0"
+        name="TransactionID" nillable="true" type="xs:string"/><xs:element minOccurs="0"
+        name="ProcessingState" nillable="true" type="xs:string"/></xs:sequence></xs:complexType><xs:element
+        name="ProcessedInvoice" nillable="true" type="tns:ProcessedInvoice"/><xs:complexType
+        name="SearchInvoiceParameter"><xs:sequence><xs:element name="BillerID" nillable="true"
+        type="xs:string"/><xs:element minOccurs="0" name="TransactionID" nillable="true"
+        type="xs:string"/><xs:element minOccurs="0" name="eBillAccountID" nillable="true"
+        type="xs:string"/><xs:element minOccurs="0" name="AmountFrom" type="xs:decimal"/><xs:element
+        minOccurs="0" name="AmountTo" type="xs:decimal"/><xs:element minOccurs="0"
+        name="State" nillable="true" type="q1:State" xmlns:q1="http://schemas.datacontract.org/2004/07/eBill.B2BServiceLib.Logic"/><xs:element
+        minOccurs="0" name="DeliveryDateFrom" type="xs:dateTime"/><xs:element minOccurs="0"
+        name="DeliveryDateTo" type="xs:dateTime"/><xs:element minOccurs="0" name="PaymentDueDateFrom"
+        type="xs:dateTime"/><xs:element minOccurs="0" name="PaymentDueDateTo" type="xs:dateTime"/></xs:sequence></xs:complexType><xs:element
+        name="SearchInvoiceParameter" nillable="true" type="tns:SearchInvoiceParameter"/><xs:complexType
+        name="SearchInvoicesResponse"><xs:sequence><xs:element minOccurs="0" name="InvoiceCount"
+        type="xs:int"/><xs:element minOccurs="0" name="TotalInvoiceCount" type="xs:int"/><xs:element
+        minOccurs="0" name="InvoiceList" nillable="true" type="tns:ArrayOfSearchInvoice"/></xs:sequence></xs:complexType><xs:element
+        name="SearchInvoicesResponse" nillable="true" type="tns:SearchInvoicesResponse"/><xs:complexType
+        name="ArrayOfSearchInvoice"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded"
+        name="SearchInvoice" nillable="true" type="tns:SearchInvoice"/></xs:sequence></xs:complexType><xs:element
+        name="ArrayOfSearchInvoice" nillable="true" type="tns:ArrayOfSearchInvoice"/><xs:complexType
+        name="SearchInvoice"><xs:sequence><xs:element minOccurs="0" name="BillerId"
+        nillable="true" type="xs:string"/><xs:element minOccurs="0" name="TransactionId"
+        nillable="true" type="xs:string"/><xs:element minOccurs="0" name="eBillAccountId"
+        nillable="true" type="xs:string"/><xs:element minOccurs="0" name="Amount"
+        nillable="true" type="xs:decimal"/><xs:element minOccurs="0" name="State"
+        type="q2:State" xmlns:q2="http://schemas.datacontract.org/2004/07/eBill.B2BServiceLib.Logic"/><xs:element
+        minOccurs="0" name="PaymentType" nillable="true" type="xs:string"/><xs:element
+        minOccurs="0" name="ESRReferenceNbr" nillable="true" type="xs:string"/><xs:element
+        minOccurs="0" name="DeliveryDate" nillable="true" type="xs:dateTime"/><xs:element
+        minOccurs="0" name="PaymentDueDate" nillable="true" type="xs:dateTime"/><xs:element
+        minOccurs="0" name="ReasonCode" nillable="true" type="xs:string"/><xs:element
+        minOccurs="0" name="ReasonText" nillable="true" type="xs:string"/></xs:sequence></xs:complexType><xs:element
+        name="SearchInvoice" nillable="true" type="tns:SearchInvoice"/><xs:complexType
+        name="ArrayOfEBillRecipientSubscriptionStatus"><xs:sequence><xs:element minOccurs="0"
+        maxOccurs="unbounded" name="EBillRecipientSubscriptionStatus" nillable="true"
+        type="tns:EBillRecipientSubscriptionStatus"/></xs:sequence></xs:complexType><xs:element
+        name="ArrayOfEBillRecipientSubscriptionStatus" nillable="true" type="tns:ArrayOfEBillRecipientSubscriptionStatus"/><xs:complexType
+        name="EBillRecipientSubscriptionStatus"><xs:sequence><xs:element minOccurs="0"
+        name="EbillAccountID" nillable="true" type="xs:string"/><xs:element minOccurs="0"
+        name="EmailAddress" nillable="true" type="xs:string"/><xs:element minOccurs="0"
+        name="UIDHR" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="Message"
+        nillable="true" type="xs:string"/></xs:sequence></xs:complexType><xs:element
+        name="EBillRecipientSubscriptionStatus" nillable="true" type="tns:EBillRecipientSubscriptionStatus"/><xs:complexType
+        name="EBillRecipientSubscriptionStatusBulk"><xs:sequence><xs:element minOccurs="0"
+        name="BillRecipients" nillable="true" type="tns:ArrayOfBillRecipient"/><xs:element
+        minOccurs="0" name="Message" nillable="true" type="xs:string"/></xs:sequence></xs:complexType><xs:element
+        name="EBillRecipientSubscriptionStatusBulk" nillable="true" type="tns:EBillRecipientSubscriptionStatusBulk"/><xs:complexType
+        name="ArrayOfBillRecipient"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded"
+        name="BillRecipient" nillable="true" type="tns:BillRecipient"/></xs:sequence></xs:complexType><xs:element
+        name="ArrayOfBillRecipient" nillable="true" type="tns:ArrayOfBillRecipient"/><xs:complexType
+        name="BillRecipient"><xs:sequence><xs:element minOccurs="0" name="EbillAccountID"
+        nillable="true" type="xs:string"/><xs:element minOccurs="0" name="EmailAddress"
+        nillable="true" type="xs:string"/><xs:element minOccurs="0" name="UIDHR" nillable="true"
+        type="xs:string"/><xs:element name="SubmissionStatus" type="q3:SubmissionStatus"
+        xmlns:q3="http://schemas.datacontract.org/2004/07/eBill.B2BServiceLib.Logic"/></xs:sequence></xs:complexType><xs:element
+        name="BillRecipient" nillable="true" type="tns:BillRecipient"/><xs:complexType
+        name="EBillRecipientSubscriptionInitiation"><xs:sequence><xs:element minOccurs="0"
+        name="SubscriptionInitiationToken" nillable="true" type="xs:string"/><xs:element
+        minOccurs="0" name="Message" nillable="true" type="xs:string"/></xs:sequence></xs:complexType><xs:element
+        name="EBillRecipientSubscriptionInitiation" nillable="true" type="tns:EBillRecipientSubscriptionInitiation"/><xs:complexType
+        name="EBillRecipientSubscriptionConfirmation"><xs:sequence><xs:element minOccurs="0"
+        name="EbillAccountID" nillable="true" type="xs:string"/><xs:element minOccurs="0"
+        name="EmailAddress" nillable="true" type="xs:string"/><xs:element minOccurs="0"
+        name="UIDHR" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="Type"
+        type="q4:EPartyType" xmlns:q4="http://schemas.datacontract.org/2004/07/eBill.B2BServiceLib.Logic"/><xs:element
+        minOccurs="0" name="Language" nillable="true" type="xs:string"/><xs:element
+        minOccurs="0" name="Party" nillable="true" type="tns:Party"/><xs:element minOccurs="0"
+        name="Message" nillable="true" type="xs:string"/></xs:sequence></xs:complexType><xs:element
+        name="EBillRecipientSubscriptionConfirmation" nillable="true" type="tns:EBillRecipientSubscriptionConfirmation"/><xs:complexType
+        name="Party"><xs:sequence><xs:element minOccurs="0" name="Address" nillable="true"
+        type="tns:Address"/></xs:sequence></xs:complexType><xs:element name="Party"
+        nillable="true" type="tns:Party"/><xs:complexType name="Address"><xs:sequence><xs:element
+        minOccurs="0" name="CompanyName" nillable="true" type="xs:string"/><xs:element
+        minOccurs="0" name="FamilyName" nillable="true" type="xs:string"/><xs:element
+        minOccurs="0" name="GivenName" nillable="true" type="xs:string"/><xs:element
+        minOccurs="0" name="Address1" nillable="true" type="xs:string"/><xs:element
+        minOccurs="0" name="ZIP" nillable="true" type="xs:string"/><xs:element minOccurs="0"
+        name="City" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="Country"
+        nillable="true" type="xs:string"/></xs:sequence></xs:complexType><xs:element
+        name="Address" nillable="true" type="tns:Address"/></xs:schema>
+    headers:
+      Connection:
+      - close
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Date:
+      - Fri, 13 May 2022 05:57:53 GMT
+      Referrer-Policy:
+      - no-referrer-when-downgrade
+      Server:
+      - Apache (proxied)
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-RP-UNIQUE_ID:
+      - Yn3zYusdGrL3swMNpDRV7AAACBg
+      X-Xss-Protection:
+      - 1; mode=block
+      content-length:
+      - '10710'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - ittrksessid=b8278c09.5dede5af62f48
+      User-Agent:
+      - Zeep/3.2.0 (www.python-zeep.org)
+    method: GET
+    uri: https://ebill-ki.postfinance.ch/B2BService/B2BService.svc?xsd=xsd3
+  response:
+    body:
+      string: <?xml version="1.0" encoding="utf-8"?><xs:schema elementFormDefault="qualified"
+        targetNamespace="http://schemas.datacontract.org/2004/07/eBill.B2BServiceLib.Logic"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.datacontract.org/2004/07/eBill.B2BServiceLib.Logic"><xs:import
+        schemaLocation="https://ebill-ki.postfinance.ch/B2BService/B2BService.svc?xsd=xsd1"
+        namespace="http://schemas.microsoft.com/2003/10/Serialization/"/><xs:simpleType
+        name="State"><xs:restriction base="xs:string"><xs:enumeration value="Open"><xs:annotation><xs:appinfo><EnumerationValue
+        xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue></xs:appinfo></xs:annotation></xs:enumeration><xs:enumeration
+        value="Paid"><xs:annotation><xs:appinfo><EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue></xs:appinfo></xs:annotation></xs:enumeration><xs:enumeration
+        value="Rejected"><xs:annotation><xs:appinfo><EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue></xs:appinfo></xs:annotation></xs:enumeration><xs:enumeration
+        value="Processing"><xs:annotation><xs:appinfo><EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue></xs:appinfo></xs:annotation></xs:enumeration><xs:enumeration
+        value="Incomplete"><xs:annotation><xs:appinfo><EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</EnumerationValue></xs:appinfo></xs:annotation></xs:enumeration><xs:enumeration
+        value="Invalid"><xs:annotation><xs:appinfo><EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">7</EnumerationValue></xs:appinfo></xs:annotation></xs:enumeration><xs:enumeration
+        value="Deleted"><xs:annotation><xs:appinfo><EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">9</EnumerationValue></xs:appinfo></xs:annotation></xs:enumeration><xs:enumeration
+        value="Unsigned"><xs:annotation><xs:appinfo><EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">50</EnumerationValue></xs:appinfo></xs:annotation></xs:enumeration></xs:restriction></xs:simpleType><xs:element
+        name="State" nillable="true" type="tns:State"/><xs:simpleType name="SubmissionStatus"><xs:restriction
+        base="xs:string"><xs:enumeration value="NOT_ALLOWED"/><xs:enumeration value="ALLOWED"/></xs:restriction></xs:simpleType><xs:element
+        name="SubmissionStatus" nillable="true" type="tns:SubmissionStatus"/><xs:simpleType
+        name="EPartyType"><xs:restriction base="xs:string"><xs:enumeration value="PRIVATE"><xs:annotation><xs:appinfo><EnumerationValue
+        xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue></xs:appinfo></xs:annotation></xs:enumeration><xs:enumeration
+        value="COMPANY"><xs:annotation><xs:appinfo><EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue></xs:appinfo></xs:annotation></xs:enumeration></xs:restriction></xs:simpleType><xs:element
+        name="EPartyType" nillable="true" type="tns:EPartyType"/></xs:schema>
+    headers:
+      Connection:
+      - close
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Date:
+      - Fri, 13 May 2022 05:57:54 GMT
+      Referrer-Policy:
+      - no-referrer-when-downgrade
+      Server:
+      - Apache (proxied)
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-RP-UNIQUE_ID:
+      - Yn3zYhFe1qhLp6voSVLKEwAACRU
+      X-Xss-Protection:
+      - 1; mode=block
+      content-length:
+      - '3068'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - ittrksessid=b8278c09.5dede5af62f48
+      User-Agent:
+      - Zeep/3.2.0 (www.python-zeep.org)
+    method: GET
+    uri: https://ebill-ki.postfinance.ch/B2BService/B2BService.svc?xsd=xsd1
+  response:
+    body:
+      string: <?xml version="1.0" encoding="utf-8"?><xs:schema attributeFormDefault="qualified"
+        elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/"><xs:element
+        name="anyType" nillable="true" type="xs:anyType"/><xs:element name="anyURI"
+        nillable="true" type="xs:anyURI"/><xs:element name="base64Binary" nillable="true"
+        type="xs:base64Binary"/><xs:element name="boolean" nillable="true" type="xs:boolean"/><xs:element
+        name="byte" nillable="true" type="xs:byte"/><xs:element name="dateTime" nillable="true"
+        type="xs:dateTime"/><xs:element name="decimal" nillable="true" type="xs:decimal"/><xs:element
+        name="double" nillable="true" type="xs:double"/><xs:element name="float" nillable="true"
+        type="xs:float"/><xs:element name="int" nillable="true" type="xs:int"/><xs:element
+        name="long" nillable="true" type="xs:long"/><xs:element name="QName" nillable="true"
+        type="xs:QName"/><xs:element name="short" nillable="true" type="xs:short"/><xs:element
+        name="string" nillable="true" type="xs:string"/><xs:element name="unsignedByte"
+        nillable="true" type="xs:unsignedByte"/><xs:element name="unsignedInt" nillable="true"
+        type="xs:unsignedInt"/><xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong"/><xs:element
+        name="unsignedShort" nillable="true" type="xs:unsignedShort"/><xs:element
+        name="char" nillable="true" type="tns:char"/><xs:simpleType name="char"><xs:restriction
+        base="xs:int"/></xs:simpleType><xs:element name="duration" nillable="true"
+        type="tns:duration"/><xs:simpleType name="duration"><xs:restriction base="xs:duration"><xs:pattern
+        value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/><xs:minInclusive value="-P10675199DT2H48M5.4775808S"/><xs:maxInclusive
+        value="P10675199DT2H48M5.4775807S"/></xs:restriction></xs:simpleType><xs:element
+        name="guid" nillable="true" type="tns:guid"/><xs:simpleType name="guid"><xs:restriction
+        base="xs:string"><xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/></xs:restriction></xs:simpleType><xs:attribute
+        name="FactoryType" type="xs:QName"/><xs:attribute name="Id" type="xs:ID"/><xs:attribute
+        name="Ref" type="xs:IDREF"/></xs:schema>
+    headers:
+      Connection:
+      - close
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Date:
+      - Fri, 13 May 2022 05:57:54 GMT
+      Referrer-Policy:
+      - no-referrer-when-downgrade
+      Server:
+      - Apache (proxied)
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-RP-UNIQUE_ID:
+      - Yn3zY-sdGrL3swMNpDRV7QAACAw
+      X-Xss-Protection:
+      - 1; mode=block
+      content-length:
+      - '2273'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - ittrksessid=b8278c09.5dede5af62f48
+      User-Agent:
+      - Zeep/3.2.0 (www.python-zeep.org)
+    method: GET
+    uri: https://ebill-ki.postfinance.ch/B2BService/B2BService.svc?xsd=xsd4
+  response:
+    body:
+      string: <?xml version="1.0" encoding="utf-8"?><xs:schema elementFormDefault="qualified"
+        targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays"><xs:complexType
+        name="ArrayOfstring"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded"
+        name="string" nillable="true" type="xs:string"/></xs:sequence></xs:complexType><xs:element
+        name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring"/></xs:schema>
+    headers:
+      Connection:
+      - close
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Date:
+      - Fri, 13 May 2022 05:57:55 GMT
+      Referrer-Policy:
+      - no-referrer-when-downgrade
+      Server:
+      - Apache (proxied)
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-RP-UNIQUE_ID:
+      - Yn3zYy25lnOenWMr5onEaQAABxY
+      X-Xss-Protection:
+      - 1; mode=block
+      content-length:
+      - '534'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: "<?xml version='1.0' encoding='utf-8'?>\n<soap-env:Envelope xmlns:soap-env=\"http://www.w3.org/2003/05/soap-envelope\"><soap-env:Header
+      xmlns:wsa=\"http://www.w3.org/2005/08/addressing\"><wsa:Action>http://ch.swisspost.ebill.b2bservice/B2BService/SearchInvoices</wsa:Action><wsa:MessageID>urn:uuid:702a1145-d198-4922-bce3-fd1101657330</wsa:MessageID><wsa:To>https://ebill-ki.postfinance.ch/B2BService/B2BService.svc</wsa:To><wsse:Security
+      xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\"><wsse:UsernameToken><wsse:Username>yb1021209</wsse:Username><wsse:Password
+      Type=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText\">\xA3cAmp\xA3339955</wsse:Password></wsse:UsernameToken></wsse:Security></soap-env:Header><soap-env:Body><ns0:SearchInvoices
+      xmlns:ns0=\"http://ch.swisspost.ebill.b2bservice\"><ns0:Parameter><ns1:BillerID
+      xmlns:ns1=\"http://swisspost_ch.ebs.ebill.b2bservice\">41101000001021209</ns1:BillerID><ns2:TransactionID
+      xmlns:ns2=\"http://swisspost_ch.ebs.ebill.b2bservice\">test-transaction-123</ns2:TransactionID></ns0:Parameter></ns0:SearchInvoices></soap-env:Body></soap-env:Envelope>"
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1174'
+      Content-Type:
+      - application/soap+xml; charset=utf-8; action="http://ch.swisspost.ebill.b2bservice/B2BService/SearchInvoices"
+      Cookie:
+      - ittrksessid=b8278c09.5dede5af62f48
+      SOAPAction:
+      - '"http://ch.swisspost.ebill.b2bservice/B2BService/SearchInvoices"'
+      User-Agent:
+      - Zeep/3.2.0 (www.python-zeep.org)
+    method: POST
+    uri: https://ebill-ki.postfinance.ch/B2BService/B2BService.svc
+  response:
+    body:
+      string: <s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://www.w3.org/2005/08/addressing"
+        xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><s:Header><a:Action
+        s:mustUnderstand="1">http://ch.swisspost.ebill.b2bservice/B2BService/SearchInvoicesResponse</a:Action><ActivityId
+        CorrelationId="7645db82-3ac8-47ee-ab0c-64a0946b409f" xmlns="http://schemas.microsoft.com/2004/09/ServiceModel/Diagnostics">00000000-0000-0000-0000-000000000000</ActivityId><a:RelatesTo>urn:uuid:702a1145-d198-4922-bce3-fd1101657330</a:RelatesTo><o:Security
+        s:mustUnderstand="1" xmlns:o="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"><u:Timestamp
+        u:Id="_0"><u:Created>2022-05-13T05:57:56.570Z</u:Created><u:Expires>2022-05-13T06:02:56.570Z</u:Expires></u:Timestamp></o:Security></s:Header><s:Body><SearchInvoicesResponse
+        xmlns="http://ch.swisspost.ebill.b2bservice"><SearchInvoicesResult xmlns:b="http://swisspost_ch.ebs.ebill.b2bservice"
+        xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><b:InvoiceCount>1</b:InvoiceCount><b:TotalInvoiceCount>1</b:TotalInvoiceCount><b:InvoiceList><b:SearchInvoice><b:BillerId>41101000001021209</b:BillerId><b:TransactionId>test-transaction-123</b:TransactionId><b:eBillAccountId>41100000259278521</b:eBillAccountId><b:Amount>340</b:Amount><b:State>Invalid</b:State><b:PaymentType/><b:ESRReferenceNbr/><b:DeliveryDate>2022-05-13T07:32:04.38</b:DeliveryDate><b:PaymentDueDate
+        i:nil="true"/><b:ReasonCode>09</b:ReasonCode><b:ReasonText>TransactionID in
+        file name (test-transaction-123) and XML (QR-IBAN) not equal</b:ReasonText></b:SearchInvoice></b:InvoiceList></SearchInvoicesResult></SearchInvoicesResponse></s:Body></s:Envelope>
+    headers:
+      Connection:
+      - close
+      Content-Length:
+      - '1737'
+      Content-Type:
+      - application/soap+xml; charset=utf-8
+      Date:
+      - Fri, 13 May 2022 05:57:55 GMT
+      Referrer-Policy:
+      - no-referrer-when-downgrade
+      Server:
+      - Apache (proxied)
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-RP-UNIQUE_ID:
+      - Yn3zZBFe1qhLp6voSVLKFAAACRM
+      X-Xss-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

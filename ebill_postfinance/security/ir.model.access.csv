@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ebill_postfinance_service_user,access.ebill.postfinance.service.user,model_ebill_postfinance_service,base.group_user,1,0,0,0
+access_ebill_postfinance_service_manager,access.postfinance.service.manager,model_ebill_postfinance_service,account.group_account_manager,1,1,1,1
+access_ebill_postfinance_invoice_message_user,access.ebill.postfinance.invoice.message.user,model_ebill_postfinance_invoice_message,base.group_user,1,0,0,0
+access_ebill_postfinance_invoice_message_manager,access.ebill.postfinance.invoice.message.manager,model_ebill_postfinance_invoice_message,account.group_account_manager,1,1,1,1
