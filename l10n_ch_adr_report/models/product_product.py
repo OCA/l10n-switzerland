@@ -19,7 +19,7 @@ class ProductProduct(models.Model):
             res = _("UN")
             res += " {}, {}".format(adr_good.un_number, adr_good.name)
             if record.nag:
-                res += _(", N.A.G ({})").format(record.nag)
+                res += _(" {}").format(record.nag)
 
             if record.label_first:
                 res += ", {}".format(record._get_name_from_selection("label_first"))
