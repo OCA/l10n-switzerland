@@ -61,3 +61,4 @@ class BusinessDocumentImport(models.AbstractModel):
                 partner, iban, bic, chatter_msg, create_if_not_found
             )
             return bankaccount
+

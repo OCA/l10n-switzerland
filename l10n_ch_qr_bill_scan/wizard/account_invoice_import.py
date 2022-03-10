@@ -187,3 +187,11 @@ class AccountInvoiceImport(models.TransientModel):
         action["res_id"] = self.id
         self.write(wiz_vals)
         return action
+
+    @api.model
+    def invoice_already_exists(self, commercial_partner, parsed_inv):
+        if not parsed_inv.get('invoice_number'):
+            return False
+        return super(AccountInvoiceImport, self).invoice_already_exists(
+            commercial_partner=commercial_partner, parsed_inv=parsed_inv
+        )
