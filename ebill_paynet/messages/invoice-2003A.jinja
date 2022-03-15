@@ -203,7 +203,7 @@
       {% for taxgroup in amount_by_group %}
       <TAX>
         <TAX-BASIS>
-          <Amount Currency="{{ invoice.currency_id.name }}">{{ taxgroup[2] }}</Amount>
+          <Amount Currency="{{ invoice.currency_id.name }}">{{ invoice._get_rounded_amount(taxgroup[2]) }}</Amount>
         </TAX-BASIS>
       {%- if taxgroup[0] %}
       <Rate Category="S">{{ taxgroup[0] }}</Rate>
