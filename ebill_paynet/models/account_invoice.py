@@ -25,9 +25,7 @@ class AccountInvoice(models.Model):
         if self.transmit_method_id == paynet_method:
             contract = self.partner_id.get_active_contract(self.transmit_method_id)
             if contract:
-                self.invoice_partner_bank_id = (
-                    contract.paynet_service_id.partner_bank_id
-                )
+                self.partner_bank_id = contract.paynet_service_id.partner_bank_id
 
     def _export_invoice(self):
         """Export invoice with the help of account_invoice_export module."""
