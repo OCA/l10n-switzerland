@@ -22,7 +22,7 @@ class PaymentISR(AccountTestInvoicingCommon):
     def create_supplier_invoice(
         self, supplier, ref, currency_to_use="base.CHF", inv_date=None
     ):
-        """ Generates a test invoice """
+        """Generates a test invoice"""
         f = Form(self.env["account.move"].with_context(default_move_type="in_invoice"))
         f.partner_id = supplier
         f.payment_reference = ref
@@ -38,13 +38,13 @@ class PaymentISR(AccountTestInvoicingCommon):
         return invoice
 
     def create_bank_account(self, number, partner, bank=None):
-        """ Generates a test res.partner.bank. """
+        """Generates a test res.partner.bank."""
         return self.env["res.partner.bank"].create(
             {"acc_number": number, "bank_id": bank.id, "partner_id": partner.id}
         )
 
     def create_isrb_account(self, number, partner):
-        """ Generates a test res.partner.bank. """
+        """Generates a test res.partner.bank."""
         return self.env["res.partner.bank"].create(
             {
                 "acc_number": partner.name + number,

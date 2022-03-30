@@ -23,7 +23,7 @@ class TestInvoiceMessage(CommonCase):
         self.assertEqual(message.ic_ref, "SA%012d" % message.id)
 
     def test_invoice(self):
-        """ Check XML payload genetated for an invoice."""
+        """Check XML payload genetated for an invoice."""
         self.invoice_1.name = "INV_TEST_01"
         # self.invoice_1.action_invoice_sent()
         # TODO set a due date different to create date

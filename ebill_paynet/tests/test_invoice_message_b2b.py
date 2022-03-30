@@ -18,7 +18,7 @@ class TestInvoiceMessage(CommonCase):
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
     def test_invoice_qr(self):
-        """ Check XML payload genetated for an invoice."""
+        """Check XML payload genetated for an invoice."""
         self.invoice.name = "INV_TEST_01"
         self.invoice.invoice_date_due = "2019-07-01"
         message = self.invoice.create_paynet_message()
@@ -47,7 +47,7 @@ class TestInvoiceMessage(CommonCase):
         self.assertXmlEquivalentOutputs(payload, expected_nocomment)
 
     def test_invoice_esr(self):
-        """ Check XML payload genetated for an invoice."""
+        """Check XML payload genetated for an invoice."""
         self.contract.payment_type = "isr"
         self.invoice.name = "INV_TEST_01"
         self.invoice.invoice_date_due = "2019-07-01"

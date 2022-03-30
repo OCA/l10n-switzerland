@@ -21,7 +21,7 @@ class TestEbillPaynetCustomerFreeRef(CommonCase):
         cls.sale.customer_order_free_ref = "FREE"
 
     def test_invoice(self):
-        """ Check XML payload genetated for an invoice."""
+        """Check XML payload genetated for an invoice."""
         message = self.invoice.create_paynet_message()
         message.payload = message._generate_payload()
         # Remove the PDF file data from the XML to ease testing
