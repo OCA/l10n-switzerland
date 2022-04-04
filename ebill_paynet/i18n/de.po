@@ -71,8 +71,11 @@ msgid "Created on"
 msgstr ""
 
 #. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_account_move__display_name
+#: model:ir.model.fields,field_description:ebill_paynet.field_ebill_payment_contract__display_name
 #: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message__display_name
 #: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__display_name
+#: model:ir.model.fields,field_description:ebill_paynet.field_sale_order__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -108,13 +111,21 @@ msgid "Error generating Paynet message"
 msgstr ""
 
 #. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__operation_timeout
+msgid "HTTP Timeout"
+msgstr ""
+
+#. module: ebill_paynet
 #: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message__ic_ref
 msgid "IC Ref"
 msgstr ""
 
 #. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_account_move__id
+#: model:ir.model.fields,field_description:ebill_paynet.field_ebill_payment_contract__id
 #: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message__id
 #: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__id
+#: model:ir.model.fields,field_description:ebill_paynet.field_sale_order__id
 msgid "ID"
 msgstr ""
 
@@ -152,12 +163,15 @@ msgstr ""
 
 #. module: ebill_paynet
 #: model:ir.model,name:ebill_paynet.model_account_move
-msgid "Journal Entries"
-msgstr "Buchungssätze"
+msgid "Journal Entry"
+msgstr ""
 
 #. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_account_move____last_update
+#: model:ir.model.fields,field_description:ebill_paynet.field_ebill_payment_contract____last_update
 #: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message____last_update
 #: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service____last_update
+#: model:ir.model.fields,field_description:ebill_paynet.field_sale_order____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -364,6 +378,11 @@ msgid "The Paynet system rejected the eBill that was send."
 msgstr ""
 
 #. module: ebill_paynet
+#: model:ir.model.fields,help:ebill_paynet.field_paynet_service__operation_timeout
+msgid "Timeout for each HTTP (GET, POST) request in seconds."
+msgstr ""
+
+#. module: ebill_paynet
 #: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__url
 msgid "Url"
 msgstr ""
@@ -377,3 +396,6 @@ msgstr ""
 #: model:ir.model,name:ebill_paynet.model_ebill_payment_contract
 msgid "eBill Payment Contract"
 msgstr ""
+
+#~ msgid "Journal Entries"
+#~ msgstr "Buchungssätze"
