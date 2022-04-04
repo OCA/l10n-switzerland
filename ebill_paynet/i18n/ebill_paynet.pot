@@ -108,6 +108,11 @@ msgid "Error generating Paynet message"
 msgstr ""
 
 #. module: ebill_paynet
+#: model:ir.model.fields,field_description:ebill_paynet.field_paynet_service__operation_timeout
+msgid "HTTP Timeout"
+msgstr ""
+
+#. module: ebill_paynet
 #: model:ir.model.fields,field_description:ebill_paynet.field_paynet_invoice_message__ic_ref
 msgid "IC Ref"
 msgstr ""
@@ -367,6 +372,11 @@ msgstr ""
 #. module: ebill_paynet
 #: model_terms:ir.ui.view,arch_db:ebill_paynet.dws_reject_invoice
 msgid "The Paynet system rejected the eBill that was send."
+msgstr ""
+
+#. module: ebill_paynet
+#: model:ir.model.fields,help:ebill_paynet.field_paynet_service__operation_timeout
+msgid "Timeout for each HTTP (GET, POST) request in seconds."
 msgstr ""
 
 #. module: ebill_paynet
