@@ -34,8 +34,8 @@
             <Date Format="CCYYMMDD">{{ format_date(invoice.date_invoice) }}</Date>
           </REFERENCE-DATE>
         </INVOICE-REFERENCE>
-        {% for order in invoice_lines.sale_line_ids.mapped('order_id') %}
-        {%- if order.paynet_client_order_ref %}
+        {% for order in invoice_lines.sale_line_ids.mapped('order_id') if order.paynet_client_order_ref %}
+        {%- if loop.index0 < 5 %}
         <ORDER>
           <REFERENCE-DATE>
             <Reference-No>{{ order.paynet_client_order_ref }}</Reference-No>
