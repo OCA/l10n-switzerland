@@ -53,6 +53,11 @@ class PaynetService(models.Model):
         readonly=True,
     )
     active = fields.Boolean(default=True)
+    operation_timeout = fields.Integer(
+        string="HTTP Timeout",
+        default="600",
+        help="Timeout for each HTTP (GET, POST) request in seconds.",
+    )
 
     @api.depends("use_test_service")
     def _compute_url(self):
@@ -62,13 +67,18 @@ class PaynetService(models.Model):
             else:
                 record.url = SYSTEM_PROD_URL
 
+    def _get_dws_connection(self):
+        return PayNetDWS(
+            self.url, self.use_test_service, self.operation_timeout or None
+        )
+
     def take_shipment(self, content):
         """Send a shipment via DWS to the Paynet System
 
         Return value is the shipment id
         """
         self.ensure_one()
-        dws = PayNetDWS(self.url, self.use_test_service)
+        dws = self._get_dws_connection()
         content = content.encode("utf-8")
         res = dws.service.takeShipment(
             Authorization=dws.authorization(self.username, self.password),
@@ -82,7 +92,7 @@ class PaynetService(models.Model):
     def get_shipment_list(self):
         """Get a list of shipments present on the DWS."""
         self.ensure_one()
-        dws = PayNetDWS(self.url, self.use_test_service)
+        dws = self._get_dws_connection()
         res = dws.service.getShipmentList(
             Authorization=dws.authorization(self.username, self.password),
             # fromEntry     : Position number as of which shipments should be
@@ -100,7 +110,7 @@ class PaynetService(models.Model):
     def get_shipment_content(self, shipment_id):
         """ """
         self.ensure_one()
-        dws = PayNetDWS(self.url, self.use_test_service)
+        dws = self._get_dws_connection()
         try:
             res = dws.service.getShipmentContent(
                 Authorization=dws.authorization(self.username, self.password),
@@ -155,7 +165,7 @@ class PaynetService(models.Model):
     def confirm_shipment(self, shipment_id):
         """Confirm a shipment reception to the DWS."""
         self.ensure_one()
-        dws = PayNetDWS(self.url, self.use_test_service)
+        dws = self._get_dws_connection()
         with dws.client.settings(raw_response=True):
             # The DWS returns an empty response for the confirmation
             # And due to that Zeep raises an exception while trying to parse
@@ -168,7 +178,7 @@ class PaynetService(models.Model):
 
     def ping_service(self):
         """Ping the DWS service this works without autentication."""
-        dws = PayNetDWS(self.url, self.use_test_service)
+        dws = self._get_dws_connection()
         return dws.service.ping(ClientData="hello")
 
     def check_shipments(self):

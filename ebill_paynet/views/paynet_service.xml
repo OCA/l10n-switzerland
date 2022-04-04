@@ -75,6 +75,7 @@
                             <field name="url" />
                             <field name="service_type" />
                             <field name="use_test_service" />
+                            <field name="operation_timeout" />
                             <field name="client_pid" />
                         </group>
                         <group>
