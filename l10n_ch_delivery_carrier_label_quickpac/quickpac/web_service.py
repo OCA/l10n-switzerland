@@ -354,13 +354,14 @@ class QuickpacWebService(object):
         :return: Notification
         """
         communication = Communication(
-            email=picking.partner_id.email, mobile=picking.partner_id.mobile
+            email=picking.partner_id.email or None,
+            mobile=(picking.partner_id.mobile or picking.partner_id.phone or None),
         )
         notification = Notification(
             communication=communication,
             service="441",
             language=get_language(picking.partner_id.lang),
-            type="EMAIL",
+            type=1 if communication.mobile else 0,
         )
         return notification
 
