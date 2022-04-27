@@ -61,10 +61,17 @@
    line=sepa_context['line']
    invoice = line.move_line_id.invoice
    %>
-   % if invoice.reference_type == 'bvr':
+   % if invoice.reference_type in ['bvr', 'QRR']:
           <RmtInf>
             <Strd>
               <CdtrRefInf>
+                % if invoice.reference_type == 'QRR':
+                <Tp>
+                  <CdOrPrtry>
+                    <Prtry>QRR</Prtry>
+                  </CdOrPrtry>
+                </Tp>
+                % endif
                 <Ref>${invoice.reference}</Ref>
               </CdtrRefInf>
             </Strd>
