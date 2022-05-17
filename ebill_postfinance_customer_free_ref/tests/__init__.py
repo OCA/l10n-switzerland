@@ -1,1 +1,1 @@
-from . import test_ebill_paynet_customer_free_ref
+from . import test_postfinance_customer_free_ref
