@@ -149,16 +149,16 @@ class QuickpacWebService(object):
         self.zip_api = ZIPApi(api_client)
         self.barcode_api = BarcodeApi(api_client)
 
+    # Similar with delivery-carrier/delivery_postlogistics/postlogistics/web_service.py
     def _get_recipient_partner(self, picking):
         if picking.picking_type_id.code == "outgoing":
             return picking.partner_id
         elif picking.picking_type_id.code == "incoming":
             location_dest = picking.location_dest_id
-            return (
-                location_dest.partner_id
-                or location_dest.company_id.partner_id
-                or picking.env.user.company_id.partner_id
-            )
+            # partner_id removed since 13.0 by below commit
+            # https://github.com/odoo/odoo/commit/2062ac6dec37841d23d2b5d8475305546a6f0df9
+            company = location_dest.company_id or picking.env.user.company_id
+            return company.partner_id
 
     def _generate_picking_itemid(self, picking, pack_no):
         """Allowed characters are alphanumeric plus `+`, `-` and `_`
