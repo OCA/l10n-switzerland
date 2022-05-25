@@ -18,7 +18,7 @@ class ReportController(Controller):
         type='http',
         auth="public",
     )
-    def report_qrcode(self, value, width=600, height=100, bar_border=4):
+    def report_qrcode(self, value, width=600, height=100, bar_border=4, barlevel='L'):
         """Contoller able to render barcode images thanks to reportlab.
 
         This adds `bar_border` capability.
@@ -32,7 +32,7 @@ class ReportController(Controller):
         """
         try:
             qrcode = request.env['report'].qrcode(
-                value, width=width, height=height, bar_border=bar_border
+                value, width=width, height=height, bar_border=bar_border, barlevel=barlevel
             )
         except (ValueError, AttributeError):
             raise exceptions.HTTPException(

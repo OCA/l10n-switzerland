@@ -9,7 +9,7 @@ class Report(models.Model):
     _inherit = 'report'
 
     @api.model
-    def qrcode(self, value, width=600, height=100, bar_border=4):
+    def qrcode(self, value, width=600, height=100, bar_border=4, barlevel='L', **kwargs):
         try:
             width, height, bar_border = (
                 int(width),
@@ -24,6 +24,8 @@ class Report(models.Model):
                 width=width,
                 height=height,
                 barBorder=bar_border,
+                barLevel=barlevel,
+                **kwargs
             )
             return qrcode.asString('png')
         except (ValueError, AttributeError):
