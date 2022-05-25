@@ -2,7 +2,6 @@
 # Copyright 2019-2020 Odoo
 # Copyright 2019-2020 Camptocamp SA
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
-
 import re
 
 import werkzeug.urls
@@ -242,7 +241,7 @@ class AccountInvoice(models.Model):
 
         # use quiet to remove blank around the QR
         # and make it easier to place it
-        return '/report/qrcode/?value=%s&width=%s&height=%s&bar_border=0' % (
+        return '/report/qrcode/?value=%s&width=%s&height=%s&bar_border=0&barlevel=M' % (
             werkzeug.urls.url_quote_plus('\n'.join(qr_code_vals)),
             256,
             256,
