@@ -13,19 +13,20 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 09:30+0000\n"
-"PO-Revision-Date: 2017-05-12 09:30+0000\n"
-"Last-Translator: Sébastien Alix <seb@usr-src.org>, 2017\n"
+"PO-Revision-Date: 2022-06-14 13:05+0000\n"
+"Last-Translator: Denis Leemann <denis.leemann@camptocamp.com>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_account_user_id
 msgid "Account Owner"
-msgstr ""
+msgstr "Titulaire du compte"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.fds_postfinance_file_search
@@ -35,17 +36,17 @@ msgstr "Active"
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_allow_download_file
 msgid "Allow download file?"
-msgstr ""
+msgstr "Autoriser le téléchargement ?"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_allow_upload_file
 msgid "Allow upload file?"
-msgstr ""
+msgstr "Autoriser l'upload de fichiers ?"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_account_authentication_key_ids
 msgid "Authentication keys"
-msgstr ""
+msgstr "Clés d'authentification"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_bank_statement_id
@@ -69,17 +70,19 @@ msgstr "Annulé"
 #. module: l10n_ch_fds_postfinance
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_files_import_tobankstatments_wizard_form
 msgid "Click on import to download files."
-msgstr ""
+msgstr "Cliquer sur importer pour télécharger les fichiers."
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.actions.act_window,help:l10n_ch_fds_postfinance.action_fds_postfinance_account
 msgid "Click to create a new PostFinance File Delivery Services (FDS) Account."
 msgstr ""
+"Cliquez pour créer un nouveau compte Postfinance File Delivery Services "
+"(FDS)."
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_postfinance_account_form
 msgid "Clone key"
-msgstr ""
+msgstr "Clé de clonage"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_files_import_tobankstatments_wizard_form
@@ -92,12 +95,12 @@ msgstr "Fermer"
 #. module: l10n_ch_fds_postfinance
 #: model:ir.ui.view,arch_db:l10n_ch_fds_postfinance.view_fds_key_clone_wizard_form
 msgid "Copy"
-msgstr ""
+msgstr "Copier"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_key_clone_wizard_src_user_key_id
 msgid "Copy authentication key:"
-msgstr ""
+msgstr "Copier la clé d'authentification :"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_authentication_keys_create_uid
@@ -144,7 +147,7 @@ msgstr "Catégorie"
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_name
 msgid "Directory name"
-msgstr ""
+msgstr "Nom du dossier"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_directory_still_on_server
