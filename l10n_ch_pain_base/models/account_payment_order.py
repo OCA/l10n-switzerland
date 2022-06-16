@@ -79,6 +79,11 @@ class AccountPaymentOrder(models.Model):
             if bank_line.local_instrument == "CH01":
                 # Don't set the creditor agent on ISR/CH01 payments
                 return True
+            elif (
+                partner_bank.acc_type == "iban" and partner_bank.acc_number[:2] == "CH"
+            ):
+                # Do not need the creditor agent (bic) on swiss payment made with iban
+                return True
             elif not partner_bank.bank_bic:
                 raise UserError(
                     _(
