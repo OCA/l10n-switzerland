@@ -149,11 +149,11 @@ class AccountPaymentOrder(models.Model):
                 adrline1 = etree.SubElement(postal_address, "AdrLine")
                 adrline1.text = ", ".join(
                     filter(None, [partner.street, partner.street2])
-                )
+                )[:71]
 
                 if partner.zip and partner.city:
                     adrline2 = etree.SubElement(postal_address, "AdrLine")
-                    adrline2.text = " ".join([partner.zip, partner.city])
+                    adrline2.text = " ".join([partner.zip, partner.city])[:71]
 
         return True
 
