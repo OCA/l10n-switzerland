@@ -9,10 +9,13 @@ class AccountPaymentLine(models.Model):
 
     local_instrument = fields.Selection(selection_add=[("CH01", "CH01 (ISR)")])
     communication_type = fields.Selection(
-        selection_add=[("isr", "ISR"), ("qrr", "QRR")]
+        selection_add=[("isr", "ISR"), ("qrr", "QRR")],
+        default="normal",
+        ondelete={"isr": "set default", "qrr": "set default"},
     )
 
     def invoice_reference_type2communication_type(self):
         res = super().invoice_reference_type2communication_type()
         res["isr"] = "isr"
+        res["qrr"] = "qrr"
         return res
