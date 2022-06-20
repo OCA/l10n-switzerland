@@ -25,7 +25,7 @@ class AccountPaymentOrder(models.Model):
         pain_flavor = self.payment_mode_id.payment_method_id.pain_version
         if pain_flavor in ["pain.001.001.03.ch.02", "pain.008.001.02.ch.01"]:
             nsmap[None] = (
-                "http://www.six-interbank-clearing.com/de/%s.xsd" % pain_flavor
+                "http://www.six-interbank-clearing.com/de/" "%s.xsd" % pain_flavor
             )
 
         return nsmap
@@ -78,6 +78,11 @@ class AccountPaymentOrder(models.Model):
         if gen_args.get("pain_flavor") == "pain.001.001.03.ch.02" and bank_line:
             if bank_line.local_instrument == "CH01":
                 # Don't set the creditor agent on ISR/CH01 payments
+                return True
+            elif (
+                partner_bank.acc_type == "iban" and partner_bank.acc_number[:2] == "CH"
+            ):
+                # Do not need the creditor agent (bic) on swiss payment made with iban
                 return True
             elif not partner_bank.bank_bic:
                 raise UserError(
@@ -149,31 +154,47 @@ class AccountPaymentOrder(models.Model):
                 adrline1 = etree.SubElement(postal_address, "AdrLine")
                 adrline1.text = ", ".join(
                     filter(None, [partner.street, partner.street2])
-                )
+                )[:71]
 
                 if partner.zip and partner.city:
                     adrline2 = etree.SubElement(postal_address, "AdrLine")
-                    adrline2.text = " ".join([partner.zip, partner.city])
+                    adrline2.text = " ".join([partner.zip, partner.city])[:71]
 
         return True
 
     @api.model
     def generate_remittance_info_block(self, parent_node, line, gen_args):
-        if line.communication_type == "qrr":
+
+        if (
+            line.communication_type in ["isr", "qrr"]
+            and gen_args.get("pain_flavor") == "pain.001.001.03.ch.02"
+        ):
             remittance_info = etree.SubElement(parent_node, "RmtInf")
             remittance_info_structured = etree.SubElement(remittance_info, "Strd")
             creditor_ref_information = etree.SubElement(
                 remittance_info_structured, "CdtrRefInf"
             )
-            creditor_ref_info_type = etree.SubElement(creditor_ref_information, "Tp")
-            creditor_ref_info_type_or = etree.SubElement(
-                creditor_ref_info_type, "CdOrPrtry"
-            )
-            creditor_ref_info_type_code = etree.SubElement(
-                creditor_ref_info_type_or, "Prtry"
-            )
-            creditor_ref_info_type_code.text = "QRR"
+
+            if line.communication_type == "qrr":
+                creditor_ref_info_type = etree.SubElement(
+                    creditor_ref_information, "Tp"
+                )
+                creditor_ref_info_type_or = etree.SubElement(
+                    creditor_ref_info_type, "CdOrPrtry"
+                )
+                creditor_ref_info_type_code = etree.SubElement(
+                    creditor_ref_info_type_or, "Prtry"
+                )
+                creditor_ref_info_type_code.text = "QRR"
+
             creditor_reference = etree.SubElement(creditor_ref_information, "Ref")
-            creditor_reference.text = line.payment_line_ids[0].communication
+
+            creditor_reference.text = self._prepare_field(
+                "Creditor Structured Reference",
+                "line.communication",
+                {"line": line},
+                35,
+                gen_args=gen_args,
+            )
         else:
             super().generate_remittance_info_block(parent_node, line, gen_args)

@@ -1,0 +1,56 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_ch_isrb
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_ch_isrb
+#: model:ir.model,name:l10n_ch_isrb.model_res_partner_bank
+msgid "Bank Accounts"
+msgstr ""
+
+#. module: l10n_ch_isrb
+#: model:ir.model.fields,field_description:l10n_ch_isrb.field_account_move__display_name
+#: model:ir.model.fields,field_description:l10n_ch_isrb.field_res_partner_bank__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_ch_isrb
+#: model:ir.model.fields,field_description:l10n_ch_isrb.field_account_move__id
+#: model:ir.model.fields,field_description:l10n_ch_isrb.field_res_partner_bank__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_ch_isrb
+#: model:ir.model.fields,field_description:l10n_ch_isrb.field_account_setup_bank_manual_config__l10n_ch_isrb_id_number
+#: model:ir.model.fields,field_description:l10n_ch_isrb.field_res_partner_bank__l10n_ch_isrb_id_number
+msgid "ISR-B Custmer ID"
+msgstr ""
+
+#. module: l10n_ch_isrb
+#: model:ir.model.fields,help:l10n_ch_isrb.field_account_setup_bank_manual_config__l10n_ch_isrb_id_number
+#: model:ir.model.fields,help:l10n_ch_isrb.field_res_partner_bank__l10n_ch_isrb_id_number
+msgid ""
+"ISR-B Customer ID number for ISR. Used only when generating ISR reference through a bank. It is not necessary for standard ISR from Postfinance. The ISR reference will contains this number in the first digits.\n"
+"e.g. 999999 will generate 99 9999x xxxxx xxxxx xxxxx xxxxx xx references"
+msgstr ""
+
+#. module: l10n_ch_isrb
+#: model:ir.model,name:l10n_ch_isrb.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: l10n_ch_isrb
+#: model:ir.model.fields,field_description:l10n_ch_isrb.field_account_move____last_update
+#: model:ir.model.fields,field_description:l10n_ch_isrb.field_res_partner_bank____last_update
+msgid "Last Modified on"
+msgstr ""
