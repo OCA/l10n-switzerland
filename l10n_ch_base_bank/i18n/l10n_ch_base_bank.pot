@@ -1,0 +1,128 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_ch_base_bank
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_ch_base_bank
+#: model:ir.model,name:l10n_ch_base_bank.model_res_bank
+msgid "Bank"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: model:ir.model,name:l10n_ch_base_bank.model_res_partner_bank
+msgid "Bank Accounts"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/invoice.py:0
+#, python-format
+msgid "Bank account must contain a subscription number for ISR ref type."
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/invoice.py:0
+#, python-format
+msgid ""
+"Bank account shouldn't be empty, for ISR ref type, you can set it manually "
+"or set appropriate payment mode."
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: model_terms:ir.ui.view,arch_db:l10n_ch_base_bank.view_bank_search
+msgid "Banks"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank__city
+msgid "City"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank__city
+msgid "City of the bank"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank__clearing
+msgid "Clearing number"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank__code
+msgid "Code"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank__country_code
+msgid "Country code"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_account_move__display_name
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank__display_name
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_partner_bank__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_account_move__id
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank__id
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_partner_bank__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/partner_bank.py:0
+#, python-format
+msgid "ISR {}"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/partner_bank.py:0
+#, python-format
+msgid "ISR {} {}"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank__code
+msgid "Internal reference"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: model:ir.model,name:l10n_ch_base_bank.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_account_move____last_update
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank____last_update
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_partner_bank____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: model_terms:ir.ui.view,arch_db:l10n_ch_base_bank.view_bank_search
+msgid "PostFinance"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank__clearing
+msgid "Swiss unique bank identifier also used in IBAN number"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank__country_code
+msgid ""
+"The ISO country code in two chars. \n"
+"You can use this field for quick search."
+msgstr ""

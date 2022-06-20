@@ -1,0 +1,139 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * l10n_ch_base_bank
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-16 06:26+0000\n"
+"PO-Revision-Date: 2018-11-24 20:10+0000\n"
+"Last-Translator: chrispi-ch <chris@okc.ch>\n"
+"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.2.2\n"
+
+#. module: l10n_ch_base_bank
+#: model:ir.model,name:l10n_ch_base_bank.model_res_bank
+msgid "Bank"
+msgstr "Bank"
+
+#. module: l10n_ch_base_bank
+#: model:ir.model,name:l10n_ch_base_bank.model_res_partner_bank
+msgid "Bank Accounts"
+msgstr "Bankkonten"
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_partner_bank_isr_adherent_num
+msgid "Bank ISR adherent number"
+msgstr "ESR-Teilnehmernummer der Bank"
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/bank.py:248
+#, python-format
+msgid "Bank/CCP Undefined"
+msgstr "Bank/Postkonto nicht definiert"
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/bank.py:246
+#, python-format
+msgid "Bank/CCP {}"
+msgstr "Bank/Postkonto {}"
+
+#. module: l10n_ch_base_bank
+#: model:ir.ui.view,arch_db:l10n_ch_base_bank.view_bank_search
+msgid "Banks"
+msgstr "Banken"
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank_ccp
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_partner_bank_ccp
+msgid "CCP/CP-Konto"
+msgstr "Postkonto"
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank_ccp
+msgid "CCP/CP-Konto of the bank"
+msgstr "Postkonto der Bank"
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank_clearing
+msgid "Clearing number"
+msgstr "Clearingnummer"
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank_code
+msgid "Code"
+msgstr "Code"
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank_country_code
+msgid "Country code"
+msgstr "Ländercode"
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank_code
+msgid "Internal reference"
+msgstr "Interne Referenz"
+
+#. module: l10n_ch_base_bank
+#: model:ir.model,name:l10n_ch_base_bank.model_account_invoice
+msgid "Invoice"
+msgstr "Rechnung"
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/bank.py:115
+#: code:addons/l10n_ch_base_bank/models/bank.py:233
+#, python-format
+msgid "Please enter a correct postal number. (01-23456-1 or 12345)"
+msgstr ""
+"Bitte geben Sie eine korrekte Postkonto-Nummer ein (01-23456-1 oder 12345)"
+
+#. module: l10n_ch_base_bank
+#: model:ir.ui.view,arch_db:l10n_ch_base_bank.view_bank_search
+msgid "PostFinance"
+msgstr "PostFinance"
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank_clearing
+msgid "Swiss unique bank identifier also used in IBAN number"
+msgstr "Instituts-Identifikation (IID; früher Clearingnummer)"
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank_country_code
+msgid ""
+"The ISO country code in two chars. \n"
+"You can use this field for quick search."
+msgstr ""
+"Der zweistellige ISO Ländercode. \n"
+"Sie können dieses Feld für die Schnellsuche verwenden."
+
+#. module: l10n_ch_base_bank
+#: sql_constraint:res.partner.bank:0
+msgid "The ISR adherent number must be unique !"
+msgstr "Die zugehörige ESR-Nummer muss eindeutig sein!"
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_partner_bank_isr_adherent_num
+msgid ""
+"Your Bank adherent number to be printed in references of your ISR. This "
+"is not a postal account number."
+msgstr ""
+"Die ESR-Teilnehmernummer, welche in der Codierzeile des Einzahlungsscheins "
+"gedruckt wird. Hinweis: Dies ist kein Postkonto."
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/bank.py:220
+#, python-format
+msgid ""
+"Your bank ISR adherent number must contain only digits!\n"
+"Please check your company bank account."
+msgstr ""
+"Die ESR-Teilnehmernummer Ihrer Bank darf nur Ziffern enthalten.\n"
+"Bitte überprüfen Sie das Bankkonto Ihres Unternehmens."

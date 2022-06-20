@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="sepa_credit_transfer_chf" model="account.payment.method">
+        <field name="name">SEPA Credit Transfer in CHF to suppliers</field>
+        <field name="code">sepa_credit_transfer_chf</field>
+        <field name="payment_type">outbound</field>
+        <field name="bank_account_required" eval="True" />
+        <field name="pain_version">pain.001.001.03.ch.02</field>
+    </record>
+</odoo>
