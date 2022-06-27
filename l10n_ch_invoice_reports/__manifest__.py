@@ -9,7 +9,7 @@
     "website": "https://github.com/OCA/l10n-switzerland",
     "license": "AGPL-3",
     "depends": ["account", "l10n_ch", "web"],
-    "data": ["data/reports.xml"],
+    "data": ["data/reports.xml", "views/res_config_settings.xml"],
     "auto_install": False,
     "installable": True,
 }
