@@ -18,7 +18,7 @@ msgstr ""
 #. module: l10n_ch_invoice_reports
 #: model:ir.actions.report,print_report_name:l10n_ch_invoice_reports.account_move_payment_report
 msgid "('invoice-payment-slip_'+object.name)"
-msgstr ""
+msgstr "('facture-bulletin_de_versement_'+object.name)"
 
 #. module: l10n_ch_invoice_reports
 #: model_terms:ir.ui.view,arch_db:l10n_ch_invoice_reports.res_config_settings_view_form
@@ -35,7 +35,7 @@ msgstr ""
 #. module: l10n_ch_invoice_reports
 #: model:ir.model,name:l10n_ch_invoice_reports.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Compagnies"
 
 #. module: l10n_ch_invoice_reports
 #: model:ir.model,name:l10n_ch_invoice_reports.model_res_config_settings
@@ -45,12 +45,12 @@ msgstr ""
 #. module: l10n_ch_invoice_reports
 #: model:ir.model,name:l10n_ch_invoice_reports.model_mail_template
 msgid "Email Templates"
-msgstr ""
+msgstr "Modèles de courriels"
 
 #. module: l10n_ch_invoice_reports
 #: model:ir.actions.report,name:l10n_ch_invoice_reports.account_move_payment_report
 msgid "Invoice with payment slip(s)"
-msgstr ""
+msgstr "facture avec bulletin de versement"
 
 #. module: l10n_ch_invoice_reports
 #: model:ir.model.fields,field_description:l10n_ch_invoice_reports.field_res_company__print_isr_invoice
@@ -78,4 +78,4 @@ msgstr ""
 #: code:addons/l10n_ch_invoice_reports/models/mail_template.py:0
 #, python-format
 msgid "invoice_%s_with_payslip.pdf"
-msgstr ""
+msgstr "facture_%s_bulletin_de_versement.pdf"
