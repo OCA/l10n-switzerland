@@ -21,7 +21,7 @@ class PortalAccountInvoice(PortalAccount):
             return self._show_report(
                 model=invoice_sudo,
                 report_type=report_type,
-                report_ref="l10n_ch_invoice_reports.account_move_qr_isr_report",
+                report_ref="l10n_ch_invoice_reports.account_move_payment_report",
                 download=download,
             )
         elif report_type in ("html", "text"):
