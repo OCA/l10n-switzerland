@@ -1,10 +1,9 @@
 # Copyright 2012-2019 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import exceptions
-from odoo.tests.common import Form, SavepointCase
+from odoo.tests.common import Form, TransactionCase
 
 
-class TestCreateMove(SavepointCase):
+class TestCreateMove(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -86,21 +85,3 @@ class TestCreateMove(SavepointCase):
         move = inv_form.save()
 
         self.assertFalse(move._has_isr_ref())
-
-    def test_emit_move_with_isr_ref_missing_subscr_num(self):
-        inv_form = self.new_form()
-        move = inv_form.save()
-        self.assertFalse(move._has_isr_ref())
-        inv_form.partner_bank_id = self.env["res.partner.bank"]
-        with self.assertRaises(exceptions.ValidationError):
-            inv_form.ref = "132000000000000000000000014"
-            inv_form.save()
-
-    def test_emit_move_with_isr_ref_subscr_num_wrong_currency(self):
-        inv_form = self.new_form()
-        move = inv_form.save()
-        self.assertFalse(move._has_isr_ref())
-        move.currency_id = self.env.ref("base.EUR")
-        with self.assertRaises(exceptions.ValidationError):
-            inv_form.ref = "132000000000000000000000014"
-            inv_form.save()
