@@ -9,18 +9,18 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     # add context key dependency to prevent generation of attachment inside
-    # https://github.com/odoo/odoo/blob/13.0/addons/l10n_ch/models/mail_template.py#L12
+    # https://github.com/odoo/odoo/blob/15.0/addons/l10n_ch/models/mail_template.py#L12
     @api.depends_context("invoice_report_no_attachment")
     def _compute_l10n_ch_isr_valid(self):
         if self.env.context.get("invoice_report_no_attachment", False):
             self.update({"l10n_ch_isr_valid": False})
         else:
-            super()._compute_l10n_ch_isr_valid()
+            return super()._compute_l10n_ch_isr_valid()
 
     def can_generate_qr_bill(self):
         # Originally method returns True if the invoice can be used to generate a QR-bill.
         # We add context key dependency to prevent generation of attachment inside
-        # https://github.com/odoo/odoo/blob/13.0/addons/l10n_ch/models/mail_template.py#L12
+        # https://github.com/odoo/odoo/blob/15.0/addons/l10n_ch/models/mail_template.py#L12
         self.ensure_one()
         if self.env.context.get("invoice_report_no_attachment", False):
             return False
