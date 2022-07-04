@@ -57,6 +57,7 @@ msgstr ""
 msgid "ID"
 msgstr ""
 
+#. module: l10n_ch_invoice_reports
 #: model:ir.actions.report,name:l10n_ch_invoice_reports.account_move_payment_report
 msgid "Invoice with payment slip(s)"
 msgstr ""

@@ -5,8 +5,13 @@
         <field name="name">Invoice with payment slip(s)</field>
         <field name="model">account.move</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">l10n_ch_invoice_reports.account_move_payment_report</field>
-        <field name="report_file">l10n_ch_invoice_reports.account_move_payment_report</field>
+        <field
+            name="report_name"
+        >l10n_ch_invoice_reports.account_move_payment_report</field>
+        <field
+            name="report_file"
+        >l10n_ch_invoice_reports.account_move_payment_report</field>
+        <field name="binding_model_id" ref="account.model_account_move" />
         <field name="print_report_name">('invoice-payment-slip_'+object.name)</field>
         <field name="attachment">''invoice_'+object.name+'_with_payslip.pdf''</field>
         <field name="attachment_use">True</field>
