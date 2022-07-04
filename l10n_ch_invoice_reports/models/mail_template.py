@@ -35,6 +35,6 @@ class MailTemplate(models.Model):
         # force translation of attachment's name according to partner's lang
         self = self.with_context(lang=invoice.partner_id.lang)
         report_name = _("invoice_%s_with_payslip.pdf") % invoice.name.replace("/", "_")
-        report_pdf = self.report_template.render_qweb_pdf([invoice.id])[0]
+        report_pdf = self.report_template._render_qweb_pdf([invoice.id])[0]
         report_pdf = base64.b64encode(report_pdf)
         return [(report_name, report_pdf)]
