@@ -5,7 +5,7 @@
     "name": "Switzerland Country States",
     "category": "Localisation",
     "summary": "",
-    "version": "14.0.1.0.0",
+    "version": "15.0.1.0.0",
     "author": "copado MEDIA UG," "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/l10n-switzerland",
     "license": "AGPL-3",
