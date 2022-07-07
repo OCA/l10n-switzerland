@@ -18,6 +18,36 @@ class PaymentISR(AccountTestInvoicingCommon):
     def setUpClass(cls):
         chart_template_ref = "l10n_ch.l10nch_chart_template"
         super().setUpClass(chart_template_ref=chart_template_ref)
+        # This is to work with bank-payment/account_payment_partner
+        company = cls.env.user.company_id
+
+        try:
+            PaymentMode = cls.env["account.payment.mode"]
+        except KeyError:
+            return
+
+        AccountJournal = cls.env["account.journal"]
+        cls.manual_out = cls.env.ref("account.account_payment_method_manual_out")
+        cls.manual_out.bank_account_required = True
+        cls.journal_c1 = AccountJournal.create(
+            {
+                "name": "J1",
+                "code": "J1",
+                "type": "bank",
+                "company_id": company.id,
+                "bank_acc_number": "123456",
+            }
+        )
+        cls.supplier_payment_mode = PaymentMode.create(
+            {
+                "name": "Suppliers Bank 1",
+                "bank_account_link": "variable",
+                "payment_method_id": cls.manual_out.id,
+                "company_id": company.id,
+                "fixed_journal_id": cls.journal_c1.id,
+                "variable_journal_ids": [(6, 0, [cls.journal_c1.id])],
+            }
+        )
 
     def create_supplier_invoice(
         self, supplier, ref, currency_to_use="base.CHF", inv_date=None
@@ -65,11 +95,20 @@ class PaymentISR(AccountTestInvoicingCommon):
         self.bank_journal_chf = self.env["account.journal"].create(
             {"name": "Bank", "type": "bank", "code": "BNK41"}
         )
-        self.supplier_isrb1 = self.env["res.partner"].create({"name": "Supplier ISR 1"})
+        try:
+            partner_vals = {
+                "supplier_payment_mode_id": self.supplier_payment_mode,
+            }
+        except AttributeError:
+            partner_vals = {}
+        partner_vals.update({"name": "Supplier ISR 1"})
+        self.supplier_isrb1 = self.env["res.partner"].create(partner_vals)
         self.create_isrb_account("01-162-8", self.supplier_isrb1)
-        self.supplier_isrb2 = self.env["res.partner"].create({"name": "Supplier ISR 2"})
+        partner_vals.update({"name": "Supplier ISR 2"})
+        self.supplier_isrb2 = self.env["res.partner"].create(partner_vals)
         self.create_isrb_account("01-162-8", self.supplier_isrb2)
-        self.supplier_iban = self.env["res.partner"].create({"name": "Supplier IBAN"})
+        partner_vals.update({"name": "Supplier IBAN"})
+        self.supplier_iban = self.env["res.partner"].create(partner_vals)
         self.create_bank_account(
             "CH61 0839 0107 6280 0100 0", self.supplier_iban, abs_bank
         )
