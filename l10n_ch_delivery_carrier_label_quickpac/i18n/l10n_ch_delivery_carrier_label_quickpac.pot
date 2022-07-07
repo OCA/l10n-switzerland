@@ -1,0 +1,448 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_ch_delivery_carrier_label_quickpac
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_resolution_template_option_200ppp
+msgid "200 ppp"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_resolution_option_300ppp
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_resolution_template_option_300ppp
+msgid "300 ppp"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_resolution_template_option_600ppp
+msgid "600 ppp"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model_terms:ir.ui.view,arch_db:l10n_ch_delivery_carrier_label_quickpac.view_quickpac_config_settings
+msgid ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
+"specific.\" groups=\"base.group_multi_company\"/>"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model_terms:ir.ui.view,arch_db:l10n_ch_delivery_carrier_label_quickpac.view_quickpac_config_settings
+msgid ""
+"<span>Post office</span>\n"
+"                <span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-specific.\" groups=\"base.group_multi_company\"/>"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_service_template_option_abend
+msgid "ABEND"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields.selection,name:l10n_ch_delivery_carrier_label_quickpac.selection__delivery_carrier_template_option__quickpac_type__additional
+msgid "Additional Service"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_delivery_carrier__allowed_tmpl_options_ids
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_delivery_carrier_option__allowed_tmpl_options_ids
+msgid "Allowed Tmpl Options"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields,help:l10n_ch_delivery_carrier_label_quickpac.field_res_company__quickpac_tracking_url
+msgid ""
+"Available variables to configure: \n"
+"               {lang} = the lang to display (de, en, fr, it) \n"
+"               {number} = the tracking number (i.e. 440010370000000034)"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields.selection,name:l10n_ch_delivery_carrier_label_quickpac.selection__delivery_carrier_template_option__quickpac_type__basic
+msgid "Basic Service"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model,name:l10n_ch_delivery_carrier_label_quickpac.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_res_config_settings__company_id
+msgid "Company"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_res_company__quickpac_logo
+msgid "Company Logo on Post labels"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model,name:l10n_ch_delivery_carrier_label_quickpac.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model_terms:ir.ui.view,arch_db:l10n_ch_delivery_carrier_label_quickpac.view_quickpac_config_settings
+msgid "Default configs"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_res_company__quickpac_label_layout
+msgid "Default label layout"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_res_company__quickpac_output_format
+msgid "Default output format"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_res_company__quickpac_resolution
+msgid "Default resolution"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields.selection,name:l10n_ch_delivery_carrier_label_quickpac.selection__delivery_carrier_template_option__quickpac_type__delivery
+msgid "Delivery Instructions"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model,name:l10n_ch_delivery_carrier_label_quickpac.model_delivery_carrier_option
+msgid "Delivery carrier option"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model,name:l10n_ch_delivery_carrier_label_quickpac.model_delivery_carrier_template_option
+msgid "Delivery carrier template option"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_delivery_carrier__display_name
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_delivery_carrier_option__display_name
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_delivery_carrier_template_option__display_name
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_res_company__display_name
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_stock_picking__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_res_company__quickpac_office
+msgid "Domicile Post office"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_service_option_eco
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_service_template_option_eco
+msgid "ECO"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_format_template_option_eps
+msgid "EPS"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_layout_template_option_a5
+msgid "Format A5"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_layout_option_a6
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_layout_template_option_a6
+msgid "Format A6"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_layout_template_option_a7
+msgid "Format A7"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_layout_template_option_fe
+msgid "Format FE"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_res_company__quickpac_franking_license
+msgid "Franking License"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_format_template_option_gif
+msgid "GIF"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_delivery_carrier__id
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_delivery_carrier_option__id
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_delivery_carrier_template_option__id
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_res_company__id
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_res_config_settings__id
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_stock_picking__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_format_template_option_jpg
+msgid "JPG"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields.selection,name:l10n_ch_delivery_carrier_label_quickpac.selection__delivery_carrier_template_option__quickpac_type__label_layout
+msgid "Label Layout"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_delivery_carrier____last_update
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_delivery_carrier_option____last_update
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_delivery_carrier_template_option____last_update
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_res_company____last_update
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_stock_picking____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: code:addons/l10n_ch_delivery_carrier_label_quickpac/quickpac/web_service.py:0
+#, python-format
+msgid "Layout not set"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model_terms:ir.ui.view,arch_db:l10n_ch_delivery_carrier_label_quickpac.view_quickpac_config_settings
+msgid "Licenses"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: code:addons/l10n_ch_delivery_carrier_label_quickpac/quickpac/web_service.py:0
+#, python-format
+msgid "Missing required delivery option on picking."
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_delivery_carrier_option__name
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_delivery_carrier_template_option__name
+msgid "Name"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields,help:l10n_ch_delivery_carrier_label_quickpac.field_res_company__quickpac_logo
+msgid ""
+"Optional company logo to show on label.\n"
+"If using an image / logo, please note the following:\n"
+"– Image width: 47 mm\n"
+"– Image height: 25 mm\n"
+"– File size: max. 30 kb\n"
+"– File format: GIF or PNG\n"
+"– Colour table: indexed colours, max. 200 colours\n"
+"– The logo will be printed rotated counter-clockwise by 90°\n"
+"We recommend using a black and white logo for printing in  the ZPL2 format."
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields.selection,name:l10n_ch_delivery_carrier_label_quickpac.selection__delivery_carrier_template_option__quickpac_type__output_format
+msgid "Output Format"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields.selection,name:l10n_ch_delivery_carrier_label_quickpac.selection__delivery_carrier_template_option__quickpac_type__resolution
+msgid "Output Resolution"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: code:addons/l10n_ch_delivery_carrier_label_quickpac/quickpac/web_service.py:0
+#, python-format
+msgid "Output format not set"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_format_option_pdf
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_format_template_option_pdf
+msgid "PDF"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_format_template_option_png
+msgid "PNG"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_service_template_option_prio
+msgid "PRIO"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_service_template_option_prioplus
+msgid "PRIO+"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_res_company__quickpac_password
+msgid "Password"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model_terms:ir.ui.view,arch_db:l10n_ch_delivery_carrier_label_quickpac.view_quickpac_config_settings
+msgid "Post digital commerce API Authentication"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields,help:l10n_ch_delivery_carrier_label_quickpac.field_res_company__quickpac_office
+#: model_terms:ir.ui.view,arch_db:l10n_ch_delivery_carrier_label_quickpac.view_quickpac_config_settings
+msgid "Post office which will receive the shipped goods"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_delivery_carrier__delivery_type
+msgid "Provider"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields.selection,name:l10n_ch_delivery_carrier_label_quickpac.selection__delivery_carrier__delivery_type__quickpac
+#: model_terms:ir.ui.view,arch_db:l10n_ch_delivery_carrier_label_quickpac.view_quickpac_config_settings
+msgid "Quickpac"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:product.product,name:l10n_ch_delivery_carrier_label_quickpac.product_quickpac_service
+#: model:product.template,name:l10n_ch_delivery_carrier_label_quickpac.product_quickpac_service_product_template
+msgid "Quickpac Delivery"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_delivery_carrier
+msgid "Quickpac delivery charges"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_delivery_carrier_option__quickpac_type
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_delivery_carrier_template_option__quickpac_type
+msgid "Quickpac option type"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: code:addons/l10n_ch_delivery_carrier_label_quickpac/quickpac/web_service.py:0
+#, python-format
+msgid "Resolution not set"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_service_template_option_sa
+msgid "SA"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_service_option_same
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_service_template_option_same
+msgid "SAME"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_service_template_option_sig
+msgid "SIG"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model_terms:ir.ui.view,arch_db:l10n_ch_delivery_carrier_label_quickpac.view_quickpac_config_settings
+msgid "Sender Informations"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model,name:l10n_ch_delivery_carrier_label_quickpac.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model_terms:ir.ui.view,arch_db:l10n_ch_delivery_carrier_label_quickpac.view_quickpac_config_settings
+msgid "Tracking"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_res_company__quickpac_tracking_url
+msgid "Tracking URL"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_res_company__quickpac_tracking_format
+msgid "Tracking number format"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model,name:l10n_ch_delivery_carrier_label_quickpac.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:product.product,uom_name:l10n_ch_delivery_carrier_label_quickpac.product_quickpac_service
+#: model:product.template,uom_name:l10n_ch_delivery_carrier_label_quickpac.product_quickpac_service_product_template
+msgid "Units"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields.selection,name:l10n_ch_delivery_carrier_label_quickpac.selection__res_company__quickpac_tracking_format__quickpac
+msgid "Use default quickpac tracking numbers"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields.selection,name:l10n_ch_delivery_carrier_label_quickpac.selection__res_company__quickpac_tracking_format__picking_num
+msgid "Use picking number with pack counter"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:ir.model.fields,field_description:l10n_ch_delivery_carrier_label_quickpac.field_res_company__quickpac_username
+msgid "Username"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_service_template_option_vorm
+msgid "VORM"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: code:addons/l10n_ch_delivery_carrier_label_quickpac/quickpac/web_service.py:0
+#, python-format
+msgid ""
+"You need to configure %s. You can set a defaultvalue in "
+"Settings/Configuration/Carriers/Quickpac. You can also set it on delivery "
+"method or on the picking."
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_format_template_option_zpl2
+msgid "ZPL2"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: code:addons/l10n_ch_delivery_carrier_label_quickpac/quickpac/web_service.py:0
+#, python-format
+msgid "label layout"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: code:addons/l10n_ch_delivery_carrier_label_quickpac/quickpac/web_service.py:0
+#, python-format
+msgid "output format"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: code:addons/l10n_ch_delivery_carrier_label_quickpac/quickpac/web_service.py:0
+#, python-format
+msgid "resolution"
+msgstr ""
+
+#. module: l10n_ch_delivery_carrier_label_quickpac
+#: model:delivery.carrier.template.option,name:l10n_ch_delivery_carrier_label_quickpac.quickpac_output_format_template_option_spdf
+msgid "sPDF"
+msgstr ""
