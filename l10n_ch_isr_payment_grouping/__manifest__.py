@@ -3,7 +3,7 @@
 {
     "name": "Switzerland - ISR payment grouping",
     "summary": "Extend account to ungroup ISR",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "author": "Camptocamp,Odoo Community Association (OCA)",
     "category": "Localization",
     "website": "https://github.com/OCA/l10n-switzerland",
