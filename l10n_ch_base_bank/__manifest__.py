@@ -4,7 +4,7 @@
 {
     "name": "Switzerland - Bank type",
     "summary": "Types and number validation for swiss electronic pmnt. DTA, ESR",
-    "version": "14.0.1.0.1",
+    "version": "14.0.1.0.2",
     "author": "Camptocamp,Odoo Community Association (OCA)",
     "category": "Localization",
     "website": "https://github.com/OCA/l10n-switzerland",
