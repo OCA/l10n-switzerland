@@ -87,13 +87,13 @@
     <LINE-ITEM />
     <SUMMARY>
       <INVOICE-AMOUNT>
-        <Amount Currency="CHF">{{ invoice.amount_total }}</Amount>
+        <Amount Currency="CHF">{{ invoice._get_rounded_amount(invoice.amount_total) }}</Amount>
       </INVOICE-AMOUNT>
       <VAT-AMOUNT>
-        <Amount Currency="CHF">{{ invoice.amount_tax }}</Amount>
+        <Amount Currency="CHF">{{ invoice._get_rounded_amount(invoice.amount_tax) }}</Amount>
       </VAT-AMOUNT>
       <EXTENDED-AMOUNT Type="79">
-        <Amount Currency="CHF">{{ invoice.amount_untaxed }}</Amount>
+        <Amount Currency="CHF">{{ invoice._get_rounded_amount(invoice.amount_untaxed) }}</Amount>
       </EXTENDED-AMOUNT>
       {% if amount_by_group %}
       {% for taxgroup in amount_by_group %}
@@ -106,7 +106,7 @@
       {%- else %}
       <Rate Category="E">0</Rate>
       {%- endif %}
-      <Amount Currency="CHF">{{ taxgroup[1] }}</Amount>
+      <Amount Currency="CHF">{{ invoice._get_rounded_amount(taxgroup[1]) }}</Amount>
     </TAX>
     {% endfor %}
     {%- else %}
