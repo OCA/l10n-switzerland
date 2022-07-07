@@ -113,7 +113,7 @@
       </ITEM-ID>
       <ITEM-DESCRIPTION>
         <Item-Type-Code>1011</Item-Type-Code>
-        <Line-35>Product One</Line-35>
+        <Line-35>Product &amp; One</Line-35>
       </ITEM-DESCRIPTION>
       <ITEM-REFERENCE Type="ON">
         <REFERENCE-DATE>

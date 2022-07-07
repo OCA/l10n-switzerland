@@ -8,6 +8,7 @@
     "version": "14.0.1.1.0",
     "license": "AGPL-3",
     "author": "Camptocamp SA,Odoo Community Association (OCA)",
+    "maintainers": ["TDu"],
     "website": "https://github.com/OCA/l10n-switzerland",
     "depends": [
         "account",
