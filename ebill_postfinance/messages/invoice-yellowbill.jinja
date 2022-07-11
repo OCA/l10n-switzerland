@@ -217,10 +217,16 @@
                     <TotalTax>{{ invoice.amount_tax|round(6) }}</TotalTax>
                 </Tax>
                 {% endif -%}
-                {# <Discount> #}
-                {#     <Days></Days> #}
-                {#     <Rate></Rate> #}
-                {# </Discount> #}
+                {% for discount in discounts %}
+                <Discount>
+                  {% if discount.days %}
+                  <Days>{{ discount.days }}</Days>
+                  {% else %}
+                  <DiscountDate>{{ discount.date }}</DiscountDate>
+                  {% endif -%}
+                  <Rate>{{ discount.percentage }}</Rate>
+                </Discount>
+                {% endfor -%}
                 <TotalAmountExclusiveTax>{{ invoice.amount_untaxed }}</TotalAmountExclusiveTax>
                 <TotalAmountInclusiveTax>{{ invoice.amount_total }}</TotalAmountInclusiveTax>
                 {# <TotalAmountPaid></TotalAmountPaid> #}

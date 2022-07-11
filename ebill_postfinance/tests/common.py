@@ -7,6 +7,7 @@ from os.path import dirname, join
 from vcr import VCR
 from xmlunittest import XmlTestMixin
 
+from odoo.modules.module import get_module_root
 from odoo.tests.common import SavepointCase
 
 
@@ -15,6 +16,10 @@ class CommonCase(SavepointCase, XmlTestMixin):
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.yb_schema_file = (
+            get_module_root(os.path.dirname(__file__))
+            + "/messages/ybInvoice_V2.0.4.xsd"
+        )
         cls.service = cls.env["ebill.postfinance.service"].create(
             {
                 "name": "Postfinance Test Service",
