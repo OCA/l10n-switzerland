@@ -10,9 +10,11 @@
     'depends': [
         'account',
         'l10n_ch_payment_slip',
+        'l10n_ch',
         ],
     'data': [
         'data/report.xml',
+        'views/res_config_settings.xml'
         ],
     'installable': True,
     'auto_install': False,
