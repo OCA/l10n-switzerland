@@ -1,6 +1,8 @@
 # Copyright 2012-2019 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import models, api, _
+import re
+
+from odoo import _, api, models
 from odoo.tools import mod10r
 from odoo import exceptions
 
@@ -57,63 +59,64 @@ class AccountInvoice(models.Model):
         selection.append(('isr', _('ISR Reference')))
         return selection
 
-    @api.onchange('reference')
-    def onchange_reference(self):
-        """Identify if the reference entered is of type ISR
-        if it does, change reference_type"""
-        if len(self.reference or '') == 27:
-            try:
-                self._is_isr_reference()
-            except exceptions.ValidationError:
-                return
-            self.reference_type = 'isr'
-
-    @api.constrains('reference_type')
+    @api.constrains('reference')
     def _check_bank_type_for_type_isr(self):
         for invoice in self:
             if invoice.reference_type == 'isr':
                 bank_acc = invoice.partner_banks_to_show()
                 if not (bank_acc.acc_type == 'postal' or
                         bank_acc.acc_type != 'postal' and
-                        (bank_acc.ccp or bank_acc.bank_id.ccp)):
+                        (bank_acc.l10n_ch_postal or bank_acc.bank_id.l10n_ch_postal)):
                     raise exceptions.ValidationError(
-                        _("Bank account shouldn't be empty, for IRS reference "
+                        _("Bank account shouldn't be empty, for ISR reference "
                           "type, you can set it manually or set appropriate"
                           " payment mode.")
                     )
+            if invoice.type == 'out_invoice' and invoice._is_isr_reference():
+                if hasattr(super(), 'partner_banks_to_show'):
+                    bank_acc = invoice.partner_banks_to_show()
+                else:
+                    bank_acc = invoice.partner_bank_id
+                if not bank_acc:
+                    raise exceptions.ValidationError(
+                        _("Bank account shouldn't be empty, for ISR reference"
+                          " type, you can set it manually or set appropriate"
+                          " payment mode.")
+                    )
+                if (not bank_acc._is_qr_iban()
+                        and (invoice.currency_id.name == 'CHF'
+                             and not bank_acc.l10n_ch_isr_subscription_chf)
+                        or (invoice.currency_id.name == 'EUR'
+                            and not bank_acc.l10n_ch_isr_subscription_eur)):
+                    raise exceptions.ValidationError(
+                        _("Bank account must contain a subscription number for"
+                          " ISR reference type.")
+                    )
         return True
 
-    @api.multi
     def _is_isr_reference(self):
+        """Check if the communication is a valid ISR reference
+        e.g.
+        210000000003139471430009017
+        21 00000 00003 13947 14300 09017
+        This is used to determine SEPA local instrument
         """
-        Function to validate a ISR reference like :
-        0100054150009>132000000000000000000000014+ 1300132412>
-        The validation is based on l10n_ch
-        """
-        if not self.reference:
-            raise exceptions.ValidationError(
-                _('ISR Reference is required')
-            )
-        # In this case
-        # <010001000060190> 052550152684006+ 43435>
-        # the reference 052550152684006 do not match modulo 10
-        #
-        if (mod10r(self.reference[:-1]) != self.reference and
-                len(self.reference) == 15):
-            return True
-        #
-        if mod10r(self.reference[:-1]) != self.reference:
-            raise exceptions.ValidationError(
-                _('Invalid ISR Number (wrong checksum).')
-            )
-
-    @api.constrains('reference')
-    def _check_isr(self):
-        """ Do the check only for invoice with reference_type = 'isr' """
-        for invoice in self:
-            if invoice.reference_type == 'isr':
-                invoice._is_isr_reference()
-        return True
+        if self.reference_type == 'isr':
+            if (mod10r(self.reference[:-1]) != self.reference and
+                    len(self.reference) == 15):
+                return True
+            if mod10r(self.reference[:-1]) != self.reference:
+                raise exceptions.ValidationError(
+                    _('Invalid ISR Number (wrong checksum).')
+                )
+        elif self.reference_type == 'qrr':
+            if not self.reference:
+                return False
+            if re.match(r'^(\d{27}|\d{2}( \d{5}){5})$', self.reference):
+                ref = self.reference.replace(' ', '')
+                return ref == mod10r(ref[:-1])
+        else:
+            return False
 
     def partner_banks_to_show(self):
         """
@@ -121,7 +124,6 @@ class AccountInvoice(models.Model):
         logic for switzerland bank payments if base method does not give
         a result
         """
-
         res = super().partner_banks_to_show()
         if not res:
             if self.journal_id:

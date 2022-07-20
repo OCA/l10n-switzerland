@@ -30,7 +30,6 @@
         <field name="bic" position="after">
           <field name="code"/>
           <field name="clearing"/>
-          <field name="ccp" attrs="{'invisible': [('bic', '=', 'POFICHBEXXX')]}"/>
         </field>
 
         <xpath expr="//field[@name='name']" position="after">
@@ -55,24 +54,10 @@
         <field name="bic" position="after">
           <field name="code"/>
           <field name="clearing"/>
-          <field name="ccp"/>
           <field name="street"/>
           <field name="city"/>
         </field>
       </field>
     </record>
-
-    <record model="ir.ui.view" id="add_ccp_on_res_partner_bank">
-      <field name="name">Add isr adherent num and ccp on res partner bank</field>
-      <field name="model">res.partner.bank</field>
-      <field name="inherit_id" ref="base.view_partner_bank_form"/>
-      <field name="arch" type="xml">
-        <field name="bank_id" position="after">
-          <field name="isr_adherent_num" groups="l10n_ch_base_bank.group_isr_adherent_num_users"/>
-          <field name="ccp"/>
-        </field>
-      </field>
-    </record>
-
   </data>
 </odoo>
