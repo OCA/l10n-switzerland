@@ -6,9 +6,11 @@
       <field name="model">res.partner.bank</field>
       <field name="inherit_id" ref="base.view_partner_bank_form"/>
       <field name="arch" type="xml">
-        <xpath expr="//group/field[@name='acc_number']/.." position="after">
+        <xpath expr="//group/field[@name='acc_number']/parent::group" position="after">
           <group string="ISR options" attrs="{'invisible': [('company_id' ,'=', False)]}" >
-            <field name="isr_adherent_num"/>
+            <field name="l10n_ch_isr_subscription_chf"/>
+            <field name="l10n_ch_isr_subscription_eur"/>
+            <field name="l10n_ch_isrb_id_number"/>
             <field name="print_bank"/>
             <field name="print_account"/>
             <field name="print_partner"/>

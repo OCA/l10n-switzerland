@@ -28,10 +28,8 @@ class IrActionsReportReportlab(models.Model):
     @api.multi
     def _generate_one_slip_per_page_from_invoice_pdf(self, res_ids):
         """Generate payment slip PDF(s) from report model.
-
         If there are many pdf they are merged in memory or on
         file system based on company settings
-
         :return: the generated PDF content
         """
         user_model = self.env['res.users']
@@ -136,12 +134,10 @@ class IrActionsReportReportlab(models.Model):
                                   res_ids=res_ids), 'pdf'
         return pdf_content, 'pdf'
 
-    # TODO consider https://github.com/OCA/reporting-engine/issues/241
-
     def merge_pdf_in_memory(self, docs):
         merger = PyPDF2.PdfFileMerger()
         for doc in docs:
-            merger.append(doc)
+            merger.append(doc, import_bookmarks=False)
         buff = io.BytesIO()
         try:
             # The writer close the reader file here
@@ -155,7 +151,7 @@ class IrActionsReportReportlab(models.Model):
     def merge_pdf_on_disk(self, docs):
         merger = PyPDF2.PdfFileMerger()
         for doc in docs:
-            merger.append(doc)
+            merger.append(doc, import_bookmarks=False)
         buff, buff_path = tempfile.mkstemp(
             suffix='.pdf',
             prefix='credit_control_slip_merged')

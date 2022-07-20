@@ -8,6 +8,7 @@
  'website': 'http://www.camptocamp.com',
  'license': 'AGPL-3',
  'depends': [
+     'base',
      'account',
      'account_invoicing',
      'l10n_ch_base_bank',

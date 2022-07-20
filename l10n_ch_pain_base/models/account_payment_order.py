@@ -115,9 +115,9 @@ class AccountPaymentOrder(models.Model):
         if (gen_args.get('pain_flavor') == 'pain.001.001.03.ch.02' and
                 bank_line and
                 bank_line.local_instrument == 'CH01'):
-            if not partner_bank.ccp:
+            if not partner_bank.l10n_ch_postal:
                 raise UserError(_(
-                    "The field 'CCP/CP-Konto' is not set on the bank "
+                    "The field 'Postal account' is not set on the bank "
                     "account '%s'.") % partner_bank.acc_number)
             party_account = etree.SubElement(
                 parent_node, '%sAcct' % party_type)
@@ -126,7 +126,7 @@ class AccountPaymentOrder(models.Model):
                 party_account_id, 'Othr')
             party_account_other_id = etree.SubElement(
                 party_account_other, 'Id')
-            party_account_other_id.text = partner_bank.ccp
+            party_account_other_id.text = partner_bank.l10n_ch_postal
             return True
         else:
             return super().generate_party_acc_number(
@@ -156,8 +156,6 @@ class AccountPaymentOrder(models.Model):
                     adrline2.text = ' '.join([partner.zip, partner.city])
 
         return True
-<<<<<<< HEAD
-=======
 
     @api.model
     def generate_remittance_info_block(self, parent_node, line, gen_args):
@@ -180,4 +178,3 @@ class AccountPaymentOrder(models.Model):
             creditor_reference.text = line.payment_line_ids[0].communication
         else:
             super().generate_remittance_info_block(parent_node, line, gen_args)
->>>>>>> 4c44a9ec... [MIG][l10n_ch_pain_base] Backport of feature from v. 12.0
