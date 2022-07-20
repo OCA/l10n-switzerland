@@ -85,10 +85,29 @@ class AccountPaymentOrder(models.Model):
                     "bank account '%s'") % (
                         partner_bank.bank_id.name,
                         partner_bank.acc_number))
-        return super().generate_party_agent(
-            parent_node, party_type, order, partner_bank, gen_args,
-            bank_line=bank_line,
-        )
+        assert order in ('B', 'C'), "Order can be 'B' or 'C'"
+        party_agent = etree.SubElement(parent_node, '%sAgt' % party_type)
+        party_agent_institution = etree.SubElement(party_agent, 'FinInstnId')
+        if partner_bank.bank_bic:
+            party_agent_bic = etree.SubElement(
+                party_agent_institution, gen_args.get('bic_xml_tag'))
+            party_agent_bic.text = partner_bank.bank_bic
+        else:
+            if order == 'B' or (
+                    order == 'C' and gen_args['payment_method'] == 'DD'):
+                if partner_bank.type == 'iban':
+                    iban = partner_bank.sanitized_acc_number
+                    abi_code = iban[5:10]
+                party_agent_sys_mmb_id = etree.SubElement(
+                    party_agent_institution, 'ClrSysMmbId')
+
+                member_identification = etree.SubElement(
+                    party_agent_sys_mmb_id, 'MmbId')
+                member_identification.text = abi_code
+            # for Credit Transfers, in the 'C' block, if BIC is not provided,
+            # we should not put the 'Creditor Agent' block at all,
+            # as per the guidelines of the EPC
+        return True
 
     @api.model
     def generate_party_acc_number(self, parent_node, party_type, order,
@@ -137,3 +156,28 @@ class AccountPaymentOrder(models.Model):
                     adrline2.text = ' '.join([partner.zip, partner.city])
 
         return True
+<<<<<<< HEAD
+=======
+
+    @api.model
+    def generate_remittance_info_block(self, parent_node, line, gen_args):
+        if line.communication_type == "qrr":
+            remittance_info = etree.SubElement(
+                parent_node, 'RmtInf')
+            remittance_info_structured = etree.SubElement(
+                remittance_info, 'Strd')
+            creditor_ref_information = etree.SubElement(
+                remittance_info_structured, 'CdtrRefInf')
+            creditor_ref_info_type = etree.SubElement(
+                creditor_ref_information, 'Tp')
+            creditor_ref_info_type_or = etree.SubElement(
+                creditor_ref_info_type, 'CdOrPrtry')
+            creditor_ref_info_type_code = etree.SubElement(
+                creditor_ref_info_type_or, 'Prtry')
+            creditor_ref_info_type_code.text = 'QRR'
+            creditor_reference = etree.SubElement(
+                creditor_ref_information, 'Ref')
+            creditor_reference.text = line.payment_line_ids[0].communication
+        else:
+            super().generate_remittance_info_block(parent_node, line, gen_args)
+>>>>>>> 4c44a9ec... [MIG][l10n_ch_pain_base] Backport of feature from v. 12.0
