@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE XML-FSCM-INVOICE-2003A SYSTEM "XML-FSCM-INVOICE-2003A.DTD">
+<XML-FSCM-INVOICE-2003A>
+  <INTERCHANGE>
+    <IC-SENDER>
+      <Pid>52110726772852593</Pid>
+    </IC-SENDER>
+    <IC-RECEIVER>
+      <Pid>41010106799303734</Pid>
+    </IC-RECEIVER>
+    <IC-Ref>SA000000000003</IC-Ref>
+  </INTERCHANGE>
+  <INVOICE Type="EFD">
+    <HEADER>
+      <FUNCTION-FLAGS>
+        <Confirmation-Flag />
+      </FUNCTION-FLAGS>
+      <MESSAGE-REFERENCE>
+        <REFERENCE-DATE>
+          <Reference-No>INV_TEST_01</Reference-No>
+          <Date Format="CCYYMMDD">20190621</Date>
+        </REFERENCE-DATE>
+      </MESSAGE-REFERENCE>
+      <PRINT-DATE>
+        <Date Format="CCYYMMDD">20190621</Date>
+      </PRINT-DATE>
+      <DELIVERY-DATE>
+        <Date Format="CCYYMMDD">20190621</Date>
+      </DELIVERY-DATE>
+      <REFERENCE>
+        <INVOICE-REFERENCE>
+          <REFERENCE-DATE>
+            <Reference-No>INV_TEST_01</Reference-No>
+            <Date Format="CCYYMMDD">20190621</Date>
+          </REFERENCE-DATE>
+        </INVOICE-REFERENCE>
+      </REFERENCE>
+      <BILLER>
+        <Tax-No>CHE-012.345.678</Tax-No>
+        <Doc-Reference Type="QRR">1234567890</Doc-Reference>
+        <PARTY-ID>
+          <Pid>52110726772852593</Pid>
+        </PARTY-ID>
+        <NAME-ADDRESS Format="COM">
+          <NAME>
+            <Line-35>Camptocamp SA</Line-35>
+          </NAME>
+          <STREET>
+            <Line-35>StreetOne</Line-35>
+          </STREET>
+          <City>Lausanne</City>
+          <Zip>1015</Zip>
+          <Country>CH</Country>
+        </NAME-ADDRESS>
+        <BANK-INFO>
+          <Acct-No>CH2130808001234567827</Acct-No>
+          <BankId Type="IID" Country="CH">30808</BankId>
+        </BANK-INFO>
+      </BILLER>
+      <PAYER>
+        <PARTY-ID>
+          <Pid>41010198248040391</Pid>
+        </PARTY-ID>
+        <NAME-ADDRESS Format="COM">
+          <NAME>
+            <Line-35>Test RAD Customer XML</Line-35>
+          </NAME>
+          <STREET>
+            <Line-35>Teststrasse 100</Line-35>
+            <Line-35>This is a very long street name tha</Line-35>
+          </STREET>
+          <City>Fribourg</City>
+          <Zip>1700</Zip>
+          <Country>CH</Country>
+        </NAME-ADDRESS>
+      </PAYER>
+    </HEADER>
+    <LINE-ITEM Line-Number="1">
+      <ITEM-DESCRIPTION>
+        <Item-Type-Code>1011</Item-Type-Code>
+        <Line-35>Phone support</Line-35>
+      </ITEM-DESCRIPTION>
+      <Quantity Type="47" Units="PCE">1.0</Quantity>
+      <Price Type="YYY">4.5</Price>
+      <Price Type="AAA">4.5</Price>
+      <Price Type="XXX">4.85</Price>
+      <ITEM-AMOUNT Type="66">
+        <Amount Currency="CHF">4.5</Amount>
+      </ITEM-AMOUNT>
+      <TAX>
+        <Rate>7.7</Rate>
+        <Amount Currency="CHF">0.35</Amount>
+      </TAX>
+    </LINE-ITEM>
+    <SUMMARY>
+      <INVOICE-AMOUNT Print-Status="25">
+        <Amount Currency="CHF">4.85</Amount>
+      </INVOICE-AMOUNT>
+      <VAT-AMOUNT Print-Status="25">
+        <Amount Currency="CHF">0.35</Amount>
+      </VAT-AMOUNT>
+      <EXTENDED-AMOUNT Type="79">
+        <Amount Currency="CHF">4.5</Amount>
+      </EXTENDED-AMOUNT>
+      <TAX>
+        <TAX-BASIS>
+          <Amount Currency="CHF">4.5</Amount>
+        </TAX-BASIS>
+        <Rate Category="S">7.7</Rate>
+        <Amount Currency="CHF">0.35</Amount>
+      </TAX>
+      <PAYMENT-TERMS>
+        <BASIC Payment-Type="QR" Terms-Type="5">
+          <TERMS>
+            <Date>20190701</Date>
+          </TERMS>
+        </BASIC>
+      </PAYMENT-TERMS>
+    </SUMMARY>
+  </INVOICE>
+</XML-FSCM-INVOICE-2003A>
