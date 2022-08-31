@@ -35,7 +35,10 @@ This module adds possibility to print invoice report together with ISR and/or QR
 Usage
 =====
 
-Print report using one of 3 additional print actions in Accounting
+Print report with payment slip using additional print action in Accounting.
+Payment slip (QR/ISR) to use in printed report can be configured in Accounting/Settings
+by selecting only one or all from options "Print invoice with QR bill" and
+"Print invoice with ISR payslip".
 
 Bug Tracker
 ===========
