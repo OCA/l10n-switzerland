@@ -108,8 +108,8 @@ class TestInvoiceMessage(CommonCase):
         invoice.action_post()
         invoice.payment_reference = "1234567890"
         invoice.partner_bank_id = self.partner_bank.id
-        # amount inside is not rounded
-        self.assertEqual(invoice.amount_by_group[0][1], 0.35000000000000003)
+        # amount inside is not rounded but the field goes 4 decimals deep
+        self.assertAlmostEqual(invoice.amount_by_group[0][1], 0.35000000000000003, 4)
         message = invoice.create_paynet_message()
         message.payload = message._generate_payload()
         # Remove the PDF file data from the XML to ease testing
