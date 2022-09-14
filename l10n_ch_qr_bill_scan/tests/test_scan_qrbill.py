@@ -92,7 +92,7 @@ class TestScanQRBill(common.SavepointCase):
         )
 
     def wiz_import_invoice_file(self, file_path, file_name):
-        """ Import a file of a vendor bill """
+        """Import a file of a vendor bill"""
         with tools.file_open(file_path, "rb") as f:
             invoice_file = base64.b64encode(f.read())
         wiz = self.env["account.invoice.import"].create({})
@@ -113,7 +113,7 @@ class TestScanQRBill(common.SavepointCase):
         return None
 
     def wiz_import_invoice_scan(self, invoice_scan):
-        """ Import scanned data from a vendor bill """
+        """Import scanned data from a vendor bill"""
         wiz = self.env["account.invoice.import"].create({})
         wiz.invoice_scan = invoice_scan
         return wiz
