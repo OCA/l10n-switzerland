@@ -4,7 +4,7 @@
 {
     "name": "Switzerland - QR-bill scan",
     "summary": "Scan QR-bill to create vendor bills",
-    "version": "14.0.1.0.0",
+    "version": "15.0.1.0.0",
     "author": "Camptocamp,Odoo Community Association (OCA)",
     "category": "Localization",
     "website": "https://github.com/OCA/l10n-switzerland",
