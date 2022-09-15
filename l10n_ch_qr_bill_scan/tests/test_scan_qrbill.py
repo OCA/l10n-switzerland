@@ -57,7 +57,7 @@ SCAN_DATA = [
 ]
 
 
-class TestScanQRBill(common.SavepointCase):
+class TestScanQRBill(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
