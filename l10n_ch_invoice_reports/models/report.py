@@ -43,7 +43,7 @@ class IrActionsReport(models.Model):
         ]
 
         if self.report_name not in reports or not res_ids:
-            return super().render_qweb_pdf(res_ids, data)
+            return super()._render_qweb_pdf(res_ids, data)
 
         inv_report = self._get_report_from_name("account.report_invoice")
         qr_report = self._get_report_from_name("l10n_ch.qr_report_main")
@@ -51,15 +51,15 @@ class IrActionsReport(models.Model):
 
         io_list = []
         for inv in self.env["account.move"].browse(res_ids):
-            invoice_pdf, _ = inv_report.render_qweb_pdf(inv.id, data)
+            invoice_pdf, _ = inv_report._render_qweb_pdf(inv.id, data)
             io_list.append(io.BytesIO(invoice_pdf))
 
             if inv.company_id.print_qr_invoice:
-                qr_pdf, _ = qr_report.render_qweb_pdf(inv.id, data)
+                qr_pdf, _ = qr_report._render_qweb_pdf(inv.id, data)
                 io_list.append(io.BytesIO(qr_pdf))
 
             if inv.company_id.print_isr_invoice:
-                isr_pdf, _ = isr_report.render_qweb_pdf(inv.id, data)
+                isr_pdf, _ = isr_report._render_qweb_pdf(inv.id, data)
                 io_list.append(io.BytesIO(isr_pdf))
 
             pdf = self.merge_pdf_in_memory(io_list)
