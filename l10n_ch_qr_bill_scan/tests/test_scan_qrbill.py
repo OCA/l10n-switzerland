@@ -136,9 +136,9 @@ class TestScanQRBill(common.TransactionCase):
         invoice = self.import_invoice_scan(scan_data)
 
         self.assertEqual(invoice.partner_id, self.supplier)
-        self.assertFalse(invoice.invoice_payment_ref)
+        self.assertFalse(invoice.payment_reference)
         self.assertEqual(invoice.state, "draft")
-        iban = invoice.invoice_partner_bank_id.acc_number
+        iban = invoice.partner_bank_id.acc_number
         self.assertEqual(iban, CH_IBAN)
         self.assertEqual(invoice.amount_total, 1949.75)
 
@@ -149,9 +149,9 @@ class TestScanQRBill(common.TransactionCase):
         invoice = self.import_invoice_scan(scan_data)
 
         self.assertEqual(invoice.partner_id, self.supplier)
-        self.assertEqual(invoice.invoice_payment_ref, QRR)
+        self.assertEqual(invoice.payment_reference, QRR)
         self.assertEqual(invoice.state, "draft")
-        iban = invoice.invoice_partner_bank_id.acc_number
+        iban = invoice.partner_bank_id.acc_number
         self.assertEqual(iban, QR_IBAN)
         self.assertEqual(invoice.amount_total, 1949.75)
 
@@ -161,9 +161,9 @@ class TestScanQRBill(common.TransactionCase):
         invoice = self.import_invoice_scan(scan_data)
 
         self.assertEqual(invoice.partner_id, self.supplier)
-        self.assertEqual(invoice.invoice_payment_ref, CF)
+        self.assertEqual(invoice.payment_reference, CF)
         self.assertEqual(invoice.state, "draft")
-        iban = invoice.invoice_partner_bank_id.acc_number
+        iban = invoice.partner_bank_id.acc_number
         self.assertEqual(iban, CH_IBAN)
         self.assertEqual(invoice.amount_total, 1949.75)
 
@@ -198,9 +198,9 @@ class TestScanQRBill(common.TransactionCase):
 
         invoice = self.import_invoice_scan(scan_data)
         self.assertEqual(invoice.partner_id, self.supplier)
-        self.assertFalse(invoice.invoice_payment_ref)
+        self.assertFalse(invoice.payment_reference)
         self.assertEqual(invoice.state, "draft")
-        iban = invoice.invoice_partner_bank_id.acc_number
+        iban = invoice.partner_bank_id.acc_number
         self.assertEqual(iban, CH_IBAN)
         self.assertEqual(invoice.amount_total, 1949.75)
 
@@ -258,5 +258,5 @@ class TestScanQRBill(common.TransactionCase):
         )
         invoice = self.import_invoice_file(invoice_fp, "qr-bill.pdf")
         self.assertTrue(invoice)
-        self.assertEqual(invoice.invoice_payment_ref, "000000000000000000202000058")
+        self.assertEqual(invoice.payment_reference, "000000000000000000202000058")
         self.assertEqual(invoice.amount_total, 1.0)
