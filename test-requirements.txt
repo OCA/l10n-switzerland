@@ -4,3 +4,6 @@ zeep==3.4.0
 freezegun==0.3.12
 vcrpy==2.0.1
 xmlunittest==0.5.0
+# Needed for ebill_postfinance
+# But I think it needs to be on PyPi before merging
+https://github.com/camptocamp/ebilling-postfinance/archive/master.tar.gz#egg=ebilling_postfinance
