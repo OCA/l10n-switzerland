@@ -9,6 +9,6 @@
     position: absolute;
     height: 18.75mm; /* 15 * 1.25 */
     width: 50mm; /* 40 * 1.25 */
-    top: 6.25mm;  /* 5 * 1.25 */
+    top: 8.5mm; /* 5 * 1.25 = 6.25, but it overlaps with Amount string so 8.5*/
     left: 10.625mm; /* (46 - 40 + 2.5) * 1.25 = 8.5 * 1.25 */
 }
