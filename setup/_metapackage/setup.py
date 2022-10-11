@@ -15,6 +15,7 @@ setuptools.setup(
         'odoo13-addon-l10n_ch_invoice_reports',
         'odoo13-addon-l10n_ch_isr_payment_grouping',
         'odoo13-addon-l10n_ch_isrb',
+        'odoo13-addon-l10n_ch_qr_no_amount',
         'odoo13-addon-l10n_ch_states',
         'odoo13-addon-server_env_ebill_paynet',
     ],
