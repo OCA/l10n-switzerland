@@ -25,6 +25,11 @@ class TestEbillPostfinanceMessageYB(CommonCase):
 
     def test_invoice_qr(self):
         """Check XML payload genetated for an invoice."""
+        # If ebill_postfinance_stock is installed it will break the test
+        try:
+            self.invoice.invoice_line_ids.sale_line_ids.write({"move_ids": False})
+        except Exception:
+            pass
         self.invoice.name = "INV_TEST_01"
         self.invoice.invoice_date_due = "2019-07-01"
         message = self.invoice.create_postfinance_ebill()

@@ -17,7 +17,6 @@
         "l10n_ch_qriban",
         "queue_job",
         "sale",
-        "sale_stock",
     ],
     "external_dependencies": {
         "python": [
