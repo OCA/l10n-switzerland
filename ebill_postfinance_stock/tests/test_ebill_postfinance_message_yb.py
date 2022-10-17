@@ -1,16 +1,15 @@
 # Copyright 2022 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-import os
 from string import Template
 
 from freezegun import freeze_time
 from lxml import etree as ET
 
-from odoo.modules.module import get_module_root
+from odoo.modules.module import get_module_path
 from odoo.tools import file_open
 
-from .common import CommonCase
+from odoo.addons.ebill_postfinance.tests.common import CommonCase
 
 
 @freeze_time("2019-06-21 09:06:00")
@@ -19,17 +18,16 @@ class TestEbillPostfinanceMessageYB(CommonCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.schema_file = (
-            get_module_root(os.path.dirname(__file__))
-            + "/messages/ybInvoice_V2.0.4.xsd"
+            get_module_path("ebill_postfinance") + "/messages/ybInvoice_V2.0.4.xsd"
         )
+        cls.pickings = cls.sale.order_line.move_ids.mapped("picking_id")
+        cls.pickings[0].name = "Picking Name"
+        for line in cls.pickings.move_lines.move_line_ids:
+            line.qty_done = line.product_qty
+        cls.pickings._action_done()
 
     def test_invoice_qr(self):
         """Check XML payload genetated for an invoice."""
-        # If ebill_postfinance_stock is installed it will break the test
-        try:
-            self.invoice.invoice_line_ids.sale_line_ids.write({"move_ids": False})
-        except Exception:
-            pass
         self.invoice.name = "INV_TEST_01"
         self.invoice.invoice_date_due = "2019-07-01"
         message = self.invoice.create_postfinance_ebill()
@@ -47,7 +45,7 @@ class TestEbillPostfinanceMessageYB(CommonCase):
         payload = "\n".join(lines).encode("utf8")
         # Prepare the XML file that is expected
         expected_tmpl = Template(
-            file_open("ebill_postfinance/tests/examples/invoice_qr_yb.xml").read()
+            file_open("ebill_postfinance_stock/tests/examples/invoice_qr_yb.xml").read()
         )
         expected = expected_tmpl.substitute(
             TRANSACTION_ID=message.transaction_id, CUSTOMER_ID=self.customer.id

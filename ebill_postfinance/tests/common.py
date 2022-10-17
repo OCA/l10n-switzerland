@@ -163,11 +163,6 @@ class CommonCase(SavepointCase, XmlTestMixin):
         )
         cls.sale.action_confirm()
         cls.sale.date_order = "2019-06-01"
-        cls.pickings = cls.sale.order_line.move_ids.mapped("picking_id")
-        cls.pickings[0].name = "Picking Name"
-        for line in cls.pickings.move_lines.move_line_ids:
-            line.qty_done = line.product_qty
-        cls.pickings._action_done()
         # Generate the invoice from the sale order
         cls.invoice = cls.sale._create_invoices()
         # And add some more lines on the invoice
