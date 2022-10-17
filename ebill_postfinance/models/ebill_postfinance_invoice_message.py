@@ -293,6 +293,7 @@ class EbillPostfinanceInvoiceMessage(models.Model):
             "ebill_account_number": self.ebill_account_number,
             "discount_template": "",
             "discount": {},
+            "invoice_line_stock_template": "",
         }
         amount_by_group = []
         # Get the percentage of the tax from the name of the group
