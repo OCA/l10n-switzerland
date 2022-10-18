@@ -81,8 +81,9 @@ class DeliveryCarrier(models.Model):
         for carrier in self:
             forbidden = option_template_obj.browse()
             domain = []
+            qp_xmlid = "l10n_ch_delivery_carrier_label_quickpac.partner_quickpac"
             if carrier.delivery_type != "quickpac":
-                domain.append(("partner_id", "=", False))
+                domain.append(("partner_id", "!=", self.env.ref(qp_xmlid).id)),
             else:
                 # Allows to set multiple optional single option in order to
                 # let the user select them
@@ -99,7 +100,6 @@ class DeliveryCarrier(models.Model):
                         ]
                     )
                     forbidden |= services
-                qp_xmlid = "l10n_ch_delivery_carrier_label_quickpac.partner_quickpac"
                 domain.append(("partner_id", "=", self.env.ref(qp_xmlid).id)),
                 domain.append(("id", "not in", forbidden.ids))
 
