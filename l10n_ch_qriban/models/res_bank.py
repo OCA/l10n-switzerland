@@ -69,7 +69,7 @@ class ResPartnerBank(models.Model):
     # fmt: off
     # Overwrite of official odoo code
     @api.model
-    def build_swiss_code_url(
+    def build_swiss_code_vals(
             self, amount, currency_name, not_used_anymore_1, debtor_partner,
             not_used_anymore_2, structured_communication, free_communication
     ):
@@ -130,7 +130,5 @@ class ResPartnerBank(models.Model):
             'EPD',                                                # Mandatory trailer part
         ]
 
-        return '/report/barcode/?type=%s&value=%s&width=%s&height=%s&humanreadable=1' % (
-            'QR_quiet', werkzeug.urls.url_quote_plus('\n'.join(qr_code_vals)), 256, 256
-        )
+        return qr_code_vals
     # fmt: on
