@@ -17,7 +17,11 @@ TODO: add repo description.
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[l10n_ch_invoice_reports](l10n_ch_invoice_reports/) | 15.0.1.0.0 |  | Extend invoice to add ISR/QR payment slip
 
 [//]: # (end addons)
 
