@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-31 15:46+0000\n"
-"PO-Revision-Date: 2022-12-29 16:47+0000\n"
+"PO-Revision-Date: 2023-01-02 12:07+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -50,7 +50,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:l10n_ch_lsv_dd.view_lsv_export_wizard_form
 #: model:ir.ui.view,arch_db:l10n_ch_lsv_dd.view_post_dd_export_wizard_form
 msgid "Cancel"
-msgstr "Cancel"
+msgstr "Annulla"
 
 #. module: l10n_ch_lsv_dd
 #: code:addons/l10n_ch_lsv_dd/wizard/dd_export_wizard.py:79
@@ -58,7 +58,7 @@ msgstr "Cancel"
 #: selection:lsv.export.wizard,state:0 selection:post.dd.export.wizard,state:0
 #, python-format
 msgid "Create"
-msgstr "Create"
+msgstr "Crea"
 
 #. module: l10n_ch_lsv_dd
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_account_invoice_free_create_uid
@@ -66,7 +66,7 @@ msgstr "Create"
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_lsv_export_wizard_create_uid
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_post_dd_export_wizard_create_uid
 msgid "Created by"
-msgstr "Created by"
+msgstr "Creato da"
 
 #. module: l10n_ch_lsv_dd
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_account_invoice_free_create_date
