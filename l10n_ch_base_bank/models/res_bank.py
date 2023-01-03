@@ -2,13 +2,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
+from odoo.osv import expression
 
 from .. import postfinance
 
 
 class Bank(models.Model):
-    """Inherit res.bank class in order to add swiss specific field"""
-
     _inherit = "res.bank"
 
     code = fields.Char(help="Internal reference")
@@ -34,22 +33,18 @@ class Bank(models.Model):
         return res
 
     @api.model
-    def name_search(self, name, args=None, operator="ilike", limit=80):
-        """Extends to look on bank code, bic, name, street and city"""
-        if args is None:
-            args = []
-        ids = []
-        cols = ("code", "bic", "name", "street", "city")
-        if name:
-            for val in name.split(" "):
-                for col in cols:
-                    tmp_ids = self.search([(col, "ilike", val)] + args, limit=limit)
-                    if tmp_ids:
-                        ids += tmp_ids.ids
-                        break
-        else:
-            ids = self.search(args, limit=limit).ids
-        # we sort by occurrence
-        to_ret_ids = list(set(ids))
-        to_ret_ids = sorted(to_ret_ids, key=lambda x: ids.count(x), reverse=True)
-        return self.browse(to_ret_ids).name_get()
+    def _name_search(
+        self, name, args=None, operator="ilike", limit=100, name_get_uid=None
+    ):
+        # OVERRIDE to search also on ``code``, ``street`` and ``city``
+        # NOTE: super() will also search on ``name`` and ``bic``
+        res = super()._name_search(name, args, operator, limit, name_get_uid)
+        if not name or operator in expression.NEGATIVE_TERM_OPERATORS:
+            return res
+        args = args or []
+        extra_fnames = ("code", "street", "city")
+        extra_domains = [[(fname, operator, name)] for fname in extra_fnames]
+        extra_domain = expression.OR(extra_domains)
+        extra_res = self._search(expression.AND([extra_domain, args]), limit=limit)
+        extra_res = [_id for _id in extra_res if _id not in res]
+        return list(res) + extra_res
