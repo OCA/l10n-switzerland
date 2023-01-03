@@ -24,12 +24,16 @@ class Bank(models.Model):
         return self.bic == postfinance.BIC
 
     def name_get(self):
-        """Format displayed name"""
+        # OVERRIDE to also display the ``code``, ``street`` and ``city``
+        # NOTE: super() will already display the ``name`` and ``bic``
+        names = dict(super().name_get())
+        extra_fnames = ("street", "city")
         res = []
-        cols = ("bic", "name", "street", "city")
-        for bank in self:
-            vals = (bank[x] for x in cols if bank[x])
-            res.append((bank.id, " - ".join(vals)))
+        for rec in self:
+            extra_name = " - ".join(rec[x] for x in extra_fnames if rec[x])
+            name = names[rec.id]
+            name = f"{name} - {extra_name}" if extra_name else name
+            res.append((rec.id, name))
         return res
 
     @api.model
