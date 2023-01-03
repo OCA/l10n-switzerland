@@ -4,8 +4,6 @@
 from odoo import api, fields, models
 from odoo.osv import expression
 
-from .. import postfinance
-
 
 class Bank(models.Model):
     _inherit = "res.bank"
@@ -19,9 +17,6 @@ class Bank(models.Model):
     country_code = fields.Char(
         string="Country code", related="country.code", readonly=True
     )
-
-    def is_swiss_post(self):
-        return self.bic == postfinance.BIC
 
     def name_get(self):
         # OVERRIDE to also display the ``code``, ``street`` and ``city``
