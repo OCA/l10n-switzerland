@@ -71,15 +71,3 @@ class AccountMove(models.Model):
             count=count,
             access_rights_uid=access_rights_uid,
         )
-
-    def partner_banks_to_show(self):
-        """
-        Extend method from account_payment_partner to add specific
-        logic for switzerland bank payments if base method does not give
-        a result
-        """
-        res = super().partner_banks_to_show()
-        if not res:
-            if self.journal_id:
-                return self.journal_id.bank_account_id
-        return res
