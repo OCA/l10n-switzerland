@@ -3,13 +3,14 @@
 
 * `Camptocamp <https://camptocamp.com>`_:
 
-    * Nicolas Bessi (Camptocamp)
+    * Nicolas Bessi
     * Vincent Renaville <vincent.renaville@camptocamp.com>
     * Joël Grand-Guillaume <joel.grandguillaume@camptocamp.com>
     * Guewen Baconnier <guewen.baconnier@camptocamp.com>
     * Yannick Vaucher <yannick.vaucher@camptocamp.com>
     * Akim Juillerat <akim.juillerat@camptocamp.com>
     * Iryna Vyshnevska <iryna.vyshnevska@camptocamp.com>
+    * Iván Todorovich <ivan.todorovich@camptocamp.com>
 
 * `Trobz <https://trobz.com>`_:
 

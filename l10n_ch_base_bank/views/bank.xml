@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2012 Camptocamp SA (https://www.camptocamp.com).
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
 <odoo>
-    <record id="view_bank_search" model="ir.ui.view">
-        <field name="name">res.bank.search</field>
+    <record id="res_bank_view_search" model="ir.ui.view">
         <field name="model">res.bank</field>
+        <field name="inherit_id" ref="base.res_bank_view_search" />
         <field name="arch" type="xml">
-            <search string="Banks">
+            <field name="name" position="after">
+                <field name="code" />
+                <field name="street" />
+                <field name="city" />
+            </field>
+            <filter name="inactive" position="after">
                 <filter
-                    name="Postfinance"
+                    name="postfinance"
                     string="PostFinance"
                     domain="[('bic', '=', 'POFICHBEXXX')]"
                     help="PostFinance"
                 />
-                <field name="name" />
-                <field name="code" />
-                <field name="street" />
-                <field name="city" />
-            </search>
+            </filter>
         </field>
     </record>
-    <!-- 'POFICHBEXXX' corresponds to Postfinance bic -->
-    <record model="ir.ui.view" id="add_custom_fields_on_bank">
-        <field name="name">add custom fields on bank</field>
+
+    <record model="ir.ui.view" id="view_res_bank_form">
         <field name="model">res.bank</field>
         <field name="inherit_id" ref="base.view_res_bank_form" />
         <field name="arch" type="xml">
@@ -28,23 +32,23 @@
                 <field name="code" />
                 <field name="clearing" />
             </field>
-            <xpath expr="//field[@name='name']" position="after">
+            <field name="name" position="after">
                 <field name="country_code" invisible="True" />
-            </xpath>
-            <xpath expr="//field[@name='city']" position="attributes">
+            </field>
+            <field name="city" position="attributes">
                 <attribute
                     name="attrs"
                 >{'required': [('country_code', '=', 'CH')]}</attribute>
-            </xpath>
-            <xpath expr="//field[@name='bic']" position="attributes">
+            </field>
+            <field name="bic" position="attributes">
                 <attribute
                     name="attrs"
                 >{'required': [('country_code', '=', 'CH')]}</attribute>
-            </xpath>
+            </field>
         </field>
     </record>
-    <record model="ir.ui.view" id="add_custom_fields_on_bank_list">
-        <field name="name">add custom fields on bank list</field>
+
+    <record model="ir.ui.view" id="view_res_bank_tree">
         <field name="model">res.bank</field>
         <field name="inherit_id" ref="base.view_res_bank_tree" />
         <field name="arch" type="xml">
@@ -56,4 +60,5 @@
             </field>
         </field>
     </record>
+
 </odoo>

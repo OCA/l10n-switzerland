@@ -1,5 +1,6 @@
-# Copyright 2012-2019 Camptocamp
+# Copyright 2012 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
 from odoo import api, fields, models
 
 from .. import postfinance
