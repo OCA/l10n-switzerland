@@ -13,7 +13,6 @@ class Bank(models.Model):
         string="Clearing number",
         help="Swiss unique bank identifier also used in IBAN number",
     )
-    city = fields.Char(help="City of the bank")
     country_code = fields.Char(
         string="Country code", related="country.code", readonly=True
     )
