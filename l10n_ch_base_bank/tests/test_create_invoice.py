@@ -1,10 +1,10 @@
 # Copyright 2012-2019 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import exceptions
-from odoo.tests.common import Form, SavepointCase
+from odoo.tests.common import Form, TransactionCase
 
 
-class TestCreateMove(SavepointCase):
+class TestCreateMove(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
