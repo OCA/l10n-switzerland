@@ -1,115 +1,116 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo.tests import common, tagged
-from odoo.tests.common import Form
+from odoo.tests import TransactionCase
 
 
-@tagged("post_install", "-at_install")
-class TestSearchmove(common.TransactionCase):
+class TestSearchAccountMove(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.company = cls.env.ref("base.main_company")
-        cls.partner = cls.env.ref("base.res_partner_12")
-        bank = cls.env["res.bank"].create(
+        cls.company_bank = cls.env["res.bank"].create(
             {"name": "BCV", "bic": "BBRUBEBB", "clearing": "234234"}
         )
-        cls.env["res.partner.bank"].create(
+        cls.company_partner_bank = cls.env["res.partner.bank"].create(
             {
                 "partner_id": cls.company.partner_id.id,
-                "bank_id": bank.id,
+                "bank_id": cls.company_bank.id,
                 "acc_number": "ISR",
                 "l10n_ch_isr_subscription_chf": "01-162-8",
                 "sequence": 1,
             }
         )
+        cls.partner = cls.env.ref("base.res_partner_12")
         cls.journal = cls.env["account.journal"].create(
             {
                 "name": "Test Journal",
                 "company_id": cls.company.id,
                 "type": "sale",
                 "code": "SALE123",
-                "bank_id": bank.id,
+                "bank_id": cls.company_bank.id,
                 "bank_acc_number": "10-8060-7",
             }
         )
+        cls.invoice = cls.env["account.move"].create(
+            {
+                "partner_id": cls.partner.id,
+                "journal_id": cls.journal.id,
+                "move_type": "out_invoice",
+            }
+        )
 
-    def new_form(self):
-        inv = Form(self.env["account.move"].with_context(default_type="out_invoice"))
-        inv.partner_id = self.partner
-        inv.journal_id = self.journal
-        return inv
+    def assertFindRef(self, ref, operator, value, message=None):
+        """Asserts that we can find the invoice
 
-    def assert_find_ref(self, ref, operator, value):
-        inv_form = self.new_form()
-        inv_form.ref = ref
+        Assuming the invoice has the given ``ref``, and that we perform a search
+        on it's ``ref`` field with the given ``operator`` and ``value``.
+        """
+        self.invoice.ref = ref
+        found = self.env["account.move"].search(
+            [
+                ("id", "in", self.invoice.ids),
+                ("ref", operator, value),
+            ],
+        )
+        self.assertEqual(self.invoice, found, message)
 
-        invoice = inv_form.save()
+    def assertNotFindRef(self, ref, operator, value):
+        """Asserts that we can't find the invoice
 
-        found = self.env["account.move"].search([("ref", operator, value)])
-        self.assertEqual(invoice, found)
+        Assuming the invoice has the given ``ref``, and that we perform a search
+        on it's ``ref`` field with the given ``operator`` and ``value``.
 
-    def assert_not_find_ref(self, ref, operator, value):
-        inv_form = self.new_form()
-        inv_form.ref = ref
-        inv_form.save()
-
+        It's the direct opposite of :meth:`assertFindRef`.
+        """
+        self.invoice.ref = ref
         found = self.env["account.move"].search([("ref", operator, value)])
         self.assertFalse(found)
 
     def test_search_equal_strict(self):
-        self.assert_find_ref(
+        self.assertFindRef(
             "27 29990 00000 00001 70400 25019", "=", "27 29990 00000 00001 70400 25019"
         )
 
     def test_search_equal_whitespace_right(self):
-        self.assert_not_find_ref(
+        self.assertNotFindRef(
             "272999000000000017040025019", "=", "27 29990 00000 00001 70400 25019"
         )
 
     def test_search_equal_whitespace_left(self):
-        self.assert_not_find_ref(
+        self.assertNotFindRef(
             "27 29990 00000 00001 70400 25019", "=", "272999000000000017040025019"
         )
 
     def test_search_like_whitespace_right(self):
-        self.assert_find_ref("272999000000000017040025019", "like", "1 70400 25")
+        self.assertFindRef("272999000000000017040025019", "like", "1 70400 25")
 
     def test_search_like_whitespace_left(self):
-        self.assert_find_ref("27 29990 00000 00001 70400 25019", "like", "17040025")
+        self.assertFindRef("27 29990 00000 00001 70400 25019", "like", "17040025")
 
     def test_search_like_whitespace_both(self):
-        self.assert_find_ref("27 29990 00000 00001 70400 25019", "like", "17 040025 01")
+        self.assertFindRef("27 29990 00000 00001 70400 25019", "like", "17 040025 01")
 
     def test_search_eqlike_whitespace_raw(self):
-        self.assert_not_find_ref(
+        self.assertNotFindRef(
             "27 29990 00000 00001 70400 25019", "=like", "17 040025 01"
         )
 
     def test_search_eqlike_whitespace_wildcards(self):
-        self.assert_find_ref(
+        self.assertFindRef(
             "27 29990 00000 00001 70400 25019", "=like", "%17 040025 01%"
         )
 
     def test_search_different(self):
-        self.assert_not_find_ref("27 29990 00000 00001 70400 25019", "like", "4273473")
+        self.assertNotFindRef("27 29990 00000 00001 70400 25019", "like", "4273473")
 
     def test_search_other_field(self):
-        inv_form = self.new_form()
-        inv_form.ref = "27 29990 00000 00001 70400 25019"
-        move = inv_form.save()
-
-        found = self.env["account.move"].search(
-            [("partner_id", "=", self.partner.id)], limit=1
-        )
-        self.assertEqual(move, found)
+        self.invoice.ref = "27 29990 00000 00001 70400 25019"
+        found = self.env["account.move"].search([("partner_id", "=", self.partner.id)])
+        self.assertIn(self.invoice, found)
 
     def test_search_unary_operator(self):
-        inv_form = self.new_form()
-        inv_form.ref = "27 29990 00000 00001 70400 25019"
-        move = inv_form.save()
-
+        self.invoice.ref = "27 29990 00000 00001 70400 25019"
         found = self.env["account.move"].search([("ref", "like", "2999000000")])
-        self.assertEqual(move, found)
+        self.assertIn(self.invoice, found)

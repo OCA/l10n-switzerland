@@ -1,11 +1,48 @@
 # Copyright 2012 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, exceptions, models
+from odoo import _, api, exceptions, fields, models
+from odoo.exceptions import UserError
+from odoo.osv.expression import TERM_OPERATORS, is_leaf
 
 
 class AccountMove(models.Model):
     _inherit = "account.move"
+
+    ref_normalized = fields.Char(
+        string="Reference (normalized)",
+        compute="_compute_ref_normalized",
+        search="_search_ref_normalized",
+        help="Without spaces, to ease searching",
+    )
+
+    @api.depends("ref")
+    def _compute_ref_normalized(self):
+        for move in self:
+            move.ref_normalized = move.ref and move.ref.replace(" ", "")
+
+    @api.model
+    def _search_ref_normalized(self, operator, value):
+        """Perform a search on ``ref_normalized``
+
+        This field is not stored on the database, but it's a computed version of ``ref``
+        that contains no spaces.
+
+        When searching on ``ref_normalized``, the spaces in ``value`` are ignored.
+        """
+        if operator not in TERM_OPERATORS:
+            raise UserError(_("Invalid operator %s", operator))
+        need_wildcard = operator in ("like", "ilike", "not like", "not ilike")
+        sql_operator = {"=like": "like", "=ilike": "ilike"}.get(operator, operator)
+        value = value and value.replace(" ", "")
+        value = f"%{value}%" if need_wildcard else value
+        query = f"""
+            SELECT id
+            FROM {self._table}
+            WHERE REPLACE(ref, ' ' , '') {sql_operator} %s
+        """
+        self.flush_model(["ref"])
+        return [("id", "inselect", (query, (value,)))]
 
     def _search(
         self,
@@ -16,51 +53,18 @@ class AccountMove(models.Model):
         count=False,
         access_rights_uid=None,
     ):
-        domain = []
-        for arg in args:
-            if not isinstance(arg, (tuple, list)) or len(arg) != 3:
-                domain.append(arg)
+        # OVERRIDE to search on ``ref_normalized`` instead of ``ref`` when using
+        # the ``like`` or ``ilike`` operators.
+        new_args = []
+        like_operators = (op for op in TERM_OPERATORS if "like" in op)
+        for element in args:
+            field, operator, value = element if is_leaf(element) else (None, None, None)
+            if field != "ref" or operator not in like_operators:
+                new_args.append(element)
                 continue
-            field, operator, value = arg
-            if field != "ref":
-                domain.append(arg)
-                continue
-            if operator not in (
-                "like",
-                "ilike",
-                "=like",
-                "=ilike",
-                "not like",
-                "not ilike",
-            ):
-                domain.append(arg)
-                continue
-            if value:
-                value = value.replace(" ", "")
-                if not value:
-                    # original value contains only spaces, the query
-                    # would return all rows, so avoid a costly search
-                    # and drop the domain triplet
-                    continue
-                # add wildcards for the like search, except if the operator
-                # is =like of =ilike because they are supposed to be there yet
-                if operator.startswith("="):
-                    operator = operator[1:]
-                else:
-                    value = "%{}%".format(value)
-            # add filtered operator to query
-            query_op = (
-                "SELECT id FROM account_move "
-                "WHERE REPLACE(ref, ' ', '') %s %%s" % (operator,)
-            )
-            # avoid pylint check on no-sql-injection query_op is safe
-            query = query_op
-            self.env.cr.execute(query, (value,))
-            ids = [t[0] for t in self.env.cr.fetchall()]
-            domain.append(("id", "in", ids))
-
+            new_args.append(("ref_normalized", operator, value))
         return super()._search(
-            domain,
+            new_args,
             offset=offset,
             limit=limit,
             order=order,
