@@ -1,25 +1,20 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo.tools import convert_file
+from odoo import SUPERUSER_ID, api
 
 
-def import_csv_data(cr, registry):
-    """Import CSV data as it is faster than xml and because we can't use
-    noupdate anymore with csv"""
-    filenames = ["data/res.bank.csv"]
-    for filename in filenames:
-        convert_file(
-            cr,
-            "l10n_ch_bank",
-            filename,
-            None,
-            mode="init",
-            noupdate=True,
-            kind="init",
-            report=None,
-        )
+def post_init_hook(cr, registry):
+    """Set the res.bank records as noupdate
 
-
-def post_init(cr, registry):
-    import_csv_data(cr, registry)
+    When importing .csv files we can't mark them as noupdate in the manifest,
+    so we do it here.
+    """
+    env = api.Environment(cr, SUPERUSER_ID, {})
+    records = env["ir.model.data"].search(
+        [
+            ("module", "=", "l10n_ch_bank"),
+            ("model", "=", "res.bank"),
+        ]
+    )
+    records.write({"noupdate": True})

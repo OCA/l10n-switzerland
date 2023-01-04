@@ -1,1 +1,1 @@
-from . import bank
+from . import res_bank

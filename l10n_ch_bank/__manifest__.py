@@ -4,16 +4,16 @@
 
 {
     "name": "Switzerland - Bank list",
-    "version": "12.0.1.0.0",
+    "summary": "Swiss banks names, addresses and BIC codes",
+    "version": "16.0.1.0.0",
     "author": "Camptocamp, brain-tec AG, Odoo Community Association (OCA)",
     "category": "Localisation",
     "website": "https://github.com/OCA/l10n-switzerland",
     "license": "AGPL-3",
-    "summary": "Banks names, addresses and BIC codes",
     "depends": ["l10n_ch_base_bank"],
-    # We use csv file as xml is too slow
-    # unfortunately it doesn't work with noupdate thus we use a post_init hook
-    # 'init': ['data/res.bank.csv'],
-    "post_init_hook": "post_init",
-    "data": [],
+    "data": [
+        "data/res.bank.csv",
+        "views/res_bank.xml",
+    ],
+    "post_init_hook": "post_init_hook",
 }
