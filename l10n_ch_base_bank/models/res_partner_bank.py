@@ -32,17 +32,6 @@ class ResPartnerBank(models.Model):
 
     _inherit = "res.partner.bank"
 
-    def is_isr_issuer(self):
-        """Supplier will provide ISR/QRR reference numbers in two cases:
-
-        - postal account number starting by 01 or 03
-        - QR-IBAN
-        """
-        # acc_type can be bank for isrb
-        if self.acc_type in ["bank", "postal"] and self.l10n_ch_postal:
-            return self.l10n_ch_postal[:2] in ["01", "03"]
-        return self.acc_type == "iban" and self._is_qr_iban()
-
     def _get_ch_bank_from_iban(self):
         """Extract clearing number from CH iban to find the bank"""
         if self.acc_type != "iban" and self.acc_number[:2] != "CH":
