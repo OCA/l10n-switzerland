@@ -1,0 +1,1 @@
+odoo-addon-l10n_ch_base_bank @git+https://github.com/OCA/l10n-switzerland@refs/pull/686/head#subdirectory=setup/l10n_ch_base_bank
