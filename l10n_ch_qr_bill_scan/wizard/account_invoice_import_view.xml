@@ -36,7 +36,7 @@
                 <div name="help-import-scan" states="import">
                     <p><big>
                             <big>
-                                <i class="fa fa-qrcode" />
+                                <i class="fa fa-qrcode" title="QR Code" />
                             </big>
                         </big> Scan a QR-bill code from a supplier invoice</p>
                 </div>
@@ -45,7 +45,7 @@
                 </group>
                 <div name="help-import-partner-select" states="select-partner">
                     <p
-                    >Partner was not found or is not set as a supplier. Please create or select the partner before continuing</p>
+                    >Partner was not found or is not set as a supplier. Please create or select the partner, add invoice config and import it again</p>
                 </div>
             </xpath>
             <xpath expr="//div[@name='help-import']" position="attributes">
@@ -78,15 +78,6 @@
                 >{'required': [('state', 'in', ('config', 'update-from-invoice', 'update', 'select-partner'))]}</attribute>
                 <attribute name="context">{'default_partner_id': partner_id}</attribute>
             </field>
-            <button name="import_invoice" position="after">
-                <button
-                    name="import_invoice"
-                    type="object"
-                    class="btn-primary"
-                    string="Continue"
-                    states="select-partner"
-                />
-            </button>
         </field>
     </record>
 </odoo>

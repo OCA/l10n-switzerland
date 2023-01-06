@@ -1,5 +1,5 @@
 This module depends on `account_invoice_import` which is located in `edi` and has dependencies on `community-data-files`.
-So the repository `edi` and `community-data-files` must be present on the system.
+So the repositories `edi` and `community-data-files` must be present on the system.
 
 Optionally you can also import Vendor bills directly from a PDF.
 To enable this feature those additional dependencies must be

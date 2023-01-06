@@ -158,23 +158,26 @@ class AccountInvoiceImport(models.TransientModel):
             logger.debug("No Swiss QR-Code found in PDF file")
         return super().parse_pdf_invoice(file_data)
 
-    def _hook_no_partner_found(self, partner_dict):
+    def goto_partner_not_found(self, parsed_inv, error_message):
         """Switch wizard to partner creation."""
-        country = self.env["res.country"].search(
-            [("code", "=", partner_dict["country_code"])], limit=1
-        )
-        wiz_vals = {
-            "state": "select-partner",
-            "partner_name": partner_dict["name"],
-            "partner_street": partner_dict["street"],
-            "partner_zip": partner_dict["zip"],
-            "partner_city": partner_dict["city"],
-            "partner_country_id": country.id,
-        }
-        act_window = self.env["ir.actions.act_window"]
-        action = act_window.for_xml_id(
-            "account_invoice_import", "account_invoice_import_action"
-        )
-        action["res_id"] = self.id
-        self.write(wiz_vals)
+        action = super().goto_partner_not_found(parsed_inv, error_message)
+        partner_dict = parsed_inv["partner"]
+        if partner_dict:
+            country = self.env["res.country"].search(
+                [("code", "=", partner_dict["country_code"])], limit=1
+            )
+            wiz_vals = {
+                "state": "select-partner",
+                "partner_name": partner_dict["name"],
+                "partner_street": partner_dict["street"],
+                "partner_zip": partner_dict["zip"],
+                "partner_city": partner_dict["city"],
+                "partner_country_id": country.id,
+            }
+            act_window = self.env["ir.actions.act_window"]
+            action = act_window._for_xml_id(
+                "account_invoice_import.account_invoice_import_action"
+            )
+            action["res_id"] = self.id
+            self.write(wiz_vals)
         return action

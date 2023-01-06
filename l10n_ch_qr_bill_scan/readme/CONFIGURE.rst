@@ -1,5 +1,11 @@
 In order to configure the type of invoice created per partner.
 
+Make sure your os have these package:
+
+sudo apt-get update
+sudo apt-get install poppler-utils libzbar0 python3-opencv
+
+
 Got to:
   - `Accounting` or `Invoicing`
   - `Configuration`

@@ -1,0 +1,5 @@
+# generated from manifests external_dependencies
+numpy
+opencv-python
+pdf2image
+pyzbar
