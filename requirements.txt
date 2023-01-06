@@ -1,3 +1,7 @@
 # generated from manifests external_dependencies
 ebilling_postfinance
+numpy
+opencv-python-headless
+pdf2image
+pyzbar
 zeep
