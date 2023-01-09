@@ -6,13 +6,13 @@ import base64
 from lxml import etree
 
 from odoo import fields
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 from odoo.tools import float_compare
 
 ch_iban = "CH15 3881 5158 3845 3843 7"
 
 
-class TestSCTCH(SavepointCase):
+class TestSCTCH(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
