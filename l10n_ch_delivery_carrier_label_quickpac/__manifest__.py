@@ -3,7 +3,7 @@
 
 {
     "name": "Quickpac",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "author": "Camptocamp,Odoo Community Association (OCA)",
     "maintainer": "Camptocamp",
     "summary": "Print quickpac shipping labels",
