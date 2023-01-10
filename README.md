@@ -24,7 +24,7 @@ addon | version | maintainers | summary
 [ebill_paynet_customer_free_ref](ebill_paynet_customer_free_ref/) | 14.0.1.0.2 |  | Glue module: ebill_paynet and sale_order_customer_free_ref
 [l10n_ch_account_tags](l10n_ch_account_tags/) | 14.0.1.0.0 |  | Switzerland Account Tags
 [l10n_ch_base_bank](l10n_ch_base_bank/) | 14.0.1.0.2 |  | Types and number validation for swiss electronic pmnt. DTA, ESR
-[l10n_ch_delivery_carrier_label_quickpac](l10n_ch_delivery_carrier_label_quickpac/) | 14.0.1.0.0 |  | Print quickpac shipping labels
+[l10n_ch_delivery_carrier_label_quickpac](l10n_ch_delivery_carrier_label_quickpac/) | 14.0.1.0.1 |  | Print quickpac shipping labels
 [l10n_ch_invoice_reports](l10n_ch_invoice_reports/) | 14.0.1.2.0 |  | Extend invoice to add ISR/QR payment slip
 [l10n_ch_isr_payment_grouping](l10n_ch_isr_payment_grouping/) | 14.0.1.0.1 |  | Extend account to ungroup ISR
 [l10n_ch_isrb](l10n_ch_isrb/) | 14.0.1.0.0 |  | Switzerland - ISR with Bank
