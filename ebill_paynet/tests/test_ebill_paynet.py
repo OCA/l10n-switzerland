@@ -42,12 +42,14 @@ class TestEbillPaynet(SingleTransactionCase):
         cls.customer = cls.env["res.partner"].create(
             {"name": "Customer One", "customer_rank": 1}
         )
+        cls.paynet_transmit_method = cls.env.ref("ebill_paynet.paynet_transmit_method")
         cls.contract = cls.env["ebill.payment.contract"].create(
             {
                 "partner_id": cls.customer.id,
                 "paynet_account_number": "123123123",
                 "state": "open",
                 "paynet_service_id": cls.paynet.id,
+                "transmit_method_id": cls.paynet_transmit_method.id,
             }
         )
         cls.account = cls.env["account.account"].search(
@@ -83,9 +85,7 @@ class TestEbillPaynet(SingleTransactionCase):
                 "partner_id": cls.customer.id,
                 # 'account_id': cls.account.id,
                 "move_type": "out_invoice",
-                "transmit_method_id": cls.env.ref(
-                    "ebill_paynet.paynet_transmit_method"
-                ).id,
+                "transmit_method_id": cls.paynet_transmit_method.id,
                 "invoice_line_ids": [
                     (
                         0,
@@ -136,3 +136,17 @@ class TestEbillPaynet(SingleTransactionCase):
         res = self.paynet.get_shipment_content("SC-00000000000020357011")
         self.paynet.handle_received_shipment(res, "SC-00000000000020357011")
         self.assertEqual(message.state, "error")
+
+    @recorder.use_cassette()
+    def test_getShipmentContent_missing_transmit_method(self):
+        """Message is empty and an ERROR log must be present if paynet transmit
+        method is missing on invoice."""
+        log_name = "odoo.addons.base_ebill_payment_contract.models.res_partner"
+        log_level = "ERROR"
+        log_message = f"eBill contract for {self.customer.name} on False not found"
+        self.invoice_1.transmit_method_id = None
+        self.invoice_1.partner_bank_id = self.partner_bank.id
+        with self.assertLogs(log_name, level=log_level) as cm:
+            message = self.invoice_1.create_paynet_message()
+            self.assertFalse(message)
+            self.assertEqual(cm.output, [f"{log_level}:{log_name}:{log_message}"])
