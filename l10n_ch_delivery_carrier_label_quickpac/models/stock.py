@@ -12,9 +12,10 @@ class StockPicking(models.Model):
 
     def onchange_carrier_id(self):
         result = super().onchange_carrier_id()
-        web_service = QuickpacWebService(self.env.user.company_id)
-        zipcode = self.partner_id.zip
-        web_service.is_deliverable_zipcode(zipcode)
+        if self.carrier_id.delivery_type == "quickpac":
+            web_service = QuickpacWebService(self.env.user.company_id)
+            zipcode = self.partner_id.zip
+            web_service.is_deliverable_zipcode(zipcode)
         return result
 
     def _generate_quickpac_label(self, webservice_class=None, package_ids=None):
