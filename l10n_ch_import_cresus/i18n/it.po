@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 03:54+0000\n"
-"PO-Revision-Date: 2023-01-02 11:45+0000\n"
+"PO-Revision-Date: 2023-01-18 13:44+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -60,7 +60,7 @@ msgstr "Creato da"
 #. module: l10n_ch_import_cresus
 #: model:ir.model.fields,field_description:l10n_ch_import_cresus.field_account_cresus_import_create_date
 msgid "Created on"
-msgstr "Created on"
+msgstr "Creato il"
 
 #. module: l10n_ch_import_cresus
 #: model:ir.ui.view,arch_db:l10n_ch_import_cresus.view_tax_form
