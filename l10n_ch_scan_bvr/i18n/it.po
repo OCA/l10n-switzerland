@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 03:54+0000\n"
-"PO-Revision-Date: 2023-01-03 12:47+0000\n"
+"PO-Revision-Date: 2023-01-18 13:45+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -87,7 +87,7 @@ msgstr "Creato da"
 #. module: l10n_ch_scan_bvr
 #: model:ir.model.fields,field_description:l10n_ch_scan_bvr.field_scan_bvr_create_date
 msgid "Created on"
-msgstr "Created on"
+msgstr "Creato il"
 
 #. module: l10n_ch_scan_bvr
 #: model:ir.model.fields,field_description:l10n_ch_scan_bvr.field_res_partner_supplier_invoice_default_product
