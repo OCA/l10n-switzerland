@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: l10n-switzerland (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-03 00:41+0000\n"
-"PO-Revision-Date: 2023-01-03 12:47+0000\n"
+"PO-Revision-Date: 2023-01-18 13:46+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-l10n-switzerland-9-0/language/it/)\n"
@@ -125,7 +125,7 @@ msgstr "Creato da"
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_create_date
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_v11_import_wizard_create_date
 msgid "Created on"
-msgstr "Created on"
+msgstr "Creato il"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_l10n_ch_payment_slip_display_name
