@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <record model="account.cash.rounding" id="swiss_cash_rounding">
+        <field name="name">swiss rounding</field>
+        <field name="rounding">0.05</field>
+        <field name="strategy">biggest_tax</field>
+        <field name="rounding_method">HALF-UP</field>
+    </record>
+</odoo>
