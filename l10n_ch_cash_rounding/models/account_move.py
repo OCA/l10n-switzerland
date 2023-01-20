@@ -9,21 +9,21 @@ class AccountMove(models.Model):
 
     invoice_cash_rounding_id = fields.Many2one(
         "account.cash.rounding",
-        readonly=False,
         compute="_compute_invoice_cash_rounding",
-        states={},
+        states={"draft": [("readonly", False)]},
     )
 
     @api.depends("move_type", "currency_id")
     def _compute_invoice_cash_rounding(self):
+        swiss_cash_rounding = self.env.ref(
+            "l10n_ch_cash_rounding.swiss_cash_rounding", raise_if_not_found=False
+        )
+        if not swiss_cash_rounding:
+            return
         for move in self:
             if move.move_type in [
                 "out_invoice",
                 "out_refund",
             ]:
-                if move.currency_id.id == self.env.ref("base.CHF").id:
-                    move.invoice_cash_rounding_id = self.env.ref(
-                        "l10n_ch_cash_rounding.swiss_cash_rounding"
-                    ).id
-                else:
-                    move.invoice_cash_rounding_id = False
+                if move.currency_id == self.env.ref("base.CHF"):
+                    move.invoice_cash_rounding_id = swiss_cash_rounding
