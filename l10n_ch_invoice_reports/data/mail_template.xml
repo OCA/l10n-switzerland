@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="account.email_template_edi_invoice" model="mail.template">
+      <field
+            name="report_template"
+            ref="l10n_ch_invoice_reports.account_move_payment_report"
+        />
+    </record>
+
+</odoo>
