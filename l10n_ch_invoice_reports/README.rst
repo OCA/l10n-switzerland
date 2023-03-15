@@ -25,7 +25,15 @@ Switzerland - Invoice Reports with payment option
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
-This module adds possibility to print invoice report together with ISR and/or QR code
+This module changes the invoice report by including the payment slip and the invoice
+detail in the same pdf file.
+
+This change is effective:
+
+* On the protal view when downloading the invoice.
+* On the email attachment when sending the invoice.
+
+The option of including the QR payment slip can be toggled in the settings.
 
 **Table of contents**
 
