@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-31 15:46+0000\n"
-"PO-Revision-Date: 2023-01-18 13:46+0000\n"
+"PO-Revision-Date: 2023-04-07 18:27+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -495,7 +495,7 @@ msgstr ""
 #. module: l10n_ch_lsv_dd
 #: selection:banking.export.ch.dd,state:0
 msgid "Sent"
-msgstr "Invia"
+msgstr "Inviato"
 
 #. module: l10n_ch_lsv_dd
 #: model:ir.ui.view,arch_db:l10n_ch_lsv_dd.view_payment_order_invoice_button_form
