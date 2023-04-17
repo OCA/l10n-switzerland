@@ -1,10 +1,11 @@
-# Copyright 2020 David Wulliamoz
+# Copyright 2023 David Wulliamoz
 # License AGPL-3.0 or later (https://www.gnuorg/licenses/agpl).
-from collections import defaultdict
-from odoo import api, models, fields
-import math
 
 import logging
+import math
+from collections import defaultdict
+
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
