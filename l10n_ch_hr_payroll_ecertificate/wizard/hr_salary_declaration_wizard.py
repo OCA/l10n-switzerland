@@ -2,10 +2,9 @@
 # License AGPL-3.0 or later (https://www.gnuorg/licenses/agpl).
 
 from odoo import fields, models
-from odoo.exceptions import UserError
 
 
-class Gen_SD_Wizard(models.TransientModel):
+class GenSdWizard(models.TransientModel):
     _name = "hr.salary.declaration.wizard"
     _description = "Generate salary declaration"
 
