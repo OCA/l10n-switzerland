@@ -10,7 +10,7 @@ _logger = logging.getLogger(__name__)
 
 
 class HrSalaryDeclaration(models.Model):
-    _name = "hr.salary_declaration"
+    _name = "hr.salary.declaration"
     _description = "Salary declaration for generating xml"
 
     employee_id = fields.Many2one(comodel_name="hr.employee", string="Employee")

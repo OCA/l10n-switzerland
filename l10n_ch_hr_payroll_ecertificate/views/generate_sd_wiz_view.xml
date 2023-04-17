@@ -2,7 +2,7 @@
 <odoo>
     <record id="gen_sd_wizard_view" model="ir.ui.view">
        <field name="name">Wizard to generate Salary declaration</field>
-        <field name="model">hr.salary_declaration.wizard</field>
+        <field name="model">hr.salary.declaration.wizard</field>
         <field name="arch" type="xml">
             <form>
                 <group>
@@ -19,9 +19,8 @@
 
     <record id="gen_sd_wizard_act" model="ir.actions.act_window">
         <field name="name">Generate salary declaration</field>
-        <field name="res_model">hr.salary_declaration.wizard</field>
+        <field name="res_model">hr.salary.declaration.wizard</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="view_type">form</field>
         <field name="view_mode">form,tree</field>
         <field name="view_id" ref="gen_sd_wizard_view"/>
         <field name="target">new</field>

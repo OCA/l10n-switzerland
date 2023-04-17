@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record model="ir.ui.view" id="hr_salary_declaration_tree_view">
-        <field name="name">hr.salary_declaration.sd</field>
-        <field name="model">hr.salary_declaration</field>
+        <field name="name">hr.salary.declaration.sd</field>
+        <field name="model">hr.salary.declaration</field>
         <field name="priority" eval="20"/>
         <field name="arch" type="xml">
             <tree string="Generated Salary declaration">
@@ -18,8 +18,7 @@
         <!-- Actions -->
     <record id="open_view_sd_tree" model="ir.actions.act_window">
         <field name="name">Salary Declaration</field>
-        <field name="res_model">hr.salary_declaration</field>
-        <field name="view_type">form</field>
+        <field name="res_model">hr.salary.declaration</field>
         <field name="view_mode">tree</field>
         <field name="context">{'search_default_active': 1}</field>
     </record>
