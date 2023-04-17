@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="gen_sd_wizard_view" model="ir.ui.view">
+       <field name="name">Wizard to generate Salary declaration</field>
+        <field name="model">hr.salary_declaration.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="date_from" />
+                    <field name="date_to" />
+                </group>
+                <footer>
+                    <button name="gen_sd" string="OK" type="object" default_focus="1" class="oe_highlight" />
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="gen_sd_wizard_act" model="ir.actions.act_window">
+        <field name="name">Generate salary declaration</field>
+        <field name="res_model">hr.salary_declaration.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" ref="gen_sd_wizard_view"/>
+        <field name="target">new</field>
+    </record>
+    <menuitem id="menu_gen_sd" parent="hr_payroll.menu_hr_payroll_configuration" action="gen_sd_wizard_act" sequence="8"/>
+
+</odoo>
