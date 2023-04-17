@@ -6,8 +6,12 @@
     "summary": "Switzerland Payroll export",
     "category": "Localization",
     "author": "Odoo Community Association (OCA)",
-    "depends": ["report_xml"],
-    "version": "13.0.1.0.0",
+    "depends": [
+                "report_xml",
+                "hr",
+                "payroll"
+                ],
+    "version": "14.0.1.0.0",
     "auto_install": False,
     "demo": [],
     "website": "https://github.com/oca/l10n-switzerland",

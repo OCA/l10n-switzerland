@@ -23,9 +23,11 @@
         <field name="context">{'search_default_active': 1}</field>
     </record>
 
-    <menuitem id="menu_report"
-              name="Salary declaration"
-              action="open_view_sd_tree"
-              parent="hr_payroll.menu_hr_payroll_configuration"
-              sequence="6"/>
+    <menuitem
+        id="report_salary_declaration"
+        name="Salary declaration"
+        action="open_view_sd_tree"
+        parent="payroll.payroll_menu_configuration"
+        sequence="6"
+    />
 </odoo>

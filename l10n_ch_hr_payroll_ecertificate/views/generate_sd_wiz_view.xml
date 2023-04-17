@@ -10,8 +10,8 @@
                     <field name="date_to" />
                 </group>
                 <footer>
-                    <button name="gen_sd" string="OK" type="object" default_focus="1" class="oe_highlight" />
-                    <button string="Cancel" class="oe_link" special="cancel" />
+                    <button name="gen_sd" title="OK" type="object" default_focus="1" class="oe_highlight" />
+                    <button Title="Cancel" class="oe_link" special="cancel" />
                 </footer>
             </form>
         </field>
@@ -25,6 +25,10 @@
         <field name="view_id" ref="gen_sd_wizard_view"/>
         <field name="target">new</field>
     </record>
-    <menuitem id="menu_gen_sd" parent="hr_payroll.menu_hr_payroll_configuration" action="gen_sd_wizard_act" sequence="8"/>
-
+    <menuitem
+        id="menu_gen_sd"
+        parent="payroll.payroll_menu_configuration"
+        action="gen_sd_wizard_act"
+        sequence="8"
+    />
 </odoo>

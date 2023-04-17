@@ -23,20 +23,20 @@ class HrSalaryDeclaration(models.Model):
 
     @api.model
     def generate_yearly_declaration(self, date_from, date_to):
-        payslip_lines_obj = self.env["hr.payslip.line"].search(
+        payslip_lines = self.env["hr.payslip.line"].search(
             [
                 ("slip_id.date_from", ">=", date_from),
                 ("slip_id.date_to", "<=", date_to),
                 ("slip_id.state", "=", "done"),
             ]
         )
-        employee_ids = payslip_lines_obj.mapped("employee_id.id")
+        employee_ids = payslip_lines.mapped("employee_id.id")
         grossincome = defaultdict(float)
         social_ded = defaultdict(float)
         bvg_lpp_ded = defaultdict(float)
         d_from = defaultdict(str)
         d_to = defaultdict(str)
-        for line in payslip_lines_obj:
+        for line in payslip_lines:
             if line.code == "5000":
                 grossincome[line.employee_id.id] += line.total
             if line.name == "OBP Employee":
