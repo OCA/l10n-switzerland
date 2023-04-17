@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2021 David Wulliamoz <dwulliamoz@compassion.ch>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <template id="salary_declaration_xml_view">
+        <SalaryDeclaration>
+        <Company>
+            <CompanyDescription>
+              <AddressPosition>RIGHT</AddressPosition>
+              <Name>
+                <HR-RC-Name t-esc="docs[0].employee_id.company_id.name"/>
+              </Name>
+              <Address>
+                <Street t-esc="docs[0].employee_id.company_id.street"/>
+                <ZIP-Code t-esc="docs[0].employee_id.company_id.zip"/>
+                <City t-esc="docs[0].employee_id.company_id.city"/>
+                <Country t-esc="docs[0].employee_id.company_id.country_id.name"/>
+              </Address>
+              <BUR-REE>
+                <CompanyWorkingTime CompanyWorkingTimeID="#1">
+                  <WeeklyHours>1.00</WeeklyHours>
+                </CompanyWorkingTime>
+              </BUR-REE>
+            </CompanyDescription>
+            <Staff>
+              <Person t-foreach="docs" t-as="doc">
+                <Particulars>
+                    <Language>
+                        <t t-esc="doc.employee_id.address_home_id.lang[:2]"/><t t-if="doc.employee_id.address_home_id.lang[:2] != 'en'">-CH</t>
+                    </Language>
+                  <DateOfBirth t-esc="doc.employee_id.birthday"/>
+                  <Social-InsuranceIdentification>
+                    <SV-AS-Number t-esc="doc.employee_id.identification_id"/>
+                  </Social-InsuranceIdentification>
+                  <Lastname t-esc="doc.employee_id.address_home_id.lastname"/>
+                  <Firstname t-esc="doc.employee_id.address_home_id.firstname"/>
+                  <Address>
+                    <Street t-esc="doc.employee_id.address_home_id.street"/>
+                    <Postbox/>
+                    <ZIP-Code t-esc="doc.employee_id.address_home_id.zip"/>
+                    <City t-esc="doc.employee_id.address_home_id.city"/>
+                    <Country t-esc="doc.employee_id.address_home_id.country_id.name"/>
+                  </Address>
+                </Particulars>
+                <TaxSalaries>
+                  <TaxSalary>
+                    <LohnausweisTyp>LOHNAUSWEIS</LohnausweisTyp>
+                    <Period>
+                      <from t-esc="doc.date_from"/>
+                      <until t-esc="doc.date_to"/>
+                    </Period>
+                    <Year t-esc="doc.year"/>
+                    <Income t-esc="doc.grossincome"/>
+                    <GrossIncome t-esc="doc.grossincome"/>
+                    <AHV-ALV-NBUV-AVS-AC-AANP-Contribution t-esc="doc.social_ded"/>
+                    <BVG-LPP-Contribution>
+                      <Regular t-esc="doc.bvg_lpp_ded"/>
+                    </BVG-LPP-Contribution>
+<!--                    <NetIncome t-esc="doc.grossincome-doc.social_ded-doc.bvg_lpp_ded"/> -->
+                  </TaxSalary>
+                </TaxSalaries>
+              </Person>
+                  </Staff>
+            <SalaryCounters/>
+            </Company>
+          <GeneralSalaryDeclarationDescription>
+            <CreationDate t-esc="time.strftime('%Y-%m-%d')"/>
+            <AccountingPeriod t-esc="docs[0].year"/>
+            <ContactPerson>
+              <Name t-esc="docs[0].create_uid.name"/>
+              <PhoneNumber t-esc="docs[0].employee_id.company_id.phone"/>
+            </ContactPerson>
+          </GeneralSalaryDeclarationDescription>
+        </SalaryDeclaration>
+    </template>
+
+    <report id="salary_declaration_report"
+            name="l10n_ch_hr_payroll_ecertificate.salary_declaration_xml_view"
+            string="Salary certificate xml report"
+            report_type="qweb-xml"
+            print_report_name="'Yearly certificate report'"
+            file="report_xml.xml"
+            model="hr.salary_declaration"/>
+</odoo>
