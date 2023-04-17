@@ -81,5 +81,5 @@
             report_type="qweb-xml"
             print_report_name="'Yearly certificate report'"
             file="report_xml.xml"
-            model="hr.salary_declaration"/>
+            model="hr.salary.declaration"/>
 </odoo>
