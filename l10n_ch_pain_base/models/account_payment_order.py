@@ -88,7 +88,12 @@ class AccountPaymentOrder(models.Model):
                     % (partner_bank.bank_id.name, partner_bank.acc_number)
                 )
         return super().generate_party_agent(
-            parent_node, party_type, order, partner_bank, gen_args, bank_line=bank_line,
+            parent_node,
+            party_type,
+            order,
+            partner_bank,
+            gen_args,
+            bank_line=bank_line,
         )
 
     @api.model
