@@ -7,9 +7,12 @@ from odoo import fields, models
 class AccountPaymentLine(models.Model):
     _inherit = "account.payment.line"
 
-    local_instrument = fields.Selection(selection_add=[("CH01", "CH01 (ISR)")])
+    local_instrument = fields.Selection(
+        selection_add=[("CH01", "CH01 (ISR)")], ondelete={"CH01": "set null"}
+    )
     communication_type = fields.Selection(
-        selection_add=[("isr", "ISR"), ("qrr", "QRR")]
+        selection_add=[("isr", "ISR"), ("qrr", "QRR")],
+        ondelete={"isr": "set default", "qrr": "set default"},
     )
 
     def invoice_reference_type2communication_type(self):
