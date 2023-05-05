@@ -11,7 +11,7 @@ class AccountMoveLine(models.Model):
         vals = super()._prepare_payment_line_vals(payment_order)
         if (
             self.move_id
-            and self.move_id._is_isr_reference()
+            and self.move_id._has_isr_ref()
             and self.move_id.partner_bank_id
         ):
             if self.move_id.partner_bank_id._is_qr_iban():
