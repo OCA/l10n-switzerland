@@ -243,7 +243,9 @@ class TestSCTCH(AccountingTestCase):
         )
         self.assertEquals(
             float_compare(
-                agrolait_pay_line1.amount_currency, 4042.0, precision_digits=accpre,
+                agrolait_pay_line1.amount_currency,
+                4042.0,
+                precision_digits=accpre,
             ),
             0,
         )
