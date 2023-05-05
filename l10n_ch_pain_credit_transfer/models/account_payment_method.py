@@ -13,7 +13,8 @@ class AccountPaymentMethod(models.Model):
                 "pain.001.001.03.ch.02",
                 "pain.001.001.03.ch.02 (credit transfer in Switzerland)",
             ),
-        ]
+        ],
+        ondelete={"pain.001.001.03.ch.02": "set null"},
     )
 
     def get_xsd_file_path(self):
