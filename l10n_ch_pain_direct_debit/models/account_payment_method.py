@@ -1,7 +1,7 @@
 # © 2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class AccountPaymentMethod(models.Model):
@@ -10,7 +10,8 @@ class AccountPaymentMethod(models.Model):
     pain_version = fields.Selection(
         selection_add=[
             ("pain.008.001.02.ch.03", "pain.008.001.02.ch.03 (XML Direct Debit)"),
-        ]
+        ],
+        ondelete={"pain.008.001.02.ch.03": "set null"},
     )
 
     def get_xsd_file_path(self):

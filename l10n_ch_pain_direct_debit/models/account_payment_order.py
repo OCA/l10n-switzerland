@@ -21,7 +21,7 @@
 ##############################################################################
 from lxml import etree
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.tools import float_round
 
 ACCEPTED_PAIN_FLAVOURS = ("pain.008.001.02.ch.03",)
@@ -29,22 +29,6 @@ ACCEPTED_PAIN_FLAVOURS = ("pain.008.001.02.ch.03",)
 
 class AccountPaymentOrder(models.Model):
     _inherit = "account.payment.order"
-
-    def show_invoices(self):
-        return {
-            "name": _("Related invoices"),
-            "type": "ir.actions.act_window",
-            "view_mode": "tree,form",
-            "domain": [
-                (
-                    "move_id",
-                    "in",
-                    self.mapped("payment_line_ids.move_line_id.move_id").ids,
-                )
-            ],
-            "res_model": "account.move",
-            "target": "current",
-        }
 
     def generate_payment_file(self):
         """Overridden to consider XML-DD.
@@ -63,13 +47,13 @@ class AccountPaymentOrder(models.Model):
             file_content, file_name = self.generate_xml_ch_dd_file()
             res = file_content, file_name
         else:
-            res = super(AccountPaymentOrder, self).generate_payment_file()
+            res = super().generate_payment_file()
 
         return res
 
     def generate_pain_nsmap(self):
         self.ensure_one()
-        nsmap = super(AccountPaymentOrder, self).generate_pain_nsmap()
+        nsmap = super().generate_pain_nsmap()
         pain_flavor = self.payment_mode_id.payment_method_id.pain_version
         if pain_flavor in ACCEPTED_PAIN_FLAVOURS:
             nsmap[None] = (
@@ -82,11 +66,12 @@ class AccountPaymentOrder(models.Model):
         pain_flavor = self.payment_mode_id.payment_method_id.pain_version
         if pain_flavor in ACCEPTED_PAIN_FLAVOURS:
             attrib = {
-                "{http://www.w3.org/2001/XMLSchema-instance}schemaLocation": "http://www.six-interbank-clearing.com/de/%s.xsd  %s.xsd"
+                "{http://www.w3.org/2001/XMLSchema-instance}"
+                "schemaLocation": "http://www.six-interbank-clearing.com/de/%s.xsd  %s.xsd"
                 % (pain_flavor, pain_flavor)
             }
         else:
-            attrib = super(AccountPaymentOrder, self).generate_pain_attrib()
+            attrib = super().generate_pain_attrib()
         return attrib
 
     @api.model
@@ -94,15 +79,15 @@ class AccountPaymentOrder(models.Model):
         if gen_args.get("pain_flavor") in ACCEPTED_PAIN_FLAVOURS:
             return True
         else:
-            return super(AccountPaymentOrder, self)._must_have_initiating_party(
-                gen_args
-            )
+            return super()._must_have_initiating_party(gen_args)
 
     @api.model
     def generate_group_header_block(self, parent_node, gen_args):
-        group_header, nb_of_transactions_a, control_sum_a = super(
-            AccountPaymentOrder, self
-        ).generate_group_header_block(parent_node, gen_args)
+        (
+            group_header,
+            nb_of_transactions_a,
+            control_sum_a,
+        ) = super().generate_group_header_block(parent_node, gen_args)
 
         if gen_args.get("pain_flavor") in ACCEPTED_PAIN_FLAVOURS:
             # It removes the tag <Issr> and its subtree.
@@ -122,7 +107,6 @@ class AccountPaymentOrder(models.Model):
         category_purpose,
         sequence_type,
         requested_date,
-        sepa,
         eval_ctx,
         gen_args,
     ):
@@ -166,7 +150,10 @@ class AccountPaymentOrder(models.Model):
             # <PmtInf>/<PmtTpInf>/  <LclInstrm>
             local_instrument_root = etree.SubElement(payment_type_info, "LclInstrm")
             # <PmtInf>/<PmtTpInf>/<SvcLvl>/  <Prtry>
-            if self.company_partner_bank_id.acc_type in ("postal", "iban"):
+            if local_instrument and self.company_partner_bank_id.acc_type in (
+                "postal",
+                "iban",
+            ):
                 service_level_value = etree.SubElement(service_level, "Prtry")
                 local_instr_value = etree.SubElement(local_instrument_root, "Prtry")
                 if (
@@ -176,7 +163,7 @@ class AccountPaymentOrder(models.Model):
                     prtry_value = "CHDD"
                 else:
                     prtry_value = "CHTA"
-                    for line in self.bank_line_ids:
+                    for line in self.payment_line_ids:
                         line.local_instrument = local_instrument
                 service_level_value.text = prtry_value
                 local_instr_value.text = local_instrument
@@ -186,9 +173,11 @@ class AccountPaymentOrder(models.Model):
             requested_date_node.text = fields.Date.to_string(requested_date)
 
         else:
-            payment_info, nb_of_transactions, control_sum = super(
-                AccountPaymentOrder, self
-            ).generate_start_payment_info_block(
+            (
+                payment_info,
+                nb_of_transactions,
+                control_sum,
+            ) = super().generate_start_payment_info_block(
                 parent_node,
                 payment_info_ident,
                 priority,
@@ -196,7 +185,6 @@ class AccountPaymentOrder(models.Model):
                 category_purpose,
                 sequence_type,
                 requested_date,
-                sepa,
                 eval_ctx,
                 gen_args,
             )
@@ -215,7 +203,7 @@ class AccountPaymentOrder(models.Model):
             party_account_iban.text = partner_bank.acc_number.replace(" ", "")
             res = True
         else:
-            res = super(AccountPaymentOrder, self).generate_party_acc_number(
+            res = super().generate_party_acc_number(
                 parent_node, party_type, order, partner_bank, gen_args, bank_line
             )
 
@@ -248,7 +236,7 @@ class AccountPaymentOrder(models.Model):
 
             res = True
         else:
-            res = super(AccountPaymentOrder, self).generate_party_agent(
+            res = super().generate_party_agent(
                 parent_node, party_type, order, partner_bank, gen_args, bank_line
             )
         return res
@@ -344,7 +332,7 @@ class AccountPaymentOrder(models.Model):
             res = True
 
         else:
-            res = super(AccountPaymentOrder, self).generate_party_block(
+            res = super().generate_party_block(
                 parent_node, party_type, order, partner_bank, gen_args, bank_line
             )
 
@@ -367,7 +355,7 @@ class AccountPaymentOrder(models.Model):
             )
             instruction_identification.text = self._prepare_field(
                 "Intruction Identification",
-                "line.name",
+                "str(line.move_id.id)",
                 {"line": line},
                 35,
                 gen_args=gen_args,
@@ -377,7 +365,7 @@ class AccountPaymentOrder(models.Model):
             )
             end2end_identification.text = self._prepare_field(
                 "End to End Identification",
-                "line.name",
+                "str(line.move_id.id)",
                 {"line": line},
                 35,
                 gen_args=gen_args,
@@ -392,7 +380,7 @@ class AccountPaymentOrder(models.Model):
             instructed_amount = etree.SubElement(
                 dd_transaction_info, "InstdAmt", Ccy=currency_name
             )
-            instructed_amount.text = "%.2f" % line.amount_currency
+            instructed_amount.text = "%.2f" % line.amount_total
 
             # .../  <DbtrAgt>
             ori_debtor_agent = etree.SubElement(dd_transaction_info, "DbtrAgt")
@@ -427,7 +415,7 @@ class AccountPaymentOrder(models.Model):
 
     @api.model
     def generate_remittance_info_block(self, parent_node, line, gen_args):
-        if line.local_instrument == "LSV+":
+        if line.payment_line_ids[:1].local_instrument == "LSV+":
             remittance_info = etree.SubElement(parent_node, "RmtInf")
             remittance_info_unstructured = etree.SubElement(remittance_info, "Ustrd")
             remittance_info_unstructured.text = self._prepare_field(
@@ -488,8 +476,12 @@ class AccountPaymentOrder(models.Model):
         # that of account_banking_sepa_credit_transfer.
 
         lines_per_group = {}
-        for line in self.bank_line_ids:
-            key = (line.date, line.priority, line.local_instrument)
+        for line in self.payment_ids:
+            key = (
+                line.date,
+                line.payment_line_ids[:1].priority,
+                line.payment_line_ids[:1].local_instrument,
+            )
             lines_per_group.setdefault(key, []).append(line)
 
         index = 0
@@ -510,7 +502,6 @@ class AccountPaymentOrder(models.Model):
                 False,
                 False,
                 req_date,
-                False,
                 eval_ctx={
                     "self": self,
                     "priority": prio,
@@ -556,11 +547,11 @@ class AccountPaymentOrder(models.Model):
             index = index + 1
 
         # It sets the number of transactions, <NbOfTxs>
-        nb_of_transactions_a.text = str(len(self.bank_line_ids))
+        nb_of_transactions_a.text = str(len(self.payment_ids))
 
         # It sets the check sum, <CtrlSum>
         ctrl_sum = float_round(
-            sum(bank_line.amount_currency for bank_line in self.bank_line_ids), 2
+            sum(payment.amount_total for payment in self.payment_ids), 2
         )
         control_sum_a.text = str(ctrl_sum)
 

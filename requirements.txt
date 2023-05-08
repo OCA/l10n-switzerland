@@ -1,6 +1,6 @@
 # generated from manifests external_dependencies
-openupgradelib
 ebilling_postfinance
+openupgradelib
 quickpac
 unidecode
 zeep

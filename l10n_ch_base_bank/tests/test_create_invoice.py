@@ -1,9 +1,11 @@
 # Copyright 2012-2019 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import exceptions
+from odoo.tests import tagged
 from odoo.tests.common import Form, SavepointCase
 
 
+@tagged("post_install", "-at_install")
 class TestCreateMove(SavepointCase):
     @classmethod
     def setUpClass(cls):
@@ -20,6 +22,7 @@ class TestCreateMove(SavepointCase):
                 "bank_id": bank.id,
                 "acc_number": "ISR",
                 "l10n_ch_isr_subscription_chf": "01-162-8",
+                "l10n_ch_isr_subscription_eur": "03-162-5",
                 "sequence": 1,
             }
         )
@@ -44,6 +47,7 @@ class TestCreateMove(SavepointCase):
         # )
         inv.partner_id = self.partner
         inv.journal_id = self.journal
+        inv.partner_bank_id = self.bank_account
         return inv
 
     def test_emit_move_with_isr_ref(self):
@@ -100,6 +104,7 @@ class TestCreateMove(SavepointCase):
         inv_form = self.new_form()
         move = inv_form.save()
         self.assertFalse(move._has_isr_ref())
+        self.bank_account.l10n_ch_isr_subscription_eur = False
         move.currency_id = self.env.ref("base.EUR")
         with self.assertRaises(exceptions.ValidationError):
             inv_form.ref = "132000000000000000000000014"

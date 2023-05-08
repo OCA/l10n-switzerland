@@ -18,32 +18,41 @@
 #
 ##############################################################################
 
-from odoo import fields, tools
-from odoo.modules.module import get_resource_path
-from odoo.tests import SavepointCase
+from odoo import fields
+from odoo.tests import tagged
+
+from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
-class TestLsvDD(SavepointCase):
+@tagged("post_install", "-at_install")
+class TestLsvDD(AccountTestInvoicingCommon):
     @classmethod
-    def _load(cls, module, *args):
-        tools.convert_file(
-            cls.cr,
-            "account_asset",
-            get_resource_path(module, *args),
-            {},
-            "init",
-            False,
-            "test",
-            cls.registry._assertion_report,
-        )
-
-    @classmethod
-    def setUpClass(cls):
-        super(TestLsvDD, cls).setUpClass()
-        cls._load("account", "test", "account_minimal_test.xml")
+    def setUpClass(cls, chart_template_ref="l10n_ch.l10nch_chart_template"):
+        super().setUpClass(chart_template_ref)
+        cls.env.company.initiating_party_identifier = "CH1312300000012345"
         cls.partner = cls.env.ref("base.res_partner_2")
-        cls.journal = cls.env["account.journal"].search(
-            [("type", "=", "bank")], limit=1
+        cls.partner_bank = cls.env["res.partner.bank"].create(
+            {
+                "acc_number": "CH63 0900 0000 2500 9779 8",
+                "partner_id": cls.partner.id,
+                "acc_type": "postal",
+                "bank_id": cls.env.ref("l10n_ch_base_bank.bank_postfinance").id,
+            }
+        )
+        cls.bank = cls.env["res.partner.bank"].create(
+            {
+                "acc_number": "CH10 0900 0000 2500 9778 2",
+                "partner_id": cls.env.company.partner_id.id,
+                "acc_type": "postal",
+                "bank_id": cls.env.ref("l10n_ch_base_bank.bank_postfinance").id,
+            }
+        )
+        cls.journal = cls.env["account.journal"].create(
+            {
+                "name": "DD for test",
+                "type": "bank",
+                "bank_account_id": cls.bank.id,
+            }
         )
         cls.account_receivable = cls.env["account.account"].search(
             [
@@ -56,71 +65,40 @@ class TestLsvDD(SavepointCase):
             limit=1,
         )
         cls.partner.property_account_receivable_id = cls.account_receivable
-        cls.product_account = cls.env["account.account"].search(
-            [
-                (
-                    "user_type_id",
-                    "=",
-                    cls.env.ref("account.data_account_type_expenses").id,
-                )
-            ],
-            limit=1,
-        )
         cls.product = cls.env.ref("product.product_product_10")
-
         # Payment mode
-        cls.paymode_dd_xml = cls.env.ref(
-            "l10n_ch_pain_direct_debit.dd_pay_" "mode_xml_dd"
+        cls.paymode_dd_xml = cls.env["account.payment.mode"].create(
+            {
+                "name": "DD XML for test",
+                "payment_type": "inbound",
+                "fixed_journal_id": cls.journal.id,
+                "bank_account_link": "fixed",
+                "payment_order_ok": True,
+                "payment_method_id": cls.env.ref(
+                    "l10n_ch_pain_direct_debit.export_sepa_dd"
+                ).id,
+            }
         )
-
-        # Bank account
-        cls.dd_xml_bank_account = cls.env.ref(
-            "l10n_ch_pain_direct_debit.company_bank_post_xml_dd"
-        )
-
         # Mandate
-        cls.dd_xml_mandate = cls.env.ref(
-            "l10n_ch_pain_direct_debit.post_mandate_xml_dd"
+        cls.dd_xml_mandate = cls.env["account.banking.mandate"].create(
+            {
+                "partner_id": cls.partner.id,
+                "state": "valid",
+                "partner_bank_id": cls.partner_bank.id,
+                "signature_date": fields.Date.today(),
+                "type": "recurrent",
+                "recurrent_sequence_type": "first",
+            }
         )
-
-        cls.dd_xml_invoice = cls.create_invoice(
-            cls.paymode_dd_xml.id, cls.dd_xml_bank_account.id, cls.dd_xml_mandate.id, 56
+        cls.dd_xml_invoice = cls.init_invoice(
+            "out_invoice",
+            cls.partner,
+            fields.Date.today(),
+            True,
+            cls.product,
+            [56],
+            currency=cls.env.ref("base.EUR"),
         )
-
-    @classmethod
-    def create_invoice(cls, payment_mode_id, partner_bank_id, mandate_id, amount):
-        """
-        Utility to quickly create an invoice
-        """
-        vals = {
-            "company_id": cls.env.ref("base.main_company").id,
-            "journal_id": cls.journal.id,
-            "currency_id": cls.env.ref("base.EUR").id,
-            "account_id": cls.account_receivable.id,
-            "type": "out_invoice",
-            "partner_id": cls.partner.id,
-            "date_invoice": fields.Date.today(),
-            "partner_bank_id": partner_bank_id,
-            "mandate_id": mandate_id,
-            "bvr_reference": "42564984",
-            "payment_mode_id": payment_mode_id,
-            "invoice_line_ids": [
-                (
-                    0,
-                    0,
-                    {
-                        "product_id": cls.product.id,
-                        "account_id": cls.product_account.id,
-                        "name": cls.product.name,
-                        "price_unit": amount,
-                        "quantity": 1,
-                    },
-                )
-            ],
-        }
-        invoice = cls.env["account.move"].create(vals)
-        invoice.button_post()
-        return invoice
 
     def create_payment_order(
         self, payment_mode, move_line, bank_id, partner_bank_id, mandate_id
@@ -144,30 +122,50 @@ class TestLsvDD(SavepointCase):
                             "partner_id": self.partner.id,
                             "partner_bank_id": partner_bank_id,
                             "mandate_id": mandate_id,
-                            "communictation_type": "normal",
+                            "communication_type": "normal",
                             "communication": "42564984",
+                            "local_instrument": "DDCOR1",
                         },
                     )
                 ],
-                "currency": "EUR",
             }
         )
 
-    def test_dd_xml_payment_order(self):
+    def test_dd_xml_payment_order_generates_correct_attachment(self):
         """
         Test the generation of a DD XML payment file
         """
-        move_line = self.dd_xml_invoice.move_id.line_ids[0]
+        move_line = self.dd_xml_invoice.line_ids[0]
         pay_order = self.create_payment_order(
             self.paymode_dd_xml,
             move_line,
-            self.dd_xml_bank_account.id,
-            self.env.ref("l10n_ch_pain_direct_debit.partner_bank_post_xml_dd").id,
+            self.bank.id,
+            self.partner_bank.id,
             self.dd_xml_mandate.id,
         )
         pay_order.draft2open()
         result = pay_order.open2generated()
         attachment_id = result.get("res_id")
-        self.assertTrue(attachment_id)
+        self.assertTrue(attachment_id, "No attachment ID returned")
         attachment = self.env["ir.attachment"].browse(attachment_id)
-        self.assertTrue(attachment.datas)
+        self.assertTrue(attachment.datas, "No data in attachment")
+
+    def test_dd_xml_payment_order_state_changes(self):
+        """
+        Test the state changes of a DD XML payment order
+        """
+        move_line = self.dd_xml_invoice.line_ids[0]
+        pay_order = self.create_payment_order(
+            self.paymode_dd_xml,
+            move_line,
+            self.bank.id,
+            self.partner_bank.id,
+            self.dd_xml_mandate.id,
+        )
+        self.assertEqual(pay_order.state, "draft", "Initial state is not 'draft'")
+        pay_order.draft2open()
+        self.assertEqual(pay_order.state, "open", "State did not change to 'open'")
+        pay_order.open2generated()
+        self.assertEqual(
+            pay_order.state, "generated", "State did not change to 'generated'"
+        )
