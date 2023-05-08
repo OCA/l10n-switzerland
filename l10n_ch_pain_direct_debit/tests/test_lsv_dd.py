@@ -118,8 +118,8 @@ class TestLsvDD(SavepointCase):
                 )
             ],
         }
-        invoice = cls.env["account.invoice"].create(vals)
-        invoice.action_invoice_open()
+        invoice = cls.env["account.move"].create(vals)
+        invoice.button_post()
         return invoice
 
     def create_payment_order(

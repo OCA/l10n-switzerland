@@ -41,7 +41,6 @@ class AccountMoveLine(models.Model):
             and invoice.partner_bank_id.lsv_identifier
         )
 
-    @api.multi
     def line2bank(self, payment_mode_id):
         """Override line2bank to avoid choosing a bank that has only
         cancelled mandate.
@@ -74,7 +73,6 @@ class AccountMoveLine(models.Model):
                     if mandate.state == "valid":
                         return bank.id
 
-    @api.multi
     def _prepare_payment_line_vals(self, payment_order):
         vals = super()._prepare_payment_line_vals(payment_order)
         # LSV files need ISR reference in the communication field.

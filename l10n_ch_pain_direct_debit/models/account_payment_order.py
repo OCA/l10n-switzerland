@@ -30,12 +30,10 @@ ACCEPTED_PAIN_FLAVOURS = ("pain.008.001.02.ch.03",)
 class AccountPaymentOrder(models.Model):
     _inherit = "account.payment.order"
 
-    @api.multi
     def show_invoices(self):
         return {
             "name": _("Related invoices"),
             "type": "ir.actions.act_window",
-            "view_type": "form",
             "view_mode": "tree,form",
             "domain": [
                 (
@@ -44,11 +42,10 @@ class AccountPaymentOrder(models.Model):
                     self.mapped("payment_line_ids.move_line_id.move_id").ids,
                 )
             ],
-            "res_model": "account.invoice",
+            "res_model": "account.move",
             "target": "current",
         }
 
-    @api.multi
     def generate_payment_file(self):
         """Overridden to consider XML-DD.
         Returns (payment file as string, filename)
@@ -70,7 +67,6 @@ class AccountPaymentOrder(models.Model):
 
         return res
 
-    @api.multi
     def generate_pain_nsmap(self):
         self.ensure_one()
         nsmap = super(AccountPaymentOrder, self).generate_pain_nsmap()
@@ -81,7 +77,6 @@ class AccountPaymentOrder(models.Model):
             )
         return nsmap
 
-    @api.multi
     def generate_pain_attrib(self):
         self.ensure_one()
         pain_flavor = self.payment_mode_id.payment_method_id.pain_version
@@ -355,7 +350,6 @@ class AccountPaymentOrder(models.Model):
 
         return res
 
-    @api.multi
     def generate_dd_transaction_information(
         self, parent_node, partner_bank, lines, gen_args
     ):
@@ -460,7 +454,6 @@ class AccountPaymentOrder(models.Model):
         else:
             super().generate_remittance_info_block(parent_node, line, gen_args)
 
-    @api.multi
     def generate_xml_ch_dd_file(self):
         self.ensure_one()
 

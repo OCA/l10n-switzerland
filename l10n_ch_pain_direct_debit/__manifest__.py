@@ -10,7 +10,11 @@
     "website": "https://github.com/OCA/l10n-switzerland",
     "license": "AGPL-3",
     "depends": ["account_banking_sepa_direct_debit", "l10n_ch_pain_base"],
-    "external_dependencies": {"python": ["openupgradelib"]},
+    "external_dependencies": {
+        "python": [
+            "openupgradelib"
+        ]
+    },
     "data": [
         "data/payment_type.xml",
         "data/export_filename_sequence.xml",
