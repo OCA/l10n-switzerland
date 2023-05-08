@@ -4,28 +4,23 @@
 {
     "name": "Switzerland - PAIN Direct Debit",
     "summary": "Generate ISO 20022 direct debits",
-    "version": "12.0.1.0.0",
+    "version": "13.0.1.0.0",
     "category": "Finance",
     "author": "Akretion,Camptocamp,Compassion,Odoo Community Association(OCA)",
-    'website': 'http://www.compassion.ch,http://www.braintec-group.com',
+    "website": "https://github.com/OCA/l10n-switzerland",
     "license": "AGPL-3",
-    "depends": [
-        "account_banking_sepa_direct_debit",
-        "l10n_ch_pain_base"
+    "depends": ["account_banking_sepa_direct_debit", "l10n_ch_pain_base"],
+    "external_dependencies": {"python": ["openupgradelib"]},
+    "data": [
+        "data/payment_type.xml",
+        "data/export_filename_sequence.xml",
+        "views/account_payment_line_view.xml",
+        "views/account_payment_mode_view.xml",
+        "views/account_payment_order_view.xml",
+        "views/bank_payment_line_view.xml",
     ],
-    'external_dependencies': {'python': ['openupgradelib']},
-    'data': [
-        'data/payment_type.xml',
-        'data/export_filename_sequence.xml',
-        'views/account_payment_line_view.xml',
-        'views/account_payment_mode_view.xml',
-        'views/account_payment_order_view.xml',
-        'views/bank_payment_line_view.xml'
-    ],
-    'demo': [
-        'demo/dd_demo.xml'
-    ],
-    'pre_init_hook': 'pre_init_hook',
-    'auto_install': False,
-    'installable': True,
+    "demo": ["demo/dd_demo.xml"],
+    "pre_init_hook": "pre_init_hook",
+    "auto_install": False,
+    "installable": True,
 }

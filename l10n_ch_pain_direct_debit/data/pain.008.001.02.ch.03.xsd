@@ -7,9 +7,9 @@ Last part (.03)  :   Version of this scheme
 
 Based on ISO pain.008.001.02 (urn:iso:std:iso:20022:tech:xsd:pain.008.001.02)
 
-Anregungen und Fragen zu diesem Dokument können an das jeweilige Finanzinstitut gerichtet werden. 
+Anregungen und Fragen zu diesem Dokument können an das jeweilige Finanzinstitut gerichtet werden.
 Allgemeine Anregungen können auch bei der SIX Interbank Clearing AG unter folgender Adresse angebracht werden:  pm@six-group.com
-  
+
 History
 30.04.2010  V01  initial version for Swiss SEPA DD, targetNamespace="http://www.iso-payments.ch/std/iso20022/ch/pain.008.001.02.ch.01.xsd"  File:pain.008.001.02.ch.01.xsd
 07.05.2015  V02  initial version for Swiss Direct Debit, targetNamespace="http://www.iso-payments.ch/std/iso20022/ch/pain.008.001.02.ch.02.xsd"  File:pain.008.001.02.ch.02.xsd

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
     Copyright (C) 2014 Compassion (http://www.compassion.ch)
     @author Cyril Sester <cyril.sester@outlook.com>
@@ -10,8 +10,8 @@
     <record id="export_filename_seq" model="ir.sequence">
       <field name="name">Swiss banking export filename</field>
       <field name="code">l10n.banking.export.filename</field>
-      <field name="prefix"></field>
-      <field name="padding" eval="6"/>
+      <field name="prefix" />
+      <field name="padding" eval="6" />
     </record>
   </data>
 </odoo>
