@@ -22,6 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [l10n_ch_invoice_reports](l10n_ch_invoice_reports/) | 15.0.1.0.0 |  | Extend invoice to add ISR/QR payment slip
+[l10n_ch_states](l10n_ch_states/) | 15.0.1.0.0 |  | Switzerland Country States
 
 [//]: # (end addons)
 
