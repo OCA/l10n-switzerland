@@ -1,0 +1,2 @@
+odoo-addon-account_invoice_import @ git+https://github.com/OCA/edi.git@refs/pull/753/head#subdirectory=setup/account_invoice_import
+odoo-addon-base_business_document_import @ git+https://github.com/OCA/edi.git@refs/pull/724/head#subdirectory=setup/base_business_document_import
