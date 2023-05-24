@@ -10,8 +10,8 @@
     "website": "https://github.com/OCA/l10n-switzerland",
     "license": "AGPL-3",
     "external_dependencies": {
-        "deb": ["libzbar0", "poppler-utils", "python3-opencv"],
-        "python": ["pyzbar", "pdf2image", "numpy", "opencv-python"],
+        "deb": ["libzbar0", "poppler-utils"],
+        "python": ["pyzbar", "pdf2image", "numpy", "opencv-python-headless"],
     },
     "depends": ["l10n_ch", "account_invoice_import"],
     "data": ["wizard/account_invoice_import_view.xml"],

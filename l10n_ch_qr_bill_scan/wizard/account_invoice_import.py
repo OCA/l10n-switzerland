@@ -16,9 +16,10 @@ try:
     import numpy as np
     import pdf2image
     from pyzbar.pyzbar import ZBarSymbol, decode
-except ImportError:
+except ImportError as e:
     # Necessary libraries to decode QR from pdf are
     # not installed
+    logger.warning(e)
     logger.warning(
         "Swiss QR detection in Vendor Bill pdf disabled."
         " To enable it, please install pyzbar, pdf2image, cv2 and numpy."
