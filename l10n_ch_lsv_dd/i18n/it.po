@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-31 15:46+0000\n"
-"PO-Revision-Date: 2023-05-22 16:09+0000\n"
+"PO-Revision-Date: 2023-06-07 17:10+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -338,7 +338,7 @@ msgstr "Ultima modifica il"
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_lsv_export_wizard_write_uid
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_post_dd_export_wizard_write_uid
 msgid "Last Updated by"
-msgstr "Last Updated by"
+msgstr "Ultimo aggiornamento di"
 
 #. module: l10n_ch_lsv_dd
 #: model:ir.model.fields,field_description:l10n_ch_lsv_dd.field_account_invoice_free_write_date
