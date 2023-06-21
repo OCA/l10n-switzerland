@@ -28,6 +28,7 @@ addon | version | maintainers | summary
 [l10n_ch_invoice_reports](l10n_ch_invoice_reports/) | 14.0.1.3.0 |  | Extend invoice to add ISR/QR payment slip
 [l10n_ch_isr_payment_grouping](l10n_ch_isr_payment_grouping/) | 14.0.1.0.1 |  | Extend account to ungroup ISR
 [l10n_ch_isrb](l10n_ch_isrb/) | 14.0.1.0.0 |  | Switzerland - ISR with Bank
+[l10n_ch_mis_reports](l10n_ch_mis_reports/) | 14.0.1.0.0 |  | Specific MIS reports for switzerland localization
 [l10n_ch_states](l10n_ch_states/) | 14.0.1.0.0 |  | Switzerland Country States
 [server_env_ebill_paynet](server_env_ebill_paynet/) | 14.0.1.0.0 |  | Server environment for Ebill Paynet
 
