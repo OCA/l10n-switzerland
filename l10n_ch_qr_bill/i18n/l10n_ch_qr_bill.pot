@@ -1,0 +1,190 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* l10n_ch_qr_bill
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_ch_qr_bill
+#: code:addons/l10n_ch_qr_bill/models/account_invoice.py:20
+#, python-format
+msgid "- Company address is incomplete, it must contain name, street, zip, city and country. Country must be Switzerland"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: code:addons/l10n_ch_qr_bill/models/account_invoice.py:25
+#, python-format
+msgid "- Invoice's 'Bank Account' is empty. You need to create or select a valid IBAN or QR-IBAN account"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: code:addons/l10n_ch_qr_bill/models/account_invoice.py:15
+#, python-format
+msgid "- Partner address is incomplete, it must contain name, street, zip, city and country. Country must be Switzerland"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: code:addons/l10n_ch_qr_bill/models/account_invoice.py:30
+#, python-format
+msgid "- With a QR-IBAN a valid QRR must be used."
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+msgid "<span class=\"title\">Acceptance point</span>"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+msgid "<span class=\"title\">Account / Payable to</span><br/>"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+msgid "<span class=\"title\">Additional information</span><br/>"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+msgid "<span class=\"title\">Amount</span><br/>"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+msgid "<span class=\"title\">Currency</span><br/>"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+msgid "<span class=\"title\">Payable by</span><br/>"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+msgid "<span class=\"title\">Reference</span><br/>"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+msgid "<span>Payment Part</span>"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+msgid "<span>Receipt</span>"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.model,name:l10n_ch_qr_bill.model_res_partner_bank
+msgid "Bank Accounts"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.model.fields,help:l10n_ch_qr_bill.field_account_invoice_l10n_ch_qrr_sent
+msgid "Boolean value telling whether or not the QRR corresponding to this invoice has already been printed or sent by mail."
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.model.fields,field_description:l10n_ch_qr_bill.field_account_invoice_l10n_ch_currency_name
+msgid "Currency Name"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.model,name:l10n_ch_qr_bill.model_account_invoice
+msgid "Invoice"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.model.fields,field_description:l10n_ch_qr_bill.field_account_invoice_l10n_ch_qrr
+msgid "L10n ch qrr"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.model.fields,field_description:l10n_ch_qr_bill.field_account_invoice_l10n_ch_qrr_sent
+msgid "L10n ch qrr sent"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.model.fields,field_description:l10n_ch_qr_bill.field_account_invoice_l10n_ch_qrr_spaced
+msgid "L10n ch qrr spaced"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.qrr_invoice_form
+msgid "Print QR-bill"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.model.fields,help:l10n_ch_qr_bill.field_res_partner_bank_l10n_ch_qr_iban
+msgid "Put the QR-IBAN here for your own bank accounts.  That way, you can still use the main IBAN in the Account Number while you will see the QR-IBAN for the barcode."
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.model.fields,field_description:l10n_ch_qr_bill.field_res_partner_bank_l10n_ch_qr_iban
+msgid "QR-IBAN"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: code:addons/l10n_ch_qr_bill/models/res_bank.py:45
+#, python-format
+msgid "QR-IBAN '%s' is invalid."
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.actions.report,name:l10n_ch_qr_bill.l10n_ch_qr_report
+msgid "QR-bill"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
+msgid "QR-bill for invoice"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.model.fields,help:l10n_ch_qr_bill.field_account_invoice_l10n_ch_qrr_spaced
+msgid "Reference QRR split in blocks of 5 characters (right-justified),to generate QR-bill report."
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.model,name:l10n_ch_qr_bill.model_report
+msgid "Report"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: code:addons/l10n_ch_qr_bill/models/account_invoice.py:76
+#, python-format
+msgid "Swiss Reference QRR"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.model.fields,help:l10n_ch_qr_bill.field_account_invoice_l10n_ch_currency_name
+msgid "The name of this invoice's currency"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: code:addons/l10n_ch_qr_bill/models/account_invoice.py:329
+#, python-format
+msgid "The payment reference is not a valid QR Reference."
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: model:ir.model.fields,help:l10n_ch_qr_bill.field_account_invoice_l10n_ch_qrr
+msgid "The reference QRR associated with this invoice"
+msgstr ""
+
+#. module: l10n_ch_qr_bill
+#: code:addons/l10n_ch_qr_bill/models/account_invoice.py:309
+#, python-format
+msgid "You cannot generate the QR-bill.\n"
+"Here is what is blocking:\n"
+"{}"
+msgstr ""
+
