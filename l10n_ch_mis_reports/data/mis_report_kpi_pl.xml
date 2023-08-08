@@ -1,0 +1,245 @@
+<odoo noupdate="1">
+
+    <record id="mis_report_kpi_0001" model="mis.report.kpi">
+        <field name="name">CH_30</field>
+        <field name="description">Chiffre d'affaires</field>
+        <field
+            name="expression"
+        >-balp[('code', '>=', '3'),('code', '&lt;', '39')][]</field>
+        <field name="style_id" ref="style_header" />
+        <field name="sequence">1</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="budgetable">true</field>
+        <field name="report_id" ref="mis_report_pl" />
+    </record>
+
+    <record id="mis_report_kpi_0002" model="mis.report.kpi">
+        <field name="name">CH_39</field>
+        <field name="description">+/- Variation des stocks</field>
+        <field
+            name="expression"
+        >-balp[('code', '>=', '39'),('code', '&lt;', '4')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">2</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="budgetable">true</field>
+        <field name="report_id" ref="mis_report_pl" />
+    </record>
+
+    <record id="mis_report_kpi_0003" model="mis.report.kpi">
+        <field name="name">CH_3</field>
+        <field
+            name="description"
+        >Produits nets des ventes et prestations de service</field>
+        <field name="expression">CH_30 +CH_39</field>
+        <field name="style_id" ref="style_header" />
+        <field name="sequence">3</field>
+        <field name="report_id" ref="mis_report_pl" />
+    </record>
+
+    <record id="mis_report_kpi_0004" model="mis.report.kpi">
+        <field name="name">CH_4</field>
+        <field name="description">- Charges de marchandises et de matériel</field>
+        <field
+            name="expression"
+        >-balp[('code', '>=', '4'),('code', '&lt;', '5')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">4</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="budgetable">true</field>
+        <field name="report_id" ref="mis_report_pl" />
+    </record>
+
+    <record id="mis_report_kpi_0005" model="mis.report.kpi">
+        <field name="name">CH_5</field>
+        <field name="description">- Charges de personnel</field>
+        <field
+            name="expression"
+        >-balp[('code', '>=', '5'),('code', '&lt;', '6')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">5</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="budgetable">true</field>
+        <field name="report_id" ref="mis_report_pl" />
+    </record>
+
+    <record id="mis_report_kpi_0006" model="mis.report.kpi">
+        <field name="name">CH_60</field>
+        <field name="description">- Autres charges d‘exploitation</field>
+        <field
+            name="expression"
+        >-balp[('code', '>=', '6'),('code', '&lt;', '68')][] </field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">6</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="budgetable">true</field>
+        <field name="report_id" ref="mis_report_pl" />
+    </record>
+
+    <record id="mis_report_kpi_0007" model="mis.report.kpi">
+        <field name="name">CH_EBITDA</field>
+        <field
+            name="description"
+        >Résultat d'exploitation avant intérêts, impôts et amortissements (EBITDA)</field>
+        <field name="expression">CH_3 +CH_4 +CH_5 +CH_60</field>
+        <field name="style_id" ref="style_header" />
+        <field name="sequence">7</field>
+        <field name="report_id" ref="mis_report_pl" />
+    </record>
+
+    <record id="mis_report_kpi_0008" model="mis.report.kpi">
+        <field name="name">CH_68</field>
+        <field
+            name="description"
+        >- Amortissements sur immobilisations corporelles</field>
+        <field
+            name="expression"
+        >-balp[('code', '>=', '68'),('code', '&lt;', '69')][] </field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">8</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="budgetable">true</field>
+        <field name="report_id" ref="mis_report_pl" />
+    </record>
+
+    <record id="mis_report_kpi_0009" model="mis.report.kpi">
+        <field name="name">CH_EBIT</field>
+        <field
+            name="description"
+        >Résultat d'exploitation avant intérêts et impôts (EBIT)</field>
+        <field name="expression">CH_EBITDA +CH_68</field>
+        <field name="style_id" ref="style_header" />
+        <field name="sequence">9</field>
+        <field name="report_id" ref="mis_report_pl" />
+    </record>
+
+    <record id="mis_report_kpi_0010" model="mis.report.kpi">
+        <field name="name">CH_REBIT</field>
+        <field name="description">% EBIT / Chiffre d'affaires</field>
+        <field name="expression">CH_EBIT /CH_3</field>
+        <field name="type">pct</field>
+        <field name="accumulation_method">avg</field>
+        <field name="compare_method">diff</field>
+        <field name="style_id" ref="style_header_indented" />
+        <field name="sequence">10</field>
+        <field name="report_id" ref="mis_report_pl" />
+    </record>
+
+    <record id="mis_report_kpi_0011" model="mis.report.kpi">
+        <field name="name">CH_69</field>
+        <field name="description">+/- Résultat financier</field>
+        <field
+            name="expression"
+        >-balp[('code', '>=', '69'),('code', '&lt;', '7')][] </field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">11</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="budgetable">true</field>
+        <field name="report_id" ref="mis_report_pl" />
+    </record>
+
+    <record id="mis_report_kpi_0012" model="mis.report.kpi">
+        <field name="name">CH_EBT</field>
+        <field name="description">Résultat d'exploitation avant impôts</field>
+        <field name="expression">CH_EBIT +CH_69</field>
+        <field name="style_id" ref="style_header" />
+        <field name="sequence">12</field>
+        <field name="report_id" ref="mis_report_pl" />
+    </record>
+
+    <record id="mis_report_kpi_0013" model="mis.report.kpi">
+        <field name="name">CH_7</field>
+        <field
+            name="description"
+        >+/- Résultat des activités annexes d'exploitation</field>
+        <field
+            name="expression"
+        >-balp[('code', '>=', '7'),('code', '&lt;', '8')][] </field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">13</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="budgetable">true</field>
+        <field name="report_id" ref="mis_report_pl" />
+    </record>
+
+    <record id="mis_report_kpi_0014" model="mis.report.kpi">
+        <field name="name">CH_80</field>
+        <field name="description">+/- Résultat hors-exploitation</field>
+        <field
+            name="expression"
+        >-balp[('code', '>=', '8'),('code', '&lt;', '85')][] </field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">14</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="budgetable">true</field>
+        <field name="report_id" ref="mis_report_pl" />
+    </record>
+
+    <record id="mis_report_kpi_0015" model="mis.report.kpi">
+        <field name="name">CH_85</field>
+        <field name="description">+/- Résultat extraordinaires</field>
+        <field
+            name="expression"
+        >-balp[('code', '>=', '85'),('code', '&lt;', '89')][] </field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">15</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="budgetable">true</field>
+        <field name="report_id" ref="mis_report_pl" />
+    </record>
+
+    <record id="mis_report_kpi_0016" model="mis.report.kpi">
+        <field name="name">CH_RAI</field>
+        <field name="description">Résultat de l'exercice avant impôts</field>
+        <field name="expression">CH_EBT +CH_7 +CH_80 +CH_85</field>
+        <field name="style_id" ref="style_header" />
+        <field name="sequence">16</field>
+        <field name="report_id" ref="mis_report_pl" />
+    </record>
+
+    <record id="mis_report_kpi_0017" model="mis.report.kpi">
+        <field name="name">CH_89</field>
+        <field name="description">- Impôts directs</field>
+        <field
+            name="expression"
+        >-balp[('code', '>=', '89'),('code', '&lt;', '9')][] </field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">17</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="budgetable">true</field>
+        <field name="report_id" ref="mis_report_pl" />
+    </record>
+
+    <record id="mis_report_kpi_0018" model="mis.report.kpi">
+        <field name="name">CH_R</field>
+        <field name="description">RESULTAT DE L'EXERCICE</field>
+        <field name="expression">CH_RAI +CH_89</field>
+        <field name="style_id" ref="style_header" />
+        <field name="sequence">18</field>
+        <field name="report_id" ref="mis_report_pl" />
+    </record>
+
+    <record id="mis_report_kpi_0019" model="mis.report.kpi">
+        <field name="name">CH_RGP</field>
+        <field name="description">% Résultat / Chiffre d'affaires</field>
+        <field name="expression">CH_R / CH_30</field>
+        <field name="type">pct</field>
+        <field name="accumulation_method">avg</field>
+        <field name="compare_method">diff</field>
+        <field name="style_id" ref="style_header_indented" />
+        <field name="sequence">19</field>
+        <field name="report_id" ref="mis_report_pl" />
+    </record>
+
+</odoo>
