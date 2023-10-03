@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 09:30+0000\n"
-"PO-Revision-Date: 2023-07-03 16:10+0000\n"
+"PO-Revision-Date: 2023-10-09 09:13+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -133,7 +133,7 @@ msgstr ""
 #: selection:fds.key.generator.wizard,state:0
 #: selection:fds.key.import.wizard,state:0
 msgid "Default"
-msgstr "Default"
+msgstr "Predefinito"
 
 #. module: l10n_ch_fds_postfinance
 #: model:ir.model.fields,field_description:l10n_ch_fds_postfinance.field_fds_postfinance_file_directory_id
