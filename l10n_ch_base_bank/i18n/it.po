@@ -30,103 +30,100 @@ msgid "Bank Accounts"
 msgstr "Conto Bancario"
 
 #. module: l10n_ch_base_bank
-#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_partner_bank_isr_adherent_num
-msgid "Bank ISR adherent number"
-msgstr ""
-
-#. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:248
+#: code:addons/l10n_ch_base_bank/models/invoice.py:0
 #, python-format
-msgid "Bank/CCP Undefined"
+msgid "Bank account must contain a subscription number for ISR ref type."
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:246
+#: code:addons/l10n_ch_base_bank/models/invoice.py:0
 #, python-format
-msgid "Bank/CCP {}"
+msgid ""
+"Bank account shouldn't be empty, for ISR ref type, you can set it manually "
+"or set appropriate payment mode."
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: model:ir.ui.view,arch_db:l10n_ch_base_bank.view_bank_search
+#: model_terms:ir.ui.view,arch_db:l10n_ch_base_bank.view_bank_search
 msgid "Banks"
 msgstr "Banche"
 
 #. module: l10n_ch_base_bank
-#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank_ccp
-#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_partner_bank_ccp
-msgid "CCP/CP-Konto"
-msgstr "Conto CCP/CP"
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank__city
+msgid "City"
+msgstr ""
 
 #. module: l10n_ch_base_bank
-#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank_ccp
-msgid "CCP/CP-Konto of the bank"
-msgstr "Conto CCP/CP per la Banca"
+#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank__city
+msgid "City of the bank"
+msgstr ""
 
 #. module: l10n_ch_base_bank
-#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank_clearing
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank__clearing
 msgid "Clearing number"
 msgstr "Numero Clearing"
 
 #. module: l10n_ch_base_bank
-#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank_code
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank__code
 msgid "Code"
 msgstr "Codice"
 
 #. module: l10n_ch_base_bank
-#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank_country_code
+#: model:ir.model.fields,field_description:l10n_ch_base_bank.field_res_bank__country_code
 msgid "Country code"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank_code
+#: code:addons/l10n_ch_base_bank/models/partner_bank.py:0
+#, python-format
+msgid "ISR {}"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: code:addons/l10n_ch_base_bank/models/partner_bank.py:0
+#, python-format
+msgid "ISR {} {}"
+msgstr ""
+
+#. module: l10n_ch_base_bank
+#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank__code
 msgid "Internal reference"
 msgstr "Riferimento interno"
 
 #. module: l10n_ch_base_bank
-#: model:ir.model,name:l10n_ch_base_bank.model_account_invoice
-msgid "Invoice"
-msgstr "Fattura"
+#: model:ir.model,name:l10n_ch_base_bank.model_account_move
+msgid "Journal Entries"
+msgstr ""
 
 #. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:115
-#: code:addons/l10n_ch_base_bank/models/bank.py:233
-#, python-format
-msgid "Please enter a correct postal number. (01-23456-1 or 12345)"
-msgstr "Inserire un conto postale corretto. (01-23456-1 or 12345)"
-
-#. module: l10n_ch_base_bank
-#: model:ir.ui.view,arch_db:l10n_ch_base_bank.view_bank_search
+#: model_terms:ir.ui.view,arch_db:l10n_ch_base_bank.view_bank_search
 msgid "PostFinance"
 msgstr "PostFinance"
 
 #. module: l10n_ch_base_bank
-#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank_clearing
+#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank__clearing
 msgid "Swiss unique bank identifier also used in IBAN number"
 msgstr ""
 
 #. module: l10n_ch_base_bank
-#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank_country_code
+#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_bank__country_code
 msgid ""
 "The ISO country code in two chars. \n"
 "You can use this field for quick search."
 msgstr ""
 
-#. module: l10n_ch_base_bank
-#: sql_constraint:res.partner.bank:0
-msgid "The ISR adherent number must be unique !"
-msgstr "Il numero di adesione PVR deve essere univoco"
+#~ msgid "CCP/CP-Konto"
+#~ msgstr "Conto CCP/CP"
 
-#. module: l10n_ch_base_bank
-#: model:ir.model.fields,help:l10n_ch_base_bank.field_res_partner_bank_isr_adherent_num
-msgid ""
-"Your Bank adherent number to be printed in references of your ISR. This "
-"is not a postal account number."
-msgstr ""
+#~ msgid "CCP/CP-Konto of the bank"
+#~ msgstr "Conto CCP/CP per la Banca"
 
-#. module: l10n_ch_base_bank
-#: code:addons/l10n_ch_base_bank/models/bank.py:220
+#~ msgid "Invoice"
+#~ msgstr "Fattura"
+
 #, python-format
-msgid ""
-"Your bank ISR adherent number must contain only digits!\n"
-"Please check your company bank account."
-msgstr ""
+#~ msgid "Please enter a correct postal number. (01-23456-1 or 12345)"
+#~ msgstr "Inserire un conto postale corretto. (01-23456-1 or 12345)"
+
+#~ msgid "The ISR adherent number must be unique !"
+#~ msgstr "Il numero di adesione PVR deve essere univoco"
