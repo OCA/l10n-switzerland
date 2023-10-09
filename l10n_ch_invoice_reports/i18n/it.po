@@ -35,6 +35,11 @@ msgid "<span class=\"o_form_label\">Invoice report options</span>"
 msgstr ""
 
 #. module: l10n_ch_invoice_reports
+#: model:ir.model,name:l10n_ch_invoice_reports.model_account_invoice_send
+msgid "Account Invoice Send"
+msgstr ""
+
+#. module: l10n_ch_invoice_reports
 #: model:ir.model,name:l10n_ch_invoice_reports.model_res_company
 msgid "Companies"
 msgstr "Aziende"
@@ -53,6 +58,11 @@ msgstr "Modelli e-mail"
 #: model:ir.actions.report,name:l10n_ch_invoice_reports.account_move_payment_report
 msgid "Invoice with payment slip(s)"
 msgstr "fattura con bollettino di pagamento"
+
+#. module: l10n_ch_invoice_reports
+#: model:ir.model,name:l10n_ch_invoice_reports.model_account_move
+msgid "Journal Entries"
+msgstr ""
 
 #. module: l10n_ch_invoice_reports
 #: model:ir.model.fields,field_description:l10n_ch_invoice_reports.field_res_company__print_isr_invoice
