@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: l10n-switzerland (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-25 12:34+0000\n"
-"PO-Revision-Date: 2023-06-08 12:10+0000\n"
-"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"PO-Revision-Date: 2023-10-13 12:41+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-l10n-switzerland-8-0/language/it/)\n"
 "Language: it\n"
@@ -131,7 +131,7 @@ msgstr ""
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,journal_id:0
 msgid "Journal"
-msgstr "Sezionale"
+msgstr "Registro"
 
 #. module: l10n_ch_import_cresus
 #: field:account.cresus.import,__last_update:0
