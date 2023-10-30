@@ -5,7 +5,7 @@
     "name": "eBill Paynet",
     "summary": """
         Paynet platform bridge implementation""",
-    "version": "14.0.1.1.3",
+    "version": "14.0.1.1.4",
     "license": "AGPL-3",
     "author": "Camptocamp SA,Odoo Community Association (OCA)",
     "maintainers": ["TDu"],
