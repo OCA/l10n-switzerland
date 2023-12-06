@@ -1,0 +1,10 @@
+{% for picking in line.sale_line_ids.move_ids.mapped('picking_id') %}
+{%- if picking.state != 'cancel' %}
+{% set ref.position = ref.position + 1 %}
+<FixedReference>
+  <ReferencePosition>{{ ref.position }}</ReferencePosition>
+  <ReferenceType>DeliveryNoteNumber</ReferenceType>
+  <ReferenceValue>{{ picking.name }}</ReferenceValue>
+</FixedReference>
+{%- endif %}
+{% endfor %}
