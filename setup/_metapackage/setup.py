@@ -10,6 +10,9 @@ setuptools.setup(
     install_requires=[
         'odoo14-addon-ebill_paynet',
         'odoo14-addon-ebill_paynet_customer_free_ref',
+        'odoo14-addon-ebill_postfinance',
+        'odoo14-addon-ebill_postfinance_server_env',
+        'odoo14-addon-ebill_postfinance_stock',
         'odoo14-addon-l10n_ch_account_tags',
         'odoo14-addon-l10n_ch_base_bank',
         'odoo14-addon-l10n_ch_delivery_carrier_label_quickpac',
