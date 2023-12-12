@@ -1,5 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-  <Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="string">
+<?xml version="1.0" encoding="utf-8" ?>
+<Envelope
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    type="string"
+>
     <Header>
         <From>Camptocamp SA</From>
         <To>IPECeBILLServer</To>
@@ -17,7 +21,7 @@
             <DeliveryDate>2019-06-21</DeliveryDate>
             <TransactionID>$TRANSACTION_ID</TransactionID>
             <BillDetailsType>PDFAppendix</BillDetailsType>
-            <URLBillDetails/>
+            <URLBillDetails />
         </DeliveryInfo>
         <Bill>
             <Header>
@@ -44,7 +48,8 @@
                         <Address>
                             <CompanyName>Test RAD Customer XML</CompanyName>
                             <Address1>Teststrasse 100</Address1>
-                            <Address2>This is a very long street name that should be sna</Address2>
+                            <Address2
+                            >This is a very long street name that should be sna</Address2>
                             <ZIP>1700</ZIP>
                             <City>Fribourg</City>
                             <Country>CH</Country>
@@ -122,7 +127,8 @@
                 <LineItem>
                     <LineItemType>NORMAL</LineItemType>
                     <LineItemID>2</LineItemID>
-                    <ProductDescription>Product With a Very Long Name That Need To Be Truncated</ProductDescription>
+                    <ProductDescription
+                    >Product With a Very Long Name That Need To Be Truncated</ProductDescription>
                     <ProductID>370003022</ProductID>
                     <Quantity>1.0</Quantity>
                     <QuantityDescription>Units</QuantityDescription>
