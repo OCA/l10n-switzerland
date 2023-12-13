@@ -39,7 +39,7 @@ class EbillPostfinanceInvoiceMessage(models.Model):
     )
     ebill_payment_contract_id = fields.Many2one(comodel_name="ebill.payment.contract")
     invoice_id = fields.Many2one(comodel_name="account.move", ondelete="restrict")
-    transaction_id = fields.Char(string="Transaction Id")
+    transaction_id = fields.Char()
     file_type_used = fields.Char()
     submitted_on = fields.Datetime(string="Submitted on")
     attachment_id = fields.Many2one("ir.attachment", "PDF")
@@ -72,12 +72,12 @@ class EbillPostfinanceInvoiceMessage(models.Model):
 
     # Set with invoice_id.number but also with returned data from server ?
     ref = fields.Char("Reference No.", size=35)
-    ebill_account_number = fields.Char("Paynet Id", size=20)
+    ebill_account_number = fields.Char("Payer Id", size=20)
     payload = fields.Text("Payload sent")
     payload_size = fields.Float(
         "Payload Size (MB)", digits=(6, 3), compute="_compute_payload_size"
     )
-    response = fields.Text("Response")
+    response = fields.Text()
     payment_type = fields.Selection(
         selection=[
             ("iban", "IBAN"),
@@ -298,15 +298,16 @@ class EbillPostfinanceInvoiceMessage(models.Model):
         amount_by_group = []
         # Get the percentage of the tax from the name of the group
         # Could be improve by searching in the account_tax linked to the group
-        for taxgroup in self.invoice_id.amount_by_group:
-            rate = taxgroup[0].split()[-1:][0][:-1]
-            amount_by_group.append(
-                (
-                    rate or "0",
-                    taxgroup[1],
-                    taxgroup[2],
+        for __, tax_group in self.invoice_id.tax_totals["groups_by_subtotal"].items():
+            for taxgroup in tax_group:
+                rate = taxgroup["tax_group_name"].split()[-1:][0][:-1]
+                amount_by_group.append(
+                    (
+                        rate or "0",
+                        taxgroup["tax_group_amount"],
+                        taxgroup["tax_group_base_amount"],
+                    )
                 )
-            )
         params["amount_by_group"] = amount_by_group
         # Get the invoice due date
         date_due = None
@@ -370,7 +371,7 @@ class EbillPostfinanceInvoiceMessage(models.Model):
         try:
             etree.fromstring(self.payload.encode("utf-8"), parser)
         except etree.XMLSyntaxError as ex:
-            raise UserError(ex.error_log)
+            raise UserError(ex.error_log) from ex
         return {
             "type": "ir.actions.client",
             "tag": "display_notification",
