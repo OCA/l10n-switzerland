@@ -1,6 +1,7 @@
 # Copyright 2022 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
+import logging
 import os
 from string import Template
 
@@ -12,6 +13,8 @@ from odoo.tools import file_open
 
 from .common import CommonCase
 
+_logger = logging.getLogger(__name__)
+
 
 @freeze_time("2019-06-21 09:06:00")
 class TestEbillPostfinanceMessageYB(CommonCase):
@@ -22,14 +25,14 @@ class TestEbillPostfinanceMessageYB(CommonCase):
             get_module_root(os.path.dirname(__file__))
             + "/messages/ybInvoice_V2.0.4.xsd"
         )
+        # If ebill_postfinance_stock is installed it will break the test
+        try:
+            cls.invoice.invoice_line_ids.sale_line_ids.write({"move_ids": False})
+        except Exception:
+            _logger.info("Disabling moves on invoice lines.")
 
     def test_invoice_qr(self):
         """Check XML payload genetated for an invoice."""
-        # If ebill_postfinance_stock is installed it will break the test
-        try:
-            self.invoice.invoice_line_ids.sale_line_ids.write({"move_ids": False})
-        except Exception:
-            pass
         self.invoice.name = "INV_TEST_01"
         self.invoice.invoice_date_due = "2019-07-01"
         message = self.invoice.create_postfinance_ebill()

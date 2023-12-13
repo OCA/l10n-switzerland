@@ -8,7 +8,9 @@ from odoo.exceptions import ValidationError
 class EbillPaymentContract(models.Model):
     _inherit = "ebill.payment.contract"
 
-    postfinance_billerid = fields.Char(string="Biller ID", size=20)
+    postfinance_billerid = fields.Char(
+        string="Contract ID", size=20, help="The PayerID of the customer"
+    )
     is_postfinance_contract = fields.Boolean(
         compute="_compute_is_postfinance_contract", store=False
     )
