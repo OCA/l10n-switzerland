@@ -22,8 +22,8 @@ class TestEbillPostfinanceMessageYB(CommonCase):
         )
         cls.pickings = cls.sale.order_line.move_ids.mapped("picking_id")
         cls.pickings[0].name = "Picking Name"
-        for line in cls.pickings.move_lines.move_line_ids:
-            line.qty_done = line.product_qty
+        for line in cls.pickings.move_ids.move_line_ids:
+            line.qty_done = line.reserved_qty
         cls.pickings._action_done()
 
     def test_invoice_qr(self):
