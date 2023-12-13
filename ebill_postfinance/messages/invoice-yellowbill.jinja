@@ -133,8 +133,8 @@
                     <fixAmount>Yes</fixAmount>
                     {% if payment_type == 'iban' %}
                     <IBAN>
-                        {%- if bank.bank_id.clearing %}
-                        <BIC>{{ bank.bank_id.clearing }}</BIC>
+                        {%- if bank.bank_id.bic %}
+                        <BIC>{{ bank.bank_id.bic }}</BIC>
                         {%- endif %}
                         <BankName>{{ bank.bank_id.name[:50] }}</BankName>
                         <IBAN>{{ bank_account }}</IBAN>
@@ -202,9 +202,9 @@
                     {% for taxgroup in amount_by_group %}
                     <TaxDetail>
                         <Rate>{{ taxgroup[0]|replace(",", ".") or "0" }}</Rate>
-                        <Amount>{{ taxgroup[1]|round(2)|round(6) }}</Amount>
-                        <BaseAmountExclusiveTax>{{ taxgroup[2]|round(6) }}</BaseAmountExclusiveTax>
-                        <BaseAmountInclusiveTax>{{ taxgroup[2]|round(6) + taxgroup[1]|round(6) }}</BaseAmountInclusiveTax>
+                        <Amount>{{ taxgroup[1]|round(2)|round(6) * amount_sign }}</Amount>
+                        <BaseAmountExclusiveTax>{{ taxgroup[2]|round(6) * amount_sign }}</BaseAmountExclusiveTax>
+                        <BaseAmountInclusiveTax>{{ (taxgroup[2]|round(6) + taxgroup[1]|round(6)) * amount_sign }}</BaseAmountInclusiveTax>
                     </TaxDetail>
                     {% endfor %}
                     <TotalTax>{{ invoice.amount_tax|round(6) }}</TotalTax>
