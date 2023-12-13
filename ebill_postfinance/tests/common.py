@@ -1,16 +1,19 @@
 # Copyright 2022 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
+import logging
 import os
 from os.path import dirname, join
 
 from vcr import VCR
 from xmlunittest import XmlTestMixin
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
+
+_logger = logging.getLogger(__name__)
 
 
-class CommonCase(SavepointCase, XmlTestMixin):
+class CommonCase(TransactionCase, XmlTestMixin):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -25,7 +28,8 @@ class CommonCase(SavepointCase, XmlTestMixin):
             }
         )
         cls.country = cls.env.ref("base.ch")
-        cls.company = cls.env.user.company_id
+        cls.company = cls.env.ref("l10n_ch.demo_company_ch")
+        cls.env.user.company_id = cls.company
         cls.company.vat = "CHE-012.345.678"
         cls.company.name = "Camptocamp SA"
         cls.company.street = "StreetOne"
@@ -36,23 +40,15 @@ class CommonCase(SavepointCase, XmlTestMixin):
         cls.company.email = "info@camptocamp.com"
         cls.company.phone = ""
         cls.bank = cls.env.ref("base.res_bank_1")
-        cls.bank.clearing = 777
-        cls.tax7 = cls.env["account.tax"].create(
-            {
-                "name": "Test tax",
-                "type_tax_use": "sale",
-                "amount_type": "percent",
-                "amount": "7.7",
-                "tax_group_id": cls.env.ref("l10n_ch.tax_group_tva_77").id,
-            }
-        )
+        cls.bank.bic = 777
+        cls.tax7 = cls.env.ref("l10n_ch.{}_vat_77".format(cls.company.id))
         cls.partner_bank = cls.env["res.partner.bank"].create(
             {
                 "bank_id": cls.bank.id,
-                "acc_number": "300.300.300",
+                "acc_number": "CH04 8914 4618 6435 6132 2",
                 "acc_holder_name": "AccountHolderName",
                 "partner_id": cls.company.partner_id.id,
-                "l10n_ch_qr_iban": "CH21 3080 8001 2345 6782 7",
+                "l10n_ch_qr_iban": "CH2130808001234567827",
             }
         )
         cls.terms = cls.env.ref("account.account_payment_term_15days")
@@ -91,29 +87,8 @@ class CommonCase(SavepointCase, XmlTestMixin):
             }
         )
         cls.account = cls.env["account.account"].search(
-            [
-                (
-                    "user_type_id",
-                    "=",
-                    cls.env.ref("account.data_account_type_revenue").id,
-                )
-            ],
+            [("account_type", "=", "asset_receivable")],
             limit=1,
-        )
-        cls.at_receivable = cls.env["account.account.type"].create(
-            {
-                "name": "Test receivable account",
-                "type": "receivable",
-                "internal_group": "asset",
-            }
-        )
-        cls.a_receivable = cls.env["account.account"].create(
-            {
-                "name": "Test receivable account",
-                "code": "TEST_RA",
-                "user_type_id": cls.at_receivable.id,
-                "reconcile": True,
-            }
         )
         cls.product = cls.env["product.product"].create(
             {"name": "Product Q & A", "list_price": 100.00, "default_code": "370003021"}
@@ -125,10 +100,8 @@ class CommonCase(SavepointCase, XmlTestMixin):
                 "default_code": "370003022",
             }
         )
-
         cls.product.product_tmpl_id.invoice_policy = "order"
         cls.product_long_name.product_tmpl_id.invoice_policy = "order"
-
         cls.sale = cls.env["sale.order"].create(
             {
                 "name": "Order123",
@@ -166,7 +139,7 @@ class CommonCase(SavepointCase, XmlTestMixin):
         # Generate the invoice from the sale order
         cls.invoice = cls.sale._create_invoices()
         # And add some more lines on the invoice
-        # One UX line and one not linked to a product
+        # One UX line and one not linked to a product and without VAT
         cls.invoice.update(
             {
                 "line_ids": [
@@ -177,17 +150,15 @@ class CommonCase(SavepointCase, XmlTestMixin):
                         {
                             "name": "Phone support",
                             "quantity": 4.0,
-                            # Set zero, avoiding error with accounting ?!
                             "price_unit": 0,
-                            "account_id": cls.at_receivable.id,
-                            # "tax_id": [(4, cls.tax7.id, 0)],
+                            # Force not tax on this line, for testing purpose
+                            "tax_ids": [(5, 0, 0)],
                         },
                     ),
                 ],
             }
         )
-        cls.invoice.action_post()
-        cls.invoice.payment_reference = "1234567890"
+        cls.invoice.payment_reference = "210000000003139471430009017"
         cls.invoice.partner_bank_id = cls.partner_bank.id
 
     @staticmethod

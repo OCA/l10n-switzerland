@@ -62,8 +62,11 @@ class AccountMove(models.Model):
         elif self.move_type == "out_refund":
             payment_type = "credit"
         for report_name in report_names:
-            r = self.env["ir.actions.report"]._get_report_from_name(report_name)
-            pdf_content, _ = r._render([self.id])
+            # r = self.env["ir.actions.report"]._get_report_from_name(report_name)
+            pdf_content, _ = self.env["ir.actions.report"]._render(
+                report_name, [self.id]
+            )
+            # pdf_content, _ = r._render([self.id])
             pdf_data.append(pdf_content)
         if not odoo.tools.config["test_enable"]:
             if len(pdf_data) > 1:
@@ -99,7 +102,7 @@ class AccountMove(models.Model):
 
         """
         self.ensure_one()
-        return self.invoice_line_ids.filtered(lambda r: not r.display_type)
+        return self.invoice_line_ids.filtered(lambda r: r.display_type == "product")
 
     def get_postfinance_other_reference(self):
         """Allows glue module to insert <OTHER-REFERENCE> in the <HEADER>
