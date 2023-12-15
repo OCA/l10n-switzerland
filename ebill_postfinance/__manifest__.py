@@ -14,7 +14,6 @@
         "account_invoice_export",
         "base_ebill_payment_contract",
         "l10n_ch",
-        "queue_job",
         "sale",
     ],
     "external_dependencies": {
