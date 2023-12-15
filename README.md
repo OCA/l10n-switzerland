@@ -33,6 +33,7 @@ addon | version | maintainers | summary
 [l10n_ch_isrb](l10n_ch_isrb/) | 14.0.1.0.0 |  | Switzerland - ISR with Bank
 [l10n_ch_mis_reports](l10n_ch_mis_reports/) | 14.0.1.0.0 |  | Specific MIS reports for switzerland localization
 [l10n_ch_pain_base](l10n_ch_pain_base/) | 14.0.1.0.0 |  | ISO 20022 base module for Switzerland
+[l10n_ch_pain_credit_transfer](l10n_ch_pain_credit_transfer/) | 14.0.1.0.0 | [![ecino](https://github.com/ecino.png?size=30px)](https://github.com/ecino) | Generate ISO 20022 credit transfert (SEPA and not SEPA)
 [l10n_ch_states](l10n_ch_states/) | 14.0.1.0.0 |  | Switzerland Country States
 [server_env_ebill_paynet](server_env_ebill_paynet/) | 14.0.1.0.0 |  | Server environment for Ebill Paynet
 

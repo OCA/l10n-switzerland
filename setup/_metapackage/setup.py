@@ -21,6 +21,7 @@ setuptools.setup(
         'odoo14-addon-l10n_ch_isrb',
         'odoo14-addon-l10n_ch_mis_reports',
         'odoo14-addon-l10n_ch_pain_base',
+        'odoo14-addon-l10n_ch_pain_credit_transfer',
         'odoo14-addon-l10n_ch_states',
         'odoo14-addon-server_env_ebill_paynet',
     ],
