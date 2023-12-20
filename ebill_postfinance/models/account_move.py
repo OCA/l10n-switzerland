@@ -16,9 +16,8 @@ class AccountMove(models.Model):
 
     _inherit = "account.move"
 
-    @api.onchange("partner_id", "company_id")
-    def _transmit_method_partner_change(self):
-        super()._transmit_method_partner_change()
+    @api.onchange("transmit_method_id")
+    def _onchange_transmit_method(self):
         if self.move_type not in ("out_invoice", "out_refund"):
             return
         postfinance_method = self.env.ref(

@@ -72,7 +72,7 @@ class EbillPostfinanceInvoiceMessage(models.Model):
 
     # Set with invoice_id.number but also with returned data from server ?
     ref = fields.Char("Reference No.", size=35)
-    ebill_account_number = fields.Char("Paynet Id", size=20)
+    ebill_account_number = fields.Char("Payer Id", size=20)
     payload = fields.Text("Payload sent")
     payload_size = fields.Float(
         "Payload Size (MB)", digits=(6, 3), compute="_compute_payload_size"
