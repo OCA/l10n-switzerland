@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: l10n-switzerland (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-03 00:41+0000\n"
-"PO-Revision-Date: 2023-06-07 12:09+0000\n"
+"PO-Revision-Date: 2023-12-24 19:43+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-l10n-switzerland-9-0/language/it/)\n"
@@ -267,7 +267,7 @@ msgstr "Inserire un codice di conto postale corretto es. 01-23456-1"
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:212
 #, python-format
 msgid "Please select a file first!"
-msgstr "Bisogna prima selezionare un file"
+msgstr "Bisogna prima selezionare un file!"
 
 #. module: l10n_ch_payment_slip
 #: model:ir.model.fields,field_description:l10n_ch_payment_slip.field_res_partner_bank_print_account
@@ -367,7 +367,7 @@ msgstr "Troppi incassi / pagamenti riferiti a %s"
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:138
 #, python-format
 msgid "Too many total record found!"
-msgstr "Trovati troppi record."
+msgstr "Trovati troppi record!"
 
 #. module: l10n_ch_payment_slip
 #: code:addons/l10n_ch_payment_slip/wizard/bvr_import.py:53
