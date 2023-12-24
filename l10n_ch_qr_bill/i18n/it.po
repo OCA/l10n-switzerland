@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-28 09:52+0000\n"
-"PO-Revision-Date: 2020-08-14 11:59+0000\n"
-"Last-Translator: stevech091 <stefano.sforzi@agilebg.com>\n"
+"PO-Revision-Date: 2023-12-24 19:34+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: \n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.10\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: l10n_ch_qr_bill
 #: code:addons/l10n_ch_qr_bill/models/account_invoice.py:20
@@ -175,7 +175,7 @@ msgstr "QR-Fattura"
 #. module: l10n_ch_qr_bill
 #: model:ir.ui.view,arch_db:l10n_ch_qr_bill.l10n_ch_swissqr_template
 msgid "QR-bill for invoice"
-msgstr "QR-Fattura n:"
+msgstr "QR-Fattura n"
 
 #. module: l10n_ch_qr_bill
 #: model:ir.model.fields,help:l10n_ch_qr_bill.field_account_invoice_l10n_ch_qrr_spaced
