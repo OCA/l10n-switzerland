@@ -74,9 +74,7 @@ class EbillPostfinanceInvoiceMessage(models.Model):
     ref = fields.Char("Reference No.", size=35)
     ebill_account_number = fields.Char("Payer Id", size=20)
     payload = fields.Text("Payload sent")
-    payload_size = fields.Float(
-        "Payload Size (MB)", digits=(6, 3), compute="_compute_payload_size"
-    )
+    payload_size = fields.Float("Payload Size (MB)", digits=(6, 3), readonly=True)
     response = fields.Text()
     payment_type = fields.Selection(
         selection=[
@@ -90,13 +88,12 @@ class EbillPostfinanceInvoiceMessage(models.Model):
         readonly=True,
     )
 
-    @api.depends("payload")
-    def _compute_payload_size(self):
-        for message in self:
-            size_in_bytes = len(message.payload)
-            if size_in_bytes > 0:
-                size_in_bytes = size_in_bytes / 1000000
-            message.payload_size = size_in_bytes
+    @api.model
+    def _get_payload_size(self, payload):
+        size_in_bytes = len(payload)
+        if size_in_bytes > 0:
+            size_in_bytes = size_in_bytes / 1000000
+        return size_in_bytes
 
     def set_transaction_id(self):
         self.ensure_one()
@@ -144,15 +141,32 @@ class EbillPostfinanceInvoiceMessage(models.Model):
                 record.state = "done"
                 record.invoice_id.message_post(body=_("Invoice paid through eBilling"))
 
+    @api.model
+    def _remove_pdf_data_from_payload(self, data):
+        """Minimize payload size to be kept.
+
+        Remove the node containing the pdf data from the xml.
+
+        """
+        start_node = "<Appendix>"
+        end_node = "</Appendix>"
+        start = data.find(start_node)
+        if start < 0:
+            return data
+        end = data.find(end_node, start)
+        return data[0:start] + data[end + len(end_node) :]
+
     def send_to_postfinance(self):
         # TODO: Could sent multiple with one call
         for message in self:
             message.file_type_used = message.service_id.file_type_to_use
             message.set_transaction_id()
-            message.payload = message._generate_payload()
+            payload = message._generate_payload()
+            data = payload.encode("utf-8")
+            message.payload = self._remove_pdf_data_from_payload(payload)
+            message.payload_size = self._get_payload_size(payload)
             try:
                 # TODO: Handle file type from service configuation
-                data = message.payload.encode("utf-8")
                 res = message.service_id.upload_file(
                     message.transaction_id, message.file_type_used, data
                 )
