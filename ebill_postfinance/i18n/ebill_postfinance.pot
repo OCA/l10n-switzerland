@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,6 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: ebill_postfinance
+#. odoo-python
 #: code:addons/ebill_postfinance/models/ebill_payment_contract.py:0
 #, python-format
 msgid "A Postfinance service is required for a Postfinance contract."
@@ -35,7 +36,6 @@ msgid "Bank account"
 msgstr ""
 
 #. module: ebill_postfinance
-#: model:ir.model.fields,field_description:ebill_postfinance.field_ebill_payment_contract__postfinance_billerid
 #: model:ir.model.fields,field_description:ebill_postfinance.field_ebill_postfinance_service__biller_id
 msgid "Biller ID"
 msgstr ""
@@ -48,6 +48,11 @@ msgstr ""
 #. module: ebill_postfinance
 #: model_terms:ir.ui.view,arch_db:ebill_postfinance.ebill_postfinance_invoice_message_form_view
 msgid "Check payload validity"
+msgstr ""
+
+#. module: ebill_postfinance
+#: model:ir.model.fields,field_description:ebill_postfinance.field_ebill_payment_contract__postfinance_billerid
+msgid "Contract ID"
 msgstr ""
 
 #. module: ebill_postfinance
@@ -84,11 +89,8 @@ msgid "Deleted"
 msgstr ""
 
 #. module: ebill_postfinance
-#: model:ir.model.fields,field_description:ebill_postfinance.field_account_move__display_name
-#: model:ir.model.fields,field_description:ebill_postfinance.field_ebill_payment_contract__display_name
 #: model:ir.model.fields,field_description:ebill_postfinance.field_ebill_postfinance_invoice_message__display_name
 #: model:ir.model.fields,field_description:ebill_postfinance.field_ebill_postfinance_service__display_name
-#: model:ir.model.fields,field_description:ebill_postfinance.field_sale_order__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -128,6 +130,7 @@ msgid "Error code"
 msgstr ""
 
 #. module: ebill_postfinance
+#. odoo-python
 #: code:addons/ebill_postfinance/models/account_move.py:0
 #, python-format
 msgid "Error generating postfinance eBill"
@@ -159,11 +162,8 @@ msgid "IBAN"
 msgstr ""
 
 #. module: ebill_postfinance
-#: model:ir.model.fields,field_description:ebill_postfinance.field_account_move__id
-#: model:ir.model.fields,field_description:ebill_postfinance.field_ebill_payment_contract__id
 #: model:ir.model.fields,field_description:ebill_postfinance.field_ebill_postfinance_invoice_message__id
 #: model:ir.model.fields,field_description:ebill_postfinance.field_ebill_postfinance_service__id
-#: model:ir.model.fields,field_description:ebill_postfinance.field_sale_order__id
 msgid "ID"
 msgstr ""
 
@@ -204,12 +204,14 @@ msgid "Invoice Messages"
 msgstr ""
 
 #. module: ebill_postfinance
+#. odoo-python
 #: code:addons/ebill_postfinance/models/account_move.py:0
 #, python-format
 msgid "Invoice accepted by the Postfinance system"
 msgstr ""
 
 #. module: ebill_postfinance
+#. odoo-python
 #: code:addons/ebill_postfinance/models/ebill_postfinance_invoice_message.py:0
 #, python-format
 msgid "Invoice paid through eBilling"
@@ -243,11 +245,8 @@ msgid "Journal Entry"
 msgstr ""
 
 #. module: ebill_postfinance
-#: model:ir.model.fields,field_description:ebill_postfinance.field_account_move____last_update
-#: model:ir.model.fields,field_description:ebill_postfinance.field_ebill_payment_contract____last_update
 #: model:ir.model.fields,field_description:ebill_postfinance.field_ebill_postfinance_invoice_message____last_update
 #: model:ir.model.fields,field_description:ebill_postfinance.field_ebill_postfinance_service____last_update
-#: model:ir.model.fields,field_description:ebill_postfinance.field_sale_order____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -294,6 +293,11 @@ msgid "Password"
 msgstr ""
 
 #. module: ebill_postfinance
+#: model:ir.model.fields,field_description:ebill_postfinance.field_ebill_postfinance_invoice_message__ebill_account_number
+msgid "Payer Id"
+msgstr ""
+
+#. module: ebill_postfinance
 #: model:ir.model.fields,field_description:ebill_postfinance.field_ebill_postfinance_invoice_message__payload_size
 msgid "Payload Size (MB)"
 msgstr ""
@@ -321,11 +325,7 @@ msgid ""
 msgstr ""
 
 #. module: ebill_postfinance
-#: model:ir.model.fields,field_description:ebill_postfinance.field_ebill_postfinance_invoice_message__ebill_account_number
-msgid "Paynet Id"
-msgstr ""
-
-#. module: ebill_postfinance
+#: model:transmit.method,name:ebill_postfinance.postfinance_transmit_method
 #: model_terms:ir.ui.view,arch_db:ebill_postfinance.ebill_payment_contract_form_view
 msgid "Postfinance"
 msgstr ""
@@ -463,6 +463,12 @@ msgid "Testing"
 msgstr ""
 
 #. module: ebill_postfinance
+#: model:ir.model.fields,help:ebill_postfinance.field_ebill_payment_contract__postfinance_billerid
+msgid "The PayerID of the customer"
+msgstr ""
+
+#. module: ebill_postfinance
+#. odoo-python
 #: code:addons/ebill_postfinance/models/ebill_payment_contract.py:0
 #, python-format
 msgid "The Postfinacnce Account ID is required for a Postfinance contract."
@@ -474,6 +480,7 @@ msgid "The Postfinance system rejected the eBill that was send."
 msgstr ""
 
 #. module: ebill_postfinance
+#. odoo-python
 #: code:addons/ebill_postfinance/models/ebill_postfinance_invoice_message.py:0
 #, python-format
 msgid "The payload is valid."
@@ -486,7 +493,7 @@ msgstr ""
 
 #. module: ebill_postfinance
 #: model:ir.model.fields,field_description:ebill_postfinance.field_ebill_postfinance_invoice_message__transaction_id
-msgid "Transaction Id"
+msgid "Transaction"
 msgstr ""
 
 #. module: ebill_postfinance
@@ -517,7 +524,6 @@ msgstr ""
 #. module: ebill_postfinance
 #: model:ir.actions.server,name:ebill_postfinance.cron_search_invoices_ir_actions_server
 #: model:ir.cron,cron_name:ebill_postfinance.cron_search_invoices
-#: model:ir.cron,name:ebill_postfinance.cron_search_invoices
 msgid "eBill Postfinance - Check invoices state on server"
 msgstr ""
 
