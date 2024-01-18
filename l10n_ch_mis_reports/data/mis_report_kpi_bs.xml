@@ -1,0 +1,356 @@
+<odoo noupdate="1">
+
+    <record id="mis_report_kpi_0020" model="mis.report.kpi">
+        <field name="name">CH_1</field>
+        <field name="description">ACTIF</field>
+        <field name="expression">CH_10 +CH_14</field>
+        <field name="style_id" ref="style_header" />
+        <field name="sequence">1</field>
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0021" model="mis.report.kpi">
+        <field name="name">CH_10</field>
+        <field name="description">ACTIF CIRCULANT</field>
+        <field name="expression">CH_100 +CH_106 +CH_110 +CH_114 +CH_120 +CH_130</field>
+        <field name="style_id" ref="style_header_indented" />
+        <field name="sequence">2</field>
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0022" model="mis.report.kpi">
+        <field name="name">CH_100</field>
+        <field name="description">Trésorerie</field>
+        <field
+            name="expression"
+        >bale[('code', '>=','1'),('code','&lt;' ,'106')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">3</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0023" model="mis.report.kpi">
+        <field name="name">CH_106</field>
+        <field name="description">Actifs à court terme cotés en bourse</field>
+        <field
+            name="expression"
+        >bale[('code', '>=','106'),('code','&lt;' ,'11')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">4</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0024" model="mis.report.kpi">
+        <field name="name">CH_110</field>
+        <field
+            name="description"
+        >Créances résultant de livraisons et prestations</field>
+        <field
+            name="expression"
+        >bale[('code', '>=','11'),('code','&lt;','114')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">5</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0025" model="mis.report.kpi">
+        <field name="name">CH_114</field>
+        <field name="description">Autres créances à court terme</field>
+        <field
+            name="expression"
+        >bale[('code', '>=','114'),('code','&lt;','12')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">6</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0026" model="mis.report.kpi">
+        <field name="name">CH_120</field>
+        <field name="description">Stocks et prestations non facturées</field>
+        <field
+            name="expression"
+        >bale[('code', '>=','12'),('code','&lt;','13')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">7</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0027" model="mis.report.kpi">
+        <field name="name">CH_130</field>
+        <field name="description">Actifs de régularisation (transitoires)</field>
+        <field
+            name="expression"
+        >bale[('code', '>=','13'),('code','&lt;','14')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">8</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0028" model="mis.report.kpi">
+        <field name="name">CH_14</field>
+        <field name="description">ACTIF IMMOBILISE</field>
+        <field name="expression">CH_140 +CH_148 +CH_150 +CH_160 + CH_170 +CH_180</field>
+        <field name="style_id" ref="style_header_indented" />
+        <field name="sequence">9</field>
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0029" model="mis.report.kpi">
+        <field name="name">CH_140</field>
+        <field name="description">Immobilisations financières</field>
+        <field
+            name="expression"
+        >bale[('code', '>=','14'),('code','&lt;','148')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">10</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0030" model="mis.report.kpi">
+        <field name="name">CH_148</field>
+        <field name="description">Participations</field>
+        <field
+            name="expression"
+        >bale[('code', '>=','148'),('code','&lt;','15')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">11</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0031" model="mis.report.kpi">
+        <field name="name">CH_150</field>
+        <field name="description">Immobilisations corporelles meubles</field>
+        <field
+            name="expression"
+        >bale[('code', '>=','15'),('code','&lt;','16')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">12</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0032" model="mis.report.kpi">
+        <field name="name">CH_160</field>
+        <field name="description">Immobilisations corporelles immeubles</field>
+        <field
+            name="expression"
+        >bale[('code', '>=','16'),('code','&lt;','17')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">13</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0033" model="mis.report.kpi">
+        <field name="name">CH_170</field>
+        <field name="description">Immobilisations incorporelles</field>
+        <field
+            name="expression"
+        >bale[('code', '>=','17'),('code','&lt;','18')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">14</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0034" model="mis.report.kpi">
+        <field name="name">CH_180</field>
+        <field
+            name="description"
+        >Capital non versé : capital social - capital de fondation</field>
+        <field name="expression">bale[('code', '>=','18'),('code','&lt;','2')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">15</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0035" model="mis.report.kpi">
+        <field name="name">CH_2</field>
+        <field name="description">PASSIF</field>
+        <field name="expression">CH_20 +CH_24 +CH_28</field>
+        <field name="style_id" ref="style_header" />
+        <field name="sequence">16</field>
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0036" model="mis.report.kpi">
+        <field name="name">CH_20</field>
+        <field name="description">DETTES A COURT TERME</field>
+        <field name="expression">CH_200 +CH_210 +CH_220 +CH_230</field>
+        <field name="style_id" ref="style_header_indented" />
+        <field name="sequence">17</field>
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0037" model="mis.report.kpi">
+        <field name="name">CH_200</field>
+        <field
+            name="description"
+        >Dettes à court terme résultant d’achats et de prestations de services</field>
+        <field
+            name="expression"
+        >-bale[('code', '>=','2'),('code','&lt;','21')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">18</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0038" model="mis.report.kpi">
+        <field name="name">CH_210</field>
+        <field name="description">Dettes à court terme rémunérés</field>
+        <field
+            name="expression"
+        >-bale[('code', '>=','21'),('code','&lt;','22')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">19</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0039" model="mis.report.kpi">
+        <field name="name">CH_220</field>
+        <field name="description">Autres dettes à court terme</field>
+        <field
+            name="expression"
+        >-bale[('code', '>=','22'),('code','&lt;','23')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">20</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0040" model="mis.report.kpi">
+        <field name="name">CH_230</field>
+        <field
+            name="description"
+        >Passifs de régularisation (transitoires) et provisions à court terme</field>
+        <field
+            name="expression"
+        >-bale[('code', '>=','23'),('code','&lt;','24')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">21</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0041" model="mis.report.kpi">
+        <field name="name">CH_24</field>
+        <field name="description">DETTES A LONG TERME</field>
+        <field name="expression">CH_240 +CH_250 +CH_260</field>
+        <field name="style_id" ref="style_header_indented" />
+        <field name="sequence">22</field>
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0042" model="mis.report.kpi">
+        <field name="name">CH_240</field>
+        <field name="description">Dettes à long terme rémunérées</field>
+        <field
+            name="expression"
+        >-bale[('code', '>=','24'),('code','&lt;','25')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">23</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0043" model="mis.report.kpi">
+        <field name="name">CH_250</field>
+        <field name="description">Autres dettes à long terme</field>
+        <field
+            name="expression"
+        >-bale[('code', '>=','25'),('code','&lt;','26')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">24</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0044" model="mis.report.kpi">
+        <field name="name">CH_260</field>
+        <field name="description">Provisions à long termes et provisions légales</field>
+        <field
+            name="expression"
+        >-bale[('code', '>=','26'),('code','&lt;','28')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">25</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0045" model="mis.report.kpi">
+        <field name="name">CH_28</field>
+        <field name="description">CAPITAUX PROPRES</field>
+        <field name="expression">CH_280 +CH_290 +CH_297</field>
+        <field name="style_id" ref="style_header_indented" />
+        <field name="sequence">26</field>
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0046" model="mis.report.kpi">
+        <field name="name">CH_280</field>
+        <field name="description">Capital social ou capital de fondation</field>
+        <field
+            name="expression"
+        >-bale[('code', '>=','28'),('code','&lt;','29')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">27</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0047" model="mis.report.kpi">
+        <field name="name">CH_290</field>
+        <field name="description">Réserves / bénéfices et pertes reportés</field>
+        <field
+            name="expression"
+        >-bale[('code', '>=','29'),('code','&lt;','30')][]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">28</field>
+        <field name="auto_expand_accounts">true</field>
+        <field name="auto_expand_accounts_style_id" ref="style_details_indented" />
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="mis_report_kpi_0048" model="mis.report.kpi">
+        <field name="name">CH_297</field>
+        <field name="description">Résultat de l'exercice</field>
+        <field
+            name="expression"
+        >-bale[][('account_id.include_initial_balance', '=', False)] -balu[][('account_id.include_initial_balance', '=', False)] - bale[('account_type', '=', 'equity_unaffected')] - balu[('account_type', '=', 'equity_unaffected')]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">29</field>
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+</odoo>
