@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -250,13 +250,13 @@ msgid "Stocks et prestations non facturées"
 msgstr ""
 
 #. module: l10n_ch_mis_reports
-#: model:mis.report,name:l10n_ch_mis_reports.mis_report_pl
-msgid "Suisse - Compte de résultat"
+#: model:mis.report,name:l10n_ch_mis_reports.mis_report_bs
+msgid "Suisse - Bilan"
 msgstr ""
 
 #. module: l10n_ch_mis_reports
-#: model:mis.report,name:l10n_ch_mis_reports.mis_report_bs
-msgid "Suisse – Bilan"
+#: model:mis.report,name:l10n_ch_mis_reports.mis_report_pl
+msgid "Suisse - Compte de résultat"
 msgstr ""
 
 #. module: l10n_ch_mis_reports
