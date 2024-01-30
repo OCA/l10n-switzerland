@@ -1,0 +1,6 @@
+# For tests
+vcrpy==4.4.0
+xmlunittest==0.5.0
+# PRs that need merging
+odoo-addon-base_ebill_payment_contract @ git+https://github.com/OCA/edi.git@refs/pull/889/head#subdirectory=setup/base_ebill_payment_contract
+odoo-addon-account_invoice_export @ git+https://github.com/OCA/edi.git@refs/pull/890/head#subdirectory=setup/account_invoice_export
