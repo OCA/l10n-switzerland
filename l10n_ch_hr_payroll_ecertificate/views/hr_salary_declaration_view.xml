@@ -5,12 +5,12 @@
         <field name="model">hr.salary.declaration</field>
         <field name="priority" eval="20" />
         <field name="arch" type="xml">
-            <tree string="Generated Salary declaration">
+            <tree>
                 <field name="year" />
                 <field name="employee_id" />
                 <field name="date_from" />
                 <field name="date_to" />
-                <field name="grossincome" sum="grossincome" />
+                <field name="gross_income" sum="gross_income" />
             </tree>
         </field>
     </record>

@@ -63,15 +63,20 @@
                                     <until t-esc="doc.date_to" />
                                 </Period>
                                 <Year t-esc="doc.year" />
-                                <Income t-esc="doc.grossincome" />
-                                <GrossIncome t-esc="doc.grossincome" />
+                                <Income t-esc="doc.income" />
+                                <FreeTransport
+                                    t-if="doc.company_car>0"
+                                >True</FreeTransport>
+                                <FringeBenefits t-if="doc.company_car>0">
+                                    <CompanyCar t-esc="doc.company_car" />
+                                </FringeBenefits>
+                                <GrossIncome t-esc="doc.gross_income" />
                                 <AHV-ALV-NBUV-AVS-AC-AANP-Contribution
                                     t-esc="doc.social_ded"
                                 />
                                 <BVG-LPP-Contribution>
                                     <Regular t-esc="doc.bvg_lpp_ded" />
                                 </BVG-LPP-Contribution>
-                                <!--                    <NetIncome t-esc="doc.grossincome-doc.social_ded-doc.bvg_lpp_ded"/> -->
                             </TaxSalary>
                         </TaxSalaries>
                     </Person>
