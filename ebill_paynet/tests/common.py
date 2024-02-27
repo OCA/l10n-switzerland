@@ -196,7 +196,10 @@ class CommonCase(SavepointCase, XmlTestMixin):
         for i in range(number_of_lines):
             if generated_line[i].strip() != expected_line[i].strip():
                 return "Diff at {}/{} || Expected {}  || Generated {}".format(
-                    i, number_of_lines, expected_line[i], generated_line[i],
+                    i,
+                    number_of_lines,
+                    expected_line[i],
+                    generated_line[i],
                 )
 
 

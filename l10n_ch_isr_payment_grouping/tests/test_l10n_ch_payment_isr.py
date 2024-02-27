@@ -94,9 +94,7 @@ class PaymentISR(common.TransactionCase):
         ]
 
     def test_payment_isr_grouping(self):
-        """Create multiple invoices to test grouping by partner and ISR
-
-        """
+        """Create multiple invoices to test grouping by partner and ISR"""
         invoices = (
             self.create_supplier_invoice(self.supplier_isrb1, ISR1)
             | self.create_supplier_invoice(self.supplier_isrb1, ISR2)
@@ -126,7 +124,12 @@ class PaymentISR(common.TransactionCase):
             # different partner, different payment
             (ISR2, self.supplier_isrb2.id, 1, 42.0),
             # not ISR, standard grouping
-            ("1234 5678 {}".format(inv_no_ref.name), self.supplier_iban.id, 3, 126.0,),
+            (
+                "1234 5678 {}".format(inv_no_ref.name),
+                self.supplier_iban.id,
+                3,
+                126.0,
+            ),
             # different ISR reference, different payment
             (ISR1, self.supplier_isrb1.id, 1, 42.0),
         ]

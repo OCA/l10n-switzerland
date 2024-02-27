@@ -54,7 +54,7 @@ class ResPartnerBank(models.Model):
 
     @api.onchange("acc_number", "acc_type")
     def _onchange_acc_number_set_swiss_bank(self):
-        """ Deduce information from IBAN
+        """Deduce information from IBAN
 
         Bank is defined as:
         - Found bank by clearing when using iban

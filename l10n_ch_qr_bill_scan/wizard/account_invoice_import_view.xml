@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2020 Camptocamp (http://www.camptocamp.com/)
+  @author: Yannick Vaucher <yannick.vaucher@camptocamp.com>
+  License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="action_partner_new_supplier_form" model="ir.actions.act_window">
+        <field name="name">Vendors</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="domain">[]</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field
+            name="context"
+        >{'res_partner_search_mode': 'supplier', 'default_is_company': True}</field>
+        <field name="filter" eval="True" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new vendor in your address book
+            </p>
+            <p>
+                Odoo helps you easily track all activities related to a vendor.
+            </p>
+        </field>
+    </record>
+    <record id="account_invoice_import_form" model="ir.ui.view">
+        <field name="model">account.invoice.import</field>
+        <field
+            name="inherit_id"
+            ref="account_invoice_import.account_invoice_import_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='help-import']" position="before">
+                <div name="help-import-scan" states="import">
+                    <p><big>
+                            <big>
+                                <i class="fa fa-qrcode" />
+                            </big>
+                        </big> Scan a QR-bill code from a supplier invoice</p>
+                </div>
+                <group name="main">
+                    <field name="invoice_scan" states="import,update-from-invoice" />
+                </group>
+                <div name="help-import-partner-select" states="select-partner">
+                    <p
+                    >Partner was not found or is not set as a supplier. Please create or select the partner before continuing</p>
+                </div>
+            </xpath>
+            <xpath expr="//div[@name='help-import']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <field name="partner_id" position="attributes">
+                <attribute
+                    name="context"
+                >{'default_name': partner_name, 'default_street': partner_street, 'default_zip': partner_zip, 'default_city': partner_city, 'default_country_id': partner_country_id}</attribute>
+                <attribute
+                    name="states"
+                >config,update,update-from-invoice,select-partner</attribute>
+                <attribute
+                    name="attrs"
+                >{'readonly': [('state', '!=', 'select-partner')], 'required': [('state', '=', 'select-partner')]}</attribute>
+            </field>
+            <group name="main">
+                <field name="partner_name" states="select-partner" />
+                <field name="partner_street" states="select-partner" />
+                <field name="partner_zip" states="select-partner" />
+                <field name="partner_city" states="select-partner" />
+                <field name="partner_country_id" states="select-partner" />
+            </group>
+            <field name="import_config_id" position="attributes">
+                <attribute
+                    name="states"
+                >config,update-from-invoice,update,select-partner</attribute>
+                <attribute
+                    name="attrs"
+                >{'required': [('state', 'in', ('config', 'update-from-invoice', 'update', 'select-partner'))]}</attribute>
+                <attribute name="context">{'default_partner_id': partner_id}</attribute>
+            </field>
+            <button name="import_invoice" position="after">
+                <button
+                    name="import_invoice"
+                    type="object"
+                    class="btn-primary"
+                    string="Continue"
+                    states="select-partner"
+                />
+            </button>
+        </field>
+    </record>
+</odoo>

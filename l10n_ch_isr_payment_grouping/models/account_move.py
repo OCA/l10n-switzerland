@@ -10,7 +10,7 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     def _get_invoice_reference_ch_invoice(self):
-        """ This sets ISR reference number which is generated based on
+        """This sets ISR reference number which is generated based on
         customer's `Bank Account` and set it as `Payment Reference` of
         the invoice when invoice's journal is using Switzerland's
         communication standard
@@ -19,7 +19,7 @@ class AccountMove(models.Model):
         return self.l10n_ch_isr_number
 
     def _get_invoice_reference_ch_partner(self):
-        """ This sets ISR reference number which is generated based on
+        """This sets ISR reference number which is generated based on
         customer's `Bank Account` and set it as `Payment Reference` of the
         invoice when invoice's journal is using Switzerland's communication
         standard
