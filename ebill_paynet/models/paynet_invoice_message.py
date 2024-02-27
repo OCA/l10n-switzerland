@@ -126,7 +126,13 @@ class PaynetInvoiceMessage(models.Model):
         # Could be improve by searching in the account_tax linked to the group
         for taxgroup in self.invoice_id.amount_by_group:
             rate = taxgroup[0].split()[-1:][0][:-1]
-            amount_by_group.append((rate or "0", taxgroup[1], taxgroup[2],))
+            amount_by_group.append(
+                (
+                    rate or "0",
+                    taxgroup[1],
+                    taxgroup[2],
+                )
+            )
         params["amount_by_group"] = amount_by_group
         # Get the invoice due date
         date_due = None
