@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="edi_ack_backend" model="edi.backend.type">
+        <field name="name">SFTP for payment orders with ack</field>
+        <field name="code">sftp_pay_ord_ack</field>
+    </record>
+</odoo>
