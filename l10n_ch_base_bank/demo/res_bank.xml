@@ -1,0 +1,7 @@
+<odoo>
+    <record model="res.bank" id="bank_postfinance">
+        <field name="name">PostFinance</field>
+        <field name="bic">POFICHBEXXX</field>
+        <field name="clearing">9000</field>
+    </record>
+</odoo>

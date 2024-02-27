@@ -98,9 +98,10 @@ class AccountMove(models.Model):
                 ):
                     raise exceptions.ValidationError(
                         _(
-                            "Bank account must contain a subscription number for"
+                            "Bank account %s must contain a subscription number for"
                             " ISR ref type."
                         )
+                        % bank_acc.acc_number
                     )
         return True
 

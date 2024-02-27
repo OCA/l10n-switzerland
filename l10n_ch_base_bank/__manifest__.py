@@ -11,6 +11,7 @@
     "license": "AGPL-3",
     "depends": ["base_iban", "l10n_ch"],
     "data": ["views/bank.xml"],
+    "demo": ["demo/res_bank.xml"],
     "auto_install": True,
     "installable": True,
 }
