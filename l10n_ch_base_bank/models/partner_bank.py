@@ -108,7 +108,7 @@ class ResPartnerBank(models.Model):
         if exist_count:
             name_exist = exist_count
             while name_exist:
-                new_name = acc_name + " #{}".format(exist_count)
+                new_name = acc_name + f" #{exist_count}"
                 name_exist = self.env["res.partner.bank"].search_count(
                     [("acc_number", "=", new_name)]
                 )

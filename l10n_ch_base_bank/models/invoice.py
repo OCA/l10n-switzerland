@@ -4,7 +4,6 @@ from odoo import _, api, exceptions, models
 
 
 class AccountMove(models.Model):
-
     _inherit = "account.move"
 
     def _search(
@@ -47,7 +46,7 @@ class AccountMove(models.Model):
                 if operator.startswith("="):
                     operator = operator[1:]
                 else:
-                    value = "%{}%".format(value)
+                    value = f"%{value}%"
             # add filtered operator to query
             query_op = (
                 "SELECT id FROM account_move "

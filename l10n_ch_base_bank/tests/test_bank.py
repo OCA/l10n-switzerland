@@ -51,7 +51,6 @@ class TestBank(SavepointCase):
         return form
 
     def test_bank_iban(self):
-
         bank_acc = self.new_form()
         bank_acc.acc_number = CH_IBAN.replace(" ", "")
         account = bank_acc.save()
@@ -100,7 +99,7 @@ class TestBank(SavepointCase):
         self.assertEqual(account.bank_id, self.bank)
         self.assertEqual(
             account.acc_number,
-            "ISR {} Azure Interior".format(CH_SUBSCRIPTION),
+            f"ISR {CH_SUBSCRIPTION} Azure Interior",
         )
         self.assertEqual(account.l10n_ch_postal, CH_SUBSCRIPTION)
         self.assertEqual(account.acc_type, "bank")
@@ -256,7 +255,7 @@ class TestBank(SavepointCase):
         # account number set based on ccp
         self.assertEqual(
             account.acc_number,
-            "ISR {} Azure Interior".format(CH_SUBSCRIPTION),
+            f"ISR {CH_SUBSCRIPTION} Azure Interior",
         )
         self.assertEqual(account.l10n_ch_postal, CH_SUBSCRIPTION)
 
@@ -274,7 +273,7 @@ class TestBank(SavepointCase):
         bank_acc.l10n_ch_postal = CH_SUBSCRIPTION
         self.assertEqual(
             bank_acc.acc_number,
-            "ISR {}".format(CH_SUBSCRIPTION),
+            f"ISR {CH_SUBSCRIPTION}",
         )
 
         # if it's ISR subscription, copy ISR + value in acc_number
@@ -282,7 +281,7 @@ class TestBank(SavepointCase):
         bank_acc.partner_id = self.partner
         self.assertEqual(
             bank_acc.acc_number,
-            "ISR {} Azure Interior".format(CH_SUBSCRIPTION),
+            f"ISR {CH_SUBSCRIPTION} Azure Interior",
         )
         self.assertEqual(bank_acc.l10n_ch_postal, CH_SUBSCRIPTION)
 
@@ -300,7 +299,7 @@ class TestBank(SavepointCase):
         self.assertEqual(bank_acc.l10n_ch_postal, CH_SUBSCRIPTION)
         self.assertEqual(
             bank_acc.acc_number,
-            "ISR {} Azure Interior".format(CH_SUBSCRIPTION),
+            f"ISR {CH_SUBSCRIPTION} Azure Interior",
         )
 
     def test_name_search(self):
@@ -328,7 +327,7 @@ class TestBank(SavepointCase):
         self.assertFalse(account2.bank_id)
         self.assertEqual(
             account2.acc_number,
-            "ISR {} Azure Interior #1".format(CH_SUBSCRIPTION),
+            f"ISR {CH_SUBSCRIPTION} Azure Interior #1",
         )
         self.assertEqual(account2.acc_type, "bank")
 
@@ -340,7 +339,7 @@ class TestBank(SavepointCase):
         self.assertFalse(account3.bank_id)
         self.assertEqual(
             account3.acc_number,
-            "ISR {} Azure Interior #2".format(CH_SUBSCRIPTION),
+            f"ISR {CH_SUBSCRIPTION} Azure Interior #2",
         )
         self.assertEqual(account3.acc_type, "bank")
         account3.unlink()
@@ -353,7 +352,7 @@ class TestBank(SavepointCase):
 
         self.assertEqual(
             account4.acc_number,
-            "ISR {} Azure Interior #2".format(CH_SUBSCRIPTION),
+            f"ISR {CH_SUBSCRIPTION} Azure Interior #2",
         )
 
     def test_acc_name_generation(self):
@@ -384,16 +383,16 @@ class TestBank(SavepointCase):
         account._update_acc_number()
         self.assertEqual(
             account.acc_number,
-            "ISR {} Azure Interior".format(CH_SUBSCRIPTION),
+            f"ISR {CH_SUBSCRIPTION} Azure Interior",
         )
         # remove partner name
         account.partner_id = ""
         account._update_acc_number()
-        self.assertEqual(account.acc_number, "ISR {}".format(CH_SUBSCRIPTION))
+        self.assertEqual(account.acc_number, f"ISR {CH_SUBSCRIPTION}")
         # no changes for bank changes
         account.bank_id = self.bank
         account._update_acc_number()
-        self.assertEqual(account.acc_number, "ISR {}".format(CH_SUBSCRIPTION))
+        self.assertEqual(account.acc_number, f"ISR {CH_SUBSCRIPTION}")
         # everything cleanup
         account.l10n_ch_postal = ""
         account._update_acc_number()
