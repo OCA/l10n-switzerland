@@ -23,14 +23,13 @@ class Bank(models.Model):
     def is_swiss_post(self):
         return self.bic == postfinance.BIC
 
-    def name_get(self):
+    @api.depends("bic", "name", "street", "city")
+    def _compute_display_name(self):
         """Format displayed name"""
-        res = []
         cols = ("bic", "name", "street", "city")
         for bank in self:
             vals = (bank[x] for x in cols if bank[x])
-            res.append((bank.id, " - ".join(vals)))
-        return res
+            bank.display_name = " - ".join(vals)
 
     @api.model
     def name_search(self, name, args=None, operator="ilike", limit=80):
@@ -42,7 +41,7 @@ class Bank(models.Model):
         if name:
             for val in name.split(" "):
                 for col in cols:
-                    tmp_ids = self.search([(col, "ilike", val)] + args, limit=limit)
+                    tmp_ids = self.search([(col, operator, val)] + args, limit=limit)
                     if tmp_ids:
                         ids += tmp_ids.ids
                         break
@@ -51,4 +50,6 @@ class Bank(models.Model):
         # we sort by occurrence
         to_ret_ids = list(set(ids))
         to_ret_ids = sorted(to_ret_ids, key=lambda x: ids.count(x), reverse=True)
-        return self.browse(to_ret_ids).name_get()
+        records = self.browse(to_ret_ids)
+        records.fetch(["display_name"])
+        return [(record.id, record.display_name) for record in records.sudo()]

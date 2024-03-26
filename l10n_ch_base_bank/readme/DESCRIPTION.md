@@ -6,6 +6,4 @@ Features:
 
 Improve UX with onchanges:
 
-- automatically set bank based on clearing part of IBAN
-- allow direct entry of l10n_ch_postal which will fill acc_number
-- search invoices by ISR, with or without spaces
+- Automatically set bank based on clearing part of IBAN

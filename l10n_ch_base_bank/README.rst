@@ -36,9 +36,7 @@ Features:
 
 Improve UX with onchanges:
 
--  automatically set bank based on clearing part of IBAN
--  allow direct entry of l10n_ch_postal which will fill acc_number
--  search invoices by ISR, with or without spaces
+-  Automatically set bank based on clearing part of IBAN
 
 **Table of contents**
 
@@ -48,33 +46,7 @@ Improve UX with onchanges:
 Usage
 =====
 
-In partner bank account the type will be discovered automatically.
 
--  For IBAN accounts fill account number with IBAN.
-
-   -  if the IBAN is an IBAN from PostFinance it will fill the Postal
-      account number
-
--  For Postal accounts:
-
-   -  fill the account number with a postal account number 9 digits
-      format (e.g. 10-8060-7).
-   -  or fill the "Swiss postal account" with a postal account number 9
-      digits format (e.g. 10-8060-7).
-
-Entering a postal number of 9 digits will auto-complete the bank with
-PostFinance. (You might create it if you haven't installed l10n_ch_bank)
-
--  For ISR subscription numbers (postal account starting with 01 or 03):
-
-   -  fill the account number with a postal account number 9 digits
-      format (e.g. 01-23456-1).
-   -  or fill the "Swiss postal account" with a postal account number 9
-      digits format (e.g. 01-23456-1).
-
-It will automatically change the content of account number by adding
-"ISR" and the partner name to avoid duplicates with partner using the
-same ISR subscription number owned by a bank (ISR-B).
 
 Bug Tracker
 ===========
@@ -106,6 +78,7 @@ Contributors
 -  Akim Juillerat <akim.juillerat@camptocamp.com>
 -  Iryna Vyshnevska <i.vyshnevska@mobilunity.com>
 -  Simone Vanin <simone.vanin@agilebg.com>
+-  Nguyen Minh Chien <chien@trobz.com>
 
 Other credits
 -------------

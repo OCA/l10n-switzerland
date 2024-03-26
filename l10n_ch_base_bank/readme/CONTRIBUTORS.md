@@ -7,3 +7,4 @@
 - Akim Juillerat \<<akim.juillerat@camptocamp.com>\>
 - Iryna Vyshnevska \<<i.vyshnevska@mobilunity.com>\>
 - Simone Vanin \<<simone.vanin@agilebg.com>\>
+- Nguyen Minh Chien \<<chien@trobz.com>\>

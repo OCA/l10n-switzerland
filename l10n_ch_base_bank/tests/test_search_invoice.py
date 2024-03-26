@@ -6,7 +6,7 @@ from odoo.tests.common import Form
 
 
 @tagged("post_install", "-at_install")
-class TestSearchmove(common.SavepointCase):
+class TestSearchmove(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -20,8 +20,7 @@ class TestSearchmove(common.SavepointCase):
             {
                 "partner_id": cls.company.partner_id.id,
                 "bank_id": bank.id,
-                "acc_number": "ISR",
-                "l10n_ch_isr_subscription_chf": "01-162-8",
+                "acc_number": "CH15 3881 5158 3845 3843 7",
                 "sequence": 1,
             }
         )
@@ -37,13 +36,15 @@ class TestSearchmove(common.SavepointCase):
         )
 
     def new_form(self):
-        inv = Form(self.env["account.move"].with_context(default_type="out_invoice"))
-        # inv = Form(
-        #     self.env['account.move'],
-        #     view='account.view_move_form'
-        # )
-        inv.partner_id = self.partner
-        inv.journal_id = self.journal
+        inv = Form(
+            self.env["account.move"].with_context(
+                **{
+                    "default_move_type": "out_invoice",
+                    "default_partner_id": self.partner.id,
+                    "default_journal_id": self.journal.id,
+                }
+            )
+        )
         return inv
 
     def assert_find_ref(self, ref, operator, value):
@@ -106,7 +107,8 @@ class TestSearchmove(common.SavepointCase):
         move = inv_form.save()
 
         found = self.env["account.move"].search([("partner_id", "=", self.partner.id)])
-        self.assertEqual(move, found)
+        self.assertEqual(self.partner, found.mapped("partner_id"))
+        self.assertIn(move, found)
 
     def test_search_unary_operator(self):
         inv_form = self.new_form()
