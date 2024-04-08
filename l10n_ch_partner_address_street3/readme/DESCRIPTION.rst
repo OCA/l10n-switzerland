@@ -1,0 +1,1 @@
+This module takes into account `street3` from `partner-contact/partner_address_street3` in QR-bills.
