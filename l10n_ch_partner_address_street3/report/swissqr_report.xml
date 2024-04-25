@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="l10n_ch_swissqr_template"
+        inherit_id="l10n_ch.l10n_ch_swissqr_template"
+    >
+        <xpath
+            expr="//div[@id='receipt_indication_zone']//span[@t-field='o.partner_id.street2']"
+            position="after"
+        >
+            <span t-field="o.partner_id.street3" />
+        </xpath>
+        <xpath
+            expr="//div[@id='indications_zone']//span[@t-field='o.partner_id.street2']"
+            position="after"
+        >
+            <span t-field="o.partner_id.street3" />
+        </xpath>
+    </template>
+</odoo>
