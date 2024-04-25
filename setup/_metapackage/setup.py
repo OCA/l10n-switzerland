@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo-addon-l10n_ch_account_tags>=16.0dev,<16.1dev',
         'odoo-addon-l10n_ch_mis_reports>=16.0dev,<16.1dev',
+        'odoo-addon-l10n_ch_partner_address_street3>=16.0dev,<16.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',
