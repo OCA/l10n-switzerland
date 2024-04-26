@@ -4,7 +4,6 @@ from odoo import models
 
 
 class ResPartnerBank(models.Model):
-
     _inherit = "res.partner.bank"
 
     def _prepare_swiss_code_url_vals(
