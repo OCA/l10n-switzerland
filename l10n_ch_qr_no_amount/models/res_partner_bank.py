@@ -6,11 +6,20 @@ from odoo import models
 class ResPartnerBank(models.Model):
     _inherit = "res.partner.bank"
 
-    def _prepare_swiss_code_url_vals(
-        self, amount, currency_name, debtor_partner, reference_type, reference, comment
+    def _l10n_ch_get_qr_vals(
+        self,
+        amount,
+        currency_name,
+        debtor_partner,
+        free_communication,
+        structured_communication,
     ):
-        res = super()._prepare_swiss_code_url_vals(
-            amount, currency_name, debtor_partner, reference_type, reference, comment
+        res = super()._l10n_ch_get_qr_vals(
+            amount,
+            currency_name,
+            debtor_partner,
+            free_communication,
+            structured_communication,
         )
         if self.env.context.get("_no_amount_qr_code", False):
             res = self._remove_swiss_code_amount(res)
