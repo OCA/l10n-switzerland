@@ -2,13 +2,13 @@
     position: absolute;
     height: 12.5mm; /* 10 * 1.25 */
     width: 37.5mm; /* 30 * 1.25 */
-    top: 3.125mm; /* 2.5 * 1.25 */
-    left: 30.625mm; /* (52 - 30 + 2.5) * 1.25 = 24.5 * 1.25 */
+    top: 89.25mm; /* 2.5 * 1.25 */
+    left: 35.625mm; /* (52 - 30 + 2.5) * 1.25 = 24.5 * 1.25 */
 }
 .payment_amount_edges {
     position: absolute;
     height: 18.75mm; /* 15 * 1.25 */
     width: 50mm; /* 40 * 1.25 */
-    top: 8.5mm; /* 5 * 1.25 = 6.25, but it overlaps with Amount string so 8.5*/
-    left: 10.625mm; /* (46 - 40 + 2.5) * 1.25 = 8.5 * 1.25 */
+    top: 91mm; /* 5 * 1.25 = 6.25, but it overlaps with Amount string so 8.5*/
+    left: 16.625mm; /* (46 - 40 + 2.5) * 1.25 = 8.5 * 1.25 */
 }

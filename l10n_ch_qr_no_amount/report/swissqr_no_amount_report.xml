@@ -1,27 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <report
-        id="l10n_ch_qr_no_amount_report"
-        model="account.move"
-        report_type="qweb-pdf"
-        string="QR-No-Amount-bill"
-        name="l10n_ch_qr_no_amount.qr_no_amount_report_main"
-        file="l10n_ch_qr_no_amount.qr_report_main"
-        attachment="'QR-bill-' + object.name + '.pdf'"
-        menu="False"
-        print_report_name="'QR-bill-%s' % object.name"
-        paperformat="l10n_ch.paperformat_euro_no_margin"
-    />
 
-    <template id="assets_common_qr_no_amount" inherit_id="web.report_assets_common">
-        <xpath expr="." position="inside">
-            <link
-                type="text/scss"
-                rel="stylesheet"
-                href="/l10n_ch_qr_no_amount/static/src/scss/report_swissqr_no_amount.scss"
-            />
-        </xpath>
-    </template>
+    <record id="l10n_ch_qr_no_amount_report" model="ir.actions.report">
+        <field name="name">QR-No-Amount-bill</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_ch_qr_no_amount.qr_no_amount_report_main</field>
+        <field name="report_file">l10n_ch_qr_no_amount.qr_report_main</field>
+        <field name="attachment">'QR-bill-' + object.name + '.pdf'</field>
+        <field name="print_report_name">'QR-bill-%s' % object.name</field>
+        <field name="binding_model_id" ref="account.model_account_move" />
+        <field name="paperformat_id" ref="l10n_ch.paperformat_euro_no_margin" />
+    </record>
 
     <template
         id="l10n_ch_swissqr_no_amount_template"
@@ -39,8 +29,14 @@
             <attribute name="t-value">str()</attribute>
         </xpath>
         <xpath
-            expr="//div[@id='receipt_amount_zone']//span[@t-esc='formated_amount']"
-            position="replace"
+            expr="//div[@id='receipt_amount_zone']//span[@t-out='formated_amount']"
+            position="attributes"
+        >
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath
+            expr="//div[@id='receipt_amount_zone']//span[@t-out='formated_amount']"
+            position="after"
         >
             <img
                 class="receipt_amount_edges"
@@ -48,8 +44,14 @@
             />
         </xpath>
         <xpath
-            expr="//div[@id='amount_zone']//span[@t-esc='formated_amount']"
-            position="replace"
+            expr="//div[@id='amount_zone']//span[@t-out='formated_amount']"
+            position="attributes"
+        >
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath
+            expr="//div[@id='amount_zone']//span[@t-out='formated_amount']"
+            position="after"
         >
             <div><img
                     class="payment_amount_edges"
