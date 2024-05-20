@@ -34,7 +34,7 @@ class TestSCTCH(AccountTestInvoicingCommon):
         cls.account_expense = Account.search(
             [
                 (
-                    "user_type_id",
+                    "account_type.",
                     "=",
                     cls.env.ref("account.data_account_type_expenses").id,
                 )
@@ -44,7 +44,7 @@ class TestSCTCH(AccountTestInvoicingCommon):
         cls.account_payable = Account.search(
             [
                 (
-                    "user_type_id",
+                    "account_type.",
                     "=",
                     cls.env.ref("account.data_account_type_payable").id,
                 )

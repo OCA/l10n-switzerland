@@ -10,7 +10,7 @@
     "website": "https://github.com/OCA/l10n-switzerland",
     "author": "Akretion,Camptocamp,Odoo Community Association (OCA)",
     "license": "AGPL-3",
-    "depends": ["account_banking_pain_base","l10n_ch_qriban"],
+    "depends": ["account_banking_pain_base"],
     "data": ["views/account_payment_line.xml"],
     "installable": True,
 }
