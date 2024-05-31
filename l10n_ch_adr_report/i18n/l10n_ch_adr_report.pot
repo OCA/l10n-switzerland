@@ -4,10 +4,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0+e\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 11:10+0000\n"
-"PO-Revision-Date: 2021-03-23 11:10+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -51,36 +49,8 @@ msgid "Content / Pack."
 msgstr ""
 
 #. module: l10n_ch_adr_report
-#: model:ir.model.fields,field_description:l10n_ch_adr_report.field_product_product__product_content_package
-#: model:ir.model.fields,field_description:l10n_ch_adr_report.field_product_template__product_content_package
-msgid "Content Packaging"
-msgstr ""
-
-#. module: l10n_ch_adr_report
-#: model:ir.model.fields,field_description:l10n_ch_adr_report.field_product_product__content_package
-#: model:ir.model.fields,field_description:l10n_ch_adr_report.field_product_template__content_package
-msgid "Content Packaging - unused"
-msgstr ""
-
-#. module: l10n_ch_adr_report
-#: model:ir.model.fields.selection,name:l10n_ch_adr_report.selection__product_template__dangerous_good__dg
-msgid "DG"
-msgstr ""
-
-#. module: l10n_ch_adr_report
 #: model:ir.model,name:l10n_ch_adr_report.model_report_l10n_ch_adr_report_report_dg_l10n_ch
 msgid "Dangerous Delivery Report ADR"
-msgstr ""
-
-#. module: l10n_ch_adr_report
-#: model:ir.model.fields,field_description:l10n_ch_adr_report.field_product_product__dangerous_good
-#: model:ir.model.fields,field_description:l10n_ch_adr_report.field_product_template__dangerous_good
-msgid "Dangerous Good"
-msgstr ""
-
-#. module: l10n_ch_adr_report
-#: model_terms:ir.ui.view,arch_db:l10n_ch_adr_report.product_variant_easy_edit_view
-msgid "Dangerous attributes"
 msgstr ""
 
 #. module: l10n_ch_adr_report
@@ -95,8 +65,15 @@ msgid "Delivery note no."
 msgstr ""
 
 #. module: l10n_ch_adr_report
+#: model:ir.model.fields,field_description:l10n_ch_adr_report.field_product_product__display_name
 #: model:ir.model.fields,field_description:l10n_ch_adr_report.field_report_l10n_ch_adr_report_report_dg_l10n_ch__display_name
 msgid "Display Name"
+msgstr ""
+
+#. module: l10n_ch_adr_report
+#: code:addons/l10n_ch_adr_report/models/product_product.py:0
+#, python-format
+msgid "Environmentally hazardous"
 msgstr ""
 
 #. module: l10n_ch_adr_report
@@ -105,18 +82,20 @@ msgid "Factor"
 msgstr ""
 
 #. module: l10n_ch_adr_report
+#: model:ir.model.fields,field_description:l10n_ch_adr_report.field_product_product__id
 #: model:ir.model.fields,field_description:l10n_ch_adr_report.field_report_l10n_ch_adr_report_report_dg_l10n_ch__id
 msgid "ID"
 msgstr ""
 
 #. module: l10n_ch_adr_report
-#: model:ir.model.fields.selection,name:l10n_ch_adr_report.selection__product_template__dangerous_good__lg
-msgid "LQ"
+#: model:ir.model.fields,field_description:l10n_ch_adr_report.field_product_product____last_update
+#: model:ir.model.fields,field_description:l10n_ch_adr_report.field_report_l10n_ch_adr_report_report_dg_l10n_ch____last_update
+msgid "Last Modified on"
 msgstr ""
 
 #. module: l10n_ch_adr_report
-#: model:ir.model.fields,field_description:l10n_ch_adr_report.field_report_l10n_ch_adr_report_report_dg_l10n_ch____last_update
-msgid "Last Modified on"
+#: model:ir.model.fields,field_description:l10n_ch_adr_report.field_product_product__adr_report_class_display_name
+msgid "Name, as required for the DG report"
 msgstr ""
 
 #. module: l10n_ch_adr_report
@@ -137,11 +116,6 @@ msgstr ""
 #. module: l10n_ch_adr_report
 #: model:ir.model,name:l10n_ch_adr_report.model_product_product
 msgid "Product"
-msgstr ""
-
-#. module: l10n_ch_adr_report
-#: model:ir.model,name:l10n_ch_adr_report.model_product_template
-msgid "Product Template"
 msgstr ""
 
 #. module: l10n_ch_adr_report
@@ -187,4 +161,10 @@ msgstr ""
 #. module: l10n_ch_adr_report
 #: model_terms:ir.ui.view,arch_db:l10n_ch_adr_report.report_dg_swiss_partner_block
 msgid "Transportation paper"
+msgstr ""
+
+#. module: l10n_ch_adr_report
+#: code:addons/l10n_ch_adr_report/models/product_product.py:0
+#, python-format
+msgid "UN"
 msgstr ""
