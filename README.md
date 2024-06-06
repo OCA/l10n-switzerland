@@ -1,14 +1,15 @@
 
 [![Runboat](https://img.shields.io/badge/runboat-Try%20me-875A7B.png)](https://runboat.odoo-community.org/builds?repo=OCA/l10n-switzerland&target_branch=14.0)
-[![Build Status](https://travis-ci.com/OCA/l10n-switzerland.svg?branch=14.0)](https://travis-ci.com/OCA/l10n-switzerland)
+[![Pre-commit Status](https://github.com/OCA/l10n-switzerland/actions/workflows/pre-commit.yml/badge.svg?branch=14.0)](https://github.com/OCA/l10n-switzerland/actions/workflows/pre-commit.yml?query=branch%3A14.0)
+[![Build Status](https://github.com/OCA/l10n-switzerland/actions/workflows/test.yml/badge.svg?branch=14.0)](https://github.com/OCA/l10n-switzerland/actions/workflows/test.yml?query=branch%3A14.0)
 [![codecov](https://codecov.io/gh/OCA/l10n-switzerland/branch/14.0/graph/badge.svg)](https://codecov.io/gh/OCA/l10n-switzerland)
 [![Translation Status](https://translation.odoo-community.org/widgets/l10n-switzerland-14-0/-/svg-badge.svg)](https://translation.odoo-community.org/engage/l10n-switzerland-14-0/?utm_source=widget)
 
 <!-- /!\ do not modify above this line -->
 
-# l10n-switzerland
+# Swiss Localization
 
-TODO: add repo description.
+Swiss Localization Modules
 
 <!-- /!\ do not modify below this line -->
 
