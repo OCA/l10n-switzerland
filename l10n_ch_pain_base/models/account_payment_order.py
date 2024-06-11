@@ -83,10 +83,11 @@ class AccountPaymentOrder(models.Model):
                 raise UserError(
                     _(
                         "For pain.001.001.03.ch.02, for non-ISR payments, "
-                        "the BIC is required on the bank '%s' related to the "
-                        "bank account '%s'"
+                        "the BIC is required on the bank '%(name)s' related to the "
+                        "bank account '%(account)s'",
+                        name=partner_bank.bank_id.name,
+                        account=partner_bank.acc_number,
                     )
-                    % (partner_bank.bank_id.name, partner_bank.acc_number)
                 )
         return super().generate_party_agent(
             parent_node,
@@ -175,5 +176,6 @@ class AccountPaymentOrder(models.Model):
             creditor_ref_info_type_code.text = "QRR"
             creditor_reference = etree.SubElement(creditor_ref_information, "Ref")
             creditor_reference.text = line.payment_line_ids[0].communication
+            return True
         else:
-            super().generate_remittance_info_block(parent_node, line, gen_args)
+            return super().generate_remittance_info_block(parent_node, line, gen_args)
