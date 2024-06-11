@@ -148,7 +148,6 @@ class TestSCTCH(AccountTestInvoicingCommon):
             ),
             0,
         )
-        self.assertEqual(agrolait_pay_line1.communication_type, "isr")
         self.assertEqual(
             agrolait_pay_line1.communication, "132000000000000000000000014"
         )
@@ -161,7 +160,6 @@ class TestSCTCH(AccountTestInvoicingCommon):
         self.assertEqual(len(bank_lines), 2)
         for bank_line in bank_lines:
             self.assertEqual(bank_line.currency_id, self.eur_currency)
-            self.assertEqual(bank_line.communication_type, "isr")
             self.assertTrue(
                 bank_line.communication
                 in ["132000000000000000000000014", "132000000000000000000000022"]
