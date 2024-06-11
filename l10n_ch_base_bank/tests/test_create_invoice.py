@@ -1,10 +1,10 @@
 # Copyright 2012-2019 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import exceptions
-from odoo.tests.common import Form, SavepointCase
+from odoo.tests.common import Form, TransactionCase
 
 
-class TestCreateMove(SavepointCase):
+class TestCreateMove(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -36,14 +36,12 @@ class TestCreateMove(SavepointCase):
         if with_bank_account:
             self.journal.bank_account_id = self.bank_account
         inv = Form(
-            self.env["account.move"].with_context(default_move_type="out_invoice")
+            self.env["account.move"].with_context(
+                default_move_type="out_invoice",
+                default_journal_id=self.journal.id,
+            )
         )
-        # Form(
-        #     self.env['account.move'],
-        #     view='account.view_move_form'
-        # )
         inv.partner_id = self.partner
-        inv.journal_id = self.journal
         return inv
 
     def test_emit_move_with_isr_ref(self):

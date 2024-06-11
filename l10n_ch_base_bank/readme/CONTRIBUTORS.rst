@@ -7,3 +7,4 @@
 * Akim Juillerat <akim.juillerat@camptocamp.com>
 * Iryna Vyshnevska <i.vyshnevska@mobilunity.com>
 * Simone Vanin <simone.vanin@agilebg.com>
+* Alberto Nieto <alberto.nieto@braintec.com>

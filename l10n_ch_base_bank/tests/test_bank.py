@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import exceptions
 from odoo.tests import tagged
-from odoo.tests.common import Form, SavepointCase
+from odoo.tests.common import Form, TransactionCase
 from odoo.tools import mute_logger
 
 CH_SUBSCRIPTION = "01-162-8"  # partner ISR subsr num we register under postal
@@ -15,7 +15,7 @@ FR_IBAN = "FR83 8723 4133 8709 9079 4002 530"
 
 
 @tagged("post_install", "-at_install")
-class TestBank(SavepointCase):
+class TestBank(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

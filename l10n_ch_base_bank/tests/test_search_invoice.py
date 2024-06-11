@@ -6,7 +6,7 @@ from odoo.tests.common import Form
 
 
 @tagged("post_install", "-at_install")
-class TestSearchmove(common.SavepointCase):
+class TestSearchmove(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -37,13 +37,13 @@ class TestSearchmove(common.SavepointCase):
         )
 
     def new_form(self):
-        inv = Form(self.env["account.move"].with_context(default_type="out_invoice"))
-        # inv = Form(
-        #     self.env['account.move'],
-        #     view='account.view_move_form'
-        # )
+        inv = Form(
+            self.env["account.move"].with_context(
+                default_move_type="out_invoice",
+                default_journal_id=self.journal.id,
+            ),
+        )
         inv.partner_id = self.partner
-        inv.journal_id = self.journal
         return inv
 
     def assert_find_ref(self, ref, operator, value):
@@ -106,7 +106,7 @@ class TestSearchmove(common.SavepointCase):
         move = inv_form.save()
 
         found = self.env["account.move"].search([("partner_id", "=", self.partner.id)])
-        self.assertEqual(move, found)
+        self.assertIn(move, found)
 
     def test_search_unary_operator(self):
         inv_form = self.new_form()

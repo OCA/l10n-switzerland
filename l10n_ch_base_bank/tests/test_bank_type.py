@@ -6,7 +6,7 @@ CH_POSTAL = "10-8060-7"
 CH_SUBSCRIPTION = "01-162-8"
 
 
-class TestBankType(common.SavepointCase):
+class TestBankType(common.TransactionCase):
     def test_is_bank_account_with_isr_issuer(self):
         bank = self.env["res.bank"].create(
             {"name": "BCV", "bic": "BCVLCH2LXXX", "clearing": "234234"}
