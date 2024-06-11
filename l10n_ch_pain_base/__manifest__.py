@@ -5,12 +5,12 @@
 {
     "name": "Switzerland - ISO 20022",
     "summary": "ISO 20022 base module for Switzerland",
-    "version": "14.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "Finance",
     "website": "https://github.com/OCA/l10n-switzerland",
     "author": "Akretion,Camptocamp,Odoo Community Association (OCA)",
     "license": "AGPL-3",
-    "depends": ["account_banking_pain_base", "l10n_ch_base_bank"],
+    "depends": ["account_banking_pain_base"],
     "data": ["views/account_payment_line.xml"],
     "installable": True,
 }
