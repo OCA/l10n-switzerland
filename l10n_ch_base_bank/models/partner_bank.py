@@ -94,9 +94,11 @@ class ResPartnerBank(models.Model):
         """This method makes sure to generate a unique name"""
         if postal_number and postal_number[:2] in ["01", "03"]:
             if partner_name:
-                acc_name = _("ISR {} {}").format(postal_number, partner_name)
+                acc_name = _(
+                    "ISR %(pos_n)s %(pn)s", pos_n=postal_number, pn=partner_name
+                )
             else:
-                acc_name = _("ISR {}").format(postal_number)
+                acc_name = _("ISR %(postal_number)s", postal_number=postal_number)
         else:
             return postal_number
 

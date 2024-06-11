@@ -10,15 +10,13 @@ class Bank(models.Model):
 
     _inherit = "res.bank"
 
-    code = fields.Char(string="Code", help="Internal reference")
+    code = fields.Char(help="Internal reference")
     clearing = fields.Char(
         string="Clearing number",
         help="Swiss unique bank identifier also used in IBAN number",
     )
-    city = fields.Char(string="City", help="City of the bank")
-    country_code = fields.Char(
-        string="Country code", related="country.code", readonly=True
-    )
+    city = fields.Char(help="City of the bank")
+    country_code = fields.Char(related="country.code", readonly=True)
 
     def is_swiss_post(self):
         return self.bic == postfinance.BIC
