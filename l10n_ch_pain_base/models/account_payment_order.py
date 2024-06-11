@@ -3,8 +3,7 @@
 
 from lxml import etree
 
-from odoo import _, api, models
-from odoo.exceptions import UserError
+from odoo import api, models
 
 
 class AccountPaymentOrder(models.Model):
@@ -70,93 +69,6 @@ class AccountPaymentOrder(models.Model):
             eval_ctx,
             gen_args,
         )
-
-    @api.model
-    def generate_party_agent(
-        self, parent_node, party_type, order, partner_bank, gen_args, bank_line=None
-    ):
-        if gen_args.get("pain_flavor") == "pain.001.001.03.ch.02" and bank_line:
-            if bank_line.payment_line_ids[:1].local_instrument == "CH01":
-                # Don't set the creditor agent on ISR/CH01 payments
-                return True
-            elif not partner_bank.bank_bic:
-                raise UserError(
-                    _(
-                        "For pain.001.001.03.ch.02, for non-ISR payments, "
-                        "the BIC is required on the bank '%(name)s' related to the "
-                        "bank account '%(account)s'",
-                        name=partner_bank.bank_id.name,
-                        account=partner_bank.acc_number,
-                    )
-                )
-        return super().generate_party_agent(
-            parent_node,
-            party_type,
-            order,
-            partner_bank,
-            gen_args,
-            bank_line=bank_line,
-        )
-
-    @api.model
-    def generate_party_acc_number(
-        self, parent_node, party_type, order, partner_bank, gen_args, bank_line=None
-    ):
-        if (
-            gen_args.get("pain_flavor") == "pain.001.001.03.ch.02"
-            and bank_line
-            and bank_line.payment_line_ids[:1].local_instrument == "CH01"
-        ):
-            if not partner_bank.l10n_ch_postal:
-                raise UserError(
-                    _(
-                        "The field 'Postal account' is not set on the bank "
-                        "account '%s'."
-                    )
-                    % partner_bank.acc_number
-                )
-            party_account = etree.SubElement(parent_node, "%sAcct" % party_type)
-            party_account_id = etree.SubElement(party_account, "Id")
-            party_account_other = etree.SubElement(party_account_id, "Othr")
-            party_account_other_id = etree.SubElement(party_account_other, "Id")
-            party_account_other_id.text = partner_bank.l10n_ch_postal
-            return True
-        else:
-            return super().generate_party_acc_number(
-                parent_node,
-                party_type,
-                order,
-                partner_bank,
-                gen_args,
-                bank_line=bank_line,
-            )
-
-    @api.model
-    def generate_address_block(self, parent_node, partner, gen_args):
-        """Generate the piece of the XML corresponding to PstlAdr"""
-        if partner.country_id:
-            postal_address = etree.SubElement(parent_node, "PstlAdr")
-
-            country = etree.SubElement(postal_address, "Ctry")
-            country.text = self._prepare_field(
-                "Country",
-                "partner.country_id.code",
-                {"partner": partner},
-                2,
-                gen_args=gen_args,
-            )
-
-            if partner.street or partner.street2:
-                adrline1 = etree.SubElement(postal_address, "AdrLine")
-                adrline1.text = ", ".join(
-                    filter(None, [partner.street, partner.street2])
-                )
-
-                if partner.zip and partner.city:
-                    adrline2 = etree.SubElement(postal_address, "AdrLine")
-                    adrline2.text = " ".join([partner.zip, partner.city])
-
-        return True
 
     @api.model
     def generate_remittance_info_block(self, parent_node, line, gen_args):
