@@ -6,7 +6,7 @@
     "category": "Localisation",
     "summary": "",
     "version": "13.0.1.0.1",
-    "author": "Camptocamp SA, Odoo Community Association (OCA)",
+    "author": "Camptocamp, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/l10n-switzerland",
     "license": "AGPL-3",
     "depends": ["l10n_ch"],
