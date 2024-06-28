@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="l10n_ch_qr_no_amount_report" model="ir.actions.report">
+        <field name="name">QR-No-Amount-bill</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_ch_qr_no_amount.qr_no_amount_report_main</field>
+        <field name="report_file">l10n_ch_qr_no_amount.qr_report_main</field>
+        <field name="attachment">'QR-bill-' + object.name + '.pdf'</field>
+        <field name="print_report_name">'QR-bill-%s' % object.name</field>
+        <field name="binding_model_id" ref="account.model_account_move" />
+        <field name="paperformat_id" ref="l10n_ch.paperformat_euro_no_margin" />
+    </record>
+
+    <template
+        id="l10n_ch_swissqr_no_amount_template"
+        inherit_id="l10n_ch.l10n_ch_swissqr_template"
+        primary="True"
+    >
+
+        <xpath expr="//t[@t-set='o']" position="attributes">
+            <attribute
+                name="t-value"
+            >o.with_context(**{'lang': lang, '_no_amount_qr_code': True})</attribute>
+        </xpath>
+        <!-- Replace amount with blank fields with black corners -->
+        <xpath expr="//t[@t-set='formated_amount']" position="attributes">
+            <attribute name="t-value">str()</attribute>
+        </xpath>
+        <xpath
+            expr="//div[@id='receipt_amount_zone']//span[@t-out='formated_amount']"
+            position="attributes"
+        >
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath
+            expr="//div[@id='receipt_amount_zone']//span[@t-out='formated_amount']"
+            position="after"
+        >
+            <img
+                class="receipt_amount_edges"
+                src="/l10n_ch_qr_no_amount/static/src/img/Betragsfeld_Eckmarke.png"
+            />
+        </xpath>
+        <xpath
+            expr="//div[@id='amount_zone']//span[@t-out='formated_amount']"
+            position="attributes"
+        >
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath
+            expr="//div[@id='amount_zone']//span[@t-out='formated_amount']"
+            position="after"
+        >
+            <div><img
+                    class="payment_amount_edges"
+                    src="/l10n_ch_qr_no_amount/static/src/img/Feld_Betrag_40x15mm.png"
+                /></div>
+        </xpath>
+    </template>
+
+    <template id="l10n_ch_qr_no_amount.qr_no_amount_report_main">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.partner_id.lang" />
+                <t
+                    t-call="l10n_ch_qr_no_amount.l10n_ch_swissqr_no_amount_template"
+                    t-lang="lang"
+                />
+            </t>
+        </t>
+    </template>
+</odoo>
