@@ -14,9 +14,10 @@
     "application": False,
     "installable": True,
     "depends": [
-        "account_accountant",
+        "account",
     ],
     "data": [
+        "security/ir.model.access.csv",
         "wizard/l10n_ch_import_cresus_view.xml",
         "views/account_tax_view.xml",
         "views/menu.xml",

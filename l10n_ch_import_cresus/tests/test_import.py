@@ -6,9 +6,7 @@ import difflib
 import logging
 import tempfile
 
-import openerp.tests.common as common
-from StringIO import StringIO
-
+import odoo.tests.common as common
 from odoo.modules import get_resource_path
 
 _logger = logging.getLogger(__name__)
@@ -20,11 +18,7 @@ class TestImport(common.TransactionCase):
 
         tax_obj = self.env["account.tax"]
         account_obj = self.env["account.account"]
-        analytic_account_obj = self.env["account.analytic.account"]
 
-        user_type = self.env["account.account.type"].search(
-            [("include_initial_balance", "=", False)], limit=1
-        )
         for code in [
             "1000",
             "1010",
@@ -40,13 +34,13 @@ class TestImport(common.TransactionCase):
         ]:
             found = account_obj.search([("code", "=", code)])
             if found:  # patch it within the transaction
-                found.user_type_id = user_type.id
+                found.account_type = "income"
             else:
                 account_obj.create(
                     {
                         "name": "dummy %s" % code,
                         "code": code,
-                        "user_type_id": user_type.id,
+                        "account_type": "income",
                         "reconcile": True,
                     }
                 )
@@ -58,7 +52,6 @@ class TestImport(common.TransactionCase):
                 "tax_cresus_mapping": "VAT",
             }
         )
-        self.reserve = analytic_account_obj.create({"name": "Fortune", "code": "10"})
 
     def test_import(self):
         journal_obj = self.env["account.journal"]
@@ -72,11 +65,8 @@ class TestImport(common.TransactionCase):
             res = get_resource_path("l10n_ch_import_cresus", "tests", filename)
             return res
 
-        with open(get_path("input.csv")) as src:
-            buf = StringIO()
-            base64.encode(src, buf)
-            contents = buf.getvalue()
-            buf.close()
+        with open(get_path("input.csv"), "rb") as src:
+            contents = base64.b64encode(src.read()).decode("utf-8")
 
         wizard = self.env["account.cresus.import"].create(
             {"journal_id": misc.id, "file": contents}
@@ -84,14 +74,14 @@ class TestImport(common.TransactionCase):
         wizard._import_file()
 
         res = wizard.imported_move_ids
-        res.assert_balanced()
+        res._check_balanced({"records": res, "self": res})
 
-        gold = open(get_path("golden-output.txt"))
-        temp = tempfile.NamedTemporaryFile(prefix="odoo-l10n_ch_import_cresus")
+        gold = open(get_path("golden-output.txt"), "r")
+        temp = tempfile.NamedTemporaryFile("w+", prefix="odoo-l10n_ch_import_cresus")
 
         # Get a predictable representation that can be compared across runs
         def p(u):
-            temp.write(u.encode("utf-8"))
+            temp.write(u)
             temp.write("\n")
 
         first = True

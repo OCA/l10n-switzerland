@@ -6,12 +6,10 @@
         <field name="res_model">account.cresus.import</field>
         <field name="domain" />
         <field name="target">new</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="cresus_move_line_importer_form" />
     </record>
     <menuitem
-        icon="STOCK_EXECUTE"
         name="Accounting Cresus Import"
         action="action_account_cresus_import"
         id="menu_account_cresus_import"
