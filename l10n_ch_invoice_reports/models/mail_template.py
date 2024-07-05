@@ -17,8 +17,9 @@ class MailTemplate(models.Model):
         result = super().generate_email(res_ids, fields)
         if self._should_print_invoice_attachment():
             for invoice in self.env[self.model_id.model].browse(res_ids):
-                invoice_attachments = self.generate_invoice_attachment(invoice)
-                result[invoice.id]["attachments"] = invoice_attachments
+                if invoice.company_id.partner_id.country_id.code == "CH":
+                    invoice_attachments = self.generate_invoice_attachment(invoice)
+                    result[invoice.id]["attachments"] = invoice_attachments
         return result
 
     def _should_print_invoice_attachment(self):
@@ -27,7 +28,12 @@ class MailTemplate(models.Model):
         if (
             self.model_id.model == "account.move"
             and self.report_template.report_name
-            == "l10n_ch_invoice_reports.account_move_payment_report"
+            in (
+                # Called from action Invoice with payment slip(s)
+                "l10n_ch_invoice_reports.account_move_payment_report",
+                # Called from Send & Print button
+                "account.report_invoice_with_payments",
+            )
         ):
             return True
 
