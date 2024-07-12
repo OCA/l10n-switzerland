@@ -21,6 +21,9 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[ebill_postfinance](ebill_postfinance/) | 16.0.1.0.0 | [![TDu](https://github.com/TDu.png?size=30px)](https://github.com/TDu) | Postfinance eBill integration
+[ebill_postfinance_server_env](ebill_postfinance_server_env/) | 16.0.1.0.0 |  | Server environment for eBill Postfinance
+[ebill_postfinance_stock](ebill_postfinance_stock/) | 16.0.1.0.0 | [![TDu](https://github.com/TDu.png?size=30px)](https://github.com/TDu) | Add stock integration to Postfinance eBill
 [l10n_ch_account_tags](l10n_ch_account_tags/) | 16.0.1.0.0 |  | Switzerland Account Tags
 [l10n_ch_mis_reports](l10n_ch_mis_reports/) | 16.0.1.0.0 |  | Specific MIS reports for switzerland localization
 [l10n_ch_partner_address_street3](l10n_ch_partner_address_street3/) | 16.0.1.0.0 |  | Take into account street3 in QR-bills
