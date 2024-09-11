@@ -42,9 +42,18 @@ class IrActionsReport(models.Model):
         if self.report_name not in reports or not res_ids:
             return super()._render_qweb_pdf(res_ids, data)
 
-        inv_report = self._get_report_from_name("account.report_invoice")
-        qr_report = self._get_report_from_name("l10n_ch.qr_report_main")
-
+        inv_report_id = self.env["ir.config_parameter"].sudo().get_param(
+            "invoice_report_id"
+        ) and int(self.env["ir.config_parameter"].sudo().get_param("invoice_report_id"))
+        inv_report = self.env["ir.actions.report"].browse(
+            inv_report_id
+        ) or self._get_report_from_name("account.report_invoice")
+        qr_report_id = self.env["ir.config_parameter"].sudo().get_param(
+            "qr_report_id"
+        ) and int(self.env["ir.config_parameter"].sudo().get_param("qr_report_id"))
+        qr_report = self.env["ir.actions.report"].browse(
+            qr_report_id
+        ) or self._get_report_from_name("l10n_ch.qr_report_main")
         io_list = []
         for inv in self.env["account.move"].browse(res_ids):
             invoice_pdf, _ = inv_report._render_qweb_pdf(inv.id, data)

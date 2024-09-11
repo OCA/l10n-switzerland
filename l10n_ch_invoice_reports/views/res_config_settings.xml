@@ -15,17 +15,34 @@
                         </div>
                         <div class="mt16">
                             <div class="content-group" id="invoice_report_options">
-                                <div class="row">
-                                    <field
-                                        name="print_qr_invoice"
-                                        class="col-lg-1 ml16"
-                                    />
-                                    <label for="print_qr_invoice" />
+                                <field name="print_qr_invoice" class="mb16" />
+                                <label for="print_qr_invoice" />
+                                <span
+                                    class="fa fa-lg fa-building-o"
+                                    title="Values set here are company-specific."
+                                />
+                                <div>
+                                    <label for="invoice_report_id" />
                                     <span
                                         class="fa fa-lg fa-building-o"
                                         title="Values set here are company-specific."
                                     />
                                 </div>
+                                <div class="text-muted">
+                                    Report invoice printed
+                                </div>
+                                <field name="invoice_report_id" class="mb16" />
+                                <div>
+                                    <label for="qr_report_id" />
+                                    <span
+                                        class="fa fa-lg fa-building-o"
+                                        title="Values set here are company-specific."
+                                    />
+                                </div>
+                                    <div class="text-muted">
+                                        QR invoice printed
+                                    </div>
+                                <field name="qr_report_id" class="mb16" />
                             </div>
                         </div>
                     </div>
