@@ -8,3 +8,5 @@ class ResCompany(models.Model):
         string="Print invoice with QR bill",
         default=True,
     )
+    invoice_report_id = fields.Many2one("ir.actions.report", string="Invoice Report")
+    qr_report_id = fields.Many2one("ir.actions.report", string="QR Report")

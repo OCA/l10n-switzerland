@@ -47,6 +47,7 @@ Usage
 =====
 
 Print report using one of 3 additional print actions in Accounting
+Define which reports will be printed using the new settings added into accounting res settings
 
 Bug Tracker
 ===========
@@ -72,6 +73,7 @@ Contributors
 * Anna Janiszewska <anna.janiszewska@camptocamp.com>
 * `Trobz <https://trobz.com>`_:
     * Son Ho <sonhd@trobz.com>
+* Victor Vermot <victor.vermot@camptocamp.com>
 
 Other credits
 ~~~~~~~~~~~~~
