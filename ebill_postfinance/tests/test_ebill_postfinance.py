@@ -25,7 +25,6 @@ class TestEbillPostfinance(CommonCase):
             os.path.join(
                 os.path.dirname(__file__), "examples", "yellowbill_qr_iban.xml"
             ),
-            "r",
         ) as f:
             data = f.read()
         data = data.encode("utf-8")

@@ -5,6 +5,7 @@ import logging
 import os
 from os.path import dirname, join
 
+import requests
 from vcr import VCR
 from xmlunittest import XmlTestMixin
 
@@ -16,6 +17,7 @@ _logger = logging.getLogger(__name__)
 class CommonCase(TransactionCase, XmlTestMixin):
     @classmethod
     def setUpClass(cls):
+        cls._super_send = requests.Session.send
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.service = cls.env["ebill.postfinance.service"].create(
@@ -41,7 +43,7 @@ class CommonCase(TransactionCase, XmlTestMixin):
         cls.company.phone = ""
         cls.bank = cls.env.ref("base.res_bank_1")
         cls.bank.bic = 777
-        cls.tax7 = cls.env.ref("l10n_ch.{}_vat_77".format(cls.company.id))
+        cls.tax7 = cls.env.ref(f"account.{cls.company.id}_vat_77")
         cls.partner_bank = cls.env["res.partner.bank"].create(
             {
                 "bank_id": cls.bank.id,
@@ -160,6 +162,11 @@ class CommonCase(TransactionCase, XmlTestMixin):
         )
         cls.invoice.payment_reference = "210000000003139471430009017"
         cls.invoice.partner_bank_id = cls.partner_bank.id
+
+    @classmethod
+    def _request_handler(cls, s, r, /, **kw):
+        """Don't block external requests."""
+        return cls._super_send(s, r, **kw)
 
     @staticmethod
     def compare_xml_line_by_line(content, expected):

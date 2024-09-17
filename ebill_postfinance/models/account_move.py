@@ -13,7 +13,6 @@ _logger = logging.getLogger(__name__)
 
 
 class AccountMove(models.Model):
-
     _inherit = "account.move"
 
     @api.onchange("transmit_method_id")
@@ -40,7 +39,7 @@ class AccountMove(models.Model):
             raise UserError(_("Error generating postfinance eBill"))
         message.send_to_postfinance()
         self.invoice_exported = True
-        return "Postfinance invoice generated and in state {}".format(message.state)
+        return f"Postfinance invoice generated and in state {message.state}"
 
     def create_postfinance_ebill(self):
         """Generate the message record for an invoice."""

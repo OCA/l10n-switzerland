@@ -73,7 +73,7 @@ class EbillPostfinanceService(models.Model):
         msg = ["Test connection to service"]
         res = self.ping_service()
         if res:
-            msg.append("Success pinging service \n  Receive :{}".format(res))
+            msg.append(f"Success pinging service \n  Receive :{res}")
         else:
             msg.append(" - Failed pinging service")
         raise UserError("\n".join(msg))

@@ -17,18 +17,19 @@ eBill Postfinance
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fl10n--switzerland-lightgray.png?logo=github
-    :target: https://github.com/OCA/l10n-switzerland/tree/16.0/ebill_postfinance
+    :target: https://github.com/OCA/l10n-switzerland/tree/17.0/ebill_postfinance
     :alt: OCA/l10n-switzerland
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/l10n-switzerland-16-0/l10n-switzerland-16-0-ebill_postfinance
+    :target: https://translation.odoo-community.org/projects/l10n-switzerland-17-0/l10n-switzerland-17-0-ebill_postfinance
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/l10n-switzerland&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/l10n-switzerland&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module implements the exchange of electronic invoices with the Postfinance web service.
+This module implements the exchange of electronic invoices with the
+Postfinance web service.
 
 **Table of contents**
 
@@ -38,48 +39,54 @@ This module implements the exchange of electronic invoices with the Postfinance 
 Installation
 ============
 
-This module needs the Python library `ebilling_postfiance` which can be installed from Pypi.
-More information can be found at `<repository https://github.com/camptocamp/ebilling-postfinance>`_.
+This module needs the Python library ebilling_postfiance which can be
+installed from Pypi. More information can be found at [repository
+`https://github.com/camptocamp/ebilling-postfinance](repository%20https://github.com/camptocamp/ebilling-postfinance) <https://github.com/camptocamp/ebilling-postfinance](repository%20https://github.com/camptocamp/ebilling-postfinance)>`__.
 
 Configuration
 =============
 
 Create a service
-================
+----------------
 
-First you need to be registred on 'Postfinance eBill service <https://www.postfinance.ch/en/business/products/accounts-receivable-solutions/e-bill-invoice-issuer.html>'
-To create a service go to `Accounting - Configuration - Payments - Postfinance eBill Service`
+First you need to be registred on 'Postfinance eBill service
+<https://www.postfinance.ch/en/business/products/accounts-receivable-solutions/e-bill-invoice-issuer.html>'
+To create a service go to Accounting - Configuration - Payments -
+Postfinance eBill Service
 
 Configure a customer and create his contract
-============================================
+--------------------------------------------
 
-The contracts specific to Postfinance e-billing are located in `Accounting - Customers - eBill Postfinance Contract`
-Create a contract for a customer with his PayerId and make sure that the contract is active by being in `Open` state with valid start/end dates.
+The contracts specific to Postfinance e-billing are located in
+Accounting - Customers - eBill Postfinance Contract Create a contract
+for a customer with his PayerId and make sure that the contract is
+active by being in Open state with valid start/end dates.
 
-Set `Customer Invoice Transmission Method` on the customer to Postfinance.
+Set Customer Invoice Transmission Method on the customer to Postfinance.
 
 Usage
 =====
 
 To use this module, you need to:
 
-#. Configure the service, customers and contracts as described in the CONFIGURATION section.
-#. Create an invoice for a customer with an open Postfinance contract.
-#. Validate the invoice, and click the Send eBill button.
+1. Configure the service, customers and contracts as described in the
+   CONFIGURATION section.
+2. Create an invoice for a customer with an open Postfinance contract.
+3. Validate the invoice, and click the Send eBill button.
 
 Known issues / Roadmap
 ======================
 
 ToDo
 
-* Add option to import the contract subscription (csv)
-* Add the download of this csv from web service, but what is the endpoint ?
-
+-  Add option to import the contract subscription (csv)
+-  Add the download of this csv from web service, but what is the
+   endpoint ?
 
 Nice to have
 
-* Add a link to the failed job in the chatter message.
-* Add an action on partner to create a ebilling contract.
+-  Add a link to the failed job in the chatter message.
+-  Add an action on partner to create a ebilling contract.
 
 Bug Tracker
 ===========
@@ -87,7 +94,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/l10n-switzerland/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/l10n-switzerland/issues/new?body=module:%20ebill_postfinance%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/l10n-switzerland/issues/new?body=module:%20ebill_postfinance%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -95,17 +102,17 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Camptocamp
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Thierry Ducrest <thierry.ducrest@camptocamp.com>
+-  Thierry Ducrest <thierry.ducrest@camptocamp.com>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -125,6 +132,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-TDu| 
 
-This module is part of the `OCA/l10n-switzerland <https://github.com/OCA/l10n-switzerland/tree/16.0/ebill_postfinance>`_ project on GitHub.
+This module is part of the `OCA/l10n-switzerland <https://github.com/OCA/l10n-switzerland/tree/17.0/ebill_postfinance>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
