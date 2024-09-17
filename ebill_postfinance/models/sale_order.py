@@ -5,7 +5,6 @@ from odoo import api, fields, models
 
 
 class SaleOrder(models.Model):
-
     _inherit = "sale.order"
 
     postfinance_ebill_client_order_ref = fields.Char(

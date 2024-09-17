@@ -77,7 +77,7 @@
                             <field name="file_type_to_use" readonly="1" />
                             <field
                                 name="use_file_type_xml_paynet"
-                                attrs="{'invisible':[('file_type_to_use', '!=', 'XML')]}"
+                                invisible="[('file_type_to_use', '!=', 'XML')]"
                             />
                             <field
                                 name="partner_bank_id"
