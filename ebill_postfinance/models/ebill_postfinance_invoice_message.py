@@ -201,6 +201,7 @@ class EbillPostfinanceInvoiceMessage(models.Model):
 
     def _get_payload_params(self):
         bank_account = ""
+        __import__("pdb").set_trace()
         if self.payment_type == "iban":
             bank_account = sanitize_account_number(
                 self.invoice_id.partner_bank_id.l10n_ch_qr_iban
@@ -266,6 +267,7 @@ class EbillPostfinanceInvoiceMessage(models.Model):
 
     def _get_payload_params_yb(self):
         bank_account = ""
+        __import__("pdb").set_trace()
         if self.payment_type == "iban":
             bank_account = sanitize_account_number(
                 self.invoice_id.partner_bank_id.l10n_ch_qr_iban
