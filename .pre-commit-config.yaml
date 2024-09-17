@@ -75,6 +75,8 @@ repos:
         args:
           - --plugin=@prettier/plugin-xml
         files: \.(css|htm|html|js|json|jsx|less|md|scss|toml|ts|xml|yaml|yml)$
+        # For ebill_postfinance don't format the message template files
+        exclude: /messages/.*\.xml$|/components/wsdl/.*\.xml$|/tests/examples/.*\.xml$
   - repo: https://github.com/pre-commit/mirrors-eslint
     rev: v8.24.0
     hooks:
