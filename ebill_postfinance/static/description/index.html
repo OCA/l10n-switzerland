@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -9,10 +8,11 @@
 
 /*
 :Author: David Goodger (goodger@python.org)
-:Id: $Id: html4css1.css 8954 2022-01-20 10:10:25Z milde $
+:Id: $Id: html4css1.css 9511 2024-01-13 09:50:07Z milde $
 :Copyright: This stylesheet has been placed in the public domain.
 
 Default cascading style sheet for the HTML output of Docutils.
+Despite the name, some widely supported CSS2 features are used.
 
 See https://docutils.sourceforge.io/docs/howto/html-stylesheets.html for how to
 customize this style sheet.
@@ -275,7 +275,7 @@ pre.literal-block, pre.doctest-block, pre.math, pre.code {
   margin-left: 2em ;
   margin-right: 2em }
 
-pre.code .ln { color: grey; } /* line numbers */
+pre.code .ln { color: gray; } /* line numbers */
 pre.code, code { background-color: #eeeeee }
 pre.code .comment, code .comment { color: #5C6576 }
 pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
@@ -301,7 +301,7 @@ span.option {
 span.pre {
   white-space: pre }
 
-span.problematic {
+span.problematic, pre.problematic {
   color: red }
 
 span.section-subtitle {
@@ -369,15 +369,18 @@ ul.auto-toc {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !! source digest: sha256:8fe54c201370aabd37f966becd9bc102925267307e434f56a4c558a943f058ed
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/l10n-switzerland/tree/16.0/ebill_postfinance"><img alt="OCA/l10n-switzerland" src="https://img.shields.io/badge/github-OCA%2Fl10n--switzerland-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/l10n-switzerland-16-0/l10n-switzerland-16-0-ebill_postfinance"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/l10n-switzerland&amp;target_branch=16.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
-<p>This module implements the exchange of electronic invoices with the Postfinance web service.</p>
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/l10n-switzerland/tree/17.0/ebill_postfinance"><img alt="OCA/l10n-switzerland" src="https://img.shields.io/badge/github-OCA%2Fl10n--switzerland-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/l10n-switzerland-17-0/l10n-switzerland-17-0-ebill_postfinance"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/l10n-switzerland&amp;target_branch=17.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p>This module implements the exchange of electronic invoices with the
+Postfinance web service.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#installation" id="toc-entry-1">Installation</a></li>
-<li><a class="reference internal" href="#configuration" id="toc-entry-2">Configuration</a></li>
+<li><a class="reference internal" href="#configuration" id="toc-entry-2">Configuration</a><ul>
 <li><a class="reference internal" href="#create-a-service" id="toc-entry-3">Create a service</a></li>
 <li><a class="reference internal" href="#configure-a-customer-and-create-his-contract" id="toc-entry-4">Configure a customer and create his contract</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#usage" id="toc-entry-5">Usage</a></li>
 <li><a class="reference internal" href="#known-issues-roadmap" id="toc-entry-6">Known issues / Roadmap</a></li>
 <li><a class="reference internal" href="#bug-tracker" id="toc-entry-7">Bug Tracker</a></li>
@@ -391,28 +394,34 @@ ul.auto-toc {
 </div>
 <div class="section" id="installation">
 <h1><a class="toc-backref" href="#toc-entry-1">Installation</a></h1>
-<p>This module needs the Python library <cite>ebilling_postfiance</cite> which can be installed from Pypi.
-More information can be found at <a class="reference external" href="repositoryhttps://github.com/camptocamp/ebilling-postfinance">repositoryhttps://github.com/camptocamp/ebilling-postfinance</a>.</p>
+<p>This module needs the Python library ebilling_postfiance which can be
+installed from Pypi. More information can be found at [repository
+<a class="reference external" href="https://github.com/camptocamp/ebilling-postfinance](repository%20https://github.com/camptocamp/ebilling-postfinance)">https://github.com/camptocamp/ebilling-postfinance](repository%20https://github.com/camptocamp/ebilling-postfinance)</a>.</p>
 </div>
 <div class="section" id="configuration">
 <h1><a class="toc-backref" href="#toc-entry-2">Configuration</a></h1>
-</div>
 <div class="section" id="create-a-service">
-<h1><a class="toc-backref" href="#toc-entry-3">Create a service</a></h1>
-<p>First you need to be registred on ‘Postfinance eBill service &lt;<a class="reference external" href="https://www.postfinance.ch/en/business/products/accounts-receivable-solutions/e-bill-invoice-issuer.html">https://www.postfinance.ch/en/business/products/accounts-receivable-solutions/e-bill-invoice-issuer.html</a>&gt;’
-To create a service go to <cite>Accounting - Configuration - Payments - Postfinance eBill Service</cite></p>
+<h2><a class="toc-backref" href="#toc-entry-3">Create a service</a></h2>
+<p>First you need to be registred on ‘Postfinance eBill service
+&lt;<a class="reference external" href="https://www.postfinance.ch/en/business/products/accounts-receivable-solutions/e-bill-invoice-issuer.html">https://www.postfinance.ch/en/business/products/accounts-receivable-solutions/e-bill-invoice-issuer.html</a>&gt;’
+To create a service go to Accounting - Configuration - Payments -
+Postfinance eBill Service</p>
 </div>
 <div class="section" id="configure-a-customer-and-create-his-contract">
-<h1><a class="toc-backref" href="#toc-entry-4">Configure a customer and create his contract</a></h1>
-<p>The contracts specific to Postfinance e-billing are located in <cite>Accounting - Customers - eBill Postfinance Contract</cite>
-Create a contract for a customer with his PayerId and make sure that the contract is active by being in <cite>Open</cite> state with valid start/end dates.</p>
-<p>Set <cite>Customer Invoice Transmission Method</cite> on the customer to Postfinance.</p>
+<h2><a class="toc-backref" href="#toc-entry-4">Configure a customer and create his contract</a></h2>
+<p>The contracts specific to Postfinance e-billing are located in
+Accounting - Customers - eBill Postfinance Contract Create a contract
+for a customer with his PayerId and make sure that the contract is
+active by being in Open state with valid start/end dates.</p>
+<p>Set Customer Invoice Transmission Method on the customer to Postfinance.</p>
+</div>
 </div>
 <div class="section" id="usage">
 <h1><a class="toc-backref" href="#toc-entry-5">Usage</a></h1>
 <p>To use this module, you need to:</p>
 <ol class="arabic simple">
-<li>Configure the service, customers and contracts as described in the CONFIGURATION section.</li>
+<li>Configure the service, customers and contracts as described in the
+CONFIGURATION section.</li>
 <li>Create an invoice for a customer with an open Postfinance contract.</li>
 <li>Validate the invoice, and click the Send eBill button.</li>
 </ol>
@@ -422,7 +431,8 @@ Create a contract for a customer with his PayerId and make sure that the contrac
 <p>ToDo</p>
 <ul class="simple">
 <li>Add option to import the contract subscription (csv)</li>
-<li>Add the download of this csv from web service, but what is the endpoint ?</li>
+<li>Add the download of this csv from web service, but what is the
+endpoint ?</li>
 </ul>
 <p>Nice to have</p>
 <ul class="simple">
@@ -435,7 +445,7 @@ Create a contract for a customer with his PayerId and make sure that the contrac
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/l10n-switzerland/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-<a class="reference external" href="https://github.com/OCA/l10n-switzerland/issues/new?body=module:%20ebill_postfinance%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<a class="reference external" href="https://github.com/OCA/l10n-switzerland/issues/new?body=module:%20ebill_postfinance%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
@@ -455,13 +465,15 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <div class="section" id="maintainers">
 <h2><a class="toc-backref" href="#toc-entry-11">Maintainers</a></h2>
 <p>This module is maintained by the OCA.</p>
-<a class="reference external image-reference" href="https://odoo-community.org"><img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" /></a>
+<a class="reference external image-reference" href="https://odoo-community.org">
+<img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" />
+</a>
 <p>OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.</p>
 <p>Current <a class="reference external" href="https://odoo-community.org/page/maintainer-role">maintainer</a>:</p>
 <p><a class="reference external image-reference" href="https://github.com/TDu"><img alt="TDu" src="https://github.com/TDu.png?size=40px" /></a></p>
-<p>This module is part of the <a class="reference external" href="https://github.com/OCA/l10n-switzerland/tree/16.0/ebill_postfinance">OCA/l10n-switzerland</a> project on GitHub.</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/l10n-switzerland/tree/17.0/ebill_postfinance">OCA/l10n-switzerland</a> project on GitHub.</p>
 <p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
 </div>
 </div>

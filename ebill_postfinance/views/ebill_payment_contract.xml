@@ -19,7 +19,7 @@
                 <group
                     name="postfinance"
                     string="Postfinance"
-                    attrs="{'invisible': [('is_postfinance_contract', '=', False)]}"
+                    invisible="[('is_postfinance_contract', '=', False)]"
                 >
                     <field name="postfinance_service_id" />
                     <field name="postfinance_billerid" />
@@ -38,7 +38,7 @@
                         class="oe_stat_button"
                         icon="fa-user-o"
                         string="Set invoicing method"
-                        attrs="{'invisible': [('is_postfinance_method_on_partner', '=', True)]}"
+                        invisible="[('is_postfinance_method_on_partner', '=', True)]"
                     >
                 </button>
                 <button
