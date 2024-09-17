@@ -1,0 +1,5 @@
+# For ebill_postfinance unit tests
+vcrpy==4.4.0
+xmlunittest==0.5.0
+odoo-addon-base_ebill_payment_contract @ git+https://github.com/OCA/edi.git@refs/pull/1038/head#subdirectory=base_ebill_payment_contract
+odoo-addon-account_invoice_export @ git+https://github.com/OCA/edi.git@refs/pull/1037/head#subdirectory=account_invoice_export

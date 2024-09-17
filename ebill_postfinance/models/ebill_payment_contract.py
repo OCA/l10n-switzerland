@@ -23,7 +23,7 @@ class EbillPaymentContract(models.Model):
         compute="_compute_is_postfinance_method_on_partner"
     )
     payment_type = fields.Selection(
-        selection=[("qr", "QR"), ("isr", "ISR")],
+        selection=[("qr", "QR")],
         string="Payment method",
         default="qr",
         help="Payment type to use for the invoices sent,"
@@ -60,7 +60,8 @@ class EbillPaymentContract(models.Model):
             if not contract.postfinance_billerid:
                 raise ValidationError(
                     _(
-                        "The Postfinacnce Account ID is required for a Postfinance contract."
+                        "The Postfinacnce Account ID is required for a "
+                        "Postfinance contract."
                     )
                 )
 
