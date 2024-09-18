@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <template
+        id="report_credit_control_summary_document_fees_formatting"
+        inherit_id="account_credit_control_dunning_fees.report_credit_control_summary_document_fees"
+    >
+    <xpath expr="//span[@t-field='l.dunning_fees_amount']" position="attributes">
+      <attribute
+                name="t-options"
+            >{"widget": "monetary", "display_currency": doc.currency_id}</attribute>
+    </xpath>
+  </template>
+
+</odoo>
