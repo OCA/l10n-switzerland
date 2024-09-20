@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -168,11 +168,6 @@ msgid "ID"
 msgstr ""
 
 #. module: ebill_postfinance
-#: model:ir.model.fields.selection,name:ebill_postfinance.selection__ebill_payment_contract__payment_type__isr
-msgid "ISR"
-msgstr ""
-
-#. module: ebill_postfinance
 #: model_terms:ir.ui.view,arch_db:ebill_postfinance.ebill_postfinance_invoice_message_search_view
 msgid "In Error"
 msgstr ""
@@ -242,12 +237,6 @@ msgstr ""
 #. module: ebill_postfinance
 #: model:ir.model,name:ebill_postfinance.model_account_move
 msgid "Journal Entry"
-msgstr ""
-
-#. module: ebill_postfinance
-#: model:ir.model.fields,field_description:ebill_postfinance.field_ebill_postfinance_invoice_message____last_update
-#: model:ir.model.fields,field_description:ebill_postfinance.field_ebill_postfinance_service____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: ebill_postfinance
@@ -523,7 +512,6 @@ msgstr ""
 
 #. module: ebill_postfinance
 #: model:ir.actions.server,name:ebill_postfinance.cron_search_invoices_ir_actions_server
-#: model:ir.cron,cron_name:ebill_postfinance.cron_search_invoices
 msgid "eBill Postfinance - Check invoices state on server"
 msgstr ""
 
