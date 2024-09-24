@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template
+        id="l10n_ch_swissqr_template_inherit"
+        inherit_id="l10n_ch.l10n_ch_swissqr_template"
+    >
+        <xpath expr="//t[@t-set='formated_amount']" position="attributes">
+            <attribute name="t-value">o.get_qr_amount()</attribute>
+        </xpath>
+    </template>
+</odoo>
