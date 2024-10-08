@@ -5,7 +5,6 @@ from odoo import _, fields, models
 
 
 class ProductProduct(models.Model):
-
     _inherit = "product.product"
 
     adr_report_class_display_name = fields.Char(
@@ -17,7 +16,7 @@ class ProductProduct(models.Model):
         for record in self:
             adr_good = record.adr_goods_id
             res = _("UN")
-            res += " {}, {}".format(adr_good.un_number, adr_good.name)
+            res += f" {adr_good.un_number}, {adr_good.name}"
             if record.nag:
                 res += _(" {}").format(record.nag)
 
