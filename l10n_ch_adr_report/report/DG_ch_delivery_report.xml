@@ -12,7 +12,10 @@
         <table class="table table-condensed dg_header">
             <thead>
                 <tr>
-                    <th class="uppercase dg-green" colspan="4">Transportation paper</th>
+                    <th
+                        class="text-uppercase dg-green"
+                        colspan="4"
+                    >Transportation paper</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,19 +23,19 @@
                     <td>Date</td>
                     <td>
                         <t t-if="o.state == 'done'">
-                            <p t-esc="o.date_done.strftime('%Y-%m-%d')" />
+                            <p t-out="o.date_done.strftime('%Y-%m-%d')" />
                         </t>
-                        <t t-if="o.state != 'done'">
-                            <p t-esc="o.scheduled_date.strftime('%Y-%m-%d')" />
+                        <t t-else="">
+                            <p t-out="o.scheduled_date.strftime('%Y-%m-%d')" />
                         </t>
                     </td>
                     <td>Delivery note no.</td>
                     <td><p t-field="o.origin" /></td>
                 </tr>
                 <tr>
-                    <td class="uppercase emphatic">Sender address</td>
+                    <td class="text-uppercase fw-bold">Sender address</td>
                     <td />
-                    <td class="uppercase emphatic">Recipient address</td>
+                    <td class="text-uppercase fw-bold">Recipient address</td>
                     <td />
                 </tr>
                 <tr>
@@ -89,8 +92,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="font-weight-bold">
-                    <td class="text-right" colspan="5">Transport category (BK)</td>
+                <tr class="fw-bold">
+                    <td class="text-end" colspan="5">Transport category (BK)</td>
                     <td>0</td>
                     <td>1</td>
                     <td>2</td>
@@ -100,40 +103,40 @@
                 <tr>
                     <t t-foreach="DG_data['dg_lines']" t-as="line">
                         <tr>
-                            <td><span t-esc="line['qty_amount']" /></td>
+                            <td><span t-out="line['qty_amount']" /></td>
                             <td><span
                                     t-field="line['product'].packaging_type_id"
                                 /></td>
                             <td><span t-field="line['product'].content_package" /></td>
                             <td t-att-style="'font-size: 12px'"><span
-                                    t-esc="line['class']"
+                                    t-out="line['class']"
                                 /></td>
                             <td><span
                                     t-field="line['product'].adr_transport_category"
                                 /></td>
                             <td>
                                 <t t-if="line['column_index'] == '0'">
-                                    <span t-esc="line['dangerous_amount']" />
+                                    <span t-out="line['dangerous_amount']" />
                                 </t>
                             </td>
                             <td>
                                 <t t-if="line['column_index'] == '1'">
-                                    <span t-esc="line['dangerous_amount']" />
+                                    <span t-out="line['dangerous_amount']" />
                                 </t>
                             </td>
                             <td>
                                 <t t-if="line['column_index'] == '2'">
-                                    <span t-esc="line['dangerous_amount']" />
+                                    <span t-out="line['dangerous_amount']" />
                                 </t>
                             </td>
                             <td>
                                 <t t-if="line['column_index'] == '3'">
-                                    <span t-esc="line['dangerous_amount']" />
+                                    <span t-out="line['dangerous_amount']" />
                                 </t>
                             </td>
                             <td>
                                 <t t-if="line['column_index'] == '4'">
-                                    <span t-esc="line['dangerous_amount']" />
+                                    <span t-out="line['dangerous_amount']" />
                                 </t>
                             </td>
                         </tr>
@@ -148,45 +151,45 @@
                 />
                 <tr>
                     <td
-                        class="text-left font-weight-bold"
+                        class="text-start fw-bold"
                         colspan="5"
                     >Total of transported units</td>
-                    <td><span t-esc="units['0']" /></td>
-                    <td><span t-esc="units['1']" /></td>
-                    <td><span t-esc="units['2']" /></td>
-                    <td><span t-esc="units['3']" /></td>
-                    <td><span t-esc="units['4']" /></td>
+                    <td><span t-out="units['0']" /></td>
+                    <td><span t-out="units['1']" /></td>
+                    <td><span t-out="units['2']" /></td>
+                    <td><span t-out="units['3']" /></td>
+                    <td><span t-out="units['4']" /></td>
                 </tr>
                 <tr>
-                    <td class="text-left font-weight-bold" colspan="5">Factor</td>
-                    <td><span t-esc="factor['0']" /></td>
-                    <td><span t-esc="factor['1']" /></td>
-                    <td><span t-esc="factor['2']" /></td>
-                    <td><span t-esc="factor['3']" /></td>
-                    <td><span t-esc="factor['4']" /></td>
+                    <td class="text-start fw-bold" colspan="5">Factor</td>
+                    <td><span t-out="factor['0']" /></td>
+                    <td><span t-out="factor['1']" /></td>
+                    <td><span t-out="factor['2']" /></td>
+                    <td><span t-out="factor['3']" /></td>
+                    <td><span t-out="factor['4']" /></td>
                 </tr>
-                <tr class="font-weight-bold">
+                <tr class="fw-bold">
                     <td
-                        class="text-left"
+                        class="text-start"
                         colspan="5"
                     >Points per transportation category</td>
-                    <td><span t-esc="mass_points['0']" /></td>
-                    <td><span t-esc="mass_points['1']" /></td>
-                    <td><span t-esc="mass_points['2']" /></td>
-                    <td><span t-esc="mass_points['3']" /></td>
-                    <td><span t-esc="mass_points['4']" /></td>
+                    <td><span t-out="mass_points['0']" /></td>
+                    <td><span t-out="mass_points['1']" /></td>
+                    <td><span t-out="mass_points['2']" /></td>
+                    <td><span t-out="mass_points['3']" /></td>
+                    <td><span t-out="mass_points['4']" /></td>
                 </tr>
-                <tr class="font-weight-bold">
+                <tr class="fw-bold">
                     <td colspan="5" />
                     <td colspan="2">Total Points</td>
                     <t t-if="DG_data['total_section']['warn']">
                         <td class="dg-red" colspan="3">
-                            <span t-esc="DG_data['total_section']['total_points']" />
+                            <span t-out="DG_data['total_section']['total_points']" />
                         </td>
                     </t>
                     <t t-else="">
                         <td class="dg-green" colspan="3">
-                            <span t-esc="DG_data['total_section']['total_points']" />
+                            <span t-out="DG_data['total_section']['total_points']" />
                         </td>
                     </t>
                 </tr>
@@ -195,26 +198,23 @@
     </template>
 
     <template id="report_dg_swiss_footer">
-        <table class="table-clean" style="width:100%;">
+        <table class="table-clean w-100">
             <tbody>
                 <tr>
                     <td>Received listed goods in good physical condition
                         <t t-if="DG_data['total_section']['warn']">
-                            <div
-                                class="fa fa-warning"
-                                style="color:red; background-color: transparent; padding: 0px;"
-                            />
+                            <i class="fa fa-warning text-danger bg-transparent p-0" />
                         </t>
                     </td>
-                    <td class="text-left">Date
+                    <td class="text-start">Date
                         <t t-if="o.state == 'done'">
-                            <p t-esc="o.date_done.strftime('%Y-%m-%d')" />
+                            <p t-out="o.date_done.strftime('%Y-%m-%d')" />
                         </t>
                         <t t-if="o.state != 'done'">
-                            <p t-esc="o.scheduled_date.strftime('%Y-%m-%d')" />
+                            <p t-out="o.scheduled_date.strftime('%Y-%m-%d')" />
                         </t>
                     </td>
-                    <td style="width:300px;" class="text-left">Signature:</td>
+                    <td style="width:300px;" class="text-start">Signature:</td>
                 </tr>
             </tbody>
         </table>

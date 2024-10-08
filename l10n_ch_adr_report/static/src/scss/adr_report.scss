@@ -10,7 +10,7 @@
         min-width: 50px;
     }
     table {
-        margin-bottom: 0px;
+        margin-bottom: 0;
     }
     .table-clean {
         border: none !important;
@@ -19,9 +19,6 @@
             border: none !important;
         }
     }
-    .uppercase {
-        text-transform: uppercase;
-    }
     .dg-green {
         text-align: center;
         background-color: #32e038;
@@ -29,11 +26,5 @@
     }
     .dg-red {
         background-color: #ff0000;
-    }
-    .emphatic {
-        font-weight: bold;
-    }
-    .text-right {
-        text-align: right;
     }
 }
