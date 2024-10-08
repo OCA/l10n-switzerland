@@ -3,7 +3,7 @@
 {
     "name": "ADR Products Swiss Report",
     "summary": "Print Delivery report to ADR swiss configuration",
-    "version": "14.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Product",
     "website": "https://github.com/OCA/l10n-switzerland",
     "author": "Camptocamp, Odoo Community Association (OCA)",
@@ -13,6 +13,10 @@
     "depends": ["l10n_eu_product_adr_dangerous_goods", "stock", "delivery"],
     "data": [
         "report/DG_ch_delivery_report.xml",
-        "views/assets.xml",
     ],
+    "assets": {
+        "web.report_assets_common": [
+            "/l10n_ch_adr_report/static/src/scss/adr_report.scss",
+        ],
+    },
 }

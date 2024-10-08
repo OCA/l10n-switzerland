@@ -70,11 +70,14 @@ Contributors
 -  `Trobz <https://trobz.com>`__:
 
    -  Son Ho <sonhd@trobz.com>
+   -  Do Anh Duy <duyda@trobz.com>
 
 Other credits
 -------------
 
 The development of this module was financially supported by Camptocamp
+The migration of this module from 14.0 to 18.0 was financially supported
+by Camptocamp
 
 Maintainers
 -----------

@@ -10,7 +10,6 @@ class DangerousDeliverCHADR(models.AbstractModel):
     _description = "Dangerous Delivery Report ADR"
 
     def _get_report_values(self, docids, data=None):
-        docs = self.env["stock.picking"]
         data = data or {}
         docs = self.env["stock.picking"].browse(docids)
         dg_data = self.prepare_DG_data(docs)
@@ -52,12 +51,12 @@ class DangerousDeliverCHADR(models.AbstractModel):
         }
         for pick in picking_ids:
             if pick.state == "done":
-                moves = pick.move_lines.filtered(lambda l: l.state == "done")
+                moves = pick.move_ids.filtered(lambda m: m.state == "done")
             else:
-                moves = pick.move_lines
+                moves = pick.move_ids
             dangerous_moves = self._filter_dangerous_move(moves)
             grouped_moves = groupby(
-                sorted(dangerous_moves, key=lambda l: l.product_id),
+                sorted(dangerous_moves, key=lambda m: m.product_id),
                 lambda r: r.product_id,
             )
             vals["dg_lines"] += self._get_DG_move_line_vals(grouped_moves)
@@ -101,9 +100,7 @@ class DangerousDeliverCHADR(models.AbstractModel):
         return round(amount, 1)
 
     def _is_limit_exceeded(self, vals):
-        if vals["total_points"] > 1000.0:
-            return True
-        return False
+        return vals["total_points"] > 1000.0
 
     def _init_total_vals(self, vals):
         vals["factor"]["0"] = 0.0
@@ -119,16 +116,12 @@ class DangerousDeliverCHADR(models.AbstractModel):
             qty = 0
             for rec in move_lines:
                 if rec.state == "done":
-                    qty += rec.quantity_done
+                    qty += rec.quantity
                 else:
                     qty += rec.product_uom_qty
             full_class_name = product.adr_report_class_display_name + (
-                ", {}, {}, {}, {}".format(
-                    qty,
-                    product.packaging_type_id.name,
-                    qty * product.content_package,
-                    product.dg_unit.name,
-                )
+                f", {qty}, {product.packaging_type_id.name},"
+                f" {qty * product.content_package}, {product.dg_unit.name}"
             )
             result.append(
                 {

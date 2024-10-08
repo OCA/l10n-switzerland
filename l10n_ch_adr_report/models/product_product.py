@@ -1,7 +1,7 @@
 # Copyright 2022 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo import _, fields, models
+from odoo import fields, models
 
 
 class ProductProduct(models.Model):
@@ -13,10 +13,10 @@ class ProductProduct(models.Model):
     )
 
     def _compute_adr_report_class_display_name(self):
+        _ = self.env._
         for record in self:
             adr_good = record.adr_goods_id
-            res = _("UN")
-            res += f" {adr_good.un_number}, {adr_good.name}"
+            res = _(f"UN {adr_good.un_number}, {adr_good.name}")
             if record.nag:
                 res += _(" {}").format(record.nag)
 
