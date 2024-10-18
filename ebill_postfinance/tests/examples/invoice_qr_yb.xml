@@ -76,7 +76,7 @@
                 </AccountAssignment>
                 <Language>en</Language>
                 <PaymentInformation>
-                    <PaymentDueDate>2019-07-01</PaymentDueDate>
+                    <PaymentDueDate>2019-08-20</PaymentDueDate>
                     <PaymentType>IBAN</PaymentType>
                     <fixAmount>Yes</fixAmount>
                     <IBAN>

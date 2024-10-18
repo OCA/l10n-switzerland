@@ -53,7 +53,7 @@ class CommonCase(TransactionCase, XmlTestMixin):
                 "l10n_ch_qr_iban": "CH2130808001234567827",
             }
         )
-        cls.terms = cls.env.ref("account.account_payment_term_15days")
+        cls.payment_term = cls.env.ref("account.account_payment_term_advance_60days")
         cls.state = cls.env["res.country.state"].create(
             {"code": "RR", "name": "Fribourg", "country_id": cls.country.id}
         )

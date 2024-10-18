@@ -34,7 +34,7 @@ class TestEbillPostfinanceMessageYB(CommonCase):
     def test_invoice_qr(self):
         """Check XML payload genetated for an invoice."""
         self.invoice.name = "INV_TEST_01"
-        self.invoice.invoice_date_due = "2019-07-01"
+        self.invoice.invoice_payment_term_id = self.payment_term
         message = self.invoice.create_postfinance_ebill()
         message.set_transaction_id()
         message.payload = message._generate_payload_yb()

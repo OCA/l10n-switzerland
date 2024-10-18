@@ -238,19 +238,9 @@ class EbillPostfinanceInvoiceMessage(models.Model):
             )
         params["amount_by_group"] = amount_by_group
         # Get the invoice due date
-        date_due = None
-        if self.invoice_id.invoice_payment_term_id:
-            terms = self.invoice_id.invoice_payment_term_id.compute(
-                self.invoice_id.amount_total
-            )
-            if terms:
-                # Returns all payment and their date like [('2020-12-07', 430.37), ...]
-                # Get the last payment date in the format "202021207"
-                date_due = terms[-1][0].replace("-", "")
-        if not date_due:
-            date_due = self.format_date(
-                self.invoice_id.invoice_date_due or self.invoice_id.invoice_date
-            )
+        date_due = self.format_date(
+            self.invoice_id.invoice_date_due or self.invoice_id.invoice_date
+        )
         params["date_due"] = date_due
         return params
 
@@ -303,18 +293,9 @@ class EbillPostfinanceInvoiceMessage(models.Model):
                 )
         params["amount_by_group"] = amount_by_group
         # Get the invoice due date
-        date_due = None
-        if self.invoice_id.invoice_payment_term_id:
-            terms = self.invoice_id.invoice_payment_term_id.compute(
-                self.invoice_id.amount_total
-            )
-            if terms:
-                # Get the last payment date
-                date_due = terms[-1][0]
-        if not date_due:
-            date_due = self.format_date_yb(
-                self.invoice_id.invoice_date_due or self.invoice_id.invoice_date
-            )
+        date_due = self.format_date_yb(
+            self.invoice_id.invoice_date_due or self.invoice_id.invoice_date
+        )
         params["date_due"] = date_due
         return params
 
