@@ -1,0 +1,2 @@
+odoo-addon-l10n_eu_product_adr @ git+https://github.com/oca/community-data-files.git@refs/pull/208/head#subdirectory=l10n_eu_product_adr
+odoo-addon-l10n_eu_product_adr_dangerous_goods @ git+https://github.com/oca/community-data-files.git@refs/pull/211/head#subdirectory=l10n_eu_product_adr_dangerous_goods
