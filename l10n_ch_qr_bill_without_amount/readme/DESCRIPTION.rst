@@ -1,0 +1,1 @@
+Allows you to print QR invoices without a predefined amount. The QR invoice without an amount is based on the payment mode field `Qr Bill Without Amount`
