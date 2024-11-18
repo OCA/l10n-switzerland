@@ -3,7 +3,7 @@
 {
     "name": "Switzerland - No Amount QR-bill",
     "summary": "Allow to print QR bill without amount",
-    "version": "17.0.1.0.0",
+    "version": "16.0.1.0.0",
     "development_status": "Alpha",
     "category": "Localization",
     "website": "https://github.com/OCA/l10n-switzerland",
