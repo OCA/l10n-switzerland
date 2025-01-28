@@ -23,6 +23,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [ebill_postfinance](ebill_postfinance/) | 17.0.1.0.0 | [![TDu](https://github.com/TDu.png?size=30px)](https://github.com/TDu) | Postfinance eBill integration
 [ebill_postfinance_server_env](ebill_postfinance_server_env/) | 17.0.1.0.0 |  | Server environment for eBill Postfinance
+[ebill_postfinance_stock](ebill_postfinance_stock/) | 17.0.1.0.0 | [![TDu](https://github.com/TDu.png?size=30px)](https://github.com/TDu) | Add stock integration to Postfinance eBill
 [l10n_ch_qr_no_amount](l10n_ch_qr_no_amount/) | 17.0.1.0.0 | [![grindtildeath](https://github.com/grindtildeath.png?size=30px)](https://github.com/grindtildeath) | Allow to print QR bill without amount
 
 [//]: # (end addons)
