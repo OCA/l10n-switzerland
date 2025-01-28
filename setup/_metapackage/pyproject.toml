@@ -1,7 +1,9 @@
 [project]
 name = "odoo-addons-oca-l10n-switzerland"
-version = "17.0.20240628.0"
+version = "17.0.20250128.0"
 dependencies = [
+    "odoo-addon-ebill_postfinance>=17.0dev,<17.1dev",
+    "odoo-addon-ebill_postfinance_server_env>=17.0dev,<17.1dev",
     "odoo-addon-l10n_ch_qr_no_amount>=17.0dev,<17.1dev",
 ]
 classifiers=[
