@@ -1,0 +1,3 @@
+# For ebill_postfinance unit tests
+vcrpy==4.4.0
+xmlunittest==0.5.0
