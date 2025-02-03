@@ -90,17 +90,9 @@ repos:
         additional_dependencies:
           - "prettier@2.1.2"
           - "@prettier/plugin-xml@0.12.0"
-<<<<<<< before updating
-        args:
-          - --plugin=@prettier/plugin-xml
-        files: \.(css|htm|html|js|json|jsx|less|md|scss|toml|ts|xml|yaml|yml)$
         # For ebill_paynet don't format the message template files
         exclude: /messages/.*\.xml$|/components/wsdl/.*\.xml$|/tests/examples/.*\.xml$
-  - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v7.8.1
-=======
   - repo: local
->>>>>>> after updating
     hooks:
       - id: eslint
         name: eslint
