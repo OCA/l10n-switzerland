@@ -244,11 +244,16 @@ class EbillPostfinanceInvoiceMessage(models.Model):
         return params
 
     def _get_payload_params_yb(self):
-        bank_account = sanitize_account_number(
-            self.invoice_id.partner_bank_id.l10n_ch_qr_iban
-            or self.invoice_id.partner_bank_id.acc_number
-            or ""
-        )
+        bank_account = ""
+        # Use the appropriate IBAN for qr invoice or not.
+        if self.invoice_id.l10n_ch_is_qr_valid:
+            bank_account = sanitize_account_number(
+                self.invoice_id.partner_bank_id.l10n_ch_qr_iban or ""
+            )
+        else:
+            bank_account = sanitize_account_number(
+                self.invoice_id.partner_bank_id.acc_number or ""
+            )
         delivery = (
             self.invoice_id.partner_shipping_id
             if self.invoice_id.partner_shipping_id != self.invoice_id.partner_id
