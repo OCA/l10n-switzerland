@@ -30,7 +30,7 @@ class IrActionsReport(models.Model):
             # The writer close the reader file here
             writer.write(buff)
             return buff.getvalue()
-        except IOError:
+        except OSError:
             raise
         finally:
             buff.close()
