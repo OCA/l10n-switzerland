@@ -28,8 +28,8 @@ Switzerland - Invoice Reports with payment option
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module adds possibility to print invoice report together with ISR
-and/or QR code
+This module adds possibility to print invoice report together with QR
+code
 
 **Table of contents**
 
@@ -40,10 +40,8 @@ Usage
 =====
 
 Print report with payment slip using additional print action in
-Accounting. Payment slip (QR/ISR) to use in printed report can be
-configured in Accounting/Settings by selecting only one or all from
-options "Print invoice with QR bill" and "Print invoice with ISR
-payslip".
+Accounting. Payment slip (QR) to use in printed report can be configured
+in Accounting/Settings by selecting option "Print invoice with QR bill".
 
 Bug Tracker
 ===========
@@ -67,7 +65,7 @@ Contributors
 ------------
 
 -  Anna Janiszewska <anna.janiszewska@camptocamp.com>
-
+-  Henry Backman <henry.backman@camptocamp.com>
 -  `Trobz <https://trobz.com>`__:
 
    -  Son Ho <sonhd@trobz.com>
@@ -75,7 +73,7 @@ Contributors
 Other credits
 -------------
 
-The migration of this module from 14.0 to 15.0 was financially supported
+The migration of this module from 15.0 to 17.0 was financially supported
 by Camptocamp
 
 Maintainers

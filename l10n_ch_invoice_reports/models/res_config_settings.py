@@ -9,8 +9,3 @@ class ResConfigSettings(models.TransientModel):
         string="Print invoice with QR bill",
         readonly=False,
     )
-    print_isr_invoice = fields.Boolean(
-        related="company_id.print_isr_invoice",
-        string="Print invoice with ISR payslip",
-        readonly=False,
-    )

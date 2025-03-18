@@ -2,24 +2,16 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 
-from odoo import api, models
+from odoo import models
 
 
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    # add context key dependency to prevent generation of attachment inside
-    # https://github.com/odoo/odoo/blob/15.0/addons/l10n_ch/models/mail_template.py#L12
-    @api.depends_context("invoice_report_no_attachment")
-    def _compute_l10n_ch_isr_valid(self):
-        if self.env.context.get("invoice_report_no_attachment", False):
-            self.update({"l10n_ch_isr_valid": False})
-        else:
-            return super()._compute_l10n_ch_isr_valid()
-
     def can_generate_qr_bill(self):
-        # Originally method returns True if the invoice can be used to generate a QR-bill.
-        # We add context key dependency to prevent generation of attachment inside
+        # Originally method returns True if the invoice can be used to generate
+        # a QR-bill. We add context key dependency to prevent generation of
+        # attachment inside
         # https://github.com/odoo/odoo/blob/15.0/addons/l10n_ch/models/mail_template.py#L12
         self.ensure_one()
         if self.env.context.get("invoice_report_no_attachment", False):
@@ -41,11 +33,11 @@ class AccountMove(models.Model):
         return action
 
 
-class AccountInvoiceSend(models.TransientModel):
-    _inherit = "account.invoice.send"
+class AccountMoveSend(models.TransientModel):
+    _inherit = "account.move.send"
 
-    def send_and_print_action(self):
+    def action_send_and_print(self):
         # override to update context with new key
         return super(
-            AccountInvoiceSend, self.with_context(invoice_report_no_attachment=True)
-        ).send_and_print_action()
+            AccountMoveSend, self.with_context(invoice_report_no_attachment=True)
+        ).action_send_and_print()

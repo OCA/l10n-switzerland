@@ -1,4 +1,4 @@
 - Anna Janiszewska \<<anna.janiszewska@camptocamp.com>\>
-
+- Henry Backman \<<henry.backman@camptocamp.com>\>
 - [Trobz](https://trobz.com):  
   - Son Ho \<<sonhd@trobz.com>\>
