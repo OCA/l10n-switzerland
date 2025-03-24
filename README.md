@@ -22,6 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [l10n_ch_account_tags](l10n_ch_account_tags/) | 18.0.1.0.0 |  | Switzerland Account Tags
+[l10n_ch_adr_report](l10n_ch_adr_report/) | 18.0.1.0.0 |  | Print Delivery report to ADR swiss configuration
 
 [//]: # (end addons)
 
