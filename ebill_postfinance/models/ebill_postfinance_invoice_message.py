@@ -200,22 +200,11 @@ class EbillPostfinanceInvoiceMessage(models.Model):
         return date_string.strftime("%Y-%m-%d")
 
     def _get_payload_params(self):
-        bank_account = ""
-        if self.payment_type == "iban":
-            bank_account = sanitize_account_number(
-                self.invoice_id.partner_bank_id.l10n_ch_qr_iban
-                or self.invoice_id.partner_bank_id.acc_number
-            )
-        else:
-            bank_account = self.invoice_id.partner_bank_id.l10n_ch_isr_subscription_chf
-            if bank_account:
-                account_parts = bank_account.split("-")
-                bank_account = (
-                    account_parts[0] + account_parts[1].rjust(6, "0") + account_parts[2]
-                )
-            else:
-                bank_account = ""
-
+        bank_account = sanitize_account_number(
+            self.invoice_id.partner_bank_id.l10n_ch_qr_iban
+            or self.invoice_id.partner_bank_id.acc_number
+            or ""
+        )
         params = {
             "client_pid": self.service_id.biller_id,
             "invoice": self.invoice_id,
@@ -248,39 +237,23 @@ class EbillPostfinanceInvoiceMessage(models.Model):
             )
         params["amount_by_group"] = amount_by_group
         # Get the invoice due date
-        date_due = None
-        if self.invoice_id.invoice_payment_term_id:
-            terms = self.invoice_id.invoice_payment_term_id.compute(
-                self.invoice_id.amount_total
-            )
-            if terms:
-                # Returns all payment and their date like [('2020-12-07', 430.37), ...]
-                # Get the last payment date in the format "202021207"
-                date_due = terms[-1][0].replace("-", "")
-        if not date_due:
-            date_due = self.format_date(
-                self.invoice_id.invoice_date_due or self.invoice_id.invoice_date
-            )
+        date_due = self.format_date(
+            self.invoice_id.invoice_date_due or self.invoice_id.invoice_date
+        )
         params["date_due"] = date_due
         return params
 
     def _get_payload_params_yb(self):
         bank_account = ""
-        if self.payment_type == "iban":
+        # Use the appropriate IBAN for qr invoice or not.
+        if self.invoice_id.l10n_ch_is_qr_valid:
             bank_account = sanitize_account_number(
-                self.invoice_id.partner_bank_id.l10n_ch_qr_iban
-                or self.invoice_id.partner_bank_id.acc_number
+                self.invoice_id.partner_bank_id.l10n_ch_qr_iban or ""
             )
         else:
-            bank_account = self.invoice_id.partner_bank_id.l10n_ch_isr_subscription_chf
-            if bank_account:
-                account_parts = bank_account.split("-")
-                bank_account = (
-                    account_parts[0] + account_parts[1].rjust(6, "0") + account_parts[2]
-                )
-            else:
-                bank_account = ""
-
+            bank_account = sanitize_account_number(
+                self.invoice_id.partner_bank_id.acc_number or ""
+            )
         delivery = (
             self.invoice_id.partner_shipping_id
             if self.invoice_id.partner_shipping_id != self.invoice_id.partner_id
@@ -324,18 +297,9 @@ class EbillPostfinanceInvoiceMessage(models.Model):
                 )
         params["amount_by_group"] = amount_by_group
         # Get the invoice due date
-        date_due = None
-        if self.invoice_id.invoice_payment_term_id:
-            terms = self.invoice_id.invoice_payment_term_id.compute(
-                self.invoice_id.amount_total
-            )
-            if terms:
-                # Get the last payment date
-                date_due = terms[-1][0]
-        if not date_due:
-            date_due = self.format_date_yb(
-                self.invoice_id.invoice_date_due or self.invoice_id.invoice_date
-            )
+        date_due = self.format_date_yb(
+            self.invoice_id.invoice_date_due or self.invoice_id.invoice_date
+        )
         params["date_due"] = date_due
         return params
 
