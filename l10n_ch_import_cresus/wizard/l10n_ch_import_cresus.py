@@ -232,7 +232,7 @@ class AccountCresusImport(models.TransientModel):
             self.with_context(dont_create_taxes=True).write(
                 {"imported_move_ids": [(0, False, mv)]}
             )
-            self.invalidate_cache(fnames=["imported_move_ids"])
+            self.invalidate_recordset(fnames=["imported_move_ids"])
 
     def import_file(self):
         try:
