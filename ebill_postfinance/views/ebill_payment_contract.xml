@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-  <record id="invoices_sent_to_service_4_contract" model="ir.actions.act_window">
-    <field name="name">Invoices Sent to Postfinance</field>
-    <field name="res_model">ebill.postfinance.invoice.message</field>
-    <field name="type">ir.actions.act_window</field>
-    <field name="domain">[('ebill_payment_contract_id', '=', active_id)]</field>
-    <field name="view_mode">tree,form</field>
-  </record>
+    <record id="invoices_sent_to_service_4_contract" model="ir.actions.act_window">
+        <field name="name">Invoices Sent to Postfinance</field>
+        <field name="res_model">ebill.postfinance.invoice.message</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="domain">[('ebill_payment_contract_id', '=', active_id)]</field>
+        <field name="view_mode">tree,form</field>
+    </record>
     <record model="ir.ui.view" id="ebill_payment_contract_form_view">
         <field name="name">ebill.payment.contract.form (in ebill_postfinance)</field>
         <field name="model">ebill.payment.contract</field>
@@ -30,8 +30,8 @@
             </group>
 
             <group name="main" position="before">
-              <div class="oe_button_box" name="button_box">
-                <button
+                <div class="oe_button_box" name="button_box">
+                    <button
                         name="set_postfinance_method_on_partner"
                         help="Sets the invoice transmit method on the customer"
                         type="object"
@@ -39,9 +39,8 @@
                         icon="fa-user-o"
                         string="Set invoicing method"
                         invisible="is_postfinance_method_on_partner"
-                    >
-                </button>
-                <button
+                    />
+                    <button
                         name="%(invoices_sent_to_service_4_contract)d"
                         type="action"
                         class="oe_stat_button"
@@ -49,7 +48,7 @@
                     >
                   Invoices
               </button>
-              </div>
+                </div>
             </group>
         </field>
     </record>

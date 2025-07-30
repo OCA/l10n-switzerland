@@ -6,13 +6,13 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                  <button type="object" name="send_to_postfinance" string="Resend" />
-                  <button
+                    <button type="object" name="send_to_postfinance" string="Resend" />
+                    <button
                         type="object"
                         name="validate_xml_payload"
                         string="Check payload validity"
                     />
-                  <field
+                    <field
                         name="state"
                         widget="statusbar"
                         readonly="1"
@@ -21,25 +21,25 @@
                 </header>
                 <sheet>
                     <group>
-                    <group>
-                      <field name="transaction_id" />
-                      <field name="submitted_on" />
+                        <group>
+                            <field name="transaction_id" />
+                            <field name="submitted_on" />
+                        </group>
+                        <group>
+                            <field name="service_id" />
+                            <field name="invoice_id" />
+                        </group>
                     </group>
                     <group>
-                        <field name="service_id" />
-                        <field name="invoice_id" />
-                    </group>
-                    </group>
-                    <group>
-                      <field name="server_state" />
-                      <field name="server_reason_code" />
-                      <field name="server_reason_text" />
+                        <field name="server_state" />
+                        <field name="server_reason_code" />
+                        <field name="server_reason_text" />
                     </group>
                     <group>
-                    <field name="response" />
-                    <field name="payload_size" />
-                    <field name="payload" />
-                    <field name="attachment_id" />
+                        <field name="response" />
+                        <field name="payload_size" />
+                        <field name="payload" />
+                        <field name="attachment_id" />
                     </group>
                 </sheet>
             </form>
