@@ -70,5 +70,7 @@ class EbillPaymentContract(models.Model):
         for contract in self:
             if contract.is_postfinance_contract and not contract.postfinance_service_id:
                 raise ValidationError(
-                    _("A Postfinance service is required for a Postfinance contract.")
+                    self.env._(
+                        "A Postfinance service is required for a Postfinance contract."
+                    )
                 )

@@ -5,7 +5,7 @@ import base64
 import logging
 
 import odoo
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools.pdf import merge_pdf
 
@@ -36,7 +36,7 @@ class AccountMove(models.Model):
             return super()._export_invoice()
         message = self.create_postfinance_ebill()
         if not message:
-            raise UserError(_("Error generating postfinance eBill"))
+            raise UserError(self.env._("Error generating postfinance eBill"))
         message.send_to_postfinance()
         self.invoice_exported = True
         return f"Postfinance invoice generated and in state {message.state}"
@@ -120,7 +120,7 @@ class AccountMove(models.Model):
             ["ebill_postfinance.mail_activity_dws_error"],
             feedback="It worked on a later try",
         )
-        self.message_post(body=_("Invoice accepted by the Postfinance system"))
+        self.message_post(body=self.env._("Invoice accepted by the Postfinance system"))
         self.invoice_export_confirmed = True
 
     def log_invoice_refused_by_system(self):

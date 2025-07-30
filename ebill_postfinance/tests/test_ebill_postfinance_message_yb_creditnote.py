@@ -11,7 +11,7 @@ from lxml import etree as ET
 from odoo.modules.module import get_module_root
 from odoo.tools import file_open
 
-from .common import CommonCase
+from .common import CommonCase, clean_xml
 
 _logger = logging.getLogger(__name__)
 
@@ -58,10 +58,6 @@ class TestEbillPostfinanceMessageYBCreditNote(CommonCase):
             TRANSACTION_ID=message.transaction_id, CUSTOMER_ID=self.customer.id
         ).encode("utf8")
         # Remove the comments in the expected xml
-        expected_nocomment = [
-            line
-            for line in expected.split(b"\n")
-            if not line.lstrip().startswith(b"<!--")
-        ]
-        expected_nocomment = b"\n".join(expected_nocomment)
-        self.assertFalse(self.compare_xml_line_by_line(payload, expected_nocomment))
+        expected = clean_xml(expected)
+        payload = clean_xml(payload)
+        self.assertFalse(self.compare_xml_line_by_line(payload, expected))

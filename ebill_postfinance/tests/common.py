@@ -6,6 +6,7 @@ import os
 from os.path import dirname, join
 
 import requests
+from lxml import etree
 from vcr import VCR
 from xmlunittest import XmlTestMixin
 
@@ -30,7 +31,7 @@ class CommonCase(TransactionCase, XmlTestMixin):
             }
         )
         cls.country = cls.env.ref("base.ch")
-        cls.company = cls.env.ref("l10n_ch.demo_company_ch")
+        cls.company = cls.env.ref("base.demo_company_ch")
         cls.env.user.company_id = cls.company
         cls.company.vat = "CHE-012.345.678"
         cls.company.name = "Camptocamp SA"
@@ -176,7 +177,13 @@ class CommonCase(TransactionCase, XmlTestMixin):
         number_of_lines = len(expected_line)
         for i in range(number_of_lines):
             if generated_line[i].strip() != expected_line[i].strip():
-                return f"Diff at {i}/{number_of_lines} || Expected {expected_line[i]}  || Generated {generated_line[i]}"
+                return " || ".join(
+                    [
+                        f"Diff at {i}/{number_of_lines}",
+                        f"Expected {expected_line[i]}",
+                        f"Generated {generated_line[i]}",
+                    ]
+                )
 
 
 def get_recorder(base_path=None, **kw):
@@ -194,3 +201,7 @@ def get_recorder(base_path=None, **kw):
 
 
 recorder = get_recorder()
+
+
+def clean_xml(txt):
+    return etree.canonicalize(txt.decode(), strip_text=True).encode()

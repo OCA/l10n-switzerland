@@ -163,11 +163,11 @@
                     <Tax>
                         <TaxDetail>
                             <Rate>{{ tax.amount|round(2)|replace(",", ".") }}</Rate>
-                            <Amount>{{ tax._compute_amount(line.price_subtotal, line.price_unit)|round(2) }}</Amount>
+                            <Amount>{{ line._ebill_tax_amount(tax)|round(2) }}</Amount>
                             <BaseAmountExclusiveTax>{{ line.price_subtotal|round(6) }}</BaseAmountExclusiveTax>
                             <BaseAmountInclusiveTax>{{ line.price_total|round(6) }}</BaseAmountInclusiveTax>
                         </TaxDetail>
-                        <TotalTax>{{ tax._compute_amount(line.price_subtotal, line.price_unit)|round(2) }}</TotalTax>
+                        <TotalTax>{{ line._ebill_tax_amount(tax)|round(2) }}</TotalTax>
                     </Tax>
                     {%- endif %}
                     {% endfor %}

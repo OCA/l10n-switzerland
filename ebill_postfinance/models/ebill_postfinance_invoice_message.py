@@ -9,7 +9,7 @@ import pytz
 from jinja2 import Environment, FileSystemLoader
 from lxml import etree
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 from odoo.modules.module import get_module_root
 
@@ -139,7 +139,9 @@ class EbillPostfinanceInvoiceMessage(models.Model):
         for record in self:
             if record.state != "done":
                 record.state = "done"
-                record.invoice_id.message_post(body=_("Invoice paid through eBilling"))
+                record.invoice_id.message_post(
+                    body=self.env._("Invoice paid through eBilling")
+                )
 
     @api.model
     def _remove_pdf_data_from_payload(self, data):
@@ -281,14 +283,14 @@ class EbillPostfinanceInvoiceMessage(models.Model):
         amount_by_group = []
         # Get the percentage of the tax from the name of the group
         # Could be improve by searching in the account_tax linked to the group
-        for __, tax_group in self.invoice_id.tax_totals["groups_by_subtotal"].items():
-            for taxgroup in tax_group:
-                rate = taxgroup["tax_group_name"].split()[-1:][0][:-1]
+        for subtotal in self.invoice_id.tax_totals["subtotals"]:
+            for taxgroup in subtotal["tax_groups"]:
+                rate = taxgroup["group_name"].split()[-1:][0][:-1]
                 amount_by_group.append(
                     (
                         rate or "0",
-                        taxgroup["tax_group_amount"],
-                        taxgroup["tax_group_base_amount"],
+                        taxgroup["tax_amount"],
+                        taxgroup["base_amount"],
                     )
                 )
         params["amount_by_group"] = amount_by_group
@@ -350,7 +352,7 @@ class EbillPostfinanceInvoiceMessage(models.Model):
             "type": "ir.actions.client",
             "tag": "display_notification",
             "params": {
-                "title": _("The payload is valid."),
+                "title": self.env._("The payload is valid."),
                 "sticky": False,
             },
         }
