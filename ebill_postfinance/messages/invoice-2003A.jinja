@@ -179,7 +179,7 @@
       {%- if loop.index == 1 %}
       <TAX>
         <Rate>{{ tax.amount}}</Rate>
-        <Amount Currency="{{ invoice.currency_id.name }}">{{ tax._compute_amount(line.price_subtotal, line.price_unit)|round(2) }}</Amount>
+        <Amount Currency="{{ invoice.currency_id.name }}">{{ line._ebill_tax_amount(tax)|round(2) }}</Amount>
       </TAX>
       {%- endif %}
       {% else %}

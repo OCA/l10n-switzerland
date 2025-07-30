@@ -67,15 +67,15 @@
         </field>
     </record>
     <record model="ir.ui.view" id="ebill_postfinance_invoice_message_tree_view">
-        <field name="name">ebill.postfinance.invoice.message.tree</field>
+        <field name="name">ebill.postfinance.invoice.message.list</field>
         <field name="model">ebill.postfinance.invoice.message</field>
         <field name="arch" type="xml">
-            <tree create="false" default_order="submitted_on desc">
+            <list create="false" default_order="submitted_on desc">
                 <field name="invoice_id" />
                 <field name="transaction_id" />
                 <field name="submitted_on" />
                 <field name="state" />
-            </tree>
+            </list>
         </field>
     </record>
 </odoo>

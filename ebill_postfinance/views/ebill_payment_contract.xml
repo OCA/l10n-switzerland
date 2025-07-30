@@ -24,8 +24,6 @@
                     <field name="postfinance_service_id" />
                     <field name="postfinance_billerid" />
                     <field name="payment_type" />
-                    <field name="is_postfinance_contract" invisible="1" />
-                    <field name="is_postfinance_method_on_partner" invisible="1" />
                 </group>
             </group>
 
