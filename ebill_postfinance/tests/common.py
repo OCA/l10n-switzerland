@@ -176,12 +176,7 @@ class CommonCase(TransactionCase, XmlTestMixin):
         number_of_lines = len(expected_line)
         for i in range(number_of_lines):
             if generated_line[i].strip() != expected_line[i].strip():
-                return "Diff at {}/{} || Expected {}  || Generated {}".format(
-                    i,
-                    number_of_lines,
-                    expected_line[i],
-                    generated_line[i],
-                )
+                return f"Diff at {i}/{number_of_lines} || Expected {expected_line[i]}  || Generated {generated_line[i]}"
 
 
 def get_recorder(base_path=None, **kw):

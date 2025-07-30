@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-  <record id="invoices_sent_to_service" model="ir.actions.act_window">
-    <field name="name">Invoices Sent to Postfinance</field>
-    <field name="res_model">ebill.postfinance.invoice.message</field>
-    <field name="type">ir.actions.act_window</field>
-    <field name="domain">[('service_id', '=', active_id)]</field>
-    <field name="context">{'default_service_id': active_id}</field>
-    <field name="view_mode">tree,form</field>
-  </record>
+    <record id="invoices_sent_to_service" model="ir.actions.act_window">
+        <field name="name">Invoices Sent to Postfinance</field>
+        <field name="res_model">ebill.postfinance.invoice.message</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="domain">[('service_id', '=', active_id)]</field>
+        <field name="context">{'default_service_id': active_id}</field>
+        <field name="view_mode">tree,form</field>
+    </record>
     <record id="contract_for_service" model="ir.actions.act_window">
         <field name="name">Subscription</field>
         <field name="res_model">ebill.payment.contract</field>
