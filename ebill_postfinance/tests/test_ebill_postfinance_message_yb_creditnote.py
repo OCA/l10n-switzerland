@@ -52,7 +52,7 @@ class TestEbillPostfinanceMessageYBCreditNote(CommonCase):
         payload = "\n".join(lines).encode("utf8")
         # Prepare the XML file that is expected
         expected_tmpl = Template(
-            file_open("ebill_postfinance/tests/examples/credit_note_yb.xml").read()
+            file_open("ebill_postfinance/tests/samples/credit_note_yb.xml").read()
         )
         expected = expected_tmpl.substitute(
             TRANSACTION_ID=message.transaction_id, CUSTOMER_ID=self.customer.id

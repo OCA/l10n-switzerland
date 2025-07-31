@@ -29,7 +29,7 @@ class TestEbillPostfinance(CommonCase):
         """Check uploading an XML invoice to the service."""
         with open(
             os.path.join(
-                os.path.dirname(__file__), "examples", "yellowbill_qr_iban.xml"
+                os.path.dirname(__file__), "samples", "yellowbill_qr_iban.xml"
             ),
         ) as f:
             data = f.read()
