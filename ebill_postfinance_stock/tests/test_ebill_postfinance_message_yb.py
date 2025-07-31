@@ -9,7 +9,7 @@ from lxml import etree as ET
 from odoo.modules.module import get_module_path
 from odoo.tools import file_open
 
-from odoo.addons.ebill_postfinance.tests.common import CommonCase
+from odoo.addons.ebill_postfinance.tests.common import CommonCase, clean_xml
 
 
 @freeze_time("2019-06-21 09:06:00")
@@ -17,9 +17,28 @@ class TestEbillPostfinanceMessageYB(CommonCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.setUpDeliveryData()
         cls.schema_file = (
             get_module_path("ebill_postfinance") + "/messages/ybInvoice_V2.0.4.xsd"
         )
+
+    @classmethod
+    def setUpSaleData(cls):  # pylint: disable=missing-return
+        cls.setUpStockData()
+        super().setUpSaleData()
+
+    @classmethod
+    def setUpStockData(cls):
+        cls.wh = cls.env["stock.warehouse"].create(
+            {
+                "name": "PF WH test",
+                "code": "PFWHT",
+                "company_id": cls.company.id,
+            }
+        )
+
+    @classmethod
+    def setUpDeliveryData(cls):
         cls.pickings = cls.sale.order_line.move_ids.mapped("picking_id")
         cls.pickings[0].name = "Picking Name"
         for line in cls.pickings.move_ids.move_line_ids:
@@ -50,11 +69,6 @@ class TestEbillPostfinanceMessageYB(CommonCase):
         expected = expected_tmpl.substitute(
             TRANSACTION_ID=message.transaction_id, CUSTOMER_ID=self.customer.id
         ).encode("utf8")
-        # Remove the comments in the expected xml
-        expected_nocomment = [
-            line
-            for line in expected.split(b"\n")
-            if not line.lstrip().startswith(b"<!--")
-        ]
-        expected_nocomment = b"\n".join(expected_nocomment)
-        self.assertFalse(self.compare_xml_line_by_line(payload, expected_nocomment))
+        payload = clean_xml(payload)
+        expected = clean_xml(expected)
+        self.assertFalse(self.compare_xml_line_by_line(payload, expected))
