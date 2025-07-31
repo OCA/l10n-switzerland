@@ -21,6 +21,12 @@ class CommonCase(TransactionCase, XmlTestMixin):
         cls._super_send = requests.Session.send
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.setUpBasicData()
+        cls.setUpSaleData()
+        cls.setUpInvoiceData()
+
+    @classmethod
+    def setUpBasicData(cls):
         cls.service = cls.env["ebill.postfinance.service"].create(
             {
                 "name": "Postfinance Test Service",
@@ -93,6 +99,9 @@ class CommonCase(TransactionCase, XmlTestMixin):
             [("account_type", "=", "asset_receivable")],
             limit=1,
         )
+
+    @classmethod
+    def setUpSaleData(cls):
         cls.product = cls.env["product.product"].create(
             {"name": "Product Q & A", "list_price": 100.00, "default_code": "370003021"}
         )
@@ -139,6 +148,9 @@ class CommonCase(TransactionCase, XmlTestMixin):
         )
         cls.sale.action_confirm()
         cls.sale.date_order = "2019-06-01"
+
+    @classmethod
+    def setUpInvoiceData(cls):
         # Generate the invoice from the sale order
         cls.invoice = cls.sale._create_invoices()
         # And add some more lines on the invoice
