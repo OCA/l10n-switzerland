@@ -15,8 +15,15 @@ _logger = logging.getLogger(__name__)
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    @api.onchange("transmit_method_id")
-    def _onchange_transmit_method(self):
+    @api.depends("transmit_method_id")
+    def _compute_partner_bank_id(self):  # pylint: disable=missing-return
+        super()._compute_partner_bank_id()
+        for rec in self:
+            pf_partner_bank = rec._get_postfinance_partner_bank()
+            if pf_partner_bank:
+                rec.partner_bank_id = pf_partner_bank
+
+    def _get_postfinance_partner_bank(self):
         if self.move_type not in ("out_invoice", "out_refund"):
             return
         postfinance_method = self.env.ref(
@@ -25,7 +32,7 @@ class AccountMove(models.Model):
         if self.transmit_method_id == postfinance_method:
             contract = self.partner_id.get_active_contract(self.transmit_method_id)
             if contract:
-                self.partner_bank_id = contract.postfinance_service_id.partner_bank_id
+                return contract.postfinance_service_id.partner_bank_id
 
     def _export_invoice(self):
         """Export invoice with the help of account_invoice_export module."""
