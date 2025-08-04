@@ -6,6 +6,7 @@ from odoo import models
 
 class EbillPostfinanceService(models.Model):
     _name = "ebill.postfinance.service"
+    # TODO: use tech name mixin
     _inherit = ["ebill.postfinance.service", "server.env.mixin"]
 
     @property
