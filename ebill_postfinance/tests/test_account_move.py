@@ -40,10 +40,8 @@ class TestAccountMove(CommonCase):
         )
         self.assertFalse(self.invoice.transmit_method_id)
         self.invoice.transmit_method_id = self.transmit_method_not_pf
-        self.invoice._onchange_transmit_method()
         self.assertNotEqual(self.invoice.partner_bank_id, self.pf_partner_bank)
         self.invoice.transmit_method_id = self.transmit_method_pf
-        self.invoice._onchange_transmit_method()
         self.assertNotEqual(self.invoice.partner_bank_id, self.pf_partner_bank)
 
     @mute_logger("odoo.addons.base_ebill_payment_contract.models.res_partner")
@@ -54,8 +52,6 @@ class TestAccountMove(CommonCase):
         )
         self.assertFalse(self.invoice.transmit_method_id)
         self.invoice.transmit_method_id = self.transmit_method_not_pf
-        self.invoice._onchange_transmit_method()
         self.assertNotEqual(self.invoice.partner_bank_id, self.pf_partner_bank)
         self.invoice.transmit_method_id = self.transmit_method_pf
-        self.invoice._onchange_transmit_method()
         self.assertEqual(self.invoice.partner_bank_id, self.pf_partner_bank)
