@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Envelope
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    type="string"
+>
+    <Header>
+        <From>Camptocamp SA</From>
+        <To>IPECeBILLServer</To>
+        <UseCase>CreateybInvoice</UseCase>
+        <SessionID>1</SessionID>
+        <Version>2.0</Version>
+        <Status>0</Status>
+        <SoftwareName>Odoo</SoftwareName>
+        <SoftwareVersion>14.0</SoftwareVersion>
+    </Header>
+    <Body>
+        <DeliveryInfo>
+            <BillerID>41101000001021209</BillerID>
+            <eBillAccountID>41010198248040391</eBillAccountID>
+            <DeliveryDate>2019-06-21</DeliveryDate>
+            <TransactionID>$TRANSACTION_ID</TransactionID>
+            <BillDetailsType>PDFAppendix</BillDetailsType>
+            <URLBillDetails />
+        </DeliveryInfo>
+        <Bill>
+            <Header>
+                <DocumentType>CREDITADVICE</DocumentType>
+                <DocumentID>INV_TEST_01</DocumentID>
+                <DocumentDate>2019-06-21</DocumentDate>
+                <SenderParty>
+                    <TaxLiability>VAT</TaxLiability>
+                    <PartyType>
+                        <Address>
+                            <CompanyName>Camptocamp SA</CompanyName>
+                            <Address1>StreetOne</Address1>
+                            <ZIP>1015</ZIP>
+                            <City>Lausanne</City>
+                            <Country>CH</Country>
+                            <Email>info@camptocamp.com</Email>
+                        </Address>
+                        <TaxID>CHE012345678</TaxID>
+                    </PartyType>
+                </SenderParty>
+                <ReceiverParty>
+                    <PartyType>
+                        <CustomerID>$CUSTOMER_ID</CustomerID>
+                        <Address>
+                            <CompanyName>Test RAD Customer XML</CompanyName>
+                            <Address1>Teststrasse 100</Address1>
+                            <Address2
+                            >This is a very long street name that should be sna</Address2>
+                            <ZIP>1700</ZIP>
+                            <City>Fribourg</City>
+                            <Country>CH</Country>
+                        </Address>
+                        <!-- <TaxID>CHE333222111</TaxID> -->
+                    </PartyType>
+                </ReceiverParty>
+                <DeliveryPlace>
+                    <Address>
+                        <CompanyName>Test RAD Customer XML</CompanyName>
+                        <ZIP>1700</ZIP>
+                        <City>Fribourg</City>
+                        <Country>CH</Country>
+                        <!-- <Contact1>0000000001</Contact1> -->
+                    </Address>
+                </DeliveryPlace>
+                <AchievementDate>
+                    <StartDateAchievement>2019-06-21</StartDateAchievement>
+                    <EndDateAchievement>2019-06-21</EndDateAchievement>
+                </AchievementDate>
+                <Currency>CHF</Currency>
+                <AccountAssignment>
+                    <OrderReference>
+                        <ReferencePosition>1</ReferencePosition>
+                        <ReferenceType>OrderReference</ReferenceType>
+                        <ReferenceValue>CustomerRef</ReferenceValue>
+                    </OrderReference>
+                    <OrderDate>2019-06-01</OrderDate>
+                </AccountAssignment>
+                <Language>en</Language>
+                <PaymentInformation>
+                    <PaymentDueDate>2019-07-01</PaymentDueDate>
+                    <PaymentType>CREDIT</PaymentType>
+                    <fixAmount>Yes</fixAmount>
+                </PaymentInformation>
+                <!-- <FreeText>Dies ist eine Musterrechnung mit QR-IBAN Angaben</FreeText> -->
+            </Header>
+            <LineItems>
+                <LineItem>
+                    <LineItemType>NORMAL</LineItemType>
+                    <LineItemID>1</LineItemID>
+                    <ProductDescription>Product Q &amp; A</ProductDescription>
+                    <ProductID>370003021</ProductID>
+                    <Quantity>4.0</Quantity>
+                    <QuantityDescription>Units</QuantityDescription>
+                    <PriceUnit>1</PriceUnit>
+                    <Tax>
+                        <TaxDetail>
+                            <Rate>7.7</Rate>
+                            <Amount>37.88</Amount>
+                            <BaseAmountExclusiveTax>492.0</BaseAmountExclusiveTax>
+                            <BaseAmountInclusiveTax>529.88</BaseAmountInclusiveTax>
+                        </TaxDetail>
+                        <TotalTax>37.88</TotalTax>
+                    </Tax>
+                    <AmountInclusiveTax>529.88</AmountInclusiveTax>
+                    <AmountExclusiveTax>492.0</AmountExclusiveTax>
+                    <FixedReference>
+                        <ReferencePosition>2</ReferencePosition>
+                        <ReferenceType>OrderNumberBySupplier</ReferenceType>
+                        <ReferenceValue>Order123</ReferenceValue>
+                    </FixedReference>
+                    <FixedReference>
+                        <ReferencePosition>3</ReferencePosition>
+                        <ReferenceType>OrderNumberByBuyer</ReferenceType>
+                        <ReferenceValue>CustomerRef</ReferenceValue>
+                    </FixedReference>
+                </LineItem>
+                <LineItem>
+                    <LineItemType>NORMAL</LineItemType>
+                    <LineItemID>2</LineItemID>
+                    <ProductDescription
+                    >Product With a Very Long Name That Need To Be Truncated</ProductDescription>
+                    <ProductID>370003022</ProductID>
+                    <Quantity>1.0</Quantity>
+                    <QuantityDescription>Units</QuantityDescription>
+                    <PriceUnit>1</PriceUnit>
+                    <Tax>
+                        <TaxDetail>
+                            <Rate>7.7</Rate>
+                            <Amount>0.0</Amount>
+                            <BaseAmountExclusiveTax>0.0</BaseAmountExclusiveTax>
+                            <BaseAmountInclusiveTax>0.0</BaseAmountInclusiveTax>
+                        </TaxDetail>
+                        <TotalTax>0.0</TotalTax>
+                    </Tax>
+                    <AmountInclusiveTax>0.0</AmountInclusiveTax>
+                    <AmountExclusiveTax>0.0</AmountExclusiveTax>
+                    <FixedReference>
+                        <ReferencePosition>4</ReferencePosition>
+                        <ReferenceType>OrderNumberBySupplier</ReferenceType>
+                        <ReferenceValue>Order123</ReferenceValue>
+                    </FixedReference>
+                    <FixedReference>
+                        <ReferencePosition>5</ReferencePosition>
+                        <ReferenceType>OrderNumberByBuyer</ReferenceType>
+                        <ReferenceValue>CustomerRef</ReferenceValue>
+                    </FixedReference>
+                </LineItem>
+                <LineItem>
+                    <LineItemType>NORMAL</LineItemType>
+                    <LineItemID>3</LineItemID>
+                    <ProductDescription>Phone support</ProductDescription>
+                    <Quantity>4.0</Quantity>
+                    <QuantityDescription>PCE</QuantityDescription>
+                    <PriceUnit>1</PriceUnit>
+                    <AmountInclusiveTax>0.0</AmountInclusiveTax>
+                    <AmountExclusiveTax>0.0</AmountExclusiveTax>
+                </LineItem>
+            </LineItems>
+            <Summary>
+                <Tax>
+                    <TaxDetail>
+                        <Rate>7.7</Rate>
+                        <Amount>-37.88</Amount>
+                        <BaseAmountExclusiveTax>-492.0</BaseAmountExclusiveTax>
+                        <BaseAmountInclusiveTax>-529.88</BaseAmountInclusiveTax>
+                    </TaxDetail>
+                    <TotalTax>37.88</TotalTax>
+                </Tax>
+                <TotalAmountExclusiveTax>-492.0</TotalAmountExclusiveTax>
+                <TotalAmountInclusiveTax>-529.88</TotalAmountInclusiveTax>
+                <!-- <TotalAmountPaid>200.00</TotalAmountPaid> -->
+                <TotalAmountDue>-529.88</TotalAmountDue>
+            </Summary>
+        </Bill>
+        <Appendix />
+    </Body>
+</Envelope>
