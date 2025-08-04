@@ -299,6 +299,14 @@ class EbillPostfinanceInvoiceMessage(models.Model):
             self.invoice_id.invoice_date_due or self.invoice_id.invoice_date
         )
         params["date_due"] = date_due
+        if self.invoice_id.invoice_payment_term_id.early_discount:
+            terms = self.invoice_id.invoice_payment_term_id
+            params["discounts"].append(
+                {
+                    "percentage": terms.discount_percentage,
+                    "days": terms.discount_days,
+                }
+            )
         return params
 
     def _get_jinja_env(self, template_dir):
