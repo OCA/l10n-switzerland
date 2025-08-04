@@ -216,4 +216,5 @@ recorder = get_recorder()
 
 
 def clean_xml(txt):
-    return etree.canonicalize(txt.decode(), strip_text=True).encode()
+    clean = etree.canonicalize(txt.decode(), strip_text=True).encode()
+    return etree.tostring(etree.fromstring(clean), pretty_print=True)
