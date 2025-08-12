@@ -224,7 +224,7 @@ class EbillPostfinanceInvoiceMessage(models.Model):
             "format_date": self.format_date,
             "ebill_account_number": self.ebill_account_number,
             "discount_template": "",
-            "discount": {},
+            "discounts": [],
         }
         amount_by_group = []
         # Get the percentage of the tax from the name of the group
@@ -277,7 +277,7 @@ class EbillPostfinanceInvoiceMessage(models.Model):
             "format_date": self.format_date_yb,
             "ebill_account_number": self.ebill_account_number,
             "discount_template": "",
-            "discount": {},
+            "discounts": [],
             "invoice_line_stock_template": "",
         }
         amount_by_group = []
@@ -299,6 +299,14 @@ class EbillPostfinanceInvoiceMessage(models.Model):
             self.invoice_id.invoice_date_due or self.invoice_id.invoice_date
         )
         params["date_due"] = date_due
+        if self.invoice_id.invoice_payment_term_id.early_discount:
+            terms = self.invoice_id.invoice_payment_term_id
+            params["discounts"].append(
+                {
+                    "percentage": terms.discount_percentage,
+                    "days": terms.discount_days,
+                }
+            )
         return params
 
     def _get_jinja_env(self, template_dir):

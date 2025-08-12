@@ -31,10 +31,9 @@ class TestEbillPostfinanceMessageYB(CommonCase):
         except Exception:
             _logger.info("Disabling moves on invoice lines.")
 
-    def test_invoice_qr(self):
-        """Check XML payload genetated for an invoice."""
+    def _test_invoice_qr(self, expected_tmpl):
+        """Check XML payload generated for an invoice."""
         self.invoice.name = "INV_TEST_01"
-        self.invoice.invoice_payment_term_id = self.payment_term
         message = self.invoice.create_postfinance_ebill()
         message.set_transaction_id()
         message.payload = message._generate_payload_yb()
@@ -49,9 +48,7 @@ class TestEbillPostfinanceMessageYB(CommonCase):
                 break
         payload = "\n".join(lines).encode("utf8")
         # Prepare the XML file that is expected
-        expected_tmpl = Template(
-            file_open("ebill_postfinance/tests/samples/invoice_qr_yb.xml").read()
-        )
+        expected_tmpl = Template(file_open(expected_tmpl).read())
         expected = expected_tmpl.substitute(
             TRANSACTION_ID=message.transaction_id, CUSTOMER_ID=self.customer.id
         ).encode("utf8")
@@ -59,3 +56,23 @@ class TestEbillPostfinanceMessageYB(CommonCase):
         payload = clean_xml(payload)
         expected = clean_xml(expected)
         self.assertFalse(self.compare_xml_line_by_line(payload, expected))
+
+    def test_invoice_qr(self):
+        """Check XML payload genetated for an invoice."""
+        self.invoice.invoice_payment_term_id = self.payment_term
+        self._test_invoice_qr("ebill_postfinance/tests/samples/invoice_qr_yb.xml")
+
+    def test_invoice_qr_discount(self):
+        payment_term = self.env["account.payment.term"].create(
+            {
+                "name": "Skonto",
+                "early_discount": True,
+                "discount_days": 10,
+                "discount_percentage": 2.0,
+            }
+        )
+        self.invoice.invoice_payment_term_id = payment_term
+        self.invoice.invoice_date_due = "2019-08-20"
+        self._test_invoice_qr(
+            "ebill_postfinance/tests/samples/invoice_qr_yb_discount.xml"
+        )
