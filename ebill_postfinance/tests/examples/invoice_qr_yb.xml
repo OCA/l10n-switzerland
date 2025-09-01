@@ -172,7 +172,7 @@
                 </Tax>
                 <TotalAmountExclusiveTax>492.0</TotalAmountExclusiveTax>
                 <TotalAmountInclusiveTax>529.88</TotalAmountInclusiveTax>
-                <!-- <TotalAmountPaid>200.00</TotalAmountPaid> -->
+                <TotalAmountPaid>0.0</TotalAmountPaid>
                 <TotalAmountDue>529.88</TotalAmountDue>
             </Summary>
           </Bill>
