@@ -4,7 +4,7 @@
 {
     "name": "eBill Postfinance",
     "summary": """Postfinance eBill integration""",
-    "version": "18.0.1.1.0",
+    "version": "18.0.1.2.0",
     "license": "AGPL-3",
     "author": "Camptocamp,Odoo Community Association (OCA)",
     "maintainers": ["TDu"],
