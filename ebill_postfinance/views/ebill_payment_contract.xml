@@ -5,7 +5,7 @@
         <field name="res_model">ebill.postfinance.invoice.message</field>
         <field name="type">ir.actions.act_window</field>
         <field name="domain">[('ebill_payment_contract_id', '=', active_id)]</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
     <record model="ir.ui.view" id="ebill_payment_contract_form_view">
         <field name="name">ebill.payment.contract.form (in ebill_postfinance)</field>
