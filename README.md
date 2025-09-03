@@ -21,7 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[ebill_postfinance](ebill_postfinance/) | 18.0.1.1.0 | <a href='https://github.com/TDu'><img src='https://github.com/TDu.png' width='32' height='32' style='border-radius:50%;' alt='TDu'/></a> | Postfinance eBill integration
+[ebill_postfinance](ebill_postfinance/) | 18.0.1.2.0 | <a href='https://github.com/TDu'><img src='https://github.com/TDu.png' width='32' height='32' style='border-radius:50%;' alt='TDu'/></a> | Postfinance eBill integration
 [ebill_postfinance_customer_free_ref](ebill_postfinance_customer_free_ref/) | 18.0.1.0.0 |  | Glue module: ebill_postfinance and sale_order_customer_free_ref
 [ebill_postfinance_stock](ebill_postfinance_stock/) | 18.0.1.0.0 | <a href='https://github.com/TDu'><img src='https://github.com/TDu.png' width='32' height='32' style='border-radius:50%;' alt='TDu'/></a> | Add stock integration to Postfinance eBill
 [l10n_ch_account_tags](l10n_ch_account_tags/) | 18.0.1.0.0 |  | Switzerland Account Tags
