@@ -72,14 +72,18 @@ class AccountMove(models.Model):
                 pdf = merge_pdf(pdf_data)
             elif len(pdf_data) == 1:
                 pdf = pdf_data[0]
-        message = self.env["ebill.postfinance.invoice.message"].create(
-            {
-                "service_id": contract.postfinance_service_id.id,
-                "invoice_id": self.id,
-                "ebill_account_number": contract.postfinance_billerid,
-                "payment_type": payment_type,
-                "ebill_payment_contract_id": contract.id,
-            }
+        message = (
+            self.env["ebill.postfinance.invoice.message"]
+            .sudo()
+            .create(
+                {
+                    "service_id": contract.postfinance_service_id.id,
+                    "invoice_id": self.id,
+                    "ebill_account_number": contract.postfinance_billerid,
+                    "payment_type": payment_type,
+                    "ebill_payment_contract_id": contract.id,
+                }
+            )
         )
         attachment = self.env["ir.attachment"].create(
             {
