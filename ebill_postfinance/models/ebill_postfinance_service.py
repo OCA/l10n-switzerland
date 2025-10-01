@@ -57,6 +57,12 @@ class EbillPostfinanceService(models.Model):
         default="600",
         help="Timeout for each HTTP (GET, POST) request in seconds.",
     )
+    xml_file_language = fields.Many2one(
+        comodel_name="res.lang",
+        string="XML file Language",
+        help="The language used to generate the XML file, "
+        "if unset default to the customer language.",
+    )
 
     def _get_service(self):
         return ebilling_postfinance.WebService(

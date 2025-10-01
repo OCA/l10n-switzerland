@@ -324,8 +324,16 @@ class EbillPostfinanceInvoiceMessage(models.Model):
     def _get_template_yb(self, jinja_env):
         return jinja_env.get_template(INVOICE_TEMPLATE_YB)
 
+    def _get_xml_language_code(self):
+        if self.service_id.xml_file_language:
+            return self.service_id.xml_file_language.code
+        if self.ebill_payment_contract_id.partner_id.lang:
+            return self.ebill_payment_contract_id.partner_id.lang
+        return self.env.lang.code
+
     def _generate_payload(self):
         self.ensure_one()
+        self = self.with_context(lang=self._get_xml_language_code())
         assert self.state in ("draft", "error")
         if self.service_id.file_type_to_use == "XML":
             if self.service_id.use_file_type_xml_paynet:
