@@ -75,6 +75,7 @@
                             <field name="use_test_service" />
                             <field name="operation_timeout" />
                             <field name="file_type_to_use" readonly="1" />
+                            <field name="xml_file_language" />
                             <field
                                 name="use_file_type_xml_paynet"
                                 invisible="file_type_to_use != 'XML'"
