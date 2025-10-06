@@ -48,15 +48,9 @@ class AccountMove(models.Model):
         self.invoice_exported = True
         return f"Postfinance invoice generated and in state {message.state}"
 
-    def _get_ebill_postfinance_pdf_report(self, payment_type):
+    def _get_ebill_postfinance_pdf_report(self):
         """Get the report name(s) to be used to generate the pdf send with the eBill."""
-        report_names = ["account.report_invoice"]
-        if self.move_type == "out_invoice":
-            # Should it not depends on the invoice being sent, instead of a
-            # configuration on the contract ?
-            if payment_type == "qr":
-                report_names.append("l10n_ch.qr_report_main")
-        return report_names
+        return ["account.report_invoice"]
 
     def create_postfinance_ebill(self):
         """Generate the message record for an invoice."""
@@ -73,7 +67,7 @@ class AccountMove(models.Model):
         pdf_data = []
         # When test are run, pdf are not generated, so use an empty pdf
         pdf = b""
-        report_names = self._get_ebill_postfinance_pdf_report(payment_type)
+        report_names = self._get_ebill_postfinance_pdf_report()
         for report_name in report_names:
             pdf_content, _ = self.env["ir.actions.report"]._render(
                 report_name, [self.id]
