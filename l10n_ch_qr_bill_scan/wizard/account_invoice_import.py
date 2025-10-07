@@ -33,7 +33,7 @@ class AccountInvoiceImport(models.TransientModel):
     invoice_file = fields.Binary(string="PDF, PNG or XML Invoice", required=False)
 
     state = fields.Selection(
-        selection_add=[("select-partner", "Select partner")],
+        selection=[("select-partner", "Select partner")],
         default="import",
     )
 

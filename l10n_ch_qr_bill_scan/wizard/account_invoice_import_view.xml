@@ -51,17 +51,6 @@
             <xpath expr="//div[@name='help-import']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
-            <field name="partner_id" position="attributes">
-                <attribute
-                    name="context"
-                >{'default_name': partner_name, 'default_street': partner_street, 'default_zip': partner_zip, 'default_city': partner_city, 'default_country_id': partner_country_id}</attribute>
-                <attribute
-                    name="states"
-                >config,update,update-from-invoice,select-partner</attribute>
-                <attribute
-                    name="attrs"
-                >{'readonly': [('state', '!=', 'select-partner')], 'required': [('state', '=', 'select-partner')]}</attribute>
-            </field>
             <group name="main">
                 <field name="partner_name" states="select-partner" />
                 <field name="partner_street" states="select-partner" />
@@ -69,18 +58,6 @@
                 <field name="partner_city" states="select-partner" />
                 <field name="partner_country_id" states="select-partner" />
             </group>
-            <field name="import_config_id" position="attributes">
-                <attribute
-                    name="states"
-                >config,update-from-invoice,update,select-partner</attribute>
-                <attribute
-                    name="attrs"
-                >{'required': [('state', 'in', ('config', 'update-from-invoice', 'update', 'select-partner'))]}</attribute>
-                <attribute name="context">{'default_partner_id': partner_id}</attribute>
-            </field>
-            <xpath expr="//button[@name='import_invoice']" position="attributes">
-                <attribute name="states">import,config,select-partner</attribute>
-            </xpath>
         </field>
     </record>
 </odoo>

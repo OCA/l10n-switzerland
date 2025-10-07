@@ -82,14 +82,6 @@ class TestScanQRBill(common.TransactionCase):
                 "account_type": "expense",
             }
         )
-        cls.env["account.invoice.import.config"].create(
-            {
-                "name": "Camptocamp - one line no product",
-                "partner_id": cls.supplier.id,
-                "invoice_line_method": "1line_no_product",
-                "account_id": cls.expense_account.id,
-            }
-        )
         cls.env.ref("l10n_ch.l10nch_chart_template")._load_template(
             cls.env.user.company_id
         )
