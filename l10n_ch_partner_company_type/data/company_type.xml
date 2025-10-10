@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <record id="ei" model="res.partner.company.type">
+        <field name="name">Individual company</field>
+        <field name="shortcut">ei</field>
+        <field name="country_ids" eval="[(4, ref('base.ch'))]" />
+    </record>
+
+    <record id="snc" model="res.partner.company.type">
+        <field name="name">Partnership</field>
+        <field name="shortcut">SNC</field>
+        <field name="country_ids" eval="[(4, ref('base.ch'))]" />
+    </record>
+
+    <record id="sa" model="res.partner.company.type">
+        <field name="name">Limited company (SA)</field>
+        <field name="shortcut">SA</field>
+        <field name="country_ids" eval="[(4, ref('base.ch'))]" />
+    </record>
+
+    <record id="sarl" model="res.partner.company.type">
+        <field name="name">Limited liability company</field>
+        <field name="shortcut">SARL</field>
+        <field name="country_ids" eval="[(4, ref('base.ch'))]" />
+    </record>
+
+    <record id="sc" model="res.partner.company.type">
+        <field name="name">Cooperative</field>
+        <field name="shortcut">SC</field>
+        <field name="country_ids" eval="[(4, ref('base.ch'))]" />
+    </record>
+
+    <record id="asso" model="res.partner.company.type">
+        <field name="name">Association</field>
+        <field name="shortcut">asso</field>
+        <field name="country_ids" eval="[(4, ref('base.ch'))]" />
+    </record>
+
+    <record id="fond" model="res.partner.company.type">
+        <field name="name">Foundation</field>
+        <field name="shortcut">fond</field>
+        <field name="country_ids" eval="[(4, ref('base.ch'))]" />
+    </record>
+
+    <record id="edp" model="res.partner.company.type">
+        <field name="name">Company under public lax</field>
+        <field name="shortcut">EDP</field>
+        <field name="country_ids" eval="[(4, ref('base.ch'))]" />
+    </record>
+
+</odoo>
