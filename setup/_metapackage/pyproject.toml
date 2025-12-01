@@ -1,9 +1,10 @@
 [project]
 name = "odoo-addons-oca-l10n-switzerland"
-version = "18.0.20250804.2"
+version = "18.0.20251201.0"
 dependencies = [
     "odoo-addon-ebill_postfinance==18.0.*",
     "odoo-addon-ebill_postfinance_customer_free_ref==18.0.*",
+    "odoo-addon-ebill_postfinance_server_env==18.0.*",
     "odoo-addon-ebill_postfinance_stock==18.0.*",
     "odoo-addon-l10n_ch_account_tags==18.0.*",
     "odoo-addon-l10n_ch_adr_report==18.0.*",
