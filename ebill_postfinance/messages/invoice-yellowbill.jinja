@@ -222,8 +222,8 @@
                 {% endfor -%}
                 <TotalAmountExclusiveTax>{{ invoice.amount_untaxed * amount_sign }}</TotalAmountExclusiveTax>
                 <TotalAmountInclusiveTax>{{ invoice.amount_total * amount_sign }}</TotalAmountInclusiveTax>
-                {# <TotalAmountPaid></TotalAmountPaid> #}
-                <TotalAmountDue>{{ invoice.amount_total * amount_sign }}</TotalAmountDue>
+                <TotalAmountPaid>{{ (invoice.amount_total - invoice.amount_residual) * amount_sign }}</TotalAmountPaid>
+                <TotalAmountDue>{{ invoice.amount_residual * amount_sign }}</TotalAmountDue>
             </Summary>
         </Bill>
         <Appendix>
