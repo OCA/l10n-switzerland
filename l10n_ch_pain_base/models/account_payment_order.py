@@ -9,6 +9,10 @@ from odoo import api, models
 class AccountPaymentOrder(models.Model):
     _inherit = "account.payment.order"
 
+    @api.model
+    def _is_ch_pain_flavor(self, pain_flavor):
+        return pain_flavor in ["pain.001.001.03.ch.02", "pain.008.001.02.ch.01"]
+
     def compute_sepa_final_hook(self, sepa):
         self.ensure_one()
         sepa = super().compute_sepa_final_hook(sepa)
@@ -22,17 +26,16 @@ class AccountPaymentOrder(models.Model):
         self.ensure_one()
         nsmap = super().generate_pain_nsmap()
         pain_flavor = self.payment_mode_id.payment_method_id.pain_version
-        if pain_flavor in ["pain.001.001.03.ch.02", "pain.008.001.02.ch.01"]:
+        if self._is_ch_pain_flavor(pain_flavor):
             nsmap[None] = (
                 "http://www.six-interbank-clearing.com/de/" "%s.xsd" % pain_flavor
             )
-
         return nsmap
 
     def generate_pain_attrib(self):
         self.ensure_one()
         pain_flavor = self.payment_mode_id.payment_method_id.pain_version
-        if pain_flavor in ["pain.001.001.03.ch.02", "pain.008.001.02.ch.01"]:
+        if self._is_ch_pain_flavor(pain_flavor):
             attrib = {
                 "{http://www.w3.org/2001/XMLSchema-instance}"
                 "schemaLocation": "http://www.six-interbank-clearing.com/de/"
