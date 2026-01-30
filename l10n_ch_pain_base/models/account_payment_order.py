@@ -10,6 +10,10 @@ from odoo.exceptions import UserError
 class AccountPaymentOrder(models.Model):
     _inherit = "account.payment.order"
 
+    @api.model
+    def _is_ch_pain_flavor(self, pain_flavor):
+        return pain_flavor in ["pain.001.001.03.ch.02", "pain.008.001.02.ch.01"]
+
     def compute_sepa_final_hook(self, sepa):
         self.ensure_one()
         sepa = super().compute_sepa_final_hook(sepa)
@@ -23,17 +27,16 @@ class AccountPaymentOrder(models.Model):
         self.ensure_one()
         nsmap = super().generate_pain_nsmap()
         pain_flavor = self.payment_mode_id.payment_method_id.pain_version
-        if pain_flavor in ["pain.001.001.03.ch.02", "pain.008.001.02.ch.01"]:
+        if self._is_ch_pain_flavor(pain_flavor):
             nsmap[None] = (
                 "http://www.six-interbank-clearing.com/de/" "%s.xsd" % pain_flavor
             )
-
         return nsmap
 
     def generate_pain_attrib(self):
         self.ensure_one()
         pain_flavor = self.payment_mode_id.payment_method_id.pain_version
-        if pain_flavor in ["pain.001.001.03.ch.02", "pain.008.001.02.ch.01"]:
+        if self._is_ch_pain_flavor(pain_flavor):
             attrib = {
                 "{http://www.w3.org/2001/XMLSchema-instance}"
                 "schemaLocation": "http://www.six-interbank-clearing.com/de/"
@@ -133,6 +136,8 @@ class AccountPaymentOrder(models.Model):
     @api.model
     def generate_address_block(self, parent_node, partner, gen_args):
         """Generate the piece of the XML corresponding to PstlAdr"""
+        if not self._is_ch_pain_flavor(gen_args.get("pain_flavor")):
+            return super().generate_address_block(parent_node, partner, gen_args)
         if partner.country_id:
             postal_address = etree.SubElement(parent_node, "PstlAdr")
 
@@ -175,5 +180,6 @@ class AccountPaymentOrder(models.Model):
             creditor_ref_info_type_code.text = "QRR"
             creditor_reference = etree.SubElement(creditor_ref_information, "Ref")
             creditor_reference.text = line.payment_line_ids[0].communication
+            return True
         else:
-            super().generate_remittance_info_block(parent_node, line, gen_args)
+            return super().generate_remittance_info_block(parent_node, line, gen_args)
