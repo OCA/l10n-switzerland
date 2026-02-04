@@ -378,17 +378,74 @@ ul.auto-toc {
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#bug-tracker" id="toc-entry-1">Bug Tracker</a></li>
-<li><a class="reference internal" href="#credits" id="toc-entry-2">Credits</a><ul>
-<li><a class="reference internal" href="#authors" id="toc-entry-3">Authors</a></li>
-<li><a class="reference internal" href="#contributors" id="toc-entry-4">Contributors</a></li>
-<li><a class="reference internal" href="#maintainers" id="toc-entry-5">Maintainers</a></li>
+<li><a class="reference internal" href="#known-issues-roadmap" id="toc-entry-1">Known issues / Roadmap</a><ul>
+<li><a class="reference internal" href="#short-term-merge-safe-keep-architecture-stable" id="toc-entry-2">Short-term (merge-safe, keep architecture stable)</a></li>
+<li><a class="reference internal" href="#mid-term-refactor" id="toc-entry-3">Mid-term refactor</a></li>
+<li><a class="reference internal" href="#swiss-standard-update-time-bound" id="toc-entry-4">Swiss standard update (time-bound)</a></li>
+<li><a class="reference internal" href="#implementation-checklist" id="toc-entry-5">Implementation checklist</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#bug-tracker" id="toc-entry-6">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="toc-entry-7">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="toc-entry-8">Authors</a></li>
+<li><a class="reference internal" href="#contributors" id="toc-entry-9">Contributors</a></li>
+<li><a class="reference internal" href="#maintainers" id="toc-entry-10">Maintainers</a></li>
 </ul>
 </li>
 </ul>
 </div>
+<div class="section" id="known-issues-roadmap">
+<h1><a class="toc-backref" href="#toc-entry-1">Known issues / Roadmap</a></h1>
+<p>This roadmap summarizes follow-up actions discussed in
+<a class="reference external" href="https://github.com/OCA/l10n-switzerland/pull/754">OCA/l10n-switzerland#754</a>.</p>
+<div class="section" id="short-term-merge-safe-keep-architecture-stable">
+<h2><a class="toc-backref" href="#toc-entry-2">Short-term (merge-safe, keep architecture stable)</a></h2>
+<ul class="simple">
+<li>Keep <tt class="docutils literal">l10n_ch_pain_base</tt> close to legacy architecture for 16.0 migration.</li>
+<li>Avoid moving PAIN flavor declarations from feature modules into base only to satisfy tests.</li>
+<li>Keep base tests minimal and focused on base behavior; validate flavor-specific behavior in
+dedicated modules.</li>
+<li>Ensure CI is stable (including copier/CI profile alignment if conflicting modules require
+dedicated handling).</li>
+</ul>
+</div>
+<div class="section" id="mid-term-refactor">
+<h2><a class="toc-backref" href="#toc-entry-3">Mid-term refactor</a></h2>
+<ul class="simple">
+<li>Review conditional logic in shared block generators that branches on <tt class="docutils literal">pain_flavor</tt> and decide
+what should remain in base vs. move to extension modules.</li>
+<li>Revisit module split and responsibilities:<ul>
+<li><tt class="docutils literal">l10n_ch_pain_base</tt>: common/shared generation logic.</li>
+<li><tt class="docutils literal">l10n_ch_pain_credit_transfer</tt>: credit-transfer specific behavior.</li>
+<li><tt class="docutils literal">l10n_ch_pain_direct_debit</tt>: confirm if still needed in current architecture.</li>
+</ul>
+</li>
+<li>Reduce duplicated Swiss-specific logic where practical while preserving backward compatibility.</li>
+</ul>
+</div>
+<div class="section" id="swiss-standard-update-time-bound">
+<h2><a class="toc-backref" href="#toc-entry-4">Swiss standard update (time-bound)</a></h2>
+<ul class="simple">
+<li>Prepare support for Swiss credit transfer <tt class="docutils literal">pain.001.001.09.ch.03</tt>.</li>
+<li>Plan deprecation path for <tt class="docutils literal">pain.001.001.03.ch.02</tt> (announced acceptance window ends around
+Nov 2026).</li>
+<li>Validate generated XML with official SIX validators and real bank acceptance tests.</li>
+<li>Address format differences required by new standards, especially postal address handling and
+structured remittance/QRR compatibility.</li>
+</ul>
+</div>
+<div class="section" id="implementation-checklist">
+<h2><a class="toc-backref" href="#toc-entry-5">Implementation checklist</a></h2>
+<ul class="simple">
+<li>[x] Keep migration PR scope limited and merge 16.0 base migration.</li>
+<li>[ ] Open a dedicated refactor PR for shared vs module-specific PAIN logic.</li>
+<li>[ ] Open a dedicated standards PR for <tt class="docutils literal">pain.001.001.09.ch.03</tt> support.</li>
+<li>[ ] Track rollout status in this roadmap and link follow-up PRs/issues.</li>
+</ul>
+</div>
+</div>
 <div class="section" id="bug-tracker">
-<h1><a class="toc-backref" href="#toc-entry-1">Bug Tracker</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-6">Bug Tracker</a></h1>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/l10n-switzerland/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
@@ -396,16 +453,16 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
-<h1><a class="toc-backref" href="#toc-entry-2">Credits</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-7">Credits</a></h1>
 <div class="section" id="authors">
-<h2><a class="toc-backref" href="#toc-entry-3">Authors</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-8">Authors</a></h2>
 <ul class="simple">
 <li>Akretion</li>
 <li>Camptocamp</li>
 </ul>
 </div>
 <div class="section" id="contributors">
-<h2><a class="toc-backref" href="#toc-entry-4">Contributors</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-9">Contributors</a></h2>
 <ul class="simple">
 <li>Alexis de Lattre &lt;<a class="reference external" href="mailto:alexis.delattre&#64;akretion.com">alexis.delattre&#64;akretion.com</a>&gt;</li>
 <li>Denis Leemann &lt;<a class="reference external" href="mailto:denis.leemann&#64;camptocamp.com">denis.leemann&#64;camptocamp.com</a>&gt;</li>
@@ -414,7 +471,7 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 </ul>
 </div>
 <div class="section" id="maintainers">
-<h2><a class="toc-backref" href="#toc-entry-5">Maintainers</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-10">Maintainers</a></h2>
 <p>This module is maintained by the OCA.</p>
 <a class="reference external image-reference" href="https://odoo-community.org">
 <img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" />
