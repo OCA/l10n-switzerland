@@ -80,7 +80,7 @@
                     <PaymentType>IBAN</PaymentType>
                     <fixAmount>Yes</fixAmount>
                     <IBAN>
-                        <BIC>777</BIC>
+                        <BIC>POFICHBEXXX</BIC>
                         <BankName>Reserve</BankName>
                         <IBAN>CH2130808001234567827</IBAN>
                         <CreditorReference>210000000003139471430009017</CreditorReference>
