@@ -15,6 +15,5 @@ class AccountMoveLine(models.Model):
             and self.move_id.partner_bank_id.l10n_ch_qr_iban
         ):
             vals["communication_type"] = "qrr"
-            if vals["communication"]:
-                vals["communication"] = vals["communication"].replace(" ", "")
+            vals["communication"] = vals["communication"].replace(" ", "")
         return vals

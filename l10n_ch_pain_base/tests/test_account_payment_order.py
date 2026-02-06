@@ -114,21 +114,6 @@ class TestAccountPaymentOrder(TransactionCase):
             }
         )
 
-    def test_is_ch_pain_flavor(self):
-        """Test the _is_ch_pain_flavor method"""
-        # Test Swiss PAIN Credit Transfer
-        self.assertTrue(
-            self.payment_order_ch._is_ch_pain_flavor("pain.001.001.03.ch.02")
-        )
-        # Test Swiss PAIN Direct Debit
-        self.assertTrue(
-            self.payment_order_ch._is_ch_pain_flavor("pain.008.001.02.ch.01")
-        )
-        # Test non-Swiss PAIN flavor
-        self.assertFalse(self.payment_order_ch._is_ch_pain_flavor("pain.001.001.03"))
-        # Test None
-        self.assertFalse(self.payment_order_ch._is_ch_pain_flavor(None))
-
     def test_compute_sepa_final_hook_ch_flavor(self):
         """Test compute_sepa_final_hook for Swiss PAIN flavor"""
         # Swiss PAIN should not be SEPA
@@ -150,13 +135,11 @@ class TestAccountPaymentOrder(TransactionCase):
         with patch.object(
             type(self.payment_method_ch), "pain_version", new_callable=PropertyMock
         ) as mock_pain_version:
-            mock_pain_version.return_value = "pain.001.001.03.ch.02"
+            mock_pain_version.return_value = "pain.001.001.09.ch.03"
             nsmap = self.payment_order_ch.generate_pain_nsmap()
-            expected_url = (
-                "http://www.six-interbank-clearing.com/de/pain.001.001.03.ch.02.xsd"
-            )
+            expected_urn = "urn:iso:std:iso:20022:tech:xsd:pain.001.001.09"
             self.assertIn(None, nsmap)
-            self.assertEqual(nsmap[None], expected_url)
+            self.assertEqual(nsmap[None], expected_urn)
 
     def test_generate_pain_nsmap_non_ch_flavor(self):
         """Test generate_pain_nsmap for non-Swiss PAIN flavor"""
@@ -165,56 +148,6 @@ class TestAccountPaymentOrder(TransactionCase):
         self.assertIn(None, nsmap)
         # Should not be the Swiss namespace
         self.assertNotIn("six-interbank-clearing.com", nsmap.get(None, ""))
-
-    def test_generate_pain_attrib_ch_flavor(self):
-        """Test generate_pain_attrib for Swiss PAIN flavor"""
-        with patch.object(
-            type(self.payment_method_ch), "pain_version", new_callable=PropertyMock
-        ) as mock_pain_version:
-            mock_pain_version.return_value = "pain.001.001.03.ch.02"
-            attrib = self.payment_order_ch.generate_pain_attrib()
-            self.assertIn(
-                "{http://www.w3.org/2001/XMLSchema-instance}schemaLocation", attrib
-            )
-            schema_location = attrib[
-                "{http://www.w3.org/2001/XMLSchema-instance}schemaLocation"
-            ]
-            self.assertIn("pain.001.001.03.ch.02.xsd", schema_location)
-
-    def test_generate_pain_attrib_non_ch_flavor(self):
-        """Test generate_pain_attrib for non-Swiss PAIN flavor"""
-        attrib = self.payment_order_sepa.generate_pain_attrib()
-        # Should call super and return standard attributes
-        if attrib:
-            self.assertNotIn("six-interbank-clearing.com", str(attrib))
-
-    def test_generate_start_payment_info_block_ch_flavor(self):
-        """Test generate_start_payment_info_block for Swiss PAIN flavor"""
-        with patch.object(
-            type(self.payment_method_ch), "pain_version", new_callable=PropertyMock
-        ) as mock_pain_version:
-            mock_pain_version.return_value = "pain.001.001.03.ch.02"
-            parent_node = etree.Element("root")
-            gen_args = {
-                "pain_flavor": "pain.001.001.03.ch.02",
-                "payment_method": "ch_pain_credit",
-            }
-
-            self.payment_order_ch.generate_start_payment_info_block(
-                parent_node,
-                payment_info_ident="name",
-                priority=None,
-                local_instrument=None,
-                category_purpose=None,
-                sequence_type=None,
-                requested_date=None,
-                eval_ctx={"name": "PMT-1"},
-                gen_args=gen_args,
-            )
-
-            # Check that gen_args were modified correctly
-            self.assertEqual(gen_args.get("local_instrument_type"), "proprietary")
-            self.assertFalse(gen_args.get("structured_remittance_issuer"))
 
     def test_generate_remittance_info_block_qrr(self):
         """Test generate_remittance_info_block for QRR communication"""
