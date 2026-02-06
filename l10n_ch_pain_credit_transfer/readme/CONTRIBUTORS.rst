@@ -2,3 +2,4 @@
 * Denis Leemann <denis.leemann@camptocamp.com>
 * Mykhailo Panarin <m.panarin@mobilunity.com>
 * Emanuel Cino <ecino@compassion.ch>
+* Julien Guenat

@@ -9,10 +9,6 @@ from odoo import api, models
 class AccountPaymentOrder(models.Model):
     _inherit = "account.payment.order"
 
-    @api.model
-    def _is_ch_pain_flavor(self, pain_flavor):
-        return pain_flavor in ["pain.001.001.03.ch.02", "pain.008.001.02.ch.01"]
-
     def compute_sepa_final_hook(self, sepa):
         self.ensure_one()
         sepa = super().compute_sepa_final_hook(sepa)
@@ -26,52 +22,12 @@ class AccountPaymentOrder(models.Model):
         self.ensure_one()
         nsmap = super().generate_pain_nsmap()
         pain_flavor = self.payment_mode_id.payment_method_id.pain_version
-        if self._is_ch_pain_flavor(pain_flavor):
-            nsmap[None] = (
-                "http://www.six-interbank-clearing.com/de/" "%s.xsd" % pain_flavor
-            )
-        return nsmap
-
-    def generate_pain_attrib(self):
-        self.ensure_one()
-        pain_flavor = self.payment_mode_id.payment_method_id.pain_version
-        if self._is_ch_pain_flavor(pain_flavor):
-            attrib = {
-                "{http://www.w3.org/2001/XMLSchema-instance}"
-                "schemaLocation": "http://www.six-interbank-clearing.com/de/"
-                "%s.xsd  %s.xsd" % (pain_flavor, pain_flavor)
+        if pain_flavor == "pain.001.001.09.ch.03":
+            nsmap = {
+                "xsi": "http://www.w3.org/2001/XMLSchema-instance",
+                None: "urn:iso:std:iso:20022:tech:xsd:pain.001.001.09",
             }
-            return attrib
-        else:
-            return super().generate_pain_attrib()
-
-    @api.model
-    def generate_start_payment_info_block(
-        self,
-        parent_node,
-        payment_info_ident,
-        priority,
-        local_instrument,
-        category_purpose,
-        sequence_type,
-        requested_date,
-        eval_ctx,
-        gen_args,
-    ):
-        if gen_args.get("pain_flavor") == "pain.001.001.03.ch.02":
-            gen_args["local_instrument_type"] = "proprietary"
-            gen_args["structured_remittance_issuer"] = False
-        return super().generate_start_payment_info_block(
-            parent_node,
-            payment_info_ident,
-            priority,
-            local_instrument,
-            category_purpose,
-            sequence_type,
-            requested_date,
-            eval_ctx,
-            gen_args,
-        )
+        return nsmap
 
     @api.model
     def generate_remittance_info_block(self, parent_node, line, gen_args):
@@ -81,14 +37,10 @@ class AccountPaymentOrder(models.Model):
             creditor_ref_information = etree.SubElement(
                 remittance_info_structured, "CdtrRefInf"
             )
-            creditor_ref_info_type = etree.SubElement(creditor_ref_information, "Tp")
-            creditor_ref_info_type_or = etree.SubElement(
-                creditor_ref_info_type, "CdOrPrtry"
-            )
-            creditor_ref_info_type_code = etree.SubElement(
-                creditor_ref_info_type_or, "Prtry"
-            )
-            creditor_ref_info_type_code.text = "QRR"
+            reference_type = etree.SubElement(creditor_ref_information, "Tp")
+            code_of_proprietary = etree.SubElement(reference_type, "CdOrPrtry")
+            proprietary = etree.SubElement(code_of_proprietary, "Prtry")
+            proprietary.text = "QRR"
             creditor_reference = etree.SubElement(creditor_ref_information, "Ref")
             creditor_reference.text = line.payment_line_ids[0].communication
             return True

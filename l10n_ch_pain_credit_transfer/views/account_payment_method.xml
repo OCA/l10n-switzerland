@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record
+        id="view_account_payment_method_form_inherit_sepa_hybrid"
+        model="ir.ui.view"
+    >
+        <field name="name">account.payment.method.form.sepa.hybrid.inherit</field>
+        <field name="model">account.payment.method</field>
+        <field
+            name="inherit_id"
+            ref="account_banking_sepa_credit_transfer.view_account_payment_method_form_inherit_sepa_hybrid"
+        />
+        <field name="arch" type="xml">
+            <field name="sepa_pain09_address_mode" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('pain_version', 'not in', ['pain.001.001.09', 'pain.001.001.09.ch.03'])]}</attribute>
+            </field>
+        </field>
+    </record>
+
+</odoo>
