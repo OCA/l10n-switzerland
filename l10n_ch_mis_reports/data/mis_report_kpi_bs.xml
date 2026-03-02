@@ -184,10 +184,10 @@
         <field name="report_id" ref="mis_report_bs" />
     </record>
 
-    <record id="mis_report_kpi_0035" model="mis.report.kpi">
+    <record id="passif" model="mis.report.kpi">
         <field name="name">CH_2</field>
         <field name="description">PASSIF</field>
-        <field name="expression">CH_20 +CH_24 +CH_28</field>
+        <field name="expression">CH_20 +CH_24 +CH_28 +unallocated</field>
         <field name="style_id" ref="style_header" />
         <field name="sequence">16</field>
         <field name="report_id" ref="mis_report_bs" />
@@ -306,10 +306,10 @@
         <field name="report_id" ref="mis_report_bs" />
     </record>
 
-    <record id="mis_report_kpi_0045" model="mis.report.kpi">
+    <record id="capital" model="mis.report.kpi">
         <field name="name">CH_28</field>
         <field name="description">CAPITAUX PROPRES</field>
-        <field name="expression">CH_280 +CH_290 +CH_297</field>
+        <field name="expression">CH_280 +CH_290</field>
         <field name="style_id" ref="style_header_indented" />
         <field name="sequence">26</field>
         <field name="report_id" ref="mis_report_bs" />
@@ -341,14 +341,43 @@
         <field name="report_id" ref="mis_report_bs" />
     </record>
 
-    <record id="mis_report_kpi_0048" model="mis.report.kpi">
-        <field name="name">CH_297</field>
-        <field name="description">Résultat de l'exercice</field>
+    <record id="unallocated" model="mis.report.kpi">
+        <field name="name">unallocated</field>
+        <field name="description">Résultat non distribué</field>
+        <field name="expression">current_unallocated + previous_unallocated</field>
+        <field name="style_id" ref="style_header_indented" />
+        <field name="sequence">29</field>
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="current_year_unallocated" model="mis.report.kpi">
+        <field name="name">current_unallocated</field>
+        <field name="description">Résultat non distribué de l'année en cours</field>
         <field
             name="expression"
-        >-bale[][('account_id.include_initial_balance', '=', False)] -balu[][('account_id.include_initial_balance', '=', False)] - bale[('account_type', '=', 'equity_unaffected')] - balu[('account_type', '=', 'equity_unaffected')]</field>
+        >mis_subreport_pl.CH_R -balp[('account_type', 'like', 'equity_unaffected')]</field>
         <field name="style_id" ref="style_details" />
-        <field name="sequence">29</field>
+        <field name="sequence">30</field>
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="previous_years_unallocated" model="mis.report.kpi">
+        <field name="name">previous_unallocated</field>
+        <field name="description">Résultat non distribué des années précédentes</field>
+        <field
+            name="expression"
+        >-balu[] -bale[('account_type', 'like', 'equity_unaffected')] +balp[('account_type', 'like', 'equity_unaffected')]</field>
+        <field name="style_id" ref="style_details" />
+        <field name="sequence">31</field>
+        <field name="report_id" ref="mis_report_bs" />
+    </record>
+
+    <record id="profit_loss" model="mis.report.kpi">
+        <field name="name">p_l</field>
+        <field name="description">Comptes de résultat</field>
+        <field name="expression">mis_subreport_pl.CH_R</field>
+        <field name="style_id" ref="style_header" />
+        <field name="sequence">32</field>
         <field name="report_id" ref="mis_report_bs" />
     </record>
 </odoo>

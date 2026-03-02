@@ -109,6 +109,14 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
+.. |maintainer-jguenat| image:: https://github.com/jguenat.png?size=40px
+    :target: https://github.com/jguenat
+    :alt: jguenat
+
+Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
+
+|maintainer-jguenat| 
+
 This module is part of the `OCA/l10n-switzerland <https://github.com/OCA/l10n-switzerland/tree/18.0/l10n_ch_mis_reports>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

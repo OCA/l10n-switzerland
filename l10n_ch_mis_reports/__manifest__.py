@@ -10,6 +10,7 @@
     "category": "Localization",
     "website": "https://github.com/OCA/l10n-switzerland",
     "license": "AGPL-3",
+    "maintainers": ["jguenat"],
     "depends": [
         "l10n_ch",
         "mis_builder",
