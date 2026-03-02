@@ -1,5 +1,4 @@
 <odoo noupdate="1">
-
     <record id="mis_report_kpi_0020" model="mis.report.kpi">
         <field name="name">CH_1</field>
         <field name="description">ACTIF</field>
@@ -352,5 +351,4 @@
         <field name="sequence">29</field>
         <field name="report_id" ref="mis_report_bs" />
     </record>
-
 </odoo>
