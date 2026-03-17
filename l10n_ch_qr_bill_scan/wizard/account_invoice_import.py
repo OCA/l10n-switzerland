@@ -1,6 +1,7 @@
 # Copyright 2020 Camptocamp
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import base64
 import logging
 
 from odoo import _, api, fields, models
@@ -30,25 +31,22 @@ class AccountInvoiceImport(models.TransientModel):
     _inherit = "account.invoice.import"
 
     invoice_scan = fields.Text(string="Scan of the invoice")
-    invoice_file = fields.Binary(string="PDF, PNG or XML Invoice", required=False)
 
-    state = fields.Selection(
-        selection=[("select-partner", "Select partner")],
-        default="import",
-    )
-
-    partner_name = fields.Char("Name", readonly=True)
-    partner_street = fields.Char("Street", readonly=True)
-    partner_zip = fields.Char("ZIP", readonly=True)
-    partner_city = fields.Char("City", readonly=True)
-    partner_country_id = fields.Many2one(
-        string="Country", comodel_name="res.country", readonly=True
-    )
-
-    def get_parsed_invoice(self):
+    def import_invoices(self):
+        self.ensure_one()
         if self.invoice_scan:
-            return self.parse_qrbill(self.invoice_scan)
-        return super().get_parsed_invoice()
+            # handle Windows line endings
+            invoice_scan = self.invoice_scan.replace("\r\n", "\n")
+            attachment = self.env["ir.attachment"].create(
+                {
+                    "name": "scan.qr",
+                    "datas": base64.b64encode(invoice_scan.encode()),
+                    "res_model": self._name,
+                    "res_id": self.id,
+                }
+            )
+            self.invoice_attachment_ids |= attachment
+        return super().import_invoices()
 
     @api.model
     def _get_qr_address(self, address_lines):
@@ -101,10 +99,7 @@ class AccountInvoiceImport(models.TransientModel):
         # From the specs it's unclear if the return line is mandatory on EPD
         if len(qr_data) > QR.BILL_INFO:
             parsed_inv.update(self._parse_billing_info(qr_data[QR.BILL_INFO]))
-        # pre_process_parsed_inv() will be called again a second time,
-        # but it's OK
-        pp_parsed_inv = self.pre_process_parsed_inv(parsed_inv)
-        return pp_parsed_inv
+        return parsed_inv
 
     @api.model
     def _read_swiss_qr_code(self, bill_img):
@@ -120,9 +115,6 @@ class AccountInvoiceImport(models.TransientModel):
         if not locations or locations[0].size == 0:
             raise UserError(_("QR-Code is not readable."))
         logger.debug("QR-Code swiss cross found")
-        patch_img = cv2.imread(
-            get_resource_path("l10n_ch_qr_bill_scan", "data", "QR-patch.png")
-        )
         y = locations[0][0]
         x = locations[1][0]
         # zbar needs some help to find the QR in a whole page
@@ -141,43 +133,33 @@ class AccountInvoiceImport(models.TransientModel):
             data = decode(cropped_img, symbols=[ZBarSymbol.QRCODE])
         return data
 
-    def parse_pdf_invoice(self, file_data):
+    @api.model
+    def parse_pdf_invoice(self, file_data, company):
+        # Swiss QR Bill data in plain text
+        if b"SPC\n" in file_data or b"SPC\r\n" in file_data:
+            try:
+                decoded_data = file_data.decode("utf-8").replace("\r\n", "\n")
+                if QR.valid_re.search(decoded_data):
+                    return self.parse_qrbill(decoded_data)
+            except (UnicodeDecodeError, UserError):
+                logger.debug("Failed to decode as UTF-8 or invalid QR-bill data.")
         if decode:
             logger.debug("Search for Swiss QR-Code in PDF file")
-            # TODO support multiple pages
-            pdf_img = pdf2image.convert_from_bytes(file_data)[0].convert("RGB")
-            pdf_img = np.array(pdf_img)
-            # Convert RGB to BGR
-            pdf_img = pdf_img[:, :, ::-1].copy()
+            try:
+                # TODO support multiple pages
+                pdf_img = pdf2image.convert_from_bytes(file_data)[0].convert("RGB")
+                pdf_img = np.array(pdf_img)
+                # Convert RGB to BGR
+                pdf_img = pdf_img[:, :, ::-1].copy()
 
-            qr_list = self._read_swiss_qr_code(pdf_img)
-            if qr_list:
-                decoded_data = qr_list[0].data.decode().replace("\r\n", "\n")
-                logger.debug("Swiss QR-Code decoded from PDF file %s" % decoded_data)
-                return self.parse_qrbill(decoded_data)
+                qr_list = self._read_swiss_qr_code(pdf_img)
+                if qr_list:
+                    decoded_data = qr_list[0].data.decode().replace("\r\n", "\n")
+                    logger.debug(
+                        "Swiss QR-Code decoded from PDF file %s" % decoded_data
+                    )
+                    return self.parse_qrbill(decoded_data)
+            except Exception:
+                logger.debug("Failed to parse as PDF")
             logger.debug("No Swiss QR-Code found in PDF file")
-        return super().parse_pdf_invoice(file_data)
-
-    def goto_partner_not_found(self, parsed_inv, error_message):
-        """Switch wizard to partner creation."""
-        action = super().goto_partner_not_found(parsed_inv, error_message)
-        partner_dict = parsed_inv["partner"]
-        if partner_dict:
-            country = self.env["res.country"].search(
-                [("code", "=", partner_dict["country_code"])], limit=1
-            )
-            wiz_vals = {
-                "state": "select-partner",
-                "partner_name": partner_dict["name"],
-                "partner_street": partner_dict["street"],
-                "partner_zip": partner_dict["zip"],
-                "partner_city": partner_dict["city"],
-                "partner_country_id": country.id,
-            }
-            act_window = self.env["ir.actions.act_window"]
-            action = act_window._for_xml_id(
-                "account_invoice_import.account_invoice_import_action"
-            )
-            action["res_id"] = self.id
-            self.write(wiz_vals)
-        return action
+        return super().parse_pdf_invoice(file_data, company)

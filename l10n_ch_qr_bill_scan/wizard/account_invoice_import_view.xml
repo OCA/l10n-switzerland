@@ -5,26 +5,6 @@
   License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-    <record id="action_partner_new_supplier_form" model="ir.actions.act_window">
-        <field name="name">Vendors</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">res.partner</field>
-        <field name="domain">[]</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-        <field
-            name="context"
-        >{'res_partner_search_mode': 'supplier', 'default_is_company': True}</field>
-        <field name="filter" eval="True" />
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Create a new vendor in your address book
-            </p>
-            <p>
-                Odoo helps you easily track all activities related to a vendor.
-            </p>
-        </field>
-    </record>
     <record id="account_invoice_import_form" model="ir.ui.view">
         <field name="model">account.invoice.import</field>
         <field
@@ -33,7 +13,7 @@
         />
         <field name="arch" type="xml">
             <xpath expr="//div[@name='help-import']" position="before">
-                <div name="help-import-scan" states="import">
+                <div name="help-import-scan">
                     <p><big>
                             <big>
                                 <i class="fa fa-qrcode" title="QR Code" />
@@ -41,23 +21,12 @@
                         </big> Scan a QR-bill code from a supplier invoice</p>
                 </div>
                 <group name="main">
-                    <field name="invoice_scan" states="import,update-from-invoice" />
+                    <field name="invoice_scan" />
                 </group>
-                <div name="help-import-partner-select" states="select-partner">
-                    <p
-                    >Partner was not found or is not set as a supplier. Please create or select the partner, add invoice config and import it again</p>
-                </div>
             </xpath>
             <xpath expr="//div[@name='help-import']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
-            <group name="main">
-                <field name="partner_name" states="select-partner" />
-                <field name="partner_street" states="select-partner" />
-                <field name="partner_zip" states="select-partner" />
-                <field name="partner_city" states="select-partner" />
-                <field name="partner_country_id" states="select-partner" />
-            </group>
         </field>
     </record>
 </odoo>

@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import base64
 
-from odoo import tools
+from odoo import Command, tools
 from odoo.exceptions import UserError
 from odoo.modules.module import get_resource_path
 from odoo.tests import common
@@ -80,6 +80,7 @@ class TestScanQRBill(common.TransactionCase):
                 "code": "612AII",
                 "name": "expense account invoice import",
                 "account_type": "expense",
+                "company_id": cls.env.user.company_id.id,
             }
         )
         cls.env.ref("l10n_ch.l10nch_chart_template")._load_template(
@@ -90,9 +91,17 @@ class TestScanQRBill(common.TransactionCase):
         """Import a file of a vendor bill"""
         with tools.file_open(file_path, "rb") as f:
             invoice_file = base64.b64encode(f.read())
-        wiz = self.env["account.invoice.import"].create({})
-        wiz.invoice_file = invoice_file
-        wiz.invoice_filename = file_name
+        attachment = self.env["ir.attachment"].create(
+            {
+                "name": file_name,
+                "datas": invoice_file,
+            }
+        )
+        wiz = self.env["account.invoice.import"].create(
+            {
+                "invoice_attachment_ids": [Command.set([attachment.id])],
+            }
+        )
         return wiz
 
     def import_invoice_file(self, file_path, file_name):
@@ -101,16 +110,19 @@ class TestScanQRBill(common.TransactionCase):
         And return the created invoice
         """
         wiz = self.wiz_import_invoice_file(file_path, file_name)
-        res = wiz.import_invoice()
-        if res.get("res_model") == "account.move":
-            invoice = self.env["account.move"].browse(res["res_id"])
-            return invoice
+        res = wiz.import_invoices()
+        invoice_id = res.get("params", {}).get("next", {}).get("res_id")
+        if invoice_id:
+            return self.env["account.move"].browse(invoice_id)
         return None
 
     def wiz_import_invoice_scan(self, invoice_scan):
         """Import scanned data from a vendor bill"""
-        wiz = self.env["account.invoice.import"].create({})
-        wiz.invoice_scan = invoice_scan
+        wiz = self.env["account.invoice.import"].create(
+            {
+                "invoice_scan": invoice_scan,
+            }
+        )
         return wiz
 
     def import_invoice_scan(self, invoice_scan):
@@ -119,10 +131,10 @@ class TestScanQRBill(common.TransactionCase):
         And return the created invoice
         """
         wiz = self.wiz_import_invoice_scan(invoice_scan)
-        res = wiz.import_invoice()
-        if res.get("res_model") == "account.move":
-            invoice = self.env["account.move"].browse(res["res_id"])
-            return invoice
+        res = wiz.import_invoices()
+        invoice_id = res.get("params", {}).get("next", {}).get("res_id")
+        if invoice_id:
+            return self.env["account.move"].browse(invoice_id)
         return None
 
     def test_scan_QR_free_ref(self):
@@ -163,18 +175,19 @@ class TestScanQRBill(common.TransactionCase):
         self.assertEqual(invoice.amount_total, 1949.75)
 
     def test_scan_QR_new_partner(self):
-        scan_data = SCAN_DATA
+        scan_data = SCAN_DATA[:]
         scan_data[QR.CREDITOR_NAME] = "New Vendor"
         scan_data = "\n".join(scan_data).format(ref_type="NON", ref="")
-        wiz = self.wiz_import_invoice_scan(scan_data)
-        wiz.import_invoice()
+        invoice = self.import_invoice_scan(scan_data)
 
-        self.assertEqual(wiz.state, "select-partner")
-        self.assertEqual(wiz.partner_name, "New Vendor")
-        self.assertEqual(wiz.partner_street, "EPFL Innovation Park Bldg A")
-        self.assertEqual(wiz.partner_zip, "1015")
-        self.assertEqual(wiz.partner_city, "Lausanne")
-        self.assertEqual(wiz.partner_country_id, self.env.ref("base.ch"))
+        self.assertTrue(invoice)
+        self.assertFalse(invoice.partner_id)
+        self.assertEqual(invoice.import_partner_data.get("name"), "New Vendor")
+        self.assertEqual(
+            invoice.import_partner_data.get("street"), "EPFL Innovation Park Bldg A"
+        )
+        self.assertEqual(invoice.import_partner_data.get("zip"), "1015")
+        self.assertEqual(invoice.import_partner_data.get("city"), "Lausanne")
 
     def test_scan_QR_wrong_swico(self):
         # not readable QR-Code
@@ -237,12 +250,10 @@ class TestScanQRBill(common.TransactionCase):
             }
         )
         partner.supplier_rank = 1
-        self.env["account.invoice.import.config"].create(
+        partner.write(
             {
-                "name": "Camptocamp - one line no product",
-                "partner_id": partner.id,
-                "invoice_line_method": "1line_no_product",
-                "account_id": self.expense_account.id,
+                "invoice_import_single_line": True,
+                "invoice_import_account_id": self.expense_account.id,
             }
         )
 
