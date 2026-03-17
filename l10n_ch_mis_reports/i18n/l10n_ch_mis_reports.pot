@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -114,7 +114,7 @@ msgid "Autres dettes à long terme"
 msgstr ""
 
 #. module: l10n_ch_mis_reports
-#: model:mis.report.kpi,description:l10n_ch_mis_reports.mis_report_kpi_0045
+#: model:mis.report.kpi,description:l10n_ch_mis_reports.capital
 msgid "CAPITAUX PROPRES"
 msgstr ""
 
@@ -131,6 +131,11 @@ msgstr ""
 #. module: l10n_ch_mis_reports
 #: model:mis.report.kpi,description:l10n_ch_mis_reports.mis_report_kpi_0001
 msgid "Chiffre d'affaires"
+msgstr ""
+
+#. module: l10n_ch_mis_reports
+#: model:mis.report.kpi,description:l10n_ch_mis_reports.profit_loss
+msgid "Comptes de résultat"
 msgstr ""
 
 #. module: l10n_ch_mis_reports
@@ -184,7 +189,7 @@ msgid "Immobilisations incorporelles"
 msgstr ""
 
 #. module: l10n_ch_mis_reports
-#: model:mis.report.kpi,description:l10n_ch_mis_reports.mis_report_kpi_0035
+#: model:mis.report.kpi,description:l10n_ch_mis_reports.passif
 msgid "PASSIF"
 msgstr ""
 
@@ -235,13 +240,23 @@ msgid ""
 msgstr ""
 
 #. module: l10n_ch_mis_reports
-#: model:mis.report.kpi,description:l10n_ch_mis_reports.mis_report_kpi_0048
-msgid "Résultat de l'exercice"
+#: model:mis.report.kpi,description:l10n_ch_mis_reports.mis_report_kpi_0016
+msgid "Résultat de l'exercice avant impôts"
 msgstr ""
 
 #. module: l10n_ch_mis_reports
-#: model:mis.report.kpi,description:l10n_ch_mis_reports.mis_report_kpi_0016
-msgid "Résultat de l'exercice avant impôts"
+#: model:mis.report.kpi,description:l10n_ch_mis_reports.unallocated
+msgid "Résultat non distribué"
+msgstr ""
+
+#. module: l10n_ch_mis_reports
+#: model:mis.report.kpi,description:l10n_ch_mis_reports.current_year_unallocated
+msgid "Résultat non distribué de l'année en cours"
+msgstr ""
+
+#. module: l10n_ch_mis_reports
+#: model:mis.report.kpi,description:l10n_ch_mis_reports.previous_years_unallocated
+msgid "Résultat non distribué des années précédentes"
 msgstr ""
 
 #. module: l10n_ch_mis_reports
