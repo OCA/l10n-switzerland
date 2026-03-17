@@ -1,0 +1,15 @@
+<odoo noupdate="1">
+    <record id="mis_report_bs" model="mis.report">
+        <field name="name">Suisse - Bilan</field>
+        <field name="style_id" ref="style_default" />
+    </record>
+    <record id="mis_report_pl" model="mis.report">
+        <field name="name">Suisse - Compte de résultat</field>
+        <field name="style_id" ref="style_default" />
+    </record>
+    <record id="mis_subreport_pl" model="mis.report.subreport">
+        <field name="report_id" ref="mis_report_bs" />
+        <field name="subreport_id" ref="mis_report_pl" />
+        <field name="name">mis_subreport_pl</field>
+    </record>
+</odoo>
