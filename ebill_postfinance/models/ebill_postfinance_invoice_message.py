@@ -24,6 +24,7 @@ TEMPLATE_DIR = [MODULE_PATH + "/messages"]
 XML_SCHEMA_YB = MODULE_PATH + "/messages/ybInvoice_V2.0.4.xsd"
 
 DOCUMENT_TYPE = {"out_invoice": "EFD", "out_refund": "EGS"}
+REASON_CODE_OTHER = -1
 
 
 class EbillPostfinanceInvoiceMessage(models.Model):
@@ -126,7 +127,7 @@ class EbillPostfinanceInvoiceMessage(models.Model):
         """
         self.ensure_one()
         self.server_state = data.State.lower()
-        self.server_reason_code = data.ReasonCode
+        self.server_reason_code = int(data.ReasonCode)
         self.server_reason_text = data.ReasonText
         if self.server_state in ["invalid"]:
             self.state = "error"
@@ -166,7 +167,7 @@ class EbillPostfinanceInvoiceMessage(models.Model):
             message.payload = self._remove_pdf_data_from_payload(payload)
             message.payload_size = self._get_payload_size(payload)
             try:
-                # TODO: Handle file type from service configuation
+                # TODO: Handle file type from service configuration
                 res = message.service_id.upload_file(
                     message.transaction_id, message.file_type_used, data
                 )
@@ -178,8 +179,8 @@ class EbillPostfinanceInvoiceMessage(models.Model):
                     message.response = response
                 else:
                     message.state = "error"
-                    message.server_reason_code = "NOK"
-                    message.server_reason_text = "Could not be sent to sftp"
+                    message.server_reason_code = REASON_CODE_OTHER
+                    message.server_reason_text = "Could not be sent to SFTP"
             except Exception as ex:
                 message.response = "Exception sending to Postfinance"
                 message.state = "error"
