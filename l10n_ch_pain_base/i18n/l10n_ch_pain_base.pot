@@ -1,0 +1,89 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_ch_pain_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_ch_pain_base
+#: model:ir.model.fields.selection,name:l10n_ch_pain_base.selection__account_payment_line__local_instrument__ch01
+msgid "CH01 (ISR)"
+msgstr ""
+
+#. module: l10n_ch_pain_base
+#: model:ir.model.fields,field_description:l10n_ch_pain_base.field_account_payment_line__communication_type
+msgid "Communication Type"
+msgstr ""
+
+#. module: l10n_ch_pain_base
+#: model:ir.model.fields,field_description:l10n_ch_pain_base.field_account_move_line__display_name
+#: model:ir.model.fields,field_description:l10n_ch_pain_base.field_account_payment_line__display_name
+#: model:ir.model.fields,field_description:l10n_ch_pain_base.field_account_payment_order__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_ch_pain_base
+#: code:addons/l10n_ch_pain_base/models/account_payment_order.py:0
+#, python-format
+msgid ""
+"For pain.001.001.03.ch.02, for non-ISR payments, the BIC is required on the "
+"bank '%s' related to the bank account '%s'"
+msgstr ""
+
+#. module: l10n_ch_pain_base
+#: model:ir.model.fields,field_description:l10n_ch_pain_base.field_account_move_line__id
+#: model:ir.model.fields,field_description:l10n_ch_pain_base.field_account_payment_line__id
+#: model:ir.model.fields,field_description:l10n_ch_pain_base.field_account_payment_order__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_ch_pain_base
+#: model:ir.model.fields.selection,name:l10n_ch_pain_base.selection__account_payment_line__communication_type__isr
+msgid "ISR"
+msgstr ""
+
+#. module: l10n_ch_pain_base
+#: model:ir.model,name:l10n_ch_pain_base.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: l10n_ch_pain_base
+#: model:ir.model.fields,field_description:l10n_ch_pain_base.field_account_move_line____last_update
+#: model:ir.model.fields,field_description:l10n_ch_pain_base.field_account_payment_line____last_update
+#: model:ir.model.fields,field_description:l10n_ch_pain_base.field_account_payment_order____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: l10n_ch_pain_base
+#: model:ir.model.fields,field_description:l10n_ch_pain_base.field_account_payment_line__local_instrument
+msgid "Local Instrument"
+msgstr ""
+
+#. module: l10n_ch_pain_base
+#: model:ir.model,name:l10n_ch_pain_base.model_account_payment_line
+msgid "Payment Lines"
+msgstr ""
+
+#. module: l10n_ch_pain_base
+#: model:ir.model,name:l10n_ch_pain_base.model_account_payment_order
+msgid "Payment Order"
+msgstr ""
+
+#. module: l10n_ch_pain_base
+#: model:ir.model.fields.selection,name:l10n_ch_pain_base.selection__account_payment_line__communication_type__qrr
+msgid "QRR"
+msgstr ""
+
+#. module: l10n_ch_pain_base
+#: code:addons/l10n_ch_pain_base/models/account_payment_order.py:0
+#, python-format
+msgid "The field 'Postal account' is not set on the bank account '%s'."
+msgstr ""
