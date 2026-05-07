@@ -49,7 +49,7 @@ class CommonCase(TransactionCase, XmlTestMixin):
         cls.company.email = "info@camptocamp.com"
         cls.company.phone = ""
         cls.bank = cls.env.ref("base.res_bank_1")
-        cls.bank.bic = 777
+        cls.bank.bic = "BCVLCH2LXXX"
         cls.tax7 = cls.env.ref(f"account.{cls.company.id}_vat_77")
         cls.partner_bank = cls.env["res.partner.bank"].create(
             {
