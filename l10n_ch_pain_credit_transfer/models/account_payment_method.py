@@ -21,6 +21,6 @@ class AccountPaymentMethod(models.Model):
         self.ensure_one()
         painv = self.pain_version
         if painv == "pain.001.001.09.ch.03":
-            path = "l10n_ch_pain_credit_transfer/data/%s.xsd" % painv
+            path = f"l10n_ch_pain_credit_transfer/data/{painv}.xsd"
             return path
         return super().get_xsd_file_path()
