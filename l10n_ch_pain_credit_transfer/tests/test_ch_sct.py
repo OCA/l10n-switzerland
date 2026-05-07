@@ -12,15 +12,30 @@ from odoo.tools import float_compare
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 # test business case and data based on chapter 5 of official documentation
-# https://www.six-group.com/dam/download/banking-services/standardization/sps/ig-credit-transfer-sps-2025-en.pdf # noqa: B950
+# https://www.six-group.com/dam/download/banking-services/standardization/sps/ig-credit-transfer-sps-2025-en.pdf # noqa: E501
 ch_iban = "CH72 8000 5000 0888 7776 6"
 
 
 @tagged("post_install", "-at_install")
 class TestSCTCH(AccountTestInvoicingCommon):
     @classmethod
-    def setUpClass(cls, chart_template_ref="l10n_ch.l10nch_chart_template"):
-        super().setUpClass(chart_template_ref)
+    @AccountTestInvoicingCommon.setup_country("ch")
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env.user.groups_id += cls.env.ref(
+            "account_payment_order.group_account_payment"
+        )
+        cls.main_company = cls.env.company
+        cls.main_company.partner_id.write(
+            {
+                "country_id": cls.env["res.country"]
+                .search([("code", "=", "CH")], limit=1)
+                .id,
+                "city": "Lausanne",
+                "zip": "1000",
+                "street": "Company Street 1",
+            }
+        )
         Journal = cls.env["account.journal"]
         PaymentMode = cls.env["account.payment.mode"]
         Account = cls.env["account.account"]
@@ -92,6 +107,7 @@ class TestSCTCH(AccountTestInvoicingCommon):
         cls.payment_mode.payment_method_id.pain_version = "pain.001.001.09.ch.03"
         cls.chf_currency = cls.env.ref("base.CHF")
         cls.eur_currency = cls.env.ref("base.EUR")
+        cls.eur_currency.active = True
 
         # Create a swiss customer with QRR bank
         cls.swiss_partner_1 = cls.partner_model.create(
