@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record
         id="view_account_payment_method_form_inherit_sepa_hybrid"
         model="ir.ui.view"
@@ -19,5 +18,4 @@
             </field>
         </field>
     </record>
-
 </odoo>
