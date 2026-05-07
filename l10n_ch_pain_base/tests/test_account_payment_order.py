@@ -6,6 +6,7 @@ from unittest.mock import PropertyMock, patch
 
 from lxml import etree
 
+from odoo import Command
 from odoo.tests.common import TransactionCase
 
 
@@ -164,7 +165,7 @@ class TestAccountPaymentOrder(TransactionCase):
                 "name": "Test Account",
                 "code": "TEST001",
                 "account_type": "asset_receivable",
-                "company_id": self.company.id,
+                "company_ids": [Command.link(self.company.id)],
             }
         )
 
@@ -199,7 +200,7 @@ class TestAccountPaymentOrder(TransactionCase):
                 "amount_currency": 100.0,
                 "currency_id": self.company.currency_id.id,
                 "move_line_id": move.line_ids.filtered(
-                    lambda l: l.account_id == account
+                    lambda line: line.account_id == account
                 )[0].id,
             }
         )
@@ -260,7 +261,7 @@ class TestAccountPaymentOrder(TransactionCase):
                 "name": "Test Account",
                 "code": "TEST002",
                 "account_type": "asset_receivable",
-                "company_id": self.company.id,
+                "company_ids": [Command.link(self.company.id)],
             }
         )
 
@@ -295,7 +296,7 @@ class TestAccountPaymentOrder(TransactionCase):
                 "amount_currency": 100.0,
                 "currency_id": self.company.currency_id.id,
                 "move_line_id": move.line_ids.filtered(
-                    lambda l: l.account_id == account
+                    lambda line: line.account_id == account
                 )[0].id,
             }
         )

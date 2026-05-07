@@ -1,6 +1,7 @@
 # Copyright 2024 Compassion CH
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
+from odoo import Command
 from odoo.tests.common import TransactionCase
 
 
@@ -98,7 +99,7 @@ class TestAccountMoveLine(TransactionCase):
                 "name": "Test Receivable Account",
                 "code": "TESTRCV",
                 "account_type": "asset_receivable",
-                "company_id": cls.company.id,
+                "company_ids": [Command.link(cls.company.id)],
             }
         )
 
@@ -129,7 +130,9 @@ class TestAccountMoveLine(TransactionCase):
         move.action_post()
 
         # Get the move line
-        move_line = move.line_ids.filtered(lambda l: l.account_id == self.account)[0]
+        move_line = move.line_ids.filtered(
+            lambda line: line.account_id == self.account
+        )[0]
 
         # Call the method
         vals = move_line._prepare_payment_line_vals(self.payment_order)
@@ -178,7 +181,9 @@ class TestAccountMoveLine(TransactionCase):
         move.action_post()
 
         # Get the move line
-        move_line = move.line_ids.filtered(lambda l: l.account_id == self.account)[0]
+        move_line = move.line_ids.filtered(
+            lambda line: line.account_id == self.account
+        )[0]
 
         # Call the method
         vals = move_line._prepare_payment_line_vals(self.payment_order)
@@ -212,7 +217,9 @@ class TestAccountMoveLine(TransactionCase):
         move.action_post()
 
         # Get the move line
-        move_line = move.line_ids.filtered(lambda l: l.account_id == self.account)[0]
+        move_line = move.line_ids.filtered(
+            lambda line: line.account_id == self.account
+        )[0]
 
         # Call the method
         vals = move_line._prepare_payment_line_vals(self.payment_order)
@@ -255,7 +262,9 @@ class TestAccountMoveLine(TransactionCase):
         move.action_post()
 
         # Get the move line
-        move_line = move.line_ids.filtered(lambda l: l.account_id == self.account)[0]
+        move_line = move.line_ids.filtered(
+            lambda line: line.account_id == self.account
+        )[0]
 
         # Call the method
         vals = move_line._prepare_payment_line_vals(self.payment_order)
