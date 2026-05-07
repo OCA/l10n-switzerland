@@ -1,2 +1,5 @@
 xmlunittest
 vcrpy
+# pending PR for pain.01.01.09
+odoo-addon-account_banking_pain_base @ git+https://github.com/OCA/bank-payment.git@refs/pull/1553/head#subdirectory=account_banking_pain_base
+odoo-addon-account_banking_sepa_credit_transfer @ git+https://github.com/OCA/bank-payment.git@refs/pull/1553/head#subdirectory=account_banking_sepa_credit_transfer
