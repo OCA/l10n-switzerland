@@ -127,7 +127,7 @@ class EbillPostfinanceInvoiceMessage(models.Model):
         """
         self.ensure_one()
         self.server_state = data.State.lower()
-        self.server_reason_code = int(data.ReasonCode)
+        self.server_reason_code = data.ReasonCode and int(data.ReasonCode) or False
         self.server_reason_text = data.ReasonText
         if self.server_state in ["invalid"]:
             self.state = "error"
