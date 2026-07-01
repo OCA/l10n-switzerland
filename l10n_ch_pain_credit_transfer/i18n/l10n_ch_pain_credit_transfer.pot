@@ -24,6 +24,6 @@ msgid "Payment Methods"
 msgstr ""
 
 #. module: l10n_ch_pain_credit_transfer
-#: model:ir.model.fields.selection,name:l10n_ch_pain_credit_transfer.selection__account_payment_method__pain_version__pain_001_001_03_ch_02
-msgid "pain.001.001.03.ch.02 (credit transfer in Switzerland)"
+#: model:ir.model.fields.selection,name:l10n_ch_pain_credit_transfer.selection__account_payment_method__pain_version__pain_001_001_09_ch_03
+msgid "pain.001.001.09.ch.03 (credit transfer in Switzerland)"
 msgstr ""
