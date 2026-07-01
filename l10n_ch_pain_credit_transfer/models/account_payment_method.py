@@ -10,17 +10,17 @@ class AccountPaymentMethod(models.Model):
     pain_version = fields.Selection(
         selection_add=[
             (
-                "pain.001.001.03.ch.02",
-                "pain.001.001.03.ch.02 (credit transfer in Switzerland)",
+                "pain.001.001.09.ch.03",
+                "pain.001.001.09.ch.03 (credit transfer in Switzerland)",
             ),
         ],
-        ondelete={"pain.001.001.03.ch.02": "set null"},
+        ondelete={"pain.001.001.09.ch.03": "set null"},
     )
 
     def get_xsd_file_path(self):
         self.ensure_one()
         painv = self.pain_version
-        if painv == "pain.001.001.03.ch.02":
+        if painv == "pain.001.001.09.ch.03":
             path = "l10n_ch_pain_credit_transfer/data/%s.xsd" % painv
             return path
         return super().get_xsd_file_path()

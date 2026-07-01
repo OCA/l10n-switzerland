@@ -39,5 +39,5 @@ Implementation checklist
 
 - [x] Keep migration PR scope limited and merge 16.0 base migration.
 - [ ] Open a dedicated refactor PR for shared vs module-specific PAIN logic.
-- [ ] Open a dedicated standards PR for ``pain.001.001.09.ch.03`` support.
+- [x] Open a dedicated standards PR for ``pain.001.001.09.ch.03`` support.
 - [ ] Track rollout status in this roadmap and link follow-up PRs/issues.

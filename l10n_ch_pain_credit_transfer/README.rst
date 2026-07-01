@@ -32,9 +32,9 @@ Switzerland - PAIN Credit Transfer
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module adds support for *pain.001.001.03.ch.02* which is used for ISO 20022 credit transfers in Switzerland (SEPA or not SEPA).
+This module adds support for *pain.001.001.09.ch.03* which is used for ISO 20022 credit transfers in Switzerland (SEPA or not SEPA).
 
-It implements the guidelines for `ISO 20022 credit transfers <http://www.six-interbank-clearing.com/dam/downloads/fr/standardization/iso/swiss-recommendations/implementation_guidelines_ct.pdf>`_ published by SIX Interbank Clearing.
+It implements the guidelines for `ISO 20022 credit transfers <https://www.six-group.com/dam/download/banking-services/standardization/sps/ig-credit-transfer-sps-2025-en.pdf>`_ published by SIX Interbank Clearing.
 
 **Table of contents**
 
@@ -46,7 +46,7 @@ Configuration
 
 In the menu *Accounting > Configuration > Management > Payment Methods*,
 select the payment method that has the code *sepa_credit_transfer* and
-set the *PAIN Version* to *pain.001.001.03.ch.02 (credit transfer in Switzerland)*.
+set the *PAIN Version* to *pain.001.001.09.ch.03 (credit transfer in Switzerland)*.
 
 Usage
 =====
@@ -80,6 +80,7 @@ Contributors
 * Denis Leemann <denis.leemann@camptocamp.com>
 * Mykhailo Panarin <m.panarin@mobilunity.com>
 * Emanuel Cino <ecino@compassion.ch>
+* Julien Guenat
 
 Maintainers
 ~~~~~~~~~~~
