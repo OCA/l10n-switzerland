@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="subscribe_template_content" name="E-Bill Subscription Content">
+        <h1 class="mb-4 mt-0">Subscribe to E-Bill</h1>
+        <div t-if="error" class="alert alert-danger" role="alert">
+            <t t-esc="error" />
+        </div>
+        <form action="/ebill/subscribe" method="post">
+            <div class="mb-3">
+                <input
+                    type="hidden"
+                    name="csrf_token"
+                    t-att-value="request.csrf_token()"
+                />
+                <label for="email_input" class="form-label">Email Address:</label>
+                <input
+                    type="email"
+                    name="email"
+                    id="email_input"
+                    class="form-control"
+                    required="1"
+                    t-att-value="submitted_email or None"
+                    placeholder="mail@example.com"
+                />
+            </div>
+            <div class="d-flex justify-content-end">
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                    data-action="/ebill/subscribe"
+                >Request validation code</button>
+            </div>
+        </form>
+    </template>
+
+    <template id="subscribe_template" name="E-Bill Subscription">
+        <t t-if="not is_integrated">
+            <t t-call="portal.frontend_layout">
+                <div class="oe_structure" id="oe_structure_ebill_subscribe_top" />
+                <div class="container py-5">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-6">
+                            <t
+                                t-call="ebill_postfinance_recipient_subscription.subscribe_template_content"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="oe_structure" id="oe_structure_ebill_subscribe_bottom" />
+            </t>
+        </t>
+        <t t-else="">
+            <div class="my-2">
+                <t
+                    t-call="ebill_postfinance_recipient_subscription.subscribe_template_content"
+                />
+            </div>
+        </t>
+    </template>
+
+    <template id="validate_template_content" name="E-Bill Validation Content">
+        <h1 class="mb-4 mt-0">Enter your validation code</h1>
+        <p>We have sent a validation code to <t t-esc="email" />.</p>
+        <div t-if="error" class="alert alert-danger" role="alert">
+            <t t-esc="error" />
+        </div>
+        <form action="/ebill/validate" method="post">
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+            <input id="token" type="hidden" name="token" t-att-value="token" />
+            <input id="email" type="hidden" name="email" t-att-value="email" />
+            <div class="mb-3">
+                <label
+                    for="validation_code_input"
+                    class="form-label"
+                >Validation code:</label>
+                <input
+                    type="text"
+                    name="validation_code"
+                    id="validation_code_input"
+                    class="form-control"
+                    required="1"
+                    placeholder="123456"
+                />
+            </div>
+            <div class="d-flex justify-content-end">
+                <button
+                    t-if="error"
+                    type="submit"
+                    class="btn btn-secondary me-2"
+                    data-action="/ebill/subscribe"
+                    formaction="/ebill/subscribe"
+                    formnovalidate="formnovalidate"
+                >Resend code</button>
+                <button
+                    type="submit"
+                    data-action="/ebill/validate"
+                    class="btn btn-primary"
+                >Confirm</button>
+            </div>
+        </form>
+    </template>
+
+    <template id="validate_template" name="E-Bill Validation">
+        <t t-if="not is_integrated">
+            <t t-call="portal.frontend_layout">
+                <div class="oe_structure" id="oe_structure_ebill_validate_top" />
+                <div class="container py-5">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-6">
+                            <t
+                                t-call="ebill_postfinance_recipient_subscription.validate_template_content"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="oe_structure" id="oe_structure_ebill_validate_bottom" />
+            </t>
+        </t>
+        <t t-else="">
+            <div class="my-2">
+                <t
+                    t-call="ebill_postfinance_recipient_subscription.validate_template_content"
+                />
+            </div>
+        </t>
+    </template>
+
+    <template id="retry_content" name="E-Bill Retry Content">
+        <h1 class="mb-4 mt-0">Unfortunately, something went wrong.</h1>
+        <p
+            class="alert alert-danger"
+        >A technical error occurred. Please try the process again.</p>
+        <input type="hidden" name="email" t-att-value="email" />
+        <div class="d-flex justify-content-end">
+            <a
+                type="submit"
+                class="btn btn-primary"
+                href="/ebill/subscribe"
+                data-action="/ebill/subscribe"
+            >Retry</a>
+        </div>
+    </template>
+
+    <template id="retry_template" name="E-Bill Subscription Failed">
+        <t t-if="not is_integrated">
+            <t t-call="portal.frontend_layout">
+                <div class="oe_structure" id="oe_structure_ebill_retry_top" />
+                <div class="container py-5">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-6">
+                            <t
+                                t-call="ebill_postfinance_recipient_subscription.retry_content"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="oe_structure" id="oe_structure_ebill_retry_bottom" />
+            </t>
+        </t>
+        <t t-else="">
+            <div class="my-2">
+                <t t-call="ebill_postfinance_recipient_subscription.retry_content" />
+            </div>
+        </t>
+    </template>
+
+    <template id="success_template_content" name="E-Bill Success Content">
+        <h1 class="mb-4 mt-0">Thank you!</h1>
+        <p>You have successfully subscribed to E-Bill.</p>
+        <div id="ebill-success-marker" data-ebill-success="1" />
+    </template>
+
+    <template id="success_template" name="E-Bill Subscription Successful">
+        <t t-if="not is_integrated">
+            <t t-call="portal.frontend_layout">
+                <div class="oe_structure" id="oe_structure_ebill_success_top" />
+                <div class="container py-5">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-6">
+                            <t
+                                t-call="ebill_postfinance_recipient_subscription.success_template_content"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="oe_structure" id="oe_structure_ebill_success_bottom" />
+            </t>
+        </t>
+        <t t-else="">
+            <div class="my-2">
+                <t
+                    t-call="ebill_postfinance_recipient_subscription.success_template_content"
+                />
+            </div>
+        </t>
+    </template>
+</odoo>

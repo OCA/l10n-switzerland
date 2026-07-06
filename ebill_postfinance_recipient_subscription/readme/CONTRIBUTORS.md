@@ -1,0 +1,2 @@
+- Elias Keller \<<elias.keller@gmail.com>\>
+- Noé Berdoz \<<nberdoz@compassion.ch>\>

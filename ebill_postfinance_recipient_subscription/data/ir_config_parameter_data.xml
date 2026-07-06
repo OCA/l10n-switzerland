@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="biller_id_ebill_postfinance" model="ir.config_parameter">
+        <field name="key">ebill_postfinance.biller_id</field>
+        <field name="value">BILLER_ID_PLACEHOLDER</field>
+    </record>
+</odoo>
