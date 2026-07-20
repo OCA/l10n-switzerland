@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 from odoo import Command
+from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
 
 
@@ -132,7 +133,7 @@ class TestAccountMoveLine(TransactionCase):
         # Get the move line
         move_line = move.line_ids.filtered(
             lambda line: line.account_id == self.account
-        )[0]
+        ).ensure_one()
 
         # Call the method
         vals = move_line._prepare_payment_line_vals(self.payment_order)
@@ -183,7 +184,7 @@ class TestAccountMoveLine(TransactionCase):
         # Get the move line
         move_line = move.line_ids.filtered(
             lambda line: line.account_id == self.account
-        )[0]
+        ).ensure_one()
 
         # Call the method
         vals = move_line._prepare_payment_line_vals(self.payment_order)
@@ -192,8 +193,8 @@ class TestAccountMoveLine(TransactionCase):
         self.assertNotEqual(vals.get("communication_type"), "qrr")
 
     def test_prepare_payment_line_vals_without_isr_ref(self):
-        """Test _prepare_payment_line_vals without ISR reference"""
-        # Create a move without ISR reference but with QR-IBAN
+        """Test _prepare_payment_line_vals raises without QRR reference on QR-IBAN"""
+        # Create a move without QRR reference but with QR-IBAN
         move = self.env["account.move"].create(
             {
                 "move_type": "out_invoice",
@@ -219,13 +220,10 @@ class TestAccountMoveLine(TransactionCase):
         # Get the move line
         move_line = move.line_ids.filtered(
             lambda line: line.account_id == self.account
-        )[0]
+        ).ensure_one()
 
-        # Call the method
-        vals = move_line._prepare_payment_line_vals(self.payment_order)
-
-        # Check that communication_type is NOT set to 'qrr'
-        self.assertNotEqual(vals.get("communication_type"), "qrr")
+        with self.assertRaises(UserError):
+            move_line._prepare_payment_line_vals(self.payment_order)
 
     def test_prepare_payment_line_vals_normal_case(self):
         """Test _prepare_payment_line_vals for normal case without QR features"""
@@ -264,7 +262,7 @@ class TestAccountMoveLine(TransactionCase):
         # Get the move line
         move_line = move.line_ids.filtered(
             lambda line: line.account_id == self.account
-        )[0]
+        ).ensure_one()
 
         # Call the method
         vals = move_line._prepare_payment_line_vals(self.payment_order)
