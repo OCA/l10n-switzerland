@@ -54,16 +54,22 @@
                           Invoices
                         </button>
                         <button
-                            name="toggle_active"
+                            name="action_archive"
                             type="object"
                             class="oe_stat_button"
                             icon="fa-archive"
+                            invisible="not active"
                         >
-                            <field
-                                name="active"
-                                widget="boolean_button"
-                                options="{&quot;terminology&quot;: &quot;disabled&quot;}"
-                            />
+                            <span class="o_stat_text">Archive</span>
+                        </button>
+                        <button
+                            name="action_unarchive"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-archive"
+                            invisible="active"
+                        >
+                            <span class="o_stat_text">Unarchive</span>
                         </button>
                     </div>
                     <label for="name" class="oe_edit_only" />

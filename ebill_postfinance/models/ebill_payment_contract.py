@@ -1,7 +1,7 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -59,7 +59,7 @@ class EbillPaymentContract(models.Model):
                 continue
             if not contract.postfinance_billerid:
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "The Postfinacnce Account ID is required for a "
                         "Postfinance contract."
                     )

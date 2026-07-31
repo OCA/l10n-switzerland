@@ -3,6 +3,7 @@
 
 import os
 
+from odoo.tests import tagged
 from odoo.tools import mute_logger
 
 from .common import CommonCase, recorder
@@ -10,6 +11,7 @@ from .common import CommonCase, recorder
 LOGGER = "odoo.addons.ebill_postfinance.models.ebill_postfinance_service"
 
 
+@tagged("post_install", "-at_install")
 class TestEbillPostfinance(CommonCase):
     @classmethod
     def setUpClass(cls):

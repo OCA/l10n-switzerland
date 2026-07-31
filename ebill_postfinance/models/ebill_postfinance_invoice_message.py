@@ -2,7 +2,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
-import os
 from datetime import datetime
 
 import pytz
@@ -11,13 +10,13 @@ from lxml import etree
 
 from odoo import api, fields, models
 from odoo.exceptions import UserError
-from odoo.modules.module import get_module_root
+from odoo.modules.module import get_module_path
 
 from odoo.addons.base.models.res_bank import sanitize_account_number
 
 _logger = logging.getLogger(__name__)
 
-MODULE_PATH = get_module_root(os.path.dirname(__file__))
+MODULE_PATH = get_module_path("ebill_postfinance")
 INVOICE_TEMPLATE_2003 = "invoice-2003A.jinja"
 INVOICE_TEMPLATE_YB = "invoice-yellowbill.jinja"
 TEMPLATE_DIR = [MODULE_PATH + "/messages"]

@@ -155,6 +155,6 @@ class EbillPostfinanceService(models.Model):
 
     @api.model
     def cron_update_invoices(self):
-        services = self.search([])
+        services = self.search([], limit=None)
         for service in services:
             service.search_invoice()

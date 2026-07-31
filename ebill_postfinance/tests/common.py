@@ -10,6 +10,7 @@ from lxml import etree
 from vcr import VCR
 from xmlunittest import XmlTestMixin
 
+from odoo import Command
 from odoo.tests.common import TransactionCase
 
 _logger = logging.getLogger(__name__)
@@ -37,10 +38,17 @@ class CommonCase(TransactionCase, XmlTestMixin):
             }
         )
         cls.country = cls.env.ref("base.ch")
-        cls.company = cls.env.ref("base.demo_company_ch")
+        cls.company = cls.env["res.company"].create(
+            {
+                "name": "Camptocamp SA",
+                "country_id": cls.country.id,
+            }
+        )
+        cls.env["account.chart.template"].try_loading(
+            "ch", company=cls.company, install_demo=False
+        )
         cls.env.user.company_id = cls.company
         cls.company.vat = "CHE-012.345.678"
-        cls.company.name = "Camptocamp SA"
         cls.company.street = "StreetOne"
         cls.company.street2 = ""
         cls.company.zip = "1015"
@@ -49,7 +57,7 @@ class CommonCase(TransactionCase, XmlTestMixin):
         cls.company.email = "info@camptocamp.com"
         cls.company.phone = ""
         cls.bank = cls.env.ref("base.res_bank_1")
-        cls.bank.bic = 777
+        cls.bank.bic = "777"
         cls.tax7 = cls.env.ref(f"account.{cls.company.id}_vat_77")
         cls.partner_bank = cls.env["res.partner.bank"].create(
             {
@@ -121,27 +129,23 @@ class CommonCase(TransactionCase, XmlTestMixin):
                 "partner_shipping_id": cls.customer_delivery.id,
                 "client_order_ref": "CustomerRef",
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "product_id": cls.product.id,
                             "name": cls.product.name,
                             "product_uom_qty": 4.0,
                             "price_unit": 123.0,
-                            "tax_id": [(4, cls.tax7.id, 0)],
-                        },
+                            "tax_ids": [Command.link(cls.tax7.id)],
+                        }
                     ),
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "product_id": cls.product_long_name.id,
                             "name": cls.product_long_name.name,
                             "product_uom_qty": 1.0,
                             "price_unit": 0.0,
-                            "tax_id": [(4, cls.tax7.id, 0)],
-                        },
+                            "tax_ids": [Command.link(cls.tax7.id)],
+                        }
                     ),
                 ],
             }
@@ -158,17 +162,17 @@ class CommonCase(TransactionCase, XmlTestMixin):
         cls.invoice.update(
             {
                 "line_ids": [
-                    (0, 0, {"name": "A little note", "display_type": "line_note"}),
-                    (
-                        0,
-                        0,
+                    Command.create(
+                        {"name": "A little note", "display_type": "line_note"}
+                    ),
+                    Command.create(
                         {
                             "name": "Phone support",
                             "quantity": 4.0,
                             "price_unit": 0,
                             # Force not tax on this line, for testing purpose
-                            "tax_ids": [(5, 0, 0)],
-                        },
+                            "tax_ids": [Command.clear()],
+                        }
                     ),
                 ],
             }
