@@ -56,7 +56,7 @@
                     <PartyType>
                         <CustomerID>{{ customer.id }}</CustomerID>
                         <Address>
-                            <CompanyName>{{ (customer.commercial_company_name or customer.name)|truncate(50, True, "") }}</CompanyName>
+                            <CompanyName>{{ (customer.commercial_company_name or customer.commercial_partner_id.name)|truncate(50, True, "") }}</CompanyName>
                             <Address1>{{ (customer.street or "")|truncate(50, True, "") }}</Address1>
                             {%- if customer.street2 %}
                             <Address2>{{ (customer.street2)|truncate(50, True, "") }}</Address2>
@@ -89,7 +89,7 @@
                 {%- if delivery %}
                 <DeliveryPlace>
                     <Address>
-                        <CompanyName>{{ (delivery.commercial_company_name or delivery.name)|truncate(50, True, "") }}</CompanyName>
+                        <CompanyName>{{ (delivery.commercial_company_name or delivery.commercial_partner_id.name)|truncate(50, True, "") }}</CompanyName>
                         <ZIP>{{ delivery.zip or "" }}</ZIP>
                         <City>{{ delivery.city or "" }}</City>
                         <Country>{{ delivery.country_id.code or 'CH' }}</Country>
