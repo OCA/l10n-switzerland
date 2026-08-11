@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="ebill_postfinance_invoice_message_form_view">
+        <field name="name">ebill.postfinance.invoice.message.form</field>
+        <field name="model">ebill.postfinance.invoice.message</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button type="object" name="send_to_postfinance" string="Resend" />
+                    <button
+                        type="object"
+                        name="validate_xml_payload"
+                        string="Check payload validity"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        readonly="1"
+                        statusbar_visible="draft,sent,done"
+                    />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="transaction_id" />
+                            <field name="submitted_on" />
+                        </group>
+                        <group>
+                            <field name="service_id" />
+                            <field name="invoice_id" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="server_state" />
+                        <field name="server_reason_code" />
+                        <field name="server_reason_text" />
+                    </group>
+                    <group>
+                        <field name="response" />
+                        <field name="payload_size" />
+                        <field name="payload" />
+                        <field name="attachment_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="ebill_postfinance_invoice_message_search_view">
+        <field name="name">ebill.postfinance.invoice.message.search</field>
+        <field name="model">ebill.postfinance.invoice.message</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter
+                    name="in_error"
+                    string="In Error"
+                    domain="[('state', '=', 'error')]"
+                />
+                <field name="state" />
+                <field name="invoice_id" />
+                <filter
+                    string="Invoice"
+                    name="invoice_id"
+                    context="{'group_by': 'invoice_id'}"
+                />
+                <filter string="State" name="state" context="{'group_by': 'state'}" />
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="ebill_postfinance_invoice_message_tree_view">
+        <field name="name">ebill.postfinance.invoice.message.list</field>
+        <field name="model">ebill.postfinance.invoice.message</field>
+        <field name="arch" type="xml">
+            <list create="false" default_order="submitted_on desc">
+                <field name="invoice_id" />
+                <field name="transaction_id" />
+                <field name="submitted_on" />
+                <field name="state" />
+            </list>
+        </field>
+    </record>
+</odoo>
