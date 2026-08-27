@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2026 Camptocamp SA (https://www.camptocamp.com).
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <template id="invoice_yellowbill">
+        <Envelope
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            type="string"
+        >
+            <Header>
+                <From t-out="biller.name" />
+                <To>IPECeBILLServer</To>
+                <UseCase>CreateybInvoice</UseCase>
+                <SessionID>1</SessionID>
+                <Version>2.0</Version>
+                <Status>0</Status>
+                <SoftwareName>Odoo</SoftwareName>
+                <SoftwareVersion t-out="software_version" />
+            </Header>
+            <Body>
+                <DeliveryInfo>
+                    <BillerID t-out="biller_id" />
+                    <eBillAccountID t-out="ebill_account_id" />
+                    <DeliveryDate t-out="delivery_date" />
+                    <TransactionID t-out="transaction_id" />
+                    <BillDetailsType>PDFAppendix</BillDetailsType>
+                    <URLBillDetails />
+                </DeliveryInfo>
+                <Bill>
+                    <Header>
+                        <DocumentType t-out="document_type" />
+                        <DocumentID t-out="invoice.name" />
+                        <DocumentDate t-out="document_date" />
+                        <SenderParty>
+                            <TaxLiability>VAT</TaxLiability>
+                            <PartyType>
+                                <Address>
+                                    <CompanyName t-out="biller.name" />
+                                    <Address1 t-out="(biller.street or '')[:50]" />
+                                    <Address2
+                                        t-if="biller.street2"
+                                        t-out="biller.street2[:50]"
+                                    />
+                                    <ZIP t-out="biller.zip or ''" />
+                                    <City t-out="biller.city or ''" />
+                                    <Country t-out="biller.country_id.code or 'CH'" />
+                                    <Email t-if="biller.email" t-out="biller.email" />
+                                    <Contact1
+                                        t-if="biller.phone"
+                                        t-out="biller.phone"
+                                    />
+                                </Address>
+                                <TaxID
+                                    t-if="biller.vat"
+                                    t-out="biller.vat.replace('-', '').replace('.', '')"
+                                />
+                            </PartyType>
+                        </SenderParty>
+                        <ReceiverParty>
+                            <PartyType>
+                                <CustomerID t-out="customer.id" />
+                                <Address>
+                                    <CompanyName
+                                        t-out="(customer.commercial_company_name or customer.commercial_partner_id.name)[:50]"
+                                    />
+                                    <Address1 t-out="(customer.street or '')[:50]" />
+                                    <Address2
+                                        t-if="customer.street2"
+                                        t-out="customer.street2[:50]"
+                                    />
+                                    <ZIP t-out="customer.zip or ''" />
+                                    <City t-out="customer.city or ''" />
+                                    <Country t-out="customer.country_id.code or 'CH'" />
+                                    <Email
+                                        t-if="customer.email"
+                                        t-out="customer.email"
+                                    />
+                                    <Contact1
+                                        t-if="customer.phone"
+                                        t-out="customer.phone"
+                                    />
+                                </Address>
+                            </PartyType>
+                        </ReceiverParty>
+                        <DeliveryPlace t-if="delivery">
+                            <Address>
+                                <CompanyName
+                                    t-out="(delivery.commercial_company_name or delivery.commercial_partner_id.name)[:50]"
+                                />
+                                <ZIP t-out="delivery.zip or ''" />
+                                <City t-out="delivery.city or ''" />
+                                <Country t-out="delivery.country_id.code or 'CH'" />
+                                <Email t-if="delivery.email" t-out="delivery.email" />
+                                <Contact1
+                                    t-if="delivery.phone"
+                                    t-out="delivery.phone"
+                                />
+                            </Address>
+                        </DeliveryPlace>
+                        <AchievementDate>
+                            <StartDateAchievement t-out="achievement_start_date" />
+                            <EndDateAchievement t-out="achievement_end_date" />
+                        </AchievementDate>
+                        <Currency t-out="invoice.currency_id.name" />
+                        <AccountAssignment>
+                            <t
+                                t-set="header_order_ref"
+                                t-value="order.client_order_ref"
+                            />
+                            <OrderReference t-if="header_order_ref">
+                                <ReferencePosition t-out="next_reference_position()" />
+                                <ReferenceType>OrderReference</ReferenceType>
+                                <ReferenceValue t-out="header_order_ref" />
+                            </OrderReference>
+                            <OrderDate t-if="order" t-out="order_date" />
+                        </AccountAssignment>
+                        <Language t-out="language" />
+                        <PaymentInformation>
+                            <PaymentDueDate t-out="payment_due_date" />
+                            <PaymentType t-out="payment_type.upper()" />
+                            <fixAmount>Yes</fixAmount>
+                            <IBAN t-if="payment_type == 'iban'">
+                                <BIC t-if="bank.bank_id.bic" t-out="bank.bank_id.bic" />
+                                <BankName t-out="(bank.bank_id.name or '')[:50]" />
+                                <IBAN t-out="bank_account" />
+                                <CreditorReference
+                                    t-if="invoice.payment_reference"
+                                    t-out="invoice.payment_reference"
+                                />
+                            </IBAN>
+                        </PaymentInformation>
+                    </Header>
+                    <LineItems>
+                        <LineItem t-foreach="line_vals_list" t-as="line_vals">
+                            <t t-set="line" t-value="line_vals['line']" />
+                            <t t-set="tax_vals" t-value="line_vals['tax_vals']" />
+                            <LineItemType>NORMAL</LineItemType>
+                            <LineItemID t-out="line_vals_index + 1" />
+                            <ProductDescription
+                                t-out="line_vals['product_description']"
+                            />
+                            <ProductID
+                                t-if="line.product_id"
+                                t-out="line.product_id.default_code or ''"
+                            />
+                            <Quantity t-out="line_vals['quantity']" />
+                            <QuantityDescription
+                                t-out="line_vals['quantity_description']"
+                            />
+                            <PriceUnit>1</PriceUnit>
+                            <Tax t-if="tax_vals">
+                                <TaxDetail>
+                                    <Rate t-out="tax_vals['rate']" />
+                                    <Amount t-out="tax_vals['amount']" />
+                                    <BaseAmountExclusiveTax
+                                        t-out="tax_vals['base_exclusive_tax']"
+                                    />
+                                    <BaseAmountInclusiveTax
+                                        t-out="tax_vals['base_inclusive_tax']"
+                                    />
+                                </TaxDetail>
+                                <TotalTax t-out="tax_vals['amount']" />
+                            </Tax>
+                            <AmountInclusiveTax
+                                t-out="line_vals['amount_inclusive_tax']"
+                            />
+                            <AmountExclusiveTax
+                                t-out="line_vals['amount_exclusive_tax']"
+                            />
+                            <t
+                                t-foreach="line.sale_line_ids.order_id"
+                                t-as="line_order"
+                            >
+                                <t
+                                    t-set="line_order_ref"
+                                    t-value="line_order.client_order_ref"
+                                />
+                                <FixedReference>
+                                    <ReferencePosition
+                                        t-out="next_reference_position()"
+                                    />
+                                    <ReferenceType>OrderNumberBySupplier</ReferenceType>
+                                    <ReferenceValue t-out="line_order.name" />
+                                </FixedReference>
+                                <FixedReference t-if="line_order_ref">
+                                    <ReferencePosition
+                                        t-out="next_reference_position()"
+                                    />
+                                    <ReferenceType>OrderNumberByBuyer</ReferenceType>
+                                    <ReferenceValue t-out="line_order_ref" />
+                                </FixedReference>
+                            </t>
+                        </LineItem>
+                    </LineItems>
+                    <Summary>
+                        <Tax t-if="tax_vals_list">
+                            <TaxDetail
+                                t-foreach="tax_vals_list"
+                                t-as="summary_tax_vals"
+                            >
+                                <Rate t-out="summary_tax_vals['rate']" />
+                                <Amount t-out="summary_tax_vals['amount']" />
+                                <BaseAmountExclusiveTax
+                                    t-out="summary_tax_vals['base_exclusive_tax']"
+                                />
+                                <BaseAmountInclusiveTax
+                                    t-out="summary_tax_vals['base_inclusive_tax']"
+                                />
+                            </TaxDetail>
+                            <TotalTax t-out="total_tax" />
+                        </Tax>
+                        <Discount t-foreach="discount_vals_list" t-as="discount_vals">
+                            <Days t-out="discount_vals['days']" />
+                            <Rate t-out="discount_vals['rate']" />
+                        </Discount>
+                        <TotalAmountExclusiveTax t-out="total_exclusive_tax" />
+                        <TotalAmountInclusiveTax t-out="total_inclusive_tax" />
+                        <TotalAmountPaid t-out="total_paid" />
+                        <TotalAmountDue t-out="total_due" />
+                    </Summary>
+                </Bill>
+                <Appendix>
+                    <Document MimeType="x-application/pdfappendix" t-out="pdf_data" />
+                </Appendix>
+            </Body>
+        </Envelope>
+    </template>
+</odoo>

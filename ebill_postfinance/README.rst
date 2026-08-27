@@ -84,6 +84,8 @@ Known issues / Roadmap
 
 ToDo
 
+- Use ``account_invoice_export_yellowbill`` to generate the YellowBill
+  payload, instead of the copy of the format this module carries.
 - Add option to import the contract subscription (csv)
 - Add the download of this csv from web service, but what is the
   endpoint ?
