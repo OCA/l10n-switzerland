@@ -1,0 +1,2 @@
+- Thierry Ducrest \<<thierry.ducrest@camptocamp.com>\>
+- Iván Todorovich \<<ivan.todorovich@camptocamp.com>\>
