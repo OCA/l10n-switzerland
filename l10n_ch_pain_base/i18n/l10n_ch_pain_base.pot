@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -12,6 +12,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: l10n_ch_pain_base
+#. odoo-python
+#: code:addons/l10n_ch_pain_base/models/account_move_line.py:0
+msgid ""
+"%(msg)s\n"
+"Journal Entry: %(name)s"
+msgstr ""
 
 #. module: l10n_ch_pain_base
 #: model:ir.model.fields,field_description:l10n_ch_pain_base.field_account_payment_line__communication_type
@@ -31,6 +39,14 @@ msgstr ""
 #. module: l10n_ch_pain_base
 #: model:ir.model,name:l10n_ch_pain_base.model_account_payment_order
 msgid "Payment Order"
+msgstr ""
+
+#. module: l10n_ch_pain_base
+#. odoo-python
+#: code:addons/l10n_ch_pain_base/models/account_move_line.py:0
+msgid ""
+"Please fill in a correct QRR reference. The bank will refuse the payment "
+"file otherwise."
 msgstr ""
 
 #. module: l10n_ch_pain_base
