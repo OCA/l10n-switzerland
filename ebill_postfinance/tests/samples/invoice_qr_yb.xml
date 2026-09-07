@@ -85,7 +85,7 @@
                     <PaymentType>IBAN</PaymentType>
                     <fixAmount>Yes</fixAmount>
                     <IBAN>
-                        <BIC>777</BIC>
+                        <BIC>BCVLCH2LXXX</BIC>
                         <BankName>Reserve</BankName>
                         <IBAN>CH2130808001234567827</IBAN>
                         <CreditorReference
