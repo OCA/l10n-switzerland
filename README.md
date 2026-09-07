@@ -28,6 +28,8 @@ addon | version | maintainers | summary
 [l10n_ch_account_tags](l10n_ch_account_tags/) | 18.0.1.0.0 |  | Switzerland Account Tags
 [l10n_ch_adr_report](l10n_ch_adr_report/) | 18.0.1.0.0 |  | Print Delivery report to ADR swiss configuration
 [l10n_ch_mis_reports](l10n_ch_mis_reports/) | 18.0.1.0.0 | <a href='https://github.com/jguenat'><img src='https://github.com/jguenat.png' width='32' height='32' style='border-radius:50%;' alt='jguenat'/></a> | Specific MIS reports for switzerland localization
+[l10n_ch_pain_base](l10n_ch_pain_base/) | 18.0.1.0.0 |  | ISO 20022 base module for Switzerland
+[l10n_ch_pain_credit_transfer](l10n_ch_pain_credit_transfer/) | 18.0.1.0.0 | <a href='https://github.com/ecino'><img src='https://github.com/ecino.png' width='32' height='32' style='border-radius:50%;' alt='ecino'/></a> | Generate ISO 20022 credit transfert (SEPA and not SEPA)
 
 [//]: # (end addons)
 
