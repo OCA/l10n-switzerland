@@ -1,0 +1,2 @@
+- Only the first tax of a line is reported.
+- `PriceUnit` is always reported as `1`.
