@@ -21,6 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[account_invoice_export_yellowbill](account_invoice_export_yellowbill/) | 19.0.1.0.0 |  | Generate the eBill YellowBill (ybInvoice) XML for an invoice
 [ebill_postfinance](ebill_postfinance/) | 19.0.1.0.0 | <a href='https://github.com/TDu'><img src='https://github.com/TDu.png' width='32' height='32' style='border-radius:50%;' alt='TDu'/></a> | Postfinance eBill integration
 
 [//]: # (end addons)
