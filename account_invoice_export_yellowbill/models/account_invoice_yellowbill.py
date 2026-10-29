@@ -246,11 +246,11 @@ class AccountInvoiceYellowbill(models.AbstractModel):
             for tax_group in subtotal["tax_groups"]:
                 tax_amount = tax_group["tax_amount"]
                 base_amount = tax_group["base_amount"]
-                # The rate is only available in the name of the group.
-                rate = tax_group["group_name"].split()[-1:][0][:-1]
+                taxes = self.env["account.tax"].browse(tax_group["involved_tax_ids"])
+                percentages = taxes.filtered(lambda tax: tax.amount_type == "percent")
                 vals_list.append(
                     {
-                        "rate": rate or "0",
+                        "rate": percentages[:1].amount or 0.0,
                         "amount": round(round(tax_amount, 2), 6) * amount_sign,
                         "base_exclusive_tax": round(base_amount, 6) * amount_sign,
                         "base_inclusive_tax": (
