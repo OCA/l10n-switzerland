@@ -104,6 +104,23 @@ class TestYellowbill(CommonCase):
             "account_invoice_export_yellowbill/tests/samples/credit_note_yb.xml"
         )
 
+    def test_invoice_translated_tax_group(self):
+        """The rate of the summary does not come from the name of the group.
+
+        Scenario:
+            1. Name the tax group the way ``l10n_ch`` names it in French,
+               where the decimal separator is a comma.
+            2. Build the payload.
+        Expected:
+            - The rate reported is the rate of the tax, so the payload is
+              still valid against the schema.
+        """
+        self.tax7.tax_group_id.name = "TVA 7,7%"
+        self.invoice.invoice_payment_term_id = self.payment_term
+        self._assert_payload(
+            "account_invoice_export_yellowbill/tests/samples/invoice_qr_yb.xml"
+        )
+
     def test_payload_not_a_customer_invoice(self):
         """Only customer invoices and credit notes can be exported."""
         bill = self.env["account.move"].create(
